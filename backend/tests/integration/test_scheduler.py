@@ -153,9 +153,7 @@ async def test_tick_retries_then_dead_letters(db_session, monkeypatch) -> None:
     # Advance well past each backoff window so the row is reclaimed every tick.
     for i in range(2, max_attempts):
         await db_session.rollback()
-        await runner.run_job(
-            "outbox.drain", session_factory=sm, now=base + timedelta(days=i)
-        )
+        await runner.run_job("outbox.drain", session_factory=sm, now=base + timedelta(days=i))
         row = await _row()
         assert row.status == "pending"
         assert row.attempts == i
@@ -193,14 +191,18 @@ async def _anonymous_application_with_reveal(db_session):
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
+        db_session,
+        principal=student,
         payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
     await reveal_service.request_reveal(
-        db_session, principal=partner, application_id=app_id,
-        reason="We would like to learn more about your internship experience.", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="We would like to learn more about your internship experience.",
+        ctx=CTX,
     )
     return partner, student, app_id
 
@@ -231,7 +233,9 @@ async def test_tick_expires_overdue_reveal_then_allows_re_request(db_session) ->
 
     # Regression: the partner can now re-request (previously blocked forever).
     out = await reveal_service.request_reveal(
-        db_session, principal=partner, application_id=app_id,
+        db_session,
+        principal=partner,
+        application_id=app_id,
         reason="Following up — we are still very interested in this candidate.",
         ctx=CTX,
     )
@@ -239,12 +243,16 @@ async def test_tick_expires_overdue_reveal_then_allows_re_request(db_session) ->
 
     # uq_reveal_app_org forbids a second row, so the lapsed row is re-armed in place.
     rows = (
-        await db_session.execute(
-            select(ApplicationRevealRequest).where(
-                ApplicationRevealRequest.application_id == app_id
+        (
+            await db_session.execute(
+                select(ApplicationRevealRequest).where(
+                    ApplicationRevealRequest.application_id == app_id
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1
     assert rows[0].id == original_id
     assert rows[0].status == recruit_lifecycle.REVEAL_PENDING
@@ -271,8 +279,11 @@ async def test_tick_auto_closes_past_deadline_job_once(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     past = _now() - timedelta(days=1)
     job_id = await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Expiring Job", application_deadline=past,
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Expiring Job",
+        application_deadline=past,
     )
 
     await db_session.rollback()
@@ -287,9 +298,7 @@ async def test_tick_auto_closes_past_deadline_job_once(db_session) -> None:
     assert await _close_notif_count(db_session, job_id) == 1
     audit = (
         await db_session.execute(
-            select(func.count()).select_from(AuditLog).where(
-                AuditLog.action == "job.auto_closed"
-            )
+            select(func.count()).select_from(AuditLog).where(AuditLog.action == "job.auto_closed")
         )
     ).scalar_one()
     assert audit == 1

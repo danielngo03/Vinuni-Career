@@ -28,7 +28,7 @@ those modules should expose narrow facades instead.
 from __future__ import annotations
 
 import uuid
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -51,17 +51,17 @@ _RECENT_ACTIVITY_WINDOW_DAYS = 90
 
 def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
     return AuditContext(
-        actor_id=principal.user_id, actor_org_id=principal.org_id,
-        ip=ctx.ip, user_agent=ctx.user_agent,
+        actor_id=principal.user_id,
+        actor_org_id=principal.org_id,
+        ip=ctx.ip,
+        user_agent=ctx.user_agent,
     )
 
 
 async def _get_org(session: AsyncSession, org_id: uuid.UUID) -> Organization:
     org = (
         await session.execute(
-            select(Organization).where(
-                Organization.id == org_id, Organization.deleted_at.is_(None)
-            )
+            select(Organization).where(Organization.id == org_id, Organization.deleted_at.is_(None))
         )
     ).scalar_one_or_none()
     if org is None:
@@ -90,9 +90,7 @@ async def _authorize_view(
         raise NotUniversityActorError()
 
 
-async def _require_university_manage(
-    session: AsyncSession, *, principal: Principal
-) -> None:
+async def _require_university_manage(session: AsyncSession, *, principal: Principal) -> None:
     permission_checker.require(principal, "partners", "manage")
     if not principal.is_superadmin and not await _is_university_actor(session, principal):
         raise NotUniversityActorError()
@@ -145,9 +143,7 @@ def compute_profile_quality(
         ("recent_activity", has_recent_activity, 10),
     ]
     score = sum(points for _, met, points in checks if met)
-    breakdown = [
-        {"check": name, "met": met, "points": points} for name, met, points in checks
-    ]
+    breakdown = [{"check": name, "met": met, "points": points} for name, met, points in checks]
     missing = [name for name, met, _ in checks if not met]
     return {"score": score, "breakdown": breakdown, "missing": missing}
 
@@ -196,10 +192,11 @@ async def get_campus_owner(
 ) -> dict:
     await _require_university_manage(session, principal=principal)
     org = await _get_org(session, org_id)
-    return {"campus_relationship_owner_id": (
-        str(org.campus_relationship_owner_id)
-        if org.campus_relationship_owner_id else None
-    )}
+    return {
+        "campus_relationship_owner_id": (
+            str(org.campus_relationship_owner_id) if org.campus_relationship_owner_id else None
+        )
+    }
 
 
 async def set_campus_owner(
@@ -228,22 +225,16 @@ async def set_campus_owner(
     org.version += 1
     await session.flush()
     await write_audit(
-        session, action="organization.campus_owner_set",
-        resource_type="organization", resource_id=org.id,
+        session,
+        action="organization.campus_owner_set",
+        resource_type="organization",
+        resource_id=org.id,
         context=_audit_ctx(principal, ctx),
         before={"campus_relationship_owner_id": str(before) if before else None},
-        after={
-            "campus_relationship_owner_id": (
-                str(owner_user_id) if owner_user_id else None
-            )
-        },
+        after={"campus_relationship_owner_id": (str(owner_user_id) if owner_user_id else None)},
     )
     await session.commit()
-    return {
-        "campus_relationship_owner_id": (
-            str(owner_user_id) if owner_user_id else None
-        )
-    }
+    return {"campus_relationship_owner_id": (str(owner_user_id) if owner_user_id else None)}
 
 
 # --------------------------------------------------------------------------- #
@@ -272,12 +263,16 @@ async def list_risk_flags(
     await _require_university_manage(session, principal=principal)
     await _get_org(session, org_id)
     rows = (
-        await session.execute(
-            select(OrganizationRiskFlag)
-            .where(OrganizationRiskFlag.org_id == org_id)
-            .order_by(OrganizationRiskFlag.raised_at.desc())
+        (
+            await session.execute(
+                select(OrganizationRiskFlag)
+                .where(OrganizationRiskFlag.org_id == org_id)
+                .order_by(OrganizationRiskFlag.raised_at.desc())
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [_risk_flag_view(r) for r in rows]
 
 
@@ -301,14 +296,20 @@ async def raise_risk_flag(
         raise ResourceNotFoundError()
 
     flag = OrganizationRiskFlag(
-        org_id=org_id, flag_type=flag_type, severity=severity, note=note,
+        org_id=org_id,
+        flag_type=flag_type,
+        severity=severity,
+        note=note,
         raised_by=principal.user_id,
     )
     session.add(flag)
     await session.flush()
     await write_audit(
-        session, action="organization.risk_flag_raised", resource_type="organization",
-        resource_id=org_id, context=_audit_ctx(principal, ctx),
+        session,
+        action="organization.risk_flag_raised",
+        resource_type="organization",
+        resource_id=org_id,
+        context=_audit_ctx(principal, ctx),
         after={"flag_id": str(flag.id), "flag_type": flag_type, "severity": severity},
     )
     await session.commit()
@@ -343,8 +344,11 @@ async def resolve_risk_flag(
     flag.resolution_note = resolution_note
     await session.flush()
     await write_audit(
-        session, action="organization.risk_flag_resolved", resource_type="organization",
-        resource_id=org_id, context=_audit_ctx(principal, ctx),
+        session,
+        action="organization.risk_flag_resolved",
+        resource_type="organization",
+        resource_id=org_id,
+        context=_audit_ctx(principal, ctx),
         after={"flag_id": str(flag.id)},
     )
     await session.commit()
@@ -371,12 +375,16 @@ async def list_notes(
     await _require_university_manage(session, principal=principal)
     await _get_org(session, org_id)
     rows = (
-        await session.execute(
-            select(OrganizationNote)
-            .where(OrganizationNote.org_id == org_id)
-            .order_by(OrganizationNote.created_at.desc())
+        (
+            await session.execute(
+                select(OrganizationNote)
+                .where(OrganizationNote.org_id == org_id)
+                .order_by(OrganizationNote.created_at.desc())
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [_note_view(n) for n in rows]
 
 
@@ -401,8 +409,11 @@ async def create_note(
     session.add(note)
     await session.flush()
     await write_audit(
-        session, action="organization.note_created", resource_type="organization",
-        resource_id=org_id, context=_audit_ctx(principal, ctx),
+        session,
+        action="organization.note_created",
+        resource_type="organization",
+        resource_id=org_id,
+        context=_audit_ctx(principal, ctx),
         after={"note_id": str(note.id)},
     )
     await session.commit()
@@ -423,9 +434,7 @@ async def event_campaign_rollup(
     from app.modules.advertising.application import inventory_facade
     from app.modules.opportunities.application import dashboard_read as jobs_read
 
-    events_by_status = await jobs_read.count_events_by_status_for_org(
-        session, org_id=org_id
-    )
+    events_by_status = await jobs_read.count_events_by_status_for_org(session, org_id=org_id)
     campaigns_by_status = await inventory_facade.count_campaigns_by_status_for_org(
         session, org_id=org_id
     )
@@ -455,6 +464,4 @@ async def hiring_outcomes(
 
     from app.modules.recruitment.application import dashboard_read as recruitment_read
 
-    return await recruitment_read.hiring_outcomes_for_org(
-        session, org_id=org_id, months=months
-    )
+    return await recruitment_read.hiring_outcomes_for_org(session, org_id=org_id, months=months)

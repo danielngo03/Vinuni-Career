@@ -77,8 +77,12 @@ async def submit_company_review(
     locale: str = Query(default="vi"),
 ) -> dict:
     data = await review_service.submit_review(
-        session, principal=auth.principal, slug=slug,
-        payload=body.to_payload(), ctx=auth.ctx, locale=locale,
+        session,
+        principal=auth.principal,
+        slug=slug,
+        payload=body.to_payload(),
+        ctx=auth.ctx,
+        locale=locale,
     )
     return success(data)
 
@@ -108,8 +112,12 @@ async def update_review(
     locale: str = Query(default="vi"),
 ) -> dict:
     data = await review_service.update_review(
-        session, principal=auth.principal, review_id=review_id,
-        payload=body.to_payload(), version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        review_id=review_id,
+        payload=body.to_payload(),
+        version=body.version,
+        ctx=auth.ctx,
         locale=locale,
     )
     return success(data)
@@ -139,9 +147,7 @@ async def vote_helpful(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await review_service.vote_helpful(
-        session, principal=auth.principal, review_id=review_id
-    )
+    data = await review_service.vote_helpful(session, principal=auth.principal, review_id=review_id)
     return success(data)
 
 
@@ -173,8 +179,11 @@ async def add_partner_response(
 ) -> dict:
     _ = request
     data = await review_service.add_partner_response(
-        session, principal=auth.principal, review_id=review_id,
-        response_text=body.response, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        review_id=review_id,
+        response_text=body.response,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -187,8 +196,12 @@ async def report_review(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await review_service.report_review(
-        session, principal=auth.principal, review_id=review_id,
-        reason_code=body.reason_code, note=body.note, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        review_id=review_id,
+        reason_code=body.reason_code,
+        note=body.note,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -207,8 +220,11 @@ async def moderation_queue(
     locale: str = Query(default="vi"),
 ) -> dict:
     data = await review_moderation_service.list_queue(
-        session, principal=auth.principal, status=review_status,
-        limit=limit, locale=locale,
+        session,
+        principal=auth.principal,
+        status=review_status,
+        limit=limit,
+        locale=locale,
     )
     return success(data)
 
@@ -221,8 +237,11 @@ async def publish_review(
     locale: str = Query(default="vi"),
 ) -> dict:
     data = await review_moderation_service.publish_review(
-        session, principal=auth.principal, review_id=review_id,
-        ctx=auth.ctx, locale=locale,
+        session,
+        principal=auth.principal,
+        review_id=review_id,
+        ctx=auth.ctx,
+        locale=locale,
     )
     return success(data)
 
@@ -236,8 +255,13 @@ async def remove_review(
     locale: str = Query(default="vi"),
 ) -> dict:
     data = await review_moderation_service.remove_review(
-        session, principal=auth.principal, review_id=review_id,
-        reason=body.reason, note=body.note, ctx=auth.ctx, locale=locale,
+        session,
+        principal=auth.principal,
+        review_id=review_id,
+        reason=body.reason,
+        note=body.note,
+        ctx=auth.ctx,
+        locale=locale,
     )
     return success(data)
 
@@ -250,8 +274,11 @@ async def restore_review(
     locale: str = Query(default="vi"),
 ) -> dict:
     data = await review_moderation_service.restore_review(
-        session, principal=auth.principal, review_id=review_id,
-        ctx=auth.ctx, locale=locale,
+        session,
+        principal=auth.principal,
+        review_id=review_id,
+        ctx=auth.ctx,
+        locale=locale,
     )
     return success(data)
 

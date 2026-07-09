@@ -75,9 +75,7 @@ async def get_thread(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await thread_service.get_thread(
-        session, principal=auth.principal, thread_id=thread_id
-    )
+    data = await thread_service.get_thread(session, principal=auth.principal, thread_id=thread_id)
     return success(data)
 
 
@@ -128,9 +126,7 @@ async def mark_read(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await message_service.mark_read(
-        session, principal=auth.principal, thread_id=thread_id
-    )
+    data = await message_service.mark_read(session, principal=auth.principal, thread_id=thread_id)
     return success(data)
 
 

@@ -84,9 +84,7 @@ async def _unique_slug(session: AsyncSession, title: str) -> str:
     candidate = base
     suffix = 1
     while True:
-        exists = (
-            await session.execute(select(Event.id).where(Event.slug == candidate))
-        ).first()
+        exists = (await session.execute(select(Event.id).where(Event.slug == candidate))).first()
         if exists is None:
             return candidate
         suffix += 1
@@ -128,7 +126,10 @@ def _validate_fields(payload: dict, *, partial: bool) -> None:
 
 
 async def _load_owned_event(
-    session: AsyncSession, *, principal: Principal, event_id: uuid.UUID,
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    event_id: uuid.UUID,
     lock: bool = False,
 ) -> Event:
     """Load a non-deleted event that ``principal`` owns; else ``404``."""
@@ -179,9 +180,20 @@ def _is_publicly_visible(event: Event, *, now: datetime) -> bool:
 # --------------------------------------------------------------------------- #
 
 _UPDATABLE = {
-    "title", "description", "event_type", "format", "cover_image_path",
-    "venue_name", "venue_address", "starts_at", "ends_at", "timezone",
-    "registration_opens_at", "registration_closes_at", "capacity", "visibility",
+    "title",
+    "description",
+    "event_type",
+    "format",
+    "cover_image_path",
+    "venue_name",
+    "venue_address",
+    "starts_at",
+    "ends_at",
+    "timezone",
+    "registration_opens_at",
+    "registration_closes_at",
+    "capacity",
+    "visibility",
     "tags",
 }
 
@@ -196,9 +208,7 @@ async def create_event(
 ) -> dict:
     if principal.org_id is None:
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=principal.org_id)
     _validate_fields(payload, partial=False)
     assert principal.user_id is not None
 
@@ -215,7 +225,10 @@ async def create_event(
     await session.flush()
 
     await write_audit(
-        session, action="event.created", resource_type="event", resource_id=event.id,
+        session,
+        action="event.created",
+        resource_type="event",
+        resource_id=event.id,
         context=_audit_ctx(principal, ctx),
         after={"title": event.title, "status": event.status, "slug": slug},
     )
@@ -233,12 +246,8 @@ async def update_event(
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
-    event = await _load_owned_event(
-        session, principal=principal, event_id=event_id, lock=True
-    )
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=event.org_id
-    )
+    event = await _load_owned_event(session, principal=principal, event_id=event_id, lock=True)
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=event.org_id)
     if event.status not in event_lifecycle.EDITABLE_STATES:
         raise EventNotEditableError()
 
@@ -254,9 +263,7 @@ async def update_event(
         "capacity": payload.get("capacity", event.capacity),
         "starts_at": payload.get("starts_at", event.starts_at),
         "ends_at": payload.get("ends_at", event.ends_at),
-        "registration_opens_at": payload.get(
-            "registration_opens_at", event.registration_opens_at
-        ),
+        "registration_opens_at": payload.get("registration_opens_at", event.registration_opens_at),
         "registration_closes_at": payload.get(
             "registration_closes_at", event.registration_closes_at
         ),
@@ -273,7 +280,10 @@ async def update_event(
     await session.flush()
 
     await write_audit(
-        session, action="event.updated", resource_type="event", resource_id=event.id,
+        session,
+        action="event.updated",
+        resource_type="event",
+        resource_id=event.id,
         context=_audit_ctx(principal, ctx),
         after={"fields": sorted(changed.keys())},
     )
@@ -302,12 +312,8 @@ async def submit_event(
     immediately with ``moderation_status=approved`` and ``published_at`` set.
     """
 
-    event = await _load_owned_event(
-        session, principal=principal, event_id=event_id, lock=True
-    )
-    permission_checker.require(
-        principal, _RESOURCE, "submit", resource_org_id=event.org_id
-    )
+    event = await _load_owned_event(session, principal=principal, event_id=event_id, lock=True)
+    permission_checker.require(principal, _RESOURCE, "submit", resource_org_id=event.org_id)
     if version is not None and version != event.version:
         raise EventVersionConflictError()
     if not event_lifecycle.can_transition("submit", event.status):
@@ -315,9 +321,7 @@ async def submit_event(
 
     now = _now()
     event.submitted_at = now
-    event.due_by = compute_due_by(
-        now, sla_hours=get_settings().event_moderation_sla_hours
-    )
+    event.due_by = compute_due_by(now, sla_hours=get_settings().event_moderation_sla_hours)
     org_type = await _org_type(session, event.org_id)
     auto_approve = org_type == "university"
 
@@ -342,7 +346,10 @@ async def submit_event(
     await session.flush()
 
     await write_audit(
-        session, action=action, resource_type="event", resource_id=event.id,
+        session,
+        action=action,
+        resource_type="event",
+        resource_id=event.id,
         context=_audit_ctx(principal, ctx),
         after={"status": event.status, "moderation_status": event.moderation_status},
     )
@@ -362,12 +369,8 @@ async def cancel_event(
 ) -> dict:
     """Cancel a published event and notify every confirmed/waitlisted registrant."""
 
-    event = await _load_owned_event(
-        session, principal=principal, event_id=event_id, lock=True
-    )
-    permission_checker.require(
-        principal, _RESOURCE, "manage", resource_org_id=event.org_id
-    )
+    event = await _load_owned_event(session, principal=principal, event_id=event_id, lock=True)
+    permission_checker.require(principal, _RESOURCE, "manage", resource_org_id=event.org_id)
     if version is not None and version != event.version:
         raise EventVersionConflictError()
     if not event_lifecycle.can_transition("cancel", event.status):
@@ -380,7 +383,10 @@ async def cancel_event(
     await session.flush()
 
     await write_audit(
-        session, action="event.cancel", resource_type="event", resource_id=event.id,
+        session,
+        action="event.cancel",
+        resource_type="event",
+        resource_id=event.id,
         context=_audit_ctx(principal, ctx),
         after={"status": event.status},
     )
@@ -409,7 +415,9 @@ async def _notify_registrants_cancelled(
                     ),
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     for reg in regs:
         user = await user_service.get_by_id(session, reg.user_id)
@@ -437,22 +445,25 @@ async def _notify_registrants_cancelled(
 
 
 async def delete_event(
-    session: AsyncSession, *, principal: Principal, event_id: uuid.UUID,
-    ctx: RequestContext, locale: str = "vi",
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    event_id: uuid.UUID,
+    ctx: RequestContext,
+    locale: str = "vi",
 ) -> None:
-    event = await _load_owned_event(
-        session, principal=principal, event_id=event_id, lock=True
-    )
-    permission_checker.require(
-        principal, _RESOURCE, "manage", resource_org_id=event.org_id
-    )
+    event = await _load_owned_event(session, principal=principal, event_id=event_id, lock=True)
+    permission_checker.require(principal, _RESOURCE, "manage", resource_org_id=event.org_id)
     if event.status not in event_lifecycle.DELETABLE_STATES:
         raise EventNotEditableError()
     event.deleted_at = _now()
     event.version += 1
     await session.flush()
     await write_audit(
-        session, action="event.deleted", resource_type="event", resource_id=event.id,
+        session,
+        action="event.deleted",
+        resource_type="event",
+        resource_id=event.id,
         context=_audit_ctx(principal, ctx),
         before={"status": event.status},
     )
@@ -465,15 +476,16 @@ async def delete_event(
 
 
 async def get_event(
-    session: AsyncSession, *, principal: Principal, event_id: uuid.UUID,
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    event_id: uuid.UUID,
     locale: str = "vi",
 ) -> dict:
     """Owner -> full detail; non-owner -> public detail iff visible, else ``404``."""
 
     event = (
-        await session.execute(
-            select(Event).where(Event.id == event_id, Event.deleted_at.is_(None))
-        )
+        await session.execute(select(Event).where(Event.id == event_id, Event.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if event is None:
         raise ResourceNotFoundError()
@@ -509,9 +521,7 @@ async def get_registrable_event(
     """
 
     event = (
-        await session.execute(
-            select(Event).where(Event.id == event_id, Event.deleted_at.is_(None))
-        )
+        await session.execute(select(Event).where(Event.id == event_id, Event.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if event is None:
         raise ResourceNotFoundError()
@@ -572,12 +582,12 @@ async def list_public_events(
     def _filtered(base: Select) -> Select:
         return _apply_search_filters(
             _public_filter(base, principal=principal, now=now),
-            q=q, event_type=event_type, format=format,
+            q=q,
+            event_type=event_type,
+            format=format,
         )
 
-    total = (
-        await session.execute(_filtered(select(func.count()).select_from(Event)))
-    ).scalar_one()
+    total = (await session.execute(_filtered(select(func.count()).select_from(Event)))).scalar_one()
 
     stmt = _filtered(select(Event))
     decoded = decode_cursor(cursor)
@@ -618,13 +628,9 @@ async def list_my_events(
 
     if principal.org_id is None:
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=principal.org_id)
     page_limit = clamp_limit(limit)
-    stmt = select(Event).where(
-        Event.org_id == principal.org_id, Event.deleted_at.is_(None)
-    )
+    stmt = select(Event).where(Event.org_id == principal.org_id, Event.deleted_at.is_(None))
     if status is not None:
         stmt = stmt.where(Event.status == status)
 

@@ -62,12 +62,8 @@ async def _load_partner_application(
     indistinguishable from missing (``404``). Row is locked for the read-modify-write.
     """
 
-    app = await _shared.load_application(
-        session, application_id=application_id, lock=True
-    )
-    if not principal.is_superadmin and (
-        principal.org_id is None or principal.org_id != app.org_id
-    ):
+    app = await _shared.load_application(session, application_id=application_id, lock=True)
+    if not principal.is_superadmin and (principal.org_id is None or principal.org_id != app.org_id):
         raise ResourceNotFoundError()
     permission_checker.require(principal, _RESOURCE, "read", resource_org_id=app.org_id)
     return app
@@ -85,9 +81,7 @@ async def _partner_projection(
 
     from app.modules.recruitment.application import apply_service
 
-    return await apply_service._partner_view(
-        session, app=app, principal=principal, locale=locale
-    )
+    return await apply_service._partner_view(session, app=app, principal=principal, locale=locale)
 
 
 async def _resolve_student_locale(
@@ -125,9 +119,7 @@ async def _notify_student(
     student = await user_service.get_by_id(session, app.applicant_id)
     if student is None:
         return
-    locale = await _resolve_student_locale(
-        session, applicant_id=app.applicant_id, student=student
-    )
+    locale = await _resolve_student_locale(session, applicant_id=app.applicant_id, student=student)
     job_title = await _job_title(session, job_id=app.job_id)
     await enqueue_notification(
         session,
@@ -183,9 +175,7 @@ async def review_application(
     # no-op path STILL ensures the stage row exists (covers an application that
     # reached under_review before the stage engine shipped).
     if app.status == lifecycle.UNDER_REVIEW:
-        created = await stage_service.ensure_pipeline_entry(
-            session, app=app, principal=principal
-        )
+        created = await stage_service.ensure_pipeline_entry(session, app=app, principal=principal)
         if created:
             await session.commit()
             await session.refresh(app)
@@ -201,8 +191,11 @@ async def review_application(
     await stage_service.ensure_pipeline_entry(session, app=app, principal=principal)
 
     await write_audit(
-        session, action="application.reviewed", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.reviewed",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"status": app.status},
     )
     await timeline.record_timeline_event(
@@ -281,8 +274,11 @@ async def reject_application(
     await stage_service.close_open_stage_on_reject(session, app=app)
 
     await write_audit(
-        session, action="application.rejected", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.rejected",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         # Reason lives in audit metadata only — NOT in the user-facing response.
         after={"status": app.status, "rejection_reason": reason},
     )
@@ -340,9 +336,7 @@ async def bulk_review_applications(
     errors = 0
     for app_id in application_ids:
         try:
-            await review_application(
-                session, principal=principal, application_id=app_id, ctx=ctx
-            )
+            await review_application(session, principal=principal, application_id=app_id, ctx=ctx)
             reviewed += 1
         except IllegalApplicationTransitionError:
             skipped += 1

@@ -55,34 +55,22 @@ class CompanyReview(BaseEntity):
     )
     # Strongest interaction proof, frozen at submit (never re-derived on read).
     eligibility_type: Mapped[str] = mapped_column(String(30), nullable=False)
-    application_id: Mapped[uuid.UUID | None] = mapped_column(
-        Uuid(as_uuid=True), nullable=True
-    )
+    application_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
     title: Mapped[str] = mapped_column(String(300), nullable=False)
     body: Mapped[str] = mapped_column(Text, nullable=False)
     pros: Mapped[str | None] = mapped_column(Text, nullable=True)
     cons: Mapped[str | None] = mapped_column(Text, nullable=True)
-    is_anonymous: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=False
-    )
-    status: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="pending"
-    )
-    published_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    report_count: Mapped[int] = mapped_column(
-        Integer, nullable=False, default=0
-    )
+    is_anonymous: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
+    published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    report_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     moderation_note: Mapped[str | None] = mapped_column(Text, nullable=True)
     moderated_by: Mapped[uuid.UUID | None] = mapped_column(
         Uuid(as_uuid=True),
         ForeignKey("users.id", ondelete="SET NULL"),
         nullable=True,
     )
-    moderated_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    moderated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     # Helpfulness (denormalized count; `review_helpful_votes` is the source).
     helpful_count: Mapped[int] = mapped_column(
         Integer, nullable=False, default=0, server_default="0"
@@ -99,9 +87,7 @@ class ReviewHelpfulVote(Base):
 
     __tablename__ = "review_helpful_votes"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     review_id: Mapped[uuid.UUID] = mapped_column(
         Uuid(as_uuid=True),
         ForeignKey("company_reviews.id", ondelete="CASCADE"),
@@ -132,9 +118,7 @@ class ReviewRating(Base):
     culture_values: Mapped[int] = mapped_column(SmallInteger, nullable=False)
     compensation: Mapped[int] = mapped_column(SmallInteger, nullable=False)
     career_growth: Mapped[int] = mapped_column(SmallInteger, nullable=False)
-    interview_experience: Mapped[int | None] = mapped_column(
-        SmallInteger, nullable=True
-    )
+    interview_experience: Mapped[int | None] = mapped_column(SmallInteger, nullable=True)
 
 
 class ReviewReport(Base):
@@ -142,9 +126,7 @@ class ReviewReport(Base):
 
     __tablename__ = "review_reports"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     review_id: Mapped[uuid.UUID] = mapped_column(
         Uuid(as_uuid=True),
         ForeignKey("company_reviews.id", ondelete="CASCADE"),
@@ -155,9 +137,7 @@ class ReviewReport(Base):
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
     )
-    reporter_org_id: Mapped[uuid.UUID | None] = mapped_column(
-        Uuid(as_uuid=True), nullable=True
-    )
+    reporter_org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
     reason_code: Mapped[str] = mapped_column(String(30), nullable=False)
     note: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
@@ -175,31 +155,15 @@ class ProjCompanyRating(Base):
         ForeignKey("organizations.id", ondelete="CASCADE"),
         primary_key=True,
     )
-    review_count: Mapped[int] = mapped_column(
-        Integer, nullable=False, default=0
-    )
+    review_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     overall_avg: Mapped[float | None] = mapped_column(Numeric(3, 2), nullable=True)
-    overall_raw_avg: Mapped[float | None] = mapped_column(
-        Numeric(3, 2), nullable=True
-    )
-    work_life_balance_avg: Mapped[float | None] = mapped_column(
-        Numeric(3, 2), nullable=True
-    )
-    culture_values_avg: Mapped[float | None] = mapped_column(
-        Numeric(3, 2), nullable=True
-    )
-    compensation_avg: Mapped[float | None] = mapped_column(
-        Numeric(3, 2), nullable=True
-    )
-    career_growth_avg: Mapped[float | None] = mapped_column(
-        Numeric(3, 2), nullable=True
-    )
-    interview_experience_avg: Mapped[float | None] = mapped_column(
-        Numeric(3, 2), nullable=True
-    )
-    distribution: Mapped[dict] = mapped_column(
-        JsonType, nullable=False, default=dict
-    )
+    overall_raw_avg: Mapped[float | None] = mapped_column(Numeric(3, 2), nullable=True)
+    work_life_balance_avg: Mapped[float | None] = mapped_column(Numeric(3, 2), nullable=True)
+    culture_values_avg: Mapped[float | None] = mapped_column(Numeric(3, 2), nullable=True)
+    compensation_avg: Mapped[float | None] = mapped_column(Numeric(3, 2), nullable=True)
+    career_growth_avg: Mapped[float | None] = mapped_column(Numeric(3, 2), nullable=True)
+    interview_experience_avg: Mapped[float | None] = mapped_column(Numeric(3, 2), nullable=True)
+    distribution: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,

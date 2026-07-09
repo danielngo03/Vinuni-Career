@@ -75,14 +75,16 @@ async def _has_active_application_to_org(
     # Lightweight check — avoids importing full recruitment domain
     try:
         result = await session.execute(
-            select(1).select_from(
+            select(1)
+            .select_from(
                 __import__("sqlalchemy", fromlist=["text"]).text(
                     "SELECT 1 FROM job_applications ja "
                     "JOIN jobs j ON j.id = ja.job_id "
                     "WHERE ja.applicant_id = :uid AND j.org_id = :oid "
                     "AND ja.status NOT IN ('rejected', 'withdrawn') LIMIT 1"
                 )
-            ).params(uid=user_id, oid=org_id)
+            )
+            .params(uid=user_id, oid=org_id)
         )
         return result.scalar() is not None
     except Exception:
@@ -96,6 +98,7 @@ async def _has_active_application_to_job(
         return False
     try:
         from sqlalchemy import text
+
         result = await session.execute(
             text(
                 "SELECT 1 FROM job_applications "
@@ -169,12 +172,16 @@ async def get_kb_ids_for_query(
     on ``kb_id = ANY(:kb_ids)`` before returning results.
     """
     rows = (
-        await session.execute(
-            select(KnowledgeBase)
-            .where(KnowledgeBase.is_active.is_(True))
-            .order_by(KnowledgeBase.scope)
+        (
+            await session.execute(
+                select(KnowledgeBase)
+                .where(KnowledgeBase.is_active.is_(True))
+                .order_by(KnowledgeBase.scope)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     result: list[uuid.UUID] = []
     for kb in rows:
         if await _can_query_kb(session, kb=kb, principal=principal):
@@ -243,8 +250,7 @@ async def get_document(
 ) -> dict:
     doc = (
         await session.execute(
-            select(KnowledgeBaseDocument)
-            .where(
+            select(KnowledgeBaseDocument).where(
                 KnowledgeBaseDocument.id == document_id,
                 KnowledgeBaseDocument.is_deleted.is_(False),
             )
@@ -262,15 +268,19 @@ async def list_documents(
     principal: Principal,
 ) -> list[dict]:
     rows = (
-        await session.execute(
-            select(KnowledgeBaseDocument)
-            .where(
-                KnowledgeBaseDocument.kb_id == kb_id,
-                KnowledgeBaseDocument.is_deleted.is_(False),
+        (
+            await session.execute(
+                select(KnowledgeBaseDocument)
+                .where(
+                    KnowledgeBaseDocument.kb_id == kb_id,
+                    KnowledgeBaseDocument.is_deleted.is_(False),
+                )
+                .order_by(KnowledgeBaseDocument.uploaded_at.desc())
             )
-            .order_by(KnowledgeBaseDocument.uploaded_at.desc())
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [_serialize_document(d) for d in rows]
 
 
@@ -372,6 +382,7 @@ async def _bm25_kb_search(
     limit: int,
 ) -> list[dict]:
     from sqlalchemy import text as sa_text
+
     sql = sa_text(
         """
         SELECT id, kb_id, document_id, content, section_heading, chunk_index, token_count

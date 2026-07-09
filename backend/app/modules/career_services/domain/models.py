@@ -57,21 +57,19 @@ class Cohort(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class CohortMembership(Base):
     """A student's membership in a cohort. Idempotent: unique(cohort, student)."""
 
     __tablename__ = "career_services_cohort_memberships"
-    __table_args__ = (
-        UniqueConstraint("cohort_id", "student_id", name="uq_cs_cohort_member"),
-    )
+    __table_args__ = (UniqueConstraint("cohort_id", "student_id", name="uq_cs_cohort_member"),)
 
     id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
     cohort_id: Mapped[uuid.UUID] = mapped_column(
@@ -116,14 +114,14 @@ class AtRiskFlag(Base):
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
     resolution_notes: Mapped[str | None] = mapped_column(Text, nullable=True)
-    resolved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -156,12 +154,12 @@ class CvReviewQueueItem(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    resolved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class Appointment(Base):
@@ -178,9 +176,7 @@ class Appointment(Base):
 
     __tablename__ = "career_services_appointments"
     __table_args__ = (
-        UniqueConstraint(
-            "counselor_id", "conflict_key", name="uq_cs_appt_counselor_slot"
-        ),
+        UniqueConstraint("counselor_id", "conflict_key", name="uq_cs_appt_counselor_slot"),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
@@ -194,12 +190,8 @@ class Appointment(Base):
         ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
     )
     scheduled_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    conflict_key: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    duration_minutes: Mapped[int] = mapped_column(
-        SmallInteger, nullable=False, default=30
-    )
+    conflict_key: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    duration_minutes: Mapped[int] = mapped_column(SmallInteger, nullable=False, default=30)
     mode: Mapped[str] = mapped_column(String(20), nullable=False, default="in_person")
     location: Mapped[str | None] = mapped_column(String(300), nullable=True)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="requested")
@@ -212,7 +204,9 @@ class Appointment(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -233,20 +227,18 @@ class EmployerRelationshipNote(Base):
         ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
     category: Mapped[str] = mapped_column(String(30), nullable=False, default="general")
-    visibility: Mapped[str] = mapped_column(
-        String(30), nullable=False, default="all_staff"
-    )
+    visibility: Mapped[str] = mapped_column(String(30), nullable=False, default="all_staff")
     note_text: Mapped[str] = mapped_column(Text, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class InterventionRecord(Base):
@@ -266,9 +258,7 @@ class InterventionRecord(Base):
     )
     intervention_type: Mapped[str] = mapped_column(String(40), nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
-    outcome: Mapped[str] = mapped_column(
-        String(30), nullable=False, default="no_outcome_yet"
-    )
+    outcome: Mapped[str] = mapped_column(String(30), nullable=False, default="no_outcome_yet")
     linked_appointment_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("career_services_appointments.id", ondelete="SET NULL"),
         nullable=True,
@@ -281,7 +271,9 @@ class InterventionRecord(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 

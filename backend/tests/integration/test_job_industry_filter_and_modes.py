@@ -72,34 +72,61 @@ async def _publish(db, partner_principal, uni_principal, *, title="Live Job", **
 async def _make_industry_tree(db) -> dict:
     """root (level 0) -> branch_a, branch_b (level 1) -> leaf_a1, leaf_b1 (level 2)."""
     root = Industry(
-        id=uuid.uuid4(), name_vi="Công nghệ thông tin", name_en="Information Technology",
-        slug=f"it-{uuid.uuid4().hex[:8]}", level=0, is_active=True,
+        id=uuid.uuid4(),
+        name_vi="Công nghệ thông tin",
+        name_en="Information Technology",
+        slug=f"it-{uuid.uuid4().hex[:8]}",
+        level=0,
+        is_active=True,
     )
     db.add(root)
     await db.flush()
     branch_a = Industry(
-        id=uuid.uuid4(), name_vi="Phát triển phần mềm", name_en="Software Development",
-        slug=f"swe-{uuid.uuid4().hex[:8]}", level=1, parent_id=root.id, is_active=True,
+        id=uuid.uuid4(),
+        name_vi="Phát triển phần mềm",
+        name_en="Software Development",
+        slug=f"swe-{uuid.uuid4().hex[:8]}",
+        level=1,
+        parent_id=root.id,
+        is_active=True,
     )
     branch_b = Industry(
-        id=uuid.uuid4(), name_vi="Khoa học dữ liệu", name_en="Data Science",
-        slug=f"ds-{uuid.uuid4().hex[:8]}", level=1, parent_id=root.id, is_active=True,
+        id=uuid.uuid4(),
+        name_vi="Khoa học dữ liệu",
+        name_en="Data Science",
+        slug=f"ds-{uuid.uuid4().hex[:8]}",
+        level=1,
+        parent_id=root.id,
+        is_active=True,
     )
     db.add_all([branch_a, branch_b])
     await db.flush()
     leaf_a1 = Industry(
-        id=uuid.uuid4(), name_vi="Phát triển Backend", name_en="Backend Development",
-        slug=f"backend-{uuid.uuid4().hex[:8]}", level=2, parent_id=branch_a.id, is_active=True,
+        id=uuid.uuid4(),
+        name_vi="Phát triển Backend",
+        name_en="Backend Development",
+        slug=f"backend-{uuid.uuid4().hex[:8]}",
+        level=2,
+        parent_id=branch_a.id,
+        is_active=True,
     )
     leaf_b1 = Industry(
-        id=uuid.uuid4(), name_vi="Phân tích dữ liệu", name_en="Data Analytics",
-        slug=f"analytics-{uuid.uuid4().hex[:8]}", level=2, parent_id=branch_b.id, is_active=True,
+        id=uuid.uuid4(),
+        name_vi="Phân tích dữ liệu",
+        name_en="Data Analytics",
+        slug=f"analytics-{uuid.uuid4().hex[:8]}",
+        level=2,
+        parent_id=branch_b.id,
+        is_active=True,
     )
     db.add_all([leaf_a1, leaf_b1])
     await db.flush()
     return {
-        "root": root, "branch_a": branch_a, "branch_b": branch_b,
-        "leaf_a1": leaf_a1, "leaf_b1": leaf_b1,
+        "root": root,
+        "branch_a": branch_a,
+        "branch_b": branch_b,
+        "leaf_a1": leaf_a1,
+        "leaf_b1": leaf_b1,
     }
 
 
@@ -126,7 +153,9 @@ async def test_industry_group_id_matches_all_descendants(db_session) -> None:
     )
 
     items, _next, _limit, total = await job_service.list_public_jobs(
-        db_session, principal=GUEST, industry_group_id=tree["root"].id,
+        db_session,
+        principal=GUEST,
+        industry_group_id=tree["root"].id,
     )
     ids = {uuid.UUID(i["id"]) for i in items}
     assert {job_root, job_branch, job_leaf, job_other_branch} <= ids
@@ -153,7 +182,9 @@ async def test_industry_id_matches_only_its_own_subtree(db_session) -> None:
     )
 
     items, _next, _limit, _total = await job_service.list_public_jobs(
-        db_session, principal=GUEST, industry_id=tree["branch_a"].id,
+        db_session,
+        principal=GUEST,
+        industry_id=tree["branch_a"].id,
     )
     ids = {uuid.UUID(i["id"]) for i in items}
     assert job_branch_a in ids
@@ -179,7 +210,9 @@ async def test_specialization_id_matches_exact_leaf_only(db_session) -> None:
     )
 
     items, _next, _limit, _total = await job_service.list_public_jobs(
-        db_session, principal=GUEST, specialization_id=tree["leaf_a1"].id,
+        db_session,
+        principal=GUEST,
+        specialization_id=tree["leaf_a1"].id,
     )
     ids = {uuid.UUID(i["id"]) for i in items}
     assert ids == {job_leaf_a1}
@@ -192,8 +225,10 @@ async def test_multiple_industry_scope_params_is_422(db_session) -> None:
     tree = await _make_industry_tree(db_session)
     with pytest.raises(InvalidIndustryFilterError) as exc_info:
         await job_service.list_public_jobs(
-            db_session, principal=GUEST,
-            industry_group_id=tree["root"].id, industry_id=tree["branch_a"].id,
+            db_session,
+            principal=GUEST,
+            industry_group_id=tree["root"].id,
+            industry_id=tree["branch_a"].id,
         )
     assert exc_info.value.details["reason"] == "multiple_scope"
 
@@ -204,7 +239,9 @@ async def test_industry_level_mismatch_is_422(db_session) -> None:
     with pytest.raises(InvalidIndustryFilterError) as exc_info:
         # leaf (level 2) passed in the `industry_group_id` (level 0) slot
         await job_service.list_public_jobs(
-            db_session, principal=GUEST, industry_group_id=tree["leaf_a1"].id,
+            db_session,
+            principal=GUEST,
+            industry_group_id=tree["leaf_a1"].id,
         )
     assert exc_info.value.details["reason"] == "level_mismatch"
 
@@ -213,7 +250,9 @@ async def test_industry_level_mismatch_is_422(db_session) -> None:
 async def test_industry_not_found_is_422(db_session) -> None:
     with pytest.raises(InvalidIndustryFilterError) as exc_info:
         await job_service.list_public_jobs(
-            db_session, principal=GUEST, industry_id=uuid.uuid4(),
+            db_session,
+            principal=GUEST,
+            industry_id=uuid.uuid4(),
         )
     assert exc_info.value.details["reason"] == "not_found"
 
@@ -228,7 +267,9 @@ async def test_industry_terms_free_text_still_works_without_canonical_params(db_
     await _publish(db_session, admin, uni, title="Sales associate role")
 
     items, _next, _limit, _total = await job_service.list_public_jobs(
-        db_session, principal=GUEST, industry_terms="machine learning",
+        db_session,
+        principal=GUEST,
+        industry_terms="machine learning",
     )
     ids = {uuid.UUID(i["id"]) for i in items}
     assert matching in ids
@@ -246,7 +287,9 @@ async def test_location_types_multi_select_or_matches(db_session) -> None:
     hybrid = await _publish(db_session, admin, uni, title="Hybrid job", location_type="hybrid")
 
     items, _next, _limit, total = await job_service.list_public_jobs(
-        db_session, principal=GUEST, location_types="onsite,remote",
+        db_session,
+        principal=GUEST,
+        location_types="onsite,remote",
     )
     ids = {uuid.UUID(i["id"]) for i in items}
     assert onsite in ids
@@ -265,12 +308,18 @@ async def test_salary_and_experience_mode_round_trip_create_to_detail(db_session
     _u, _org, admin = await make_org_with_admin(db_session)
 
     created = await job_service.create_job(
-        db_session, principal=admin,
+        db_session,
+        principal=admin,
         payload=_payload(
             "Structured comp role",
-            salary_mode="range", salary_min=15_000_000, salary_max=25_000_000,
-            salary_period="monthly", salary_gross_net="gross",
-            experience_mode="range", experience_min_years=1, experience_max_years=3,
+            salary_mode="range",
+            salary_min=15_000_000,
+            salary_max=25_000_000,
+            salary_period="monthly",
+            salary_gross_net="gross",
+            experience_mode="range",
+            experience_min_years=1,
+            experience_max_years=3,
         ),
         ctx=CTX,
     )
@@ -283,7 +332,9 @@ async def test_salary_and_experience_mode_round_trip_create_to_detail(db_session
     assert created["experience_display"]["kind"] == "range"
 
     detail = await job_service.get_job(
-        db_session, principal=admin, job_id=uuid.UUID(created["id"]),
+        db_session,
+        principal=admin,
+        job_id=uuid.UUID(created["id"]),
     )
     assert detail["salary_mode"] == "range"
     assert detail["experience_mode"] == "range"
@@ -295,10 +346,13 @@ async def test_salary_mode_hidden_shows_real_numbers_to_owner_only(db_session) -
     _u2, _org2, other_admin = await make_org_with_admin(db_session, display_name="Other Co")
 
     created = await job_service.create_job(
-        db_session, principal=admin,
+        db_session,
+        principal=admin,
         payload=_payload(
             "Confidential budget role",
-            salary_mode="hidden", salary_min=20_000_000, salary_max=30_000_000,
+            salary_mode="hidden",
+            salary_min=20_000_000,
+            salary_max=30_000_000,
         ),
         ctx=CTX,
     )
@@ -314,9 +368,13 @@ async def test_patch_partial_salary_min_revalidated_against_stored_mode(db_sessi
     _u, _org, admin = await make_org_with_admin(db_session)
 
     created = await job_service.create_job(
-        db_session, principal=admin,
+        db_session,
+        principal=admin,
         payload=_payload(
-            "Range role", salary_mode="range", salary_min=15_000_000, salary_max=25_000_000,
+            "Range role",
+            salary_mode="range",
+            salary_min=15_000_000,
+            salary_max=25_000_000,
         ),
         ctx=CTX,
     )
@@ -328,14 +386,20 @@ async def test_patch_partial_salary_min_revalidated_against_stored_mode(db_sessi
 
     with pytest.raises(InvalidJobFieldError):
         await job_service.update_job(
-            db_session, principal=admin, job_id=job_id,
-            payload={"salary_min": 30_000_000}, ctx=CTX,
+            db_session,
+            principal=admin,
+            job_id=job_id,
+            payload={"salary_min": 30_000_000},
+            ctx=CTX,
         )
 
     # A consistent partial update (still range, still min < max) succeeds.
     updated = await job_service.update_job(
-        db_session, principal=admin, job_id=job_id,
-        payload={"salary_min": 18_000_000}, ctx=CTX,
+        db_session,
+        principal=admin,
+        job_id=job_id,
+        payload={"salary_min": 18_000_000},
+        ctx=CTX,
     )
     assert updated["salary_display"]["min"] == 18_000_000
     assert updated["salary_display"]["kind"] == "range"

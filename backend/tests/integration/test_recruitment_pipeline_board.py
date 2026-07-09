@@ -65,7 +65,8 @@ async def _apply(db, *, job_id, prefix="student", is_anonymous=False):
     su, student = await make_student(db, prefix=prefix)
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
-        db, principal=student,
+        db,
+        principal=student,
         payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
         ctx=CTX,
     )
@@ -73,22 +74,24 @@ async def _apply(db, *, job_id, prefix="student", is_anonymous=False):
 
 
 async def _template_stages_for_app(db, app_id) -> list[PipelineStage]:
-    from app.modules.recruitment.domain.models import CandidateStage
     from app.modules.recruitment.domain import pipeline
+    from app.modules.recruitment.domain.models import CandidateStage
 
     active = (
-        await db.execute(
-            select(CandidateStage).where(
-                CandidateStage.application_id == app_id,
-                CandidateStage.status == pipeline.STAGE_ACTIVE,
+        (
+            await db.execute(
+                select(CandidateStage).where(
+                    CandidateStage.application_id == app_id,
+                    CandidateStage.status == pipeline.STAGE_ACTIVE,
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert active is not None
     stage = (
-        await db.execute(
-            select(PipelineStage).where(PipelineStage.id == active.stage_id)
-        )
+        await db.execute(select(PipelineStage).where(PipelineStage.id == active.stage_id))
     ).scalar_one()
     return list(
         (
@@ -97,7 +100,9 @@ async def _template_stages_for_app(db, app_id) -> list[PipelineStage]:
                 .where(PipelineStage.template_id == stage.template_id)
                 .order_by(PipelineStage.sort_order)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -106,15 +111,11 @@ def _column(board: dict, *, key: str) -> dict:
 
 
 def _stage_column(board: dict, *, sort_order: int) -> dict:
-    return next(
-        c for c in board["columns"] if c.get("sort_order") == sort_order and c["stage_id"]
-    )
+    return next(c for c in board["columns"] if c.get("sort_order") == sort_order and c["stage_id"])
 
 
 def _all_card_app_ids(board: dict) -> set[str]:
-    return {
-        card["application_id"] for col in board["columns"] for card in col["candidates"]
-    }
+    return {card["application_id"] for col in board["columns"] for card in col["candidates"]}
 
 
 @contextmanager
@@ -135,9 +136,7 @@ def _count_queries(db):
 
 
 async def _board(db, *, partner, job_id):
-    return await pipeline_board.get_job_pipeline_board(
-        db, principal=partner, job_id=job_id
-    )
+    return await pipeline_board.get_job_pipeline_board(db, principal=partner, job_id=job_id)
 
 
 # --------------------------------------------------------------------------- #
@@ -217,15 +216,16 @@ async def test_advanced_candidate_moves_buckets(db_session) -> None:
 async def test_rejected_and_withdrawn_drop_off_active_board(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     _su1, _s1, rejected_id = await _apply(db_session, job_id=job_id, prefix="rej")
-    _su2, withdrawer, withdrawn_id = await _apply(
-        db_session, job_id=job_id, prefix="wd"
-    )
+    _su2, withdrawer, withdrawn_id = await _apply(db_session, job_id=job_id, prefix="wd")
     await decision_service.review_application(
         db_session, principal=partner, application_id=rejected_id, ctx=CTX
     )
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=rejected_id,
-        reason="not_qualified", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=rejected_id,
+        reason="not_qualified",
+        ctx=CTX,
     )
     await decision_service.review_application(
         db_session, principal=partner, application_id=withdrawn_id, ctx=CTX
@@ -307,14 +307,10 @@ async def test_org_pipeline_counts_rollup(db_session) -> None:
 
 async def test_cross_org_partner_gets_404(db_session) -> None:
     partner_a, _uni, job_id = await _setup_published(db_session, title="A Job")
-    _pb_u, _pb_org, partner_b = await make_org_with_admin(
-        db_session, display_name="Org B"
-    )
+    _pb_u, _pb_org, partner_b = await make_org_with_admin(db_session, display_name="Org B")
     await _apply(db_session, job_id=job_id)
     with pytest.raises(ResourceNotFoundError):
-        await pipeline_board.get_job_pipeline_board(
-            db_session, principal=partner_b, job_id=job_id
-        )
+        await pipeline_board.get_job_pipeline_board(db_session, principal=partner_b, job_id=job_id)
 
 
 async def test_unknown_job_is_404(db_session) -> None:
@@ -332,9 +328,7 @@ async def test_unknown_job_is_404(db_session) -> None:
 
 async def test_anonymous_card_redacted_pre_reveal(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    su, _student, app_id = await _apply(
-        db_session, job_id=job_id, is_anonymous=True
-    )
+    su, _student, app_id = await _apply(db_session, job_id=job_id, is_anonymous=True)
     await decision_service.review_application(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
@@ -354,20 +348,23 @@ async def test_anonymous_card_redacted_pre_reveal(db_session) -> None:
 
 async def test_revealed_identity_appears_after_accept(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    su, student, app_id = await _apply(
-        db_session, job_id=job_id, is_anonymous=True
-    )
+    su, student, app_id = await _apply(db_session, job_id=job_id, is_anonymous=True)
     await decision_service.review_application(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
     await reveal_service.request_reveal(
-        db_session, principal=partner, application_id=app_id,
+        db_session,
+        principal=partner,
+        application_id=app_id,
         reason="Chúng tôi muốn xác minh thông tin ứng viên để mời phỏng vấn.",
         ctx=CTX,
     )
     await reveal_service.respond_reveal(
-        db_session, principal=student, application_id=app_id,
-        decision="accepted", ctx=CTX,
+        db_session,
+        principal=student,
+        application_id=app_id,
+        decision="accepted",
+        ctx=CTX,
     )
 
     board = await _board(db_session, partner=partner, job_id=job_id)
@@ -386,9 +383,7 @@ async def test_board_query_count_is_bounded(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     # Mix of buckets + a revealed card to exercise every batched lookup.
     for i in range(6):
-        _su, _student, app_id = await _apply(
-            db_session, job_id=job_id, prefix=f"q{i}"
-        )
+        _su, _student, app_id = await _apply(db_session, job_id=job_id, prefix=f"q{i}")
         if i < 4:
             await decision_service.review_application(
                 db_session, principal=partner, application_id=app_id, ctx=CTX
@@ -405,9 +400,7 @@ async def test_board_query_count_is_bounded(db_session) -> None:
     # Add many more candidates; the query count must NOT grow with N (no per-card
     # fetch loop). A small fixed ceiling proves the board is batched.
     for i in range(20):
-        _su, _student, app_id = await _apply(
-            db_session, job_id=job_id, prefix=f"big{i}"
-        )
+        _su, _student, app_id = await _apply(db_session, job_id=job_id, prefix=f"big{i}")
         await decision_service.review_application(
             db_session, principal=partner, application_id=app_id, ctx=CTX
         )

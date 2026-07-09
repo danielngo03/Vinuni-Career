@@ -91,9 +91,7 @@ async def list_outcomes(
 # --------------------------------------------------------------------------- #
 
 
-def _record_payload(
-    rec: CareerOutcomeRecord, *, employer_name: str, locale: str
-) -> dict:
+def _record_payload(rec: CareerOutcomeRecord, *, employer_name: str, locale: str) -> dict:
     return {
         "id": str(rec.id),
         "position_title": rec.position_title,
@@ -105,9 +103,7 @@ def _record_payload(
     }
 
 
-async def get_kpi(
-    session: AsyncSession, *, principal: Principal, locale: str = "vi"
-) -> dict:
+async def get_kpi(session: AsyncSession, *, principal: Principal, locale: str = "vi") -> dict:
     """University KPI roll-up: totals, trust-level mix, top employers, recents."""
 
     await _require_university(session, principal)
@@ -186,12 +182,8 @@ async def list_records(
 
     await _require_university(session, principal)
     page_limit = clamp_limit(limit)
-    rows = await list_outcomes(
-        session, trust_level=trust_level, limit=page_limit
-    )
-    names = await org_reporting_facade.display_names_for(
-        session, [r.employer_org_id for r in rows]
-    )
+    rows = await list_outcomes(session, trust_level=trust_level, limit=page_limit)
+    names = await org_reporting_facade.display_names_for(session, [r.employer_org_id for r in rows])
     items = [
         _record_payload(
             r,

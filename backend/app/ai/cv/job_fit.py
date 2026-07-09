@@ -80,12 +80,12 @@ SCORER_VERSION = "10"
 # survival signal ("sống còn") and carries the most weight; experience is the
 # second pillar. Scope, credentials, soft skills, and trajectory refine the
 # ranking between candidates who clear the skills+experience bar.
-W_SKILLS = 0.30       # hard-skill coverage vs the JD + contextual depth
-W_EXPERIENCE = 0.22   # relevance + years + job-title/field alignment
-W_SCOPE = 0.15        # leadership vs participation + quantified impact + level fit
+W_SKILLS = 0.30  # hard-skill coverage vs the JD + contextual depth
+W_EXPERIENCE = 0.22  # relevance + years + job-title/field alignment
+W_SCOPE = 0.15  # leadership vs participation + quantified impact + level fit
 W_CREDENTIALS = 0.13  # degree/cert/language + study-major alignment
-W_SOFT = 0.10         # JD-requested soft skills, credited for context proof
-W_TRAJECTORY = 0.10   # tenure / job-hopping risk + career-objective alignment
+W_SOFT = 0.10  # JD-requested soft skills, credited for context proof
+W_TRAJECTORY = 0.10  # tenure / job-hopping risk + career-objective alignment
 
 # HR-realism competency gate (applied only when the JD specifies skills). The
 # "core competency" — can they do THIS job at all — is skills + experience. When
@@ -231,14 +231,33 @@ _DEGREE_LEVEL = {"associate": 1, "bachelor": 2, "master": 3, "phd": 4}
 
 _SENIORITY_TERMS = {
     "intern": ["intern", "internship", "thực tập", "thực tập sinh", "sinh viên thực tập"],
-    "fresher": ["fresher", "entry level", "graduate", "mới tốt nghiệp", "tốt nghiệp mới",
-                "fresh graduate"],
+    "fresher": [
+        "fresher",
+        "entry level",
+        "graduate",
+        "mới tốt nghiệp",
+        "tốt nghiệp mới",
+        "fresh graduate",
+    ],
     "junior": ["junior"],
     "middle": ["middle", "mid level", "mid-level", "trung cấp"],
-    "senior": ["senior", "principal", "kỹ sư cao cấp", "nhân viên cấp cao",
-               "chuyên gia", "cao cấp"],
-    "lead": ["lead", "principal", "staff", "trưởng nhóm", "trưởng phòng", "tech lead",
-             "quản lý kỹ thuật"],
+    "senior": [
+        "senior",
+        "principal",
+        "kỹ sư cao cấp",
+        "nhân viên cấp cao",
+        "chuyên gia",
+        "cao cấp",
+    ],
+    "lead": [
+        "lead",
+        "principal",
+        "staff",
+        "trưởng nhóm",
+        "trưởng phòng",
+        "tech lead",
+        "quản lý kỹ thuật",
+    ],
 }
 
 _NO_EXPERIENCE_MODES = {"no_requirement", "fresher"}
@@ -256,77 +275,278 @@ _NO_EXPERIENCE_MODES = {"no_requirement", "fresher"}
 # because those two bands feed the score and the competency gate.
 _INDUSTRY_TERMS: dict[str, list[str]] = {
     "software_it": [
-        "software", "developer", "programmer", "engineer", "backend", "frontend",
-        "fullstack", "full-stack", "full stack", "devops", "devsecops", "sre",
-        "web", "mobile", "api", "microservices", "cloud", "aws", "azure", "gcp",
-        "kubernetes", "docker", "linux", "python", "java", "javascript", "typescript",
-        "golang", "c++", "c#", "php", "ruby", "react", "node", "sql", "database",
-        "cybersecurity", "security engineer", "infrastructure", "system administrator",
-        "lập trình", "phần mềm", "kỹ sư phần mềm", "công nghệ thông tin", "cntt",
-        "an ninh mạng", "an toàn thông tin", "hệ thống", "cơ sở dữ liệu",
+        "software",
+        "developer",
+        "programmer",
+        "engineer",
+        "backend",
+        "frontend",
+        "fullstack",
+        "full-stack",
+        "full stack",
+        "devops",
+        "devsecops",
+        "sre",
+        "web",
+        "mobile",
+        "api",
+        "microservices",
+        "cloud",
+        "aws",
+        "azure",
+        "gcp",
+        "kubernetes",
+        "docker",
+        "linux",
+        "python",
+        "java",
+        "javascript",
+        "typescript",
+        "golang",
+        "c++",
+        "c#",
+        "php",
+        "ruby",
+        "react",
+        "node",
+        "sql",
+        "database",
+        "cybersecurity",
+        "security engineer",
+        "infrastructure",
+        "system administrator",
+        "lập trình",
+        "phần mềm",
+        "kỹ sư phần mềm",
+        "công nghệ thông tin",
+        "cntt",
+        "an ninh mạng",
+        "an toàn thông tin",
+        "hệ thống",
+        "cơ sở dữ liệu",
     ],
     "data_ai": [
-        "data scientist", "data engineer", "data analyst", "machine learning",
-        "deep learning", "artificial intelligence", "nlp", "computer vision",
-        "analytics", "big data", "tensorflow", "pytorch", "llm", "genai",
-        "khoa học dữ liệu", "phân tích dữ liệu", "trí tuệ nhân tạo", "học máy",
+        "data scientist",
+        "data engineer",
+        "data analyst",
+        "machine learning",
+        "deep learning",
+        "artificial intelligence",
+        "nlp",
+        "computer vision",
+        "analytics",
+        "big data",
+        "tensorflow",
+        "pytorch",
+        "llm",
+        "genai",
+        "khoa học dữ liệu",
+        "phân tích dữ liệu",
+        "trí tuệ nhân tạo",
+        "học máy",
     ],
     "design_ux": [
-        "designer", "ux", "ui", "user experience", "user interface", "figma",
-        "graphic design", "product design", "photoshop", "illustrator", "wireframe",
-        "prototype", "thiết kế", "đồ họa", "trải nghiệm người dùng",
+        "designer",
+        "ux",
+        "ui",
+        "user experience",
+        "user interface",
+        "figma",
+        "graphic design",
+        "product design",
+        "photoshop",
+        "illustrator",
+        "wireframe",
+        "prototype",
+        "thiết kế",
+        "đồ họa",
+        "trải nghiệm người dùng",
     ],
     "healthcare": [
-        "nurse", "nursing", "doctor", "physician", "clinical", "patient", "hospital",
-        "medical", "healthcare", "pharmacy", "pharmacist", "surgery", "therapy",
-        "điều dưỡng", "y tá", "bác sĩ", "y khoa", "bệnh nhân", "bệnh viện", "y tế",
-        "dược sĩ", "lâm sàng", "chăm sóc sức khỏe",
+        "nurse",
+        "nursing",
+        "doctor",
+        "physician",
+        "clinical",
+        "patient",
+        "hospital",
+        "medical",
+        "healthcare",
+        "pharmacy",
+        "pharmacist",
+        "surgery",
+        "therapy",
+        "điều dưỡng",
+        "y tá",
+        "bác sĩ",
+        "y khoa",
+        "bệnh nhân",
+        "bệnh viện",
+        "y tế",
+        "dược sĩ",
+        "lâm sàng",
+        "chăm sóc sức khỏe",
     ],
     "finance_accounting": [
-        "finance", "financial", "accountant", "accounting", "banking", "audit",
-        "auditor", "tax", "investment", "treasury", "actuary", "bookkeeping",
-        "tài chính", "kế toán", "ngân hàng", "kiểm toán", "thuế", "đầu tư",
+        "finance",
+        "financial",
+        "accountant",
+        "accounting",
+        "banking",
+        "audit",
+        "auditor",
+        "tax",
+        "investment",
+        "treasury",
+        "actuary",
+        "bookkeeping",
+        "tài chính",
+        "kế toán",
+        "ngân hàng",
+        "kiểm toán",
+        "thuế",
+        "đầu tư",
     ],
     "marketing_sales": [
-        "marketing", "seo", "sem", "content", "brand", "advertising", "sales",
-        "salesperson", "business development", "account manager", "social media",
-        "copywriting", "public relations", "tiếp thị", "bán hàng", "kinh doanh",
-        "quảng cáo", "thương hiệu", "truyền thông", "chăm sóc khách hàng",
+        "marketing",
+        "seo",
+        "sem",
+        "content",
+        "brand",
+        "advertising",
+        "sales",
+        "salesperson",
+        "business development",
+        "account manager",
+        "social media",
+        "copywriting",
+        "public relations",
+        "tiếp thị",
+        "bán hàng",
+        "kinh doanh",
+        "quảng cáo",
+        "thương hiệu",
+        "truyền thông",
+        "chăm sóc khách hàng",
     ],
     "hr_admin": [
-        "human resources", "recruitment", "recruiter", "talent acquisition",
-        "hr generalist", "payroll", "administrative", "office admin", "compensation",
-        "nhân sự", "tuyển dụng", "hành chính", "tính lương",
+        "human resources",
+        "recruitment",
+        "recruiter",
+        "talent acquisition",
+        "hr generalist",
+        "payroll",
+        "administrative",
+        "office admin",
+        "compensation",
+        "nhân sự",
+        "tuyển dụng",
+        "hành chính",
+        "tính lương",
     ],
     "education": [
-        "teacher", "lecturer", "tutor", "professor", "curriculum", "education",
-        "teaching", "instructor", "academic", "giáo viên", "giảng viên", "gia sư",
-        "giáo dục", "sư phạm", "đào tạo", "giảng dạy",
+        "teacher",
+        "lecturer",
+        "tutor",
+        "professor",
+        "curriculum",
+        "education",
+        "teaching",
+        "instructor",
+        "academic",
+        "giáo viên",
+        "giảng viên",
+        "gia sư",
+        "giáo dục",
+        "sư phạm",
+        "đào tạo",
+        "giảng dạy",
     ],
     "manufacturing_engineering": [
-        "manufacturing", "production", "mechanical", "electrical", "industrial",
-        "maintenance", "assembly", "factory", "plant", "cnc", "automation engineer",
-        "lean", "kaizen", "sản xuất", "cơ khí", "điện", "nhà máy", "vận hành máy",
-        "may mặc", "dệt may", "kiểm soát chất lượng",
+        "manufacturing",
+        "production",
+        "mechanical",
+        "electrical",
+        "industrial",
+        "maintenance",
+        "assembly",
+        "factory",
+        "plant",
+        "cnc",
+        "automation engineer",
+        "lean",
+        "kaizen",
+        "sản xuất",
+        "cơ khí",
+        "điện",
+        "nhà máy",
+        "vận hành máy",
+        "may mặc",
+        "dệt may",
+        "kiểm soát chất lượng",
     ],
     "construction": [
-        "construction", "civil engineer", "architect", "architecture", "site engineer",
-        "surveyor", "building", "structural", "xây dựng", "kiến trúc", "công trình",
-        "kỹ sư xây dựng", "giám sát công trường",
+        "construction",
+        "civil engineer",
+        "architect",
+        "architecture",
+        "site engineer",
+        "surveyor",
+        "building",
+        "structural",
+        "xây dựng",
+        "kiến trúc",
+        "công trình",
+        "kỹ sư xây dựng",
+        "giám sát công trường",
     ],
     "legal": [
-        "lawyer", "legal", "attorney", "paralegal", "compliance", "contract law",
-        "litigation", "luật", "luật sư", "pháp lý", "pháp chế", "hợp đồng",
+        "lawyer",
+        "legal",
+        "attorney",
+        "paralegal",
+        "compliance",
+        "contract law",
+        "litigation",
+        "luật",
+        "luật sư",
+        "pháp lý",
+        "pháp chế",
+        "hợp đồng",
     ],
     "hospitality_tourism": [
-        "hotel", "restaurant", "tourism", "hospitality", "chef", "waiter", "barista",
-        "receptionist", "travel", "khách sạn", "nhà hàng", "du lịch", "đầu bếp",
-        "lễ tân", "phục vụ",
+        "hotel",
+        "restaurant",
+        "tourism",
+        "hospitality",
+        "chef",
+        "waiter",
+        "barista",
+        "receptionist",
+        "travel",
+        "khách sạn",
+        "nhà hàng",
+        "du lịch",
+        "đầu bếp",
+        "lễ tân",
+        "phục vụ",
     ],
     "logistics_supplychain": [
-        "logistics", "supply chain", "warehouse", "shipping", "freight", "procurement",
-        "inventory", "fleet", "distribution", "chuỗi cung ứng", "kho vận", "kho bãi",
-        "vận chuyển", "mua sắm", "đấu thầu",
+        "logistics",
+        "supply chain",
+        "warehouse",
+        "shipping",
+        "freight",
+        "procurement",
+        "inventory",
+        "fleet",
+        "distribution",
+        "chuỗi cung ứng",
+        "kho vận",
+        "kho bãi",
+        "vận chuyển",
+        "mua sắm",
+        "đấu thầu",
     ],
 }
 
@@ -338,11 +558,11 @@ _INDUSTRY_ADJACENCY: tuple[frozenset[str], ...] = (
     frozenset({"manufacturing_engineering", "construction", "logistics_supplychain"}),
 )
 
-_FIELD_SAME = 100        # same industry
-_FIELD_ADJACENT = 55     # adjacent field (some transferable relevance)
-_FIELD_UNRELATED = 15    # different world (Nursing vs Software)
-_FIELD_UNKNOWN = 60      # can't classify one side — neutral, don't over-penalise
-_INDUSTRY_MIN_HITS = 2   # need at least this many signal hits to claim an industry
+_FIELD_SAME = 100  # same industry
+_FIELD_ADJACENT = 55  # adjacent field (some transferable relevance)
+_FIELD_UNRELATED = 15  # different world (Nursing vs Software)
+_FIELD_UNKNOWN = 60  # can't classify one side — neutral, don't over-penalise
+_INDUSTRY_MIN_HITS = 2  # need at least this many signal hits to claim an industry
 
 
 @dataclass(slots=True)
@@ -363,9 +583,9 @@ class BandScores:
     skills: int
     experience: int
     scope: int
-    credentials: int = 80        # default: JD states no credential requirement
-    soft_skills: int = 70        # default: JD does not emphasise soft skills
-    trajectory: int = 70         # default: not enough history to flag risk
+    credentials: int = 80  # default: JD states no credential requirement
+    soft_skills: int = 70  # default: JD does not emphasise soft skills
+    trajectory: int = 70  # default: not enough history to flag risk
 
     def as_dict(self) -> dict[str, int]:
         return {
@@ -611,9 +831,7 @@ def resolve_requirements(job: dict) -> _Requirements:
     inferred = _inferred_terms(job, [*explicit, *role_terms, *credential_terms])
     raw_map = job.get("_skill_translation_map")
     translation_map = (
-        {str(k): str(v) for k, v in raw_map.items()}
-        if isinstance(raw_map, dict)
-        else {}
+        {str(k): str(v) for k, v in raw_map.items()} if isinstance(raw_map, dict) else {}
     )
     return _Requirements(
         required=required,
@@ -643,9 +861,7 @@ def _section_type(section: dict) -> str:
 
 def _section_text(sections: list[dict], types: frozenset[str]) -> str:
     parts = [
-        grounding.content_to_text(s.get("content"))
-        for s in sections
-        if _section_type(s) in types
+        grounding.content_to_text(s.get("content")) for s in sections if _section_type(s) in types
     ]
     return " ".join(p for p in parts if p)
 
@@ -683,6 +899,7 @@ def _collapse_translations(
 # --------------------------------------------------------------------------- #
 # Field / industry helpers (reused by EXPERIENCE + CREDENTIALS)               #
 # --------------------------------------------------------------------------- #
+
 
 @lru_cache(maxsize=2048)
 def _classify_industry_norm(text_norm: str) -> str | None:
@@ -736,6 +953,7 @@ def _jd_industry(job: dict, req: _Requirements) -> str | None:
 # Band 1: Hard skills & tools (coverage + contextual depth)                   #
 # --------------------------------------------------------------------------- #
 
+
 def _skills_band(
     req: _Requirements,
     cv_text_norm: str,
@@ -756,9 +974,7 @@ def _skills_band(
         elif pref_cov is not None:
             explicit_score = _clamp(100 * pref_cov)
 
-    inferred_score = (
-        _clamp(100 * len(pres_inf) / len(req.inferred)) if req.inferred else None
-    )
+    inferred_score = _clamp(100 * len(pres_inf) / len(req.inferred)) if req.inferred else None
     if explicit_score is not None and inferred_score is not None:
         coverage_score = _clamp(0.75 * explicit_score + 0.25 * inferred_score)
     elif explicit_score is not None:
@@ -777,9 +993,7 @@ def _skills_band(
     # coverage (never invents credit), so it can't lift a low-coverage CV.
     matched_terms = [*pres_req, *pres_pref]
     if matched_terms and experience_norm:
-        in_context = sum(
-            1 for t in matched_terms if grounding.term_present(t, experience_norm)
-        )
+        in_context = sum(1 for t in matched_terms if grounding.term_present(t, experience_norm))
         depth_ratio = in_context / len(matched_terms)
     else:
         depth_ratio = 0.0
@@ -803,6 +1017,7 @@ def _skills_band(
 # --------------------------------------------------------------------------- #
 # Band 2: Work experience & relevance (relevance + years + title/field)       #
 # --------------------------------------------------------------------------- #
+
 
 def _minimum_experience(job: dict) -> float | None:
     mode = (job.get("experience_mode") or "").lower()
@@ -893,9 +1108,7 @@ def _experience_band(
             return _clamp(0.5 * 55 + 0.5 * title_score)
         return _clamp(0.65 * 25 + 0.35 * title_score)
 
-    terms = _dedupe_terms(
-        [*req.required, *req.preferred, *req.inferred, *req.role_terms], limit=24
-    )
+    terms = _dedupe_terms([*req.required, *req.preferred, *req.inferred, *req.role_terms], limit=24)
     if terms:
         present, _ = _split_present(terms, evidence)
         relevance = len(present) / len(terms)
@@ -938,19 +1151,70 @@ _ACHIEVEMENT_TYPES = _EXPERIENCE_TYPES | frozenset({"projects", "project", "acti
 # Leadership vs participation language. Leadership verbs signal ownership/scope;
 # participation verbs signal a supporting contribution. A Senior/Lead JD expects
 # leadership evidence. Matched with boundary-aware normalized containment.
-_LEAD_VERBS = frozenset({
-    "led", "lead", "leading", "manage", "managed", "managing", "direct", "directed",
-    "architect", "architected", "own", "owned", "drove", "drive", "spearhead",
-    "spearheaded", "oversee", "oversaw", "supervise", "supervised", "mentor",
-    "mentored", "founded", "established", "launched", "built", "headed", "coordinated",
-    "quản lý", "dẫn dắt", "lãnh đạo", "phụ trách", "chịu trách nhiệm", "điều hành",
-    "chủ trì", "xây dựng", "triển khai", "thiết kế", "giám sát", "đứng đầu",
-})
-_PARTICIPATE_VERBS = frozenset({
-    "participated", "participate", "assisted", "assist", "supported", "support",
-    "helped", "help", "contributed", "contribute", "involved",
-    "tham gia", "hỗ trợ", "phụ giúp", "góp phần", "cộng tác",
-})
+_LEAD_VERBS = frozenset(
+    {
+        "led",
+        "lead",
+        "leading",
+        "manage",
+        "managed",
+        "managing",
+        "direct",
+        "directed",
+        "architect",
+        "architected",
+        "own",
+        "owned",
+        "drove",
+        "drive",
+        "spearhead",
+        "spearheaded",
+        "oversee",
+        "oversaw",
+        "supervise",
+        "supervised",
+        "mentor",
+        "mentored",
+        "founded",
+        "established",
+        "launched",
+        "built",
+        "headed",
+        "coordinated",
+        "quản lý",
+        "dẫn dắt",
+        "lãnh đạo",
+        "phụ trách",
+        "chịu trách nhiệm",
+        "điều hành",
+        "chủ trì",
+        "xây dựng",
+        "triển khai",
+        "thiết kế",
+        "giám sát",
+        "đứng đầu",
+    }
+)
+_PARTICIPATE_VERBS = frozenset(
+    {
+        "participated",
+        "participate",
+        "assisted",
+        "assist",
+        "supported",
+        "support",
+        "helped",
+        "help",
+        "contributed",
+        "contribute",
+        "involved",
+        "tham gia",
+        "hỗ trợ",
+        "phụ giúp",
+        "góp phần",
+        "cộng tác",
+    }
+)
 
 
 @lru_cache(maxsize=2048)
@@ -1042,16 +1306,18 @@ def _detect_seniority(text: str) -> str | None:
 
 def _seniority_band(job: dict, req: _Requirements, cv_text_norm: str) -> int:
     """Seniority alignment: does the candidate's level match the role's level?"""
-    jd_text = grounding.normalize(job.get("title") or "") + " " + " ".join(
-        grounding.normalize(t) for t in req.role_terms
+    jd_text = (
+        grounding.normalize(job.get("title") or "")
+        + " "
+        + " ".join(grounding.normalize(t) for t in req.role_terms)
     )
     jd_level = _detect_seniority(jd_text)
     cv_level = _detect_seniority(cv_text_norm)
 
     if jd_level is None:
-        return 70   # JD doesn't specify seniority → neutral
+        return 70  # JD doesn't specify seniority → neutral
     if cv_level is None:
-        return 55   # CV gives no seniority signal → slight uncertainty
+        return 55  # CV gives no seniority signal → slight uncertainty
 
     diff = _LEVEL_NUM[cv_level] - _LEVEL_NUM[jd_level]
     if diff == 0:
@@ -1061,20 +1327,40 @@ def _seniority_band(job: dict, req: _Requirements, cv_text_norm: str) -> int:
     if diff == -1:
         return 55
     if diff >= 2:
-        return 70   # clearly overqualified — may decline offer
-    return 25       # diff <= -2: clearly too junior — hard gap
+        return 70  # clearly overqualified — may decline offer
+    return 25  # diff <= -2: clearly too junior — hard gap
 
 
 # --------------------------------------------------------------------------- #
 # Band 4: Education & certifications (requirements + study-major alignment)   #
 # --------------------------------------------------------------------------- #
 
-_PROFICIENCY_SIGNALS = frozenset({
-    "ielts", "toefl", "toeic", "aptis", "pte", "duolingo", "vstep",
-    "cefr", "english", "tiếng anh", "french", "tiếng pháp",
-    "japanese", "tiếng nhật", "chinese", "tiếng trung",
-    " b1", " b2", " c1", " c2", " a1", " a2",
-})
+_PROFICIENCY_SIGNALS = frozenset(
+    {
+        "ielts",
+        "toefl",
+        "toeic",
+        "aptis",
+        "pte",
+        "duolingo",
+        "vstep",
+        "cefr",
+        "english",
+        "tiếng anh",
+        "french",
+        "tiếng pháp",
+        "japanese",
+        "tiếng nhật",
+        "chinese",
+        "tiếng trung",
+        " b1",
+        " b2",
+        " c1",
+        " c2",
+        " a1",
+        " a2",
+    }
+)
 _GPA_SIGNALS = frozenset({"gpa", "grade point", "điểm trung bình"})
 
 
@@ -1103,8 +1389,7 @@ def _credential_coverage(
         return None, [], []
 
     evidence_expanded = (
-        grounding.normalize_expanded(_section_text(sections, _CREDENTIAL_TYPES))
-        or cv_text_norm
+        grounding.normalize_expanded(_section_text(sections, _CREDENTIAL_TYPES)) or cv_text_norm
     )
     cv_raw = _cv_credential_text(sections, cv_text_norm)
 
@@ -1186,19 +1471,34 @@ def _credentials_band(
 
 _SOFT_SKILLS: dict[str, list[str]] = {
     "communication": ["communication", "communicate", "giao tiếp", "truyền đạt"],
-    "teamwork": ["teamwork", "team work", "collaboration", "làm việc nhóm",
-                 "làm việc theo nhóm", "phối hợp"],
+    "teamwork": [
+        "teamwork",
+        "team work",
+        "collaboration",
+        "làm việc nhóm",
+        "làm việc theo nhóm",
+        "phối hợp",
+    ],
     "leadership": ["leadership", "lãnh đạo", "dẫn dắt"],
     "problem_solving": ["problem solving", "problem-solving", "giải quyết vấn đề"],
-    "critical_thinking": ["critical thinking", "analytical thinking", "tư duy phản biện",
-                          "tư duy phân tích"],
+    "critical_thinking": [
+        "critical thinking",
+        "analytical thinking",
+        "tư duy phản biện",
+        "tư duy phân tích",
+    ],
     "time_management": ["time management", "quản lý thời gian"],
     "adaptability": ["adaptability", "adaptable", "flexible", "thích nghi", "linh hoạt"],
     "presentation": ["presentation", "present", "thuyết trình"],
     "negotiation": ["negotiation", "negotiate", "đàm phán", "thương lượng"],
     "creativity": ["creativity", "creative", "sáng tạo"],
-    "attention_to_detail": ["attention to detail", "detail-oriented", "cẩn thận",
-                            "tỉ mỉ", "chi tiết"],
+    "attention_to_detail": [
+        "attention to detail",
+        "detail-oriented",
+        "cẩn thận",
+        "tỉ mỉ",
+        "chi tiết",
+    ],
     "work_under_pressure": ["under pressure", "chịu áp lực", "chịu được áp lực"],
     "proactivity": ["proactive", "self-motivated", "chủ động", "tự giác"],
 }
@@ -1235,6 +1535,7 @@ def _soft_skills_band(job: dict, sections: list[dict], cv_text_norm: str) -> int
 # Band 6: Career trajectory (tenure / job-hopping + objective alignment)      #
 # --------------------------------------------------------------------------- #
 
+
 def _tenure_score(sections: list[dict]) -> int:
     """Job-hopping risk from per-role tenures. Neutral when history is thin."""
     durations = _job_durations(_section_text(sections, _EXPERIENCE_TYPES))
@@ -1242,7 +1543,7 @@ def _tenure_score(sections: list[dict]) -> int:
         short = sum(1 for d in durations if d < 0.5)  # < 6 months
         avg = sum(durations) / len(durations)
         if short >= 2:
-            return 40   # repeated job-hopping — a real HR risk flag
+            return 40  # repeated job-hopping — a real HR risk flag
         if short == 1:
             return 62
         if avg >= 2.0:
@@ -1276,6 +1577,7 @@ def _trajectory_band(req: _Requirements, sections: list[dict]) -> int:
 # Composition                                                                 #
 # --------------------------------------------------------------------------- #
 
+
 def _avg_skill_level(sections: list[dict]) -> float:
     """Average of the CV's numeric skill levels (0-100); 50.0 (neutral) if none."""
     levels: list[float] = []
@@ -1303,9 +1605,7 @@ def score_cv(
     jd_ind: str | None = None,
 ) -> CvFit:
     cv_text_norm = grounding.normalize_expanded(grounding.sections_to_text(cv.sections))
-    experience_norm = grounding.normalize_expanded(
-        _section_text(cv.sections, _EXPERIENCE_TYPES)
-    )
+    experience_norm = grounding.normalize_expanded(_section_text(cv.sections, _EXPERIENCE_TYPES))
 
     # Field distance (reused by EXPERIENCE title-relevance + CREDENTIALS major).
     # ``jd_ind`` is classified ONCE per job in ``evaluate`` and passed in (the JD is
@@ -1399,9 +1699,7 @@ def evaluate(
     # Classify the JD's field ONCE (identical across the user's CVs) and pass it in,
     # so ``score_cv`` doesn't re-expand + re-classify the JD per CV.
     jd_ind = _jd_industry(job, req)
-    results = [
-        score_cv(job, req, cv, stale_days=stale_days, jd_ind=jd_ind) for cv in cvs
-    ]
+    results = [score_cv(job, req, cv, stale_days=stale_days, jd_ind=jd_ind) for cv in cvs]
     # Rank: score first (authoritative), then higher self-rated proficiency as a
     # tie-breaker, then freshness, then id for a stable total order.
     results.sort(key=lambda r: (-r.score, -r.avg_skill_level, r.last_updated_days, r.cv_id))

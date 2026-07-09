@@ -63,9 +63,7 @@ class LogoValidationError(Exception):
 
     def __init__(self, reason: str) -> None:
         self.reason = reason
-        self.message_vi, self.message_en = _REASONS.get(
-            reason, _REASONS["unsupported_image_type"]
-        )
+        self.message_vi, self.message_en = _REASONS.get(reason, _REASONS["unsupported_image_type"])
         super().__init__(reason)
 
 
@@ -81,9 +79,7 @@ def sniff_image(data: bytes) -> LogoMedia | None:
     return None
 
 
-def validate_logo(
-    data: bytes, content_type: str | None, *, max_bytes: int
-) -> LogoMedia:
+def validate_logo(data: bytes, content_type: str | None, *, max_bytes: int) -> LogoMedia:
     """Validate an uploaded logo and return its resolved media identity.
 
     Order: empty -> size -> declared content-type allowlist -> magic-byte sniff.

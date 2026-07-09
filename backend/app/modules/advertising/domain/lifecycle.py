@@ -47,9 +47,7 @@ TERMINAL_STATES: frozenset[str] = frozenset({COMPLETED, CANCELLED})
 # "In flight": occupies the per-target uniqueness + per-org concurrency cap.
 IN_FLIGHT_STATES: frozenset[str] = frozenset({PENDING_APPROVAL, APPROVED, ACTIVE})
 # Partner may cancel from any pre-completed, non-terminal state.
-CANCELLABLE_STATES: frozenset[str] = frozenset(
-    {DRAFT, PENDING_APPROVAL, APPROVED, ACTIVE}
-)
+CANCELLABLE_STATES: frozenset[str] = frozenset({DRAFT, PENDING_APPROVAL, APPROVED, ACTIVE})
 
 # --------------------------------------------------------------------------- #
 # Transition map: event -> (allowed from-states, to-state)                    #
@@ -136,11 +134,7 @@ def can_activate(
     ``status == approved AND paid_at IS NOT NULL AND start_at <= now < end_at``.
     """
 
-    return (
-        status == APPROVED
-        and paid_at is not None
-        and start_at <= now < end_at
-    )
+    return status == APPROVED and paid_at is not None and start_at <= now < end_at
 
 
 def compute_target_flags(active_placement_types: list[str]) -> tuple[bool, bool]:

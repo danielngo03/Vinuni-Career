@@ -83,9 +83,7 @@ def _format_salary_result(result: dict[str, Any], *, role: str, locale: str) -> 
             if search_url
             else str(note)
         )
-    lines = [
-        assistant_message("fmt.salary.heading", locale, role=result.get("role") or role)
-    ]
+    lines = [assistant_message("fmt.salary.heading", locale, role=result.get("role") or role)]
     for tier in tiers[:4]:
         lines.append(
             assistant_message(
@@ -130,8 +128,7 @@ def _format_jobs_result(result: dict[str, Any], *, plan: AgentPlan, locale: str)
     for index, item in enumerate(jobs[:5], start=1):
         company = item.get("company") or item.get("company_name") or ""
         lines.append(
-            f"{index}. {item.get('title', title_fallback)} · {company} · "
-            f"{item.get('url', '/jobs')}"
+            f"{index}. {item.get('title', title_fallback)} · {company} · {item.get('url', '/jobs')}"
         )
     lines.append(assistant_message("fmt.jobs.footer", locale))
     return "\n".join(lines)
@@ -233,9 +230,7 @@ def _format_cvs_result(result: dict[str, Any], *, plan: AgentPlan, locale: str) 
         ]
     title_fallback = assistant_message("fmt.cvs.item_title_fallback", locale)
     for index, cv in enumerate(cvs[:5], start=1):
-        lines.append(
-            f"{index}. {cv.get('title', title_fallback)} · {cv.get('status', 'draft')}"
-        )
+        lines.append(f"{index}. {cv.get('title', title_fallback)} · {cv.get('status', 'draft')}")
     if plan.reason:
         lines.append(assistant_message("fmt.cvs.footer_with_reason", locale))
     return "\n".join(lines)
@@ -447,9 +442,7 @@ def _format_career_advice_result(result: dict[str, Any], *, locale: str) -> str:
             assistant_message("fmt.career.growth_path", locale, path=result["growth_path"])
         )
     if result.get("search_url"):
-        lines.append(
-            assistant_message("fmt.career.search_url", locale, url=result["search_url"])
-        )
+        lines.append(assistant_message("fmt.career.search_url", locale, url=result["search_url"]))
     return "\n".join(lines)
 
 

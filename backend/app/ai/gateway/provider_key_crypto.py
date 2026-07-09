@@ -58,9 +58,7 @@ def _configured_keys() -> list[str]:
 def _derived_local_key() -> str:
     """Deterministic dev-only key derived from the JWT secret (never for prod)."""
 
-    digest = hashlib.sha256(
-        f"ai-provider-key:{get_settings().jwt_secret_key}".encode()
-    ).digest()
+    digest = hashlib.sha256(f"ai-provider-key:{get_settings().jwt_secret_key}".encode()).digest()
     return base64.urlsafe_b64encode(digest).decode()
 
 

@@ -111,9 +111,7 @@ async def list_recent_summaries(
 async def count_visible_jobs(session: AsyncSession) -> int:
     """Total number of guest-visible jobs across the platform."""
 
-    return (
-        await session.execute(_visible(select(func.count(Job.id))))
-    ).scalar_one()
+    return (await session.execute(_visible(select(func.count(Job.id))))).scalar_one()
 
 
 async def count_open_for_applications(session: AsyncSession) -> int:

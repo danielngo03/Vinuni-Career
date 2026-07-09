@@ -68,9 +68,7 @@ async def _create_published_review(db, *, student, partner, uni):
         db, principal=student, slug=slug, payload=_payload(), ctx=CTX
     )
     rid = uuid.UUID(sub["id"])
-    return await review_moderation_service.publish_review(
-        db, principal=uni, review_id=rid, ctx=CTX
-    )
+    return await review_moderation_service.publish_review(db, principal=uni, review_id=rid, ctx=CTX)
 
 
 # --------------------------------------------------------------------------- #
@@ -157,25 +155,19 @@ async def test_my_vote_in_public_list(db_session) -> None:
     await review_service.vote_helpful(db_session, principal=voter, review_id=rid)
 
     # Voter sees my_vote=True.
-    result_voter = await review_service.list_public_reviews(
-        db_session, slug=slug, principal=voter
-    )
+    result_voter = await review_service.list_public_reviews(db_session, slug=slug, principal=voter)
     item = next(r for r in result_voter["items"] if r["id"] == str(rid))
     assert item["helpful_count"] == 1
     assert item["my_vote"] is True
 
     # Non-voter sees my_vote=False.
     _su3, other = await make_student(db_session, prefix="v6")
-    result_other = await review_service.list_public_reviews(
-        db_session, slug=slug, principal=other
-    )
+    result_other = await review_service.list_public_reviews(db_session, slug=slug, principal=other)
     item2 = next(r for r in result_other["items"] if r["id"] == str(rid))
     assert item2["my_vote"] is False
 
     # Guest sees my_vote=None.
-    result_guest = await review_service.list_public_reviews(
-        db_session, slug=slug, principal=GUEST
-    )
+    result_guest = await review_service.list_public_reviews(db_session, slug=slug, principal=GUEST)
     item3 = next(r for r in result_guest["items"] if r["id"] == str(rid))
     assert item3["my_vote"] is None
 
@@ -193,8 +185,11 @@ async def test_partner_can_add_response(db_session) -> None:
     slug = await _org_slug(db_session, partner.org_id)
 
     res = await review_service.add_partner_response(
-        db_session, principal=partner, review_id=rid,
-        response_text="Thank you for your feedback!", ctx=CTX,
+        db_session,
+        principal=partner,
+        review_id=rid,
+        response_text="Thank you for your feedback!",
+        ctx=CTX,
     )
     assert res["status"] == "ok"
 
@@ -217,7 +212,9 @@ async def test_partner_cannot_respond_to_other_org_review(db_session) -> None:
     )
     with pytest.raises(ResourceNotFoundError):
         await review_service.add_partner_response(
-            db_session, principal=other_partner, review_id=rid,
+            db_session,
+            principal=other_partner,
+            review_id=rid,
             response_text="I should not be able to respond to this.",
             ctx=CTX,
         )

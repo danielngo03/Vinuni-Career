@@ -41,6 +41,7 @@ type ChartSpec = {
 type DiagramSpec = {
   type?: string;
   title?: string;
+  note?: string;
   stages?: { label: string; count: number; pct: number }[];
 };
 
@@ -347,9 +348,9 @@ function FunnelDiagram({ artifact }: { artifact: MessageArtifact }) {
           </div>
         ))}
       </div>
-      <p className="mt-2 text-[10px] text-[var(--text-muted)]">
-        % = phần ứng viên đạt đến mỗi vòng so với vòng đầu tiên.
-      </p>
+      {diagram.note && (
+        <p className="mt-2 text-[10px] text-[var(--text-muted)]">{diagram.note}</p>
+      )}
     </figure>
   );
 }

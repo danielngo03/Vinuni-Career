@@ -70,9 +70,7 @@ async def _load_writable_org(
 
     org = (
         await session.execute(
-            select(Organization).where(
-                Organization.id == org_id, Organization.deleted_at.is_(None)
-            )
+            select(Organization).where(Organization.id == org_id, Organization.deleted_at.is_(None))
         )
     ).scalar_one_or_none()
     if org is None:
@@ -132,8 +130,11 @@ async def upload_logo(
             pass
 
     await write_audit(
-        session, action="organization.logo_updated", resource_type="organization",
-        resource_id=org.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="organization.logo_updated",
+        resource_type="organization",
+        resource_id=org.id,
+        context=_audit_ctx(principal, ctx),
         after={"has_logo": True, "media_type": media.media_type},
     )
     await session.commit()
@@ -164,8 +165,11 @@ async def remove_logo(
         except Exception:  # noqa: BLE001 - storage cleanup is non-critical
             pass
         await write_audit(
-            session, action="organization.logo_removed", resource_type="organization",
-            resource_id=org.id, context=_audit_ctx(principal, ctx),
+            session,
+            action="organization.logo_removed",
+            resource_type="organization",
+            resource_id=org.id,
+            context=_audit_ctx(principal, ctx),
             after={"has_logo": False},
         )
     await session.commit()

@@ -14,11 +14,9 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import pytest
-from sqlalchemy import func, select
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.core.db import get_sessionmaker
 from app.modules.automation.scheduler import runner
+from app.modules.documents.application import snapshot_service
 from app.modules.notifications.application.dispatch_service import process_outbox
 from app.modules.notifications.application.template_seed import ensure_default_templates
 from app.modules.notifications.domain.models import Notification, NotificationOutbox
@@ -31,7 +29,8 @@ from app.modules.recruitment.application import (
     stage_service,
 )
 from app.modules.recruitment.domain.models import CandidateStage, PipelineStage
-from app.modules.documents.application import snapshot_service
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from tests.auth_utils import CTX
 from tests.documents_utils import make_student
@@ -60,14 +59,13 @@ async def _setup_reviewed(db: AsyncSession):
     su, student = await make_student(db, prefix="student")
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
-        db, principal=student,
+        db,
+        principal=student,
         payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
-    await decision_service.review_application(
-        db, principal=partner, application_id=app_id, ctx=CTX
-    )
+    await decision_service.review_application(db, principal=partner, application_id=app_id, ctx=CTX)
     return porg, partner, job_id, app_id
 
 
@@ -152,18 +150,28 @@ async def test_recipient_is_reviewer_not_whole_org(db_session) -> None:
     await sla_reminder_service.sweep_sla_reminders(db_session, now=_now())
 
     rows = (
-        await db_session.execute(select(NotificationOutbox).where(
-            NotificationOutbox.dedupe_key.like(f"pipeline.sla_reminder:{cs.id}:%")
-        ))
-    ).scalars().all()
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.dedupe_key.like(f"pipeline.sla_reminder:{cs.id}:%")
+                )
+            )
+        )
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1
     assert rows[0].recipient_id == partner.user_id
 
     feed = (
-        await db_session.execute(
-            select(Notification).where(Notification.recipient_id == partner.user_id)
+        (
+            await db_session.execute(
+                select(Notification).where(Notification.recipient_id == partner.user_id)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert any(n.notif_type == "recruitment.pipeline_sla_reminder" for n in feed)
 
 
@@ -176,17 +184,18 @@ async def test_falls_back_to_job_owner_when_reviewer_inactive(db_session) -> Non
     _pu, porg, org_admin = await make_org_with_admin(db_session, display_name="Partner Co")
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     poster_user, _membership, poster = await add_member(
-        db_session, org=porg,
+        db_session,
+        org=porg,
         permissions=[("jobs", "create"), ("jobs", "submit"), ("jobs", "update")],
     )
-    job_id = await publish_job(
-        db_session, partner_principal=poster, uni_principal=uni
-    )
+    job_id = await publish_job(db_session, partner_principal=poster, uni_principal=uni)
     su, student = await make_student(db_session, prefix="student")
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
     # ``org_admin`` (a DIFFERENT user than the job poster) reviews -> entered_by.
@@ -199,9 +208,7 @@ async def test_falls_back_to_job_owner_when_reviewer_inactive(db_session) -> Non
 
     # The reviewer leaves the org (membership no longer active).
     membership = (
-        await db_session.execute(
-            select(Membership).where(Membership.user_id == org_admin.user_id)
-        )
+        await db_session.execute(select(Membership).where(Membership.user_id == org_admin.user_id))
     ).scalar_one()
     membership.status = "removed"
     await db_session.commit()
@@ -209,10 +216,16 @@ async def test_falls_back_to_job_owner_when_reviewer_inactive(db_session) -> Non
     await sla_reminder_service.sweep_sla_reminders(db_session, now=_now())
 
     rows = (
-        await db_session.execute(select(NotificationOutbox).where(
-            NotificationOutbox.dedupe_key.like(f"pipeline.sla_reminder:{cs.id}:%")
-        ))
-    ).scalars().all()
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.dedupe_key.like(f"pipeline.sla_reminder:{cs.id}:%")
+                )
+            )
+        )
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1
     assert rows[0].recipient_id == poster_user.id
 

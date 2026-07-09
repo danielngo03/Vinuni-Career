@@ -80,9 +80,7 @@ async def _require_university_actor(
     if principal.org_id is not None:
         org_type = (
             await session.execute(
-                select(Organization.org_type).where(
-                    Organization.id == principal.org_id
-                )
+                select(Organization.org_type).where(Organization.id == principal.org_id)
             )
         ).scalar_one_or_none()
     if org_type != "university":
@@ -94,9 +92,7 @@ async def _require_university_actor(
 # --------------------------------------------------------------------------- #
 
 
-async def _has_active_partner_membership(
-    session: AsyncSession, email: str
-) -> bool:
+async def _has_active_partner_membership(session: AsyncSession, email: str) -> bool:
     user = await user_service.get_by_email(session, email)
     if user is None:
         return False
@@ -216,16 +212,18 @@ async def register_partner(
 async def _load_request(
     session: AsyncSession, partner_id: uuid.UUID
 ) -> PartnerRegistrationRequest | None:
-    stmt = select(PartnerRegistrationRequest).where(
-        PartnerRegistrationRequest.id == partner_id
-    )
+    stmt = select(PartnerRegistrationRequest).where(PartnerRegistrationRequest.id == partner_id)
     if get_settings().database_url.startswith("postgresql"):
         stmt = stmt.with_for_update()
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
 async def get_request(
-    session: AsyncSession, *, principal: Principal, partner_id: uuid.UUID, locale: str = "vi",
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    partner_id: uuid.UUID,
+    locale: str = "vi",
 ) -> dict:
     await _require_university_actor(session, principal, "read")
     req = (
@@ -239,7 +237,10 @@ async def get_request(
 
 
 async def list_requests(
-    session: AsyncSession, *, principal: Principal, status: str | None = None,
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    status: str | None = None,
     locale: str = "vi",
 ) -> list[dict]:
     await _require_university_actor(session, principal, "read")
@@ -327,8 +328,9 @@ async def approve_partner(
         action="partner_registration.approved",
         resource_type="partner_registration_request",
         resource_id=req.id,
-        context=AuditContext(actor_id=principal.user_id, actor_org_id=org.id,
-                             ip=ctx.ip, user_agent=ctx.user_agent),
+        context=AuditContext(
+            actor_id=principal.user_id, actor_org_id=org.id, ip=ctx.ip, user_agent=ctx.user_agent
+        ),
         after={
             "organization_id": str(org.id),
             "trust_level": trust_level,
@@ -340,9 +342,7 @@ async def approve_partner(
     # Activation: passwordless admin sets a password + verifies via this token.
     activation_token = ""
     if new_user or user.password_hash is None:
-        activation_token = await auth_service.issue_activation_token(
-            session, user=user
-        )
+        activation_token = await auth_service.issue_activation_token(session, user=user)
     await enqueue_notification(
         session,
         recipient_id=user.id,
@@ -406,8 +406,7 @@ async def reject_partner(
         action="partner_registration.rejected",
         resource_type="partner_registration_request",
         resource_id=req.id,
-        context=AuditContext(actor_id=principal.user_id,
-                             ip=ctx.ip, user_agent=ctx.user_agent),
+        context=AuditContext(actor_id=principal.user_id, ip=ctx.ip, user_agent=ctx.user_agent),
         after={"status": "rejected"},
     )
     await enqueue_notification(

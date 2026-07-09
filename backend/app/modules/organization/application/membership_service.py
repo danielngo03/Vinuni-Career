@@ -45,8 +45,10 @@ INVITATION_TTL_DAYS = 7
 
 def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
     return AuditContext(
-        actor_id=principal.user_id, actor_org_id=principal.org_id,
-        ip=ctx.ip, user_agent=ctx.user_agent,
+        actor_id=principal.user_id,
+        actor_org_id=principal.org_id,
+        ip=ctx.ip,
+        user_agent=ctx.user_agent,
     )
 
 
@@ -59,20 +61,14 @@ def _require_org(principal: Principal) -> uuid.UUID:
 async def _get_membership(
     session: AsyncSession, *, org_id: uuid.UUID, membership_id: uuid.UUID
 ) -> Membership | None:
-    stmt = select(Membership).where(
-        Membership.id == membership_id, Membership.org_id == org_id
-    )
+    stmt = select(Membership).where(Membership.id == membership_id, Membership.org_id == org_id)
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
-async def _membership_role_ids(
-    session: AsyncSession, membership_id: uuid.UUID
-) -> list[uuid.UUID]:
+async def _membership_role_ids(session: AsyncSession, membership_id: uuid.UUID) -> list[uuid.UUID]:
     rows = (
         await session.execute(
-            select(MembershipRole.role_id).where(
-                MembershipRole.membership_id == membership_id
-            )
+            select(MembershipRole.role_id).where(MembershipRole.membership_id == membership_id)
         )
     ).all()
     return [r[0] for r in rows]
@@ -129,9 +125,9 @@ async def list_members(
     if status is not None:
         stmt = stmt.where(Membership.status == status)
     if role_id is not None:
-        stmt = stmt.join(
-            MembershipRole, MembershipRole.membership_id == Membership.id
-        ).where(MembershipRole.role_id == role_id)
+        stmt = stmt.join(MembershipRole, MembershipRole.membership_id == Membership.id).where(
+            MembershipRole.role_id == role_id
+        )
 
     decoded = decode_cursor(cursor)
     if decoded is not None and "id" in decoded:
@@ -139,9 +135,7 @@ async def list_members(
     stmt = stmt.order_by(Membership.id).limit(page_limit + 1)
 
     rows = list((await session.execute(stmt)).scalars().all())
-    page = build_cursor_page(
-        rows, limit=page_limit, cursor_builder=lambda m: {"id": str(m.id)}
-    )
+    page = build_cursor_page(rows, limit=page_limit, cursor_builder=lambda m: {"id": str(m.id)})
     items = []
     for m in page.items:
         user = await user_service.get_by_id(session, m.user_id)
@@ -173,9 +167,7 @@ async def update_member(
 ) -> dict:
     org_id = _require_org(principal)
     permission_checker.require(principal, "members", "update", resource_org_id=org_id)
-    membership = await _get_membership(
-        session, org_id=org_id, membership_id=membership_id
-    )
+    membership = await _get_membership(session, org_id=org_id, membership_id=membership_id)
     if membership is None:
         raise ResourceNotFoundError()
     if version is not None and version != membership.version:
@@ -186,10 +178,16 @@ async def update_member(
     if role_ids is not None:
         target_ids = list(dict.fromkeys(role_ids))
         roles = (
-            await session.execute(
-                select(Role).where(Role.id.in_(target_ids), Role.org_id == org_id)
+            (
+                await session.execute(
+                    select(Role).where(Role.id.in_(target_ids), Role.org_id == org_id)
+                )
             )
-        ).scalars().all() if target_ids else []
+            .scalars()
+            .all()
+            if target_ids
+            else []
+        )
         if len(roles) != len(target_ids):
             raise ResourceNotFoundError()  # a role from another org / missing
 
@@ -204,21 +202,18 @@ async def update_member(
                 new_grants_admin = True
                 break
         if not new_grants_admin:
-            current_admins = await admin_guard.admin_membership_ids(
-                session, org_id=org_id
-            )
+            current_admins = await admin_guard.admin_membership_ids(session, org_id=org_id)
             if membership.id in current_admins and current_admins == {membership.id}:
                 raise LastAdminError()
 
         await session.execute(
-            delete(MembershipRole).where(
-                MembershipRole.membership_id == membership.id
-            )
+            delete(MembershipRole).where(MembershipRole.membership_id == membership.id)
         )
         for rid in target_ids:
             session.add(
                 MembershipRole(
-                    membership_id=membership.id, role_id=rid,
+                    membership_id=membership.id,
+                    role_id=rid,
                     assigned_by=principal.user_id,
                 )
             )
@@ -226,23 +221,26 @@ async def update_member(
     if department_ids is not None:
         target_dept_ids = list(dict.fromkeys(department_ids))
         depts = (
-            await session.execute(
-                select(Department.id).where(
-                    Department.id.in_(target_dept_ids), Department.org_id == org_id
+            (
+                await session.execute(
+                    select(Department.id).where(
+                        Department.id.in_(target_dept_ids), Department.org_id == org_id
+                    )
                 )
-            )
-        ).all() if target_dept_ids else []
+            ).all()
+            if target_dept_ids
+            else []
+        )
         if len(depts) != len(target_dept_ids):
             raise ResourceNotFoundError()
         await session.execute(
-            delete(MembershipDepartment).where(
-                MembershipDepartment.membership_id == membership.id
-            )
+            delete(MembershipDepartment).where(MembershipDepartment.membership_id == membership.id)
         )
         for did in target_dept_ids:
             session.add(
                 MembershipDepartment(
-                    membership_id=membership.id, department_id=did,
+                    membership_id=membership.id,
+                    department_id=did,
                     assigned_by=principal.user_id,
                 )
             )
@@ -250,8 +248,11 @@ async def update_member(
     membership.version += 1
     await session.flush()
     await write_audit(
-        session, action="membership.updated", resource_type="membership",
-        resource_id=membership.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="membership.updated",
+        resource_type="membership",
+        resource_id=membership.id,
+        context=_audit_ctx(principal, ctx),
         before={"roles": [str(r) for r in before_roles]},
         after={"roles": [str(r) for r in await _membership_role_ids(session, membership.id)]},
     )
@@ -263,9 +264,7 @@ async def update_member(
         email=user.email if user else "",
         full_name=user.full_name if user else None,
         role_ids=[str(r) for r in await _membership_role_ids(session, membership.id)],
-        department_ids=[
-            str(d) for d in await _membership_department_ids(session, membership.id)
-        ],
+        department_ids=[str(d) for d in await _membership_department_ids(session, membership.id)],
         locale=locale,
     )
 
@@ -279,9 +278,7 @@ async def remove_member(
 ) -> None:
     org_id = _require_org(principal)
     permission_checker.require(principal, "members", "remove", resource_org_id=org_id)
-    membership = await _get_membership(
-        session, org_id=org_id, membership_id=membership_id
-    )
+    membership = await _get_membership(session, org_id=org_id, membership_id=membership_id)
     if membership is None:
         raise ResourceNotFoundError()
     if membership.status == "left":
@@ -296,8 +293,11 @@ async def remove_member(
     membership.version += 1
     await session.flush()
     await write_audit(
-        session, action="membership.removed", resource_type="membership",
-        resource_id=membership.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="membership.removed",
+        resource_type="membership",
+        resource_id=membership.id,
+        context=_audit_ctx(principal, ctx),
         after={"status": "left"},
     )
     await session.commit()
@@ -320,9 +320,7 @@ async def deactivate_member(
 
     org_id = _require_org(principal)
     permission_checker.require(principal, "members", "remove", resource_org_id=org_id)
-    membership = await _get_membership(
-        session, org_id=org_id, membership_id=membership_id
-    )
+    membership = await _get_membership(session, org_id=org_id, membership_id=membership_id)
     if membership is None:
         raise ResourceNotFoundError()
     if membership.status == "left":
@@ -338,9 +336,13 @@ async def deactivate_member(
     membership.version += 1
     await session.flush()
     await write_audit(
-        session, action="membership.deactivated", resource_type="membership",
-        resource_id=membership.id, context=_audit_ctx(principal, ctx),
-        before={"status": "active"}, after={"status": "suspended"},
+        session,
+        action="membership.deactivated",
+        resource_type="membership",
+        resource_id=membership.id,
+        context=_audit_ctx(principal, ctx),
+        before={"status": "active"},
+        after={"status": "suspended"},
     )
     await session.commit()
     return await _member_view(session, membership=membership, locale=locale)
@@ -362,9 +364,7 @@ async def reactivate_member(
 
     org_id = _require_org(principal)
     permission_checker.require(principal, "members", "update", resource_org_id=org_id)
-    membership = await _get_membership(
-        session, org_id=org_id, membership_id=membership_id
-    )
+    membership = await _get_membership(session, org_id=org_id, membership_id=membership_id)
     if membership is None:
         raise ResourceNotFoundError()
     if membership.status == "left":
@@ -376,17 +376,19 @@ async def reactivate_member(
     membership.version += 1
     await session.flush()
     await write_audit(
-        session, action="membership.reactivated", resource_type="membership",
-        resource_id=membership.id, context=_audit_ctx(principal, ctx),
-        before={"status": "suspended"}, after={"status": "active"},
+        session,
+        action="membership.reactivated",
+        resource_type="membership",
+        resource_id=membership.id,
+        context=_audit_ctx(principal, ctx),
+        before={"status": "suspended"},
+        after={"status": "active"},
     )
     await session.commit()
     return await _member_view(session, membership=membership, locale=locale)
 
 
-async def _member_view(
-    session: AsyncSession, *, membership: Membership, locale: str
-) -> dict:
+async def _member_view(session: AsyncSession, *, membership: Membership, locale: str) -> dict:
     user = await user_service.get_by_id(session, membership.user_id)
     role_ids = await _membership_role_ids(session, membership.id)
     dept_ids = await _membership_department_ids(session, membership.id)
@@ -405,13 +407,9 @@ async def _member_view(
 # --------------------------------------------------------------------------- #
 
 
-async def _get_role(
-    session: AsyncSession, *, org_id: uuid.UUID, role_id: uuid.UUID
-) -> Role | None:
+async def _get_role(session: AsyncSession, *, org_id: uuid.UUID, role_id: uuid.UUID) -> Role | None:
     return (
-        await session.execute(
-            select(Role).where(Role.id == role_id, Role.org_id == org_id)
-        )
+        await session.execute(select(Role).where(Role.id == role_id, Role.org_id == org_id))
     ).scalar_one_or_none()
 
 
@@ -450,9 +448,7 @@ async def create_invitation(
         if role is None:
             raise ResourceNotFoundError()
         # Escalation ceiling: cannot invite into a role beyond the actor's grants.
-        admin_guard.assert_can_grant(
-            principal, await _permissions_of_roles(session, [role_id])
-        )
+        admin_guard.assert_can_grant(principal, await _permissions_of_roles(session, [role_id]))
     if department_id is not None:
         dept = (
             await session.execute(
@@ -465,13 +461,17 @@ async def create_invitation(
             raise ResourceNotFoundError()
 
     pending = (
-        await session.execute(
-            select(Invitation.id).where(
-                Invitation.org_id == org_id,
-                Invitation.status == "pending",
+        (
+            await session.execute(
+                select(Invitation.id).where(
+                    Invitation.org_id == org_id,
+                    Invitation.status == "pending",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     # Application-level dedupe (Postgres partial-unique index is the race backstop).
     for inv_id in pending:
         existing = (
@@ -515,8 +515,11 @@ async def create_invitation(
         dedupe_key=f"invite:{invitation.id}",
     )
     await write_audit(
-        session, action="invitation.created", resource_type="invitation",
-        resource_id=invitation.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="invitation.created",
+        resource_type="invitation",
+        resource_id=invitation.id,
+        context=_audit_ctx(principal, ctx),
         after={"email": norm_email, "role_id": str(role_id) if role_id else None},
     )
     await session.commit()
@@ -536,29 +539,34 @@ async def list_invitations(
     org_id = _require_org(principal)
     permission_checker.require(principal, "members", "read", resource_org_id=org_id)
     rows = (
-        await session.execute(
-            select(Invitation)
-            .where(
-                Invitation.org_id == org_id,
-                Invitation.status.in_(("pending", "expired")),
+        (
+            await session.execute(
+                select(Invitation)
+                .where(
+                    Invitation.org_id == org_id,
+                    Invitation.status.in_(("pending", "expired")),
+                )
+                .order_by(Invitation.created_at.desc())
             )
-            .order_by(Invitation.created_at.desc())
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [presenters.invitation_summary(i, locale=locale) for i in rows]
 
 
 async def revoke_invitation(
-    session: AsyncSession, *, principal: Principal, invitation_id: uuid.UUID,
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    invitation_id: uuid.UUID,
     ctx: RequestContext,
 ) -> None:
     org_id = _require_org(principal)
     permission_checker.require(principal, "members", "invite", resource_org_id=org_id)
     inv = (
         await session.execute(
-            select(Invitation).where(
-                Invitation.id == invitation_id, Invitation.org_id == org_id
-            )
+            select(Invitation).where(Invitation.id == invitation_id, Invitation.org_id == org_id)
         )
     ).scalar_one_or_none()
     if inv is None:
@@ -567,14 +575,21 @@ async def revoke_invitation(
         inv.status = "revoked"
         await session.flush()
         await write_audit(
-            session, action="invitation.revoked", resource_type="invitation",
-            resource_id=inv.id, context=_audit_ctx(principal, ctx),
+            session,
+            action="invitation.revoked",
+            resource_type="invitation",
+            resource_id=inv.id,
+            context=_audit_ctx(principal, ctx),
         )
     await session.commit()
 
 
 async def accept_invitation(
-    session: AsyncSession, *, principal: Principal, token: str, ctx: RequestContext,
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    token: str,
+    ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
     """Accept an invitation as the authenticated user (token bound to email)."""
@@ -582,9 +597,7 @@ async def accept_invitation(
     if principal.user_id is None:
         raise ResourceNotFoundError()
     inv = (
-        await session.execute(
-            select(Invitation).where(Invitation.token_hash == hash_token(token))
-        )
+        await session.execute(select(Invitation).where(Invitation.token_hash == hash_token(token)))
     ).scalar_one_or_none()
     if inv is None:
         raise InvitationError("invite_invalid")
@@ -611,9 +624,7 @@ async def accept_invitation(
 
     existing = (
         await session.execute(
-            select(Membership).where(
-                Membership.user_id == user.id, Membership.org_id == inv.org_id
-            )
+            select(Membership).where(Membership.user_id == user.id, Membership.org_id == inv.org_id)
         )
     ).scalar_one_or_none()
     if existing is not None:
@@ -623,9 +634,7 @@ async def accept_invitation(
         )
 
     org = (
-        await session.execute(
-            select(Organization).where(Organization.id == inv.org_id)
-        )
+        await session.execute(select(Organization).where(Organization.id == inv.org_id))
     ).scalar_one()
     persona = "university_staff" if org.org_type == "university" else "partner_member"
     identity = await user_service.add_identity(
@@ -639,14 +648,16 @@ async def accept_invitation(
     if inv.role_id is not None:
         session.add(
             MembershipRole(
-                membership_id=membership.id, role_id=inv.role_id,
+                membership_id=membership.id,
+                role_id=inv.role_id,
                 assigned_by=inv.invited_by,
             )
         )
     if inv.department_id is not None:
         session.add(
             MembershipDepartment(
-                membership_id=membership.id, department_id=inv.department_id,
+                membership_id=membership.id,
+                department_id=inv.department_id,
                 assigned_by=inv.invited_by,
             )
         )
@@ -654,10 +665,13 @@ async def accept_invitation(
     inv.accepted_at = now
     await session.flush()
     await write_audit(
-        session, action="membership.created", resource_type="membership",
+        session,
+        action="membership.created",
+        resource_type="membership",
         resource_id=membership.id,
-        context=AuditContext(actor_id=user.id, actor_org_id=org.id,
-                             ip=ctx.ip, user_agent=ctx.user_agent),
+        context=AuditContext(
+            actor_id=user.id, actor_org_id=org.id, ip=ctx.ip, user_agent=ctx.user_agent
+        ),
         after={"via": "invitation", "invitation_id": str(inv.id)},
     )
     await session.commit()
@@ -665,7 +679,10 @@ async def accept_invitation(
     role_ids = await _membership_role_ids(session, membership.id)
     dept_ids = await _membership_department_ids(session, membership.id)
     return presenters.member_summary(
-        membership=membership, email=user.email, full_name=user.full_name,
+        membership=membership,
+        email=user.email,
+        full_name=user.full_name,
         role_ids=[str(r) for r in role_ids],
-        department_ids=[str(d) for d in dept_ids], locale=locale,
+        department_ids=[str(d) for d in dept_ids],
+        locale=locale,
     )

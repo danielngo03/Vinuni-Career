@@ -194,9 +194,7 @@ _ALERT_ACTION_RE = re.compile(
     r"\b(tạo|create|bật|turn\s*on|enable|tắt|turn\s*off|disable|xoá|xóa|delete|sửa|edit)\b",
     re.IGNORECASE,
 )
-_SAVED_JOB_RE = re.compile(
-    r"\b(saved|đã\s*lưu|danh\s*sách\s*lưu|yêu\s*thích)\b", re.IGNORECASE
-)
+_SAVED_JOB_RE = re.compile(r"\b(saved|đã\s*lưu|danh\s*sách\s*lưu|yêu\s*thích)\b", re.IGNORECASE)
 _UNSAVE_JOB_RE = re.compile(
     r"\b(bỏ\s*lưu|unsave|unbookmark|remove\s+saved|xoá\s+khỏi\s+danh\s+sách\s+lưu)\b"
     r"|\b(xoá|xóa|remove)\b.{0,30}\b(saved|đã\s*lưu|bookmark)\b",
@@ -213,9 +211,7 @@ _SKILL_GAP_RE = re.compile(
     r"\b(phù\s*hợp|fit|match|so\s*(sánh)?\s*cv|gap|thiếu\s*kỹ\s*năng)\b", re.IGNORECASE
 )
 _SAVE_JOB_RE = re.compile(r"\b(lưu|save|bookmark|yêu\s*thích)\b", re.IGNORECASE)
-_APPLY_JOB_RE = re.compile(
-    r"\b(apply|applyy|aply|appyly|ứng\s*tuyển|nộp\s*đơn)\b", re.IGNORECASE
-)
+_APPLY_JOB_RE = re.compile(r"\b(apply|applyy|aply|appyly|ứng\s*tuyển|nộp\s*đơn)\b", re.IGNORECASE)
 _JOB_TARGET_RE = re.compile(r"\b(jd|job|việc|vị\s*trí|role|position|thực\s*tập)\b", re.IGNORECASE)
 _REVIEW_RE = re.compile(r"\b(review|đánh\s*giá|văn\s*hóa|culture|môi\s*trường)\b", re.IGNORECASE)
 _COVER_LETTER_RE = re.compile(
@@ -808,9 +804,8 @@ def _external_source_plan(text: str, locale: str) -> AgentPlan | None:
 
 def _external_source_is_google(text: str) -> bool:
     lowered = text.lower()
-    return (
-        "google" in lowered
-        and not re.search(r"\blinked\s*in\b|\blinkedin\b|\blinkedln\b|\blinkdn\b", lowered)
+    return "google" in lowered and not re.search(
+        r"\blinked\s*in\b|\blinkedin\b|\blinkedln\b|\blinkdn\b", lowered
     )
 
 
@@ -1079,7 +1074,6 @@ def _rejection_reply(locale: str) -> str:
 
 def _first_job_reply(locale: str) -> str:
     return assistant_message("planner.first_job", locale)
-
 
 
 # Public exports so the AI-safety output guard can run the SAME keyword gate

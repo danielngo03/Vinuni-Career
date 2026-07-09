@@ -10,6 +10,7 @@ Personalization logic:
   2. Fill remainder from global top queries (30-day window, same locale)
   3. If both empty → return [] (frontend must show nothing, not static fallbacks)
 """
+
 from __future__ import annotations
 
 import uuid
@@ -52,9 +53,7 @@ async def log_search(
     q = body.query.strip()
     if not q:
         return
-    cookie_id = _parse_cookie_id(
-        request.cookies.get(get_settings().discovery_session_cookie_name)
-    )
+    cookie_id = _parse_cookie_id(request.cookies.get(get_settings().discovery_session_cookie_name))
     db.add(SearchLog(query=q, locale=body.locale, session_id=cookie_id))
     await db.commit()
 
@@ -75,9 +74,7 @@ async def popular_keywords(
     3. Combine up to `limit` items. If total is 0 → return [].
     """
     now = datetime.now(UTC)
-    cookie_id = _parse_cookie_id(
-        request.cookies.get(get_settings().discovery_session_cookie_name)
-    )
+    cookie_id = _parse_cookie_id(request.cookies.get(get_settings().discovery_session_cookie_name))
 
     session_keywords: list[str] = []
     if cookie_id is not None:
@@ -111,7 +108,7 @@ async def popular_keywords(
             .order_by(func.count(SearchLog.query).desc())
             .limit(limit * 3)  # fetch extra to allow dedup filtering
         )
-        for (q, _) in global_rows.all():
+        for q, _ in global_rows.all():
             if len(global_keywords) >= remaining:
                 break
             if q.lower() not in exclude:

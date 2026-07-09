@@ -62,15 +62,19 @@ async def recompute_target_flags(
     """
 
     rows = (
-        await session.execute(
-            select(SponsoredPlacement.placement_type).where(
-                SponsoredPlacement.target_type == target_type,
-                SponsoredPlacement.target_id == target_id,
-                SponsoredPlacement.status == lifecycle.ACTIVE,
-                SponsoredPlacement.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(SponsoredPlacement.placement_type).where(
+                    SponsoredPlacement.target_type == target_type,
+                    SponsoredPlacement.target_id == target_id,
+                    SponsoredPlacement.status == lifecycle.ACTIVE,
+                    SponsoredPlacement.deleted_at.is_(None),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     is_sponsored, is_featured = lifecycle.compute_target_flags(list(rows))
     return await sponsorship_facade.set_target_flags(
         session,
@@ -127,19 +131,29 @@ async def _activate(
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_activated",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_activated",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(actor, placement),
-        after={"status": placement.status, "org_id": str(placement.org_id),
-               "target_type": placement.target_type,
-               "target_id": str(placement.target_id)},
+        after={
+            "status": placement.status,
+            "org_id": str(placement.org_id),
+            "target_type": placement.target_type,
+            "target_id": str(placement.target_id),
+        },
     )
     await recompute_target_flags(
-        session, target_type=placement.target_type, target_id=placement.target_id,
-        actor=actor, reason="placement_activated",
+        session,
+        target_type=placement.target_type,
+        target_id=placement.target_id,
+        actor=actor,
+        reason="placement_activated",
     )
     await notify.notify_partner(
-        session, placement=placement, template_key="advertising.live",
+        session,
+        placement=placement,
+        template_key="advertising.live",
     )
 
 
@@ -155,18 +169,26 @@ async def _complete(
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_completed",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_completed",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(actor, placement),
-        after={"status": placement.status, "org_id": str(placement.org_id),
-               "target_type": placement.target_type,
-               "target_id": str(placement.target_id)},
+        after={
+            "status": placement.status,
+            "org_id": str(placement.org_id),
+            "target_type": placement.target_type,
+            "target_id": str(placement.target_id),
+        },
     )
     # Recompute AFTER the status flip so this just-completed placement is excluded;
     # the flag stays ON only if ANOTHER active placement still covers the target.
     await recompute_target_flags(
-        session, target_type=placement.target_type, target_id=placement.target_id,
-        actor=actor, reason="placement_completed",
+        session,
+        target_type=placement.target_type,
+        target_id=placement.target_id,
+        actor=actor,
+        reason="placement_completed",
     )
 
 
@@ -181,9 +203,7 @@ def _aware(dt: datetime) -> datetime:
     return dt if dt.tzinfo is not None else dt.replace(tzinfo=UTC)
 
 
-async def activation_sweep(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def activation_sweep(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Activate every approved+paid placement whose window has opened.
 
     ``status=approved AND paid_at IS NOT NULL AND start_at <= now < end_at`` ->
@@ -193,22 +213,28 @@ async def activation_sweep(
 
     now = now or _now()
     rows = (
-        await session.execute(
-            select(SponsoredPlacement).where(
-                SponsoredPlacement.deleted_at.is_(None),
-                SponsoredPlacement.status == lifecycle.APPROVED,
-                SponsoredPlacement.paid_at.isnot(None),
-                SponsoredPlacement.start_at <= now,
-                SponsoredPlacement.end_at > now,
+        (
+            await session.execute(
+                select(SponsoredPlacement).where(
+                    SponsoredPlacement.deleted_at.is_(None),
+                    SponsoredPlacement.status == lifecycle.APPROVED,
+                    SponsoredPlacement.paid_at.isnot(None),
+                    SponsoredPlacement.start_at <= now,
+                    SponsoredPlacement.end_at > now,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     count = 0
     for placement in rows:
         # Defensive re-check against the (possibly naive) stored window bounds.
         if lifecycle.can_activate(
-            status=placement.status, paid_at=placement.paid_at,
-            start_at=_aware(placement.start_at), end_at=_aware(placement.end_at),
+            status=placement.status,
+            paid_at=placement.paid_at,
+            start_at=_aware(placement.start_at),
+            end_at=_aware(placement.end_at),
             now=now,
         ):
             await _activate(session, placement, now=now, actor=None)
@@ -217,9 +243,7 @@ async def activation_sweep(
     return {"activated": count}
 
 
-async def completion_sweep(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def completion_sweep(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Complete every active/approved placement whose window has closed + warn
     of imminent endings.
 
@@ -235,13 +259,13 @@ async def completion_sweep(
             await session.execute(
                 select(SponsoredPlacement).where(
                     SponsoredPlacement.deleted_at.is_(None),
-                    SponsoredPlacement.status.in_(
-                        [lifecycle.ACTIVE, lifecycle.APPROVED]
-                    ),
+                    SponsoredPlacement.status.in_([lifecycle.ACTIVE, lifecycle.APPROVED]),
                     SponsoredPlacement.end_at <= now,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     completed = 0
     for placement in ending:
@@ -251,22 +275,28 @@ async def completion_sweep(
 
     # T-24h "ending soon" notice (active only; deduped on ending_notified_at).
     soon = (
-        await session.execute(
-            select(SponsoredPlacement).where(
-                SponsoredPlacement.deleted_at.is_(None),
-                SponsoredPlacement.status == lifecycle.ACTIVE,
-                SponsoredPlacement.end_at > now,
-                SponsoredPlacement.end_at <= now + _ENDING_WINDOW,
-                SponsoredPlacement.ending_notified_at.is_(None),
+        (
+            await session.execute(
+                select(SponsoredPlacement).where(
+                    SponsoredPlacement.deleted_at.is_(None),
+                    SponsoredPlacement.status == lifecycle.ACTIVE,
+                    SponsoredPlacement.end_at > now,
+                    SponsoredPlacement.end_at <= now + _ENDING_WINDOW,
+                    SponsoredPlacement.ending_notified_at.is_(None),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     notified = 0
     for placement in soon:
         placement.ending_notified_at = now
         placement.version += 1
         await notify.notify_partner(
-            session, placement=placement, template_key="advertising.ending",
+            session,
+            placement=placement,
+            template_key="advertising.ending",
         )
         notified += 1
 
@@ -274,9 +304,7 @@ async def completion_sweep(
     return {"completed": completed, "ending_notices": notified}
 
 
-async def flag_reconcile(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def flag_reconcile(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Recompute flags for every target that has >= 1 placement (drift guard).
 
     Pure recompute; idempotent. Self-heals manual/seed drift. Targets with no
@@ -285,9 +313,7 @@ async def flag_reconcile(
 
     targets = (
         await session.execute(
-            select(
-                SponsoredPlacement.target_type, SponsoredPlacement.target_id
-            )
+            select(SponsoredPlacement.target_type, SponsoredPlacement.target_id)
             .where(SponsoredPlacement.deleted_at.is_(None))
             .distinct()
         )
@@ -295,7 +321,9 @@ async def flag_reconcile(
     changed = 0
     for target_type, target_id in targets:
         if await recompute_target_flags(
-            session, target_type=target_type, target_id=target_id,
+            session,
+            target_type=target_type,
+            target_id=target_id,
             reason="flag_reconcile",
         ):
             changed += 1

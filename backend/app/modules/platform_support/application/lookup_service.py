@@ -35,6 +35,4 @@ async def lookup(
         return await admin_users_service.list_platform_users(
             session, principal=principal, q=q, page=page, page_size=page_size
         )
-    return await org_reporting_facade.search_orgs(
-        session, q=q, page=page, page_size=page_size
-    )
+    return await org_reporting_facade.search_orgs(session, q=q, page=page, page_size=page_size)

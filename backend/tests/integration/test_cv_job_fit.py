@@ -25,9 +25,22 @@ from tests.documents_utils import make_ready_cv, make_student
 from tests.org_utils import make_org_with_admin
 
 _FORBIDDEN = [
-    "openrouter", "openai", "anthropic", "claude", "gpt-4", "gemini", "deepseek",
-    "chat_cheap", "reasoning_cheap", "model_alias", "prompt_tokens",
-    "completion_tokens", "storage_path", "storage_key", "confidence", "embedding",
+    "openrouter",
+    "openai",
+    "anthropic",
+    "claude",
+    "gpt-4",
+    "gemini",
+    "deepseek",
+    "chat_cheap",
+    "reasoning_cheap",
+    "model_alias",
+    "prompt_tokens",
+    "completion_tokens",
+    "storage_path",
+    "storage_key",
+    "confidence",
+    "embedding",
 ]
 
 
@@ -94,12 +107,12 @@ async def _seed(db, cv_id, section_type, items) -> None:
     # cv.version (which invalidates the cached fit rows AND the stored matching
     # snapshot); mirror that here by bumping the version so job-fit reads the
     # freshly-seeded content instead of a pre-seed snapshot.
-    cv = (
-        await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))
-    ).scalar_one()
+    cv = (await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))).scalar_one()
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     target = next(s for s in sections if s.section_type == section_type)
     target.content_json = {"items": items}
     cv.version += 1
@@ -110,13 +123,13 @@ async def _age_cv(db, cv_id, *, days: int) -> None:
     """Push the CV's content timestamps into the past so it reads as stale."""
 
     old = datetime.now(tz=UTC) - timedelta(days=days)
-    cv = (
-        await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))
-    ).scalar_one()
+    cv = (await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))).scalar_one()
     cv.last_edited_at = old
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     for s in sections:
         s.updated_at = old
     await db.commit()
@@ -126,7 +139,9 @@ async def _build_strong_cv(db, student, *, title="Strong CV") -> str:
     cv = await _make_cv(db, student, title=title)
     await _seed(db, cv["id"], "skills", [{"text": "Python, FastAPI, PostgreSQL, SQL"}])
     await _seed(
-        db, cv["id"], "experience",
+        db,
+        cv["id"],
+        "experience",
         [{"text": "Built REST APIs with Python and FastAPI at a startup."}],
     )
     await _seed(db, cv["id"], "summary", [{"text": "Backend engineering intern."}])
@@ -144,12 +159,8 @@ async def test_scores_are_deterministic(db_session) -> None:
     await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
 
-    first = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
-    second = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    first = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
+    second = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert [r["score"] for r in first["results"]] == [r["score"] for r in second["results"]]
     assert first["results"][0]["bands"] == second["results"][0]["bands"]
     assert first["recommended_cv_id"] == second["recommended_cv_id"]
@@ -166,9 +177,7 @@ async def test_better_cv_ranks_first_and_is_recommended(db_session) -> None:
     weak = await _make_cv(db_session, student, title="Empty CV")
     job_id = await _create_job(db_session)
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert out["recommended_cv_id"] == strong_id
     assert out["results"][0]["cv_id"] == strong_id
     scores = {r["cv_id"]: r["score"] for r in out["results"]}
@@ -190,9 +199,7 @@ async def test_stale_flag_when_older_than_threshold(db_session) -> None:
     await _age_cv(db_session, cv_id, days=75)
     job_id = await _create_job(db_session)
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     result = next(r for r in out["results"] if r["cv_id"] == cv_id)
     assert result["stale"] is True
     assert result["last_updated_days"] >= 75
@@ -203,9 +210,7 @@ async def test_fresh_cv_not_stale(db_session) -> None:
     cv_id = await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     result = next(r for r in out["results"] if r["cv_id"] == cv_id)
     assert result["stale"] is False
 
@@ -219,9 +224,7 @@ async def test_no_active_cvs_returns_empty_not_404(db_session) -> None:
     _u, student = await make_student(db_session)
     job_id = await _create_job(db_session)
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert out["results"] == []
     assert out["recommended_cv_id"] is None
     assert out["ai_explanation_available"] is False
@@ -232,17 +235,13 @@ async def test_archived_cv_is_excluded(db_session) -> None:
     _u, student = await make_student(db_session)
     cv_id = await _build_strong_cv(db_session, student)
     cv = (
-        await db_session.execute(
-            select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id))
-        )
+        await db_session.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))
     ).scalar_one()
     cv.status = "archived"
     await db_session.commit()
     job_id = await _create_job(db_session)
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert out["results"] == []
 
 
@@ -253,15 +252,11 @@ async def test_hidden_or_missing_job_returns_404(db_session) -> None:
     # Unpublished (draft) job is not discoverable by a student.
     draft_id = await _create_job(db_session, publish=False)
     with pytest.raises(ResourceNotFoundError):
-        await job_fit_service.job_fit_for_job(
-            db_session, principal=student, job_id=draft_id
-        )
+        await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=draft_id)
 
     # Entirely unknown job id.
     with pytest.raises(ResourceNotFoundError):
-        await job_fit_service.job_fit_for_job(
-            db_session, principal=student, job_id=uuid.uuid4()
-        )
+        await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=uuid.uuid4())
 
 
 # --------------------------------------------------------------------------- #
@@ -274,9 +269,7 @@ async def test_offline_provider_returns_results_without_explanation(db_session) 
     await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert out["ai_explanation_available"] is False
     assert all(r["explanation"] is None for r in out["results"])
     assert out["results"]  # deterministic results still present
@@ -296,9 +289,7 @@ def test_vague_jd_is_low_signal() -> None:
         "jd_text": "Role.",
         "location_type": "remote",
     }
-    cv = job_fit.CvInput(
-        cv_id="x", title="X", language="en", sections=[], last_updated_days=0
-    )
+    cv = job_fit.CvInput(cv_id="x", title="X", language="en", sections=[], last_updated_days=0)
     out = job_fit.evaluate(job, [cv], stale_days=60)
     assert out.signal == "low_signal"
 

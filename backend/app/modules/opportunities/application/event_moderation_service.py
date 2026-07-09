@@ -61,9 +61,7 @@ def _use_for_update() -> bool:
     return get_settings().database_url.startswith("postgresql")
 
 
-async def _require_university_moderator(
-    session: AsyncSession, principal: Principal
-) -> None:
+async def _require_university_moderator(session: AsyncSession, principal: Principal) -> None:
     if principal.is_superadmin:
         return
     permission_checker.require(principal, _RESOURCE, "moderate")
@@ -89,7 +87,11 @@ def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
 
 
 async def _notify_organizer(
-    session: AsyncSession, *, event: Event, template_key: str, locale: str,
+    session: AsyncSession,
+    *,
+    event: Event,
+    template_key: str,
+    locale: str,
     extra: dict | None = None,
 ) -> None:
     organizer = await user_service.get_by_id(session, event.created_by)
@@ -154,9 +156,9 @@ async def list_moderation_queue(
     rows = list((await session.execute(stmt)).scalars().all())
     total = (
         await session.execute(
-            select(func.count()).select_from(Event).where(
-                Event.deleted_at.is_(None), Event.status == target_status
-            )
+            select(func.count())
+            .select_from(Event)
+            .where(Event.deleted_at.is_(None), Event.status == target_status)
         )
     ).scalar_one()
     items = [presenters.owner_event_summary(e, locale=locale) for e in rows]
@@ -203,13 +205,22 @@ async def approve_event(
     await session.flush()
 
     await write_audit(
-        session, action="event.approved", resource_type="event", resource_id=event.id,
+        session,
+        action="event.approved",
+        resource_type="event",
+        resource_id=event.id,
         context=_audit_ctx(principal, ctx),
-        after={"status": event.status, "moderation_status": event.moderation_status,
-               "org_id": str(event.org_id)},
+        after={
+            "status": event.status,
+            "moderation_status": event.moderation_status,
+            "org_id": str(event.org_id),
+        },
     )
     await _notify_organizer(
-        session, event=event, template_key="event.approved", locale=locale,
+        session,
+        event=event,
+        template_key="event.approved",
+        locale=locale,
     )
     await session.commit()
     return presenters.owner_event_summary(event, locale=locale)
@@ -262,13 +273,23 @@ async def reject_event(
     await session.flush()
 
     await write_audit(
-        session, action="event.rejected", resource_type="event", resource_id=event.id,
+        session,
+        action="event.rejected",
+        resource_type="event",
+        resource_id=event.id,
         context=_audit_ctx(principal, ctx),
-        after={"status": event.status, "moderation_status": event.moderation_status,
-               "reason_code": code, "org_id": str(event.org_id)},
+        after={
+            "status": event.status,
+            "moderation_status": event.moderation_status,
+            "reason_code": code,
+            "org_id": str(event.org_id),
+        },
     )
     await _notify_organizer(
-        session, event=event, template_key="event.rejected", locale=locale,
+        session,
+        event=event,
+        template_key="event.rejected",
+        locale=locale,
         extra={"reason": reason.strip()},
     )
     await session.commit()
@@ -309,15 +330,16 @@ async def claim_event(
             Event.claimed_by.is_(None),
             Event.version == event.version,
         )
-        .values(
-            claimed_by=principal.user_id, claimed_at=now, version=Event.version + 1
-        )
+        .values(claimed_by=principal.user_id, claimed_at=now, version=Event.version + 1)
     )
-    if result.rowcount == 0:
+    if getattr(result, "rowcount", 0) == 0:
         raise EventAlreadyClaimedError()
     await session.flush()
     await write_audit(
-        session, action="event.claimed", resource_type="event", resource_id=event.id,
+        session,
+        action="event.claimed",
+        resource_type="event",
+        resource_id=event.id,
         context=_audit_ctx(principal, ctx),
         after={"claimed_by": str(principal.user_id), "org_id": str(event.org_id)},
     )
@@ -343,7 +365,10 @@ async def bulk_approve_events(
     for event_id in event_ids:
         try:
             data = await approve_event(
-                session, principal=principal, event_id=event_id, ctx=ctx,
+                session,
+                principal=principal,
+                event_id=event_id,
+                ctx=ctx,
                 locale=locale,
             )
             results.append({"id": str(event_id), "success": True, "event": data})
@@ -424,10 +449,16 @@ async def escalate_event(
     await session.flush()
 
     await write_audit(
-        session, action="event.escalated", resource_type="event",
-        resource_id=event.id, context=_audit_ctx(principal, ctx),
-        after={"moderation_status": event.moderation_status, "reason_code": code,
-               "org_id": str(event.org_id)},
+        session,
+        action="event.escalated",
+        resource_type="event",
+        resource_id=event.id,
+        context=_audit_ctx(principal, ctx),
+        after={
+            "moderation_status": event.moderation_status,
+            "reason_code": code,
+            "org_id": str(event.org_id),
+        },
     )
 
     from app.modules.moderation.application import review_queue_service

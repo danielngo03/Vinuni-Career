@@ -33,9 +33,7 @@ def audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
     )
 
 
-async def require_support(
-    session: AsyncSession, principal: Principal, action: str
-) -> None:
+async def require_support(session: AsyncSession, principal: Principal, action: str) -> None:
     """``support:{action}`` + university-org gate (superadmin bypasses)."""
 
     if not principal.is_authenticated:

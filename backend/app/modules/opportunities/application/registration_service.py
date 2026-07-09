@@ -79,9 +79,7 @@ def _as_aware(value: datetime | None) -> datetime | None:
     return value if value.tzinfo is not None else value.replace(tzinfo=UTC)
 
 
-async def _load_event_locked(
-    session: AsyncSession, event_id: uuid.UUID
-) -> Event | None:
+async def _load_event_locked(session: AsyncSession, event_id: uuid.UUID) -> Event | None:
     stmt = select(Event).where(Event.id == event_id, Event.deleted_at.is_(None))
     if _use_for_update():
         stmt = stmt.with_for_update()
@@ -107,19 +105,21 @@ async def _active_registration(
     """The caller's non-cancelled registration for an event, if any."""
 
     return (
-        await session.execute(
-            select(EventRegistration).where(
-                EventRegistration.event_id == event_id,
-                EventRegistration.user_id == user_id,
-                EventRegistration.status != event_lifecycle.REG_CANCELLED,
+        (
+            await session.execute(
+                select(EventRegistration).where(
+                    EventRegistration.event_id == event_id,
+                    EventRegistration.user_id == user_id,
+                    EventRegistration.status != event_lifecycle.REG_CANCELLED,
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
-async def _waitlist_position(
-    session: AsyncSession, *, reg: EventRegistration
-) -> int:
+async def _waitlist_position(session: AsyncSession, *, reg: EventRegistration) -> int:
     """1-based FIFO position of a waitlisted registration.
 
     Computed by ranking within the ordered waitlist (column-to-column ordering in
@@ -136,11 +136,11 @@ async def _waitlist_position(
                     EventRegistration.event_id == reg.event_id,
                     EventRegistration.status == event_lifecycle.REG_WAITLISTED,
                 )
-                .order_by(
-                    EventRegistration.created_at.asc(), EventRegistration.id.asc()
-                )
+                .order_by(EventRegistration.created_at.asc(), EventRegistration.id.asc())
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     try:
         return ids.index(reg.id) + 1
@@ -164,19 +164,13 @@ def _assert_registrable(event: Event, *, principal: Principal, now: datetime) ->
         raise ResourceNotFoundError()  # never publicly enumerable
     if event.status in (event_lifecycle.CANCELLED, event_lifecycle.COMPLETED):
         raise EventNotOpenError()
-    if (
-        event.moderation_status != event_lifecycle.MOD_APPROVED
-        or event.published_at is None
-    ):
+    if event.moderation_status != event_lifecycle.MOD_APPROVED or event.published_at is None:
         raise ResourceNotFoundError()
 
     levels = lifecycle.visible_levels_for(
         principal.persona, is_authenticated=principal.is_authenticated
     )
-    if (
-        event.visibility == event_lifecycle.INVITATION_ONLY
-        or event.visibility not in levels
-    ):
+    if event.visibility == event_lifecycle.INVITATION_ONLY or event.visibility not in levels:
         raise ResourceNotFoundError()
 
     starts_at = _as_aware(event.starts_at)
@@ -277,9 +271,7 @@ async def register(
     now = _now()
     _assert_registrable(event, principal=principal, now=now)
 
-    existing = await _active_registration(
-        session, event_id=event_id, user_id=user_id
-    )
+    existing = await _active_registration(session, event_id=event_id, user_id=user_id)
     if existing is not None:
         # Idempotent: return the current registration state unchanged.
         position = (
@@ -305,9 +297,7 @@ async def register(
     # Set ``created_at`` explicitly (microsecond precision) so FIFO waitlist
     # ordering is deterministic on both Postgres and SQLite (whose ``func.now()``
     # only has second precision, which would otherwise tie same-second rows).
-    reg = EventRegistration(
-        event_id=event_id, user_id=user_id, status=status, created_at=now
-    )
+    reg = EventRegistration(event_id=event_id, user_id=user_id, status=status, created_at=now)
     session.add(reg)
     await session.flush()
 
@@ -317,8 +307,11 @@ async def register(
     await session.flush()
 
     await write_audit(
-        session, action="event.registered", resource_type="event_registration",
-        resource_id=reg.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="event.registered",
+        resource_type="event_registration",
+        resource_id=reg.id,
+        context=_audit_ctx(principal, ctx),
         after={"event_id": str(event_id), "user_id": str(user_id), "status": status},
     )
     await analytics.record_event_safe(
@@ -334,24 +327,28 @@ async def register(
     position = None
     if status == event_lifecycle.REG_CONFIRMED:
         await _notify_registration(
-            session, event=event, user_id=user_id,
+            session,
+            event=event,
+            user_id=user_id,
             template_key="event.registration_confirmed",
-            notif_type="opportunities.event_registration_confirmed", locale=locale,
+            notif_type="opportunities.event_registration_confirmed",
+            locale=locale,
         )
     else:
         position = await _waitlist_position(session, reg=reg)
         await _notify_registration(
-            session, event=event, user_id=user_id,
+            session,
+            event=event,
+            user_id=user_id,
             template_key="event.registration_waitlisted",
-            notif_type="opportunities.event_waitlisted", locale=locale,
+            notif_type="opportunities.event_waitlisted",
+            locale=locale,
             extra={"waitlist_position": position},
         )
 
     await session.commit()
     await session.refresh(reg)
-    return presenters.my_registration(
-        reg, event=event, waitlist_position=position, locale=locale
-    )
+    return presenters.my_registration(reg, event=event, waitlist_position=position, locale=locale)
 
 
 # --------------------------------------------------------------------------- #
@@ -385,16 +382,20 @@ async def _promote_head(
     await session.flush()
 
     await write_audit(
-        session, action="event.waitlist_promoted",
-        resource_type="event_registration", resource_id=head.id,
+        session,
+        action="event.waitlist_promoted",
+        resource_type="event_registration",
+        resource_id=head.id,
         context=AuditContext(actor_org_id=event.org_id),
-        after={"event_id": str(event.id), "user_id": str(head.user_id),
-               "status": head.status},
+        after={"event_id": str(event.id), "user_id": str(head.user_id), "status": head.status},
     )
     await _notify_registration(
-        session, event=event, user_id=head.user_id,
+        session,
+        event=event,
+        user_id=head.user_id,
         template_key="event.waitlist_promoted",
-        notif_type="opportunities.event_waitlist_promoted", locale=locale,
+        notif_type="opportunities.event_waitlist_promoted",
+        locale=locale,
     )
     return head
 
@@ -418,16 +419,20 @@ async def cancel_registration(
         raise ResourceNotFoundError()
 
     reg = (
-        await session.execute(
-            select(EventRegistration).where(
-                EventRegistration.event_id == event_id,
-                EventRegistration.user_id == user_id,
-                EventRegistration.status.in_(
-                    [event_lifecycle.REG_CONFIRMED, event_lifecycle.REG_WAITLISTED]
-                ),
+        (
+            await session.execute(
+                select(EventRegistration).where(
+                    EventRegistration.event_id == event_id,
+                    EventRegistration.user_id == user_id,
+                    EventRegistration.status.in_(
+                        [event_lifecycle.REG_CONFIRMED, event_lifecycle.REG_WAITLISTED]
+                    ),
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     if reg is None:
         raise NotRegisteredError()
 
@@ -441,19 +446,16 @@ async def cancel_registration(
     await session.flush()
 
     await write_audit(
-        session, action="event.registration_cancelled",
-        resource_type="event_registration", resource_id=reg.id,
+        session,
+        action="event.registration_cancelled",
+        resource_type="event_registration",
+        resource_id=reg.id,
         context=_audit_ctx(principal, ctx),
-        after={"event_id": str(event_id), "user_id": str(user_id),
-               "status": reg.status},
+        after={"event_id": str(event_id), "user_id": str(user_id), "status": reg.status},
     )
 
     # A freed confirmed seat lets the FIFO head in (capacitied events only).
-    if (
-        was_confirmed
-        and event.capacity is not None
-        and event.status == event_lifecycle.PUBLISHED
-    ):
+    if was_confirmed and event.capacity is not None and event.status == event_lifecycle.PUBLISHED:
         await _promote_head(session, event=event, locale=locale)
 
     await session.commit()
@@ -476,9 +478,7 @@ async def _load_event_for_staff(
     """
 
     event = (
-        await session.execute(
-            select(Event).where(Event.id == event_id, Event.deleted_at.is_(None))
-        )
+        await session.execute(select(Event).where(Event.id == event_id, Event.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if event is None:
         raise ResourceNotFoundError()
@@ -489,9 +489,7 @@ async def _load_event_for_staff(
         and await _is_university(session, principal.org_id)
     )
     if principal.org_id is not None and principal.org_id == event.org_id:
-        permission_checker.require(
-            principal, _RESOURCE, "manage", resource_org_id=event.org_id
-        )
+        permission_checker.require(principal, _RESOURCE, "manage", resource_org_id=event.org_id)
         return event, True
     if is_moderator:
         return event, False
@@ -541,10 +539,12 @@ async def check_in(
     await session.flush()
 
     await write_audit(
-        session, action="event.checked_in", resource_type="event_registration",
-        resource_id=reg.id, context=_audit_ctx(principal, ctx),
-        after={"event_id": str(event_id), "user_id": str(reg.user_id),
-               "status": reg.status},
+        session,
+        action="event.checked_in",
+        resource_type="event_registration",
+        resource_id=reg.id,
+        context=_audit_ctx(principal, ctx),
+        after={"event_id": str(event_id), "user_id": str(reg.user_id), "status": reg.status},
     )
     await analytics.record_event_safe(
         session,
@@ -581,7 +581,9 @@ async def list_attendees(
                 )
                 .order_by(EventRegistration.created_at.asc())
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     user_ids = {r.user_id for r in rows}
     users = await user_read_facade.get_user_contacts(session, user_ids)
@@ -623,14 +625,16 @@ async def my_registrations(
                 )
                 .order_by(EventRegistration.created_at.desc())
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     event_ids = {r.event_id for r in rows}
     events: dict[uuid.UUID, Event] = {}
     if event_ids:
         erows = (
-            await session.execute(select(Event).where(Event.id.in_(event_ids)))
-        ).scalars().all()
+            (await session.execute(select(Event).where(Event.id.in_(event_ids)))).scalars().all()
+        )
         events = {e.id: e for e in erows}
 
     out: list[dict] = []
@@ -644,9 +648,7 @@ async def my_registrations(
             else None
         )
         out.append(
-            presenters.my_registration(
-                r, event=event, waitlist_position=position, locale=locale
-            )
+            presenters.my_registration(r, event=event, waitlist_position=position, locale=locale)
         )
     return out
 
@@ -671,23 +673,26 @@ async def sweep_auto_complete(
                     Event.ends_at < now,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     for event in rows:
         event.status = event_lifecycle.COMPLETED
         event.version += 1
         await write_audit(
-            session, action="event.auto_completed", resource_type="event",
-            resource_id=event.id, context=AuditContext(actor_org_id=event.org_id),
+            session,
+            action="event.auto_completed",
+            resource_type="event",
+            resource_id=event.id,
+            context=AuditContext(actor_org_id=event.org_id),
             after={"status": event.status},
         )
     await session.flush()
     return {"completed": len(rows)}
 
 
-async def sweep_no_show(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def sweep_no_show(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Flip remaining confirmed registrations of ended events to ``no_show``."""
 
     now = now or _now()
@@ -700,22 +705,28 @@ async def sweep_no_show(
                 .where(
                     Event.deleted_at.is_(None),
                     Event.ends_at < cutoff,
-                    Event.status.in_(
-                        [event_lifecycle.COMPLETED, event_lifecycle.PUBLISHED]
-                    ),
+                    Event.status.in_([event_lifecycle.COMPLETED, event_lifecycle.PUBLISHED]),
                     EventRegistration.status == event_lifecycle.REG_CONFIRMED,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     for reg in rows:
         reg.status = event_lifecycle.REG_NO_SHOW
         reg.version += 1
         await write_audit(
-            session, action="event.no_show", resource_type="event_registration",
-            resource_id=reg.id, context=AuditContext(),
-            after={"event_id": str(reg.event_id), "user_id": str(reg.user_id),
-                   "status": reg.status},
+            session,
+            action="event.no_show",
+            resource_type="event_registration",
+            resource_id=reg.id,
+            context=AuditContext(),
+            after={
+                "event_id": str(reg.event_id),
+                "user_id": str(reg.user_id),
+                "status": reg.status,
+            },
         )
     await session.flush()
     return {"no_show": len(rows)}
@@ -737,7 +748,9 @@ async def sweep_waitlist_backfill(
                     Event.ends_at > now,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     promoted = 0
     for event in events:
@@ -782,9 +795,12 @@ async def sweep_reminders(
         if await _outbox_dedupe_exists(session, dedupe_key=dedupe_key):
             continue  # a previous tick already enqueued this reminder
         await _notify_registration(
-            session, event=event, user_id=reg.user_id,
+            session,
+            event=event,
+            user_id=reg.user_id,
             template_key="event.reminder",
-            notif_type="opportunities.event_reminder", locale=locale,
+            notif_type="opportunities.event_reminder",
+            locale=locale,
             extra={"dedupe_key": dedupe_key},
         )
         sent += 1
@@ -825,9 +841,12 @@ async def sweep_reminders_soon(
         if await _outbox_dedupe_exists(session, dedupe_key=dedupe_key):
             continue  # a previous tick already enqueued this reminder
         await _notify_registration(
-            session, event=event, user_id=reg.user_id,
+            session,
+            event=event,
+            user_id=reg.user_id,
             template_key="event.reminder_soon",
-            notif_type="opportunities.event_reminder_soon", locale=locale,
+            notif_type="opportunities.event_reminder_soon",
+            locale=locale,
             extra={"dedupe_key": dedupe_key},
         )
         sent += 1
@@ -835,7 +854,5 @@ async def sweep_reminders_soon(
     return {"reminders_soon": sent}
 
 
-async def _outbox_dedupe_exists(
-    session: AsyncSession, *, dedupe_key: str
-) -> bool:
+async def _outbox_dedupe_exists(session: AsyncSession, *, dedupe_key: str) -> bool:
     return await dispatch_service.dedupe_exists(session, dedupe_key=dedupe_key)

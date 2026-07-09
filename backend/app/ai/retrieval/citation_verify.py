@@ -98,8 +98,7 @@ def verify_citations(answer: str, sources: list[str]) -> CitationCheckResult:
         raw_name = m.group(1).strip()
         norm_name = _normalize(raw_name)
         is_grounded = bool(norm_name) and any(
-            norm_name == src or norm_name in src or src in norm_name
-            for src in normalized_sources
+            norm_name == src or norm_name in src or src in norm_name for src in normalized_sources
         )
         if is_grounded:
             grounded_count += 1

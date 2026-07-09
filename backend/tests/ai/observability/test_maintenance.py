@@ -18,6 +18,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_event(
     *,
     created_at: datetime,
@@ -73,17 +74,41 @@ async def test_reconcile_creates_daily_rows_from_events(db_session: AsyncSession
     org = uuid.uuid4()
 
     # Grain 1: job_fit / openrouter / deepseek-r1 / org
-    db_session.add(_make_event(created_at=day.replace(hour=9), task_type="job_fit",
-                               org_id=org, prompt_tokens=100, completion_tokens=50,
-                               cost_usd=0.001))
-    db_session.add(_make_event(created_at=day.replace(hour=14), task_type="job_fit",
-                               org_id=org, prompt_tokens=200, completion_tokens=80,
-                               cost_usd=0.002, fallback_used=True))
+    db_session.add(
+        _make_event(
+            created_at=day.replace(hour=9),
+            task_type="job_fit",
+            org_id=org,
+            prompt_tokens=100,
+            completion_tokens=50,
+            cost_usd=0.001,
+        )
+    )
+    db_session.add(
+        _make_event(
+            created_at=day.replace(hour=14),
+            task_type="job_fit",
+            org_id=org,
+            prompt_tokens=200,
+            completion_tokens=80,
+            cost_usd=0.002,
+            fallback_used=True,
+        )
+    )
     # Grain 2: cv_bullets / openai / gpt-4o-mini / no org
-    db_session.add(_make_event(created_at=day.replace(hour=11), task_type="cv_bullets",
-                               provider="openai", model="gpt-4o-mini", org_id=None,
-                               prompt_tokens=400, completion_tokens=150,
-                               cost_usd=0.005, status="error"))
+    db_session.add(
+        _make_event(
+            created_at=day.replace(hour=11),
+            task_type="cv_bullets",
+            provider="openai",
+            model="gpt-4o-mini",
+            org_id=None,
+            prompt_tokens=400,
+            completion_tokens=150,
+            cost_usd=0.005,
+            status="error",
+        )
+    )
     await db_session.flush()
 
     written = await reconcile_ai_usage_daily(db_session, day)
@@ -124,12 +149,28 @@ async def test_reconcile_is_idempotent(db_session: AsyncSession) -> None:
 
     day = _day_start(datetime(2026, 6, 2, tzinfo=UTC))
 
-    db_session.add(_make_event(created_at=day.replace(hour=10), task_type="embedding",
-                               provider=None, model=None,
-                               prompt_tokens=50, completion_tokens=0, cost_usd=0.001))
-    db_session.add(_make_event(created_at=day.replace(hour=11), task_type="embedding",
-                               provider=None, model=None,
-                               prompt_tokens=60, completion_tokens=0, cost_usd=0.001))
+    db_session.add(
+        _make_event(
+            created_at=day.replace(hour=10),
+            task_type="embedding",
+            provider=None,
+            model=None,
+            prompt_tokens=50,
+            completion_tokens=0,
+            cost_usd=0.001,
+        )
+    )
+    db_session.add(
+        _make_event(
+            created_at=day.replace(hour=11),
+            task_type="embedding",
+            provider=None,
+            model=None,
+            prompt_tokens=60,
+            completion_tokens=0,
+            cost_usd=0.001,
+        )
+    )
     await db_session.flush()
 
     await reconcile_ai_usage_daily(db_session, day)
@@ -156,9 +197,18 @@ async def test_reconcile_corrects_wrong_preexisting_daily_row(db_session: AsyncS
     org = uuid.uuid4()
 
     # Seed the source events.
-    db_session.add(_make_event(created_at=day.replace(hour=8), task_type="cover_letter",
-                               provider="openai", model="gpt-4o-mini", org_id=org,
-                               prompt_tokens=300, completion_tokens=100, cost_usd=0.004))
+    db_session.add(
+        _make_event(
+            created_at=day.replace(hour=8),
+            task_type="cover_letter",
+            provider="openai",
+            model="gpt-4o-mini",
+            org_id=org,
+            prompt_tokens=300,
+            completion_tokens=100,
+            cost_usd=0.004,
+        )
+    )
     await db_session.flush()
 
     # Pre-seed a WRONG daily row for the same grain (simulates a ledger failure).
@@ -168,13 +218,13 @@ async def test_reconcile_corrects_wrong_preexisting_daily_row(db_session: AsyncS
         provider="openai",
         model="gpt-4o-mini",
         org_id=org,
-        requests=99,      # wrong
-        errors=5,         # wrong
+        requests=99,  # wrong
+        errors=5,  # wrong
         fallbacks=0,
         blocked=0,
         prompt_tokens=9999,  # wrong
         completion_tokens=9999,
-        cost_usd=99.0,       # wrong
+        cost_usd=99.0,  # wrong
         latency_ms_sum=0,
         latency_ms_count=0,
     )
@@ -206,21 +256,34 @@ async def test_reconcile_excludes_events_outside_day(db_session: AsyncSession) -
     prev_day = day - timedelta(days=1)
     next_day = day + timedelta(days=1)
 
-    db_session.add(_make_event(created_at=day.replace(hour=12), task_type="job_fit",
-                               prompt_tokens=100, cost_usd=0.001))
+    db_session.add(
+        _make_event(
+            created_at=day.replace(hour=12), task_type="job_fit", prompt_tokens=100, cost_usd=0.001
+        )
+    )
     # These must be excluded:
-    db_session.add(_make_event(created_at=prev_day.replace(hour=23), task_type="job_fit",
-                               prompt_tokens=999, cost_usd=9.0))
-    db_session.add(_make_event(created_at=next_day.replace(hour=0), task_type="job_fit",
-                               prompt_tokens=999, cost_usd=9.0))
+    db_session.add(
+        _make_event(
+            created_at=prev_day.replace(hour=23),
+            task_type="job_fit",
+            prompt_tokens=999,
+            cost_usd=9.0,
+        )
+    )
+    db_session.add(
+        _make_event(
+            created_at=next_day.replace(hour=0),
+            task_type="job_fit",
+            prompt_tokens=999,
+            cost_usd=9.0,
+        )
+    )
     await db_session.flush()
 
     await reconcile_ai_usage_daily(db_session, day)
     await db_session.flush()
 
-    rows = (await db_session.scalars(
-        select(AiUsageDaily).where(AiUsageDaily.day == day)
-    )).all()
+    rows = (await db_session.scalars(select(AiUsageDaily).where(AiUsageDaily.day == day))).all()
     assert len(rows) == 1
     assert rows[0].requests == 1
     assert rows[0].prompt_tokens == 100
@@ -346,35 +409,39 @@ async def test_prune_does_not_touch_ai_usage_daily(db_session: AsyncSession) -> 
 
     # Seed a daily rollup row — must survive pruning.
     day = _day_start(old_ts)
-    db_session.add(AiUsageDaily(
-        day=day,
-        task_type="job_fit",
-        provider="openrouter",
-        model="deepseek/deepseek-r1",
-        org_id=None,
-        requests=5,
-        errors=0,
-        fallbacks=0,
-        blocked=0,
-        prompt_tokens=500,
-        completion_tokens=200,
-        cost_usd=0.01,
-        latency_ms_sum=1500,
-        latency_ms_count=5,
-    ))
+    db_session.add(
+        AiUsageDaily(
+            day=day,
+            task_type="job_fit",
+            provider="openrouter",
+            model="deepseek/deepseek-r1",
+            org_id=None,
+            requests=5,
+            errors=0,
+            fallbacks=0,
+            blocked=0,
+            prompt_tokens=500,
+            completion_tokens=200,
+            cost_usd=0.01,
+            latency_ms_sum=1500,
+            latency_ms_count=5,
+        )
+    )
 
     # Seed an AiUsageLog row — must also survive pruning.
-    db_session.add(AiUsageLog(
-        created_at=old_ts,
-        task_type="job_fit",
-        model_alias="chat_default",
-        success=True,
-        prompt_chars_bucket="sm",
-        completion_chars_bucket="xs",
-        user_id=None,
-        session_id=None,
-        cost_usd=0.002,
-    ))
+    db_session.add(
+        AiUsageLog(
+            created_at=old_ts,
+            task_type="job_fit",
+            model_alias="chat_default",
+            success=True,
+            prompt_chars_bucket="sm",
+            completion_chars_bucket="xs",
+            user_id=None,
+            session_id=None,
+            cost_usd=0.002,
+        )
+    )
     await db_session.flush()
 
     deleted = await prune_ai_ops_events(db_session, older_than_days=90, _now=fixed_now)
@@ -426,8 +493,7 @@ async def test_prune_exact_boundary_is_exclusive(db_session: AsyncSession) -> No
     # Exactly at the boundary — must be kept (cutoff is strict less-than).
     db_session.add(_make_event(created_at=cutoff, task_type="job_fit"))
     # One second before the cutoff — must be deleted.
-    db_session.add(_make_event(created_at=cutoff - timedelta(seconds=1),
-                               task_type="job_fit"))
+    db_session.add(_make_event(created_at=cutoff - timedelta(seconds=1), task_type="job_fit"))
     await db_session.flush()
 
     deleted = await prune_ai_ops_events(db_session, older_than_days=90, _now=fixed_now)

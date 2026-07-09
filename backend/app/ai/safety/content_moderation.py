@@ -121,8 +121,7 @@ _RULES: list[tuple[re.Pattern, str, str, str]] = [
         re.compile(r"\bpay\s+a?\s*deposit\b", re.IGNORECASE),
         CATEGORY_FEE,
         RISK_HIGH,
-        "Requiring a monetary deposit from candidates is a recruitment scam "
-        "signal.",
+        "Requiring a monetary deposit from candidates is a recruitment scam signal.",
     ),
     # --- Pyramid / MLM ---
     (
@@ -150,8 +149,7 @@ _RULES: list[tuple[re.Pattern, str, str, str]] = [
         ),
         CATEGORY_PYRAMID,
         RISK_HIGH,
-        "Multi-level-marketing recruitment must be human-reviewed before it "
-        "is shown to students.",
+        "Multi-level-marketing recruitment must be human-reviewed before it is shown to students.",
     ),
     (
         re.compile(r"\brecruit\s+your\s+own\s+downline\b", re.IGNORECASE),
@@ -225,8 +223,7 @@ _RULES: list[tuple[re.Pattern, str, str, str]] = [
         ),
         CATEGORY_ADULT,
         RISK_HIGH,
-        "Nội dung người lớn/nhạy cảm không được phép trên nền tảng hướng tới "
-        "sinh viên.",
+        "Nội dung người lớn/nhạy cảm không được phép trên nền tảng hướng tới sinh viên.",
     ),
     (
         re.compile(r"\badult\s+(?:content|entertainment|services)\b", re.IGNORECASE),

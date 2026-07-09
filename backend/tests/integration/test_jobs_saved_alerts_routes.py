@@ -36,9 +36,7 @@ async def client():
 async def _student_token(client, db_session) -> str:
     """Register a verified student and log in over HTTP for a real bearer token."""
     user, _ = await make_student(db_session)
-    resp = await client.post(
-        "/auth/login", json={"email": user.email, "password": "Sup3rSecret!"}
-    )
+    resp = await client.post("/auth/login", json={"email": user.email, "password": "Sup3rSecret!"})
     assert resp.status_code == 200, resp.text
     return resp.json()["data"]["access_token"]
 
@@ -80,9 +78,7 @@ async def test_job_alert_delete_persists(client, db_session) -> None:
     token = await _student_token(client, db_session)
     headers = {"Authorization": f"Bearer {token}"}
 
-    created = await client.post(
-        "/jobs/alerts", headers=headers, json={"name": "To be deleted"}
-    )
+    created = await client.post("/jobs/alerts", headers=headers, json={"name": "To be deleted"})
     assert created.status_code == 201, created.text
     alert_id = created.json()["data"]["id"]
 
@@ -97,7 +93,5 @@ async def test_job_alert_delete_persists(client, db_session) -> None:
 async def test_dynamic_job_detail_route_still_resolves(client, db_session) -> None:
     """Regression: the dynamic GET /jobs/{job_id} still works (random UUID → 404)."""
     token = await _student_token(client, db_session)
-    resp = await client.get(
-        f"/jobs/{uuid.uuid4()}", headers={"Authorization": f"Bearer {token}"}
-    )
+    resp = await client.get(f"/jobs/{uuid.uuid4()}", headers={"Authorization": f"Bearer {token}"})
     assert resp.status_code == 404, resp.text

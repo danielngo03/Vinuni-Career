@@ -41,6 +41,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 # Helpers: build minimal Principal objects
 # ---------------------------------------------------------------------------
 
+
 def _superadmin_principal(permissions: frozenset[str] = frozenset()) -> Principal:
     return Principal(
         user_id=uuid.uuid4(),
@@ -63,6 +64,7 @@ def _student_principal() -> Principal:
 
 def _make_current_auth(principal: Principal) -> CurrentAuth:
     from datetime import timedelta
+
     claims = AccessClaims(
         user_id=principal.user_id or uuid.uuid4(),
         session_id=uuid.uuid4(),
@@ -79,6 +81,7 @@ def _make_current_auth(principal: Principal) -> CurrentAuth:
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture
 async def client() -> AsyncIterator[AsyncClient]:
@@ -106,9 +109,7 @@ async def superadmin_client() -> AsyncIterator[AsyncClient]:
 @pytest.fixture
 async def superadmin_with_identity_client() -> AsyncIterator[AsyncClient]:
     """Client: superadmin AND holds ai_settings:view_provider_identity."""
-    principal = _superadmin_principal(
-        permissions=frozenset({"ai_settings:view_provider_identity"})
-    )
+    principal = _superadmin_principal(permissions=frozenset({"ai_settings:view_provider_identity"}))
     auth = _make_current_auth(principal)
 
     app.dependency_overrides[get_current_auth] = lambda: auth
@@ -139,6 +140,7 @@ async def student_client() -> AsyncIterator[AsyncClient]:
 # Test 1: non-superadmin → 403
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_non_superadmin_gets_403_on_overview(student_client: AsyncClient) -> None:
     resp = await student_client.get("/admin/ai-ops/overview")
@@ -162,6 +164,7 @@ async def test_non_superadmin_gets_403_on_spend(student_client: AsyncClient) -> 
 # ---------------------------------------------------------------------------
 # Test 2: superadmin → 200 with required overview keys
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_superadmin_overview_200_with_required_keys(
@@ -210,6 +213,7 @@ async def test_superadmin_volume_200(superadmin_client: AsyncClient) -> None:
 # Test 3: events WITHOUT view_provider_identity → provider/model masked
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_events_without_identity_grant_masks_provider_model(
     superadmin_client: AsyncClient,
@@ -256,6 +260,7 @@ async def test_events_without_identity_grant_masks_provider_model(
 # Test 4: events WITH view_provider_identity → real provider/model
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_events_with_identity_grant_exposes_provider_model(
     superadmin_with_identity_client: AsyncClient,
@@ -296,6 +301,7 @@ async def test_events_with_identity_grant_exposes_provider_model(
 # Test 5: events empty list when no rows (no crash)
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_events_empty_when_no_rows(superadmin_client: AsyncClient) -> None:
     resp = await superadmin_client.get("/admin/ai-ops/events")
@@ -308,6 +314,7 @@ async def test_events_empty_when_no_rows(superadmin_client: AsyncClient) -> None
 # ---------------------------------------------------------------------------
 # Test: langfuse_trace_id included in event items (with and without value)
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_events_langfuse_trace_id_present_and_correct(
@@ -379,6 +386,7 @@ async def test_events_langfuse_trace_id_present_and_correct(
 # require_superadmin even when no view_provider_identity grant
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_require_superadmin_dep_directly() -> None:
     """Unit-level: require_superadmin raises PermissionDeniedError for non-superadmin."""
@@ -402,6 +410,7 @@ async def test_require_superadmin_dep_directly() -> None:
 # Fix A unit test: _can_reveal_identity accepts ONLY the exact literal grant
 # ---------------------------------------------------------------------------
 
+
 def test_can_reveal_identity_exact_literal_only() -> None:
     """Only the exact literal 'ai_settings:view_provider_identity' returns True.
 
@@ -409,9 +418,7 @@ def test_can_reveal_identity_exact_literal_only() -> None:
     """
     from app.modules.ai_ops.api.router import _can_reveal_identity  # noqa: PLC0415
 
-    exact = _superadmin_principal(
-        permissions=frozenset({"ai_settings:view_provider_identity"})
-    )
+    exact = _superadmin_principal(permissions=frozenset({"ai_settings:view_provider_identity"}))
     assert _can_reveal_identity(exact) is True
 
     # is_superadmin alone — no grant
@@ -421,14 +428,13 @@ def test_can_reveal_identity_exact_literal_only() -> None:
     # Wildcard expansions must NOT pass
     for bogus in ("*", "ai_settings:*", "*:view_provider_identity"):
         principal = _superadmin_principal(permissions=frozenset({bogus}))
-        assert _can_reveal_identity(principal) is False, (
-            f"Expected False for wildcard {bogus!r}"
-        )
+        assert _can_reveal_identity(principal) is False, f"Expected False for wildcard {bogus!r}"
 
 
 # ---------------------------------------------------------------------------
 # Fix B: spend endpoint — identity masking
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_spend_without_identity_grant_masks_provider_model(
@@ -502,6 +508,7 @@ async def test_spend_with_identity_grant_exposes_provider_model(
 # Fix E: spend group_by=model returns grouped rows
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_spend_group_by_model_returns_grouped_rows(
     superadmin_with_identity_client: AsyncClient,
@@ -512,18 +519,20 @@ async def test_spend_group_by_model_returns_grouped_rows(
 
     today = datetime.now(tz=UTC).replace(hour=0, minute=0, second=0, microsecond=0)
     for task in ("cv_bullets", "job_fit"):
-        db_session.add(AiUsageDaily(
-            day=today,
-            task_type=task,
-            provider="openrouter",
-            model="deepseek/deepseek-v4-flash",
-            requests=2,
-            errors=0,
-            fallbacks=0,
-            prompt_tokens=100,
-            completion_tokens=50,
-            cost_usd=0.0002,
-        ))
+        db_session.add(
+            AiUsageDaily(
+                day=today,
+                task_type=task,
+                provider="openrouter",
+                model="deepseek/deepseek-v4-flash",
+                requests=2,
+                errors=0,
+                fallbacks=0,
+                prompt_tokens=100,
+                completion_tokens=50,
+                cost_usd=0.0002,
+            )
+        )
     await db_session.commit()
 
     resp = await superadmin_with_identity_client.get(
@@ -551,18 +560,20 @@ async def test_spend_group_by_model_masks_when_no_identity_grant(
     from app.ai.observability.models import AiUsageDaily  # noqa: PLC0415
 
     today = datetime.now(tz=UTC).replace(hour=0, minute=0, second=0, microsecond=0)
-    db_session.add(AiUsageDaily(
-        day=today,
-        task_type="cv_bullets",
-        provider="openrouter",
-        model="deepseek/deepseek-v4-flash",
-        requests=1,
-        errors=0,
-        fallbacks=0,
-        prompt_tokens=50,
-        completion_tokens=20,
-        cost_usd=0.0001,
-    ))
+    db_session.add(
+        AiUsageDaily(
+            day=today,
+            task_type="cv_bullets",
+            provider="openrouter",
+            model="deepseek/deepseek-v4-flash",
+            requests=1,
+            errors=0,
+            fallbacks=0,
+            prompt_tokens=50,
+            completion_tokens=20,
+            cost_usd=0.0001,
+        )
+    )
     await db_session.commit()
 
     resp = await superadmin_client.get(
@@ -579,6 +590,7 @@ async def test_spend_group_by_model_masks_when_no_identity_grant(
 # Fix C: reliability endpoint — circuit_states keys masked when no identity grant
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_reliability_without_identity_grant_masks_circuit_state_keys(
     superadmin_client: AsyncClient,
@@ -591,9 +603,7 @@ async def test_reliability_without_identity_grant_masks_circuit_state_keys(
     circuit_states = data["circuit_states"]
     # All keys must be positional placeholders, never real provider names.
     for key in circuit_states:
-        assert key.startswith("provider_"), (
-            f"Expected masked placeholder key, got {key!r}"
-        )
+        assert key.startswith("provider_"), f"Expected masked placeholder key, got {key!r}"
 
 
 @pytest.mark.asyncio
@@ -628,6 +638,7 @@ async def test_reliability_with_identity_grant_exposes_real_circuit_state_keys(
 # p95 latency in overview
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_overview_p95_latency_ms_with_10_rows(
     superadmin_client: AsyncClient,
@@ -635,7 +646,7 @@ async def test_overview_p95_latency_ms_with_10_rows(
 ) -> None:
     """Seed 10 events with latencies 100..1000; nearest-rank p95 = index 9 = 1000."""
     now = datetime.now(tz=UTC)
-    for i, latency in enumerate(range(100, 1100, 100)):  # 100, 200, ..., 1000
+    for latency in range(100, 1100, 100):  # 100, 200, ..., 1000
         db_session.add(
             AiOpsEvent(
                 id=uuid.uuid4(),
@@ -680,6 +691,7 @@ async def test_overview_p95_latency_ms_none_when_no_events(
 # overview honors range_days parameter
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_overview_honors_range_days(
     superadmin_client: AsyncClient,
@@ -693,18 +705,20 @@ async def test_overview_honors_range_days(
     from app.ai.observability.models import AiUsageDaily  # noqa: PLC0415
 
     today = datetime.now(tz=UTC).replace(hour=0, minute=0, second=0, microsecond=0)
-    db_session.add(AiUsageDaily(
-        day=today,
-        task_type="range_test",
-        provider="openrouter",
-        model="deepseek/deepseek-v4-flash",
-        requests=7,
-        errors=0,
-        fallbacks=0,
-        prompt_tokens=100,
-        completion_tokens=50,
-        cost_usd=0.001,
-    ))
+    db_session.add(
+        AiUsageDaily(
+            day=today,
+            task_type="range_test",
+            provider="openrouter",
+            model="deepseek/deepseek-v4-flash",
+            requests=7,
+            errors=0,
+            fallbacks=0,
+            prompt_tokens=100,
+            completion_tokens=50,
+            cost_usd=0.001,
+        )
+    )
     await db_session.commit()
 
     # range_days=1 should include today

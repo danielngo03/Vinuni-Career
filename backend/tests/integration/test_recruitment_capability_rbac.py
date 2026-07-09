@@ -78,14 +78,13 @@ async def _setup_reviewed(db, *, is_anonymous=False):
     su, student = await make_student(db, prefix="student")
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
-        db, principal=student,
+        db,
+        principal=student,
         payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
-    await decision_service.review_application(
-        db, principal=partner, application_id=app_id, ctx=CTX
-    )
+    await decision_service.review_application(db, principal=partner, application_id=app_id, ctx=CTX)
     return porg, partner, su, student, job_id, app_id
 
 
@@ -138,8 +137,12 @@ async def test_catalog_accepts_new_capability_tuple(db_session, resource, action
 
     _u, _org, admin = await make_org_with_admin(db_session)
     role = await rbac_service.create_role(
-        db_session, principal=admin, name=f"Role-{resource}-{action}",
-        description=None, permissions=[(resource, action)], ctx=CTX,
+        db_session,
+        principal=admin,
+        name=f"Role-{resource}-{action}",
+        description=None,
+        permissions=[(resource, action)],
+        ctx=CTX,
     )
     assert f"{resource}:{action}" in role["permissions"]
 
@@ -157,8 +160,12 @@ async def test_catalog_still_rejects_legacy_ungranted_recruitment_resource(
     _u, _org, admin = await make_org_with_admin(db_session)
     with pytest.raises(InvalidPermissionError):
         await rbac_service.create_role(
-            db_session, principal=admin, name="LegacyRole", description=None,
-            permissions=[("recruitment", "manage_interview")], ctx=CTX,
+            db_session,
+            principal=admin,
+            name="LegacyRole",
+            description=None,
+            permissions=[("recruitment", "manage_interview")],
+            ctx=CTX,
         )
 
 
@@ -172,27 +179,40 @@ async def test_interviews_schedule_grant_allows_schedule_denies_assign_and_offer
 ) -> None:
     org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     _u, _m, scheduler = await add_member(
-        db_session, org=org,
+        db_session,
+        org=org,
         permissions=[("applications", "read"), ("interviews", "schedule")],
     )
 
     out = await interview_service.schedule_interview(
-        db_session, principal=scheduler, application_id=app_id,
-        mode="onsite", scheduled_at=_now() + timedelta(days=2),
-        assignee_ids=[], location="VinUni Campus", ctx=CTX,
+        db_session,
+        principal=scheduler,
+        application_id=app_id,
+        mode="onsite",
+        scheduled_at=_now() + timedelta(days=2),
+        assignee_ids=[],
+        location="VinUni Campus",
+        ctx=CTX,
     )
     iv_id = uuid.UUID(out["id"])
 
     # Same resource, sibling action -> denied (action-scoped, not resource-wide).
     with pytest.raises(PermissionDeniedError):
         await interview_service.set_assignees(
-            db_session, principal=scheduler, application_id=app_id,
-            interview_id=iv_id, assignee_ids=[], ctx=CTX,
+            db_session,
+            principal=scheduler,
+            application_id=app_id,
+            interview_id=iv_id,
+            assignee_ids=[],
+            ctx=CTX,
         )
     # A different (also new) resource -> denied.
     with pytest.raises(PermissionDeniedError):
         await offer_service.create_offer(
-            db_session, principal=scheduler, application_id=app_id, ctx=CTX,
+            db_session,
+            principal=scheduler,
+            application_id=app_id,
+            ctx=CTX,
             **_offer_kwargs(),
         )
 
@@ -202,12 +222,16 @@ async def test_offers_create_grant_allows_create_denies_approve_and_send(
 ) -> None:
     org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     _u, _m, drafter = await add_member(
-        db_session, org=org,
+        db_session,
+        org=org,
         permissions=[("applications", "read"), ("offers", "create")],
     )
 
     out = await offer_service.create_offer(
-        db_session, principal=drafter, application_id=app_id, ctx=CTX,
+        db_session,
+        principal=drafter,
+        application_id=app_id,
+        ctx=CTX,
         **_offer_kwargs(),
     )
     oid = uuid.UUID(out["id"])
@@ -215,47 +239,67 @@ async def test_offers_create_grant_allows_create_denies_approve_and_send(
 
     with pytest.raises(PermissionDeniedError):
         await offer_service.approve_offer(
-            db_session, principal=drafter, offer_id=oid, decision="approve", ctx=CTX,
+            db_session,
+            principal=drafter,
+            offer_id=oid,
+            decision="approve",
+            ctx=CTX,
         )
 
     # Approver role can approve but not send.
     _u2, _m2, approver = await add_member(
-        db_session, org=org,
+        db_session,
+        org=org,
         permissions=[("applications", "read"), ("offers", "approve")],
     )
     approved = await offer_service.approve_offer(
-        db_session, principal=approver, offer_id=oid, decision="approve", ctx=CTX,
+        db_session,
+        principal=approver,
+        offer_id=oid,
+        decision="approve",
+        ctx=CTX,
     )
     assert approved["status"] == "approved"
     with pytest.raises(PermissionDeniedError):
         await offer_service.send_offer(
-            db_session, principal=approver, offer_id=oid, ctx=CTX,
+            db_session,
+            principal=approver,
+            offer_id=oid,
+            ctx=CTX,
         )
 
 
 async def test_scorecards_submit_grant_allows_submit_denies_read(db_session) -> None:
     org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     _u, _m, reviewer = await add_member(
-        db_session, org=org,
+        db_session,
+        org=org,
         permissions=[("applications", "read"), ("scorecards", "submit")],
     )
 
     out = await scorecard_service.submit_scorecard(
-        db_session, principal=reviewer, application_id=app_id,
-        recommendation="yes", scores=_scores(), ctx=CTX,
+        db_session,
+        principal=reviewer,
+        application_id=app_id,
+        recommendation="yes",
+        scores=_scores(),
+        ctx=CTX,
     )
     assert out["mine"]["recommendation"] == "yes"
 
     with pytest.raises(PermissionDeniedError):
         await scorecard_service.list_scorecards(
-            db_session, principal=reviewer, application_id=app_id,
+            db_session,
+            principal=reviewer,
+            application_id=app_id,
         )
 
 
 async def test_ai_recruiting_grant_is_scoped_per_action(db_session) -> None:
     org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     _u, _m, scorer = await add_member(
-        db_session, org=org,
+        db_session,
+        org=org,
         permissions=[
             ("applications", "read"),
             ("ai_recruiting", "suggest_scorecard"),
@@ -263,7 +307,9 @@ async def test_ai_recruiting_grant_is_scoped_per_action(db_session) -> None:
     )
 
     result = await scorecard_ai_service.suggest_scorecard(
-        db_session, principal=scorer, application_id=app_id,
+        db_session,
+        principal=scorer,
+        application_id=app_id,
         notes="Strong technical answers, clear communication.",
     )
     assert "criteria" in result
@@ -271,23 +317,30 @@ async def test_ai_recruiting_grant_is_scoped_per_action(db_session) -> None:
     # Same resource, sibling action (screening brief) -> denied.
     with pytest.raises(PermissionDeniedError):
         await screening_brief_service.generate_screening_brief(
-            db_session, principal=scorer, application_id=app_id,
+            db_session,
+            principal=scorer,
+            application_id=app_id,
         )
 
     _u2, _m2, screener = await add_member(
-        db_session, org=org,
+        db_session,
+        org=org,
         permissions=[
             ("applications", "read"),
             ("ai_recruiting", "screen_candidate"),
         ],
     )
     brief = await screening_brief_service.generate_screening_brief(
-        db_session, principal=screener, application_id=app_id,
+        db_session,
+        principal=screener,
+        application_id=app_id,
     )
     assert "bullets" in brief
     with pytest.raises(PermissionDeniedError):
         await scorecard_ai_service.suggest_scorecard(
-            db_session, principal=screener, application_id=app_id,
+            db_session,
+            principal=screener,
+            application_id=app_id,
             notes="Strong technical answers.",
         )
 
@@ -301,7 +354,8 @@ async def test_interviews_schedule_grant_does_not_cross_org(db_session) -> None:
     org_a, partner_a, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     _bu, org_b, _partner_b = await make_org_with_admin(db_session, display_name="Org B")
     _u, _m, scheduler_b = await add_member(
-        db_session, org=org_b,
+        db_session,
+        org=org_b,
         permissions=[("applications", "read"), ("interviews", "schedule")],
     )
 
@@ -309,9 +363,14 @@ async def test_interviews_schedule_grant_does_not_cross_org(db_session) -> None:
     # never a permission leak that would confirm the resource exists.
     with pytest.raises(ResourceNotFoundError):
         await interview_service.schedule_interview(
-            db_session, principal=scheduler_b, application_id=app_id,
-            mode="onsite", scheduled_at=_now() + timedelta(days=2),
-            assignee_ids=[], location="Somewhere", ctx=CTX,
+            db_session,
+            principal=scheduler_b,
+            application_id=app_id,
+            mode="onsite",
+            scheduled_at=_now() + timedelta(days=2),
+            assignee_ids=[],
+            location="Somewhere",
+            ctx=CTX,
         )
 
 
@@ -319,12 +378,16 @@ async def test_offers_create_grant_does_not_cross_org(db_session) -> None:
     org_a, partner_a, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     _bu, org_b, _partner_b = await make_org_with_admin(db_session, display_name="Org B2")
     _u, _m, drafter_b = await add_member(
-        db_session, org=org_b,
+        db_session,
+        org=org_b,
         permissions=[("applications", "read"), ("offers", "create")],
     )
     with pytest.raises(ResourceNotFoundError):
         await offer_service.create_offer(
-            db_session, principal=drafter_b, application_id=app_id, ctx=CTX,
+            db_session,
+            principal=drafter_b,
+            application_id=app_id,
+            ctx=CTX,
             **_offer_kwargs(),
         )
 
@@ -338,40 +401,63 @@ async def test_admin_wildcard_passes_every_new_recruiting_capability(db_session)
     org, admin, _su, _student, _job, app_id = await _setup_reviewed(db_session)
 
     iv = await interview_service.schedule_interview(
-        db_session, principal=admin, application_id=app_id,
-        mode="onsite", scheduled_at=_now() + timedelta(days=2),
-        assignee_ids=[], location="VinUni Campus", ctx=CTX,
+        db_session,
+        principal=admin,
+        application_id=app_id,
+        mode="onsite",
+        scheduled_at=_now() + timedelta(days=2),
+        assignee_ids=[],
+        location="VinUni Campus",
+        ctx=CTX,
     )
     assert iv["status"] == "scheduled"
 
     offer_out = await offer_service.create_offer(
-        db_session, principal=admin, application_id=app_id, ctx=CTX,
+        db_session,
+        principal=admin,
+        application_id=app_id,
+        ctx=CTX,
         **_offer_kwargs(),
     )
     oid = uuid.UUID(offer_out["id"])
     await offer_service.submit_offer(db_session, principal=admin, offer_id=oid, ctx=CTX)
     approved = await offer_service.approve_offer(
-        db_session, principal=admin, offer_id=oid, decision="approve", ctx=CTX,
+        db_session,
+        principal=admin,
+        offer_id=oid,
+        decision="approve",
+        ctx=CTX,
     )
     assert approved["status"] == "approved"
     sent = await offer_service.send_offer(db_session, principal=admin, offer_id=oid, ctx=CTX)
     assert sent["status"] == "sent"
 
     sc = await scorecard_service.submit_scorecard(
-        db_session, principal=admin, application_id=app_id,
-        recommendation="yes", scores=_scores(), ctx=CTX,
+        db_session,
+        principal=admin,
+        application_id=app_id,
+        recommendation="yes",
+        scores=_scores(),
+        ctx=CTX,
     )
     assert sc["mine"]["recommendation"] == "yes"
     listed = await scorecard_service.list_scorecards(
-        db_session, principal=admin, application_id=app_id,
+        db_session,
+        principal=admin,
+        application_id=app_id,
     )
     assert listed["mine"] is not None
 
     suggestion = await scorecard_ai_service.suggest_scorecard(
-        db_session, principal=admin, application_id=app_id, notes="Great candidate.",
+        db_session,
+        principal=admin,
+        application_id=app_id,
+        notes="Great candidate.",
     )
     assert "criteria" in suggestion
     brief = await screening_brief_service.generate_screening_brief(
-        db_session, principal=admin, application_id=app_id,
+        db_session,
+        principal=admin,
+        application_id=app_id,
     )
     assert "bullets" in brief

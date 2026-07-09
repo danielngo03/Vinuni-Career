@@ -6,9 +6,7 @@ from app.modules.analytics.domain import taxonomy
 
 
 def test_sanitize_properties_keeps_safe_scalars() -> None:
-    clean = taxonomy.sanitize_properties(
-        {"job_id": "abc-123", "count": 3, "featured": True}
-    )
+    clean = taxonomy.sanitize_properties({"job_id": "abc-123", "count": 3, "featured": True})
     assert clean == {"job_id": "abc-123", "count": 3, "featured": True}
 
 

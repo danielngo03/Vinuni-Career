@@ -58,9 +58,7 @@ def _presenter(appt: Appointment, *, locale: str = "vi") -> dict:
 async def _get_appt(
     session: AsyncSession, *, org_id: uuid.UUID, appt_id: uuid.UUID
 ) -> Appointment | None:
-    stmt = select(Appointment).where(
-        Appointment.id == appt_id, Appointment.org_id == org_id
-    )
+    stmt = select(Appointment).where(Appointment.id == appt_id, Appointment.org_id == org_id)
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
@@ -79,9 +77,7 @@ async def book_appointment(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=org_id)
     if mode not in catalog.APPT_MODES:
         raise ValidationFailedError(details={"reason": "invalid_mode"})
     if duration_minutes < 5 or duration_minutes > 240:
@@ -173,7 +169,9 @@ async def update_status(
 ) -> dict:
     org_id = require_org(principal)
     permission_checker.require(
-        principal, _RESOURCE, "cancel" if status == catalog.APPT_CANCELLED else "update",
+        principal,
+        _RESOURCE,
+        "cancel" if status == catalog.APPT_CANCELLED else "update",
         resource_org_id=org_id,
     )
     appt = await _get_appt(session, org_id=org_id, appt_id=appointment_id)
@@ -181,15 +179,14 @@ async def update_status(
         raise ResourceNotFoundError()
     if status not in catalog.APPT_STATUSES:
         raise ValidationFailedError(details={"reason": "invalid_status"})
-    if status == catalog.APPT_CANCELLED and (
-        not cancel_reason or not cancel_reason.strip()
-    ):
+    reason = cancel_reason.strip() if cancel_reason else ""
+    if status == catalog.APPT_CANCELLED and not reason:
         raise ValidationFailedError(details={"reason": "cancel_reason_required"})
 
     appt.status = status
     appt.conflict_key = _conflict_key(status, appt.scheduled_at)
     if status == catalog.APPT_CANCELLED:
-        appt.cancel_reason = cancel_reason.strip()
+        appt.cancel_reason = reason
 
     try:
         await session.flush()

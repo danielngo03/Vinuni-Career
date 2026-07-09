@@ -59,8 +59,9 @@ def _fail(status: str) -> JdExtractionOutcome:
     return JdExtractionOutcome(status=status)
 
 
-def _finalize(raw_llm: dict, raw_text: str, *, vision_used: bool,
-              ocr_used: bool, llm_used: bool) -> JdExtractionOutcome:
+def _finalize(
+    raw_llm: dict, raw_text: str, *, vision_used: bool, ocr_used: bool, llm_used: bool
+) -> JdExtractionOutcome:
     # Treat is_jd=False, is_jd=null/omitted, and is_jd=0 as non-JD.
     # "is False" would silently pass null through as a valid JD.
     if not raw_llm.get("is_jd"):
@@ -80,10 +81,14 @@ def _finalize(raw_llm: dict, raw_text: str, *, vision_used: bool,
     )
 
 
-async def run_jd_cascade(filename: str, data: bytes, *,
-                         policy: JdEnginePolicy | None = None,
-                         structurer=_structuring.run_jd_text_structuring,
-                         vision_runner=_vision.run_jd_vision_extraction) -> JdExtractionOutcome:
+async def run_jd_cascade(
+    filename: str,
+    data: bytes,
+    *,
+    policy: JdEnginePolicy | None = None,
+    structurer=_structuring.run_jd_text_structuring,
+    vision_runner=_vision.run_jd_vision_extraction,
+) -> JdExtractionOutcome:
     pol = policy or resolve_jd_policy()
 
     # Tier 0 — file + security gate
@@ -113,24 +118,24 @@ async def run_jd_cascade(filename: str, data: bytes, *,
     if is_image or scanned_pdf or cid_pdf:
         vision_json = await asyncio.to_thread(
             vision_runner,
-            data, kind,
+            data,
+            kind,
             enabled=pol.vision_enabled,
             max_image_px=pol.vision_max_image_px,
             max_pages=pol.vision_max_pages,
             native_text=native_text or None,
         )
         if isinstance(vision_json, dict):
-            return _finalize(vision_json, native_text,
-                             vision_used=True, ocr_used=ocr_used, llm_used=False)
+            return _finalize(
+                vision_json, native_text, vision_used=True, ocr_used=ocr_used, llm_used=False
+            )
 
         # Tier 4 — OCR fallback when vision produced nothing
         if not native_text:
             adapter = get_ocr_adapter()
             if getattr(adapter, "available", False):
                 try:
-                    recognized = await asyncio.to_thread(
-                        adapter.recognize, data, pol.ocr_langs
-                    )
+                    recognized = await asyncio.to_thread(adapter.recognize, data, pol.ocr_langs)
                     native_text = (recognized or "").strip()
                     ocr_used = True
                 except Exception:  # noqa: BLE001 - OCR is best-effort

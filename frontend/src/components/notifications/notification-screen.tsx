@@ -62,8 +62,10 @@ export function NotificationScreen() {
     staleTime: 15_000,
   });
 
-  const items: Notification[] =
-    query.data?.pages.flatMap((p) => p.data) ?? [];
+  const items: Notification[] = useMemo(
+    () => query.data?.pages.flatMap((p) => p.data) ?? [],
+    [query.data?.pages],
+  );
   const unreadCount =
     query.data?.pages[0]?.meta.unread_count ??
     qc.getQueryData<number>(UNREAD_COUNT_KEY) ??

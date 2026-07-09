@@ -105,9 +105,7 @@ async def test_budget_blocked_records_blocked_no_charge(db_session: Any, monkeyp
     from app.ai.gateway.task_runner import AiTaskRunner
     from app.shared.exceptions import PaymentRequiredError
 
-    monkeypatch.setattr(
-        "app.ai.gateway.factory.real_provider_active", lambda: True, raising=True
-    )
+    monkeypatch.setattr("app.ai.gateway.factory.real_provider_active", lambda: True, raising=True)
     monkeypatch.setattr(
         "app.ai.gateway.factory.get_provider_for_alias",
         lambda alias: FakeProvider(),

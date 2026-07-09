@@ -29,9 +29,7 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
         return None if got == bool(exp) else f"flagged expected {exp}, got {got}"
     if key == "requires_human_review":
         got = bool(d.get("requires_human_review"))
-        return None if got == bool(exp) else (
-            f"requires_human_review expected {exp}, got {got}"
-        )
+        return None if got == bool(exp) else (f"requires_human_review expected {exp}, got {got}")
     if key == "category_contains":
         categories = {f.get("category") for f in d.get("findings") or []}
         return None if exp in categories else f"expected category {exp!r} in {categories!r}"
@@ -43,8 +41,10 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
         return None if n >= int(exp) else f"finding_count expected >= {exp}, got {n}"
     if key == "matched_phrase_excludes":
         phrases = " ".join(f.get("matched_phrase", "") for f in d.get("findings") or [])
-        return None if str(exp).lower() not in phrases.lower() else (
-            f"matched_phrase should never contain {exp!r} (bounded-span guarantee)"
+        return (
+            None
+            if str(exp).lower() not in phrases.lower()
+            else (f"matched_phrase should never contain {exp!r} (bounded-span guarantee)")
         )
     if key == "no_crash":
         return None

@@ -282,10 +282,7 @@ class JobUpdateRequest(BaseModel):
             raise ValueError(f"salary_mode must be one of {SALARY_MODES}")
         if self.salary_period is not None and self.salary_period not in SALARY_PERIODS:
             raise ValueError(f"salary_period must be one of {SALARY_PERIODS}")
-        if (
-            self.salary_gross_net is not None
-            and self.salary_gross_net not in SALARY_GROSS_NET
-        ):
+        if self.salary_gross_net is not None and self.salary_gross_net not in SALARY_GROSS_NET:
             raise ValueError(f"salary_gross_net must be one of {SALARY_GROSS_NET}")
         if self.experience_mode is not None and self.experience_mode not in EXPERIENCE_MODES:
             raise ValueError(f"experience_mode must be one of {EXPERIENCE_MODES}")

@@ -52,16 +52,12 @@ def _validate_human_review(node: dict) -> list[str]:
     data = node.get("data", {})
     mode = data.get("assignee_mode")
     if mode not in _VALID_ASSIGNEE_MODES:
-        errors.append(
-            f"node {node['id']}: assignee_mode must be one of {_VALID_ASSIGNEE_MODES}"
-        )
+        errors.append(f"node {node['id']}: assignee_mode must be one of {_VALID_ASSIGNEE_MODES}")
         return errors
     if mode == "person" and not data.get("assignee_user_id"):
         errors.append(f"node {node['id']}: assignee_mode=person requires assignee_user_id")
     if mode == "queue" and not data.get("assignee_department_id"):
-        errors.append(
-            f"node {node['id']}: assignee_mode=queue requires assignee_department_id"
-        )
+        errors.append(f"node {node['id']}: assignee_mode=queue requires assignee_department_id")
     return errors
 
 

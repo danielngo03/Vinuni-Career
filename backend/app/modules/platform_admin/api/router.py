@@ -230,6 +230,7 @@ async def suspend_user(
 ) -> dict:
     if not auth.principal.is_superadmin:
         from app.shared.exceptions import PermissionDeniedError
+
         raise PermissionDeniedError()
     data = await users_admin_service.suspend_user(
         db,
@@ -248,6 +249,7 @@ async def unsuspend_user(
 ) -> dict:
     if not auth.principal.is_superadmin:
         from app.shared.exceptions import PermissionDeniedError
+
         raise PermissionDeniedError()
     data = await users_admin_service.unsuspend_user(
         db,
@@ -269,6 +271,7 @@ async def grant_superadmin(
 ) -> dict:
     if not auth.principal.is_superadmin:
         from app.shared.exceptions import PermissionDeniedError
+
         raise PermissionDeniedError()
     data = await users_admin_service.grant_superadmin(
         db,
@@ -290,6 +293,7 @@ async def revoke_superadmin(
 ) -> dict:
     if not auth.principal.is_superadmin:
         from app.shared.exceptions import PermissionDeniedError
+
         raise PermissionDeniedError()
     data = await users_admin_service.revoke_superadmin(
         db,
@@ -326,6 +330,7 @@ async def revoke_platform_session(
 ) -> dict:
     if not auth.principal.is_superadmin:
         from app.shared.exceptions import PermissionDeniedError
+
         raise PermissionDeniedError()
     data = await users_admin_service.revoke_platform_session(
         db,

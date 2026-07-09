@@ -25,9 +25,7 @@ async def get_platform(session: AsyncSession) -> AiSettings | None:
     """Return the platform settings row, or ``None`` if not yet seeded."""
 
     return (
-        await session.execute(
-            select(AiSettings).where(AiSettings.scope == PLATFORM_SCOPE)
-        )
+        await session.execute(select(AiSettings).where(AiSettings.scope == PLATFORM_SCOPE))
     ).scalar_one_or_none()
 
 

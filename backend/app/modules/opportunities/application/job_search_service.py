@@ -96,7 +96,9 @@ async def resolve_industry_scope(
                     Industry.parent_id == node.id, Industry.is_active.is_(True)
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     ids = [node.id, *children]
     if level == 0 and children:
@@ -107,7 +109,9 @@ async def resolve_industry_scope(
                         Industry.parent_id.in_(children), Industry.is_active.is_(True)
                     )
                 )
-            ).scalars().all()
+            )
+            .scalars()
+            .all()
         )
         ids.extend(grandchildren)
     return ids
@@ -227,9 +231,7 @@ def _location_contains(stmt: Select, field: str, value: str, use_jsonb: bool) ->
     return stmt.where(cast(Job.locations, String).ilike(f'%"{field}":%"{value}"%'))
 
 
-def _location_contains_any(
-    stmt: Select, field: str, values: list[str], use_jsonb: bool
-) -> Select:
+def _location_contains_any(stmt: Select, field: str, values: list[str], use_jsonb: bool) -> Select:
     clauses = []
     for value in values:
         if use_jsonb:
@@ -307,9 +309,7 @@ def _job_fit_projection(job: Job) -> dict:
     either made discovery diverge from the store-backed paths.
     """
     jd_text = " ".join(
-        part
-        for part in (job.title, job.description, job.requirements, job.benefits)
-        if part
+        part for part in (job.title, job.description, job.requirements, job.benefits) if part
     )
     return {
         "id": str(job.id),
@@ -490,9 +490,7 @@ async def list_public_jobs(
             use_jsonb=use_jsonb,
         )
 
-    total = (
-        await session.execute(_filtered(select(func.count()).select_from(Job)))
-    ).scalar_one()
+    total = (await session.execute(_filtered(select(func.count()).select_from(Job)))).scalar_one()
 
     stmt = _filtered(select(Job))
     if page is not None:
@@ -504,9 +502,7 @@ async def list_public_jobs(
         items = await public_read.enrich_summaries(
             session, rows, locale=locale, saved_ids=saved_ids
         )
-        items = await _attach_student_fit(
-            session, principal=principal, jobs=rows, items=items
-        )
+        items = await _attach_student_fit(session, principal=principal, jobs=rows, items=items)
         return items, None, page_limit, total
 
     decoded = decode_cursor(cursor)
@@ -553,13 +549,9 @@ async def list_my_jobs(
 
     if principal.org_id is None:
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=principal.org_id)
     page_limit = clamp_limit(limit)
-    stmt = select(Job).where(
-        Job.org_id == principal.org_id, Job.deleted_at.is_(None)
-    )
+    stmt = select(Job).where(Job.org_id == principal.org_id, Job.deleted_at.is_(None))
     if status is not None:
         stmt = stmt.where(Job.status == status)
 

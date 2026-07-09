@@ -72,9 +72,7 @@ async def create_intervention(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=org_id)
     if intervention_type not in catalog.INTERVENTION_TYPES:
         raise ValidationFailedError(details={"reason": "invalid_intervention_type"})
     if not description or not description.strip():
@@ -155,9 +153,7 @@ async def update_outcome(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=org_id)
     rec = await _get_record(session, org_id=org_id, record_id=record_id)
     if rec is None:
         raise ResourceNotFoundError()

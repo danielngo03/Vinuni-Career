@@ -13,10 +13,12 @@ from app.modules.advertising.application import moderation_service as ad_moderat
 from app.modules.advertising.application import placement_service
 from app.modules.advertising.application.errors import (
     InvalidModerationReasonError as AdInvalidReasonError,
+)
+from app.modules.advertising.application.errors import (
     PlacementAlreadyClaimedError,
 )
 from app.modules.advertising.domain.models import AdPackage, SponsoredPlacement
-from app.modules.moderation.domain.models import HumanReviewItem, STATUS_PENDING
+from app.modules.moderation.domain.models import STATUS_PENDING, HumanReviewItem
 from app.modules.opportunities.application import (
     event_moderation_service,
     event_service,
@@ -30,7 +32,6 @@ from app.modules.opportunities.application.errors import (
 from app.modules.opportunities.application.event_errors import (
     EventAlreadyClaimedError,
 )
-from app.shared.exceptions import ResourceNotFoundError
 from sqlalchemy import select
 
 from tests.auth_utils import CTX
@@ -77,7 +78,7 @@ async def _submitted_event(db, organizer, *, title="Career Day") -> uuid.UUID:
     created = await event_service.create_event(
         db, principal=organizer, payload=event_payload(title), ctx=CTX
     )
-    submitted = await event_service.submit_event(
+    await event_service.submit_event(
         db, principal=organizer, event_id=uuid.UUID(created["id"]), ctx=CTX
     )
     return uuid.UUID(created["id"])
@@ -85,9 +86,15 @@ async def _submitted_event(db, organizer, *, title="Career Day") -> uuid.UUID:
 
 async def _seed_ad_package(db) -> AdPackage:
     pkg = AdPackage(
-        code="sponsored_14d", name="Tài trợ 14 ngày", placement_type="sponsored",
-        price_amount="3000000.00", currency="VND", duration_days=14,
-        grants_sponsored=True, grants_featured=False, is_active=True,
+        code="sponsored_14d",
+        name="Tài trợ 14 ngày",
+        placement_type="sponsored",
+        price_amount="3000000.00",
+        currency="VND",
+        duration_days=14,
+        grants_sponsored=True,
+        grants_featured=False,
+        is_active=True,
     )
     db.add(pkg)
     await db.commit()
@@ -98,10 +105,14 @@ async def _seed_ad_package(db) -> AdPackage:
 async def _submitted_placement(db, partner, *, job_id: uuid.UUID) -> uuid.UUID:
     pkg = await _seed_ad_package(db)
     draft = await placement_service.create_placement(
-        db, principal=partner,
+        db,
+        principal=partner,
         payload={
-            "target_type": "job", "target_id": job_id, "placement_type": "sponsored",
-            "package_id": pkg.id, "start_at": _now() + timedelta(days=1),
+            "target_type": "job",
+            "target_id": job_id,
+            "placement_type": "sponsored",
+            "package_id": pkg.id,
+            "start_at": _now() + timedelta(days=1),
             "disclosure_confirmed": True,
         },
         ctx=CTX,
@@ -110,7 +121,10 @@ async def _submitted_placement(db, partner, *, job_id: uuid.UUID) -> uuid.UUID:
     # existing admin-only ``payment_reference``/``approved_by``) — asserted via
     # the moderator-facing queue/approve responses instead of this partner one.
     await placement_service.submit_placement(
-        db, principal=partner, placement_id=uuid.UUID(draft["id"]), ctx=CTX,
+        db,
+        principal=partner,
+        placement_id=uuid.UUID(draft["id"]),
+        ctx=CTX,
     )
     return uuid.UUID(draft["id"])
 
@@ -127,26 +141,38 @@ async def test_job_claim_conflict_rejects_second_moderator(db_session) -> None:
     job_id = await _submitted_job(db_session, partner)
 
     claimed = await moderation_service.claim_job(
-        db_session, principal=uni_a, job_id=job_id, ctx=CTX,
+        db_session,
+        principal=uni_a,
+        job_id=job_id,
+        ctx=CTX,
     )
     assert claimed["claimed_by"] == str(uni_a.user_id)
 
     # Same moderator re-claiming is an idempotent no-op.
     again = await moderation_service.claim_job(
-        db_session, principal=uni_a, job_id=job_id, ctx=CTX,
+        db_session,
+        principal=uni_a,
+        job_id=job_id,
+        ctx=CTX,
     )
     assert again["claimed_by"] == str(uni_a.user_id)
 
     # A different moderator is rejected with a clear conflict.
     with pytest.raises(JobAlreadyClaimedError):
         await moderation_service.claim_job(
-            db_session, principal=uni_b, job_id=job_id, ctx=CTX,
+            db_session,
+            principal=uni_b,
+            job_id=job_id,
+            ctx=CTX,
         )
 
     # Approval still works for whoever holds the claim (claim is advisory, not
     # a hard permission gate) and clears the claim on the fresh submit cycle.
     approved = await moderation_service.approve_job(
-        db_session, principal=uni_a, job_id=job_id, ctx=CTX,
+        db_session,
+        principal=uni_a,
+        job_id=job_id,
+        ctx=CTX,
     )
     assert approved["status"] == "active"
 
@@ -158,11 +184,17 @@ async def test_event_claim_conflict_rejects_second_moderator(db_session) -> None
     event_id = await _submitted_event(db_session, organizer)
 
     await event_moderation_service.claim_event(
-        db_session, principal=uni_a, event_id=event_id, ctx=CTX,
+        db_session,
+        principal=uni_a,
+        event_id=event_id,
+        ctx=CTX,
     )
     with pytest.raises(EventAlreadyClaimedError):
         await event_moderation_service.claim_event(
-            db_session, principal=uni_b, event_id=event_id, ctx=CTX,
+            db_session,
+            principal=uni_b,
+            event_id=event_id,
+            ctx=CTX,
         )
 
 
@@ -172,16 +204,25 @@ async def test_placement_claim_conflict_rejects_second_moderator(db_session) -> 
     _uu2, _uorg2, uni_b = await make_org_with_admin(db_session, org_type="university")
     job_id = await _submitted_job(db_session, partner)
     await moderation_service.approve_job(
-        db_session, principal=uni_a, job_id=job_id, ctx=CTX,
+        db_session,
+        principal=uni_a,
+        job_id=job_id,
+        ctx=CTX,
     )
     placement_id = await _submitted_placement(db_session, partner, job_id=job_id)
 
     await ad_moderation.claim_placement(
-        db_session, principal=uni_a, placement_id=placement_id, ctx=CTX,
+        db_session,
+        principal=uni_a,
+        placement_id=placement_id,
+        ctx=CTX,
     )
     with pytest.raises(PlacementAlreadyClaimedError):
         await ad_moderation.claim_placement(
-            db_session, principal=uni_b, placement_id=placement_id, ctx=CTX,
+            db_session,
+            principal=uni_b,
+            placement_id=placement_id,
+            ctx=CTX,
         )
 
 
@@ -196,7 +237,8 @@ async def test_job_queue_exposes_due_by_and_age(db_session) -> None:
     await _submitted_job(db_session, partner)
 
     queue, total = await moderation_service.list_moderation_queue(
-        db_session, principal=uni,
+        db_session,
+        principal=uni,
     )
     assert total == 1
     row = queue[0]
@@ -211,7 +253,10 @@ async def test_placement_admin_queue_exposes_due_by_and_age(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     job_id = await _submitted_job(db_session, partner)
     await moderation_service.approve_job(
-        db_session, principal=uni, job_id=job_id, ctx=CTX,
+        db_session,
+        principal=uni,
+        job_id=job_id,
+        ctx=CTX,
     )
     await _submitted_placement(db_session, partner, job_id=job_id)
 
@@ -234,8 +279,12 @@ async def test_reject_job_rejects_invalid_reason_code(db_session) -> None:
 
     with pytest.raises(InvalidModerationReasonError):
         await moderation_service.reject_job(
-            db_session, principal=uni, job_id=job_id,
-            reason="bad", reason_code="not_a_real_code", ctx=CTX,
+            db_session,
+            principal=uni,
+            job_id=job_id,
+            reason="bad",
+            reason_code="not_a_real_code",
+            ctx=CTX,
         )
 
 
@@ -247,8 +296,12 @@ async def test_reject_job_other_reason_code_requires_note(db_session) -> None:
     # "other" is always accompanied by the (already-required) free-text reason,
     # so this succeeds; the reason_code is persisted alongside the free text.
     rejected = await moderation_service.reject_job(
-        db_session, principal=uni, job_id=job_id,
-        reason="Không đủ tiêu chuẩn", reason_code="other", ctx=CTX,
+        db_session,
+        principal=uni,
+        job_id=job_id,
+        reason="Không đủ tiêu chuẩn",
+        reason_code="other",
+        ctx=CTX,
     )
     assert rejected["moderation_reason_code"] == "other"
     assert rejected["moderation_reason_label"]
@@ -260,8 +313,11 @@ async def test_reject_job_with_valid_structured_code(db_session) -> None:
     job_id = await _submitted_job(db_session, partner)
 
     rejected = await moderation_service.reject_job(
-        db_session, principal=uni, job_id=job_id,
-        reason="Trùng với tin đã đăng trước đó", reason_code="duplicate_listing",
+        db_session,
+        principal=uni,
+        job_id=job_id,
+        reason="Trùng với tin đã đăng trước đó",
+        reason_code="duplicate_listing",
         ctx=CTX,
     )
     assert rejected["status"] == "rejected"
@@ -273,14 +329,20 @@ async def test_ad_escalate_rejects_invalid_reason_code(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     job_id = await _submitted_job(db_session, partner)
     await moderation_service.approve_job(
-        db_session, principal=uni, job_id=job_id, ctx=CTX,
+        db_session,
+        principal=uni,
+        job_id=job_id,
+        ctx=CTX,
     )
     placement_id = await _submitted_placement(db_session, partner, job_id=job_id)
 
     with pytest.raises(AdInvalidReasonError):
         await ad_moderation.escalate_placement(
-            db_session, principal=uni, placement_id=placement_id,
-            reason_code="nonsense", ctx=CTX,
+            db_session,
+            principal=uni,
+            placement_id=placement_id,
+            reason_code="nonsense",
+            ctx=CTX,
         )
 
 
@@ -296,7 +358,8 @@ async def test_bulk_reject_jobs_partial_failure_reported_per_item(db_session) ->
     missing_id = uuid.uuid4()
 
     results = await moderation_service.bulk_reject_jobs(
-        db_session, principal=uni,
+        db_session,
+        principal=uni,
         items=[
             {"id": good_id, "reason": "Trùng lặp", "reason_code": "duplicate_listing"},
             {"id": missing_id, "reason": "n/a"},
@@ -324,7 +387,10 @@ async def test_bulk_approve_events_partial_failure_reported_per_item(db_session)
     missing_id = uuid.uuid4()
 
     results = await event_moderation_service.bulk_approve_events(
-        db_session, principal=uni, event_ids=[good_id, missing_id], ctx=CTX,
+        db_session,
+        principal=uni,
+        event_ids=[good_id, missing_id],
+        ctx=CTX,
     )
     ok = next(r for r in results if r["id"] == str(good_id))
     fail = next(r for r in results if r["id"] == str(missing_id))
@@ -343,8 +409,12 @@ async def test_escalate_job_creates_human_review_item(db_session) -> None:
     job_id = await _submitted_job(db_session, partner)
 
     escalated = await moderation_service.escalate_job(
-        db_session, principal=uni, job_id=job_id,
-        reason_code="policy_violation", note="Needs a second opinion", ctx=CTX,
+        db_session,
+        principal=uni,
+        job_id=job_id,
+        reason_code="policy_violation",
+        note="Needs a second opinion",
+        ctx=CTX,
     )
     assert escalated["moderation_status"] == "flagged"
 
@@ -367,8 +437,12 @@ async def test_escalate_event_creates_human_review_item(db_session) -> None:
     event_id = await _submitted_event(db_session, organizer)
 
     await event_moderation_service.escalate_event(
-        db_session, principal=uni, event_id=event_id,
-        reason_code="misleading_content", note="Check the venue claim", ctx=CTX,
+        db_session,
+        principal=uni,
+        event_id=event_id,
+        reason_code="misleading_content",
+        note="Check the venue claim",
+        ctx=CTX,
     )
     item = (
         await db_session.execute(
@@ -386,13 +460,20 @@ async def test_escalate_placement_creates_human_review_item(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     job_id = await _submitted_job(db_session, partner)
     await moderation_service.approve_job(
-        db_session, principal=uni, job_id=job_id, ctx=CTX,
+        db_session,
+        principal=uni,
+        job_id=job_id,
+        ctx=CTX,
     )
     placement_id = await _submitted_placement(db_session, partner, job_id=job_id)
 
     await ad_moderation.escalate_placement(
-        db_session, principal=uni, placement_id=placement_id,
-        reason_code="spam", note="Repeated banner report", ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=placement_id,
+        reason_code="spam",
+        note="Repeated banner report",
+        ctx=CTX,
     )
     item = (
         await db_session.execute(

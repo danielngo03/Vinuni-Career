@@ -23,10 +23,18 @@ from app.modules.onboarding.api.schemas import (
     StudentVerifyRequestBody,
 )
 from app.modules.onboarding.application import onboarding_service
+from app.shared.exceptions import AuthRequiredError
 from app.shared.responses import success
 from app.shared.storage import save_upload
 
 router = APIRouter(prefix="/onboarding", tags=["onboarding"])
+
+
+def _user_id(auth: CurrentAuth):
+    user_id = auth.principal.user_id
+    if user_id is None:
+        raise AuthRequiredError()
+    return user_id
 
 
 @router.get("/status", summary="Get current onboarding wizard step")
@@ -34,7 +42,7 @@ async def get_status(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await onboarding_service.get_status(session, user_id=auth.principal.user_id)
+    data = await onboarding_service.get_status(session, user_id=_user_id(auth))
     return success(OnboardingStatusResponse(**data).model_dump())
 
 
@@ -47,7 +55,7 @@ async def set_role(
 ) -> dict:
     state = await onboarding_service.set_role(
         session,
-        user_id=auth.principal.user_id,
+        user_id=_user_id(auth),
         role=body.role,
         ctx=context_from_request(request),
     )
@@ -67,7 +75,7 @@ async def set_seeker_type(
 ) -> dict:
     state = await onboarding_service.set_seeker_type(
         session,
-        user_id=auth.principal.user_id,
+        user_id=_user_id(auth),
         seeker_type=body.seeker_type,
         ctx=context_from_request(request),
     )
@@ -84,7 +92,7 @@ async def save_seeker_profile(
 ) -> dict:
     state = await onboarding_service.save_seeker_profile(
         session,
-        user_id=auth.principal.user_id,
+        user_id=_user_id(auth),
         profile_data=body.model_dump(exclude_none=True),
         ctx=context_from_request(request),
     )
@@ -101,7 +109,7 @@ async def request_student_verify(
 ) -> dict:
     result = await onboarding_service.request_student_verify(
         session,
-        user_id=auth.principal.user_id,
+        user_id=_user_id(auth),
         university_name=body.university_name,
         student_id_number=body.student_id_number,
         student_email=body.student_email,
@@ -126,14 +134,14 @@ async def confirm_student_verify(
     if id_card_image is not None:
         file_path = await save_upload(
             file=id_card_image,
-            folder=f"student_id_cards/{auth.principal.user_id}",
+            folder=f"student_id_cards/{_user_id(auth)}",
             allowed_mime={"image/jpeg", "image/png", "image/webp"},
             max_bytes=5 * 1024 * 1024,
         )
 
     state = await onboarding_service.confirm_student_verify(
         session,
-        user_id=auth.principal.user_id,
+        user_id=_user_id(auth),
         otp_code=otp_code,
         id_card_file_path=file_path,
         ctx=context_from_request(request),
@@ -151,7 +159,7 @@ async def save_employer_info(
 ) -> dict:
     state = await onboarding_service.save_employer_info(
         session,
-        user_id=auth.principal.user_id,
+        user_id=_user_id(auth),
         company_name=body.company_name,
         industry=body.industry,
         company_size=body.company_size,
@@ -177,13 +185,13 @@ async def submit_employer_docs(
 ) -> dict:
     document_path = await save_upload(
         file=document,
-        folder=f"employer_docs/{auth.principal.user_id}",
+        folder=f"employer_docs/{_user_id(auth)}",
         allowed_mime={"application/pdf", "image/jpeg", "image/png"},
         max_bytes=onboarding_service.EMPLOYER_DOC_MAX_BYTES,
     )
     result = await onboarding_service.submit_employer_docs(
         session,
-        user_id=auth.principal.user_id,
+        user_id=_user_id(auth),
         document_path=document_path,
         tax_id=tax_id,
         ctx=context_from_request(request),
@@ -197,7 +205,5 @@ async def get_employer_doc_status(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await onboarding_service.get_employer_doc_status(
-        session, user_id=auth.principal.user_id
-    )
+    data = await onboarding_service.get_employer_doc_status(session, user_id=_user_id(auth))
     return success(EmployerDocStatusResponse(**data).model_dump())

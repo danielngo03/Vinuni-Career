@@ -103,13 +103,13 @@ def queue_age_fields(
 
     submitted_at = _as_utc(submitted_at)
     due_by = _as_utc(due_by)
-    now = _as_utc(now)
+    now_utc = _as_utc(now) or now
 
     age_hours: float | None = None
     if submitted_at is not None:
-        age_hours = round((now - submitted_at).total_seconds() / 3600.0, 1)
+        age_hours = round((now_utc - submitted_at).total_seconds() / 3600.0, 1)
     return {
         "due_by": due_by.isoformat() if due_by else None,
         "age_hours": age_hours,
-        "is_overdue": bool(due_by is not None and now >= due_by),
+        "is_overdue": bool(due_by is not None and now_utc >= due_by),
     }

@@ -121,9 +121,7 @@ async def get_university_dashboard(
     }
 
 
-async def platform_stats_for_university(
-    session: AsyncSession, *, principal: Principal
-) -> dict:
+async def platform_stats_for_university(session: AsyncSession, *, principal: Principal) -> dict:
     """Platform-wide KPI snapshot for university governance reporting.
 
     Returns aggregate counts across the entire platform — no per-user PII.

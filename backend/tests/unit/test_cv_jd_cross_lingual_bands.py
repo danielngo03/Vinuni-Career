@@ -15,6 +15,7 @@ Locks in the 2026-07-07 correctness fixes:
 All OFFLINE + PURE: the model call is replaced by a deterministic fake VN→EN map
 and the DB cache is stubbed to no-ops. No network, no database.
 """
+
 from __future__ import annotations
 
 import pytest
@@ -81,6 +82,7 @@ def _disable_ai(monkeypatch: pytest.MonkeyPatch) -> None:
 # Fixtures                                                                     #
 # --------------------------------------------------------------------------- #
 
+
 def _vn_cv() -> job_fit.CvInput:
     """A fully Vietnamese CV: VN summary, experience, education, and skills."""
     return job_fit.CvInput(
@@ -93,12 +95,7 @@ def _vn_cv() -> job_fit.CvInput:
                 "title": "Tóm tắt",
                 "content": {
                     "items": [
-                        {
-                            "text": (
-                                "Chuyên gia chuỗi cung ứng với kinh nghiệm phân "
-                                "tích dữ liệu"
-                            )
-                        }
+                        {"text": ("Chuyên gia chuỗi cung ứng với kinh nghiệm phân tích dữ liệu")}
                     ]
                 },
             },
@@ -121,13 +118,7 @@ def _vn_cv() -> job_fit.CvInput:
                 "section_type": "education",
                 "title": "Học vấn",
                 "content": {
-                    "items": [
-                        {
-                            "text": (
-                                "Cử nhân kỹ thuật công nghiệp Đại học Bách Khoa"
-                            )
-                        }
-                    ]
+                    "items": [{"text": ("Cử nhân kỹ thuật công nghiệp Đại học Bách Khoa")}]
                 },
             },
             {
@@ -167,6 +158,7 @@ def _en_jd() -> dict:
 # 1. ROLE + EXPERIENCE bands materially higher WITH augmentation.             #
 # --------------------------------------------------------------------------- #
 
+
 async def test_role_experience_bands_lift_with_augmentation(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None
 ) -> None:
@@ -188,9 +180,7 @@ async def test_role_experience_bands_lift_with_augmentation(
     # Overall score improves too.
     assert augmented.score > baseline.score
     # A translated_en section was actually injected on the CV.
-    assert any(
-        s.get("section_type") == "translated_en" for s in aug_cvs[0].sections
-    )
+    assert any(s.get("section_type") == "translated_en" for s in aug_cvs[0].sections)
 
 
 async def test_credentials_band_uses_translated_prose(
@@ -212,6 +202,7 @@ async def test_credentials_band_uses_translated_prose(
 # --------------------------------------------------------------------------- #
 # 2. No duplicate VN+EN entry; matched ∩ gaps == ∅.                            #
 # --------------------------------------------------------------------------- #
+
 
 async def test_no_duplicate_vn_en_surfaced_terms(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None
@@ -255,6 +246,7 @@ async def test_no_duplicate_vn_en_surfaced_terms(
 # 3. Offline = byte-identical, no synthetic sections.                          #
 # --------------------------------------------------------------------------- #
 
+
 async def test_offline_byte_identical_no_synthetic_sections(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None
 ) -> None:
@@ -278,6 +270,7 @@ async def test_offline_byte_identical_no_synthetic_sections(
 # 4. English CV skips prose translation entirely (diacritic gate).            #
 # --------------------------------------------------------------------------- #
 
+
 async def test_english_cv_skips_prose_translation(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None
 ) -> None:
@@ -291,11 +284,7 @@ async def test_english_cv_skips_prose_translation(
             {
                 "section_type": "experience",
                 "title": "Experience",
-                "content": {
-                    "items": [
-                        {"text": "Supply chain engineer with data analysis work"}
-                    ]
-                },
+                "content": {"items": [{"text": "Supply chain engineer with data analysis work"}]},
             },
             {
                 "section_type": "skills",

@@ -50,17 +50,17 @@ _JOB = {
 
 
 async def _load_cv(db, cv_id: uuid.UUID) -> CvProfile:
-    return (
-        await db.execute(select(CvProfile).where(CvProfile.id == cv_id))
-    ).scalar_one()
+    return (await db.execute(select(CvProfile).where(CvProfile.id == cv_id))).scalar_one()
 
 
 async def _rich_ready_cv(db, student) -> uuid.UUID:
     """Create + finalize a CV with header, leveled skills, and an experience entry."""
 
     cv = await cv_service.create_cv(
-        db, principal=student,
-        payload={"title": "Backend CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db,
+        principal=student,
+        payload={"title": "Backend CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(cv["id"])
     by_type = {s["section_type"]: s for s in cv["sections"]}
@@ -69,21 +69,39 @@ async def _rich_ready_cv(db, student) -> uuid.UUID:
     async def _seed(section_type: str, content: dict) -> None:
         nonlocal version
         await cv_service.upsert_section(
-            db, principal=student, cv_id=cv_id,
+            db,
+            principal=student,
+            cv_id=cv_id,
             section_id=uuid.UUID(by_type[section_type]["id"]),
-            payload={"content": content, "expected_version": version}, ctx=CTX,
+            payload={"content": content, "expected_version": version},
+            ctx=CTX,
         )
         version += 1
 
     await _seed("header", {"name": "Le Van B", "email": "b@example.com"})
-    await _seed("skills", {"items": [{"name": "Python", "level": 90},
-                                     {"name": "FastAPI", "level": 70},
-                                     {"name": "SQL", "level": 60}]})
-    await _seed("experience", {"entries": [
-        {"heading": "Backend Intern", "subheading": "Example Tech",
-         "timeframe": "2024 - 2025",
-         "highlights": ["Built REST APIs with FastAPI and PostgreSQL"]},
-    ]})
+    await _seed(
+        "skills",
+        {
+            "items": [
+                {"name": "Python", "level": 90},
+                {"name": "FastAPI", "level": 70},
+                {"name": "SQL", "level": 60},
+            ]
+        },
+    )
+    await _seed(
+        "experience",
+        {
+            "entries": [
+                {
+                    "heading": "Backend Intern",
+                    "subheading": "Example Tech",
+                    "timeframe": "2024 - 2025",
+                    "highlights": ["Built REST APIs with FastAPI and PostgreSQL"],
+                },
+            ]
+        },
+    )
     await cv_lifecycle_service.finalize_cv(db, principal=student, cv_id=cv_id, ctx=CTX)
     return cv_id
 
@@ -181,15 +199,26 @@ async def test_upload_import_populates_matching_snapshot(db_session, _sync_stora
     _u, student = await make_student(db_session)
 
     up = await ingestion_service.create_upload(
-        db_session, principal=student, filename="cv.pdf", data=F.text_pdf_en(),
-        content_type="application/pdf", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.pdf",
+        data=F.text_pdf_en(),
+        content_type="application/pdf",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     ing = await ingestion_service.start_ingestion(
-        db_session, principal=student, document_id=uuid.UUID(up["document_id"]), ctx=CTX,
+        db_session,
+        principal=student,
+        document_id=uuid.UUID(up["document_id"]),
+        ctx=CTX,
     )
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={"title": "Uploaded CV"}, ctx=CTX,
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={"title": "Uploaded CV"},
+        ctx=CTX,
     )
     cv = await _load_cv(db_session, uuid.UUID(detail["id"]))
     assert isinstance(cv.matching_json, dict)

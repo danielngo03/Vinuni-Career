@@ -5,7 +5,15 @@ from app.modules.workflow.domain.validation import validate_graph
 VALID_GRAPH = {
     "nodes": [
         {"id": "n1", "type": "trigger", "data": {"trigger_type": "system.student_registered"}},
-        {"id": "n2", "type": "human_review", "data": {"assignee_mode": "person", "assignee_user_id": "11111111-1111-1111-1111-111111111111", "sla_hours": 24}},
+        {
+            "id": "n2",
+            "type": "human_review",
+            "data": {
+                "assignee_mode": "person",
+                "assignee_user_id": "11111111-1111-1111-1111-111111111111",
+                "sla_hours": 24,
+            },
+        },
         {"id": "n3", "type": "end", "data": {}},
     ],
     "edges": [

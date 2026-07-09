@@ -75,9 +75,7 @@ async def load_owned_profile(
     return profile
 
 
-async def load_profile_by_id(
-    session: AsyncSession, *, profile_id: uuid.UUID
-) -> StudentProfile:
+async def load_profile_by_id(session: AsyncSession, *, profile_id: uuid.UUID) -> StudentProfile:
     profile = (
         await session.execute(
             select(StudentProfile).where(

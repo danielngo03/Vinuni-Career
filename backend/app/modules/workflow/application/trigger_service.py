@@ -25,13 +25,17 @@ async def dispatch_trigger(
     idempotency_key: str,
 ) -> list[uuid.UUID]:
     active_flows = (
-        await session.execute(
-            select(WorkflowFlow).where(
-                WorkflowFlow.trigger_type == trigger_type,
-                WorkflowFlow.status == "ACTIVE",
+        (
+            await session.execute(
+                select(WorkflowFlow).where(
+                    WorkflowFlow.trigger_type == trigger_type,
+                    WorkflowFlow.status == "ACTIVE",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
     execution_ids: list[uuid.UUID] = []
     for flow in active_flows:

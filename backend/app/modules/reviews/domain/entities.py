@@ -37,9 +37,7 @@ ELIG_PARTNER = "partner_verified"
 ACCEPTED_ELIGIBILITY: frozenset[str] = frozenset({ELIG_OFFER, ELIG_INTERVIEW})
 
 # Report reason codes (review_reports.reason_code).
-REPORT_REASONS: frozenset[str] = frozenset(
-    {"pii", "harassment", "spam", "false_claim", "other"}
-)
+REPORT_REASONS: frozenset[str] = frozenset({"pii", "harassment", "spam", "false_claim", "other"})
 
 # Removal reasons a moderator may use — maps to BUSINESS_LOGIC §7.3 allowed
 # criteria. A genuinely negative opinion is NOT a valid removal ground, so the

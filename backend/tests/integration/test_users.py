@@ -17,11 +17,14 @@ import uuid
 import pytest
 from app.modules.users.application import admin_users_service, preferences_service, user_service
 from app.modules.users.application.student_directory_facade import DEPARTED_LABEL, display_for
-from app.shared.exceptions import PermissionDeniedError, ResourceNotFoundError, ValidationFailedError
+from app.shared.exceptions import (
+    PermissionDeniedError,
+    ResourceNotFoundError,
+    ValidationFailedError,
+)
 
 from tests.documents_utils import make_student
 from tests.org_utils import make_org_with_admin
-
 
 # --------------------------------------------------------------------------- #
 # admin_users_service.list_platform_users                                     #

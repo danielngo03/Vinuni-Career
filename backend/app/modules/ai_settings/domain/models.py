@@ -45,17 +45,11 @@ class AiSettings(Base):
         String(20), nullable=False, unique=True, default=PLATFORM_SCOPE
     )
     # Reserved for deferred per-university scope; NULL for the platform row.
-    org_id: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("organizations.id"), nullable=True
-    )
+    org_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("organizations.id"), nullable=True)
 
     # DB toggle, ANDed UNDER the env+key ceiling in the resolver (never an OR).
-    real_calls_enabled: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=False
-    )
-    rollout_state: Mapped[str] = mapped_column(
-        String(20), nullable=False, default=ROLLOUT_ENABLED
-    )
+    real_calls_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    rollout_state: Mapped[str] = mapped_column(String(20), nullable=False, default=ROLLOUT_ENABLED)
 
     # Selected alias NAMES per task family (validated against the allowlist; never
     # free text, never a concrete model id).
@@ -76,9 +70,7 @@ class AiSettings(Base):
     )
 
     # Feature flags.
-    cv_llm_structuring_enabled: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=False
-    )
+    cv_llm_structuring_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     job_fit_ai_explanation_enabled: Mapped[bool] = mapped_column(
         Boolean, nullable=False, default=True
     )
@@ -96,15 +88,15 @@ class AiSettings(Base):
     )
 
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
-    updated_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
+    updated_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)

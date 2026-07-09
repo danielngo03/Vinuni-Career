@@ -77,9 +77,7 @@ async def update_identity_persona(
 
     from app.modules.users.domain.models import Identity as _Identity
 
-    stmt = select(_Identity).where(
-        _Identity.user_id == user_id, _Identity.is_primary.is_(True)
-    )
+    stmt = select(_Identity).where(_Identity.user_id == user_id, _Identity.is_primary.is_(True))
     identity = (await session.execute(stmt)).scalar_one_or_none()
     if identity is not None:
         identity.persona = persona

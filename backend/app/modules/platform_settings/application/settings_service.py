@@ -63,9 +63,7 @@ def _to_response(row) -> dict:
     return {
         "font_key": active_key,
         "font_family": FONT_CATALOGUE[active_key],
-        "catalogue": [
-            {"key": k, "family": v} for k, v in FONT_CATALOGUE.items()
-        ],
+        "catalogue": [{"key": k, "family": v} for k, v in FONT_CATALOGUE.items()],
     }
 
 
@@ -84,9 +82,7 @@ async def update_settings(
     _check_admin(principal)
 
     if font_key is not None and font_key not in FONT_CATALOGUE:
-        raise ValidationFailedError(
-            f"font_key must be one of: {', '.join(FONT_CATALOGUE)}"
-        )
+        raise ValidationFailedError(f"font_key must be one of: {', '.join(FONT_CATALOGUE)}")
 
     row = await get_or_create_platform(session)
     # None = reset to default.

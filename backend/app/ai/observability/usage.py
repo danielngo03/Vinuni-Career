@@ -29,6 +29,7 @@ logger = logging.getLogger("ai.usage")
 # Bucket helpers                                                                #
 # --------------------------------------------------------------------------- #
 
+
 def _bucket(n: int) -> str:
     """Existing sync bucket labels — kept unchanged for backward compat."""
     if n <= 0:
@@ -59,6 +60,7 @@ def _db_bucket(n: int) -> str:
 # Sync logger (unchanged)                                                       #
 # --------------------------------------------------------------------------- #
 
+
 def log_ai_usage(
     *,
     task_type: str,
@@ -84,6 +86,7 @@ def log_ai_usage(
 # --------------------------------------------------------------------------- #
 # Async DB writer                                                               #
 # --------------------------------------------------------------------------- #
+
 
 async def log_ai_usage_async(
     db: AsyncSession,
@@ -164,6 +167,7 @@ async def log_ai_usage_async(
     sample_nested = None
     try:
         from app.ai.observability.eval_samples import maybe_sample_async
+
         sample_nested = await db.begin_nested()
         await maybe_sample_async(
             db,

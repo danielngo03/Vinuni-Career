@@ -57,8 +57,11 @@ def test_render_cv_pdf_outputs_pdf_bytes() -> None:
     snapshot = {
         "title": "My CV",
         "sections": [
-            {"title": "Skills", "is_visible": True,
-             "content_json": {"items": [{"text": "Python"}]}},
+            {
+                "title": "Skills",
+                "is_visible": True,
+                "content_json": {"items": [{"text": "Python"}]},
+            },
         ],
     }
     out = pdf_render.render_cv_pdf(snapshot, watermark=None)

@@ -19,9 +19,7 @@ def normalize_email(email: str) -> str:
 
 
 async def get_by_email(session: AsyncSession, email: str) -> User | None:
-    stmt = select(User).where(
-        User.email == normalize_email(email), User.deleted_at.is_(None)
-    )
+    stmt = select(User).where(User.email == normalize_email(email), User.deleted_at.is_(None))
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
@@ -58,17 +56,13 @@ async def add_identity(
     org_id: uuid.UUID | None = None,
     is_primary: bool = False,
 ) -> Identity:
-    identity = Identity(
-        user_id=user_id, persona=persona, org_id=org_id, is_primary=is_primary
-    )
+    identity = Identity(user_id=user_id, persona=persona, org_id=org_id, is_primary=is_primary)
     session.add(identity)
     await session.flush()
     return identity
 
 
-async def list_identities(
-    session: AsyncSession, user_id: uuid.UUID
-) -> list[Identity]:
+async def list_identities(session: AsyncSession, user_id: uuid.UUID) -> list[Identity]:
     stmt = (
         select(Identity)
         .where(Identity.user_id == user_id)
@@ -80,14 +74,10 @@ async def list_identities(
 async def get_identity(
     session: AsyncSession, *, identity_id: uuid.UUID, user_id: uuid.UUID
 ) -> Identity | None:
-    stmt = select(Identity).where(
-        Identity.id == identity_id, Identity.user_id == user_id
-    )
+    stmt = select(Identity).where(Identity.id == identity_id, Identity.user_id == user_id)
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
-async def primary_identity(
-    session: AsyncSession, user_id: uuid.UUID
-) -> Identity | None:
+async def primary_identity(session: AsyncSession, user_id: uuid.UUID) -> Identity | None:
     identities = await list_identities(session, user_id)
     return identities[0] if identities else None

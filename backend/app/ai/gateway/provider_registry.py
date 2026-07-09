@@ -194,6 +194,7 @@ _DEFAULT_ALIASES: list[dict[str, Any]] = [
 # Key resolution
 # ---------------------------------------------------------------------------
 
+
 def get_api_key_for_provider(provider_name: str) -> str:
     """Return the API key for a named provider from env fallback only.
 
@@ -209,10 +210,7 @@ def get_api_key_for_provider(provider_name: str) -> str:
         elif provider_name == "openai":
             key = os.environ.get("OPENAI_API_KEY", "") or get_settings().openai_api_key
         elif provider_name in ("azure-openai", "azure_openai"):
-            key = (
-                os.environ.get("AZURE_OPENAI_API_KEY", "")
-                or get_settings().azure_openai_api_key
-            )
+            key = os.environ.get("AZURE_OPENAI_API_KEY", "") or get_settings().azure_openai_api_key
     return key
 
 
@@ -244,6 +242,7 @@ def runtime_ciphertexts() -> dict[str, str]:
 # Seeding
 # ---------------------------------------------------------------------------
 
+
 async def ensure_defaults(db: AsyncSession) -> None:
     """Upsert built-in providers and aliases if they don't exist yet.
 
@@ -253,9 +252,7 @@ async def ensure_defaults(db: AsyncSession) -> None:
     # Upsert providers
     for p in _DEFAULT_PROVIDERS:
         existing = (
-            await db.execute(
-                select(AiProviderConfig).where(AiProviderConfig.name == p["name"])
-            )
+            await db.execute(select(AiProviderConfig).where(AiProviderConfig.name == p["name"]))
         ).scalar_one_or_none()
         if existing is None:
             row = AiProviderConfig(
@@ -271,9 +268,7 @@ async def ensure_defaults(db: AsyncSession) -> None:
     await db.flush()
 
     # Build provider name → id map
-    provider_rows = (
-        await db.execute(select(AiProviderConfig))
-    ).scalars().all()
+    provider_rows = (await db.execute(select(AiProviderConfig))).scalars().all()
     provider_map = {r.name: r.id for r in provider_rows}
 
     # Upsert aliases
@@ -286,9 +281,7 @@ async def ensure_defaults(db: AsyncSession) -> None:
             )
             continue
         existing_alias = (
-            await db.execute(
-                select(AiModelAlias).where(AiModelAlias.alias_name == a["alias_name"])
-            )
+            await db.execute(select(AiModelAlias).where(AiModelAlias.alias_name == a["alias_name"]))
         ).scalar_one_or_none()
         if existing_alias is None:
             alias_row = AiModelAlias(
@@ -322,9 +315,7 @@ async def ensure_defaults(db: AsyncSession) -> None:
     if default_provider_id is not None:
         for slot_name, model_id, family, desc in default_slots:
             existing_slot = (
-                await db.execute(
-                    select(AiModelAlias).where(AiModelAlias.alias_name == slot_name)
-                )
+                await db.execute(select(AiModelAlias).where(AiModelAlias.alias_name == slot_name))
             ).scalar_one_or_none()
             if existing_slot is None:
                 db.add(
@@ -345,6 +336,7 @@ async def ensure_defaults(db: AsyncSession) -> None:
 # ---------------------------------------------------------------------------
 # Resolution — used by the factory to build provider routes
 # ---------------------------------------------------------------------------
+
 
 async def load_active_routes(db: AsyncSession) -> dict[str, tuple[str, str, str]]:
     """Return all active alias routes for the runtime snapshot.
@@ -390,20 +382,24 @@ async def load_active_key_ciphertexts(db: AsyncSession) -> dict[str, str]:
 async def list_providers(db: AsyncSession) -> list[dict]:
     """List all providers for the admin API response."""
     rows = (
-        await db.execute(select(AiProviderConfig).order_by(AiProviderConfig.name))
-    ).scalars().all()
+        (await db.execute(select(AiProviderConfig).order_by(AiProviderConfig.name))).scalars().all()
+    )
     return [_serialize_provider(r) for r in rows]
 
 
 async def list_aliases(db: AsyncSession) -> list[dict]:
     """List all model aliases for the admin API response."""
     rows = (
-        await db.execute(
-            select(AiModelAlias)
-            .options(selectinload(AiModelAlias.provider))
-            .order_by(AiModelAlias.alias_name)
+        (
+            await db.execute(
+                select(AiModelAlias)
+                .options(selectinload(AiModelAlias.provider))
+                .order_by(AiModelAlias.alias_name)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [_serialize_alias(r) for r in rows]
 
 
@@ -481,10 +477,14 @@ async def reencrypt_all_provider_keys(db: AsyncSession) -> dict:
 
     target_version = current_key_version()
     rows = (
-        await db.execute(
-            select(AiProviderConfig).where(AiProviderConfig.api_key_ciphertext.is_not(None))
+        (
+            await db.execute(
+                select(AiProviderConfig).where(AiProviderConfig.api_key_ciphertext.is_not(None))
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     rotated = 0
     skipped = 0
     unreadable = 0
@@ -533,9 +533,7 @@ async def create_alias(
         model_id=model_id,
         provider_id=provider_uuid,
         task_families=payload.get("task_families"),
-        fallback_provider_names=normalize_fallback_payload(
-            payload.get("fallback_provider_names")
-        ),
+        fallback_provider_names=normalize_fallback_payload(payload.get("fallback_provider_names")),
         description=payload.get("description"),
         is_active=bool(payload.get("is_active", True)),
         is_builtin=False,
@@ -567,9 +565,7 @@ async def update_alias(db: AsyncSession, alias_id: uuid.UUID, *, payload: dict) 
     if "task_families" in payload:
         row.task_families = payload["task_families"]
     if "fallback_provider_names" in payload:
-        row.fallback_provider_names = normalize_fallback_payload(
-            payload["fallback_provider_names"]
-        )
+        row.fallback_provider_names = normalize_fallback_payload(payload["fallback_provider_names"])
     if "description" in payload:
         row.description = payload["description"]
     if "is_active" in payload:
@@ -588,10 +584,9 @@ async def update_alias(db: AsyncSession, alias_id: uuid.UUID, *, payload: dict) 
 # Serializers (safe — no API keys, no model_id exposed externally)
 # ---------------------------------------------------------------------------
 
+
 def _serialize_provider(r: AiProviderConfig) -> dict:
-    has_db_key = bool(
-        r.api_key_ciphertext and decrypt_provider_api_key(r.api_key_ciphertext)
-    )
+    has_db_key = bool(r.api_key_ciphertext and decrypt_provider_api_key(r.api_key_ciphertext))
     return {
         "id": str(r.id),
         "name": r.name,

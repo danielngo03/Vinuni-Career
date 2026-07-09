@@ -44,18 +44,18 @@ def _reset_runtime_snapshot():
 def _row(**over) -> AiSettings:
     """In-memory settings row with all fields the resolver reads."""
 
-    base = dict(
-        scope="platform",
-        real_calls_enabled=False,
-        rollout_state=ROLLOUT_ENABLED,
-        chat_model_alias="chat_cheap",
-        reasoning_model_alias="reasoning_cheap",
-        embedding_model_alias="embedding_cheap",
-        eval_model_alias="eval_cheap",
-        cv_llm_structuring_enabled=False,
-        job_fit_ai_explanation_enabled=True,
-        daily_budget_usd=Decimal("1.00"),
-    )
+    base = {
+        "scope": "platform",
+        "real_calls_enabled": False,
+        "rollout_state": ROLLOUT_ENABLED,
+        "chat_model_alias": "chat_cheap",
+        "reasoning_model_alias": "reasoning_cheap",
+        "embedding_model_alias": "embedding_cheap",
+        "eval_model_alias": "eval_cheap",
+        "cv_llm_structuring_enabled": False,
+        "job_fit_ai_explanation_enabled": True,
+        "daily_budget_usd": Decimal("1.00"),
+    }
     base.update(over)
     return AiSettings(**base)
 
@@ -97,9 +97,7 @@ def test_db_toggle_off_keeps_real_calls_off_within_envelope(monkeypatch) -> None
 @pytest.mark.parametrize("state", [ROLLOUT_PAUSED, ROLLOUT_OFFLINE])
 def test_rollout_not_enabled_forces_real_calls_off(monkeypatch, state) -> None:
     _set_env(monkeypatch, real_calls=True, key=_REAL_KEY)
-    cfg = resolver.build_effective_config(
-        _row(real_calls_enabled=True, rollout_state=state)
-    )
+    cfg = resolver.build_effective_config(_row(real_calls_enabled=True, rollout_state=state))
     assert cfg.real_calls_active is False
 
 
@@ -123,9 +121,7 @@ def test_factory_reflects_published_snapshot(monkeypatch) -> None:
     # Publish a snapshot that turns real calls OFF (e.g. admin paused) -> the
     # gateway consumer reflects it immediately.
     runtime_config.publish(
-        resolver.build_effective_config(
-            _row(real_calls_enabled=True, rollout_state=ROLLOUT_PAUSED)
-        )
+        resolver.build_effective_config(_row(real_calls_enabled=True, rollout_state=ROLLOUT_PAUSED))
     )
     assert real_provider_active() is False
 
@@ -177,9 +173,7 @@ def test_cv_llm_uses_snapshot_chat_alias(monkeypatch) -> None:
     runtime_config.publish(
         resolver.build_effective_config(_row(chat_model_alias="reasoning_cheap"))
     )
-    asyncio.run(
-        cv_llm.generate_note(task_type="t", system_prompt="s", user_content="u")
-    )
+    asyncio.run(cv_llm.generate_note(task_type="t", system_prompt="s", user_content="u"))
     assert captured["alias"] == "reasoning_cheap"
 
 
@@ -197,13 +191,13 @@ async def test_resolve_and_publish_seeds_and_publishes(db_session) -> None:
 
 
 async def test_budget_guard_reads_snapshot_and_never_trips_offline(db_session) -> None:
-    principal_admin = (
-        await make_org_with_admin(db_session, org_type="university")
-    )[2]
+    principal_admin = (await make_org_with_admin(db_session, org_type="university"))[2]
     await settings_service.get_effective_settings(db_session, principal=principal_admin)
     await settings_service.update_settings(
-        db_session, principal=principal_admin,
-        payload={"daily_budget_usd": "3.00"}, ctx=CTX,
+        db_session,
+        principal=principal_admin,
+        payload={"daily_budget_usd": "3.00"},
+        ctx=CTX,
     )
     assert runtime_config.current().daily_budget_usd == 3.00
     # No-op accumulator (offline calls cost nothing) -> never raises.

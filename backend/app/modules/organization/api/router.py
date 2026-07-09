@@ -83,8 +83,11 @@ async def get_organization(
     return success(data)
 
 
-@org_router.post("", status_code=status.HTTP_201_CREATED,
-                 summary="Bootstrap a university organization (superadmin only)")
+@org_router.post(
+    "",
+    status_code=status.HTTP_201_CREATED,
+    summary="Bootstrap a university organization (superadmin only)",
+)
 async def create_university_org(
     body: CreateUniversityOrgRequest,
     auth: CurrentAuth = Depends(get_current_auth),
@@ -103,8 +106,10 @@ async def update_organization(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await organization_service.update_organization(
-        session, principal=auth.principal,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        payload=body.model_dump(exclude_unset=True),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -130,9 +135,14 @@ async def upload_logo(
             details={"reason": "file_too_large"},
         )
     result = await logo_service.upload_logo(
-        session, principal=auth.principal, org_id=org_id,
-        filename=file.filename or "logo", data=data,
-        content_type=file.content_type, expected_version=version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        org_id=org_id,
+        filename=file.filename or "logo",
+        data=data,
+        content_type=file.content_type,
+        expected_version=version,
+        ctx=auth.ctx,
     )
     return success(result)
 
@@ -145,8 +155,11 @@ async def remove_logo(
     version: int | None = Query(default=None),
 ) -> dict:
     result = await logo_service.remove_logo(
-        session, principal=auth.principal, org_id=org_id,
-        expected_version=version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        org_id=org_id,
+        expected_version=version,
+        ctx=auth.ctx,
     )
     return success(result)
 
@@ -172,8 +185,12 @@ async def create_role(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await rbac_service.create_role(
-        session, principal=auth.principal, name=body.name,
-        description=body.description, permissions=_perms(body.permissions), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        name=body.name,
+        description=body.description,
+        permissions=_perms(body.permissions),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -197,8 +214,13 @@ async def update_role(
 ) -> dict:
     perms = _perms(body.permissions) if body.permissions is not None else None
     data = await rbac_service.update_role(
-        session, principal=auth.principal, role_id=role_id, name=body.name,
-        description=body.description, permissions=perms, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        role_id=role_id,
+        name=body.name,
+        description=body.description,
+        permissions=perms,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -209,9 +231,7 @@ async def delete_role(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    await rbac_service.delete_role(
-        session, principal=auth.principal, role_id=role_id, ctx=auth.ctx
-    )
+    await rbac_service.delete_role(session, principal=auth.principal, role_id=role_id, ctx=auth.ctx)
     return success({"status": "deleted"})
 
 
@@ -229,16 +249,18 @@ async def list_departments(
     return success(items, meta={"count": len(items)})
 
 
-@org_router.post("/departments", status_code=status.HTTP_201_CREATED,
-                 summary="Create a department")
+@org_router.post("/departments", status_code=status.HTTP_201_CREATED, summary="Create a department")
 async def create_department(
     body: DepartmentCreateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await rbac_service.create_department(
-        session, principal=auth.principal, name=body.name,
-        parent_id=body.parent_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        name=body.name,
+        parent_id=body.parent_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -251,8 +273,13 @@ async def update_department(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await rbac_service.update_department(
-        session, principal=auth.principal, dept_id=dept_id, name=body.name,
-        parent_id=body.parent_id, clear_parent=body.clear_parent, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        dept_id=dept_id,
+        name=body.name,
+        parent_id=body.parent_id,
+        clear_parent=body.clear_parent,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -284,8 +311,12 @@ async def list_members(
     role_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     items, next_cursor, page_limit = await membership_service.list_members(
-        session, principal=auth.principal, cursor=cursor, limit=limit,
-        status=member_status, role_id=role_id,
+        session,
+        principal=auth.principal,
+        cursor=cursor,
+        limit=limit,
+        status=member_status,
+        role_id=role_id,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
@@ -298,9 +329,13 @@ async def update_member(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await membership_service.update_member(
-        session, principal=auth.principal, membership_id=membership_id,
-        role_ids=body.role_ids, department_ids=body.department_ids,
-        version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        membership_id=membership_id,
+        role_ids=body.role_ids,
+        department_ids=body.department_ids,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -372,8 +407,10 @@ async def hypothetical_permission_preview(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await permission_preview_service.preview_hypothetical(
-        session, principal=auth.principal,
-        role_ids=body.role_ids, department_ids=body.department_ids,
+        session,
+        principal=auth.principal,
+        role_ids=body.role_ids,
+        department_ids=body.department_ids,
     )
     return success(data)
 
@@ -399,8 +436,10 @@ async def transfer_ownership(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await ownership_service.transfer_ownership(
-        session, principal=auth.principal,
-        target_membership_id=body.target_membership_id, confirm=body.confirm,
+        session,
+        principal=auth.principal,
+        target_membership_id=body.target_membership_id,
+        confirm=body.confirm,
         ctx=auth.ctx,
     )
     return success(data)
@@ -423,8 +462,14 @@ async def list_audit_log(
     until: datetime | None = Query(default=None),
 ) -> dict:
     items, next_cursor, page_limit = await audit_log_service.list_audit_log(
-        session, principal=auth.principal, cursor=cursor, limit=limit,
-        actor_id=actor_id, action=action, since=since, until=until,
+        session,
+        principal=auth.principal,
+        cursor=cursor,
+        limit=limit,
+        actor_id=actor_id,
+        action=action,
+        since=since,
+        until=until,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
@@ -441,9 +486,7 @@ async def get_profile_quality(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await crm_service.get_profile_quality(
-        session, principal=auth.principal, org_id=org_id
-    )
+    data = await crm_service.get_profile_quality(session, principal=auth.principal, org_id=org_id)
     return success(data)
 
 
@@ -465,9 +508,7 @@ async def get_crm_activity(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await crm_service.event_campaign_rollup(
-        session, principal=auth.principal, org_id=org_id
-    )
+    data = await crm_service.event_campaign_rollup(session, principal=auth.principal, org_id=org_id)
     return success(data)
 
 
@@ -477,9 +518,7 @@ async def get_crm_hiring_outcomes(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await crm_service.hiring_outcomes(
-        session, principal=auth.principal, org_id=org_id
-    )
+    data = await crm_service.hiring_outcomes(session, principal=auth.principal, org_id=org_id)
     return success(data)
 
 
@@ -491,9 +530,7 @@ async def get_campus_owner(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await crm_service.get_campus_owner(
-        session, principal=auth.principal, org_id=org_id
-    )
+    data = await crm_service.get_campus_owner(session, principal=auth.principal, org_id=org_id)
     return success(data)
 
 
@@ -507,28 +544,28 @@ async def set_campus_owner(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await crm_service.set_campus_owner(
-        session, principal=auth.principal, org_id=org_id,
-        owner_user_id=body.owner_user_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        org_id=org_id,
+        owner_user_id=body.owner_user_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@org_router.get(
-    "/{org_id}/risk-flags", summary="List risk/trust flags (university-only)"
-)
+@org_router.get("/{org_id}/risk-flags", summary="List risk/trust flags (university-only)")
 async def list_risk_flags(
     org_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    items = await crm_service.list_risk_flags(
-        session, principal=auth.principal, org_id=org_id
-    )
+    items = await crm_service.list_risk_flags(session, principal=auth.principal, org_id=org_id)
     return success(items, meta={"count": len(items)})
 
 
 @org_router.post(
-    "/{org_id}/risk-flags", status_code=status.HTTP_201_CREATED,
+    "/{org_id}/risk-flags",
+    status_code=status.HTTP_201_CREATED,
     summary="Raise a risk/trust flag (university-only)",
 )
 async def raise_risk_flag(
@@ -538,8 +575,12 @@ async def raise_risk_flag(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await crm_service.raise_risk_flag(
-        session, principal=auth.principal, org_id=org_id,
-        flag_type=body.flag_type, severity=body.severity, note=body.note,
+        session,
+        principal=auth.principal,
+        org_id=org_id,
+        flag_type=body.flag_type,
+        severity=body.severity,
+        note=body.note,
         ctx=auth.ctx,
     )
     return success(data)
@@ -557,8 +598,12 @@ async def resolve_risk_flag(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await crm_service.resolve_risk_flag(
-        session, principal=auth.principal, org_id=org_id, flag_id=flag_id,
-        resolution_note=body.resolution_note, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        org_id=org_id,
+        flag_id=flag_id,
+        resolution_note=body.resolution_note,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -569,14 +614,13 @@ async def list_notes(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    items = await crm_service.list_notes(
-        session, principal=auth.principal, org_id=org_id
-    )
+    items = await crm_service.list_notes(session, principal=auth.principal, org_id=org_id)
     return success(items, meta={"count": len(items)})
 
 
 @org_router.post(
-    "/{org_id}/notes", status_code=status.HTTP_201_CREATED,
+    "/{org_id}/notes",
+    status_code=status.HTTP_201_CREATED,
     summary="Add a university-only CRM note",
 )
 async def create_note(
@@ -605,16 +649,19 @@ async def list_invitations(
     return success(items, meta={"count": len(items)})
 
 
-@org_router.post("/invitations", status_code=status.HTTP_201_CREATED,
-                 summary="Invite a member")
+@org_router.post("/invitations", status_code=status.HTTP_201_CREATED, summary="Invite a member")
 async def create_invitation(
     body: InvitationCreateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await membership_service.create_invitation(
-        session, principal=auth.principal, email=body.email, role_id=body.role_id,
-        department_id=body.department_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        email=body.email,
+        role_id=body.role_id,
+        department_id=body.department_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -650,8 +697,11 @@ async def accept_invitation(
 partner_router = APIRouter()
 
 
-@partner_router.post("/partner-registration", status_code=status.HTTP_201_CREATED,
-                     summary="Submit a partner registration (public)")
+@partner_router.post(
+    "/partner-registration",
+    status_code=status.HTTP_201_CREATED,
+    summary="Submit a partner registration (public)",
+)
 async def partner_registration(
     body: PartnerRegistrationRequestBody,
     request: Request,
@@ -689,7 +739,9 @@ async def get_partner_request(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await partner_registration_service.get_request(
-        session, principal=auth.principal, partner_id=partner_id,
+        session,
+        principal=auth.principal,
+        partner_id=partner_id,
     )
     return success(data)
 
@@ -702,9 +754,14 @@ async def approve_partner(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await partner_registration_service.approve_partner(
-        session, principal=auth.principal, partner_id=partner_id,
-        trust_level=body.trust_level, package_id=body.package_id, note=body.note,
-        version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        partner_id=partner_id,
+        trust_level=body.trust_level,
+        package_id=body.package_id,
+        note=body.note,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -717,8 +774,12 @@ async def reject_partner(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await partner_registration_service.reject_partner(
-        session, principal=auth.principal, partner_id=partner_id,
-        reason=body.reason, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        partner_id=partner_id,
+        reason=body.reason,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 

@@ -48,9 +48,7 @@ def is_fresh(row: CvJobFitScore, *, cv_version: int, job_version: int) -> bool:
     )
 
 
-def has_fresh_explanation(
-    row: CvJobFitScore, *, prompt_version: int, lang: str
-) -> bool:
+def has_fresh_explanation(row: CvJobFitScore, *, prompt_version: int, lang: str) -> bool:
     """Whether the row already holds a reusable explanation.
 
     Caller is responsible for confirming the row itself is fresh
@@ -153,9 +151,7 @@ async def upsert_result(
     # translation) instead of serving the degraded score forever. A later complete
     # compute overwrites it with the real ``SCORER_VERSION`` and it caches normally.
     row.scorer_version = (
-        f"{job_fit.SCORER_VERSION}{_PROVISIONAL_SUFFIX}"
-        if provisional
-        else job_fit.SCORER_VERSION
+        f"{job_fit.SCORER_VERSION}{_PROVISIONAL_SUFFIX}" if provisional else job_fit.SCORER_VERSION
     )
     row.computed_at = now
 
@@ -237,9 +233,7 @@ def explanation_fingerprint(
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-async def get_reusable_explanation(
-    session: AsyncSession, *, fingerprint: str
-) -> str | None:
+async def get_reusable_explanation(session: AsyncSession, *, fingerprint: str) -> str | None:
     """Return the cached explanation for ``fingerprint`` (and bump ``hit_count``).
 
     A hit means a DIFFERENT CV already generated an equivalent explanation for
@@ -248,9 +242,7 @@ async def get_reusable_explanation(
     """
     row = (
         await session.execute(
-            select(CvFitExplanationCache).where(
-                CvFitExplanationCache.fingerprint == fingerprint
-            )
+            select(CvFitExplanationCache).where(CvFitExplanationCache.fingerprint == fingerprint)
         )
     ).scalar_one_or_none()
     if row is None:
@@ -276,9 +268,7 @@ async def put_reusable_explanation(
     """
     row = (
         await session.execute(
-            select(CvFitExplanationCache).where(
-                CvFitExplanationCache.fingerprint == fingerprint
-            )
+            select(CvFitExplanationCache).where(CvFitExplanationCache.fingerprint == fingerprint)
         )
     ).scalar_one_or_none()
     if row is None:

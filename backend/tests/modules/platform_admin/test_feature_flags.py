@@ -114,9 +114,7 @@ async def _get_flags(db: AsyncSession) -> list[FeatureFlag]:
 
 
 async def _get_audit_rows(db: AsyncSession, resource_type: str = "feature_flag") -> list[AuditLog]:
-    result = await db.execute(
-        select(AuditLog).where(AuditLog.resource_type == resource_type)
-    )
+    result = await db.execute(select(AuditLog).where(AuditLog.resource_type == resource_type))
     return list(result.scalars().all())
 
 

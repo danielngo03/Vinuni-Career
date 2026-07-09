@@ -119,9 +119,7 @@ async def submit(
     return {"status": "submitted", "request": _present(row)}
 
 
-async def list_mine(
-    session: AsyncSession, *, principal: Principal, limit: int = 20
-) -> list[dict]:
+async def list_mine(session: AsyncSession, *, principal: Principal, limit: int = 20) -> list[dict]:
     if not principal.is_authenticated or principal.user_id is None:
         raise AuthRequiredError()
     stmt = (
@@ -171,9 +169,7 @@ async def fulfill(
         raise ValidationFailedError(details={"field": "status"})
 
     row = (
-        await session.execute(
-            select(PrivacyRequest).where(PrivacyRequest.id == request_id)
-        )
+        await session.execute(select(PrivacyRequest).where(PrivacyRequest.id == request_id))
     ).scalar_one_or_none()
     if row is None:
         raise ResourceNotFoundError()

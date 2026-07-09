@@ -28,7 +28,7 @@ from app.shared.exceptions import AIUnavailableError
 # Opens after _CB_THRESHOLD consecutive failures; re-tests after _CB_RECOVERY_SECS.
 # ---------------------------------------------------------------------------
 
-_CB_THRESHOLD = 3       # failures before circuit opens
+_CB_THRESHOLD = 3  # failures before circuit opens
 _CB_RECOVERY_SECS = 60.0  # seconds before HALF_OPEN retry
 
 
@@ -120,6 +120,7 @@ def _get_api_key(provider_name: str) -> str:
 # ---------------------------------------------------------------------------
 # Factory functions
 # ---------------------------------------------------------------------------
+
 
 def real_provider_active() -> bool:
     """True when a real (network) provider is configured and enabled.

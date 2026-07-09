@@ -58,15 +58,19 @@ async def _audit_count(db, action: str) -> int:
 
 async def _make_cv(db, student, *, title="My CV") -> dict:
     return await cv_service.create_cv(
-        db, principal=student, payload={"title": title, "creation_mode": "blank_template"},
+        db,
+        principal=student,
+        payload={"title": title, "creation_mode": "blank_template"},
         ctx=CTX,
     )
 
 
 async def _section_id(db, cv_id, section_type) -> uuid.UUID:
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     return next(s for s in sections if s.section_type == section_type).id
 
 
@@ -83,13 +87,26 @@ async def test_update_canvas_persists_blocks_versioned_and_audited(db_session) -
     versions_before = len(before["versions"])
 
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "blocks": [
-                {"id": "b1", "type": "heading", "section_id": str(summary_id), "order": 0,
-                 "visible": True},
-                {"id": "b2", "type": "text", "section_id": str(summary_id), "order": 1,
-                 "visible": True, "style": {"font_size": 12}},
+                {
+                    "id": "b1",
+                    "type": "heading",
+                    "section_id": str(summary_id),
+                    "order": 0,
+                    "visible": True,
+                },
+                {
+                    "id": "b2",
+                    "type": "text",
+                    "section_id": str(summary_id),
+                    "order": 1,
+                    "visible": True,
+                    "style": {"font_size": 12},
+                },
             ],
         },
         ctx=CTX,
@@ -105,12 +122,18 @@ async def test_update_canvas_reorders_blocks(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"blocks": [{"id": "b1", "type": "text", "order": 0}]}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"blocks": [{"id": "b1", "type": "text", "order": 0}]},
+        ctx=CTX,
     )
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"blocks": [{"id": "b1", "type": "text", "order": 5}]}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"blocks": [{"id": "b1", "type": "text", "order": 5}]},
+        ctx=CTX,
     )
     assert data["canvas"]["blocks"][0]["order"] == 5
 
@@ -120,7 +143,9 @@ async def test_update_canvas_rejects_unknown_section_id(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError):
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
             payload={
                 "blocks": [
                     {"id": "b1", "type": "text", "section_id": str(uuid.uuid4()), "order": 0}
@@ -135,8 +160,11 @@ async def test_update_canvas_rejects_invalid_block_type(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError):
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"blocks": [{"id": "b1", "type": "not_a_type", "order": 0}]}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"blocks": [{"id": "b1", "type": "not_a_type", "order": 0}]},
+            ctx=CTX,
         )
 
 
@@ -145,7 +173,9 @@ async def test_update_canvas_rejects_duplicate_block_ids(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError):
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
             payload={
                 "blocks": [
                     {"id": "dup", "type": "text", "order": 0},
@@ -161,8 +191,11 @@ async def test_update_canvas_version_conflict(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(CvVersionConflictError):
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"blocks": [], "expected_version": 999}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"blocks": [], "expected_version": 999},
+            ctx=CTX,
         )
 
 
@@ -170,13 +203,23 @@ async def test_update_canvas_never_clobbers_photo(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     await cv_photo_service.update_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        data=_PNG_MAGIC, content_type="image/png", filename="p.png",
-        crop=None, shape="circle", expected_version=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        data=_PNG_MAGIC,
+        content_type="image/png",
+        filename="p.png",
+        crop=None,
+        shape="circle",
+        expected_version=None,
+        ctx=CTX,
     )
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"blocks": [{"id": "b1", "type": "text", "order": 0}]}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"blocks": [{"id": "b1", "type": "text", "order": 0}]},
+        ctx=CTX,
     )
     assert data["canvas"]["photo"]["shape"] == "circle"
 
@@ -185,17 +228,27 @@ async def test_restore_version_restores_canvas(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     v1 = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"blocks": [{"id": "b1", "type": "text", "order": 0}]}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"blocks": [{"id": "b1", "type": "text", "order": 0}]},
+        ctx=CTX,
     )
     v1_id = v1["current_version_id"]
     await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"blocks": [{"id": "b2", "type": "text", "order": 0}]}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"blocks": [{"id": "b2", "type": "text", "order": 0}]},
+        ctx=CTX,
     )
     restored = await cv_section_service.restore_version(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        version_id=uuid.UUID(v1_id), payload=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        version_id=uuid.UUID(v1_id),
+        payload=None,
+        ctx=CTX,
     )
     assert restored["canvas"]["blocks"][0]["id"] == "b1"
 
@@ -206,8 +259,11 @@ async def test_canvas_cross_owner_404(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(ResourceNotFoundError):
         await cv_canvas_service.update_canvas(
-            db_session, principal=other, cv_id=uuid.UUID(cv["id"]),
-            payload={"blocks": []}, ctx=CTX,
+            db_session,
+            principal=other,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"blocks": []},
+            ctx=CTX,
         )
 
 
@@ -233,12 +289,13 @@ async def test_update_canvas_persists_theme_override_and_snapshot(db_session) ->
     cv = await _make_cv(db_session, student)
 
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "theme": {
                 "palette": {"accent": "#0F766E", "primary": "#123"},
-                "typography": {"bodyFont": "serif", "headingCase": "upper",
-                               "scale": "compact"},
+                "typography": {"bodyFont": "serif", "headingCase": "upper", "scale": "compact"},
                 "sectionStyle": {"itemGap": "tight"},
             }
         },
@@ -247,7 +304,9 @@ async def test_update_canvas_persists_theme_override_and_snapshot(db_session) ->
     theme = data["canvas"]["theme"]
     assert theme["palette"] == {"accent": "#0F766E", "primary": "#123"}
     assert theme["typography"] == {
-        "bodyFont": "serif", "headingCase": "upper", "scale": "compact",
+        "bodyFont": "serif",
+        "headingCase": "upper",
+        "scale": "compact",
     }
     assert theme["sectionStyle"] == {"itemGap": "tight"}
     # Theme is a canvas write: versioned + audited via the same canvas action.
@@ -261,7 +320,9 @@ async def test_update_canvas_theme_strips_unknown_keys(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "theme": {
                 "palette": {"accent": "#0F766E", "bogusSlot": "#000000"},
@@ -283,12 +344,18 @@ async def test_update_canvas_empty_theme_resets_to_template_default(db_session) 
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"theme": {"palette": {"accent": "#0F766E"}}}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"theme": {"palette": {"accent": "#0F766E"}}},
+        ctx=CTX,
     )
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"theme": {}}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"theme": {}},
+        ctx=CTX,
     )
     assert "theme" not in data["canvas"]
 
@@ -298,8 +365,11 @@ async def test_update_canvas_rejects_invalid_hex_palette(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"theme": {"palette": {"accent": "teal"}}}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"theme": {"palette": {"accent": "teal"}}},
+            ctx=CTX,
         )
     assert exc.value.details["field"] == "canvas.theme.palette"
 
@@ -309,8 +379,11 @@ async def test_update_canvas_rejects_invalid_font_token(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"theme": {"typography": {"bodyFont": "comic-sans"}}}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"theme": {"typography": {"bodyFont": "comic-sans"}}},
+            ctx=CTX,
         )
     assert exc.value.details["field"] == "canvas.theme.typography"
 
@@ -320,8 +393,11 @@ async def test_update_canvas_rejects_invalid_scale_token(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"theme": {"typography": {"scale": "huge"}}}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"theme": {"typography": {"scale": "huge"}}},
+            ctx=CTX,
         )
     assert exc.value.details["field"] == "canvas.theme.typography"
 
@@ -331,8 +407,11 @@ async def test_update_canvas_rejects_invalid_item_gap(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"theme": {"sectionStyle": {"itemGap": "roomy"}}}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"theme": {"sectionStyle": {"itemGap": "roomy"}}},
+            ctx=CTX,
         )
     assert exc.value.details["field"] == "canvas.theme.sectionStyle"
 
@@ -342,17 +421,30 @@ async def test_update_canvas_theme_does_not_wipe_blocks_or_photo(db_session) -> 
     cv = await _make_cv(db_session, student)
     # Seed a photo + blocks first, then a theme-only update must preserve both.
     await cv_photo_service.update_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        data=_PNG_MAGIC, content_type="image/png", filename="p.png",
-        crop=None, shape="circle", expected_version=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        data=_PNG_MAGIC,
+        content_type="image/png",
+        filename="p.png",
+        crop=None,
+        shape="circle",
+        expected_version=None,
+        ctx=CTX,
     )
     await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"blocks": [{"id": "b1", "type": "text", "order": 0}]}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"blocks": [{"id": "b1", "type": "text", "order": 0}]},
+        ctx=CTX,
     )
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"theme": {"palette": {"accent": "#0F766E"}}}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"theme": {"palette": {"accent": "#0F766E"}}},
+        ctx=CTX,
     )
     assert data["canvas"]["photo"]["shape"] == "circle"
     assert data["canvas"]["blocks"][0]["id"] == "b1"
@@ -365,8 +457,11 @@ async def test_theme_override_cross_owner_404(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(ResourceNotFoundError):
         await cv_canvas_service.update_canvas(
-            db_session, principal=other, cv_id=uuid.UUID(cv["id"]),
-            payload={"theme": {"palette": {"accent": "#0F766E"}}}, ctx=CTX,
+            db_session,
+            principal=other,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"theme": {"palette": {"accent": "#0F766E"}}},
+            ctx=CTX,
         )
 
 
@@ -381,12 +476,18 @@ async def test_update_canvas_persists_element_styles_and_snapshot(db_session) ->
     cv = await _make_cv(db_session, student)
 
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "elementStyles": {
                 "header.name": {
-                    "font": "serif", "size": "2xl", "weight": "bold",
-                    "italic": True, "align": "center", "color": "#0F766E",
+                    "font": "serif",
+                    "size": "2xl",
+                    "weight": "bold",
+                    "italic": True,
+                    "align": "center",
+                    "color": "#0F766E",
                 },
                 "summary.text": {"size": "sm", "align": "left"},
             }
@@ -395,8 +496,12 @@ async def test_update_canvas_persists_element_styles_and_snapshot(db_session) ->
     )
     styles = data["canvas"]["elementStyles"]
     assert styles["header.name"] == {
-        "font": "serif", "size": "2xl", "weight": "bold",
-        "italic": True, "align": "center", "color": "#0F766E",
+        "font": "serif",
+        "size": "2xl",
+        "weight": "bold",
+        "italic": True,
+        "align": "center",
+        "color": "#0F766E",
     }
     assert styles["summary.text"] == {"size": "sm", "align": "left"}
     # Element styles are a canvas write: versioned + audited via the canvas action.
@@ -405,9 +510,7 @@ async def test_update_canvas_persists_element_styles_and_snapshot(db_session) ->
     snapshot = await _latest_snapshot(db_session, cv["id"])
     assert snapshot["canvas"]["elementStyles"] == styles
     # And the CV detail response carries it back verbatim.
-    detail = await cv_service.get_cv(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"])
-    )
+    detail = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
     assert detail["canvas"]["elementStyles"] == styles
 
 
@@ -415,7 +518,9 @@ async def test_update_canvas_element_styles_strips_unknown_subkeys(db_session) -
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "elementStyles": {
                 "header.name": {"size": "lg", "bogus": "x", "fontFamily": "Arial"},
@@ -430,7 +535,9 @@ async def test_update_canvas_element_styles_drops_empty_path_entries(db_session)
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "elementStyles": {
                 "header.name": {"size": "lg"},
@@ -451,12 +558,18 @@ async def test_update_canvas_empty_element_styles_resets(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"elementStyles": {"header.name": {"size": "lg"}}}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"elementStyles": {"header.name": {"size": "lg"}}},
+        ctx=CTX,
     )
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"elementStyles": {}}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"elementStyles": {}},
+        ctx=CTX,
     )
     assert "elementStyles" not in data["canvas"]
 
@@ -466,8 +579,11 @@ async def test_update_canvas_element_styles_snake_case_alias(db_session) -> None
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"element_styles": {"header.name": {"align": "right"}}}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"element_styles": {"header.name": {"align": "right"}}},
+        ctx=CTX,
     )
     assert data["canvas"]["elementStyles"]["header.name"] == {"align": "right"}
 
@@ -483,15 +599,16 @@ async def test_update_canvas_element_styles_snake_case_alias(db_session) -> None
         ({"italic": "yes"}, "canvas.elementStyles.italic"),
     ],
 )
-async def test_update_canvas_element_styles_rejects_bad_value(
-    db_session, style, field
-) -> None:
+async def test_update_canvas_element_styles_rejects_bad_value(db_session, style, field) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"elementStyles": {"header.name": style}}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"elementStyles": {"header.name": style}},
+            ctx=CTX,
         )
     assert exc.value.details["field"] == field
 
@@ -501,8 +618,11 @@ async def test_update_canvas_element_styles_rejects_non_dict(db_session) -> None
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"elementStyles": ["not", "a", "dict"]}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"elementStyles": ["not", "a", "dict"]},
+            ctx=CTX,
         )
     assert exc.value.details["field"] == "canvas.elementStyles"
 
@@ -512,8 +632,11 @@ async def test_update_canvas_element_styles_rejects_empty_path_key(db_session) -
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"elementStyles": {"   ": {"size": "lg"}}}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"elementStyles": {"   ": {"size": "lg"}}},
+            ctx=CTX,
         )
     assert exc.value.details["field"] == "canvas.elementStyles"
 
@@ -524,8 +647,11 @@ async def test_update_canvas_element_styles_caps_path_count(db_session) -> None:
     too_many = {f"p.{i}": {"size": "lg"} for i in range(501)}
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"elementStyles": too_many}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"elementStyles": too_many},
+            ctx=CTX,
         )
     assert exc.value.details["field"] == "canvas.elementStyles"
 
@@ -534,12 +660,21 @@ async def test_element_styles_do_not_wipe_theme_or_blocks_or_photo(db_session) -
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     await cv_photo_service.update_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        data=_PNG_MAGIC, content_type="image/png", filename="p.png",
-        crop=None, shape="circle", expected_version=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        data=_PNG_MAGIC,
+        content_type="image/png",
+        filename="p.png",
+        crop=None,
+        shape="circle",
+        expected_version=None,
+        ctx=CTX,
     )
     await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "blocks": [{"id": "b1", "type": "text", "order": 0}],
             "theme": {"palette": {"accent": "#0F766E"}},
@@ -547,8 +682,11 @@ async def test_element_styles_do_not_wipe_theme_or_blocks_or_photo(db_session) -
         ctx=CTX,
     )
     data = await cv_canvas_service.update_canvas(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"elementStyles": {"header.name": {"size": "lg"}}}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"elementStyles": {"header.name": {"size": "lg"}}},
+        ctx=CTX,
     )
     assert data["canvas"]["photo"]["shape"] == "circle"
     assert data["canvas"]["blocks"][0]["id"] == "b1"
@@ -575,12 +713,14 @@ async def test_header_section_contact_content_round_trips(db_session) -> None:
         "links": [{"label": "GitHub", "url": "https://github.com/a"}],
     }
     await cv_section_service.upsert_section(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        section_id=header_id, payload={"content": contact}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        section_id=header_id,
+        payload={"content": contact},
+        ctx=CTX,
     )
-    detail = await cv_service.get_cv(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"])
-    )
+    detail = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
     header = next(s for s in detail["sections"] if s["section_type"] == "header")
     assert header["content"] == contact
 
@@ -600,12 +740,14 @@ async def test_header_typed_link_round_trips(db_session) -> None:
         ],
     }
     await cv_section_service.upsert_section(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        section_id=header_id, payload={"content": contact}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        section_id=header_id,
+        payload={"content": contact},
+        ctx=CTX,
     )
-    detail = await cv_service.get_cv(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"])
-    )
+    detail = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
     header = next(s for s in detail["sections"] if s["section_type"] == "header")
     links = header["content"]["links"]
     assert links[0] == {"label": "GitHub", "url": "https://github.com/a", "type": "github"}
@@ -624,10 +766,16 @@ async def test_photo_update_happy_path(db_session) -> None:
     before = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
 
     data = await cv_photo_service.update_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        data=_PNG_MAGIC, content_type="image/png", filename="me.png",
-        crop={"x": 0.1, "y": 0.1, "width": 0.8, "height": 0.8}, shape="circle",
-        expected_version=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        data=_PNG_MAGIC,
+        content_type="image/png",
+        filename="me.png",
+        crop={"x": 0.1, "y": 0.1, "width": 0.8, "height": 0.8},
+        shape="circle",
+        expected_version=None,
+        ctx=CTX,
     )
     assert data["canvas"]["photo"]["shape"] == "circle"
     assert data["canvas"]["photo"]["crop"]["width"] == 0.8
@@ -654,14 +802,18 @@ async def test_cv_detail_resolves_canvas_photo_signed_url(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     await cv_photo_service.update_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        data=_PNG_MAGIC, content_type="image/png", filename="me.png",
-        crop={"x": 0.1, "y": 0.1, "width": 0.8, "height": 0.8}, shape="circle",
-        expected_version=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        data=_PNG_MAGIC,
+        content_type="image/png",
+        filename="me.png",
+        crop={"x": 0.1, "y": 0.1, "width": 0.8, "height": 0.8},
+        shape="circle",
+        expected_version=None,
+        ctx=CTX,
     )
-    detail = await cv_service.get_cv(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"])
-    )
+    detail = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
     photo = detail["canvas"]["photo"]
     assert photo["document_id"]
     assert isinstance(photo.get("url"), str) and photo["url"]
@@ -684,14 +836,28 @@ async def test_photo_replace_overwrites_binding(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     first = await cv_photo_service.update_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        data=_PNG_MAGIC, content_type="image/png", filename="a.png",
-        crop=None, shape="square", expected_version=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        data=_PNG_MAGIC,
+        content_type="image/png",
+        filename="a.png",
+        crop=None,
+        shape="square",
+        expected_version=None,
+        ctx=CTX,
     )
     second = await cv_photo_service.update_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        data=_PNG_MAGIC, content_type="image/png", filename="b.png",
-        crop=None, shape="circle", expected_version=first["version"], ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        data=_PNG_MAGIC,
+        content_type="image/png",
+        filename="b.png",
+        crop=None,
+        shape="circle",
+        expected_version=first["version"],
+        ctx=CTX,
     )
     assert second["canvas"]["photo"]["shape"] == "circle"
     assert second["canvas"]["photo"]["document_id"] != first["canvas"]["photo"]["document_id"]
@@ -701,13 +867,23 @@ async def test_photo_remove(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     await cv_photo_service.update_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        data=_PNG_MAGIC, content_type="image/png", filename="a.png",
-        crop=None, shape="square", expected_version=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        data=_PNG_MAGIC,
+        content_type="image/png",
+        filename="a.png",
+        crop=None,
+        shape="square",
+        expected_version=None,
+        ctx=CTX,
     )
     removed = await cv_photo_service.remove_photo(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        expected_version=None, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        expected_version=None,
+        ctx=CTX,
     )
     assert "photo" not in removed["canvas"]
     assert await _audit_count(db_session, "cv.photo.removed") == 1
@@ -727,9 +903,16 @@ async def test_photo_invalid_crop_rect_rejected(db_session, crop) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidCropRectError):
         await cv_photo_service.update_photo(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            data=_PNG_MAGIC, content_type="image/png", filename="a.png",
-            crop=crop, shape="square", expected_version=None, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            data=_PNG_MAGIC,
+            content_type="image/png",
+            filename="a.png",
+            crop=crop,
+            shape="square",
+            expected_version=None,
+            ctx=CTX,
         )
 
 
@@ -738,9 +921,16 @@ async def test_photo_invalid_file_type_rejected(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidPhotoFileError):
         await cv_photo_service.update_photo(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            data=b"not an image", content_type="application/pdf", filename="a.pdf",
-            crop=None, shape="square", expected_version=None, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            data=b"not an image",
+            content_type="application/pdf",
+            filename="a.pdf",
+            crop=None,
+            shape="square",
+            expected_version=None,
+            ctx=CTX,
         )
 
 
@@ -749,9 +939,16 @@ async def test_photo_empty_file_rejected(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidPhotoFileError):
         await cv_photo_service.update_photo(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            data=b"", content_type="image/png", filename="a.png",
-            crop=None, shape="square", expected_version=None, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            data=b"",
+            content_type="image/png",
+            filename="a.png",
+            crop=None,
+            shape="square",
+            expected_version=None,
+            ctx=CTX,
         )
 
 
@@ -760,9 +957,16 @@ async def test_photo_oversized_file_rejected(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidPhotoFileError):
         await cv_photo_service.update_photo(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            data=b"0" * (9 * 1024 * 1024), content_type="image/png", filename="a.png",
-            crop=None, shape="square", expected_version=None, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            data=b"0" * (9 * 1024 * 1024),
+            content_type="image/png",
+            filename="a.png",
+            crop=None,
+            shape="square",
+            expected_version=None,
+            ctx=CTX,
         )
 
 
@@ -771,9 +975,16 @@ async def test_photo_version_conflict(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(CvVersionConflictError):
         await cv_photo_service.update_photo(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            data=_PNG_MAGIC, content_type="image/png", filename="a.png",
-            crop=None, shape="square", expected_version=999, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            data=_PNG_MAGIC,
+            content_type="image/png",
+            filename="a.png",
+            crop=None,
+            shape="square",
+            expected_version=999,
+            ctx=CTX,
         )
 
 
@@ -783,7 +994,14 @@ async def test_photo_cross_owner_404(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(ResourceNotFoundError):
         await cv_photo_service.update_photo(
-            db_session, principal=other, cv_id=uuid.UUID(cv["id"]),
-            data=_PNG_MAGIC, content_type="image/png", filename="a.png",
-            crop=None, shape="square", expected_version=None, ctx=CTX,
+            db_session,
+            principal=other,
+            cv_id=uuid.UUID(cv["id"]),
+            data=_PNG_MAGIC,
+            content_type="image/png",
+            filename="a.png",
+            crop=None,
+            shape="square",
+            expected_version=None,
+            ctx=CTX,
         )

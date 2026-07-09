@@ -146,6 +146,7 @@ def _extract_cv_evidence(cv_text: str) -> str:
 # JSON → dataclass parsing
 # ---------------------------------------------------------------------------
 
+
 def _parse_strength(raw: object) -> Literal["strong", "moderate", "weak"]:
     s = str(raw or "").lower()
     if s == "strong":
@@ -240,6 +241,7 @@ def _parse_result(
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
 
 async def analyze(
     *,

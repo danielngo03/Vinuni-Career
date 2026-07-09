@@ -229,19 +229,20 @@ async def recommend_jobs(session: AsyncSession, principal: Principal, args: dict
         for jid in job_ids[:limit]:
             try:
                 detail = await job_service.get_job(session, principal=principal, job_id=jid)
-                recommendations.append({
-                    "id": str(jid),
-                    "title": detail.get("title", ""),
-                    "company": (detail.get("company") or {}).get("display_name", ""),
-                    "employment_type": (
-                        detail.get("employment_type_label")
-                        or detail.get("employment_type", "")
-                    ),
-                    "location_type": (
-                        detail.get("location_type_label") or detail.get("location_type", "")
-                    ),
-                    "url": f"/jobs/{jid}",
-                })
+                recommendations.append(
+                    {
+                        "id": str(jid),
+                        "title": detail.get("title", ""),
+                        "company": (detail.get("company") or {}).get("display_name", ""),
+                        "employment_type": (
+                            detail.get("employment_type_label") or detail.get("employment_type", "")
+                        ),
+                        "location_type": (
+                            detail.get("location_type_label") or detail.get("location_type", "")
+                        ),
+                        "url": f"/jobs/{jid}",
+                    }
+                )
             except Exception:
                 continue
         return {"ok": True, "recommendations": recommendations, "source": source}
@@ -263,6 +264,7 @@ async def save_job(session: AsyncSession, principal: Principal, args: dict) -> d
         return {"ok": False, "error": "invalid_job_id"}
     try:
         from app.modules.opportunities.application import saved_jobs_service
+
         await saved_jobs_service.save_job(session, principal=principal, job_id=job_id)
         return {"ok": True, "saved": True, "job_id": job_id_str}
     except Exception:

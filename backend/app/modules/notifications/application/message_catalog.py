@@ -166,8 +166,7 @@ CATALOG: dict[str, CatalogEntry] = {
         body={
             "vi": "Nhắc bạn: buổi phỏng vấn cho “{job_title}” diễn ra vào "
             "{scheduled_at} ({mode_label}).",
-            "en": "Reminder: your interview for “{job_title}” is on {scheduled_at} "
-            "({mode_label}).",
+            "en": "Reminder: your interview for “{job_title}” is on {scheduled_at} ({mode_label}).",
         },
     ),
     "recruitment.interview_assigned": CatalogEntry(
@@ -192,8 +191,7 @@ CATALOG: dict[str, CatalogEntry] = {
         body={
             "vi": "Nhắc bạn: buổi phỏng vấn cho “{job_title}” diễn ra vào "
             "{scheduled_at} ({mode_label}).",
-            "en": "Reminder: the interview for “{job_title}” is on {scheduled_at} "
-            "({mode_label}).",
+            "en": "Reminder: the interview for “{job_title}” is on {scheduled_at} ({mode_label}).",
         },
     ),
     "recruitment.offer_received": CatalogEntry(
@@ -340,8 +338,7 @@ CATALOG: dict[str, CatalogEntry] = {
             "en": "Event registration confirmed",
         },
         body={
-            "vi": "Bạn đã đăng ký thành công sự kiện “{event_title}”. Xem trong "
-            "“Sự kiện của tôi”.",
+            "vi": "Bạn đã đăng ký thành công sự kiện “{event_title}”. Xem trong “Sự kiện của tôi”.",
             "en": "You're registered for “{event_title}”. See it under “My events”.",
         },
     ),
@@ -354,8 +351,7 @@ CATALOG: dict[str, CatalogEntry] = {
         body={
             "vi": "Sự kiện “{event_title}” đã đầy. Bạn đang ở vị trí "
             "#{waitlist_position} trong danh sách chờ.",
-            "en": "“{event_title}” is full. You're #{waitlist_position} on the "
-            "waitlist.",
+            "en": "“{event_title}” is full. You're #{waitlist_position} on the waitlist.",
         },
     ),
     "opportunities.event_waitlist_promoted": CatalogEntry(
@@ -365,8 +361,7 @@ CATALOG: dict[str, CatalogEntry] = {
             "en": "A seat opened up",
         },
         body={
-            "vi": "Một chỗ vừa trống — bạn đã được xác nhận tham dự sự kiện "
-            "“{event_title}”.",
+            "vi": "Một chỗ vừa trống — bạn đã được xác nhận tham dự sự kiện “{event_title}”.",
             "en": "A seat opened up — you're now registered for “{event_title}”.",
         },
     ),
@@ -403,8 +398,7 @@ CATALOG: dict[str, CatalogEntry] = {
         body={
             "vi": "Ban tổ chức đã hủy sự kiện “{event_title}”. Chúng tôi xin lỗi vì "
             "sự bất tiện này.",
-            "en": "The organizer has cancelled “{event_title}”. We're sorry for the "
-            "inconvenience.",
+            "en": "The organizer has cancelled “{event_title}”. We're sorry for the inconvenience.",
         },
     ),
     "opportunities.event_approved": CatalogEntry(
@@ -500,8 +494,7 @@ CATALOG: dict[str, CatalogEntry] = {
             # No amount / payment reference in the body (PII-safe; admin-only spend).
             "vi": "Chúng tôi đã ghi nhận thanh toán cho gói đăng ký của bạn. Gói "
             "dịch vụ của bạn đã được kích hoạt.",
-            "en": "We've recorded the payment for your subscription. Your plan is "
-            "now active.",
+            "en": "We've recorded the payment for your subscription. Your plan is now active.",
         },
     ),
     "billing.active": CatalogEntry(
@@ -550,10 +543,8 @@ CATALOG: dict[str, CatalogEntry] = {
             "en": "Your subscription was cancelled",
         },
         body={
-            "vi": "Gói đăng ký của bạn đã được hủy. Tài khoản của bạn đã trở về gói "
-            "mặc định.",
-            "en": "Your subscription was cancelled. Your account reverted to the "
-            "default plan.",
+            "vi": "Gói đăng ký của bạn đã được hủy. Tài khoản của bạn đã trở về gói mặc định.",
+            "en": "Your subscription was cancelled. Your account reverted to the default plan.",
         },
     ),
     "message.received": CatalogEntry(
@@ -565,10 +556,8 @@ CATALOG: dict[str, CatalogEntry] = {
         body={
             # PII-safe (ADR-0012 §4): a MASKED sender label + a neutral "new message"
             # only — NEVER the message body, never the anonymous student's identity.
-            "vi": "{sender_label} đã gửi cho bạn một tin nhắn mới. Mở VinUni Career "
-            "để xem.",
-            "en": "{sender_label} sent you a new message. Open VinUni Career to read "
-            "it.",
+            "vi": "{sender_label} đã gửi cho bạn một tin nhắn mới. Mở VinUni Career để xem.",
+            "en": "{sender_label} sent you a new message. Open VinUni Career to read it.",
         },
     ),
     "message.flagged": CatalogEntry(
@@ -604,8 +593,7 @@ CATALOG: dict[str, CatalogEntry] = {
         },
         body={
             "vi": "Đăng ký đối tác của {company_name} chưa được duyệt. Lý do: {reason}",
-            "en": "The partner registration for {company_name} was declined. "
-            "Reason: {reason}",
+            "en": "The partner registration for {company_name} was declined. Reason: {reason}",
         },
     ),
     "recruitment.job_invitation_received": CatalogEntry(

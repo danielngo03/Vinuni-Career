@@ -60,7 +60,8 @@ async def _apply(db, *, job_id, prefix="student", is_anonymous=False):
     su, student = await make_student(db, prefix=prefix)
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
-        db, principal=student,
+        db,
+        principal=student,
         payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
         ctx=CTX,
     )
@@ -84,7 +85,9 @@ async def _feed_rows(db, *, recipient_id, notif_type) -> list[Notification]:
                     Notification.notif_type == notif_type,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -121,8 +124,12 @@ async def test_reject_from_submitted(db_session) -> None:
     _su, _student, app_id = await _apply(db_session, job_id=job_id)
 
     out = await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="not_qualified", note="Junior for this role", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="not_qualified",
+        note="Junior for this role",
+        ctx=CTX,
     )
     assert out["status"] == "rejected"
     assert out["rejection_reason"] == "not_qualified"
@@ -137,8 +144,11 @@ async def test_reject_from_under_review(db_session) -> None:
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
     out = await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="experience_mismatch", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="experience_mismatch",
+        ctx=CTX,
     )
     assert out["status"] == "rejected"
     assert out["rejection_reason"] == "experience_mismatch"
@@ -150,13 +160,18 @@ async def test_reject_frees_active_slot_allows_reapply(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     su, student, app_id = await _apply(db_session, job_id=job_id)
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="position_filled", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="position_filled",
+        ctx=CTX,
     )
     sel = await make_builder_cv(db_session, student=student)
     again = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     assert again["status"] == "submitted"
     assert again["id"] != str(app_id)
@@ -187,8 +202,11 @@ async def test_reject_withdrawn_is_409(db_session) -> None:
     )
     with pytest.raises(IllegalApplicationTransitionError):
         await decision_service.reject_application(
-            db_session, principal=partner, application_id=app_id,
-            reason="other", ctx=CTX,
+            db_session,
+            principal=partner,
+            application_id=app_id,
+            reason="other",
+            ctx=CTX,
         )
 
 
@@ -196,8 +214,11 @@ async def test_review_rejected_is_409(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     _su, _student, app_id = await _apply(db_session, job_id=job_id)
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="incomplete", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="incomplete",
+        ctx=CTX,
     )
     with pytest.raises(IllegalApplicationTransitionError):
         await decision_service.review_application(
@@ -245,8 +266,11 @@ async def test_cross_org_partner_gets_404(db_session) -> None:
         )
     with pytest.raises(ResourceNotFoundError):
         await decision_service.reject_application(
-            db_session, principal=partner_b, application_id=app_id,
-            reason="other", ctx=CTX,
+            db_session,
+            principal=partner_b,
+            application_id=app_id,
+            reason="other",
+            ctx=CTX,
         )
     # The legitimate org-A partner can still act.
     out = await decision_service.review_application(
@@ -274,8 +298,12 @@ async def test_reject_version_conflict_is_409(db_session) -> None:
     _su, _student, app_id = await _apply(db_session, job_id=job_id)
     with pytest.raises(ApplicationVersionConflictError):
         await decision_service.reject_application(
-            db_session, principal=partner, application_id=app_id,
-            reason="other", version=999, ctx=CTX,
+            db_session,
+            principal=partner,
+            application_id=app_id,
+            reason="other",
+            version=999,
+            ctx=CTX,
         )
 
 
@@ -308,13 +336,21 @@ async def test_double_reject_idempotent_single_notification(db_session) -> None:
     su, _student, app_id = await _apply(db_session, job_id=job_id)
 
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="not_qualified", note="first note", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="not_qualified",
+        note="first note",
+        ctx=CTX,
     )
     # Replay with a different reason/note must NOT overwrite or re-notify.
     out2 = await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="other", note="second note", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="other",
+        note="second note",
+        ctx=CTX,
     )
     assert out2["rejection_reason"] == "not_qualified"
     assert out2["rejection_note"] == "first note"
@@ -337,8 +373,12 @@ async def test_student_notification_neutral_no_reason_leak(db_session) -> None:
     secret_note = "Candidate failed the take-home test badly"
 
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="not_qualified", note=secret_note, ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="not_qualified",
+        note=secret_note,
+        ctx=CTX,
     )
     rows = await _feed_rows(
         db_session, recipient_id=su.id, notif_type="recruitment.application_rejected"
@@ -372,14 +412,21 @@ async def test_reject_audit_metadata_has_reason(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     _su, _student, app_id = await _apply(db_session, job_id=job_id)
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="position_filled", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="position_filled",
+        ctx=CTX,
     )
     row = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "application.rejected")
+        (
+            await db_session.execute(
+                select(AuditLog).where(AuditLog.action == "application.rejected")
+            )
         )
-    ).scalars().one()
+        .scalars()
+        .one()
+    )
     assert row.after_snapshot["rejection_reason"] == "position_filled"
     assert row.after_snapshot["status"] == "rejected"
 
@@ -393,8 +440,12 @@ async def test_projection_split_partner_vs_student(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     _su, student, app_id = await _apply(db_session, job_id=job_id)
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="incomplete", note="missing transcript", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="incomplete",
+        note="missing transcript",
+        ctx=CTX,
     )
 
     partner_view = await apply_service.get_application(
@@ -422,15 +473,11 @@ async def test_projection_split_partner_vs_student(db_session) -> None:
 
 async def test_anonymous_identity_not_revealed_by_decision(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    su, _student, app_id = await _apply(
-        db_session, job_id=job_id, is_anonymous=True
-    )
+    su, _student, app_id = await _apply(db_session, job_id=job_id, is_anonymous=True)
     await decision_service.review_application(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
-    view = await apply_service.get_application(
-        db_session, principal=partner, application_id=app_id
-    )
+    view = await apply_service.get_application(db_session, principal=partner, application_id=app_id)
     applicant = view["applicant"]
     assert applicant["is_anonymous"] is True and applicant["revealed"] is False
     assert "email" not in applicant

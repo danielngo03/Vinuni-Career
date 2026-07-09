@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import pytest
+from app.main import app
 from httpx import ASGITransport, AsyncClient
 
-from app.main import app
 from tests.org_utils import make_org_with_admin
 
 
@@ -28,13 +28,9 @@ async def test_create_and_activate_flow_via_api(db_session, client) -> None:
     # A brand-new user's primary identity is the default student persona, not
     # the university-admin identity created by make_org_with_admin — switch to
     # the org-scoped identity so the workflow:create/activate grants apply.
-    identities = await client.get(
-        "/auth/identity", headers={"Authorization": f"Bearer {token}"}
-    )
+    identities = await client.get("/auth/identity", headers={"Authorization": f"Bearer {token}"})
     assert identities.status_code == 200
-    org_identity = next(
-        item for item in identities.json()["data"] if item["org_id"] == str(org.id)
-    )
+    org_identity = next(item for item in identities.json()["data"] if item["org_id"] == str(org.id))
     switch_resp = await client.post(
         "/auth/identity",
         headers={"Authorization": f"Bearer {token}"},
@@ -52,7 +48,11 @@ async def test_create_and_activate_flow_via_api(db_session, client) -> None:
             "trigger_type": "system.student_registered",
             "graph": {
                 "nodes": [
-                    {"id": "n1", "type": "trigger", "data": {"trigger_type": "system.student_registered"}},
+                    {
+                        "id": "n1",
+                        "type": "trigger",
+                        "data": {"trigger_type": "system.student_registered"},
+                    },
                     {"id": "n2", "type": "end", "data": {}},
                 ],
                 "edges": [{"source": "n1", "target": "n2"}],

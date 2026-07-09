@@ -61,9 +61,7 @@ def _job_projection(job: Job, org_display_name: str | None) -> dict:
     logistics / text fields are included — no internal status columns.
     """
     jd_text = " ".join(
-        part
-        for part in (job.title, job.description, job.requirements, job.benefits)
-        if part
+        part for part in (job.title, job.description, job.requirements, job.benefits) if part
     )
     return {
         "id": str(job.id),
@@ -155,9 +153,7 @@ async def _score_job(
     aug_job, aug_cv_inputs, aug_complete = await skill_translation.english_augment(
         job_dict, cv_inputs, allow_model_calls=False
     )
-    outcome = job_fit.evaluate(
-        aug_job, aug_cv_inputs, stale_days=_stale_days()
-    )
+    outcome = job_fit.evaluate(aug_job, aug_cv_inputs, stale_days=_stale_days())
     for fit in outcome.results:
         cv = cv_by_id[fit.cv_id]
         payload = _fit_to_result_payload(fit, signal=outcome.signal)
@@ -248,9 +244,7 @@ async def batch_fit_for_jobs(
 
     # Job version map (id + version only — lightweight) so the cache signature
     # also tracks JD edits (``job.version`` bumps on every real amendment).
-    ver_rows = await session.execute(
-        select(Job.id, Job.version).where(Job.id.in_(deduped))
-    )
+    ver_rows = await session.execute(select(Job.id, Job.version).where(Job.id.in_(deduped)))
     job_versions: dict[uuid.UUID, int] = {row.id: row.version for row in ver_rows}
 
     def _sig(job_id: uuid.UUID) -> str:

@@ -114,9 +114,7 @@ async def list_platform_users(
 
 async def _get_user_or_404(session: AsyncSession, user_id: uuid.UUID) -> User:
     user = (
-        await session.execute(
-            select(User).where(User.id == user_id, User.deleted_at.is_(None))
-        )
+        await session.execute(select(User).where(User.id == user_id, User.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if user is None:
         # AppError.__init__ only accepts (message, *, details) — resource/

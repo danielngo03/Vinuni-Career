@@ -47,9 +47,7 @@ class RunStatus(StrEnum):
 
 
 TERMINAL_SUBTASK_STATUSES = frozenset({SubtaskStatus.SUCCESS, SubtaskStatus.FAILED})
-TERMINAL_RUN_STATUSES = frozenset(
-    {RunStatus.PARTIAL, RunStatus.COMPLETE, RunStatus.FAILED}
-)
+TERMINAL_RUN_STATUSES = frozenset({RunStatus.PARTIAL, RunStatus.COMPLETE, RunStatus.FAILED})
 
 
 @dataclass(frozen=True, slots=True)
@@ -97,9 +95,7 @@ class WorkforceRun(Base):
 
     __tablename__ = "ai_workforce_runs"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -109,16 +105,12 @@ class WorkforceRun(Base):
         server_default=func.now(),
         onupdate=func.now(),
     )
-    completed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     # e.g. "bulk_screening_brief" — extend by adding a new task_type + a new
     # subtask_type executor, never by branching this field in a giant if-chain.
     task_type: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
-    status: Mapped[str] = mapped_column(
-        String(16), nullable=False, default=RunStatus.PENDING.value
-    )
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default=RunStatus.PENDING.value)
 
     requested_by_user_id: Mapped[uuid.UUID] = mapped_column(
         Uuid(as_uuid=True), nullable=False, index=True
@@ -133,8 +125,6 @@ class WorkforceRun(Base):
     # Planned subtask keys, in dispatch order.
     subtask_keys_json: Mapped[list] = mapped_column(JsonType, nullable=False, default=list)
     # subtask_key -> SubtaskResult.to_json(); populated as workers report in.
-    subtask_results_json: Mapped[dict] = mapped_column(
-        JsonType, nullable=False, default=dict
-    )
+    subtask_results_json: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
     # Aggregated, user-safe summary — set once the run reaches a terminal status.
     summary_json: Mapped[dict | None] = mapped_column(JsonType, nullable=True)

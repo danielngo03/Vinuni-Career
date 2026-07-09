@@ -25,9 +25,7 @@ from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.modules.opportunities.domain.industry_models import Industry
 
 industries_router = APIRouter(prefix="/industries", tags=["industries"])
-admin_industries_router = APIRouter(
-    prefix="/admin/industries", tags=["admin-industries"]
-)
+admin_industries_router = APIRouter(prefix="/admin/industries", tags=["admin-industries"])
 
 
 # ── Schemas ────────────────────────────────────────────────────────────────
@@ -260,9 +258,7 @@ async def deactivate_industry(
 
     # Check no active children remain
     children_result = await db.execute(
-        select(Industry).where(
-            Industry.parent_id == row.id, Industry.is_active.is_(True)
-        )
+        select(Industry).where(Industry.parent_id == row.id, Industry.is_active.is_(True))
     )
     if children_result.scalars().first():
         raise HTTPException(

@@ -61,9 +61,7 @@ def test_gender_only_vietnamese_flagged_high_and_requires_review():
 
 def test_gender_only_english_flagged_high():
     result = check_bias("This role is open to males only.")
-    assert any(
-        f.category == CATEGORY_GENDER and f.risk_level == RISK_HIGH for f in result.findings
-    )
+    assert any(f.category == CATEGORY_GENDER and f.risk_level == RISK_HIGH for f in result.findings)
     assert result.requires_human_review is True
 
 

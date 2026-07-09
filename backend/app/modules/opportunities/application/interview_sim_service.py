@@ -101,16 +101,12 @@ async def generate_interview_prep(
     """
     # Load publicly visible job (students can only prep for public jobs)
     job = (
-        await session.execute(
-            select(Job).where(Job.id == job_id, Job.deleted_at.is_(None))
-        )
+        await session.execute(select(Job).where(Job.id == job_id, Job.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if job is None:
         raise ResourceNotFoundError()
 
-    levels = visible_levels_for(
-        principal.persona, is_authenticated=principal.is_authenticated
-    )
+    levels = visible_levels_for(principal.persona, is_authenticated=principal.is_authenticated)
     now = __import__("datetime").datetime.utcnow()
     is_public = (
         job.status == "published"
@@ -170,13 +166,15 @@ def normalize_interview_prep_result(result: dict) -> dict:
     for i, q in enumerate(questions[:10]):
         if not isinstance(q, dict):
             continue
-        clean_questions.append({
-            "number": i + 1,
-            "type": q.get("type", "behavioral"),
-            "question": str(q.get("question", ""))[:500],
-            "hint": str(q.get("hint", ""))[:300],
-            "rubric": str(q.get("rubric", ""))[:300],
-        })
+        clean_questions.append(
+            {
+                "number": i + 1,
+                "type": q.get("type", "behavioral"),
+                "question": str(q.get("question", ""))[:500],
+                "hint": str(q.get("hint", ""))[:300],
+                "rubric": str(q.get("rubric", ""))[:300],
+            }
+        )
     if not clean_questions:
         raise AIUnavailableError()
     return {
@@ -222,20 +220,17 @@ async def evaluate_answer(
     # Permission: authenticated non-partner student
     if principal.persona not in ("student", None) and not principal.is_superadmin:
         from app.shared.exceptions import PermissionDeniedError
+
         raise PermissionDeniedError()
 
     # Verify job is publicly accessible (reuse existing check path)
     job = (
-        await session.execute(
-            select(Job).where(Job.id == job_id, Job.deleted_at.is_(None))
-        )
+        await session.execute(select(Job).where(Job.id == job_id, Job.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if job is None:
         raise ResourceNotFoundError()
 
-    levels = visible_levels_for(
-        principal.persona, is_authenticated=principal.is_authenticated
-    )
+    levels = visible_levels_for(principal.persona, is_authenticated=principal.is_authenticated)
     now = __import__("datetime").datetime.utcnow()
     is_public = (
         job.status == "published"

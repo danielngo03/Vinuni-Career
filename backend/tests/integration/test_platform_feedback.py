@@ -21,9 +21,7 @@ from tests.documents_utils import make_student
 
 
 async def _count_feedback(db_session) -> int:
-    return (
-        await db_session.execute(select(func.count()).select_from(UserFeedback))
-    ).scalar_one()
+    return (await db_session.execute(select(func.count()).select_from(UserFeedback))).scalar_one()
 
 
 # --------------------------------------------------------------------------- #

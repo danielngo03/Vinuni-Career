@@ -47,8 +47,8 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
         got = d.get("ungrounded_count")
         return None if got == exp else f"ungrounded_count expected {exp!r}, got {got!r}"
     if key == "clean_answer_excludes":
-        return None if str(exp).lower() not in probe.blob else (
-            f"clean_answer should exclude {exp!r}"
+        return (
+            None if str(exp).lower() not in probe.blob else (f"clean_answer should exclude {exp!r}")
         )
     if key == "clean_answer_contains":
         return None if str(exp).lower() in probe.blob else f"clean_answer should contain {exp!r}"

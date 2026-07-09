@@ -72,9 +72,7 @@ async def fraud_scan_job(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    result = await fraud_scan_service.scan_job(
-        session, principal=auth.principal, job_id=job_id
-    )
+    result = await fraud_scan_service.scan_job(session, principal=auth.principal, job_id=job_id)
     return success(result)
 
 

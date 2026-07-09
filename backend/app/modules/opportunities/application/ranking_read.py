@@ -109,22 +109,16 @@ def _visible(stmt, *, persona: str, is_authenticated: bool):
     )
 
 
-async def _orgs_for(
-    session: AsyncSession, jobs: list[Job]
-) -> dict[uuid.UUID, OrgSummary]:
+async def _orgs_for(session: AsyncSession, jobs: list[Job]) -> dict[uuid.UUID, OrgSummary]:
     org_ids = {j.org_id for j in jobs}
     if not org_ids:
         return {}
     return await summaries_for(session, org_ids)
 
 
-def _to_candidate(
-    job: Job, org: OrgSummary | None, *, locale: str
-) -> RankingCandidate:
+def _to_candidate(job: Job, org: OrgSummary | None, *, locale: str) -> RankingCandidate:
     jd_text = " ".join(
-        part
-        for part in (job.title, job.description, job.requirements, job.benefits)
-        if part
+        part for part in (job.title, job.description, job.requirements, job.benefits) if part
     )
     return RankingCandidate(
         job_id=job.id,

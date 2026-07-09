@@ -38,9 +38,7 @@ class AnalyticsEvent(Base):
 
     __tablename__ = "analytics_events"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     # e.g. "job.applied", "cv.export.completed", "ai.tool.called" — see taxonomy.py.
     event_type: Mapped[str] = mapped_column(String(60), nullable=False, index=True)
     # The domain aggregate this fact is about (job|application|cv_export|event|

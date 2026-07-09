@@ -21,9 +21,7 @@ class FlowNotActivatableError(ConflictError):
     message = "Chỉ có thể kích hoạt quy trình ở trạng thái nháp hoặc tạm dừng."
 
     def __init__(self, *, from_status: str) -> None:
-        super().__init__(
-            self.message, details={"reason": "not_activatable", "status": from_status}
-        )
+        super().__init__(self.message, details={"reason": "not_activatable", "status": from_status})
 
 
 class MissingActivationCapabilitiesError(ValidationFailedError):

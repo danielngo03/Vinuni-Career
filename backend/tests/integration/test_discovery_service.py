@@ -75,9 +75,7 @@ def test_sanitize_strips_forbidden_and_unknown_keys() -> None:
 
 
 def test_sanitize_drops_out_of_vocab_scalars() -> None:
-    clean = allowlist.sanitize_coarse_tags(
-        {"work_mode": "telepathy", "device_type": "hologram"}
-    )
+    clean = allowlist.sanitize_coarse_tags({"work_mode": "telepathy", "device_type": "hologram"})
     assert clean == {}
 
 
@@ -158,9 +156,7 @@ async def test_reset_clears_signals_and_opts_out_with_audit(db_session) -> None:
     await session_service.record_signal(db_session, s, tags={"categories": ["python"]})
     await db_session.commit()
 
-    cleared = await session_service.reset(
-        db_session, cookie_id=str(s.id), opt_out=True, ctx=CTX
-    )
+    cleared = await session_service.reset(db_session, cookie_id=str(s.id), opt_out=True, ctx=CTX)
     assert cleared is not None
     assert cleared.coarse_tags == {}
     assert cleared.opt_out is True
@@ -192,14 +188,24 @@ async def test_record_event_is_idempotent(db_session) -> None:
     key = uuid.uuid4().hex
     target = uuid.uuid4()
     e1 = await event_service.record_event(
-        db_session, principal=GUEST, discovery_session=s,
-        event_type="impression", source_surface="homepage_recommended",
-        target_type="job", target_id=target, idempotency_key=key,
+        db_session,
+        principal=GUEST,
+        discovery_session=s,
+        event_type="impression",
+        source_surface="homepage_recommended",
+        target_type="job",
+        target_id=target,
+        idempotency_key=key,
     )
     e2 = await event_service.record_event(
-        db_session, principal=GUEST, discovery_session=s,
-        event_type="impression", source_surface="homepage_recommended",
-        target_type="job", target_id=target, idempotency_key=key,
+        db_session,
+        principal=GUEST,
+        discovery_session=s,
+        event_type="impression",
+        source_surface="homepage_recommended",
+        target_type="job",
+        target_id=target,
+        idempotency_key=key,
     )
     await db_session.commit()
     assert e1.id == e2.id
@@ -214,16 +220,26 @@ async def test_placement_id_only_kept_for_sponsored_surface(db_session) -> None:
     placement = uuid.uuid4()
 
     organic = await event_service.record_event(
-        db_session, principal=GUEST, discovery_session=s,
-        event_type="impression", source_surface="homepage_recommended",
-        target_type="job", target_id=uuid.uuid4(),
-        idempotency_key=uuid.uuid4().hex, placement_id=placement,
+        db_session,
+        principal=GUEST,
+        discovery_session=s,
+        event_type="impression",
+        source_surface="homepage_recommended",
+        target_type="job",
+        target_id=uuid.uuid4(),
+        idempotency_key=uuid.uuid4().hex,
+        placement_id=placement,
     )
     sponsored = await event_service.record_event(
-        db_session, principal=GUEST, discovery_session=s,
-        event_type="impression", source_surface="homepage_sponsored",
-        target_type="job", target_id=uuid.uuid4(),
-        idempotency_key=uuid.uuid4().hex, placement_id=placement,
+        db_session,
+        principal=GUEST,
+        discovery_session=s,
+        event_type="impression",
+        source_surface="homepage_sponsored",
+        target_type="job",
+        target_id=uuid.uuid4(),
+        idempotency_key=uuid.uuid4().hex,
+        placement_id=placement,
     )
     await db_session.commit()
     assert organic.placement_id is None  # organic surface drops the placement ref
@@ -235,22 +251,37 @@ async def test_scope_resolution_anonymous_session_user(db_session) -> None:
 
     # session scope (guest with a live session)
     sess_evt = await event_service.record_event(
-        db_session, principal=GUEST, discovery_session=s,
-        event_type="view", source_surface="job_detail", target_type="job",
-        target_id=uuid.uuid4(), idempotency_key=uuid.uuid4().hex,
+        db_session,
+        principal=GUEST,
+        discovery_session=s,
+        event_type="view",
+        source_surface="job_detail",
+        target_type="job",
+        target_id=uuid.uuid4(),
+        idempotency_key=uuid.uuid4().hex,
     )
     # user scope (authenticated)
     principal = Principal(user_id=uuid.uuid4(), persona="student")
     user_evt = await event_service.record_event(
-        db_session, principal=principal, discovery_session=s,
-        event_type="view", source_surface="job_detail", target_type="job",
-        target_id=uuid.uuid4(), idempotency_key=uuid.uuid4().hex,
+        db_session,
+        principal=principal,
+        discovery_session=s,
+        event_type="view",
+        source_surface="job_detail",
+        target_type="job",
+        target_id=uuid.uuid4(),
+        idempotency_key=uuid.uuid4().hex,
     )
     # anonymous scope (no session at all)
     anon_evt = await event_service.record_event(
-        db_session, principal=GUEST, discovery_session=None,
-        event_type="view", source_surface="job_detail", target_type="job",
-        target_id=uuid.uuid4(), idempotency_key=uuid.uuid4().hex,
+        db_session,
+        principal=GUEST,
+        discovery_session=None,
+        event_type="view",
+        source_surface="job_detail",
+        target_type="job",
+        target_id=uuid.uuid4(),
+        idempotency_key=uuid.uuid4().hex,
     )
     await db_session.commit()
 
@@ -269,15 +300,20 @@ async def test_invalid_vocab_rejected(db_session) -> None:
         {"source_surface": "totally_unknown_surface"},
         {"target_type": "spaceship"},
     ):
-        kwargs = dict(
-            event_type="impression", source_surface="homepage_recommended",
-            target_type="job",
-        )
+        kwargs = {
+            "event_type": "impression",
+            "source_surface": "homepage_recommended",
+            "target_type": "job",
+        }
         kwargs.update(bad)
         try:
             await event_service.record_event(
-                db_session, principal=GUEST, discovery_session=s,
-                target_id=uuid.uuid4(), idempotency_key=uuid.uuid4().hex, **kwargs,
+                db_session,
+                principal=GUEST,
+                discovery_session=s,
+                target_id=uuid.uuid4(),
+                idempotency_key=uuid.uuid4().hex,
+                **kwargs,
             )
             raise AssertionError(f"expected rejection for {bad}")
         except InvalidDiscoveryEventError:
@@ -293,24 +329,41 @@ async def test_cleanup_sweep_prunes_expired_via_tick(db_session) -> None:
     now = datetime.now(tz=UTC)
     # An expired session + a live one.
     expired = DiscoverySession(
-        id=uuid.uuid4(), coarse_tags={}, opt_out=False,
-        created_at=now - timedelta(days=40), last_seen_at=now - timedelta(days=40),
+        id=uuid.uuid4(),
+        coarse_tags={},
+        opt_out=False,
+        created_at=now - timedelta(days=40),
+        last_seen_at=now - timedelta(days=40),
         expires_at=now - timedelta(days=1),
     )
     live = DiscoverySession(
-        id=uuid.uuid4(), coarse_tags={}, opt_out=False,
-        created_at=now, last_seen_at=now, expires_at=now + timedelta(days=30),
+        id=uuid.uuid4(),
+        coarse_tags={},
+        opt_out=False,
+        created_at=now,
+        last_seen_at=now,
+        expires_at=now + timedelta(days=30),
     )
     # An old event (out of retention) + a fresh one.
     old_evt = DiscoveryEvent(
-        id=uuid.uuid4(), event_type="impression", source_surface="search",
-        target_type="job", target_id=uuid.uuid4(), scope="anonymous",
-        idempotency_key=uuid.uuid4().hex, created_at=now - timedelta(days=120),
+        id=uuid.uuid4(),
+        event_type="impression",
+        source_surface="search",
+        target_type="job",
+        target_id=uuid.uuid4(),
+        scope="anonymous",
+        idempotency_key=uuid.uuid4().hex,
+        created_at=now - timedelta(days=120),
     )
     fresh_evt = DiscoveryEvent(
-        id=uuid.uuid4(), event_type="impression", source_surface="search",
-        target_type="job", target_id=uuid.uuid4(), scope="anonymous",
-        idempotency_key=uuid.uuid4().hex, created_at=now,
+        id=uuid.uuid4(),
+        event_type="impression",
+        source_surface="search",
+        target_type="job",
+        target_id=uuid.uuid4(),
+        scope="anonymous",
+        idempotency_key=uuid.uuid4().hex,
+        created_at=now,
     )
     db_session.add_all([expired, live, old_evt, fresh_evt])
     await db_session.commit()
@@ -321,12 +374,8 @@ async def test_cleanup_sweep_prunes_expired_via_tick(db_session) -> None:
     assert res["sessions_pruned"] == 1
     assert res["events_pruned"] == 1
 
-    remaining_sessions = (
-        await db_session.execute(select(DiscoverySession.id))
-    ).scalars().all()
-    remaining_events = (
-        await db_session.execute(select(DiscoveryEvent.id))
-    ).scalars().all()
+    remaining_sessions = (await db_session.execute(select(DiscoverySession.id))).scalars().all()
+    remaining_events = (await db_session.execute(select(DiscoveryEvent.id))).scalars().all()
     assert remaining_sessions == [live.id]
     assert remaining_events == [fresh_evt.id]
 

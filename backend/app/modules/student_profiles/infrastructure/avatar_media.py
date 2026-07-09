@@ -51,9 +51,7 @@ _REASONS: dict[str, tuple[str, str]] = {
 class AvatarValidationError(Exception):
     def __init__(self, reason: str) -> None:
         self.reason = reason
-        self.message_vi, self.message_en = _REASONS.get(
-            reason, _REASONS["unsupported_image_type"]
-        )
+        self.message_vi, self.message_en = _REASONS.get(reason, _REASONS["unsupported_image_type"])
         super().__init__(reason)
 
 

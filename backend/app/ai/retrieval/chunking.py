@@ -29,10 +29,10 @@ ChunkMode = Literal["sliding_window", "semantic"]
 # Constants
 # ---------------------------------------------------------------------------
 
-_TARGET_TOKENS = 512        # soft target for chunk size
-_OVERLAP_TOKENS = 64        # overlap between consecutive sliding-window chunks
-_SEMANTIC_SIM_THRESHOLD = 0.65   # split when similarity drops below this
-_SEMANTIC_MIN_CHUNK_WORDS = 40   # never split below this word count
+_TARGET_TOKENS = 512  # soft target for chunk size
+_OVERLAP_TOKENS = 64  # overlap between consecutive sliding-window chunks
+_SEMANTIC_SIM_THRESHOLD = 0.65  # split when similarity drops below this
+_SEMANTIC_MIN_CHUNK_WORDS = 40  # never split below this word count
 _LARGE_DOC_HEADING_PATTERN = re.compile(
     r"^(#{1,4}\s+.+|[A-Z][A-Z\s]{5,}$|\d+\.\s+[A-Z])", re.MULTILINE
 )

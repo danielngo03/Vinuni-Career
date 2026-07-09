@@ -333,9 +333,7 @@ async def run_native_turn(
 
         # Echo the assistant's tool-call turn back into history so the next hop
         # (and the OpenAI protocol) has the matching context for the results.
-        history.append(
-            AIMessage(role="assistant", content=completion.text or "", tool_calls=calls)
-        )
+        history.append(AIMessage(role="assistant", content=completion.text or "", tool_calls=calls))
 
         for call in calls:
             fn = call.get("function") or {}
@@ -390,9 +388,7 @@ async def run_native_turn(
             if isinstance(render, dict):
                 artifacts.append(render)
             yield {"type": "tool_result", "name": name, "ok": bool(result.get("ok"))}
-            persist_tool_result(
-                session, chat=chat, tool_name=name, tool_args=args, result=result
-            )
+            persist_tool_result(session, chat=chat, tool_name=name, tool_args=args, result=result)
             history.append(_tool_result_message(call_id, name, result))
         # Loop: model now sees the tool results and either answers or calls more.
 

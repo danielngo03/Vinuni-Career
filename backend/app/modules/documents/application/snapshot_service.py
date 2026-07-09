@@ -126,9 +126,7 @@ async def create_application_cv_snapshot(
         if not cv_id or not version_id:
             raise ValidationFailedError("Thiếu CV hoặc phiên bản CV để nộp.")
         cv = (
-            await session.execute(
-                select(CvProfile).where(CvProfile.id == cv_id)
-            )
+            await session.execute(select(CvProfile).where(CvProfile.id == cv_id))
         ).scalar_one_or_none()
         if cv is None or cv.user_id != owner_id:
             raise ResourceNotFoundError()
@@ -160,12 +158,16 @@ async def create_application_cv_snapshot(
         if document is None or document.user_id != owner_id:
             raise ResourceNotFoundError()
         run = (
-            await session.execute(
-                select(CvParseRun)
-                .where(CvParseRun.document_id == document.id)
-                .order_by(CvParseRun.created_at.desc())
+            (
+                await session.execute(
+                    select(CvParseRun)
+                    .where(CvParseRun.document_id == document.id)
+                    .order_by(CvParseRun.created_at.desc())
+                )
             )
-        ).scalars().first()
+            .scalars()
+            .first()
+        )
         extracted = (run.extracted_data if run else None) or {}
         snapshot.uploaded_document_id = document.id
         snapshot.snapshot_json = {
@@ -180,7 +182,9 @@ async def create_application_cv_snapshot(
     session.add(snapshot)
     await session.flush()
     await write_audit(
-        session, action="cv.snapshot.created", resource_type="application_cv_snapshot",
+        session,
+        action="cv.snapshot.created",
+        resource_type="application_cv_snapshot",
         resource_id=snapshot.id,
         context=_shared.audit_ctx(Principal(user_id=owner_id), ctx),
         after={
@@ -218,12 +222,16 @@ async def get_snapshot_json_for_application(
     """
 
     snap = (
-        await session.execute(
-            select(ApplicationCvSnapshot)
-            .where(ApplicationCvSnapshot.application_id == application_id)
-            .order_by(ApplicationCvSnapshot.created_at.desc())
+        (
+            await session.execute(
+                select(ApplicationCvSnapshot)
+                .where(ApplicationCvSnapshot.application_id == application_id)
+                .order_by(ApplicationCvSnapshot.created_at.desc())
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     return dict(snap.snapshot_json or {}) if snap is not None else None
 
 
@@ -285,9 +293,7 @@ async def anonymize_expired_snapshots(session: AsyncSession, *, older_than) -> i
     rows = list(
         (
             await session.execute(
-                select(ApplicationCvSnapshot).where(
-                    ApplicationCvSnapshot.created_at < older_than
-                )
+                select(ApplicationCvSnapshot).where(ApplicationCvSnapshot.created_at < older_than)
             )
         )
         .scalars()

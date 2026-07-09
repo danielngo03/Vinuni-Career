@@ -189,9 +189,7 @@ async def record_billable_usage(
 
 async def _by_idempotency_key(db: AsyncSession, key: str) -> AiBillableUsage | None:
     return (
-        await db.execute(
-            select(AiBillableUsage).where(AiBillableUsage.idempotency_key == key)
-        )
+        await db.execute(select(AiBillableUsage).where(AiBillableUsage.idempotency_key == key))
     ).scalar_one_or_none()
 
 

@@ -75,12 +75,12 @@ async def _create_job(db, **over) -> tuple[uuid.UUID, uuid.UUID]:
 async def _seed(db, cv_id, section_type, items) -> None:
     # Bump cv.version like a real section edit so job-fit reads the seeded content
     # live rather than the empty finalize-time matching snapshot (B-596).
-    cv = (
-        await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))
-    ).scalar_one()
+    cv = (await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))).scalar_one()
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     target = next(s for s in sections if s.section_type == section_type)
     target.content_json = {"items": items}
     cv.version += 1
@@ -115,11 +115,17 @@ async def test_vi_vs_en_localized_guidance_differs(db_session) -> None:
     job_id, _org_id = await _create_job(db_session)
 
     vi = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(cv_id),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(cv_id),
         locale="vi",
     )
     en = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(cv_id),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(cv_id),
         locale="en",
     )
 
@@ -138,17 +144,11 @@ async def test_vi_vs_en_localized_guidance_differs(db_session) -> None:
 
     # And the localized string values genuinely differ.
     assert vi["fit"]["improvement_actions"] != en["fit"]["improvement_actions"]
-    assert (
-        vi["learning_gaps"][0]["suggestion"] != en["learning_gaps"][0]["suggestion"]
-    )
-    assert [a["label"] for a in vi["next_actions"]] != [
-        a["label"] for a in en["next_actions"]
-    ]
+    assert vi["learning_gaps"][0]["suggestion"] != en["learning_gaps"][0]["suggestion"]
+    assert [a["label"] for a in vi["next_actions"]] != [a["label"] for a in en["next_actions"]]
 
     # next_actions codes stay identical across locales (frontend localizes by code).
-    assert [a["action"] for a in vi["next_actions"]] == [
-        a["action"] for a in en["next_actions"]
-    ]
+    assert [a["action"] for a in vi["next_actions"]] == [a["action"] for a in en["next_actions"]]
 
 
 # --------------------------------------------------------------------------- #
@@ -162,7 +162,10 @@ async def test_default_locale_is_vietnamese(db_session) -> None:
     job_id, _org_id = await _create_job(db_session)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(cv_id),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(cv_id),
     )
     assert "Bổ sung bằng chứng" in " ".join(out["fit"]["improvement_actions"])
     # Learning-gap suggestions are localized + skill-specific (B-588); the vi-default
@@ -195,7 +198,10 @@ async def test_already_applied_near_deadline_still_has_deadline_guidance(
 
     # English for a stable substring assertion.
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(cv_id),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(cv_id),
         locale="en",
     )
     guidance = out["competition"]["guidance"]
@@ -208,7 +214,10 @@ async def test_already_applied_near_deadline_still_has_deadline_guidance(
 
     # vi equivalent also keeps the deadline line.
     out_vi = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(cv_id),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(cv_id),
         locale="vi",
     )
     assert any("Hạn nộp hồ sơ" in g for g in out_vi["competition"]["guidance"])
@@ -226,11 +235,17 @@ async def test_contract_keys_unchanged_across_locales(db_session) -> None:
     job_id, _org_id = await _create_job(db_session)
 
     vi = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(cv_id),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(cv_id),
         locale="vi",
     )
     en = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(cv_id),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(cv_id),
         locale="en",
     )
 
@@ -240,8 +255,14 @@ async def test_contract_keys_unchanged_across_locales(db_session) -> None:
     # No accidental new keys.
     assert "screening_questions" not in vi
     for expected in (
-        "job_id", "selected_cv_id", "best_cv_id", "fit", "competition",
-        "learning_gaps", "apply_readiness", "next_actions",
+        "job_id",
+        "selected_cv_id",
+        "best_cv_id",
+        "fit",
+        "competition",
+        "learning_gaps",
+        "apply_readiness",
+        "next_actions",
     ):
         assert expected in vi
     # Competition sub-object leaves the two caller-only keys popped.

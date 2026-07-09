@@ -27,9 +27,7 @@ async def _get_or_create_user_preference(
     session: AsyncSession, user_id: uuid.UUID
 ) -> UserPreference:
     pref = (
-        await session.execute(
-            select(UserPreference).where(UserPreference.user_id == user_id)
-        )
+        await session.execute(select(UserPreference).where(UserPreference.user_id == user_id))
     ).scalar_one_or_none()
     if pref is None:
         pref = UserPreference(user_id=user_id)
@@ -42,18 +40,18 @@ async def _category_map(
     session: AsyncSession, user_id: uuid.UUID
 ) -> dict[str, NotificationPreference]:
     rows = (
-        await session.execute(
-            select(NotificationPreference).where(
-                NotificationPreference.user_id == user_id
+        (
+            await session.execute(
+                select(NotificationPreference).where(NotificationPreference.user_id == user_id)
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return {row.category: row for row in rows}
 
 
-async def get_preferences(
-    session: AsyncSession, user_id: uuid.UUID
-) -> dict[str, Any]:
+async def get_preferences(session: AsyncSession, user_id: uuid.UUID) -> dict[str, Any]:
     pref = await _get_or_create_user_preference(session, user_id)
     stored = await _category_map(session, user_id)
 
@@ -139,9 +137,7 @@ async def patch_preferences(
         if isinstance(email_setting, bool):
             email_setting = "immediate" if email_setting else "off"
         if email_setting is not None and email_setting not in EMAIL_SETTINGS:
-            raise ValidationFailedError(
-                details={"field": f"categories.{category}.email"}
-            )
+            raise ValidationFailedError(details={"field": f"categories.{category}.email"})
 
         row = stored.get(category)
         if row is None:

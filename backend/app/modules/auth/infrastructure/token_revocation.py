@@ -27,9 +27,7 @@ def _redis_client():
     try:
         import redis.asyncio as aioredis
 
-        return aioredis.from_url(
-            get_settings().redis_url, socket_connect_timeout=1
-        )
+        return aioredis.from_url(get_settings().redis_url, socket_connect_timeout=1)
     except Exception:  # pragma: no cover - redis optional locally
         return None
 

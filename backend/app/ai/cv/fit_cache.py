@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import uuid
+from typing import Any
 
 FIT_KEY_PREFIX = "fit:v2"
 FIT_TTL = 14_400  # 4 hours
@@ -28,15 +29,13 @@ def _key(user_id: uuid.UUID, job_id: uuid.UUID) -> str:
     return f"{FIT_KEY_PREFIX}:{user_id}:{job_id}"
 
 
-async def get_cached(
-    redis: object, user_id: uuid.UUID, job_id: uuid.UUID, *, sig: str
-) -> dict | None:
+async def get_cached(redis: Any, user_id: uuid.UUID, job_id: uuid.UUID, *, sig: str) -> dict | None:
     """Return the cached fit result, or None on miss / stale-sig / decode error.
 
     ``sig`` is the caller's current content signature; a stored entry whose
     signature differs is treated as a miss (its CV/JD/scorer version moved).
     """
-    raw = await redis.get(_key(user_id, job_id))  # type: ignore[union-attr]
+    raw = await redis.get(_key(user_id, job_id))
     if raw is None:
         return None
     try:
@@ -50,14 +49,14 @@ async def get_cached(
 
 
 async def set_cached(
-    redis: object, user_id: uuid.UUID, job_id: uuid.UUID, data: dict, *, sig: str
+    redis: Any, user_id: uuid.UUID, job_id: uuid.UUID, data: dict, *, sig: str
 ) -> None:
     """Store a fit result + its content signature with the standard TTL."""
     payload = json.dumps({"sig": sig, "data": data})
-    await redis.setex(_key(user_id, job_id), FIT_TTL, payload)  # type: ignore[union-attr]
+    await redis.setex(_key(user_id, job_id), FIT_TTL, payload)
 
 
-async def invalidate_user(redis: object, user_id: uuid.UUID) -> None:
+async def invalidate_user(redis: Any, user_id: uuid.UUID) -> None:
     """Invalidate all scores for a user (e.g. when their CV changes).
 
     Uses SCAN with a per-iteration count cap to avoid blocking the Redis event
@@ -66,14 +65,14 @@ async def invalidate_user(redis: object, user_id: uuid.UUID) -> None:
     pattern = f"{FIT_KEY_PREFIX}:{user_id}:*"
     cursor = 0
     while True:
-        cursor, keys = await redis.scan(cursor, match=pattern, count=100)  # type: ignore[union-attr]
+        cursor, keys = await redis.scan(cursor, match=pattern, count=100)
         if keys:
-            await redis.delete(*keys)  # type: ignore[union-attr]
+            await redis.delete(*keys)
         if cursor == 0:
             break
 
 
-async def invalidate_job(redis: object, job_id: uuid.UUID) -> None:
+async def invalidate_job(redis: Any, job_id: uuid.UUID) -> None:
     """Invalidate all user scores for a job (e.g. when job is updated).
 
     Uses SCAN to avoid KEYS blocking on production key-spaces.
@@ -81,8 +80,8 @@ async def invalidate_job(redis: object, job_id: uuid.UUID) -> None:
     pattern = f"{FIT_KEY_PREFIX}:*:{job_id}"
     cursor = 0
     while True:
-        cursor, keys = await redis.scan(cursor, match=pattern, count=100)  # type: ignore[union-attr]
+        cursor, keys = await redis.scan(cursor, match=pattern, count=100)
         if keys:
-            await redis.delete(*keys)  # type: ignore[union-attr]
+            await redis.delete(*keys)
         if cursor == 0:
             break

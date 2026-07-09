@@ -55,9 +55,7 @@ async def get_student_dashboard(
     )
     pending_reveals = await safe(
         session,
-        lambda: recruitment_read.count_pending_reveals_for_student(
-            session, user_id=user_id
-        ),
+        lambda: recruitment_read.count_pending_reveals_for_student(session, user_id=user_id),
         fallback=0,
     )
     alert_count = await safe(
@@ -75,9 +73,7 @@ async def get_student_dashboard(
 
     next_actions: list[dict] = []
     if cv_count == 0:
-        next_actions.append(
-            {"key": "build_cv", "href": "/student/cv", "count": None}
-        )
+        next_actions.append({"key": "build_cv", "href": "/student/cv", "count": None})
     if pending_reveals > 0:
         next_actions.append(
             {
@@ -87,9 +83,7 @@ async def get_student_dashboard(
             }
         )
     if alert_count == 0:
-        next_actions.append(
-            {"key": "create_alert", "href": "/student/alerts", "count": None}
-        )
+        next_actions.append({"key": "create_alert", "href": "/student/alerts", "count": None})
 
     applications_recent = await safe(
         session,

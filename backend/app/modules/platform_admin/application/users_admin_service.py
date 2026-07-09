@@ -84,9 +84,7 @@ async def user_360(
 
     # --- core user row ---
     user = (
-        await session.execute(
-            select(User).where(User.id == user_id, User.deleted_at.is_(None))
-        )
+        await session.execute(select(User).where(User.id == user_id, User.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if user is None:
         raise ResourceNotFoundError(details={"resource": "user"})
@@ -126,7 +124,9 @@ async def user_360(
     async def _fetch_session_count() -> int:
         now = datetime.now(tz=UTC)
         result = await session.execute(
-            select(func.count()).select_from(Session).where(
+            select(func.count())
+            .select_from(Session)
+            .where(
                 Session.user_id == user_id,
                 Session.revoked_at.is_(None),
                 Session.expires_at > now,
@@ -142,7 +142,9 @@ async def user_360(
 
         cutoff = datetime.now(tz=UTC) - timedelta(days=30)
         result = await session.execute(
-            select(func.count()).select_from(AiUsageLog).where(
+            select(func.count())
+            .select_from(AiUsageLog)
+            .where(
                 AiUsageLog.user_id == user_id,
                 AiUsageLog.created_at >= cutoff,
             )
@@ -201,17 +203,12 @@ async def list_platform_sessions(
             cur_id = uuid.UUID(decoded["id"])
             stmt = stmt.where(
                 (Session.last_seen_at < cur_last_seen)
-                | (
-                    (Session.last_seen_at == cur_last_seen)
-                    & (Session.id < cur_id)
-                )
+                | ((Session.last_seen_at == cur_last_seen) & (Session.id < cur_id))
             )
         except (KeyError, ValueError):
             pass  # malformed cursor — treat as first page
 
-    stmt = stmt.order_by(Session.last_seen_at.desc(), Session.id.desc()).limit(
-        page_limit + 1
-    )
+    stmt = stmt.order_by(Session.last_seen_at.desc(), Session.id.desc()).limit(page_limit + 1)
     rows = list((await session.execute(stmt)).scalars().all())
 
     page = build_cursor_page(
@@ -349,9 +346,7 @@ async def suspend_user(
         )
     ).scalar_one_or_none()
 
-    result = await admin_users_service.suspend_user(
-        session, principal=principal, user_id=user_id
-    )
+    result = await admin_users_service.suspend_user(session, principal=principal, user_id=user_id)
 
     audit_ctx = AuditContext(
         actor_id=principal.user_id,
@@ -388,9 +383,7 @@ async def unsuspend_user(
         )
     ).scalar_one_or_none()
 
-    result = await admin_users_service.unsuspend_user(
-        session, principal=principal, user_id=user_id
-    )
+    result = await admin_users_service.unsuspend_user(session, principal=principal, user_id=user_id)
 
     audit_ctx = AuditContext(
         actor_id=principal.user_id,
@@ -435,9 +428,7 @@ async def grant_superadmin(
     _require_superadmin(principal)
 
     user = (
-        await session.execute(
-            select(User).where(User.id == user_id, User.deleted_at.is_(None))
-        )
+        await session.execute(select(User).where(User.id == user_id, User.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if user is None:
         raise ResourceNotFoundError(details={"resource": "user"})
@@ -488,9 +479,7 @@ async def revoke_superadmin(
     _require_superadmin(principal)
 
     user = (
-        await session.execute(
-            select(User).where(User.id == user_id, User.deleted_at.is_(None))
-        )
+        await session.execute(select(User).where(User.id == user_id, User.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if user is None:
         raise ResourceNotFoundError(details={"resource": "user"})
@@ -504,7 +493,9 @@ async def revoke_superadmin(
     # be counted as a "remaining" admin — otherwise revoking the last active
     # superadmin would leave the system in an effective lockout state.
     superadmin_count_result = await session.execute(
-        select(func.count()).select_from(User).where(
+        select(func.count())
+        .select_from(User)
+        .where(
             User.is_superadmin.is_(True),
             User.is_active.is_(True),
             User.deleted_at.is_(None),

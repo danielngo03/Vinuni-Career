@@ -34,20 +34,18 @@ _VALID_SUITABILITY = frozenset({"strong", "moderate", "weak"})
 
 
 def _extract_skills_from_snapshot(snapshot_json: dict) -> list[str]:
-    for section in (snapshot_json.get("sections") or []):
+    for section in snapshot_json.get("sections") or []:
         title = (section.get("title") or "").lower()
         if "skill" in title:
             items = (section.get("content_json") or {}).get("items") or []
-            return [
-                str(item.get("name") or item.get("title") or item)
-                for item in items
-                if item
-            ][:15]
+            return [str(item.get("name") or item.get("title") or item) for item in items if item][
+                :15
+            ]
     return []
 
 
 def _extract_experience_titles(snapshot_json: dict) -> list[str]:
-    for section in (snapshot_json.get("sections") or []):
+    for section in snapshot_json.get("sections") or []:
         title = (section.get("title") or "").lower()
         if "experience" in title or "work" in title:
             items = (section.get("content_json") or {}).get("items") or []
@@ -60,7 +58,7 @@ def _extract_experience_titles(snapshot_json: dict) -> list[str]:
 
 
 def _extract_education_summary(snapshot_json: dict) -> str:
-    for section in (snapshot_json.get("sections") or []):
+    for section in snapshot_json.get("sections") or []:
         title = (section.get("title") or "").lower()
         if "education" in title:
             items = (section.get("content_json") or {}).get("items") or []
@@ -162,9 +160,7 @@ def normalize_screening_brief_result(result: dict) -> dict:
     can never be echoed back); an invalid ``suitability`` enum value is
     neutralized to ``"moderate"`` rather than passed through verbatim.
     """
-    bullets = [
-        str(b)[:150] for b in (result.get("bullets") or []) if isinstance(b, str)
-    ][:4]
+    bullets = [str(b)[:150] for b in (result.get("bullets") or []) if isinstance(b, str)][:4]
     suitability = result.get("suitability", "")
     if suitability not in _VALID_SUITABILITY:
         suitability = "moderate"

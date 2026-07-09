@@ -118,8 +118,10 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
         return None if got == exp else f"parsed tool_call args.role expected {exp!r}, got {got!r}"
     if key == "parsed_tool_exists_for_parsed":
         got = bool(d.get("parsed_tool_exists"))
-        return None if got == bool(exp) else (
-            f"parsed_tool_exists_for_parsed expected {exp}, got {got}"
+        return (
+            None
+            if got == bool(exp)
+            else (f"parsed_tool_exists_for_parsed expected {exp}, got {got}")
         )
     if key == "no_crash":
         return None

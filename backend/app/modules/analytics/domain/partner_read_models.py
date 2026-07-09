@@ -60,9 +60,7 @@ class PartnerJobMetricDaily(Base):
         UniqueConstraint("job_id", "metric_date", name="uq_job_metrics_daily_job_date"),
     )
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     org_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False, index=True
     )
@@ -111,14 +109,15 @@ class PartnerJobMetricDimensionDaily(Base):
     __tablename__ = "partner_job_metric_dimensions_daily"
     __table_args__ = (
         UniqueConstraint(
-            "job_id", "metric_date", "dimension_type", "dimension_value",
+            "job_id",
+            "metric_date",
+            "dimension_type",
+            "dimension_value",
             name="uq_job_metric_dim_daily",
         ),
     )
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     org_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False, index=True
     )

@@ -32,9 +32,7 @@ async def ensure_default_templates(session: AsyncSession) -> int:
     created = 0
     for spec in TEMPLATE_SEEDS:
         template = (
-            await session.execute(
-                select(CvTemplate).where(CvTemplate.key == spec["key"])
-            )
+            await session.execute(select(CvTemplate).where(CvTemplate.key == spec["key"]))
         ).scalar_one_or_none()
         if template is None:
             template = CvTemplate(
@@ -57,9 +55,7 @@ async def ensure_default_templates(session: AsyncSession) -> int:
     return created
 
 
-async def _ensure_current_version_row(
-    session: AsyncSession, template: CvTemplate
-) -> None:
+async def _ensure_current_version_row(session: AsyncSession, template: CvTemplate) -> None:
     """Insert the immutable version snapshot for ``template``'s current version
     if it does not already exist (idempotent)."""
 

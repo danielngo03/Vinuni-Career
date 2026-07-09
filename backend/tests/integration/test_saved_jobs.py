@@ -9,15 +9,17 @@ from __future__ import annotations
 import uuid
 
 import pytest
-from app.modules.opportunities.application import job_service, saved_jobs_service
-from app.modules.opportunities.application import moderation_service
+from app.modules.opportunities.application import (
+    job_service,
+    moderation_service,
+    saved_jobs_service,
+)
 from app.shared.exceptions import PermissionDeniedError
-from app.shared.permissions import GUEST, Principal
-from app.modules.auth.domain.personas import permissions_for
+from app.shared.permissions import GUEST
 
 from tests.auth_utils import CTX
-from tests.org_utils import make_org_with_admin
 from tests.documents_utils import make_student
+from tests.org_utils import make_org_with_admin
 
 
 def _job_payload(title: str = "Test Job") -> dict:

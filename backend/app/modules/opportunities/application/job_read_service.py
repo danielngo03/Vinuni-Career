@@ -43,8 +43,13 @@ from app.shared.permissions import Principal, permission_checker
 
 
 async def get_job(
-    session: AsyncSession, *, principal: Principal, job_id: uuid.UUID,
-    locale: str = "vi", user_agent: str | None = None, source: str | None = None,
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    locale: str = "vi",
+    user_agent: str | None = None,
+    source: str | None = None,
 ) -> dict:
     """Owner -> full detail; non-owner -> public detail iff visible, else ``404``.
 
@@ -56,9 +61,7 @@ async def get_job(
     """
 
     job = (
-        await session.execute(
-            select(Job).where(Job.id == job_id, Job.deleted_at.is_(None))
-        )
+        await session.execute(select(Job).where(Job.id == job_id, Job.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if job is None:
         raise ResourceNotFoundError()
@@ -88,14 +91,20 @@ async def get_job(
         session, job=job, principal=principal, user_agent=user_agent, source=source
     )
     return presenters.public_job_detail(
-        job, company=org, locale=locale,
+        job,
+        company=org,
+        locale=locale,
         is_saved=job.id in saved_ids,
     )
 
 
 async def _record_detail_view_metric(
-    session: AsyncSession, *, job: Job, principal: Principal,
-    user_agent: str | None, source: str | None,
+    session: AsyncSession,
+    *,
+    job: Job,
+    principal: Principal,
+    user_agent: str | None,
+    source: str | None,
 ) -> None:
     """Best-effort ``detail_view`` hook into ``partner_job_metrics_daily``.
 
@@ -107,9 +116,7 @@ async def _record_detail_view_metric(
     try:
         from app.modules.analytics.application import partner_job_metrics_service as metrics
 
-        effective_source = source or await metrics.default_source_for_job(
-            session, job_id=job.id
-        )
+        effective_source = source or await metrics.default_source_for_job(session, job_id=job.id)
         student_tier = metrics.student_tier_for_persona(principal.persona)
         major_group, year_group = await metrics.coarse_academic_dims(
             session, user_id=principal.user_id
@@ -165,22 +172,23 @@ async def preview_job(
     """
 
     job = await _load_owned_job(session, principal=principal, job_id=job_id)
-    permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=job.org_id)
     spec = _PREVIEW_PERSONAS.get(as_persona)
     if spec is None:
         raise InvalidJobFieldError(field="as")
 
-    levels = lifecycle.visible_levels_for(
-        spec["persona"], is_authenticated=spec["is_authenticated"]
-    )
+    persona = str(spec["persona"])
+    is_authenticated = bool(spec["is_authenticated"])
+    levels = lifecycle.visible_levels_for(persona, is_authenticated=is_authenticated)
     is_invitation_only = job.visibility == lifecycle.INVITATION_ONLY
     would_be_visible = job.visibility in levels and not is_invitation_only
 
     org = await org_reporting_facade.summary_for(session, job.org_id)
     detail = presenters.public_job_detail(
-        job, company=org, locale=locale, is_saved=False,
+        job,
+        company=org,
+        locale=locale,
+        is_saved=False,
     )
     hidden_reason = None
     if not would_be_visible:
@@ -207,9 +215,7 @@ async def get_applyable_job(
     """
 
     job = (
-        await session.execute(
-            select(Job).where(Job.id == job_id, Job.deleted_at.is_(None))
-        )
+        await session.execute(select(Job).where(Job.id == job_id, Job.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if job is None:
         raise ResourceNotFoundError()

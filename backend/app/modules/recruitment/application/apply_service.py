@@ -109,18 +109,12 @@ async def apply_to_job(
             return presenters.applicant_application(prior, locale=locale)
 
     # Job must be open + visible to this applicant (else 404).
-    job = await job_service.get_applyable_job_ref(
-        session, principal=principal, job_id=job_id
-    )
+    job = await job_service.get_applyable_job_ref(session, principal=principal, job_id=job_id)
 
     # One active application per (job, applicant).
-    existing = await _active_duplicate(
-        session, job_id=job.id, applicant_id=principal.user_id
-    )
+    existing = await _active_duplicate(session, job_id=job.id, applicant_id=principal.user_id)
     if existing is not None:
-        raise DuplicateApplicationError(
-            application_id=existing.id, status=existing.status
-        )
+        raise DuplicateApplicationError(application_id=existing.id, status=existing.status)
 
     app = Application(
         job_id=job.id,
@@ -143,13 +137,9 @@ async def apply_to_job(
         await session.flush()
     except IntegrityError as exc:
         await session.rollback()
-        winner = await _active_duplicate(
-            session, job_id=job.id, applicant_id=principal.user_id
-        )
+        winner = await _active_duplicate(session, job_id=job.id, applicant_id=principal.user_id)
         if winner is not None:
-            raise DuplicateApplicationError(
-                application_id=winner.id, status=winner.status
-            ) from exc
+            raise DuplicateApplicationError(application_id=winner.id, status=winner.status) from exc
         raise DuplicateApplicationError() from exc
 
     # Immutable CV snapshot via the documents facade (atomic with this txn).
@@ -177,8 +167,11 @@ async def apply_to_job(
     await session.flush()
 
     await write_audit(
-        session, action="application.created", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.created",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={
             "job_id": str(app.job_id),
             "org_id": str(app.org_id),
@@ -319,11 +312,7 @@ def _redact_header_content(content: dict) -> dict:
     (pattern-scrubbed) because it carries positioning, not identity.
     """
 
-    redacted = {
-        key: value
-        for key, value in content.items()
-        if key not in _HEADER_CONTACT_FIELDS
-    }
+    redacted = {key: value for key, value in content.items() if key not in _HEADER_CONTACT_FIELDS}
     redacted = {key: _scrub_deep(value) for key, value in redacted.items()}
     redacted["name"] = _ANON_NAME
     return redacted
@@ -408,10 +397,7 @@ def _effective_reveal_status(req: ApplicationRevealRequest) -> str:
     offering an accept/decline panel for a request that can no longer be acted on.
     """
 
-    if (
-        req.status == lifecycle.REVEAL_PENDING
-        and _shared.as_aware(req.expires_at) <= _shared.now()
-    ):
+    if req.status == lifecycle.REVEAL_PENDING and _shared.as_aware(req.expires_at) <= _shared.now():
         return lifecycle.REVEAL_EXPIRED
     return req.status
 
@@ -422,12 +408,16 @@ async def _latest_reveal_for(
     """The most recent reveal request on an application (at most one per org)."""
 
     return (
-        await session.execute(
-            select(ApplicationRevealRequest)
-            .where(ApplicationRevealRequest.application_id == application_id)
-            .order_by(ApplicationRevealRequest.created_at.desc())
+        (
+            await session.execute(
+                select(ApplicationRevealRequest)
+                .where(ApplicationRevealRequest.application_id == application_id)
+                .order_by(ApplicationRevealRequest.created_at.desc())
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
 async def _latest_reveals_for(
@@ -438,12 +428,16 @@ async def _latest_reveals_for(
     if not application_ids:
         return {}
     rows = (
-        await session.execute(
-            select(ApplicationRevealRequest)
-            .where(ApplicationRevealRequest.application_id.in_(set(application_ids)))
-            .order_by(ApplicationRevealRequest.created_at.desc())
+        (
+            await session.execute(
+                select(ApplicationRevealRequest)
+                .where(ApplicationRevealRequest.application_id.in_(set(application_ids)))
+                .order_by(ApplicationRevealRequest.created_at.desc())
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     latest: dict[uuid.UUID, ApplicationRevealRequest] = {}
     for req in rows:
         latest.setdefault(req.application_id, req)
@@ -478,9 +472,7 @@ async def list_my_applications(
                 (Application.created_at == anchor_created) & (Application.id < anchor_id),
             )
         )
-    stmt = stmt.order_by(Application.created_at.desc(), Application.id.desc()).limit(
-        page_limit + 1
-    )
+    stmt = stmt.order_by(Application.created_at.desc(), Application.id.desc()).limit(page_limit + 1)
     rows = list((await session.execute(stmt)).scalars().all())
     page = build_cursor_page(
         rows,
@@ -505,9 +497,7 @@ async def list_my_applications(
                 company_name=org_names.get(a.org_id) if a.org_id else None,
                 reveal=req,
                 reveal_status=_effective_reveal_status(req) if req else None,
-                reveal_company_name=(
-                    org_names.get(req.requester_org_id) if req else None
-                ),
+                reveal_company_name=(org_names.get(req.requester_org_id) if req else None),
                 locale=locale,
             )
         )
@@ -520,9 +510,7 @@ async def _org_display_names(
     return await org_reporting_facade.display_names_for(session, org_ids)
 
 
-async def _job_titles(
-    session: AsyncSession, job_ids: list[uuid.UUID]
-) -> dict[uuid.UUID, str]:
+async def _job_titles(session: AsyncSession, job_ids: list[uuid.UUID]) -> dict[uuid.UUID, str]:
     return await job_read_facade.get_job_titles(session, job_ids)
 
 
@@ -531,9 +519,7 @@ def _is_partner_of(principal: Principal, app: Application) -> bool:
         return True
     if principal.org_id is None or principal.org_id != app.org_id:
         return False
-    return permission_checker.can(
-        principal, _RESOURCE, "read", resource_org_id=app.org_id
-    )
+    return permission_checker.can(principal, _RESOURCE, "read", resource_org_id=app.org_id)
 
 
 async def get_application(
@@ -621,11 +607,17 @@ async def get_application(
 
         view["pipeline"] = await stage_service._pipeline_block(session, app=app)
         await _record_candidate_access(
-            session, app=app, principal=principal, event_type="application_opened",
+            session,
+            app=app,
+            principal=principal,
+            event_type="application_opened",
         )
         if app.reveal_approved_at is not None:
             await _record_candidate_access(
-                session, app=app, principal=principal, event_type="identity_revealed_viewed",
+                session,
+                app=app,
+                principal=principal,
+                event_type="identity_revealed_viewed",
             )
         return view
 
@@ -637,9 +629,7 @@ async def get_application(
 # --------------------------------------------------------------------------- #
 
 
-async def _decrement_job_application_count(
-    session: AsyncSession, *, job_id: uuid.UUID
-) -> None:
+async def _decrement_job_application_count(session: AsyncSession, *, job_id: uuid.UUID) -> None:
     """Decrement the denormalized ``jobs.application_count`` by one, floored at 0.
 
     Loads the job row the same way ``apply_to_job`` mutates it (the live ORM row),
@@ -662,9 +652,7 @@ async def withdraw_application(
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
-    app = await _shared.load_application(
-        session, application_id=application_id, lock=True
-    )
+    app = await _shared.load_application(session, application_id=application_id, lock=True)
     # Only the applicant may withdraw; others cannot even tell it exists.
     if principal.user_id is None or app.applicant_id != principal.user_id:
         raise ResourceNotFoundError()
@@ -707,8 +695,11 @@ async def withdraw_application(
     if clean_reason:
         audit_after["reason"] = clean_reason
     await write_audit(
-        session, action="application.withdrawn", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.withdrawn",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after=audit_after,
     )
     await timeline.record_timeline_event(
@@ -749,9 +740,7 @@ async def _partner_view(
     user = None
     if app.reveal_approved_at is not None or not app.is_anonymous:
         user = await user_service.get_by_id(session, app.applicant_id)
-    reveal_status = await _reveal_status_for(
-        session, application_id=app.id, org_id=app.org_id
-    )
+    reveal_status = await _reveal_status_for(session, application_id=app.id, org_id=app.org_id)
     return presenters.partner_application(
         app, user=user, reveal_status=reveal_status, locale=locale
     )
@@ -776,18 +765,12 @@ async def list_job_applications(
     if job is None:
         raise ResourceNotFoundError()
     # Tenant isolation: a cross-org job is indistinguishable from missing.
-    if not principal.is_superadmin and (
-        principal.org_id is None or principal.org_id != job.org_id
-    ):
+    if not principal.is_superadmin and (principal.org_id is None or principal.org_id != job.org_id):
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=job.org_id)
 
     page_limit = clamp_limit(limit)
-    stmt = select(Application).where(
-        Application.job_id == job.id, Application.deleted_at.is_(None)
-    )
+    stmt = select(Application).where(Application.job_id == job.id, Application.deleted_at.is_(None))
     decoded = decode_cursor(cursor)
     if decoded is not None:
         from datetime import datetime
@@ -800,9 +783,7 @@ async def list_job_applications(
                 (Application.applied_at == anchor_applied) & (Application.id < anchor_id),
             )
         )
-    stmt = stmt.order_by(Application.applied_at.desc(), Application.id.desc()).limit(
-        page_limit + 1
-    )
+    stmt = stmt.order_by(Application.applied_at.desc(), Application.id.desc()).limit(page_limit + 1)
     rows = list((await session.execute(stmt)).scalars().all())
     page = build_cursor_page(
         rows,
@@ -815,9 +796,7 @@ async def list_job_applications(
 
     items: list[dict] = []
     for a in page.items:
-        items.append(
-            await _partner_view(session, app=a, principal=principal, locale=locale)
-        )
+        items.append(await _partner_view(session, app=a, principal=principal, locale=locale))
     return items, page.next_cursor, page.limit
 
 
@@ -860,7 +839,10 @@ async def get_application_cv_download(
     org_name = await _shared.org_display_name(session, app.org_id)
     watermark = f"VinUni Career • {org_name}"
     await _record_candidate_access(
-        session, app=app, principal=principal, event_type="cv_downloaded",
+        session,
+        app=app,
+        principal=principal,
+        event_type="cv_downloaded",
     )
     with access.authorized_download(
         snapshot_id=app.snapshot_id,
@@ -873,7 +855,11 @@ async def get_application_cv_download(
 
 
 async def _record_candidate_access(
-    session: AsyncSession, *, app: Application, principal: Principal, event_type: str,
+    session: AsyncSession,
+    *,
+    app: Application,
+    principal: Principal,
+    event_type: str,
 ) -> None:
     """Best-effort hook into ``partner_candidate_access_events``
     (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`). Instrumentation only — never raises,

@@ -104,6 +104,7 @@ def _audit_row(
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture
 async def superadmin_client() -> AsyncIterator[AsyncClient]:
     auth = _make_auth(_superadmin_principal())
@@ -127,6 +128,7 @@ async def student_client() -> AsyncIterator[AsyncClient]:
 # ---------------------------------------------------------------------------
 # Test 1: platform-wide — rows from both orgs are returned
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_list_returns_rows_from_all_orgs(
@@ -159,6 +161,7 @@ async def test_list_returns_rows_from_all_orgs(
 # Test 2 & 3: non-superadmin → 403
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_list_non_superadmin_gets_403(student_client: AsyncClient) -> None:
     resp = await student_client.get("/admin/audit-log")
@@ -176,6 +179,7 @@ async def test_export_non_superadmin_gets_403(student_client: AsyncClient) -> No
 # ---------------------------------------------------------------------------
 # Test 4: filter by action
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_filter_by_action(
@@ -197,6 +201,7 @@ async def test_filter_by_action(
 # Test 5: filter by resource_type
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_filter_by_resource_type(
     superadmin_client: AsyncClient,
@@ -206,9 +211,7 @@ async def test_filter_by_resource_type(
     db_session.add(_audit_row(resource_type="job", action="job.create"))
     await db_session.commit()
 
-    resp = await superadmin_client.get(
-        "/admin/audit-log", params={"resource_type": "cv_profile"}
-    )
+    resp = await superadmin_client.get("/admin/audit-log", params={"resource_type": "cv_profile"})
     assert resp.status_code == 200
     items = resp.json()["data"]
     assert all(item["resource_type"] == "cv_profile" for item in items)
@@ -218,6 +221,7 @@ async def test_filter_by_resource_type(
 # ---------------------------------------------------------------------------
 # Test 6: filter by since / until
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_filter_by_since_until(
@@ -245,6 +249,7 @@ async def test_filter_by_since_until(
 # Test 7: filter by actor_id
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_filter_by_actor_id(
     superadmin_client: AsyncClient,
@@ -256,9 +261,7 @@ async def test_filter_by_actor_id(
     db_session.add(_audit_row(actor_id=other_actor, action="other.actor.action"))
     await db_session.commit()
 
-    resp = await superadmin_client.get(
-        "/admin/audit-log", params={"actor_id": str(target_actor)}
-    )
+    resp = await superadmin_client.get("/admin/audit-log", params={"actor_id": str(target_actor)})
     assert resp.status_code == 200
     items = resp.json()["data"]
     assert all(item["actor_id"] == str(target_actor) for item in items)
@@ -268,6 +271,7 @@ async def test_filter_by_actor_id(
 # ---------------------------------------------------------------------------
 # Test 8: cursor pagination
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_cursor_pagination(
@@ -306,6 +310,7 @@ async def test_cursor_pagination(
 # Test 9: CSV export
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_csv_export_content(
     superadmin_client: AsyncClient,
@@ -313,12 +318,14 @@ async def test_csv_export_content(
 ) -> None:
     """CSV has header + data rows; no ip/ua hashes; no before/after blobs."""
     actor_id = uuid.uuid4()
-    db_session.add(_audit_row(
-        actor_id=actor_id,
-        actor_org_id=_ORG_A,
-        action="csv.export.test",
-        resource_type="job",
-    ))
+    db_session.add(
+        _audit_row(
+            actor_id=actor_id,
+            actor_org_id=_ORG_A,
+            action="csv.export.test",
+            resource_type="job",
+        )
+    )
     await db_session.commit()
 
     resp = await superadmin_client.get(
@@ -376,6 +383,7 @@ async def test_csv_export_action_filter(
 # Test 10: require_superadmin canonical import path
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_require_superadmin_canonical_import() -> None:
     """require_superadmin imported from auth.api.deps raises 403 for non-superadmin."""
@@ -405,6 +413,7 @@ async def test_require_superadmin_ai_ops_reexport() -> None:
 # ---------------------------------------------------------------------------
 # Test: response envelope shape
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_list_response_envelope_shape(

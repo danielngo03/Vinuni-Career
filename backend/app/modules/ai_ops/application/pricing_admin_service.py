@@ -54,8 +54,7 @@ async def list_prices(db: AsyncSession) -> list[dict[str, Any]]:
     )
     rows = result.scalars().all()
     return [
-        _row_snapshot(r) | {"id": str(r.id), "updated_at": r.updated_at.isoformat()}
-        for r in rows
+        _row_snapshot(r) | {"id": str(r.id), "updated_at": r.updated_at.isoformat()} for r in rows
     ]
 
 
@@ -135,9 +134,7 @@ async def update_price(
     Raises:
         NotFoundError: if no row with ``price_id`` exists.
     """
-    result = await db.execute(
-        select(AiModelPrice).where(AiModelPrice.id == price_id)
-    )
+    result = await db.execute(select(AiModelPrice).where(AiModelPrice.id == price_id))
     row = result.scalar_one_or_none()
     if row is None:
         raise ResourceNotFoundError(details={"resource": _RESOURCE, "id": str(price_id)})

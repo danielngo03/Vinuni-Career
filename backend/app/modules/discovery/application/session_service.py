@@ -58,9 +58,7 @@ async def _load_live(
     if session_id is None:
         return None
     row = (
-        await session.execute(
-            select(DiscoverySession).where(DiscoverySession.id == session_id)
-        )
+        await session.execute(select(DiscoverySession).where(DiscoverySession.id == session_id))
     ).scalar_one_or_none()
     if row is None:
         return None
@@ -86,9 +84,7 @@ async def get_or_create(
     """
 
     now = now or _now()
-    existing = await _load_live(
-        session, session_id=_parse_cookie_id(cookie_id), now=now
-    )
+    existing = await _load_live(session, session_id=_parse_cookie_id(cookie_id), now=now)
     user_id = principal.user_id if principal and principal.is_authenticated else None
 
     if existing is not None:
@@ -130,9 +126,7 @@ async def get_coarse_tags(
     """
 
     now = now or _now()
-    existing = await _load_live(
-        session, session_id=_parse_cookie_id(cookie_id), now=now
-    )
+    existing = await _load_live(session, session_id=_parse_cookie_id(cookie_id), now=now)
     if existing is None or existing.opt_out:
         return {}
     return dict(existing.coarse_tags or {})
@@ -186,9 +180,7 @@ async def reset(
     """
 
     now = now or _now()
-    existing = await _load_live(
-        session, session_id=_parse_cookie_id(cookie_id), now=now
-    )
+    existing = await _load_live(session, session_id=_parse_cookie_id(cookie_id), now=now)
     if existing is None:
         return None
 

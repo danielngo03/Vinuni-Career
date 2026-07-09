@@ -161,8 +161,8 @@ async def test_timeseries_correct_sums(
     row = series[0]
     today_iso = today.date().isoformat()
     assert row["day"] == today_iso
-    assert row["requests"] == 20   # 10 + 10
-    assert row["errors"] == 4      # 2 + 2
+    assert row["requests"] == 20  # 10 + 10
+    assert row["errors"] == 4  # 2 + 2
     assert row["prompt_tokens"] == 1000
     assert row["completion_tokens"] == 400
     assert abs(row["cost_usd"] - 0.010) < 1e-6

@@ -668,7 +668,7 @@ export function AiChatWindow({
               <AuthLoadingPrompt />
             ) : !isAuthed ? (
               <GuestPrompt t={t} />
-            ) : messages.length === 0 && !messagesQuery.isPending ? (
+            ) : messages.length === 0 && !messagesQuery.isFetching ? (
               <WelcomeScreen t={t} persona={persona} onPrompt={(prompt) => void send(prompt)} />
             ) : (
               messages.map((msg) => (

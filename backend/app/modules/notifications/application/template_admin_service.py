@@ -83,9 +83,7 @@ def _presenter(template: NotificationTemplate) -> dict:
         "variables_schema": template.variables_schema,
         "created_by": str(template.created_by) if template.created_by else None,
         "updated_by": str(template.updated_by) if template.updated_by else None,
-        "activated_at": (
-            template.activated_at.isoformat() if template.activated_at else None
-        ),
+        "activated_at": (template.activated_at.isoformat() if template.activated_at else None),
         "created_at": template.created_at.isoformat(),
         "updated_at": template.updated_at.isoformat(),
     }
@@ -140,18 +138,14 @@ def _normalize_key(value: str) -> str:
 def _normalize_channel(value: str) -> str:
     channel = value.strip().lower()
     if channel not in _CHANNELS:
-        raise ValidationFailedError(
-            details={"field": "channel", "reason": "invalid_channel"}
-        )
+        raise ValidationFailedError(details={"field": "channel", "reason": "invalid_channel"})
     return channel
 
 
 def _normalize_locale(value: str) -> str:
     locale = value.strip().lower()
     if locale not in _LOCALES:
-        raise ValidationFailedError(
-            details={"field": "locale", "reason": "invalid_locale"}
-        )
+        raise ValidationFailedError(details={"field": "locale", "reason": "invalid_locale"})
     return locale
 
 
@@ -229,9 +223,7 @@ async def list_templates_admin(
         stmt = stmt.where(NotificationTemplate.locale == _normalize_locale(locale))
     if status is not None:
         if status not in _STATUSES:
-            raise ValidationFailedError(
-                details={"field": "status", "reason": "invalid_status"}
-            )
+            raise ValidationFailedError(details={"field": "status", "reason": "invalid_status"})
         stmt = stmt.where(NotificationTemplate.status == status)
     stmt = stmt.order_by(
         NotificationTemplate.key,
@@ -250,9 +242,7 @@ async def create_template(
     payload: dict,
     ctx: RequestContext,
 ) -> dict:
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=principal.org_id)
     owner_scope, owner_org_id = await _resolve_owner(session, principal)
 
     key = _normalize_key(payload["key"])
@@ -264,9 +254,7 @@ async def create_template(
     variables_schema = _normalize_variables_schema(payload.get("variables_schema"))
 
     # Reject unknown ``{{var}}`` placeholders before it ever reaches storage.
-    validate_template(
-        body=body, subject=subject, title=title, variables_schema=variables_schema
-    )
+    validate_template(body=body, subject=subject, title=title, variables_schema=variables_schema)
 
     version = await _next_version(
         session,
@@ -343,9 +331,7 @@ async def update_template(
         else template.variables_schema
     )
 
-    validate_template(
-        body=body, subject=subject, title=title, variables_schema=variables_schema
-    )
+    validate_template(body=body, subject=subject, title=title, variables_schema=variables_schema)
 
     if "subject" in payload:
         template.subject = subject
@@ -461,9 +447,7 @@ async def archive_template(
     )
 
     if template.status == "archived":
-        raise ConflictError(
-            "Mẫu này đã được lưu trữ.", details={"reason": "already_archived"}
-        )
+        raise ConflictError("Mẫu này đã được lưu trữ.", details={"reason": "already_archived"})
 
     before_status = template.status
     template.status = "archived"
@@ -498,15 +482,12 @@ async def preview_template(
     if template is None:
         raise ResourceNotFoundError()
     _require_visible(template, principal)
-    permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=template.owner_org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=template.owner_org_id)
 
     variables = dict(sample_variables or {})
     allowed, required = (
-        set(template.variables_schema.get("allowed", [])) | set(
-            template.variables_schema.get("required", [])
-        ),
+        set(template.variables_schema.get("allowed", []))
+        | set(template.variables_schema.get("required", [])),
         set(template.variables_schema.get("required", [])),
     )
     # Fill any un-supplied variable (required or optional) with a readable

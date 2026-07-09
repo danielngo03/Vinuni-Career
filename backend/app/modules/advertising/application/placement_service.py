@@ -86,13 +86,9 @@ async def list_packages(
     return [presenters.package(p, locale=locale) for p in rows]
 
 
-async def _load_package(
-    session: AsyncSession, package_id: uuid.UUID
-) -> AdPackage | None:
+async def _load_package(session: AsyncSession, package_id: uuid.UUID) -> AdPackage | None:
     return (
-        await session.execute(
-            select(AdPackage).where(AdPackage.id == package_id)
-        )
+        await session.execute(select(AdPackage).where(AdPackage.id == package_id))
     ).scalar_one_or_none()
 
 
@@ -124,17 +120,18 @@ async def _load_owned(
     return placement
 
 
-async def _present(
-    session: AsyncSession, placement: SponsoredPlacement, *, locale: str
-) -> dict:
+async def _present(session: AsyncSession, placement: SponsoredPlacement, *, locale: str) -> dict:
     pkg = await _load_package(session, placement.package_id)
     ref = await sponsorship_facade.load_target(
         session, target_type=placement.target_type, target_id=placement.target_id
     )
     creatives = await creative_service.load_for_placement(session, placement.id)
     return presenters.placement(
-        placement, locale=locale, pkg=pkg,
-        target_title=ref.title if ref else None, creatives=creatives,
+        placement,
+        locale=locale,
+        pkg=pkg,
+        target_title=ref.title if ref else None,
+        creatives=creatives,
     )
 
 
@@ -153,9 +150,7 @@ async def create_placement(
 ) -> dict:
     if principal.org_id is None:
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=principal.org_id)
     assert principal.user_id is not None
 
     target_type = payload["target_type"]
@@ -170,9 +165,7 @@ async def create_placement(
     ref = await sponsorship_facade.load_target(
         session, target_type=target_type, target_id=payload["target_id"]
     )
-    if ref is None or (
-        not principal.is_superadmin and ref.org_id != principal.org_id
-    ):
+    if ref is None or (not principal.is_superadmin and ref.org_id != principal.org_id):
         raise ResourceNotFoundError()
 
     pkg = await _load_package(session, payload["package_id"])
@@ -208,12 +201,18 @@ async def create_placement(
     await session.flush()
 
     await write_audit(
-        session, action="advertising.placement_created",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_created",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
-        after={"status": placement.status, "target_type": target_type,
-               "target_id": str(payload["target_id"]),
-               "placement_type": placement_type, "package": pkg.code},
+        after={
+            "status": placement.status,
+            "target_type": target_type,
+            "target_id": str(payload["target_id"]),
+            "placement_type": placement_type,
+            "package": pkg.code,
+        },
     )
     await session.commit()
     await session.refresh(placement)
@@ -235,9 +234,7 @@ async def update_placement(
     placement = await _load_owned(
         session, principal=principal, placement_id=placement_id, lock=True
     )
-    permission_checker.require(
-        principal, _RESOURCE, "edit", resource_org_id=placement.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "edit", resource_org_id=placement.org_id)
     if placement.status not in lifecycle.EDITABLE_STATES:
         raise PlacementNotEditableError()
 
@@ -291,8 +288,10 @@ async def update_placement(
         placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_updated",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_updated",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         after={"fields": sorted(changed.keys())},
     )
@@ -357,9 +356,7 @@ async def submit_placement(
     placement = await _load_owned(
         session, principal=principal, placement_id=placement_id, lock=True
     )
-    permission_checker.require(
-        principal, _RESOURCE, "submit", resource_org_id=placement.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "submit", resource_org_id=placement.org_id)
     if version is not None and version != placement.version:
         raise PlacementVersionConflictError()
     if not lifecycle.can_transition("submit", placement.status):
@@ -381,8 +378,10 @@ async def submit_placement(
 
     # One in-flight placement per target.
     if await _target_has_inflight(
-        session, target_type=placement.target_type,
-        target_id=placement.target_id, exclude_id=placement.id,
+        session,
+        target_type=placement.target_type,
+        target_id=placement.target_id,
+        exclude_id=placement.id,
     ):
         raise PlacementExistsError()
 
@@ -407,8 +406,10 @@ async def submit_placement(
     await session.flush()
 
     await write_audit(
-        session, action="advertising.placement_submitted",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_submitted",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         after={"status": placement.status, "price_amount": str(pkg.price_amount)},
     )
@@ -434,9 +435,7 @@ async def cancel_placement(
     placement = await _load_owned(
         session, principal=principal, placement_id=placement_id, lock=True
     )
-    permission_checker.require(
-        principal, _RESOURCE, "edit", resource_org_id=placement.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "edit", resource_org_id=placement.org_id)
     if version is not None and version != placement.version:
         raise PlacementVersionConflictError()
     if not lifecycle.can_transition("cancel", placement.status):
@@ -448,8 +447,10 @@ async def cancel_placement(
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_cancelled",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_cancelled",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         after={"status": placement.status, "by": "partner"},
     )
@@ -457,8 +458,10 @@ async def cancel_placement(
     # the flag ON; else it turns OFF).
     if was_active:
         await activation_service.recompute_target_flags(
-            session, target_type=placement.target_type,
-            target_id=placement.target_id, actor=principal,
+            session,
+            target_type=placement.target_type,
+            target_id=placement.target_id,
+            actor=principal,
             reason="placement_cancelled",
         )
     await session.commit()
@@ -476,17 +479,17 @@ async def delete_placement(
     placement = await _load_owned(
         session, principal=principal, placement_id=placement_id, lock=True
     )
-    permission_checker.require(
-        principal, _RESOURCE, "edit", resource_org_id=placement.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "edit", resource_org_id=placement.org_id)
     if placement.status not in lifecycle.DELETABLE_STATES:
         raise PlacementNotEditableError()
     placement.deleted_at = _now()
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_deleted",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_deleted",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         before={"status": placement.status},
     )
@@ -499,15 +502,14 @@ async def delete_placement(
 
 
 async def get_placement(
-    session: AsyncSession, *, principal: Principal, placement_id: uuid.UUID,
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    placement_id: uuid.UUID,
     locale: str = "vi",
 ) -> dict:
-    placement = await _load_owned(
-        session, principal=principal, placement_id=placement_id
-    )
-    permission_checker.require(
-        principal, _RESOURCE, "view", resource_org_id=placement.org_id
-    )
+    placement = await _load_owned(session, principal=principal, placement_id=placement_id)
+    permission_checker.require(principal, _RESOURCE, "view", resource_org_id=placement.org_id)
     return await _present(session, placement, locale=locale)
 
 
@@ -524,9 +526,7 @@ async def list_my_placements(
 
     if principal.org_id is None:
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "view", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "view", resource_org_id=principal.org_id)
     page_limit = clamp_limit(limit)
     stmt = select(SponsoredPlacement).where(
         SponsoredPlacement.org_id == principal.org_id,
@@ -546,9 +546,9 @@ async def list_my_placements(
                 & (SponsoredPlacement.id < anchor_id),
             )
         )
-    stmt = stmt.order_by(
-        SponsoredPlacement.created_at.desc(), SponsoredPlacement.id.desc()
-    ).limit(page_limit + 1)
+    stmt = stmt.order_by(SponsoredPlacement.created_at.desc(), SponsoredPlacement.id.desc()).limit(
+        page_limit + 1
+    )
     rows = list((await session.execute(stmt)).scalars().all())
 
     page = build_cursor_page(

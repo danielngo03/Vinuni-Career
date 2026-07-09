@@ -42,9 +42,7 @@ class ConsoleEmailAdapter:
 
     async def send(self, *, to: str, subject: str, body: str) -> str:
         message_id = f"local_{uuid.uuid4().hex}"
-        self.outbox.append(
-            SentEmail(to=to, subject=subject, body=body, message_id=message_id)
-        )
+        self.outbox.append(SentEmail(to=to, subject=subject, body=body, message_id=message_id))
         # Log metadata only — never the body or recipient PII.
         logger.info(
             "email.sent_local",
@@ -110,7 +108,9 @@ class SmtpEmailAdapter:
     def _send_sync(self, to: str, raw_message: str) -> None:
         if self._use_ssl:
             ctx = ssl.create_default_context()
-            with smtplib.SMTP_SSL(self._host, self._port, context=ctx, timeout=self._timeout) as smtp:
+            with smtplib.SMTP_SSL(
+                self._host, self._port, context=ctx, timeout=self._timeout
+            ) as smtp:
                 smtp.login(self._username, self._password)
                 smtp.sendmail(self._username, [to], raw_message.encode("utf-8"))
         else:

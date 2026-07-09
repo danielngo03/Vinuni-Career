@@ -66,8 +66,10 @@ def _all_text(extracted: dict) -> str:
         if not isinstance(value, dict):
             continue
         for entry in value.get("entries", []) or []:
-            parts += [str(entry.get(k) or "") for k in
-                      ("heading", "subheading", "timeframe", "location", "note")]
+            parts += [
+                str(entry.get(k) or "")
+                for k in ("heading", "subheading", "timeframe", "location", "note")
+            ]
             parts += [str(h) for h in entry.get("highlights", []) or []]
         for item in value.get("items", []) or []:
             parts += [str(item.get(k) or "") for k in ("text", "name", "level")]
@@ -130,10 +132,19 @@ def test_english_no_content_dropped() -> None:
     extracted = structure_cv_text(_CV_EN)["extracted_data"]
     blob = _all_text(extracted)
     for token in (
-        "Software Engineer Intern", "Acme Corp", "Reduced latency",
-        "Data Analyst", "Beta Ltd", "Analysed sales data",
-        "Computer Science", "VinUniversity", "Python", "FastAPI", "SQL",
-        "English", "Vietnamese",
+        "Software Engineer Intern",
+        "Acme Corp",
+        "Reduced latency",
+        "Data Analyst",
+        "Beta Ltd",
+        "Analysed sales data",
+        "Computer Science",
+        "VinUniversity",
+        "Python",
+        "FastAPI",
+        "SQL",
+        "English",
+        "Vietnamese",
     ):
         assert token in blob, f"lost content: {token}"
 
@@ -170,8 +181,14 @@ def test_vietnamese_no_content_dropped() -> None:
     extracted = structure_cv_text(_CV_VI)["extracted_data"]
     blob = _all_text(extracted)
     for token in (
-        "Điều dưỡng viên", "Bệnh viện Nhi", "Chăm sóc bệnh nhân nhi khoa",
-        "Hỗ trợ bác sĩ", "Điều dưỡng", "Đại học Y Hà Nội", "Giao tiếp", "Tiếng Anh",
+        "Điều dưỡng viên",
+        "Bệnh viện Nhi",
+        "Chăm sóc bệnh nhân nhi khoa",
+        "Hỗ trợ bác sĩ",
+        "Điều dưỡng",
+        "Đại học Y Hà Nội",
+        "Giao tiếp",
+        "Tiếng Anh",
     ):
         assert token in blob, f"lost content: {token}"
 
@@ -182,13 +199,7 @@ def test_vietnamese_no_content_dropped() -> None:
 
 
 def test_skill_level_percent_and_bar_variants() -> None:
-    text = (
-        "Skills\n"
-        "Docker: 90%\n"
-        "Kubernetes ●●●●●\n"
-        "Terraform ▮▮▯▯▯\n"
-        "Go, Rust, C++\n"
-    )
+    text = "Skills\nDocker: 90%\nKubernetes ●●●●●\nTerraform ▮▮▯▯▯\nGo, Rust, C++\n"
     items = structure_cv_text(text)["extracted_data"]["skills"]["items"]
     by_name = {it["name"]: it["level"] for it in items}
     assert by_name["Docker"] == 90

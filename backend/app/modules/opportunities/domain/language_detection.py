@@ -17,8 +17,8 @@ _VI_CHARS: frozenset[str] = frozenset(
 # Hiragana + Katakana codepoint ranges
 _JA_RANGES: tuple[tuple[int, int], ...] = ((0x3040, 0x309F), (0x30A0, 0x30FF))
 
-_KO_LO, _KO_HI = 0xAC00, 0xD7A3   # Hangul syllables
-_ZH_LO, _ZH_HI = 0x4E00, 0x9FFF   # CJK Unified Ideographs (main block)
+_KO_LO, _KO_HI = 0xAC00, 0xD7A3  # Hangul syllables
+_ZH_LO, _ZH_HI = 0x4E00, 0x9FFF  # CJK Unified Ideographs (main block)
 
 
 def detect_language(text: str) -> str:

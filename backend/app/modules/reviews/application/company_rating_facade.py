@@ -39,17 +39,15 @@ def _block(row: ProjCompanyRating) -> dict:
     }
 
 
-async def ratings_for(
-    session: AsyncSession, org_ids: Iterable[uuid.UUID]
-) -> dict[uuid.UUID, dict]:
+async def ratings_for(session: AsyncSession, org_ids: Iterable[uuid.UUID]) -> dict[uuid.UUID, dict]:
     """Batch-resolve ``{org_id: rating_block}`` for orgs that have a projection row."""
 
     ids = {i for i in org_ids if i is not None}
     if not ids:
         return {}
     rows = (
-        await session.execute(
-            select(ProjCompanyRating).where(ProjCompanyRating.org_id.in_(ids))
-        )
-    ).scalars().all()
+        (await session.execute(select(ProjCompanyRating).where(ProjCompanyRating.org_id.in_(ids))))
+        .scalars()
+        .all()
+    )
     return {row.org_id: _block(row) for row in rows if row.review_count > 0}

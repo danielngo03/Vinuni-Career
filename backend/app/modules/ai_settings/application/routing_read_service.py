@@ -48,17 +48,27 @@ def _alias_matches_family(alias: AiModelAlias, task_family: str) -> bool:
 async def get_routing_canvas_view(
     session: AsyncSession, *, principal: Principal, task_family: str, ctx: RequestContext
 ) -> dict:
-    await settings_service._require_ai_settings_admin(session, principal, "read")
+    settings_service.require_platform_superadmin(principal)
 
     all_aliases = (
-        await session.execute(select(AiModelAlias).where(AiModelAlias.is_active.is_(True)))
-    ).scalars().all()
+        (await session.execute(select(AiModelAlias).where(AiModelAlias.is_active.is_(True))))
+        .scalars()
+        .all()
+    )
     aliases = [a for a in all_aliases if _alias_matches_family(a, task_family)]
 
     provider_ids = {a.provider_id for a in aliases if a.provider_id is not None}
     providers = (
-        await session.execute(select(AiProviderConfig).where(AiProviderConfig.id.in_(provider_ids)))
-    ).scalars().all() if provider_ids else []
+        (
+            await session.execute(
+                select(AiProviderConfig).where(AiProviderConfig.id.in_(provider_ids))
+            )
+        )
+        .scalars()
+        .all()
+        if provider_ids
+        else []
+    )
 
     show_raw = _has_identity_permission(principal)
     if show_raw:

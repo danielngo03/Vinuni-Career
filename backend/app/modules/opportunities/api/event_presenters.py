@@ -62,9 +62,7 @@ def _common(event: Event, *, locale: str) -> dict:
         "title": event.title,
         "slug": event.slug,
         "event_type": event.event_type,
-        "event_type_label": event_lifecycle.event_type_label(
-            event.event_type, locale=locale
-        ),
+        "event_type_label": event_lifecycle.event_type_label(event.event_type, locale=locale),
         "format": event.format,
         "format_label": event_lifecycle.format_label(event.format, locale=locale),
         "cover_image_url": cover_image_url(event),
@@ -77,9 +75,7 @@ def _common(event: Event, *, locale: str) -> dict:
         "capacity": event.capacity,
         "registration_count": event.registration_count,
         "seats_remaining": (
-            None
-            if event.capacity is None
-            else max(event.capacity - event.registration_count, 0)
+            None if event.capacity is None else max(event.capacity - event.registration_count, 0)
         ),
         "is_featured": event.is_featured,
         "is_sponsored": event.is_sponsored,
@@ -122,9 +118,7 @@ def _owner_fields(event: Event, *, locale: str) -> dict:
         ),
         "moderation_note": event.moderation_note,
         "moderation_reason_code": event.moderation_reason_code,
-        "moderation_reason_label": reason_code_label(
-            event.moderation_reason_code, locale=locale
-        ),
+        "moderation_reason_label": reason_code_label(event.moderation_reason_code, locale=locale),
         "submitted_at": _iso(event.submitted_at),
         "approved_at": _iso(event.approved_at),
         "cancelled_at": _iso(event.cancelled_at),
@@ -135,7 +129,8 @@ def _owner_fields(event: Event, *, locale: str) -> dict:
         "claimed_by": str(event.claimed_by) if event.claimed_by else None,
         "claimed_at": _iso(event.claimed_at),
         **queue_age_fields(
-            submitted_at=event.submitted_at, due_by=event.due_by,
+            submitted_at=event.submitted_at,
+            due_by=event.due_by,
             now=datetime.now(tz=UTC),
         ),
     }
@@ -146,9 +141,7 @@ def owner_event_summary(event: Event, *, locale: str = "vi") -> dict:
     data.update(
         {
             "status": event.status,
-            "status_label": event_lifecycle.status_label(
-                event.status, locale=locale
-            ),
+            "status_label": event_lifecycle.status_label(event.status, locale=locale),
             "moderation_status": event.moderation_status,
             "moderation_status_label": event_lifecycle.moderation_label(
                 event.moderation_status, locale=locale
@@ -195,9 +188,7 @@ def my_registration(
     return {
         "registration_id": str(reg.id),
         "status": reg.status,
-        "status_label": event_lifecycle.registration_state_label(
-            reg.status, locale=locale
-        ),
+        "status_label": event_lifecycle.registration_state_label(reg.status, locale=locale),
         "waitlist_position": waitlist_position,
         "registered_at": _iso(reg.created_at),
         "checked_in_at": _iso(reg.check_in_at),
@@ -224,9 +215,7 @@ def attendee_row(
         "registration_id": str(reg.id),
         "display_name": display_name or "—",
         "status": reg.status,
-        "status_label": event_lifecycle.registration_state_label(
-            reg.status, locale=locale
-        ),
+        "status_label": event_lifecycle.registration_state_label(reg.status, locale=locale),
         "registered_at": _iso(reg.created_at),
         "checked_in_at": _iso(reg.check_in_at),
     }

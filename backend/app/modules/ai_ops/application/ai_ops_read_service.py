@@ -363,8 +363,7 @@ async def reliability(
     else:
         # Mask provider names to stable positional placeholders.
         circuit_states = {
-            f"provider_{i + 1}": state
-            for i, (_, state) in enumerate(raw_circuit_states.items())
+            f"provider_{i + 1}": state for i, (_, state) in enumerate(raw_circuit_states.items())
         }
 
     return {**agg, "circuit_states": circuit_states}
@@ -459,9 +458,7 @@ async def events(
     """
 
     async def _query() -> dict[str, Any]:
-        stmt = select(AiOpsEvent).order_by(
-            AiOpsEvent.created_at.desc(), AiOpsEvent.id.desc()
-        )
+        stmt = select(AiOpsEvent).order_by(AiOpsEvent.created_at.desc(), AiOpsEvent.id.desc())
 
         # Cursor-based pagination: (created_at, id) desc.
         if cursor:
@@ -471,10 +468,7 @@ async def events(
                 cursor_id = uuid.UUID(id_str)
                 stmt = stmt.where(
                     (AiOpsEvent.created_at < cursor_ts)
-                    | (
-                        (AiOpsEvent.created_at == cursor_ts)
-                        & (AiOpsEvent.id < cursor_id)
-                    )
+                    | ((AiOpsEvent.created_at == cursor_ts) & (AiOpsEvent.id < cursor_id))
                 )
             except (ValueError, AttributeError):
                 # Invalid cursor: ignore and start from the beginning.
@@ -505,24 +499,26 @@ async def events(
         items: list[dict[str, Any]] = []
         for row in page_rows:
             cost = row.cost_usd
-            items.append({
-                "id": str(row.id),
-                "created_at": row.created_at.isoformat(),
-                "task_type": row.task_type,
-                "alias": row.alias,
-                "provider": row.provider if reveal_identity else None,
-                "model": row.model if reveal_identity else None,
-                "prompt_tokens": row.prompt_tokens,
-                "completion_tokens": row.completion_tokens,
-                "latency_ms": row.latency_ms,
-                "status": row.status,
-                "fallback_used": row.fallback_used,
-                "circuit_open": row.circuit_open,
-                # SQLAlchemy Numeric returns Decimal at runtime; convert explicitly.
-                "cost_usd": float(cost) if cost is not None else None,
-                "unpriced": row.unpriced,
-                "langfuse_trace_id": row.langfuse_trace_id,
-            })
+            items.append(
+                {
+                    "id": str(row.id),
+                    "created_at": row.created_at.isoformat(),
+                    "task_type": row.task_type,
+                    "alias": row.alias,
+                    "provider": row.provider if reveal_identity else None,
+                    "model": row.model if reveal_identity else None,
+                    "prompt_tokens": row.prompt_tokens,
+                    "completion_tokens": row.completion_tokens,
+                    "latency_ms": row.latency_ms,
+                    "status": row.status,
+                    "fallback_used": row.fallback_used,
+                    "circuit_open": row.circuit_open,
+                    # SQLAlchemy Numeric returns Decimal at runtime; convert explicitly.
+                    "cost_usd": float(cost) if cost is not None else None,
+                    "unpriced": row.unpriced,
+                    "langfuse_trace_id": row.langfuse_trace_id,
+                }
+            )
 
         return {"items": items, "next_cursor": next_cursor}
 
@@ -556,10 +552,7 @@ async def timeseries(
 
     # Build the ordered list of calendar days in the window (ascending).
     n_days = (today - window_start.date()).days + 1
-    all_days = [
-        (window_start.date() + timedelta(days=i)).isoformat()
-        for i in range(n_days)
-    ]
+    all_days = [(window_start.date() + timedelta(days=i)).isoformat() for i in range(n_days)]
 
     async def _query() -> dict[str, Any]:
         # --- Aggregate from ai_usage_daily per day --------------------------
@@ -597,9 +590,7 @@ async def timeseries(
                 "error_rate": (errors / requests) if requests > 0 else 0.0,
                 "prompt_tokens": int(r.prompt_tokens or 0),
                 "completion_tokens": int(r.completion_tokens or 0),
-                "avg_latency_ms": (
-                    latency_sum / latency_count if latency_count > 0 else None
-                ),
+                "avg_latency_ms": (latency_sum / latency_count if latency_count > 0 else None),
             }
 
         # --- Per-day p95 from ai_ops_event ----------------------------------
@@ -633,25 +624,29 @@ async def timeseries(
             agg = daily.get(day_iso)
             p95 = _p95_nearest_rank(day_latencies.get(day_iso, []))
             if agg is None:
-                series.append({
-                    "day": day_iso,
-                    "cost_usd": 0.0,
-                    "requests": 0,
-                    "errors": 0,
-                    "error_rate": 0.0,
-                    "prompt_tokens": 0,
-                    "completion_tokens": 0,
-                    "avg_latency_ms": None,
-                    # p95 may be non-None even on gap days if ai_ops_event rows
-                    # exist for that day without a corresponding ai_usage_daily row.
-                    "p95_latency_ms": p95,
-                })
+                series.append(
+                    {
+                        "day": day_iso,
+                        "cost_usd": 0.0,
+                        "requests": 0,
+                        "errors": 0,
+                        "error_rate": 0.0,
+                        "prompt_tokens": 0,
+                        "completion_tokens": 0,
+                        "avg_latency_ms": None,
+                        # p95 may be non-None even on gap days if ai_ops_event rows
+                        # exist for that day without a corresponding ai_usage_daily row.
+                        "p95_latency_ms": p95,
+                    }
+                )
             else:
-                series.append({
-                    "day": day_iso,
-                    **agg,
-                    "p95_latency_ms": p95,
-                })
+                series.append(
+                    {
+                        "day": day_iso,
+                        **agg,
+                        "p95_latency_ms": p95,
+                    }
+                )
 
         return {"series": series}
 

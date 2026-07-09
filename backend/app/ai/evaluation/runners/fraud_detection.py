@@ -32,25 +32,19 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
         return None if got == exp else f"risk_level expected {exp!r}, got {got!r}"
     if key == "requires_human_review":
         got = bool(d.get("requires_human_review"))
-        return None if got == bool(exp) else (
-            f"requires_human_review expected {exp}, got {got}"
-        )
+        return None if got == bool(exp) else (f"requires_human_review expected {exp}, got {got}")
     if key == "signal_contains":
         codes = {s.get("code") for s in d.get("signals") or []}
         return None if exp in codes else f"expected signal {exp!r} in {codes!r}"
     if key == "signal_excludes":
         codes = {s.get("code") for s in d.get("signals") or []}
-        return None if exp not in codes else (
-            f"signal {exp!r} must NOT be present, got {codes!r}"
-        )
+        return None if exp not in codes else (f"signal {exp!r} must NOT be present, got {codes!r}")
     if key == "signal_count":
         n = len(d.get("signals") or [])
         return None if n == int(exp) else f"signal_count expected {exp}, got {n}"
     if key == "risk_score_lte":
         score = float(d.get("risk_score") or 0.0)
-        return None if score <= float(exp) else (
-            f"risk_score expected <= {exp}, got {score}"
-        )
+        return None if score <= float(exp) else (f"risk_score expected <= {exp}, got {score}")
     if key == "no_crash":
         return None
     return None  # unknown / informational key

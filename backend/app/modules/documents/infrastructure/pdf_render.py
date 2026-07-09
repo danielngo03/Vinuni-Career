@@ -176,14 +176,10 @@ def _visible_entries(entries: list) -> list[dict]:
         ]
         note = _clean_str(entry.get("note"))
         highlights = [
-            h.strip()
-            for h in (entry.get("highlights") or [])
-            if isinstance(h, str) and h.strip()
+            h.strip() for h in (entry.get("highlights") or []) if isinstance(h, str) and h.strip()
         ]
         if heading or meta or note or highlights:
-            out.append(
-                {"heading": heading, "meta": meta, "note": note, "highlights": highlights}
-            )
+            out.append({"heading": heading, "meta": meta, "note": note, "highlights": highlights})
     return out
 
 
@@ -413,9 +409,7 @@ class _CvPdf(FPDF):
             for item in items:
                 self._skill_bar(item["name"], item.get("level"))
         else:
-            self._para(
-                "  ·  ".join(it["name"] for it in items), size=10.0, height=5.4
-            )
+            self._para("  ·  ".join(it["name"] for it in items), size=10.0, height=5.4)
 
     def _skill_bar(self, name: str, level: object) -> None:
         row_h = 5.6

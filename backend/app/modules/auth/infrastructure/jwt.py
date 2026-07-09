@@ -121,9 +121,7 @@ class OAuthStateClaims:
     nonce: str
 
 
-def issue_oauth_state_token(
-    *, provider: str, mode: str, return_to: str | None, nonce: str
-) -> str:
+def issue_oauth_state_token(*, provider: str, mode: str, return_to: str | None, nonce: str) -> str:
     """Short-lived signed state token bridging ``/oauth/{provider}/start`` and
     ``/oauth/{provider}/callback`` (CSRF defense). The same ``nonce`` is also set
     as an httpOnly cookie (double-submit) by the router."""

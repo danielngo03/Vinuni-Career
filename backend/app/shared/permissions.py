@@ -67,9 +67,7 @@ class PermissionChecker:
         if resource_org_id is not None and principal.org_id != resource_org_id:
             return False
 
-        return any(
-            _matches(granted, resource_type, action) for granted in principal.permissions
-        )
+        return any(_matches(granted, resource_type, action) for granted in principal.permissions)
 
     def require(
         self,
@@ -87,9 +85,7 @@ class PermissionChecker:
 
         if not principal.is_authenticated:
             raise AuthRequiredError()
-        if not self.can(
-            principal, resource_type, action, resource_org_id=resource_org_id
-        ):
+        if not self.can(principal, resource_type, action, resource_org_id=resource_org_id):
             raise PermissionDeniedError()
 
 

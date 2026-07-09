@@ -133,8 +133,10 @@ async def test_update_invalid_visibility_rejected(db_session) -> None:
     _su, student = await make_student(db_session)
     with pytest.raises(InvalidProfileFieldError):
         await profile_service.update_my_profile(
-            db_session, principal=student,
-            payload={"profile_visibility": "everyone"}, ctx=CTX,
+            db_session,
+            principal=student,
+            payload={"profile_visibility": "everyone"},
+            ctx=CTX,
         )
 
 
@@ -142,8 +144,10 @@ async def test_update_invalid_contact_gate_rejected(db_session) -> None:
     _su, student = await make_student(db_session)
     with pytest.raises(InvalidProfileFieldError):
         await profile_service.update_my_profile(
-            db_session, principal=student,
-            payload={"show_email": "sometimes"}, ctx=CTX,
+            db_session,
+            principal=student,
+            payload={"show_email": "sometimes"},
+            ctx=CTX,
         )
 
 
@@ -153,7 +157,8 @@ async def test_update_optimistic_version_conflict(db_session) -> None:
     # Stale expected_version -> conflict.
     with pytest.raises(ProfileVersionConflictError):
         await profile_service.update_my_profile(
-            db_session, principal=student,
+            db_session,
+            principal=student,
             payload={"phone": "+84900000000", "expected_version": me["version"] + 5},
             ctx=CTX,
         )
@@ -167,7 +172,8 @@ async def test_update_optimistic_version_conflict(db_session) -> None:
 async def _setup_student(db_session, *, prefix: str, visibility: str, **profile):
     _su, student = await make_student(db_session, prefix=prefix)
     await profile_service.update_my_profile(
-        db_session, principal=student,
+        db_session,
+        principal=student,
         payload={
             "location_city": "Hanoi",
             "profile_visibility": visibility,
@@ -198,8 +204,10 @@ async def test_public_profile_partner_view_hides_contact(db_session) -> None:
 async def test_public_profile_exposes_email_when_public(db_session) -> None:
     _su, student = await make_student(db_session, prefix="pubmail")
     await profile_service.update_my_profile(
-        db_session, principal=student,
-        payload={"profile_visibility": "public", "show_email": "public"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"profile_visibility": "public", "show_email": "public"},
+        ctx=CTX,
     )
     pid = await get_profile_id(db_session, principal=student)
     _pu, _org, partner = await make_org_with_admin(db_session, display_name="P2")
@@ -210,28 +218,20 @@ async def test_public_profile_exposes_email_when_public(db_session) -> None:
 
 
 async def test_private_profile_returns_404_to_partner(db_session) -> None:
-    _student, pid = await _setup_student(
-        db_session, prefix="priv", visibility="private"
-    )
+    _student, pid = await _setup_student(db_session, prefix="priv", visibility="private")
     _pu, _org, partner = await make_org_with_admin(db_session, display_name="P3")
     with pytest.raises(ResourceNotFoundError):
-        await profile_service.get_profile_for_viewer(
-            db_session, principal=partner, profile_id=pid
-        )
+        await profile_service.get_profile_for_viewer(db_session, principal=partner, profile_id=pid)
 
 
 async def test_vinuni_only_hidden_from_external_partner_but_visible_to_student(
     db_session,
 ) -> None:
-    _student, pid = await _setup_student(
-        db_session, prefix="vin", visibility="vinuni_only"
-    )
+    _student, pid = await _setup_student(db_session, prefix="vin", visibility="vinuni_only")
     _pu, _org, partner = await make_org_with_admin(db_session, display_name="P4")
     # External partner cannot see a vinuni_only profile -> 404.
     with pytest.raises(ResourceNotFoundError):
-        await profile_service.get_profile_for_viewer(
-            db_session, principal=partner, profile_id=pid
-        )
+        await profile_service.get_profile_for_viewer(db_session, principal=partner, profile_id=pid)
     # A fellow VinUni student can see the public projection.
     _vu, viewer_student = await make_student(db_session, prefix="viewer")
     view = await profile_service.get_profile_for_viewer(
@@ -265,22 +265,26 @@ async def test_application_context_reveals_invited_contact_only_when_accepted(
 ) -> None:
     su, student = await make_student(db_session, prefix="appctx")
     await profile_service.update_my_profile(
-        db_session, principal=student,
-        payload={"show_email": "invited", "phone": "+84900000000",
-                 "show_phone": "invited"},
+        db_session,
+        principal=student,
+        payload={"show_email": "invited", "phone": "+84900000000", "show_phone": "invited"},
         ctx=CTX,
     )
     _pu, _org, partner = await make_org_with_admin(db_session, display_name="P5")
 
     not_revealed = await profile_service.get_profile_for_application_context(
-        db_session, viewer_principal=partner, applicant_user_id=su.id,
+        db_session,
+        viewer_principal=partner,
+        applicant_user_id=su.id,
         reveal_accepted=False,
     )
     assert not_revealed is not None
     assert "email" not in not_revealed and "phone" not in not_revealed
 
     revealed = await profile_service.get_profile_for_application_context(
-        db_session, viewer_principal=partner, applicant_user_id=su.id,
+        db_session,
+        viewer_principal=partner,
+        applicant_user_id=su.id,
         reveal_accepted=True,
     )
     assert revealed is not None
@@ -293,7 +297,9 @@ async def test_application_context_none_without_profile(db_session) -> None:
     _pu, _org, partner = await make_org_with_admin(db_session, display_name="P6")
     # No profile materialized yet -> the seam returns None (never fabricates one).
     result = await profile_service.get_profile_for_application_context(
-        db_session, viewer_principal=partner, applicant_user_id=su.id,
+        db_session,
+        viewer_principal=partner,
+        applicant_user_id=su.id,
         reveal_accepted=True,
     )
     assert result is None
@@ -307,8 +313,12 @@ async def test_application_context_none_without_profile(db_session) -> None:
 async def test_avatar_upload_stores_url_and_audits(db_session, memory_storage) -> None:
     _su, student = await make_student(db_session, prefix="avu1")
     result = await avatar_service.upload_avatar(
-        db_session, principal=student,
-        filename="photo.png", data=PNG_BYTES, content_type="image/png", ctx=CTX,
+        db_session,
+        principal=student,
+        filename="photo.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        ctx=CTX,
     )
     assert result["avatar_url"] is not None
     assert "avatar" in result["avatar_url"]
@@ -319,12 +329,20 @@ async def test_avatar_upload_stores_url_and_audits(db_session, memory_storage) -
 async def test_avatar_upload_replaces_old_file(db_session, memory_storage) -> None:
     _su, student = await make_student(db_session, prefix="avu2")
     await avatar_service.upload_avatar(
-        db_session, principal=student,
-        filename="a.png", data=PNG_BYTES, content_type="image/png", ctx=CTX,
+        db_session,
+        principal=student,
+        filename="a.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        ctx=CTX,
     )
     await avatar_service.upload_avatar(
-        db_session, principal=student,
-        filename="b.jpg", data=JPEG_BYTES, content_type="image/jpeg", ctx=CTX,
+        db_session,
+        principal=student,
+        filename="b.jpg",
+        data=JPEG_BYTES,
+        content_type="image/jpeg",
+        ctx=CTX,
     )
     # Only one avatar per student; storage holds exactly one active key.
     assert len(memory_storage._data) == 1
@@ -334,8 +352,12 @@ async def test_avatar_upload_rejects_non_image(db_session, memory_storage) -> No
     _su, student = await make_student(db_session, prefix="avu3")
     with pytest.raises(ValidationFailedError):
         await avatar_service.upload_avatar(
-            db_session, principal=student,
-            filename="resume.txt", data=NOT_AN_IMAGE, content_type="text/plain", ctx=CTX,
+            db_session,
+            principal=student,
+            filename="resume.txt",
+            data=NOT_AN_IMAGE,
+            content_type="text/plain",
+            ctx=CTX,
         )
 
 
@@ -343,19 +365,29 @@ async def test_avatar_upload_rejects_empty_file(db_session, memory_storage) -> N
     _su, student = await make_student(db_session, prefix="avu4")
     with pytest.raises(ValidationFailedError):
         await avatar_service.upload_avatar(
-            db_session, principal=student,
-            filename="empty.png", data=b"", content_type="image/png", ctx=CTX,
+            db_session,
+            principal=student,
+            filename="empty.png",
+            data=b"",
+            content_type="image/png",
+            ctx=CTX,
         )
 
 
 async def test_avatar_remove_clears_and_audits(db_session, memory_storage) -> None:
     _su, student = await make_student(db_session, prefix="avu5")
     await avatar_service.upload_avatar(
-        db_session, principal=student,
-        filename="x.png", data=PNG_BYTES, content_type="image/png", ctx=CTX,
+        db_session,
+        principal=student,
+        filename="x.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        ctx=CTX,
     )
     result = await avatar_service.remove_avatar(
-        db_session, principal=student, ctx=CTX,
+        db_session,
+        principal=student,
+        ctx=CTX,
     )
     assert result["avatar_url"] is None
     assert not memory_storage._data  # storage cleared
@@ -367,7 +399,9 @@ async def test_avatar_remove_is_idempotent(db_session, memory_storage) -> None:
     _su, student = await make_student(db_session, prefix="avu6")
     # No avatar set — remove should not raise.
     result = await avatar_service.remove_avatar(
-        db_session, principal=student, ctx=CTX,
+        db_session,
+        principal=student,
+        ctx=CTX,
     )
     assert result["avatar_url"] is None
 
@@ -375,8 +409,12 @@ async def test_avatar_remove_is_idempotent(db_session, memory_storage) -> None:
 async def test_avatar_serve_returns_bytes(db_session, memory_storage) -> None:
     _su, student = await make_student(db_session, prefix="avu7")
     await avatar_service.upload_avatar(
-        db_session, principal=student,
-        filename="x.png", data=PNG_BYTES, content_type="image/png", ctx=CTX,
+        db_session,
+        principal=student,
+        filename="x.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        ctx=CTX,
     )
     profile_id = await get_profile_id(db_session, principal=student)
     blob = await avatar_service.serve_avatar(db_session, profile_id=profile_id)
@@ -398,8 +436,12 @@ async def test_profile_response_includes_avatar_url(db_session, memory_storage) 
     assert me["avatar_url"] is None
     # After upload: avatar_url is set.
     await avatar_service.upload_avatar(
-        db_session, principal=student,
-        filename="photo.png", data=PNG_BYTES, content_type="image/png", ctx=CTX,
+        db_session,
+        principal=student,
+        filename="photo.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        ctx=CTX,
     )
     me2 = await profile_service.get_my_profile(db_session, principal=student)
     assert me2["avatar_url"] is not None
@@ -415,9 +457,9 @@ async def test_talent_search_returns_open_to_work_students(db_session) -> None:
 
     _su, student = await make_student(db_session, prefix="talent1")
     await profile_service.update_my_profile(
-        db_session, principal=student,
-        payload={"profile_visibility": "public", "is_open_to_work": True,
-                 "location_city": "Hanoi"},
+        db_session,
+        principal=student,
+        payload={"profile_visibility": "public", "is_open_to_work": True, "location_city": "Hanoi"},
         ctx=CTX,
     )
     _pu, _org, partner = await make_org_with_admin(db_session, display_name="Recruiter Co")
@@ -439,7 +481,8 @@ async def test_talent_search_excludes_not_open_to_work(db_session) -> None:
 
     _su, student = await make_student(db_session, prefix="talent2")
     await profile_service.update_my_profile(
-        db_session, principal=student,
+        db_session,
+        principal=student,
         payload={"profile_visibility": "public", "is_open_to_work": False},
         ctx=CTX,
     )

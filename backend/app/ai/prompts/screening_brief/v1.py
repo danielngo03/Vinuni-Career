@@ -48,7 +48,5 @@ def build_user_message(
         parts.append(f"Education: {education_summary}")
     if cover_letter_snippet:
         parts.append(f"Cover letter excerpt: {cover_letter_snippet[:200]}")
-    parts.append(
-        "\nWrite 3-4 screening bullet points comparing this candidate to the role."
-    )
+    parts.append("\nWrite 3-4 screening bullet points comparing this candidate to the role.")
     return "\n".join(parts)

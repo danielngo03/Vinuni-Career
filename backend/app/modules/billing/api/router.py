@@ -44,7 +44,9 @@ async def list_plans(
     audience: str | None = Query(default=None),
 ) -> dict:
     data = await subscription_service.list_plans(
-        session, principal=auth.principal, audience=audience,
+        session,
+        principal=auth.principal,
+        audience=audience,
     )
     return success(data)
 
@@ -59,7 +61,8 @@ async def get_my_subscription(
 
 
 @router.post(
-    "/subscription", status_code=status.HTTP_201_CREATED,
+    "/subscription",
+    status_code=status.HTTP_201_CREATED,
     summary="Request a paid plan (-> pending, bank-transfer instructions)",
 )
 async def request_subscription(
@@ -68,7 +71,10 @@ async def request_subscription(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await subscription_service.request_subscription(
-        session, principal=auth.principal, plan_id=body.plan_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        plan_id=body.plan_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -81,7 +87,10 @@ async def cancel_subscription(
 ) -> dict:
     version = body.version if body else None
     data = await subscription_service.cancel(
-        session, principal=auth.principal, ctx=auth.ctx, version=version,
+        session,
+        principal=auth.principal,
+        ctx=auth.ctx,
+        version=version,
     )
     return success(data)
 
@@ -98,7 +107,9 @@ async def list_admin_plans(
     audience: str | None = Query(default=None),
 ) -> dict:
     data = await moderation_service.list_plans_admin(
-        session, principal=auth.principal, audience=audience,
+        session,
+        principal=auth.principal,
+        audience=audience,
     )
     return success(data)
 
@@ -149,8 +160,12 @@ async def list_all_subscriptions(
     limit: int | None = Query(default=None),
 ) -> dict:
     items, total, revenue = await moderation_service.list_all(
-        session, principal=auth.principal, status=subscription_status,
-        audience=audience, principal_id=principal_id, limit=limit,
+        session,
+        principal=auth.principal,
+        status=subscription_status,
+        audience=audience,
+        principal_id=principal_id,
+        limit=limit,
     )
     return success(items, meta={"count": total, "revenue": revenue})
 
@@ -166,8 +181,12 @@ async def mark_paid(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await moderation_service.mark_paid(
-        session, principal=auth.principal, subscription_id=subscription_id,
-        payment_reference=body.payment_reference, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        subscription_id=subscription_id,
+        payment_reference=body.payment_reference,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -185,7 +204,11 @@ async def admin_cancel(
     reason = body.reason if body else None
     version = body.version if body else None
     data = await moderation_service.admin_cancel(
-        session, principal=auth.principal, subscription_id=subscription_id,
-        reason=reason, version=version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        subscription_id=subscription_id,
+        reason=reason,
+        version=version,
+        ctx=auth.ctx,
     )
     return success(data)

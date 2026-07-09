@@ -51,9 +51,7 @@ async def make_student(
     return user, principal
 
 
-async def make_ready_cv(
-    session: AsyncSession, *, student: Principal, title: str = "My CV"
-) -> dict:
+async def make_ready_cv(session: AsyncSession, *, student: Principal, title: str = "My CV") -> dict:
     """Create a blank builder CV, seed a header name, and finalize it into the library.
 
     The CV library lifecycle (design spec 2026-07-05) makes template CVs start as
@@ -68,21 +66,27 @@ async def make_ready_cv(
     from tests.auth_utils import CTX
 
     cv = await cv_service.create_cv(
-        session, principal=student,
-        payload={"title": title, "creation_mode": "blank_template"}, ctx=CTX,
+        session,
+        principal=student,
+        payload={"title": title, "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(cv["id"])
     header = next(s for s in cv["sections"] if s["section_type"] == "header")
     # Seed a header name so the non-empty finalize gate passes (a blank CV is blocked).
     await cv_service.upsert_section(
-        session, principal=student, cv_id=cv_id,
+        session,
+        principal=student,
+        cv_id=cv_id,
         section_id=uuid.UUID(header["id"]),
-        payload={"content": {"name": "Test Candidate"},
-                 "expected_version": cv["version"]},
+        payload={"content": {"name": "Test Candidate"}, "expected_version": cv["version"]},
         ctx=CTX,
     )
     return await cv_lifecycle_service.finalize_cv(
-        session, principal=student, cv_id=cv_id, ctx=CTX,
+        session,
+        principal=student,
+        cv_id=cv_id,
+        ctx=CTX,
     )
 
 

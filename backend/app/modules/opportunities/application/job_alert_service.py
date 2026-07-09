@@ -73,15 +73,19 @@ async def list_alerts(
     """Return all job alerts for the authenticated student (newest first)."""
     _require_student(principal)
     rows = (
-        await session.execute(
-            select(JobAlert)
-            .where(
-                JobAlert.user_id == principal.user_id,
-                JobAlert.is_active.is_(True),
+        (
+            await session.execute(
+                select(JobAlert)
+                .where(
+                    JobAlert.user_id == principal.user_id,
+                    JobAlert.is_active.is_(True),
+                )
+                .order_by(JobAlert.created_at.desc())
             )
-            .order_by(JobAlert.created_at.desc())
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [_present(alert) for alert in rows]
 
 
@@ -106,14 +110,17 @@ async def create_alert(
     _require_student(principal)
 
     existing_count = (
-        await session.execute(
-            select(JobAlert)
-            .where(
-                JobAlert.user_id == principal.user_id,
-                JobAlert.is_active.is_(True),
+        (
+            await session.execute(
+                select(JobAlert).where(
+                    JobAlert.user_id == principal.user_id,
+                    JobAlert.is_active.is_(True),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
     if len(existing_count) >= _MAX_ALERTS_PER_USER:
         raise QuotaExceededError(
@@ -138,13 +145,10 @@ async def create_alert(
         await session.flush()
     except Exception as exc:
         exc_str = str(exc).lower()
-        if (
-            "uq_job_alerts_user_name" in exc_str
-            or ("job_alerts" in exc_str and "unique" in exc_str)
+        if "uq_job_alerts_user_name" in exc_str or (
+            "job_alerts" in exc_str and "unique" in exc_str
         ):
-            raise ConflictError(
-                details={"reason": "alert_name_exists"}
-            ) from exc
+            raise ConflictError(details={"reason": "alert_name_exists"}) from exc
         raise
 
     # Every write action records an audit entry (CLAUDE.md non-negotiable). The

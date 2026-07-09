@@ -191,7 +191,10 @@ async def test_remove_policy_gate(db_session) -> None:
     # A merely-negative-opinion reason is NOT an allowed removal ground.
     with pytest.raises(RemovalReasonInvalidError):
         await review_moderation_service.remove_review(
-            db_session, principal=uni, review_id=rid, reason="negative_opinion",
+            db_session,
+            principal=uni,
+            review_id=rid,
+            reason="negative_opinion",
             ctx=CTX,
         )
     # A policy reason removes it and drops it from the aggregate.
@@ -210,8 +213,11 @@ async def test_remove_policy_gate(db_session) -> None:
 async def test_anonymous_review_has_no_author_pii(db_session) -> None:
     _partner, student, slug = await _eligible_setup(db_session)
     sub = await review_service.submit_review(
-        db_session, principal=student, slug=slug,
-        payload=_payload(is_anonymous=True), ctx=CTX,
+        db_session,
+        principal=student,
+        slug=slug,
+        payload=_payload(is_anonymous=True),
+        ctx=CTX,
     )
     rid = uuid.UUID(sub["id"])
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
@@ -251,14 +257,17 @@ async def test_edit_pulls_published_review_from_aggregate(db_session) -> None:
     await review_moderation_service.publish_review(
         db_session, principal=uni, review_id=rid, ctx=CTX
     )
-    assert (
-        await company_rating_facade.ratings_for(db_session, [partner.org_id])
-    )[partner.org_id]["review_count"] == 1
+    assert (await company_rating_facade.ratings_for(db_session, [partner.org_id]))[partner.org_id][
+        "review_count"
+    ] == 1
 
     # Editing re-enters pending and removes it from the public aggregate.
     edited = await review_service.update_review(
-        db_session, principal=student, review_id=rid,
-        payload=_payload(title="Updated thoughts"), ctx=CTX,
+        db_session,
+        principal=student,
+        review_id=rid,
+        payload=_payload(title="Updated thoughts"),
+        ctx=CTX,
     )
     assert edited["status"] == entities.STATUS_PENDING
     assert await company_rating_facade.ratings_for(db_session, [partner.org_id]) == {}

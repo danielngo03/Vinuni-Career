@@ -62,9 +62,7 @@ class FraudAssessment:
             "risk_score": round(self.risk_score, 4),
             "risk_level": self.risk_level,
             "requires_human_review": self.requires_human_review,
-            "signals": [
-                {"code": s.code, "reason": s.reason} for s in self.signals
-            ],
+            "signals": [{"code": s.code, "reason": s.reason} for s in self.signals],
         }
 
 
@@ -97,8 +95,7 @@ def _rule_unverified_email_domain(signals: dict) -> FraudSignal | None:
         return FraudSignal(
             code="unverified_email_domain",
             weight=0.20,
-            reason="Recruiter email domain does not match a verified "
-            "company domain.",
+            reason="Recruiter email domain does not match a verified company domain.",
         )
     return None
 
@@ -119,8 +116,7 @@ def _rule_off_platform_contact(signals: dict) -> FraudSignal | None:
         return FraudSignal(
             code="off_platform_contact",
             weight=0.20,
-            reason="Content pushes candidates to unmonitored external "
-            "channels before applying.",
+            reason="Content pushes candidates to unmonitored external channels before applying.",
         )
     return None
 
@@ -141,8 +137,7 @@ def _rule_duplicate_content(signals: dict) -> FraudSignal | None:
         return FraudSignal(
             code="duplicated_content",
             weight=0.15,
-            reason="Content is a near-duplicate of other postings "
-            "(copy-paste farm pattern).",
+            reason="Content is a near-duplicate of other postings (copy-paste farm pattern).",
         )
     return None
 
@@ -153,8 +148,7 @@ def _rule_salary_outlier(signals: dict) -> FraudSignal | None:
         return FraudSignal(
             code="salary_outlier",
             weight=0.20,
-            reason="Advertised salary is an extreme outlier versus market "
-            "range for the role.",
+            reason="Advertised salary is an extreme outlier versus market range for the role.",
         )
     return None
 

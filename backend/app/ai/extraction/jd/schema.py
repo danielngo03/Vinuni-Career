@@ -100,10 +100,18 @@ class JDExtractionSchema(BaseModel):
 EXPECTED_KEYS: frozenset[str] = frozenset(JDExtractionSchema.model_fields.keys())
 
 # Free-text fields the prompt is told to copy/translate -> verifiable by verbatim match.
-_QUOTABLE_TEXT = frozenset({
-    "title", "title_en", "description_vi", "description_en",
-    "requirements_vi", "requirements_en", "benefits_vi", "benefits_en",
-})
+_QUOTABLE_TEXT = frozenset(
+    {
+        "title",
+        "title_en",
+        "description_vi",
+        "description_en",
+        "requirements_vi",
+        "requirements_en",
+        "benefits_vi",
+        "benefits_en",
+    }
+)
 _QUOTABLE_LIST = frozenset({"required_skills", "preferred_skills"})
 # Never need a per-field review flag.
 _NO_REVIEW = frozenset({"salary_is_disclosed", "detected_language", "cv_language_required"})

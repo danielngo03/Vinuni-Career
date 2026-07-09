@@ -16,13 +16,9 @@ from tests.org_utils import add_member, email, make_org_with_admin
 async def test_no_org_identity_keeps_persona_baseline(db_session) -> None:
     user = await register_verified(db_session, email=email("student"))
     identity = (
-        await db_session.execute(
-            select(Identity).where(Identity.user_id == user.id)
-        )
+        await db_session.execute(select(Identity).where(Identity.user_id == user.id))
     ).scalar_one()
-    grants = await grant_resolver.resolve_grants(
-        db_session, user_id=user.id, identity=identity
-    )
+    grants = await grant_resolver.resolve_grants(db_session, user_id=user.id, identity=identity)
     assert grants == permissions_for("student")
 
 
@@ -55,23 +51,17 @@ async def test_suspended_membership_drops_to_persona_baseline(db_session) -> Non
     )
     # Suspend the membership.
     m = (
-        await db_session.execute(
-            select(Membership).where(Membership.id == membership.id)
-        )
+        await db_session.execute(select(Membership).where(Membership.id == membership.id))
     ).scalar_one()
     m.status = "suspended"
     await db_session.commit()
 
     identity = (
         await db_session.execute(
-            select(Identity).where(
-                Identity.user_id == user.id, Identity.org_id == org.id
-            )
+            select(Identity).where(Identity.user_id == user.id, Identity.org_id == org.id)
         )
     ).scalar_one()
-    grants = await grant_resolver.resolve_grants(
-        db_session, user_id=user.id, identity=identity
-    )
+    grants = await grant_resolver.resolve_grants(db_session, user_id=user.id, identity=identity)
     # Org grant dropped; falls back to the persona baseline (no org powers).
     assert grants == permissions_for(identity.persona)
     assert "roles:read" not in grants
@@ -79,7 +69,9 @@ async def test_suspended_membership_drops_to_persona_baseline(db_session) -> Non
 
 async def test_superadmin_bypasses_grants(db_session) -> None:
     principal = Principal(
-        user_id=__import__("uuid").uuid4(), persona="university_staff",
-        is_superadmin=True, permissions=frozenset(),
+        user_id=__import__("uuid").uuid4(),
+        persona="university_staff",
+        is_superadmin=True,
+        permissions=frozenset(),
     )
     assert permission_checker.can(principal, "partners", "approve")

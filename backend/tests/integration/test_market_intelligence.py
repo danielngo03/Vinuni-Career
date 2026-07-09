@@ -16,9 +16,7 @@ from tests.org_utils import make_org_with_admin
 
 
 def _student() -> Principal:
-    return Principal(
-        user_id=uuid.uuid4(), persona="student", permissions=frozenset()
-    )
+    return Principal(user_id=uuid.uuid4(), persona="student", permissions=frozenset())
 
 
 async def _seed_active_jobs(db, *, org_id: uuid.UUID, posted_by: uuid.UUID) -> None:
@@ -47,9 +45,7 @@ class TestGate:
         from app.shared.exceptions import PermissionDeniedError
 
         with pytest.raises(PermissionDeniedError):
-            await svc.get_market_intelligence(
-                db_session, principal=_student()
-            )
+            await svc.get_market_intelligence(db_session, principal=_student())
 
     async def test_partner_denied(self, db_session) -> None:
         from app.shared.exceptions import PermissionDeniedError
@@ -62,9 +58,7 @@ class TestGate:
 
 
 class TestReport:
-    async def test_empty_platform_is_low_signal_without_narrative(
-        self, db_session
-    ) -> None:
+    async def test_empty_platform_is_low_signal_without_narrative(self, db_session) -> None:
         _u, _org, uni = await make_org_with_admin(
             db_session, org_type="university", display_name="VinUni"
         )
@@ -96,9 +90,7 @@ class TestReport:
         for leak in ("openrouter", "gpt", "model_alias", "prompt_tokens"):
             assert leak not in blob
 
-    async def test_provider_failure_degrades_to_aggregates(
-        self, db_session
-    ) -> None:
+    async def test_provider_failure_degrades_to_aggregates(self, db_session) -> None:
         from unittest import mock
 
         pu, porg, _partner = await make_org_with_admin(

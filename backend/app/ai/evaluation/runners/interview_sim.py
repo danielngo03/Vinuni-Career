@@ -32,8 +32,7 @@ def _sim_deterministic_result(role: str, round_type: str) -> dict[str, Any]:
         "role": safe_role,
         "round": norm_round,
         "question": (
-            "Tell me about yourself and why you are interested in this "
-            f"{safe_role} position."
+            f"Tell me about yourself and why you are interested in this {safe_role} position."
         ),
         "tip": (
             "Use the Present-Past-Future structure: who you are now, "
@@ -58,9 +57,13 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
     result = probe.result or {}
     if key == "degrades_to_deterministic":
         is_det = not result.get("ai_available", True)
-        return None if is_det == bool(exp) else (
-            "degrades_to_deterministic expected "
-            f"{exp}, got ai_available={result.get('ai_available')}"
+        return (
+            None
+            if is_det == bool(exp)
+            else (
+                "degrades_to_deterministic expected "
+                f"{exp}, got ai_available={result.get('ai_available')}"
+            )
         )
     if key == "no_crash":
         return None  # reaching here means no exception was raised

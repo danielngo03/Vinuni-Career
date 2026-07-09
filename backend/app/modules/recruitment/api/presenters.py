@@ -139,16 +139,12 @@ def applicant_application(
     }
 
 
-def _applicant_identity(
-    app: Application, *, revealed: bool, user, locale: str
-) -> dict:
+def _applicant_identity(app: Application, *, revealed: bool, user, locale: str) -> dict:
     if app.is_anonymous and not revealed:
         return {
             "is_anonymous": True,
             "revealed": False,
-            "anonymous_id": anonymous_handle(
-                applicant_id=app.applicant_id, org_id=app.org_id
-            ),
+            "anonymous_id": anonymous_handle(applicant_id=app.applicant_id, org_id=app.org_id),
             "display_name": "Ứng viên ẩn danh" if locale == "vi" else "Anonymous candidate",
         }
     return {
@@ -340,9 +336,7 @@ def interview_view(
     the partner-only gate summary for the interview's stage.
     """
 
-    meeting_link = (
-        decrypt_meeting_link(iv.meeting_link) if viewer_is_attendee else None
-    )
+    meeting_link = decrypt_meeting_link(iv.meeting_link) if viewer_is_attendee else None
     return {
         "id": str(iv.id),
         "application_id": str(iv.application_id),

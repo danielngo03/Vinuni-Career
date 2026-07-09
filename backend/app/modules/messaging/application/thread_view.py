@@ -53,9 +53,7 @@ async def _real_name(session: AsyncSession, user_id: uuid.UUID, locale: str) -> 
     return name or _NEUTRAL_NAME.get(labels.normalize_locale(locale), _NEUTRAL_NAME["vi"])
 
 
-async def _is_org_member(
-    session: AsyncSession, *, user_id: uuid.UUID, org_id: uuid.UUID
-) -> bool:
+async def _is_org_member(session: AsyncSession, *, user_id: uuid.UUID, org_id: uuid.UUID) -> bool:
     return await user_read_facade.is_org_member(session, user_id=user_id, org_id=org_id)
 
 
@@ -75,9 +73,7 @@ async def render_participant_label(
     if is_moderator:
         return await _real_name(session, other_user_id, locale)
 
-    viewer_is_partner = (
-        viewer.persona == rules.PARTNER_MEMBER and viewer.org_id == thread.org_id
-    )
+    viewer_is_partner = viewer.persona == rules.PARTNER_MEMBER and viewer.org_id == thread.org_id
     # 2) Partner viewing the masked applicant.
     if (
         viewer_is_partner
@@ -86,9 +82,7 @@ async def render_participant_label(
         and other_user_id == relationship.applicant_id
     ):
         if relationship.is_anonymous and not relationship.is_revealed:
-            return labels.anonymous_handle(
-                short_code=_short_code(thread.context_id), locale=locale
-            )
+            return labels.anonymous_handle(short_code=_short_code(thread.context_id), locale=locale)
         return await _real_name(session, other_user_id, locale)
 
     # 3) Student/alumni viewing the org counterpart -> org name.
@@ -139,9 +133,7 @@ async def thread_unread(
 ) -> int:
     """Unread = messages newer than my ``last_read_at``, not authored by me, not deleted."""
 
-    participant = await _shared.get_participant(
-        session, thread_id=thread_id, user_id=viewer_id
-    )
+    participant = await _shared.get_participant(session, thread_id=thread_id, user_id=viewer_id)
     if participant is None:
         return 0
     anchor = participant.last_read_at or _EPOCH
@@ -182,7 +174,5 @@ async def unread_count_total(session: AsyncSession, *, principal: Principal) -> 
     )
     total = 0
     for thread_id, _last_read in rows:
-        total += await thread_unread(
-            session, thread_id=thread_id, viewer_id=principal.user_id
-        )
+        total += await thread_unread(session, thread_id=thread_id, viewer_id=principal.user_id)
     return total

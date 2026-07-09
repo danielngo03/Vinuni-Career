@@ -41,9 +41,7 @@ def _slug(value: str, *, fallback: str = "ung-vien") -> str:
     import unicodedata
 
     ascii_only = (
-        unicodedata.normalize("NFKD", value or "")
-        .encode("ascii", "ignore")
-        .decode("ascii")
+        unicodedata.normalize("NFKD", value or "").encode("ascii", "ignore").decode("ascii")
     )
     slug = re.sub(r"[^a-z0-9]+", "-", ascii_only.lower()).strip("-")
     return slug[:60] or fallback
@@ -73,16 +71,19 @@ async def export_applications(session: AsyncSession, principal: Principal, args:
     from app.modules.recruitment.application import export_service
 
     try:
-        content, row_count, resolved_cols, job_title = (
-            await export_service.export_applications_xlsx(
-                session,
-                principal=principal,
-                job_id=job_id,
-                stage=args.get("stage"),
-                status=args.get("status"),
-                columns=columns,
-                locale=str(args.get("locale") or "vi"),
-            )
+        (
+            content,
+            row_count,
+            resolved_cols,
+            job_title,
+        ) = await export_service.export_applications_xlsx(
+            session,
+            principal=principal,
+            job_id=job_id,
+            stage=args.get("stage"),
+            status=args.get("status"),
+            columns=columns,
+            locale=str(args.get("locale") or "vi"),
         )
     except PermissionDeniedError:
         return {"ok": False, "error": "permission_denied"}
@@ -311,8 +312,17 @@ async def rewrite_job_description(session: AsyncSession, principal: Principal, a
     payload = {
         k: v
         for k, v in args.items()
-        if k in ("employment_type", "experience_level", "location", "required_skills",
-                  "preferred_skills", "responsibilities", "benefits", "partner_instruction")
+        if k
+        in (
+            "employment_type",
+            "experience_level",
+            "location",
+            "required_skills",
+            "preferred_skills",
+            "responsibilities",
+            "benefits",
+            "partner_instruction",
+        )
     }
     try:
         result = await jd_ai_service.draft_description(

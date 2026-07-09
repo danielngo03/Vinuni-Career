@@ -29,9 +29,7 @@ async def _identity_for(
 ) -> Identity:
     return (
         await session.execute(
-            select(Identity).where(
-                Identity.user_id == user_id, Identity.org_id == org_id
-            )
+            select(Identity).where(Identity.user_id == user_id, Identity.org_id == org_id)
         )
     ).scalar_one()
 
@@ -40,9 +38,7 @@ async def principal_for(
     session: AsyncSession, *, user, org_id: uuid.UUID, superadmin: bool = False
 ) -> Principal:
     identity = await _identity_for(session, user_id=user.id, org_id=org_id)
-    grants = await grant_resolver.resolve_grants(
-        session, user_id=user.id, identity=identity
-    )
+    grants = await grant_resolver.resolve_grants(session, user_id=user.id, identity=identity)
     return Principal(
         user_id=user.id,
         persona=identity.persona,

@@ -46,8 +46,6 @@ def build_user_message(report: dict) -> str:
             "- Most-demanded skills: "
             + ", ".join(f"{s['skill']} ({s['count']})" for s in top_skills)
         )
-    lines.append(
-        f"- Salary disclosure rate: {report.get('salary_disclosure_rate', 0)}%"
-    )
+    lines.append(f"- Salary disclosure rate: {report.get('salary_disclosure_rate', 0)}%")
     lines.append("\nWrite the 3-5 sentence briefing now.")
     return "\n".join(lines)

@@ -108,9 +108,7 @@ class AlertRule(Base):
     metric: Mapped[str] = mapped_column(String(80), nullable=False)
     comparison: Mapped[str] = mapped_column(String(10), nullable=False)
     threshold: Mapped[float] = mapped_column(Float, nullable=False)
-    window_days: Mapped[int] = mapped_column(
-        Integer, nullable=False, server_default="1", default=1
-    )
+    window_days: Mapped[int] = mapped_column(Integer, nullable=False, server_default="1", default=1)
     severity: Mapped[str] = mapped_column(
         String(20), nullable=False, server_default="warning", default="warning"
     )
@@ -147,9 +145,7 @@ class Incident(Base):
     """
 
     __tablename__ = "incidents"
-    __table_args__ = (
-        Index("ix_incidents_status_triggered_at", "status", "triggered_at"),
-    )
+    __table_args__ = (Index("ix_incidents_status_triggered_at", "status", "triggered_at"),)
 
     id: Mapped[uuid.UUID] = mapped_column(
         Uuid(as_uuid=True),

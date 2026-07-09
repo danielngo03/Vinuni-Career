@@ -28,9 +28,7 @@ async def test_outbox_event_write(db_session) -> None:
     await db_session.commit()
 
     row = (
-        await db_session.execute(
-            select(OutboxEvent).where(OutboxEvent.id == event.id)
-        )
+        await db_session.execute(select(OutboxEvent).where(OutboxEvent.id == event.id))
     ).scalar_one()
     assert row.event_type == "application.submitted"
     assert row.published_at is None  # unpublished by default

@@ -40,9 +40,7 @@ def _audit_ctx(sub: Subscription) -> AuditContext:
     return AuditContext(actor_id=None, actor_org_id=None)
 
 
-async def expiry_sweep(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def expiry_sweep(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Expire every active subscription whose window has closed.
 
     ``status=active AND end_at <= now`` -> ``expired`` + revert limits to default.
@@ -60,7 +58,9 @@ async def expiry_sweep(
                     Subscription.end_at <= now,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     expired = 0
     for sub in rows:
@@ -71,22 +71,24 @@ async def expiry_sweep(
         sub.expired_at = now
         sub.version += 1
         await write_audit(
-            session, action="billing.subscription_expired",
-            resource_type="subscription", resource_id=sub.id,
+            session,
+            action="billing.subscription_expired",
+            resource_type="subscription",
+            resource_id=sub.id,
             context=_audit_ctx(sub),
             after={"status": sub.status, "principal_type": sub.principal_type},
         )
         await notify.notify_owner(
-            session, subscription=sub, template_key="billing.expired",
+            session,
+            subscription=sub,
+            template_key="billing.expired",
         )
         expired += 1
     await session.flush()
     return {"expired": expired}
 
 
-async def expiring_notice(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def expiring_notice(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Enqueue a deduped T-7d "expiring soon" notice for active subscriptions.
 
     ``status=active AND now < end_at <= now+7d AND expiring_notified_at IS NULL``
@@ -106,14 +108,18 @@ async def expiring_notice(
                     Subscription.expiring_notified_at.is_(None),
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     notified = 0
     for sub in soon:
         sub.expiring_notified_at = now
         sub.version += 1
         await notify.notify_owner(
-            session, subscription=sub, template_key="billing.expiring",
+            session,
+            subscription=sub,
+            template_key="billing.expiring",
         )
         notified += 1
     await session.flush()

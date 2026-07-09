@@ -138,26 +138,14 @@ class AiOpsEvent(Base):
     prompt_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
     completion_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
     latency_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    status: Mapped[str] = mapped_column(
-        String(16), nullable=False, server_default="ok"
-    )
-    fallback_used: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, server_default="false"
-    )
-    circuit_open: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, server_default="false"
-    )
+    status: Mapped[str] = mapped_column(String(16), nullable=False, server_default="ok")
+    fallback_used: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false")
+    circuit_open: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false")
     cost_usd: Mapped[float | None] = mapped_column(Numeric(10, 7), nullable=True)
-    unpriced: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, server_default="false"
-    )
-    org_id: Mapped[uuid.UUID | None] = mapped_column(
-        Uuid(as_uuid=True), nullable=True, index=True
-    )
+    unpriced: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false")
+    org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True, index=True)
     user_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
-    session_id: Mapped[uuid.UUID | None] = mapped_column(
-        Uuid(as_uuid=True), nullable=True
-    )
+    session_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
     request_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
     langfuse_trace_id: Mapped[str | None] = mapped_column(String(128), nullable=True)
 
@@ -189,36 +177,20 @@ class AiUsageDaily(Base):
         default=uuid.uuid4,
         server_default=func.gen_random_uuid(),
     )
-    day: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, index=True
-    )
+    day: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
     task_type: Mapped[str] = mapped_column(String(64), nullable=False)
-    provider: Mapped[str] = mapped_column(
-        String(64), nullable=False, server_default=""
-    )
-    model: Mapped[str] = mapped_column(
-        String(128), nullable=False, server_default=""
-    )
+    provider: Mapped[str] = mapped_column(String(64), nullable=False, server_default="")
+    model: Mapped[str] = mapped_column(String(128), nullable=False, server_default="")
     org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
     requests: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
     errors: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
     fallbacks: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
     blocked: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
-    prompt_tokens: Mapped[int] = mapped_column(
-        Integer, nullable=False, server_default="0"
-    )
-    completion_tokens: Mapped[int] = mapped_column(
-        Integer, nullable=False, server_default="0"
-    )
-    cost_usd: Mapped[float] = mapped_column(
-        Numeric(12, 7), nullable=False, server_default="0"
-    )
-    latency_ms_sum: Mapped[int] = mapped_column(
-        Integer, nullable=False, server_default="0"
-    )
-    latency_ms_count: Mapped[int] = mapped_column(
-        Integer, nullable=False, server_default="0"
-    )
+    prompt_tokens: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    completion_tokens: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    cost_usd: Mapped[float] = mapped_column(Numeric(12, 7), nullable=False, server_default="0")
+    latency_ms_sum: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    latency_ms_count: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
 
 
 class AiBillableUsage(Base):
@@ -269,9 +241,7 @@ class AiBillableUsage(Base):
     )
     # "student" | "partner" | "university" | "system"
     actor_persona: Mapped[str] = mapped_column(String(24), nullable=False)
-    org_id: Mapped[uuid.UUID | None] = mapped_column(
-        Uuid(as_uuid=True), nullable=True, index=True
-    )
+    org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True, index=True)
     # "user" | "org" | "department" | "platform"
     billing_scope: Mapped[str] = mapped_column(String(16), nullable=False)
     # Product feature key, e.g. "chatbot" | "cv_fit_explanation" | "jd_extraction".

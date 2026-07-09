@@ -72,9 +72,7 @@ class TotpOutcome:
     reason: str | None = None
 
 
-async def confirm_setup(
-    session: AsyncSession, *, user_id: uuid.UUID, code: str
-) -> TotpOutcome:
+async def confirm_setup(session: AsyncSession, *, user_id: uuid.UUID, code: str) -> TotpOutcome:
     """Verify ``code`` against the pending secret and mark it confirmed.
 
     ``reason`` mirrors the previous inline error details exactly

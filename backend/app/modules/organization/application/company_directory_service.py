@@ -87,9 +87,7 @@ async def list_companies(
         filters.append(Organization.industry == industry.strip())
 
     total = (
-        await session.execute(
-            _base_query().with_only_columns(func.count()).where(*filters)
-        )
+        await session.execute(_base_query().with_only_columns(func.count()).where(*filters))
     ).scalar_one()
 
     stmt = (
@@ -104,7 +102,8 @@ async def list_companies(
         .offset(offset)
         .limit(page_limit + 1)
     )
-    rows = list((await session.execute(stmt)).all())
+    raw_rows = (await session.execute(stmt)).all()
+    rows: list[tuple[Organization, int]] = [(org, int(count or 0)) for org, count in raw_rows]
 
     has_more = len(rows) > page_limit
     page_rows = rows[:page_limit]
@@ -124,15 +123,11 @@ async def list_companies(
         )
         for org, count in page_rows
     ]
-    next_cursor = (
-        encode_cursor({"offset": offset + page_limit}) if has_more else None
-    )
+    next_cursor = encode_cursor({"offset": offset + page_limit}) if has_more else None
     return items, next_cursor, page_limit, total
 
 
-async def get_listable_org_by_slug(
-    session: AsyncSession, *, slug: str
-) -> Organization | None:
+async def get_listable_org_by_slug(session: AsyncSession, *, slug: str) -> Organization | None:
     """Return the org for ``slug`` iff it is publicly listable, else ``None``.
 
     Single source of the public-visibility predicate so logo delivery, the
@@ -145,9 +140,7 @@ async def get_listable_org_by_slug(
     ).scalar_one_or_none()
 
 
-async def get_company(
-    session: AsyncSession, *, slug: str, locale: str = "vi"
-) -> dict:
+async def get_company(session: AsyncSession, *, slug: str, locale: str = "vi") -> dict:
     """Public company profile by slug, or ``404`` if not a listable partner."""
 
     org = await get_listable_org_by_slug(session, slug=slug)
@@ -159,9 +152,7 @@ async def get_company(
     )
     count_col = public_read.visible_job_count_subquery(Organization.id)
     active_job_count = (
-        await session.execute(
-            select(count_col).where(Organization.id == org.id)
-        )
+        await session.execute(select(count_col).where(Organization.id == org.id))
     ).scalar_one()
 
     # Company review aggregate via the reviews facade (read model only — no live
@@ -171,14 +162,14 @@ async def get_company(
     ratings = await company_rating_facade.ratings_for(session, [org.id])
 
     return public_presenters.company_detail(
-        org, active_job_count=active_job_count or 0, active_jobs=active_jobs,
+        org,
+        active_job_count=active_job_count or 0,
+        active_jobs=active_jobs,
         rating=ratings.get(org.id),
     )
 
 
-async def list_spotlight_companies(
-    session: AsyncSession, *, limit: int
-) -> list[dict]:
+async def list_spotlight_companies(session: AsyncSession, *, limit: int) -> list[dict]:
     """Verified-first companies for the marketplace spotlight rail."""
 
     count_col = public_read.visible_job_count_subquery(Organization.id)
@@ -192,10 +183,10 @@ async def list_spotlight_companies(
         )
         .limit(max(limit, 0))
     )
-    rows = list((await session.execute(stmt)).all())
+    raw_rows = (await session.execute(stmt)).all()
+    rows: list[tuple[Organization, int]] = [(org, int(count or 0)) for org, count in raw_rows]
     return [
-        public_presenters.directory_summary(org, active_job_count=count or 0)
-        for org, count in rows
+        public_presenters.directory_summary(org, active_job_count=count or 0) for org, count in rows
     ]
 
 
@@ -227,11 +218,7 @@ async def list_recommended_companies(
     seed_industries: set[str] = set()
     if seed_company_ids:
         seed_rows = list(
-            (
-                await session.execute(
-                    _base_query().where(Organization.id.in_(seed_company_ids))
-                )
-            )
+            (await session.execute(_base_query().where(Organization.id.in_(seed_company_ids))))
             .scalars()
             .all()
         )
@@ -252,7 +239,8 @@ async def list_recommended_companies(
         )
         .limit(max(page_limit * 4, 12))
     )
-    rows = list((await session.execute(stmt)).all())
+    raw_rows = (await session.execute(stmt)).all()
+    rows: list[tuple[Organization, int]] = [(org, int(count or 0)) for org, count in raw_rows]
 
     def score(row: tuple[Organization, int]) -> tuple[int, int, str]:
         org, count = row
@@ -277,6 +265,4 @@ async def list_recommended_companies(
 async def count_public_companies(session: AsyncSession) -> int:
     """Number of publicly listable partner companies."""
 
-    return (
-        await session.execute(_base_query().with_only_columns(func.count()))
-    ).scalar_one()
+    return (await session.execute(_base_query().with_only_columns(func.count()))).scalar_one()

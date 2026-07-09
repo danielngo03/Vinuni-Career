@@ -32,24 +32,26 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
         return None if got == bool(exp) else f"flagged expected {exp}, got {got}"
     if key == "policy_violation":
         got = bool(d.get("policy_violation"))
-        return None if got == bool(exp) else (
-            f"policy_violation expected {exp}, got {got}"
-        )
+        return None if got == bool(exp) else (f"policy_violation expected {exp}, got {got}")
     if key == "category_contains":
         categories = {f.get("category") for f in d.get("findings") or []}
         return None if exp in categories else f"expected category {exp!r} in {categories!r}"
     if key == "category_excludes":
         categories = {f.get("category") for f in d.get("findings") or []}
-        return None if exp not in categories else (
-            f"category {exp!r} must NOT be present, got {categories!r}"
+        return (
+            None
+            if exp not in categories
+            else (f"category {exp!r} must NOT be present, got {categories!r}")
         )
     if key == "finding_count_gte":
         n = len(d.get("findings") or [])
         return None if n >= int(exp) else f"finding_count expected >= {exp}, got {n}"
     if key == "matched_phrase_excludes":
         phrases = " ".join(f.get("matched_phrase", "") for f in d.get("findings") or [])
-        return None if str(exp).lower() not in phrases.lower() else (
-            f"matched_phrase should never contain {exp!r} (bounded-span guarantee)"
+        return (
+            None
+            if str(exp).lower() not in phrases.lower()
+            else (f"matched_phrase should never contain {exp!r} (bounded-span guarantee)")
         )
     if key == "no_crash":
         return None

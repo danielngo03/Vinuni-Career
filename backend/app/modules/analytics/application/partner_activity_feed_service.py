@@ -155,13 +155,17 @@ async def list_partner_activity_feed(
     approximation, department when the viewer is department-scoped)."""
 
     rows = (
-        await session.execute(
-            select(AuditLog)
-            .where(AuditLog.actor_org_id == org_id)
-            .order_by(AuditLog.occurred_at.desc())
-            .limit(max(limit, 1) * 3)  # over-fetch; some rows get capability-filtered out
+        (
+            await session.execute(
+                select(AuditLog)
+                .where(AuditLog.actor_org_id == org_id)
+                .order_by(AuditLog.occurred_at.desc())
+                .limit(max(limit, 1) * 3)  # over-fetch; some rows get capability-filtered out
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     if not rows:
         return []
 
@@ -192,9 +196,7 @@ async def list_partner_activity_feed(
         if cap is None:
             continue
         resource, action_verb = cap
-        if not permission_checker.can(
-            principal, resource, action_verb, resource_org_id=org_id
-        ):
+        if not permission_checker.can(principal, resource, action_verb, resource_org_id=org_id):
             continue
         if not await _actor_shares_department(row.actor_id):
             continue
@@ -204,14 +206,16 @@ async def list_partner_activity_feed(
             actor = await user_service.get_by_id(session, row.actor_id)
             actor_name = actor.full_name if actor else None
 
-        out.append({
-            "action": row.action,
-            "action_label": _label(row.action, locale=locale),
-            "resource_type": row.resource_type,
-            "resource_id": str(row.resource_id) if row.resource_id else None,
-            "actor_name": actor_name,
-            "occurred_at": row.occurred_at.isoformat(),
-        })
+        out.append(
+            {
+                "action": row.action,
+                "action_label": _label(row.action, locale=locale),
+                "resource_type": row.resource_type,
+                "resource_id": str(row.resource_id) if row.resource_id else None,
+                "actor_name": actor_name,
+                "occurred_at": row.occurred_at.isoformat(),
+            }
+        )
         if len(out) >= limit:
             break
     return out

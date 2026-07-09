@@ -104,8 +104,14 @@ async def test_upload_sets_logo_and_serve_returns_bytes(db_session, _memory_stor
     before = await _audit_count(db_session, "organization.logo_updated")
 
     result = await logo_service.upload_logo(
-        db_session, principal=admin, org_id=org.id, filename="logo.png",
-        data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        filename="logo.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        expected_version=None,
+        ctx=CTX,
     )
     # Detail projection exposes the safe URL, never the raw storage key.
     assert "logo_path" not in result
@@ -132,8 +138,14 @@ async def test_upload_sets_logo_and_serve_returns_bytes(db_session, _memory_stor
 async def test_upload_accepts_jpeg_and_webp(db_session, data, content_type, media_type):
     _u, org, admin = await make_org_with_admin(db_session)
     await logo_service.upload_logo(
-        db_session, principal=admin, org_id=org.id, filename="logo",
-        data=data, content_type=content_type, expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        filename="logo",
+        data=data,
+        content_type=content_type,
+        expected_version=None,
+        ctx=CTX,
     )
     served = await logo_service.serve_logo(db_session, slug=org.slug)
     assert served.media_type == media_type
@@ -142,13 +154,25 @@ async def test_upload_accepts_jpeg_and_webp(db_session, data, content_type, medi
 async def test_replacing_logo_deletes_old_object(db_session, _memory_storage):
     _u, org, admin = await make_org_with_admin(db_session)
     await logo_service.upload_logo(
-        db_session, principal=admin, org_id=org.id, filename="a.png",
-        data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        filename="a.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        expected_version=None,
+        ctx=CTX,
     )
     first_key = (await _reload(db_session, org.id)).logo_path
     await logo_service.upload_logo(
-        db_session, principal=admin, org_id=org.id, filename="b.webp",
-        data=WEBP_BYTES, content_type="image/webp", expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        filename="b.webp",
+        data=WEBP_BYTES,
+        content_type="image/webp",
+        expected_version=None,
+        ctx=CTX,
     )
     second_key = (await _reload(db_session, org.id)).logo_path
     assert first_key != second_key
@@ -165,8 +189,14 @@ async def test_non_image_rejected_user_safe(db_session):
     _u, org, admin = await make_org_with_admin(db_session)
     with pytest.raises(ValidationFailedError) as exc:
         await logo_service.upload_logo(
-            db_session, principal=admin, org_id=org.id, filename="cv.png",
-            data=NOT_AN_IMAGE, content_type="image/png", expected_version=None, ctx=CTX,
+            db_session,
+            principal=admin,
+            org_id=org.id,
+            filename="cv.png",
+            data=NOT_AN_IMAGE,
+            content_type="image/png",
+            expected_version=None,
+            ctx=CTX,
         )
     assert exc.value.details["reason"] == "unsupported_image_type"
     # Nothing persisted on rejection.
@@ -177,8 +207,14 @@ async def test_declared_type_not_in_allowlist_rejected(db_session):
     _u, org, admin = await make_org_with_admin(db_session)
     with pytest.raises(ValidationFailedError):
         await logo_service.upload_logo(
-            db_session, principal=admin, org_id=org.id, filename="x.gif",
-            data=PNG_BYTES, content_type="image/gif", expected_version=None, ctx=CTX,
+            db_session,
+            principal=admin,
+            org_id=org.id,
+            filename="x.gif",
+            data=PNG_BYTES,
+            content_type="image/gif",
+            expected_version=None,
+            ctx=CTX,
         )
 
 
@@ -189,8 +225,14 @@ async def test_oversize_rejected(db_session, monkeypatch):
     _u, org, admin = await make_org_with_admin(db_session)
     with pytest.raises(ValidationFailedError) as exc:
         await logo_service.upload_logo(
-            db_session, principal=admin, org_id=org.id, filename="logo.png",
-            data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+            db_session,
+            principal=admin,
+            org_id=org.id,
+            filename="logo.png",
+            data=PNG_BYTES,
+            content_type="image/png",
+            expected_version=None,
+            ctx=CTX,
         )
     assert exc.value.details["reason"] == "file_too_large"
 
@@ -199,8 +241,14 @@ async def test_empty_file_rejected(db_session):
     _u, org, admin = await make_org_with_admin(db_session)
     with pytest.raises(ValidationFailedError) as exc:
         await logo_service.upload_logo(
-            db_session, principal=admin, org_id=org.id, filename="logo.png",
-            data=b"", content_type="image/png", expected_version=None, ctx=CTX,
+            db_session,
+            principal=admin,
+            org_id=org.id,
+            filename="logo.png",
+            data=b"",
+            content_type="image/png",
+            expected_version=None,
+            ctx=CTX,
         )
     assert exc.value.details["reason"] == "empty_file"
 
@@ -212,13 +260,17 @@ async def test_empty_file_rejected(db_session):
 
 async def test_member_without_update_permission_denied_403(db_session):
     _u, org, _admin = await make_org_with_admin(db_session)
-    _mu, _m, member = await add_member(
-        db_session, org=org, permissions=[("members", "read")]
-    )
+    _mu, _m, member = await add_member(db_session, org=org, permissions=[("members", "read")])
     with pytest.raises(PermissionDeniedError):
         await logo_service.upload_logo(
-            db_session, principal=member, org_id=org.id, filename="logo.png",
-            data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+            db_session,
+            principal=member,
+            org_id=org.id,
+            filename="logo.png",
+            data=PNG_BYTES,
+            content_type="image/png",
+            expected_version=None,
+            ctx=CTX,
         )
 
 
@@ -228,8 +280,14 @@ async def test_cross_org_upload_is_404(db_session):
     # Admin A targets Org B's id -> hidden as 404, never 403 (no enumeration).
     with pytest.raises(ResourceNotFoundError):
         await logo_service.upload_logo(
-            db_session, principal=admin_a, org_id=org_b.id, filename="logo.png",
-            data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+            db_session,
+            principal=admin_a,
+            org_id=org_b.id,
+            filename="logo.png",
+            data=PNG_BYTES,
+            content_type="image/png",
+            expected_version=None,
+            ctx=CTX,
         )
     assert (await _reload(db_session, org_b.id)).logo_path is None
 
@@ -238,8 +296,14 @@ async def test_upload_version_conflict(db_session):
     _u, org, admin = await make_org_with_admin(db_session)
     with pytest.raises(VersionConflictError):
         await logo_service.upload_logo(
-            db_session, principal=admin, org_id=org.id, filename="logo.png",
-            data=PNG_BYTES, content_type="image/png", expected_version=999, ctx=CTX,
+            db_session,
+            principal=admin,
+            org_id=org.id,
+            filename="logo.png",
+            data=PNG_BYTES,
+            content_type="image/png",
+            expected_version=999,
+            ctx=CTX,
         )
 
 
@@ -251,14 +315,24 @@ async def test_upload_version_conflict(db_session):
 async def test_remove_logo_clears_and_audits(db_session, _memory_storage):
     _u, org, admin = await make_org_with_admin(db_session)
     await logo_service.upload_logo(
-        db_session, principal=admin, org_id=org.id, filename="logo.png",
-        data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        filename="logo.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        expected_version=None,
+        ctx=CTX,
     )
     key = (await _reload(db_session, org.id)).logo_path
     before = await _audit_count(db_session, "organization.logo_removed")
 
     result = await logo_service.remove_logo(
-        db_session, principal=admin, org_id=org.id, expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        expected_version=None,
+        ctx=CTX,
     )
     assert result["logo_url"] is None
     assert (await _reload(db_session, org.id)).logo_path is None
@@ -280,8 +354,14 @@ async def test_public_logo_url_none_before_url_after(db_session):
     assert public_presenters.public_logo_url(org) is None
 
     await logo_service.upload_logo(
-        db_session, principal=admin, org_id=org.id, filename="logo.png",
-        data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        filename="logo.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        expected_version=None,
+        ctx=CTX,
     )
     org = await _reload(db_session, org.id)
     url = public_presenters.public_logo_url(org)
@@ -292,8 +372,14 @@ async def test_public_logo_url_none_before_url_after(db_session):
 async def test_serve_404_for_suspended_and_pending(db_session):
     _u, org, admin = await make_org_with_admin(db_session)
     await logo_service.upload_logo(
-        db_session, principal=admin, org_id=org.id, filename="logo.png",
-        data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        filename="logo.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        expected_version=None,
+        ctx=CTX,
     )
     org = await _reload(db_session, org.id)
     await _set_status(db_session, org, "suspended")
@@ -310,8 +396,14 @@ async def test_serve_404_for_university_and_missing(db_session):
         db_session, org_type="university", display_name="VinUni"
     )
     await logo_service.upload_logo(
-        db_session, principal=uni_admin, org_id=uni.id, filename="logo.png",
-        data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+        db_session,
+        principal=uni_admin,
+        org_id=uni.id,
+        filename="logo.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        expected_version=None,
+        ctx=CTX,
     )
     # University orgs are never publicly listable -> never serve a logo.
     with pytest.raises(ResourceNotFoundError):
@@ -328,8 +420,14 @@ async def test_serve_404_for_university_and_missing(db_session):
 async def test_http_public_logo_serve_contract(client, db_session):
     _u, org, admin = await make_org_with_admin(db_session, display_name="Acme Co")
     await logo_service.upload_logo(
-        db_session, principal=admin, org_id=org.id, filename="logo.png",
-        data=PNG_BYTES, content_type="image/png", expected_version=None, ctx=CTX,
+        db_session,
+        principal=admin,
+        org_id=org.id,
+        filename="logo.png",
+        data=PNG_BYTES,
+        content_type="image/png",
+        expected_version=None,
+        ctx=CTX,
     )
 
     resp = await client.get(f"/companies/{org.slug}/logo")

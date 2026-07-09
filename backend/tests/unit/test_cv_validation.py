@@ -77,12 +77,8 @@ def test_password_protected_pdf_rejected(monkeypatch) -> None:
     def _raise_password(filename: str, data: bytes):  # noqa: ARG001
         raise text_extraction.ExtractionError("PASSWORD_PROTECTED_FILE")
 
-    monkeypatch.setattr(
-        "app.ai.extraction.cv_validation.extract_text", _raise_password
-    )
-    result = validate_cv_upload(
-        "locked.pdf", b"%PDF-1.4 encrypted body", max_bytes=MAX_BYTES
-    )
+    monkeypatch.setattr("app.ai.extraction.cv_validation.extract_text", _raise_password)
+    result = validate_cv_upload("locked.pdf", b"%PDF-1.4 encrypted body", max_bytes=MAX_BYTES)
     assert result.accepted is False
     assert result.quality_code == "PASSWORD_PROTECTED_FILE"
     assert result.recoverability == "fix_input"

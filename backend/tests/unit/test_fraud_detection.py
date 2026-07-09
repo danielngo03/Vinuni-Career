@@ -71,15 +71,11 @@ class TestRobustness:
             assert result.signals == []
 
     def test_bools_are_not_numbers(self) -> None:
-        result = assess_fraud_signals(
-            {"org_age_days": True, "jobs_posted_last_7d": True}
-        )
+        result = assess_fraud_signals({"org_age_days": True, "jobs_posted_last_7d": True})
         assert result.signals == []
 
     def test_spoofed_output_keys_in_input_are_ignored(self) -> None:
-        result = assess_fraud_signals(
-            {"risk_score": 1.0, "requires_human_review": True}
-        )
+        result = assess_fraud_signals({"risk_score": 1.0, "requires_human_review": True})
         assert not result.requires_human_review
 
     def test_as_dict_contains_no_input_echo(self) -> None:

@@ -24,11 +24,16 @@ PERSONA_PERMISSIONS: dict[str, frozenset[str]] = {
     STUDENT: _COMMON
     | frozenset(
         {
-            "cv:*", "profile:*", "applications:*", "jobs:read",
-            "events:read", "events:register",
+            "cv:*",
+            "profile:*",
+            "applications:*",
+            "jobs:read",
+            "events:read",
+            "events:register",
             # Student self-service subscription (ADR-0010): view plans + request a
             # paid tier for their own user-scoped subscription.
-            "billing:view", "billing:subscribe",
+            "billing:view",
+            "billing:subscribe",
         }
     ),
     ALUMNI: _COMMON

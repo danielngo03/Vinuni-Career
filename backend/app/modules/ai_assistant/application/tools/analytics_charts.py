@@ -184,6 +184,11 @@ async def get_hiring_funnel_diagram(
         return {"ok": True, "empty": True, "title": title}
 
     top = ordered[0][1]
+    note = (
+        "% = phần ứng viên đạt đến mỗi vòng so với vòng đầu tiên."
+        if locale == "vi"
+        else "% = share of applicants who reached each stage vs the first."
+    )
     stages = [
         {
             "label": _status_label(s, locale),
@@ -200,6 +205,6 @@ async def get_hiring_funnel_diagram(
         "top_stage_count": top,
         "render": {
             "kind": "diagram",
-            "diagram": {"type": "funnel", "title": title, "stages": stages},
+            "diagram": {"type": "funnel", "title": title, "stages": stages, "note": note},
         },
     }

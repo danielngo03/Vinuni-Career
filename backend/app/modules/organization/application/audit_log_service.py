@@ -67,9 +67,7 @@ async def list_audit_log(
     stmt = stmt.order_by(AuditLog.id.desc()).limit(page_limit + 1)
 
     rows = list((await session.execute(stmt)).scalars().all())
-    page = build_cursor_page(
-        rows, limit=page_limit, cursor_builder=lambda row: {"id": str(row.id)}
-    )
+    page = build_cursor_page(rows, limit=page_limit, cursor_builder=lambda row: {"id": str(row.id)})
 
     actor_ids = {row.actor_id for row in page.items if row.actor_id is not None}
     contacts = await user_read_facade.get_user_contacts(session, actor_ids)
@@ -77,9 +75,7 @@ async def list_audit_log(
         {
             "id": row.id,
             "actor_id": str(row.actor_id) if row.actor_id else None,
-            "actor_email": (
-                contacts[row.actor_id].email if row.actor_id in contacts else None
-            ),
+            "actor_email": (contacts[row.actor_id].email if row.actor_id in contacts else None),
             "action": row.action,
             "resource_type": row.resource_type,
             "resource_id": str(row.resource_id) if row.resource_id else None,

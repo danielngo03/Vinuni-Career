@@ -45,9 +45,7 @@ class InvalidEventFieldError(ValidationFailedError):
     message = "Dữ liệu sự kiện không hợp lệ. Vui lòng kiểm tra lại."
 
     def __init__(self, *, field: str) -> None:
-        super().__init__(
-            self.message, details={"reason": "invalid_field", "field": field}
-        )
+        super().__init__(self.message, details={"reason": "invalid_field", "field": field})
 
 
 class RegistrationClosedError(ConflictError):

@@ -7,7 +7,7 @@ empty-state when no seed data is loaded, and unknown-province lookup.
 
 from __future__ import annotations
 
-from app.modules.locations.api.router import list_provinces, list_province_wards
+from app.modules.locations.api.router import list_province_wards, list_provinces
 from app.shared.location_models import Province, Ward
 
 

@@ -13,6 +13,7 @@ DIFFERENT gap set on the discovery card than on the detail/batch paths. All path
 run OFFLINE here (no real provider), so the cross-lingual augmentation is OFF for
 all three — this isolates the projection alignment, not translation.
 """
+
 from __future__ import annotations
 
 import uuid
@@ -44,7 +45,9 @@ async def _build_vn_cv(db, student, *, title="CV Tiếng Việt") -> str:
     cv = await _make_cv(db, student, title=title)
     await _seed(db, cv["id"], "skills", [{"text": "Python, FastAPI, SQL"}])
     await _seed(
-        db, cv["id"], "experience",
+        db,
+        cv["id"],
+        "experience",
         [{"text": "Xây dựng REST API bằng Python và FastAPI tại một công ty khởi nghiệp."}],
     )
     await _seed(db, cv["id"], "summary", [{"text": "Thực tập sinh kỹ thuật backend."}])
@@ -65,6 +68,7 @@ async def _build_vn_cv(db, student, *, title="CV Tiếng Việt") -> str:
 # Cross-path parity                                                            #
 # --------------------------------------------------------------------------- #
 
+
 async def test_same_score_and_gaps_across_detail_batch_discovery(db_session) -> None:
     _user, student = await make_student(db_session)
     cv_id = await _build_vn_cv(db_session, student)
@@ -73,9 +77,7 @@ async def test_same_score_and_gaps_across_detail_batch_discovery(db_session) -> 
     job_id = await _create_job(db_session, cv_language_required="en")
 
     # 1. Detail / store path.
-    detail = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    detail = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     detail_best = detail["results"][0]
 
     # 2. Batch / job-card path.
@@ -85,9 +87,7 @@ async def test_same_score_and_gaps_across_detail_batch_discovery(db_session) -> 
     batch_entry = batch[str(job_id)]
 
     # 3. Discovery-card path.
-    job = (
-        await db_session.execute(select(Job).where(Job.id == job_id))
-    ).scalar_one()
+    job = (await db_session.execute(select(Job).where(Job.id == job_id))).scalar_one()
     items = await job_search_service._attach_student_fit(
         db_session,
         principal=student,
@@ -121,6 +121,7 @@ async def test_same_score_and_gaps_across_detail_batch_discovery(db_session) -> 
 # Empty-edge: no skills, no sections -> no crash, low_signal propagates        #
 # --------------------------------------------------------------------------- #
 
+
 async def test_empty_jd_and_empty_cv_no_crash_low_signal(db_session) -> None:
     _user, student = await make_student(db_session)
     # A CV with NO skills section (only an empty summary), and one with zero
@@ -140,9 +141,7 @@ async def test_empty_jd_and_empty_cv_no_crash_low_signal(db_session) -> None:
         requirements="",
     )
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert out["results"], "an active CV must still produce a result"
     assert out["results"][0]["score"] >= 0
     # A JD with no curated skills falls back to inferred terms only -> low_signal.

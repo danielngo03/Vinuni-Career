@@ -76,9 +76,7 @@ async def _offer_expire_sweep(session: AsyncSession, now: datetime) -> dict[str,
     return await offer_service.sweep_offers(session, now=now)
 
 
-async def _pipeline_sla_reminders(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _pipeline_sla_reminders(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await sla_reminder_service.sweep_sla_reminders(session, now=now)
 
 
@@ -90,9 +88,7 @@ async def _event_reminders_soon(session: AsyncSession, now: datetime) -> dict[st
     return await registration_service.sweep_reminders_soon(session, now=now)
 
 
-async def _event_waitlist_backfill(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _event_waitlist_backfill(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await registration_service.sweep_waitlist_backfill(session, now=now)
 
 
@@ -104,45 +100,31 @@ async def _event_no_show(session: AsyncSession, now: datetime) -> dict[str, int]
     return await registration_service.sweep_no_show(session, now=now)
 
 
-async def _advertising_activation(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _advertising_activation(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await ad_activation.activation_sweep(session, now=now)
 
 
-async def _advertising_completion(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _advertising_completion(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await ad_activation.completion_sweep(session, now=now)
 
 
-async def _advertising_flag_reconcile(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _advertising_flag_reconcile(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await ad_activation.flag_reconcile(session, now=now)
 
 
-async def _billing_expiry_sweep(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _billing_expiry_sweep(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await billing_expiry.expiry_sweep(session, now=now)
 
 
-async def _billing_expiring_notice(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _billing_expiring_notice(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await billing_expiry.expiring_notice(session, now=now)
 
 
-async def _career_outcomes_materialize(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _career_outcomes_materialize(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await materializer_service.materialize_career_outcomes(session, now)
 
 
-async def _discovery_session_cleanup(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _discovery_session_cleanup(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await discovery_cleanup.session_cleanup(session, now=now)
 
 
@@ -154,21 +136,15 @@ async def _weekly_job_digest(session: AsyncSession, now: datetime) -> dict[str, 
     return await weekly_digest_service.sweep_weekly_digest(session, now=now)
 
 
-async def _compliance_retention_sweep(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _compliance_retention_sweep(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await compliance_retention.sweep_retention(session, now=now)
 
 
-async def _market_intelligence_refresh(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _market_intelligence_refresh(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await mi_snapshot.refresh(session, now=now)
 
 
-async def _market_intelligence_reconcile(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _market_intelligence_reconcile(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await mi_snapshot.reconcile(session, now=now)
 
 
@@ -236,9 +212,7 @@ REGISTRY: tuple[ScheduledJob, ...] = (
     # snapshot (well inside ``market_intelligence_stale_after_seconds``) + a
     # nightly drift reconciliation check (read-only; logs only, self-heals via
     # the next scheduled refresh).
-    ScheduledJob(
-        "dashboards.market_intelligence_refresh_sweep", 900, _market_intelligence_refresh
-    ),
+    ScheduledJob("dashboards.market_intelligence_refresh_sweep", 900, _market_intelligence_refresh),
     ScheduledJob(
         "dashboards.market_intelligence_reconcile_sweep",
         86400,

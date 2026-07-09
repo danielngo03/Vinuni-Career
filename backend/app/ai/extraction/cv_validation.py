@@ -274,8 +274,6 @@ def validate_cv_upload(
         return _result(code, accepted=False, checksum=checksum)
 
     # 3. Content quality.
-    code, needs_review = classify_content(
-        extraction.text, kind=kind, ocr_used=extraction.ocr_used
-    )
+    code, needs_review = classify_content(extraction.text, kind=kind, ocr_used=extraction.ocr_used)
     accepted = code == "REVIEW_REQUIRED"
     return _result(code, accepted=accepted, checksum=checksum, needs_review=needs_review)

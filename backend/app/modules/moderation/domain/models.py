@@ -64,9 +64,7 @@ class HumanReviewItem(Base):
     findings_json: Mapped[dict] = mapped_column(_JSON, nullable=False, default=dict)
     resolution_note: Mapped[str | None] = mapped_column(Text, nullable=True)
     reviewed_by: Mapped[uuid.UUID | None] = mapped_column(Uuid, nullable=True)
-    reviewed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 # --------------------------------------------------------------------------- #
@@ -78,9 +76,7 @@ REPORT_ENTITY_TYPES = frozenset({"company", "job", "message"})
 REPORT_STATUS_PENDING = "PENDING"
 REPORT_STATUS_TRIAGED = "TRIAGED"
 REPORT_STATUS_DISMISSED = "DISMISSED"
-REPORT_STATUSES = frozenset(
-    {REPORT_STATUS_PENDING, REPORT_STATUS_TRIAGED, REPORT_STATUS_DISMISSED}
-)
+REPORT_STATUSES = frozenset({REPORT_STATUS_PENDING, REPORT_STATUS_TRIAGED, REPORT_STATUS_DISMISSED})
 
 
 class ContentReport(Base):
@@ -112,9 +108,7 @@ class ContentReport(Base):
     reporter_org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid, nullable=True)
     reason_code: Mapped[str] = mapped_column(String(30), nullable=False)
     note: Mapped[str | None] = mapped_column(Text, nullable=True)
-    status: Mapped[str] = mapped_column(
-        String(16), nullable=False, default=REPORT_STATUS_PENDING
-    )
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default=REPORT_STATUS_PENDING)
     review_item_id: Mapped[uuid.UUID | None] = mapped_column(
         Uuid, ForeignKey("human_review_queue.id", ondelete="SET NULL"), nullable=True
     )

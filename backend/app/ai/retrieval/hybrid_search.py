@@ -155,9 +155,7 @@ async def hybrid_job_search(
     )
 
     if settings.pgvector_enabled:
-        vector_results = await search_by_embedding(
-            session, query_text=query, limit=vector_limit
-        )
+        vector_results = await search_by_embedding(session, query_text=query, limit=vector_limit)
     else:
         vector_results = []
 

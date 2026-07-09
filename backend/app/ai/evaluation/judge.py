@@ -42,8 +42,7 @@ RUBRICS: dict[str, str] = {
         "quantified outcomes."
     ),
     "rewrite_cv_section": (
-        "Score whether the rewrite preserves the original meaning while improving "
-        "clarity and tone."
+        "Score whether the rewrite preserves the original meaning while improving clarity and tone."
     ),
     "optimize_cv_for_job": (
         "Score tailoring relevance, source faithfulness, and JD keyword grounding."
@@ -109,9 +108,9 @@ def _parse_verdict(raw: str) -> JudgeResult:
 
     reasoning = str(data.get("reasoning") or "").strip()[:1000]
     flags_raw = data.get("flags")
-    flags = [str(f)[:64] for f in flags_raw if str(f).strip()] if isinstance(
-        flags_raw, list
-    ) else []
+    flags = (
+        [str(f)[:64] for f in flags_raw if str(f).strip()] if isinstance(flags_raw, list) else []
+    )
     return JudgeResult(score=score, reasoning=reasoning, flags=flags)
 
 
@@ -147,9 +146,7 @@ async def judge_response(
         AIMessage(role="system", content=_SYSTEM_PROMPT),
         AIMessage(
             role="user",
-            content=build_user_message(
-                task_type, input_context, model_response, effective_rubric
-            ),
+            content=build_user_message(task_type, input_context, model_response, effective_rubric),
         ),
     ]
     provider = get_provider()

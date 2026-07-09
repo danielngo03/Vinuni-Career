@@ -140,7 +140,9 @@ async def list_participants(
                     MessageThreadParticipant.removed_at.is_(None),
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -153,9 +155,7 @@ async def org_display_name(session: AsyncSession, org_id: uuid.UUID) -> str:
     return name or "VinUni Career"
 
 
-async def is_university_moderator(
-    session: AsyncSession, principal: Principal
-) -> bool:
+async def is_university_moderator(session: AsyncSession, principal: Principal) -> bool:
     """A superadmin, or a ``university_staff`` member of a ``university``-type org."""
 
     if principal.is_superadmin:

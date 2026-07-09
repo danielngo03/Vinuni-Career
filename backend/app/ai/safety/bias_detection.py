@@ -159,8 +159,7 @@ _RULES: list[tuple[re.Pattern, str, str, str]] = [
         re.compile(r"\b(?:male|female)s?\s+only\b", re.IGNORECASE),
         CATEGORY_GENDER,
         RISK_HIGH,
-        "A gender-only requirement without a genuine occupational reason should "
-        "be removed.",
+        "A gender-only requirement without a genuine occupational reason should be removed.",
     ),
     (
         re.compile(r"\bnam\s+giới\s+ưu\s+tiên\b", re.IGNORECASE),
@@ -203,8 +202,7 @@ _RULES: list[tuple[re.Pattern, str, str, str]] = [
         re.compile(r"\battractive\s+appearance\b", re.IGNORECASE),
         CATEGORY_APPEARANCE,
         RISK_MEDIUM,
-        "Appearance requirements unrelated to the job's genuine needs should "
-        "be reconsidered.",
+        "Appearance requirements unrelated to the job's genuine needs should be reconsidered.",
     ),
     (
         re.compile(r"\bchưa\s+(?:lập\s+gia\s+đình|kết\s+hôn)\b", re.IGNORECASE),
@@ -217,8 +215,7 @@ _RULES: list[tuple[re.Pattern, str, str, str]] = [
         re.compile(r"\b(?:single|unmarried)\s+(?:preferred|only|required)\b", re.IGNORECASE),
         CATEGORY_APPEARANCE,
         RISK_HIGH,
-        "Marital-status requirements without a genuine occupational reason "
-        "should be removed.",
+        "Marital-status requirements without a genuine occupational reason should be removed.",
     ),
 ]
 

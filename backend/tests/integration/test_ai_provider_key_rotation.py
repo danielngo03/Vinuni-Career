@@ -45,9 +45,7 @@ async def test_reencrypt_rotates_key_version(db_session, monkeypatch) -> None:
     assert result["key_version"] != version_a
 
     row = (
-        await db_session.execute(
-            select(AiProviderConfig).where(AiProviderConfig.name == "rot-x")
-        )
+        await db_session.execute(select(AiProviderConfig).where(AiProviderConfig.name == "rot-x"))
     ).scalar_one()
     assert row.key_version == result["key_version"]
     assert row.api_key_ciphertext != old_cipher  # re-wrapped under the new key

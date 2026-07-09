@@ -16,11 +16,28 @@ _INSUFFICIENT_THRESHOLD = 120
 
 # Hiring / job-description signals (vi + en). Presence indicates a JD.
 JD_SIGNALS: list[str] = [
-    "mô tả công việc", "trách nhiệm", "nhiệm vụ", "yêu cầu", "quyền lợi",
-    "phúc lợi", "mức lương", "tuyển dụng", "vị trí", "kinh nghiệm",
-    "job description", "responsibilities", "requirements", "benefits",
-    "we are hiring", "we are looking for", "qualifications", "salary",
-    "employment type", "full-time", "part-time", "internship",
+    "mô tả công việc",
+    "trách nhiệm",
+    "nhiệm vụ",
+    "yêu cầu",
+    "quyền lợi",
+    "phúc lợi",
+    "mức lương",
+    "tuyển dụng",
+    "vị trí",
+    "kinh nghiệm",
+    "job description",
+    "responsibilities",
+    "requirements",
+    "benefits",
+    "we are hiring",
+    "we are looking for",
+    "qualifications",
+    "salary",
+    "employment type",
+    "full-time",
+    "part-time",
+    "internship",
 ]
 
 # CV/résumé signals that, when dominant WITHOUT hiring language, mean the file is
@@ -68,13 +85,23 @@ def classify_jd_content(text: str, *, kind: FileKind, ocr_used: bool) -> str:
     # Looks like a résumé (CV-only signals dominate, no hiring framing beyond a
     # stray keyword)? Guard against a CV slipping through.
     if _has_signal(text, _CV_ONLY_SIGNALS) and not _has_signal(
-        text, [
-            "tuyển dụng", "mô tả công việc", "we are hiring", "we are looking for",
-            "job description", "responsibilities", "quyền lợi", "benefits",
+        text,
+        [
+            "tuyển dụng",
+            "mô tả công việc",
+            "we are hiring",
+            "we are looking for",
+            "job description",
+            "responsibilities",
+            "quyền lợi",
+            "benefits",
             # Additional hiring-context overrides that co-occur with "học vấn" in JDs
             # (e.g. the JD lists education requirements under a "học vấn" section header).
-            "trách nhiệm", "phúc lợi", "vị trí tuyển", "tuyển dụng",
-        ]
+            "trách nhiệm",
+            "phúc lợi",
+            "vị trí tuyển",
+            "tuyển dụng",
+        ],
     ):
         return "not_a_jd"
     if len(text) < _INSUFFICIENT_THRESHOLD:

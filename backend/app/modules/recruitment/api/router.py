@@ -77,7 +77,10 @@ async def apply(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await apply_service.apply_to_job(
-        session, principal=auth.principal, payload=body.model_dump(), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        payload=body.model_dump(),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -90,7 +93,10 @@ async def list_my_applications(
     limit: int | None = Query(default=None),
 ) -> dict:
     items, next_cursor, page_limit = await apply_service.list_my_applications(
-        session, principal=auth.principal, cursor=cursor, limit=limit,
+        session,
+        principal=auth.principal,
+        cursor=cursor,
+        limit=limit,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
@@ -102,7 +108,9 @@ async def get_application(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await apply_service.get_application(
-        session, principal=auth.principal, application_id=application_id,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
     )
     return success(data)
 
@@ -138,7 +146,9 @@ async def cv_download(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await apply_service.get_application_cv_download(
-        session, principal=auth.principal, application_id=application_id,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
     )
     return success(data)
 
@@ -161,15 +171,16 @@ async def review_application(
     # lifecycle endpoints (submit/close/reopen) which accept an optional body
     # carrying only the optimistic ``version``.
     data = await decision_service.review_application(
-        session, principal=auth.principal, application_id=application_id,
-        version=body.version if body else None, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        version=body.version if body else None,
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@applications_router.post(
-    "/{application_id}/reject", summary="Reject an application (partner)"
-)
+@applications_router.post("/{application_id}/reject", summary="Reject an application (partner)")
 async def reject_application(
     application_id: uuid.UUID,
     body: RejectRequestBody,
@@ -177,8 +188,13 @@ async def reject_application(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await decision_service.reject_application(
-        session, principal=auth.principal, application_id=application_id,
-        reason=body.reason, note=body.note, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        reason=body.reason,
+        note=body.note,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -201,9 +217,12 @@ async def advance_application(
     # Body is optional ("advance" needs no payload beyond the optional optimistic
     # version); the Idempotency-Key header dedupes a true network retry.
     data = await stage_service.advance_application_stage(
-        session, principal=auth.principal, application_id=application_id,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
         version=body.version if body else None,
-        idempotency_key=idempotency_key, ctx=auth.ctx,
+        idempotency_key=idempotency_key,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -219,9 +238,14 @@ async def rollback_application(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await stage_service.rollback_application_stage(
-        session, principal=auth.principal, application_id=application_id,
-        target_stage_id=body.target_stage_id, reason=body.reason,
-        version=body.version, idempotency_key=idempotency_key, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        target_stage_id=body.target_stage_id,
+        reason=body.reason,
+        version=body.version,
+        idempotency_key=idempotency_key,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -243,10 +267,14 @@ async def submit_scorecard(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await scorecard_service.submit_scorecard(
-        session, principal=auth.principal, application_id=application_id,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
         recommendation=body.recommendation,
         scores=[s.model_dump() for s in body.scores],
-        comment=body.comment, version=body.version, ctx=auth.ctx,
+        comment=body.comment,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -262,7 +290,9 @@ async def list_scorecards(
     stage_id: uuid.UUID | None = Query(default=None),
 ) -> dict:
     data = await scorecard_service.list_scorecards(
-        session, principal=auth.principal, application_id=application_id,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
         stage_id=stage_id,
     )
     return success(data)
@@ -279,8 +309,11 @@ async def withdraw_scorecard(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await scorecard_service.withdraw_scorecard(
-        session, principal=auth.principal, application_id=application_id,
-        scorecard_id=scorecard_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        scorecard_id=scorecard_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -364,11 +397,18 @@ async def schedule_interview(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await interview_service.schedule_interview(
-        session, principal=auth.principal, application_id=application_id,
-        mode=body.mode, scheduled_at=body.scheduled_at,
-        assignee_ids=body.assignee_ids, duration_minutes=body.duration_minutes,
-        location=body.location, meeting_link=body.meeting_link,
-        title=body.title, notes=body.notes, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        mode=body.mode,
+        scheduled_at=body.scheduled_at,
+        assignee_ids=body.assignee_ids,
+        duration_minutes=body.duration_minutes,
+        location=body.location,
+        meeting_link=body.meeting_link,
+        title=body.title,
+        notes=body.notes,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -383,7 +423,9 @@ async def list_interviews(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await interview_service.list_interviews(
-        session, principal=auth.principal, application_id=application_id,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
     )
     return success(data)
 
@@ -400,10 +442,18 @@ async def reschedule_interview(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await interview_service.reschedule_interview(
-        session, principal=auth.principal, application_id=application_id,
-        interview_id=interview_id, scheduled_at=body.scheduled_at, mode=body.mode,
-        location=body.location, meeting_link=body.meeting_link, title=body.title,
-        notes=body.notes, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        interview_id=interview_id,
+        scheduled_at=body.scheduled_at,
+        mode=body.mode,
+        location=body.location,
+        meeting_link=body.meeting_link,
+        title=body.title,
+        notes=body.notes,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -420,8 +470,12 @@ async def set_interview_assignees(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await interview_service.set_assignees(
-        session, principal=auth.principal, application_id=application_id,
-        interview_id=interview_id, assignee_ids=body.assignee_ids, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        interview_id=interview_id,
+        assignee_ids=body.assignee_ids,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -438,8 +492,11 @@ async def cancel_interview(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await interview_service.cancel_interview(
-        session, principal=auth.principal, application_id=application_id,
-        interview_id=interview_id, version=body.version if body else None,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        interview_id=interview_id,
+        version=body.version if body else None,
         ctx=auth.ctx,
     )
     return success(data)
@@ -457,8 +514,12 @@ async def complete_interview(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await interview_service.complete_interview(
-        session, principal=auth.principal, application_id=application_id,
-        interview_id=interview_id, outcome=body.outcome, version=body.version,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        interview_id=interview_id,
+        outcome=body.outcome,
+        version=body.version,
         ctx=auth.ctx,
     )
     return success(data)
@@ -477,8 +538,11 @@ async def request_reveal(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await reveal_service.request_reveal(
-        session, principal=auth.principal, application_id=application_id,
-        reason=body.reason, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        reason=body.reason,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -493,8 +557,11 @@ async def respond_reveal(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await reveal_service.respond_reveal(
-        session, principal=auth.principal, application_id=application_id,
-        decision=body.decision, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        decision=body.decision,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -516,12 +583,19 @@ async def create_offer(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.create_offer(
-        session, principal=auth.principal, application_id=application_id,
-        position_title=body.position_title, expiry_date=body.expiry_date,
-        department=body.department, start_date=body.start_date,
-        salary_amount=body.salary_amount, salary_currency=body.salary_currency,
-        salary_period=body.salary_period, benefits_summary=body.benefits_summary,
-        terms_notes=body.terms_notes, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        position_title=body.position_title,
+        expiry_date=body.expiry_date,
+        department=body.department,
+        start_date=body.start_date,
+        salary_amount=body.salary_amount,
+        salary_currency=body.salary_currency,
+        salary_period=body.salary_period,
+        benefits_summary=body.benefits_summary,
+        terms_notes=body.terms_notes,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -535,7 +609,9 @@ async def list_application_offers(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.list_offers_partner(
-        session, principal=auth.principal, application_id=application_id,
+        session,
+        principal=auth.principal,
+        application_id=application_id,
     )
     return success(data)
 
@@ -552,12 +628,20 @@ async def update_offer(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.update_draft(
-        session, principal=auth.principal, offer_id=offer_id,
-        position_title=body.position_title, department=body.department,
-        start_date=body.start_date, salary_amount=body.salary_amount,
-        salary_currency=body.salary_currency, salary_period=body.salary_period,
-        benefits_summary=body.benefits_summary, terms_notes=body.terms_notes,
-        expiry_date=body.expiry_date, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        offer_id=offer_id,
+        position_title=body.position_title,
+        department=body.department,
+        start_date=body.start_date,
+        salary_amount=body.salary_amount,
+        salary_currency=body.salary_currency,
+        salary_period=body.salary_period,
+        benefits_summary=body.benefits_summary,
+        terms_notes=body.terms_notes,
+        expiry_date=body.expiry_date,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -570,8 +654,11 @@ async def submit_offer(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.submit_offer(
-        session, principal=auth.principal, offer_id=offer_id,
-        version=body.version if body else None, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        offer_id=offer_id,
+        version=body.version if body else None,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -584,8 +671,12 @@ async def approve_offer(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.approve_offer(
-        session, principal=auth.principal, offer_id=offer_id,
-        decision=body.decision, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        offer_id=offer_id,
+        decision=body.decision,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -598,8 +689,11 @@ async def send_offer(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.send_offer(
-        session, principal=auth.principal, offer_id=offer_id,
-        version=body.version if body else None, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        offer_id=offer_id,
+        version=body.version if body else None,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -612,8 +706,11 @@ async def rescind_offer(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.rescind_offer(
-        session, principal=auth.principal, offer_id=offer_id,
-        version=body.version if body else None, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        offer_id=offer_id,
+        version=body.version if body else None,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -629,7 +726,8 @@ async def list_my_offers(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.list_offers_student(
-        session, principal=auth.principal,
+        session,
+        principal=auth.principal,
     )
     return success({"offers": data})
 
@@ -641,7 +739,9 @@ async def get_my_offer(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.get_offer_student(
-        session, principal=auth.principal, offer_id=offer_id,
+        session,
+        principal=auth.principal,
+        offer_id=offer_id,
     )
     return success(data)
 
@@ -654,9 +754,13 @@ async def respond_offer(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await offer_service.respond_offer(
-        session, principal=auth.principal, offer_id=offer_id,
-        decision=body.decision, notes=body.notes,
-        idempotency_key=body.idempotency_key, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        offer_id=offer_id,
+        decision=body.decision,
+        notes=body.notes,
+        idempotency_key=body.idempotency_key,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -677,7 +781,11 @@ async def list_job_applications(
     limit: int | None = Query(default=None),
 ) -> dict:
     items, next_cursor, page_limit = await apply_service.list_job_applications(
-        session, principal=auth.principal, job_id=job_id, cursor=cursor, limit=limit,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        cursor=cursor,
+        limit=limit,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
@@ -691,7 +799,9 @@ async def job_pipeline_board(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await pipeline_board.get_job_pipeline_board(
-        session, principal=auth.principal, job_id=job_id,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
     )
     return success(data)
 
@@ -708,7 +818,10 @@ async def export_job_applications(
 ) -> Response:
     locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
     csv_body = await export_service.export_applications_csv(
-        session, principal=auth.principal, job_id=job_id, locale=locale,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        locale=locale,
     )
     filename = f"applications_{job_id}.csv"
     return Response(
@@ -829,7 +942,9 @@ async def get_my_invitation(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await invitation_service.get_invitation(
-        session, principal=auth.principal, invitation_id=invitation_id,
+        session,
+        principal=auth.principal,
+        invitation_id=invitation_id,
     )
     return success(data)
 

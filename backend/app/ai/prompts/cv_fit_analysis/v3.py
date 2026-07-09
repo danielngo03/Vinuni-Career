@@ -266,9 +266,7 @@ def build_user_message(
 
     exp_mode = job.get("experience_mode") or "not_specified"
     exp_min = job.get("experience_min_years")
-    exp_str = (
-        f"{exp_min}+ years ({exp_mode})" if exp_min is not None else exp_mode
-    )
+    exp_str = f"{exp_min}+ years ({exp_mode})" if exp_min is not None else exp_mode
 
     desc = str(job.get("description") or "")[:600]
     reqs_text = str(job.get("requirements") or "")[:600]

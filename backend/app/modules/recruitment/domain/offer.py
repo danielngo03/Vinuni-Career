@@ -80,9 +80,7 @@ TRANSITIONS: dict[str, tuple[frozenset[str], str]] = {
     EVENT_DECLINE: (frozenset({STATUS_SENT}), STATUS_DECLINED),
     EVENT_EXPIRE: (frozenset({STATUS_SENT}), STATUS_EXPIRED),
     EVENT_RESCIND: (
-        frozenset(
-            {STATUS_DRAFT, STATUS_PENDING_APPROVAL, STATUS_APPROVED, STATUS_SENT}
-        ),
+        frozenset({STATUS_DRAFT, STATUS_PENDING_APPROVAL, STATUS_APPROVED, STATUS_SENT}),
         STATUS_RESCINDED,
     ),
 }

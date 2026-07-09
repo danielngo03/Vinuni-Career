@@ -57,15 +57,19 @@ def _visibility_filter(principal: Principal):
     """SQLAlchemy ``WHERE`` clause fragment for the caller's visibility context."""
     if principal.is_superadmin or principal.persona == "university_staff":
         # University staff see all non-private open-to-work profiles.
-        return StudentProfile.profile_visibility.in_([
-            vocab.VISIBILITY_PUBLIC,
-            vocab.VISIBILITY_VINUNI_ONLY,
-        ])
+        return StudentProfile.profile_visibility.in_(
+            [
+                vocab.VISIBILITY_PUBLIC,
+                vocab.VISIBILITY_VINUNI_ONLY,
+            ]
+        )
     if principal.persona in VINUNI_PERSONAS:
-        return StudentProfile.profile_visibility.in_([
-            vocab.VISIBILITY_PUBLIC,
-            vocab.VISIBILITY_VINUNI_ONLY,
-        ])
+        return StudentProfile.profile_visibility.in_(
+            [
+                vocab.VISIBILITY_PUBLIC,
+                vocab.VISIBILITY_VINUNI_ONLY,
+            ]
+        )
     # External partners: only ``public`` profiles.
     return StudentProfile.profile_visibility == vocab.VISIBILITY_PUBLIC
 
@@ -88,13 +92,10 @@ async def search_talent_pool(
     _require_partner_or_staff(principal)
     limit = min(limit, MAX_PAGE_SIZE)
 
-    stmt = (
-        select(StudentProfile)
-        .where(
-            StudentProfile.deleted_at.is_(None),
-            StudentProfile.is_open_to_work.is_(True),
-            _visibility_filter(principal),
-        )
+    stmt = select(StudentProfile).where(
+        StudentProfile.deleted_at.is_(None),
+        StudentProfile.is_open_to_work.is_(True),
+        _visibility_filter(principal),
     )
 
     # Keyword now matches identity fields only (city/country); career text is gone.
@@ -112,23 +113,22 @@ async def search_talent_pool(
     if cursor:
         try:
             from datetime import datetime
+
             cursor_dt = datetime.fromisoformat(cursor)
             stmt = stmt.where(StudentProfile.updated_at < cursor_dt)
         except ValueError:
             pass
 
-    stmt = stmt.order_by(
-        StudentProfile.updated_at.desc(), StudentProfile.id.desc()
-    ).limit(limit + 1)
+    stmt = stmt.order_by(StudentProfile.updated_at.desc(), StudentProfile.id.desc()).limit(
+        limit + 1
+    )
 
     profiles = list((await session.execute(stmt)).scalars().all())
 
     has_more = len(profiles) > limit
     profiles = profiles[:limit]
 
-    names = await user_read_facade.get_full_names(
-        session, (p.user_id for p in profiles)
-    )
+    names = await user_read_facade.get_full_names(session, (p.user_id for p in profiles))
     items = [_talent_card(p, names.get(p.user_id)) for p in profiles]
     next_cursor = profiles[-1].updated_at.isoformat() if has_more and profiles else None
 

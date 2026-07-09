@@ -80,6 +80,9 @@ async def notify_partner_by_id(
     extra: dict | None = None,
 ) -> None:
     await notify_partner(
-        session, placement=placement, template_key=template_key,
-        locale=locale, extra=extra,
+        session,
+        placement=placement,
+        template_key=template_key,
+        locale=locale,
+        extra=extra,
     )
