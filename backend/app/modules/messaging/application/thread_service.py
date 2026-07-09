@@ -308,6 +308,13 @@ async def create_thread(
         session, recipient_ids=recipient_ids
     )
 
+    # A thread must NEVER co-locate two student-side individuals. Even as passive
+    # co-recipients of a partner, they would read each other's real names in the
+    # thread view — a student-discovery / de-anonymization channel. At most one
+    # student-side counterpart per thread (student↔student isolation invariant).
+    if sum(p in (rules.STUDENT, rules.ALUMNI) for p in recipient_personas) > 1:
+        raise StudentToStudentBlockedError()
+
     is_partner_student = (
         principal.persona == rules.PARTNER_MEMBER
         and any(p in (rules.STUDENT, rules.ALUMNI) for p in recipient_personas)

@@ -151,7 +151,7 @@ async def _render_party(
     if (
         viewer_is_org
         and not viewer_on_target
-        and parties.student_masked_to_partner_pending(
+        and parties.cold_requested_student_masked(
             thread_request_state=thread.request_state,
             org_is_initiator=org_is_initiator,
         )
@@ -361,6 +361,10 @@ async def _org_inbox_unread(session: AsyncSession, *, principal: Principal) -> i
         party.muted.is_(False),
         party.assignment_state != rules.ASSIGN_RESOLVED,
         MessageThread.deleted_at.is_(None),
+        # Recruitment application threads are recruiter-owned 1:1 (their own
+        # pipeline UI + reveal handshake), NOT shared-inbox org-Page threads —
+        # exclude them so they never inflate a non-owner teammate's team badge.
+        MessageThread.context_type.is_distinct_from(rules.CONTEXT_APPLICATION),
         ~has_participant,
     ]
     if not (capability.can_assign(principal, org_id) or principal.is_superadmin):

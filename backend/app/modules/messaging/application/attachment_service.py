@@ -270,6 +270,17 @@ async def download(
     thread = await _shared.load_thread(session, thread_id=attachment.thread_id)
     if not await _can_read_thread(session, principal=principal, thread=thread):
         raise ResourceNotFoundError()
+    if attachment.message_id is None:
+        # UNBOUND draft (uploaded, not yet sent) → visible only to its uploader; a
+        # teammate must not fetch another member's not-yet-sent attachment by id.
+        if attachment.uploader_id != principal.user_id:
+            raise ResourceNotFoundError()
+    else:
+        # A soft-deleted message's attachments are no longer downloadable (the UI
+        # hides them; the raw endpoint must not keep streaming the bytes).
+        parent = await session.get(Message, attachment.message_id)
+        if parent is None or parent.deleted_at is not None:
+            raise ResourceNotFoundError()
     try:
         data = storage.load_file(attachment.storage_key)
     except Exception as exc:  # noqa: BLE001

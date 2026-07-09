@@ -468,6 +468,21 @@ async def send_message(
     if reason is not None:
         raise MessagingNotAllowedError(details={"reason": reason})
 
+    # Idempotent re-send FIRST: a retry with the same key must return the original
+    # message even at the request cap or rate limit — otherwise a dropped-response
+    # retry of the last intro message would be wrongly rejected (409) after the row
+    # already persisted. Dedupe short-circuits before any gate/limit rejection.
+    existing = await _existing_dedupe(
+        session,
+        thread_id=thread_id,
+        sender_id=sender_id,
+        client_dedupe_key=client_dedupe_key,
+    )
+    if existing is not None:
+        return presenters.message_item(
+            existing, sender_label="", is_mine=True, locale=locale
+        )
+
     # MESSAGE-REQUEST GATE (Messaging V2): a pending request lets only the initiator
     # post, up to the intro cap, until the recipient accepts.
     sender_is_initiator = (
@@ -481,18 +496,6 @@ async def send_message(
     )
     if gate_reason is not None:
         raise RequestPendingError(reason=gate_reason)
-
-    # Idempotent re-send: same key -> the original message, no new row / notify.
-    existing = await _existing_dedupe(
-        session,
-        thread_id=thread_id,
-        sender_id=sender_id,
-        client_dedupe_key=client_dedupe_key,
-    )
-    if existing is not None:
-        return presenters.message_item(
-            existing, sender_label="", is_mine=True, locale=locale
-        )
 
     await _enforce_send_rate_limit(
         session, sender_id=sender_id, thread=thread, relationship=relationship

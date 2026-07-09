@@ -56,17 +56,20 @@ def thread_kind_for(
     return rules.TK_ORG_DM
 
 
-def student_masked_to_partner_pending(
+def cold_requested_student_masked(
     *,
     thread_request_state: str,
     org_is_initiator: bool,
 ) -> bool:
-    """A cold partner-initiated request keeps the student masked until they accept.
+    """A cold partner-initiated request keeps the student masked UNLESS they accept.
+
+    The mask lifts only on ``accepted`` — the student choosing to open the
+    conversation is what reveals them. A ``declined`` or ``blocked`` request must
+    STAY masked: a student who rejects unwanted outreach must never have their
+    identity exposed to the partner as a side effect (that would invert the intent).
 
     (A student-initiated request does NOT mask the student — they chose to reach out,
     so the org may see their name to help them: the asymmetric identity decision.)
     """
 
-    return (
-        thread_request_state == rules.REQUEST_PENDING and org_is_initiator
-    )
+    return org_is_initiator and thread_request_state != rules.REQUEST_ACCEPTED

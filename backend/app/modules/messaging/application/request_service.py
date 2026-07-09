@@ -71,14 +71,16 @@ async def respond(
         raise ValidationFailedError(details={"field": "action"})
 
     thread = await _shared.load_thread(session, thread_id=thread_id, lock=True)
-    if thread.request_state != rules.REQUEST_PENDING:
-        raise RequestNotActionableError()
-
+    # Authorize the caller as the recipient party FIRST (404 for anyone else) so a
+    # settled thread never reveals its existence via a 409-vs-404 difference
+    # (anti-enumeration): a non-recipient gets the same 404 whatever the state.
     recipient = await _recipient_party(session, thread)
     if recipient is None or not await _actor_on_party(
         session, principal=principal, party=recipient
     ):
         raise ResourceNotFoundError()
+    if thread.request_state != rules.REQUEST_PENDING:
+        raise RequestNotActionableError()
 
     new_state = _ACTIONS[action]
     thread.request_state = new_state

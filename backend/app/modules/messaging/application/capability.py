@@ -82,9 +82,15 @@ async def member_can_access_org_party(
         return True
     if party.assigned_user_id == principal.user_id:
         return True
-    if party.assigned_department_id is None:
-        return True
-    my_departments = await org_reporting_facade.department_ids_for_user_in_org(
-        session, org_id=org_id, user_id=principal.user_id
-    )
-    return party.assigned_department_id in my_departments
+    # A thread assigned to a specific DEPARTMENT → members of that department.
+    if party.assigned_department_id is not None:
+        my_departments = await org_reporting_facade.department_ids_for_user_in_org(
+            session, org_id=org_id, user_id=principal.user_id
+        )
+        return party.assigned_department_id in my_departments
+    # Assigned to a specific PERSON but no department → confined to that person
+    # (handled above) + admins; NOT the whole org.
+    if party.assigned_user_id is not None:
+        return False
+    # Truly UNASSIGNED (no person, no department) → any member may triage it.
+    return True

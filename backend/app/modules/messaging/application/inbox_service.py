@@ -84,6 +84,10 @@ async def list_org_inbox(
         P.party_kind == rules.PARTY_ORG,
         P.org_id == org_id,
         MessageThread.deleted_at.is_(None),
+        # Recruitment application threads live in the recruitment pipeline (their
+        # own reveal handshake + recruiter ownership), not the org shared inbox —
+        # keep them out so they don't flood every teammate's inbox.
+        MessageThread.context_type.is_distinct_from(rules.CONTEXT_APPLICATION),
     ]
     # Scope filter.
     if scope == "unassigned":

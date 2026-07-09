@@ -258,6 +258,114 @@ async def test_partner_cold_request_masks_student(db_session) -> None:
     )
 
 
+def _is_masked(label: str) -> bool:
+    lo = label.lower()
+    return "ẩn danh" in lo or "anonymous" in lo
+
+
+async def test_cold_requested_student_stays_masked_after_decline_and_block(db_session) -> None:
+    """A student who rejects a partner's cold outreach must NOT have their identity
+    exposed to the partner — the mask lifts only on accept, never on decline/block."""
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+    out = await thread_service.create_thread(
+        db_session, principal=partner, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[student_user.id], first_message="We're hiring",
+        ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+    # Decline → still masked to the partner.
+    await request_service.respond(
+        db_session, principal=student, thread_id=tid, action="decline", ctx=CTX
+    )
+    detail = await thread_service.get_thread(db_session, principal=partner, thread_id=tid)
+    assert _is_masked(detail["counterpart_label"])
+
+    # A fresh cold request that gets BLOCKED → also still masked.
+    out2 = await thread_service.create_thread(
+        db_session, principal=partner, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[student_user.id], first_message="Second try",
+        ctx=CTX,
+    )
+    tid2 = uuid.UUID(out2["id"])
+    await request_service.respond(
+        db_session, principal=student, thread_id=tid2, action="block", ctx=CTX
+    )
+    detail2 = await thread_service.get_thread(db_session, principal=partner, thread_id=tid2)
+    assert _is_masked(detail2["counterpart_label"])
+
+
+async def test_partner_cannot_colocate_two_students_in_one_thread(db_session) -> None:
+    """A partner must not create a thread with two student recipients — they would
+    read each other's real names (a student-discovery / de-anonymization channel)."""
+    from app.modules.messaging.application.errors import StudentToStudentBlockedError
+
+    from tests.messaging_utils import make_second_student
+
+    _su1, s1 = await make_student(db_session)
+    student2_user, _s2 = await make_second_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+    _su1_user = _su1
+
+    with pytest.raises(StudentToStudentBlockedError):
+        await thread_service.create_thread(
+            db_session, principal=partner, kind="direct", context_type=None,
+            context_id=None, recipient_ids=[_su1_user.id, student2_user.id],
+            first_message="Hi both", ctx=CTX,
+        )
+
+
+async def test_idempotent_intro_retry_at_cap_returns_original(db_session) -> None:
+    """Retrying the last intro message (same dedupe key) at the request cap must
+    return the already-persisted message, not a spurious 409 request-pending error."""
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id], first_message="intro 1",
+        ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+    limit = get_settings().messaging_request_message_limit
+    # Send up to the cap; the last one carries a dedupe key.
+    for i in range(limit - 2):
+        await message_service.send_message(
+            db_session, principal=student, thread_id=tid, body=f"intro {i + 2}", ctx=CTX,
+        )
+    last = await message_service.send_message(
+        db_session, principal=student, thread_id=tid, body="final intro",
+        client_dedupe_key="K-final", ctx=CTX,
+    )
+    # Retrying that exact send at the cap returns the SAME message (idempotent),
+    # never RequestPendingError.
+    retry = await message_service.send_message(
+        db_session, principal=student, thread_id=tid, body="final intro",
+        client_dedupe_key="K-final", ctx=CTX,
+    )
+    assert retry["id"] == last["id"]
+
+
+async def test_respond_returns_404_not_409_for_nonrecipient(db_session) -> None:
+    """A settled thread must not reveal its existence via a 409-vs-404 difference:
+    a non-recipient always gets 404 whatever the request state."""
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+    _ou, _oorg, outsider = await make_partner(db_session, display_name="Other Co")
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id], first_message="Hi", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+    await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="accept", ctx=CTX
+    )
+    # The thread is now settled (accepted). An unrelated org gets 404, NOT 409.
+    with pytest.raises(ResourceNotFoundError):
+        await request_service.respond(
+            db_session, principal=outsider, thread_id=tid, action="accept", ctx=CTX
+        )
+
+
 # --------------------------------------------------------------------------- #
 # Shared org inbox + RBAC                                                       #
 # --------------------------------------------------------------------------- #
