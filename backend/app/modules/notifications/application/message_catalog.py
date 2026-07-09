@@ -599,6 +599,21 @@ CATALOG: dict[str, CatalogEntry] = {
             "start the conversation.",
         },
     ),
+    "messaging.thread_assigned": CatalogEntry(
+        category="message",
+        title={
+            "vi": "Bạn được giao một cuộc trò chuyện",
+            "en": "A conversation was assigned to you",
+        },
+        body={
+            # Internal shared-inbox routing alert — neutral, no counterpart identity
+            # or message body; the assignee sees the (masked) thread on open.
+            "vi": "Một cuộc trò chuyện trong hộp thư chung đã được giao cho bạn xử lý. "
+            "Mở VinUni Career để phản hồi.",
+            "en": "A shared-inbox conversation was routed to you. Open VinUni Career "
+            "to respond.",
+        },
+    ),
     "organization.partner_approved": CatalogEntry(
         category="application_lifecycle",
         title={

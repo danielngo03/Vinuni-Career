@@ -17,6 +17,7 @@ from app.modules.auth.application.context import RequestContext
 from app.modules.messaging.application import _shared, capability, party_service
 from app.modules.messaging.domain import rules
 from app.modules.messaging.domain.models import MessageThread, MessageThreadParty
+from app.modules.notifications.application import feed_service
 from app.modules.organization.application import org_reporting_facade
 from app.shared.audit import write_audit
 from app.shared.exceptions import (
@@ -104,6 +105,18 @@ async def assign(
             "assignment_state": party.assignment_state,
         },
     )
+    # Durable in-app alert to a NEW responsible assignee (never on self-assign, so a
+    # member picking up their own thread doesn't ping themselves). Neutral + PII-safe:
+    # no counterpart identity or body — just a deep link into the shared inbox.
+    if assignee_id is not None and assignee_id != principal.user_id:
+        await feed_service.create_in_app(
+            session,
+            recipient_id=assignee_id,
+            notif_type="messaging.thread_assigned",
+            action_url=f"/messages/{thread.id}",
+            variables={},
+            locale=None,
+        )
     await session.commit()
     from app.modules.messaging.application.message_service import (
         _publish_thread_signal,

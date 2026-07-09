@@ -326,6 +326,53 @@ async def test_org_new_inbound_raises_team_badge_and_clears_on_read(db_session) 
     assert await message_service.unread_count(db_session, principal=admin) == 0
 
 
+async def test_assignment_notifies_new_assignee_not_self(db_session) -> None:
+    """Routing a thread to a specific member alerts that member (deep link, no body);
+    picking up your own thread never pings yourself."""
+    student_user, student = await make_student(db_session)
+    admin_user, porg, admin = await make_partner(db_session, display_name="Acme Co")
+    member_user, _m, _mp = await add_member(
+        db_session, org=porg, member_email=email("rep"),
+        permissions=[("messaging", "read"), ("messaging", "send")],
+    )
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[], target_org_id=porg.id,
+        first_message="Hi team", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+
+    await assignment_service.assign(
+        db_session, principal=admin, thread_id=tid,
+        department_id=None, assignee_id=member_user.id, ctx=CTX,
+    )
+    rep_notes = (
+        await db_session.execute(
+            select(Notification).where(
+                Notification.recipient_id == member_user.id,
+                Notification.notif_type == "messaging.thread_assigned",
+            )
+        )
+    ).scalars().all()
+    assert len(rep_notes) == 1
+    assert rep_notes[0].action_url == f"/messages/{tid}"
+
+    # Self-assign does not ping the caller.
+    await assignment_service.assign(
+        db_session, principal=admin, thread_id=tid,
+        department_id=None, assignee_id=admin_user.id, ctx=CTX,
+    )
+    admin_notes = (
+        await db_session.execute(
+            select(Notification).where(
+                Notification.recipient_id == admin_user.id,
+                Notification.notif_type == "messaging.thread_assigned",
+            )
+        )
+    ).scalars().all()
+    assert admin_notes == []
+
+
 async def test_org_staff_reads_inbox_thread_without_participant_row(db_session) -> None:
     # The whole team must be able to READ a shared-inbox thread via ``messaging:read``,
     # not only after someone replies (participant rows are created lazily on send/accept).
