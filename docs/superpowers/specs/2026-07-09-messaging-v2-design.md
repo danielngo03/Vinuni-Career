@@ -340,3 +340,47 @@ moderator does); recruitment reveal still masks student; capability + department
 without grant blocked; admin sees all; dept member sees only their dept's threads); attachment
 type/size limits + download auth; cross-tenant/non-participant → 404; persist-before-deliver;
 PII-safe notifications/audit.
+
+## 14. Phase 6 — post-launch hardening (2026-07-09)
+
+Follow-up pass after a full-surface audit. All backend-gated + tested; frontend
+tsc/eslint green.
+
+- **Request-lifecycle notification.** Accepting a message request now notifies the
+  INITIATOR (in-app feed + preference-gated email) via `message_service.notify_request_accepted`,
+  reusing the notifications module. PII-safe: a MASKED counterpart label as the
+  initiator perceives it (org Page name for a student initiator; the now-revealed
+  student for a partner initiator, since accept lifts the cold mask), never the body.
+  Decline/block stay silent by design (no rejection/harassment signal). New catalog
+  type `message.request_accepted` (vi/en).
+- **Department scope is ACCESS CONTROL, not just a list filter** (security fix). The
+  shared-inbox department scoping was enforced only in `inbox_service.list_org_inbox`.
+  Added `capability.member_can_access_org_party` (admins/`assign` + superadmin see all;
+  a member sees unassigned + assigned-to-me + my-department threads) and gate every
+  non-participant org-access path with it: `thread_service._load_readable` (read),
+  `attachment_service._can_read_thread`/`_send_party` (download/upload),
+  `message_service.send_message` org lazy-participant branch (reply), and
+  `request_service._actor_on_party` (accept/decline/block). Participant rows still imply
+  legitimate prior engagement (unaffected). A deep link can no longer cross departments.
+- **Org shared-inbox unread now drives the header badge.** `thread_view._org_inbox_unread`
+  counts team unread (shared party cursor, department-scoped) for accessible org-Page
+  threads the caller is NOT yet a participant of — so a brand-new inbound lead raises the
+  whole team's badge even with no participant rows, and recruitment/application threads
+  (which have participant rows) keep the personal-cursor accounting (no double count).
+  `inbox_service.mark_org_read` also advances the caller's participant cursor so reading
+  in the inbox clears the badge in lockstep.
+- **Assignment notification.** Routing a thread to a specific member alerts that member
+  (in-app, deep link, no body/counterpart identity) via a new `messaging.thread_assigned`
+  catalog type; self-assign is silent.
+- **Notification rendering.** Aligned the frontend NotifType union + icon/category maps to
+  the real backend keys (`message.received`, `message.request_accepted`, `message.flagged`,
+  `messaging.thread_assigned`) — previously keyed off a non-existent `messaging.message.received`,
+  so all messaging notifications fell back to the neutral bell.
+- **Dark mode.** Messaging surfaces converted hardcoded light-only backgrounds to the
+  theme surface tokens (`--surface-card`/`--bg-subtle`) so the inbox, thread panel, and
+  composer render correctly under `[data-theme="dark"]`; ink-bubble overlays and semantic
+  green pills left intact.
+
+Deferred (lower value / product-decision-heavy): dedicated "Requests" inbox scope +
+hide declined from recipient; read receipts ("seen") + `thread.read`/`message.deleted`
+realtime signals; unblock / block-list management; thread-fetch pagination on the client.
