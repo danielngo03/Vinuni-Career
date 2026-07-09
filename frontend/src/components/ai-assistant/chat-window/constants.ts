@@ -174,6 +174,7 @@ const STUDENT_QUICK_PROMPTS: readonly string[] = [
 
 const PARTNER_QUICK_PROMPTS: readonly string[] = [
   "Liệt kê tin tuyển dụng đang mở của tôi",
+  "Vẽ biểu đồ phễu tuyển dụng của tôi",
   "Tổng quan pipeline ứng viên của tôi",
   "Soạn mô tả công việc cho một vị trí mới",
   "Sự kiện tuyển dụng sắp tới của công ty",
