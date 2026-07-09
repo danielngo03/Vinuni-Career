@@ -263,12 +263,20 @@ async def get_job_pipeline_board(
     app_ids = [app.id for app, _stage_id, _entered in cards_raw]
 
     reveal_status = await _batch_reveal_status(session, application_ids=app_ids, org_id=job.org_id)
-    # Only revealed / non-anonymous cards need a real user row; anonymous-unrevealed
-    # cards render from the deterministic handle alone (no user fetch, no leak).
+    # Unmasking an anonymous applicant whose reveal was accepted additionally
+    # requires ``candidate_identity:view_revealed_identity`` (additive to the base
+    # ``applications:read``); a member without it keeps the masked card even
+    # post-reveal (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``). Non-anonymous
+    # applicants applied openly and are always visible.
+    can_view_revealed = permission_checker.can(
+        principal, "candidate_identity", "view_revealed_identity", resource_org_id=job.org_id
+    )
+    # Only cards we are authorized to unmask need a real user row; the rest render
+    # from the deterministic handle alone (no user fetch, no leak).
     revealed_user_ids = [
         app.applicant_id
         for app, _stage_id, _entered in cards_raw
-        if app.reveal_approved_at is not None or not app.is_anonymous
+        if (not app.is_anonymous) or (app.reveal_approved_at is not None and can_view_revealed)
     ]
     users = await _batch_users(session, user_ids=revealed_user_ids)
     rollback_counts = await _batch_rollback_counts(session, application_ids=app_ids)
@@ -303,6 +311,7 @@ async def get_job_pipeline_board(
             entered_at=entered_at if stage_id is not None else None,
             rollback_count=rollback_counts.get(app.id, 0),
             evaluation=evaluations.get(app.id),
+            identity_authorized=can_view_revealed,
             locale=locale,
         )
         if stage_id is not None and stage_id in stage_ids:

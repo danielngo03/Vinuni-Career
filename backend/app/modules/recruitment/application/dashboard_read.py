@@ -277,6 +277,40 @@ async def count_org_applications(session: AsyncSession, *, org_id: uuid.UUID) ->
     ).scalar_one()
 
 
+async def count_org_applications_needing_review(
+    session: AsyncSession, *, org_id: uuid.UUID
+) -> int:
+    """New applications awaiting partner triage (``submitted``) for this org."""
+
+    return (
+        await session.execute(
+            select(func.count())
+            .select_from(Application)
+            .where(
+                Application.org_id == org_id,
+                Application.status == lifecycle.SUBMITTED,
+                Application.deleted_at.is_(None),
+            )
+        )
+    ).scalar_one()
+
+
+async def count_org_offers_by_status(
+    session: AsyncSession, *, org_id: uuid.UUID, statuses: tuple[str, ...]
+) -> int:
+    """Count this org's offers in any of ``statuses`` (e.g. pending_approval / approved)."""
+
+    if not statuses:
+        return 0
+    return (
+        await session.execute(
+            select(func.count())
+            .select_from(Offer)
+            .where(Offer.org_id == org_id, Offer.status.in_(statuses))
+        )
+    ).scalar_one()
+
+
 async def count_org_pending_reveals(session: AsyncSession, *, org_id: uuid.UUID) -> int:
     """Reveal requests this org initiated that are still awaiting a student
     response (non-expired ``pending``)."""

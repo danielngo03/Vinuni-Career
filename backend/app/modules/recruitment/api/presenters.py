@@ -161,9 +161,18 @@ def partner_application(
     *,
     user,
     reveal_status: str | None,
+    identity_authorized: bool | None = None,
+    assignee: dict | None = None,
     locale: str = "vi",
 ) -> dict:
     revealed = app.reveal_approved_at is not None or not app.is_anonymous
+    # A viewer lacking ``candidate_identity:view_revealed_identity`` keeps the
+    # redacted view even for an anonymous applicant whose reveal was accepted:
+    # the real ``user_id``/name, cover letter, and CV download all stay withheld.
+    # ``identity_authorized is None`` preserves the base reveal semantics for the
+    # callers that pre-authorize (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
+    if app.is_anonymous and identity_authorized is False:
+        revealed = False
     cv_download_available = revealed
     body = {
         "id": str(app.id),
@@ -186,6 +195,10 @@ def partner_application(
         # a stable machine code for partner-side filtering; it stays org-internal.
         "rejection_reason": app.rejection_reason,
         "rejection_note": app.rejection_note,
+        # Candidate owner for multi-person teams: ``{membership_id, user_id,
+        # display_name}`` of the assigned recruiter, or ``None`` when unassigned.
+        # This is PARTNER staff (not the candidate), so the name is always shown.
+        "assignee": assignee,
         "last_status_at": _iso(app.last_status_at),
         "applied_at": _iso(app.applied_at),
     }
@@ -202,6 +215,7 @@ def partner_board_card(
     entered_at,
     rollback_count: int,
     evaluation: dict | None = None,
+    identity_authorized: bool | None = None,
     locale: str = "vi",
 ) -> dict:
     """A lean kanban CARD for the partner pipeline board (anonymity-safe).
@@ -209,12 +223,16 @@ def partner_board_card(
     Reuses the SAME redaction core as :func:`partner_application`
     (:func:`_applicant_identity`): pre-reveal the card carries only the
     deterministic ``UV-xxxx`` handle; the revealed identity (name/email) appears
-    only once an anonymous applicant's reveal has been accepted. A card never
-    carries CV text, the cover letter, screening answers, scores, or the internal
-    rejection reason — a kanban glance is identity-minimal by construction.
+    only once an anonymous applicant's reveal has been accepted AND the viewer
+    holds ``candidate_identity:view_revealed_identity`` (``identity_authorized``);
+    without it the card stays masked even post-reveal. A card never carries CV
+    text, the cover letter, screening answers, scores, or the internal rejection
+    reason — a kanban glance is identity-minimal by construction.
     """
 
     revealed = app.reveal_approved_at is not None or not app.is_anonymous
+    if app.is_anonymous and identity_authorized is False:
+        revealed = False
     return {
         "application_id": str(app.id),
         "is_anonymous": app.is_anonymous,

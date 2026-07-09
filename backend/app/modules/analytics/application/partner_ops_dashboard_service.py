@@ -26,10 +26,12 @@ from app.modules.analytics.application import (
 )
 from app.modules.auth.domain import personas
 from app.modules.dashboards.application._common import RECENT_CAP, empty_rows, safe
+from app.modules.messaging.application import message_service
 from app.modules.opportunities.application import dashboard_read as opportunities_read
 from app.modules.opportunities.application import job_read_facade
 from app.modules.organization.application import org_reporting_facade
 from app.modules.recruitment.application import dashboard_read as recruitment_read
+from app.modules.recruitment.domain import offer as offer_domain
 from app.shared.exceptions import AuthRequiredError, PermissionDeniedError, ResourceNotFoundError
 from app.shared.permissions import Principal
 
@@ -48,33 +50,48 @@ async def _todos(
     job_counts: dict,
     reveals_pending: int,
     access_alerts: list[dict],
+    apps_to_review: int = 0,
+    offers_to_approve: int = 0,
+    offers_to_send: int = 0,
+    unread_messages: int = 0,
 ) -> list[dict]:
+    """Partner-ACTIONABLE work queue.
+
+    Every item is something the partner can act on right now; ``count`` is the size
+    of the backlog and ``kind`` distinguishes an actionable todo from an
+    ``informational`` awareness item. Ordered high → low so the UI can render the
+    most urgent first.
+    """
+
     todos: list[dict] = []
-    if reveals_pending > 0:
+    if apps_to_review > 0:
         todos.append(
             {
-                "key": "respond_reveals",
-                "href": "/partner/applications",
-                "count": reveals_pending,
+                "key": "applications_to_review",
+                "href": "/partner/candidates",
+                "count": apps_to_review,
                 "priority": "high",
+                "kind": "action",
             }
         )
-    if job_counts["pending_review"] > 0:
+    if offers_to_approve > 0:
         todos.append(
             {
-                "key": "jobs_pending_review",
-                "href": "/partner/jobs",
-                "count": job_counts["pending_review"],
+                "key": "offers_to_approve",
+                "href": "/partner/candidates",
+                "count": offers_to_approve,
+                "priority": "high",
+                "kind": "action",
+            }
+        )
+    if offers_to_send > 0:
+        todos.append(
+            {
+                "key": "offers_to_send",
+                "href": "/partner/candidates",
+                "count": offers_to_send,
                 "priority": "medium",
-            }
-        )
-    if job_counts["draft"] > 0:
-        todos.append(
-            {
-                "key": "jobs_in_draft",
-                "href": "/partner/jobs",
-                "count": job_counts["draft"],
-                "priority": "low",
+                "kind": "action",
             }
         )
     if access_alerts:
@@ -84,9 +101,61 @@ async def _todos(
                 "href": "/partner/security",
                 "count": len(access_alerts),
                 "priority": "high",
+                "kind": "action",
             }
         )
-    todos.append({"key": "post_job", "href": "/partner/jobs/new", "count": None, "priority": "low"})
+    if job_counts["pending_review"] > 0:
+        todos.append(
+            {
+                "key": "jobs_pending_review",
+                "href": "/partner/jobs",
+                "count": job_counts["pending_review"],
+                "priority": "medium",
+                "kind": "action",
+            }
+        )
+    if job_counts["draft"] > 0:
+        todos.append(
+            {
+                "key": "jobs_in_draft",
+                "href": "/partner/jobs",
+                "count": job_counts["draft"],
+                "priority": "medium",
+                "kind": "action",
+            }
+        )
+    if unread_messages > 0:
+        todos.append(
+            {
+                "key": "unread_messages",
+                "href": "/partner/messages",
+                "count": unread_messages,
+                "priority": "medium",
+                "kind": "action",
+            }
+        )
+    # Reveal requests are answered by the STUDENT, not the partner — so this is an
+    # awareness item (outreach in flight), never framed as a partner action. This
+    # replaces the old, misleading ``respond_reveals`` action todo.
+    if reveals_pending > 0:
+        todos.append(
+            {
+                "key": "reveals_awaiting_candidate",
+                "href": "/partner/candidates",
+                "count": reveals_pending,
+                "priority": "low",
+                "kind": "informational",
+            }
+        )
+    todos.append(
+        {
+            "key": "post_job",
+            "href": "/partner/jobs/new",
+            "count": None,
+            "priority": "low",
+            "kind": "action",
+        }
+    )
     return todos
 
 
@@ -210,12 +279,42 @@ async def get_partner_dashboard_ops(
         access_alerts = []
         access_alerts_widget = {"locked": True, "reason": "missing_grant", "items": []}
 
+    # --- actionable work counts for the ops queue (all cheap indexed counts) - #
+    apps_to_review = await safe(
+        session,
+        lambda: recruitment_read.count_org_applications_needing_review(session, org_id=org_id),
+        fallback=0,
+    )
+    offers_to_approve = await safe(
+        session,
+        lambda: recruitment_read.count_org_offers_by_status(
+            session, org_id=org_id, statuses=(offer_domain.STATUS_PENDING_APPROVAL,)
+        ),
+        fallback=0,
+    )
+    offers_to_send = await safe(
+        session,
+        lambda: recruitment_read.count_org_offers_by_status(
+            session, org_id=org_id, statuses=(offer_domain.STATUS_APPROVED,)
+        ),
+        fallback=0,
+    )
+    unread_messages = await safe(
+        session,
+        lambda: message_service.unread_count(session, principal=principal),
+        fallback=0,
+    )
+
     todos = await _todos(
         session,
         org_id=org_id,
         job_counts=job_counts,
         reveals_pending=reveals_pending,
         access_alerts=access_alerts,
+        apps_to_review=apps_to_review,
+        offers_to_approve=offers_to_approve,
+        offers_to_send=offers_to_send,
+        unread_messages=unread_messages,
     )
 
     # --- ai_recommendations: advisory-only, rule-based heuristics ------------ #

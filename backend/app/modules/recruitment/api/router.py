@@ -18,6 +18,7 @@ from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.modules.recruitment.api.schemas import (
     AdvanceRequestBody,
     ApplyRequest,
+    AssignApplicationBody,
     BulkRejectRequestBody,
     BulkReviewRequestBody,
     InterviewAssigneesBody,
@@ -44,6 +45,7 @@ from app.modules.recruitment.api.schemas import (
 )
 from app.modules.recruitment.application import (
     apply_service,
+    assignment_service,
     decision_service,
     export_service,
     interview_service,
@@ -779,6 +781,10 @@ async def list_job_applications(
     session: AsyncSession = Depends(get_db_session),
     cursor: str | None = Query(default=None),
     limit: int | None = Query(default=None),
+    status: str | None = Query(default=None, description="Filter by application status"),
+    assignee: str | None = Query(
+        default=None, description='Candidate owner: "me", "unassigned", or a membership id'
+    ),
 ) -> dict:
     items, next_cursor, page_limit = await apply_service.list_job_applications(
         session,
@@ -786,8 +792,30 @@ async def list_job_applications(
         job_id=job_id,
         cursor=cursor,
         limit=limit,
+        status=status,
+        assignee=assignee,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
+
+
+@applications_router.post(
+    "/{application_id}/assign",
+    summary="Assign (or clear) the recruiter who owns a candidate (partner)",
+)
+async def assign_application(
+    application_id: uuid.UUID,
+    body: AssignApplicationBody,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await assignment_service.assign_application(
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        assignee_membership_id=body.assignee_membership_id,
+        ctx=auth.ctx,
+    )
+    return success(data)
 
 
 @job_applications_router.get(

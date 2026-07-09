@@ -612,7 +612,7 @@ async def get_application(
             principal=principal,
             event_type="application_opened",
         )
-        if app.reveal_approved_at is not None:
+        if app.reveal_approved_at is not None and _can_view_identity(principal, app):
             await _record_candidate_access(
                 session,
                 app=app,
@@ -734,16 +734,94 @@ async def _reveal_status_for(
     ).scalar_one_or_none()
 
 
+def _can_view_identity(principal: Principal, app: Application) -> bool:
+    """Whether ``principal`` may see this applicant's real identity.
+
+    A non-anonymous applicant chose to apply openly, so identity is visible to any
+    partner-of-org (base ``applications:read``). An ANONYMOUS applicant whose
+    reveal was accepted is only unmasked for a member additionally holding
+    ``candidate_identity:view_revealed_identity``; without it the partner keeps the
+    redacted view even post-reveal (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``). The
+    Admin wildcard (``*:*``) passes.
+    """
+
+    if not app.is_anonymous:
+        return True
+    if app.reveal_approved_at is None:
+        return False
+    return permission_checker.can(
+        principal, "candidate_identity", "view_revealed_identity", resource_org_id=app.org_id
+    )
+
+
 async def _partner_view(
     session: AsyncSession, *, app: Application, principal: Principal, locale: str
 ) -> dict:
+    authorized = _can_view_identity(principal, app)
     user = None
-    if app.reveal_approved_at is not None or not app.is_anonymous:
+    if authorized:
         user = await user_service.get_by_id(session, app.applicant_id)
     reveal_status = await _reveal_status_for(session, application_id=app.id, org_id=app.org_id)
+    assignee = await _assignee_block(session, app=app)
     return presenters.partner_application(
-        app, user=user, reveal_status=reveal_status, locale=locale
+        app,
+        user=user,
+        reveal_status=reveal_status,
+        identity_authorized=authorized,
+        assignee=assignee,
+        locale=locale,
     )
+
+
+async def _assignee_block(session: AsyncSession, *, app: Application) -> dict | None:
+    """Resolve the assigned recruiter (candidate owner) into a display block.
+
+    ``None`` when unassigned or the membership no longer resolves (e.g. removed).
+    Reads through the org facade so the recruitment module never imports the
+    ``Membership`` ORM directly.
+    """
+
+    if app.assigned_to_membership_id is None:
+        return None
+    brief = await org_reporting_facade.member_brief(
+        session, org_id=app.org_id, membership_id=app.assigned_to_membership_id
+    )
+    if brief is None:
+        return None
+    return {
+        "membership_id": str(brief.membership_id),
+        "user_id": str(brief.user_id),
+        "display_name": brief.display_name,
+    }
+
+
+async def _assignee_filter_clause(
+    session: AsyncSession, *, principal: Principal, assignee: str | None
+):
+    """Translate the ``assignee`` filter token into a SQL clause (or ``None``).
+
+    ``"me"`` resolves the caller's own membership; ``"unassigned"`` matches the
+    NULL owner; anything else is parsed as a membership id. An unresolvable token
+    yields an always-false clause so the page is empty rather than unfiltered.
+    """
+
+    if not assignee:
+        return None
+    if assignee == "unassigned":
+        return Application.assigned_to_membership_id.is_(None)
+    if assignee == "me":
+        if principal.org_id is None or principal.user_id is None:
+            return Application.id.is_(None)  # no membership -> match nothing
+        mid = await org_reporting_facade.membership_id_for_user_in_org(
+            session, org_id=principal.org_id, user_id=principal.user_id
+        )
+        if mid is None:
+            return Application.id.is_(None)
+        return Application.assigned_to_membership_id == mid
+    try:
+        return Application.assigned_to_membership_id == uuid.UUID(assignee)
+    except (ValueError, AttributeError, TypeError):
+        return Application.id.is_(None)
 
 
 async def list_job_applications(
@@ -753,12 +831,21 @@ async def list_job_applications(
     job_id: uuid.UUID,
     cursor: str | None = None,
     limit: int | None = None,
+    status: str | None = None,
+    assignee: str | None = None,
     locale: str = "vi",
 ) -> tuple[list[dict], str | None, int]:
     """Partner-scoped list of applications to one of the caller org's jobs.
 
     The job must belong to the caller's org (else ``404``); ``applications:read``
     is required. Anonymous applicants are redacted until reveal is accepted.
+
+    Team filters (all optional, composable):
+
+    - ``status`` — one application status (``submitted``/``under_review``/…).
+    - ``assignee`` — candidate owner: ``"me"`` (the caller's own membership),
+      ``"unassigned"``, or a specific membership id. An unknown/cross-org
+      membership id simply yields an empty page (never a tenant leak).
     """
 
     job = await job_read_facade.get_job_ref(session, job_id)
@@ -771,6 +858,11 @@ async def list_job_applications(
 
     page_limit = clamp_limit(limit)
     stmt = select(Application).where(Application.job_id == job.id, Application.deleted_at.is_(None))
+    if status:
+        stmt = stmt.where(Application.status == status)
+    assignee_clause = await _assignee_filter_clause(session, principal=principal, assignee=assignee)
+    if assignee_clause is not None:
+        stmt = stmt.where(assignee_clause)
     decoded = decode_cursor(cursor)
     if decoded is not None:
         from datetime import datetime
@@ -831,6 +923,14 @@ async def get_application_cv_download(
 
     if not _is_partner_of(principal, app):
         raise ResourceNotFoundError()
+    # Downloading a candidate's CV is a sensitive-identity action gated on the
+    # dedicated ``candidate_identity:download_cv`` capability (additive to the base
+    # partner-of-org ``applications:read``) so CV export can be granted narrowly to
+    # a subset of the team and every use is audited
+    # (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md`` candidate_identity row).
+    permission_checker.require(
+        principal, "candidate_identity", "download_cv", resource_org_id=app.org_id
+    )
 
     # Anonymous + not yet revealed -> PDF download blocked.
     if app.is_anonymous and app.reveal_approved_at is None:

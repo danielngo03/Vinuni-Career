@@ -218,6 +218,66 @@ async def active_member_ids(
     return set(rows)
 
 
+@dataclass
+class MemberBrief:
+    """Cross-module-safe membership descriptor for candidate-ownership display.
+
+    Carries only the non-sensitive fields another module needs to render an
+    assignee chip (membership id, user id, staff display name, active flag) —
+    never persona/role grants, department, or contact PII.
+    """
+
+    membership_id: uuid.UUID
+    user_id: uuid.UUID
+    display_name: str
+    active: bool
+
+
+async def member_briefs(
+    session: AsyncSession, *, org_id: uuid.UUID, membership_ids: Iterable[uuid.UUID]
+) -> dict[uuid.UUID, MemberBrief]:
+    """Batch-resolve ``{membership_id: MemberBrief}`` for memberships in ``org_id``.
+
+    Cross-org / unknown ids are simply absent (tenant isolation): a membership row
+    is only returned when it belongs to ``org_id``. One membership query + one
+    batched name lookup.
+    """
+
+    ids = {i for i in membership_ids if i is not None}
+    if not ids:
+        return {}
+    rows = (
+        await session.execute(
+            select(Membership.id, Membership.user_id, Membership.status).where(
+                Membership.org_id == org_id, Membership.id.in_(ids)
+            )
+        )
+    ).all()
+    if not rows:
+        return {}
+    from app.modules.users.application import user_read_facade
+
+    names = await user_read_facade.get_full_names(session, [r.user_id for r in rows])
+    return {
+        r.id: MemberBrief(
+            membership_id=r.id,
+            user_id=r.user_id,
+            display_name=names.get(r.user_id) or "",
+            active=(r.status == "active"),
+        )
+        for r in rows
+    }
+
+
+async def member_brief(
+    session: AsyncSession, *, org_id: uuid.UUID, membership_id: uuid.UUID
+) -> MemberBrief | None:
+    """Single membership descriptor scoped to ``org_id``; ``None`` if not a member."""
+
+    briefs = await member_briefs(session, org_id=org_id, membership_ids=[membership_id])
+    return briefs.get(membership_id)
+
+
 async def search_orgs(
     session: AsyncSession, *, q: str | None, page: int = 1, page_size: int = 30
 ) -> dict:
@@ -297,6 +357,18 @@ async def department_ids_for_membership(
         .all()
     )
     return list(rows)
+
+
+async def membership_id_for_user_in_org(
+    session: AsyncSession, *, org_id: uuid.UUID, user_id: uuid.UUID
+) -> uuid.UUID | None:
+    """The caller's membership id in ``org_id`` (for "assigned to me" filters), or ``None``."""
+
+    return (
+        await session.execute(
+            select(Membership.id).where(Membership.user_id == user_id, Membership.org_id == org_id)
+        )
+    ).scalar_one_or_none()
 
 
 async def department_ids_for_user_in_org(

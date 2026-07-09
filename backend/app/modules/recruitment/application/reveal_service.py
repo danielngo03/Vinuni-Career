@@ -85,6 +85,15 @@ async def request_reveal(
     if not principal.is_superadmin and (principal.org_id is None or principal.org_id != app.org_id):
         raise ResourceNotFoundError()
     permission_checker.require(principal, _RESOURCE, "read", resource_org_id=app.org_id)
+    # Sensitive candidate-identity access: sending a reveal request is gated on the
+    # dedicated ``candidate_identity:request_reveal`` capability (additive to the
+    # base partner-of-org ``applications:read``), so a recruiter role can review
+    # applications without holding the power to unmask anonymous candidates
+    # (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md`` candidate_identity row). The Admin
+    # wildcard (``*:*``) still passes.
+    permission_checker.require(
+        principal, "candidate_identity", "request_reveal", resource_org_id=app.org_id
+    )
     assert principal.user_id is not None
 
     if not app.is_anonymous:

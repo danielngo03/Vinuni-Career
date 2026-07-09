@@ -81,6 +81,15 @@ class Application(Base):
     )
     rejection_reason: Mapped[str | None] = mapped_column(String(50), nullable=True)
     rejection_note: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Candidate ownership for multi-person recruiting teams: the org membership
+    # this candidate is assigned to (the recruiter accountable for driving it).
+    # ``SET NULL`` on member removal so a departed recruiter's candidates surface
+    # as unassigned rather than dangling. Distinct from ``candidate_stages.entered_by``
+    # (who moved the card) — this is the durable owner (PARTNER_RBAC_ANALYTICS_SPEC).
+    assigned_to_membership_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("memberships.id", ondelete="SET NULL"), nullable=True, index=True
+    )
+    assigned_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(200), nullable=True)
     applied_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()

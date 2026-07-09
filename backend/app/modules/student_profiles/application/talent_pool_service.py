@@ -24,6 +24,8 @@ Privacy contracts (``docs/SECURITY_PRIVACY.md`` §8 / BUSINESS_LOGIC.md §talent
 
 from __future__ import annotations
 
+import hashlib
+
 from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -36,6 +38,36 @@ from app.shared.exceptions import PermissionDeniedError
 from app.shared.permissions import Principal
 
 MAX_PAGE_SIZE = 20
+
+
+def _should_mask_identity(principal: Principal) -> bool:
+    """Whether the caller sees passive candidates ANONYMISED.
+
+    External partner recruiters get a blind-screening view: the real name and the
+    identifying photo are withheld so passive candidates stay anonymous until they
+    CHOOSE to engage (they respond to a reason-gated outreach and apply, at which
+    point the recruitment reveal handshake governs identity). University staff and
+    superadmins — the student's own institution / governance — are internal and
+    keep the identified view for the ``vinuni_only`` audience the student opted
+    into (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md`` — candidate identity protection).
+    """
+
+    if principal.is_superadmin or principal.persona == "university_staff":
+        return False
+    if principal.persona in VINUNI_PERSONAS:
+        return False
+    return True
+
+
+def _masked_handle(profile: StudentProfile) -> str:
+    """Deterministic, non-identifying handle for an anonymised passive candidate.
+
+    Stable per profile (so a recruiter can reference "UV-A1B2" across a session)
+    and derived from the opaque ``profile_id`` — it reveals nothing about identity.
+    """
+
+    code = hashlib.sha256(str(profile.id).encode()).hexdigest()[:4].upper()
+    return f"UV-{code}"
 
 
 def _require_partner_or_staff(principal: Principal) -> None:
@@ -128,8 +160,13 @@ async def search_talent_pool(
     has_more = len(profiles) > limit
     profiles = profiles[:limit]
 
-    names = await user_read_facade.get_full_names(session, (p.user_id for p in profiles))
-    items = [_talent_card(p, names.get(p.user_id)) for p in profiles]
+    # Blind-screening view for external partners: skip the name lookup entirely so
+    # no candidate PII is even loaded for the masked path.
+    masked = _should_mask_identity(principal)
+    names: dict = {}
+    if not masked:
+        names = await user_read_facade.get_full_names(session, (p.user_id for p in profiles))
+    items = [_talent_card(p, names.get(p.user_id), masked=masked) for p in profiles]
     next_cursor = profiles[-1].updated_at.isoformat() if has_more and profiles else None
 
     return {
@@ -149,12 +186,33 @@ def _profile_avatar_url(profile: StudentProfile) -> str | None:
     return f"{base}/api/v1/students/{profile.id}/avatar?v={profile.version}"
 
 
-def _talent_card(profile: StudentProfile, full_name: str | None) -> dict:
-    """Anonymous-safe identity summary card for a talent pool result."""
+def _talent_card(profile: StudentProfile, full_name: str | None, *, masked: bool = False) -> dict:
+    """Identity summary card for a talent pool result.
+
+    When ``masked`` (external partner recruiter), the real name and identifying
+    photo are withheld and replaced by the opaque ``UV-xxxx`` handle — the coarse
+    location + open-to-work signal remain so the recruiter can screen on fit, then
+    engage through the reason-gated outreach flow. ``identity_masked`` tells the UI
+    which mode it is in.
+    """
+
+    if masked:
+        return {
+            "profile_id": str(profile.id),
+            "display_name": _masked_handle(profile),
+            "anonymous_id": _masked_handle(profile),
+            "avatar_url": None,
+            "identity_masked": True,
+            "location_city": profile.location_city,
+            "location_country": profile.location_country,
+            "is_open_to_work": profile.is_open_to_work,
+            "updated_at": profile.updated_at.isoformat() if profile.updated_at else None,
+        }
     return {
         "profile_id": str(profile.id),
         "display_name": full_name or "Student",
         "avatar_url": _profile_avatar_url(profile),
+        "identity_masked": False,
         "location_city": profile.location_city,
         "location_country": profile.location_country,
         "is_open_to_work": profile.is_open_to_work,

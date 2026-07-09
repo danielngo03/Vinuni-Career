@@ -50,6 +50,17 @@ class ReviewRequestBody(BaseModel):
     version: int | None = None
 
 
+class AssignApplicationBody(BaseModel):
+    """``POST /applications/{id}/assign``.
+
+    ``assignee_membership_id`` is the org membership that will OWN this candidate;
+    ``null`` unassigns. The membership must be an ACTIVE member of the caller's org
+    (validated in the service — an invalid one is a ``422``, never a tenant leak).
+    """
+
+    assignee_membership_id: uuid.UUID | None = None
+
+
 class RejectRequestBody(BaseModel):
     """``POST /applications/{id}/reject``.
 
