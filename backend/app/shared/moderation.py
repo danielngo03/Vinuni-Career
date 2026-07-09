@@ -93,6 +93,12 @@ def _as_utc(value: datetime | None) -> datetime | None:
     return value if value.tzinfo is not None else value.replace(tzinfo=UTC)
 
 
+def _ensure_utc(value: datetime) -> datetime:
+    """UTC-aware normalisation for a value that is always present."""
+
+    return value if value.tzinfo is not None else value.replace(tzinfo=UTC)
+
+
 def queue_age_fields(
     *,
     submitted_at: datetime | None,
@@ -103,7 +109,7 @@ def queue_age_fields(
 
     submitted_at = _as_utc(submitted_at)
     due_by = _as_utc(due_by)
-    now = _as_utc(now)
+    now = _ensure_utc(now)
 
     age_hours: float | None = None
     if submitted_at is not None:
@@ -113,3 +119,109 @@ def queue_age_fields(
         "age_hours": age_hours,
         "is_overdue": bool(due_by is not None and now >= due_by),
     }
+
+
+# --------------------------------------------------------------------------- #
+# Cross-queue SLA policy (BUSINESS_LOGIC.md §11)                               #
+# --------------------------------------------------------------------------- #
+#
+# One code-level policy table shared by every university operational queue so
+# the SLA hours, "due soon"/"overdue" health, and breach roll-ups presented on
+# the ops command center are computed identically everywhere (never re-derived
+# per surface). Codes are stable identifiers; the ops read-model and each
+# queue presenter pair them with a localized label.
+
+QUEUE_PARTNER_REGISTRATION = "partner_registration"
+QUEUE_JOB_POSTING = "job_posting"
+QUEUE_EVENT = "event"
+QUEUE_AD_CREATIVE = "ad_creative"
+QUEUE_COMPANY_REVIEW = "company_review"
+QUEUE_CONTENT_REPORT = "content_report"
+QUEUE_AI_FLAGGED = "ai_flagged"
+QUEUE_SUPPORT_CASE = "support_case"
+QUEUE_PRIVACY_REQUEST = "privacy_request"
+QUEUE_CV_REVIEW = "cv_review"
+QUEUE_AT_RISK = "at_risk"
+
+# SLA windows in hours. The moderation rows track BUSINESS_LOGIC.md §11 exactly;
+# the trust/career rows use operationally sensible defaults (privacy honours a
+# 30-day legal window; support/CV-review/at-risk use business-day outreach
+# windows) until a per-queue config surface exists.
+QUEUE_SLA_HOURS: dict[str, int] = {
+    QUEUE_PARTNER_REGISTRATION: 48,
+    QUEUE_JOB_POSTING: 24,
+    QUEUE_EVENT: 24,
+    QUEUE_AD_CREATIVE: 24,
+    QUEUE_COMPANY_REVIEW: 24,
+    QUEUE_CONTENT_REPORT: 6,
+    QUEUE_AI_FLAGGED: 4,
+    QUEUE_SUPPORT_CASE: 48,
+    QUEUE_PRIVACY_REQUEST: 720,
+    QUEUE_CV_REVIEW: 72,
+    QUEUE_AT_RISK: 120,
+}
+
+SLA_OK = "ok"
+SLA_DUE_SOON = "due_soon"
+SLA_OVERDUE = "overdue"
+
+
+def sla_hours_for(kind: str) -> int | None:
+    """SLA window (hours) for a queue kind, or ``None`` if the kind is unknown."""
+
+    return QUEUE_SLA_HOURS.get(kind)
+
+
+def sla_health(
+    *,
+    submitted_at: datetime | None,
+    due_by: datetime | None,
+    now: datetime,
+) -> str:
+    """Traffic-light SLA state for a queue row.
+
+    ``overdue`` once the deadline has passed; ``due_soon`` (amber) within the
+    final ``max(2h, 25% of the SLA window)`` before it; ``ok`` otherwise. With
+    no deadline the row is treated as ``ok`` (nothing to breach).
+    """
+
+    submitted_at = _as_utc(submitted_at)
+    due_by = _as_utc(due_by)
+    now = _ensure_utc(now)
+
+    if due_by is None:
+        return SLA_OK
+    if now >= due_by:
+        return SLA_OVERDUE
+    remaining = (due_by - now).total_seconds()
+    amber = 2 * 3600.0
+    if submitted_at is not None:
+        window = (due_by - submitted_at).total_seconds()
+        if window > 0:
+            amber = max(amber, 0.25 * window)
+    return SLA_DUE_SOON if remaining <= amber else SLA_OK
+
+
+def sla_fields(
+    *,
+    submitted_at: datetime | None,
+    kind: str,
+    now: datetime,
+) -> dict:
+    """Full SLA presentation block for a queue row: due-by, age, overdue, health.
+
+    Computes ``due_by`` from ``submitted_at + QUEUE_SLA_HOURS[kind]`` (no stored
+    column required) and folds in :func:`queue_age_fields` plus the traffic-light
+    :func:`sla_health` state and the policy window used.
+    """
+
+    hours = QUEUE_SLA_HOURS.get(kind)
+    due_by = (
+        compute_due_by(submitted_at, sla_hours=hours)
+        if submitted_at is not None and hours is not None
+        else None
+    )
+    fields = queue_age_fields(submitted_at=submitted_at, due_by=due_by, now=now)
+    fields["sla_hours"] = hours
+    fields["sla_health"] = sla_health(submitted_at=submitted_at, due_by=due_by, now=now)
+    return fields

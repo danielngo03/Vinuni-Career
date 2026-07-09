@@ -283,6 +283,37 @@ export interface UniversityDashboard {
   partner_requests_recent: UniversityPartnerRequestItem[];
 }
 
+/* --------------------- University ops command center ---------------------- */
+
+/** One operational queue row within a function group. */
+export interface UniversityOpsQueue {
+  /** Stable queue identifier (e.g. `content_report`, `privacy_request`). */
+  key: string;
+  /** SLA policy kind used for the overdue roll-up. */
+  kind: string;
+  /** Server-localized label; the UI prefers its own i18n keyed on `kind`. */
+  label: string;
+  /** Deep link into the queue's operating surface. */
+  href: string;
+  open: number;
+  overdue: number;
+  sla_hours: number | null;
+}
+
+/** A function group (moderation, partner support, trust & safety, …). */
+export interface UniversityOpsGroup {
+  key: string;
+  label: string;
+  open_total: number;
+  overdue_total: number;
+  queues: UniversityOpsQueue[];
+}
+
+export interface UniversityOps {
+  groups: UniversityOpsGroup[];
+  totals: { open: number; overdue: number };
+}
+
 /* ------------------------------- Analytics -------------------------------- */
 
 export interface AnalyticsFunnelItem {
@@ -371,6 +402,15 @@ export const dashboardsApi = {
   /** University operations projection (authenticated university staff). */
   university(): Promise<UniversityDashboard> {
     return api.get<UniversityDashboard>("/dashboards/university");
+  },
+
+  /**
+   * University ops command center — every operational queue aggregated into
+   * function groups with open + overdue counts and deep links. Additive to
+   * {@link UniversityDashboard}; superadmin sees the whole system.
+   */
+  universityOps(): Promise<UniversityOps> {
+    return api.get<UniversityOps>("/dashboards/university/ops");
   },
 
   /** Partner analytics — application funnel, top jobs, monthly trend. */

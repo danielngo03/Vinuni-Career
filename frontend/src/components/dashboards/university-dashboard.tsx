@@ -35,6 +35,7 @@ import {
   SectionLink,
   type MetricItem,
 } from "./dashboard-kit";
+import { UniversityOpsWorklist } from "./university-ops-worklist";
 
 /* -------------------------------------------------------------------------- */
 /* Activity Summary + SLA widget (right rail)                                */
@@ -249,6 +250,9 @@ export function UniversityDashboard() {
             <div className="space-y-6">
               {/* Row 1: 4 metric tiles */}
               <MetricTiles items={metrics} />
+
+              {/* Operations command center — every queue grouped by function */}
+              <UniversityOpsWorklist />
 
               {/* AI Governance Insights panel */}
               {(() => {

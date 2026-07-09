@@ -13,6 +13,7 @@ import uuid
 
 import pytest
 from app.modules.dashboards.application import (
+    ops_read,
     partner_dashboard,
     student_dashboard,
     university_dashboard,
@@ -309,6 +310,136 @@ async def test_university_dashboard_partner_forbidden(db_session) -> None:
     # Partner Admin holds *:* but the org-type gate keeps this surface uni-only.
     with pytest.raises(PermissionDeniedError):
         await university_dashboard.get_university_dashboard(db_session, principal=partner)
+
+
+# --------------------------------------------------------------------------- #
+# University operations command center (grouped queue read model)             #
+# --------------------------------------------------------------------------- #
+
+
+_OPS_GROUP_ORDER = ["moderation", "partner_support", "trust_safety", "career_services"]
+_OPS_QUEUE_FIELDS = {"key", "kind", "label", "href", "open", "overdue", "sla_hours"}
+
+
+def _ops_queues_by_kind(data: dict) -> dict:
+    return {q["kind"]: q for g in data["groups"] for q in g["queues"]}
+
+
+async def test_university_ops_group_structure_and_real_counts(db_session) -> None:
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    _pa_u, _pa_org, partner = await make_org_with_admin(db_session, display_name="P A")
+
+    # One pending-review job (submitted) and one pending partner registration.
+    job = await job_service.create_job(
+        db_session, principal=partner, payload=job_payload("Needs Review"), ctx=CTX
+    )
+    await job_service.submit_job(
+        db_session, principal=partner, job_id=uuid.UUID(job["id"]), ctx=CTX
+    )
+    await _register_pending_partner(db_session, company_name="Brand New Co")
+
+    data = await ops_read.get_university_ops(db_session, principal=uni)
+
+    # Every function group is present, in the stable ops order.
+    assert [g["key"] for g in data["groups"]] == _OPS_GROUP_ORDER
+    for group in data["groups"]:
+        assert group["label"]  # localized, never a bare enum code
+        assert group["queues"]
+
+    queues = _ops_queues_by_kind(data)
+    # The two seeded queues report real open counts; everything else is zero.
+    assert queues["job_posting"]["open"] == 1
+    assert queues["partner_registration"]["open"] == 1
+    assert queues["event"]["open"] == 0
+    assert queues["cv_review"]["open"] == 0
+
+    # Queue row shape + deep-link + SLA policy hours.
+    job_row = queues["job_posting"]
+    assert set(job_row) == _OPS_QUEUE_FIELDS
+    assert job_row["href"] == "/university/moderation/jobs"
+    assert job_row["label"]
+    assert job_row["sla_hours"] == 24
+    assert queues["partner_registration"]["href"] == "/university/partners"
+    assert queues["partner_registration"]["sla_hours"] == 48
+
+    # Group + platform totals roll the per-queue counts up.
+    moderation = next(g for g in data["groups"] if g["key"] == "moderation")
+    assert moderation["open_total"] >= 1
+    assert data["totals"]["open"] >= 2
+    assert data["totals"]["overdue"] == 0  # nothing backdated past SLA yet
+
+
+async def test_university_ops_localized_labels(db_session) -> None:
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    vi = await ops_read.get_university_ops(db_session, principal=uni, locale="vi")
+    en = await ops_read.get_university_ops(db_session, principal=uni, locale="en")
+
+    vi_mod = next(g for g in vi["groups"] if g["key"] == "moderation")["label"]
+    en_mod = next(g for g in en["groups"] if g["key"] == "moderation")["label"]
+    assert en_mod == "Content moderation"
+    assert vi_mod != en_mod  # vi default differs from the en override
+
+
+async def test_university_ops_overdue_increments(db_session) -> None:
+    from datetime import UTC, datetime, timedelta
+
+    from app.modules.organization.domain.models import PartnerRegistrationRequest
+    from sqlalchemy import update
+
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    await _register_pending_partner(db_session, company_name="Old Co")
+
+    # Backdate the request past its 48h SLA window so it counts as overdue.
+    backdated = datetime.now(UTC) - timedelta(hours=100)
+    await db_session.execute(
+        update(PartnerRegistrationRequest).values(created_at=backdated)
+    )
+    await db_session.flush()
+
+    data = await ops_read.get_university_ops(db_session, principal=uni)
+    partner_queue = _ops_queues_by_kind(data)["partner_registration"]
+    assert partner_queue["open"] == 1
+    assert partner_queue["overdue"] == 1
+    assert data["totals"]["overdue"] >= 1
+
+
+async def test_university_ops_superadmin_allowed(db_session) -> None:
+    _su, student = await make_student(db_session)
+    student.is_superadmin = True
+    data = await ops_read.get_university_ops(db_session, principal=student)
+    assert [g["key"] for g in data["groups"]] == _OPS_GROUP_ORDER
+    assert data["totals"] == {"open": 0, "overdue": 0}
+
+
+async def test_university_ops_partner_forbidden(db_session) -> None:
+    _pu, _porg, partner = await make_org_with_admin(db_session)
+    # Partner Admin holds *:* but the org-type gate keeps this surface uni-only.
+    with pytest.raises(PermissionDeniedError):
+        await ops_read.get_university_ops(db_session, principal=partner)
+
+
+async def test_university_ops_widget_failure_degrades(db_session, monkeypatch) -> None:
+    from app.modules.opportunities.application import ops_queue_read as opportunities_ops
+
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+
+    async def _boom(*_a, **_k):
+        raise RuntimeError("simulated queue failure")
+
+    monkeypatch.setattr(opportunities_ops, "queue_counts", _boom)
+    data = await ops_read.get_university_ops(db_session, principal=uni)
+    # The failing jobs/events queues degrade to zero; the envelope still loads.
+    queues = _ops_queues_by_kind(data)
+    assert queues["job_posting"] == {
+        "key": "job_posting",
+        "kind": "job_posting",
+        "label": queues["job_posting"]["label"],
+        "href": "/university/moderation/jobs",
+        "open": 0,
+        "overdue": 0,
+        "sla_hours": 24,
+    }
+    assert [g["key"] for g in data["groups"]] == _OPS_GROUP_ORDER
 
 
 # --------------------------------------------------------------------------- #

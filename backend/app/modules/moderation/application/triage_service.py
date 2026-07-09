@@ -22,6 +22,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
 from app.modules.moderation.domain.models import (
+    REPORT_ENTITY_TYPES,
+    REPORT_STATUS_DISMISSED,
     REPORT_STATUS_PENDING,
     REPORT_STATUS_TRIAGED,
     SOURCE_FRAUD,
@@ -38,6 +40,7 @@ from app.shared.exceptions import (
     ResourceNotFoundError,
     ValidationFailedError,
 )
+from app.shared.moderation import QUEUE_CONTENT_REPORT, sla_fields
 from app.shared.pagination import clamp_limit
 from app.shared.permissions import Principal, permission_checker
 
@@ -71,16 +74,25 @@ async def _require_abuse(
 
 
 def _present_report(row: ContentReport) -> dict:
-    return {
+    data = {
         "kind": "content_report",
         "id": str(row.id),
         "entity_type": row.entity_type,
         "entity_id": str(row.entity_id),
         "reason_code": row.reason_code,
+        "note": row.note,
         "status": row.status,
         "review_item_id": str(row.review_item_id) if row.review_item_id else None,
         "created_at": row.created_at.isoformat(),
     }
+    # Content reports run a tight 6h SLA (BUSINESS_LOGIC.md §11); surface the
+    # same due-by/overdue/health block every other ops queue row carries.
+    data.update(
+        sla_fields(
+            submitted_at=row.created_at, kind=QUEUE_CONTENT_REPORT, now=_now()
+        )
+    )
+    return data
 
 
 def _present_review_item(item: HumanReviewItem) -> dict:
@@ -101,10 +113,13 @@ async def list_triage(
     *,
     principal: Principal,
     source: str | None = None,
+    entity_type: str | None = None,
     limit: int = 50,
 ) -> list[dict]:
     await _require_abuse(session, principal, "read")
     limit = clamp_limit(limit)
+    if entity_type is not None and entity_type not in REPORT_ENTITY_TYPES:
+        raise ValidationFailedError(details={"field": "entity_type"})
 
     items: list[dict] = []
     if source is None or source == SOURCE_USER_REPORT:
@@ -118,6 +133,8 @@ async def list_triage(
             .order_by(ContentReport.created_at.desc())
             .limit(limit)
         )
+        if entity_type is not None:
+            report_stmt = report_stmt.where(ContentReport.entity_type == entity_type)
         reports = (await session.execute(report_stmt)).scalars().all()
         items.extend(_present_report(r) for r in reports)
 
@@ -241,6 +258,54 @@ async def escalate_report(
             "severity": severity,
             "review_item_id": str(review_item.id),
         },
+    )
+    await session.commit()
+    return _present_report(report)
+
+
+async def dismiss_report(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    report_id: uuid.UUID,
+    note: str | None,
+    ctx: RequestContext,
+) -> dict:
+    """Close a pending report as no-action (the previously-dead DISMISSED state).
+
+    A moderator must be able to clear a spam / false / duplicate report without
+    escalating it to the human-review queue. Only ``PENDING`` reports can be
+    dismissed — an already-triaged report has a review item and must be resolved
+    there instead.
+    """
+
+    await _require_abuse(session, principal, "triage")
+
+    report = (
+        await session.execute(select(ContentReport).where(ContentReport.id == report_id))
+    ).scalar_one_or_none()
+    if report is None:
+        raise ResourceNotFoundError()
+    if report.status != REPORT_STATUS_PENDING:
+        raise ValidationFailedError(
+            details={"field": "status", "reason": "not_pending"}
+        )
+
+    before = {"status": report.status}
+    report.status = REPORT_STATUS_DISMISSED
+    if note and note.strip():
+        report.note = note.strip()[:2000]
+    report.updated_at = _now()
+    await session.flush()
+
+    await write_audit(
+        session,
+        action="abuse.report_dismissed",
+        resource_type="content_report",
+        resource_id=report.id,
+        context=_audit_ctx(principal, ctx),
+        before=before,
+        after={"status": report.status},
     )
     await session.commit()
     return _present_report(report)

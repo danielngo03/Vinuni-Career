@@ -33,6 +33,7 @@ import {
 } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/page-header";
+import { useAuthStore } from "@/stores/auth-store";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import {
   ApiError,
@@ -90,6 +91,12 @@ export function AiSettingsScreen() {
   const t = useTranslations("aiSettings");
   const tStates = useTranslations("states");
   const tc = useTranslations("common");
+  // The real provider/model registry (names, base URLs, concrete model ids)
+  // is platform-superadmin territory. Ordinary university AI-settings admins
+  // manage only masked aliases, budgets and feature flags. Backend RBAC is the
+  // authoritative gate (superadmin-only registry endpoints); this hides the
+  // registry UI so staff never see — or trigger 403s against — those surfaces.
+  const isSuperadmin = useAuthStore((s) => s.user?.isSuperadmin ?? false);
   const toast = useToast();
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
@@ -295,9 +302,11 @@ export function AiSettingsScreen() {
         description={t("subtitle")}
         actions={
           <>
-            <Link href="/university/ai-settings/routing">
-              <Button variant="secondary">{t("routingLinkLabel")}</Button>
-            </Link>
+            {isSuperadmin && (
+              <Link href="/university/ai-settings/routing">
+                <Button variant="secondary">{t("routingLinkLabel")}</Button>
+              </Link>
+            )}
             <Button
               variant="danger"
               onClick={() => {
@@ -467,8 +476,21 @@ export function AiSettingsScreen() {
           </div>
         </Card>
 
-        {/* Multi-provider configuration */}
-        <AiProviderManager />
+        {/* Multi-provider configuration — real provider/model registry is
+            platform-superadmin-only; staff see a masked explanatory panel. */}
+        {isSuperadmin ? (
+          <AiProviderManager />
+        ) : (
+          <Card
+            title={t("providerRegistryTitle")}
+            icon={ShieldWarning}
+            iconGradient="icon-chip-info"
+          >
+            <p className="text-sm text-[var(--text-secondary)]">
+              {t("providerRegistryMaskedBody")}
+            </p>
+          </Card>
+        )}
 
         {/* Secrecy footnote */}
         <p className="px-1 text-xs text-[var(--text-muted)]">{t("secrecyNote")}</p>

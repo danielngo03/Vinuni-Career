@@ -16,7 +16,7 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
@@ -42,6 +42,7 @@ __all__ = [
     "SOURCE_MODERATOR_ESCALATION",
     "SOURCE_SUPPORT_CASE",
     "SOURCE_USER_REPORT",
+    "count_pending",
     "dismiss_item",
     "enqueue",
     "get_source",
@@ -251,6 +252,51 @@ async def get_source(session: AsyncSession, item_id: uuid.UUID) -> str | None:
         )
     ).scalar_one_or_none()
     return item
+
+
+async def count_pending(
+    session: AsyncSession,
+    *,
+    source: str | None = None,
+    exclude_sources: frozenset[str] | None = None,
+    overdue_before: datetime | None = None,
+) -> dict[str, int]:
+    """Cross-module read seam: open + overdue PENDING counts for this queue.
+
+    Returns ``{"open": int, "overdue": int}`` for the ``PENDING`` human-review
+    rows, optionally constrained to a single ``source`` or with a set of
+    ``exclude_sources`` filtered out (e.g. the ops read-model counts the
+    AI-flagged queue as everything EXCEPT ``support_case``, while
+    :mod:`platform_support` counts only ``support_case``). A row is overdue when
+    its ``created_at`` precedes ``overdue_before`` (the caller derives the cutoff
+    from the shared SLA policy). No RBAC — the caller has already authorized
+    itself under its own permission noun; mirrors :func:`list_items_unchecked`
+    and :func:`get_source`. NEVER call this from a router directly.
+    """
+
+    base = [HumanReviewItem.status == STATUS_PENDING]
+    if source is not None:
+        base.append(HumanReviewItem.source == source)
+    if exclude_sources:
+        base.append(HumanReviewItem.source.not_in(list(exclude_sources)))
+
+    open_count = int(
+        (
+            await session.execute(select(func.count()).select_from(HumanReviewItem).where(*base))
+        ).scalar_one()
+    )
+    overdue_count = 0
+    if overdue_before is not None:
+        overdue_count = int(
+            (
+                await session.execute(
+                    select(func.count())
+                    .select_from(HumanReviewItem)
+                    .where(*base, HumanReviewItem.created_at < overdue_before)
+                )
+            ).scalar_one()
+        )
+    return {"open": open_count, "overdue": overdue_count}
 
 
 async def resolve_item(

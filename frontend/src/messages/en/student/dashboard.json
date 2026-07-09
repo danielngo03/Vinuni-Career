@@ -275,7 +275,36 @@
       "aiInsightPartnersPending": "{count, plural, one {# partner request} other {# partner requests}} awaiting approval",
       "aiInsightPlatformScope": "{partners, plural, one {# active partner} other {# active partners}} with {jobs, plural, one {# published job} other {# published jobs}} on the platform",
       "queueDepth": "Moderation queue depth",
-      "queueHealth": "Queue health"
+      "queueHealth": "Queue health",
+      "ops": {
+        "title": "Operations command center",
+        "subtitle": "Everything awaiting action across the university, grouped by function.",
+        "allClearTitle": "Everything is up to date",
+        "allClearBody": "No open items across operational queues right now.",
+        "openLabel": "open",
+        "overdueLabel": "overdue",
+        "viewQueue": "Open",
+        "summary": "{open} open · {overdue} overdue",
+        "group": {
+          "moderation": "Content moderation",
+          "partner_support": "Partner support",
+          "trust_safety": "Trust & safety",
+          "career_services": "Career services"
+        },
+        "queue": {
+          "job_posting": "Job postings",
+          "event": "Events",
+          "ad_creative": "Ad creatives",
+          "partner_registration": "Partner registrations",
+          "support_case": "Support cases",
+          "content_report": "Abuse reports",
+          "ai_flagged": "AI review queue",
+          "privacy_request": "Privacy requests",
+          "company_review": "Reported reviews",
+          "cv_review": "CV reviews",
+          "at_risk": "At-risk students"
+        }
+      }
     }
   }
 }

@@ -275,7 +275,36 @@
       "aiInsightPartnersPending": "{count, plural, one {# yêu cầu đối tác} other {# yêu cầu đối tác}} đang chờ phê duyệt",
       "aiInsightPlatformScope": "{partners, plural, one {# đối tác đang hoạt động} other {# đối tác đang hoạt động}} với {jobs, plural, one {# việc làm đang đăng} other {# việc làm đang đăng}} trên nền tảng",
       "queueDepth": "Độ sâu hàng đợi kiểm duyệt",
-      "queueHealth": "Tình trạng hàng đợi"
+      "queueHealth": "Tình trạng hàng đợi",
+      "ops": {
+        "title": "Trung tâm điều hành",
+        "subtitle": "Mọi việc đang chờ xử lý toàn trường, gom theo chức năng.",
+        "allClearTitle": "Mọi thứ đã được xử lý",
+        "allClearBody": "Hiện không có mục nào đang chờ trong các hàng đợi vận hành.",
+        "openLabel": "đang mở",
+        "overdueLabel": "quá hạn",
+        "viewQueue": "Mở",
+        "summary": "{open} đang mở · {overdue} quá hạn",
+        "group": {
+          "moderation": "Kiểm duyệt nội dung",
+          "partner_support": "Hỗ trợ đối tác",
+          "trust_safety": "An toàn & tin cậy",
+          "career_services": "Dịch vụ hướng nghiệp"
+        },
+        "queue": {
+          "job_posting": "Tin tuyển dụng",
+          "event": "Sự kiện",
+          "ad_creative": "Nội dung quảng cáo",
+          "partner_registration": "Đăng ký đối tác",
+          "support_case": "Yêu cầu hỗ trợ",
+          "content_report": "Báo cáo vi phạm",
+          "ai_flagged": "Hàng đợi rà soát AI",
+          "privacy_request": "Yêu cầu quyền riêng tư",
+          "company_review": "Đánh giá bị báo cáo",
+          "cv_review": "Duyệt CV",
+          "at_risk": "Sinh viên cần hỗ trợ"
+        }
+      }
     }
   }
 }

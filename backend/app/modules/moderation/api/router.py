@@ -167,15 +167,40 @@ async def escalate_content_report(
     return success(result)
 
 
+@content_reports_router.post(
+    "/content-reports/{report_id}/dismiss",
+    summary="Dismiss a content report as no-action",
+)
+async def dismiss_content_report(
+    report_id: uuid.UUID,
+    body: ReviewDecisionRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    result = await triage_service.dismiss_report(
+        session,
+        principal=auth.principal,
+        report_id=report_id,
+        note=body.note,
+        ctx=auth.ctx,
+    )
+    return success(result)
+
+
 @router.get("/triage", summary="Merged abuse/fraud triage list")
 async def list_triage(
     source: str | None = Query(default=None),
+    entity_type: str | None = Query(default=None),
     limit: int = Query(default=50, ge=1, le=100),
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     items = await triage_service.list_triage(
-        session, principal=auth.principal, source=source, limit=limit
+        session,
+        principal=auth.principal,
+        source=source,
+        entity_type=entity_type,
+        limit=limit,
     )
     return success(items)
 

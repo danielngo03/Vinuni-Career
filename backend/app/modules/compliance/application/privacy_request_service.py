@@ -18,10 +18,13 @@ from app.modules.auth.application.context import RequestContext
 from app.modules.compliance.domain.models import (
     ALL_STATUSES,
     OPEN_STATUSES,
+    REQUEST_DELETION,
     REQUEST_TYPES,
     STATUS_FULFILLED,
     STATUS_PENDING,
+    STATUS_PROCESSING,
     STATUS_REJECTED,
+    TERMINAL_STATUSES,
     PrivacyRequest,
 )
 from app.modules.organization.application import org_reporting_facade
@@ -32,6 +35,7 @@ from app.shared.exceptions import (
     ResourceNotFoundError,
     ValidationFailedError,
 )
+from app.shared.moderation import QUEUE_PRIVACY_REQUEST, sla_fields
 from app.shared.pagination import clamp_limit
 from app.shared.permissions import Principal, permission_checker
 
@@ -60,17 +64,33 @@ async def _require_privacy_staff(session: AsyncSession, principal: Principal) ->
         raise PermissionDeniedError(details={"reason": "university_only"})
 
 
+def _priority_for(request_type: str) -> str:
+    """Deletion carries a legal deadline -> triaged ahead of export."""
+
+    return "high" if request_type == REQUEST_DELETION else "normal"
+
+
 def _present(row: PrivacyRequest) -> dict:
-    return {
+    data = {
         "id": str(row.id),
         "request_type": row.request_type,
         "status": row.status,
+        "priority": _priority_for(row.request_type),
         "requested_by": str(row.requested_by),
         "processed_by": str(row.processed_by) if row.processed_by else None,
+        # `processed_by` doubles as the claim/assignee once a staffer starts
+        # processing (surfaced under a queue-standard key for the ops UI).
+        "assigned_to": str(row.processed_by) if row.processed_by else None,
         "note": row.note,
         "created_at": row.created_at.isoformat(),
         "fulfilled_at": row.fulfilled_at.isoformat() if row.fulfilled_at else None,
     }
+    data.update(
+        sla_fields(
+            submitted_at=row.created_at, kind=QUEUE_PRIVACY_REQUEST, now=_now()
+        )
+    )
+    return data
 
 
 async def submit(
@@ -140,6 +160,7 @@ async def list_staff(
     principal: Principal,
     status: str | None = None,
     request_type: str | None = None,
+    assigned_to: uuid.UUID | None = None,
     limit: int = 50,
 ) -> list[dict]:
     await _require_privacy_staff(session, principal)
@@ -152,9 +173,56 @@ async def list_staff(
         if request_type not in REQUEST_TYPES:
             raise ValidationFailedError(details={"field": "request_type"})
         stmt = stmt.where(PrivacyRequest.request_type == request_type)
+    if assigned_to is not None:
+        stmt = stmt.where(PrivacyRequest.processed_by == assigned_to)
     stmt = stmt.limit(clamp_limit(limit))
     rows = (await session.execute(stmt)).scalars().all()
     return [_present(r) for r in rows]
+
+
+async def start_processing(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    request_id: uuid.UUID,
+    ctx: RequestContext,
+) -> dict:
+    """Claim a pending request and move it to ``processing``.
+
+    Fills the previously-dead ``PROCESSING`` state: a deletion request carries a
+    legal deadline, so staff need a visible "in progress / who owns it" state
+    between submission and fulfilment. ``processed_by`` records the claimer.
+    """
+
+    await _require_privacy_staff(session, principal)
+    row = (
+        await session.execute(
+            select(PrivacyRequest).where(PrivacyRequest.id == request_id)
+        )
+    ).scalar_one_or_none()
+    if row is None:
+        raise ResourceNotFoundError()
+    if row.status != STATUS_PENDING:
+        raise ValidationFailedError(
+            details={"field": "status", "reason": "not_pending"}
+        )
+
+    before = {"status": row.status}
+    row.status = STATUS_PROCESSING
+    row.processed_by = principal.user_id
+    await session.flush()
+
+    await write_audit(
+        session,
+        action="compliance.privacy_request_processing_started",
+        resource_type="privacy_request",
+        resource_id=row.id,
+        context=_audit_ctx(principal, ctx),
+        before=before,
+        after={"status": STATUS_PROCESSING, "processed_by": str(principal.user_id)},
+    )
+    await session.commit()
+    return _present(row)
 
 
 async def fulfill(
@@ -177,6 +245,10 @@ async def fulfill(
     ).scalar_one_or_none()
     if row is None:
         raise ResourceNotFoundError()
+    if row.status in TERMINAL_STATUSES:
+        raise ValidationFailedError(
+            details={"field": "status", "reason": "already_resolved"}
+        )
 
     before = {"status": row.status}
     row.status = status

@@ -205,6 +205,9 @@ export type {
   PartnerRbacSummary,
   PartnerAiRecommendation,
   PartnerDashboardOps,
+  UniversityOps,
+  UniversityOpsGroup,
+  UniversityOpsQueue,
 } from "./dashboards";
 export { analyticsApi } from "./analytics";
 export type {

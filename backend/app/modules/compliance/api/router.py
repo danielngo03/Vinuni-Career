@@ -103,11 +103,31 @@ async def list_my_privacy_requests(
 async def list_privacy_requests_admin(
     status: str | None = Query(default=None),
     request_type: str | None = Query(default=None),
+    assigned_to: uuid.UUID | None = Query(default=None),
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await privacy_request_service.list_staff(
-        session, principal=auth.principal, status=status, request_type=request_type
+        session,
+        principal=auth.principal,
+        status=status,
+        request_type=request_type,
+        assigned_to=assigned_to,
+    )
+    return success(data)
+
+
+@admin_router.post("/{request_id}/start", summary="Claim + start processing a request")
+async def start_privacy_request(
+    request_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await privacy_request_service.start_processing(
+        session,
+        principal=auth.principal,
+        request_id=request_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
