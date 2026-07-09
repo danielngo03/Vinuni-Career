@@ -5,7 +5,7 @@ generated downloads (e.g. an applicants .xlsx export). Fetched only via the
 RBAC-checked ``/ai/chat/exports/{id}`` endpoint (raw bytes/path never exposed).
 Bound to the requesting user + org; ``expires_at`` bounds link lifetime.
 
-Revision ID: 0085_chat_export_files
+Revision ID: 0090_chat_export_files
 Revises: 0083_ai_billable_usage
 Create Date: 2026-07-09
 """
@@ -17,8 +17,8 @@ from collections.abc import Sequence
 import sqlalchemy as sa
 from alembic import op
 
-revision: str = "0085_chat_export_files"
-down_revision: str | None = "0084_ai_provider_health_fields"
+revision: str = "0090_chat_export_files"
+down_revision: str | None = "0089_chat_message_seq_softdelete_edited"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 
