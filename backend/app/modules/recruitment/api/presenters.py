@@ -163,6 +163,7 @@ def partner_application(
     reveal_status: str | None,
     identity_authorized: bool | None = None,
     assignee: dict | None = None,
+    stage: dict | None = None,
     locale: str = "vi",
 ) -> dict:
     revealed = app.reveal_approved_at is not None or not app.is_anonymous
@@ -199,6 +200,12 @@ def partner_application(
         # display_name}`` of the assigned recruiter, or ``None`` when unassigned.
         # This is PARTNER staff (not the candidate), so the name is always shown.
         "assignee": assignee,
+        # Current pipeline stage ``{stage_id, stage_name}`` (from the ACTIVE
+        # ``candidate_stages`` row), or ``None`` for a pre-pipeline (still
+        # ``submitted``) application. Stage metadata only — never any student
+        # identity. Lets the flat LIST show pipeline position without opening the
+        # per-candidate detail (whose ``pipeline`` block carries the full ladder).
+        "stage": stage,
         "last_status_at": _iso(app.last_status_at),
         "applied_at": _iso(app.applied_at),
     }
@@ -216,6 +223,7 @@ def partner_board_card(
     rollback_count: int,
     evaluation: dict | None = None,
     identity_authorized: bool | None = None,
+    assignee: dict | None = None,
     locale: str = "vi",
 ) -> dict:
     """A lean kanban CARD for the partner pipeline board (anonymity-safe).
@@ -251,6 +259,11 @@ def partner_board_card(
         # Partner-only scorecard glance for the card's CURRENT stage (None when the
         # card is pre-pipeline). NEVER carries any student identity.
         "evaluation": evaluation,
+        # Candidate owner for multi-person teams: ``{membership_id, user_id,
+        # display_name}`` of the assigned recruiter, or ``None`` when unassigned.
+        # Same shape/source as :func:`partner_application` — this is PARTNER staff
+        # (not the candidate), so the name is always shown to the same-org board.
+        "assignee": assignee,
         "applied_at": _iso(app.applied_at),
         "last_status_at": _iso(app.last_status_at),
     }

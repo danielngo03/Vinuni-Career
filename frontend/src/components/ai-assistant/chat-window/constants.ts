@@ -1,13 +1,14 @@
 import type { ChatMessage } from "@/lib/api";
 import {
   Briefcase,
-  ReadCvLogo,
+  FileText,
   CalendarCheck,
-  PaperPlaneTilt,
-  ChartBar,
-  CurrencyDollar,
-  UsersThree,
-} from "@phosphor-icons/react";
+  Send,
+  BarChart3,
+  CircleDollarSign,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 
 export const MAX_INPUT_LENGTH = 1000;
 
@@ -136,27 +137,27 @@ export const STATUS_LABELS: Record<string, string> = {
 export type ChatPersona = "student" | "partner" | "university";
 
 export type SuggestionItem = {
-  icon: typeof Briefcase;
+  icon: LucideIcon;
   key: string;
   href: string;
 };
 
 const STUDENT_SUGGESTIONS: readonly SuggestionItem[] = [
   { icon: Briefcase, key: "suggestJobs", href: "/jobs" },
-  { icon: ReadCvLogo, key: "suggestCv", href: "/student/cv" },
+  { icon: FileText, key: "suggestCv", href: "/student/cv" },
   { icon: CalendarCheck, key: "suggestEvents", href: "/events" },
-  { icon: PaperPlaneTilt, key: "suggestApps", href: "/student/applications" },
-  { icon: ChartBar, key: "suggestSkillGap", href: "/student/cv" },
-  { icon: CurrencyDollar, key: "suggestSalary", href: "/jobs" },
+  { icon: Send, key: "suggestApps", href: "/student/applications" },
+  { icon: BarChart3, key: "suggestSkillGap", href: "/student/cv" },
+  { icon: CircleDollarSign, key: "suggestSalary", href: "/jobs" },
 ];
 
 // Partner (recruiter) shortcuts point at partner operating surfaces — never the
 // student /jobs, /student/cv, /student/applications routes.
 const PARTNER_SUGGESTIONS: readonly SuggestionItem[] = [
   { icon: Briefcase, key: "suggestPartnerJobs", href: "/partner/jobs" },
-  { icon: UsersThree, key: "suggestPartnerPipeline", href: "/partner/pipeline" },
+  { icon: Users, key: "suggestPartnerPipeline", href: "/partner/pipeline" },
   { icon: CalendarCheck, key: "suggestPartnerEvents", href: "/partner/events" },
-  { icon: ChartBar, key: "suggestPartnerAnalytics", href: "/partner/analytics" },
+  { icon: BarChart3, key: "suggestPartnerAnalytics", href: "/partner/analytics" },
 ];
 
 export const SUGGESTION_ITEMS_BY_PERSONA: Record<ChatPersona, readonly SuggestionItem[]> = {

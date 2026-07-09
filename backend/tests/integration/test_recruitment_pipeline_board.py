@@ -25,6 +25,7 @@ from app.modules.documents.application import snapshot_service
 from app.modules.recruitment.application import (
     access,
     apply_service,
+    assignment_service,
     decision_service,
     pipeline_board,
     reveal_service,
@@ -36,7 +37,7 @@ from sqlalchemy import event, select
 
 from tests.auth_utils import CTX
 from tests.documents_utils import make_student
-from tests.org_utils import make_org_with_admin
+from tests.org_utils import add_member, make_org_with_admin
 from tests.recruitment_utils import apply_payload, make_builder_cv, publish_job
 
 
@@ -372,6 +373,54 @@ async def test_revealed_identity_appears_after_accept(db_session) -> None:
     assert card["applicant"]["revealed"] is True
     assert card["applicant"]["email"] == su.email
     assert card["cv_download_available"] is True
+
+
+# --------------------------------------------------------------------------- #
+# Candidate owner (assignee) on the board card                                 #
+# --------------------------------------------------------------------------- #
+
+
+async def test_board_card_shows_assignee(db_session) -> None:
+    # Own setup (capture the partner org so a recruiter can be added + assigned).
+    _pu, porg, partner = await make_org_with_admin(db_session, display_name="Assignee Co")
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    job_id = await publish_job(db_session, partner_principal=partner, uni_principal=uni)
+    _su, _student, app_id = await _apply(db_session, job_id=job_id)
+    await decision_service.review_application(
+        db_session, principal=partner, application_id=app_id, ctx=CTX
+    )
+    _mu, membership, _mp = await add_member(
+        db_session, org=porg, permissions=[("applications", "read"), ("applications", "update")]
+    )
+    await assignment_service.assign_application(
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        assignee_membership_id=membership.id,
+        ctx=CTX,
+    )
+
+    board = await _board(db_session, partner=partner, job_id=job_id)
+    card = _stage_column(board, sort_order=1)["candidates"][0]
+    assert card["application_id"] == str(app_id)
+    # The assignee block matches the partner_application shape (partner STAFF, not
+    # the candidate) — membership id + user id + resolved staff name.
+    assert card["assignee"]["membership_id"] == str(membership.id)
+    assert card["assignee"]["user_id"]
+    assert card["assignee"]["display_name"]
+
+
+async def test_board_card_unassigned_has_null_assignee(db_session) -> None:
+    partner, _uni, job_id = await _setup_published(db_session)
+    _su, _student, app_id = await _apply(db_session, job_id=job_id)
+    await decision_service.review_application(
+        db_session, principal=partner, application_id=app_id, ctx=CTX
+    )
+
+    board = await _board(db_session, partner=partner, job_id=job_id)
+    card = _stage_column(board, sort_order=1)["candidates"][0]
+    assert "assignee" in card
+    assert card["assignee"] is None
 
 
 # --------------------------------------------------------------------------- #

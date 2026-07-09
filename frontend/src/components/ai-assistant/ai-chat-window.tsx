@@ -5,17 +5,17 @@ import { useTranslations } from "next-intl";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
-  ArrowsInSimple,
-  ArrowsOutSimple,
   ArrowUp,
   Check,
+  Loader2,
+  Maximize2,
+  Minimize2,
   Paperclip,
-  PencilSimple,
+  Pencil,
   Plus,
-  Spinner,
+  Sparkles,
   X,
-} from "@phosphor-icons/react";
-import { Sparkles } from "lucide-react";
+} from "lucide-react";
 import { aiAssistantApi, type ChatMessage, type ChatSession } from "@/lib/api";
 import { getAccessToken } from "@/lib/api/session";
 import { env } from "@/lib/env";
@@ -519,9 +519,9 @@ export function AiChatWindow({
             ? "fixed inset-x-0 bottom-0 top-[60px] z-[60] h-[calc(100dvh-60px)] w-screen overflow-hidden bg-[var(--surface-card)] animate-in slide-in-from-right-4 duration-200"
             : "h-full w-full overflow-hidden"
           : cn(
-              "fixed z-50 rounded-2xl border border-[var(--glass-border)] shadow-[0_8px_40px_rgba(11,34,57,0.18)] backdrop-blur-xl",
+              "fixed z-50 rounded-2xl border border-[var(--border-default)] shadow-[var(--shadow-xl)]",
               expanded ? "inset-4 w-auto" : "bottom-20 right-4 w-[min(92vw,400px)]",
-              "bg-[var(--glass-surface)] animate-in fade-in slide-in-from-bottom-4 duration-200",
+              "bg-[var(--surface-card)] animate-in fade-in slide-in-from-bottom-4 duration-200",
             ),
       )}
       style={
@@ -537,13 +537,14 @@ export function AiChatWindow({
           embedded ? "bg-[var(--surface-card)]" : "rounded-t-2xl bg-[var(--bg-subtle)]",
         )}
       >
-        <Sparkles
+        <span
           aria-hidden
-          strokeWidth={1.9}
-          className="size-5 shrink-0 text-[var(--text-primary)]"
-        />
+          className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--content-ai-soft)]"
+        >
+          <Sparkles strokeWidth={1.9} className="size-4 text-[var(--content-ai)]" />
+        </span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[0.8125rem] font-bold text-[var(--text-primary)]">
+          <p className="type-caption truncate font-semibold text-[var(--text-primary)]">
             {t("panelTitle")}
           </p>
         </div>
@@ -552,27 +553,27 @@ export function AiChatWindow({
           onClick={() => setExpanded((v) => !v)}
           aria-label={expanded ? t("collapse") : t("expand")}
           title={expanded ? t("collapse") : t("expand")}
-          className="rounded-lg p-1 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+          className="rounded-lg p-1 text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
         >
           {expanded ? (
-            <ArrowsInSimple aria-hidden weight="bold" className="size-4" />
+            <Minimize2 aria-hidden strokeWidth={1.9} className="size-4" />
           ) : (
-            <ArrowsOutSimple aria-hidden weight="bold" className="size-4" />
+            <Maximize2 aria-hidden strokeWidth={1.9} className="size-4" />
           )}
         </button>
         <button
           type="button"
           onClick={onClose}
           aria-label={t("close")}
-          className="rounded-lg p-1 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+          className="rounded-lg p-1 text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
         >
-          <X aria-hidden weight="bold" className="size-4" />
+          <X aria-hidden strokeWidth={1.9} className="size-4" />
         </button>
       </div>
 
       <div className="flex h-10 shrink-0 items-center gap-2 border-b border-[var(--border-subtle)] px-3">
         {historyOpen ? (
-          <p className="min-w-0 flex-1 truncate text-[0.8125rem] font-semibold text-[var(--text-primary)]">
+          <p className="type-caption min-w-0 flex-1 truncate font-semibold text-[var(--text-primary)]">
             {t("conversationHistory")}
           </p>
         ) : (
@@ -582,9 +583,9 @@ export function AiChatWindow({
               onClick={() => setHistoryOpen(true)}
               aria-label={t("conversationHistory")}
               title={t("conversationHistory")}
-              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
             >
-              <ArrowLeft aria-hidden weight="bold" className="size-4" />
+              <ArrowLeft aria-hidden strokeWidth={1.9} className="size-4" />
             </button>
             {renaming ? (
               <input
@@ -600,10 +601,10 @@ export function AiChatWindow({
                   }
                 }}
                 autoFocus
-                className="min-w-0 flex-1 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-1 text-[0.8125rem] font-semibold text-[var(--text-primary)] outline-none focus:border-[var(--text-primary)]/35"
+                className="type-caption min-w-0 flex-1 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-1 font-semibold text-[var(--text-primary)] outline-none transition-colors focus:border-[var(--field-focus-border)]"
               />
             ) : (
-              <p className="min-w-0 flex-1 truncate text-[0.8125rem] font-semibold text-[var(--text-primary)]">
+              <p className="type-caption min-w-0 flex-1 truncate font-semibold text-[var(--text-primary)]">
                 {currentTitle}
               </p>
             )}
@@ -613,14 +614,14 @@ export function AiChatWindow({
               disabled={renaming && (!renameDraft.trim() || savingTitle || !sessionId)}
               aria-label={renaming ? t("saveTitle") : t("renameSession")}
               title={renaming ? t("saveTitle") : t("renameSession")}
-              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40 disabled:cursor-not-allowed disabled:opacity-45"
+              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-45"
             >
               {savingTitle ? (
-                <Spinner aria-hidden weight="bold" className="size-4 animate-spin" />
+                <Loader2 aria-hidden className="size-4 animate-spin" />
               ) : renaming ? (
-                <Check aria-hidden weight="bold" className="size-4" />
+                <Check aria-hidden strokeWidth={1.9} className="size-4" />
               ) : (
-                <PencilSimple aria-hidden weight="bold" className="size-4" />
+                <Pencil aria-hidden strokeWidth={1.9} className="size-4" />
               )}
             </button>
             <button
@@ -628,9 +629,9 @@ export function AiChatWindow({
               onClick={startNewChat}
               aria-label={t("newChat")}
               title={t("newChat")}
-              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
             >
-              <Plus aria-hidden weight="bold" className="size-4" />
+              <Plus aria-hidden strokeWidth={1.9} className="size-4" />
             </button>
           </>
         )}
@@ -661,7 +662,7 @@ export function AiChatWindow({
           <div
             className={cn(
               "flex flex-1 flex-col gap-3 overflow-y-auto p-4",
-              embedded ? "min-h-0 text-[0.9rem]" : "min-h-[260px]",
+              embedded ? "min-h-0" : "min-h-[260px]",
             )}
           >
             {isAuthLoading ? (
@@ -707,16 +708,16 @@ export function AiChatWindow({
                     <span
                       key={a.localId}
                       className={cn(
-                        "inline-flex max-w-[200px] items-center gap-1.5 rounded-lg border px-2 py-1 text-[11px]",
+                        "type-caption inline-flex max-w-[200px] items-center gap-1.5 rounded-lg border px-2 py-1 font-normal",
                         a.status === "error"
-                          ? "border-[var(--red-200,rgba(220,38,38,0.3))] bg-[var(--red-50,rgba(220,38,38,0.06))] text-[var(--red-600,#dc2626)]"
-                          : "border-[var(--border-default)] bg-[var(--surface-muted,rgba(0,0,0,0.03))] text-[var(--text-secondary)]",
+                          ? "border-[var(--content-danger)]/30 bg-[var(--content-danger-soft)] text-[var(--content-danger)]"
+                          : "border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--text-secondary)]",
                       )}
                     >
                       {a.status === "uploading" ? (
-                        <Spinner aria-hidden weight="bold" className="size-3 shrink-0 animate-spin" />
+                        <Loader2 aria-hidden className="size-3 shrink-0 animate-spin" />
                       ) : (
-                        <Paperclip aria-hidden weight="bold" className="size-3 shrink-0" />
+                        <Paperclip aria-hidden strokeWidth={1.9} className="size-3 shrink-0" />
                       )}
                       <span className="truncate">{a.filename}</span>
                       <button
@@ -725,9 +726,9 @@ export function AiChatWindow({
                           setAttachments((prev) => prev.filter((x) => x.localId !== a.localId))
                         }
                         aria-label={t("removeAttachment")}
-                        className="shrink-0 opacity-60 transition hover:opacity-100"
+                        className="shrink-0 opacity-60 transition-opacity hover:opacity-100"
                       >
-                        <X aria-hidden weight="bold" className="size-3" />
+                        <X aria-hidden strokeWidth={1.9} className="size-3" />
                       </button>
                     </span>
                   ))}
@@ -747,9 +748,9 @@ export function AiChatWindow({
                   onClick={() => fileInputRef.current?.click()}
                   disabled={sending || attachments.length >= MAX_ATTACHMENTS}
                   aria-label={t("attachButton")}
-                  className="flex size-8 shrink-0 items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition hover:bg-[var(--surface-muted,rgba(0,0,0,0.04))] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="flex size-8 shrink-0 items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  <Paperclip aria-hidden weight="bold" className="size-4" />
+                  <Paperclip aria-hidden strokeWidth={1.9} className="size-4" />
                 </button>
                 <textarea
                   ref={inputRef}
@@ -761,7 +762,7 @@ export function AiChatWindow({
                   rows={1}
                   wrap="soft"
                   disabled={sending}
-                  className="min-h-9 min-w-0 flex-1 resize-none appearance-none overflow-y-hidden overflow-x-hidden rounded-xl border border-[var(--border-default)] bg-transparent px-3 py-2 text-[0.8125rem] leading-5 text-[var(--text-primary)] outline-none [overflow-wrap:anywhere] [word-break:break-word] placeholder:text-[var(--text-muted)] focus:border-[var(--text-primary)]/35 focus:ring-0 disabled:opacity-60"
+                  className="type-small min-h-9 min-w-0 flex-1 resize-none appearance-none overflow-x-hidden overflow-y-hidden rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 leading-5 text-[var(--text-primary)] outline-none [overflow-wrap:anywhere] [word-break:break-word] transition-colors placeholder:text-[var(--text-muted)] focus:border-[var(--field-focus-border)] focus:ring-0 disabled:opacity-60"
                   style={{ maxHeight: "112px" }}
                 />
                 <button
@@ -770,21 +771,21 @@ export function AiChatWindow({
                   disabled={(!input.trim() && !attachments.some((a) => a.status === "ready")) || sending}
                   aria-label={t("sendBtn")}
                   className={cn(
-                    "flex size-8 shrink-0 items-center justify-center rounded-full outline-none transition-all",
-                    "text-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
+                    "flex size-8 shrink-0 items-center justify-center rounded-full outline-none transition-colors",
+                    "focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
                     (input.trim() || attachments.some((a) => a.status === "ready")) && !sending
-                      ? "bg-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/90 shadow-[0_1px_4px_rgba(45,95,166,0.30)]"
-                      : "bg-[var(--text-muted)]/30 cursor-not-allowed",
+                      ? "bg-[var(--btn-primary-bg)] text-[var(--btn-primary-fg)] shadow-[var(--shadow-sm)] hover:opacity-90"
+                      : "cursor-not-allowed bg-[var(--bg-muted)] text-[var(--text-muted)]",
                   )}
                 >
                   {sending ? (
-                    <Spinner aria-hidden weight="bold" className="size-3.5 animate-spin" />
+                    <Loader2 aria-hidden className="size-3.5 animate-spin" />
                   ) : (
-                    <ArrowUp aria-hidden weight="bold" className="size-3.5" />
+                    <ArrowUp aria-hidden strokeWidth={2} className="size-3.5" />
                   )}
                 </button>
               </div>
-              <p className="mt-1.5 text-center text-[11px] text-[var(--text-muted)]">
+              <p className="type-caption mt-1.5 text-center font-normal text-[var(--text-muted)]">
                 {t("disclaimer")}
               </p>
             </div>

@@ -1,50 +1,61 @@
 "use client";
 
 import { Handle, Position, type NodeProps } from "@xyflow/react";
-import { Sparkle } from "@phosphor-icons/react";
+import { Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
 import type { WorkflowNodeType } from "@/lib/api/workflows";
 import { ADVISORY_NODE_TYPES } from "@/lib/api/workflows";
+import { nodeSoft, nodeVisual } from "./node-visuals";
 
-const NODE_STYLES: Record<WorkflowNodeType, { bg: string; border: string }> = {
-  trigger: { bg: "bg-emerald-50", border: "border-emerald-400" },
-  condition: { bg: "bg-amber-50", border: "border-amber-400" },
-  human_review: { bg: "bg-sky-50", border: "border-sky-400" },
-  action: { bg: "bg-violet-50", border: "border-violet-400" },
-  delay: { bg: "bg-slate-50", border: "border-slate-400" },
-  wait: { bg: "bg-slate-50", border: "border-slate-400" },
-  end: { bg: "bg-rose-50", border: "border-rose-400" },
-  assign_owner: { bg: "bg-violet-50", border: "border-violet-400" },
-  send_notification: { bg: "bg-blue-50", border: "border-blue-400" },
-  create_task: { bg: "bg-violet-50", border: "border-violet-400" },
-  move_candidate: { bg: "bg-violet-50", border: "border-violet-400" },
-  request_approval: { bg: "bg-sky-50", border: "border-sky-400" },
-  ai_suggestion: { bg: "bg-teal-50", border: "border-teal-400" },
-  webhook: { bg: "bg-slate-50", border: "border-slate-500" },
-};
+const HANDLE_STYLE = {
+  width: 9,
+  height: 9,
+  background: "var(--border-strong)",
+  border: "2px solid var(--surface-card)",
+} as const;
 
-function GenericNode({ data, type }: NodeProps) {
+function GenericNode({ data, type, selected }: NodeProps) {
   const nodeType = type as WorkflowNodeType;
-  const style = NODE_STYLES[nodeType] ?? NODE_STYLES.action;
+  const { icon: Icon, accent } = nodeVisual(nodeType);
   const isAdvisory = ADVISORY_NODE_TYPES.has(nodeType);
+
   return (
     <div
-      className={`rounded-xl border-2 px-4 py-2 text-sm font-medium shadow-sm ${style.border} ${style.bg} ${
-        isAdvisory ? "border-dashed" : ""
-      }`}
+      className={cn(
+        "flex min-w-[172px] items-center gap-2.5 rounded-lg border border-l-[3px] border-border bg-card px-3 py-2 transition-shadow",
+        !selected && "hover:shadow-[var(--shadow-md)]",
+      )}
+      style={{
+        // Category accent lives on the left border; a colored ring marks selection.
+        borderLeftColor: accent,
+        boxShadow: selected ? `0 0 0 2px ${accent}` : "var(--shadow-sm)",
+      }}
       data-node-advisory={isAdvisory ? "true" : undefined}
     >
-      <Handle type="target" position={Position.Top} />
-      <span className="flex items-center gap-1.5">
-        {isAdvisory && (
-          <Sparkle
-            aria-hidden
-            weight="fill"
-            className="size-3.5 shrink-0 text-[var(--teal-600)]"
-          />
-        )}
+      <Handle type="target" position={Position.Top} style={HANDLE_STYLE} />
+
+      <span
+        aria-hidden
+        className="flex size-7 shrink-0 items-center justify-center rounded-md"
+        style={{ background: nodeSoft(accent), color: accent }}
+      >
+        <Icon className="size-4" strokeWidth={1.9} />
+      </span>
+
+      <span className="type-small min-w-0 flex-1 truncate font-semibold text-foreground">
         {String(data.label ?? type)}
       </span>
-      <Handle type="source" position={Position.Bottom} />
+
+      {isAdvisory && (
+        <Sparkles
+          aria-hidden
+          className="size-3.5 shrink-0"
+          strokeWidth={2}
+          style={{ color: "var(--content-ai)" }}
+        />
+      )}
+
+      <Handle type="source" position={Position.Bottom} style={HANDLE_STYLE} />
     </div>
   );
 }

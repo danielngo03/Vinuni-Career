@@ -156,3 +156,40 @@ async def test_list_filters_by_assignee_me_and_unassigned(db_session) -> None:
         db_session, principal=admin, job_id=job_id, assignee="unassigned"
     )
     assert all(i["id"] != str(app_id) for i in un2)
+
+
+# --------------------------------------------------------------------------- #
+# List projection surfaces the current pipeline stage                          #
+# --------------------------------------------------------------------------- #
+
+
+async def test_list_projection_includes_current_stage(db_session) -> None:
+    """A reviewed candidate carries its current pipeline stage on the LIST item."""
+
+    _porg, admin, job_id, app_id = await _setup(db_session)  # reviewed -> stage 1
+    items, _c, _l = await apply_service.list_job_applications(
+        db_session, principal=admin, job_id=job_id
+    )
+    item = next(i for i in items if i["id"] == str(app_id))
+    assert item["stage"] is not None
+    assert item["stage"]["stage_id"]
+    assert item["stage"]["stage_name"]
+
+
+async def test_list_projection_stage_none_for_submitted(db_session) -> None:
+    """A still-submitted (pre-pipeline) application carries ``stage = None``."""
+
+    _porg, admin, job_id, _reviewed_id = await _setup(db_session)
+    _su, student = await make_student(db_session, prefix="unreviewed")
+    sel = await make_builder_cv(db_session, student=student)
+    app = await apply_service.apply_to_job(
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
+    )
+    items, _c, _l = await apply_service.list_job_applications(
+        db_session, principal=admin, job_id=job_id
+    )
+    item = next(i for i in items if i["id"] == app["id"])
+    assert item["stage"] is None

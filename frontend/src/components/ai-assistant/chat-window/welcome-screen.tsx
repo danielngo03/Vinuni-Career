@@ -1,12 +1,28 @@
 "use client";
 
-import { Sparkle, Spinner } from "@phosphor-icons/react";
+import { Loader2, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
   QUICK_PROMPTS_BY_PERSONA,
   SUGGESTION_ITEMS_BY_PERSONA,
   type ChatPersona,
 } from "./constants";
+
+/** Small AI-identity marker tile — one restrained `--content-ai` accent, not a
+ * decorative gradient blob (v10 §1.1.2). */
+function AiMarker({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={
+        "flex size-10 shrink-0 items-center justify-center rounded-xl bg-[var(--content-ai-soft)] " +
+        className
+      }
+    >
+      <Sparkles strokeWidth={1.9} className="size-5 text-[var(--content-ai)]" />
+    </span>
+  );
+}
 
 export function WelcomeScreen({
   t,
@@ -22,31 +38,25 @@ export function WelcomeScreen({
   const links = SUGGESTION_ITEMS_BY_PERSONA[persona] ?? SUGGESTION_ITEMS_BY_PERSONA.student;
   return (
     <div className="flex flex-col items-center gap-4 py-2 text-center">
-      {/* Glowing avatar */}
-      <span
-        className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)]"
-        style={{ boxShadow: "0 4px 20px rgba(45,95,166,0.30), 0 0 0 1px rgba(45,95,166,0.12)" }}
-      >
-        <Sparkle aria-hidden weight="fill" className="size-7 text-white" />
-      </span>
+      <AiMarker />
 
       <div>
-        <p className="text-sm font-bold text-[var(--text-primary)]">
+        <p className="type-h2 text-[var(--text-primary)]">
           {t(isPartner ? "welcomeTitlePartner" : "welcomeTitle")}
         </p>
-        <p className="mt-1 text-xs text-[var(--text-secondary)]">
+        <p className="type-small mt-1 text-[var(--text-secondary)]">
           {t(isPartner ? "welcomeBodyPartner" : "welcomeBody")}
         </p>
       </div>
 
       {/* Quick-prompt chips */}
-      <div className="flex w-full flex-wrap gap-1.5 justify-center">
+      <div className="flex w-full flex-wrap justify-center gap-1.5">
         {prompts.map((prompt) => (
           <button
             key={prompt}
             type="button"
             onClick={() => onPrompt(prompt)}
-            className="rounded-full border border-[var(--brand-primary)]/20 bg-[var(--brand-primary)]/5 px-3 py-1 text-[11px] font-medium text-[var(--brand-primary)] outline-none transition hover:bg-[var(--brand-primary)]/10 hover:border-[var(--brand-primary)]/40 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+            className="type-caption rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-1 font-medium text-[var(--text-secondary)] outline-none transition-colors hover:border-[var(--field-focus-border)] hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
           >
             {prompt}
           </button>
@@ -59,10 +69,10 @@ export function WelcomeScreen({
           <Link
             key={key}
             href={href as Parameters<typeof Link>[0]["href"]}
-            className="flex items-center gap-2 rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface-light)] px-3 py-2 text-left text-xs font-medium text-[var(--text-secondary)] outline-none transition hover:border-[var(--brand-primary)]/40 hover:bg-[var(--glass-surface-heavy)] hover:text-[var(--brand-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+            className="type-small flex items-center gap-2 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-left font-medium text-[var(--text-secondary)] outline-none transition-colors hover:border-[var(--field-focus-border)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
           >
-            <Icon aria-hidden weight="duotone" className="size-4 shrink-0 text-[var(--brand-primary)]" />
-            {t(key)}
+            <Icon aria-hidden strokeWidth={1.9} className="size-4 shrink-0 text-[var(--content-ai)]" />
+            <span className="min-w-0 truncate">{t(key)}</span>
           </Link>
         ))}
       </div>
@@ -74,13 +84,13 @@ export function AuthLoadingPrompt() {
   return (
     <div className="flex flex-col items-center gap-3 py-6 text-center">
       <span
-        className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)]"
-        style={{ boxShadow: "0 4px 20px rgba(45,95,166,0.25)" }}
+        aria-hidden
+        className="flex size-10 items-center justify-center rounded-xl bg-[var(--content-ai-soft)]"
       >
-        <Spinner aria-hidden className="size-7 animate-spin text-white" />
+        <Loader2 className="size-5 animate-spin text-[var(--content-ai)]" />
       </span>
-      <span className="h-3 w-28 rounded-full bg-[var(--bg-subtle)]" />
-      <span className="h-2 w-40 rounded-full bg-[var(--bg-subtle)]" />
+      <span className="h-3 w-28 rounded-full bg-[var(--bg-muted)]" />
+      <span className="h-2 w-40 rounded-full bg-[var(--bg-muted)]" />
     </div>
   );
 }
@@ -89,16 +99,16 @@ export function GuestPrompt({ t }: { t: (k: string) => string }) {
   return (
     <div className="flex flex-col items-center gap-3 py-6 text-center">
       <span
-        className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)]"
-        style={{ boxShadow: "0 4px 20px rgba(45,95,166,0.25)" }}
+        aria-hidden
+        className="flex size-10 items-center justify-center rounded-xl bg-[var(--content-ai-soft)]"
       >
-        <Sparkle aria-hidden weight="fill" className="size-7 text-white" />
+        <Sparkles strokeWidth={1.9} className="size-5 text-[var(--content-ai)]" />
       </span>
-      <p className="text-sm font-bold text-[var(--text-primary)]">{t("guestTitle")}</p>
-      <p className="text-xs text-[var(--text-secondary)]">{t("guestBody")}</p>
+      <p className="type-h3 text-[var(--text-primary)]">{t("guestTitle")}</p>
+      <p className="type-small text-[var(--text-secondary)]">{t("guestBody")}</p>
       <Link
         href="/auth/login"
-        className="rounded-xl icon-chip-primary px-5 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(45,95,166,0.25)] outline-none transition hover:shadow-[0_4px_12px_rgba(45,95,166,0.35)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+        className="type-body inline-flex items-center justify-center rounded-full bg-[var(--btn-primary-bg)] px-5 py-2 font-semibold text-[var(--btn-primary-fg)] shadow-[var(--shadow-sm)] outline-none transition-colors hover:opacity-90 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
       >
         {t("signIn")}
       </Link>

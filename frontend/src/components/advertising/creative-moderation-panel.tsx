@@ -3,31 +3,27 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  CheckCircle,
-  XCircle,
-  WarningCircle,
-  ImageSquare,
-  LockKey,
-} from "@phosphor-icons/react";
+import { CheckCircle2, XCircle, AlertTriangle, Image as ImageIcon, Lock } from "lucide-react";
 import {
   Button,
   Select,
-  StatusBadge,
+  Textarea,
   DisclosureLabel,
   useToast,
 } from "@/components/ui";
+import { Card, StatusChip, EmptyState, type ChipTone } from "@/components/kit";
 import {
   ApiError,
   advertisingApi,
   PRIMARY_CREATIVE_SLOTS,
+  type CreativeModerationStatus,
   type CreativeSlot,
   type DisclosureClass,
   type Placement,
   type PlacementCreative,
 } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
-import { CreativeImage, creativeStatusTone } from "./creative-preview";
+import { CreativeImage } from "./creative-preview";
 
 const DISCLOSURE_CLASS_OPTIONS: DisclosureClass[] = [
   "paid_sponsored",
@@ -36,13 +32,20 @@ const DISCLOSURE_CLASS_OPTIONS: DisclosureClass[] = [
   "featured",
 ];
 
+/** Creative review state → StatusChip tone (never colour-only; always labelled). */
+function creativeChipTone(status: CreativeModerationStatus | string): ChipTone {
+  if (status === "approved") return "success";
+  if (status === "rejected") return "danger";
+  return "warning";
+}
+
 /**
  * University creative moderation (spec §6 university flow): creative preview, the
  * polished disclosure label, a missing/broken-asset inspector, per-creative
  * approve/reject (reject reason required), and inventory-class relabel that
  * surfaces the paid-immutable 409 honestly — a PAID placement's disclosure can
  * never be relabelled to a non-paid editorial/partnership class. Renders inline
- * inside the oversight review modal (no nested modal stacking).
+ * inside the oversight review DetailSheet (no nested modal stacking).
  */
 export function CreativeModerationPanel({
   placement,
@@ -148,11 +151,11 @@ export function CreativeModerationPanel({
   });
 
   return (
-    <div className="space-y-4 border-t border-[var(--border-default)] pt-4">
+    <div className="space-y-4">
       <div className="flex items-center justify-between gap-2">
-        <h3 className="flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-          <span className="flex size-6 shrink-0 items-center justify-center rounded-md icon-chip-success shadow-sm">
-            <ImageSquare aria-hidden weight="duotone" className="size-3.5 text-white" />
+        <h3 className="type-h3 flex items-center gap-2 text-[var(--text-primary)]">
+          <span className="flex size-6 shrink-0 items-center justify-center rounded-md icon-chip-info">
+            <ImageIcon aria-hidden className="size-3.5" strokeWidth={2} />
           </span>
           {t("creativesTitle")}
         </h3>
@@ -162,7 +165,7 @@ export function CreativeModerationPanel({
       </div>
 
       {/* Inventory-class relabel. */}
-      <div className="rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-3 ">
+      <Card padded className="space-y-2">
         <Select
           label={t("relabelLabel")}
           value={selectedClass}
@@ -180,9 +183,9 @@ export function CreativeModerationPanel({
           help={t("relabelHelp")}
         />
         {placement.is_paid && (
-          <p className="mt-2 flex items-start gap-1.5 text-xs text-[var(--text-secondary)]">
-            <span className="flex size-4 shrink-0 items-center justify-center rounded icon-chip-warning shadow-sm">
-              <LockKey aria-hidden weight="duotone" className="size-2.5 text-white" />
+          <p className="flex items-start gap-1.5 text-xs text-[var(--text-secondary)]">
+            <span className="flex size-4 shrink-0 items-center justify-center rounded icon-chip-warning">
+              <Lock aria-hidden className="size-2.5" strokeWidth={2.2} />
             </span>
             {t("relabelPaidLockHint")}
           </p>
@@ -190,18 +193,18 @@ export function CreativeModerationPanel({
         {relabelError && (
           <p
             role="alert"
-            className="mt-2 rounded-lg border border-[var(--red-400)]/40 bg-[var(--red-50)] px-2.5 py-1.5 text-xs font-medium text-[var(--brand-red)]"
+            className="rounded-lg border border-[var(--content-danger)]/30 bg-[var(--content-danger-soft)] px-2.5 py-1.5 text-xs font-medium text-[var(--content-danger)]"
           >
             {relabelError}
           </p>
         )}
-      </div>
+      </Card>
 
       {/* Missing approved-asset inspector. */}
       {missing.length > 0 && (
-        <div className="flex items-start gap-2.5 rounded-xl border border-[var(--amber-600)]/40 bg-[var(--amber-100)] px-3.5 py-3">
-          <span className="flex size-6 shrink-0 items-center justify-center rounded-md icon-chip-warning shadow-sm">
-            <WarningCircle aria-hidden weight="duotone" className="size-3.5 text-white" />
+        <div className="flex items-start gap-2.5 rounded-xl border border-[var(--content-warning)]/30 bg-[var(--content-warning-soft)] px-3.5 py-3">
+          <span className="flex size-6 shrink-0 items-center justify-center rounded-md icon-chip-warning">
+            <AlertTriangle aria-hidden className="size-3.5" strokeWidth={2} />
           </span>
           <div>
             <p className="text-sm font-semibold text-[var(--text-primary)]">
@@ -218,21 +221,13 @@ export function CreativeModerationPanel({
 
       {/* Creative previews + review. */}
       {creatives.length === 0 ? (
-        <p className="flex items-center gap-2.5 rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-3 text-sm text-[var(--text-secondary)] ">
-          <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-success shadow-sm">
-            <ImageSquare aria-hidden weight="duotone" className="size-4 text-white" />
-          </span>
-          {t("creativeNoneBody")}
-        </p>
+        <EmptyState title={t("creativeNoneBody")} />
       ) : (
         <ul className="space-y-3">
           {creatives.map((c) => (
-            <li
-              key={c.id}
-              className="rounded-xl border border-[var(--border-default)] bg-white p-3"
-            >
+            <Card key={c.id} className="p-3">
               <div className="flex gap-3">
-                <div className="h-24 w-32 shrink-0 overflow-hidden rounded-lg border border-[var(--border-default)]">
+                <div className="h-24 w-32 shrink-0 overflow-hidden rounded-lg border border-border">
                   <CreativeImage
                     src={c.image_url}
                     alt={c.alt}
@@ -246,18 +241,21 @@ export function CreativeModerationPanel({
                       {c.slot_label}
                     </span>
                     {PRIMARY_CREATIVE_SLOTS.includes(c.slot as CreativeSlot) && (
-                      <span className="rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--text-muted)]">
+                      <StatusChip tone="neutral" size="sm">
                         {tcr("primaryBadge")}
-                      </span>
+                      </StatusChip>
                     )}
-                    <StatusBadge tone={creativeStatusTone(c.moderation_status)}>
+                    <StatusChip
+                      tone={creativeChipTone(c.moderation_status)}
+                      size="sm"
+                    >
                       {c.moderation_status_label}
-                    </StatusBadge>
+                    </StatusChip>
                   </div>
                   <p className="mt-1 text-xs text-[var(--text-secondary)]">
                     {c.alt ?? tcr("noAlt")}
                   </p>
-                  <p className="mt-0.5 font-mono text-[11px] text-[var(--text-muted)]">
+                  <p className="mt-0.5 font-mono text-[11px] tabular-nums text-[var(--text-muted)]">
                     {t("creativeFocal", {
                       x: Math.round(c.focal_point.x * 100),
                       y: Math.round(c.focal_point.y * 100),
@@ -269,7 +267,7 @@ export function CreativeModerationPanel({
                     </p>
                   )}
                   {c.moderation_status === "rejected" && c.moderation_note && (
-                    <p className="mt-1 text-xs text-[var(--brand-red)]">
+                    <p className="mt-1 text-xs text-[var(--content-danger)]">
                       {tcr("rejectedNote", { note: c.moderation_note })}
                     </p>
                   )}
@@ -279,38 +277,17 @@ export function CreativeModerationPanel({
               {/* Inline review actions. */}
               {rejectingId === c.id ? (
                 <div className="mt-3 space-y-2">
-                  <label
-                    htmlFor={`creative-reject-${c.id}`}
-                    className="block text-xs font-semibold text-[var(--text-primary)]"
-                  >
-                    {t("creativeRejectReasonLabel")}
-                    <span className="ml-0.5 text-[var(--brand-red)]" aria-hidden>
-                      *
-                    </span>
-                  </label>
-                  <textarea
-                    id={`creative-reject-${c.id}`}
+                  <Textarea
+                    label={t("creativeRejectReasonLabel")}
+                    required
                     rows={2}
                     value={rejectNote}
+                    error={rejectError ?? undefined}
                     onChange={(e) => {
                       setRejectNote(e.target.value);
                       if (rejectError) setRejectError(null);
                     }}
-                    aria-invalid={rejectError ? true : undefined}
-                    aria-describedby={
-                      rejectError ? `creative-reject-${c.id}-err` : undefined
-                    }
-                    className="w-full rounded-lg border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
                   />
-                  {rejectError && (
-                    <p
-                      id={`creative-reject-${c.id}-err`}
-                      role="alert"
-                      className="text-xs font-medium text-[var(--brand-red)]"
-                    >
-                      {rejectError}
-                    </p>
-                  )}
                   <div className="flex items-center gap-2">
                     <Button
                       variant="danger"
@@ -359,7 +336,7 @@ export function CreativeModerationPanel({
                         review.mutate({ creative: c, decision: "approve" })
                       }
                     >
-                      <CheckCircle aria-hidden weight="bold" className="size-4" />
+                      <CheckCircle2 aria-hidden className="size-4" strokeWidth={2} />
                       {t("approveCreative")}
                     </Button>
                   )}
@@ -373,13 +350,13 @@ export function CreativeModerationPanel({
                         setRejectError(null);
                       }}
                     >
-                      <XCircle aria-hidden weight="bold" className="size-4" />
+                      <XCircle aria-hidden className="size-4" strokeWidth={2} />
                       {t("rejectCreative")}
                     </Button>
                   )}
                 </div>
               )}
-            </li>
+            </Card>
           ))}
         </ul>
       )}

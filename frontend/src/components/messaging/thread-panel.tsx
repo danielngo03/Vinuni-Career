@@ -4,19 +4,22 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
+  AlertCircle,
   ArrowLeft,
-  ArrowClockwise,
-  BellSlash,
   Bell,
-  CircleNotch,
+  BellOff,
   Flag,
+  Loader2,
   Megaphone,
-  PaperPlaneTilt,
-  Trash,
-  WarningCircle,
-  WifiSlash,
-} from "@phosphor-icons/react";
-import { Button, EmptyState, Skeleton, useToast } from "@/components/ui";
+  MessagesSquare,
+  RotateCw,
+  Send,
+  Trash2,
+  WifiOff,
+  type LucideIcon,
+} from "lucide-react";
+import { Button, Skeleton, useToast } from "@/components/ui";
+import { EmptyState, StatusChip } from "@/components/kit";
 import { ReportModal } from "@/components/report/report-modal";
 import { cn } from "@/lib/utils";
 import { relativeTime } from "@/lib/notifications/grouping";
@@ -53,11 +56,13 @@ export interface ThreadPanelProps {
 }
 
 /**
- * One open thread: header (masked counterpart + mute/report), a polled,
- * sanitized, aria-live transcript, and a composer with optimistic send + retry
- * (idempotent on a generated `client_dedupe_key`). Announcement threads and
- * closed/non-reply threads render the composer as a read-only notice. Identity
- * is the server label only — never a reconstructed name/email.
+ * One open thread: header (masked counterpart + context + mute/report), a
+ * polled, sanitized, aria-live transcript, and a composer with optimistic send +
+ * retry (idempotent on a generated `client_dedupe_key`). Announcement threads
+ * and closed/non-reply threads render the composer as a read-only notice.
+ * Identity is the server label only — never a reconstructed name/email. v10:
+ * message surfaces use subtle mono/tinted bubbles (never loud fills) and the
+ * central field-focus tokens on the composer.
  */
 export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProps) {
   const t = useTranslations("messaging");
@@ -231,51 +236,67 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
     !isLoading && !isError && serverMessages.length === 0 && pending.length === 0;
 
   const canCompose = thread.can_reply && !isAnnouncement && !closed;
+  const subline = thread.subject || thread.kind_label;
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col bg-card">
       {/* Header */}
-      <div className="flex items-start gap-2 border-b border-[var(--border-default)] bg-white px-5 py-4">
+      <div className="flex items-start gap-2 border-b border-border px-5 py-4">
         <button
           type="button"
           onClick={onBack}
           aria-label={tc("back")}
-          className="-ml-1 rounded-lg p-1.5 text-[var(--text-secondary)] outline-none hover:bg-[#f2f1ee] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+          className="-ml-1 rounded-lg p-1.5 text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
         >
-          <ArrowLeft aria-hidden weight="bold" className="size-5" />
+          <ArrowLeft aria-hidden strokeWidth={1.9} className="size-5" />
         </button>
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             {isAnnouncement && (
-              <span className="flex size-5 shrink-0 items-center justify-center rounded-md icon-chip-warning shadow-sm">
-                <Megaphone aria-hidden weight="duotone" className="size-3 text-white" />
+              <span
+                aria-hidden
+                className="flex size-5 shrink-0 items-center justify-center rounded-md"
+                style={{ background: "var(--content-warning-soft)", color: "var(--content-warning)" }}
+              >
+                <Megaphone strokeWidth={1.9} className="size-3" />
               </span>
             )}
-            <h3 className="truncate text-sm font-bold text-[var(--text-primary)]">
+            <h3 className="truncate type-h3 text-foreground">
               {thread.counterpart_label}
             </h3>
           </div>
-          <p className="mt-0.5 truncate text-xs text-[var(--text-muted)]">
-            {thread.subject ||
-              thread.context_label ||
-              thread.kind_label}
-            {thread.status !== "active" && ` · ${thread.status_label}`}
-          </p>
+          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+            {subline && (
+              <span className="truncate type-caption text-muted-foreground">
+                {subline}
+              </span>
+            )}
+            {thread.context_label && (
+              <StatusChip tone="neutral" size="sm">
+                {thread.context_label}
+              </StatusChip>
+            )}
+            {thread.status !== "active" && (
+              <StatusChip tone="neutral" size="sm">
+                {thread.status_label}
+              </StatusChip>
+            )}
+          </div>
         </div>
         {!isAnnouncement && (
-          <div className="flex shrink-0 items-center">
+          <div className="flex shrink-0 items-center gap-0.5">
             <button
               type="button"
               onClick={() => muteMutation.mutate(!muted)}
               aria-pressed={muted}
               aria-label={muted ? t("unmute") : t("mute")}
               title={muted ? t("unmute") : t("mute")}
-              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+              className="rounded-lg p-1.5 text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
             >
               {muted ? (
-                <BellSlash aria-hidden weight="duotone" className="size-4" />
+                <BellOff aria-hidden strokeWidth={1.8} className="size-4" />
               ) : (
-                <Bell aria-hidden weight="duotone" className="size-4" />
+                <Bell aria-hidden strokeWidth={1.8} className="size-4" />
               )}
             </button>
             <button
@@ -283,9 +304,9 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
               onClick={() => setReportOpen(true)}
               aria-label={t("report")}
               title={t("report")}
-              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[var(--red-50)] hover:text-[var(--brand-red)] focus-visible:ring-2 focus-visible:ring-[var(--brand-red)]"
+              className="rounded-lg p-1.5 text-muted-foreground outline-none transition-colors hover:text-[var(--content-danger)] focus-visible:ring-2 focus-visible:ring-[var(--content-danger)]"
             >
-              <Flag aria-hidden weight="duotone" className="size-4" />
+              <Flag aria-hidden strokeWidth={1.8} className="size-4" />
             </button>
           </div>
         )}
@@ -294,12 +315,15 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
       {/* Transcript */}
       <div
         ref={scrollRef}
-        className="flex-1 space-y-3 overflow-y-auto bg-white px-5 py-4"
+        className="min-h-0 flex-1 space-y-3 overflow-y-auto px-5 py-4"
         aria-label={t("transcript")}
       >
         {isStale && (
-          <p className="flex items-center justify-center gap-1.5 rounded-lg bg-[var(--amber-100)] px-3 py-1.5 text-xs font-medium text-[var(--amber-700)]">
-            <WifiSlash aria-hidden weight="bold" className="size-3.5" />
+          <p
+            className="mx-auto flex w-fit items-center gap-1.5 rounded-full px-3 py-1 type-caption font-medium"
+            style={{ background: "var(--content-warning-soft)", color: "var(--content-warning)" }}
+          >
+            <WifiOff aria-hidden strokeWidth={2} className="size-3.5" />
             {t("staleReload")}
           </p>
         )}
@@ -309,7 +333,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
         {isError && (
           <EmptyState
             kind="offline"
-            icon={WifiSlash}
+            icon={AlertCircle}
             title={tStates("offlineTitle")}
             description={t("offlineRetry")}
             action={
@@ -327,7 +351,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
         {isEmpty && (
           <EmptyState
             kind="empty"
-            icon={PaperPlaneTilt}
+            icon={MessagesSquare}
             title={t("threadEmptyTitle")}
             description={
               canCompose ? t("threadEmptyBody") : t("threadEmptyReadOnly")
@@ -367,21 +391,25 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
       {rateLimitMsg && (
         <p
           role="alert"
-          className="mb-2 flex items-center gap-1.5 rounded-lg bg-[var(--amber-100)] px-3 py-2 text-xs font-medium text-[var(--amber-700)]"
+          className="mx-4 mb-2 flex items-center gap-1.5 rounded-lg px-3 py-2 type-caption font-medium"
+          style={{ background: "var(--content-warning-soft)", color: "var(--content-warning)" }}
         >
-          <WarningCircle aria-hidden weight="bold" className="size-4 shrink-0" />
+          <AlertCircle aria-hidden strokeWidth={2} className="size-4 shrink-0" />
           {rateLimitMsg}
         </p>
       )}
 
       {closed ? (
-        <ReadOnlyNotice text={t("threadClosed")} icon={WarningCircle} />
+        <ReadOnlyNotice text={t("threadClosed")} icon={AlertCircle} />
       ) : isAnnouncement ? (
         <ReadOnlyNotice text={t("announcementReadOnly")} icon={Megaphone} />
       ) : !thread.can_reply ? (
-        <ReadOnlyNotice text={t("replyNotAllowed")} icon={WarningCircle} />
+        <ReadOnlyNotice text={t("replyNotAllowed")} icon={AlertCircle} />
       ) : (
-        <form onSubmit={onSubmit} className="flex items-end gap-2 border-t border-[var(--border-default)] bg-[#fbfaf8] px-5 py-4">
+        <form
+          onSubmit={onSubmit}
+          className="flex items-end gap-2 border-t border-border bg-[var(--bg-subtle)] px-4 py-3"
+        >
           <label htmlFor="msg-composer" className="sr-only">
             {t("composerLabel")}
           </label>
@@ -398,7 +426,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
             rows={1}
             maxLength={8000}
             placeholder={t("composerPlaceholder")}
-            className="max-h-32 min-h-[40px] flex-1 resize-none rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:ring-2 focus:ring-[var(--brand-primary)]/20"
+            className="max-h-32 min-h-[40px] flex-1 resize-none rounded-xl border border-border bg-card px-3.5 py-2.5 type-body text-foreground outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted-foreground hover:border-border-strong focus:border-[var(--field-focus-border)] focus:shadow-[0_0_0_4px_var(--field-focus-ring)]"
           />
           <Button
             type="submit"
@@ -407,7 +435,7 @@ export function ThreadPanel({ thread, open, onBack, onChanged }: ThreadPanelProp
             aria-label={t("send")}
             className="shrink-0"
           >
-            <PaperPlaneTilt aria-hidden weight="fill" className="size-4" />
+            <Send aria-hidden strokeWidth={2} className="size-4" />
           </Button>
         </form>
       )}
@@ -447,19 +475,24 @@ function MessageBubble({
   return (
     <div className={cn("flex flex-col", mine ? "items-end" : "items-start")}>
       {!mine && !message.is_system && (
-        <span className="mb-0.5 px-1 text-[11px] font-semibold text-[var(--text-muted)]">
+        <span className="mb-0.5 px-1 type-caption font-semibold text-muted-foreground">
           {message.sender_label}
         </span>
       )}
       <div
         className={cn(
-          "group relative max-w-[85%] rounded-2xl px-3 py-2 text-sm",
+          "group relative max-w-[85%] rounded-2xl px-3 py-2",
           message.is_system
-            ? "mx-auto bg-[var(--bg-muted)] text-center text-xs text-[var(--text-secondary)]"
+            ? "mx-auto bg-[var(--bg-subtle)] text-center type-caption text-muted-foreground"
             : mine
-              ? "rounded-br-sm bg-[var(--brand-primary)] text-white"
-              : "rounded-bl-sm bg-[var(--bg-subtle)] text-[var(--text-primary)]",
+              ? "type-body rounded-br-sm text-foreground"
+              : "type-body rounded-bl-sm bg-[var(--bg-muted)] text-foreground",
         )}
+        style={
+          !message.is_system && mine
+            ? { background: "var(--viz-indigo-soft)" }
+            : undefined
+        }
       >
         <div
           className={cn(
@@ -475,16 +508,16 @@ function MessageBubble({
             onClick={onDelete}
             aria-label={deleteLabel}
             title={deleteLabel}
-            className="absolute -left-7 top-1/2 hidden -translate-y-1/2 rounded-md p-1 text-[var(--text-muted)] outline-none hover:text-[var(--brand-red)] focus-visible:block group-hover:block"
+            className="absolute -left-7 top-1/2 hidden -translate-y-1/2 rounded-md p-1 text-muted-foreground outline-none hover:text-[var(--content-danger)] focus-visible:block group-hover:block"
           >
-            <Trash aria-hidden weight="bold" className="size-3.5" />
+            <Trash2 aria-hidden strokeWidth={1.8} className="size-3.5" />
           </button>
         )}
       </div>
       {ts && !message.is_system && (
         <time
           dateTime={message.created_at}
-          className="mt-0.5 px-1 text-[10px] text-[var(--text-muted)]"
+          className="mt-0.5 px-1 type-caption tabular-nums text-muted-foreground"
         >
           {ts}
         </time>
@@ -515,36 +548,44 @@ function PendingBubble({
     <div className="flex flex-col items-end">
       <div
         className={cn(
-          "max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-sm px-3 py-2 text-sm",
-          failed
-            ? "border border-[var(--brand-red)]/40 bg-[var(--red-50)] text-[var(--text-primary)]"
-            : "bg-[var(--brand-primary)]/70 text-white",
+          "max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-sm px-3 py-2 type-body text-foreground",
+          failed && "border",
         )}
+        style={
+          failed
+            ? {
+                background: "var(--content-danger-soft)",
+                borderColor: "var(--content-danger)",
+              }
+            : { background: "var(--viz-indigo-soft)", opacity: 0.75 }
+        }
       >
         {renderMessageBody(message.body)}
       </div>
       {failed ? (
-        <div className="mt-0.5 flex items-center gap-2 px-1 text-[10px]">
-          <span className="font-medium text-[var(--brand-red)]">{failedLabel}</span>
+        <div className="mt-0.5 flex items-center gap-2 px-1 type-caption">
+          <span className="font-medium" style={{ color: "var(--content-danger)" }}>
+            {failedLabel}
+          </span>
           <button
             type="button"
             onClick={onRetry}
             className="flex items-center gap-0.5 font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
           >
-            <ArrowClockwise aria-hidden weight="bold" className="size-3" />
+            <RotateCw aria-hidden strokeWidth={2} className="size-3" />
             {retryLabel}
           </button>
           <button
             type="button"
             onClick={onDiscard}
-            className="text-[var(--text-muted)] underline-offset-2 hover:underline"
+            className="text-muted-foreground underline-offset-2 hover:underline"
           >
             {discardLabel}
           </button>
         </div>
       ) : (
-        <span className="mt-0.5 flex items-center gap-1 px-1 text-[10px] text-[var(--text-muted)]">
-          <CircleNotch aria-hidden className="size-3 animate-spin" />
+        <span className="mt-0.5 flex items-center gap-1 px-1 type-caption text-muted-foreground">
+          <Loader2 aria-hidden className="size-3 animate-spin" />
           {sendingLabel}
         </span>
       )}
@@ -557,11 +598,11 @@ function ReadOnlyNotice({
   icon: Icon,
 }: {
   text: string;
-  icon: typeof WarningCircle;
+  icon: LucideIcon;
 }) {
   return (
-    <p className="flex items-center justify-center gap-1.5 border-t border-white/40 pt-3 text-xs font-medium text-[var(--text-muted)]">
-      <Icon aria-hidden weight="duotone" className="size-4 shrink-0" />
+    <p className="flex items-center justify-center gap-1.5 border-t border-border px-5 py-3 type-caption font-medium text-muted-foreground">
+      <Icon aria-hidden strokeWidth={1.8} className="size-4 shrink-0" />
       {text}
     </p>
   );

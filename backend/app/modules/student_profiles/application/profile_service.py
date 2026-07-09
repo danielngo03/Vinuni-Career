@@ -25,7 +25,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
 from app.modules.student_profiles.api import presenters
-from app.modules.student_profiles.application import _shared, visibility
+from app.modules.student_profiles.application import (
+    _shared,
+    reveal_read,
+    talent_pool_service,
+    visibility,
+)
 from app.modules.student_profiles.application.errors import (
     InvalidProfileFieldError,
     ProfileVersionConflictError,
@@ -56,7 +61,17 @@ async def _public_response(
     profile: StudentProfile,
     decision: visibility.ViewDecision,
     locale: str,
+    masked: bool = False,
 ) -> dict:
+    # Blind-screening: an external partner without a granted reveal never even has
+    # the candidate's name/contact loaded — the masked card is built from the
+    # opaque handle alone (same handle the talent-pool LIST card carries).
+    if masked:
+        return presenters.masked_public_profile(
+            profile,
+            anonymous_handle=talent_pool_service._masked_handle(profile),
+            locale=locale,
+        )
     user = await user_service.get_by_id(session, profile.user_id)
     return presenters.public_profile(
         profile,
@@ -189,7 +204,44 @@ async def get_profile_for_viewer(
     if principal.is_superadmin or principal.persona == "university_staff":
         return await _owner_response(session, profile=profile, locale=locale)
 
-    return await _public_response(session, profile=profile, decision=decision, locale=locale)
+    # External partner recruiters get the SAME blind-screening mask as the talent-
+    # pool LIST (``talent_pool_service._should_mask_identity``): the candidate's real
+    # name + identifying avatar are withheld behind the deterministic ``UV-xxxx``
+    # handle until this partner has an ACCEPTED reveal for this candidate. VinUni
+    # community personas (student/alumni) are internal and keep the identified view.
+    masked = talent_pool_service._should_mask_identity(principal)
+    if masked and await _partner_reveal_lifts_mask(session, principal=principal, profile=profile):
+        masked = False
+    return await _public_response(
+        session, profile=profile, decision=decision, locale=locale, masked=masked
+    )
+
+
+async def _partner_reveal_lifts_mask(
+    session: AsyncSession, *, principal: Principal, profile: StudentProfile
+) -> bool:
+    """Whether an external partner may see this candidate's REAL identity on detail.
+
+    The mask is lifted only when this partner org holds an ACCEPTED identity reveal
+    for the candidate (recruitment handshake) AND the viewing member additionally
+    holds ``candidate_identity:view_revealed_identity`` — the same additive gate the
+    recruitment pipeline board applies post-reveal, so this passive read can never
+    be a weaker identity path than the application surface
+    (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
+    """
+
+    if principal.org_id is None:
+        return False
+    if not permission_checker.can(
+        principal,
+        "candidate_identity",
+        "view_revealed_identity",
+        resource_org_id=principal.org_id,
+    ):
+        return False
+    return await reveal_read.has_revealed_candidate(
+        session, org_id=principal.org_id, applicant_user_id=profile.user_id
+    )
 
 
 # --------------------------------------------------------------------------- #

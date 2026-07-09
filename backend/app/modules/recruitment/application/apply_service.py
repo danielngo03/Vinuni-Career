@@ -786,7 +786,12 @@ def _can_view_identity(principal: Principal, app: Application) -> bool:
 
 
 async def _partner_view(
-    session: AsyncSession, *, app: Application, principal: Principal, locale: str
+    session: AsyncSession,
+    *,
+    app: Application,
+    principal: Principal,
+    locale: str,
+    stage: dict | None = None,
 ) -> dict:
     authorized = _can_view_identity(principal, app)
     user = None
@@ -800,8 +805,45 @@ async def _partner_view(
         reveal_status=reveal_status,
         identity_authorized=authorized,
         assignee=assignee,
+        stage=stage,
         locale=locale,
     )
+
+
+async def _current_stages_for(
+    session: AsyncSession, *, application_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, dict]:
+    """Batch-resolve ``{application_id: {stage_id, stage_name}}`` for a LIST page.
+
+    ONE join over the ACTIVE ``candidate_stages`` rows + their ``pipeline_stages``
+    name — independent of page size (no per-application fetch). Applications still
+    pre-pipeline (``submitted``, no ACTIVE row) are simply absent → ``stage`` is
+    ``None`` on their card. Stage metadata only; never any student identity.
+    """
+
+    from app.modules.recruitment.domain import pipeline
+    from app.modules.recruitment.domain.models import CandidateStage, PipelineStage
+
+    if not application_ids:
+        return {}
+    rows = (
+        await session.execute(
+            select(
+                CandidateStage.application_id,
+                PipelineStage.id,
+                PipelineStage.name,
+            )
+            .join(PipelineStage, PipelineStage.id == CandidateStage.stage_id)
+            .where(
+                CandidateStage.application_id.in_(set(application_ids)),
+                CandidateStage.status == pipeline.STAGE_ACTIVE,
+            )
+        )
+    ).all()
+    return {
+        app_id: {"stage_id": str(stage_id), "stage_name": name}
+        for app_id, stage_id, name in rows
+    }
 
 
 async def _assignee_block(session: AsyncSession, *, app: Application) -> dict | None:
@@ -917,9 +959,17 @@ async def list_job_applications(
         },
     )
 
+    # Current pipeline stage per row — ONE batched join (independent of page size).
+    stages = await _current_stages_for(
+        session, application_ids=[a.id for a in page.items]
+    )
     items: list[dict] = []
     for a in page.items:
-        items.append(await _partner_view(session, app=a, principal=principal, locale=locale))
+        items.append(
+            await _partner_view(
+                session, app=a, principal=principal, locale=locale, stage=stages.get(a.id)
+            )
+        )
     return items, page.next_cursor, page.limit
 
 

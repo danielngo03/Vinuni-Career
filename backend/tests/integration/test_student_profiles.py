@@ -197,6 +197,9 @@ async def test_public_profile_partner_view_hides_contact(db_session) -> None:
     )
     assert "email" not in view  # show_email=hidden -> never exposed
     assert "phone" not in view
+    # An external partner gets the blind-screening mask on this passive path — the
+    # candidate stays anonymous (UV- handle) until the recruitment reveal flow.
+    assert view["identity_masked"] is True
     assert view["location_city"] == "Hanoi"
     assert view["is_open_to_work"] is True
 
@@ -210,10 +213,15 @@ async def test_public_profile_exposes_email_when_public(db_session) -> None:
         ctx=CTX,
     )
     pid = await get_profile_id(db_session, principal=student)
-    _pu, _org, partner = await make_org_with_admin(db_session, display_name="P2")
+    # A VinUni community viewer (a fellow student) is NOT blind-screened, so the
+    # student's public-gated email is exposed to them. External PARTNERS are masked
+    # on this passive path and never receive contact (blind-screening) — covered by
+    # tests/integration/test_talent_pool_detail_masking.py.
+    _vu, viewer = await make_student(db_session, prefix="pubmail_viewer")
     view = await profile_service.get_profile_for_viewer(
-        db_session, principal=partner, profile_id=pid
+        db_session, principal=viewer, profile_id=pid
     )
+    assert view["identity_masked"] is False
     assert view["email"] == _su.email
 
 

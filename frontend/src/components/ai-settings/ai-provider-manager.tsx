@@ -3,32 +3,40 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  ArrowsClockwise,
+  Bot,
   Cloud,
-  Code,
-  Database,
-  GearSix,
   Key,
-  Link,
-  PencilSimple,
+  Pencil,
   Plus,
-  Robot,
-  ShieldWarning,
-  Tag,
-  Warning,
-  XCircle,
-} from "@phosphor-icons/react";
+  RotateCw,
+  Settings2,
+  ShieldAlert,
+  ShieldCheck,
+} from "lucide-react";
 import {
   Button,
   Input,
   Modal,
   Select,
-  StatusBadge,
   Switch,
   Textarea,
   useToast,
 } from "@/components/ui";
-import { cn } from "@/lib/utils";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardToolbar,
+  CardContent,
+  StatusChip,
+  DataTable,
+  type ColumnDef,
+  DetailSheet,
+  DetailSheetSection,
+  DetailRow,
+  EmptyState,
+} from "@/components/kit";
 import {
   ApiError,
   aiAliasesApi,
@@ -45,28 +53,28 @@ import {
 
 /* ------------------------------------------------------------------ helpers */
 
-function KeyBadge({ present }: { present: boolean }) {
+function KeyChip({ present }: { present: boolean }) {
   return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold",
-        present
-          ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-          : "bg-slate-50 text-slate-500 border border-slate-200",
-      )}
-    >
-      <Key aria-hidden weight="bold" className="size-3" />
+    <StatusChip tone={present ? "success" : "neutral"} size="sm">
+      <Key aria-hidden className="size-3" strokeWidth={2} />
       {present ? "Key set" : "No key"}
-    </span>
+    </StatusChip>
   );
 }
 
-function BuiltinBadge() {
+function BuiltinChip() {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-0.5 text-xs font-semibold text-violet-700 border border-violet-200">
-      <Database aria-hidden weight="bold" className="size-3" />
+    <StatusChip tone="violet" size="sm">
       Built-in
-    </span>
+    </StatusChip>
+  );
+}
+
+function ActiveChip({ active }: { active: boolean }) {
+  return (
+    <StatusChip tone={active ? "success" : "neutral"} size="sm" dot>
+      {active ? "Active" : "Inactive"}
+    </StatusChip>
   );
 }
 
@@ -74,47 +82,12 @@ function providerTypeLabel(t: AiProviderType): string {
   return AI_PROVIDER_TYPES.find((p) => p.value === t)?.label ?? t;
 }
 
-/* ------------------------------------------------------------------ section wrapper */
-
-function SectionCard({
-  title,
-  subtitle,
-  icon: IconCmp,
-  iconGradient,
-  action,
-  children,
-}: {
-  title: string;
-  subtitle?: string;
-  icon: typeof Cloud;
-  iconGradient: string;
-  action?: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="rounded-2xl border border-white/60 bg-white/82 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-md overflow-hidden">
-      <div className="flex items-start justify-between gap-3 px-5 py-4 border-b border-[var(--border-subtle)]">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <span
-            className={cn(
-              "flex size-7 shrink-0 items-center justify-center rounded-lg shadow-sm",
-              iconGradient,
-            )}
-          >
-            <IconCmp aria-hidden weight="duotone" className="size-4 text-white" />
-          </span>
-          <div className="min-w-0">
-            <h2 className="text-base font-bold text-[var(--text-primary)]">{title}</h2>
-            {subtitle && (
-              <p className="mt-0.5 text-xs text-[var(--text-secondary)]">{subtitle}</p>
-            )}
-          </div>
-        </div>
-        {action}
-      </div>
-      {children}
-    </section>
-  );
+function fmtDate(iso: string | null): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime())
+    ? "—"
+    : d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
 }
 
 /* ================================================================== PROVIDERS ================================================================== */
@@ -312,7 +285,7 @@ function ProviderForm({
               }
             />
             {isEdit && mode.provider.has_api_key && (
-              <label className="flex items-center justify-between gap-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-3 py-2.5">
+              <label className="flex items-center justify-between gap-3 rounded-xl border border-border bg-[var(--bg-subtle)] px-3 py-2.5">
                 <span className="min-w-0">
                   <span className="block text-sm font-medium text-[var(--text-primary)]">
                     Clear stored key
@@ -344,8 +317,8 @@ function ProviderForm({
           onChange={(e) => patch({ description: e.target.value })}
         />
         {form.provider_type !== "ollama" && (
-          <div className="flex items-start gap-2 rounded-xl bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800 border border-emerald-200">
-            <Warning aria-hidden weight="fill" className="size-4 shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 rounded-xl border border-[var(--content-info)]/25 bg-[var(--content-info-soft)] px-3 py-2.5 text-sm text-[var(--content-info)]">
+            <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" strokeWidth={2} />
             <p>
               Keys saved here are encrypted in the backend database. Environment
               variables can still be used as an operations fallback.
@@ -357,10 +330,80 @@ function ProviderForm({
   );
 }
 
+/** Read-only registry detail for a provider (superadmin AI-ops surface). */
+function ProviderDetailSheet({
+  provider,
+  onClose,
+  onEdit,
+}: {
+  provider: AiProvider;
+  onClose: () => void;
+  onEdit: () => void;
+}) {
+  return (
+    <DetailSheet
+      open
+      onClose={onClose}
+      title={provider.name}
+      subtitle={providerTypeLabel(provider.provider_type)}
+      avatar={
+        <span className="flex size-10 items-center justify-center rounded-xl bg-[var(--bg-muted)]">
+          <Cloud aria-hidden className="size-5 text-[var(--text-muted)]" strokeWidth={1.8} />
+        </span>
+      }
+      status={
+        <>
+          <ActiveChip active={provider.is_active} />
+          {provider.is_builtin && <BuiltinChip />}
+          <KeyChip present={provider.has_api_key} />
+        </>
+      }
+      footer={
+        <Button variant="secondary" onClick={onEdit}>
+          <Pencil aria-hidden className="size-3.5" strokeWidth={2} />
+          Edit provider
+        </Button>
+      }
+    >
+      <DetailSheetSection title="Endpoint">
+        <DetailRow label="Provider type">{providerTypeLabel(provider.provider_type)}</DetailRow>
+        <DetailRow label="Base URL">
+          {provider.base_url ? (
+            <span className="break-all font-mono text-xs">{provider.base_url}</span>
+          ) : (
+            "—"
+          )}
+        </DetailRow>
+      </DetailSheetSection>
+      <DetailSheetSection title="Credentials">
+        <DetailRow label="API key">
+          <KeyChip present={provider.has_api_key} />
+        </DetailRow>
+        <p className="mt-2 type-caption text-muted-foreground">
+          The plaintext key is never returned by the API — it is stored encrypted
+          at rest and only referenced by the gateway at call time.
+        </p>
+      </DetailSheetSection>
+      {provider.description && (
+        <DetailSheetSection title="Notes">
+          <p className="text-sm text-foreground">{provider.description}</p>
+        </DetailSheetSection>
+      )}
+      <DetailSheetSection title="Registry">
+        <DetailRow label="Built-in">{provider.is_builtin ? "Yes" : "No"}</DetailRow>
+        <DetailRow label="Status">{provider.is_active ? "Active" : "Inactive"}</DetailRow>
+        <DetailRow label="Created">{fmtDate(provider.created_at)}</DetailRow>
+        <DetailRow label="Updated">{fmtDate(provider.updated_at)}</DetailRow>
+      </DetailSheetSection>
+    </DetailSheet>
+  );
+}
+
 export function ProvidersSection() {
   const qc = useQueryClient();
   const toast = useToast();
   const [formMode, setFormMode] = useState<ProviderFormMode | null>(null);
+  const [detail, setDetail] = useState<AiProvider | null>(null);
 
   const query = useQuery({
     queryKey: ["admin", "ai-providers"],
@@ -377,107 +420,148 @@ export function ProvidersSection() {
 
   const providers = query.data ?? [];
 
-  return (
-    <SectionCard
-      title="AI Providers"
-      subtitle="Registered endpoints with encrypted admin-managed keys"
-      icon={Cloud}
-      iconGradient="icon-chip-info"
-      action={
-        <Button
-          variant="secondary"
-          onClick={() => setFormMode({ mode: "create" })}
-          className="shrink-0"
-        >
-          <Plus aria-hidden weight="bold" className="size-4" />
-          Add provider
-        </Button>
-      }
-    >
-      {query.isLoading && (
-        <div className="divide-y divide-[var(--border-subtle)]">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="h-14 animate-pulse bg-[var(--bg-subtle)]" />
-          ))}
-        </div>
-      )}
-      {query.isError && (
-        <div className="flex items-center gap-2 px-5 py-4 text-sm text-[var(--brand-red)]">
-          <XCircle aria-hidden weight="fill" className="size-4 shrink-0" />
-          Failed to load providers.
-          <Button variant="ghost" onClick={() => query.refetch()} className="ml-auto">
-            <ArrowsClockwise aria-hidden className="size-4" /> Retry
-          </Button>
-        </div>
-      )}
-      {!query.isLoading && !query.isError && providers.length === 0 && (
-        <p className="px-5 py-6 text-center text-sm text-[var(--text-muted)]">
-          No providers configured yet.
-        </p>
-      )}
-      {providers.length > 0 && (
-        <div className="divide-y divide-[var(--border-subtle)]">
-          {providers.map((p) => (
-            <div
-              key={p.id}
-              className={cn(
-                "flex items-center gap-3 px-5 py-3.5",
-                !p.is_active && "opacity-50",
-              )}
-            >
-              {/* Icon */}
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 shadow-sm">
-                <Cloud aria-hidden weight="duotone" className="size-4 text-slate-500" />
+  const columns: ColumnDef<AiProvider, unknown>[] = [
+    {
+      id: "provider",
+      header: "Provider",
+      enableSorting: false,
+      cell: ({ row }) => {
+        const p = row.original;
+        return (
+          <button
+            type="button"
+            onClick={() => setDetail(p)}
+            className="group flex items-center gap-2.5 text-left outline-none"
+          >
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--bg-muted)]">
+              <Cloud aria-hidden className="size-4 text-[var(--text-muted)]" strokeWidth={1.8} />
+            </span>
+            <span className="min-w-0">
+              <span className="flex items-center gap-1.5">
+                <span className="truncate text-sm font-semibold text-foreground group-hover:text-[var(--brand-primary)]">
+                  {p.name}
+                </span>
+                {p.is_builtin && <BuiltinChip />}
               </span>
-              {/* Name + badges */}
-              <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="text-sm font-semibold text-[var(--text-primary)]">
-                    {p.name}
-                  </span>
-                  {p.is_builtin && <BuiltinBadge />}
-                  <KeyBadge present={p.has_api_key} />
-                </div>
-                <div className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-[var(--text-muted)]">
-                  <span className="inline-flex items-center gap-1">
-                    <Code aria-hidden className="size-3" />
-                    {providerTypeLabel(p.provider_type)}
-                  </span>
-                  {p.base_url && (
-                    <span className="inline-flex items-center gap-1 truncate max-w-[200px]">
-                      <Link aria-hidden className="size-3 shrink-0" />
-                      {p.base_url}
-                    </span>
-                  )}
-                  {p.description && (
-                    <span className="hidden sm:inline text-[var(--text-muted)]">
-                      · {p.description}
-                    </span>
-                  )}
-                </div>
-              </div>
-              {/* Actions */}
-              <div className="flex shrink-0 items-center gap-2">
-                <Switch
-                  checked={p.is_active}
-                  onCheckedChange={(v) => toggleMut.mutate({ id: p.id, is_active: v })}
-                  label={p.is_active ? "Active" : "Inactive"}
-                  hideLabel
-                  id={`prov-toggle-${p.id}`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setFormMode({ mode: "edit", provider: p })}
-                  className="flex size-7 items-center justify-center rounded-lg text-[var(--text-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] transition-colors"
-                  aria-label={`Edit ${p.name}`}
-                >
-                  <PencilSimple aria-hidden weight="bold" className="size-3.5" />
-                </button>
-              </div>
-            </div>
-          ))}
+              {p.description && (
+                <span className="block max-w-[240px] truncate type-caption text-muted-foreground">
+                  {p.description}
+                </span>
+              )}
+            </span>
+          </button>
+        );
+      },
+    },
+    {
+      id: "type",
+      header: "Type",
+      enableSorting: false,
+      cell: ({ row }) => (
+        <span className="text-[0.8125rem] text-muted-foreground">
+          {providerTypeLabel(row.original.provider_type)}
+        </span>
+      ),
+    },
+    {
+      id: "endpoint",
+      header: "Endpoint",
+      enableSorting: false,
+      cell: ({ row }) =>
+        row.original.base_url ? (
+          <span className="block max-w-[220px] truncate font-mono text-xs text-muted-foreground">
+            {row.original.base_url}
+          </span>
+        ) : (
+          <span className="text-muted-foreground">—</span>
+        ),
+    },
+    {
+      id: "key",
+      header: "Key",
+      enableSorting: false,
+      cell: ({ row }) => <KeyChip present={row.original.has_api_key} />,
+    },
+    {
+      id: "actions",
+      header: "Status",
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => {
+        const p = row.original;
+        return (
+          <div className="flex items-center justify-end gap-2">
+            <Switch
+              checked={p.is_active}
+              onCheckedChange={(v) => toggleMut.mutate({ id: p.id, is_active: v })}
+              label={p.is_active ? "Active" : "Inactive"}
+              hideLabel
+              id={`prov-toggle-${p.id}`}
+            />
+            <button
+              type="button"
+              onClick={() => setFormMode({ mode: "edit", provider: p })}
+              className="flex size-7 items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+              aria-label={`Edit ${p.name}`}
+            >
+              <Pencil aria-hidden className="size-3.5" strokeWidth={2} />
+            </button>
+          </div>
+        );
+      },
+    },
+  ];
+
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-center gap-2.5">
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-info">
+            <Cloud aria-hidden className="size-4" strokeWidth={2} />
+          </span>
+          <div>
+            <CardTitle>AI Providers</CardTitle>
+            <CardDescription>
+              Registered endpoints with encrypted admin-managed keys
+            </CardDescription>
+          </div>
         </div>
-      )}
+        <CardToolbar>
+          <Button variant="secondary" size="sm" onClick={() => setFormMode({ mode: "create" })}>
+            <Plus aria-hidden className="size-4" strokeWidth={2} />
+            Add provider
+          </Button>
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {query.isError ? (
+          <EmptyState
+            kind="error"
+            title="Couldn't load providers."
+            description="Something went wrong fetching the provider registry."
+            action={
+              <Button variant="secondary" onClick={() => query.refetch()}>
+                <RotateCw aria-hidden className="size-4" strokeWidth={2} />
+                Retry
+              </Button>
+            }
+          />
+        ) : (
+          <DataTable
+            columns={columns}
+            data={providers}
+            getRowId={(p) => p.id}
+            loading={query.isLoading}
+            empty={
+              <EmptyState
+                kind="empty"
+                title="No providers configured yet."
+                description="Add a provider endpoint to route AI aliases to concrete models."
+              />
+            }
+          />
+        )}
+      </CardContent>
 
       {formMode && (
         <ProviderForm
@@ -487,7 +571,17 @@ export function ProvidersSection() {
           onSaved={() => void qc.invalidateQueries({ queryKey: ["admin", "ai-providers"] })}
         />
       )}
-    </SectionCard>
+      {detail && (
+        <ProviderDetailSheet
+          provider={detail}
+          onClose={() => setDetail(null)}
+          onEdit={() => {
+            setFormMode({ mode: "edit", provider: detail });
+            setDetail(null);
+          }}
+        />
+      )}
+    </Card>
   );
 }
 
@@ -697,12 +791,12 @@ function AliasForm({
           rows={2}
           onChange={(e) => patch({ description: e.target.value })}
         />
-        <div className="flex items-start gap-2 rounded-xl bg-sky-50 px-3 py-2.5 text-sm text-sky-800 border border-sky-200">
-          <ShieldWarning aria-hidden weight="fill" className="size-4 shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2 rounded-xl border border-[var(--content-info)]/25 bg-[var(--content-info-soft)] px-3 py-2.5 text-sm text-[var(--content-info)]">
+          <ShieldAlert aria-hidden className="mt-0.5 size-4 shrink-0" strokeWidth={2} />
           <p>
             Model IDs are stored securely and never returned in API responses or
             shown to non-admin users. Alias names (e.g.{" "}
-            <code className="rounded bg-sky-100 px-1 font-mono text-xs">chat_cheap</code>)
+            <code className="rounded bg-[var(--bg-muted)] px-1 font-mono text-xs">chat_cheap</code>)
             are the only identifiers surfaced to students and partners.
           </p>
         </div>
@@ -711,10 +805,76 @@ function AliasForm({
   );
 }
 
+/** Read-only registry detail for a model alias (superadmin AI-ops surface). */
+function AliasDetailSheet({
+  alias,
+  onClose,
+  onEdit,
+}: {
+  alias: AiModelAliasRow;
+  onClose: () => void;
+  onEdit: () => void;
+}) {
+  return (
+    <DetailSheet
+      open
+      onClose={onClose}
+      title={alias.alias_name}
+      subtitle={alias.provider_name ?? "Unassigned provider"}
+      avatar={
+        <span className="flex size-10 items-center justify-center rounded-xl bg-[var(--ai-accent-soft)]">
+          <Bot aria-hidden className="size-5 text-[var(--ai-accent)]" strokeWidth={1.8} />
+        </span>
+      }
+      status={
+        <>
+          <ActiveChip active={alias.is_active} />
+          {alias.is_builtin && <BuiltinChip />}
+        </>
+      }
+      footer={
+        <Button variant="secondary" onClick={onEdit}>
+          <Pencil aria-hidden className="size-3.5" strokeWidth={2} />
+          Edit alias
+        </Button>
+      }
+    >
+      <DetailSheetSection title="Routing">
+        <DetailRow label="Alias name">
+          <code className="rounded bg-[var(--bg-muted)] px-1.5 py-0.5 font-mono text-xs font-semibold text-foreground">
+            {alias.alias_name}
+          </code>
+        </DetailRow>
+        <DetailRow label="Provider">{alias.provider_name ?? "—"}</DetailRow>
+        <DetailRow label="Task families">{alias.task_families || "Any"}</DetailRow>
+      </DetailSheetSection>
+      {alias.description && (
+        <DetailSheetSection title="Notes">
+          <p className="text-sm text-foreground">{alias.description}</p>
+        </DetailSheetSection>
+      )}
+      <DetailSheetSection title="Registry">
+        <DetailRow label="Built-in">{alias.is_builtin ? "Yes" : "No"}</DetailRow>
+        <DetailRow label="Status">{alias.is_active ? "Active" : "Inactive"}</DetailRow>
+        <DetailRow label="Created">{fmtDate(alias.created_at)}</DetailRow>
+        <DetailRow label="Updated">{fmtDate(alias.updated_at)}</DetailRow>
+      </DetailSheetSection>
+      <div className="px-5 py-4">
+        <p className="flex items-start gap-2 type-caption text-muted-foreground">
+          <ShieldAlert aria-hidden className="mt-0.5 size-3.5 shrink-0" strokeWidth={2} />
+          The concrete model ID this alias routes to is stored write-only and is
+          never returned by the API. Edit the alias to re-point its routing.
+        </p>
+      </div>
+    </DetailSheet>
+  );
+}
+
 export function AliasesSection({ providers }: { providers: AiProvider[] }) {
   const qc = useQueryClient();
   const toast = useToast();
   const [formMode, setFormMode] = useState<AliasFormMode | null>(null);
+  const [detail, setDetail] = useState<AiModelAliasRow | null>(null);
 
   const query = useQuery({
     queryKey: ["admin", "ai-aliases"],
@@ -731,113 +891,142 @@ export function AliasesSection({ providers }: { providers: AiProvider[] }) {
 
   const aliases = query.data ?? [];
 
-  return (
-    <SectionCard
-      title="Model Aliases"
-      subtitle="Logical names that route to concrete models at registered providers"
-      icon={Robot}
-      iconGradient="icon-chip-info"
-      action={
-        <Button
-          variant="secondary"
-          onClick={() => setFormMode({ mode: "create" })}
-          className="shrink-0"
-        >
-          <Plus aria-hidden weight="bold" className="size-4" />
-          Add alias
-        </Button>
-      }
-    >
-      {query.isLoading && (
-        <div className="divide-y divide-[var(--border-subtle)]">
-          {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="h-14 animate-pulse bg-[var(--bg-subtle)]" />
-          ))}
-        </div>
-      )}
-      {query.isError && (
-        <div className="flex items-center gap-2 px-5 py-4 text-sm text-[var(--brand-red)]">
-          <XCircle aria-hidden weight="fill" className="size-4 shrink-0" />
-          Failed to load aliases.
-          <Button variant="ghost" onClick={() => query.refetch()} className="ml-auto">
-            <ArrowsClockwise aria-hidden className="size-4" /> Retry
-          </Button>
-        </div>
-      )}
-      {!query.isLoading && !query.isError && aliases.length === 0 && (
-        <p className="px-5 py-6 text-center text-sm text-[var(--text-muted)]">
-          No aliases configured yet.
-        </p>
-      )}
-      {aliases.length > 0 && (
-        <div className="divide-y divide-[var(--border-subtle)]">
-          {aliases.map((a) => (
-            <div
-              key={a.id}
-              className={cn(
-                "flex items-center gap-3 px-5 py-3.5",
-                !a.is_active && "opacity-50",
-              )}
-            >
-              {/* Icon */}
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ai-accent-soft)] shadow-sm">
-                <Robot aria-hidden weight="duotone" className="size-4 text-[var(--ai-accent)]" />
+  const columns: ColumnDef<AiModelAliasRow, unknown>[] = [
+    {
+      id: "alias",
+      header: "Alias",
+      enableSorting: false,
+      cell: ({ row }) => {
+        const a = row.original;
+        return (
+          <button
+            type="button"
+            onClick={() => setDetail(a)}
+            className="group flex items-center gap-2.5 text-left outline-none"
+          >
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ai-accent-soft)]">
+              <Bot aria-hidden className="size-4 text-[var(--ai-accent)]" strokeWidth={1.8} />
+            </span>
+            <span className="min-w-0">
+              <span className="flex items-center gap-1.5">
+                <code className="rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 font-mono text-xs font-semibold text-foreground group-hover:text-[var(--brand-primary)]">
+                  {a.alias_name}
+                </code>
+                {a.is_builtin && <BuiltinChip />}
               </span>
-              {/* Name + metadata */}
-              <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  <code className="rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 font-mono text-xs font-semibold text-[var(--text-primary)]">
-                    {a.alias_name}
-                  </code>
-                  {a.is_builtin && <BuiltinBadge />}
-                  {!a.is_active && (
-                    <StatusBadge tone="closed">
-                      <XCircle aria-hidden weight="bold" className="size-3" /> Inactive
-                    </StatusBadge>
-                  )}
-                </div>
-                <div className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-[var(--text-muted)]">
-                  {a.provider_name && (
-                    <span className="inline-flex items-center gap-1">
-                      <Cloud aria-hidden className="size-3" />
-                      {a.provider_name}
-                    </span>
-                  )}
-                  {a.task_families && (
-                    <span className="inline-flex items-center gap-1">
-                      <Tag aria-hidden className="size-3" />
-                      {a.task_families}
-                    </span>
-                  )}
-                  {a.description && (
-                    <span className="hidden sm:inline text-[var(--text-muted)]">
-                      · {a.description}
-                    </span>
-                  )}
-                </div>
-              </div>
-              {/* Actions */}
-              <div className="flex shrink-0 items-center gap-2">
-                <Switch
-                  checked={a.is_active}
-                  onCheckedChange={(v) => toggleMut.mutate({ id: a.id, is_active: v })}
-                  label={a.is_active ? "Active" : "Inactive"}
-                  hideLabel
-                  id={`alias-toggle-${a.id}`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setFormMode({ mode: "edit", alias: a })}
-                  className="flex size-7 items-center justify-center rounded-lg text-[var(--text-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] transition-colors"
-                  aria-label={`Edit alias ${a.alias_name}`}
-                >
-                  <PencilSimple aria-hidden weight="bold" className="size-3.5" />
-                </button>
-              </div>
-            </div>
-          ))}
+              {a.description && (
+                <span className="block max-w-[240px] truncate type-caption text-muted-foreground">
+                  {a.description}
+                </span>
+              )}
+            </span>
+          </button>
+        );
+      },
+    },
+    {
+      id: "provider",
+      header: "Provider",
+      enableSorting: false,
+      cell: ({ row }) => (
+        <span className="text-[0.8125rem] text-muted-foreground">
+          {row.original.provider_name ?? "—"}
+        </span>
+      ),
+    },
+    {
+      id: "families",
+      header: "Task families",
+      enableSorting: false,
+      cell: ({ row }) =>
+        row.original.task_families ? (
+          <span className="font-mono text-xs text-muted-foreground">
+            {row.original.task_families}
+          </span>
+        ) : (
+          <span className="text-muted-foreground">Any</span>
+        ),
+    },
+    {
+      id: "actions",
+      header: "Status",
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => {
+        const a = row.original;
+        return (
+          <div className="flex items-center justify-end gap-2">
+            <Switch
+              checked={a.is_active}
+              onCheckedChange={(v) => toggleMut.mutate({ id: a.id, is_active: v })}
+              label={a.is_active ? "Active" : "Inactive"}
+              hideLabel
+              id={`alias-toggle-${a.id}`}
+            />
+            <button
+              type="button"
+              onClick={() => setFormMode({ mode: "edit", alias: a })}
+              className="flex size-7 items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+              aria-label={`Edit alias ${a.alias_name}`}
+            >
+              <Pencil aria-hidden className="size-3.5" strokeWidth={2} />
+            </button>
+          </div>
+        );
+      },
+    },
+  ];
+
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-center gap-2.5">
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-info">
+            <Bot aria-hidden className="size-4" strokeWidth={2} />
+          </span>
+          <div>
+            <CardTitle>Model Aliases</CardTitle>
+            <CardDescription>
+              Logical names that route to concrete models at registered providers
+            </CardDescription>
+          </div>
         </div>
-      )}
+        <CardToolbar>
+          <Button variant="secondary" size="sm" onClick={() => setFormMode({ mode: "create" })}>
+            <Plus aria-hidden className="size-4" strokeWidth={2} />
+            Add alias
+          </Button>
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {query.isError ? (
+          <EmptyState
+            kind="error"
+            title="Couldn't load aliases."
+            description="Something went wrong fetching the model alias registry."
+            action={
+              <Button variant="secondary" onClick={() => query.refetch()}>
+                <RotateCw aria-hidden className="size-4" strokeWidth={2} />
+                Retry
+              </Button>
+            }
+          />
+        ) : (
+          <DataTable
+            columns={columns}
+            data={aliases}
+            getRowId={(a) => a.id}
+            loading={query.isLoading}
+            empty={
+              <EmptyState
+                kind="empty"
+                title="No aliases configured yet."
+                description="Create a logical alias to route AI tasks to a concrete model."
+              />
+            }
+          />
+        )}
+      </CardContent>
 
       {formMode && (
         <AliasForm
@@ -848,7 +1037,17 @@ export function AliasesSection({ providers }: { providers: AiProvider[] }) {
           onSaved={() => void qc.invalidateQueries({ queryKey: ["admin", "ai-aliases"] })}
         />
       )}
-    </SectionCard>
+      {detail && (
+        <AliasDetailSheet
+          alias={detail}
+          onClose={() => setDetail(null)}
+          onEdit={() => {
+            setFormMode({ mode: "edit", alias: detail });
+            setDetail(null);
+          }}
+        />
+      )}
+    </Card>
   );
 }
 
@@ -865,14 +1064,14 @@ export function AiProviderManager() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2 px-1">
-        <GearSix aria-hidden weight="duotone" className="size-4 text-[var(--text-muted)]" />
-        <span className="text-sm font-semibold text-[var(--text-secondary)]">
+      <div className="flex flex-wrap items-center gap-2 px-1">
+        <Settings2 aria-hidden className="size-4 text-muted-foreground" strokeWidth={1.8} />
+        <span className="type-small font-semibold text-[var(--text-secondary)]">
           Multi-provider configuration
         </span>
-        <span className="ml-auto text-xs text-[var(--text-muted)]">
+        <span className="ml-auto flex items-center gap-1 type-caption text-muted-foreground">
+          <ShieldAlert aria-hidden className="size-3.5" strokeWidth={1.8} />
           Model IDs are never exposed to students or partners
-          <ShieldWarning aria-hidden weight="fill" className="inline ml-1 size-3.5 text-[var(--text-muted)]" />
         </span>
       </div>
       <ProvidersSection />

@@ -36,6 +36,7 @@ from sqlalchemy import and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.application import job_read_facade
+from app.modules.organization.application import org_reporting_facade
 from app.modules.recruitment.api import presenters
 from app.modules.recruitment.application import _shared, dashboard_read, stage_service
 from app.modules.recruitment.domain import lifecycle, pipeline, scorecard
@@ -155,6 +156,33 @@ async def _batch_users(
     if not user_ids:
         return {}
     return await user_read_facade.get_user_contacts(session, user_ids)
+
+
+async def _batch_assignees(
+    session: AsyncSession, *, org_id: uuid.UUID, membership_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, dict]:
+    """Resolve ``{membership_id: assignee_block}`` for the assigned recruiters.
+
+    ONE batched org-facade lookup (membership query + names) for the whole board —
+    independent of candidate count. Reads through ``org_reporting_facade`` so the
+    recruitment module never imports the ``Membership`` ORM directly. The assignee
+    is PARTNER staff (never the candidate) so the name is always shown; the block
+    matches ``presenters.partner_application``'s ``assignee`` shape.
+    """
+
+    if not membership_ids:
+        return {}
+    briefs = await org_reporting_facade.member_briefs(
+        session, org_id=org_id, membership_ids=membership_ids
+    )
+    return {
+        mid: {
+            "membership_id": str(brief.membership_id),
+            "user_id": str(brief.user_id),
+            "display_name": brief.display_name,
+        }
+        for mid, brief in briefs.items()
+    }
 
 
 async def _batch_rollback_counts(
@@ -280,6 +308,17 @@ async def get_job_pipeline_board(
     ]
     users = await _batch_users(session, user_ids=revealed_user_ids)
     rollback_counts = await _batch_rollback_counts(session, application_ids=app_ids)
+    # Candidate owner (assignee) per card — ONE batched org-facade lookup for the
+    # whole board (empty set → no query, so the board's bounded-query budget holds).
+    assignees = await _batch_assignees(
+        session,
+        org_id=job.org_id,
+        membership_ids=[
+            app.assigned_to_membership_id
+            for app, _stage_id, _entered in cards_raw
+            if app.assigned_to_membership_id is not None
+        ],
+    )
 
     # Partner-only scorecard summary per card (current stage) — ONE batched query.
     required_by_stage = {stage.id: stage.required_action for stage in stages}
@@ -312,6 +351,9 @@ async def get_job_pipeline_board(
             rollback_count=rollback_counts.get(app.id, 0),
             evaluation=evaluations.get(app.id),
             identity_authorized=can_view_revealed,
+            assignee=assignees.get(app.assigned_to_membership_id)
+            if app.assigned_to_membership_id is not None
+            else None,
             locale=locale,
         )
         if stage_id is not None and stage_id in stage_ids:

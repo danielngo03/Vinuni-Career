@@ -1,12 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { Archive, ChevronRight, FileText, Pause, PauseCircle, Play, Plus, Workflow } from "lucide-react";
 
-import { Button, EmptyState, Modal, StatusBadge, useToast, type StatusTone } from "@/components/ui";
-import { PageHeader } from "@/components/layout/page-header";
+import { Button, Modal, useToast } from "@/components/ui";
+import {
+  Card,
+  EmptyState,
+  KpiRow,
+  KpiTile,
+  PageHeader,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import {
   ApiError,
   workflowsApi,
@@ -16,11 +25,13 @@ import {
 } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 
-const STATUS_TONE: Record<WorkflowStatus, StatusTone> = {
-  DRAFT: "draft",
-  ACTIVE: "active",
-  PAUSED: "pending",
-  ARCHIVED: "closed",
+const nf = new Intl.NumberFormat();
+
+const STATUS_CHIP_TONE: Record<WorkflowStatus, ChipTone> = {
+  DRAFT: "neutral",
+  ACTIVE: "success",
+  PAUSED: "warning",
+  ARCHIVED: "neutral",
 };
 
 export interface WorkflowListScreenProps {
@@ -41,13 +52,6 @@ export function WorkflowListScreen({ ownerType }: WorkflowListScreenProps) {
     queryFn: () => workflowsApi.list(),
     retry: false,
   });
-
-  function statusLabel(status: WorkflowStatus): string {
-    if (status === "ACTIVE") return t("statusActive");
-    if (status === "PAUSED") return t("statusPaused");
-    if (status === "ARCHIVED") return t("statusArchived");
-    return t("statusDraft");
-  }
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ["workflows", ownerType] });
 
@@ -83,19 +87,48 @@ export function WorkflowListScreen({ ownerType }: WorkflowListScreenProps) {
     },
   });
 
+  const flows = query.data ?? [];
+  const counts = useMemo(() => {
+    const c: Record<WorkflowStatus, number> = { ACTIVE: 0, DRAFT: 0, PAUSED: 0, ARCHIVED: 0 };
+    for (const f of query.data ?? []) c[f.status] += 1;
+    return c;
+  }, [query.data]);
+
+  function statusLabel(status: WorkflowStatus): string {
+    if (status === "ACTIVE") return t("statusActive");
+    if (status === "PAUSED") return t("statusPaused");
+    if (status === "ARCHIVED") return t("statusArchived");
+    return t("statusDraft");
+  }
+
+  const header = (
+    <PageHeader
+      title={t(ownerType === "partner" ? "titlePartner" : "title")}
+      description={t(ownerType === "partner" ? "subtitlePartner" : "subtitle")}
+      actions={
+        <Link href={`${base}/new`}>
+          <Button variant="primary">
+            <Plus className="size-4" strokeWidth={2} />
+            {t("newFlow")}
+          </Button>
+        </Link>
+      }
+    />
+  );
+
   if (query.isError) {
     const err = query.error;
     if (err instanceof ApiError && (err.isPermissionError || err.isAuthError)) {
       return (
         <>
-          <PageHeader title={t("title")} />
+          {header}
           <EmptyState kind="permission" title={t("permissionDeniedTitle")} description={t("permissionDeniedBody")} />
         </>
       );
     }
     return (
       <>
-        <PageHeader title={t("title")} />
+        {header}
         <EmptyState
           kind="error"
           title={t("loadErrorTitle")}
@@ -106,67 +139,106 @@ export function WorkflowListScreen({ ownerType }: WorkflowListScreenProps) {
     );
   }
 
-  const flows = query.data ?? [];
+  const loading = query.isLoading;
+  const showValue = (n: number) => (loading ? "—" : nf.format(n));
 
   return (
     <>
-      <PageHeader
-        title={t(ownerType === "partner" ? "titlePartner" : "title")}
-        description={t(ownerType === "partner" ? "subtitlePartner" : "subtitle")}
-        actions={
-          <Link href={`${base}/new`}>
-            <Button variant="primary">{t("newFlow")}</Button>
-          </Link>
-        }
-      />
-      {flows.length === 0 && !query.isLoading ? (
-        <EmptyState kind="empty" title={t("listEmptyTitle")} description={t("listEmptyBody")} />
-      ) : (
-        <ul className="space-y-2">
-          {flows.map((flow) => (
-            <li
-              key={flow.id}
-              className="flex items-center justify-between gap-3 rounded-xl border border-[var(--border-subtle)] bg-white/90 px-4 py-3 shadow-sm"
-              data-testid={`workflow-row-${flow.id}`}
-            >
-              <Link href={`${base}/${flow.id}`} className="flex min-w-0 flex-1 items-center gap-3">
-                <span className="min-w-0 truncate font-medium">{flow.name}</span>
-                <StatusBadge tone={STATUS_TONE[flow.status]}>{statusLabel(flow.status)}</StatusBadge>
-                {flow.version > 1 && (
-                  <span className="shrink-0 text-xs text-[var(--text-muted)]">v{flow.version}</span>
-                )}
-              </Link>
-              <div className="flex shrink-0 items-center gap-1.5">
-                {flow.status === "ACTIVE" && (
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    loading={pause.isPending && pause.variables === flow.id}
-                    onClick={() => pause.mutate(flow.id)}
+      {header}
+
+      <div className="space-y-4">
+        <KpiRow cols={4}>
+          <KpiTile label={t("statusActive")} value={showValue(counts.ACTIVE)} icon={Play} />
+          <KpiTile label={t("statusDraft")} value={showValue(counts.DRAFT)} icon={FileText} />
+          <KpiTile label={t("statusPaused")} value={showValue(counts.PAUSED)} icon={PauseCircle} />
+          <KpiTile label={t("statusArchived")} value={showValue(counts.ARCHIVED)} icon={Archive} />
+        </KpiRow>
+
+        {loading ? (
+          <div className="space-y-2" aria-busy="true">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="h-16 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
+            ))}
+          </div>
+        ) : flows.length === 0 ? (
+          <EmptyState
+            kind="empty"
+            icon={Workflow}
+            title={t("listEmptyTitle")}
+            description={t("listEmptyBody")}
+          />
+        ) : (
+          <Card className="overflow-hidden">
+            <ul className="divide-y divide-border">
+              {flows.map((flow) => (
+                <li key={flow.id} className="flex items-center gap-3 px-4 py-3">
+                  <Link
+                    href={`${base}/${flow.id}`}
+                    className="group flex min-w-0 flex-1 items-center gap-3 outline-none"
+                    data-testid={`workflow-row-${flow.id}`}
                   >
-                    {t("pause")}
-                  </Button>
-                )}
-                {flow.status === "ACTIVE" && (
-                  <Button variant="ghost" size="sm" onClick={() => setArchiveTarget(flow)}>
-                    {t("archive")}
-                  </Button>
-                )}
-                {(flow.status === "DRAFT" || flow.status === "PAUSED" || flow.status === "ARCHIVED") && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    loading={clone.isPending && clone.variables === flow.id}
-                    onClick={() => clone.mutate(flow.id)}
-                  >
-                    {t("clone")}
-                  </Button>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+                    <span
+                      aria-hidden
+                      className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[var(--bg-muted)] text-muted-foreground"
+                    >
+                      <Workflow className="size-4" strokeWidth={1.8} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="type-small block truncate font-semibold text-foreground group-hover:text-[var(--brand-primary)]">
+                        {flow.name}
+                      </span>
+                      <span className="type-caption block truncate text-muted-foreground">
+                        {flow.trigger_type}
+                        {flow.version > 1 ? ` · v${flow.version}` : ""}
+                      </span>
+                    </span>
+                  </Link>
+
+                  <StatusChip tone={STATUS_CHIP_TONE[flow.status]} size="sm" className="hidden sm:inline-flex">
+                    {statusLabel(flow.status)}
+                  </StatusChip>
+
+                  <div className="flex shrink-0 items-center gap-1">
+                    {flow.status === "ACTIVE" && (
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        loading={pause.isPending && pause.variables === flow.id}
+                        onClick={() => pause.mutate(flow.id)}
+                      >
+                        <Pause className="size-4" strokeWidth={1.8} />
+                        {t("pause")}
+                      </Button>
+                    )}
+                    {flow.status === "ACTIVE" && (
+                      <Button variant="ghost" size="sm" onClick={() => setArchiveTarget(flow)}>
+                        {t("archive")}
+                      </Button>
+                    )}
+                    {(flow.status === "DRAFT" || flow.status === "PAUSED" || flow.status === "ARCHIVED") && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        loading={clone.isPending && clone.variables === flow.id}
+                        onClick={() => clone.mutate(flow.id)}
+                      >
+                        {t("clone")}
+                      </Button>
+                    )}
+                    <Link
+                      href={`${base}/${flow.id}`}
+                      aria-label={flow.name}
+                      className="hidden size-8 items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] sm:inline-flex"
+                    >
+                      <ChevronRight className="size-4" strokeWidth={1.8} />
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        )}
+      </div>
 
       <Modal
         open={Boolean(archiveTarget)}

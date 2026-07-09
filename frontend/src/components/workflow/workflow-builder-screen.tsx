@@ -4,18 +4,17 @@ import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { Warning } from "@phosphor-icons/react";
+import { AlertTriangle, Archive, Copy, FlaskConical, Lock, Pause, Rocket, Save } from "lucide-react";
 
 import {
   Button,
   EmptyState,
   Modal,
-  StatusBadge,
   Tabs,
   TabPanel,
   useToast,
-  type StatusTone,
 } from "@/components/ui";
+import { Card, StatusChip, type ChipTone } from "@/components/kit";
 import { PageHeader } from "@/components/layout/page-header";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import {
@@ -36,11 +35,11 @@ import { useMyCapabilities } from "./use-my-capabilities";
 
 const EMPTY_GRAPH: FlowGraph = { nodes: [], edges: [] };
 
-const STATUS_TONE: Record<WorkflowStatus, StatusTone> = {
-  DRAFT: "draft",
-  ACTIVE: "active",
-  PAUSED: "pending",
-  ARCHIVED: "closed",
+const STATUS_CHIP_TONE: Record<WorkflowStatus, ChipTone> = {
+  DRAFT: "neutral",
+  ACTIVE: "success",
+  PAUSED: "warning",
+  ARCHIVED: "neutral",
 };
 
 function nodeTypeDefs(
@@ -253,10 +252,7 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
         <PageHeader title={t("title")} />
         <div className="space-y-4" aria-busy="true">
           {[0, 1].map((i) => (
-            <div
-              key={i}
-              className="h-32 animate-pulse rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-subtle)]"
-            />
+            <div key={i} className="h-32 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
           ))}
         </div>
       </>
@@ -270,59 +266,88 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
       <PageHeader
         title={effectiveName || t("title")}
         description={t(ownerType === "partner" ? "subtitlePartner" : "subtitle")}
+        meta={
+          <>
+            <StatusChip tone={STATUS_CHIP_TONE[status]} dot size="sm">
+              {statusLabel(t, status)}
+            </StatusChip>
+            {!isNew && flow && flow.version > 1 && (
+              <span className="tabular-nums">v{flow.version}</span>
+            )}
+          </>
+        }
         actions={
-          <div className="flex flex-wrap gap-2">
-            <StatusBadge tone={STATUS_TONE[status]}>{statusLabel(t, status)}</StatusBadge>
+          <>
             {!isNew && (
               <Button variant="secondary" loading={dryRun.isPending} onClick={() => dryRun.mutate()}>
+                <FlaskConical className="size-4" strokeWidth={1.8} />
                 {t("testFlow")}
               </Button>
             )}
             <Button variant="secondary" loading={save.isPending} disabled={readOnly} onClick={() => save.mutate()}>
+              <Save className="size-4" strokeWidth={1.8} />
               {save.isPending ? t("saving") : t("save")}
             </Button>
             {!isNew && status === "ACTIVE" && (
               <Button variant="secondary" loading={pause.isPending} onClick={() => pause.mutate()}>
+                <Pause className="size-4" strokeWidth={1.8} />
                 {t("pause")}
               </Button>
             )}
             {!isNew && status === "ACTIVE" && (
               <Button variant="ghost" onClick={() => setArchiveOpen(true)}>
+                <Archive className="size-4" strokeWidth={1.8} />
                 {t("archive")}
               </Button>
             )}
             {!isNew && status !== "DRAFT" && (
               <Button variant="secondary" loading={clone.isPending} onClick={() => clone.mutate()}>
+                <Copy className="size-4" strokeWidth={1.8} />
                 {t("clone")}
               </Button>
             )}
             {!isNew && canActivate && (
               <Button variant="primary" onClick={() => setActivateOpen(true)}>
+                <Rocket className="size-4" strokeWidth={2} />
                 {t("activate")}
               </Button>
             )}
-          </div>
+          </>
         }
       />
 
       {readOnly && (
-        <p className="mb-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-4 py-2.5 text-sm text-[var(--text-secondary)]">
-          {t("readOnlyNotice")}
-        </p>
+        <Card
+          className="mb-4 flex items-start gap-2.5 border-l-[3px] p-4"
+          style={{ borderLeftColor: "var(--content-info)" }}
+        >
+          <Lock
+            aria-hidden
+            className="mt-0.5 size-4 shrink-0"
+            strokeWidth={1.9}
+            style={{ color: "var(--content-info)" }}
+          />
+          <p className="type-small text-muted-foreground">{t("readOnlyNotice")}</p>
+        </Card>
       )}
 
       {canActivate && capabilities.resolved && preCheckMissing.length > 0 && (
-        <div
-          className="mb-4 flex items-start gap-2.5 rounded-xl border border-[var(--amber-600)]/40 bg-[var(--amber-100)] px-4 py-3 text-sm text-[var(--amber-700)]"
+        <Card
+          className="mb-4 flex items-start gap-2.5 border-l-[3px] p-4"
+          style={{ borderLeftColor: "var(--content-warning)" }}
           role="alert"
           data-testid="activation-precheck-warning"
         >
-          <Warning aria-hidden weight="fill" className="mt-0.5 size-4 shrink-0" />
-          <span>
-            {t("missingCapabilitiesPrefix")}{" "}
-            <strong>{preCheckMissing.join(", ")}</strong>
-          </span>
-        </div>
+          <AlertTriangle
+            aria-hidden
+            className="mt-0.5 size-4 shrink-0"
+            strokeWidth={1.9}
+            style={{ color: "var(--content-warning)" }}
+          />
+          <p className="type-small text-foreground">
+            {t("missingCapabilitiesPrefix")} <strong>{preCheckMissing.join(", ")}</strong>
+          </p>
+        </Card>
       )}
 
       <Tabs
@@ -339,29 +364,35 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
       />
 
       <TabPanel tabsId="workflow-detail" value="builder" active={tab === "builder"}>
-        <div className="flex gap-4">
+        <div className="grid gap-4 lg:grid-cols-[210px_1fr]">
           <NodePalette defs={defs} title={t("paletteTitle")} />
-          <div className="flex-1">
-            <FlowCanvas
-              graph={effectiveGraph}
-              nodeTypeDefs={defs}
-              readOnly={readOnly}
-              onNodeClick={setSelectedNodeId}
-              onGraphChange={(next) => {
-                setGraph(next);
-                if (!isNew && flow) queryClient.setQueryData(["workflows", ownerType, "detail", flowId], { ...flow, graph: next });
-              }}
-            />
-          </div>
-          <NodeInspector
-            node={selectedNode}
-            onClose={() => setSelectedNodeId(null)}
-            onChange={(nodeId, data) => {
-              const nextNodes = effectiveGraph.nodes.map((n) => (n.id === nodeId ? { ...n, data } : n));
-              setGraph({ ...effectiveGraph, nodes: nextNodes });
+          <FlowCanvas
+            graph={effectiveGraph}
+            nodeTypeDefs={defs}
+            readOnly={readOnly}
+            onNodeClick={setSelectedNodeId}
+            onGraphChange={(next) => {
+              setGraph(next);
+              if (!isNew && flow) queryClient.setQueryData(["workflows", ownerType, "detail", flowId], { ...flow, graph: next });
             }}
           />
         </div>
+        <NodeInspector
+          node={selectedNode}
+          readOnly={readOnly}
+          onClose={() => setSelectedNodeId(null)}
+          onChange={(nodeId, data) => {
+            const nextNodes = effectiveGraph.nodes.map((n) => (n.id === nodeId ? { ...n, data } : n));
+            const nextGraph = { ...effectiveGraph, nodes: nextNodes };
+            setGraph(nextGraph);
+            // Mirror the canvas cache-write: for a saved flow, effectiveGraph reads
+            // from the query cache, so inspector edits must update the cache too or
+            // they are dropped on save.
+            if (!isNew && flow) {
+              queryClient.setQueryData(["workflows", ownerType, "detail", flowId], { ...flow, graph: nextGraph });
+            }
+          }}
+        />
       </TabPanel>
 
       <TabPanel tabsId="workflow-detail" value="test" active={tab === "test"}>
@@ -370,11 +401,13 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
         ) : (
           <EmptyState
             kind="empty"
+            icon={FlaskConical}
             title={t("noDryRunYetTitle")}
             description={t("noDryRunYetBody")}
             action={
               !isNew ? (
                 <Button variant="primary" loading={dryRun.isPending} onClick={() => dryRun.mutate()}>
+                  <FlaskConical className="size-4" strokeWidth={1.8} />
                   {t("testFlow")}
                 </Button>
               ) : undefined
@@ -412,7 +445,7 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
         }
       >
         {capabilities.resolved && preCheckMissing.length > 0 ? (
-          <p className="text-sm text-[var(--amber-700)]" data-testid="activate-modal-precheck">
+          <p className="type-small" style={{ color: "var(--content-warning)" }} data-testid="activate-modal-precheck">
             {t("missingCapabilitiesPrefix")} <strong>{preCheckMissing.join(", ")}</strong>
           </p>
         ) : (
@@ -448,7 +481,7 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
         closeLabel={t("cancel")}
         footer={<Button variant="primary" onClick={() => setActivateBlockedMissing(null)}>{t("cancel")}</Button>}
       >
-        <ul className="list-disc space-y-1 pl-5 text-sm text-[var(--text-secondary)]" data-testid="activation-blocked-list">
+        <ul className="list-disc space-y-1 pl-5 type-small text-muted-foreground" data-testid="activation-blocked-list">
           {(activateBlockedMissing ?? []).map((cap) => (
             <li key={cap}>{cap}</li>
           ))}

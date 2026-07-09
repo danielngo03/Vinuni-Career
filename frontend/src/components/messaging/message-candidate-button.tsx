@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useMutation } from "@tanstack/react-query";
-import { ChatCircleText } from "@phosphor-icons/react";
+import { MessageSquareText } from "lucide-react";
 import { Button, useToast } from "@/components/ui";
 import {
   ApiError,
@@ -71,7 +71,7 @@ export function MessageCandidateButton({
         disabled={create.isPending}
         onClick={() => create.mutate()}
       >
-        <ChatCircleText aria-hidden weight="duotone" className="size-4" />
+        <MessageSquareText aria-hidden strokeWidth={1.8} className="size-4" />
         {t("messageCandidate")}
       </Button>
 
