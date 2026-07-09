@@ -2,9 +2,7 @@
 
 Proves the partner command-center ops queue surfaces the ACTIONABLE work an
 enterprise recruiting team must not drop: an application awaiting triage, an offer
-awaiting internal approval, and an approved offer awaiting send. Also proves the
-reveal item is an INFORMATIONAL awareness row (answered by the student), never a
-misleading partner "action".
+awaiting internal approval, and an approved offer awaiting send.
 """
 
 from __future__ import annotations

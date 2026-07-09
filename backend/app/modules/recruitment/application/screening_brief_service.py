@@ -114,11 +114,8 @@ async def generate_screening_brief(
     experience_titles = _extract_experience_titles(snapshot_json)
     education_summary = _extract_education_summary(snapshot_json)
 
-    # Only include cover letter snippet if reveal is accepted (non-anonymous)
-    cover_snippet: str | None = None
-    if not app.is_anonymous or app.reveal_approved_at is not None:
-        raw_cl = getattr(app, "cover_letter", None) or ""
-        cover_snippet = raw_cl[:200].strip() if raw_cl else None
+    raw_cl = getattr(app, "cover_letter", None) or ""
+    cover_snippet = raw_cl[:200].strip() if raw_cl else None
 
     try:
         user_msg = brief_prompt.build_user_message(

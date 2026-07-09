@@ -160,7 +160,7 @@ Acceptance:
 
 - Activation validates every action against RBAC.
 - Failed nodes create recoverable tasks.
-- Sensitive actions such as CV access, reveal, rejection, offer send, billing,
+- Sensitive actions such as CV access/download, rejection, offer send, billing,
   and AI actions are audited and permission-gated.
 
 ## Workstream 6 — Auth, Recovery, Onboarding, And Notifications

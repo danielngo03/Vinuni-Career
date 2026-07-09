@@ -3,9 +3,9 @@
 Covers the recipient-scoped read API (list newest-first + unread_count, cursor
 pagination, ``unread_only``, idempotent mark-one-read with ``404`` for a
 non-recipient, mark-all-read), the ``create_in_app`` facade (vi/en rendering per
-recipient locale, in-app preference gating, anonymous-handle PII safety), and that
-real product events (apply / reveal-request / job-approve) write the expected feed
-row for the right recipient with the right ``action_url``.
+recipient locale, in-app preference gating, contact-PII safety), and that real
+product events (apply / job-approve) write the expected feed row for the right
+recipient with the right ``action_url``.
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ from app.modules.documents.application import snapshot_service
 from app.modules.notifications.application import feed_service
 from app.modules.notifications.domain.models import Notification
 from app.modules.opportunities.application import job_service, moderation_service
-from app.modules.recruitment.application import access, apply_service, reveal_service
+from app.modules.recruitment.application import access, apply_service
 from app.modules.users.domain.models import NotificationPreference
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import Principal
@@ -254,7 +254,7 @@ async def test_create_in_app_renders_english_for_en_recipient(db_session):
 
 async def test_create_in_app_respects_in_app_disabled_preference(db_session):
     user = await register_verified(db_session, email=_email("muted"))
-    # Mute the (non-mandatory) category that reveal/application notifs map to.
+    # Mute the (non-mandatory) category that application notifs map to.
     db_session.add(
         NotificationPreference(user_id=user.id, category="application_status", in_app_enabled=False)
     )
@@ -263,9 +263,9 @@ async def test_create_in_app_respects_in_app_disabled_preference(db_session):
     row = await feed_service.create_in_app(
         db_session,
         recipient_id=user.id,
-        notif_type="recruitment.reveal_requested",
+        notif_type="recruitment.application_under_review",
         action_url="/student/applications/1",
-        variables={"company_name": "Acme"},
+        variables={"company_name": "Acme", "job_title": "X"},
     )
     await db_session.commit()
     assert row is None
@@ -294,23 +294,21 @@ async def test_create_in_app_dedupes_on_action_url(db_session):
     assert await _count_rows(db_session, user.id) == 1
 
 
-async def test_partner_facing_notification_uses_anonymous_handle_no_pii(db_session):
+async def test_partner_facing_notification_uses_neutral_label_no_contact_pii(db_session):
     partner_user = await register_verified(db_session, email=_email("partner"))
-    # Simulate the anonymous-apply variables the apply flow passes.
-    student_name = "Nguyen Van A"
+    # Simulate the apply-flow variables (neutral "a candidate" label — no contact).
     student_email = "student.real@vinuni.edu.vn"
     row = await feed_service.create_in_app(
         db_session,
         recipient_id=partner_user.id,
         notif_type="recruitment.application_received",
         action_url="/partner/applications/42",
-        variables={"job_title": "Backend Intern", "applicant_label": "Ứng viên ẩn danh"},
+        variables={"job_title": "Backend Intern", "applicant_label": "một ứng viên"},
     )
     await db_session.commit()
     assert row is not None
     blob = f"{row.title} {row.body}"
-    assert "Ứng viên ẩn danh" in blob
-    assert student_name not in blob
+    assert "một ứng viên" in blob
     assert student_email not in blob
 
 
@@ -343,7 +341,7 @@ async def _feed_for(db, recipient_id: uuid.UUID, notif_type: str) -> list[Notifi
     )
 
 
-async def test_apply_creates_in_app_for_partner_with_anonymous_handle(db_session):
+async def test_apply_creates_in_app_for_partner_with_neutral_label(db_session):
     partner_user, _partner, _uni, job_id = await _published(db_session)
     su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
@@ -351,7 +349,7 @@ async def test_apply_creates_in_app_for_partner_with_anonymous_handle(db_session
     app = await apply_service.apply_to_job(
         db_session,
         principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
 
@@ -359,36 +357,10 @@ async def test_apply_creates_in_app_for_partner_with_anonymous_handle(db_session
     assert len(rows) == 1
     row = rows[0]
     assert row.action_url == f"/partner/applications/{app['id']}"
-    # No applicant PII for an anonymous application.
+    # The feed row carries a neutral label + no contact PII (the real identity
+    # lives on the application detail behind RBAC).
     blob = f"{row.title} {row.body}"
     assert su.email not in blob
-    assert (su.full_name or "Test User") not in blob
-
-
-async def test_reveal_request_creates_in_app_for_student(db_session):
-    _partner_user, partner, _uni, job_id = await _published(db_session)
-    su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session,
-        principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
-        ctx=CTX,
-    )
-    app_id = uuid.UUID(app["id"])
-
-    await reveal_service.request_reveal(
-        db_session,
-        principal=partner,
-        application_id=app_id,
-        reason="We would like to learn more about your internship experience.",
-        ctx=CTX,
-    )
-
-    rows = await _feed_for(db_session, su.id, "recruitment.reveal_requested")
-    assert len(rows) == 1
-    assert rows[0].action_url == f"/student/applications/{app_id}"
-    assert "Partner Co" in rows[0].body  # company display name rendered
 
 
 async def test_job_approve_creates_in_app_for_partner(db_session):

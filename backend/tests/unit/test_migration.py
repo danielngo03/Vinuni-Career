@@ -87,7 +87,9 @@ def test_cv_template_versions_registered_on_metadata() -> None:
 def test_recruitment_tables_registered_on_metadata() -> None:
     import_all_models()
     names = set(target_metadata.tables.keys())
-    assert {"applications", "application_reveal_requests"} <= names
+    assert {"applications"} <= names
+    # The anonymous-apply reveal handshake was removed (owner decision 2026-07-10).
+    assert "application_reveal_requests" not in names
 
 
 def test_documents_tables_registered_on_metadata() -> None:

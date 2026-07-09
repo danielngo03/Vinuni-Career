@@ -33,7 +33,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { cn } from "@/lib/utils";
 import { useJobLabels } from "@/lib/jobs/labels";
 import { formatLocation } from "@/lib/jobs/format";
-import { formatDateTime } from "@/lib/format";
+import { formatDateShort, formatDateTime, formatDateTimeShort } from "@/lib/format";
 import {
   ApiError,
   applicationsApi,
@@ -87,7 +87,6 @@ export function PartnerJobsScreen() {
   const t = useTranslations("jobs");
   const tStates = useTranslations("states");
   const tc = useTranslations("common");
-  const locale = useLocale();
   const labels = useJobLabels();
   const qc = useQueryClient();
   const toast = useToast();
@@ -275,15 +274,20 @@ export function PartnerJobsScreen() {
     },
     {
       id: "deadline",
+      accessorKey: "application_deadline",
       header: t("colDeadline"),
       meta: { align: "right" },
-      cell: ({ row }) => (
-        <span className="tabular-nums text-muted-foreground">
-          {row.original.application_deadline
-            ? formatDateTime(row.original.application_deadline, locale)
-            : "—"}
-        </span>
-      ),
+      cell: ({ row }) => {
+        const dl = row.original.application_deadline;
+        return (
+          <span
+            className="tabular-nums text-muted-foreground"
+            title={dl ? formatDateTimeShort(dl) : undefined}
+          >
+            {dl ? formatDateShort(dl) : "—"}
+          </span>
+        );
+      },
     },
     {
       id: "actions",
@@ -588,7 +592,7 @@ function JobDetailSheet({
                 {applicantsQ.data!.data.slice(0, 5).map((a: PartnerApplication) => (
                   <li key={a.id} className="flex items-center justify-between gap-2">
                     <span className="min-w-0 truncate text-[0.8125rem] font-medium text-foreground">
-                      {a.applicant.display_name || a.applicant.anonymous_id || "—"}
+                      {a.applicant.full_name || "—"}
                     </span>
                     <span className="flex shrink-0 items-center gap-2">
                       <StatusChip tone="neutral" size="sm">{a.status_label}</StatusChip>

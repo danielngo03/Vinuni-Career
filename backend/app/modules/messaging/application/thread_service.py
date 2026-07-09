@@ -2,9 +2,9 @@
 
 RBAC is enforced HERE (not the router) at the open + read checkpoints, with the
 student↔student hard block as the first check. Partner↔student threads are bound to
-a recruitment ``application`` and denormalize ``is_anonymous`` from it. Cross-tenant
-/ non-participant access returns ``404`` (never ``403``) so threads are not
-enumerable. Every create is audited (PII-safe: ids + status only).
+a recruitment ``application``. Cross-tenant / non-participant access returns ``404``
+(never ``403``) so threads are not enumerable. Every create is audited (PII-safe:
+ids + status only).
 """
 
 from __future__ import annotations
@@ -222,7 +222,9 @@ async def create_thread(
         context_id=context_id,
         org_id=thread_org_id,
         subject=subject,
-        is_anonymous=bool(relationship.is_anonymous) if relationship else False,
+        # Applicant identity is never masked in messaging (reveal handshake removed
+        # 2026-07-10); the column is retained but always false.
+        is_anonymous=False,
         created_by=sender_id,
         status=rules.STATUS_ACTIVE,
     )

@@ -6,8 +6,6 @@
       "complete_profile": "Hoàn thiện hồ sơ",
       "build_cv": "Tạo CV",
       "create_alert": "Tạo thông báo việc làm",
-      "respond_reveal": "Phản hồi yêu cầu hiện danh tính",
-      "respond_reveals": "Phản hồi yêu cầu hiện danh tính",
       "jobs_in_draft": "Hoàn tất tin nháp",
       "jobs_pending_review": "Tin đang chờ duyệt",
       "post_job": "Đăng tin tuyển dụng",
@@ -29,11 +27,8 @@
       "viewInterview": "Xem chi tiết",
       "upcomingEventsTitle": "Sự kiện sắp tham dự",
       "viewEvent": "Xem sự kiện",
-      "revealsTitle": "Yêu cầu hiện danh tính",
       "untitledJob": "Vị trí chưa đặt tên",
       "unknownCompany": "Doanh nghiệp ẩn danh",
-      "requestedOn": "Yêu cầu ngày {date}",
-      "respondCta": "Phản hồi",
       "recentApplicationsTitle": "Đơn ứng tuyển gần đây",
       "noApplicationsTitle": "Chưa có đơn ứng tuyển",
       "noApplicationsBody": "Khám phá việc làm và nộp đơn đầu tiên của bạn.",
@@ -53,9 +48,7 @@
         "jobsDraft": "Tin nháp",
         "jobsPendingReview": "Chờ duyệt",
         "jobsPendingReviewHotNote": "{count, plural, one {# tin cần duyệt} other {# tin cần duyệt}}",
-        "applicationsTotal": "Tổng số đơn",
-        "revealsPending": "Chờ phản hồi danh tính",
-        "revealsPendingHotNote": "{count, plural, one {# hồ sơ cần phản hồi} other {# hồ sơ cần phản hồi}}"
+        "applicationsTotal": "Tổng số đơn"
       },
       "actionsEmptyTitle": "Không có việc cần xử lý",
       "actionsEmptyBody": "Mọi tin tuyển dụng và đơn ứng tuyển đều đã được xử lý.",
@@ -73,14 +66,9 @@
       "aiInsightStrongDemand": "Nhu cầu cao — trung bình {count} ứng tuyển cho mỗi vị trí đang mở.",
       "aiInsightLowVolume": "Lượng ứng tuyển thấp ({count} mỗi vị trí) — hãy tăng độ phủ của tin tuyển dụng.",
       "aiInsightDraftJobs": "{count, plural, one {# tin nháp} other {# tin nháp}} chưa đăng — hãy xuất bản để thu hút ứng viên.",
-      "aiInsightRevealsPending": "{count, plural, one {# yêu cầu tiết lộ danh tính} other {# yêu cầu tiết lộ danh tính}} đang chờ phản hồi — trả lời nhanh giúp cải thiện trải nghiệm ứng viên.",
       "aiInsightNoActive": "Không có tin tuyển dụng nào đang hoạt động — hãy kích hoạt bản nháp để tiếp tục tuyển dụng.",
       "todoTitle": "Việc cần làm hôm nay",
       "todo": {
-        "respond_reveals": {
-          "title": "Phản hồi yêu cầu hiện danh tính",
-          "body": "{count, plural, one {# hồ sơ đang chờ quyết định của đội tuyển dụng} other {# hồ sơ đang chờ quyết định của đội tuyển dụng}}"
-        },
         "jobs_pending_review": {
           "title": "Theo dõi tin đang chờ duyệt",
           "body": "{count, plural, one {# tin đang ở hàng đợi kiểm duyệt của trường} other {# tin đang ở hàng đợi kiểm duyệt của trường}}"
@@ -163,8 +151,6 @@
         "low": "Thấp"
       },
       "todoLabel": {
-        "respond_reveals": "Phản hồi yêu cầu hiện danh tính",
-        "reveals_awaiting_candidate": "Yêu cầu hiện danh tính đang chờ ứng viên",
         "applications_to_review": "Hồ sơ cần xem xét",
         "offers_to_approve": "Thư mời chờ phê duyệt",
         "offers_to_send": "Thư mời cần gửi",
@@ -234,7 +220,6 @@
         "heroTitle": "Ứng viên đang xử lý",
         "heroCaption": "Trên {roles} vị trí đang mở và {apps} lượt ứng tuyển.",
         "heroConversion": "Tỷ lệ ứng tuyển {value}",
-        "heroReveals": "{count, plural, one {# yêu cầu cần trả lời} other {# yêu cầu cần trả lời}}",
         "heroTopRoles": "Vị trí sôi động nhất",
         "greeting": "Chào {name}",
         "kpi": {
@@ -243,8 +228,6 @@
           "pendingReview": "Chờ duyệt",
           "pendingReviewHint": "Đang chờ nhà trường phê duyệt",
           "drafts": "Tin nháp",
-          "reveals": "Yêu cầu cần trả lời",
-          "revealsHint": "Ứng viên đang chờ bạn phản hồi",
           "conversion": "Chuyển đổi"
         },
         "funnelTitle": "Phễu ứng tuyển",

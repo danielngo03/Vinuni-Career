@@ -1,5 +1,13 @@
 # ADR-0012: Messaging — Institutional In-App Threads (Phase 2 Foundation)
 
+> **PARTIALLY SUPERSEDED (owner decision 2026-07-10):** the thread
+> `is_anonymous` denormalization and the "anonymous handle until the reveal
+> handshake" projection (`§2 Anonymity handling`) are **retired**. Applicants are
+> always identified, so a partner↔student application thread shows the identified
+> student (CV access still gated by `candidate_access` RBAC). All other messaging
+> invariants (persist-before-deliver, permission matrix, PII-safe
+> notifications/audit) stand. Needs a formal amendment.
+
 **Status:** Accepted (Proposed for implementation in the next backend slice)
 **Date:** 2026-06-28
 **Owner:** system-architect

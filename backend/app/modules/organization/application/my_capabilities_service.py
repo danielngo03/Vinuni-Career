@@ -40,7 +40,6 @@ _CAPABILITY_CATALOG: tuple[str, ...] = (
     "pipeline:move_candidate",
     "candidate_identity:view_cv",
     "candidate_identity:download_cv",
-    "candidate_identity:request_reveal",
     # --- partner: growth ---
     "analytics:view_job_metrics",
     "analytics:view_clicks",

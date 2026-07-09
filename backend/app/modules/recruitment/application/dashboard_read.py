@@ -6,11 +6,10 @@ re-check RBAC — the calling ``dashboards`` application service owns the person
 gate and only ever passes the caller's own scope. This mirrors the RBAC-free
 ``opportunities.public_read`` facade.
 
-Privacy rule for partner-facing rows: a dashboard is a glance surface, so partner
-candidate rows carry **only** the deterministic anonymous handle
-(``presenters.anonymous_handle``) — never the student's name/email — regardless of
-reveal state. Full identity (post-reveal) lives on the application *detail*
-endpoint, not on the org-wide glance.
+Partner-facing rows carry the candidate's real display name (an application always
+exposes the applicant to a partner who holds ``applications:read``); a dashboard
+glance still omits contact PII (email) — the partner opens the application detail
+for the CV + fit + contact.
 
 Job titles / org display names are resolved through the ``opportunities`` /
 ``organization`` internal read facades (no cross-module ORM import) with a
@@ -28,17 +27,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.application import job_read_facade
 from app.modules.organization.application import org_reporting_facade
-from app.modules.recruitment.api import presenters
 from app.modules.recruitment.application import _shared
 from app.modules.recruitment.domain import lifecycle, pipeline
 from app.modules.recruitment.domain.models import (
     Application,
-    ApplicationRevealRequest,
     CandidateStage,
     Interview,
     Offer,
     PipelineStage,
 )
+from app.modules.users.application import user_read_facade
 
 
 def _iso(value) -> str | None:
@@ -114,40 +112,6 @@ async def list_recent_student_applications(
     ]
 
 
-async def _pending_reveals_for_student(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> list[tuple[ApplicationRevealRequest, str | None, str | None]]:
-    """Non-expired ``pending`` reveal requests on the student's applications.
-
-    Expiry is evaluated in Python (``_shared.as_aware``) so the lazily-expired
-    convention used elsewhere (``apply_service._effective_reveal_status``) holds
-    identically across SQLite (tests) and PostgreSQL (runtime).
-    """
-
-    rows = (
-        await session.execute(
-            select(ApplicationRevealRequest, Application.job_id)
-            .join(Application, Application.id == ApplicationRevealRequest.application_id)
-            .where(
-                Application.applicant_id == user_id,
-                Application.deleted_at.is_(None),
-                ApplicationRevealRequest.status == lifecycle.REVEAL_PENDING,
-            )
-            .order_by(ApplicationRevealRequest.created_at.desc())
-        )
-    ).all()
-    titles = await job_read_facade.get_job_titles(session, (job_id for _, job_id in rows))
-    names = await org_reporting_facade.display_names_for(
-        session, (req.requester_org_id for req, _ in rows)
-    )
-    now = _shared.now()
-    return [
-        (req, titles.get(job_id), names.get(req.requester_org_id))
-        for req, job_id in rows
-        if _shared.as_aware(req.expires_at) > now
-    ]
-
-
 async def list_upcoming_student_interviews(
     session: AsyncSession,
     *,
@@ -187,29 +151,6 @@ async def list_upcoming_student_interviews(
             "location": iv.location,
         }
         for iv, job_id in rows
-    ]
-
-
-async def count_pending_reveals_for_student(session: AsyncSession, *, user_id: uuid.UUID) -> int:
-    return len(await _pending_reveals_for_student(session, user_id=user_id))
-
-
-async def list_pending_reveals_for_student(
-    session: AsyncSession,
-    *,
-    user_id: uuid.UUID,
-    limit: int,
-    locale: str = "vi",
-) -> list[dict]:
-    pending = await _pending_reveals_for_student(session, user_id=user_id)
-    return [
-        {
-            "application_id": str(req.application_id),
-            "job_title": title,
-            "company_name": company,
-            "requested_at": _iso(req.created_at),
-        }
-        for req, title, company in pending[: max(limit, 0)]
     ]
 
 
@@ -312,26 +253,6 @@ async def count_org_offers_by_status(
     ).scalar_one()
 
 
-async def count_org_pending_reveals(session: AsyncSession, *, org_id: uuid.UUID) -> int:
-    """Reveal requests this org initiated that are still awaiting a student
-    response (non-expired ``pending``)."""
-
-    rows = (
-        (
-            await session.execute(
-                select(ApplicationRevealRequest).where(
-                    ApplicationRevealRequest.requester_org_id == org_id,
-                    ApplicationRevealRequest.status == lifecycle.REVEAL_PENDING,
-                )
-            )
-        )
-        .scalars()
-        .all()
-    )
-    now = _shared.now()
-    return sum(1 for req in rows if _shared.as_aware(req.expires_at) > now)
-
-
 async def list_recent_org_applications(
     session: AsyncSession,
     *,
@@ -339,10 +260,10 @@ async def list_recent_org_applications(
     limit: int,
     locale: str = "vi",
 ) -> list[dict]:
-    """Newest-first applications to the org's jobs — ANONYMOUS handle only.
+    """Newest-first applications to the org's jobs — candidate display name.
 
-    The dashboard never surfaces applicant PII; the partner opens the application
-    detail (which enforces the reveal handshake) to see identity where allowed.
+    The glance carries the applicant's real display name (never masked) but no
+    contact PII; the partner opens the application detail for the CV + fit + email.
     """
 
     apps = (
@@ -358,13 +279,12 @@ async def list_recent_org_applications(
         .all()
     )
     titles = await job_read_facade.get_job_titles(session, (a.job_id for a in apps))
+    names = await user_read_facade.get_full_names(session, (a.applicant_id for a in apps))
     return [
         {
             "id": str(app.id),
             "job_title": titles.get(app.job_id),
-            "candidate_handle": presenters.anonymous_handle(
-                applicant_id=app.applicant_id, org_id=app.org_id
-            ),
+            "candidate_name": names.get(app.applicant_id) or "",
             "status": app.status,
             "status_label": lifecycle.status_label(app.status, locale=locale),
             "submitted_at": _iso(app.applied_at),

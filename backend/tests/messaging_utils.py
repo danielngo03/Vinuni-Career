@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import uuid
-from datetime import UTC, datetime
 
 from app.modules.auth.domain.personas import permissions_for
 from app.modules.recruitment.domain.models import Application
@@ -52,15 +51,13 @@ async def seed_application(
     *,
     org_id: uuid.UUID,
     applicant_id: uuid.UUID,
-    is_anonymous: bool = False,
     status: str = "submitted",
-    revealed: bool = False,
 ) -> uuid.UUID:
     """Insert an ``applications`` row binding a partner org to an applicant.
 
     Mirrors what the recruitment apply-flow produces, without the full job/CV setup
     (SQLite does not enforce the ``job_id`` FK in tests). The messaging relationship
-    read-model only reads org_id/applicant_id/status/is_anonymous/reveal_approved_at.
+    read-model only reads org_id/applicant_id/status.
     """
 
     app = Application(
@@ -68,8 +65,6 @@ async def seed_application(
         applicant_id=applicant_id,
         org_id=org_id,
         status=status,
-        is_anonymous=is_anonymous,
-        reveal_approved_at=datetime.now(tz=UTC) if revealed else None,
     )
     session.add(app)
     await session.commit()

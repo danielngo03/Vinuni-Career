@@ -2,8 +2,8 @@
 
 RBAC: the acting principal must be a ``student`` (wrong persona -> ``403``). All
 data is scoped to the acting student's own ``user_id`` — a student never sees
-another student's applications, CVs, or reveals. The gate runs before any widget
-so it is never swallowed by the failure-tolerant widget wrapper.
+another student's applications or CVs. The gate runs before any widget so it is
+never swallowed by the failure-tolerant widget wrapper.
 
 The profile is identity-only (owner decision 2026-07-06): there is no
 profile-completion metric anymore. The dashboard's "get set up" nudge is now
@@ -53,11 +53,6 @@ async def get_student_dashboard(
         lambda: cv_service.count_cvs(session, principal=principal),
         fallback=0,
     )
-    pending_reveals = await safe(
-        session,
-        lambda: recruitment_read.count_pending_reveals_for_student(session, user_id=user_id),
-        fallback=0,
-    )
     alert_count = await safe(
         session,
         lambda: job_alert_service.count_alerts_for_user(session, user_id=user_id),
@@ -74,27 +69,12 @@ async def get_student_dashboard(
     next_actions: list[dict] = []
     if cv_count == 0:
         next_actions.append({"key": "build_cv", "href": "/student/cv", "count": None})
-    if pending_reveals > 0:
-        next_actions.append(
-            {
-                "key": "respond_reveal",
-                "href": "/student/applications",
-                "count": pending_reveals,
-            }
-        )
     if alert_count == 0:
         next_actions.append({"key": "create_alert", "href": "/student/alerts", "count": None})
 
     applications_recent = await safe(
         session,
         lambda: recruitment_read.list_recent_student_applications(
-            session, user_id=user_id, limit=RECENT_CAP, locale=locale
-        ),
-        fallback=empty_rows(),
-    )
-    reveal_requests_pending = await safe(
-        session,
-        lambda: recruitment_read.list_pending_reveals_for_student(
             session, user_id=user_id, limit=RECENT_CAP, locale=locale
         ),
         fallback=empty_rows(),
@@ -135,7 +115,6 @@ async def get_student_dashboard(
         "metrics": metrics,
         "next_actions": next_actions,
         "applications_recent": applications_recent,
-        "reveal_requests_pending": reveal_requests_pending,
         "upcoming_interviews": upcoming_interviews,
         "upcoming_events": upcoming_events,
         "recommended_jobs": recommended_jobs,

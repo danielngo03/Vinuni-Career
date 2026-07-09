@@ -1,162 +1,77 @@
 import {
+  BadgeCheck,
+  BadgeDollarSign,
   Bell,
   CalendarCheck,
   CalendarX,
-  ChatText,
-  CheckCircle,
-  ClipboardText,
+  CheckCircle2,
+  ClipboardList,
   Eye,
   Handshake,
   Megaphone,
-  Money,
-  SealCheck,
+  MessageSquare,
   UserPlus,
   XCircle,
-  type Icon,
-} from "@phosphor-icons/react";
-import { cn } from "@/lib/utils";
+  type LucideIcon,
+} from "lucide-react";
 import type { NotifType } from "@/lib/api";
 
+type NotifTone = "info" | "success" | "danger" | "warning" | "neutral";
+
 interface NotifVisual {
-  icon: Icon;
-  gradient: string;
+  icon: LucideIcon;
+  tone: NotifTone;
 }
 
-/**
- * notif_type -> Phosphor duotone icon + bold gradient tone. Unknown types fall
- * back to a neutral bell so a new server-side type still renders cleanly.
- */
-const VISUALS: Record<string, NotifVisual> = {
-  "recruitment.reveal_requested": {
-    icon: Eye,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.reveal_responded": {
-    icon: SealCheck,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.application_received": {
-    icon: UserPlus,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.application_under_review": {
-    icon: ClipboardText,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.application_stage_advanced": {
-    icon: CheckCircle,
-    gradient: "icon-chip-success",
-  },
-  "recruitment.application_under_rereview": {
-    icon: ClipboardText,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.application_rejected": {
-    icon: XCircle,
-    gradient: "icon-chip-danger",
-  },
-  "recruitment.interview_scheduled": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-success",
-  },
-  "recruitment.interview_rescheduled": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.interview_cancelled": {
-    icon: CalendarX,
-    gradient: "icon-chip-danger",
-  },
-  "recruitment.interview_reminder": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.interview_assigned": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.interview_reminder_assignee": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-primary",
-  },
-  "recruitment.offer_received": {
-    icon: Money,
-    gradient: "icon-chip-success",
-  },
-  "recruitment.offer_expiring": {
-    icon: Money,
-    gradient: "icon-chip-warning",
-  },
-  "recruitment.offer_expired": {
-    icon: Money,
-    gradient: "icon-chip-danger",
-  },
-  "recruitment.offer_accepted": {
-    icon: Handshake,
-    gradient: "icon-chip-success",
-  },
-  "recruitment.offer_declined": {
-    icon: XCircle,
-    gradient: "icon-chip-danger",
-  },
-  "recruitment.offer_rescinded": {
-    icon: XCircle,
-    gradient: "icon-chip-danger",
-  },
-  "opportunities.job_approved": {
-    icon: CheckCircle,
-    gradient: "icon-chip-success",
-  },
-  "opportunities.job_rejected": {
-    icon: XCircle,
-    gradient: "icon-chip-danger",
-  },
-  "opportunities.job_auto_closed": {
-    icon: XCircle,
-    gradient: "icon-chip-neutral",
-  },
-  "opportunities.event_registration_confirmed": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-success",
-  },
-  "opportunities.event_waitlisted": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-warning",
-  },
-  "opportunities.event_waitlist_promoted": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-success",
-  },
-  "opportunities.event_cancelled": {
-    icon: CalendarX,
-    gradient: "icon-chip-danger",
-  },
-  "opportunities.event_reminder": {
-    icon: CalendarCheck,
-    gradient: "icon-chip-primary",
-  },
-  "organization.partner_approved": {
-    icon: Handshake,
-    gradient: "icon-chip-success",
-  },
-  "messaging.message.received": {
-    icon: ChatText,
-    gradient: "icon-chip-primary",
-  },
-  "advertising.placement_approved": {
-    icon: Megaphone,
-    gradient: "icon-chip-success",
-  },
-  "advertising.placement_rejected": {
-    icon: Megaphone,
-    gradient: "icon-chip-danger",
-  },
+/** Soft data-viz tint per tone — content colour, never a loud fill (v10). */
+const TONE_TINT: Record<NotifTone, { bg: string; fg: string }> = {
+  info: { bg: "var(--viz-indigo-soft)", fg: "var(--viz-indigo)" },
+  success: { bg: "var(--content-success-soft)", fg: "var(--content-success)" },
+  danger: { bg: "var(--content-danger-soft)", fg: "var(--content-danger)" },
+  warning: { bg: "var(--content-warning-soft)", fg: "var(--content-warning)" },
+  neutral: { bg: "var(--bg-muted)", fg: "var(--text-secondary)" },
 };
 
-const FALLBACK: NotifVisual = {
-  icon: Bell,
-  gradient: "icon-chip-neutral",
+/**
+ * notif_type -> lucide icon + semantic tone. Unknown types fall back to a
+ * neutral bell so a new server-side type still renders cleanly. The tile carries
+ * a soft data-viz tint (CONTENT colour); unread emphasis lives on the row.
+ */
+const VISUALS: Record<string, NotifVisual> = {
+  "recruitment.reveal_requested": { icon: Eye, tone: "info" },
+  "recruitment.reveal_responded": { icon: BadgeCheck, tone: "info" },
+  "recruitment.application_received": { icon: UserPlus, tone: "info" },
+  "recruitment.application_under_review": { icon: ClipboardList, tone: "info" },
+  "recruitment.application_stage_advanced": { icon: CheckCircle2, tone: "success" },
+  "recruitment.application_under_rereview": { icon: ClipboardList, tone: "info" },
+  "recruitment.application_rejected": { icon: XCircle, tone: "danger" },
+  "recruitment.interview_scheduled": { icon: CalendarCheck, tone: "success" },
+  "recruitment.interview_rescheduled": { icon: CalendarCheck, tone: "info" },
+  "recruitment.interview_cancelled": { icon: CalendarX, tone: "danger" },
+  "recruitment.interview_reminder": { icon: CalendarCheck, tone: "info" },
+  "recruitment.interview_assigned": { icon: CalendarCheck, tone: "info" },
+  "recruitment.interview_reminder_assignee": { icon: CalendarCheck, tone: "info" },
+  "recruitment.offer_received": { icon: BadgeDollarSign, tone: "success" },
+  "recruitment.offer_expiring": { icon: BadgeDollarSign, tone: "warning" },
+  "recruitment.offer_expired": { icon: BadgeDollarSign, tone: "danger" },
+  "recruitment.offer_accepted": { icon: Handshake, tone: "success" },
+  "recruitment.offer_declined": { icon: XCircle, tone: "danger" },
+  "recruitment.offer_rescinded": { icon: XCircle, tone: "danger" },
+  "opportunities.job_approved": { icon: CheckCircle2, tone: "success" },
+  "opportunities.job_rejected": { icon: XCircle, tone: "danger" },
+  "opportunities.job_auto_closed": { icon: XCircle, tone: "neutral" },
+  "opportunities.event_registration_confirmed": { icon: CalendarCheck, tone: "success" },
+  "opportunities.event_waitlisted": { icon: CalendarCheck, tone: "warning" },
+  "opportunities.event_waitlist_promoted": { icon: CalendarCheck, tone: "success" },
+  "opportunities.event_cancelled": { icon: CalendarX, tone: "danger" },
+  "opportunities.event_reminder": { icon: CalendarCheck, tone: "info" },
+  "organization.partner_approved": { icon: Handshake, tone: "success" },
+  "messaging.message.received": { icon: MessageSquare, tone: "info" },
+  "advertising.placement_approved": { icon: Megaphone, tone: "success" },
+  "advertising.placement_rejected": { icon: Megaphone, tone: "danger" },
 };
+
+const FALLBACK: NotifVisual = { icon: Bell, tone: "neutral" };
 
 /** Maps a notif_type to its i18n category key for the category pill. */
 const CATEGORY_KEYS: Record<string, string> = {
@@ -201,27 +116,18 @@ export function notifCategoryKey(type: NotifType): string | null {
   return CATEGORY_KEYS[type as string] ?? null;
 }
 
-/** Neutral duotone glyph for a notification row. Decorative (aria-hidden). */
-export function NotifIcon({
-  type,
-  active = false,
-}: {
-  type: NotifType;
-  active?: boolean;
-}) {
-  const visual = VISUALS[type] ?? FALLBACK;
-  const IconCmp = visual.icon;
+/** Soft-tinted glyph tile for a notification row. Decorative (aria-hidden). */
+export function NotifIcon({ type }: { type: NotifType; active?: boolean }) {
+  const visual = VISUALS[type as string] ?? FALLBACK;
+  const Icon = visual.icon;
+  const tint = TONE_TINT[visual.tone];
   return (
     <span
       aria-hidden
-      className={cn(
-        "flex size-9 shrink-0 items-center justify-center rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.045)]",
-        active
-          ? "bg-[var(--text-primary)] text-white"
-          : "bg-[#f2f1ee] text-[var(--text-secondary)]",
-      )}
+      className="flex size-9 shrink-0 items-center justify-center rounded-xl"
+      style={{ background: tint.bg, color: tint.fg }}
     >
-      <IconCmp weight="duotone" className="size-[18px]" />
+      <Icon strokeWidth={1.8} className="size-[18px]" />
     </span>
   );
 }

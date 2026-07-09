@@ -16,8 +16,8 @@ Already present:
 - `organization`: organizations, members, roles, permissions, departments, invitations, membership role/department assignment.
 - `billing`: partner/org subscriptions, plans, manual billing, limit facade.
 - `opportunities`: job lifecycle, moderation, public/ranking reads, `view_count` on job ranking data.
-- `recruitment`: applications, anonymous reveal flow, pipeline stages, scorecards, interviews, offers, job invitations.
-- `dashboards`: partner dashboard read model with active/draft/pending jobs, total applications, pending reveals, jobs needing attention, recent applications.
+- `recruitment`: applications (always identified — no anonymous/reveal flow, owner decision 2026-07-10), pipeline stages, scorecards, interviews, offers, job invitations.
+- `dashboards`: partner dashboard read model with active/draft/pending jobs, total applications, new/unreviewed applications, jobs needing attention, recent applications.
 - `audit_logs`: shared audit writer used by many write paths.
 - `ai_assistant`: partner tools for jobs, pipeline summary, candidate search/detail, JD drafting/rewrite/bias check, scorecard suggestion, screening brief.
 
@@ -31,7 +31,7 @@ Add or confirm these permission nouns/actions in the organization permission cat
 |---|---|---|
 | `analytics` | `view_job_metrics`, `view_clicks`, `export` | org, department, job |
 | `applications` | `read`, `review`, `reject`, `bulk_review`, `export` | org, department, job |
-| `candidate_identity` | `request_reveal`, `view_revealed_identity`, `view_cv`, `download_cv` | org, job, application |
+| `candidate_access` | `open_application`, `view_contact`, `view_cv`, `download_cv` | org, job, application |
 | `jobs` | `create`, `update`, `submit`, `close`, `duplicate`, `assign_owner` | org, department, job |
 | `pipeline` | `read`, `move_candidate`, `rollback`, `configure_template` | org, department, job |
 | `scorecards` | `read`, `submit`, `read_aggregate`, `configure` | org, job, stage |
@@ -41,8 +41,52 @@ Add or confirm these permission nouns/actions in the organization permission cat
 | `roles` / `departments` | `read`, `create`, `update`, `delete` | org |
 | `billing` | `view`, `subscribe`, `manage` | org |
 | `ai_recruiting` | `draft_jd`, `screen_candidate`, `suggest_scorecard`, `move_candidate_with_confirmation` | org, job, application |
+| `talent_pool` | `search`, `search_external_jd`, `save_candidate`, `add_to_pipeline`, `export` | org, department |
 
 Partner Admin should carry a wildcard grant for the org. Non-admin members should be assigned only the grants their role/department needs.
+
+## Talent Pool — AI Semantic Candidate Search Contract
+
+(Owner decision 2026-07-10.) Talent Pool is an AI semantic candidate-search
+surface, not a masked "blind-search" card wall. There is no anonymity/reveal
+gate; authorized recruiters search and see identified candidates, and every
+sensitive access is RBAC-gated and audited exactly like application CV access.
+
+Retrieval pipeline:
+
+1. Candidate CVs (owned/consented, indexable talent) are embedded into a
+   pgvector store. Embeddings are refreshed when a candidate's active CV changes.
+2. A query — a recruiter's typed brief, an existing posted job, OR a pasted /
+   uploaded **external JD that is not yet a posted job** — is embedded and run as
+   dense semantic search over the candidate index.
+3. Structured filters narrow the candidate set: skills, experience level/years,
+   major/faculty, graduation cohort, location/work-mode, availability, and tier.
+   Filters are deterministic and apply before and after semantic ranking.
+4. An LLM rerank pass orders the top candidates and returns **human-readable
+   match reasons** (why each candidate fits the JD/brief) plus evidence gaps —
+   never a raw similarity number.
+
+External-JD search:
+
+- A recruiter may paste or upload a JD (PDF/text) that has no corresponding
+  posted job. The JD runs through the same extraction/embedding path used for
+  posted jobs and returns ranked candidates with match reasons.
+- External-JD searches are quota-metered like other AI recruiting actions and
+  are audited (actor, org/department, JD hash/reference, result count).
+
+Privacy and safety:
+
+- Never expose provider/model names, embedding vectors, similarity scores,
+  token counts, prompts, or any AI internals to partners. Match output is a
+  product-facing reason string plus deterministic filter/skill evidence only.
+- Candidate visibility respects the student's passive-search/discoverability
+  consent setting where the product requires opt-in; opting out removes the
+  candidate from the index, it does not mask them into an anonymous card.
+- CV preview/download from a talent-pool result uses the same `candidate_access`
+  RBAC, watermark, and audit rules as application CV access.
+- Fallback when the AI gateway/embeddings are unavailable: deterministic
+  keyword + structured-filter search with an honest "AI ranking unavailable"
+  state, never fabricated matches or reasons.
 
 ## Recruiting Intelligence Read Models
 
@@ -68,11 +112,13 @@ Append-only audit/read model for sensitive candidate access:
 
 - actor user/org/department
 - application/job/candidate identifiers
-- event type: application_opened, cv_previewed, cv_downloaded, identity_reveal_requested, identity_revealed_viewed
+- event type: application_opened, contact_viewed, cv_previewed, cv_downloaded
 - reason/context where required
 - timestamp
 
-This powers "who viewed which CV" and supports export/security review.
+This powers "who viewed which CV" and supports export/security review. Candidate
+access is always to an identified candidate; there is no reveal-request event
+because there is no anonymity gate to unlock (owner decision 2026-07-10).
 
 ### `partner_activity_feed`
 
@@ -91,11 +137,11 @@ The feed must be filtered by the viewer's grants and department scope.
 
 Extend `GET /dashboards/partner` or add `GET /dashboards/partner/ops` with:
 
-- `todos`: prioritized tasks from jobs, reveals, pipeline SLA, interviews, offers, billing/package limits, and team setup.
+- `todos`: prioritized tasks from jobs, new applications, pipeline SLA, interviews, offers, billing/package limits, and team setup.
 - `metrics`: current metrics plus conversion metrics when the analytics projection exists.
 - `job_performance`: top/at-risk jobs with applications, views, clicks, conversion rate, source mix, and owner.
 - `team_activity`: recent org activity filtered by permission.
-- `access_alerts`: unusual CV downloads, reveal spikes, or permission-sensitive events.
+- `access_alerts`: unusual CV downloads, CV-view spikes, or permission-sensitive events.
 - `rbac_summary`: current actor permissions and which widgets are hidden/disabled because grants are missing.
 - `ai_recommendations`: advisory only; any write action remains confirmation-required and audited.
 
@@ -140,7 +186,7 @@ Required behavior:
   input summary, output summary, and user-safe error.
 - Failed nodes create recoverable tasks instead of silently dropping candidates,
   applications, or notifications.
-- Sensitive actions such as CV access, identity reveal, rejection, offer send,
+- Sensitive actions such as CV access/download, rejection, offer send,
   and billing/package changes require explicit permissions and audit rows.
 
 Frontend requirements:

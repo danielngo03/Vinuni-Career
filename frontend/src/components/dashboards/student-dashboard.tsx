@@ -9,7 +9,6 @@ import {
   PaperPlaneTilt,
   ReadCvLogo,
   ClockCounterClockwise,
-  Eye,
   VideoCamera,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
@@ -264,43 +263,6 @@ export function StudentDashboard() {
                           </div>
                           <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-[var(--brand-primary)]">
                             {ts("viewEvent")}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </DashboardSection>
-              )}
-
-              {/* Reveal requests — highlighted, time-sensitive. */}
-              {data.reveal_requests_pending.length > 0 && (
-                <DashboardSection
-                  icon={Eye}
-                  tone="warning"
-                  title={ts("revealsTitle")}
-                  count={data.reveal_requests_pending.length}
-                >
-                  <ul className="space-y-3">
-                    {data.reveal_requests_pending.map((r) => (
-                      <li key={r.application_id}>
-                        <Link
-                          href={`/student/applications/${r.application_id}`}
-                          className="flex flex-col gap-2 rounded-2xl border border-[var(--amber-600)]/40 bg-[var(--amber-100)]/40 p-4 outline-none transition-colors hover:border-[var(--amber-600)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 sm:flex-row sm:items-center sm:justify-between"
-                        >
-                          <div className="min-w-0">
-                            <h3 className="truncate text-sm font-bold text-[var(--text-primary)]">
-                              {r.job_title ?? ts("untitledJob")}
-                            </h3>
-                            <p className="mt-0.5 truncate text-xs text-[var(--text-secondary)]">
-                              {r.company_name ?? ts("unknownCompany")}
-                              {" · "}
-                              {ts("requestedOn", {
-                                date: formatDateTime(r.requested_at, locale),
-                              })}
-                            </p>
-                          </div>
-                          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-[var(--amber-700)]">
-                            {ts("respondCta")}
                           </span>
                         </Link>
                       </li>

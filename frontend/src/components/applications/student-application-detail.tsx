@@ -12,7 +12,6 @@ import {
   MagnifyingGlass,
   ShieldWarning,
   SignIn,
-  UserFocus,
   WarningCircle,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
@@ -20,7 +19,7 @@ import { Button, EmptyState, Modal, Skeleton, StatusBadge, Textarea, useToast } 
 import { PageHeader } from "@/components/layout/page-header";
 import { formatDateTime } from "@/lib/format";
 import { APPLICATION_STATUS_TONE, useApplicationLabels } from "@/lib/applications/labels";
-import { ApiError, applicationsApi, type RevealDecision } from "@/lib/api";
+import { ApiError, applicationsApi } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { Meta } from "./application-detail/meta";
 import { statusNextSteps, StatusTimeline } from "./application-detail/status-timeline";
@@ -81,22 +80,6 @@ export function StudentApplicationDetail({ id }: { id: string }) {
       }
       toast.show({ tone: "error", title: apiError(e) });
     },
-  });
-
-  const respond = useMutation({
-    mutationFn: (decision: RevealDecision) =>
-      applicationsApi.respondReveal(id, decision),
-    onSuccess: (_res, decision) => {
-      toast.show({
-        tone: decision === "accepted" ? "success" : "info",
-        title:
-          decision === "accepted"
-            ? t("revealAcceptedToast")
-            : t("revealDeclinedToast"),
-      });
-      refresh();
-    },
-    onError: (e) => toast.show({ tone: "error", title: apiError(e) }),
   });
 
   const backLink = (
@@ -171,7 +154,6 @@ export function StudentApplicationDetail({ id }: { id: string }) {
 
   const canWithdraw =
     app.can_withdraw ?? (app.status === "submitted" || app.status === "under_review");
-  const reveal = app.reveal_request;
 
   return (
     <>
@@ -182,9 +164,6 @@ export function StudentApplicationDetail({ id }: { id: string }) {
         <StatusBadge tone={APPLICATION_STATUS_TONE[app.status] ?? "info"}>
           {labels.status(app.status, app.status_label)}
         </StatusBadge>
-        {app.is_anonymous && (
-          <StatusBadge tone="info">{t("anonymousBadge")}</StatusBadge>
-        )}
       </div>
 
       {/* Honest "what happens next" callout driven by the server's next_action. */}
@@ -270,54 +249,6 @@ export function StudentApplicationDetail({ id }: { id: string }) {
         </Link>
       )}
 
-      {/* Pending reveal request — rendered only when the API surfaces it. */}
-      {reveal && reveal.status === "pending" && (
-        <div
-          role="alert"
-          className="mb-6 rounded-2xl border border-[var(--amber-600)]/40 bg-[var(--amber-100)] p-4"
-        >
-          <div className="flex items-start gap-3">
-            <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-warning shadow-sm">
-              <UserFocus aria-hidden weight="duotone" className="size-4 text-white" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-[var(--text-primary)]">
-                {t("revealRequestTitle")}
-              </p>
-              <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                {t("revealRequestBody")}
-              </p>
-              <blockquote className="mt-2 rounded-lg bg-[var(--glass-surface)] p-3 text-sm italic text-[var(--text-secondary)]">
-                {reveal.reason}
-              </blockquote>
-              <p className="mt-2 text-xs text-[var(--text-muted)]">
-                {t("revealExpires", {
-                  date: formatDateTime(reveal.expires_at, locale),
-                })}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <Button
-                  variant="primary"
-                  size="sm"
-                  loading={respond.isPending}
-                  onClick={() => respond.mutate("accepted")}
-                >
-                  {t("revealAccept")}
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  disabled={respond.isPending}
-                  onClick={() => respond.mutate("declined")}
-                >
-                  {t("revealDecline")}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Submitted snapshot summary */}
       <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <Meta label={t("appliedAt")}>
@@ -335,9 +266,6 @@ export function StudentApplicationDetail({ id }: { id: string }) {
             />
             {t("snapshotLocked")}
           </span>
-        </Meta>
-        <Meta label={t("visibilityToEmployer")}>
-          {app.is_anonymous ? t("anonymousBadge") : t("identified")}
         </Meta>
       </dl>
 

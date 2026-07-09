@@ -6,8 +6,6 @@
       "complete_profile": "Complete your profile",
       "build_cv": "Build a CV",
       "create_alert": "Create job alert",
-      "respond_reveal": "Respond to identity reveal",
-      "respond_reveals": "Respond to identity reveals",
       "jobs_in_draft": "Finish draft jobs",
       "jobs_pending_review": "Jobs awaiting review",
       "post_job": "Post a job",
@@ -29,11 +27,8 @@
       "viewInterview": "View details",
       "upcomingEventsTitle": "Your upcoming events",
       "viewEvent": "View event",
-      "revealsTitle": "Identity reveal requests",
       "untitledJob": "Untitled role",
       "unknownCompany": "Anonymous employer",
-      "requestedOn": "Requested {date}",
-      "respondCta": "Respond",
       "recentApplicationsTitle": "Recent applications",
       "noApplicationsTitle": "No applications yet",
       "noApplicationsBody": "Browse jobs and submit your first application.",
@@ -53,9 +48,7 @@
         "jobsDraft": "Draft jobs",
         "jobsPendingReview": "Pending review",
         "jobsPendingReviewHotNote": "{count, plural, one {# job needs review} other {# jobs need review}}",
-        "applicationsTotal": "Total applications",
-        "revealsPending": "Reveals pending",
-        "revealsPendingHotNote": "{count, plural, one {# profile needs a reply} other {# profiles need a reply}}"
+        "applicationsTotal": "Total applications"
       },
       "actionsEmptyTitle": "Nothing needs action",
       "actionsEmptyBody": "All your jobs and applications are handled.",
@@ -73,14 +66,9 @@
       "aiInsightStrongDemand": "Strong demand — {count} applications per active job on average.",
       "aiInsightLowVolume": "Low application volume ({count} per job) — consider boosting job visibility.",
       "aiInsightDraftJobs": "{count, plural, one {# draft job} other {# draft jobs}} not yet published — publish to attract candidates.",
-      "aiInsightRevealsPending": "{count, plural, one {# reveal request} other {# reveal requests}} awaiting response — quick replies improve candidate experience.",
       "aiInsightNoActive": "No active jobs right now — activate a draft to resume hiring.",
       "todoTitle": "Today's to-do list",
       "todo": {
-        "respond_reveals": {
-          "title": "Respond to identity reveal requests",
-          "body": "{count, plural, one {# profile is waiting for the hiring team's decision} other {# profiles are waiting for the hiring team's decision}}"
-        },
         "jobs_pending_review": {
           "title": "Track jobs awaiting review",
           "body": "{count, plural, one {# job is in the university moderation queue} other {# jobs are in the university moderation queue}}"
@@ -163,8 +151,6 @@
         "low": "Low"
       },
       "todoLabel": {
-        "respond_reveals": "Respond to identity-reveal requests",
-        "reveals_awaiting_candidate": "Reveal requests awaiting the candidate",
         "applications_to_review": "Applications to review",
         "offers_to_approve": "Offers pending approval",
         "offers_to_send": "Offers to send",
@@ -234,7 +220,6 @@
         "heroTitle": "Candidates in play",
         "heroCaption": "Across {roles} active roles and {apps} total applications.",
         "heroConversion": "{value} apply conversion",
-        "heroReveals": "{count, plural, one {# reveal to answer} other {# reveals to answer}}",
         "heroTopRoles": "Busiest roles",
         "greeting": "Hi, {name}",
         "kpi": {
@@ -243,8 +228,6 @@
           "pendingReview": "Pending review",
           "pendingReviewHint": "Awaiting university approval",
           "drafts": "Draft jobs",
-          "reveals": "Reveals to answer",
-          "revealsHint": "Candidates awaiting your reply",
           "conversion": "Conversion"
         },
         "funnelTitle": "Application funnel",

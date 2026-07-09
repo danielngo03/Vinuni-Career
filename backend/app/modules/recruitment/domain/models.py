@@ -1,10 +1,17 @@
 """Recruitment ORM models (``docs/DATA_MODEL.md`` §9).
 
-Phase 1e owns ``applications`` and ``application_reveal_requests``. Types use the
-shared cross-database variants (``JsonType``) so the same models run on
-PostgreSQL (runtime) and SQLite (unit tests). Postgres-only constructs (partial /
-unique-active indexes, ``set_updated_at`` trigger, the deferred
-``application_cv_snapshots`` FK + NOT NULL) live in migration ``0006`` only.
+Phase 1e owns ``applications``. Types use the shared cross-database variants
+(``JsonType``) so the same models run on PostgreSQL (runtime) and SQLite (unit
+tests). Postgres-only constructs (partial / unique-active indexes,
+``set_updated_at`` trigger, the deferred ``application_cv_snapshots`` FK + NOT
+NULL) live in migration ``0006`` only.
+
+Identity model (owner decision 2026-07-10): an application ALWAYS carries and
+exposes the applicant's real identity to any partner member who passes the CV /
+candidate RBAC gate. The former anonymous-apply + identity-reveal handshake was
+removed entirely; CV-access RBAC, the watermark on CV downloads, and audit
+logging of sensitive candidate access are retained (they gate WHO may see the CV,
+not WHETHER identity is masked).
 
 Documented deviations from the canonical ``docs/DATA_MODEL.md`` §9 columns
 (necessary because the ``student_profiles`` module is not yet built):
@@ -20,9 +27,6 @@ Documented deviations from the canonical ``docs/DATA_MODEL.md`` §9 columns
   side here to avoid an ORM metadata create cycle; the migration adds it on
   Postgres.
 - ``applications.idempotency_key`` — submit idempotency (``docs/API_CONTRACTS.md``).
-- ``application_reveal_requests`` is the apply-flow reveal table (the broader
-  ``contact_reveal_requests`` of the data model also serves passive search, a
-  later phase); shape is identical for the apply use case.
 """
 
 from __future__ import annotations
@@ -69,15 +73,8 @@ class Application(Base):
     status: Mapped[str] = mapped_column(String(30), nullable=False, default="submitted")
     cover_letter: Mapped[str | None] = mapped_column(Text, nullable=True)
     screening_answers: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
-    is_anonymous: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     snapshot_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("application_cv_snapshots.id", ondelete="SET NULL"), nullable=True
-    )
-    reveal_approved_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id", ondelete="SET NULL"), nullable=True
-    )
-    reveal_approved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
     )
     rejection_reason: Mapped[str | None] = mapped_column(String(50), nullable=True)
     rejection_note: Mapped[str | None] = mapped_column(Text, nullable=True)
@@ -237,9 +234,8 @@ class CandidateStage(Base):
 # upsert guard).
 #
 # A scorecard carries NO student-identity field — it references ``application_id``
-# (already redacted on every partner projection); the reveal handshake stays the
-# only identity path. ``interview_id`` (DATA_MODEL §9) is added nullable by
-# ADR-0006; V1 binds to ``application_id`` + ``stage_id`` directly.
+# only. ``interview_id`` (DATA_MODEL §9) is added nullable by ADR-0006; V1 binds to
+# ``application_id`` + ``stage_id`` directly.
 
 
 class Scorecard(Base):
@@ -324,9 +320,8 @@ class ScorecardScore(Base):
 # "At most one OPEN (scheduled) interview per (application, stage)" is enforced by a
 # Postgres PARTIAL unique index ``uq_interview_open_per_stage ... WHERE
 # status='scheduled'`` (migration ``0014``, dialect-guarded); SQLite unit tests rely
-# on the service-layer guard. An interview carries NO student-identity field — the
-# reveal handshake stays the only identity path (scheduling an anonymous interview
-# REQUIRES an already-accepted reveal, enforced in the service).
+# on the service-layer guard. An interview carries NO student-identity field — it
+# references ``application_id`` only.
 
 
 class Interview(Base):
@@ -411,8 +406,7 @@ class InterviewAssignee(Base):
 # sent) is enforced by a Postgres PARTIAL unique index
 # ``uq_offer_live_per_application ... WHERE status IN (...)`` (migration ``0015``,
 # dialect-guarded); SQLite unit tests rely on the service-layer guard. An offer
-# carries NO student-identity field — the reveal handshake stays the only identity
-# path (SENDING an anonymous offer REQUIRES an already-accepted reveal, §5).
+# carries NO student-identity field — it references ``application_id`` only.
 
 
 class Offer(Base):
@@ -493,37 +487,6 @@ class ApplicationTimelineEvent(Base):
     )
     event_metadata: Mapped[dict] = mapped_column("metadata", JsonType, nullable=False, default=dict)
     occurred_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now()
-    )
-
-
-class ApplicationRevealRequest(Base):
-    """A partner's request to reveal an anonymous applicant's identity.
-
-    One request per (application, requester_org); 72h expiry. The student
-    accepts/declines; on accept the partner may see identity + download the CV.
-    """
-
-    __tablename__ = "application_reveal_requests"
-    __table_args__ = (
-        UniqueConstraint("application_id", "requester_org_id", name="uq_reveal_app_org"),
-    )
-
-    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
-    application_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("applications.id", ondelete="CASCADE"), nullable=False, index=True
-    )
-    requester_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
-    )
-    requester_org_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("organizations.id", ondelete="RESTRICT"), nullable=False
-    )
-    reason: Mapped[str] = mapped_column(Text, nullable=False)
-    status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
-    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    responded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
-    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
 

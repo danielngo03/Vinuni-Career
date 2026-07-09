@@ -3,11 +3,10 @@
 RBAC + tenancy: the acting principal must be a ``partner_member`` (wrong persona
 -> ``403``) and must have an org context (``principal.org_id``); a partner without
 an org -> ``404``. Every count/list is scoped to that single ``org_id`` — a
-partner never sees another org's jobs, applications, or reveals.
+partner never sees another org's jobs or applications.
 
-Privacy: ``applications_recent`` rows carry only the deterministic anonymous
-candidate handle (never name/email); the partner opens the application detail
-(which enforces the reveal handshake) to see identity where permitted.
+Privacy: ``applications_recent`` rows carry the candidate's real display name but
+no contact PII; the partner opens the application detail for the CV + fit + email.
 """
 
 from __future__ import annotations
@@ -67,29 +66,15 @@ async def get_partner_dashboard(
         lambda: recruitment_read.count_org_applications(session, org_id=org_id),
         fallback=0,
     )
-    reveals_pending = await safe(
-        session,
-        lambda: recruitment_read.count_org_pending_reveals(session, org_id=org_id),
-        fallback=0,
-    )
 
     metrics = {
         "jobs_active": job_counts["active"],
         "jobs_draft": job_counts["draft"],
         "jobs_pending_review": job_counts["pending_review"],
         "applications_total": applications_total,
-        "reveals_pending_response": reveals_pending,
     }
 
     next_actions: list[dict] = []
-    if reveals_pending > 0:
-        next_actions.append(
-            {
-                "key": "respond_reveals",
-                "href": "/partner/applications",
-                "count": reveals_pending,
-            }
-        )
     if job_counts["draft"] > 0:
         next_actions.append(
             {"key": "jobs_in_draft", "href": "/partner/jobs", "count": job_counts["draft"]}

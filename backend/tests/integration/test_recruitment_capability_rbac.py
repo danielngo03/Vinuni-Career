@@ -116,7 +116,6 @@ _NEW_TUPLES: list[tuple[str, str]] = [
     ("offers", "rescind"),
     ("scorecards", "submit"),
     ("scorecards", "read"),
-    ("candidate_identity", "request_reveal"),
     ("candidate_identity", "view_cv"),
     ("candidate_identity", "download_cv"),
     ("pipeline", "move_candidate"),

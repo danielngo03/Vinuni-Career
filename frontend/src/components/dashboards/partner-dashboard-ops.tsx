@@ -8,7 +8,6 @@ import {
   CaretRight,
   ChartLineUp,
   ClockCounterClockwise,
-  Eye,
   Hourglass,
   Lightning,
   ListChecks,
@@ -44,7 +43,6 @@ import {
 } from "./dashboard-kit";
 
 const TODO_ICONS: Record<string, Icon> = {
-  respond_reveals: Eye,
   jobs_pending_review: Hourglass,
   jobs_in_draft: NotePencil,
   review_access_alerts: ShieldWarning,

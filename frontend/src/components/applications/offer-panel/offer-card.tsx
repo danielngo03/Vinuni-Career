@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import {
   BadgeCheck,
   CheckCircle2,
-  Eye,
   Pencil,
   Send,
   Ban,
@@ -37,9 +36,6 @@ export function OfferCard({
   offer,
   locale,
   busy,
-  anonUnrevealed,
-  revealPending,
-  onRequestReveal,
   onEdit,
   onSubmit,
   onApprove,
@@ -50,9 +46,6 @@ export function OfferCard({
   offer: PartnerOffer;
   locale: string;
   busy: boolean;
-  anonUnrevealed: boolean;
-  revealPending: boolean;
-  onRequestReveal: () => void;
   onEdit: () => void;
   onSubmit: () => void;
   onApprove: () => void;
@@ -63,9 +56,6 @@ export function OfferCard({
   const t = useTranslations("offers");
   const labels = useOfferLabels();
   const status = offer.status;
-  // Sending an approved offer to a still-anonymous applicant is blocked until the
-  // reveal handshake is accepted (ADR-0007 §5) — mirror the interview posture.
-  const sendBlockedByReveal = status === "approved" && anonUnrevealed;
 
   return (
     <div className="rounded-lg border border-border bg-card p-3.5">
@@ -132,39 +122,6 @@ export function OfferCard({
         <p className="mt-2.5 type-caption text-muted-foreground">{t("rescindedHint")}</p>
       )}
 
-      {/* Send blocked by an outstanding reveal (approved + anonymous). */}
-      {sendBlockedByReveal && (
-        <div
-          role="status"
-          className="mt-3 rounded-lg p-3"
-          style={{ background: "var(--content-warning-soft)" }}
-        >
-          <p className="flex items-start gap-2 type-small font-semibold text-foreground">
-            <Eye
-              aria-hidden
-              className="mt-0.5 size-4 shrink-0"
-              strokeWidth={1.8}
-              style={{ color: "var(--content-warning)" }}
-            />
-            {t("sendRevealBlockedTitle")}
-          </p>
-          <p className="mt-1 type-caption text-muted-foreground">{t("sendRevealBlockedBody")}</p>
-          {revealPending ? (
-            <p
-              className="mt-2 type-caption font-medium"
-              style={{ color: "var(--content-warning)" }}
-            >
-              {t("revealBlockedPending")}
-            </p>
-          ) : (
-            <Button variant="secondary" size="sm" className="mt-2.5" onClick={onRequestReveal}>
-              <Eye aria-hidden className="size-4" strokeWidth={1.8} />
-              {t("revealBlockedCta")}
-            </Button>
-          )}
-        </div>
-      )}
-
       {/* Actions per status. */}
       <div className="mt-3 flex flex-wrap gap-1.5">
         {status === "draft" && (
@@ -191,7 +148,7 @@ export function OfferCard({
             </Button>
           </>
         )}
-        {status === "approved" && !sendBlockedByReveal && (
+        {status === "approved" && (
           <Button variant="primary" size="sm" loading={busy} onClick={onSend}>
             <Send aria-hidden className="size-4" strokeWidth={1.8} />
             {t("sendCta")}

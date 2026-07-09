@@ -65,7 +65,6 @@ export function PipelineCardView({
   const offerLabels = useOfferLabels();
   const [downloading, setDownloading] = useState(false);
   const handle = cardHandle(card);
-  const anon = card.is_anonymous && !card.applicant.display_name;
   const days = daysInStage(card.entered_at);
   const stale = days !== null && days >= STALE_DAYS;
 
@@ -109,8 +108,6 @@ export function PipelineCardView({
         >
           {isSelected ? (
             <CheckSquare aria-hidden className="size-4 shrink-0 text-[var(--brand-primary)]" strokeWidth={2} />
-          ) : anon ? (
-            <UserRound aria-hidden className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.8} />
           ) : (
             <Square aria-hidden className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.8} />
           )}
@@ -228,12 +225,10 @@ export function PipelineCardView({
             {t("rollback")}
           </Button>
         )}
-        {card.cv_download_available && (
-          <Button variant="ghost" size="sm" loading={downloading} onClick={handleDownload}>
-            <Download aria-hidden className="size-4" strokeWidth={1.8} />
-            {t("cv")}
-          </Button>
-        )}
+        <Button variant="ghost" size="sm" loading={downloading} onClick={handleDownload}>
+          <Download aria-hidden className="size-4" strokeWidth={1.8} />
+          {t("cv")}
+        </Button>
       </div>
     </KanbanCard>
   );

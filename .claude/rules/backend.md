@@ -95,9 +95,12 @@ backend/app/modules/{domain}/
   never expose raw `logo_path`, object keys, local paths, bucket names, or
   document storage keys in public/company/job/dashboard responses.
 - CV download by partner requires watermark.
-- Sensitive candidate access by partners (application open where identity/CV is
-  visible, CV preview/download, reveal request, revealed-identity view) must be
-  auditable and scoped by RBAC.
+- Applications are always identified (owner decision 2026-07-10): no anonymous
+  apply, blind-screening, or identity-reveal flow. Do not add `is_anonymous`
+  gating, redacted previews, or a reveal/`candidate_identity` capability.
+- Sensitive candidate access by partners (application open, contact view, CV
+  preview/download) must be auditable and scoped by RBAC (`candidate_access`
+  capability, per user/role/department).
 - CV Studio writes are versioned; application CV snapshots are immutable.
 - CV Studio template/canvas data is backend-owned. Templates need layout schema,
   content-binding schema, owner/version/status metadata, preview/render

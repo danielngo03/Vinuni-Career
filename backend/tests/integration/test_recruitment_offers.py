@@ -5,8 +5,7 @@ of the ADR-0004 stage engine, ADR-0005 scorecards, and ADR-0006 interviews:
 
 - create draft -> submit -> approve -> send happy path; send-before-approve -> 409
   ``offer_not_approved``; second LIVE offer -> 409 ``offer_exists``; edit-after-draft
-  -> 409 ``offer_not_editable``; send anonymous w/o accepted reveal -> 409
-  ``reveal_required``.
+  -> 409 ``offer_not_editable``.
 - student accept -> offer ``accepted`` + ``applications.status='hired'`` + Offer-stage
   ``candidate_stages`` row closed PASSED/``exit_kind='hired'`` + ``offer.accepted``
   outbox event (career seam, NO salary) + ``application.hired`` audit; student decline
@@ -34,7 +33,6 @@ from app.modules.recruitment.application import (
     apply_service,
     decision_service,
     offer_service,
-    reveal_service,
 )
 from app.modules.recruitment.application.errors import (
     ApplicationVersionConflictError,
@@ -42,7 +40,6 @@ from app.modules.recruitment.application.errors import (
     OfferNotActionableError,
     OfferNotApprovedError,
     OfferNotEditableError,
-    RevealRequiredError,
 )
 from app.modules.recruitment.domain import lifecycle, pipeline
 from app.modules.recruitment.domain import offer as offer_domain
@@ -77,7 +74,7 @@ _SALARY = 25_000_000
 # --------------------------------------------------------------------------- #
 
 
-async def _setup_reviewed(db, *, is_anonymous=False):
+async def _setup_reviewed(db):
     """Published job + applied + reviewed (candidate ACTIVE at stage 1)."""
 
     _pu, _porg, partner = await make_org_with_admin(db, display_name="Partner Co")
@@ -89,7 +86,7 @@ async def _setup_reviewed(db, *, is_anonymous=False):
     app = await apply_service.apply_to_job(
         db,
         principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
@@ -137,23 +134,6 @@ async def _audit_count(db, action: str) -> int:
             select(func.count()).select_from(AuditLog).where(AuditLog.action == action)
         )
     ).scalar_one()
-
-
-async def _accept_reveal(db, *, partner, student, app_id) -> None:
-    await reveal_service.request_reveal(
-        db,
-        principal=partner,
-        application_id=app_id,
-        reason="We would like to extend an offer and confirm your details.",
-        ctx=CTX,
-    )
-    await reveal_service.respond_reveal(
-        db,
-        principal=student,
-        application_id=app_id,
-        decision=lifecycle.REVEAL_ACCEPTED,
-        ctx=CTX,
-    )
 
 
 # --------------------------------------------------------------------------- #
@@ -274,23 +254,6 @@ async def test_update_draft_version_conflict_is_409(db_session) -> None:
 # --------------------------------------------------------------------------- #
 # Reveal precondition on SEND                                                 #
 # --------------------------------------------------------------------------- #
-
-
-async def test_send_anonymous_without_reveal_is_409_reveal_required(db_session) -> None:
-    partner, _su, _student, _job, app_id = await _setup_reviewed(db_session, is_anonymous=True)
-    appr = await _to_approved(db_session, partner=partner, app_id=app_id)
-    with pytest.raises(RevealRequiredError) as exc:
-        await offer_service.send_offer(
-            db_session, principal=partner, offer_id=uuid.UUID(appr["id"]), ctx=CTX
-        )
-    assert exc.value.details == {"reason": "reveal_required"}
-
-
-async def test_send_anonymous_after_accepted_reveal_ok(db_session) -> None:
-    partner, _su, student, _job, app_id = await _setup_reviewed(db_session, is_anonymous=True)
-    await _accept_reveal(db_session, partner=partner, student=student, app_id=app_id)
-    sent = await _to_sent(db_session, partner=partner, app_id=app_id)
-    assert sent["status"] == offer_domain.STATUS_SENT
 
 
 # --------------------------------------------------------------------------- #

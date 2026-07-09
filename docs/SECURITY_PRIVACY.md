@@ -12,6 +12,11 @@
 - CV access uses signed URLs and partner downloads require watermark.
 - AI internals are hidden from end users.
 - Sponsored/ad labels are mandatory and cannot be removed by UI options.
+- Applications are always identified. Anonymous apply, blind-screening, and the
+  identity-reveal handshake are removed product-wide (owner decision
+  2026-07-10). This removes the anonymity dance only; partner CV access stays
+  RBAC-gated per user/role/department, CV downloads stay watermarked, and every
+  sensitive candidate access stays audited.
 
 ## RBAC
 
@@ -39,7 +44,10 @@ Permission checks must include:
 - Use signed URLs with short expiry for files.
 - Partners never see direct storage paths.
 - CV download by partner adds watermark with partner identity and timestamp.
-- Anonymous applications redact configured fields and PII in CV preview.
+- Partner access to an application, its CV preview, and its CV download is
+  RBAC-gated by user/role/department scope (`candidate_access` capability) and
+  audited. There is no anonymized/redacted candidate preview and no reveal step;
+  authorized recruiters see the identified candidate directly.
 
 ## CV Studio Privacy
 
@@ -48,7 +56,8 @@ Permission checks must include:
 - AI may use only permitted sources: confirmed profile fields, reviewed upload extraction, owned builder CV versions, target job/JD, and user-provided notes.
 - AI suggestions are owner-only until accepted; partners never see rejected or pending suggestions.
 - Application CV snapshots are immutable and scoped to the application.
-- Anonymous applications render redacted preview from the submitted snapshot, not from the student's current live CV.
+- Partner CV views render from the immutable submitted snapshot, not from the
+  student's current live CV.
 - Partner downloads use watermarked rendered PDF and are audited.
 - Template preview images are safe public assets; filled CV previews are signed/private.
 
@@ -109,6 +118,14 @@ Moderation/fraud/approval:
 
 ## Advertising Compliance
 
+Allowed targeting (coarse, non-sensitive, product-owned dimensions the
+allocation engine may use — see `docs/DISCOVERY_RECOMMENDATION_ADS_SPEC.md` §7):
+
+- Coarse location: city/region/campus and work-mode preference (never exact GPS).
+- Student major group / faculty and declared career interest/role family.
+- Year group / graduation cohort, coarse tier, device class, and coarse
+  behavioral intent (viewed/searched role families).
+
 Forbidden targeting:
 
 - name, email, phone
@@ -116,7 +133,7 @@ Forbidden targeting:
 - ethnicity/national origin
 - gender/sexual orientation
 - disability/pregnancy
-- exact location
+- exact/GPS location
 - sensitive financial status
 
 Required:
@@ -149,7 +166,7 @@ Required:
 
 ## Notification And Email Safety
 
-- Email/push bodies must not contain sensitive CV text, raw scores, private notes, or hidden anonymous-apply fields.
+- Email/push bodies must not contain sensitive CV text, raw scores, or private recruiter/candidate notes.
 - Push notifications must be PII-minimal because they may appear on lock screens.
 - Template variables are allowlisted per event type.
 - Unknown variables or missing required variables block template activation/send.
@@ -159,7 +176,7 @@ Required:
 ## Export Security
 
 - Field-level RBAC before export generation.
-- Anonymous data stays redacted in exports.
+- Exports never include candidate/CV fields outside the actor's role/department scope.
 - Download links expire.
 - Large exports run asynchronously.
 - Export creation and download are audited.

@@ -14,9 +14,6 @@ Hard rules enforced HERE (service layer, never the router):
   (``OfferExistsError`` / 409 ``offer_exists``).
 - **Editable only while ``draft`` (§1):** editing after submit raises
   ``OfferNotEditableError`` / 409 ``offer_not_editable``.
-- **Reveal precondition on SEND (§5):** sending an anonymous application's offer
-  without an accepted reveal raises ``RevealRequiredError`` / 409 ``reveal_required``
-  — the handshake stays the ONLY identity path.
 - **Candidate respond (§3):** owner-only, only to a ``sent`` non-expired offer
   (else 409 ``offer_not_actionable``); idempotent; lazy-expire on read. **Accept ->
   ``applications.status='hired'``** + closes the Offer-stage ``candidate_stages`` row
@@ -60,7 +57,6 @@ from app.modules.recruitment.application.errors import (
     OfferNotActionableError,
     OfferNotApprovedError,
     OfferNotEditableError,
-    RevealRequiredError,
 )
 from app.modules.recruitment.domain import lifecycle, pipeline, timeline
 from app.modules.recruitment.domain import offer as offer_domain
@@ -411,7 +407,7 @@ async def approve_offer(
 
 
 # --------------------------------------------------------------------------- #
-# Send (reveal precondition) / rescind                                        #
+# Send (approval gate) / rescind                                              #
 # --------------------------------------------------------------------------- #
 
 
@@ -424,7 +420,7 @@ async def send_offer(
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
-    """``approved -> sent`` (the approval gate + reveal precondition; §2/§5)."""
+    """``approved -> sent`` (the approval gate; §2)."""
 
     offer, app = await _load_partner_offer(
         session,
@@ -439,10 +435,6 @@ async def send_offer(
     # The structural approval gate: send requires status='approved'.
     if offer.status != offer_domain.STATUS_APPROVED:
         raise OfferNotApprovedError()
-    # Reveal precondition (§5): an anonymous app with no accepted reveal can NOT have
-    # an offer sent — the handshake is the only identity path.
-    if app.is_anonymous and app.reveal_approved_at is None:
-        raise RevealRequiredError()
 
     offer.status = offer_domain.transition_target(offer_domain.EVENT_SEND)
     offer.sent_at = _shared.now()
@@ -986,7 +978,7 @@ async def sweep_offers(session: AsyncSession, *, now: datetime | None = None) ->
     entering the window. IDEMPOTENT — once flipped the row is no longer ``sent`` so a
     re-run finds no work; the expiring reminder is deduped on the per-offer outbox
     ``dedupe_key``. Flush-only — the scheduler owns the commit (mirrors
-    ``interview_service.sweep_due_reminders`` / ``reveal_service.sweep_expired``).
+    ``interview_service.sweep_due_reminders``).
     """
 
     now = _shared.as_aware(now) if now is not None else _shared.now()

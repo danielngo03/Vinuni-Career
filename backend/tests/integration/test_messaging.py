@@ -30,7 +30,6 @@ from app.modules.messaging.domain.models import (
     MessageThreadParticipant,
 )
 from app.modules.notifications.domain.models import Notification
-from app.modules.recruitment.domain.models import Application
 from app.shared.exceptions import ResourceNotFoundError, ValidationFailedError
 from app.shared.models import AuditLog
 from sqlalchemy import func, select
@@ -199,22 +198,22 @@ async def test_partner_to_student_with_application_ok(db_session) -> None:
 
 
 # --------------------------------------------------------------------------- #
-# Partner opens an ANONYMOUS-applicant thread WITHOUT the student's user id     #
+# Partner opens an applicant thread WITHOUT the student's user id               #
 # (recipient resolved server-side from the application — ADR-0012 §3/§8)        #
 # --------------------------------------------------------------------------- #
 
 
-async def test_partner_opens_anonymous_thread_without_recipient_ids(db_session) -> None:
-    """A partner has no student user id while the application is anonymous; it opens
-    the masked thread by passing ONLY the application context, and the service
-    resolves the applicant. The response must stay masked (no name/email)."""
+async def test_partner_opens_thread_without_recipient_ids(db_session) -> None:
+    """A partner opens the thread by passing ONLY the application context, and the
+    service resolves the bound applicant. The applicant's real identity is shown
+    (masking removed 2026-07-10); the audit still stores ids/codes only."""
 
     student_user, _student = await make_student(db_session)
     student_user.full_name = "Mai Tran Unique"
     await db_session.commit()
     _pu, porg, partner = await make_partner(db_session)
     app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
+        db_session, org_id=porg.id, applicant_id=student_user.id
     )
 
     created = await thread_service.create_thread(
@@ -223,7 +222,7 @@ async def test_partner_opens_anonymous_thread_without_recipient_ids(db_session) 
         kind="direct",
         context_type="application",
         context_id=app_id,
-        recipient_ids=[],  # partner does NOT know / pass the student's user id
+        recipient_ids=[],  # partner does NOT pass the student's user id
         first_message="We would like to talk.",
         ctx=CTX,
     )
@@ -244,14 +243,11 @@ async def test_partner_opens_anonymous_thread_without_recipient_ids(db_session) 
     assert student_user.id in parts
     assert partner.user_id in parts
 
-    # Response is anonymity-masked: no name, no email, just the masked handle.
-    assert created["is_anonymous"] is True
-    assert created["counterpart_label"].startswith("Ứng viên ẩn danh")
-    serialized = json.dumps(created, ensure_ascii=False)
-    assert "Mai Tran Unique" not in serialized
-    assert student_user.email not in serialized
+    # The applicant's real identity is shown (never masked).
+    assert created["is_anonymous"] is False
+    assert created["counterpart_label"] == "Mai Tran Unique"
 
-    # Audit stores ids/codes only, never the student identity.
+    # Audit stores ids/codes only, never the student contact.
     audit_rows = (
         (
             await db_session.execute(
@@ -264,17 +260,16 @@ async def test_partner_opens_anonymous_thread_without_recipient_ids(db_session) 
     assert audit_rows
     for row in audit_rows:
         blob = json.dumps(row.after_snapshot or {}, ensure_ascii=False)
-        assert "Mai Tran Unique" not in blob
         assert student_user.email not in blob
 
 
-async def test_partner_open_anonymous_thread_idempotent(db_session) -> None:
+async def test_partner_open_thread_idempotent(db_session) -> None:
     """Re-opening the same (application, org) returns the existing thread."""
 
     student_user, _student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
     app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
+        db_session, org_id=porg.id, applicant_id=student_user.id
     )
     first = await thread_service.create_thread(
         db_session,
@@ -305,13 +300,13 @@ async def test_partner_open_anonymous_thread_idempotent(db_session) -> None:
     assert count == 1
 
 
-async def test_partner_open_anonymous_thread_other_org_404(db_session) -> None:
+async def test_partner_open_thread_other_org_404(db_session) -> None:
     """A partner cannot open a context thread on another org's application."""
 
     student_user, _student = await make_student(db_session)
     _pu, porg, _partner = await make_partner(db_session)
     app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
+        db_session, org_id=porg.id, applicant_id=student_user.id
     )
     _ou, _oorg, other_partner = await make_partner(db_session, display_name="Other Co")
     with pytest.raises(ResourceNotFoundError):
@@ -359,15 +354,15 @@ async def test_partner_context_overrides_recipient_to_applicant(db_session) -> N
     assert decoy_user.id not in parts  # the smuggled non-applicant is ignored
 
 
-async def test_partner_open_thread_reveal_flips_to_real_name(db_session) -> None:
-    """After reveal, the projection on a context-resolved thread shows the real name."""
+async def test_partner_open_thread_shows_real_name(db_session) -> None:
+    """A context-resolved thread shows the applicant's real name (never masked)."""
 
     student_user, _student = await make_student(db_session)
     student_user.full_name = "Khanh Le Unique"
     await db_session.commit()
     _pu, porg, partner = await make_partner(db_session)
     app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
+        db_session, org_id=porg.id, applicant_id=student_user.id
     )
     created = await thread_service.create_thread(
         db_session,
@@ -379,17 +374,8 @@ async def test_partner_open_thread_reveal_flips_to_real_name(db_session) -> None
         ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
-    masked = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
-    assert masked["counterpart_label"].startswith("Ứng viên ẩn danh")
-
-    app_row = (
-        await db_session.execute(select(Application).where(Application.id == app_id))
-    ).scalar_one()
-    app_row.reveal_approved_at = datetime.now(tz=UTC)
-    await db_session.commit()
-
-    revealed = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
-    assert revealed["counterpart_label"] == "Khanh Le Unique"
+    detail = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
+    assert detail["counterpart_label"] == "Khanh Le Unique"
 
 
 # --------------------------------------------------------------------------- #
@@ -492,14 +478,13 @@ async def test_student_replies_into_partner_thread(db_session) -> None:
 # --------------------------------------------------------------------------- #
 
 
-async def test_anonymous_masking_until_reveal(db_session) -> None:
+async def test_partner_sees_real_name_notification_hides_body(db_session) -> None:
     student_user, student = await make_student(db_session)
-    # Distinct, recognizable name so we can prove it is masked then revealed.
     student_user.full_name = "Linh Nguyen Unique"
     await db_session.commit()
     _pu, porg, partner = await make_partner(db_session)
     app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
+        db_session, org_id=porg.id, applicant_id=student_user.id
     )
     created = await thread_service.create_thread(
         db_session,
@@ -513,7 +498,7 @@ async def test_anonymous_masking_until_reveal(db_session) -> None:
     )
     thread_id = uuid.UUID(created["id"])
 
-    # Student replies -> partner gets a PII-safe, anonymous notification.
+    # Student replies -> partner gets a notification (real name, never the body).
     await message_service.send_message(
         db_session,
         principal=student,
@@ -522,14 +507,11 @@ async def test_anonymous_masking_until_reveal(db_session) -> None:
         ctx=CTX,
     )
 
-    # Partner's thread view masks the student.
+    # Partner's thread view shows the applicant's real name.
     detail = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
-    assert detail["counterpart_label"].startswith("Ứng viên ẩn danh")
-    serialized = json.dumps(detail, ensure_ascii=False)
-    assert student_user.email not in serialized
-    assert "Linh Nguyen Unique" not in serialized
+    assert detail["counterpart_label"] == "Linh Nguyen Unique"
 
-    # Partner's NEW-MESSAGE notification stays anonymous (no name/email/body).
+    # The NEW-MESSAGE notification never leaks the message body or contact email.
     notif = (
         (
             await db_session.execute(
@@ -544,26 +526,15 @@ async def test_anonymous_masking_until_reveal(db_session) -> None:
     )
     assert notif is not None
     blob = f"{notif.title} {notif.body}"
-    assert "Ứng viên ẩn danh" in notif.body
     assert student_user.email not in blob
     assert "Hi there" not in blob  # never the message body
-
-    # After reveal, the same projection flips to the real name.
-    app_row = (
-        await db_session.execute(select(Application).where(Application.id == app_id))
-    ).scalar_one()
-    app_row.reveal_approved_at = datetime.now(tz=UTC)
-    await db_session.commit()
-
-    detail2 = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
-    assert detail2["counterpart_label"] == "Linh Nguyen Unique"
 
 
 async def test_student_sees_partner_org_name(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session, display_name="Acme Partner")
     app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
+        db_session, org_id=porg.id, applicant_id=student_user.id
     )
     created = await thread_service.create_thread(
         db_session,

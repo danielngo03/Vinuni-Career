@@ -3,10 +3,9 @@
 §"Partner Dashboard V2 Contract").
 
 Covers: job-metrics upsert hooks (detail view / save / apply-start+submitted),
-candidate-access audit hooks (application opened / CV downloaded / reveal
-requested / identity revealed viewed), the partner-ops dashboard's honest
-degrade-when-locked / no-data-yet behavior, RBAC gating (admin wildcard vs a
-non-admin member without the analytics grant), and tenant isolation.
+candidate-access audit hooks (application opened / CV downloaded), the partner-ops
+dashboard's honest degrade-when-locked / no-data-yet behavior, RBAC gating (admin
+wildcard vs a non-admin member without the analytics grant), and tenant isolation.
 """
 
 from __future__ import annotations
@@ -27,7 +26,7 @@ from app.modules.analytics.domain.partner_read_models import (
 from app.modules.dashboards.application import partner_dashboard
 from app.modules.documents.application import snapshot_service
 from app.modules.opportunities.application import job_service, saved_jobs_service
-from app.modules.recruitment.application import access, apply_service, reveal_service
+from app.modules.recruitment.application import access, apply_service
 from app.shared.exceptions import PermissionDeniedError
 from sqlalchemy import select
 
@@ -35,8 +34,6 @@ from tests.auth_utils import CTX
 from tests.documents_utils import make_student
 from tests.org_utils import add_member, make_org_with_admin
 from tests.recruitment_utils import apply_payload, make_builder_cv, publish_job
-
-_REVEAL_REASON = "We would like to learn more about your internship experience here."
 
 
 @pytest.fixture(autouse=True)
@@ -190,41 +187,19 @@ async def test_apply_hook_records_apply_start_and_submitted(db_session) -> None:
 # --------------------------------------------------------------------------- #
 
 
-async def test_candidate_access_events_recorded_for_open_download_reveal(db_session) -> None:
+async def test_candidate_access_events_recorded_for_open_and_download(db_session) -> None:
     partner_principal, _porg, _uni, job_id = await _setup_published(db_session)
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
         db_session,
         principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     application_id = uuid.UUID(app["id"])
 
     # Partner opens the application -> application_opened.
-    await apply_service.get_application(
-        db_session,
-        principal=partner_principal,
-        application_id=application_id,
-    )
-    # Partner requests reveal -> identity_reveal_requested.
-    await reveal_service.request_reveal(
-        db_session,
-        principal=partner_principal,
-        application_id=application_id,
-        reason=_REVEAL_REASON,
-        ctx=CTX,
-    )
-    # Student accepts.
-    await reveal_service.respond_reveal(
-        db_session,
-        principal=student,
-        application_id=application_id,
-        decision="accepted",
-        ctx=CTX,
-    )
-    # Partner re-opens (now revealed) -> application_opened + identity_revealed_viewed.
     await apply_service.get_application(
         db_session,
         principal=partner_principal,
@@ -249,9 +224,7 @@ async def test_candidate_access_events_recorded_for_open_download_reveal(db_sess
         .all()
     )
     event_types = [r.event_type for r in rows]
-    assert event_types.count("application_opened") == 2
-    assert "identity_reveal_requested" in event_types
-    assert "identity_revealed_viewed" in event_types
+    assert "application_opened" in event_types
     assert "cv_downloaded" in event_types
     # Applicant's own view of their own application never logs an access event.
     assert all(r.actor_id == partner_principal.user_id for r in rows)

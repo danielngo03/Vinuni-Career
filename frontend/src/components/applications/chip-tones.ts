@@ -15,14 +15,6 @@ export const APPLICATION_STATUS_CHIP: Record<string, ChipTone> = {
   hired: "success",
 };
 
-export const REVEAL_STATUS_CHIP: Record<string, ChipTone> = {
-  none: "neutral",
-  pending: "warning",
-  accepted: "success",
-  declined: "danger",
-  expired: "neutral",
-};
-
 export const INTERVIEW_STATUS_CHIP: Record<string, ChipTone> = {
   scheduled: "info",
   completed: "success",

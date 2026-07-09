@@ -1,5 +1,13 @@
 # ADR-0006: Recruitment Interviews, Reviewer Assignees & Threshold Gating (Phase 2)
 
+> **PARTIALLY SUPERSEDED (owner decision 2026-07-10):** every "anonymous
+> application requires an accepted reveal to schedule an interview" /
+> `409 reveal_required` precondition in this ADR is **retired**. Applications are
+> always identified, so interviews schedule freely. All other invariants
+> (assignee gating, `score_threshold`, `meeting_link` encryption, RBAC, audit)
+> stand. This ADR needs a formal amendment; the note here is authoritative until
+> then.
+
 **Status:** Accepted (Proposed for implementation in the next backend slice)
 **Date:** 2026-06-28
 **Owner:** system-architect

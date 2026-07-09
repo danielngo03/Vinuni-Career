@@ -582,7 +582,7 @@ CREATE TABLE privacy_settings (
   show_address        VARCHAR(20) NOT NULL DEFAULT 'hidden',
   allow_cv_download   BOOLEAN NOT NULL DEFAULT TRUE,
   require_watermark   BOOLEAN NOT NULL DEFAULT TRUE,
-  anonymous_apply     BOOLEAN NOT NULL DEFAULT FALSE,           -- hide name/photo to recruiter
+  anonymous_apply     BOOLEAN NOT NULL DEFAULT FALSE,           -- DEPRECATED (owner 2026-07-10): anonymous apply removed; retain until a migration drops it
   updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 ```
@@ -994,9 +994,12 @@ CREATE TABLE applications (
   cv_version_id       UUID REFERENCES cv_versions(id),   -- version used at submit time
   cover_letter        TEXT,
   screening_answers   JSONB NOT NULL DEFAULT '{}',
-  is_anonymous        BOOLEAN NOT NULL DEFAULT FALSE,
-  reveal_approved_by  UUID REFERENCES users(id),
-  reveal_approved_at  TIMESTAMPTZ,
+  -- DEPRECATED (owner decision 2026-07-10): applications are always identified.
+  -- The three columns below (anonymity + reveal handshake) are retired; keep the
+  -- columns until a migration removes them, but no new code reads/writes them.
+  is_anonymous        BOOLEAN NOT NULL DEFAULT FALSE,   -- DEPRECATED
+  reveal_approved_by  UUID REFERENCES users(id),        -- DEPRECATED
+  reveal_approved_at  TIMESTAMPTZ,                      -- DEPRECATED
   status              VARCHAR(30) NOT NULL DEFAULT 'submitted',
   -- 'draft' | 'submitted' | 'screening' | 'interview' | 'offer' |
   -- 'offer_accepted' | 'offer_declined' | 'rejected' | 'withdrawn'
@@ -1024,7 +1027,7 @@ CREATE TABLE application_cv_snapshots (
   cv_version_id   UUID REFERENCES cv_versions(id),
   uploaded_document_id UUID REFERENCES documents(id),
   snapshot_json   JSONB NOT NULL,          -- immutable submitted CV snapshot
-  redacted_json   JSONB,                   -- generated for anonymous applications
+  redacted_json   JSONB,                   -- DEPRECATED (owner 2026-07-10): anonymous redaction removed
   created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   UNIQUE(application_id)
 );
@@ -2006,7 +2009,14 @@ CREATE TABLE passive_search_quota (
 );
 ```
 
-### `contact_reveal_requests`
+### `contact_reveal_requests` — DEPRECATED (owner decision 2026-07-10)
+
+> The identity-reveal handshake is removed product-wide. This table and its
+> `application_reveal_requests` sibling are **retired**; keep them until a
+> migration drops them, but no new code should read/write them. Talent-pool
+> candidates and applicants are shown identified to authorized recruiters
+> (RBAC + watermark + audit).
+
 ```sql
 CREATE TABLE contact_reveal_requests (
   id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -2049,7 +2059,7 @@ CREATE TABLE job_cart_items (
   cv_profile_id   UUID REFERENCES cv_profiles(id),
   cv_version_id   UUID REFERENCES cv_versions(id),
   uploaded_doc_id UUID REFERENCES documents(id),
-  is_anonymous    BOOLEAN NOT NULL DEFAULT FALSE,
+  is_anonymous    BOOLEAN NOT NULL DEFAULT FALSE,   -- DEPRECATED (owner 2026-07-10): anonymous apply removed
   added_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   UNIQUE(user_id, job_id)
 );

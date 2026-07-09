@@ -6,9 +6,12 @@ RBAC is enforced here (not in routers):
   always the acting user.
 - A partner sees applications only for its own org's jobs (``applications:read`` +
   ``org_id`` match); a cross-org access is indistinguishable from missing (``404``).
-- An anonymous applicant's identity is redacted in partner views until a reveal
-  request is accepted; the watermarked partner CV download is likewise blocked
-  until reveal for anonymous applications.
+- An application ALWAYS carries and exposes the applicant's real identity to any
+  partner member who passes the base ``applications:read`` gate (owner decision
+  2026-07-10 — the anonymous-apply + identity-reveal handshake was removed). The
+  CV preview / download is still additionally gated on ``candidate_identity``
+  (``view_cv`` / ``download_cv``), the partner download is watermarked, and every
+  sensitive candidate access (application open, CV view/download) is audited.
 
 Every write is audited in the caller's transaction; the immutable CV snapshot is
 created via the documents facade (never reimplemented); the partner notification
@@ -17,8 +20,6 @@ is enqueued on the outbox (no synchronous SMTP).
 
 from __future__ import annotations
 
-import copy
-import re
 import uuid
 
 from sqlalchemy import or_, select
@@ -27,7 +28,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.analytics.application import ingestion_service as analytics
 from app.modules.auth.application.context import RequestContext
-from app.modules.documents.application import snapshot_service
+from app.modules.documents.application import application_fit_service, snapshot_service
 from app.modules.notifications.application import feed_service
 from app.modules.notifications.application.dispatch_service import enqueue_notification
 from app.modules.opportunities.application import job_read_facade, job_service
@@ -40,8 +41,9 @@ from app.modules.recruitment.application.errors import (
     DuplicateApplicationError,
 )
 from app.modules.recruitment.domain import lifecycle, timeline
-from app.modules.recruitment.domain.models import Application, ApplicationRevealRequest
-from app.modules.users.application import user_service
+from app.modules.recruitment.domain.models import Application
+from app.modules.student_profiles.application import avatar_facade
+from app.modules.users.application import user_read_facade, user_service
 from app.shared.audit import write_audit
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.pagination import build_cursor_page, clamp_limit, decode_cursor
@@ -123,7 +125,6 @@ async def apply_to_job(
         status=lifecycle.SUBMITTED,
         cover_letter=payload.get("cover_letter"),
         screening_answers=payload.get("screening_answers") or {},
-        is_anonymous=bool(payload.get("is_anonymous", False)),
         idempotency_key=idempotency_key,
     )
     session.add(app)
@@ -154,15 +155,6 @@ async def apply_to_job(
     )
     app.snapshot_id = snapshot.id
 
-    # Anonymous applications carry a redacted snapshot COPY for the partner-side
-    # pre-reveal preview (``docs/BUSINESS_LOGIC.md`` §4.2 / ``docs/SECURITY_PRIVACY.md``).
-    # The ORIGINAL ``snapshot_json`` stays immutable and un-redacted so an accepted
-    # reveal still exposes the true identity; only this copy is served pre-reveal.
-    # Guarded on ``redacted_json is None`` so an idempotent apply-replay (the
-    # snapshot already existed) never rebuilds/overwrites it.
-    if app.is_anonymous and snapshot.redacted_json is None:
-        snapshot.redacted_json = _redact_snapshot(snapshot.snapshot_json or {})
-
     await job_read_facade.increment_application_count(session, job.id)
     await session.flush()
 
@@ -175,7 +167,6 @@ async def apply_to_job(
         after={
             "job_id": str(app.job_id),
             "org_id": str(app.org_id),
-            "is_anonymous": app.is_anonymous,
             "snapshot_id": str(app.snapshot_id),
         },
     )
@@ -266,129 +257,13 @@ async def _record_ad_apply_attribution(
     )
 
 
-# --------------------------------------------------------------------------- #
-# Anonymous-apply CV snapshot redaction (B-603)                                #
-# --------------------------------------------------------------------------- #
-#
-# The immutable snapshot mirrors the CV content model (``documents`` module):
-#   - a ``header`` section, ``content_json`` = {name, headline, email, phone,
-#     location, links:[{label,url}]} — DIRECTLY identifying,
-#   - entry sections, ``content_json`` = {entries:[{heading, subheading, timeframe,
-#     location, note, highlights[]}]},
-#   - skills/languages, ``content_json`` = {items:[{name, level}]},
-#   - text sections, ``content_json`` = {text} / {items:[{text}]}.
-# Uploaded-CV snapshots use {title, source_type, document_id, sections:[{title,
-# content_json:{items}}]} (no header section; the ingestion path already drops the
-# contact block).
-#
-# For an anonymous application the partner's PRE-REVEAL view must not leak the
-# student's identity, yet must keep the evaluable professional content. We drop the
-# header contact block and scrub email/phone patterns that can appear inside free
-# text — while preserving skills, experience headings/bullets, and education.
-
-_ANON_NAME = "[Ẩn danh]"
-# Inline redaction mark for a scrubbed email/phone pattern. Carries no ``@`` and no
-# digit run, which makes the scrub idempotent (a re-run finds nothing new).
-_PII_MARK = "[đã ẩn]"
-
-# Header/contact fields that identify the applicant — removed entirely.
-_HEADER_CONTACT_FIELDS = ("name", "email", "phone", "location", "links")
-
-_EMAIL_RE = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9][A-Za-z0-9.\-]*\.[A-Za-z]{2,}")
-# A phone-like run: optional leading ``+``/``(``, a digit, then 8-14 more chars from
-# {digit, space, ., -, (, )}, ending on a digit. The digit-count validator below
-# (9..15) keeps year ranges ("2020 - 2023" = 8 digits), month/year ranges broken by
-# ``/``, and GPAs intact — only genuine phone numbers are scrubbed.
-_PHONE_CANDIDATE_RE = re.compile(r"\+?\(?\d[\d\s().\-]{7,}\d")
-
-
-def _scrub_pii_text(value: str) -> str:
-    """Replace email + phone-number patterns in one string with a redaction mark.
-
-    Deterministic (pure regex) and idempotent (the mark contains no ``@`` and no
-    9+ digit run, so re-scrubbing already-scrubbed text is a no-op).
-    """
-
-    scrubbed = _EMAIL_RE.sub(_PII_MARK, value)
-
-    def _phone_repl(match: re.Match[str]) -> str:
-        digits = sum(ch.isdigit() for ch in match.group(0))
-        return _PII_MARK if 9 <= digits <= 15 else match.group(0)
-
-    return _PHONE_CANDIDATE_RE.sub(_phone_repl, scrubbed)
-
-
-def _scrub_deep(value: object) -> object:
-    """Recursively scrub PII patterns from every string in a nested structure.
-
-    Non-string leaves (skill ``level`` ints, ``is_visible`` bools, ids) are returned
-    untouched, so evaluable structured data (skills 0-100, experience entries,
-    education) survives intact.
-    """
-
-    if isinstance(value, str):
-        return _scrub_pii_text(value)
-    if isinstance(value, list):
-        return [_scrub_deep(v) for v in value]
-    if isinstance(value, dict):
-        return {k: _scrub_deep(v) for k, v in value.items()}
-    return value
-
-
-def _redact_header_content(content: dict) -> dict:
-    """Strip the identifying contact block from a CV header ``content_json``.
-
-    Drops name/email/phone/location/links and re-labels the name as ``[Ẩn danh]``
-    so the header still renders anonymously; keeps the professional ``headline``
-    (pattern-scrubbed) because it carries positioning, not identity.
-    """
-
-    redacted = {key: value for key, value in content.items() if key not in _HEADER_CONTACT_FIELDS}
-    redacted = {key: _scrub_deep(value) for key, value in redacted.items()}
-    redacted["name"] = _ANON_NAME
-    return redacted
-
-
-def _redact_snapshot(snapshot_json: dict) -> dict:
-    """Build the anonymous partner-preview COPY of an immutable CV snapshot.
-
-    Removes identifying PII (header contact + inline email/phone patterns) while
-    PRESERVING evaluable content (skills, experience headings/bullets, education).
-    Deep-copies its input so the ORIGINAL immutable ``snapshot_json`` is never
-    mutated — the reveal flow keeps serving the un-redacted original. Pure,
-    deterministic, and idempotent (redacting the output again yields the same JSON).
-    """
-
-    redacted = copy.deepcopy(dict(snapshot_json))
-    # The top-level title can carry the applicant's name — an uploaded CV's title is
-    # ``document.original_name`` (e.g. "Nguyen Van A - CV.pdf"), and a builder title
-    # may include the person's name. Replace it with the anonymous label.
-    redacted["title"] = _ANON_NAME
-    sections = redacted.get("sections")
-    if isinstance(sections, list):
-        for section in sections:
-            if not isinstance(section, dict):
-                continue
-            content = section.get("content_json")
-            if not isinstance(content, dict):
-                continue
-            if section.get("section_type") == "header":
-                section["content_json"] = _redact_header_content(content)
-            else:
-                section["content_json"] = _scrub_deep(content)
-    redacted["redacted"] = True
-    return redacted
-
-
 async def _notify_partner_received(
     session: AsyncSession, *, app: Application, job: job_read_facade.JobRef, locale: str
 ) -> None:
     poster = await user_service.get_by_id(session, job.posted_by)
     if poster is None:
         return
-    applicant_label = "Ứng viên ẩn danh" if app.is_anonymous else "một ứng viên"
-    if locale == "en":
-        applicant_label = "an anonymous candidate" if app.is_anonymous else "a candidate"
+    applicant_label = "một ứng viên" if locale != "en" else "a candidate"
     await enqueue_notification(
         session,
         recipient_id=job.posted_by,
@@ -403,8 +278,8 @@ async def _notify_partner_received(
         },
         dedupe_key=f"application.received:{app.id}",
     )
-    # In-app feed row for the posting partner. Uses the anonymous applicant handle
-    # only — never the student's name/email — for anonymous applications.
+    # In-app feed row for the posting partner (neutral "a candidate" label; the
+    # applicant's real identity lives on the application detail behind RBAC).
     await feed_service.create_in_app(
         session,
         recipient_id=job.posted_by,
@@ -418,61 +293,6 @@ async def _notify_partner_received(
 # --------------------------------------------------------------------------- #
 # Student reads                                                               #
 # --------------------------------------------------------------------------- #
-
-
-def _effective_reveal_status(req: ApplicationRevealRequest) -> str:
-    """A still-``pending`` request past its 72h expiry reads as ``expired``.
-
-    Read path only — never mutates the row (lazy expiry is committed by
-    ``reveal_service.respond_reveal``); this just keeps the applicant view from
-    offering an accept/decline panel for a request that can no longer be acted on.
-    """
-
-    if req.status == lifecycle.REVEAL_PENDING and _shared.as_aware(req.expires_at) <= _shared.now():
-        return lifecycle.REVEAL_EXPIRED
-    return req.status
-
-
-async def _latest_reveal_for(
-    session: AsyncSession, *, application_id: uuid.UUID
-) -> ApplicationRevealRequest | None:
-    """The most recent reveal request on an application (at most one per org)."""
-
-    return (
-        (
-            await session.execute(
-                select(ApplicationRevealRequest)
-                .where(ApplicationRevealRequest.application_id == application_id)
-                .order_by(ApplicationRevealRequest.created_at.desc())
-            )
-        )
-        .scalars()
-        .first()
-    )
-
-
-async def _latest_reveals_for(
-    session: AsyncSession, application_ids: list[uuid.UUID]
-) -> dict[uuid.UUID, ApplicationRevealRequest]:
-    """Batch the latest reveal request per application id (avoids N+1)."""
-
-    if not application_ids:
-        return {}
-    rows = (
-        (
-            await session.execute(
-                select(ApplicationRevealRequest)
-                .where(ApplicationRevealRequest.application_id.in_(set(application_ids)))
-                .order_by(ApplicationRevealRequest.created_at.desc())
-            )
-        )
-        .scalars()
-        .all()
-    )
-    latest: dict[uuid.UUID, ApplicationRevealRequest] = {}
-    for req in rows:
-        latest.setdefault(req.application_id, req)
-    return latest
 
 
 async def list_my_applications(
@@ -514,24 +334,18 @@ async def list_my_applications(
         },
     )
     titles = await _job_titles(session, [a.job_id for a in page.items])
-    reveals = await _latest_reveals_for(session, [a.id for a in page.items])
-    hiring_org_ids = [a.org_id for a in page.items if a.org_id is not None]
-    reveal_org_ids = [r.requester_org_id for r in reveals.values()]
-    org_names = await _org_display_names(session, hiring_org_ids + reveal_org_ids)
-    items = []
-    for a in page.items:
-        req = reveals.get(a.id)
-        items.append(
-            presenters.applicant_application(
-                a,
-                job_title=titles.get(a.job_id),
-                company_name=org_names.get(a.org_id) if a.org_id else None,
-                reveal=req,
-                reveal_status=_effective_reveal_status(req) if req else None,
-                reveal_company_name=(org_names.get(req.requester_org_id) if req else None),
-                locale=locale,
-            )
+    org_names = await _org_display_names(
+        session, [a.org_id for a in page.items if a.org_id is not None]
+    )
+    items = [
+        presenters.applicant_application(
+            a,
+            job_title=titles.get(a.job_id),
+            company_name=org_names.get(a.org_id) if a.org_id else None,
+            locale=locale,
         )
+        for a in page.items
+    ]
     return items, page.next_cursor, page.limit
 
 
@@ -566,12 +380,6 @@ async def get_application(
 
     if principal.user_id is not None and app.applicant_id == principal.user_id:
         titles = await _job_titles(session, [app.job_id])
-        req = await _latest_reveal_for(session, application_id=app.id)
-        company = (
-            await _shared.org_display_name(session, req.requester_org_id)
-            if req is not None
-            else None
-        )
 
         # The student's OWN upcoming interview card (identity-safe: date/mode/
         # location-or-link only — NEVER assignee identities, scorecards, or the
@@ -618,9 +426,6 @@ async def get_application(
         view = presenters.applicant_application(
             app,
             job_title=titles.get(app.job_id),
-            reveal=req,
-            reveal_status=_effective_reveal_status(req) if req else None,
-            reveal_company_name=company,
             timeline_events=timeline_events,
             next_action=next_action,
             messages_pointer=messages_pointer,
@@ -631,9 +436,11 @@ async def get_application(
         return view
 
     if _is_partner_of(principal, app):
-        view = await _partner_view(session, app=app, principal=principal, locale=locale)
-        # Attach the (anonymity-safe) pipeline position so the partner detail can
-        # render the candidate's current stage. Lazy import avoids a cycle.
+        view = await _partner_view(
+            session, app=app, principal=principal, locale=locale, include_detail=True
+        )
+        # Attach the pipeline position so the partner detail can render the
+        # candidate's current stage. Lazy import avoids a cycle.
         from app.modules.recruitment.application import stage_service
 
         view["pipeline"] = await stage_service._pipeline_block(session, app=app)
@@ -643,13 +450,6 @@ async def get_application(
             principal=principal,
             event_type="application_opened",
         )
-        if app.reveal_approved_at is not None and _can_view_identity(principal, app):
-            await _record_candidate_access(
-                session,
-                app=app,
-                principal=principal,
-                event_type="identity_revealed_viewed",
-            )
         return view
 
     raise ResourceNotFoundError()
@@ -752,36 +552,62 @@ async def withdraw_application(
 # --------------------------------------------------------------------------- #
 
 
-async def _reveal_status_for(
-    session: AsyncSession, *, application_id: uuid.UUID, org_id: uuid.UUID
-) -> str | None:
-    return (
-        await session.execute(
-            select(ApplicationRevealRequest.status).where(
-                ApplicationRevealRequest.application_id == application_id,
-                ApplicationRevealRequest.requester_org_id == org_id,
-            )
-        )
-    ).scalar_one_or_none()
+async def _applicant_block_for(session: AsyncSession, *, app: Application) -> dict:
+    """The applicant's real identity block for a single application.
 
-
-def _can_view_identity(principal: Principal, app: Application) -> bool:
-    """Whether ``principal`` may see this applicant's real identity.
-
-    A non-anonymous applicant chose to apply openly, so identity is visible to any
-    partner-of-org (base ``applications:read``). An ANONYMOUS applicant whose
-    reveal was accepted is only unmasked for a member additionally holding
-    ``candidate_identity:view_revealed_identity``; without it the partner keeps the
-    redacted view even post-reveal (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``). The
-    Admin wildcard (``*:*``) passes.
+    An application always exposes the applicant's real identity to a partner who
+    passed the base ``applications:read`` gate (owner decision 2026-07-10). Loads
+    the user's contact (name/email) + safe avatar URL through the users /
+    student-profile facades so recruitment never imports those ORMs directly.
     """
 
-    if not app.is_anonymous:
-        return True
-    if app.reveal_approved_at is None:
-        return False
-    return permission_checker.can(
-        principal, "candidate_identity", "view_revealed_identity", resource_org_id=app.org_id
+    user = await user_service.get_by_id(session, app.applicant_id)
+    avatars = await avatar_facade.avatar_urls_for(session, [app.applicant_id])
+    return presenters.applicant_block(app, user=user, avatar_url=avatars.get(app.applicant_id))
+
+
+async def _cv_block_for(
+    session: AsyncSession, *, app: Application, principal: Principal
+) -> dict | None:
+    """Watermarked inline CV view/download block for the partner detail.
+
+    Gated on ``candidate_identity:view_cv`` (the CV-preview capability, additive to
+    the base ``applications:read``) so CV access can be granted narrowly; a member
+    without it sees the candidate but not the CV embed (``cv: null``). Returns
+    ``None`` when the application carries no snapshot / nothing renderable.
+    """
+
+    if app.snapshot_id is None:
+        return None
+    if not permission_checker.can(
+        principal, "candidate_identity", "view_cv", resource_org_id=app.org_id
+    ):
+        return None
+    org_name = await _shared.org_display_name(session, app.org_id)
+    watermark = f"VinUni Career • {org_name}"
+    return await snapshot_service.build_partner_cv_view(
+        session,
+        snapshot_id=app.snapshot_id,
+        actor_id=principal.user_id,
+        watermark_text=watermark,
+    )
+
+
+async def _fit_block_for(session: AsyncSession, *, app: Application, locale: str) -> dict | None:
+    """User-safe CV-JD fit ``{score, band, reasons}`` for the partner detail.
+
+    Deterministic reuse of the shared CV-fit engine on the application's IMMUTABLE
+    snapshot vs the job it was submitted to; ``None`` when not computable. Never
+    exposes provider/model/token/latency/raw confidence/embedding internals.
+    """
+
+    if app.snapshot_id is None:
+        return None
+    return await application_fit_service.application_snapshot_fit(
+        session,
+        snapshot_id=app.snapshot_id,
+        job_id=app.job_id,
+        locale=locale,
     )
 
 
@@ -792,18 +618,22 @@ async def _partner_view(
     principal: Principal,
     locale: str,
     stage: dict | None = None,
+    applicant: dict | None = None,
+    include_detail: bool = False,
 ) -> dict:
-    authorized = _can_view_identity(principal, app)
-    user = None
-    if authorized:
-        user = await user_service.get_by_id(session, app.applicant_id)
-    reveal_status = await _reveal_status_for(session, application_id=app.id, org_id=app.org_id)
+    if applicant is None:
+        applicant = await _applicant_block_for(session, app=app)
     assignee = await _assignee_block(session, app=app)
+    cv = None
+    fit = None
+    if include_detail:
+        cv = await _cv_block_for(session, app=app, principal=principal)
+        fit = await _fit_block_for(session, app=app, locale=locale)
     return presenters.partner_application(
         app,
-        user=user,
-        reveal_status=reveal_status,
-        identity_authorized=authorized,
+        applicant=applicant,
+        cv=cv,
+        fit=fit,
         assignee=assignee,
         stage=stage,
         locale=locale,
@@ -911,7 +741,8 @@ async def list_job_applications(
     """Partner-scoped list of applications to one of the caller org's jobs.
 
     The job must belong to the caller's org (else ``404``); ``applications:read``
-    is required. Anonymous applicants are redacted until reveal is accepted.
+    is required. Each row carries the applicant's real identity block (never
+    masked); the CV embed + fit are DETAIL-only enrichments (not on the list).
 
     Team filters (all optional, composable):
 
@@ -963,11 +794,24 @@ async def list_job_applications(
     stages = await _current_stages_for(
         session, application_ids=[a.id for a in page.items]
     )
+    # Applicant identity per row — TWO batched facade lookups (contacts + avatars)
+    # for the whole page, independent of page size (no per-row user fetch).
+    applicant_ids = [a.applicant_id for a in page.items]
+    contacts = await user_read_facade.get_user_contacts(session, applicant_ids)
+    avatars = await avatar_facade.avatar_urls_for(session, applicant_ids)
     items: list[dict] = []
     for a in page.items:
+        applicant = presenters.applicant_block(
+            a, user=contacts.get(a.applicant_id), avatar_url=avatars.get(a.applicant_id)
+        )
         items.append(
             await _partner_view(
-                session, app=a, principal=principal, locale=locale, stage=stages.get(a.id)
+                session,
+                app=a,
+                principal=principal,
+                locale=locale,
+                stage=stages.get(a.id),
+                applicant=applicant,
             )
         )
     return items, page.next_cursor, page.limit
@@ -987,9 +831,9 @@ async def get_application_cv_download(
 ) -> dict:
     """Return a signed snapshot download URL.
 
-    Applicant -> unwatermarked (owner). Authorized partner -> watermarked, but only
-    once an anonymous applicant's reveal has been accepted (PDF view is unavailable
-    until then per ``docs/BUSINESS_LOGIC.md`` §4.2). Anyone else -> ``404``.
+    Applicant -> unwatermarked (owner). Authorized partner -> watermarked. Anyone
+    else -> ``404``. The partner path is gated on ``candidate_identity:download_cv``
+    and every download is audited (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
     """
 
     app = await _shared.load_application(session, application_id=application_id)
@@ -1004,18 +848,14 @@ async def get_application_cv_download(
 
     if not _is_partner_of(principal, app):
         raise ResourceNotFoundError()
-    # Downloading a candidate's CV is a sensitive-identity action gated on the
-    # dedicated ``candidate_identity:download_cv`` capability (additive to the base
+    # Downloading a candidate's CV is a sensitive action gated on the dedicated
+    # ``candidate_identity:download_cv`` capability (additive to the base
     # partner-of-org ``applications:read``) so CV export can be granted narrowly to
     # a subset of the team and every use is audited
     # (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md`` candidate_identity row).
     permission_checker.require(
         principal, "candidate_identity", "download_cv", resource_org_id=app.org_id
     )
-
-    # Anonymous + not yet revealed -> PDF download blocked.
-    if app.is_anonymous and app.reveal_approved_at is None:
-        raise ResourceNotFoundError()
 
     org_name = await _shared.org_display_name(session, app.org_id)
     watermark = f"VinUni Career • {org_name}"

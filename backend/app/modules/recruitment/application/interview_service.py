@@ -7,10 +7,6 @@ pipeline stage, with an explicit list of assigned interviewers (PERSON mode,
 
 Hard rules enforced HERE (service layer, never the router):
 
-- **Reveal precondition (NON-NEGOTIABLE, §3):** scheduling an interview on an
-  ANONYMOUS application whose reveal has not been accepted raises
-  ``RevealRequiredError`` (409 ``reveal_required``). The reveal handshake stays the
-  ONLY identity path; the student's consent is never silently bypassed.
 - One OPEN (``scheduled``) interview per ``(application, stage)`` (409
   ``interview_exists``); a second is blocked.
 - Assignees must be ACTIVE members of the job's org (else ``422``).
@@ -23,10 +19,9 @@ Hard rules enforced HERE (service layer, never the router):
   reschedule/cancel/complete; an audit row per write; notifications via the outbox +
   feed (no synchronous SMTP).
 
-ANONYMITY: an interview carries NO student-identity field. The candidate is notified
-about THEIR OWN interview (they know their own identity, so it leaks nothing); the
-reveal is what gates interviewers seeing the STUDENT's identity. The student
-projection never carries assignee identities, scorecards, or the gate.
+An interview carries NO student-identity field. The candidate is notified about
+THEIR OWN interview; the student projection never carries assignee identities,
+scorecards, or the gate.
 """
 
 from __future__ import annotations
@@ -54,7 +49,6 @@ from app.modules.recruitment.application.errors import (
     InterviewExistsError,
     InterviewNotActionableError,
     InvalidApplicationFieldError,
-    RevealRequiredError,
 )
 from app.modules.recruitment.domain import interview as interview_domain
 from app.modules.recruitment.domain import lifecycle, timeline
@@ -312,11 +306,6 @@ async def schedule_interview(
         session, principal=principal, application_id=application_id
     )
     permission_checker.require(principal, _RESOURCE, _PERM_SCHEDULE, resource_org_id=app.org_id)
-
-    # Reveal precondition (NON-NEGOTIABLE §3): an anonymous app with no accepted
-    # reveal can NOT be scheduled — the handshake is the only identity path.
-    if app.is_anonymous and app.reveal_approved_at is None:
-        raise RevealRequiredError()
 
     # Only meaningful while the application is actively in the pipeline.
     if app.status != lifecycle.UNDER_REVIEW:
@@ -887,8 +876,7 @@ async def sweep_due_reminders(
     Called by the ADR-0003 scheduler (``interview.reminder_sweep``). IDEMPOTENT:
     each reminder is gated on a per-``(interview, window[, user])`` outbox
     ``dedupe_key`` (``interview.reminder:{id}:{window}``) so re-running enqueues
-    nothing new. Flush-only — the scheduler owns the commit (mirrors
-    ``reveal_service.sweep_expired``).
+    nothing new. Flush-only — the scheduler owns the commit.
     """
 
     now = _shared.as_aware(now) if now is not None else _shared.now()

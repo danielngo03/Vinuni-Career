@@ -1,9 +1,9 @@
 """Partner pipeline kanban board read model (``GET /jobs/{job_id}/pipeline``).
 
-A read-only, anonymity-safe facade (no writes, no audit) that loads the WHOLE
-kanban board for one of the caller-org's jobs in a small, bounded number of
-queries — never a per-application fetch loop (ADR-0004 kanban data note + the
-``backend.md`` "no heavy live joins / no N+1" rule).
+A read-only facade (no writes, no audit) that loads the WHOLE kanban board for one
+of the caller-org's jobs in a small, bounded number of queries — never a
+per-application fetch loop (ADR-0004 kanban data note + the ``backend.md`` "no
+heavy live joins / no N+1" rule).
 
 Query budget (independent of candidate count):
 
@@ -13,18 +13,16 @@ Query budget (independent of candidate count):
 3. ONE ``applications LEFT JOIN candidate_stages (ACTIVE)`` fetch → every card with
    its current stage position in a single statement (one ACTIVE row per app → no
    row multiplication);
-4. batched reveal-status lookup (one ``IN`` query);
-5. batched user lookup, ONLY for revealed / non-anonymous cards (one ``IN`` query);
-6. batched rollback-count lookup (one grouped query);
-7. authoritative by-stage counts via ``dashboard_read`` (the ``proj_partner_pipeline``
+4. batched applicant identity lookup (contacts + avatars, two ``IN`` queries);
+5. batched rollback-count lookup (one grouped query);
+6. authoritative by-stage counts via ``dashboard_read`` (the ``proj_partner_pipeline``
    live read) so the column COUNTS are exact even when the rendered CARDS are
    capped.
 
-Anonymity is non-negotiable: every card is built through
-``presenters.partner_board_card`` (which reuses the ``_applicant_identity``
-redaction core) so a pre-reveal card carries only the ``UV-xxxx`` handle — never a
-name/email, CV text, cover letter, screening answers, or scores. The reveal
-handshake stays the only identity path; the board never bypasses it.
+Every card carries the applicant's real identity (owner decision 2026-07-10 — the
+anonymous-apply + reveal handshake was removed); a card still never carries CV
+text, the cover letter, screening answers, or scores — a kanban glance is minimal
+by construction.
 """
 
 from __future__ import annotations
@@ -42,11 +40,11 @@ from app.modules.recruitment.application import _shared, dashboard_read, stage_s
 from app.modules.recruitment.domain import lifecycle, pipeline, scorecard
 from app.modules.recruitment.domain.models import (
     Application,
-    ApplicationRevealRequest,
     CandidateStage,
     PipelineStage,
     Scorecard,
 )
+from app.modules.student_profiles.application import avatar_facade
 from app.modules.users.application import user_read_facade
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import Principal, permission_checker
@@ -129,25 +127,6 @@ async def _fetch_cards(
     if truncated:
         rows = rows[:BOARD_CANDIDATE_CAP]
     return [(r[0], r[1], r[2]) for r in rows], truncated
-
-
-async def _batch_reveal_status(
-    session: AsyncSession, *, application_ids: list[uuid.UUID], org_id: uuid.UUID
-) -> dict[uuid.UUID, str]:
-    if not application_ids:
-        return {}
-    rows = (
-        await session.execute(
-            select(
-                ApplicationRevealRequest.application_id,
-                ApplicationRevealRequest.status,
-            ).where(
-                ApplicationRevealRequest.application_id.in_(set(application_ids)),
-                ApplicationRevealRequest.requester_org_id == org_id,
-            )
-        )
-    ).all()
-    return {row[0]: row[1] for row in rows}
 
 
 async def _batch_users(
@@ -290,23 +269,11 @@ async def get_job_pipeline_board(
     cards_raw, truncated = await _fetch_cards(session, job_id=job.id)
     app_ids = [app.id for app, _stage_id, _entered in cards_raw]
 
-    reveal_status = await _batch_reveal_status(session, application_ids=app_ids, org_id=job.org_id)
-    # Unmasking an anonymous applicant whose reveal was accepted additionally
-    # requires ``candidate_identity:view_revealed_identity`` (additive to the base
-    # ``applications:read``); a member without it keeps the masked card even
-    # post-reveal (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``). Non-anonymous
-    # applicants applied openly and are always visible.
-    can_view_revealed = permission_checker.can(
-        principal, "candidate_identity", "view_revealed_identity", resource_org_id=job.org_id
-    )
-    # Only cards we are authorized to unmask need a real user row; the rest render
-    # from the deterministic handle alone (no user fetch, no leak).
-    revealed_user_ids = [
-        app.applicant_id
-        for app, _stage_id, _entered in cards_raw
-        if (not app.is_anonymous) or (app.reveal_approved_at is not None and can_view_revealed)
-    ]
-    users = await _batch_users(session, user_ids=revealed_user_ids)
+    # Every card carries the applicant's real identity (contacts + avatars) — TWO
+    # batched facade lookups for the whole board, independent of candidate count.
+    applicant_ids = [app.applicant_id for app, _stage_id, _entered in cards_raw]
+    users = await _batch_users(session, user_ids=applicant_ids)
+    avatars = await avatar_facade.avatar_urls_for(session, applicant_ids)
     rollback_counts = await _batch_rollback_counts(session, application_ids=app_ids)
     # Candidate owner (assignee) per card — ONE batched org-facade lookup for the
     # whole board (empty set → no query, so the board's bounded-query budget holds).
@@ -341,16 +308,19 @@ async def get_job_pipeline_board(
     by_stage_cards: dict[uuid.UUID, list[dict]] = {stage.id: [] for stage in stages}
 
     for app, stage_id, entered_at in cards_raw:
-        card = presenters.partner_board_card(
+        applicant = presenters.applicant_block(
             app,
             user=users.get(app.applicant_id),
-            reveal_status=reveal_status.get(app.id),
+            avatar_url=avatars.get(app.applicant_id),
+        )
+        card = presenters.partner_board_card(
+            app,
+            applicant=applicant,
             stage_id=str(stage_id) if stage_id is not None else None,
             position=None,
             entered_at=entered_at if stage_id is not None else None,
             rollback_count=rollback_counts.get(app.id, 0),
             evaluation=evaluations.get(app.id),
-            identity_authorized=can_view_revealed,
             assignee=assignees.get(app.assigned_to_membership_id)
             if app.assigned_to_membership_id is not None
             else None,

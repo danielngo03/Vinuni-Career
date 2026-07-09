@@ -66,7 +66,6 @@ def apply_payload(*, job_id: uuid.UUID, cv_selection: dict, **over) -> dict:
         "cv_selection": cv_selection,
         "cover_letter": "I am excited to apply.",
         "screening_answers": {},
-        "is_anonymous": False,
         "idempotency_key": uuid.uuid4().hex,
     }
     base.update(over)

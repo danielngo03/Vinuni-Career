@@ -151,8 +151,7 @@
 
 ### Module 8: Job Posting Advanced (M8) ⭐
 - [ ] 5 visibility levels: Public / Authenticated / Students Only / VinUni Students Only / Invitation Only
-- [ ] Anonymous apply toggle (partner sets per job)
-- [ ] Anonymous apply: student chooses at apply time; university admin controls which fields hidden; partner can request reveal
+- [x] ~~Anonymous apply toggle / reveal handshake~~ **REMOVED product-wide (owner decision 2026-07-10)** — applications are always identified; CV access stays RBAC-gated + watermarked + audited
 - [ ] Job posting permissions: partner admin can restrict posting to specific departments only
 - [ ] Job referral tracking (ref= query param)
 - [ ] Auto-close when quota filled
@@ -166,11 +165,16 @@
 - [ ] Tag candidates
 - [ ] Bulk add to job pipeline
 
-### Module 12: Passive Talent Discovery (M12) ⭐
-- [ ] Student opt-in: "Cho phép doanh nghiệp tìm kiếm hồ sơ của tôi"
-- [ ] Anonymized profiles in search (name/email hidden until contact request)
-- [ ] Partner search: filter by skills, tier, GPA range, availability
-- [ ] Semantic search via pgvector embeddings
+### Module 12: Talent Pool — AI Semantic Candidate Discovery (M12) ⭐
+> Reframed by owner decision 2026-07-10: AI semantic search, not anonymized cards.
+> Contract: `docs/PARTNER_RBAC_ANALYTICS_SPEC.md` + `docs/AI_PRODUCT_SPEC.md` §3.3.
+- [ ] Student opt-in: "Cho phép doanh nghiệp tìm kiếm hồ sơ của tôi" (opt-out ⇒ removed from index, not masked)
+- [ ] pgvector embeddings over consented candidate CVs + refresh on active-CV change
+- [ ] Semantic search + structured filters (skills, experience, major, cohort, location/work-mode, availability, tier)
+- [ ] LLM rerank returning human-readable match reasons + evidence gaps (no raw similarity exposed)
+- [ ] **External-JD search**: paste/upload a JD not yet posted → find matching candidates
+- [ ] Candidates shown identified to authorized recruiters; CV view/download via `candidate_access` RBAC + watermark + audit
+- [ ] Deterministic keyword+filter fallback when AI/embeddings unavailable
 - [ ] Partner sends contact request → student approves/declines
 - [ ] Anti-spam quota (max requests per partner per day/week)
 - [ ] Student notification: X doanh nghiệp đã xem hồ sơ của bạn
@@ -196,7 +200,7 @@
 - [ ] Super Admin creates all roles/departments/permissions
 - [ ] University permission resources (see university-domain-agent spec)
 
-**Exit criteria:** Partner can configure 4-stage pipeline per job; student anonymously applies; partner searches passive talent pool.
+**Exit criteria:** Partner can configure 4-stage pipeline per job; student applies (always identified); partner runs AI semantic talent-pool search (incl. external-JD).
 
 ---
 

@@ -1,9 +1,10 @@
 """Partner application export — synchronous CSV, < 1 000 rows (B-332).
 
 Exports all applications (including terminal) for one of the caller org's jobs.
-Anonymity rules from ``apply_service`` apply: unrevealed anonymous applicants are
-shown as their UV handle with no email (never leaked via export).
-Stage name is resolved from the ACTIVE ``candidate_stages`` row if present.
+Each row carries the applicant's real identity (name + email) — an application
+always exposes the applicant to a partner who holds ``applications:read``
+(owner decision 2026-07-10). Stage name is resolved from the ACTIVE
+``candidate_stages`` row if present.
 """
 
 from __future__ import annotations
@@ -32,8 +33,7 @@ _MAX_ROWS = 1000
 
 # Column catalog for the AI-assistant applicant export (localized headers). The
 # assistant lets a recruiter pick which columns to include; unknown/omitted keys
-# fall back to _DEFAULT_EXPORT_COLUMNS. Anonymity rules still apply per column
-# (email is blank for unrevealed anonymous applicants).
+# fall back to _DEFAULT_EXPORT_COLUMNS.
 _EXPORT_COLUMN_LABELS: dict[str, dict[str, str]] = {
     "application_id": {"vi": "Mã đơn", "en": "Application ID"},
     "applicant": {"vi": "Ứng viên", "en": "Applicant"},
@@ -43,7 +43,6 @@ _EXPORT_COLUMN_LABELS: dict[str, dict[str, str]] = {
     "applied_at": {"vi": "Ngày ứng tuyển", "en": "Applied at"},
     "last_status_at": {"vi": "Cập nhật gần nhất", "en": "Last update"},
     "rejection_reason": {"vi": "Lý do từ chối", "en": "Rejection reason"},
-    "is_anonymous": {"vi": "Ẩn danh", "en": "Anonymous"},
 }
 _DEFAULT_EXPORT_COLUMNS = ["applicant", "email", "status", "stage", "applied_at"]
 
@@ -58,18 +57,13 @@ def _iso(dt: datetime | None) -> str:
 
 
 def _applicant_label(app: Application, user: user_read_facade.UserContact | None) -> str:
-    revealed = app.reveal_approved_at is not None or not app.is_anonymous
-    if revealed and user and user.full_name:
+    if user and user.full_name:
         return user.full_name
-    handle = (str(app.applicant_id)[:8]).upper()
-    return f"UV-{handle}"
+    return (str(app.applicant_id)[:8]).upper()
 
 
 def _email(app: Application, user: user_read_facade.UserContact | None) -> str:
-    revealed = app.reveal_approved_at is not None or not app.is_anonymous
-    if revealed and user:
-        return user.email
-    return ""
+    return user.email if user else ""
 
 
 async def export_applications_csv(
@@ -137,7 +131,6 @@ async def export_applications_csv(
         "applied_at",
         "last_status_at",
         "rejection_reason",
-        "is_anonymous",
     ]
 
     buf = io.StringIO()
@@ -156,7 +149,6 @@ async def export_applications_csv(
                 _iso(app.applied_at),
                 _iso(app.last_status_at),
                 app.rejection_reason or "",
-                "yes" if app.is_anonymous else "no",
             ]
         )
 
@@ -176,7 +168,6 @@ def _empty_csv(locale: str) -> str:
             "applied_at",
             "last_status_at",
             "rejection_reason",
-            "is_anonymous",
         ]
     )
     return buf.getvalue()
@@ -205,12 +196,6 @@ def _export_cell(
         return _iso(app.last_status_at)
     if col == "rejection_reason":
         return app.rejection_reason or ""
-    if col == "is_anonymous":
-        return (
-            ("Có" if app.is_anonymous else "Không")
-            if locale == "vi"
-            else ("Yes" if app.is_anonymous else "No")
-        )
     return ""
 
 
@@ -229,8 +214,8 @@ async def export_applications_xlsx(
     Org-scoped and gated on ``applications:export`` (distinct from ``read`` — the
     partner admin grants export narrowly). Supports an optional ``stage`` name
     filter, ``status`` filter, and a selectable ``columns`` subset. Returns
-    ``(xlsx_bytes, row_count, resolved_columns, job_title)``. Anonymity rules from
-    ``apply_service`` apply (unrevealed anonymous applicants never leak email).
+    ``(xlsx_bytes, row_count, resolved_columns, job_title)``. Each row carries the
+    applicant's real identity (name + email).
     """
     from openpyxl import Workbook
     from openpyxl.styles import Alignment, Font, PatternFill

@@ -16,8 +16,8 @@ status (occupies the single active slot); ``rejected``/``withdrawn`` are inactiv
 so rejecting frees the slot and the student may re-apply.
 
 Raw enum codes never reach end users — every status is paired with a localized
-label, and the anonymous-reveal status is likewise localized. The internal
-``rejection_reason`` code is partner/owner-only and never surfaced to the student.
+label. The internal ``rejection_reason`` code is partner/owner-only and never
+surfaced to the student.
 """
 
 from __future__ import annotations
@@ -72,14 +72,6 @@ REJECTION_REASONS: frozenset[str] = frozenset(
     {"not_qualified", "experience_mismatch", "position_filled", "incomplete", "other"}
 )
 
-# Reveal-request vocabulary.
-REVEAL_PENDING = "pending"
-REVEAL_ACCEPTED = "accepted"
-REVEAL_DECLINED = "declined"
-REVEAL_EXPIRED = "expired"
-
-REVEAL_TTL_HOURS = 72
-
 _STATUS_LABELS: dict[str, dict[str, str]] = {
     "vi": {
         SUBMITTED: "Đã nộp",
@@ -97,29 +89,9 @@ _STATUS_LABELS: dict[str, dict[str, str]] = {
     },
 }
 
-_REVEAL_LABELS: dict[str, dict[str, str]] = {
-    "vi": {
-        REVEAL_PENDING: "Đang chờ phản hồi",
-        REVEAL_ACCEPTED: "Đã chấp nhận",
-        REVEAL_DECLINED: "Đã từ chối",
-        REVEAL_EXPIRED: "Đã hết hạn",
-    },
-    "en": {
-        REVEAL_PENDING: "Awaiting response",
-        REVEAL_ACCEPTED: "Accepted",
-        REVEAL_DECLINED: "Declined",
-        REVEAL_EXPIRED: "Expired",
-    },
-}
-
-
 def _label(table: dict[str, dict[str, str]], code: str, locale: str) -> str:
     return table.get(locale, table["vi"]).get(code, code)
 
 
 def status_label(code: str, *, locale: str = "vi") -> str:
     return _label(_STATUS_LABELS, code, locale)
-
-
-def reveal_label(code: str, *, locale: str = "vi") -> str:
-    return _label(_REVEAL_LABELS, code, locale)

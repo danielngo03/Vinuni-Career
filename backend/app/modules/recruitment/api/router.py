@@ -1,5 +1,5 @@
 """Applications HTTP routes: student apply/list/detail/withdraw, partner views,
-anonymous-reveal handshake, and watermarked partner CV download.
+and watermarked partner CV download.
 
 Routers are HTTP-only: validate, delegate to services (which enforce RBAC + audit
 + tenant isolation + idempotency), and shape the response envelope.
@@ -36,8 +36,6 @@ from app.modules.recruitment.api.schemas import (
     OfferSubmitBody,
     OfferUpdateBody,
     RejectRequestBody,
-    RevealRequestBody,
-    RevealRespondBody,
     ReviewRequestBody,
     RollbackRequestBody,
     ScorecardSubmitBody,
@@ -52,7 +50,6 @@ from app.modules.recruitment.application import (
     invitation_service,
     offer_service,
     pipeline_board,
-    reveal_service,
     scorecard_ai_service,
     scorecard_service,
     screening_brief_service,
@@ -522,47 +519,6 @@ async def complete_interview(
         interview_id=interview_id,
         outcome=body.outcome,
         version=body.version,
-        ctx=auth.ctx,
-    )
-    return success(data)
-
-
-# --------------------------------------------------------------------------- #
-# Anonymous reveal handshake                                                   #
-# --------------------------------------------------------------------------- #
-
-
-@applications_router.post("/{application_id}/reveal", summary="Request identity reveal (partner)")
-async def request_reveal(
-    application_id: uuid.UUID,
-    body: RevealRequestBody,
-    auth: CurrentAuth = Depends(get_current_auth),
-    session: AsyncSession = Depends(get_db_session),
-) -> dict:
-    data = await reveal_service.request_reveal(
-        session,
-        principal=auth.principal,
-        application_id=application_id,
-        reason=body.reason,
-        ctx=auth.ctx,
-    )
-    return success(data)
-
-
-@applications_router.post(
-    "/{application_id}/reveal/respond", summary="Respond to a reveal request (student)"
-)
-async def respond_reveal(
-    application_id: uuid.UUID,
-    body: RevealRespondBody,
-    auth: CurrentAuth = Depends(get_current_auth),
-    session: AsyncSession = Depends(get_db_session),
-) -> dict:
-    data = await reveal_service.respond_reveal(
-        session,
-        principal=auth.principal,
-        application_id=application_id,
-        decision=body.decision,
         ctx=auth.ctx,
     )
     return success(data)

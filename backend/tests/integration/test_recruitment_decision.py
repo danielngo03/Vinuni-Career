@@ -56,13 +56,13 @@ async def _setup_published(db, *, title="Live Job", **over):
     return partner, uni, job_id
 
 
-async def _apply(db, *, job_id, prefix="student", is_anonymous=False):
+async def _apply(db, *, job_id, prefix="student"):
     su, student = await make_student(db, prefix=prefix)
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
         db,
         principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     return su, student, uuid.UUID(app["id"])
@@ -467,19 +467,18 @@ async def test_projection_split_partner_vs_student(db_session) -> None:
 
 
 # --------------------------------------------------------------------------- #
-# Anonymity preserved across a decision                                       #
+# Partner decision view carries the applicant's real identity                  #
 # --------------------------------------------------------------------------- #
 
 
-async def test_anonymous_identity_not_revealed_by_decision(db_session) -> None:
+async def test_decision_view_shows_real_identity(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    su, _student, app_id = await _apply(db_session, job_id=job_id, is_anonymous=True)
+    su, student, app_id = await _apply(db_session, job_id=job_id)
     await decision_service.review_application(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
     view = await apply_service.get_application(db_session, principal=partner, application_id=app_id)
     applicant = view["applicant"]
-    assert applicant["is_anonymous"] is True and applicant["revealed"] is False
-    assert "email" not in applicant
-    assert "user_id" not in applicant
-    assert su.email not in str(view)
+    assert applicant["user_id"] == str(student.user_id)
+    assert applicant["email"] == su.email
+    assert "is_anonymous" not in applicant

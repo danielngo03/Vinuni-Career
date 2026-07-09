@@ -3,9 +3,10 @@
 import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { MapPin, ShieldCheck, Users, Clock, ArrowRight } from "lucide-react";
+import { MapPin, Users, Clock, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PageHeader } from "@/components/layout/page-header";
 import {
   Card,
@@ -16,26 +17,11 @@ import {
 import { formatRelativeTime } from "@/lib/format";
 import { ApiError, talentPoolApi, type TalentCard } from "@/lib/api";
 
-/* -------------------------------------------------------------------------- */
-/* Masked identity avatar                                                      */
-/* -------------------------------------------------------------------------- */
-
-/**
- * Blind-screening avatar. For a masked candidate we never render a photo — a
- * neutral shielded monogram stands in for the withheld identity. For the
- * identified view (university staff), we still avoid loading remote photos here
- * and use a stable monogram to keep the grid calm.
- */
-function MaskedAvatar({ handle }: { handle: string }) {
-  const code = handle.replace(/^UV-/, "").slice(0, 2) || "UV";
-  return (
-    <span className="relative flex size-11 shrink-0 items-center justify-center rounded-full bg-[var(--viz-indigo-soft)] text-[var(--viz-indigo)]">
-      <span className="type-small font-bold tabular-nums tracking-tight">{code}</span>
-      <span className="absolute -bottom-0.5 -right-0.5 flex size-4 items-center justify-center rounded-full bg-card">
-        <ShieldCheck className="size-3.5" strokeWidth={2} style={{ color: "var(--content-info)" }} />
-      </span>
-    </span>
-  );
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
+  return (parts[0]![0]! + parts[parts.length - 1]![0]!).toUpperCase();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -45,7 +31,6 @@ function MaskedAvatar({ handle }: { handle: string }) {
 function TalentPoolCard({ card, locale }: { card: TalentCard; locale: string }) {
   const t = useTranslations("talentPool");
   const location = [card.location_city, card.location_country].filter(Boolean).join(", ");
-  const handle = card.anonymous_id ?? card.display_name;
 
   return (
     <Link
@@ -54,30 +39,29 @@ function TalentPoolCard({ card, locale }: { card: TalentCard; locale: string }) 
     >
       <Card interactive className="flex h-full flex-col p-4">
         <div className="flex items-start gap-3">
-          <MaskedAvatar handle={handle} />
+          <Avatar size="lg" className="size-11 ring-1 ring-border">
+            {card.avatar_url && <AvatarImage src={card.avatar_url} alt="" />}
+            <AvatarFallback className="bg-[var(--viz-indigo-soft)] font-semibold text-[var(--viz-indigo)]">
+              {initials(card.display_name)}
+            </AvatarFallback>
+          </Avatar>
           <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
-              <span className="type-h3 truncate font-semibold text-foreground group-hover:text-[var(--brand-primary)]">
-                {handle}
-              </span>
-            </div>
-            <p className="type-caption mt-0.5 text-muted-foreground">
-              {card.identity_masked ? t("maskedLabel") : t("identifiedLabel")}
-            </p>
+            <span className="type-h3 block truncate font-semibold text-foreground group-hover:text-[var(--brand-primary)]">
+              {card.display_name}
+            </span>
+            {card.is_open_to_work && (
+              <div className="mt-1">
+                <StatusChip tone="success" dot size="sm">
+                  {t("openToWork")}
+                </StatusChip>
+              </div>
+            )}
           </div>
           <ArrowRight
             aria-hidden
             strokeWidth={2}
             className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
           />
-        </div>
-
-        <div className="mt-3 flex flex-wrap items-center gap-1.5">
-          {card.is_open_to_work && (
-            <StatusChip tone="success" dot size="sm">
-              {t("openToWork")}
-            </StatusChip>
-          )}
         </div>
 
         <dl className="mt-3 space-y-1.5 border-t border-border pt-3 text-[0.8125rem]">
@@ -102,12 +86,11 @@ function TalentPoolCard({ card, locale }: { card: TalentCard; locale: string }) 
 /* -------------------------------------------------------------------------- */
 
 /**
- * Talent Pool — the partner blind-screening surface. Passive open-to-work
- * candidates are shown anonymised (backend-masked `UV-xxxx` handle, no
- * name/photo) with only the coarse signals a recruiter may screen on: location,
+ * Talent Pool — the partner sourcing surface. Passive open-to-work candidates
+ * are listed with the coarse signals a recruiter screens on: identity, location,
  * open-to-work, and freshness. Career detail lives in CVs — recruiters engage
- * through the reason-gated outreach flow on the profile detail. Every state
- * (loading / empty / auth / error) degrades honestly and no data is fabricated.
+ * through outreach on the profile detail. Every state (loading / empty / auth /
+ * error) degrades honestly and no data is fabricated.
  */
 export function TalentPoolScreen() {
   const t = useTranslations("talentPool");
@@ -136,13 +119,12 @@ export function TalentPoolScreen() {
   });
 
   const allCards = query.data?.pages.flatMap((p) => p.items) ?? [];
-  const anyMasked = allCards.some((c) => c.identity_masked);
 
   return (
     <>
       <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
-      {/* Toolbar — keyword search matches coarse location only (identity-only model). */}
+      {/* Toolbar — keyword search matches coarse location. */}
       <form
         className="mb-4"
         onSubmit={(e) => {
@@ -193,25 +175,6 @@ export function TalentPoolScreen() {
         <EmptyState kind="empty" title={t("emptyTitle")} description={t("emptyBody")} />
       ) : (
         <div className="space-y-4">
-          {/* Blind-screening disclosure — only when the caller sees masked cards. */}
-          {anyMasked && (
-            <div
-              className="flex items-start gap-3 rounded-xl border border-border px-4 py-3"
-              style={{ background: "var(--content-info-soft)" }}
-            >
-              <ShieldCheck
-                aria-hidden
-                className="mt-0.5 size-4 shrink-0"
-                strokeWidth={1.9}
-                style={{ color: "var(--content-info)" }}
-              />
-              <div className="min-w-0">
-                <p className="text-[0.8125rem] font-semibold text-foreground">{t("blindTitle")}</p>
-                <p className="type-caption mt-0.5 text-muted-foreground">{t("blindNote")}</p>
-              </div>
-            </div>
-          )}
-
           <p className="type-small text-muted-foreground">
             {t("loadedCount", { count: allCards.length })}
           </p>

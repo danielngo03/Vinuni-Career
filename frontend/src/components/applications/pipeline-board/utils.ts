@@ -40,10 +40,7 @@ export function daysInStage(enteredAt: string | null | undefined): number | null
   return Math.floor((Date.now() - t) / 86_400_000);
 }
 
-/** Anonymity-safe display handle. Prefers the revealed name, else UV-xxxx. */
+/** The candidate's display name (identity is always present on the card). */
 export function cardHandle(card: PipelineCard): string {
-  if (card.is_anonymous && card.applicant.anonymous_id) {
-    return card.applicant.anonymous_id;
-  }
-  return card.applicant.display_name ?? card.applicant.anonymous_id ?? "—";
+  return card.applicant.full_name || "—";
 }

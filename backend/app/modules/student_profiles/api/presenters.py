@@ -89,9 +89,6 @@ def public_profile(
         "user_id": str(p.user_id),
         "display_name": (getattr(user, "full_name", None) or "") if user else "",
         "avatar_url": _avatar_url(p),
-        # Identified view (owner / VinUni community / revealed partner). ``False``
-        # lets the UI branch consistently against :func:`masked_public_profile`.
-        "identity_masked": False,
         "location_city": p.location_city,
         "location_country": p.location_country,
         "is_open_to_work": p.is_open_to_work,
@@ -102,32 +99,3 @@ def public_profile(
     if expose_phone:
         body["phone"] = p.phone
     return body
-
-
-def masked_public_profile(
-    p: StudentProfile, *, anonymous_handle: str, locale: str = "vi"
-) -> dict:
-    """Blind-screening identity projection for the passive DETAIL read.
-
-    Mirrors the talent-pool LIST card (``talent_pool_service._talent_card``): an
-    external partner recruiter who has NOT yet been granted an identity reveal for
-    this candidate sees the deterministic ``UV-xxxx`` handle (``anonymous_handle``,
-    the SAME value the list card carries for this profile) instead of the real name,
-    no identifying avatar, and NO contact fields. The internal ``user_id`` is
-    deliberately withheld too (the list omits it as well) so an anonymous candidate
-    cannot be linked back to a stable identity. The coarse open-to-work + location
-    signal remains so the recruiter can still screen on fit and then engage through
-    the reason-gated reveal flow (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
-    """
-
-    return {
-        "id": str(p.id),
-        "display_name": anonymous_handle,
-        "anonymous_id": anonymous_handle,
-        "avatar_url": None,
-        "identity_masked": True,
-        "location_city": p.location_city,
-        "location_country": p.location_country,
-        "is_open_to_work": p.is_open_to_work,
-        "profile_visibility": p.profile_visibility,
-    }

@@ -48,6 +48,33 @@ these blockers before broad feature expansion or any "complete" status update:
 When in doubt, run a blocker stabilization pass first and update
 `docs/IMPLEMENTATION_STATUS.md` with exact commands and pass/fail evidence.
 
+## Owner Decisions — 2026-07-10
+
+These override any earlier doc/status lines that conflict with them:
+
+- **Applications are always identified.** Anonymous apply, blind-screening, and
+  the identity-reveal handshake are removed product-wide. Do NOT reintroduce a
+  `candidate_identity`/reveal capability, anonymized candidate cards, or a
+  redacted CV preview. This removed only the anonymity dance — partner CV access
+  stays RBAC-gated per user/role/department (`candidate_access` capability), CV
+  downloads stay watermarked, and application-open/CV-view/CV-download stay
+  audited. See `docs/SECURITY_PRIVACY.md`, `docs/PARTNER_RBAC_ANALYTICS_SPEC.md`,
+  `docs/BUSINESS_LOGIC.md` §4/§8. (Note: anonymous **company reviews** and the
+  privacy-safe **guest discovery session** are separate features and stay.)
+- **Talent Pool is AI semantic search.** pgvector embeddings over consented
+  candidate CVs + skill/experience filters + LLM rerank that returns
+  human-readable match reasons (never a raw similarity score). It must support
+  **external-JD search**: paste/upload a JD that is not yet a posted job and find
+  matching candidates. No provider/model/token/embedding internals are ever
+  exposed to partners; deterministic keyword+filter fallback when AI is down.
+  Contract in `docs/PARTNER_RBAC_ANALYTICS_SPEC.md`.
+- **Advertising is a real allocation engine**, not "upload a banner":
+  auto-allocation/distribution of paid placements into defined sponsored slots,
+  partner targeting by coarse LOCATION and by student MAJOR/CAREER (never exact
+  GPS or sensitive categories), strict separation of organic vs recommended vs
+  sponsored vs university-curated inventory, and truthful non-removable paid
+  disclosure. Contract in `docs/DISCOVERY_RECOMMENDATION_ADS_SPEC.md` §7.
+
 ## Source Of Truth
 
 Read only the docs needed for the task, in this order:

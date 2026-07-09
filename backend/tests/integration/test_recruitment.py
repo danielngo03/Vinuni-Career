@@ -3,10 +3,9 @@
 Covers: apply happy path (creates the immutable CV snapshot + links snapshot_id),
 apply to non-visible/closed job rejected, duplicate active apply rejected, submit
 idempotency replay, withdraw idempotency, student sees only own applications,
-partner sees only own-org job applications (cross-org 404), anonymous applicant
-redacted in the partner view until reveal accepted, partner watermarked CV
-download + non-partner 404 + anonymous-unrevealed download blocked, and audit on
-writes.
+partner sees only own-org job applications (cross-org 404), the partner view always
+carries the applicant's real identity, partner watermarked CV download +
+non-partner 404, and audit on writes.
 """
 
 from __future__ import annotations
@@ -23,14 +22,10 @@ from app.modules.recruitment.application import (
     access,
     apply_service,
     export_service,
-    reveal_service,
 )
-from app.modules.recruitment.application.errors import (
-    DuplicateApplicationError,
-    RevealNotAvailableError,
-)
+from app.modules.recruitment.application.errors import DuplicateApplicationError
 from app.modules.recruitment.domain.models import Application
-from app.shared.exceptions import ResourceNotFoundError, ValidationFailedError
+from app.shared.exceptions import ResourceNotFoundError
 from app.shared.models import AuditLog
 from sqlalchemy import func, select
 
@@ -348,97 +343,48 @@ async def test_partner_sees_only_own_org_job_applications(db_session) -> None:
 
 
 # --------------------------------------------------------------------------- #
-# Anonymous redaction + reveal                                                #
+# Partner always sees the applicant's real identity + detail cv/fit            #
 # --------------------------------------------------------------------------- #
 
 
-async def test_anonymous_applicant_redacted_until_reveal(db_session) -> None:
+async def test_partner_view_always_identified_with_cv_and_fit(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
         db_session,
         principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
 
+    # LIST: real identity, no masking/reveal fields, cv/fit are detail-only.
     items, _c, _l = await apply_service.list_job_applications(
         db_session, principal=partner, job_id=job_id
     )
     applicant = items[0]["applicant"]
-    assert applicant["is_anonymous"] is True and applicant["revealed"] is False
-    assert applicant["anonymous_id"].startswith("UV-")
-    assert "email" not in applicant
-    assert items[0]["cover_letter"] is None
-    assert items[0]["cv_download_available"] is False
+    assert applicant["user_id"] == str(student.user_id)
+    assert applicant["email"] == su.email
+    assert "is_anonymous" not in applicant and "anonymous_id" not in applicant
+    assert items[0]["cover_letter"] is not None
+    assert "cv" in items[0] and items[0]["cv"] is None
+    assert "reveal_status" not in items[0] and "cv_download_available" not in items[0]
 
-    # Partner requests reveal (reason >= 20 chars), student accepts.
-    await reveal_service.request_reveal(
-        db_session,
-        principal=partner,
-        application_id=app_id,
-        reason="We would like to learn more about your internship experience.",
-        ctx=CTX,
+    # DETAIL: identity + a watermarked cv block (admin holds the wildcard) + a fit
+    # block (None or a user-safe {score, band, reasons}).
+    detail = await apply_service.get_application(
+        db_session, principal=partner, application_id=app_id
     )
-    await reveal_service.respond_reveal(
-        db_session,
-        principal=student,
-        application_id=app_id,
-        decision="accepted",
-        ctx=CTX,
-    )
-
-    items2, _c2, _l2 = await apply_service.list_job_applications(
-        db_session, principal=partner, job_id=job_id
-    )
-    applicant2 = items2[0]["applicant"]
-    assert applicant2["revealed"] is True
-    assert applicant2["email"] == su.email
-    assert items2[0]["cv_download_available"] is True
-    assert await _audit_count(db_session, "application.reveal_requested") == 1
-    assert await _audit_count(db_session, "application.reveal_responded") == 1
-
-
-async def test_reveal_reason_too_short_rejected(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session,
-        principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
-        ctx=CTX,
-    )
-    with pytest.raises(ValidationFailedError):
-        await reveal_service.request_reveal(
-            db_session,
-            principal=partner,
-            application_id=uuid.UUID(app["id"]),
-            reason="too short",
-            ctx=CTX,
-        )
-
-
-async def test_reveal_on_non_anonymous_rejected(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session,
-        principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=False),
-        ctx=CTX,
-    )
-    with pytest.raises(RevealNotAvailableError):
-        await reveal_service.request_reveal(
-            db_session,
-            principal=partner,
-            application_id=uuid.UUID(app["id"]),
-            reason="We would like to learn more about your experience here.",
-            ctx=CTX,
-        )
+    assert detail["applicant"]["user_id"] == str(student.user_id)
+    assert detail["cv"] is not None
+    assert detail["cv"]["view_url"] and detail["cv"]["download_url"]
+    assert "fit" in detail
+    if detail["fit"] is not None:
+        assert 0 <= detail["fit"]["score"] <= 100
+        assert detail["fit"]["band"]
+        # Never leaks provider/model/token/confidence internals.
+        assert set(detail["fit"].keys()) == {"score", "band", "reasons"}
 
 
 # --------------------------------------------------------------------------- #
@@ -478,23 +424,6 @@ async def test_partner_cv_download_watermarked_and_non_partner_404(db_session) -
         )
 
 
-async def test_anonymous_unrevealed_partner_download_blocked(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session,
-        principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
-        ctx=CTX,
-    )
-    # PDF download blocked until reveal accepted.
-    with pytest.raises(ResourceNotFoundError):
-        await apply_service.get_application_cv_download(
-            db_session, principal=partner, application_id=uuid.UUID(app["id"])
-        )
-
-
 # --------------------------------------------------------------------------- #
 # Application CSV export (B-322)                                               #
 # --------------------------------------------------------------------------- #
@@ -519,7 +448,7 @@ async def test_export_csv_returns_rows_for_partner(db_session) -> None:
     lines = [line for line in csv_text.splitlines() if line.strip()]
     assert lines[0].startswith("application_id"), "first line must be CSV header"
     assert len(lines) >= 2, "expected at least one data row"
-    assert "is_anonymous" in lines[0]
+    assert "is_anonymous" not in lines[0]
 
 
 @pytest.mark.asyncio
@@ -534,32 +463,27 @@ async def test_export_csv_cross_org_raises_not_found(db_session) -> None:
 
 
 @pytest.mark.asyncio
-async def test_export_csv_anonymous_unrevealed_redacted(db_session) -> None:
+async def test_export_csv_shows_real_identity(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session, prefix="anon_exp")
+    su, student = await make_student(db_session, prefix="ident_exp")
     sel = await make_builder_cv(db_session, student=student)
     await apply_service.apply_to_job(
         db_session,
         principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
 
     csv_text = await export_service.export_applications_csv(
         db_session, principal=partner, job_id=job_id
     )
-    lines = [line for line in csv_text.splitlines() if line.strip()]
-    # Data row(s) for the anonymous applicant must not contain any email
-    data_rows = lines[1:]
-    assert any("UV-" in row for row in data_rows), "anonymous label must use UV- prefix"
-    # The email column (3rd column, index 2) must be empty for unrevealed anon
     import csv as _csv
     import io as _io
 
     reader = list(_csv.reader(_io.StringIO(csv_text)))
     email_col_idx = reader[0].index("email")
-    anon_rows = [r for r in reader[1:] if r[email_col_idx] == ""]
-    assert len(anon_rows) >= 1, "unrevealed anonymous applicant must have blank email"
+    # The applicant's real email is present (never masked).
+    assert any(r[email_col_idx] == su.email for r in reader[1:])
 
 
 # --------------------------------------------------------------------------- #

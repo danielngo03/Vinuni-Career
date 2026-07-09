@@ -157,10 +157,9 @@ async def search_partner_candidates(
     """Search/shortlist the org's own applicants for one job (by stage/keyword).
 
     Reuses ``apply_service.list_job_applications`` — it already 404s on a
-    cross-org ``job_id`` and redacts identity for anonymous-apply applicants
-    (``presenters.partner_application`` / ``_applicant_identity``). Only the
-    candidate's display label is returned here (never email), to keep the
-    chat surface's PII footprint smaller than the full pipeline UI.
+    cross-org ``job_id`` and returns each applicant's real identity behind the
+    partner RBAC gate. Only the candidate's display name is returned here (never
+    email), to keep the chat surface's PII footprint smaller than the pipeline UI.
     """
     from app.modules.recruitment.application import apply_service
 
@@ -191,14 +190,13 @@ async def search_partner_candidates(
         if stage_filter and stage_filter not in status:
             continue
         applicant = a.get("applicant") or {}
-        label = applicant.get("display_name") or "Candidate"
+        label = applicant.get("full_name") or "Candidate"
         if q and q not in label.lower():
             continue
         results.append(
             {
                 "application_id": a.get("id"),
                 "status": a.get("status_label") or a.get("status"),
-                "is_anonymous": applicant.get("is_anonymous", True),
                 "candidate_label": label,
                 "applied_at": a.get("applied_at"),
                 "url": f"/partner/pipeline/applications/{a.get('id', '')}",
@@ -215,9 +213,10 @@ async def search_partner_candidates(
 async def get_candidate_detail(session: AsyncSession, principal: Principal, args: dict) -> dict:
     """Single applicant's stage/scorecard-gate/CV-snapshot link (not raw bytes).
 
-    Delegates to ``apply_service.get_application`` for org-ownership + identity
-    redaction — it raises ``ResourceNotFoundError`` for a cross-org application,
-    which is indistinguishable from a missing one (tenant-isolation convention).
+    Delegates to ``apply_service.get_application`` for org-ownership — it raises
+    ``ResourceNotFoundError`` for a cross-org application, which is indistinguishable
+    from a missing one (tenant-isolation convention). The applicant's real identity
+    and the CV-JD fit come back on the partner detail projection.
     """
     from app.modules.recruitment.application import apply_service
 
@@ -242,16 +241,18 @@ async def get_candidate_detail(session: AsyncSession, principal: Principal, args
     applicant = view.get("applicant") or {}
     pipeline = view.get("pipeline") or {}
     current_stage = pipeline.get("current_stage") or {}
+    fit = view.get("fit") or None
     return {
         "ok": True,
         "application_id": view.get("id"),
         "job_id": view.get("job_id"),
         "status": view.get("status_label") or view.get("status"),
-        "candidate_label": applicant.get("display_name"),
-        "is_anonymous": applicant.get("is_anonymous", True),
+        "candidate_label": applicant.get("full_name"),
         "current_stage": current_stage.get("name"),
         "cv_snapshot_available": bool(view.get("snapshot_id")),
-        "cv_download_available": view.get("cv_download_available", False),
+        "cv_available": bool(view.get("cv")),
+        "fit_score": fit.get("score") if isinstance(fit, dict) else None,
+        "fit_band": fit.get("band") if isinstance(fit, dict) else None,
         "applied_at": view.get("applied_at"),
         "url": f"/partner/pipeline/applications/{view.get('id', '')}",
     }

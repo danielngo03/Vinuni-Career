@@ -17,26 +17,17 @@ import { isLive } from "./offer-panel/utils";
  * rendered on any student surface — the student sees only their own offer card.
  *
  * Lifecycle: draft → submit → approve → send → accepted | declined | expired |
- * rescinded. Editable only while `draft`. Sending an offer to an anonymous
- * applicant requires an already-accepted reveal (`409 reveal_required`),
- * reusing the same reveal deep-link as interview scheduling.
+ * rescinded. Editable only while `draft`. Sending an offer is subject only to
+ * normal RBAC (the identity-reveal precondition was removed, owner decision
+ * 2026-07-10).
  */
 export function PartnerOfferPanel({
   applicationId,
   canCreate,
-  anonUnrevealed,
-  revealPending,
-  onRequestReveal,
 }: {
   applicationId: string;
   /** Offer creation is only valid while the candidate is actively under review. */
   canCreate: boolean;
-  /** True while the applicant is anonymous and the reveal is not yet accepted. */
-  anonUnrevealed: boolean;
-  /** True when a reveal request is already pending the student's response. */
-  revealPending: boolean;
-  /** Opens the existing reveal-request flow (deep-link from the blocked state). */
-  onRequestReveal: () => void;
 }) {
   const t = useTranslations("offers");
   const tc = useTranslations("common");
@@ -81,8 +72,6 @@ export function PartnerOfferPanel({
       const reason = e.details?.reason;
       if (reason === "offer_not_approved") {
         toast.show({ tone: "warning", title: t("notApprovedToast") });
-      } else if (reason === "reveal_required") {
-        toast.show({ tone: "warning", title: t("revealRequiredToast") });
       } else if (reason === "offer_exists") {
         toast.show({ tone: "warning", title: t("offerExistsToast") });
       } else if (reason === "offer_not_editable") {
@@ -204,9 +193,6 @@ export function PartnerOfferPanel({
           offer={current}
           locale={locale}
           busy={busy}
-          anonUnrevealed={anonUnrevealed}
-          revealPending={revealPending}
-          onRequestReveal={onRequestReveal}
           onEdit={() => setEditTarget(current)}
           onSubmit={() => submitMutation.mutate(current)}
           onApprove={() =>

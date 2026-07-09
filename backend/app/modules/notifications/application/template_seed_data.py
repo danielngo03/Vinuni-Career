@@ -931,64 +931,6 @@ DEFAULT_TEMPLATES: list[dict] = [
         },
     },
     {
-        "key": "application.reveal_requested",
-        "channel": "email",
-        "variables_schema": {
-            "allowed": ["name", "email", "company_name"],
-            "required": ["company_name"],
-        },
-        "locales": {
-            "vi": {
-                "subject": "Yêu cầu xem thông tin của bạn — VinUni Career",
-                "body": (
-                    "Chào {{name}},\n\n"
-                    "Công ty {{company_name}} muốn xem thông tin đầy đủ của bạn cho một "
-                    "vị trí bạn đã ứng tuyển ẩn danh. Đăng nhập VinUni Career để xem lý "
-                    "do và chấp nhận hoặc từ chối. Yêu cầu sẽ hết hạn sau 72 giờ.\n\n"
-                    "Trân trọng,\nVinUni Career Center"
-                ),
-            },
-            "en": {
-                "subject": "A company requests your information — VinUni Career",
-                "body": (
-                    "Hi {{name}},\n\n"
-                    "{{company_name}} would like to view your full information for a role "
-                    "you applied to anonymously. Sign in to VinUni Career to see the "
-                    "reason and accept or decline. The request expires in 72 hours.\n\n"
-                    "Best regards,\nVinUni Career Center"
-                ),
-            },
-        },
-    },
-    {
-        "key": "application.reveal_responded",
-        "channel": "email",
-        "variables_schema": {
-            "allowed": ["name", "email", "decision_label"],
-            "required": ["decision_label"],
-        },
-        "locales": {
-            "vi": {
-                "subject": "Phản hồi yêu cầu xem thông tin — VinUni Career",
-                "body": (
-                    "Chào {{name}},\n\n"
-                    "Ứng viên đã phản hồi yêu cầu xem thông tin của bạn: {{decision_label}}. "
-                    "Đăng nhập VinUni Career để xem chi tiết.\n\n"
-                    "Trân trọng,\nVinUni Career Center"
-                ),
-            },
-            "en": {
-                "subject": "Response to your information request — VinUni Career",
-                "body": (
-                    "Hi {{name}},\n\n"
-                    "The candidate responded to your information request: {{decision_label}}. "
-                    "Sign in to VinUni Career to see the details.\n\n"
-                    "Best regards,\nVinUni Career Center"
-                ),
-            },
-        },
-    },
-    {
         "key": "account.password_changed",
         "channel": "email",
         "variables_schema": {

@@ -3,27 +3,27 @@
 Two audiences:
 
 - :func:`applicant_application` — what the owning student sees (full own data).
-- :func:`partner_application` — what a partner reviewing the job sees. For an
-  anonymous applicant whose reveal has NOT been accepted, the applicant identity
-  is replaced by a deterministic, per-partner anonymous handle and PII-bearing
-  free text (cover letter) is withheld; ``application_answers`` (screening) stay
-  visible per ``docs/BUSINESS_LOGIC.md`` §4.1.
+- :func:`partner_application` — what a partner reviewing the job sees.
+
+Identity model (owner decision 2026-07-10): an application ALWAYS exposes the
+applicant's real identity (``user_id``, ``full_name``, ``avatar_url``, ``email``)
+to any partner member who passes the CV / candidate RBAC gate. The former
+anonymous-apply + identity-reveal handshake was removed; there is no masking and
+no ``UV-xxxx`` handle. WHO may open the CV is still gated by
+``candidate_identity:view_cv`` / ``download_cv`` and every sensitive access is
+audited; the watermark on partner CV downloads is retained.
 
 Every enum column is paired with a localized label; raw codes are never the only
-signal and internal fields (rejection notes, raw IDs of other users) are never
-leaked across the tenant boundary.
+signal and internal fields (rejection notes) are never leaked to the student.
 """
 
 from __future__ import annotations
-
-import hashlib
 
 from app.modules.recruitment.domain import interview as interview_domain
 from app.modules.recruitment.domain import lifecycle, scorecard
 from app.modules.recruitment.domain import offer as offer_domain
 from app.modules.recruitment.domain.models import (
     Application,
-    ApplicationRevealRequest,
     Interview,
     Offer,
     Scorecard,
@@ -38,44 +38,21 @@ def _iso(value) -> str | None:
     return value.isoformat() if value else None
 
 
-def applicant_reveal(
-    req: ApplicationRevealRequest,
-    *,
-    status: str,
-    company_name: str | None = None,
-    locale: str = "vi",
-) -> dict:
-    """The reveal handshake as the *applicant* sees it.
+def applicant_block(app: Application, *, user, avatar_url: str | None = None) -> dict:
+    """The applicant's real identity as a partner sees it (never masked).
 
-    Exposes only what the student needs to accept/decline: the requesting org's
-    public display name (``company_name``), the partner's stated reason, and the
-    request lifecycle timestamps. The partner's individual identity (requester
-    user id / email) is never surfaced. ``status`` is the *effective* status
-    (a still-``pending`` request past its expiry is reported as ``expired``).
+    ``user`` is a contact-like object carrying ``full_name`` / ``email`` (loaded
+    by the service through the users facade); ``avatar_url`` is the safe serve
+    pointer (never a raw storage key). The block is always fully identified — the
+    partner has already passed the CV / candidate RBAC gate to reach it.
     """
 
     return {
-        "id": str(req.id),
-        "status": status,
-        "status_label": lifecycle.reveal_label(status, locale=locale),
-        "reason": req.reason,
-        "company_name": company_name,
-        "requested_at": _iso(req.created_at),
-        "expires_at": _iso(req.expires_at),
-        "responded_at": _iso(req.responded_at),
+        "user_id": str(app.applicant_id),
+        "full_name": (getattr(user, "full_name", None) or "") if user else "",
+        "avatar_url": avatar_url,
+        "email": (getattr(user, "email", None) or "") if user else "",
     }
-
-
-def anonymous_handle(*, applicant_id, org_id) -> str:
-    """Deterministic per-(applicant, partner-org) anonymous id.
-
-    Same student is stable for the same partner (so a partner can track a
-    candidate across the flow) but differs across partners — preventing
-    cross-partner identity linking (``docs/BUSINESS_LOGIC.md`` §4.4).
-    """
-
-    digest = hashlib.sha256(f"{applicant_id}:{org_id}".encode()).hexdigest()
-    return f"UV-{digest[:8].upper()}"
 
 
 def applicant_application(
@@ -83,28 +60,11 @@ def applicant_application(
     *,
     job_title: str | None = None,
     company_name: str | None = None,
-    reveal: ApplicationRevealRequest | None = None,
-    reveal_status: str | None = None,
-    reveal_company_name: str | None = None,
     timeline_events: list[dict] | None = None,
     next_action: str | None = None,
     messages_pointer: dict | None = None,
     locale: str = "vi",
 ) -> dict:
-    # The applicant can have a pending/answered identity-reveal request from the
-    # partner. Surfacing it here lets the UI show an accept/decline panel. Only
-    # the applicant's *own* application carries this; partner identity beyond the
-    # public company name is withheld (see :func:`applicant_reveal`).
-    reveal_request_view = (
-        applicant_reveal(
-            reveal,
-            status=reveal_status or reveal.status,
-            company_name=reveal_company_name,
-            locale=locale,
-        )
-        if reveal is not None
-        else None
-    )
     return {
         "id": str(app.id),
         "job_id": str(app.job_id),
@@ -112,12 +72,9 @@ def applicant_application(
         "company_name": company_name,
         "status": app.status,
         "status_label": lifecycle.status_label(app.status, locale=locale),
-        "is_anonymous": app.is_anonymous,
         "cover_letter": app.cover_letter,
         "screening_answers": dict(app.screening_answers or {}),
         "snapshot_id": str(app.snapshot_id) if app.snapshot_id else None,
-        "reveal_status": reveal_status,
-        "reveal_request": reveal_request_view,
         "applied_at": _iso(app.applied_at),
         "last_status_at": _iso(app.last_status_at),
         "created_at": _iso(app.created_at),
@@ -139,58 +96,38 @@ def applicant_application(
     }
 
 
-def _applicant_identity(app: Application, *, revealed: bool, user, locale: str) -> dict:
-    if app.is_anonymous and not revealed:
-        return {
-            "is_anonymous": True,
-            "revealed": False,
-            "anonymous_id": anonymous_handle(applicant_id=app.applicant_id, org_id=app.org_id),
-            "display_name": "Ứng viên ẩn danh" if locale == "vi" else "Anonymous candidate",
-        }
-    return {
-        "is_anonymous": app.is_anonymous,
-        "revealed": True,
-        "user_id": str(app.applicant_id),
-        "display_name": (getattr(user, "full_name", None) or "") if user else "",
-        "email": (getattr(user, "email", None) or "") if user else "",
-    }
-
-
 def partner_application(
     app: Application,
     *,
-    user,
-    reveal_status: str | None,
-    identity_authorized: bool | None = None,
+    applicant: dict,
+    cv: dict | None = None,
+    fit: dict | None = None,
     assignee: dict | None = None,
     stage: dict | None = None,
     locale: str = "vi",
 ) -> dict:
-    revealed = app.reveal_approved_at is not None or not app.is_anonymous
-    # A viewer lacking ``candidate_identity:view_revealed_identity`` keeps the
-    # redacted view even for an anonymous applicant whose reveal was accepted:
-    # the real ``user_id``/name, cover letter, and CV download all stay withheld.
-    # ``identity_authorized is None`` preserves the base reveal semantics for the
-    # callers that pre-authorize (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
-    if app.is_anonymous and identity_authorized is False:
-        revealed = False
-    cv_download_available = revealed
-    body = {
+    """One application as a partner sees it — always fully identified.
+
+    ``applicant`` is the real identity block (:func:`applicant_block`). ``cv`` and
+    ``fit`` are DETAIL-only enrichments the service supplies (``None`` on the flat
+    list): ``cv`` = ``{snapshot_id, filename, view_url, download_url}`` (watermarked,
+    permission-gated), ``fit`` = ``{score, band, reasons}`` or ``None`` when the
+    CV-JD fit is not computable.
+    """
+
+    return {
         "id": str(app.id),
         "job_id": str(app.job_id),
         "status": app.status,
         "status_label": lifecycle.status_label(app.status, locale=locale),
-        "is_anonymous": app.is_anonymous,
-        "applicant": _applicant_identity(app, revealed=revealed, user=user, locale=locale),
+        "applicant": applicant,
         "screening_answers": dict(app.screening_answers or {}),
-        # Cover letter may carry PII (signature) -> withheld until reveal accepted.
-        "cover_letter": app.cover_letter if revealed else None,
+        "cover_letter": app.cover_letter,
         "snapshot_id": str(app.snapshot_id) if app.snapshot_id else None,
-        "cv_download_available": cv_download_available,
-        "reveal_status": reveal_status or "none",
-        "reveal_status_label": (
-            lifecycle.reveal_label(reveal_status, locale=locale) if reveal_status else None
-        ),
+        # DETAIL-only: watermarked inline view + download URLs for the CV snapshot.
+        "cv": cv,
+        # DETAIL-only: user-safe CV-JD fit ``{score, band, reasons}`` | ``None``.
+        "fit": fit,
         # Decision metadata is partner/owner-only (the student view never carries
         # the coded reason or the partner's internal note). ``rejection_reason`` is
         # a stable machine code for partner-side filtering; it stays org-internal.
@@ -198,60 +135,43 @@ def partner_application(
         "rejection_note": app.rejection_note,
         # Candidate owner for multi-person teams: ``{membership_id, user_id,
         # display_name}`` of the assigned recruiter, or ``None`` when unassigned.
-        # This is PARTNER staff (not the candidate), so the name is always shown.
+        # This is PARTNER staff (not the candidate).
         "assignee": assignee,
         # Current pipeline stage ``{stage_id, stage_name}`` (from the ACTIVE
         # ``candidate_stages`` row), or ``None`` for a pre-pipeline (still
-        # ``submitted``) application. Stage metadata only — never any student
-        # identity. Lets the flat LIST show pipeline position without opening the
-        # per-candidate detail (whose ``pipeline`` block carries the full ladder).
+        # ``submitted``) application. Lets the flat LIST show pipeline position
+        # without opening the per-candidate detail (whose ``pipeline`` block
+        # carries the full ladder).
         "stage": stage,
         "last_status_at": _iso(app.last_status_at),
         "applied_at": _iso(app.applied_at),
     }
-    return body
 
 
 def partner_board_card(
     app: Application,
     *,
-    user,
-    reveal_status: str | None,
+    applicant: dict,
     stage_id: str | None,
     position: int | None,
     entered_at,
     rollback_count: int,
     evaluation: dict | None = None,
-    identity_authorized: bool | None = None,
     assignee: dict | None = None,
     locale: str = "vi",
 ) -> dict:
-    """A lean kanban CARD for the partner pipeline board (anonymity-safe).
+    """A lean kanban CARD for the partner pipeline board.
 
-    Reuses the SAME redaction core as :func:`partner_application`
-    (:func:`_applicant_identity`): pre-reveal the card carries only the
-    deterministic ``UV-xxxx`` handle; the revealed identity (name/email) appears
-    only once an anonymous applicant's reveal has been accepted AND the viewer
-    holds ``candidate_identity:view_revealed_identity`` (``identity_authorized``);
-    without it the card stays masked even post-reveal. A card never carries CV
-    text, the cover letter, screening answers, scores, or the internal rejection
-    reason — a kanban glance is identity-minimal by construction.
+    The card carries the applicant's real identity block; it never carries CV
+    text, the cover letter, screening answers, or scores — a kanban glance is
+    minimal by construction.
     """
 
-    revealed = app.reveal_approved_at is not None or not app.is_anonymous
-    if app.is_anonymous and identity_authorized is False:
-        revealed = False
     return {
         "application_id": str(app.id),
-        "is_anonymous": app.is_anonymous,
-        "applicant": _applicant_identity(app, revealed=revealed, user=user, locale=locale),
+        "applicant": applicant,
         "status": app.status,
         "status_label": lifecycle.status_label(app.status, locale=locale),
-        "reveal_status": reveal_status or "none",
-        "reveal_status_label": (
-            lifecycle.reveal_label(reveal_status, locale=locale) if reveal_status else None
-        ),
-        "cv_download_available": revealed,
         "stage_id": stage_id,
         "position": position,
         "entered_at": _iso(entered_at),
@@ -261,8 +181,6 @@ def partner_board_card(
         "evaluation": evaluation,
         # Candidate owner for multi-person teams: ``{membership_id, user_id,
         # display_name}`` of the assigned recruiter, or ``None`` when unassigned.
-        # Same shape/source as :func:`partner_application` — this is PARTNER staff
-        # (not the candidate), so the name is always shown to the same-org board.
         "assignee": assignee,
         "applied_at": _iso(app.applied_at),
         "last_status_at": _iso(app.last_status_at),
@@ -572,17 +490,4 @@ def student_offer_card(offer: Offer, *, locale: str = "vi") -> dict:
         "start_date": _iso(offer.start_date),
         "expiry_date": _iso(offer.expiry_date),
         "comp_summary": _comp_summary(offer, locale=locale),
-    }
-
-
-def reveal_request(req, *, locale: str = "vi") -> dict:
-    return {
-        "id": str(req.id),
-        "application_id": str(req.application_id),
-        "status": req.status,
-        "status_label": lifecycle.reveal_label(req.status, locale=locale),
-        "reason": req.reason,
-        "expires_at": _iso(req.expires_at),
-        "responded_at": _iso(req.responded_at),
-        "created_at": _iso(req.created_at),
     }

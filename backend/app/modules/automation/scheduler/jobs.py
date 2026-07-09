@@ -42,7 +42,6 @@ from app.modules.opportunities.application import (
 from app.modules.recruitment.application import (
     interview_service,
     offer_service,
-    reveal_service,
     sla_reminder_service,
 )
 
@@ -58,10 +57,6 @@ class ScheduledJob:
 
 async def _drain_outbox(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await dispatch_service.process_outbox(session, limit=50, now=now)
-
-
-async def _expire_reveals(session: AsyncSession, now: datetime) -> dict[str, int]:
-    return await reveal_service.sweep_expired(session, now=now)
 
 
 async def _close_deadlines(session: AsyncSession, now: datetime) -> dict[str, int]:
@@ -166,7 +161,6 @@ async def _evaluate_alerts(session: AsyncSession, _now: datetime) -> dict[str, i
 # within a tick; each job is otherwise independent (its own session + commit).
 REGISTRY: tuple[ScheduledJob, ...] = (
     ScheduledJob("outbox.drain", 15, _drain_outbox),
-    ScheduledJob("reveal.expire_sweep", 300, _expire_reveals),
     ScheduledJob("interview.reminder_sweep", 300, _interview_reminders),
     ScheduledJob("offer.expire_sweep", 300, _offer_expire_sweep),
     # Pipeline SLA reminders: notify the stage's owning reviewer (fallback: the

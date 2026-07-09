@@ -49,12 +49,6 @@ _DELETED_BODY: dict[str, str] = {
     "en": "This message was deleted",
 }
 
-_ANON_PREFIX: dict[str, str] = {
-    "vi": "Ứng viên ẩn danh",
-    "en": "Anonymous candidate",
-}
-
-
 def normalize_locale(locale: str | None) -> str:
     return locale if locale in _SUPPORTED else DEFAULT_LOCALE
 
@@ -80,10 +74,3 @@ def status_label(code: str, *, locale: str = "vi") -> str:
 
 def deleted_body(*, locale: str = "vi") -> str:
     return _DELETED_BODY.get(normalize_locale(locale), _DELETED_BODY[DEFAULT_LOCALE])
-
-
-def anonymous_handle(*, short_code: str, locale: str = "vi") -> str:
-    """A stable PII-free handle for a masked applicant, e.g. ``Ứng viên ẩn danh #1A2B3C``."""
-
-    prefix = _ANON_PREFIX.get(normalize_locale(locale), _ANON_PREFIX[DEFAULT_LOCALE])
-    return f"{prefix} #{short_code}"

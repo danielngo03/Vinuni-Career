@@ -48,7 +48,6 @@ async def _todos(
     *,
     org_id: uuid.UUID,
     job_counts: dict,
-    reveals_pending: int,
     access_alerts: list[dict],
     apps_to_review: int = 0,
     offers_to_approve: int = 0,
@@ -134,19 +133,6 @@ async def _todos(
                 "kind": "action",
             }
         )
-    # Reveal requests are answered by the STUDENT, not the partner — so this is an
-    # awareness item (outreach in flight), never framed as a partner action. This
-    # replaces the old, misleading ``respond_reveals`` action todo.
-    if reveals_pending > 0:
-        todos.append(
-            {
-                "key": "reveals_awaiting_candidate",
-                "href": "/partner/candidates",
-                "count": reveals_pending,
-                "priority": "low",
-                "kind": "informational",
-            }
-        )
     todos.append(
         {
             "key": "post_job",
@@ -182,11 +168,6 @@ async def get_partner_dashboard_ops(
         lambda: recruitment_read.count_org_applications(session, org_id=org_id),
         fallback=0,
     )
-    reveals_pending = await safe(
-        session,
-        lambda: recruitment_read.count_org_pending_reveals(session, org_id=org_id),
-        fallback=0,
-    )
 
     # --- rbac_summary (always computable; drives the other widgets' gates) -- #
     rbac_summary = rbac_capability_service.capability_summary(principal, org_id=org_id)
@@ -201,7 +182,6 @@ async def get_partner_dashboard_ops(
         "jobs_draft": job_counts["draft"],
         "jobs_pending_review": job_counts["pending_review"],
         "applications_total": applications_total,
-        "reveals_pending_response": reveals_pending,
     }
     if can_view_metrics:
         org_summary = await safe(
@@ -309,7 +289,6 @@ async def get_partner_dashboard_ops(
         session,
         org_id=org_id,
         job_counts=job_counts,
-        reveals_pending=reveals_pending,
         access_alerts=access_alerts,
         apps_to_review=apps_to_review,
         offers_to_approve=offers_to_approve,
@@ -334,15 +313,6 @@ async def get_partner_dashboard_ops(
                     "You have draft jobs — finish and submit them for review "
                     "to start receiving applications."
                 ),
-                "advisory_only": True,
-            }
-        )
-    if reveals_pending > 0:
-        ai_recommendations.append(
-            {
-                "code": "respond_reveals_pending",
-                "message_vi": "Có yêu cầu tiết lộ danh tính đang chờ ứng viên phản hồi.",
-                "message_en": "You have identity-reveal requests awaiting candidate response.",
                 "advisory_only": True,
             }
         )

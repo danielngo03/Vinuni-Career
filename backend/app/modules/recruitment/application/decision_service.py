@@ -8,14 +8,11 @@ Two partner-driven decisions on an application:
 
 The full configurable stage engine (``docs/BUSINESS_LOGIC.md`` §3, ``/advance`` /
 ``/rollback``) stays Phase 2. RBAC + tenant isolation are enforced HERE, not in the
-router, using the SAME org-membership gate as ``reveal_service.request_reveal``: a
-cross-org or non-partner caller is indistinguishable from a missing resource
-(``404``, never ``403``), so applications are not enumerable.
+router: a cross-org or non-partner caller is indistinguishable from a missing
+resource (``404``, never ``403``), so applications are not enumerable.
 
 Privacy invariants (``docs/SECURITY_PRIVACY.md`` / ``docs/API_CONTRACTS.md``):
 
-- A status change NEVER exposes the student's identity to the partner and never
-  bypasses the anonymous-reveal handshake.
 - The student notification + the student application projection carry ONLY the
   localized status label — never the coded ``rejection_reason`` or the partner's
   ``rejection_note``. Those stay org-internal (partner/owner projection only).
@@ -23,8 +20,8 @@ Privacy invariants (``docs/SECURITY_PRIVACY.md`` / ``docs/API_CONTRACTS.md``):
 Each transition bumps the optimistic ``version``, writes an audit row (the reason
 code lives in audit metadata, not the user response), and — in the same
 transaction — enqueues the outbox email AND inserts the in-app feed row, mirroring
-``reveal_service`` / ``apply_service``. The idempotent no-op path short-circuits
-BEFORE any notification, so a double-review / double-reject never duplicates.
+``apply_service``. The idempotent no-op path short-circuits BEFORE any
+notification, so a double-review / double-reject never duplicates.
 """
 
 from __future__ import annotations
@@ -58,8 +55,8 @@ async def _load_partner_application(
 ) -> Application:
     """Load an application the caller may act on as a partner of its owning org.
 
-    Mirrors ``reveal_service.request_reveal``: a cross-org or non-partner caller is
-    indistinguishable from missing (``404``). Row is locked for the read-modify-write.
+    A cross-org or non-partner caller is indistinguishable from missing (``404``).
+    Row is locked for the read-modify-write.
     """
 
     app = await _shared.load_application(session, application_id=application_id, lock=True)
@@ -74,9 +71,8 @@ async def _partner_projection(
 ) -> dict:
     """Build the partner/owner projection (includes reason/note/last_status_at).
 
-    Identity stays redacted until the reveal handshake is accepted — a decision
-    never reveals the student. Reuses the apply_service partner view so the
-    anonymity rules are applied in exactly one place.
+    Reuses the apply_service partner view so the identity + assignee shape is
+    applied in exactly one place.
     """
 
     from app.modules.recruitment.application import apply_service

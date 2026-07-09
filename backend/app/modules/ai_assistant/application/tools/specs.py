@@ -667,9 +667,8 @@ TOOL_SPECS: dict[str, ToolSpec] = {
             "optionally filtered by pipeline stage or a keyword. Use this when the "
             "recruiter asks to find candidates for a role, filter by stage (e.g. "
             "'interview'), or search their applicant list. Requires job_id from a "
-            "prior get_partner_jobs result. Anonymous-apply candidates are shown "
-            "with a generic label, never their real identity, until reveal is "
-            "accepted in the platform UI. Only available to partner users."
+            "prior get_partner_jobs result. Each candidate is shown with their real "
+            "name (identity is never masked). Only available to partner users."
         ),
         parameters={
             "type": "object",
@@ -941,8 +940,8 @@ TOOL_SPECS: dict[str, ToolSpec] = {
             "from a prior get_partner_jobs result. Returns a download link (shown "
             "to the recruiter as a button) plus the row count — never raw file "
             "bytes. Selectable columns: applicant, email, status, stage, "
-            "applied_at, last_status_at, rejection_reason, is_anonymous, "
-            "application_id. Only available to partner users with export rights."
+            "applied_at, last_status_at, rejection_reason, application_id. Only "
+            "available to partner users with export rights."
         ),
         parameters={
             "type": "object",
@@ -962,7 +961,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
                     "description": (
                         "Optional subset/order of columns. Valid keys: applicant, email, "
                         "status, stage, applied_at, last_status_at, rejection_reason, "
-                        "is_anonymous, application_id. Omit for a sensible default set."
+                        "application_id. Omit for a sensible default set."
                     ),
                 },
             },

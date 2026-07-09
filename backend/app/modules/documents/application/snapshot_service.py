@@ -271,6 +271,55 @@ async def get_snapshot_download(
     }
 
 
+async def build_partner_cv_view(
+    session: AsyncSession,
+    *,
+    snapshot_id: uuid.UUID,
+    actor_id: uuid.UUID | None,
+    watermark_text: str,
+) -> dict | None:
+    """Mint a WATERMARKED, embeddable inline view + download URL for a snapshot.
+
+    The recruitment service calls this AFTER it has verified the partner's org
+    ownership + CV-access RBAC for the application, so this trusts the caller
+    (no authorizer seam). It returns ``{snapshot_id, filename, view_url,
+    download_url}``: both URLs point at the token-authorized ``/api/v1/cv-files``
+    endpoint, which serves the rendered snapshot PDF ``inline`` (embeddable in an
+    ``<iframe>`` / PDF viewer) with the partner watermark burned in at render
+    time. The token carries only a resource reference + access metadata — never a
+    storage path. Every byte fetch is audited via ``signed_file_accesses``.
+
+    Returns ``None`` when the snapshot is missing or has been retention-tombstoned
+    (nothing renderable), so the caller surfaces ``cv: null``.
+    """
+
+    snap = await _load_snapshot(session, snapshot_id=snapshot_id)
+    body = snap.snapshot_json if isinstance(snap.snapshot_json, dict) else {}
+    if not body or body.get(_RETENTION_TOMBSTONE_MARKER):
+        return None
+
+    watermark = watermark_text or "VinUni Career"
+    token = storage.make_signed_token(
+        {
+            "kind": "snapshot",
+            "id": str(snap.id),
+            "uid": str(actor_id) if actor_id else "",
+            "purpose": "application_review",
+            "wm": watermark,
+        }
+    )
+    base = get_settings().app_url.rstrip("/")
+    url = f"{base}/api/v1/cv-files/{token}"
+    raw_title = str(body.get("title") or "cv").strip() or "cv"
+    filename = raw_title if raw_title.lower().endswith(".pdf") else f"{raw_title}.pdf"
+    return {
+        "snapshot_id": str(snap.id),
+        "filename": filename,
+        "view_url": url,
+        "download_url": url,
+    }
+
+
 # --------------------------------------------------------------------------- #
 # Retention sweep (compliance module's scheduled job hook, ADR-0014 §35)      #
 # --------------------------------------------------------------------------- #

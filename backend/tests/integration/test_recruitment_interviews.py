@@ -3,9 +3,8 @@
 Covers the interview + reviewer-assignee + threshold layer on the ADR-0004 stage
 engine and ADR-0005 scorecards:
 
-- schedule happy path (non-anonymous); reveal precondition on an anonymous app
-  (409 ``reveal_required``); anonymous + accepted reveal schedules.
-- one OPEN interview per (application, stage) (409 ``interview_exists``); reschedule
+- schedule happy path; one OPEN interview per (application, stage) (409
+  ``interview_exists``); reschedule
   version conflict (409); cancel frees the slot; complete / no_show transitions.
 - the assignee set drives the upgraded advance gate: a ``scorecard`` stage with 2
   assignees needs 2 submitted ASSIGNEE scorecards (409 ``scorecard_required
@@ -34,7 +33,6 @@ from app.modules.recruitment.application import (
     apply_service,
     decision_service,
     interview_service,
-    reveal_service,
     scorecard_service,
     stage_service,
 )
@@ -43,12 +41,11 @@ from app.modules.recruitment.application.errors import (
     InterviewExistsError,
     InterviewNotActionableError,
     InvalidApplicationFieldError,
-    RevealRequiredError,
     ScoreBelowThresholdError,
     ScorecardRequiredError,
 )
 from app.modules.recruitment.domain import interview as interview_domain
-from app.modules.recruitment.domain import lifecycle, scorecard
+from app.modules.recruitment.domain import scorecard
 from app.modules.recruitment.domain.models import Interview, PipelineStage, Scorecard
 from app.modules.recruitment.infrastructure.meeting_link_crypto import (
     decrypt_meeting_link,
@@ -88,7 +85,7 @@ def _scores(*, technical=4, communication=4, culture_fit=4, motivation=4) -> lis
     ]
 
 
-async def _setup_reviewed(db, *, is_anonymous=False):
+async def _setup_reviewed(db):
     """Published job + applied + reviewed (candidate ACTIVE at stage 1)."""
 
     _pu, porg, partner = await make_org_with_admin(db, display_name="Partner Co")
@@ -100,7 +97,7 @@ async def _setup_reviewed(db, *, is_anonymous=False):
     app = await apply_service.apply_to_job(
         db,
         principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
@@ -150,23 +147,6 @@ async def _audit_count(db, action: str) -> int:
     ).scalar_one()
 
 
-async def _accept_reveal(db, *, partner, student, app_id) -> None:
-    await reveal_service.request_reveal(
-        db,
-        principal=partner,
-        application_id=app_id,
-        reason="We would like to schedule an interview and learn more about you.",
-        ctx=CTX,
-    )
-    await reveal_service.respond_reveal(
-        db,
-        principal=student,
-        application_id=app_id,
-        decision=lifecycle.REVEAL_ACCEPTED,
-        ctx=CTX,
-    )
-
-
 def _online(*, assignees: list[uuid.UUID], at=None, link="https://meet.example/abc") -> dict:
     return {
         "mode": "online",
@@ -177,11 +157,11 @@ def _online(*, assignees: list[uuid.UUID], at=None, link="https://meet.example/a
 
 
 # --------------------------------------------------------------------------- #
-# Schedule + reveal precondition                                              #
+# Schedule                                                                     #
 # --------------------------------------------------------------------------- #
 
 
-async def test_schedule_non_anonymous_ok(db_session) -> None:
+async def test_schedule_ok(db_session) -> None:
     org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     assignee = await _assignee(db_session, org)
 
@@ -198,35 +178,6 @@ async def test_schedule_non_anonymous_ok(db_session) -> None:
     # The scheduler (partner admin) is NOT an attendee -> link withheld.
     assert out["meeting_link"] is None
     assert await _audit_count(db_session, "application.interview_scheduled") == 1
-
-
-async def test_schedule_anonymous_without_reveal_is_409_reveal_required(db_session) -> None:
-    org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session, is_anonymous=True)
-    assignee = await _assignee(db_session, org)
-    with pytest.raises(RevealRequiredError) as exc:
-        await interview_service.schedule_interview(
-            db_session,
-            principal=partner,
-            application_id=app_id,
-            **_online(assignees=[assignee.user_id]),
-            ctx=CTX,
-        )
-    assert exc.value.details == {"reason": "reveal_required"}
-
-
-async def test_schedule_anonymous_after_accepted_reveal_ok(db_session) -> None:
-    org, partner, _su, student, _job, app_id = await _setup_reviewed(db_session, is_anonymous=True)
-    assignee = await _assignee(db_session, org)
-    await _accept_reveal(db_session, partner=partner, student=student, app_id=app_id)
-
-    out = await interview_service.schedule_interview(
-        db_session,
-        principal=partner,
-        application_id=app_id,
-        **_online(assignees=[assignee.user_id]),
-        ctx=CTX,
-    )
-    assert out["status"] == interview_domain.STATUS_SCHEDULED
 
 
 async def test_online_requires_link_onsite_requires_location_422(db_session) -> None:

@@ -52,11 +52,6 @@ export type StageRequiredAction =
 /** CV selection discriminator on apply (docs/API_CONTRACTS.md). */
 export type CvSelectionType = "builder_cv" | "uploaded_document";
 
-/** Reveal request lifecycle as surfaced by the API. */
-export type RevealStatus = "none" | "pending" | "accepted" | "declined" | "expired";
-
-export type RevealDecision = "accepted" | "declined";
-
 /* ------------------------------- Wire types ------------------------------- */
 
 export interface CvSelectionInput {
@@ -74,7 +69,6 @@ export interface ApplyBody {
   cv_selection: CvSelectionInput;
   cover_letter?: string | null;
   screening_answers?: ScreeningAnswers;
-  is_anonymous?: boolean;
   idempotency_key: string;
 }
 
@@ -112,23 +106,11 @@ export interface ApplicationMessagesPointer {
   unread_count: number;
 }
 
-/** A reveal request as seen by either party. */
-export interface RevealRequest {
-  id: string;
-  application_id: string;
-  status: RevealStatus | string;
-  status_label: string | null;
-  reason: string;
-  expires_at: string | null;
-  responded_at: string | null;
-  created_at: string;
-}
-
 /**
- * Student-facing application (list + detail share this shape). `reveal_request`
- * / `reveal_status` are optional: the current backend projection omits them, so
- * the UI renders the reveal accept/decline panel only when they are present
- * (no fabricated data). See handoff "backend gaps".
+ * Student-facing application (list + detail share this shape). The
+ * anonymous-apply / identity-reveal flow was removed (owner decision
+ * 2026-07-10) — an application is always identified, so there is no
+ * `is_anonymous` / `reveal_request` / `reveal_status` on this projection.
  */
 export interface StudentApplication {
   id: string;
@@ -137,7 +119,6 @@ export interface StudentApplication {
   company_name: string | null;
   status: ApplicationStatus | string;
   status_label: string;
-  is_anonymous: boolean;
   cover_letter: string | null;
   screening_answers: ScreeningAnswers;
   snapshot_id: string;
@@ -146,8 +127,6 @@ export interface StudentApplication {
   created_at: string;
   updated_at: string;
   version: number;
-  reveal_request?: RevealRequest | null;
-  reveal_status?: RevealStatus | string | null;
   /**
    * The student's OWN upcoming interview (ADR-0006 §6) — identity-safe by
    * construction: date/mode/duration/location-or-link/status only, NEVER
@@ -186,16 +165,41 @@ export interface WithdrawBody {
   reason?: string;
 }
 
-/** Applicant block in the partner view — PII redacted until revealed. */
+/**
+ * Applicant identity in the partner view. Owner decision (2026-07-10): the
+ * anonymous / identity-reveal flow was removed — the applicant's real identity
+ * is ALWAYS present and is never masked.
+ */
 export interface PartnerApplicant {
-  is_anonymous: boolean;
-  revealed: boolean;
-  /** UV-xxxx handle shown while anonymous + unrevealed. */
-  anonymous_id?: string | null;
-  display_name: string;
-  /** Only present once revealed (or non-anonymous). */
-  email?: string | null;
-  user_id?: string | null;
+  user_id: string;
+  full_name: string;
+  avatar_url: string | null;
+  email: string | null;
+}
+
+/**
+ * Watermarked CV descriptor attached to a partner application DETAIL
+ * (`GET /applications/{id}`). `view_url` is an inline, embeddable (PDF) URL used
+ * by the in-drawer viewer; `download_url` is the watermarked download. Both are
+ * signed + access-logged server-side. Null until a CV snapshot is available.
+ */
+export interface PartnerApplicationCv {
+  snapshot_id: string;
+  filename: string;
+  view_url: string;
+  download_url: string;
+}
+
+/**
+ * CV↔JD fit signal for a candidate — a deterministic PRODUCT score (0–100),
+ * never an AI confidence rating. `band` is a coded tier; the UI colour is
+ * derived from `score` (never from any model internal). `reasons` are short,
+ * privacy-safe evidence strings. Null when there isn't enough data to score.
+ */
+export interface CandidateFit {
+  score: number;
+  band: string;
+  reasons: string[];
 }
 
 /** Partner-facing application (list + detail share this shape). */
@@ -204,16 +208,20 @@ export interface PartnerApplication {
   job_id: string;
   status: ApplicationStatus | string;
   status_label: string;
-  is_anonymous: boolean;
   applicant: PartnerApplicant;
   screening_answers: ScreeningAnswers;
-  /** Null while anonymous + unrevealed. */
   cover_letter: string | null;
   snapshot_id: string;
-  /** True once the partner may download the (watermarked) CV. */
-  cv_download_available: boolean;
-  reveal_status: RevealStatus | string;
-  reveal_status_label: string | null;
+  /**
+   * Watermarked CV (detail endpoint only). Null while no snapshot is available.
+   * Replaces the old `cv_download_available` boolean + reveal gate.
+   */
+  cv?: PartnerApplicationCv | null;
+  /**
+   * CV↔JD fit signal. Present on the detail; the list projection may also carry
+   * it to drive the match-ring column. Null when not scored.
+   */
+  fit?: CandidateFit | null;
   applied_at: string;
   /** Last status transition timestamp (decision workflow). */
   last_status_at: string | null;
@@ -227,21 +235,18 @@ export interface PartnerApplication {
   /** Optimistic-concurrency token; a stale value yields a 409 CONFLICT. */
   version: number;
   /**
-   * Anonymity-safe pipeline projection attached to the partner application detail
-   * (`GET /applications/{id}`, partner branch). Carries the partner-only offer
-   * GLANCE (status + deadline, NO salary). Full comp lives behind
+   * Partner-only pipeline projection attached to the application detail: the
+   * offer GLANCE (status + deadline, NO salary). Full comp lives behind
    * `GET /applications/{id}/offers`. Optional: only the detail endpoint sets it.
    */
   pipeline?: { offer?: OfferBoardGlance | null } | null;
   /**
-   * Current pipeline stage `{stage_id, stage_name}` from the ACTIVE
-   * `candidate_stages` row, or `null` for a pre-pipeline (submitted) application.
-   * Lets the flat candidates list show pipeline position without opening the board.
+   * Current pipeline stage, or `null` for a pre-pipeline (submitted) application.
    */
   stage?: StageRef | null;
   /**
-   * The recruiter this candidate is assigned to (partner-staff identity only,
-   * no student PII), or `null` when unassigned.
+   * The recruiter this candidate is assigned to (partner-staff identity only),
+   * or `null` when unassigned.
    */
   assignee?: CardAssignee | null;
 }
@@ -308,8 +313,8 @@ export interface PipelineEvaluation {
 
 /**
  * The recruiter who owns a candidate on a team board. `display_name` is a
- * partner-org member (NOT the candidate), so it carries no student PII and is
- * safe to render on an anonymous card. `null` assignee means unassigned.
+ * partner-org member (NOT the candidate), so it carries no student PII. `null`
+ * assignee means unassigned.
  */
 export interface CardAssignee {
   membership_id: string;
@@ -318,24 +323,15 @@ export interface CardAssignee {
 }
 
 /**
- * A single board card. Anonymity-safe by construction: the backend only ever
- * includes `display_name` when reveal/RBAC rules allow it; otherwise the card
- * carries the `anonymous_id` (UV-xxxx) handle. Never assume PII is present.
+ * A single board card. The applicant's real identity is always present (owner
+ * decision 2026-07-10 — the anonymous-apply / reveal handshake was removed).
  * Carries NO score and NO rejection reason — those are not board-safe.
  */
 export interface PipelineCard {
   application_id: string;
-  is_anonymous: boolean;
-  applicant: {
-    /** Present only when reveal/RBAC allow it. */
-    display_name?: string | null;
-    /** UV-xxxx handle shown while anonymous + unrevealed. */
-    anonymous_id?: string | null;
-  };
+  applicant: PartnerApplicant;
   status: ApplicationStatus | string;
   status_label: string;
-  reveal_status: RevealStatus | string;
-  cv_download_available: boolean;
   /** `null` while the card sits in the pre-pipeline `new` bucket. */
   stage_id: string | null;
   position: number;
@@ -386,7 +382,7 @@ export interface PipelineSummary {
   [key: string]: number;
 }
 
-/** Partner pipeline board for one job (anonymity-safe projection). */
+/** Partner pipeline board for one job (fully-identified projection). */
 export interface PipelineBoard {
   job: { id: string; title: string };
   template_id: string | null;
@@ -436,13 +432,6 @@ export const applicationsCoreApi = {
     );
   },
 
-  /* Student: respond to a partner reveal request. */
-  respondReveal(id: string, decision: RevealDecision): Promise<RevealRequest> {
-    return api.post<RevealRequest>(`/applications/${id}/reveal/respond`, {
-      decision,
-    });
-  },
-
   /* Partner: applications for one of the caller org's jobs, cursor paginated. */
   listForJob(
     jobId: string,
@@ -453,14 +442,9 @@ export const applicationsCoreApi = {
     });
   },
 
-  /* Partner: application detail (org-scoped; anonymous redacted until reveal). */
+  /* Partner: application detail (org-scoped; fully identified). */
   getForPartner(id: string): Promise<PartnerApplication> {
     return api.get<PartnerApplication>(`/applications/${id}`);
-  },
-
-  /* Partner: request to reveal an anonymous applicant (reason >= 20 chars). */
-  requestReveal(id: string, reason: string): Promise<RevealRequest> {
-    return api.post<RevealRequest>(`/applications/${id}/reveal`, { reason });
   },
 
   /* Partner: obtain a watermarked, signed CV download URL. */

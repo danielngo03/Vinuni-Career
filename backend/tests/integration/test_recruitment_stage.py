@@ -66,13 +66,13 @@ async def _setup_published(db, *, title="Live Job", **over):
     return partner, uni, job_id
 
 
-async def _apply(db, *, job_id, prefix="student", is_anonymous=False):
+async def _apply(db, *, job_id, prefix="student"):
     su, student = await make_student(db, prefix=prefix)
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
         db,
         principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     return su, student, uuid.UUID(app["id"])
@@ -601,23 +601,22 @@ async def test_cross_org_partner_gets_404(db_session) -> None:
 
 
 # --------------------------------------------------------------------------- #
-# Anonymity preserved across stage moves                                       #
+# Real identity carried across stage moves                                     #
 # --------------------------------------------------------------------------- #
 
 
-async def test_anonymity_preserved_across_moves(db_session) -> None:
+async def test_identity_carried_across_moves(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    su, _student, app_id = await _apply(db_session, job_id=job_id, is_anonymous=True)
+    su, student, app_id = await _apply(db_session, job_id=job_id)
     await decision_service.review_application(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
     adv = await stage_service.advance_application_stage(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
-    assert adv["applicant"]["is_anonymous"] is True
-    assert adv["applicant"]["revealed"] is False
-    assert "email" not in adv["applicant"] and "user_id" not in adv["applicant"]
-    assert su.email not in str(adv)
+    assert adv["applicant"]["user_id"] == str(student.user_id)
+    assert adv["applicant"]["email"] == su.email
+    assert "is_anonymous" not in adv["applicant"]
 
     stages = await _template_stages_for_app(db_session, app_id)
     rb = await stage_service.rollback_application_stage(
@@ -628,13 +627,11 @@ async def test_anonymity_preserved_across_moves(db_session) -> None:
         reason=_GOOD_REASON,
         ctx=CTX,
     )
-    assert rb["applicant"]["revealed"] is False
-    assert su.email not in str(rb)
+    assert rb["applicant"]["email"] == su.email
 
-    # The partner detail view is likewise still redacted after the moves.
+    # The partner detail view likewise carries the real identity after the moves.
     view = await apply_service.get_application(db_session, principal=partner, application_id=app_id)
-    assert view["applicant"]["revealed"] is False
-    assert su.email not in str(view)
+    assert view["applicant"]["email"] == su.email
 
 
 # --------------------------------------------------------------------------- #

@@ -89,13 +89,13 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
             "move_candidate_with_confirmation",
         }
     ),
-    # Sensitive candidate-identity access (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`
-    # `candidate_identity` row). Gates the anonymous-apply reveal request and CV
-    # preview/download independent of the broader `applications:read` surface —
-    # every grant use is audited via `partner_candidate_access_events`.
-    "candidate_identity": frozenset(
-        {"request_reveal", "view_revealed_identity", "view_cv", "download_cv"}
-    ),
+    # Sensitive candidate CV access (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`
+    # `candidate_identity` row). Gates CV preview / download independent of the
+    # broader `applications:read` surface — every grant use is audited via
+    # `partner_candidate_access_events`. (The anonymous-apply reveal handshake was
+    # removed 2026-07-10; an application always exposes the applicant's identity to
+    # a member holding `applications:read`, so no reveal capability remains.)
+    "candidate_identity": frozenset({"view_cv", "download_cv"}),
     # Pipeline stage actions (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md` `pipeline`
     # row): advancing/rolling back a candidate's stage and configuring an org's
     # stage template. Distinct from `applications:*` so a narrow "pipeline

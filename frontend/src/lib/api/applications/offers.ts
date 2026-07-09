@@ -237,8 +237,7 @@ export const offersApi = {
 
   /**
    * Partner: send an approved offer to the candidate (`approved → sent`). `409
-   * offer_not_approved` if not yet `approved`; `409 reveal_required` for an
-   * anonymous applicant without an accepted reveal (deep-link the reveal flow).
+   * offer_not_approved` if not yet `approved`.
    */
   sendOffer(offerId: string, version?: number): Promise<PartnerOffer> {
     return api.post<PartnerOffer>(

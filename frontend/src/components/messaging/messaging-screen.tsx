@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { BellOff, MessagesSquare, Search, WifiOff } from "lucide-react";
 import { Button, Input, Skeleton } from "@/components/ui";
-import { Card, EmptyState, StatusChip } from "@/components/kit";
+import { Card, EmptyState, PageHeader, StatusChip } from "@/components/kit";
 import { cn } from "@/lib/utils";
 import { relativeTime } from "@/lib/notifications/grouping";
 import { messagingApi, type ThreadSummary } from "@/lib/api";
@@ -23,10 +23,13 @@ import { ThreadAvatar } from "./thread-bits";
 export function MessagingScreen({
   persona = "student",
   initialThreadId,
+  headerActions,
 }: {
   persona?: "student" | "partner" | "university";
   /** Deep-link target (e.g. `?thread=<id>` from an application detail page). */
   initialThreadId?: string;
+  /** Optional persona-specific actions rendered in the PageHeader (e.g. announce). */
+  headerActions?: React.ReactNode;
 }) {
   const t = useTranslations("messaging");
   const tc = useTranslations("common");
@@ -95,6 +98,10 @@ export function MessagingScreen({
   const noSearchResults =
     Boolean(normalizedSearch) && !isLoading && !isError && threads.length > 0 && visibleThreads.length === 0;
   const emptyBody = persona === "partner" ? t("partnerEmptyBody") : t("emptyBody");
+  const totalUnread = useMemo(
+    () => threads.reduce((sum, th) => sum + (th.unread || 0), 0),
+    [threads],
+  );
 
   // Auto-select the first thread on desktop when inbox loads (skipped while a
   // deep-linked thread is still resolving).
@@ -105,8 +112,18 @@ export function MessagingScreen({
   }, [firstThread, selected, pendingDeepLink]);
 
   return (
-    <div className="flex h-full min-h-[560px] flex-col">
-      <Card className="grid min-h-0 flex-1 grid-rows-1 overflow-hidden p-0 md:grid-cols-[340px_minmax(0,1fr)]">
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="mx-auto flex w-full min-h-0 max-w-7xl flex-1 flex-col px-4 py-5 lg:px-6">
+        <PageHeader
+          className="mb-4"
+          title={t("title")}
+          subtitle={
+            totalUnread > 0 ? t("badgeLabel", { count: totalUnread }) : undefined
+          }
+          actions={headerActions}
+        />
+
+        <Card className="grid min-h-0 flex-1 grid-rows-1 overflow-hidden p-0 md:grid-cols-[340px_minmax(0,1fr)]">
         {/* ── Thread list (left rail) ── */}
         <aside
           className={cn(
@@ -115,17 +132,7 @@ export function MessagingScreen({
           )}
         >
           <div className="mb-3 border-b border-border px-1 pb-3">
-            <div className="flex h-9 items-center justify-between">
-              <h2 className="type-body font-semibold text-foreground">
-                {t("title")}
-              </h2>
-              {threads.length > 0 && (
-                <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-[var(--bg-muted)] px-1.5 py-0.5 type-caption font-semibold tabular-nums text-muted-foreground">
-                  {threads.length}
-                </span>
-              )}
-            </div>
-            <div className="relative mt-2">
+            <div className="relative">
               <Search
                 aria-hidden
                 strokeWidth={1.8}
@@ -237,7 +244,8 @@ export function MessagingScreen({
             </div>
           )}
         </div>
-      </Card>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -362,7 +362,7 @@ Layout:
 Rules:
 
 - Show friendly labels, not raw status codes.
-- For anonymous applications, show what is hidden from the partner.
+- Applications are always identified (no anonymous state to surface).
 - Withdrawal requires reason and confirmation.
 
 ## 5. Partner Pipeline
@@ -381,7 +381,7 @@ Rules:
 - Drag move opens confirmation if required action is incomplete.
 - Rollback requires target stage and reason.
 - Bulk actions use selection bar and limit warnings.
-- Anonymous candidates cannot be deanonymized through filters, exports, or visible metadata.
+- Candidate fields, CV preview, and export respect the actor's `candidate_access` and analytics/export RBAC scope.
 
 ## 6. University Moderation Queue
 
@@ -550,27 +550,36 @@ Rules:
 
 ---
 
-## 13. Partner Passive Search / Talent Pool
+## 13. Partner Talent Pool — AI Semantic Candidate Search
 
-Route: `/partner/passive-search`.
+Route: `/partner/talent-pool`. (Owner decision 2026-07-10: AI semantic search,
+not anonymized cards. Contract: `docs/PARTNER_RBAC_ANALYTICS_SPEC.md` +
+`docs/AI_PRODUCT_SPEC.md` §3.3.)
 
 Layout:
 
 ```
+Query bar:
+  Natural-language brief  |  or pick a posted job  |  or [Paste / upload a JD]
+  (external JD = a JD not yet posted → same extraction/embedding path)
+
 Left filter panel:
   Skills (multi-select, autocomplete)
+  Experience / years
+  Major / faculty
   Graduation year range
-  Industry interests
+  Location / work-mode
   Availability (open to work toggle)
   [Tìm kiếm]
 
-Right result list:
+Right result list (ranked, identified candidates):
   ┌────────────────────────────────────────────────────────┐
-  │ 🙂 Sinh viên #A347 (anonymous)                        │
-  │ Major: Computer Science | Tốt nghiệp 2025             │
-  │ Skills: Python, FastAPI, React                        │
-  │ Experience: 2 internships (no company names)           │
-  │ [Thêm vào danh sách] [Gửi yêu cầu liên hệ]           │
+  │ 🙂 Nguyễn Văn A · Computer Science · Tốt nghiệp 2025   │
+  │ Match reasons: strong FastAPI + React overlap;         │
+  │   2 backend internships; open to work now              │
+  │ Gaps: no cloud/DevOps evidence                         │
+  │ Skills: Python, FastAPI, React                         │
+  │ [Xem CV] [Thêm vào danh sách] [Gửi yêu cầu liên hệ]    │
   └────────────────────────────────────────────────────────┘
 
 Quota indicator: "18/30 lượt liên hệ còn lại tuần này"
@@ -578,18 +587,17 @@ Quota indicator: "18/30 lượt liên hệ còn lại tuần này"
 
 Rules:
 
-- Profile cards are always anonymized until reveal is accepted.
+- Candidates appear only if they opted in to passive discoverability; they are
+  shown identified to authorized recruiters (no anonymized card, no reveal step).
+- Match reasons are human-readable strings; never show a raw similarity/confidence number.
+- "Xem CV" / download uses `candidate_access` RBAC + watermark + audit.
+- External-JD search is metered like other AI recruiting actions and audited.
+- When the AI gateway/embeddings are unavailable, fall back to keyword+filter
+  search with an honest "AI ranking unavailable" state (no fabricated matches).
 - "Gửi yêu cầu liên hệ" requires reason input (min 20 chars).
-- Quota warning at 80% usage: amber banner.
-- Quota exhausted: button disabled with "Nâng cấp gói" CTA.
+- Quota warning at 80% usage: amber banner. Quota exhausted: button disabled with "Nâng cấp gói" CTA.
 - Student response (accept/decline) notified in real-time via WebSocket.
-- Partners cannot see if a student has also applied to competitor jobs.
-
-Route: `/partner/talent-pool`.
-
-- List of saved profiles from passive search.
-- Internal label and notes per entry.
-- Bulk action: send outreach message (rate-limited).
+- Saved-list view: internal label and notes per entry; bulk outreach is rate-limited.
 
 ---
 

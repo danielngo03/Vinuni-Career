@@ -7,7 +7,6 @@ import {
   Activity,
   BarChart3,
   Briefcase,
-  Eye,
   FileText,
   Gauge,
   Layers,
@@ -82,8 +81,6 @@ function trendDelta(points: AnalyticsMonthlyPoint[]): KpiDelta | undefined {
 }
 
 const TODO_META: Record<string, { icon: React.ElementType; tone: (p: PartnerOpsTodo["priority"]) => ChipTone }> = {
-  respond_reveals: { icon: Eye, tone: () => "danger" },
-  reveals_awaiting_candidate: { icon: Eye, tone: () => "warning" },
   applications_to_review: { icon: ListChecks, tone: () => "warning" },
   offers_to_approve: { icon: Send, tone: () => "info" },
   offers_to_send: { icon: Send, tone: () => "info" },
@@ -310,17 +307,7 @@ function KpiSection({ ops, monthly }: { ops: PartnerDashboardOps; monthly: Analy
         href="/partner/jobs"
       />
       <KpiTile label={tf("kpi.drafts")} value={nf.format(m.jobs_draft)} icon={FileText} href="/partner/jobs" />
-      {conversion ? (
-        <KpiTile label={tf("kpi.conversion")} value={conversion} icon={TrendingUp} />
-      ) : (
-        <KpiTile
-          label={tf("kpi.reveals")}
-          value={nf.format(m.reveals_pending_response)}
-          icon={Eye}
-          hint={m.reveals_pending_response > 0 ? tf("kpi.revealsHint") : undefined}
-          href="/partner/candidates"
-        />
-      )}
+      <KpiTile label={tf("kpi.conversion")} value={conversion ?? "—"} icon={TrendingUp} />
     </KpiRow>
   );
 }
@@ -389,12 +376,6 @@ function HeroSection({
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold text-white">
               <TrendingUp className="size-3.5" strokeWidth={2} />
               {tf("heroConversion", { value: conversion })}
-            </span>
-          )}
-          {ops.metrics.reveals_pending_response > 0 && (
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold text-white">
-              <Eye className="size-3.5" strokeWidth={2} />
-              {tf("heroReveals", { count: ops.metrics.reveals_pending_response })}
             </span>
           )}
         </>

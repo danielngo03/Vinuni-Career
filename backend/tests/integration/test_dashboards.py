@@ -2,9 +2,9 @@
 
 Covers, per dashboard: correct persona allowed, wrong persona forbidden, real
 counts match seeded data, scoping/tenant isolation (student A vs B; partner org
-isolation; university sees pending across orgs), anonymous candidate handles on
-the partner dashboard (no PII leak), empty-state shape (new user -> zeros +
-appropriate next_actions), and single-widget failure tolerance.
+isolation), candidate display names on the partner dashboard (no contact PII),
+empty-state shape (new user -> zeros + appropriate next_actions), and
+single-widget failure tolerance.
 """
 
 from __future__ import annotations
@@ -23,7 +23,6 @@ from app.modules.organization.application import partner_registration_service
 from app.modules.recruitment.application import (
     access,
     apply_service,
-    reveal_service,
 )
 from app.modules.recruitment.application import (
     dashboard_read as recruitment_read,
@@ -41,8 +40,6 @@ from tests.recruitment_utils import (
     make_builder_cv,
     publish_job,
 )
-
-_REVEAL_REASON = "We would like to learn more about your internship experience here."
 
 
 @pytest.fixture(autouse=True)
@@ -86,7 +83,7 @@ async def test_student_dashboard_empty_state(db_session) -> None:
     assert "create_alert" in keys  # nudge when no alerts exist
     assert "respond_reveal" not in keys
     assert data["applications_recent"] == []
-    assert data["reveal_requests_pending"] == []
+    assert "reveal_requests_pending" not in data
 
 
 async def test_student_dashboard_real_counts_and_scoping(db_session) -> None:
@@ -129,33 +126,6 @@ async def test_student_dashboard_real_counts_and_scoping(db_session) -> None:
     assert all("source" in item for item in reco["items"])
 
 
-async def test_student_dashboard_pending_reveal_action(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session,
-        principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
-        ctx=CTX,
-    )
-    await reveal_service.request_reveal(
-        db_session,
-        principal=partner,
-        application_id=uuid.UUID(app["id"]),
-        reason=_REVEAL_REASON,
-        ctx=CTX,
-    )
-
-    data = await student_dashboard.get_student_dashboard(db_session, principal=student)
-    actions = {a["key"]: a for a in data["next_actions"]}
-    assert actions["respond_reveal"]["count"] == 1
-    assert len(data["reveal_requests_pending"]) == 1
-    pending = data["reveal_requests_pending"][0]
-    assert pending["application_id"] == app["id"]
-    assert pending["company_name"] and pending["job_title"]
-
-
 async def test_student_dashboard_wrong_persona_forbidden(db_session) -> None:
     _pu, _porg, partner = await make_org_with_admin(db_session)
     with pytest.raises(PermissionDeniedError):
@@ -185,12 +155,12 @@ async def test_partner_dashboard_real_counts_and_anonymous_rows(db_session) -> N
         db_session, principal=partner, job_id=uuid.UUID(pending["id"]), ctx=CTX
     )
 
-    _su, student = await make_student(db_session)
+    su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     await apply_service.apply_to_job(
         db_session,
         principal=student,
-        payload=apply_payload(job_id=active_job_id, cv_selection=sel, is_anonymous=True),
+        payload=apply_payload(job_id=active_job_id, cv_selection=sel),
         ctx=CTX,
     )
 
@@ -210,12 +180,12 @@ async def test_partner_dashboard_real_counts_and_anonymous_rows(db_session) -> N
     assert "Draft Role" in attention_titles and "Pending Role" in attention_titles
     assert "Live Role" not in attention_titles
 
-    # PII guard: candidate rows are anonymous handles only — no name/email.
+    # Candidate rows carry the real display name but NO contact PII (email).
     assert len(data["applications_recent"]) == 1
     cand = data["applications_recent"][0]
-    assert cand["candidate_handle"].startswith("UV-")
-    assert "email" not in cand and "display_name" not in cand
-    assert "candidate_name" not in cand and "user_id" not in cand
+    assert cand["candidate_name"] == su.full_name
+    assert "email" not in cand
+    assert "candidate_handle" not in cand
 
 
 async def test_partner_dashboard_org_isolation(db_session) -> None:
@@ -238,28 +208,6 @@ async def test_partner_dashboard_org_isolation(db_session) -> None:
     assert data_b["metrics"]["jobs_active"] == 0
     assert data_b["metrics"]["applications_total"] == 0
     assert data_b["applications_recent"] == []
-
-
-async def test_partner_dashboard_reveals_pending_response(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session,
-        principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
-        ctx=CTX,
-    )
-    await reveal_service.request_reveal(
-        db_session,
-        principal=partner,
-        application_id=uuid.UUID(app["id"]),
-        reason=_REVEAL_REASON,
-        ctx=CTX,
-    )
-    data = await partner_dashboard.get_partner_dashboard(db_session, principal=partner)
-    assert data["metrics"]["reveals_pending_response"] == 1
-    assert {a["key"] for a in data["next_actions"]} >= {"respond_reveals"}
 
 
 async def test_partner_dashboard_wrong_persona_forbidden(db_session) -> None:

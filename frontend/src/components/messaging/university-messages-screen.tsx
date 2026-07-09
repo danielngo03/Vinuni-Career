@@ -21,28 +21,23 @@ export function UniversityMessagesScreen() {
   const [composeOpen, setComposeOpen] = useState(false);
 
   return (
-    <div className="flex h-full flex-col gap-4">
-      <div className="flex items-center justify-between">
-        <div />
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => setComposeOpen(true)}
-        >
-          <Megaphone aria-hidden strokeWidth={1.9} className="size-4" />
-          {t("newAnnouncement")}
-        </Button>
-      </div>
-
-      <div className="flex-1">
-        <MessagingScreen persona="university" />
-      </div>
-
-      <AnnounceModal
-        open={composeOpen}
-        onClose={() => setComposeOpen(false)}
+    <>
+      <MessagingScreen
+        persona="university"
+        headerActions={
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setComposeOpen(true)}
+          >
+            <Megaphone aria-hidden strokeWidth={1.9} className="size-4" />
+            {t("newAnnouncement")}
+          </Button>
+        }
       />
-    </div>
+
+      <AnnounceModal open={composeOpen} onClose={() => setComposeOpen(false)} />
+    </>
   );
 }
 
@@ -128,7 +123,7 @@ function AnnounceModal({
             maxLength={BODY_MAX}
             required
           />
-          <p aria-hidden className="mt-1 text-right text-xs text-[var(--text-muted)]">
+          <p aria-hidden className="mt-1 text-right type-caption tabular-nums text-muted-foreground">
             {body.length}/{BODY_MAX}
           </p>
         </div>

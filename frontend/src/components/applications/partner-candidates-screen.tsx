@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useSearchParams } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import {
   useInfiniteQuery,
   useMutation,
@@ -12,9 +12,10 @@ import {
 import {
   ArrowLeft,
   CheckCheck,
+  ChevronLeft,
+  ChevronRight,
   Download,
   Eye,
-  EyeOff,
   Inbox,
   Kanban,
   Loader2,
@@ -27,7 +28,7 @@ import {
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button, useToast } from "@/components/ui";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MessageCandidateButton } from "@/components/messaging/message-candidate-button";
 import {
   DataTable,
@@ -40,7 +41,7 @@ import {
   PageHeader,
   StatusChip,
 } from "@/components/kit";
-import { formatDateTime } from "@/lib/format";
+import { formatDateShort, formatDateTimeShort } from "@/lib/format";
 import { useApplicationLabels } from "@/lib/applications/labels";
 import {
   ApiError,
@@ -53,18 +54,9 @@ import {
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { CandidateDetail } from "./candidates-screen/candidate-detail";
 import { RejectModal } from "./candidates-screen/reject-modal";
-import { RevealModal } from "./candidates-screen/reveal-modal";
-import {
-  MIN_REASON,
-  nowIso,
-  STAGE_FILTERS,
-  type ForJobData,
-} from "./candidates-screen/utils";
-import {
-  APPLICATION_STATUS_CHIP,
-  REVEAL_STATUS_CHIP,
-  initials,
-} from "./chip-tones";
+import { MatchRing, fitChipTone, fitTierKey } from "./candidates-screen/match-ring";
+import { nowIso, STAGE_FILTERS, type ForJobData } from "./candidates-screen/utils";
+import { APPLICATION_STATUS_CHIP, initials } from "./chip-tones";
 
 const nf = new Intl.NumberFormat();
 
@@ -76,7 +68,6 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
   const t = useTranslations("candidates");
   const tStates = useTranslations("states");
   const tc = useTranslations("common");
-  const locale = useLocale();
   const labels = useApplicationLabels();
   const toast = useToast();
   const qc = useQueryClient();
@@ -88,8 +79,6 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
   );
   const [search, setSearch] = React.useState("");
   const [statusFilter, setStatusFilter] = React.useState<string>("all");
-  const [revealOpen, setRevealOpen] = React.useState(false);
-  const [reason, setReason] = React.useState("");
   const [downloading, setDownloading] = React.useState(false);
   const [exportingCsv, setExportingCsv] = React.useState(false);
 
@@ -157,6 +146,17 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
   const selected = detailQuery.data;
   const detailKey = (id: string) =>
     ["applications", "partnerDetail", id] as const;
+
+  /* --------------- prev/next navigation within the filtered list ---------- */
+  const currentIndex = React.useMemo(
+    () => (selectedId ? filteredRows.findIndex((r) => r.id === selectedId) : -1),
+    [filteredRows, selectedId],
+  );
+  const prevId = currentIndex > 0 ? filteredRows[currentIndex - 1]!.id : null;
+  const nextId =
+    currentIndex >= 0 && currentIndex < filteredRows.length - 1
+      ? filteredRows[currentIndex + 1]!.id
+      : null;
 
   /* ----------------------- optimistic cache helpers ----------------------- */
 
@@ -326,24 +326,12 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     }
   }
 
-  const requestReveal = useMutation({
-    mutationFn: () => applicationsApi.requestReveal(selectedId as string, reason.trim()),
-    onSuccess: () => {
-      setRevealOpen(false);
-      setReason("");
-      toast.show({ tone: "success", title: t("revealRequestedToast") });
-      invalidateList();
-      if (selectedId) void qc.invalidateQueries({ queryKey: detailKey(selectedId) });
-    },
-    onError: (e) => toast.show({ tone: "error", title: apiError(e) }),
-  });
-
-  async function handleDownload() {
-    if (!selectedId) return;
+  function handleDownload() {
+    const cv = selected?.cv;
+    if (!cv) return;
     setDownloading(true);
     try {
-      const info = await applicationsApi.getCvDownload(selectedId);
-      window.open(resolveDownloadUrl(info.download_url), "_blank", "noopener");
+      window.open(resolveDownloadUrl(cv.download_url), "_blank", "noopener");
       toast.show({ tone: "success", title: t("downloadStarted") });
     } catch (e) {
       toast.show({ tone: "error", title: apiError(e) });
@@ -404,27 +392,37 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
 
   const columns: ColumnDef<PartnerApplication, unknown>[] = [
     {
+      id: "match",
+      accessorFn: (r) => r.fit?.score ?? -1,
+      header: t("colMatch"),
+      size: 78,
+      cell: ({ row }) => {
+        const score = row.original.fit?.score ?? null;
+        return (
+          <MatchRing
+            score={score}
+            size={34}
+            ariaLabel={score != null ? t("matchAria", { score: Math.round(score) }) : undefined}
+          />
+        );
+      },
+    },
+    {
       id: "applicant",
-      accessorFn: (r) =>
-        r.applicant.is_anonymous && !r.applicant.revealed
-          ? r.applicant.anonymous_id ?? r.applicant.display_name
-          : r.applicant.display_name,
+      accessorFn: (r) => r.applicant.full_name,
       header: t("colApplicant"),
       cell: ({ row }) => {
         const a = row.original.applicant;
-        const anon = a.is_anonymous && !a.revealed;
-        const name = anon ? a.anonymous_id ?? a.display_name : a.display_name;
         return (
           <span className="inline-flex min-w-0 items-center gap-2.5">
             <Avatar size="sm">
-              <AvatarFallback className={anon ? "bg-[var(--bg-muted)] text-muted-foreground" : undefined}>
-                {anon ? <EyeOff aria-hidden className="size-3" strokeWidth={1.8} /> : initials(name)}
-              </AvatarFallback>
+              {a.avatar_url && <AvatarImage src={a.avatar_url} alt="" />}
+              <AvatarFallback>{initials(a.full_name)}</AvatarFallback>
             </Avatar>
             <span className="min-w-0">
-              <span className="block truncate font-medium text-foreground">{name}</span>
-              {anon && (
-                <span className="block type-caption text-muted-foreground">{t("anonymousShort")}</span>
+              <span className="block truncate font-medium text-foreground">{a.full_name}</span>
+              {a.email && (
+                <span className="block type-caption truncate text-muted-foreground">{a.email}</span>
               )}
             </span>
           </span>
@@ -455,25 +453,29 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
         ),
     },
     {
-      id: "reveal",
+      id: "owner",
       enableSorting: false,
-      header: t("colReveal"),
+      header: t("colOwner"),
       cell: ({ row }) =>
-        row.original.applicant.is_anonymous ? (
-          <StatusChip tone={REVEAL_STATUS_CHIP[row.original.reveal_status] ?? "neutral"}>
-            {labels.reveal(row.original.reveal_status, row.original.reveal_status_label)}
-          </StatusChip>
+        row.original.assignee ? (
+          <span className="type-small truncate text-foreground">
+            {row.original.assignee.display_name}
+          </span>
         ) : (
-          <span className="type-caption text-muted-foreground">{t("identified")}</span>
+          <span className="type-caption text-muted-foreground">{t("unassigned")}</span>
         ),
     },
     {
       id: "applied_at",
       accessorFn: (r) => r.applied_at,
       header: t("colApplied"),
+      meta: { align: "right" },
       cell: ({ row }) => (
-        <span className="type-caption tabular-nums text-muted-foreground">
-          {formatDateTime(row.original.applied_at, locale)}
+        <span
+          className="type-small tabular-nums text-muted-foreground"
+          title={formatDateTimeShort(row.original.applied_at)}
+        >
+          {formatDateShort(row.original.applied_at)}
         </span>
       ),
     },
@@ -514,15 +516,9 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     },
   ];
 
-  const reasonValid = reason.trim().length >= MIN_REASON;
-
   const selApplicant = selected?.applicant;
-  const selAnon = !!selApplicant && selApplicant.is_anonymous && !selApplicant.revealed;
-  const selName = selApplicant
-    ? selAnon
-      ? selApplicant.anonymous_id ?? selApplicant.display_name
-      : selApplicant.display_name
-    : t("detailTitle");
+  const selName = selApplicant?.full_name ?? t("detailTitle");
+  const selScore = selected?.fit?.score ?? null;
   const canReview = selected?.status === "submitted";
   const canReject = selected?.status === "submitted" || selected?.status === "under_review";
 
@@ -634,6 +630,7 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
             enableSelection
             activeRowId={selectedId ?? undefined}
             onRowClick={(r) => setSelectedId(r.id)}
+            initialSort={[{ id: "match", desc: true }]}
             bulkActions={(sel, clear) => {
               const reviewable = sel.filter((r) => r.status === "submitted").map((r) => r.id);
               const rejectable = sel
@@ -690,44 +687,91 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
         </div>
       )}
 
-      {/* Candidate detail drawer */}
+      {/* Candidate CV drawer */}
       <DetailSheet
         open={!!selectedId}
         onClose={() => setSelectedId(null)}
         width="lg"
         closeLabel={tc("close")}
         title={selName}
-        subtitle={
-          selected
-            ? selAnon
-              ? t("anonymousShort")
-              : selected.applicant.email ?? jobTitle
-            : undefined
-        }
+        subtitle={selected ? selected.applicant.email ?? jobTitle : undefined}
         avatar={
           selected ? (
             <Avatar size="lg">
-              <AvatarFallback className={selAnon ? "bg-[var(--bg-muted)] text-muted-foreground" : undefined}>
-                {selAnon ? <EyeOff aria-hidden className="size-4" strokeWidth={1.8} /> : initials(selName)}
-              </AvatarFallback>
+              {selected.applicant.avatar_url && (
+                <AvatarImage src={selected.applicant.avatar_url} alt="" />
+              )}
+              <AvatarFallback>{initials(selName)}</AvatarFallback>
             </Avatar>
           ) : undefined
         }
         status={
           selected ? (
             <>
+              {selScore != null && (
+                <span className="inline-flex items-center gap-1.5">
+                  <MatchRing
+                    score={selScore}
+                    size={34}
+                    ariaLabel={t("matchAria", { score: Math.round(selScore) })}
+                  />
+                  <StatusChip tone={fitChipTone(selScore)} size="sm">
+                    {t(fitTierKey(selScore))}
+                  </StatusChip>
+                </span>
+              )}
               <StatusChip tone={APPLICATION_STATUS_CHIP[selected.status] ?? "neutral"}>
                 {labels.status(selected.status, selected.status_label)}
               </StatusChip>
-              {selected.applicant.is_anonymous && (
-                <StatusChip tone={REVEAL_STATUS_CHIP[selected.reveal_status] ?? "neutral"}>
-                  {labels.reveal(selected.reveal_status, selected.reveal_status_label)}
+              {selected.stage && (
+                <StatusChip tone="indigo" size="sm">
+                  {selected.stage.stage_name}
                 </StatusChip>
               )}
             </>
           ) : undefined
         }
-        headerActions={selected ? <MessageCandidateButton applicationId={selected.id} /> : undefined}
+        headerActions={
+          selected ? (
+            <div className="flex items-center gap-1">
+              <div className="mr-1 flex items-center gap-0.5 rounded-lg border border-border">
+                <button
+                  type="button"
+                  aria-label={t("prevCandidate")}
+                  disabled={!prevId}
+                  onClick={() => prevId && setSelectedId(prevId)}
+                  className="inline-flex size-8 items-center justify-center rounded-l-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ChevronLeft aria-hidden className="size-4" strokeWidth={1.8} />
+                </button>
+                {currentIndex >= 0 && (
+                  <span className="min-w-[3rem] px-1 text-center type-caption tabular-nums text-muted-foreground">
+                    {currentIndex + 1}/{filteredRows.length}
+                  </span>
+                )}
+                <button
+                  type="button"
+                  aria-label={t("nextCandidate")}
+                  disabled={!nextId}
+                  onClick={() => nextId && setSelectedId(nextId)}
+                  className="inline-flex size-8 items-center justify-center rounded-r-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ChevronRight aria-hidden className="size-4" strokeWidth={1.8} />
+                </button>
+              </div>
+              <button
+                type="button"
+                aria-label={t("downloadCv")}
+                disabled={!selected.cv || downloading}
+                onClick={handleDownload}
+                className="inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                <Download aria-hidden className="size-4" strokeWidth={1.8} />
+              </button>
+              <MessageCandidateButton applicationId={selected.id} />
+            </div>
+          ) : undefined
+        }
         footer={
           selected && (canReview || canReject) ? (
             <>
@@ -763,7 +807,7 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
         {detailQuery.isPending ? (
           <div className="space-y-3 p-5">
             <div className="h-20 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
-            <div className="h-40 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
+            <div className="h-[50vh] animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
           </div>
         ) : detailQuery.isError || !selected ? (
           <div className="p-5">
@@ -779,13 +823,7 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
             />
           </div>
         ) : (
-          <CandidateDetail
-            app={selected}
-            jobTitle={jobTitle}
-            downloading={downloading}
-            onDownload={handleDownload}
-            onOpenReveal={() => setRevealOpen(true)}
-          />
+          <CandidateDetail app={selected} downloading={downloading} onDownload={handleDownload} />
         )}
       </DetailSheet>
 
@@ -804,21 +842,6 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
         fieldError={rejectFieldError}
         loading={rejectMutation.isPending || bulkRejectMutation.isPending}
         onSubmit={submitReject}
-      />
-
-      {/* Reveal request modal */}
-      <RevealModal
-        open={revealOpen}
-        onClose={() => {
-          setRevealOpen(false);
-          setReason("");
-        }}
-        reason={reason}
-        onReasonChange={setReason}
-        reasonValid={reasonValid}
-        minReason={MIN_REASON}
-        loading={requestReveal.isPending}
-        onSubmit={() => requestReveal.mutate()}
       />
     </>
   );

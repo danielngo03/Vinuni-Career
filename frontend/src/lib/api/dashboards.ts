@@ -34,13 +34,6 @@ export interface StudentRecentApplication {
   submitted_at: string;
 }
 
-export interface StudentRevealRequestItem {
-  application_id: string;
-  job_title: string | null;
-  company_name: string | null;
-  requested_at: string;
-}
-
 export interface StudentUpcomingInterview {
   id: string;
   application_id: string;
@@ -79,7 +72,6 @@ export interface StudentDashboard {
   completion_sections: CompletionSection[];
   next_actions: DashboardNextAction[];
   applications_recent: StudentRecentApplication[];
-  reveal_requests_pending: StudentRevealRequestItem[];
   upcoming_interviews: StudentUpcomingInterview[];
   upcoming_events: StudentUpcomingEvent[];
   /**
@@ -97,7 +89,6 @@ export interface PartnerDashboardMetrics {
   jobs_draft: number;
   jobs_pending_review: number;
   applications_total: number;
-  reveals_pending_response: number;
 }
 
 export interface PartnerJobAttentionItem {
@@ -111,8 +102,8 @@ export interface PartnerJobAttentionItem {
 export interface PartnerRecentApplication {
   id: string;
   job_title: string | null;
-  /** Anonymous handle, e.g. "UV-60ADB170". Never a real candidate name. */
-  candidate_handle: string;
+  /** The applicant's real name (identity is always present). */
+  candidate_name: string;
   status: string;
   status_label: string;
   submitted_at: string;
@@ -166,7 +157,6 @@ export interface PartnerOpsMetrics {
   jobs_draft: number;
   jobs_pending_review: number;
   applications_total: number;
-  reveals_pending_response: number;
   engagement: PartnerEngagementWidget;
 }
 

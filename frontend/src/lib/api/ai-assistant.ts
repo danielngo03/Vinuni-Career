@@ -35,7 +35,13 @@ export interface ChatMessage {
 export interface AiUsageWindow {
   used: number;
   limit: number;
+  /** Percent USED, 0-100 (drives the meter fill + warn/block thresholds). */
   pct: number;
+  /** ISO-8601 UTC instant the window next frees capacity. For the rolling
+   * session window this is when the oldest counted request ages out; for the
+   * weekly window it is the next UTC-Monday reset. `null` when the (rolling)
+   * window is empty and has nothing pending to reset. */
+  resets_at: string | null;
 }
 
 /** AI request usage for the sidebar meter (`GET /ai/usage/me`).

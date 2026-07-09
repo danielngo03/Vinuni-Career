@@ -118,7 +118,7 @@ fabricate.
 - Apply deadline passed during form fill: block submit with refreshed job status.
 - Selected CV archived during apply: ask student to choose another CV.
 - Application duplicate due double-click/retry: idempotency returns existing application.
-- Anonymous apply to job that does not allow it: explain policy before submit.
+- Recruiter without `candidate_access` opens an application: 403 with a permission-request path, no CV/contact leak.
 
 ### Partner Pipeline
 

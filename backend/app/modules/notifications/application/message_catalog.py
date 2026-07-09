@@ -36,30 +36,6 @@ class CatalogEntry:
 
 # notif_type -> localized title/body + preference category.
 CATALOG: dict[str, CatalogEntry] = {
-    "recruitment.reveal_requested": CatalogEntry(
-        category="application_status",
-        title={
-            "vi": "Yêu cầu tiết lộ danh tính",
-            "en": "Identity reveal requested",
-        },
-        body={
-            "vi": "{company_name} muốn xem thông tin liên hệ của bạn cho đơn ứng "
-            "tuyển ẩn danh. Bạn có thể chấp nhận hoặc từ chối.",
-            "en": "{company_name} asked to view your contact details for your "
-            "anonymous application. You can accept or decline.",
-        },
-    ),
-    "recruitment.reveal_responded": CatalogEntry(
-        category="application_status",
-        title={
-            "vi": "Phản hồi yêu cầu tiết lộ",
-            "en": "Reveal request answered",
-        },
-        body={
-            "vi": "Ứng viên đã {decision_label} yêu cầu tiết lộ danh tính của bạn.",
-            "en": "The candidate {decision_label} your identity-reveal request.",
-        },
-    ),
     "recruitment.application_under_review": CatalogEntry(
         category="application_status",
         title={
@@ -288,8 +264,8 @@ CATALOG: dict[str, CatalogEntry] = {
             "en": "Candidate review deadline reminder",
         },
         body={
-            # Partner-internal (pipeline owner/reviewer). Never carries the
-            # student's identity — the reveal handshake stays the only path.
+            # Partner-internal (pipeline owner/reviewer). Carries no identity —
+            # it is a stage/deadline reminder only.
             "vi": "Một ứng viên ở vòng “{stage_name}” cho “{job_title}” "
             "{level_label} hạn xử lý ({deadline_label}). Vui lòng xem xét sớm.",
             "en": "A candidate at the “{stage_name}” stage for “{job_title}” "

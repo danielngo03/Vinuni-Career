@@ -1,7 +1,51 @@
 # Implementation Status — VinUni Career Platform
 
-> Phiên bản: 15.4 | Cập nhật: 04/07/2026  
+> Phiên bản: 15.5 | Cập nhật: 10/07/2026  
 > Purpose: verified status for the clean greenfield rebuild. This file records facts, not wishes.
+
+---
+
+## Wave 1 (2026-07-10) — IN PROGRESS
+
+Multi-agent Wave 1 batch against `vinuni-main-submission` (UI overhaul worktree).
+Status is honest: several items are **in progress / API-wired only**. Nothing in
+this entry is browser-verified or E2E-verified yet.
+
+- **De-anon removal (product decision, owner 2026-07-10).** Anonymous apply,
+  blind-screening, and the identity-reveal handshake are removed product-wide;
+  applications are always identified. Partner CV access stays RBAC-gated
+  (`candidate_access`), watermarked on download, and audited.
+  - **Docs — updated (this agent):** CLAUDE.md owner-decisions block;
+    `SECURITY_PRIVACY.md`, `PARTNER_RBAC_ANALYTICS_SPEC.md`, `BUSINESS_LOGIC.md`
+    §4/§8, `PRODUCT_REQUIREMENTS.md` (6.1/6.3/12/13, settings), `ROADMAP.md`,
+    `BACKLOG.md`, `DISCOVERY_RECOMMENDATION_ADS_SPEC.md`, `AI_PRODUCT_SPEC.md`,
+    `ARCHITECTURE.md` (de-anon note + module comments), `SCREEN_SPECS.md`,
+    `UI_QUALITY_BAR.md`, `CV_STUDIO_SPEC.md`, `TEST_STRATEGY.md`,
+    `EDGE_CASES_FAILURE_MODES.md`, `TASK_ROUTING.md`,
+    `AGENT_PARALLEL_EXECUTION_PLAN.md`. `API_CONTRACTS.md` + `DATA_MODEL.md` carry
+    SUPERSEDED/DEPRECATED banners; ADR-0003/0006/0007/0012 still need a formal
+    `system-architect` amendment (flagged, not yet done).
+  - **Backend/frontend code — NOT done in this docs pass.** The
+    `is_anonymous`/reveal columns, `_redact_snapshot`, reveal endpoints/services,
+    and anonymized talent cards still exist in code and must be removed by
+    backend/frontend agents (see BACKLOG B-603, B-086..B-089, B-156).
+- **Talent Pool → AI semantic search (product decision).** Contract written
+  (`PARTNER_RBAC_ANALYTICS_SPEC.md` + `AI_PRODUCT_SPEC.md` §3.3): pgvector
+  embeddings over consented CVs + structured filters + LLM rerank match reasons +
+  external-JD search + deterministic fallback. **Spec only — not implemented.**
+- **Advertising → allocation engine (product decision).** Contract written
+  (`DISCOVERY_RECOMMENDATION_ADS_SPEC.md` §7.0): slot inventory, auto-allocation
+  + pacing, coarse location + major/career targeting, strict organic/recommended/
+  sponsored/university-curated separation. **Spec only — not implemented.**
+- **Partner candidate PDF-modal + CV-JD match score** — sibling agents; status
+  **in progress / API-wired** (not browser-verified here).
+- **AI quota %/reset display** — sibling agents; status **in progress /
+  API-wired** (not browser-verified here).
+- **Notifications + messages polish** — sibling agents; status **in progress**
+  (not browser-verified here).
+
+Verification note: this docs agent did not run backend/frontend gates. Treat all
+Wave 1 code items as unverified until `tester-qa` records commands + evidence.
 
 ---
 

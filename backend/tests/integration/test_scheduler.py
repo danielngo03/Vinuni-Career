@@ -10,8 +10,6 @@ Covered:
 - outbox.drain: a pending row is delivered (``sent``) by a tick; re-tick is a no-op.
 - retry/dead-letter: a forced send failure retries with backoff, then dead-letters
   after ``outbox_max_attempts`` ticks.
-- reveal.expire_sweep: an overdue pending reveal expires via the sweep, AND the
-  partner can then re-request (regression for the stale-pending re-request bug).
 - opportunities.deadline_close: an active job past its deadline auto-closes via the
   sweep with exactly one (idempotent) close notification.
 """
@@ -31,16 +29,11 @@ from app.modules.notifications.domain.models import (
     NotificationTemplate,
 )
 from app.modules.opportunities.application import job_service
-from app.modules.recruitment.application import access, apply_service, reveal_service
-from app.modules.recruitment.domain import lifecycle as recruit_lifecycle
-from app.modules.recruitment.domain.models import ApplicationRevealRequest
 from app.shared.models import AuditLog
 from sqlalchemy import func, select
 
-from tests.auth_utils import CTX
-from tests.documents_utils import make_student
 from tests.org_utils import make_org_with_admin
-from tests.recruitment_utils import apply_payload, make_builder_cv, publish_job
+from tests.recruitment_utils import publish_job
 
 
 def _now() -> datetime:
@@ -177,90 +170,7 @@ async def test_tick_retries_then_dead_letters(db_session, monkeypatch) -> None:
 
 
 # --------------------------------------------------------------------------- #
-# (c) reveal expiry sweep + re-request regression                            #
-# --------------------------------------------------------------------------- #
-
-
-async def _anonymous_application_with_reveal(db_session):
-    access.install_authorizer()
-    _pu, _porg, partner = await make_org_with_admin(db_session, display_name="Partner Co")
-    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
-    job_id = await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni, title="Live Job"
-    )
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session,
-        principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
-        ctx=CTX,
-    )
-    app_id = uuid.UUID(app["id"])
-    await reveal_service.request_reveal(
-        db_session,
-        principal=partner,
-        application_id=app_id,
-        reason="We would like to learn more about your internship experience.",
-        ctx=CTX,
-    )
-    return partner, student, app_id
-
-
-async def test_tick_expires_overdue_reveal_then_allows_re_request(db_session) -> None:
-    partner, _student, app_id = await _anonymous_application_with_reveal(db_session)
-
-    # Force the pending request overdue, then sweep via a tick.
-    req = (
-        await db_session.execute(
-            select(ApplicationRevealRequest).where(
-                ApplicationRevealRequest.application_id == app_id
-            )
-        )
-    ).scalar_one()
-    req.expires_at = _now() - timedelta(hours=1)
-    await db_session.commit()
-    original_id = req.id
-
-    await db_session.rollback()
-    results = await runner.tick(_now(), session_factory=get_sessionmaker())
-    assert results["reveal.expire_sweep"]["expired"] == 1
-
-    await db_session.rollback()
-    await db_session.refresh(req)
-    assert req.status == recruit_lifecycle.REVEAL_EXPIRED
-    assert req.responded_at is not None
-
-    # Regression: the partner can now re-request (previously blocked forever).
-    out = await reveal_service.request_reveal(
-        db_session,
-        principal=partner,
-        application_id=app_id,
-        reason="Following up — we are still very interested in this candidate.",
-        ctx=CTX,
-    )
-    assert out["status"] == recruit_lifecycle.REVEAL_PENDING
-
-    # uq_reveal_app_org forbids a second row, so the lapsed row is re-armed in place.
-    rows = (
-        (
-            await db_session.execute(
-                select(ApplicationRevealRequest).where(
-                    ApplicationRevealRequest.application_id == app_id
-                )
-            )
-        )
-        .scalars()
-        .all()
-    )
-    assert len(rows) == 1
-    assert rows[0].id == original_id
-    assert rows[0].status == recruit_lifecycle.REVEAL_PENDING
-    assert rows[0].responded_at is None
-
-
-# --------------------------------------------------------------------------- #
-# (d) job deadline auto-close sweep + idempotent close notification           #
+# (c) job deadline auto-close sweep + idempotent close notification           #
 # --------------------------------------------------------------------------- #
 
 
