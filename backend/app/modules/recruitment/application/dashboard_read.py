@@ -23,7 +23,7 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime, timedelta
 
-from sqlalchemy import func, select
+from sqlalchemy import and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.application import job_read_facade
@@ -37,6 +37,7 @@ from app.modules.recruitment.domain.models import (
     CandidateStage,
     Interview,
     Offer,
+    PipelineStage,
 )
 
 
@@ -720,3 +721,192 @@ async def hiring_outcomes_for_org(
         "recent_applications": recent_applications,
         "window_months": months,
     }
+
+
+# --------------------------------------------------------------------------- #
+# Recruiting funnel + per-stage conversion + time metrics (org scope, no PII)  #
+# --------------------------------------------------------------------------- #
+#
+# These reads unify the COARSE outcome (``applications.status``) with the FINE
+# pipeline position (``candidate_stages`` joined to ``pipeline_stages.stage_type``)
+# into the classic recruiting funnel applied -> screened -> interview -> offer ->
+# hired. "reached at least stage X" is a distinct-application count, so the funnel
+# is monotonically non-increasing by construction (a candidate at ``interview``
+# also owns the closed ``screening`` row it advanced out of). All queries are
+# grouped aggregates over the recruitment module's own tables (no cross-module
+# join, no PII) — the RBAC gate + presentation live in the analytics service.
+
+
+async def recruiting_funnel_counts(session: AsyncSession, *, org_id: uuid.UUID) -> dict[str, int]:
+    """Distinct-application counts for each recruiting-funnel step.
+
+    ``applied`` counts every non-deleted application; ``screened`` counts those
+    that entered the pipeline (own a ``candidate_stages`` row); ``interview`` /
+    ``offer`` count those that reached a stage of that ``stage_type``; ``hired``
+    counts the terminal positive outcome (``applications.status='hired'``).
+    """
+
+    applied = await count_org_applications(session, org_id=org_id)
+
+    screened = (
+        await session.execute(
+            select(func.count(func.distinct(CandidateStage.application_id)))
+            .select_from(CandidateStage)
+            .join(Application, Application.id == CandidateStage.application_id)
+            .where(Application.org_id == org_id, Application.deleted_at.is_(None))
+        )
+    ).scalar_one()
+
+    reached_rows = (
+        await session.execute(
+            select(
+                PipelineStage.stage_type,
+                func.count(func.distinct(CandidateStage.application_id)),
+            )
+            .select_from(CandidateStage)
+            .join(PipelineStage, PipelineStage.id == CandidateStage.stage_id)
+            .join(Application, Application.id == CandidateStage.application_id)
+            .where(Application.org_id == org_id, Application.deleted_at.is_(None))
+            .group_by(PipelineStage.stage_type)
+        )
+    ).all()
+    reached: dict[str, int] = {stage_type: int(count) for stage_type, count in reached_rows}
+
+    hired = (
+        await session.execute(
+            select(func.count())
+            .select_from(Application)
+            .where(
+                Application.org_id == org_id,
+                Application.status == lifecycle.HIRED,
+                Application.deleted_at.is_(None),
+            )
+        )
+    ).scalar_one()
+
+    return {
+        "applied": int(applied),
+        "screened": int(screened),
+        "interview": int(reached.get("interview", 0)),
+        "offer": int(reached.get("offer", 0)),
+        "hired": int(hired),
+    }
+
+
+async def stage_exit_breakdown(session: AsyncSession, *, org_id: uuid.UUID) -> list[dict]:
+    """Per ``stage_type`` outcome counts derived from ``candidate_stages.exit_kind``.
+
+    Returns one row per stage_type present, each with ``entered`` (all rows),
+    ``advanced`` (advanced/hired exits), ``rejected``, ``rolled_back``, and
+    ``active`` (still-open rows). The caller derives a pass rate from these.
+    """
+
+    rows = (
+        await session.execute(
+            select(
+                PipelineStage.stage_type,
+                CandidateStage.exit_kind,
+                CandidateStage.status,
+                func.count(),
+            )
+            .select_from(CandidateStage)
+            .join(PipelineStage, PipelineStage.id == CandidateStage.stage_id)
+            .join(Application, Application.id == CandidateStage.application_id)
+            .where(Application.org_id == org_id, Application.deleted_at.is_(None))
+            .group_by(PipelineStage.stage_type, CandidateStage.exit_kind, CandidateStage.status)
+        )
+    ).all()
+
+    agg: dict[str, dict[str, int]] = {}
+    for stage_type, exit_kind, status, count in rows:
+        bucket = agg.setdefault(
+            stage_type,
+            {"entered": 0, "advanced": 0, "rejected": 0, "rolled_back": 0, "active": 0},
+        )
+        n = int(count or 0)
+        bucket["entered"] += n
+        if exit_kind in (pipeline.EXIT_ADVANCED, pipeline.EXIT_HIRED):
+            bucket["advanced"] += n
+        elif exit_kind == pipeline.EXIT_REJECTED:
+            bucket["rejected"] += n
+        elif exit_kind == pipeline.EXIT_ROLLED_BACK:
+            bucket["rolled_back"] += n
+        elif status == pipeline.STAGE_ACTIVE:
+            bucket["active"] += n
+    return [{"stage_type": stage_type, **counts} for stage_type, counts in agg.items()]
+
+
+async def time_to_hire_samples(session: AsyncSession, *, org_id: uuid.UUID) -> list[float]:
+    """Days from ``applied_at`` to hire, one sample per hired application.
+
+    Hire time is the ``exit_kind='hired'`` candidate-stage's ``exited_at`` when
+    present, else the application's ``last_status_at`` (legacy/no-stage path).
+    """
+
+    rows = (
+        await session.execute(
+            select(
+                Application.applied_at,
+                Application.last_status_at,
+                CandidateStage.exited_at,
+            )
+            .select_from(Application)
+            .outerjoin(
+                CandidateStage,
+                and_(
+                    CandidateStage.application_id == Application.id,
+                    CandidateStage.exit_kind == pipeline.EXIT_HIRED,
+                ),
+            )
+            .where(
+                Application.org_id == org_id,
+                Application.status == lifecycle.HIRED,
+                Application.deleted_at.is_(None),
+            )
+        )
+    ).all()
+
+    samples: list[float] = []
+    for applied_at, last_status_at, hired_exit_at in rows:
+        end = hired_exit_at or last_status_at
+        if applied_at is None or end is None:
+            continue
+        days = (_shared.as_aware(end) - _shared.as_aware(applied_at)).total_seconds() / 86400.0
+        if days >= 0:
+            samples.append(days)
+    return samples
+
+
+async def time_in_stage_samples(
+    session: AsyncSession, *, org_id: uuid.UUID
+) -> dict[str, list[float]]:
+    """Per ``stage_type`` list of closed-stage durations in days (entered->exited)."""
+
+    rows = (
+        await session.execute(
+            select(
+                PipelineStage.stage_type,
+                CandidateStage.entered_at,
+                CandidateStage.exited_at,
+            )
+            .select_from(CandidateStage)
+            .join(PipelineStage, PipelineStage.id == CandidateStage.stage_id)
+            .join(Application, Application.id == CandidateStage.application_id)
+            .where(
+                Application.org_id == org_id,
+                Application.deleted_at.is_(None),
+                CandidateStage.exited_at.is_not(None),
+            )
+        )
+    ).all()
+
+    out: dict[str, list[float]] = {}
+    for stage_type, entered_at, exited_at in rows:
+        if entered_at is None or exited_at is None:
+            continue
+        days = (
+            _shared.as_aware(exited_at) - _shared.as_aware(entered_at)
+        ).total_seconds() / 86400.0
+        if days >= 0:
+            out.setdefault(stage_type, []).append(days)
+    return out

@@ -231,8 +231,39 @@ async def _record_apply_metrics(session: AsyncSession, *, job, principal: Princi
                 major_group=major_group,
                 year_group=year_group,
             )
+        await _record_ad_apply_attribution(session, job=job, principal=principal)
     except Exception:  # noqa: BLE001 — telemetry must never break apply submission
         pass
+
+
+async def _record_ad_apply_attribution(
+    session: AsyncSession, *, job, principal: Principal
+) -> None:
+    """Emit ``ad.apply_start`` when this apply is attributable to a live placement.
+
+    Closes the ad funnel (impression -> click -> apply_start) so campaign
+    performance can report apply attribution. Best-effort and non-breaking: if the
+    job carries no currently-live sponsored placement there is nothing to
+    attribute and we simply return.
+    """
+
+    from app.modules.advertising.application import inventory_facade
+    from app.modules.advertising.domain.lifecycle import TARGET_JOB
+
+    placement_id = await inventory_facade.active_placement_id_for_target(
+        session, target_type=TARGET_JOB, target_id=job.id
+    )
+    if placement_id is None:
+        return
+    await analytics.record_event_safe(
+        session,
+        event_type="ad.apply_start",
+        aggregate_type="ad_placement",
+        aggregate_id=placement_id,
+        actor_id=principal.user_id,
+        actor_type="student",
+        properties={"target_type": "job"},
+    )
 
 
 # --------------------------------------------------------------------------- #

@@ -51,6 +51,7 @@ from app.modules.organization.application import (
     crm_service,
     logo_service,
     membership_service,
+    my_capabilities_service,
     organization_service,
     ownership_service,
     partner_registration_service,
@@ -299,6 +300,18 @@ async def delete_department(
 # --------------------------------------------------------------------------- #
 # Members                                                                     #
 # --------------------------------------------------------------------------- #
+
+
+@org_router.get(
+    "/members/me",
+    summary="The caller's own effective capability map (grants + admin + department scope)",
+)
+async def get_my_membership_capabilities(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await my_capabilities_service.get_my_capabilities(session, principal=auth.principal)
+    return success(data)
 
 
 @org_router.get("/members", summary="List organization members")

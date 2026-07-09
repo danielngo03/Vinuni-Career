@@ -417,6 +417,8 @@ def owner_job_summary(job: Job, *, locale: str = "vi") -> dict:
             "moderation_reason_label": reason_code_label(job.moderation_reason_code, locale=locale),
             "visibility": job.visibility,
             "version": job.version,
+            "view_count": job.view_count,
+            "application_count": job.application_count,
             "created_at": _iso(job.created_at),
             "claimed_by": str(job.claimed_by) if job.claimed_by else None,
             "claimed_at": _iso(job.claimed_at),

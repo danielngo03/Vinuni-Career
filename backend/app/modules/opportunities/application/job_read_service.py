@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import uuid
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.api import presenters
@@ -57,7 +57,9 @@ async def get_job(
     ``partner_job_metrics_daily`` read model (spec §"Recruiting Intelligence Read
     Models") — only recorded on the genuine public detail-view branch below, and
     never on the owner/moderator branches (a partner viewing their own job, or a
-    university moderator reviewing it, is not a candidate engagement signal).
+    university moderator reviewing it, is not a candidate engagement signal). The
+    lifetime ``jobs.view_count`` counter is bumped on the SAME genuine-public
+    branch (coarse: owner/moderator/hidden views never count).
     """
 
     job = (
@@ -115,6 +117,13 @@ async def _record_detail_view_metric(
 
     try:
         from app.modules.analytics.application import partner_job_metrics_service as metrics
+
+        # Lifetime view counter (surfaced in the partner job read). Atomic UPDATE so
+        # concurrent views never lose an increment; part of the same one-write
+        # transaction as the metrics upsert below.
+        await session.execute(
+            update(Job).where(Job.id == job.id).values(view_count=Job.view_count + 1)
+        )
 
         effective_source = source or await metrics.default_source_for_job(session, job_id=job.id)
         student_tier = metrics.student_tier_for_persona(principal.persona)

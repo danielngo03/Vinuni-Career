@@ -19,6 +19,7 @@ from __future__ import annotations
 import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from decimal import Decimal
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -259,6 +260,100 @@ async def is_target_sponsored_now(
     )
     row = (await session.execute(stmt)).first()
     return row is not None
+
+
+async def active_placement_id_for_target(
+    session: AsyncSession,
+    *,
+    target_type: str,
+    target_id: uuid.UUID,
+    now: datetime | None = None,
+) -> uuid.UUID | None:
+    """The id of a currently-LIVE sponsored placement for ``target_id``, or ``None``.
+
+    Same "live" predicate as :func:`is_target_sponsored_now`, but returns the
+    placement id so an apply-time attribution event (``ad.apply_start``) can be
+    keyed to the placement. Read-only; best-effort caller.
+    """
+
+    now = now or _now()
+    stmt = (
+        select(SponsoredPlacement.id)
+        .where(
+            SponsoredPlacement.deleted_at.is_(None),
+            SponsoredPlacement.status == lifecycle.ACTIVE,
+            SponsoredPlacement.target_type == target_type,
+            SponsoredPlacement.target_id == target_id,
+            SponsoredPlacement.start_at <= now,
+            SponsoredPlacement.end_at > now,
+        )
+        .order_by(SponsoredPlacement.activated_at.desc().nullslast(), SponsoredPlacement.id.desc())
+        .limit(1)
+    )
+    return (await session.execute(stmt)).scalars().first()
+
+
+@dataclass(frozen=True, slots=True)
+class PlacementReportRef:
+    """Per-placement reporting reference for the OWNING org's advertising analytics.
+
+    Spend (``price_amount``) is org-internal (never PII, the org owns it) and is
+    exposed only to that org's own analytics surface. No moderator note, no
+    payment reference, no cross-org data.
+    """
+
+    placement_id: uuid.UUID
+    org_id: uuid.UUID
+    target_type: str
+    target_id: uuid.UUID
+    placement_type: str
+    status: str
+    disclosure_class: str
+    price_amount: Decimal | None
+    currency: str
+    start_at: datetime
+    end_at: datetime
+    created_at: datetime
+
+
+async def list_org_placements_for_reporting(
+    session: AsyncSession,
+    *,
+    org_id: uuid.UUID,
+    statuses: tuple[str, ...] | None = None,
+) -> list[PlacementReportRef]:
+    """Non-deleted sponsored placements for ``org_id`` (newest first) as report refs.
+
+    ``statuses`` optionally filters to a lifecycle subset (e.g. only delivering /
+    delivered campaigns). Tenant-scoped by ``org_id`` — the analytics service that
+    calls this has already RBAC-gated the caller to that org.
+    """
+
+    stmt = select(SponsoredPlacement).where(
+        SponsoredPlacement.org_id == org_id,
+        SponsoredPlacement.deleted_at.is_(None),
+    )
+    if statuses:
+        stmt = stmt.where(SponsoredPlacement.status.in_(statuses))
+    stmt = stmt.order_by(SponsoredPlacement.created_at.desc(), SponsoredPlacement.id.desc())
+    rows = (await session.execute(stmt)).scalars().all()
+    return [
+        PlacementReportRef(
+            placement_id=p.id,
+            org_id=p.org_id,
+            target_type=p.target_type,
+            target_id=p.target_id,
+            placement_type=p.placement_type,
+            status=p.status,
+            disclosure_class=p.disclosure_class,
+            price_amount=p.price_amount,
+            currency=p.currency,
+            start_at=p.start_at,
+            end_at=p.end_at,
+            created_at=p.created_at,
+        )
+        for p in rows
+    ]
 
 
 async def count_active_sponsored(session: AsyncSession, *, now: datetime | None = None) -> int:
