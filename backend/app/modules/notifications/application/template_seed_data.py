@@ -204,6 +204,41 @@ DEFAULT_TEMPLATES: list[dict] = [
         },
     },
     {
+        # Message-request accepted email (Messaging V2). PII-safe: a MASKED
+        # counterpart label + a neutral prompt + the internal deep link — never the
+        # message body. Sent to the request INITIATOR when the other side accepts.
+        "key": "message.request_accepted",
+        "channel": "email",
+        "variables_schema": {
+            "allowed": ["name", "email", "counterpart_label", "action_url"],
+            "required": ["counterpart_label"],
+        },
+        "locales": {
+            "vi": {
+                "subject": "Lời mời nhắn tin đã được chấp nhận — VinUni Career",
+                "body": (
+                    "Chào {{name}},\n\n"
+                    "{{counterpart_label}} đã chấp nhận lời mời nhắn tin của bạn "
+                    "trên VinUni Career. Bây giờ bạn có thể bắt đầu trò chuyện — mở "
+                    "liên kết bên dưới:\n\n"
+                    "{{action_url}}\n\n"
+                    "Trân trọng,\nVinUni Career Center"
+                ),
+            },
+            "en": {
+                "subject": "Your message request was accepted — VinUni Career",
+                "body": (
+                    "Hi {{name}},\n\n"
+                    "{{counterpart_label}} accepted your message request on VinUni "
+                    "Career. You can now start the conversation — open the link "
+                    "below:\n\n"
+                    "{{action_url}}\n\n"
+                    "Best regards,\nVinUni Career Center"
+                ),
+            },
+        },
+    },
+    {
         "key": "partner.registration_received",
         "channel": "email",
         "variables_schema": {

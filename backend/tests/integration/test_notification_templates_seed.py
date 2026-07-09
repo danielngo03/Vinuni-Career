@@ -73,6 +73,7 @@ async def test_seeded_templates_render_for_all_locales(db_session) -> None:
                 "venue_or_format": "VinUni Campus",
                 "waitlist_position": 3,
                 "sender_label": "Acme Corp",
+                "counterpart_label": "Acme Corp",
                 "provider": "Google",
                 "otp_code": "123456",
                 "ttl_minutes": "10",
