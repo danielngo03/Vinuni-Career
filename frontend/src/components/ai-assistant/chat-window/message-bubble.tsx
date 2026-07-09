@@ -37,7 +37,15 @@ type ChartSpec = {
   data?: Record<string, number | string>[];
 };
 
-/** A render artifact the backend attaches to an assistant message (download/chart). */
+/** A funnel/flow diagram spec the backend emits for the FE to draw (no lib). */
+type DiagramSpec = {
+  type?: string;
+  title?: string;
+  note?: string;
+  stages?: { label: string; count: number; pct: number }[];
+};
+
+/** A render artifact the backend attaches to an assistant message (download/chart/diagram). */
 type MessageArtifact = {
   kind: string;
   download_path?: string;
@@ -45,6 +53,7 @@ type MessageArtifact = {
   row_count?: number;
   format?: string;
   chart?: ChartSpec;
+  diagram?: DiagramSpec;
 };
 
 function readArtifacts(message: ChatMessage): MessageArtifact[] {
@@ -160,6 +169,8 @@ function MessageArtifacts({ message }: { message: ChatMessage }) {
           <DownloadArtifact key={i} artifact={a} />
         ) : a.kind === "chart" && a.chart ? (
           <ChartArtifact key={i} artifact={a} />
+        ) : a.kind === "diagram" && a.diagram ? (
+          <FunnelDiagram key={i} artifact={a} />
         ) : null,
       )}
     </div>
@@ -302,6 +313,44 @@ function ChartArtifact({ artifact }: { artifact: MessageArtifact }) {
           )}
         </ResponsiveContainer>
       </div>
+    </figure>
+  );
+}
+
+/** Render a backend-emitted hiring-funnel diagram (vertical flow, no library). */
+function FunnelDiagram({ artifact }: { artifact: MessageArtifact }) {
+  const diagram = artifact.diagram;
+  if (!diagram || !Array.isArray(diagram.stages) || diagram.stages.length === 0) return null;
+  return (
+    <figure className="mt-1 w-full rounded-xl border border-[var(--glass-border-strong)] bg-[var(--surface-card)]/60 p-3">
+      {diagram.title && (
+        <figcaption className="mb-2 text-xs font-semibold text-[var(--text-secondary)]">
+          {diagram.title}
+        </figcaption>
+      )}
+      <div className="flex flex-col gap-1.5">
+        {diagram.stages.map((st, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-24 shrink-0 truncate text-[11px] text-[var(--text-secondary)]">
+              {st.label}
+            </span>
+            <div className="relative h-6 flex-1 overflow-hidden rounded-md bg-[var(--surface-muted,rgba(0,0,0,0.04))]">
+              <div
+                className="flex h-full items-center rounded-md bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-teal)] px-2 transition-all"
+                style={{ width: `${Math.max(st.pct, 6)}%` }}
+              >
+                <span className="text-[11px] font-semibold text-white">{st.count}</span>
+              </div>
+            </div>
+            <span className="w-10 shrink-0 text-right text-[11px] tabular-nums text-[var(--text-muted)]">
+              {st.pct}%
+            </span>
+          </div>
+        ))}
+      </div>
+      {diagram.note && (
+        <p className="mt-2 text-[10px] text-[var(--text-muted)]">{diagram.note}</p>
+      )}
     </figure>
   );
 }

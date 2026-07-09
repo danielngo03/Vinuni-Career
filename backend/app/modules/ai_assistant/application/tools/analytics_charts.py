@@ -12,6 +12,8 @@ org and soft-delete). No provider/model/token internals ever appear here.
 
 from __future__ import annotations
 
+from typing import Any
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.shared.permissions import Principal
@@ -74,8 +76,7 @@ async def get_recruitment_analytics_chart(
         if chart == "funnel":
             rows = await rr.analytics_application_funnel(session, org_id=org_id)
             data = [
-                {"label": _status_label(r["status"], locale), "value": r["count"]}
-                for r in rows
+                {"label": _status_label(r["status"], locale), "value": r["count"]} for r in rows
             ]
             spec = {
                 "type": "bar",
@@ -96,9 +97,7 @@ async def get_recruitment_analytics_chart(
             }
         elif chart == "top_jobs":
             rows = await rr.analytics_top_jobs(session, org_id=org_id, limit=6)
-            data = [
-                {"label": r["title"], "value": r["application_count"]} for r in rows
-            ]
+            data = [{"label": r["title"], "value": r["application_count"]} for r in rows]
             spec = {
                 "type": "bar",
                 "title": title,
@@ -137,15 +136,75 @@ async def get_recruitment_analytics_chart(
 
     # Compact summary for the model's context (the full data goes only to the FE
     # via ``render``, which native_loop strips before the model sees the result).
+    data_rows: list[dict[str, Any]] = [row for row in spec.get("data", []) if isinstance(row, dict)]
     total = sum(
-        (row.get("value") or row.get("active", 0) + row.get("rejected", 0))
-        for row in spec["data"]
+        row.get("value") or row.get("active", 0) + row.get("rejected", 0) for row in data_rows
     )
     return {
         "ok": True,
         "chart": chart,
         "title": title,
-        "point_count": len(spec["data"]),
+        "point_count": len(data_rows),
         "total": total,
         "render": {"kind": "chart", "chart": spec},
+    }
+
+
+# Ordered active-pipeline progression for the funnel-flow diagram.
+_FUNNEL_ORDER = ["submitted", "under_review", "shortlisted", "interview", "offer", "hired"]
+
+
+async def get_hiring_funnel_diagram(
+    session: AsyncSession, principal: Principal, args: dict
+) -> dict:
+    """Render the org's hiring funnel as a stage-flow diagram with drop-off.
+
+    Unlike the bar chart, this shows the PROGRESSION between pipeline stages and
+    the conversion (% of applicants who reached each stage vs the first) — the
+    recruiter's drop-off view. Aggregate counts only, org-scoped.
+    """
+    if not principal.is_authenticated or principal.org_id is None:
+        return {"ok": False, "error": "partner_auth_required"}
+    locale = _loc(args.get("locale") or "vi")
+    title = "Phễu tuyển dụng" if locale == "vi" else "Hiring funnel"
+
+    from app.modules.recruitment.application import dashboard_read as rr
+
+    try:
+        rows = await rr.analytics_application_funnel(session, org_id=principal.org_id)
+    except Exception:
+        return {"ok": False, "error": "tool_failed"}
+
+    by_status = {r["status"]: r["count"] for r in rows}
+    # Progression stages up to the deepest one that has candidates (trim trailing 0s).
+    ordered = [(s, by_status.get(s, 0)) for s in _FUNNEL_ORDER]
+    while ordered and ordered[-1][1] == 0:
+        ordered.pop()
+    if not ordered or ordered[0][1] == 0:
+        return {"ok": True, "empty": True, "title": title}
+
+    top = ordered[0][1]
+    note = (
+        "% = phần ứng viên đạt đến mỗi vòng so với vòng đầu tiên."
+        if locale == "vi"
+        else "% = share of applicants who reached each stage vs the first."
+    )
+    stages = [
+        {
+            "label": _status_label(s, locale),
+            "count": c,
+            # % of the first stage that reached this stage (drop-off view).
+            "pct": round(100 * c / top) if top else 0,
+        }
+        for s, c in ordered
+    ]
+    return {
+        "ok": True,
+        "title": title,
+        "stage_count": len(stages),
+        "top_stage_count": top,
+        "render": {
+            "kind": "diagram",
+            "diagram": {"type": "funnel", "title": title, "stages": stages, "note": note},
+        },
     }
