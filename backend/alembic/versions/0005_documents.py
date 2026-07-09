@@ -309,7 +309,7 @@ def upgrade() -> None:
                     name_en=spec["name_en"],
                     category=spec["category"],
                     layout=json.dumps(spec["layout_schema"]),
-                    is_premium=spec["is_premium"],
+                    is_premium=spec.get("is_premium", False),
                 )
             )
     else:
