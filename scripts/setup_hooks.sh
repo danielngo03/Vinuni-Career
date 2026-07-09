@@ -1,26 +1,25 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# Install git pre-push hook for AI log submission (POSIX / Git Bash).
+# Run once after cloning: bash scripts/setup_hooks.sh
+set -e
 
-ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-cd "$ROOT"
+HOOK_FILE=".git/hooks/pre-push"
 
-mkdir -p .ai-log/archive .git/hooks
+cat > "$HOOK_FILE" <<'EOF'
+#!/usr/bin/env bash
+# Pre-push: sweep recent Antigravity / Gemini prompts, then submit AI logs.
+# Uses the cross-platform Python launcher so it works whether the user
+# has python3, python, or only the `py` launcher (Windows).
+bash scripts/_pyrun.sh scripts/log_antigravity.py --auto || true
+bash scripts/_pyrun.sh scripts/submit_log.py || true
+exit 0  # Never block push, even if either step fails
+EOF
+
+chmod +x "$HOOK_FILE"
+chmod +x scripts/_pyrun.sh 2>/dev/null || true
+echo "[ai-log] Git pre-push hook installed."
+
+mkdir -p .ai-log
 touch .ai-log/.gitkeep
 
-cat > .git/hooks/pre-push <<'HOOK'
-#!/usr/bin/env bash
-set -euo pipefail
-
-ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-cd "$ROOT"
-
-bash scripts/_pyrun.sh scripts/log_antigravity.py || true
-bash scripts/_pyrun.sh scripts/submit_log.py
-HOOK
-
-chmod +x .git/hooks/pre-push
-chmod +x scripts/_pyrun.sh scripts/log_hook.py scripts/log_manual.py scripts/log_antigravity.py scripts/submit_log.py scripts/setup_hooks.sh
-
-echo "AI logging hooks installed."
-echo "Pre-push hook: .git/hooks/pre-push"
-echo "Log file: .ai-log/session.jsonl"
+echo "[ai-log] Setup complete. Configure AI_LOG_SERVER in your .env file."

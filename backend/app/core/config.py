@@ -97,6 +97,8 @@ class Settings(BaseSettings):
     # policy, V1 flat). Single weekly window, resets at UTC Monday. The daily
     # request-count window was removed (WS-1) — cost-weighted metering is now the
     # masked-energy account; this weekly cap is a coarse safety net for chat.
+    ai_session_request_limit: int = 50
+    ai_session_window_hours: int = 3
     ai_weekly_request_limit: int = 200
     openai_compatible_base_url: str = "https://openrouter.ai/api/v1"
 

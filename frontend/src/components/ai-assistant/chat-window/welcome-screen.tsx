@@ -1,16 +1,25 @@
 "use client";
 
-import { Robot, Sparkle, Spinner } from "@phosphor-icons/react";
+import { Sparkle, Spinner } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
-import { QUICK_PROMPTS, SUGGESTION_ITEMS } from "./constants";
+import {
+  QUICK_PROMPTS_BY_PERSONA,
+  SUGGESTION_ITEMS_BY_PERSONA,
+  type ChatPersona,
+} from "./constants";
 
 export function WelcomeScreen({
   t,
   onPrompt,
+  persona = "student",
 }: {
   t: (k: string) => string;
   onPrompt: (prompt: string) => void;
+  persona?: ChatPersona;
 }) {
+  const isPartner = persona === "partner";
+  const prompts = QUICK_PROMPTS_BY_PERSONA[persona] ?? QUICK_PROMPTS_BY_PERSONA.student;
+  const links = SUGGESTION_ITEMS_BY_PERSONA[persona] ?? SUGGESTION_ITEMS_BY_PERSONA.student;
   return (
     <div className="flex flex-col items-center gap-4 py-2 text-center">
       {/* Glowing avatar */}
@@ -23,16 +32,16 @@ export function WelcomeScreen({
 
       <div>
         <p className="text-sm font-bold text-[var(--text-primary)]">
-          {t("welcomeTitle")}
+          {t(isPartner ? "welcomeTitlePartner" : "welcomeTitle")}
         </p>
         <p className="mt-1 text-xs text-[var(--text-secondary)]">
-          {t("welcomeBody")}
+          {t(isPartner ? "welcomeBodyPartner" : "welcomeBody")}
         </p>
       </div>
 
       {/* Quick-prompt chips */}
       <div className="flex w-full flex-wrap gap-1.5 justify-center">
-        {QUICK_PROMPTS.map((prompt) => (
+        {prompts.map((prompt) => (
           <button
             key={prompt}
             type="button"
@@ -46,7 +55,7 @@ export function WelcomeScreen({
 
       {/* Link shortcuts */}
       <div className="grid w-full grid-cols-2 gap-2">
-        {SUGGESTION_ITEMS.slice(0, 4).map(({ icon: Icon, key, href }) => (
+        {links.slice(0, 4).map(({ icon: Icon, key, href }) => (
           <Link
             key={key}
             href={href as Parameters<typeof Link>[0]["href"]}
@@ -83,7 +92,7 @@ export function GuestPrompt({ t }: { t: (k: string) => string }) {
         className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)]"
         style={{ boxShadow: "0 4px 20px rgba(45,95,166,0.25)" }}
       >
-        <Robot aria-hidden weight="fill" className="size-7 text-white" />
+        <Sparkle aria-hidden weight="fill" className="size-7 text-white" />
       </span>
       <p className="text-sm font-bold text-[var(--text-primary)]">{t("guestTitle")}</p>
       <p className="text-xs text-[var(--text-secondary)]">{t("guestBody")}</p>

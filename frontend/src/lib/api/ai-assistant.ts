@@ -1,4 +1,4 @@
-import { api } from "./client";
+import { api, apiUpload } from "./client";
 
 /* ------------------------------- Wire types ------------------------------- */
 
@@ -31,7 +31,7 @@ export interface ChatMessage {
 
 /* --------------------------------- Calls ---------------------------------- */
 
-/** One AI quota window (day or week) for the sidebar meter. */
+/** One AI quota window for the sidebar meter. */
 export interface AiUsageWindow {
   used: number;
   limit: number;
@@ -40,14 +40,14 @@ export interface AiUsageWindow {
 
 /** AI request usage for the sidebar meter (`GET /ai/usage/me`).
  * Request counts only — the backend never exposes cost/token/provider data.
- * `blocked` mirrors the gateway gate: when either window is exhausted, new AI
- * requests are refused with 409 QUOTA_EXCEEDED (week dominates day). */
+ * `blocked` mirrors the gateway gate: weekly exhaustion refuses new AI
+ * requests with 409 QUOTA_EXCEEDED; the rolling session window is a soft warning. */
 export interface AiUsageSummary {
-  day: AiUsageWindow;
+  session: AiUsageWindow;
   week: AiUsageWindow;
   warning: boolean;
   blocked: boolean;
-  blocked_scope: "day" | "week" | null;
+  blocked_scope: "session" | "week" | null;
 }
 
 /** One product-feature bucket in the usage breakdown. `feature` is a stable
@@ -69,8 +69,6 @@ export interface AiUsageActivity {
  * Extends the sidebar meter with reset timing, a per-feature breakdown, and a
  * recent-activity list. Still request-count only: no provider/model/token/cost. */
 export interface AiUsageDetail extends AiUsageSummary {
-  /** ISO-8601 UTC instant the daily window resets. */
-  day_reset: string;
   /** ISO-8601 UTC instant the weekly window resets. */
   week_reset: string;
   /** Number of days the breakdown/total cover (default 30). */
@@ -79,6 +77,16 @@ export interface AiUsageDetail extends AiUsageSummary {
   total: number;
   by_feature: AiUsageFeatureCount[];
   recent: AiUsageActivity[];
+}
+
+export interface ChatAttachment {
+  id: string;
+  session_id: string;
+  filename: string;
+  content_type: string;
+  size: number;
+  status: string;
+  created_at: string;
 }
 
 export const aiAssistantApi = {
@@ -101,6 +109,11 @@ export const aiAssistantApi = {
   /** List the caller's recent sessions. */
   listSessions(): Promise<ChatSession[]> {
     return api.get<ChatSession[]>("/ai/chat/sessions");
+  },
+
+  /** Rename a chat session. */
+  renameSession(sessionId: string, title: string): Promise<ChatSession> {
+    return api.patch<ChatSession>(`/ai/chat/sessions/${sessionId}`, { title });
   },
 
   /** Get messages for a session. */
@@ -130,4 +143,16 @@ export const aiAssistantApi = {
   archiveSession(sessionId: string): Promise<{ status: string }> {
     return api.delete<{ status: string }>(`/ai/chat/sessions/${sessionId}`);
   },
+
+  /** Upload a file/image to a chat session for AI analysis (owner only). */
+  async uploadAttachment(sessionId: string, file: File): Promise<ChatAttachment> {
+    const form = new FormData();
+    form.append("file", file);
+    const res = await apiUpload<{ data: ChatAttachment }>(
+      `/ai/chat/sessions/${sessionId}/attachments`,
+      form,
+    );
+    return res.data;
+  },
+
 };

@@ -1,19 +1,22 @@
-"""Per-user AI request quota: the weekly window.
+"""Per-user AI request quota: rolling session + weekly windows.
 
 Counts ``ai_usage_log`` rows for the caller (request counts only — no cost,
 token, latency, or provider data ever leaves the backend, per AI_PRODUCT_SPEC
 leakage rules) against one platform allowance:
 
-- ``AI_WEEKLY_REQUEST_LIMIT`` — resets at UTC Monday 00:00.
+- ``AI_SESSION_REQUEST_LIMIT`` — rolling short-session soft-warning window.
+- ``AI_WEEKLY_REQUEST_LIMIT`` — hard cap, resets at UTC Monday 00:00.
 
 The daily request-count window was removed (WS-1): fine-grained, cost-weighted
-metering is now the masked-energy account (:mod:`app.modules.billing.application.energy_service`);
-this legacy request-count gate keeps only the weekly hard cap as a coarse
-safety net for chat.
+metering is now the masked-energy account
+(:mod:`app.modules.billing.application.energy_service`). This legacy
+request-count surface keeps a rolling session warning and weekly hard cap as a
+coarse safety net for chat.
 
 ``my_usage()`` powers the sidebar meter; ``enforce_quota()`` is the hard gate
 called before running an AI request — when the weekly window is exhausted the
-request is refused with ``409 QUOTA_EXCEEDED``. The UI warns from 80%.
+request is refused with ``409 QUOTA_EXCEEDED``. The UI warns from 80% in either
+window.
 """
 
 from __future__ import annotations
@@ -116,18 +119,25 @@ def _window(used: int, limit: int) -> dict:
 
 
 async def my_usage(session: AsyncSession, *, principal: Any) -> dict:
-    """Return this week's AI request usage for the caller."""
+    """Return the caller's rolling session and weekly AI request usage."""
     settings = get_settings()
     now = datetime.now(UTC)
 
+    session_used = await _count_since(
+        session,
+        principal.user_id,
+        now - timedelta(hours=max(1, settings.ai_session_window_hours)),
+    )
     week_used = await _count_since(session, principal.user_id, _week_start(now))
+    session_window = _window(session_used, settings.ai_session_request_limit)
     week = _window(week_used, settings.ai_weekly_request_limit)
 
     blocked_scope = "week" if week["pct"] >= 100 else None
 
     return {
+        "session": session_window,
         "week": week,
-        "warning": week["pct"] >= WARNING_THRESHOLD_PCT,
+        "warning": max(session_window["pct"], week["pct"]) >= WARNING_THRESHOLD_PCT,
         "blocked": blocked_scope is not None,
         "blocked_scope": blocked_scope,
     }
@@ -151,7 +161,13 @@ async def my_usage_detail(
     settings = get_settings()
     now = datetime.now(UTC)
 
+    session_used = await _count_since(
+        session,
+        principal.user_id,
+        now - timedelta(hours=max(1, settings.ai_session_window_hours)),
+    )
     week_used = await _count_since(session, principal.user_id, _week_start(now))
+    session_window = _window(session_used, settings.ai_session_request_limit)
     week = _window(week_used, settings.ai_weekly_request_limit)
     blocked_scope = "week" if week["pct"] >= 100 else None
 
@@ -208,8 +224,9 @@ async def my_usage_detail(
             break
 
     return {
+        "session": session_window,
         "week": week,
-        "warning": week["pct"] >= WARNING_THRESHOLD_PCT,
+        "warning": max(session_window["pct"], week["pct"]) >= WARNING_THRESHOLD_PCT,
         "blocked": blocked_scope is not None,
         "blocked_scope": blocked_scope,
         "week_reset": _iso_utc(_week_start(now) + timedelta(days=7)),

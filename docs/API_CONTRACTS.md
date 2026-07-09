@@ -1998,12 +1998,13 @@ token counts, cost, or latency (`docs/AI_PRODUCT_SPEC.md` §15). Counts come fro
 real `ai_usage_log` rows for the authenticated caller.
 
 - `GET /api/v1/ai/usage/me` — the sidebar meter. Returns
-  `{ day, week, warning, blocked, blocked_scope }` where each window is
-  `{ used, limit, pct }`. `blocked_scope` is `"day" | "week" | null` and the
-  weekly window dominates (an exhausted week blocks even with daily room). This
-  is the same gate the gateway enforces with `409 QUOTA_EXCEEDED`.
+  `{ session, week, warning, blocked, blocked_scope }` where each window is
+  `{ used, limit, pct }`. `session` is a rolling short-session warning window;
+  `week` is the hard-cap window. `blocked_scope` is `"week" | null` for the
+  shipped hard gate: an exhausted week blocks new AI calls with
+  `409 QUOTA_EXCEEDED`.
 - `GET /api/v1/ai/usage/summary` — the billing/usage panel. Extends `/me` with:
-  - `day_reset`, `week_reset` — ISO-8601 UTC instants the windows reset;
+  - `week_reset` — ISO-8601 UTC instant the weekly window resets;
   - `window_days` (default `30`) and `total` — total requests in the window
     (includes system tasks not shown per-feature);
   - `by_feature: [{ feature, count }]` — sorted desc. `feature` is a stable

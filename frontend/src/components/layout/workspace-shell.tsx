@@ -3,14 +3,10 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { CircleNotch } from "@phosphor-icons/react";
-import { HelpCircle } from "lucide-react";
 import { Sidebar } from "./sidebar";
 import { Topbar } from "./topbar";
-import { WorkspaceFooter } from "./workspace-footer";
 import { LoginModal } from "./login-modal";
 import { BrandMark } from "./brand-mark";
-import { FeedbackModal } from "./feedback-modal";
-import { HelpSupportModal } from "./help-support-modal";
 import { AiChatWindow } from "@/components/ai-assistant/ai-chat-window";
 import { Sheet } from "@/components/ui";
 import { usePathname, useRouter } from "@/i18n/navigation";
@@ -42,8 +38,6 @@ export function WorkspaceShell({
     setSidebarCollapsed,
   } = useUiStore();
   const [aiOpen, setAiOpen] = useState(false);
-  const [helpOpen, setHelpOpen] = useState(false);
-  const [feedbackOpen, setFeedbackOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const isFullCanvasRoute =
@@ -132,57 +126,75 @@ export function WorkspaceShell({
         />
       </Sheet>
 
-      {/* AI chat — available in all workspace personas */}
-      <AiChatWindow open={aiOpen} onClose={() => setAiOpen(false)} />
-
-      <div className="pointer-events-none fixed bottom-4 right-4 z-40">
-        <button
-          type="button"
-          onClick={() => setHelpOpen(true)}
-          aria-label={tNav("help")}
-          className="group/help-fab pointer-events-auto relative flex size-12 items-center justify-center rounded-full border border-[var(--glass-border-strong)] bg-[var(--btn-primary-bg)] text-[var(--btn-primary-fg)] shadow-[0_8px_24px_rgba(0,0,0,0.18)] outline-none transition-colors duration-200 hover:bg-[var(--btn-primary-hover)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/35 focus-visible:ring-offset-2"
-        >
-          <HelpCircle aria-hidden strokeWidth={1.9} className="size-5" />
-          <span className="pointer-events-none absolute right-[calc(100%+0.65rem)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-1.5 text-xs font-semibold text-[var(--text-primary)] opacity-0 shadow-[var(--shadow-sm)] transition-opacity duration-150 group-hover/help-fab:opacity-100 group-focus-visible/help-fab:opacity-100">
-            {tNav("help")}
-          </span>
-        </button>
-      </div>
-
-      <HelpSupportModal
-        open={helpOpen}
-        onClose={() => setHelpOpen(false)}
-        onOpenFeedback={() => setFeedbackOpen(true)}
-      />
-      <FeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
-
       {/* Main column — left offset only applies at the lg breakpoint where the fixed sidebar shows */}
-      <div className="flex min-h-dvh flex-col transition-[padding-left] duration-200 motion-reduce:transition-none lg:pl-[var(--sidebar-offset)]">
-        <Topbar persona={persona} />
+      <div
+        className={cn(
+          "flex min-h-dvh flex-col transition-[padding-left] duration-200 motion-reduce:transition-none lg:pl-[var(--sidebar-offset)]",
+          aiOpen && "xl:h-dvh xl:min-h-0 xl:overflow-hidden",
+        )}
+      >
+        <Topbar
+          persona={persona}
+          onAiClick={() => setAiOpen((open) => !open)}
+          aiActive={aiOpen}
+        />
         <div
           className={cn(
-            "flex flex-1 flex-col bg-[var(--surface-card)] shadow-[inset_1px_1px_0_rgba(0,0,0,0.04)] lg:rounded-tl-[28px]",
+            "flex min-h-0 flex-1 flex-col bg-[var(--surface-card)] shadow-[inset_1px_1px_0_rgba(0,0,0,0.04)] lg:rounded-tl-[28px]",
+            aiOpen && "xl:bg-[#f7f6f2] xl:shadow-none",
             isFullCanvasRoute && "overflow-hidden",
           )}
         >
-          <main
-            id="main-content"
-            tabIndex={-1}
+          <div
             className={cn(
-              "flex-1 outline-none",
-              isFullCanvasRoute ? "flex min-h-0 p-0" : "px-4 py-6 lg:px-6",
+              "flex min-h-0 flex-1",
+              aiOpen &&
+              "xl:grid xl:grid-cols-[minmax(0,5fr)_minmax(380px,2fr)] xl:gap-5 xl:overflow-hidden",
             )}
           >
-            <div
+            <main
+              id="main-content"
+              tabIndex={-1}
               className={cn(
-                "w-full",
-                isFullCanvasRoute ? "min-h-0 flex-1" : "mx-auto max-w-7xl",
+                "min-w-0 flex-1 outline-none transition-[padding] duration-200 motion-reduce:transition-none",
+                isFullCanvasRoute ? "flex min-h-0 p-0" : "px-4 py-6 lg:px-6",
+                aiOpen &&
+                  "xl:min-h-0 xl:overflow-hidden xl:bg-[var(--surface-card)] xl:rounded-r-[24px] xl:rounded-tl-[28px]",
+                aiOpen &&
+                  !isFullCanvasRoute &&
+                  "xl:px-4 xl:text-[0.875rem] xl:[&_.text-sm]:text-[0.8125rem] xl:[&_.text-base]:text-[0.875rem] xl:[&_.text-lg]:text-[1rem] xl:[&_.text-xl]:text-[1.125rem] xl:[&_.text-2xl]:text-[1.25rem]",
               )}
             >
-              {children}
-            </div>
-          </main>
-          <WorkspaceFooter />
+              <div
+                className={cn(
+                  "w-full",
+                  isFullCanvasRoute
+                    ? "min-h-0 flex-1"
+                    : aiOpen
+                      ? "mx-0 max-w-none xl:h-full xl:overflow-y-auto xl:pr-2"
+                      : "mx-auto max-w-7xl",
+                )}
+              >
+                {children}
+              </div>
+            </main>
+
+            {aiOpen && (
+              <aside
+                aria-label={tNav("aiAssistant")}
+                className={cn(
+                  "fixed inset-x-3 bottom-3 top-[72px] z-50 overflow-hidden rounded-2xl bg-[var(--surface-card)] shadow-[0_18px_60px_rgba(11,34,57,0.18)]",
+                  "xl:static xl:inset-auto xl:z-auto xl:h-full xl:min-h-0 xl:rounded-l-[24px] xl:rounded-r-none xl:shadow-[0_1px_2px_rgba(11,34,57,0.04)]",
+                )}
+              >
+                <AiChatWindow
+                  open={aiOpen}
+                  onClose={() => setAiOpen(false)}
+                  variant="embedded"
+                />
+              </aside>
+            )}
+          </div>
         </div>
       </div>
 

@@ -11,3 +11,7 @@ class SendMessageRequest(BaseModel):
 
 class CreateSessionRequest(BaseModel):
     pass
+
+
+class UpdateSessionRequest(BaseModel):
+    title: str = Field(..., min_length=1, max_length=120)

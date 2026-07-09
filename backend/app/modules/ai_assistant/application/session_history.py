@@ -112,6 +112,23 @@ async def archive_session(
     return {"status": "archived"}
 
 
+async def rename_session(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    session_id: uuid.UUID,
+    title: str,
+) -> dict:
+    """Rename a chat session owned by the principal."""
+    if not principal.is_authenticated:
+        raise AuthRequiredError()
+    chat = await require_session(session, principal, session_id)
+    chat.title = title.strip()[:120]
+    await session.commit()
+    await session.refresh(chat)
+    return serialize_session(chat)
+
+
 async def require_session(
     session: AsyncSession,
     principal: Principal,

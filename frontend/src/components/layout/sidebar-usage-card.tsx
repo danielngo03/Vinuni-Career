@@ -10,10 +10,9 @@ import { cn } from "@/lib/utils";
 
 /**
  * Sidebar footer card: AI request quota meters (real counts from
- * `GET /ai/usage/me` — daily window + weekly window, the same two gates the
- * backend enforces with 409 QUOTA_EXCEEDED) and, for partners, the current
+ * `GET /ai/usage/me` — rolling session + weekly request windows) and, for partners, the current
  * subscription plan (`GET /billing/subscription`). Warns at ≥80%, shows the
- * blocked state (week dominates day) with an upgrade link into billing.
+ * blocked state with an upgrade link into billing.
  * Hidden while loading, on error, and in the collapsed icon rail.
  */
 export function SidebarUsageCard({ persona }: { persona: Persona }) {
@@ -54,10 +53,10 @@ export function SidebarUsageCard({ persona }: { persona: Persona }) {
       </p>
 
       <UsageMeter
-        label={t("dayLabel")}
-        window={u.day}
-        blocked={u.blocked_scope === "day"}
-        countLabel={t("count", { used: u.day.used, limit: u.day.limit })}
+        label={t("sessionLabel")}
+        window={u.session}
+        blocked={u.blocked_scope === "session"}
+        countLabel={t("count", { used: u.session.used, limit: u.session.limit })}
       />
       <UsageMeter
         label={t("weekLabel")}
@@ -68,7 +67,7 @@ export function SidebarUsageCard({ persona }: { persona: Persona }) {
 
       {u.blocked ? (
         <p className="mt-2 text-[0.6875rem] font-medium text-[var(--red-600)]">
-          {u.blocked_scope === "week" ? t("weekLimitReached") : t("dayLimitReached")}
+          {u.blocked_scope === "week" ? t("weekLimitReached") : t("sessionLimitReached")}
         </p>
       ) : u.warning ? (
         <p className="mt-2 text-[0.6875rem] font-medium text-[var(--amber-700)]">

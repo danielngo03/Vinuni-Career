@@ -55,12 +55,19 @@ class FallbackChainProvider(AIProvider):
         alias: str,
         temperature: float = 0.2,
         max_tokens: int = 1024,
+        tools: list[dict] | None = None,
+        tool_choice: str | None = None,
     ) -> AICompletion:
         last_exc: AIUnavailableError | None = None
         for position, (provider_name, provider) in enumerate(self._entries):
             try:
                 result = await provider.complete(
-                    messages, alias=alias, temperature=temperature, max_tokens=max_tokens
+                    messages,
+                    alias=alias,
+                    temperature=temperature,
+                    max_tokens=max_tokens,
+                    tools=tools,
+                    tool_choice=tool_choice,
                 )
             except AIUnavailableError as exc:
                 last_exc = exc

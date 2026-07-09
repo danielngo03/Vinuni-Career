@@ -18,6 +18,7 @@ import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { useAuthStore } from "@/stores/auth-store";
 import { cn } from "@/lib/utils";
 import { FeedbackModal } from "./feedback-modal";
+import { HelpSupportModal } from "./help-support-modal";
 
 /**
  * Authenticated account dropdown for the marketplace-style header (student
@@ -37,6 +38,7 @@ export function AccountMenu({
   applicationsHref,
   invitationsHref,
   showFeedback = false,
+  showHelpSupport = false,
   showName = false,
 }: {
   settingsHref: string;
@@ -51,6 +53,8 @@ export function AccountMenu({
   invitationsHref?: string;
   /** When true, a "Feedback & support" item opens the feedback modal. */
   showFeedback?: boolean;
+  /** When true, a "Help & support" item opens the workspace support panel. */
+  showHelpSupport?: boolean;
   /** Workspace topbar form: avatar + name + caret in a quiet pill. */
   showName?: boolean;
 }) {
@@ -62,6 +66,7 @@ export function AccountMenu({
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -100,6 +105,16 @@ export function AccountMenu({
     router.replace("/");
   }
 
+  const menuItemClass = cn(
+    "flex w-full items-center gap-2 rounded-lg px-2.5 py-[0.4375rem] text-left text-[0.8125rem] font-medium text-[var(--text-secondary)] outline-none transition-colors",
+    "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
+  );
+  const dangerMenuItemClass = cn(
+    "flex w-full items-center gap-2 rounded-lg px-2.5 py-[0.4375rem] text-left text-[0.8125rem] font-medium text-[var(--text-secondary)] outline-none transition-colors",
+    "hover:bg-[var(--bg-subtle)] hover:text-[var(--brand-red)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--brand-red)]",
+  );
+  const menuIconClass = "size-4 shrink-0";
+
   return (
     <div ref={rootRef} className="relative">
       <button
@@ -113,7 +128,7 @@ export function AccountMenu({
         className={cn(
           "outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
           showName
-            ? "flex items-center gap-2.5 rounded-full py-1 pl-1 pr-2.5 hover:bg-[var(--bg-subtle)]"
+            ? "flex items-center gap-2 rounded-full py-0.5 pl-0.5 pr-2 hover:bg-[var(--bg-subtle)]"
             : "flex size-9 items-center justify-center rounded-full bg-[var(--text-primary)] text-sm font-bold text-[var(--text-inverted)] focus-visible:ring-offset-2",
         )}
       >
@@ -121,15 +136,15 @@ export function AccountMenu({
           <>
             <span
               aria-hidden
-              className="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--bg-muted)] text-sm font-bold text-[var(--text-primary)]"
+              className="relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--bg-muted)] text-[0.8125rem] font-bold text-[var(--text-primary)]"
             >
               {user?.avatarUrl ? (
-                <Image src={user.avatarUrl} alt="" fill sizes="32px" className="object-cover" aria-hidden />
+                <Image src={user.avatarUrl} alt="" fill sizes="28px" className="object-cover" aria-hidden />
               ) : (
                 initial
               )}
             </span>
-            <span className="hidden max-w-[150px] truncate text-[0.8125rem] font-semibold text-[var(--text-primary)] lg:inline">
+            <span className="hidden max-w-[140px] truncate text-[0.78rem] font-semibold text-[var(--text-primary)] lg:inline">
               {user?.name}
             </span>
             <ChevronDown
@@ -150,14 +165,14 @@ export function AccountMenu({
         <div
           role="menu"
           aria-label={tNav("userMenu")}
-          className="absolute right-0 top-[calc(100%+8px)] z-40 w-60 overflow-hidden rounded-xl border border-[var(--border-default)] bg-[var(--surface-dropdown)] p-1.5 shadow-[var(--shadow-lg)]"
+          className="absolute right-0 top-[calc(100%+8px)] z-40 w-56 overflow-hidden rounded-xl border border-[var(--border-default)] bg-[var(--surface-dropdown)] p-1 shadow-[var(--shadow-lg)]"
         >
-          <div className="px-3 py-2">
-            <p className="truncate text-sm font-semibold text-[var(--text-primary)]">
+          <div className="px-2.5 py-1.5">
+            <p className="truncate text-[0.8125rem] font-semibold text-[var(--text-primary)]">
               {user?.name ?? tNav("userMenu")}
             </p>
             {user?.email && (
-              <p className="truncate text-xs text-[var(--text-muted)]">
+              <p className="truncate text-[0.6875rem] text-[var(--text-muted)]">
                 {user.email}
               </p>
             )}
@@ -170,12 +185,9 @@ export function AccountMenu({
               href={dashboardHref}
               role="menuitem"
               onClick={() => setOpen(false)}
-              className={cn(
-                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
-                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
-              )}
+              className={menuItemClass}
             >
-              <LayoutGrid aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              <LayoutGrid aria-hidden strokeWidth={1.8} className={menuIconClass} />
               {tNav("dashboard")}
             </Link>
           )}
@@ -185,12 +197,9 @@ export function AccountMenu({
               href={profileHref}
               role="menuitem"
               onClick={() => setOpen(false)}
-              className={cn(
-                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
-                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
-              )}
+              className={menuItemClass}
             >
-              <UserRound aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              <UserRound aria-hidden strokeWidth={1.8} className={menuIconClass} />
               {tNav("profile")}
             </Link>
           )}
@@ -200,12 +209,9 @@ export function AccountMenu({
               href={applicationsHref}
               role="menuitem"
               onClick={() => setOpen(false)}
-              className={cn(
-                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
-                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
-              )}
+              className={menuItemClass}
             >
-              <ClipboardList aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              <ClipboardList aria-hidden strokeWidth={1.8} className={menuIconClass} />
               {tNav("applications")}
             </Link>
           )}
@@ -215,12 +221,9 @@ export function AccountMenu({
               href={invitationsHref}
               role="menuitem"
               onClick={() => setOpen(false)}
-              className={cn(
-                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
-                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
-              )}
+              className={menuItemClass}
             >
-              <MailOpen aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              <MailOpen aria-hidden strokeWidth={1.8} className={menuIconClass} />
               {tNav("invitations")}
             </Link>
           )}
@@ -234,12 +237,9 @@ export function AccountMenu({
               href={billingHref}
               role="menuitem"
               onClick={() => setOpen(false)}
-              className={cn(
-                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
-                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
-              )}
+              className={menuItemClass}
             >
-              <CreditCard aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              <CreditCard aria-hidden strokeWidth={1.8} className={menuIconClass} />
               {tNav("billing")}
             </Link>
           )}
@@ -248,12 +248,9 @@ export function AccountMenu({
             href={settingsHref}
             role="menuitem"
             onClick={() => setOpen(false)}
-            className={cn(
-              "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
-              "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
-            )}
+            className={menuItemClass}
           >
-            <Settings aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+            <Settings aria-hidden strokeWidth={1.8} className={menuIconClass} />
             {tNav("settings")}
           </Link>
 
@@ -265,13 +262,25 @@ export function AccountMenu({
                 setOpen(false);
                 setFeedbackOpen(true);
               }}
-              className={cn(
-                "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
-                "hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
-              )}
+              className={menuItemClass}
             >
-              <LifeBuoy aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+              <LifeBuoy aria-hidden strokeWidth={1.8} className={menuIconClass} />
               {tRail("feedbackLabel")}
+            </button>
+          )}
+
+          {showHelpSupport && (
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => {
+                setOpen(false);
+                setHelpOpen(true);
+              }}
+              className={menuItemClass}
+            >
+              <LifeBuoy aria-hidden strokeWidth={1.8} className={menuIconClass} />
+              {tNav("help")}
             </button>
           )}
 
@@ -279,19 +288,23 @@ export function AccountMenu({
             type="button"
             role="menuitem"
             onClick={handleSignOut}
-            className={cn(
-              "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors",
-              "hover:bg-[var(--bg-subtle)] hover:text-[var(--brand-red)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--brand-red)]",
-            )}
+            className={dangerMenuItemClass}
           >
-            <LogOut aria-hidden strokeWidth={1.8} className="size-[18px] shrink-0" />
+            <LogOut aria-hidden strokeWidth={1.8} className={menuIconClass} />
             {tNav("logout")}
           </button>
         </div>
       )}
 
-      {showFeedback && (
+      {(showFeedback || showHelpSupport) && (
         <FeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
+      )}
+      {showHelpSupport && (
+        <HelpSupportModal
+          open={helpOpen}
+          onClose={() => setHelpOpen(false)}
+          onOpenFeedback={() => setFeedbackOpen(true)}
+        />
       )}
     </div>
   );

@@ -1,15 +1,64 @@
 "use client";
 
+import { useState } from "react";
 import {
   ArrowSquareOut,
+  DownloadSimple,
   Lightning,
   MagnifyingGlass,
-  Robot,
+  Paperclip,
+  Sparkle,
   Spinner,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
+import { env } from "@/lib/env";
 import type { ChatMessage } from "@/lib/api";
-import { TOOL_LABELS } from "./constants";
+import { getAccessToken } from "@/lib/api/session";
+import { TOOL_LABELS, extractAttachmentRefs } from "./constants";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+/** A chart spec the backend emits for the FE to render with Recharts. */
+type ChartSpec = {
+  type?: string;
+  title?: string;
+  x_key?: string;
+  series?: { key: string; name?: string }[];
+  data?: Record<string, number | string>[];
+};
+
+/** A funnel/flow diagram spec the backend emits for the FE to draw (no lib). */
+type DiagramSpec = {
+  type?: string;
+  title?: string;
+  stages?: { label: string; count: number; pct: number }[];
+};
+
+/** A render artifact the backend attaches to an assistant message (download/chart/diagram). */
+type MessageArtifact = {
+  kind: string;
+  download_path?: string;
+  filename?: string;
+  row_count?: number;
+  format?: string;
+  chart?: ChartSpec;
+  diagram?: DiagramSpec;
+};
+
+function readArtifacts(message: ChatMessage): MessageArtifact[] {
+  const raw = (message.tool_result as { artifacts?: unknown } | null)?.artifacts;
+  return Array.isArray(raw) ? (raw as MessageArtifact[]) : [];
+}
 
 export function MessageBubble({
   message,
@@ -62,7 +111,7 @@ export function MessageBubble({
     >
       {!isUser && (
         <span className="mb-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
-          <Robot aria-hidden weight="fill" className="size-3.5 text-white" />
+          <Sparkle aria-hidden weight="fill" className="size-3.5 text-white" />
         </span>
       )}
       <div
@@ -70,13 +119,238 @@ export function MessageBubble({
           "rounded-2xl px-3 py-2.5 text-sm leading-relaxed",
           expanded ? "max-w-[min(72ch,82%)]" : "max-w-[82%]",
           isUser
-            ? "rounded-br-sm icon-chip-primary text-white shadow-[var(--shadow-sm)]"
+            ? "rounded-br-sm bg-[var(--text-primary)] text-[var(--text-inverted)] shadow-[0_1px_6px_rgba(0,0,0,0.16)]"
             : "rounded-bl-sm border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] text-[var(--text-primary)] shadow-[0_1px_4px_rgba(11,34,57,0.06)]",
         )}
       >
-        <FormattedContent content={message.content} isUser={isUser} />
+        {isUser ? (
+          <UserBubbleContent content={message.content} />
+        ) : (
+          <FormattedContent content={message.content} isUser={false} />
+        )}
+        {!isUser && <MessageArtifacts message={message} />}
       </div>
     </div>
+  );
+}
+
+/** User message: strip machine-readable attachment refs, show paperclip chips. */
+function UserBubbleContent({ content }: { content: string }) {
+  const { text, filenames } = extractAttachmentRefs(content);
+  return (
+    <div className="flex flex-col gap-1.5">
+      {text && <FormattedContent content={text} isUser />}
+      {filenames.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {filenames.map((name, i) => (
+            <span
+              key={i}
+              className="inline-flex max-w-[200px] items-center gap-1 rounded-lg bg-white/15 px-2 py-1 text-[11px]"
+            >
+              <Paperclip aria-hidden weight="bold" className="size-3 shrink-0" />
+              <span className="truncate">{name}</span>
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Render backend-attached artifacts (currently: download buttons). */
+function MessageArtifacts({ message }: { message: ChatMessage }) {
+  const artifacts = readArtifacts(message);
+  if (artifacts.length === 0) return null;
+  return (
+    <div className="mt-2 flex flex-col gap-1.5">
+      {artifacts.map((a, i) =>
+        a.kind === "download" && a.download_path ? (
+          <DownloadArtifact key={i} artifact={a} />
+        ) : a.kind === "chart" && a.chart ? (
+          <ChartArtifact key={i} artifact={a} />
+        ) : a.kind === "diagram" && a.diagram ? (
+          <FunnelDiagram key={i} artifact={a} />
+        ) : null,
+      )}
+    </div>
+  );
+}
+
+function DownloadArtifact({ artifact }: { artifact: MessageArtifact }) {
+  const [busy, setBusy] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const onDownload = async () => {
+    if (!artifact.download_path) return;
+    setBusy(true);
+    setFailed(false);
+    try {
+      const base = env.apiBaseUrl.replace(/\/$/, "");
+      const token = getAccessToken();
+      const res = await fetch(`${base}${artifact.download_path}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        credentials: "include",
+      });
+      if (!res.ok) throw new Error(`download failed: ${res.status}`);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = artifact.filename || "export.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      setFailed(true);
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={onDownload}
+      disabled={busy}
+      className="inline-flex w-fit items-center gap-2 rounded-xl border border-[var(--brand-primary)]/25 bg-[var(--brand-primary)]/5 px-3 py-2 text-xs font-semibold text-[var(--brand-primary)] outline-none transition hover:bg-[var(--brand-primary)]/10 hover:border-[var(--brand-primary)]/40 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      {busy ? (
+        <Spinner aria-hidden weight="bold" className="size-4 animate-spin" />
+      ) : (
+        <DownloadSimple aria-hidden weight="bold" className="size-4 shrink-0" />
+      )}
+      <span className="flex flex-col items-start leading-tight">
+        <span>{failed ? "Tải thất bại — thử lại" : (artifact.filename ?? "Tải tệp")}</span>
+        {typeof artifact.row_count === "number" && !failed && (
+          <span className="text-[10px] font-normal text-[var(--text-muted)]">
+            {artifact.format === "xlsx" ? "Excel" : "Tệp"} · {artifact.row_count} dòng
+          </span>
+        )}
+      </span>
+    </button>
+  );
+}
+
+const CHART_COLORS = [
+  "var(--brand-primary)",
+  "var(--brand-teal)",
+  "var(--amber-600)",
+];
+
+/** Render a backend-emitted analytics chart (bar/line) with Recharts. */
+function ChartArtifact({ artifact }: { artifact: MessageArtifact }) {
+  const chart = artifact.chart;
+  if (!chart || !Array.isArray(chart.data) || chart.data.length === 0) return null;
+  const xKey = chart.x_key ?? "label";
+  const series = chart.series && chart.series.length > 0 ? chart.series : [{ key: "value" }];
+  const isLine = chart.type === "line";
+  const many = chart.data.length > 4;
+  return (
+    <figure className="mt-1 w-full rounded-xl border border-[var(--glass-border-strong)] bg-[var(--surface-card)]/60 p-3">
+      {chart.title && (
+        <figcaption className="mb-2 text-xs font-semibold text-[var(--text-secondary)]">
+          {chart.title}
+        </figcaption>
+      )}
+      <div className="h-[220px] w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          {isLine ? (
+            <LineChart data={chart.data} margin={{ top: 4, right: 8, bottom: 4, left: -14 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border-strong)" vertical={false} />
+              <XAxis
+                dataKey={xKey}
+                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+                interval="preserveStartEnd"
+              />
+              <YAxis
+                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+                allowDecimals={false}
+                width={30}
+              />
+              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
+              {series.length > 1 && <Legend wrapperStyle={{ fontSize: 11 }} />}
+              {series.map((sr, i) => (
+                <Line
+                  key={sr.key}
+                  type="monotone"
+                  dataKey={sr.key}
+                  name={sr.name ?? sr.key}
+                  stroke={CHART_COLORS[i % CHART_COLORS.length]}
+                  strokeWidth={2}
+                  dot={{ r: 3 }}
+                />
+              ))}
+            </LineChart>
+          ) : (
+            <BarChart data={chart.data} margin={{ top: 4, right: 8, bottom: 4, left: -14 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border-strong)" vertical={false} />
+              <XAxis
+                dataKey={xKey}
+                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+                interval={0}
+                angle={many ? -20 : 0}
+                textAnchor={many ? "end" : "middle"}
+                height={many ? 52 : 24}
+              />
+              <YAxis
+                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+                allowDecimals={false}
+                width={30}
+              />
+              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
+              {series.length > 1 && <Legend wrapperStyle={{ fontSize: 11 }} />}
+              {series.map((sr, i) => (
+                <Bar
+                  key={sr.key}
+                  dataKey={sr.key}
+                  name={sr.name ?? sr.key}
+                  fill={CHART_COLORS[i % CHART_COLORS.length]}
+                  radius={[3, 3, 0, 0]}
+                  maxBarSize={44}
+                />
+              ))}
+            </BarChart>
+          )}
+        </ResponsiveContainer>
+      </div>
+    </figure>
+  );
+}
+
+/** Render a backend-emitted hiring-funnel diagram (vertical flow, no library). */
+function FunnelDiagram({ artifact }: { artifact: MessageArtifact }) {
+  const diagram = artifact.diagram;
+  if (!diagram || !Array.isArray(diagram.stages) || diagram.stages.length === 0) return null;
+  return (
+    <figure className="mt-1 w-full rounded-xl border border-[var(--glass-border-strong)] bg-[var(--surface-card)]/60 p-3">
+      {diagram.title && (
+        <figcaption className="mb-2 text-xs font-semibold text-[var(--text-secondary)]">
+          {diagram.title}
+        </figcaption>
+      )}
+      <div className="flex flex-col gap-1.5">
+        {diagram.stages.map((st, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-24 shrink-0 truncate text-[11px] text-[var(--text-secondary)]">
+              {st.label}
+            </span>
+            <div className="relative h-6 flex-1 overflow-hidden rounded-md bg-[var(--surface-muted,rgba(0,0,0,0.04))]">
+              <div
+                className="flex h-full items-center rounded-md bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-teal)] px-2 transition-all"
+                style={{ width: `${Math.max(st.pct, 6)}%` }}
+              >
+                <span className="text-[11px] font-semibold text-white">{st.count}</span>
+              </div>
+            </div>
+            <span className="w-10 shrink-0 text-right text-[11px] tabular-nums text-[var(--text-muted)]">
+              {st.pct}%
+            </span>
+          </div>
+        ))}
+      </div>
+      <p className="mt-2 text-[10px] text-[var(--text-muted)]">
+        % = phần ứng viên đạt đến mỗi vòng so với vòng đầu tiên.
+      </p>
+    </figure>
   );
 }
 
@@ -90,7 +364,7 @@ export function StreamingBubble({
   return (
     <div className="flex items-end gap-2">
       <span className="mb-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
-        <Robot aria-hidden weight="fill" className="size-3.5 text-white" />
+        <Sparkle aria-hidden weight="fill" className="size-3.5 text-white" />
       </span>
       <div
         className={cn(
@@ -132,7 +406,19 @@ export function AssistantActivity({
   );
 }
 
-/** Render plain text with basic markdown: **bold**, lists, internal links. */
+const _TABLE_ROW = /^\s*\|.*\|\s*$/;
+const _TABLE_SEP = /^\s*\|?[\s:|-]*-[\s:|-]*\|?\s*$/;
+
+function parseCells(row: string): string[] {
+  return row
+    .trim()
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((c) => c.trim());
+}
+
+/** Render plain text with basic markdown: **bold**, lists, tables, internal links. */
 export function FormattedContent({
   content,
   isUser,
@@ -141,46 +427,105 @@ export function FormattedContent({
   isUser: boolean;
 }) {
   const lines = content.split("\n").filter((l) => l.trim() !== "");
+  const nodes: React.ReactNode[] = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i]!;
+    // Markdown table: a `| ... |` row immediately followed by a `|---|` separator.
+    if (_TABLE_ROW.test(line) && i + 1 < lines.length && _TABLE_SEP.test(lines[i + 1]!)) {
+      const body: string[] = [];
+      let j = i + 2;
+      while (j < lines.length && _TABLE_ROW.test(lines[j]!) && !_TABLE_SEP.test(lines[j]!)) {
+        body.push(lines[j]!);
+        j += 1;
+      }
+      nodes.push(<MarkdownTable key={i} header={line} rows={body} isUser={isUser} />);
+      i = j;
+      continue;
+    }
+    nodes.push(renderLine(line, i, isUser));
+    i += 1;
+  }
+  return <div className="space-y-1">{nodes}</div>;
+}
 
+function renderLine(line: string, key: number, isUser: boolean): React.ReactNode {
+  if (line.startsWith("- ") || line.startsWith("• ") || line.startsWith("* ")) {
+    return (
+      <p key={key} className="pl-3">
+        <span className="mr-1.5 opacity-50">•</span>
+        {renderInline(line.replace(/^[-•*]\s*/, ""), isUser)}
+      </p>
+    );
+  }
+  const numberedMatch = line.match(/^(\d+)\.\s+(.+)/);
+  if (numberedMatch) {
+    return (
+      <p key={key} className="pl-3">
+        <span className="mr-1.5 opacity-60 font-medium">{numberedMatch[1]}.</span>
+        {renderInline(numberedMatch[2] ?? "", isUser)}
+      </p>
+    );
+  }
+  if (line.match(/^\/\w/)) {
+    return (
+      <a
+        key={key}
+        href={line}
+        className={cn(
+          "flex items-center gap-1 text-xs font-medium underline underline-offset-2",
+          isUser ? "text-white/90" : "text-[var(--brand-primary)]",
+        )}
+      >
+        {line}
+        <ArrowSquareOut aria-hidden weight="bold" className="size-3 shrink-0" />
+      </a>
+    );
+  }
+  return <p key={key}>{renderInline(line, isUser)}</p>;
+}
+
+function MarkdownTable({
+  header,
+  rows,
+  isUser,
+}: {
+  header: string;
+  rows: string[];
+  isUser: boolean;
+}) {
+  const headers = parseCells(header);
+  const body = rows.map(parseCells);
   return (
-    <div className="space-y-1">
-      {lines.map((line, i) => {
-        if (line.startsWith("- ") || line.startsWith("• ") || line.startsWith("* ")) {
-          return (
-            <p key={i} className="pl-3">
-              <span className="mr-1.5 opacity-50">•</span>
-              {renderInline(line.replace(/^[-•*]\s*/, ""), isUser)}
-            </p>
-          );
-        }
-        // Numbered lists
-        const numberedMatch = line.match(/^(\d+)\.\s+(.+)/);
-        if (numberedMatch) {
-          return (
-            <p key={i} className="pl-3">
-              <span className="mr-1.5 opacity-60 font-medium">{numberedMatch[1]}.</span>
-              {renderInline(numberedMatch[2] ?? "", isUser)}
-            </p>
-          );
-        }
-        // Internal path → link
-        if (line.match(/^\/\w/)) {
-          return (
-            <a
-              key={i}
-              href={line}
-              className={cn(
-                "flex items-center gap-1 text-xs font-medium underline underline-offset-2",
-                isUser ? "text-white/90" : "text-[var(--brand-primary)]",
-              )}
-            >
-              {line}
-              <ArrowSquareOut aria-hidden weight="bold" className="size-3 shrink-0" />
-            </a>
-          );
-        }
-        return <p key={i}>{renderInline(line, isUser)}</p>;
-      })}
+    <div className="my-1.5 overflow-x-auto rounded-lg border border-[var(--glass-border)]">
+      <table className="w-full border-collapse text-[11px]">
+        <thead>
+          <tr className="bg-[var(--brand-primary)]/8">
+            {headers.map((h, i) => (
+              <th
+                key={i}
+                className="border-b border-[var(--glass-border)] px-2 py-1.5 text-left font-semibold text-[var(--text-primary)] whitespace-nowrap"
+              >
+                {renderInline(h, isUser)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {body.map((r, ri) => (
+            <tr key={ri} className="even:bg-[var(--bg-subtle)]/40">
+              {r.map((c, ci) => (
+                <td
+                  key={ci}
+                  className="border-b border-[var(--glass-border)]/60 px-2 py-1 align-top text-[var(--text-secondary)]"
+                >
+                  {renderInline(c, isUser)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -205,7 +550,7 @@ export function TypingIndicator() {
   return (
     <div className="flex items-end gap-2">
       <span className="mb-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
-        <Robot aria-hidden weight="fill" className="size-3.5 text-white" />
+        <Sparkle aria-hidden weight="fill" className="size-3.5 text-white" />
       </span>
       <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-sm border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] px-4 py-3 shadow-[0_1px_4px_rgba(11,34,57,0.06)]">
         {[0, 1, 2].map((i) => (
