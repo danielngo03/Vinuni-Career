@@ -7,7 +7,9 @@ reads ``GET /onboarding/status`` to decide which wizard page to show.
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, File, Form, Request, UploadFile, status
+import uuid
+
+from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, Request, UploadFile, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
@@ -22,7 +24,7 @@ from app.modules.onboarding.api.schemas import (
     SetSeekerTypeRequest,
     StudentVerifyRequestBody,
 )
-from app.modules.onboarding.application import onboarding_service
+from app.modules.onboarding.application import doc_verification, onboarding_service
 from app.shared.exceptions import AuthRequiredError
 from app.shared.responses import success
 from app.shared.storage import save_upload
@@ -178,6 +180,7 @@ async def save_employer_info(
 )
 async def submit_employer_docs(
     request: Request,
+    background: BackgroundTasks,
     document: UploadFile = File(...),
     tax_id: str | None = Form(default=None, max_length=20),
     auth: CurrentAuth = Depends(get_current_auth),
@@ -197,6 +200,13 @@ async def submit_employer_docs(
         ctx=context_from_request(request),
     )
     await session.commit()
+    # Run AI verification AFTER commit and OFF the request path. The task opens its
+    # OWN DB session and must see the committed document row; enqueuing it inline
+    # pre-commit self-deadlocked (its session blocked on the row this request had
+    # locked). BackgroundTasks lets the 202 return immediately — the UI polls
+    # /employer-docs/status. ``request_id`` is stripped so it never leaves the API.
+    request_id = uuid.UUID(str(result.pop("request_id")))
+    background.add_task(doc_verification.enqueue_verification, request_id=request_id)
     return success(result)
 
 

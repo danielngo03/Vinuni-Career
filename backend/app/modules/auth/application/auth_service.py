@@ -159,15 +159,15 @@ async def _issue_email_verification(
     settings = get_settings()
     raw = generate_token()
     otp = generate_otp()
-    ttl_minutes = settings.otp_ttl_minutes
-    # Magic link uses the longer 24h TTL; OTP uses the shorter OTP_TTL_MINUTES.
-    # The record expires at the shorter window so OTP verification fails too.
-    expires_at = datetime.now(tz=UTC) + timedelta(minutes=ttl_minutes)
-    if purpose in (PURPOSE_REGISTER, PURPOSE_PASSWORD_RESET):
-        # Account-level verifications use longer magic-link TTL (24h) but keep
-        # OTP TTL short. We record the shorter window so the whole record expires
-        # at OTP time — magic links for account verify are re-sent on demand.
-        expires_at = datetime.now(tz=UTC) + timedelta(minutes=ttl_minutes)
+    ttl_minutes = settings.otp_ttl_minutes  # OTP window (email copy + verify check)
+    # The record lives for the full magic-link window (24h). The OTP is
+    # additionally constrained to the shorter ``ttl_minutes`` window at
+    # verification time (checked against ``created_at`` in ``verify_otp``), so a
+    # magic link stays valid for the advertised 24h while the OTP still expires in
+    # ``ttl_minutes``. Previously the whole record expired at OTP time (10 min),
+    # silently breaking the 24h magic link (and disagreeing with the resend path,
+    # which already used 24h).
+    expires_at = datetime.now(tz=UTC) + timedelta(hours=EMAIL_VERIFICATION_TTL_HOURS)
 
     record = EmailVerification(
         user_id=user.id,
@@ -242,6 +242,11 @@ async def verify_email_otp(
     )
     record = (await session.execute(stmt)).scalar_one_or_none()
     if record is None or ensure_aware(record.expires_at) <= now:
+        raise errors.InvalidTokenError("otp_expired")
+    # The record lives the full 24h magic-link window; the OTP is valid only within
+    # the shorter OTP window, enforced here against ``created_at``.
+    otp_deadline = ensure_aware(record.created_at) + timedelta(minutes=settings.otp_ttl_minutes)
+    if otp_deadline <= now:
         raise errors.InvalidTokenError("otp_expired")
 
     if record.otp_attempts >= settings.otp_max_attempts:

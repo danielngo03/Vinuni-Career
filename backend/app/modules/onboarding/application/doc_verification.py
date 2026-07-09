@@ -14,8 +14,6 @@ from __future__ import annotations
 import logging
 import uuid
 
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.core.worker import get_queue
 
 logger = logging.getLogger(__name__)
@@ -23,8 +21,15 @@ logger = logging.getLogger(__name__)
 TASK_NAME = "onboarding.verify_employer_document"
 
 
-async def enqueue_verification(_session: AsyncSession, *, request_id: uuid.UUID) -> None:
-    """Enqueue the async AI verification task for an employer document."""
+async def enqueue_verification(*, request_id: uuid.UUID) -> None:
+    """Enqueue the async AI verification task for an employer document.
+
+    Callers MUST enqueue this AFTER committing the transaction that wrote the
+    document row (and ideally off the request path): the task opens its OWN DB
+    session and can only see the document once it is committed. Enqueuing inside
+    the still-open transaction with the inline dev queue self-deadlocks — the
+    task's separate session blocks on the row the caller has locked-but-not-committed.
+    """
     queue = get_queue()
     await queue.enqueue(TASK_NAME, {"request_id": str(request_id)})
     logger.info(
