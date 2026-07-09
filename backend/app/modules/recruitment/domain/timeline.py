@@ -35,6 +35,11 @@ INTERVIEW_SCHEDULED = "interview_scheduled"
 INTERVIEW_RESCHEDULED = "interview_rescheduled"
 INTERVIEW_CANCELLED = "interview_cancelled"
 INTERVIEW_COMPLETED = "interview_completed"
+# Candidate-initiated responses to their OWN interview (student action; truthful
+# on the student's own timeline — NOT partner-internal).
+INTERVIEW_CONFIRMED = "interview_confirmed"
+INTERVIEW_DECLINED_BY_CANDIDATE = "interview_declined_by_candidate"
+INTERVIEW_RESCHEDULE_REQUESTED = "interview_reschedule_requested"
 OFFER_SENT = "offer_sent"
 OFFER_ACCEPTED = "offer_accepted"
 OFFER_DECLINED = "offer_declined"
@@ -56,6 +61,9 @@ EVENT_TYPES: frozenset[str] = frozenset(
         INTERVIEW_RESCHEDULED,
         INTERVIEW_CANCELLED,
         INTERVIEW_COMPLETED,
+        INTERVIEW_CONFIRMED,
+        INTERVIEW_DECLINED_BY_CANDIDATE,
+        INTERVIEW_RESCHEDULE_REQUESTED,
         OFFER_SENT,
         OFFER_ACCEPTED,
         OFFER_DECLINED,
@@ -117,6 +125,18 @@ _LABELS: dict[str, dict[str, str]] = {
     INTERVIEW_COMPLETED: {
         "en": "Interview completed",
         "vi": "Đã hoàn thành phỏng vấn",
+    },
+    INTERVIEW_CONFIRMED: {
+        "en": "You confirmed your interview",
+        "vi": "Bạn đã xác nhận tham gia phỏng vấn",
+    },
+    INTERVIEW_DECLINED_BY_CANDIDATE: {
+        "en": "You declined the interview",
+        "vi": "Bạn đã từ chối buổi phỏng vấn",
+    },
+    INTERVIEW_RESCHEDULE_REQUESTED: {
+        "en": "You requested to reschedule the interview",
+        "vi": "Bạn đã yêu cầu đổi lịch phỏng vấn",
     },
     OFFER_SENT: {
         "en": "Offer sent",

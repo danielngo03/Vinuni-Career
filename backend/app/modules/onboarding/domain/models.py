@@ -73,6 +73,10 @@ class StudentVerification(Base):
     university_name: Mapped[str] = mapped_column(String(255), nullable=False)
     student_id_number: Mapped[str] = mapped_column(String(50), nullable=False)
     student_email: Mapped[str] = mapped_column(String(320), nullable=False)
+    # Which student persona this verification asserts:
+    # ``vinuni_student`` | ``vinuni_alumni`` | ``external``. Drives the
+    # institution-domain enforcement and the resulting affiliation on confirm.
+    student_kind: Mapped[str | None] = mapped_column(String(20), nullable=True)
     student_email_verified_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )

@@ -23,10 +23,24 @@ from app.modules.dashboards.application._common import (
 )
 from app.modules.discovery.application import ranking_service
 from app.modules.documents.application import cv_service
+from app.modules.messaging.application import message_service as messaging_read
+from app.modules.onboarding.application import onboarding_read_facade
 from app.modules.opportunities.application import job_alert_service, job_read_facade
 from app.modules.recruitment.application import dashboard_read as recruitment_read
+from app.modules.recruitment.application import offer_service
+from app.modules.student_profiles.application import affiliation_facade
+from app.modules.users.application import user_read_facade
 from app.shared.exceptions import AuthRequiredError, PermissionDeniedError
 from app.shared.permissions import Principal
+
+# Affiliations that represent a student who benefits from verifying — a general
+# working professional is not nagged to verify a student status they don't hold.
+_VERIFIABLE_AFFILIATIONS = frozenset(
+    {
+        affiliation_facade.AFFILIATION_VINUNI_STUDENT,
+        affiliation_facade.AFFILIATION_EXTERNAL,
+    }
+)
 
 
 def _require_student(principal: Principal) -> None:
@@ -34,6 +48,21 @@ def _require_student(principal: Principal) -> None:
         raise AuthRequiredError()
     if principal.persona != personas.STUDENT:
         raise PermissionDeniedError()
+
+
+async def _resolve_affiliation(
+    session: AsyncSession, *, principal: Principal, user_id
+) -> dict:
+    """Resolve the student's affiliation badge for the dashboard (verified fact when
+    present, else a provisional label from login email + onboarding seeker type)."""
+
+    email = await user_read_facade.get_email(session, user_id)
+    seeker_type = await onboarding_read_facade.get_seeker_type(
+        session, user_id=user_id
+    )
+    return await affiliation_facade.resolve_display(
+        session, user_id=user_id, login_email=email, seeker_type=seeker_type
+    )
 
 
 async def get_student_dashboard(
@@ -65,18 +94,64 @@ async def get_student_dashboard(
         lambda: job_alert_service.count_alerts_for_user(session, user_id=user_id),
         fallback=0,
     )
+    actionable_offers = await safe(
+        session,
+        lambda: offer_service.count_actionable_offers_for_student(
+            session, user_id=user_id
+        ),
+        fallback=0,
+    )
+    interviews_awaiting = await safe(
+        session,
+        lambda: recruitment_read.count_interviews_awaiting_response(
+            session, user_id=user_id
+        ),
+        fallback=0,
+    )
+    unread_messages = await safe(
+        session,
+        lambda: messaging_read.unread_count(session, principal=principal),
+        fallback=0,
+    )
+    # Persona-aware verify-account prompt: only nudge a still-unverified student
+    # (VinUni / external), never a general working professional. The affiliation is
+    # the verified fact when present, else a provisional label from login email +
+    # onboarding seeker type.
+    affiliation_info = await safe(
+        session,
+        lambda: _resolve_affiliation(session, principal=principal, user_id=user_id),
+        fallback={"affiliation": affiliation_facade.AFFILIATION_GENERAL, "verified": True},
+    )
 
     metrics = {
         "applications_total": counts["total"],
         "applications_active": counts["active"],
         "cv_count": cv_count,
         "alert_count": alert_count,
+        "unread_messages": unread_messages,
+        # Surfaced so the frontend can render a persona badge + verified check.
+        "affiliation": affiliation_info["affiliation"],
+        "verified": affiliation_info["verified"],
     }
 
+    # Ordered by urgency: time-sensitive responses first, setup nudges last. Each
+    # todo is real (backed by a live count/flag) — never a decorative placeholder.
     next_actions: list[dict] = []
-    if cv_count == 0:
+    if actionable_offers > 0:
         next_actions.append(
-            {"key": "build_cv", "href": "/student/cv", "count": None}
+            {
+                "key": "respond_offer",
+                "href": "/student/applications",
+                "count": actionable_offers,
+            }
+        )
+    if interviews_awaiting > 0:
+        next_actions.append(
+            {
+                "key": "respond_interview",
+                "href": "/student/applications",
+                "count": interviews_awaiting,
+            }
         )
     if pending_reveals > 0:
         next_actions.append(
@@ -85,6 +160,29 @@ async def get_student_dashboard(
                 "href": "/student/applications",
                 "count": pending_reveals,
             }
+        )
+    if (
+        not affiliation_info["verified"]
+        and affiliation_info["affiliation"] in _VERIFIABLE_AFFILIATIONS
+    ):
+        next_actions.append(
+            {
+                "key": "verify_account",
+                "href": "/onboarding/student-verify",
+                "count": None,
+            }
+        )
+    if unread_messages > 0:
+        next_actions.append(
+            {
+                "key": "unread_messages",
+                "href": "/student/messages",
+                "count": unread_messages,
+            }
+        )
+    if cv_count == 0:
+        next_actions.append(
+            {"key": "build_cv", "href": "/student/cv", "count": None}
         )
     if alert_count == 0:
         next_actions.append(

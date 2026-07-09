@@ -10,6 +10,9 @@ import {
   IdentificationCard,
   ReadCvLogo,
   Eye,
+  Certificate,
+  VideoCamera,
+  ChatCircle,
   NotePencil,
   Hourglass,
   PlusCircle,
@@ -263,9 +266,12 @@ export function MetricTiles({
  */
 const ACTION_ICONS: Record<string, Icon> = {
   // student
-  complete_profile: IdentificationCard,
-  build_cv: ReadCvLogo,
+  verify_account: IdentificationCard,
+  respond_offer: Certificate,
+  respond_interview: VideoCamera,
   respond_reveal: Eye,
+  unread_messages: ChatCircle,
+  build_cv: ReadCvLogo,
   create_alert: Bell,
   // partner
   respond_reveals: Eye,

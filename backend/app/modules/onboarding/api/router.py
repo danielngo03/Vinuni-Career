@@ -105,6 +105,7 @@ async def request_student_verify(
         university_name=body.university_name,
         student_id_number=body.student_id_number,
         student_email=body.student_email,
+        student_kind=body.student_kind,
         ctx=context_from_request(request),
     )
     await session.commit()

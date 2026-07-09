@@ -28,7 +28,7 @@ from typing import Any
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.config import get_settings
+from app.core.config import is_institution_email
 from app.modules.billing.domain import lifecycle
 from app.modules.billing.domain.models import Subscription, SubscriptionPlan
 from app.modules.users.application import user_read_facade
@@ -83,21 +83,6 @@ def _audience_for_principal(principal: Principal) -> str | None:
     return None
 
 
-def _institution_domains() -> set[str]:
-    return {
-        item.strip().lower().lstrip("@")
-        for item in get_settings().institution_email_domains.split(",")
-        if item.strip()
-    }
-
-
-def _is_institution_email(email: str | None) -> bool:
-    if not email or "@" not in email:
-        return False
-    domain = email.rsplit("@", 1)[1].lower()
-    return domain in _institution_domains()
-
-
 async def _email_for_user(session: AsyncSession, user_id: Any) -> str | None:
     return await user_read_facade.get_email(session, user_id)
 
@@ -108,7 +93,7 @@ async def _student_segment_limits(
     if principal.user_id is None or principal.org_id is not None:
         return {}
     email = await _email_for_user(session, principal.user_id)
-    if _is_institution_email(email):
+    if is_institution_email(email):
         return dict(_VINUNI_STUDENT_LIMITS)
     return dict(_EXTERNAL_STUDENT_LIMITS)
 

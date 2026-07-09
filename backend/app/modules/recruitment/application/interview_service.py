@@ -53,6 +53,8 @@ from app.modules.recruitment.application.errors import (
     IllegalApplicationTransitionError,
     InterviewExistsError,
     InterviewNotActionableError,
+    InterviewNotRespondableError,
+    InterviewResponseConflictError,
     InvalidApplicationFieldError,
     RevealRequiredError,
 )
@@ -481,6 +483,12 @@ async def reschedule_interview(
         iv.title = _clean_text(title)
     if notes is not None:
         iv.notes = _clean_text(notes)
+    # The interview terms changed underneath the candidate — any prior
+    # confirm/decline/reschedule response is now stale, so clear it and let the
+    # student respond to the new time (Theme D).
+    iv.candidate_response = None
+    iv.candidate_responded_at = None
+    iv.candidate_response_note = None
     iv.version += 1
     await session.flush()
 
@@ -781,6 +789,153 @@ async def student_interview_block(
     return presenters.student_interview_card(iv, locale=locale)
 
 
+async def student_interview_blocks(
+    session: AsyncSession,
+    *,
+    application_ids: list[uuid.UUID],
+    locale: str = "vi",
+) -> dict[uuid.UUID, dict]:
+    """Batch the earliest ``scheduled`` interview card per application (no N+1).
+
+    ONE query keyed by ``application_id`` (mirrors ``apply_service._latest_reveals_for``)
+    so the applications LIST can attach the SAME identity-safe upcoming-interview
+    card the detail path uses without a per-row query. Earliest ``scheduled_at``
+    wins per application. Empty in -> empty out.
+    """
+
+    if not application_ids:
+        return {}
+    rows = (
+        await session.execute(
+            select(Interview)
+            .where(
+                Interview.application_id.in_(set(application_ids)),
+                Interview.status == interview_domain.STATUS_SCHEDULED,
+            )
+            .order_by(Interview.scheduled_at)
+        )
+    ).scalars().all()
+    blocks: dict[uuid.UUID, dict] = {}
+    for iv in rows:
+        # First row per application is the earliest (ordered by scheduled_at).
+        blocks.setdefault(
+            iv.application_id, presenters.student_interview_card(iv, locale=locale)
+        )
+    return blocks
+
+
+# --------------------------------------------------------------------------- #
+# Candidate respond (student confirms / declines / requests reschedule)        #
+# --------------------------------------------------------------------------- #
+
+# response state -> the truthful STUDENT-facing timeline event it appends.
+_RESPONSE_TIMELINE_EVENTS: dict[str, str] = {
+    interview_domain.CANDIDATE_RESPONSE_CONFIRMED: timeline.INTERVIEW_CONFIRMED,
+    interview_domain.CANDIDATE_RESPONSE_DECLINED: (
+        timeline.INTERVIEW_DECLINED_BY_CANDIDATE
+    ),
+    interview_domain.CANDIDATE_RESPONSE_RESCHEDULE: (
+        timeline.INTERVIEW_RESCHEDULE_REQUESTED
+    ),
+}
+
+
+async def respond_to_interview(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    application_id: uuid.UUID,
+    interview_id: uuid.UUID,
+    action: str,
+    note: str | None = None,
+    version: int | None = None,
+    ctx: RequestContext,
+    locale: str = "vi",
+) -> dict:
+    """The candidate confirms / declines / requests-reschedule of THEIR interview.
+
+    Owner-only (a non-owner is indistinguishable from missing -> ``404``, never
+    ``403``, mirroring offer respond). Idempotent (the SAME response again is a
+    no-op success); a CONFLICTING response is a ``409``; a non-``scheduled`` or past
+    interview is a ``409``. Records the student-owned response on the row + an audit
+    row + a truthful student-facing timeline event, and notifies the partner side
+    (masked, PII-safe). Never mutates the partner-owned interview ``status``.
+    """
+
+    # Load the interview scoped to (application, interview); a mismatch is 404.
+    iv = await _load_interview(
+        session, application_id=application_id, interview_id=interview_id, lock=True
+    )
+    if iv is None:
+        raise ResourceNotFoundError()
+    app = await _shared.load_application(
+        session, application_id=iv.application_id, lock=True
+    )
+    # Owner-only: only the applicant may respond to their own interview.
+    if principal.user_id is None or app.applicant_id != principal.user_id:
+        raise ResourceNotFoundError()
+    permission_checker.require(principal, _shared.RESOURCE, "update")
+
+    if action not in interview_domain.CANDIDATE_ACTIONS:
+        raise InvalidApplicationFieldError(field="action")
+    target = interview_domain.CANDIDATE_ACTION_TO_RESPONSE[action]
+
+    # Idempotent replay: the SAME response again is a no-op success (safe even after
+    # the interview has passed — the outcome the caller wanted already holds). A
+    # stale version on such a replay is NOT an error (mirrors withdraw).
+    if iv.candidate_response == target:
+        return presenters.student_interview_card(iv, locale=locale)
+
+    if version is not None and version != iv.version:
+        raise ApplicationVersionConflictError()
+
+    # Respondable only while a future ``scheduled`` interview (cancelled/completed/
+    # no_show/past -> a clear, actionable 409).
+    if (
+        iv.status != interview_domain.STATUS_SCHEDULED
+        or _shared.as_aware(iv.scheduled_at) <= _shared.now()
+    ):
+        raise InterviewNotRespondableError()
+
+    # First-response-wins: a DIFFERENT already-recorded response is a conflict.
+    if iv.candidate_response is not None:
+        raise InterviewResponseConflictError(current_response=iv.candidate_response)
+
+    now = _shared.now()
+    iv.candidate_response = target
+    iv.candidate_responded_at = now
+    iv.candidate_response_note = _clean_text(note)
+    iv.version += 1
+    await session.flush()
+
+    await write_audit(
+        session,
+        action="application.interview_candidate_responded",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
+        after={
+            "interview_id": str(iv.id),
+            "candidate_response": target,
+            "version": iv.version,
+        },
+    )
+    await timeline.record_timeline_event(
+        session,
+        application_id=app.id,
+        event_type=_RESPONSE_TIMELINE_EVENTS[target],
+        actor_id=principal.user_id,
+        # The student's OWN note is fine on their own timeline metadata (never
+        # surfaced to the student projection, which drops metadata entirely).
+        metadata={"interview_id": str(iv.id)},
+    )
+    await _notify_partner_candidate_response(session, app=app, iv=iv, response=target)
+
+    await session.commit()
+    await session.refresh(iv)
+    return presenters.student_interview_card(iv, locale=locale)
+
+
 # --------------------------------------------------------------------------- #
 # Notifications                                                                #
 # --------------------------------------------------------------------------- #
@@ -912,6 +1067,79 @@ async def _notify_assignees_assigned(
             ),
             variables={
                 "job_title": job_title,
+                "scheduled_at": _scheduled_label(iv),
+                "mode_label": mode_label,
+            },
+            locale=locale,
+        )
+
+
+async def _notify_partner_candidate_response(
+    session: AsyncSession, *, app, iv: Interview, response: str
+) -> None:
+    """Notify the partner side that the candidate responded (masked, PII-safe).
+
+    Recipients: the interview's scheduler (``created_by``) + its assignees (deduped)
+    — the people who need to know the candidate confirmed / declined / asked to
+    reschedule. Outbox email + in-app feed, mirroring ``_notify_assignees_assigned``.
+    Carries ONLY the localized response verb + job/time/mode — never the student's
+    identity (they responded to their OWN interview, so nothing new is revealed to
+    them; the partner learns only that "the candidate" responded). Deduped per
+    ``(interview, response, version, recipient)`` so a post-reschedule re-response
+    (version bumped) notifies again while a true retry does not.
+    """
+
+    recipients: set[uuid.UUID] = set()
+    if iv.created_by is not None:
+        recipients.add(iv.created_by)
+    for uid in await _assignee_ids(session, interview_id=iv.id):
+        recipients.add(uid)
+    if not recipients:
+        return
+    job_title = await _job_title(session, job_id=app.job_id)
+    for uid in recipients:
+        member = await user_service.get_by_id(session, uid)
+        if member is None:
+            continue
+        locale = message_catalog.normalize_locale(
+            getattr(member, "preferred_language", None)
+        )
+        mode_label = interview_domain.MODE_LABELS[iv.mode].get(
+            locale, interview_domain.MODE_LABELS[iv.mode]["vi"]
+        )
+        response_label = interview_domain.candidate_response_verb(
+            response, locale=locale
+        )
+        await enqueue_notification(
+            session,
+            recipient_id=uid,
+            template_key="application.interview_candidate_responded",
+            channel="email",
+            locale=locale,
+            variables={
+                "email": member.email,
+                "name": member.full_name or "",
+                "job_title": job_title,
+                "response_label": response_label,
+                "scheduled_at": _scheduled_label(iv),
+                "mode_label": mode_label,
+            },
+            dedupe_key=(
+                f"recruitment.interview_candidate_responded:{iv.id}:{response}"
+                f":{iv.version}:{uid}"
+            ),
+        )
+        await feed_service.create_in_app(
+            session,
+            recipient_id=uid,
+            notif_type="recruitment.interview_candidate_responded",
+            action_url=(
+                f"/partner/applications/{app.id}?interview={iv.id}"
+                f"&r={response}&v={iv.version}"
+            ),
+            variables={
+                "job_title": job_title,
+                "response_label": response_label,
                 "scheduled_at": _scheduled_label(iv),
                 "mode_label": mode_label,
             },

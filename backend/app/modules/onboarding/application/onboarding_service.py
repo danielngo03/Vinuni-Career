@@ -21,6 +21,7 @@ from datetime import UTC, datetime
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import is_institution_email
 from app.modules.auth.application.auth_service import (
     PURPOSE_STUDENT_EMAIL,
     _invalidate_outstanding,
@@ -30,6 +31,7 @@ from app.modules.auth.application.auth_service import (
 from app.modules.auth.application.context import RequestContext
 from app.modules.onboarding.domain.models import OnboardingState, StudentVerification
 from app.modules.organization.application import partner_registration_facade
+from app.modules.student_profiles.application import affiliation_facade
 from app.modules.users.application import user_service
 from app.modules.users.application.user_write_facade import update_identity_persona
 from app.shared.audit import AuditContext, write_audit
@@ -50,6 +52,24 @@ SEEKER_FRESH_GRADUATE = "fresh_graduate"
 
 VALID_ROLES = {ROLE_JOB_SEEKER, ROLE_EMPLOYER}
 VALID_SEEKER_TYPES = {SEEKER_STUDENT, SEEKER_PROFESSIONAL, SEEKER_FRESH_GRADUATE}
+
+# Student verification "kind" — which persona the verification asserts.
+STUDENT_KIND_VINUNI = "vinuni_student"
+STUDENT_KIND_ALUMNI = "vinuni_alumni"
+STUDENT_KIND_EXTERNAL = "external"
+VALID_STUDENT_KINDS = {
+    STUDENT_KIND_VINUNI,
+    STUDENT_KIND_ALUMNI,
+    STUDENT_KIND_EXTERNAL,
+}
+# Kinds that require a real institution (VinUni) email domain to verify.
+_INSTITUTION_STUDENT_KINDS = {STUDENT_KIND_VINUNI, STUDENT_KIND_ALUMNI}
+# student_kind -> resulting affiliation on confirmed verification.
+_KIND_TO_AFFILIATION = {
+    STUDENT_KIND_VINUNI: affiliation_facade.AFFILIATION_VINUNI_STUDENT,
+    STUDENT_KIND_ALUMNI: affiliation_facade.AFFILIATION_ALUMNI,
+    STUDENT_KIND_EXTERNAL: affiliation_facade.AFFILIATION_EXTERNAL,
+}
 
 # Max employer doc upload: 10 MB
 EMPLOYER_DOC_MAX_BYTES = 10 * 1024 * 1024
@@ -225,14 +245,33 @@ async def request_student_verify(
     university_name: str,
     student_id_number: str,
     student_email: str,
+    student_kind: str = STUDENT_KIND_VINUNI,
     ctx: RequestContext,
 ) -> dict:
     """Start student email verification: create/update StudentVerification row,
-    issue OTP to student email address."""
+    issue OTP to student email address.
+
+    ``student_kind`` selects which persona is being asserted. For a VinUni student
+    or alumnus the OTP email MUST be an institution domain (``@vinuni.edu.vn``),
+    enforced here in the service so "verified" actually distinguishes VinUni from
+    external — schema validation alone is not authoritative.
+    """
+
+    if student_kind not in VALID_STUDENT_KINDS:
+        student_kind = STUDENT_KIND_VINUNI
 
     user = await user_service.get_by_id(session, user_id)
     if user is None:
         raise NotFoundError("user_not_found")
+
+    # VinUni student / alumni must verify with a real institution email domain.
+    if student_kind in _INSTITUTION_STUDENT_KINDS and not is_institution_email(
+        student_email
+    ):
+        raise ValidationFailedError(
+            "Vui lòng dùng email trường VinUni (ví dụ @vinuni.edu.vn) để xác minh "
+            "sinh viên hoặc cựu sinh viên VinUni.",
+        )
 
     # Upsert StudentVerification row
     existing = (
@@ -247,12 +286,14 @@ async def request_student_verify(
             university_name=university_name,
             student_id_number=student_id_number,
             student_email=student_email,
+            student_kind=student_kind,
         )
         session.add(verif)
     else:
         existing.university_name = university_name
         existing.student_id_number = student_id_number
         existing.student_email = student_email
+        existing.student_kind = student_kind
         existing.student_email_verified_at = None
         existing.status = "unverified"
         existing.updated_at = datetime.now(tz=UTC)
@@ -317,8 +358,23 @@ async def confirm_student_verify(
     verif.status = "verified"
     if id_card_file_path:
         verif.id_card_file_path = id_card_file_path
-        verif.ai_check_status = "pending"
     verif.updated_at = now
+
+    # Persist the now-meaningful affiliation (VinUni student / alumni / external)
+    # and the verified-student badge timestamp via the student_profiles facade.
+    student_kind = verif.student_kind or STUDENT_KIND_VINUNI
+    affiliation = _KIND_TO_AFFILIATION.get(
+        student_kind, affiliation_facade.AFFILIATION_VINUNI_STUDENT
+    )
+    await affiliation_facade.set_affiliation(
+        session,
+        user_id=user_id,
+        affiliation=affiliation,
+        verified_at=now,
+    )
+    # Alumni is a distinct persona — make it assignable on confirmed verification.
+    if student_kind == STUDENT_KIND_ALUMNI:
+        await update_identity_persona(session, user_id=user_id, persona="alumni")
 
     state = await get_or_create_onboarding_state(session, user_id=user_id)
     state.current_step = "seeker_profile"
@@ -330,6 +386,7 @@ async def confirm_student_verify(
         resource_type="user",
         resource_id=user_id,
         context=_audit_ctx(ctx, actor_id=user_id),
+        after={"student_kind": student_kind, "affiliation": affiliation},
     )
     await session.flush()
     return state

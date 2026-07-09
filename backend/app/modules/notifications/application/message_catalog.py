@@ -183,6 +183,21 @@ CATALOG: dict[str, CatalogEntry] = {
             "{scheduled_at} ({mode_label}).",
         },
     ),
+    "recruitment.interview_candidate_responded": CatalogEntry(
+        category="interview",
+        title={
+            "vi": "Ứng viên đã phản hồi lịch phỏng vấn",
+            "en": "Candidate responded to the interview",
+        },
+        body={
+            # Partner-internal (scheduler + assignees). Masked — never the student's
+            # name/email; only "the candidate {response_label} the interview".
+            "vi": "Ứng viên {response_label} buổi phỏng vấn cho “{job_title}” vào "
+            "{scheduled_at} ({mode_label}).",
+            "en": "The candidate {response_label} the interview for “{job_title}” "
+            "on {scheduled_at} ({mode_label}).",
+        },
+    ),
     "recruitment.interview_reminder_assignee": CatalogEntry(
         category="interview",
         title={

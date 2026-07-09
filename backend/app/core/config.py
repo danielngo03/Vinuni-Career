@@ -396,3 +396,32 @@ def get_settings() -> Settings:
     """Return a cached settings instance."""
 
     return Settings()
+
+
+def institution_email_domains() -> set[str]:
+    """Normalized set of configured institution email domains.
+
+    Lowercased, whitespace-trimmed, and stripped of any leading ``@`` so callers
+    can compare a bare email domain directly. Configured via
+    ``INSTITUTION_EMAIL_DOMAINS`` (comma-separated); defaults to ``vinuni.edu.vn``.
+    """
+
+    return {
+        item.strip().lower().lstrip("@")
+        for item in get_settings().institution_email_domains.split(",")
+        if item.strip()
+    }
+
+
+def is_institution_email(email: str | None) -> bool:
+    """True when ``email``'s domain is a configured institution domain.
+
+    Single source of truth for the VinUni-vs-external heuristic. Both the billing
+    entitlement segment and the student-affiliation resolver call this so the rule
+    is defined once.
+    """
+
+    if not email or "@" not in email:
+        return False
+    domain = email.rsplit("@", 1)[1].lower()
+    return domain in institution_email_domains()

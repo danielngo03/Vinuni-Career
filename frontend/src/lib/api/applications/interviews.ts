@@ -131,7 +131,17 @@ export interface StudentInterviewCard {
   duration_minutes: number;
   location_or_link: string | null;
   status: InterviewStatus;
+  /**
+   * Candidate self-response state (Theme D): `confirmed` | `declined` |
+   * `reschedule_requested`, or null until the student responds. The label is the
+   * localized state ("Confirmed" / "Đã xác nhận") — never a raw code.
+   */
+  candidate_response: string | null;
+  candidate_response_label: string | null;
 }
+
+/** The candidate's reply to their own interview (Theme D). */
+export type InterviewRespondAction = "confirm" | "decline" | "request_reschedule";
 
 /* --------------------------------- Calls ---------------------------------- */
 
@@ -206,6 +216,25 @@ export const interviewsApi = {
     return api.post<Interview>(
       `/applications/${id}/interviews/${interviewId}/complete`,
       version === undefined ? { outcome } : { outcome, version },
+    );
+  },
+
+  /**
+   * STUDENT: confirm / decline / request-reschedule of THEIR own interview
+   * (Theme D). Owner-only server-side (a non-owner is a 404). Idempotent replay;
+   * a conflicting response after a prior one is a 409
+   * (`interview_response_conflict`); a non-scheduled or past interview is a 409
+   * (`interview_not_respondable`). Returns the refreshed student interview card.
+   */
+  respondToInterview(
+    id: string,
+    interviewId: string,
+    action: InterviewRespondAction,
+    note?: string,
+  ): Promise<StudentInterviewCard> {
+    return api.post<StudentInterviewCard>(
+      `/applications/${id}/interviews/${interviewId}/respond`,
+      note ? { action, note } : { action },
     );
   },
 };

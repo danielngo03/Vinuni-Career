@@ -78,6 +78,10 @@ async def test_student_dashboard_empty_state(db_session) -> None:
         "applications_active": 0,
         "cv_count": 0,
         "alert_count": 0,
+        "unread_messages": 0,
+        # Provisional badge from the institution login-email domain; unverified.
+        "affiliation": "vinuni_student",
+        "verified": False,
     }
     keys = {a["key"] for a in data["next_actions"]}
     # Identity-only profile: no "complete_profile" nudge; the setup nudge is CV-first.
@@ -85,8 +89,46 @@ async def test_student_dashboard_empty_state(db_session) -> None:
     assert "build_cv" in keys
     assert "create_alert" in keys  # nudge when no alerts exist
     assert "respond_reveal" not in keys
+    # A still-unverified VinUni/external student is nudged to verify (Theme A/B).
+    assert "verify_account" in keys
+    # No live offer / interview / unread message in the empty state.
+    assert "respond_offer" not in keys
+    assert "respond_interview" not in keys
+    assert "unread_messages" not in keys
     assert data["applications_recent"] == []
     assert data["reveal_requests_pending"] == []
+
+
+async def test_student_dashboard_verify_account_toggles_with_verification(
+    db_session,
+) -> None:
+    """Theme A/B: an unverified VinUni/external student is nudged to verify; once
+    verification is confirmed the nudge clears and the badge flips to verified."""
+
+    from datetime import UTC, datetime
+
+    from app.modules.student_profiles.application import affiliation_facade
+
+    _su, student = await make_student(db_session)
+
+    data = await student_dashboard.get_student_dashboard(db_session, principal=student)
+    assert "verify_account" in {a["key"] for a in data["next_actions"]}
+    assert data["metrics"]["verified"] is False
+
+    await affiliation_facade.set_affiliation(
+        db_session,
+        user_id=student.user_id,
+        affiliation=affiliation_facade.AFFILIATION_VINUNI_STUDENT,
+        verified_at=datetime.now(tz=UTC),
+    )
+
+    data2 = await student_dashboard.get_student_dashboard(
+        db_session, principal=student
+    )
+    keys2 = {a["key"] for a in data2["next_actions"]}
+    assert "verify_account" not in keys2
+    assert data2["metrics"]["verified"] is True
+    assert data2["metrics"]["affiliation"] == "vinuni_student"
 
 
 async def test_student_dashboard_real_counts_and_scoping(db_session) -> None:

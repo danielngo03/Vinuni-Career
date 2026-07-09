@@ -240,7 +240,11 @@ export function StudentApplicationDetail({ id }: { id: string }) {
           construction: date/mode/location-or-link/status only — NEVER assignee
           identities, scores, or the advance gate. */}
       {app.upcoming_interview && (
-        <UpcomingInterviewCard interview={app.upcoming_interview} />
+        <UpcomingInterviewCard
+          interview={app.upcoming_interview}
+          applicationId={id}
+          onResponded={refresh}
+        />
       )}
 
       {/* Real application-bound message thread — omitted entirely when none

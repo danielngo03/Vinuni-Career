@@ -23,6 +23,16 @@ export interface StudentDashboardMetrics {
   profile_completion_pct: number;
   cv_count: number;
   alert_count: number;
+  /** Unread institutional-message count (drives the "unread messages" todo). */
+  unread_messages: number;
+  /**
+   * Institutional affiliation badge: `vinuni_student` | `alumni` | `external` |
+   * `general`. The verified fact when the student has verified, else a
+   * provisional label from the login-email domain + onboarding seeker type.
+   */
+  affiliation: string;
+  /** Whether the student has completed institutional verification. */
+  verified: boolean;
 }
 
 export interface StudentRecentApplication {
@@ -51,6 +61,9 @@ export interface StudentUpcomingInterview {
   scheduled_at: string;
   duration_minutes: number;
   location: string | null;
+  /** Candidate self-response state (Theme D): null until the student responds. */
+  candidate_response: string | null;
+  candidate_response_label: string | null;
 }
 
 export interface CompletionSection {

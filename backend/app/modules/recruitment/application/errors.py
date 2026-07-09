@@ -169,6 +169,42 @@ class InterviewNotActionableError(ConflictError):
         super().__init__(self.message, details={"reason": reason})
 
 
+class InterviewNotRespondableError(ConflictError):
+    """The candidate cannot respond to this interview in its current state.
+
+    Theme D: a student may confirm / decline / request-reschedule ONLY a
+    ``scheduled`` interview whose start time is still in the future. A cancelled /
+    completed / no-show / past interview raises this distinct ``409`` so the
+    student UI renders a precise "this interview can no longer be updated" state.
+    """
+
+    message = "Không thể phản hồi buổi phỏng vấn ở trạng thái hiện tại."
+
+    def __init__(self, *, reason: str = "interview_not_respondable") -> None:
+        super().__init__(self.message, details={"reason": reason})
+
+
+class InterviewResponseConflictError(ConflictError):
+    """The candidate already responded differently to this interview (Theme D).
+
+    First-response-wins: re-sending the SAME response is an idempotent no-op, but a
+    CONFLICTING response (e.g. confirming after declining) raises this distinct
+    ``409`` — the student should contact the recruiter to change a submitted
+    response. Carries the current response code so the client can reflect it.
+    """
+
+    message = (
+        "Bạn đã phản hồi buổi phỏng vấn này rồi. Vui lòng liên hệ nhà tuyển dụng "
+        "nếu cần thay đổi."
+    )
+
+    def __init__(self, *, current_response: str | None = None) -> None:
+        details: dict = {"reason": "interview_response_conflict"}
+        if current_response is not None:
+            details["current_response"] = current_response
+        super().__init__(self.message, details=details)
+
+
 class RevealNotAvailableError(ConflictError):
     """A reveal request cannot be created/answered in the current state."""
 

@@ -65,6 +65,10 @@ def owner_profile(p: StudentProfile, *, user, locale: str = "vi") -> dict:
         "show_phone": p.show_phone,
         "show_phone_label": vocab.contact_label(p.show_phone, locale=locale),
         "is_open_to_work": p.is_open_to_work,
+        # Institutional affiliation + verified-student badge (owner projection).
+        "affiliation": getattr(p, "affiliation", None) or "general",
+        "verified": getattr(p, "student_verified_at", None) is not None,
+        "verified_at": _iso(getattr(p, "student_verified_at", None)),
         "created_at": _iso(p.created_at),
         "updated_at": _iso(p.updated_at),
         "version": p.version,
@@ -95,6 +99,10 @@ def public_profile(
         "location_country": p.location_country,
         "is_open_to_work": p.is_open_to_work,
         "profile_visibility": p.profile_visibility,
+        # Coarse affiliation label + verified-student badge. Not PII; the verified
+        # timestamp is intentionally NOT exposed to public viewers.
+        "affiliation": getattr(p, "affiliation", None) or "general",
+        "verified": getattr(p, "student_verified_at", None) is not None,
     }
     if expose_email and user is not None:
         body["email"] = getattr(user, "email", None) or ""

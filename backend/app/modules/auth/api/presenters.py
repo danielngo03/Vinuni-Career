@@ -12,6 +12,8 @@ def user_summary(
     identity: Identity,
     *,
     principal: Principal | None = None,
+    affiliation: str | None = None,
+    verified: bool | None = None,
 ) -> dict:
     """Build the user summary dict for /auth/me and login responses.
 
@@ -19,6 +21,11 @@ def user_summary(
     (sorted, privacy-safe strings only).  Superadmins always get ``["*"]``
     regardless of their explicit grants, because :meth:`PermissionChecker.can`
     bypasses the grants set for superadmins.
+
+    ``affiliation`` / ``verified`` are the surfaced student-affiliation badge
+    (``vinuni_student`` | ``alumni`` | ``external`` | ``general``). They are
+    included only when supplied by the caller (``/me`` resolves them via the
+    affiliation facade); other callers omit them.
     """
     base: dict[str, object] = {
         "id": str(user.id),
@@ -30,6 +37,10 @@ def user_summary(
         "is_superadmin": user.is_superadmin,
         "active_identity": identity_summary(identity),
     }
+    if affiliation is not None:
+        base["affiliation"] = affiliation
+    if verified is not None:
+        base["verified"] = verified
     if principal is not None:
         if principal.is_superadmin:
             base["permissions"] = ["*"]

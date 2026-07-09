@@ -359,6 +359,14 @@ def interview_view(
         "notes": iv.notes,
         "assignees": assignees,
         "evaluation": evaluation,
+        # The candidate's own response to this interview (partner-visible so the
+        # recruiter can see confirm/decline/reschedule + the student's note).
+        "candidate_response": iv.candidate_response,
+        "candidate_response_label": interview_domain.candidate_response_label(
+            iv.candidate_response, locale=locale
+        ),
+        "candidate_responded_at": _iso(iv.candidate_responded_at),
+        "candidate_response_note": iv.candidate_response_note,
         "version": iv.version,
         "created_at": _iso(iv.created_at),
         "updated_at": _iso(iv.updated_at),
@@ -387,6 +395,13 @@ def student_interview_card(iv: Interview, *, locale: str = "vi") -> dict:
         "duration_minutes": iv.duration_minutes,
         "location_or_link": location_or_link,
         "status": iv.status,
+        # The student's OWN response state (so the card reflects what they chose).
+        # NULL until they respond; a localized label accompanies the raw code.
+        "candidate_response": iv.candidate_response,
+        "candidate_response_label": interview_domain.candidate_response_label(
+            iv.candidate_response, locale=locale
+        ),
+        "candidate_responded_at": _iso(iv.candidate_responded_at),
     }
 
 

@@ -732,6 +732,46 @@ DEFAULT_TEMPLATES: list[dict] = [
         },
     },
     {
+        "key": "application.interview_candidate_responded",
+        "channel": "email",
+        # Partner-internal (scheduler + assignees). ``name``/``email`` are the
+        # RECIPIENT (partner member); the candidate is never named. ``response_label``
+        # is the localized verb (confirmed / declined / requested to reschedule).
+        "variables_schema": {
+            "allowed": [
+                "name", "email", "job_title", "response_label", "scheduled_at",
+                "mode_label",
+            ],
+            "required": [],
+        },
+        "locales": {
+            "vi": {
+                "subject": "Ứng viên đã phản hồi lịch phỏng vấn — VinUni Career",
+                "body": (
+                    "Chào {{name}},\n\n"
+                    "Ứng viên {{response_label}} buổi phỏng vấn cho vị trí "
+                    "“{{job_title}}”.\n"
+                    "Thời gian: {{scheduled_at}}\n"
+                    "Hình thức: {{mode_label}}\n\n"
+                    "Đăng nhập VinUni Career để xem chi tiết.\n\n"
+                    "Trân trọng,\nVinUni Career Center"
+                ),
+            },
+            "en": {
+                "subject": "Candidate responded to the interview — VinUni Career",
+                "body": (
+                    "Hi {{name}},\n\n"
+                    "The candidate {{response_label}} the interview for "
+                    "“{{job_title}}”.\n"
+                    "Time: {{scheduled_at}}\n"
+                    "Mode: {{mode_label}}\n\n"
+                    "Sign in to VinUni Career for the details.\n\n"
+                    "Best regards,\nVinUni Career Center"
+                ),
+            },
+        },
+    },
+    {
         "key": "application.stage_sla_reminder",
         "channel": "email",
         # Partner-internal (pipeline owner/reviewer). No student-identity field.

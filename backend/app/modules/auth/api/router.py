@@ -281,7 +281,30 @@ async def me(
         session, identity_id=auth.claims.identity_id, user_id=auth.principal.user_id
     )
     assert user is not None and identity is not None
-    return success(presenters.user_summary(user, identity, principal=auth.principal))
+
+    # Surface the student-affiliation badge (verified fact when present, else a
+    # provisional label from the login-email domain + onboarding seeker type).
+    from app.modules.onboarding.application import onboarding_read_facade
+    from app.modules.student_profiles.application import affiliation_facade
+
+    seeker_type = await onboarding_read_facade.get_seeker_type(
+        session, user_id=user.id
+    )
+    display = await affiliation_facade.resolve_display(
+        session,
+        user_id=user.id,
+        login_email=user.email,
+        seeker_type=seeker_type,
+    )
+    return success(
+        presenters.user_summary(
+            user,
+            identity,
+            principal=auth.principal,
+            affiliation=display["affiliation"],
+            verified=display["verified"],
+        )
+    )
 
 
 @router.get("/identity", summary="List the user's identities")

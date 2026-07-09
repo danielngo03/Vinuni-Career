@@ -371,6 +371,7 @@ export type {
   ScheduleInterviewBody,
   RescheduleInterviewBody,
   StudentInterviewCard,
+  InterviewRespondAction,
   OfferStatus,
   OfferApproveDecision,
   OfferRespondDecision,

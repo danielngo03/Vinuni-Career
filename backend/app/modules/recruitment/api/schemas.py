@@ -198,6 +198,20 @@ class InterviewCompleteBody(BaseModel):
     version: int | None = None
 
 
+class InterviewRespondBody(BaseModel):
+    """``POST /applications/{id}/interviews/{interview_id}/respond`` — candidate reply.
+
+    ``action`` is a coded enum (``confirm`` -> confirmed, ``decline`` -> declined,
+    ``request_reschedule`` -> reschedule_requested; mapped in the service). ``note``
+    is the student's OWN optional free text (e.g. a reschedule reason). ``version``
+    is the optimistic-lock guard against the interview row (stale -> 409).
+    """
+
+    action: Literal["confirm", "decline", "request_reschedule"]
+    note: str | None = Field(default=None, max_length=2000)
+    version: int | None = None
+
+
 class OfferCreateBody(BaseModel):
     """``POST /applications/{id}/offers`` — create the draft offer (ADR-0007 §8).
 

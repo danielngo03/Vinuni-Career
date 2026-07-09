@@ -30,6 +30,7 @@ from app.modules.opportunities.application import job_read_facade
 from app.modules.organization.application import org_reporting_facade
 from app.modules.recruitment.api import presenters
 from app.modules.recruitment.application import _shared
+from app.modules.recruitment.domain import interview as interview_domain
 from app.modules.recruitment.domain import lifecycle, pipeline
 from app.modules.recruitment.domain.models import (
     Application,
@@ -185,9 +186,44 @@ async def list_upcoming_student_interviews(
             "scheduled_at": _iso(iv.scheduled_at),
             "duration_minutes": iv.duration_minutes,
             "location": iv.location,
+            # Candidate self-response state (Theme D) so the card can show a
+            # confirm/decline CTA or the already-responded label. Never a raw code.
+            "candidate_response": iv.candidate_response,
+            "candidate_response_label": interview_domain.candidate_response_label(
+                iv.candidate_response, locale=locale
+            ),
         }
         for iv, job_id in rows
     ]
+
+
+async def count_interviews_awaiting_response(
+    session: AsyncSession, *, user_id: uuid.UUID
+) -> int:
+    """Scheduled, future interviews the student has NOT yet responded to (Theme D).
+
+    Drives the dashboard "respond to interview" todo — only counts interviews the
+    student can still confirm/decline (``scheduled`` + future + no candidate
+    response recorded).
+    """
+
+    now = _shared.now()
+    return int(
+        (
+            await session.execute(
+                select(func.count())
+                .select_from(Interview)
+                .join(Application, Application.id == Interview.application_id)
+                .where(
+                    Application.applicant_id == user_id,
+                    Application.deleted_at.is_(None),
+                    Interview.status == "scheduled",
+                    Interview.scheduled_at > now,
+                    Interview.candidate_response.is_(None),
+                )
+            )
+        ).scalar_one()
+    )
 
 
 async def count_pending_reveals_for_student(

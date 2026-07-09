@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -34,6 +35,12 @@ class StudentVerifyRequestBody(BaseModel):
     university_name: str = Field(min_length=2, max_length=255)
     student_id_number: str = Field(min_length=2, max_length=50)
     student_email: str = Field(max_length=320)
+    # Which student persona is being asserted. Defaults to ``vinuni_student`` for
+    # backward-compat when the client omits it. The institution-domain rule for
+    # vinuni_student / vinuni_alumni is enforced in the service, not just here.
+    student_kind: Literal["vinuni_student", "vinuni_alumni", "external"] = (
+        "vinuni_student"
+    )
 
     @field_validator("student_email")
     @classmethod

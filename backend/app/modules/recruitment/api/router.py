@@ -24,6 +24,7 @@ from app.modules.recruitment.api.schemas import (
     InterviewCancelBody,
     InterviewCompleteBody,
     InterviewRescheduleBody,
+    InterviewRespondBody,
     InterviewScheduleBody,
     InviteRespondBody,
     InviteToApplyBody,
@@ -460,6 +461,25 @@ async def complete_interview(
         session, principal=auth.principal, application_id=application_id,
         interview_id=interview_id, outcome=body.outcome, version=body.version,
         ctx=auth.ctx,
+    )
+    return success(data)
+
+
+@applications_router.post(
+    "/{application_id}/interviews/{interview_id}/respond",
+    summary="Confirm / decline / request-reschedule your interview (student)",
+)
+async def respond_to_interview(
+    application_id: uuid.UUID,
+    interview_id: uuid.UUID,
+    body: InterviewRespondBody,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await interview_service.respond_to_interview(
+        session, principal=auth.principal, application_id=application_id,
+        interview_id=interview_id, action=body.action, note=body.note,
+        version=body.version, ctx=auth.ctx,
     )
     return success(data)
 

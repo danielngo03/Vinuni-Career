@@ -6,10 +6,14 @@ import {
   Bell,
   Briefcase,
   CalendarBlank,
+  CaretRight,
+  ChatCircle,
   PaperPlaneTilt,
   ReadCvLogo,
   ClockCounterClockwise,
   Eye,
+  SealCheck,
+  ShieldWarning,
   VideoCamera,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
@@ -73,7 +77,7 @@ export function StudentDashboard() {
             />
             <div className="relative max-w-2xl">
               <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--blue-200)]">
-                VinUni Career
+                {ts("brandEyebrow")}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
                 {ts("title")}
@@ -91,28 +95,37 @@ export function StudentDashboard() {
                 <Link href="/student/cv">
                   <Button variant="ghost" className="border-white/20 bg-white/10 text-white hover:bg-white/16">
                     <ReadCvLogo aria-hidden weight="bold" className="size-4" />
-                    CV Studio
+                    {ts("cvStudioCta")}
                   </Button>
                 </Link>
               </div>
             </div>
           </div>
+          {/* Honest static quick-links — no fabricated stats. Real per-user
+              signals (persona badge, unread, next actions) live in the authed
+              content below where the query data is available. */}
           <div className="border-t border-[var(--border-default)] bg-[var(--surface-card)] p-6 lg:border-l lg:border-t-0">
             <div className="grid gap-3">
-              <div className="rounded-[14px] border border-[var(--border-default)] bg-[var(--surface-secondary)] p-4">
-                <p className="text-xs font-semibold text-[var(--text-secondary)]">
-                  {ts("metric.cvCount")}
-                </p>
-                <p className="mt-1 text-2xl font-black text-[var(--brand-navy)]">CV Studio</p>
-              </div>
-              <div className="rounded-[14px] border border-[var(--border-default)] bg-[var(--ai-accent-soft)] p-4">
-                <p className="text-xs font-semibold text-[var(--ai-accent)]">
-                  {ts("recommendedRolesTitle")}
-                </p>
-                <p className="mt-1 text-sm leading-5 text-[var(--text-secondary)]">
-                  {ts("actionsEmptyBody")}
-                </p>
-              </div>
+              <Link
+                href="/student/applications"
+                className="marketplace-card marketplace-card-hover flex items-center gap-3 rounded-[14px] p-4 outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+              >
+                <PaperPlaneTilt aria-hidden weight="duotone" className="size-5 text-[var(--text-muted)]" />
+                <span className="min-w-0 flex-1 text-sm font-bold text-[var(--text-primary)]">
+                  {ts("quickApplications")}
+                </span>
+                <CaretRight aria-hidden weight="bold" className="size-3.5 text-[var(--text-muted)]" />
+              </Link>
+              <Link
+                href="/student/messages"
+                className="marketplace-card marketplace-card-hover flex items-center gap-3 rounded-[14px] p-4 outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+              >
+                <ChatCircle aria-hidden weight="duotone" className="size-5 text-[var(--text-muted)]" />
+                <span className="min-w-0 flex-1 text-sm font-bold text-[var(--text-primary)]">
+                  {ts("quickMessages")}
+                </span>
+                <CaretRight aria-hidden weight="bold" className="size-3.5 text-[var(--text-muted)]" />
+              </Link>
             </div>
           </div>
         </div>
@@ -156,10 +169,59 @@ export function StudentDashboard() {
               icon: Bell,
               tone: "warning",
             },
+            {
+              key: "unread_messages",
+              label: ts("metric.unreadMessages"),
+              value: data.metrics.unread_messages,
+              icon: ChatCircle,
+              tone: "info",
+            },
           ];
+
+          const affiliation = data.metrics.affiliation;
+          const affiliationLabel =
+            affiliation === "vinuni_student"
+              ? ts("affiliationVinuniStudent")
+              : affiliation === "alumni"
+                ? ts("affiliationAlumni")
+                : affiliation === "external"
+                  ? ts("affiliationExternal")
+                  : ts("affiliationGeneral");
+          const verified = data.metrics.verified;
 
           return (
             <div className="space-y-8">
+              {/* Persona badge — real affiliation + verified state (Theme A).
+                  VinUni / alumni / external / general, with an honest verify CTA
+                  when the student has not completed institutional verification. */}
+              <section
+                aria-label={ts("personaTitle")}
+                className="flex flex-wrap items-center gap-2.5 rounded-[14px] border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3"
+              >
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border-strong)] bg-[var(--surface-secondary)] px-3 py-1 text-xs font-bold text-[var(--text-primary)]">
+                  {affiliationLabel}
+                </span>
+                {verified ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-[var(--teal-50)] px-2.5 py-1 text-xs font-semibold text-[var(--teal-600)]">
+                    <SealCheck aria-hidden weight="fill" className="size-4" />
+                    {ts("verifiedBadge")}
+                  </span>
+                ) : (
+                  <>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-[var(--amber-100)] px-2.5 py-1 text-xs font-semibold text-[var(--amber-700)]">
+                      <ShieldWarning aria-hidden weight="fill" className="size-4" />
+                      {ts("unverifiedBadge")}
+                    </span>
+                    <Link
+                      href="/onboarding/student-verify"
+                      className="text-xs font-bold text-[var(--brand-primary)] outline-none hover:underline focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                    >
+                      {ts("verifyCta")}
+                    </Link>
+                  </>
+                )}
+              </section>
+
               <MetricTiles items={metrics} />
 
               <section aria-labelledby="student-next-actions">

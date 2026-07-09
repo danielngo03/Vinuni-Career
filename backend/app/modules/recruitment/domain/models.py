@@ -363,6 +363,18 @@ class Interview(Base):
     created_by: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
+    # The candidate's own response to THIS interview (``confirmed | declined |
+    # reschedule_requested``); NULL until the student responds. Distinct from the
+    # partner-owned ``status`` — it records what the candidate said and never
+    # mutates the partner lifecycle. Cleared when the partner reschedules so the
+    # student can respond to the new time (interview_service).
+    candidate_response: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    candidate_responded_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    # The candidate's OWN free-text note (e.g. a reschedule reason). Partner-visible
+    # on the partner interview view; never surfaced to another student.
+    candidate_response_note: Mapped[str | None] = mapped_column(Text, nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()

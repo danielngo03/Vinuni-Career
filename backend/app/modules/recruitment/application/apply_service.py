@@ -495,22 +495,52 @@ async def list_my_applications(
     hiring_org_ids = [a.org_id for a in page.items if a.org_id is not None]
     reveal_org_ids = [r.requester_org_id for r in reveals.values()]
     org_names = await _org_display_names(session, hiring_org_ids + reveal_org_ids)
+
+    # Batch-attach the SAME identity-safe interview / offer cards (and the server
+    # ``next_action``) the DETAIL path exposes, so the list-level tiles, filter tabs,
+    # progress bar, and "what to do next" light up. One query per related entity for
+    # the whole page (keyed by application_id) — never N+1. Lazy imports mirror the
+    # detail path and avoid an apply_service <-> interview/offer_service cycle.
+    from app.modules.recruitment.application import interview_service, offer_service
+    from app.modules.recruitment.domain import offer as offer_domain
+
+    app_ids = [a.id for a in page.items]
+    interview_blocks = await interview_service.student_interview_blocks(
+        session, application_ids=app_ids, locale=locale
+    )
+    offer_blocks = await offer_service.student_offer_blocks(
+        session, application_ids=app_ids, locale=locale
+    )
+
     items = []
     for a in page.items:
         req = reveals.get(a.id)
-        items.append(
-            presenters.applicant_application(
-                a,
-                job_title=titles.get(a.job_id),
-                company_name=org_names.get(a.org_id) if a.org_id else None,
-                reveal=req,
-                reveal_status=_effective_reveal_status(req) if req else None,
-                reveal_company_name=(
-                    org_names.get(req.requester_org_id) if req else None
-                ),
-                locale=locale,
-            )
+        upcoming_interview = interview_blocks.get(a.id)
+        offer_card = offer_blocks.get(a.id)
+        next_action = timeline.derive_next_action(
+            status=a.status,
+            has_upcoming_interview=upcoming_interview is not None,
+            has_actionable_offer=(
+                offer_card is not None
+                and offer_card.get("status") == offer_domain.STATUS_SENT
+            ),
         )
+        view = presenters.applicant_application(
+            a,
+            job_title=titles.get(a.job_id),
+            company_name=org_names.get(a.org_id) if a.org_id else None,
+            reveal=req,
+            reveal_status=_effective_reveal_status(req) if req else None,
+            reveal_company_name=(
+                org_names.get(req.requester_org_id) if req else None
+            ),
+            next_action=next_action,
+            locale=locale,
+        )
+        # Same keys the detail path emits so the frontend types line up.
+        view["upcoming_interview"] = upcoming_interview
+        view["offer"] = offer_card
+        items.append(view)
     return items, page.next_cursor, page.limit
 
 

@@ -39,7 +39,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timedelta
 
-from sqlalchemy import select
+from sqlalchemy import func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
@@ -789,6 +789,73 @@ async def student_offer_block(
     if offer is None:
         return None
     return presenters.student_offer_card(offer, locale=locale)
+
+
+async def student_offer_blocks(
+    session: AsyncSession,
+    *,
+    application_ids: list[uuid.UUID],
+    locale: str = "vi",
+) -> dict[uuid.UUID, dict]:
+    """Batch the latest student-visible offer card per application (no N+1).
+
+    ONE query keyed by ``application_id`` (mirrors ``student_offer_block`` but for a
+    page of applications) so the applications LIST attaches the SAME identity-safe
+    offer card the detail path uses without a per-row query. Latest ``created_at``
+    wins per application; only ``sent``+terminal offers are ever included. Empty in
+    -> empty out.
+    """
+
+    if not application_ids:
+        return {}
+    rows = (
+        await session.execute(
+            select(Offer)
+            .where(
+                Offer.application_id.in_(set(application_ids)),
+                Offer.status.in_(tuple(offer_domain.STUDENT_VISIBLE_STATUSES)),
+            )
+            .order_by(Offer.created_at.desc())
+        )
+    ).scalars().all()
+    blocks: dict[uuid.UUID, dict] = {}
+    for offer in rows:
+        # First row per application is the latest (ordered by created_at desc).
+        blocks.setdefault(
+            offer.application_id, presenters.student_offer_card(offer, locale=locale)
+        )
+    return blocks
+
+
+async def count_actionable_offers_for_student(
+    session: AsyncSession, *, user_id: uuid.UUID
+) -> int:
+    """Number of LIVE offers awaiting the student's response.
+
+    An offer is actionable only while ``sent`` and not past its ``expiry_date``
+    (the lazy-expire sweep flips overdue ones to ``expired``; this count is honest
+    even before the sweep runs). Drives the dashboard "respond to offer" todo.
+    """
+
+    now = _shared.now()
+    return int(
+        (
+            await session.execute(
+                select(func.count())
+                .select_from(Offer)
+                .join(Application, Offer.application_id == Application.id)
+                .where(
+                    Application.applicant_id == user_id,
+                    Application.deleted_at.is_(None),
+                    Offer.status == offer_domain.STATUS_SENT,
+                    or_(
+                        Offer.expiry_date.is_(None),
+                        Offer.expiry_date > now,
+                    ),
+                )
+            )
+        ).scalar_one()
+    )
 
 
 async def partner_offer_block(

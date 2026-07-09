@@ -28,8 +28,9 @@ follow-up — exposure is already privacy-gated, encryption-at-rest is additive.
 from __future__ import annotations
 
 import uuid
+from datetime import datetime
 
-from sqlalchemy import Boolean, ForeignKey, String
+from sqlalchemy import Boolean, DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.modules.student_profiles.domain import vocab
@@ -63,6 +64,18 @@ class StudentProfile(BaseEntity):
 
     # The sole career signal the identity-only profile keeps.
     is_open_to_work: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+
+    # Institutional affiliation — the authoritative, surfaced VinUni-vs-external
+    # fact (``vinuni_student`` | ``alumni`` | ``external`` | ``general``). Written
+    # only via the affiliation facade; ``general`` until the student verifies or a
+    # provisional label is derived. ``student_verified_at`` is the verified-student
+    # badge source (set on successful student verification).
+    affiliation: Mapped[str] = mapped_column(
+        String(30), nullable=False, default="general", server_default="general"
+    )
+    student_verified_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
 
     # Avatar storage key (internal; never returned to clients — expose via avatar_url only).
     avatar_path: Mapped[str | None] = mapped_column(String(500), nullable=True)
