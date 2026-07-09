@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { TreeStructure, ShieldWarning, Plus } from "@phosphor-icons/react";
+import { Plus } from "lucide-react";
+import { Button, EmptyState, Input, Modal, Select, useToast } from "@/components/ui";
 import {
-  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardToolbar,
   DataTable,
-  EmptyState,
-  Input,
-  Modal,
-  Select,
-  useToast,
-  type Column,
-} from "@/components/ui";
-import { SectionCard } from "@/components/settings/section-card";
+  type ColumnDef,
+} from "@/components/kit";
 import { ApiError, organizationApi, type OrgDepartment } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 
@@ -29,11 +29,11 @@ export function DepartmentsTab() {
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
 
-  const [edit, setEdit] = useState<EditState>(null);
-  const [deleting, setDeleting] = useState<OrgDepartment | null>(null);
-  const [name, setName] = useState("");
-  const [parentId, setParentId] = useState("");
-  const [nameError, setNameError] = useState<string | null>(null);
+  const [edit, setEdit] = React.useState<EditState>(null);
+  const [deleting, setDeleting] = React.useState<OrgDepartment | null>(null);
+  const [name, setName] = React.useState("");
+  const [parentId, setParentId] = React.useState("");
+  const [nameError, setNameError] = React.useState<string | null>(null);
 
   const query = useQuery({
     queryKey: ["org", "departments"],
@@ -41,11 +41,7 @@ export function DepartmentsTab() {
     retry: false,
   });
 
-  // Departments are managed by org admins; we surface backend errors for
-  // missing permissions rather than guessing here. Superadmin always allowed.
-  const canManage = true;
-
-  useEffect(() => {
+  React.useEffect(() => {
     if (edit?.mode === "edit") {
       setName(edit.dept.name);
       setParentId(edit.dept.parent_id ?? "");
@@ -92,67 +88,32 @@ export function DepartmentsTab() {
     },
   });
 
-  if (query.isError && query.error instanceof ApiError) {
-    const err = query.error;
-    return (
-      <SectionCard
-        title={t("title")}
-        description={t("intro")}
-        icon={TreeStructure}
-        iconGradient="icon-chip-success"
-      >
-        <EmptyState
-          kind={err.isPermissionError ? "permission" : err.isAuthError ? "auth" : "error"}
-          icon={ShieldWarning}
-          title={
-            err.isPermissionError
-              ? tStates("permissionTitle")
-              : err.isAuthError
-                ? tStates("authTitle")
-                : tStates("errorTitle")
-          }
-          description={
-            err.isPermissionError
-              ? tStates("permissionBody")
-              : err.isAuthError
-                ? tStates("authBody")
-                : tStates("errorBody")
-          }
-        />
-      </SectionCard>
-    );
-  }
-
   const rows = query.data ?? [];
-  const deptName = (id?: string | null) =>
-    id ? (rows.find((d) => d.id === id)?.name ?? "—") : "—";
+  const deptName = (id?: string | null) => (id ? (rows.find((d) => d.id === id)?.name ?? "—") : "—");
 
-  const columns: Column<OrgDepartment>[] = [
+  const columns: ColumnDef<OrgDepartment, unknown>[] = [
     {
-      key: "name",
+      accessorKey: "name",
       header: t("name"),
-      cell: (d) => <span className="font-semibold text-[var(--text-primary)]">{d.name}</span>,
+      cell: ({ row }) => <span className="font-semibold text-foreground">{row.original.name}</span>,
     },
     {
-      key: "parent",
+      accessorKey: "parent_id",
       header: t("parent"),
-      cell: (d) => deptName(d.parent_id),
+      enableSorting: false,
+      cell: ({ row }) => <span className="text-muted-foreground">{deptName(row.original.parent_id)}</span>,
     },
     {
-      key: "actions",
+      id: "actions",
       header: "",
-      align: "right",
-      cell: (d) => (
+      meta: { align: "right" },
+      enableSorting: false,
+      cell: ({ row }) => (
         <div className="flex justify-end gap-1">
-          <Button variant="ghost" size="sm" onClick={() => setEdit({ mode: "edit", dept: d })}>
+          <Button variant="ghost" size="sm" onClick={() => setEdit({ mode: "edit", dept: row.original })}>
             {tc("edit")}
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-[var(--brand-red)]"
-            onClick={() => setDeleting(d)}
-          >
+          <Button variant="ghost" size="sm" className="text-[var(--content-danger)]" onClick={() => setDeleting(row.original)}>
             {tc("delete")}
           </Button>
         </div>
@@ -160,7 +121,6 @@ export function DepartmentsTab() {
     },
   ];
 
-  // Parent options exclude the dept being edited (no self-parent).
   const parentOptions = [
     { value: "", label: t("noParent") },
     ...rows
@@ -169,23 +129,48 @@ export function DepartmentsTab() {
   ];
 
   return (
-    <SectionCard title={t("title")} description={t("intro")}>
-      {canManage && (
-        <div className="mb-4 flex justify-end">
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("title")}</CardTitle>
+          <CardDescription>{t("intro")}</CardDescription>
+        </div>
+        <CardToolbar>
           <Button variant="primary" size="sm" onClick={() => setEdit({ mode: "create" })}>
-            <Plus aria-hidden weight="bold" className="size-4" />
+            <Plus className="size-4" strokeWidth={2} />
             {t("create")}
           </Button>
-        </div>
-      )}
-      <DataTable
-        columns={columns}
-        rows={rows}
-        getRowId={(d) => d.id}
-        loading={query.isPending}
-        caption={t("title")}
-        empty={{ kind: "empty", icon: TreeStructure, title: t("empty") }}
-      />
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {query.isError && query.error instanceof ApiError ? (
+          <EmptyState
+            kind={query.error.isPermissionError ? "permission" : query.error.isAuthError ? "auth" : "error"}
+            title={
+              query.error.isPermissionError
+                ? tStates("permissionTitle")
+                : query.error.isAuthError
+                  ? tStates("authTitle")
+                  : tStates("errorTitle")
+            }
+            description={
+              query.error.isPermissionError
+                ? tStates("permissionBody")
+                : query.error.isAuthError
+                  ? tStates("authBody")
+                  : tStates("errorBody")
+            }
+          />
+        ) : (
+          <DataTable
+            columns={columns}
+            data={rows}
+            getRowId={(d) => d.id}
+            loading={query.isPending}
+            empty={<EmptyState kind="empty" title={t("empty")} />}
+          />
+        )}
+      </CardContent>
 
       <Modal
         open={edit !== null}
@@ -225,12 +210,7 @@ export function DepartmentsTab() {
             }}
             error={nameError ?? undefined}
           />
-          <Select
-            label={t("parent")}
-            value={parentId}
-            onChange={(e) => setParentId(e.target.value)}
-            options={parentOptions}
-          />
+          <Select label={t("parent")} value={parentId} onChange={(e) => setParentId(e.target.value)} options={parentOptions} />
         </div>
       </Modal>
 
@@ -246,18 +226,14 @@ export function DepartmentsTab() {
             <Button variant="ghost" onClick={() => setDeleting(null)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="danger"
-              loading={del.isPending}
-              onClick={() => deleting && del.mutate(deleting)}
-            >
+            <Button variant="danger" loading={del.isPending} onClick={() => deleting && del.mutate(deleting)}>
               {tc("delete")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("deleteNote")}</p>
+        <p className="type-small text-muted-foreground">{t("deleteNote")}</p>
       </Modal>
-    </SectionCard>
+    </Card>
   );
 }

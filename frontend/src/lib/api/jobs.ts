@@ -293,6 +293,13 @@ export interface OwnerJobSummary extends JobSummary {
   visibility: JobVisibility;
   version: number;
   created_at: string;
+  /**
+   * Lifetime detail-view + application counts. Optional: the owner LIST
+   * projection may omit them (only the detail read guarantees them), so the
+   * Jobs table renders "—" when absent rather than fabricating a metric.
+   */
+  view_count?: number;
+  application_count?: number;
   /** Moderation queue assignment (claim/SLA — university moderation only). */
   claimed_by?: string | null;
   claimed_at?: string | null;

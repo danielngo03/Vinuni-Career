@@ -32,6 +32,83 @@
     "insightTrendUp": "Application volume is up significantly this month — high interest signal. Act quickly to shortlist top candidates.",
     "insightTrendDown": "Application volume dropped this month. Consider boosting job visibility or refreshing the job description.",
     "insightTopJob": "\"{title}\" is your best-performing role with {count} applications. Prioritize reviewing this queue.",
-    "insightNoData": "No active applications yet. Post your first job to start receiving candidate insights."
+    "insightNoData": "No active applications yet. Post your first job to start receiving candidate insights.",
+    "kpi": {
+      "applications": "Applications",
+      "interviewRate": "Interview rate",
+      "offerRate": "Offer rate",
+      "hires": "Hires",
+      "timeToHire": "Time to hire",
+      "timeToHireHint": "Median days, applied → hired",
+      "interviewRateHint": "Of all applications",
+      "offerRateHint": "Of all applications"
+    },
+    "funnelSubtitle": "Stage-over-stage conversion across your pipeline",
+    "funnelOfPrev": "of previous",
+    "trendSeries": "Applications",
+    "trendSubtitle": "Applications received per month",
+    "topJobsSubtitle": "Roles ranked by applications received",
+    "table": {
+      "rank": "#",
+      "job": "Job",
+      "applications": "Applications",
+      "stage": "Stage",
+      "candidates": "Candidates",
+      "month": "Month"
+    },
+    "stageOutcomes": {
+      "title": "Stage outcomes",
+      "subtitle": "How candidates move through each stage",
+      "empty": "No stage activity yet",
+      "emptyBody": "Outcome data appears once candidates move through interview stages.",
+      "passRate": "Pass rate",
+      "colStage": "Stage",
+      "colEntered": "Entered",
+      "colAdvanced": "Advanced",
+      "colRejected": "Rejected",
+      "colActive": "Active"
+    },
+    "timeInStage": {
+      "title": "Time in stage",
+      "subtitle": "Median days candidates spend per stage",
+      "empty": "Not enough data",
+      "emptyBody": "Median durations appear once enough candidates complete each stage.",
+      "days": "{count}d"
+    },
+    "timeToHire": {
+      "title": "Time to hire",
+      "subtitle": "Days from application to hire",
+      "median": "Median",
+      "days": "days",
+      "distribution": "Distribution",
+      "empty": "Not enough hires yet",
+      "emptyBody": "Time-to-hire needs a few completed hires before it can be shown honestly.",
+      "sample": "{count, plural, =1 {# hire} other {# hires}}"
+    },
+    "source": {
+      "title": "Source attribution",
+      "subtitle": "Where your applications come from",
+      "empty": "No source data yet",
+      "emptyBody": "Source attribution needs job-engagement data to appear.",
+      "organic": "Organic",
+      "search": "Search",
+      "recommendation": "Recommended",
+      "sponsored": "Sponsored",
+      "invitation": "Invitation",
+      "direct": "Direct"
+    },
+    "range": {
+      "label": "Range",
+      "d30": "30 days",
+      "d90": "90 days",
+      "d180": "6 months",
+      "d365": "12 months",
+      "all": "All time"
+    },
+    "export": "Export CSV",
+    "exportFilename": "recruiting-analytics",
+    "notEnoughData": "Not enough data",
+    "chartTableSr": "Data table alternative",
+    "retry": "Try again"
   }
 }

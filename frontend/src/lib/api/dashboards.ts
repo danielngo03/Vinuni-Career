@@ -307,6 +307,101 @@ export interface PartnerAnalytics {
   monthly_trend: AnalyticsMonthlyPoint[];
 }
 
+/* ------------------- Recruiting funnel analytics (§6, NEW) ---------------- */
+
+/**
+ * Recruiting-funnel analytics read (`GET /dashboards/partner/analytics/
+ * recruiting-funnel`, design-spec §6). Extends the thin {@link PartnerAnalytics}
+ * funnel with step-over-step conversion, per-stage outcomes, and time-to-hire /
+ * time-in-stage medians. Every metric degrades honestly: `low_signal` and
+ * `median_days: null` mean "not enough data" — the UI renders an em dash / an
+ * honest note, never a fabricated number.
+ */
+export interface RecruitingFunnelStage {
+  stage: string;
+  label: string;
+  count: number;
+  /** Conversion vs the previous stage (0–100); null for the first stage. */
+  conversion_from_prev_pct: number | null;
+}
+
+export interface RecruitingStageOutcome {
+  stage_type: string;
+  label: string;
+  entered: number;
+  advanced: number;
+  rejected: number;
+  rolled_back: number;
+  active: number;
+  pass_rate_pct: number | null;
+}
+
+export interface TimeBucket {
+  label: string;
+  count: number;
+}
+
+export interface TimeToHire {
+  sample_size: number;
+  median_days: number | null;
+  low_signal: boolean;
+  buckets: TimeBucket[];
+}
+
+export interface TimeInStageItem {
+  stage_type: string;
+  label: string;
+  median_days: number | null;
+  sample_size: number;
+  low_signal: boolean;
+}
+
+export interface PartnerRecruitingFunnel {
+  funnel: RecruitingFunnelStage[];
+  stage_outcomes: RecruitingStageOutcome[];
+  time_to_hire: TimeToHire;
+  time_in_stage: TimeInStageItem[];
+}
+
+/* --------------------- Advertising performance (§6, NEW) ------------------ */
+
+/**
+ * Ad delivery read (`GET /dashboards/partner/analytics/advertising`, design-spec
+ * §6). Delivery counters (`impressions`/`clicks`/`apply_starts`) come from the
+ * real ad-event projection; `ctr_pct` is null until there is enough delivery to
+ * compute honestly (render "—", never 0-as-a-rate). `spend` is a frozen decimal
+ * string. `disclosure_class` drives the non-removable public sponsored label.
+ */
+export interface AdvertisingCampaignRow {
+  placement_id: string;
+  target_title: string | null;
+  placement_type_label: string;
+  status_label: string;
+  disclosure_class: string;
+  impressions: number;
+  clicks: number;
+  apply_starts: number;
+  ctr_pct: number | null;
+  spend: string | number | null;
+  currency: string;
+}
+
+export interface AdvertisingPerformanceTotals {
+  impressions: number;
+  clicks: number;
+  apply_starts: number;
+  ctr_pct: number | null;
+  spend: string | number | null;
+  currency: string;
+  active_count?: number;
+  campaigns?: number;
+}
+
+export interface PartnerAdvertisingPerformance {
+  campaigns: AdvertisingCampaignRow[];
+  totals: AdvertisingPerformanceTotals;
+}
+
 /* ---------------------- University reports/KPIs --------------------------- */
 
 export interface UniversityPlatformKpis {
@@ -376,6 +471,27 @@ export const dashboardsApi = {
   /** Partner analytics — application funnel, top jobs, monthly trend. */
   partnerAnalytics(): Promise<PartnerAnalytics> {
     return api.get<PartnerAnalytics>("/dashboards/partner/analytics");
+  },
+
+  /**
+   * Recruiting-funnel analytics (§6) — step conversion, per-stage outcomes,
+   * time-to-hire / time-in-stage. Optional trailing-window range (ISO dates).
+   */
+  partnerRecruitingFunnel(params?: {
+    from?: string;
+    to?: string;
+  }): Promise<PartnerRecruitingFunnel> {
+    return api.get<PartnerRecruitingFunnel>(
+      "/dashboards/partner/analytics/recruiting-funnel",
+      { query: { from: params?.from, to: params?.to } },
+    );
+  },
+
+  /** Advertising delivery read (§6) — per-campaign impressions/clicks/CTR/spend. */
+  partnerAdvertisingPerformance(): Promise<PartnerAdvertisingPerformance> {
+    return api.get<PartnerAdvertisingPerformance>(
+      "/dashboards/partner/analytics/advertising",
+    );
   },
 
   /** Partner pipeline overview — per-job candidate counts. */

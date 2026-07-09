@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Megaphone, Info } from "@phosphor-icons/react";
+import { Megaphone, Info } from "lucide-react";
 import {
   Button,
   Input,
@@ -313,7 +313,7 @@ export function PlacementFormModal({
             disabled={save.isPending || !disclosure}
             onClick={onSubmit}
           >
-            <Megaphone aria-hidden weight="bold" className="size-4" />
+            <Megaphone aria-hidden className="size-4" strokeWidth={2} />
             {t("form.sendRequest")}
           </Button>
         </>
@@ -363,7 +363,7 @@ export function PlacementFormModal({
 
         {/* Selected package summary */}
         {selectedPackage && (
-          <div className="rounded-xl border border-white/50 bg-white/70 px-3.5 py-3 backdrop-blur-sm">
+          <div className="rounded-xl border border-border bg-[var(--bg-subtle)] px-3.5 py-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <StatusBadge tone={PLACEMENT_TYPE_TONE[selectedPackage.placement_type]}>
                 {selectedPackage.placement_type_label}
@@ -402,11 +402,11 @@ export function PlacementFormModal({
 
         {/* Mandatory disclosure acknowledgement */}
         <div
-          className={`rounded-xl border px-3.5 py-3 ${
-            disclosureError
-              ? "border-[var(--brand-red)] bg-[var(--red-50)]"
-              : "border-[var(--amber-600)]/40 bg-[var(--amber-100)]"
-          }`}
+          className="rounded-xl border px-3.5 py-3"
+          style={{
+            borderColor: disclosureError ? "var(--content-danger)" : "var(--border-default)",
+            background: disclosureError ? "var(--content-danger-soft)" : "var(--content-warning-soft)",
+          }}
         >
           <label className="flex items-start gap-2.5 text-sm">
             <input
@@ -420,13 +420,11 @@ export function PlacementFormModal({
                 setDisclosure(e.target.checked);
                 if (e.target.checked) setDisclosureError(null);
               }}
-              className="mt-0.5 size-4 shrink-0 rounded border-[var(--border-default)] text-[var(--brand-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+              className="mt-0.5 size-4 shrink-0 rounded border-[var(--border-default)] text-[var(--brand-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
             />
             <span id="disclosure-desc" className="text-[var(--text-primary)]">
               <span className="inline-flex items-center gap-1.5 font-semibold">
-                <span className="flex size-5 shrink-0 items-center justify-center rounded icon-chip-warning shadow-sm">
-                  <Info aria-hidden weight="duotone" className="size-3 text-white" />
-                </span>
+                <Info aria-hidden className="size-4 shrink-0" strokeWidth={1.9} style={{ color: "var(--content-warning)" }} />
                 {t("form.disclosureLabel")}
               </span>
               <span className="mt-0.5 block text-xs text-[var(--text-secondary)]">
@@ -435,7 +433,7 @@ export function PlacementFormModal({
             </span>
           </label>
           {disclosureError && (
-            <p className="mt-1.5 text-xs font-medium text-[var(--brand-red)]" role="alert">
+            <p className="mt-1.5 text-xs font-medium" style={{ color: "var(--content-danger)" }} role="alert">
               {disclosureError}
             </p>
           )}

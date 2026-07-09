@@ -10,10 +10,7 @@ import {
 } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  FloppyDisk,
-  Eye,
-} from "@phosphor-icons/react";
+import { Save, Eye } from "lucide-react";
 import { JobLocationPicker } from "./location-picker";
 import { IndustryPicker } from "@/components/jobs/industry-picker";
 import type { JobLocationItem, CandidateRequirements } from "@/lib/api/jobs";
@@ -760,7 +757,7 @@ export function JobForm({ mode, job, qualityIssues, companyName, onSuccess, onCa
           aria-label={tf("previewToggle")}
           title={tf("previewToggle")}
         >
-          <Eye aria-hidden weight="bold" className="size-4" />
+          <Eye aria-hidden className="size-4" strokeWidth={1.8} />
         </Button>
       </>
     ) : undefined;
@@ -1405,7 +1402,7 @@ export function JobForm({ mode, job, qualityIssues, companyName, onSuccess, onCa
 
             <div className="ml-auto flex items-center gap-2">
               <Button type="submit" variant="primary" size="sm" loading={mutation.isPending}>
-                <FloppyDisk aria-hidden weight="bold" className="size-4" />
+                <Save aria-hidden className="size-4" strokeWidth={1.8} />
                 {mode === "create" ? tf("saveDraft") : tc("save")}
               </Button>
             </div>

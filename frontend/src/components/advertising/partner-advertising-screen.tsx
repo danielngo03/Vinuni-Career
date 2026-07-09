@@ -1,44 +1,52 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  Megaphone,
-  Plus,
-  LightbulbFilament,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
-  WarningCircle,
   Clock,
-  CheckCircle,
+  ExternalLink,
+  Eye,
   Image as ImageIcon,
-  Broadcast,
-  Hourglass,
-  PencilSimple as PencilSimpleIcon,
-} from "@phosphor-icons/react";
+  Megaphone,
+  MousePointerClick,
+  Percent,
+  Plus,
+  Rocket,
+  Trash2,
+  Wallet,
+} from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { Button, Modal, SponsoredLabel, useToast } from "@/components/ui";
 import {
-  Button,
   DataTable,
+  type ColumnDef,
+  DetailRow,
+  DetailSheet,
+  DetailSheetSection,
   EmptyState,
-  Modal,
-  StatusBadge,
-  useToast,
-  type Column,
-} from "@/components/ui";
+  KpiRow,
+  KpiTile,
+  PageHeader,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import { cn } from "@/lib/utils";
-import { PageHeader } from "@/components/layout/page-header";
 import { PlacementFormModal } from "./placement-form-modal";
 import { CreativeManagerModal } from "./creative-manager-modal";
-import {
-  useAdvertisingLabels,
-  PLACEMENT_STATUS_TONE,
-  PLACEMENT_TYPE_TONE,
-} from "@/lib/advertising/labels";
+import { useAdvertisingLabels } from "@/lib/advertising/labels";
 import { daysUntil, formatVnd, formatWindow } from "@/lib/advertising/format";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
-import { ApiError, advertisingApi, type Placement } from "@/lib/api";
+import {
+  ApiError,
+  advertisingApi,
+  dashboardsApi,
+  type AdvertisingCampaignRow,
+  type Placement,
+  type PlacementStatus,
+} from "@/lib/api";
+
+const nf = new Intl.NumberFormat();
 
 const STATUS_FILTERS = [
   "all",
@@ -51,33 +59,28 @@ const STATUS_FILTERS = [
   "cancelled",
 ] as const;
 
-const EDITABLE = new Set(["draft", "rejected"]);
-const CANCELLABLE = new Set(["pending_approval", "approved", "active"]);
-/** Creatives can be staged/managed while the campaign is not terminal. */
-const MANAGE_CREATIVES = new Set([
-  "draft",
-  "pending_approval",
-  "approved",
-  "active",
-]);
+const EDITABLE = new Set<string>(["draft", "rejected"]);
+const CANCELLABLE = new Set<string>(["pending_approval", "approved", "active"]);
+const MANAGE_CREATIVES = new Set<string>(["draft", "pending_approval", "approved", "active"]);
 
-type AdInsightKey =
-  | "insightPendingApproval"
-  | "insightActiveCampaigns"
-  | "insightDraftsPending"
-  | "insightGetStarted";
+const STATUS_CHIP_TONE: Record<PlacementStatus, ChipTone> = {
+  draft: "neutral",
+  pending_approval: "warning",
+  approved: "info",
+  active: "success",
+  completed: "sky",
+  rejected: "danger",
+  cancelled: "neutral",
+};
 
-function deriveAdInsights(rows: { status: string }[]): AdInsightKey[] {
-  const out: AdInsightKey[] = [];
-  const active = rows.filter((r) => r.status === "active").length;
-  const pending = rows.filter((r) => r.status === "pending_approval").length;
-  const drafts = rows.filter((r) => r.status === "draft").length;
+const TYPE_CHIP_TONE: Record<string, ChipTone> = {
+  sponsored: "amber",
+  featured: "violet",
+  both: "indigo",
+};
 
-  if (pending > 0) out.push("insightPendingApproval");
-  if (active > 0) out.push("insightActiveCampaigns");
-  if (drafts > 0 && pending === 0) out.push("insightDraftsPending");
-  if (out.length === 0 && rows.length === 0) out.push("insightGetStarted");
-  return out.slice(0, 3);
+function spendString(v: string | number | null | undefined): string | null {
+  return v == null ? null : String(v);
 }
 
 export function PartnerAdvertisingScreen() {
@@ -90,12 +93,13 @@ export function PartnerAdvertisingScreen() {
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
 
-  const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [formOpen, setFormOpen] = useState(false);
-  const [editing, setEditing] = useState<Placement | null>(null);
-  const [cancelTarget, setCancelTarget] = useState<Placement | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<Placement | null>(null);
-  const [creativeTargetId, setCreativeTargetId] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = React.useState<string>("all");
+  const [formOpen, setFormOpen] = React.useState(false);
+  const [editing, setEditing] = React.useState<Placement | null>(null);
+  const [cancelTarget, setCancelTarget] = React.useState<Placement | null>(null);
+  const [deleteTarget, setDeleteTarget] = React.useState<Placement | null>(null);
+  const [creativeTargetId, setCreativeTargetId] = React.useState<string | null>(null);
+  const [detailId, setDetailId] = React.useState<string | null>(null);
 
   const query = useInfiniteQuery({
     queryKey: ["advertising", "placements", statusFilter],
@@ -110,39 +114,45 @@ export function PartnerAdvertisingScreen() {
     retry: false,
   });
 
-  const rows: Placement[] = useMemo(
+  const perfQuery = useQuery({
+    queryKey: ["advertising", "performance"],
+    queryFn: () => dashboardsApi.partnerAdvertisingPerformance(),
+    staleTime: 2 * 60 * 1000,
+    retry: false,
+  });
+
+  const rows: Placement[] = React.useMemo(
     () => query.data?.pages.flatMap((p) => p.data) ?? [],
     [query.data],
   );
-  const adInsights = useMemo(() => (!query.isPending && !query.isError ? deriveAdInsights(rows) : []), [rows, query.isPending, query.isError]);
 
-  /** Targets with a live (non-terminal) placement — blocked in the create picker. */
-  const inflightTargetIds = useMemo(() => {
+  const perfById = React.useMemo(() => {
+    const m = new Map<string, AdvertisingCampaignRow>();
+    for (const c of perfQuery.data?.campaigns ?? []) m.set(c.placement_id, c);
+    return m;
+  }, [perfQuery.data]);
+
+  const totals = perfQuery.data?.totals;
+
+  const inflightTargetIds = React.useMemo(() => {
     const s = new Set<string>();
     for (const p of rows) {
-      if (["pending_approval", "approved", "active"].includes(p.status)) {
-        s.add(p.target_id);
-      }
+      if (["pending_approval", "approved", "active"].includes(p.status)) s.add(p.target_id);
     }
     return s;
   }, [rows]);
 
-  /** Re-derived from live rows so the creative modal stays fresh after a mutation. */
-  const creativeTarget = creativeTargetId
-    ? (rows.find((r) => r.id === creativeTargetId) ?? null)
-    : null;
+  const creativeTarget = creativeTargetId ? (rows.find((r) => r.id === creativeTargetId) ?? null) : null;
+  const detailPlacement = detailId ? (rows.find((r) => r.id === detailId) ?? null) : null;
 
   function refresh() {
     void qc.invalidateQueries({ queryKey: ["advertising", "placements"] });
+    void qc.invalidateQueries({ queryKey: ["advertising", "performance"] });
   }
 
   function handleMutationError(e: unknown) {
     if (e instanceof ApiError && e.isConflict) {
-      toast.show({
-        tone: "error",
-        title: t("errors.conflictTitle"),
-        description: t("errors.conflictBody"),
-      });
+      toast.show({ tone: "error", title: t("errors.conflictTitle"), description: t("errors.conflictBody") });
       refresh();
       return;
     }
@@ -153,6 +163,7 @@ export function PartnerAdvertisingScreen() {
     mutationFn: (p: Placement) => advertisingApi.cancelPlacement(p.id, p.version),
     onSuccess: () => {
       setCancelTarget(null);
+      setDetailId(null);
       toast.show({ tone: "success", title: t("toast.cancelled") });
       refresh();
     },
@@ -166,6 +177,7 @@ export function PartnerAdvertisingScreen() {
     mutationFn: (p: Placement) => advertisingApi.deletePlacement(p.id),
     onSuccess: () => {
       setDeleteTarget(null);
+      setDetailId(null);
       toast.show({ tone: "success", title: t("toast.deleted") });
       refresh();
     },
@@ -178,92 +190,109 @@ export function PartnerAdvertisingScreen() {
   const newButton = (
     <Button
       variant="primary"
+      size="sm"
       onClick={() => {
         setEditing(null);
         setFormOpen(true);
       }}
     >
-      <Plus aria-hidden weight="bold" className="size-4" />
+      <Plus className="size-4" strokeWidth={2} />
       {t("newPlacement")}
     </Button>
   );
 
-  /* ---- Permission / auth states ---- */
+  const header = <PageHeader title={t("partnerTitle")} subtitle={t("partnerSubtitle")} actions={newButton} />;
+
+  /* ---- Permission / auth ---- */
   if (query.isError && query.error instanceof ApiError) {
     const err = query.error;
     if (err.isPermissionError || err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("partnerTitle")} description={t("partnerSubtitle")} />
+          {header}
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
-            title={
-              err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")
-            }
-            description={
-              err.isPermissionError ? t("permissionBody") : tStates("authBody")
-            }
+            title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
+            description={err.isPermissionError ? t("permissionBody") : tStates("authBody")}
           />
         </>
       );
     }
   }
 
-  const columns: Column<Placement>[] = [
+  const ctr = totals?.ctr_pct;
+
+  const columns: ColumnDef<Placement, unknown>[] = [
     {
-      key: "target",
+      accessorKey: "target_title",
       header: t("colTarget"),
-      cell: (r) => (
-        <div className="min-w-0">
-          <p className="truncate font-semibold text-[var(--text-primary)]">
-            {r.target_title ?? t("targetUnavailable")}
-          </p>
-          <p className="truncate text-xs text-[var(--text-secondary)]">
-            {labels.targetType(r.target_type, r.target_type_label)}
-          </p>
-        </div>
-      ),
+      cell: ({ row }) => {
+        const r = row.original;
+        const showSponsored = r.status === "active" && (r.placement_type === "sponsored" || r.placement_type === "both");
+        return (
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="truncate font-semibold text-foreground">
+                {r.target_title ?? t("targetUnavailable")}
+              </span>
+              {showSponsored && <SponsoredLabel label={t("sponsoredTag")} />}
+            </div>
+            <span className="type-caption text-muted-foreground">
+              {labels.targetType(r.target_type, r.target_type_label)}
+            </span>
+          </div>
+        );
+      },
     },
     {
-      key: "type",
+      accessorKey: "placement_type",
       header: t("colType"),
-      cell: (r) => (
-        <StatusBadge tone={PLACEMENT_TYPE_TONE[r.placement_type] ?? "info"}>
-          {labels.placementType(r.placement_type, r.placement_type_label)}
-        </StatusBadge>
+      cell: ({ row }) => (
+        <StatusChip tone={TYPE_CHIP_TONE[row.original.placement_type] ?? "neutral"}>
+          {labels.placementType(row.original.placement_type, row.original.placement_type_label)}
+        </StatusChip>
       ),
     },
     {
-      key: "price",
-      header: t("colPrice"),
-      cell: (r) => (
-        <span className="font-medium text-[var(--text-primary)]">
-          {formatVnd(r.price_amount, r.currency, locale)}
-        </span>
-      ),
+      accessorKey: "status",
+      header: t("colStatus"),
+      cell: ({ row }) => {
+        const r = row.original;
+        return (
+          <div className="flex flex-col items-start gap-1">
+            <StatusChip tone={STATUS_CHIP_TONE[r.status] ?? "neutral"} dot>
+              {labels.status(r.status, r.status_label)}
+            </StatusChip>
+            {r.status === "approved" && !r.is_paid && (
+              <span className="type-caption font-medium" style={{ color: "var(--content-warning)" }}>
+                {t("awaitingPayment")}
+              </span>
+            )}
+            {r.missing_primary_slots && r.missing_primary_slots.length > 0 && (
+              <span className="inline-flex items-center gap-1 type-caption font-medium" style={{ color: "var(--content-warning)" }}>
+                <ImageIcon className="size-3" strokeWidth={1.9} />
+                {t("assetRequired")}
+              </span>
+            )}
+          </div>
+        );
+      },
     },
     {
-      key: "window",
+      accessorKey: "start_at",
       header: t("colWindow"),
-      cell: (r) => {
+      cell: ({ row }) => {
+        const r = row.original;
         const days = r.status === "active" ? daysUntil(r.end_at) : null;
         return (
-          <div className="text-[var(--text-secondary)]">
-            <span className="text-xs">
-              {formatWindow(r.start_at, r.end_at, locale)}
-            </span>
+          <div className="text-muted-foreground">
+            <span className="type-caption">{formatWindow(r.start_at, r.end_at, locale)}</span>
             {r.status === "active" && days != null && days >= 0 && (
               <span
-                className={`mt-0.5 flex items-center gap-1 text-xs font-semibold ${
-                  days <= 1 ? "text-[var(--brand-red)]" : "text-[var(--teal-600)]"
-                }`}
+                className="mt-0.5 flex items-center gap-1 type-caption font-semibold"
+                style={{ color: days <= 1 ? "var(--content-danger)" : "var(--content-success)" }}
               >
-                {days <= 1 ? (
-                  <Clock aria-hidden weight="duotone" className="size-3.5" />
-                ) : (
-                  <CheckCircle aria-hidden weight="duotone" className="size-3.5" />
-                )}
+                <Clock className="size-3" strokeWidth={1.9} />
                 {days <= 1 ? t("endingSoon") : t("daysLeft", { count: days })}
               </span>
             )}
@@ -272,159 +301,66 @@ export function PartnerAdvertisingScreen() {
       },
     },
     {
-      key: "status",
-      header: t("colStatus"),
-      cell: (r) => (
-        <div className="flex flex-col items-start gap-1">
-          <StatusBadge tone={PLACEMENT_STATUS_TONE[r.status] ?? "info"}>
-            {labels.status(r.status, r.status_label)}
-          </StatusBadge>
-          {r.status === "approved" && !r.is_paid && (
-            <span className="text-[11px] font-medium text-[var(--amber-700)]">
-              {t("awaitingPayment")}
-            </span>
-          )}
-          {r.status === "rejected" && r.moderation_note && (
-            <span className="max-w-[16rem] text-[11px] text-[var(--text-muted)]">
-              {t("rejectReasonInline", { reason: r.moderation_note })}
-            </span>
-          )}
-          {r.missing_primary_slots && r.missing_primary_slots.length > 0 && (
-            <span className="flex items-center gap-1 text-[11px] font-semibold text-[var(--amber-700)]">
-              <ImageIcon aria-hidden weight="duotone" className="size-3.5" />
-              {t("assetRequired")}
-            </span>
-          )}
-        </div>
-      ),
-    },
-    {
-      key: "actions",
-      header: "",
-      align: "right",
-      cell: (r) => (
-        <div className="flex items-center justify-end gap-1">
-          {MANAGE_CREATIVES.has(r.status) && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setCreativeTargetId(r.id)}
-            >
-              <ImageIcon aria-hidden weight="duotone" className="size-4" />
-              {t("creatives")}
-            </Button>
-          )}
-          {EDITABLE.has(r.status) && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                setEditing(r);
-                setFormOpen(true);
-              }}
-            >
-              {r.status === "rejected" ? t("editResubmit") : t("editSend")}
-            </Button>
-          )}
-          {EDITABLE.has(r.status) && (
-            <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(r)}>
-              {tc("delete")}
-            </Button>
-          )}
-          {CANCELLABLE.has(r.status) && (
-            <Button variant="ghost" size="sm" onClick={() => setCancelTarget(r)}>
-              {t("cancelPlacement")}
-            </Button>
-          )}
-        </div>
-      ),
+      id: "delivery",
+      header: t("colDelivery"),
+      meta: { align: "right" },
+      cell: ({ row }) => {
+        const perf = perfById.get(row.original.id);
+        if (!perf || perf.impressions === 0) {
+          return <span className="type-caption text-muted-foreground">{t("notStarted")}</span>;
+        }
+        return (
+          <div className="text-right">
+            <span className="font-semibold tabular-nums text-foreground">{nf.format(perf.impressions)}</span>
+            <span className="ml-1 type-caption text-muted-foreground">{t("colImpressions").toLowerCase()}</span>
+            <div className="type-caption text-muted-foreground">
+              {nf.format(perf.clicks)} {t("colClicks").toLowerCase()}
+              {perf.ctr_pct != null && ` · ${perf.ctr_pct}% ${t("colCtr")}`}
+            </div>
+          </div>
+        );
+      },
     },
   ];
 
   return (
     <>
-      <PageHeader
-        title={t("partnerTitle")}
-        description={t("partnerSubtitle")}
-        actions={newButton}
-      />
+      {header}
 
-      {/* Campaign health tiles */}
-      {rows.length > 0 && (
-        <div className="mb-5 grid grid-cols-3 gap-3">
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
-            <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-              <Broadcast aria-hidden weight="duotone" className="size-4.5 text-white" />
-            </div>
-            <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-              {rows.filter((r) => r.status === "active").length}
-            </p>
-            <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statActiveCampaigns")}</p>
-          </div>
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
-            <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-warning shadow-sm">
-              <Hourglass aria-hidden weight="duotone" className="size-4.5 text-white" />
-            </div>
-            <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-              {rows.filter((r) => r.status === "pending_approval").length}
-            </p>
-            <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statPendingApproval")}</p>
-          </div>
-          <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
-            <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-neutral shadow-sm">
-              <PencilSimpleIcon aria-hidden weight="duotone" className="size-4.5 text-white" />
-            </div>
-            <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-              {rows.filter((r) => r.status === "draft").length}
-            </p>
-            <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statDrafts")}</p>
-          </div>
-        </div>
-      )}
+      {/* Delivery KPI row — honest zeros/dashes until real ad events arrive */}
+      <KpiRow cols={5} className="mb-4">
+        <KpiTile label={t("kpi.impressions")} value={nf.format(totals?.impressions ?? 0)} icon={Eye} />
+        <KpiTile label={t("kpi.clicks")} value={nf.format(totals?.clicks ?? 0)} icon={MousePointerClick} />
+        <KpiTile label={t("kpi.ctr")} value={ctr != null ? `${ctr}%` : "—"} icon={Percent} />
+        <KpiTile label={t("kpi.applyStarts")} value={nf.format(totals?.apply_starts ?? 0)} icon={Rocket} />
+        <KpiTile
+          label={t("kpi.spend")}
+          value={formatVnd(spendString(totals?.spend), totals?.currency ?? "VND", locale)}
+          icon={Wallet}
+        />
+      </KpiRow>
 
-      {/* AI Campaign Insights */}
-      {adInsights.length > 0 && (
-        <section
-          className="mb-4 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 "
-          aria-label={t("aiInsightsTitle")}
-        >
-          <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-            <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-              <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-            </span>
-            {t("aiInsightsTitle")}
-          </h2>
-          <ul className="space-y-1.5">
-            {adInsights.map((key) => (
-              <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                {t(key)}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* Disclosure notice — the label is non-removable. */}
-      <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-[var(--blue-200)] bg-[var(--blue-50)] px-3.5 py-3 text-sm text-[var(--text-secondary)]">
-        <span className="flex size-6 shrink-0 items-center justify-center rounded-md icon-chip-primary shadow-sm">
-          <Megaphone aria-hidden weight="duotone" className="size-3.5 text-white" />
-        </span>
-        <p>{t("disclosureNotice")}</p>
+      {/* Non-removable disclosure notice */}
+      <div
+        className="mb-4 flex items-start gap-2.5 rounded-xl border border-border px-3.5 py-3"
+        style={{ background: "var(--content-warning-soft)" }}
+      >
+        <Megaphone className="mt-0.5 size-4 shrink-0" strokeWidth={1.9} style={{ color: "var(--content-warning)" }} />
+        <p className="type-small text-foreground">{t("disclosureNotice")}</p>
       </div>
 
-      {/* Status filter tab chips */}
-      <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t("filterStatusLabel")}>
+      {/* Status filter chips */}
+      <div className="mb-4 flex flex-wrap gap-1.5" role="group" aria-label={t("filterStatusLabel")}>
         {STATUS_FILTERS.map((s) => (
           <button
             key={s}
             onClick={() => setStatusFilter(s)}
             aria-pressed={statusFilter === s}
             className={cn(
-              "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
+              "inline-flex items-center rounded-full border px-3 py-1 text-[0.8125rem] font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
               statusFilter === s
-                ? "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                : "border-border bg-card text-muted-foreground hover:text-foreground",
             )}
           >
             {s === "all" ? t("filterAllStatuses") : labels.status(s)}
@@ -432,14 +368,9 @@ export function PartnerAdvertisingScreen() {
         ))}
       </div>
 
-      {query.isError &&
-      !(
-        query.error instanceof ApiError &&
-        (query.error.isPermissionError || query.error.isAuthError)
-      ) ? (
+      {query.isError && !(query.error instanceof ApiError && (query.error.isPermissionError || query.error.isAuthError)) ? (
         <EmptyState
           kind="error"
-          icon={WarningCircle}
           title={tStates("errorTitle")}
           description={tStates("errorBody")}
           action={
@@ -452,37 +383,47 @@ export function PartnerAdvertisingScreen() {
         <>
           <DataTable
             columns={columns}
-            rows={rows}
+            data={rows}
             getRowId={(r) => r.id}
             loading={query.isPending}
-            caption={t("partnerTitle")}
-            empty={{
-              kind: "empty",
-              icon: Megaphone,
-              title:
-                statusFilter === "all"
-                  ? t("emptyTitle")
-                  : t("emptyFilterTitle"),
-              description:
-                statusFilter === "all"
-                  ? t("emptyBody")
-                  : t("emptyFilterBody"),
-              action: statusFilter === "all" ? newButton : undefined,
-            }}
+            onRowClick={(r) => setDetailId(r.id)}
+            activeRowId={detailId ?? undefined}
+            empty={
+              <EmptyState
+                kind="empty"
+                title={statusFilter === "all" ? t("emptyTitle") : t("emptyFilterTitle")}
+                description={statusFilter === "all" ? t("emptyBody") : t("emptyFilterBody")}
+                action={statusFilter === "all" ? newButton : undefined}
+              />
+            }
           />
           {query.hasNextPage && (
-            <div className="mt-6 flex justify-center">
-              <Button
-                variant="secondary"
-                loading={query.isFetchingNextPage}
-                onClick={() => query.fetchNextPage()}
-              >
+            <div className="mt-4 flex justify-center">
+              <Button variant="secondary" loading={query.isFetchingNextPage} onClick={() => query.fetchNextPage()}>
                 {tc("loadMore")}
               </Button>
             </div>
           )}
         </>
       )}
+
+      {/* Campaign detail drawer */}
+      <CampaignDetailSheet
+        placement={detailPlacement}
+        perf={detailPlacement ? (perfById.get(detailPlacement.id) ?? null) : null}
+        onClose={() => setDetailId(null)}
+        onEdit={(p) => {
+          setDetailId(null);
+          setEditing(p);
+          setFormOpen(true);
+        }}
+        onCreatives={(p) => {
+          setDetailId(null);
+          setCreativeTargetId(p.id);
+        }}
+        onCancel={(p) => setCancelTarget(p)}
+        onDelete={(p) => setDeleteTarget(p)}
+      />
 
       {/* Create / edit */}
       <PlacementFormModal
@@ -492,14 +433,14 @@ export function PartnerAdvertisingScreen() {
         inflightTargetIds={inflightTargetIds}
       />
 
-      {/* Per-placement creative manager (upload / preview / moderation status) */}
+      {/* Creatives */}
       <CreativeManagerModal
         open={creativeTarget !== null}
         onClose={() => setCreativeTargetId(null)}
         placement={creativeTarget}
       />
 
-      {/* Cancel confirmation */}
+      {/* Cancel */}
       <Modal
         open={cancelTarget !== null}
         onClose={() => setCancelTarget(null)}
@@ -512,24 +453,18 @@ export function PartnerAdvertisingScreen() {
             <Button variant="ghost" onClick={() => setCancelTarget(null)}>
               {tc("back")}
             </Button>
-            <Button
-              variant="danger"
-              loading={cancel.isPending}
-              onClick={() => cancelTarget && cancel.mutate(cancelTarget)}
-            >
+            <Button variant="danger" loading={cancel.isPending} onClick={() => cancelTarget && cancel.mutate(cancelTarget)}>
               {t("cancelConfirm")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">
-          {cancelTarget?.status === "active"
-            ? t("cancelActiveNote")
-            : t("cancelNote")}
+        <p className="type-small text-muted-foreground">
+          {cancelTarget?.status === "active" ? t("cancelActiveNote") : t("cancelNote")}
         </p>
       </Modal>
 
-      {/* Delete confirmation */}
+      {/* Delete */}
       <Modal
         open={deleteTarget !== null}
         onClose={() => setDeleteTarget(null)}
@@ -542,18 +477,141 @@ export function PartnerAdvertisingScreen() {
             <Button variant="ghost" onClick={() => setDeleteTarget(null)}>
               {tc("back")}
             </Button>
-            <Button
-              variant="danger"
-              loading={remove.isPending}
-              onClick={() => deleteTarget && remove.mutate(deleteTarget)}
-            >
+            <Button variant="danger" loading={remove.isPending} onClick={() => deleteTarget && remove.mutate(deleteTarget)}>
               {tc("delete")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("deleteNote")}</p>
+        <p className="type-small text-muted-foreground">{t("deleteNote")}</p>
       </Modal>
     </>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Detail sheet                                                                 */
+/* -------------------------------------------------------------------------- */
+
+function CampaignDetailSheet({
+  placement,
+  perf,
+  onClose,
+  onEdit,
+  onCreatives,
+  onCancel,
+  onDelete,
+}: {
+  placement: Placement | null;
+  perf: AdvertisingCampaignRow | null;
+  onClose: () => void;
+  onEdit: (p: Placement) => void;
+  onCreatives: (p: Placement) => void;
+  onCancel: (p: Placement) => void;
+  onDelete: (p: Placement) => void;
+}) {
+  const t = useTranslations("advertising");
+  const tc = useTranslations("common");
+  const locale = useLocale();
+  const labels = useAdvertisingLabels();
+
+  if (!placement) return null;
+  const r = placement;
+  const showSponsored = r.status === "active" && (r.placement_type === "sponsored" || r.placement_type === "both");
+  const hasDelivery = perf && perf.impressions > 0;
+
+  const metricTiles: { key: string; label: string; value: string }[] = [
+    { key: "impressions", label: t("sheet.impressions"), value: nf.format(perf?.impressions ?? 0) },
+    { key: "clicks", label: t("sheet.clicks"), value: nf.format(perf?.clicks ?? 0) },
+    { key: "ctr", label: t("sheet.ctr"), value: perf?.ctr_pct != null ? `${perf.ctr_pct}%` : "—" },
+    { key: "applyStarts", label: t("sheet.applyStarts"), value: nf.format(perf?.apply_starts ?? 0) },
+  ];
+
+  return (
+    <DetailSheet
+      open={!!placement}
+      onClose={onClose}
+      title={r.target_title ?? t("targetUnavailable")}
+      subtitle={labels.targetType(r.target_type, r.target_type_label)}
+      closeLabel={tc("close")}
+      status={
+        <>
+          <StatusChip tone={STATUS_CHIP_TONE[r.status] ?? "neutral"} dot>
+            {labels.status(r.status, r.status_label)}
+          </StatusChip>
+          <StatusChip tone={TYPE_CHIP_TONE[r.placement_type] ?? "neutral"}>
+            {labels.placementType(r.placement_type, r.placement_type_label)}
+          </StatusChip>
+          {showSponsored && <SponsoredLabel label={t("sponsoredTag")} />}
+        </>
+      }
+      footer={
+        <>
+          {MANAGE_CREATIVES.has(r.status) && (
+            <Button variant="ghost" size="sm" onClick={() => onCreatives(r)}>
+              <ImageIcon className="size-4" strokeWidth={1.8} />
+              {t("sheet.creatives")}
+            </Button>
+          )}
+          {EDITABLE.has(r.status) && (
+            <Button variant="secondary" size="sm" onClick={() => onEdit(r)}>
+              {r.status === "rejected" ? t("editResubmit") : t("editSend")}
+            </Button>
+          )}
+          {EDITABLE.has(r.status) && (
+            <Button variant="danger" size="sm" onClick={() => onDelete(r)}>
+              <Trash2 className="size-4" strokeWidth={1.8} />
+              {tc("delete")}
+            </Button>
+          )}
+          {CANCELLABLE.has(r.status) && (
+            <Button variant="danger" size="sm" onClick={() => onCancel(r)}>
+              {t("cancelPlacement")}
+            </Button>
+          )}
+        </>
+      }
+    >
+      <DetailSheetSection title={t("sheet.delivery")}>
+        {!hasDelivery ? (
+          <EmptyState kind="empty" title={t("sheet.noDelivery")} description={t("sheet.noDeliveryBody")} />
+        ) : (
+          <dl className="grid grid-cols-2 gap-2.5">
+            {metricTiles.map((m) => (
+              <div key={m.key} className="rounded-lg border border-border bg-[var(--bg-subtle)] px-3 py-2">
+                <dt className="type-caption text-muted-foreground">{m.label}</dt>
+                <dd className="mt-0.5 text-base font-bold tabular-nums text-foreground">{m.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </DetailSheetSection>
+
+      <DetailSheetSection title={t("sheet.details")}>
+        <dl>
+          <DetailRow label={t("sheet.window")}>{formatWindow(r.start_at, r.end_at, locale)}</DetailRow>
+          <DetailRow label={t("sheet.price")}>{formatVnd(r.price_amount, r.currency, locale)}</DetailRow>
+        </dl>
+        {r.status === "rejected" && r.moderation_note && (
+          <p
+            className="mt-2.5 rounded-lg px-3 py-2 type-caption"
+            style={{ background: "var(--content-danger-soft)", color: "var(--content-danger)" }}
+            role="alert"
+          >
+            {t("rejectReasonInline", { reason: r.moderation_note })}
+          </p>
+        )}
+      </DetailSheetSection>
+
+      <DetailSheetSection>
+        <Link
+          href={r.target_type === "job" ? `/partner/jobs/${r.target_id}` : `/partner/events/${r.target_id}`}
+          className="inline-flex items-center gap-1.5 type-small font-semibold text-[var(--brand-primary)] hover:underline"
+        >
+          <ExternalLink className="size-4" strokeWidth={1.8} />
+          {t("sheet.openTarget")}
+        </Link>
+      </DetailSheetSection>
+    </DetailSheet>
   );
 }

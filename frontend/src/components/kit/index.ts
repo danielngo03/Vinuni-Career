@@ -56,6 +56,9 @@ export type { DataTableProps, ColumnDef } from "./data-table";
 export { CommandPalette } from "./command-palette";
 export type { CommandAction } from "./command-palette";
 
+// Kanban board (dnd-kit) — pipeline drag-and-drop
+export { KanbanBoard, KanbanColumn, KanbanCard, type KanbanMoveEvent } from "./kanban";
+
 // Charts (content data-viz)
 export {
   AreaChart,

@@ -1,8 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Eye, CheckCircle, ShieldWarning } from "@phosphor-icons/react";
+import { Eye, CheckCircle2 } from "lucide-react";
 import { Modal, Skeleton, EmptyState } from "@/components/ui";
+import { SectionLabel, StatusChip } from "@/components/kit";
 import type { PermissionPreview } from "@/lib/api";
 
 /**
@@ -70,19 +71,16 @@ export function PermissionPreviewBody({
   }
 
   if (error || !preview) {
-    return (
-      <EmptyState
-        kind="error"
-        icon={ShieldWarning}
-        title={t("errorTitle")}
-      />
-    );
+    return <EmptyState kind="error" title={t("errorTitle")} />;
   }
 
   if (preview.is_admin) {
     return (
-      <div className="flex items-start gap-2 rounded-xl border border-[var(--teal-500)]/30 bg-[var(--teal-50)] px-3.5 py-3 text-sm text-[var(--teal-700)]">
-        <CheckCircle aria-hidden weight="fill" className="mt-0.5 size-4 shrink-0" />
+      <div
+        className="flex items-start gap-2 rounded-xl px-3.5 py-3 text-[0.8125rem] font-medium"
+        style={{ background: "var(--content-success-soft)", color: "var(--content-success)" }}
+      >
+        <CheckCircle2 aria-hidden className="mt-0.5 size-4 shrink-0" strokeWidth={2} />
         {t("isAdmin")}
       </div>
     );
@@ -90,27 +88,20 @@ export function PermissionPreviewBody({
 
   const entries = Object.entries(preview.by_resource);
   if (entries.length === 0) {
-    return <p className="text-sm text-[var(--text-muted)]">{t("noGrants")}</p>;
+    return <p className="type-small text-muted-foreground">{t("noGrants")}</p>;
   }
 
   return (
     <div className="space-y-4">
-      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-        {t("grantCount", { count: preview.grants.length })}
-      </p>
+      <SectionLabel>{t("grantCount", { count: preview.grants.length })}</SectionLabel>
       {entries.map(([resource, actions]) => (
         <div key={resource}>
-          <p className="mb-1.5 text-sm font-semibold text-[var(--text-primary)]">
-            {resourceLabel(resource)}
-          </p>
+          <p className="mb-1.5 type-small font-semibold text-foreground">{resourceLabel(resource)}</p>
           <div className="flex flex-wrap gap-1.5">
             {actions.map((action) => (
-              <span
-                key={action}
-                className="inline-flex items-center rounded-md bg-[var(--bg-subtle)] px-2 py-1 text-xs font-medium text-[var(--text-secondary)]"
-              >
+              <StatusChip key={action} tone="neutral" size="sm">
                 {actionLabel(action)}
-              </span>
+              </StatusChip>
             ))}
           </div>
         </div>

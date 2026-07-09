@@ -50,7 +50,7 @@ export function PermissionPicker({
       <legend className="sr-only">{t("legend")}</legend>
       {resources.map((res) => (
         <div key={res.resource}>
-          <p className="mb-1.5 text-sm font-semibold text-[var(--text-primary)]">
+          <p className="mb-1.5 type-small font-semibold text-foreground">
             {t(`resource.${res.resource}`)}
           </p>
           <div className="flex flex-wrap gap-2">
@@ -63,17 +63,17 @@ export function PermissionPicker({
                   className={
                     "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors " +
                     (allowed
-                      ? "cursor-pointer border-[var(--border-default)] hover:border-[var(--brand-primary)]"
-                      : "cursor-not-allowed border-dashed border-[var(--border-default)] opacity-50") +
+                      ? "cursor-pointer border-border hover:border-border-strong"
+                      : "cursor-not-allowed border-dashed border-border opacity-50") +
                     (checked && allowed
-                      ? " border-[var(--brand-primary)] bg-[var(--blue-50)] text-[var(--brand-primary)]"
-                      : " text-[var(--text-secondary)]")
+                      ? " border-[var(--brand-primary)] bg-[var(--content-info-soft)] text-[var(--brand-primary)]"
+                      : " text-muted-foreground")
                   }
                   title={!allowed ? t("notAllowed") : undefined}
                 >
                   <input
                     type="checkbox"
-                    className="size-3.5 rounded border-[var(--border-default)] text-[var(--brand-primary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+                    className="size-3.5 rounded border-border text-[var(--brand-primary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
                     checked={checked}
                     disabled={!allowed}
                     onChange={() => toggle(res.resource, action)}
@@ -86,7 +86,7 @@ export function PermissionPicker({
         </div>
       ))}
       {!holdsWildcard && (
-        <p className="text-xs text-[var(--text-muted)]">{t("ceilingNote")}</p>
+        <p className="type-caption text-muted-foreground">{t("ceilingNote")}</p>
       )}
     </fieldset>
   );

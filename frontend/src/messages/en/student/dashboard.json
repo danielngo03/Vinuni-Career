@@ -307,7 +307,13 @@
         "cv_downloaded": "CV downloaded",
         "identity_reveal_requested": "Identity reveal requested",
         "identity_revealed_viewed": "Revealed identity viewed"
-      }
+      },
+      "errorTitle": "Couldn't load the access log",
+      "errorBody": "Something went wrong loading candidate access events. Try again.",
+      "spikeTitle": "Access spikes",
+      "spikeNote": "Members with an unusual volume of CV downloads or identity reveals in this window. Review their access if it looks off.",
+      "spikeItem": "{actor} · {count} sensitive accesses",
+      "reviewAccess": "Review access"
     },
     "university": {
       "title": "Operations center",

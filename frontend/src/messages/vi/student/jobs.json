@@ -355,7 +355,16 @@
     "illegalTransitionToast": "Hành động này không hợp lệ với trạng thái hiện tại.",
     "editTitle": "Chỉnh sửa tin",
     "editSubtitle": "Cập nhật thông tin và lưu thay đổi.",
-    "preview": "Xem trước",
+    "preview": {
+      "guestCta": "Xem trước như khách",
+      "studentCta": "Xem trước như sinh viên",
+      "guestTitle": "Xem trước — góc nhìn khách",
+      "studentTitle": "Xem trước — góc nhìn sinh viên",
+      "modalNote": "Đây là bản xem trước, không phải trang trực tiếp. Nội dung dưới đây thể hiện đúng những gì nhóm người dùng này sẽ thấy.",
+      "visibleNote": "Nhóm người dùng này sẽ thấy được tin tuyển dụng như hiển thị bên dưới.",
+      "hiddenInvitationOnly": "Tin này chỉ hiển thị qua lời mời — nhóm người dùng này sẽ không thấy tin trong khám phá hay qua liên kết trực tiếp.",
+      "hiddenVisibilityTier": "Phạm vi hiển thị của tin này đang ẩn tin khỏi nhóm người dùng này."
+    },
     "viewLive": "Xem tin đang đăng",
     "submitForReview": "Gửi duyệt",
     "closeJob": "Đóng tin",
@@ -397,16 +406,6 @@
         "experience": "Kinh nghiệm",
         "screening_questions": "Câu hỏi sàng lọc"
       }
-    },
-    "preview": {
-      "guestCta": "Xem trước như khách",
-      "studentCta": "Xem trước như sinh viên",
-      "guestTitle": "Xem trước — góc nhìn khách",
-      "studentTitle": "Xem trước — góc nhìn sinh viên",
-      "modalNote": "Đây là bản xem trước, không phải trang trực tiếp. Nội dung dưới đây thể hiện đúng những gì nhóm người dùng này sẽ thấy.",
-      "visibleNote": "Nhóm người dùng này sẽ thấy được tin tuyển dụng như hiển thị bên dưới.",
-      "hiddenInvitationOnly": "Tin này chỉ hiển thị qua lời mời — nhóm người dùng này sẽ không thấy tin trong khám phá hay qua liên kết trực tiếp.",
-      "hiddenVisibilityTier": "Phạm vi hiển thị của tin này đang ẩn tin khỏi nhóm người dùng này."
     },
     "locationType": {
       "onsite": "Tại văn phòng",
@@ -805,7 +804,32 @@
     "filterWardLabel": "Phường/xã",
     "wardAll": "Tất cả phường/xã",
     "wardSelectProvinceFirst": "Chọn tỉnh/thành trước",
-    "locationWardPlaceholder": "Chọn phường/xã"
+    "locationWardPlaceholder": "Chọn phường/xã",
+    "kpiActive": "Đang tuyển",
+    "kpiDraft": "Bản nháp",
+    "kpiPending": "Chờ duyệt",
+    "kpiPendingHint": "Đang chờ kiểm duyệt",
+    "kpiTotal": "Tổng",
+    "colGate": "Cổng JD",
+    "colViews": "Lượt xem",
+    "colApplies": "Ứng viên",
+    "colDeadline": "Hạn nộp",
+    "gatePreSubmit": "Chờ gửi duyệt",
+    "gateRejected": "Cần chỉnh sửa",
+    "gateInReview": "Đang duyệt",
+    "gateCleared": "Đã duyệt",
+    "bulkClose": "Đóng",
+    "bulkDuplicate": "Nhân bản",
+    "bulkExport": "Xuất CSV",
+    "bulkCloseToast": "Đã đóng {closed} tin, bỏ qua {skipped}",
+    "bulkDuplicateToast": "Đã nhân bản {count} tin",
+    "bulkExportToast": "Đã xuất {count} tệp",
+    "sheetMetricsTitle": "Hiệu suất",
+    "sheetApplicantsTitle": "Ứng viên gần đây",
+    "sheetApplicantsEmpty": "Chưa có ứng viên",
+    "sheetViewAll": "Xem tất cả",
+    "sheetLinksTitle": "Liên kết nhanh",
+    "sheetOpenFull": "Mở trang đầy đủ"
   },
   "jobInvitations": {
     "title": "Lời mời ứng tuyển",

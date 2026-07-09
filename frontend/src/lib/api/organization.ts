@@ -80,6 +80,31 @@ export interface PermissionPreview {
   department_ids?: string[];
 }
 
+/* --------------------------- My capability map ---------------------------- */
+
+/**
+ * The caller's OWN effective capability map (`GET /organizations/members/me`).
+ * The redesigned partner/university workspaces gate nav groups, tabs, quick
+ * actions, and page controls on this — the server remains the final authority,
+ * the UI just reflects it (honest permission-locked states, never a fake gate).
+ *
+ * - `grants` / `by_resource` — the authoritative `resource:action` grant set.
+ * - `capabilities` — a curated boolean map keyed by the IA's `resource:action`
+ *   tuples (`true` for wildcard admins and any member holding the grant).
+ * - `is_org_admin` — holds `*:*` / superadmin.
+ * - `departments` — the member's department scope.
+ */
+export interface MyCapabilities {
+  org_id: string;
+  membership_id: string | null;
+  membership_status: string | null;
+  is_org_admin: boolean;
+  grants: string[];
+  by_resource: Record<string, string[]>;
+  capabilities: Record<string, boolean>;
+  departments: { id: string; name: string }[];
+}
+
 /* ------------------------------- Ownership -------------------------------- */
 
 export interface OwnershipInfo {
@@ -287,6 +312,15 @@ export const organizationApi = {
   /** Restore a previously-suspended member's access. */
   reactivateMember(id: string): Promise<OrgMember> {
     return api.post<OrgMember>(`/organizations/members/${id}/reactivate`, {});
+  },
+
+  /**
+   * The caller's own effective capability map — used to gate nav/tabs/actions
+   * in the UI. Any authenticated org member may read their own; non-org
+   * personas (students/guests) get a 403 the caller renders as a locked state.
+   */
+  getMyCapabilities(): Promise<MyCapabilities> {
+    return api.get<MyCapabilities>("/organizations/members/me");
   },
 
   /* Permission preview */

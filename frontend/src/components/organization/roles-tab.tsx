@@ -1,28 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { IdentificationBadge, ShieldWarning, Plus } from "@phosphor-icons/react";
+import { Plus } from "lucide-react";
+import { Button, EmptyState, Input, Modal, useToast } from "@/components/ui";
 import {
-  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardToolbar,
   DataTable,
-  EmptyState,
-  Input,
-  Modal,
-  StatusBadge,
-  useToast,
-  type Column,
-} from "@/components/ui";
-import { SectionCard } from "@/components/settings/section-card";
+  type ColumnDef,
+  StatusChip,
+} from "@/components/kit";
 import { ApiError, organizationApi, type OrgRole, type PermissionInput } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { PermissionPicker } from "./permission-picker";
 
-type EditState =
-  | { mode: "create" }
-  | { mode: "edit"; role: OrgRole }
-  | null;
+type EditState = { mode: "create" } | { mode: "edit"; role: OrgRole } | null;
 
 function toInputs(perms: string[]): PermissionInput[] {
   return perms
@@ -54,20 +52,16 @@ export function RolesTab({
   const canUpdate = holdsWildcard || effective.has("roles:update") || effective.has("roles:*");
   const canDelete = holdsWildcard || effective.has("roles:delete") || effective.has("roles:*");
 
-  const [edit, setEdit] = useState<EditState>(null);
-  const [deleting, setDeleting] = useState<OrgRole | null>(null);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [perms, setPerms] = useState<PermissionInput[]>([]);
-  const [nameError, setNameError] = useState<string | null>(null);
+  const [edit, setEdit] = React.useState<EditState>(null);
+  const [deleting, setDeleting] = React.useState<OrgRole | null>(null);
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [perms, setPerms] = React.useState<PermissionInput[]>([]);
+  const [nameError, setNameError] = React.useState<string | null>(null);
 
-  const query = useQuery({
-    queryKey: ["org", "roles"],
-    queryFn: () => organizationApi.listRoles(),
-    retry: false,
-  });
+  const query = useQuery({ queryKey: ["org", "roles"], queryFn: () => organizationApi.listRoles(), retry: false });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (edit?.mode === "edit") {
       setName(edit.role.name);
       setDescription(edit.role.description ?? "");
@@ -117,10 +111,7 @@ export function RolesTab({
   });
 
   function handleError(e: unknown) {
-    const reason =
-      e instanceof ApiError && typeof e.details?.reason === "string"
-        ? e.details.reason
-        : undefined;
+    const reason = e instanceof ApiError && typeof e.details?.reason === "string" ? e.details.reason : undefined;
     if (reason === "last_admin") {
       toast.show({ tone: "error", title: t("lastAdminToast"), description: t("lastAdminBody") });
       setDeleting(null);
@@ -138,79 +129,52 @@ export function RolesTab({
     toast.show({ tone: "error", title: getMessage(e) });
   }
 
-  if (query.isError && query.error instanceof ApiError) {
-    const err = query.error;
-    return (
-      <SectionCard
-        title={t("title")}
-        description={t("intro")}
-        icon={IdentificationBadge}
-        iconGradient="icon-chip-info"
-      >
-        <EmptyState
-          kind={err.isPermissionError ? "permission" : err.isAuthError ? "auth" : "error"}
-          icon={ShieldWarning}
-          title={
-            err.isPermissionError
-              ? tStates("permissionTitle")
-              : err.isAuthError
-                ? tStates("authTitle")
-                : tStates("errorTitle")
-          }
-          description={
-            err.isPermissionError
-              ? tStates("permissionBody")
-              : err.isAuthError
-                ? tStates("authBody")
-                : tStates("errorBody")
-          }
-        />
-      </SectionCard>
-    );
-  }
-
-  const rows = query.data ?? [];
-
-  const columns: Column<OrgRole>[] = [
+  const columns: ColumnDef<OrgRole, unknown>[] = [
     {
-      key: "name",
+      accessorKey: "name",
       header: t("name"),
-      cell: (r) => (
+      cell: ({ row }) => (
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-[var(--text-primary)]">{r.name}</span>
-          {r.is_system && <StatusBadge tone="verified">{t("system")}</StatusBadge>}
+          <span className="font-semibold text-foreground">{row.original.name}</span>
+          {row.original.is_system && (
+            <StatusChip tone="info" size="sm">
+              {t("system")}
+            </StatusChip>
+          )}
         </div>
       ),
     },
     {
-      key: "permissions",
+      accessorKey: "permissions",
       header: t("permissions"),
-      cell: (r) =>
-        r.permissions.includes("*:*") ? (
-          <StatusBadge tone="featured">{t("fullAccess")}</StatusBadge>
+      enableSorting: false,
+      cell: ({ row }) =>
+        row.original.permissions.includes("*:*") ? (
+          <StatusChip tone="violet" size="sm">
+            {t("fullAccess")}
+          </StatusChip>
         ) : (
-          <span className="text-sm text-[var(--text-secondary)]">
-            {t("permCount", { count: r.permissions.length })}
-          </span>
+          <span className="type-small text-muted-foreground">{t("permCount", { count: row.original.permissions.length })}</span>
         ),
     },
     {
-      key: "actions",
+      id: "actions",
       header: "",
-      align: "right",
-      cell: (r) => (
+      meta: { align: "right" },
+      enableSorting: false,
+      cell: ({ row }) => (
         <div className="flex justify-end gap-1">
           {canUpdate && (
-            <Button variant="ghost" size="sm" onClick={() => setEdit({ mode: "edit", role: r })}>
+            <Button variant="ghost" size="sm" onClick={() => setEdit({ mode: "edit", role: row.original })}>
               {tc("edit")}
             </Button>
           )}
-          {canDelete && !r.is_system && (
+          {canDelete && !row.original.is_system && (
             <Button
               variant="ghost"
               size="sm"
-              className="text-[var(--brand-red)]"
-              onClick={() => setDeleting(r)}
+              className="text-[var(--content-danger)]"
+              onClick={() => setDeleting(row.original)}
             >
               {tc("delete")}
             </Button>
@@ -221,23 +185,50 @@ export function RolesTab({
   ];
 
   return (
-    <SectionCard title={t("title")} description={t("intro")}>
-      {canCreate && (
-        <div className="mb-4 flex justify-end">
-          <Button variant="primary" size="sm" onClick={() => setEdit({ mode: "create" })}>
-            <Plus aria-hidden weight="bold" className="size-4" />
-            {t("create")}
-          </Button>
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("title")}</CardTitle>
+          <CardDescription>{t("intro")}</CardDescription>
         </div>
-      )}
-      <DataTable
-        columns={columns}
-        rows={rows}
-        getRowId={(r) => r.id}
-        loading={query.isPending}
-        caption={t("title")}
-        empty={{ kind: "empty", icon: IdentificationBadge, title: t("empty") }}
-      />
+        {canCreate && (
+          <CardToolbar>
+            <Button variant="primary" size="sm" onClick={() => setEdit({ mode: "create" })}>
+              <Plus className="size-4" strokeWidth={2} />
+              {t("create")}
+            </Button>
+          </CardToolbar>
+        )}
+      </CardHeader>
+      <CardContent>
+        {query.isError && query.error instanceof ApiError ? (
+          <EmptyState
+            kind={query.error.isPermissionError ? "permission" : query.error.isAuthError ? "auth" : "error"}
+            title={
+              query.error.isPermissionError
+                ? tStates("permissionTitle")
+                : query.error.isAuthError
+                  ? tStates("authTitle")
+                  : tStates("errorTitle")
+            }
+            description={
+              query.error.isPermissionError
+                ? tStates("permissionBody")
+                : query.error.isAuthError
+                  ? tStates("authBody")
+                  : tStates("errorBody")
+            }
+          />
+        ) : (
+          <DataTable
+            columns={columns}
+            data={query.data ?? []}
+            getRowId={(r) => r.id}
+            loading={query.isPending}
+            empty={<EmptyState kind="empty" title={t("empty")} />}
+          />
+        )}
+      </CardContent>
 
       <Modal
         open={edit !== null}
@@ -268,7 +259,10 @@ export function RolesTab({
       >
         <div className="space-y-5">
           {isSystemEdit && (
-            <p className="rounded-xl bg-[var(--amber-100)] px-3 py-2 text-sm text-[var(--amber-700)]">
+            <p
+              className="rounded-xl px-3 py-2 text-[0.8125rem]"
+              style={{ background: "var(--content-warning-soft)", color: "var(--content-warning)" }}
+            >
               {t("systemRoleNote")}
             </p>
           )}
@@ -283,26 +277,14 @@ export function RolesTab({
             }}
             error={nameError ?? undefined}
           />
-          <Input
-            label={t("description")}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          <Input label={t("description")} value={description} onChange={(e) => setDescription(e.target.value)} />
           {isSystemEdit ? (
             <div>
-              <p className="mb-1.5 text-sm font-semibold text-[var(--text-primary)]">
-                {t("permissions")}
-              </p>
-              <StatusBadge tone="featured">{t("fullAccess")}</StatusBadge>
+              <p className="mb-1.5 type-small font-semibold text-foreground">{t("permissions")}</p>
+              <StatusChip tone="violet">{t("fullAccess")}</StatusChip>
             </div>
           ) : (
-            <PermissionPicker
-              value={perms}
-              onChange={setPerms}
-              effective={effective}
-              holdsWildcard={holdsWildcard}
-              orgType={orgType}
-            />
+            <PermissionPicker value={perms} onChange={setPerms} effective={effective} holdsWildcard={holdsWildcard} orgType={orgType} />
           )}
         </div>
       </Modal>
@@ -319,18 +301,14 @@ export function RolesTab({
             <Button variant="ghost" onClick={() => setDeleting(null)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="danger"
-              loading={del.isPending}
-              onClick={() => deleting && del.mutate(deleting)}
-            >
+            <Button variant="danger" loading={del.isPending} onClick={() => deleting && del.mutate(deleting)}>
               {tc("delete")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("deleteNote")}</p>
+        <p className="type-small text-muted-foreground">{t("deleteNote")}</p>
       </Modal>
-    </SectionCard>
+    </Card>
   );
 }

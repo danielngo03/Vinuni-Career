@@ -4,21 +4,27 @@ import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  AlertCircle,
   ArrowLeft,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
-  LightbulbFilament,
+  Lightbulb,
+  LogIn,
+  ShieldAlert,
+  Sparkles,
   Users,
-  WarningCircle,
-} from "@phosphor-icons/react";
+} from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { Button, EmptyState, StatusBadge } from "@/components/ui";
-import { PageHeader } from "@/components/layout/page-header";
+import { Button, EmptyState, useToast } from "@/components/ui";
 import {
-  APPLICATION_STATUS_TONE,
-  useApplicationLabels,
-} from "@/lib/applications/labels";
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  KanbanBoard,
+  StatusChip,
+  type KanbanMoveEvent,
+} from "@/components/kit";
+import { PageHeader } from "@/components/layout/page-header";
+import { useApplicationLabels } from "@/lib/applications/labels";
 import {
   ApiError,
   applicationsApi,
@@ -29,13 +35,18 @@ import {
   type RejectionReason,
 } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
-import { useToast } from "@/components/ui";
 import { PipelineColumnView } from "./pipeline-board/pipeline-column";
 import { BulkActionBar } from "./pipeline-board/bulk-action-bar";
 import { BulkRejectModal } from "./pipeline-board/bulk-reject-modal";
 import { RollbackModal } from "./pipeline-board/rollback-modal";
 import { BoardSkeleton } from "./pipeline-board/board-skeleton";
-import { cardHandle, MIN_REASON, STALE_DAYS } from "./pipeline-board/utils";
+import {
+  APPLICATION_CHIP_TONE,
+  cardHandle,
+  MIN_REASON,
+  NEW_COLUMN_ID,
+  STALE_DAYS,
+} from "./pipeline-board/utils";
 
 type RollbackTarget = {
   applicationId: string;
@@ -53,10 +64,7 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   const qc = useQueryClient();
   const apiError = useApiErrorMessage();
 
-  const boardKey = useMemo(
-    () => ["applications", "pipeline", jobId] as const,
-    [jobId],
-  );
+  const boardKey = useMemo(() => ["applications", "pipeline", jobId] as const, [jobId]);
 
   const query = useQuery({
     queryKey: boardKey,
@@ -86,17 +94,13 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   }
 
   const bulkReviewMutation = useMutation({
-    mutationFn: () =>
-      applicationsApi.bulkReview(jobId, Array.from(selected)),
+    mutationFn: () => applicationsApi.bulkReview(jobId, Array.from(selected)),
     onSuccess: (data) => {
       clearSelection();
       refetchBoard();
       toast.show({
         tone: "success",
-        title: t("bulkReviewedToast", {
-          count: data.reviewed,
-          skipped: data.skipped,
-        }),
+        title: t("bulkReviewedToast", { count: data.reviewed, skipped: data.skipped }),
       });
     },
     onError: (e) => toast.show({ tone: "error", title: apiError(e) }),
@@ -116,10 +120,7 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
       refetchBoard();
       toast.show({
         tone: "success",
-        title: t("bulkRejectedToast", {
-          count: data.rejected,
-          skipped: data.skipped,
-        }),
+        title: t("bulkRejectedToast", { count: data.rejected, skipped: data.skipped }),
       });
     },
     onError: (e) => {
@@ -129,14 +130,10 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   });
 
   /* ------------------------------ rollback modal ----------------------------- */
-  const [rollbackTarget, setRollbackTarget] = useState<RollbackTarget | null>(
-    null,
-  );
+  const [rollbackTarget, setRollbackTarget] = useState<RollbackTarget | null>(null);
   const [rollbackStageId, setRollbackStageId] = useState("");
   const [rollbackReason, setRollbackReason] = useState("");
-  const [rollbackFieldError, setRollbackFieldError] = useState<string | null>(
-    null,
-  );
+  const [rollbackFieldError, setRollbackFieldError] = useState<string | null>(null);
 
   function refetchBoard() {
     void qc.invalidateQueries({ queryKey: boardKey });
@@ -160,46 +157,19 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
       refetchBoard();
     },
     onError: (e) => {
-      // A `scorecard` stage blocks advance until a scorecard is submitted: the
-      // server returns 409 `scorecard_required` with {submitted, required}. Show
-      // the precise blocked reason instead of the generic conflict toast, and
-      // refetch so the card's "scorecard required" indicator stays accurate.
-      if (
-        e instanceof ApiError &&
-        e.isConflict &&
-        e.details?.reason === "scorecard_required"
-      ) {
-        const submitted =
-          typeof e.details.submitted === "number" ? e.details.submitted : 0;
-        const required =
-          typeof e.details.required === "number" ? e.details.required : 1;
-        toast.show({
-          tone: "warning",
-          title: t("scorecardBlockedToast", { submitted, required }),
-        });
+      if (e instanceof ApiError && e.isConflict && e.details?.reason === "scorecard_required") {
+        const submitted = typeof e.details.submitted === "number" ? e.details.submitted : 0;
+        const required = typeof e.details.required === "number" ? e.details.required : 1;
+        toast.show({ tone: "warning", title: t("scorecardBlockedToast", { submitted, required }) });
         refetchBoard();
         return;
       }
-      // A `score_threshold` stage blocks advance once all assigned reviewers have
-      // submitted but the average score is below the stage threshold: 409
-      // `score_below_threshold` with {avg_overall, threshold} (ADR-0006).
-      if (
-        e instanceof ApiError &&
-        e.isConflict &&
-        e.details?.reason === "score_below_threshold"
-      ) {
+      if (e instanceof ApiError && e.isConflict && e.details?.reason === "score_below_threshold") {
         const avg =
-          typeof e.details.avg_overall === "number"
-            ? e.details.avg_overall.toFixed(1)
-            : "—";
+          typeof e.details.avg_overall === "number" ? e.details.avg_overall.toFixed(1) : "—";
         const threshold =
-          typeof e.details.threshold === "number"
-            ? e.details.threshold.toFixed(1)
-            : "—";
-        toast.show({
-          tone: "warning",
-          title: t("scoreBelowThresholdToast", { avg, threshold }),
-        });
+          typeof e.details.threshold === "number" ? e.details.threshold.toFixed(1) : "—";
+        toast.show({ tone: "warning", title: t("scoreBelowThresholdToast", { avg, threshold }) });
         refetchBoard();
         return;
       }
@@ -210,11 +180,7 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   });
 
   const rollbackMutation = useMutation({
-    mutationFn: (vars: {
-      id: string;
-      target_stage_id: string;
-      reason: string;
-    }) =>
+    mutationFn: (vars: { id: string; target_stage_id: string; reason: string }) =>
       applicationsApi.rollback(vars.id, {
         target_stage_id: vars.target_stage_id,
         reason: vars.reason.trim(),
@@ -225,7 +191,6 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
       refetchBoard();
     },
     onError: (e) => {
-      // 422 → keep the modal open, surface inline; 409 → close + reload.
       if (e instanceof ApiError && e.isValidation) {
         setRollbackFieldError(t("reasonTooShort", { min: MIN_REASON }));
         return;
@@ -237,13 +202,13 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
     },
   });
 
-  function openRollback(card: PipelineCard) {
+  function openRollback(card: PipelineCard, presetStageId?: string) {
     setRollbackTarget({
       applicationId: card.application_id,
       stageId: card.stage_id,
       handle: cardHandle(card),
     });
-    setRollbackStageId("");
+    setRollbackStageId(presetStageId ?? "");
     setRollbackReason("");
     setRollbackFieldError(null);
   }
@@ -268,17 +233,29 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
     };
   }, [board]);
 
-  /** Prior stages for the card currently targeted by the rollback modal. */
-  const priorStages: PipelineStage[] = priorStagesFor(
-    rollbackTarget?.stageId ?? null,
-  );
+  const priorStages: PipelineStage[] = priorStagesFor(rollbackTarget?.stageId ?? null);
 
-  /** Map of stage id → required_action (drives the scorecard-gate indicator). */
   const requiredActionByStage = useMemo(() => {
     const map = new Map<string, string>();
     for (const stage of board?.stages ?? []) {
       if (stage.required_action) map.set(stage.id, stage.required_action);
     }
+    return map;
+  }, [board]);
+
+  /** Fast lookup of every board card by application id (for drag-to-move). */
+  const cardsById = useMemo(() => {
+    const map = new Map<string, PipelineCard>();
+    for (const col of board?.columns ?? []) {
+      for (const c of col.candidates) map.set(c.application_id, c);
+    }
+    return map;
+  }, [board]);
+
+  /** Column droppable id → its index in the ordered board. */
+  const columnIndexById = useMemo(() => {
+    const map = new Map<string, number>();
+    (board?.columns ?? []).forEach((c, i) => map.set(c.stage_id ?? NEW_COLUMN_ID, i));
     return map;
   }, [board]);
 
@@ -299,12 +276,37 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
     });
   }
 
+  /**
+   * Drag-to-move: forward drop = advance one stage; backward drop = open the
+   * rollback modal with the target stage preselected (reason ≥ 20 chars still
+   * required). Dropping onto the pre-pipeline "new" bucket is not a rollback
+   * target — surface a hint instead of a silent no-op.
+   */
+  function handleMove(ev: KanbanMoveEvent) {
+    const fromIdx = columnIndexById.get(ev.fromColumnId);
+    const toIdx = columnIndexById.get(ev.toColumnId);
+    if (fromIdx == null || toIdx == null || fromIdx === toIdx) return;
+    const card = cardsById.get(ev.cardId);
+    if (!card) return;
+
+    if (toIdx > fromIdx) {
+      advanceMutation.mutate(ev.cardId);
+      return;
+    }
+    // Backward: the target must be a real prior stage.
+    if (ev.toColumnId === NEW_COLUMN_ID) {
+      toast.show({ tone: "warning", title: t("rollbackNeedsStage") });
+      return;
+    }
+    openRollback(card, ev.toColumnId);
+  }
+
   const backLink = (
     <Link
       href={`/partner/jobs/${jobId}`}
-      className="mb-4 inline-flex items-center gap-1.5 rounded-lg text-sm font-medium text-[var(--text-secondary)] outline-none hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+      className="mb-4 inline-flex items-center gap-1.5 rounded-lg text-sm font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
     >
-      <ArrowLeft aria-hidden weight="bold" className="size-4" />
+      <ArrowLeft aria-hidden className="size-4" strokeWidth={1.8} />
       {t("backToJob")}
     </Link>
   );
@@ -318,17 +320,9 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
           {backLink}
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
-            title={
-              err.isPermissionError
-                ? tStates("permissionTitle")
-                : tStates("authTitle")
-            }
-            description={
-              err.isPermissionError
-                ? tStates("permissionBody")
-                : tStates("authBody")
-            }
+            icon={err.isPermissionError ? ShieldAlert : LogIn}
+            title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
+            description={err.isPermissionError ? tStates("permissionBody") : tStates("authBody")}
           />
         </>
       );
@@ -356,17 +350,9 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
         {backLink}
         <EmptyState
           kind={err.code === "NETWORK_ERROR" ? "offline" : "error"}
-          icon={WarningCircle}
-          title={
-            err.code === "NETWORK_ERROR"
-              ? tStates("offlineTitle")
-              : tStates("errorTitle")
-          }
-          description={
-            err.code === "NETWORK_ERROR"
-              ? tStates("offlineBody")
-              : tStates("errorBody")
-          }
+          icon={AlertCircle}
+          title={err.code === "NETWORK_ERROR" ? tStates("offlineTitle") : tStates("errorTitle")}
+          description={err.code === "NETWORK_ERROR" ? tStates("offlineBody") : tStates("errorBody")}
           action={
             <Button variant="secondary" onClick={() => query.refetch()}>
               {tc("retry")}
@@ -378,12 +364,11 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   }
 
   const subnav = (
-    <Link
-      href={`/partner/jobs/${jobId}/applications`}
-      className="inline-flex items-center gap-1.5 rounded-lg text-sm font-medium text-[var(--text-secondary)] outline-none hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
-    >
-      <Users aria-hidden weight="duotone" className="size-4" />
-      {t("listView")}
+    <Link href={`/partner/jobs/${jobId}/applications`}>
+      <Button variant="secondary" size="sm">
+        <Users aria-hidden className="size-4" strokeWidth={1.8} />
+        {t("listView")}
+      </Button>
     </Link>
   );
 
@@ -407,127 +392,137 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   return (
     <>
       {backLink}
-      <PageHeader
-        title={board.job.title || t("title")}
-        description={t("subtitle")}
-        actions={subnav}
-      />
+      <PageHeader title={board.job.title || t("title")} description={t("subtitle")} actions={subnav} />
 
       {/* Board-safe summary chips */}
       <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className="text-xs font-medium text-[var(--text-muted)]">
-          {t("inPipeline", { count: totalVisible })}
-        </span>
-        <StatusBadge tone="rejected">
-          {t("rejectedCount", { count: board.summary.rejected ?? 0 })}
-        </StatusBadge>
-        <StatusBadge tone="closed">
-          {t("withdrawnCount", { count: board.summary.withdrawn ?? 0 })}
-        </StatusBadge>
+        <StatusChip tone="indigo" dot>{t("inPipeline", { count: totalVisible })}</StatusChip>
+        <StatusChip tone="danger" dot>{t("rejectedCount", { count: board.summary.rejected ?? 0 })}</StatusChip>
+        <StatusChip tone="neutral" dot>{t("withdrawnCount", { count: board.summary.withdrawn ?? 0 })}</StatusChip>
       </div>
 
-      {/* AI Pipeline Health panel — shown when there are candidates in the pipeline */}
-      {totalVisible > 0 && (() => {
-        const now = Date.now();
-        const allCandidates = board.columns.flatMap((c) => c.candidates);
-        const staleCount = allCandidates.filter((card) => {
-          if (!card.entered_at) return false;
-          const days = (now - new Date(card.entered_at).getTime()) / 86_400_000;
-          return days >= STALE_DAYS;
-        }).length;
-        const gateBlockedCount = allCandidates.filter(
-          (card) => card.evaluation && card.evaluation.gate_met === false
-        ).length;
-        const busiestCol = board.columns
-          .filter((c) => c.stage_id !== null)
-          .reduce<PipelineColumn | null>(
-            (best, c) => (best === null || c.count > best.count ? c : best),
-            null,
+      {/* AI pipeline health */}
+      {totalVisible > 0 &&
+        (() => {
+          const now = Date.now();
+          const allCandidates = board.columns.flatMap((c) => c.candidates);
+          const staleCount = allCandidates.filter((card) => {
+            if (!card.entered_at) return false;
+            const days = (now - new Date(card.entered_at).getTime()) / 86_400_000;
+            return days >= STALE_DAYS;
+          }).length;
+          const gateBlockedCount = allCandidates.filter(
+            (card) => card.evaluation && card.evaluation.gate_met === false,
+          ).length;
+          const busiestCol = board.columns
+            .filter((c) => c.stage_id !== null)
+            .reduce<PipelineColumn | null>(
+              (best, c) => (best === null || c.count > best.count ? c : best),
+              null,
+            );
+          const insights: string[] = [];
+          if (staleCount > 0) insights.push(t("aiInsightStale", { count: staleCount }));
+          if (gateBlockedCount > 0) insights.push(t("aiInsightGateBlocked", { count: gateBlockedCount }));
+          if (busiestCol && busiestCol.count > 0)
+            insights.push(t("aiInsightBusiestStage", { stage: busiestCol.name, count: busiestCol.count }));
+          if (insights.length === 0) insights.push(t("aiInsightFlowing"));
+          return (
+            <Card className="mb-4 border-l-[3px]" style={{ borderLeftColor: "var(--content-ai)" }}>
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <span
+                    className="flex size-7 items-center justify-center rounded-lg"
+                    style={{ background: "var(--content-ai-soft)" }}
+                  >
+                    <Sparkles className="size-4" strokeWidth={1.9} style={{ color: "var(--content-ai)" }} />
+                  </span>
+                  <CardTitle>{t("aiPipelineTitle")}</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {insights.map((text, i) => (
+                    <li key={i} className="flex items-start gap-2 text-[0.8125rem] text-foreground">
+                      <Lightbulb
+                        aria-hidden
+                        className="mt-0.5 size-3.5 shrink-0"
+                        strokeWidth={1.9}
+                        style={{ color: "var(--content-ai)" }}
+                      />
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
           );
-        const insights: string[] = [];
-        if (staleCount > 0) insights.push(t("aiInsightStale", { count: staleCount }));
-        if (gateBlockedCount > 0) insights.push(t("aiInsightGateBlocked", { count: gateBlockedCount }));
-        if (busiestCol && busiestCol.count > 0) insights.push(t("aiInsightBusiestStage", { stage: busiestCol.name, count: busiestCol.count }));
-        if (insights.length === 0) insights.push(t("aiInsightFlowing"));
-        return (
-          <div className="mb-4 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 ">
-            <p className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              {t("aiPipelineTitle")}
-            </p>
-            <ul className="space-y-1.5">
-              {insights.map((text, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden weight="duotone" className="mt-px size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                  {text}
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })()}
+        })()}
 
       {board.truncated && (
         <p
           role="status"
-          className="mb-4 flex items-start gap-2 rounded-xl border border-[var(--amber-600)]/40 bg-[var(--amber-100)] px-3.5 py-2.5 text-xs text-[var(--amber-700)]"
+          className="mb-4 flex items-start gap-2 rounded-xl px-3.5 py-2.5 text-xs"
+          style={{ background: "var(--content-warning-soft)", color: "var(--content-warning)" }}
         >
-          <ShieldWarning aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0" />
+          <ShieldAlert aria-hidden className="mt-0.5 size-4 shrink-0" strokeWidth={1.9} />
           {t("truncatedNote", { cap: board.candidate_cap })}
         </p>
       )}
 
       {allEmpty ? (
-        <EmptyState
-          kind="empty"
-          icon={Users}
-          title={t("emptyTitle")}
-          description={t("emptyBody")}
-        />
+        <EmptyState kind="empty" icon={Users} title={t("emptyTitle")} description={t("emptyBody")} />
       ) : (
-        <div
-          role="list"
-          aria-label={t("boardAriaLabel")}
-          className="flex gap-4 overflow-x-auto pb-4"
+        <KanbanBoard
+          ariaLabel={t("boardAriaLabel")}
+          onMove={handleMove}
+          disabled={advanceMutation.isPending}
+          renderOverlay={(id) => {
+            const card = cardsById.get(id);
+            if (!card) return null;
+            return (
+              <div className="rounded-lg border border-[var(--field-focus-border)] bg-card p-3 shadow-[var(--shadow-xl)]">
+                <p className="truncate text-[0.8125rem] font-semibold text-foreground">{cardHandle(card)}</p>
+                <div className="mt-1.5">
+                  <StatusChip tone={APPLICATION_CHIP_TONE[card.status] ?? "sky"} size="sm">
+                    {labels.status(card.status, card.status_label)}
+                  </StatusChip>
+                </div>
+              </div>
+            );
+          }}
         >
           {board.columns.map((column, index) => {
             const isLast = index === board.columns.length - 1;
             return (
               <PipelineColumnView
-                key={column.stage_id ?? "__new__"}
+                key={column.stage_id ?? NEW_COLUMN_ID}
                 column={column}
                 stageIndex={index}
                 totalStages={board.columns.length}
                 canAdvance={!isLast}
                 jobId={jobId}
                 requiredAction={
-                  column.stage_id
-                    ? requiredActionByStage.get(column.stage_id) ?? null
-                    : null
+                  column.stage_id ? requiredActionByStage.get(column.stage_id) ?? null : null
                 }
                 hasPriorStage={(stageId) => priorStagesFor(stageId).length > 0}
                 locale={locale}
-                statusTone={(s) => APPLICATION_STATUS_TONE[s] ?? "info"}
+                statusTone={(s) => APPLICATION_CHIP_TONE[s] ?? "sky"}
                 statusLabel={(s, l) => labels.status(s, l)}
                 advancePendingId={
-                  advanceMutation.isPending
-                    ? (advanceMutation.variables ?? null)
-                    : null
+                  advanceMutation.isPending ? (advanceMutation.variables ?? null) : null
                 }
                 selected={selected}
                 onToggleSelect={toggleSelect}
                 onAdvance={(id) => advanceMutation.mutate(id)}
-                onRollback={openRollback}
+                onRollback={(card) => openRollback(card)}
                 t={t}
               />
             );
           })}
-        </div>
+        </KanbanBoard>
       )}
 
-      {/* Bulk action toolbar — floats at the bottom when cards are selected */}
+      {/* Bulk action toolbar */}
       {selected.size > 0 && (
         <BulkActionBar
           count={selected.size}
@@ -540,7 +535,6 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
         />
       )}
 
-      {/* Bulk reject modal */}
       <BulkRejectModal
         open={bulkRejectOpen}
         count={selected.size}

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Handshake, WarningCircle } from "@phosphor-icons/react";
+import { Handshake, AlertCircle } from "lucide-react";
 import { Button, Modal, useToast } from "@/components/ui";
 import { ApiError, applicationsApi, type PartnerOffer } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
@@ -148,16 +148,15 @@ export function PartnerOfferPanel({
   const header = (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-2">
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-success shadow-sm">
-          <Handshake aria-hidden weight="duotone" className="size-4 text-white" />
+        <span
+          className="flex size-7 shrink-0 items-center justify-center rounded-lg"
+          style={{ background: "var(--content-success-soft)" }}
+        >
+          <Handshake aria-hidden className="size-4" strokeWidth={1.8} style={{ color: "var(--content-success)" }} />
         </span>
-        <h3 className="text-base font-bold text-[var(--text-primary)]">
-          {t("panelTitle")}
-        </h3>
+        <h3 className="type-h3 text-foreground">{t("panelTitle")}</h3>
       </div>
-      <span className="text-xs font-medium text-[var(--text-muted)]">
-        {t("partnerOnly")}
-      </span>
+      <span className="type-caption text-muted-foreground">{t("partnerOnly")}</span>
     </div>
   );
 
@@ -165,10 +164,7 @@ export function PartnerOfferPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div
-          className="h-24 animate-pulse rounded-xl bg-[var(--bg-muted)]"
-          aria-hidden
-        />
+        <div className="h-24 animate-skeleton rounded-xl bg-[var(--bg-muted)]" aria-hidden />
       </section>
     );
   }
@@ -179,22 +175,13 @@ export function PartnerOfferPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
-          <p className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-            <WarningCircle
-              aria-hidden
-              weight="duotone"
-              className="size-4 text-[var(--text-muted)]"
-            />
+        <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
+          <p className="flex items-center gap-2 type-small text-muted-foreground">
+            <AlertCircle aria-hidden className="size-4 text-muted-foreground" strokeWidth={1.8} />
             {permission ? t("noPermission") : t("loadError")}
           </p>
           {!permission && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="mt-2"
-              onClick={() => query.refetch()}
-            >
+            <Button variant="secondary" size="sm" className="mt-2" onClick={() => query.refetch()}>
               {tc("retry")}
             </Button>
           )}
@@ -232,8 +219,8 @@ export function PartnerOfferPanel({
           onRescind={() => setRescindTarget(current)}
         />
       ) : (
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
-          <p className="text-sm text-[var(--text-secondary)]">
+        <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
+          <p className="type-small text-muted-foreground">
             {canCreate ? t("emptyBody") : t("emptyBlocked")}
           </p>
         </div>
@@ -242,7 +229,7 @@ export function PartnerOfferPanel({
       {/* Create CTA — only when there is no LIVE offer and the app is active. */}
       {canCreate && !liveOffer && (
         <Button variant="primary" size="sm" onClick={() => setFormOpen(true)}>
-          <Handshake aria-hidden weight="bold" className="size-4" />
+          <Handshake aria-hidden className="size-4" strokeWidth={1.8} />
           {current ? t("createAnotherCta") : t("createCta")}
         </Button>
       )}

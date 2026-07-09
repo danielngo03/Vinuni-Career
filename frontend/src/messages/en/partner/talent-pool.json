@@ -1,22 +1,24 @@
 {
   "talentPool": {
     "title": "Talent Pool",
-    "subtitle": "Browse students who are open to work opportunities.",
-    "searchPlaceholder": "Search by skill, major...",
-    "anyWorkType": "Any work type",
-    "anyDegree": "Any degree",
+    "subtitle": "Blind-screen students who are open to work. Names and photos stay hidden until you reach out.",
     "search": "Search",
+    "searchByLocation": "Search by location…",
+    "maskedLabel": "Anonymous candidate",
+    "identifiedLabel": "VinUni student",
+    "locationUnknown": "Location not shared",
+    "activeAgo": "Active {time}",
+    "openToWork": "Open to work",
+    "blindTitle": "Blind screening",
+    "blindNote": "Names and photos are hidden to keep screening fair. Reach out through one of your jobs to unlock identity and review the CV.",
+    "loadedCount": "{count, plural, =0 {No candidates} =1 {1 candidate} other {# candidates}}",
     "emptyTitle": "No candidates found",
-    "emptyBody": "No students match your current search criteria.",
+    "emptyBody": "No open-to-work students match your search yet. Try a broader location or clear the search.",
+    "lockedTitle": "Talent pool access required",
+    "lockedBody": "Your account can't browse the talent pool. Ask your organization admin for access.",
     "backToList": "Back to Talent Pool",
-    "openToWork": "Open to Work",
     "profileNotVisible": "This profile is not available",
-    "profileNotVisibleBody": "The student may have changed their visibility settings.",
-    "cvReviewHint": "Career details live in this student's CVs. Invite them or open a shared application to review their CV.",
-    "resultsCount": "{count, plural, =0 {No candidates found} =1 {1 candidate} other {# candidates}}",
-    "aiInsightsTitle": "Talent Discovery",
-    "aiInsightPool": "{count} {count, plural, =1 {candidate matches} other {candidates match}} your search",
-    "aiInsightHighCompletion": "{count} {count, plural, =1 {candidate has} other {candidates have}} a complete profile — strong talent quality",
-    "aiInsightRefine": "Use filters (work type, degree level) to discover more targeted candidates"
+    "profileNotVisibleBody": "The student may have changed their visibility settings, or you don't have access to it.",
+    "cvReviewHint": "Career details live in this student's CVs. Reach out through a job or open a shared application to review their CV."
   }
 }

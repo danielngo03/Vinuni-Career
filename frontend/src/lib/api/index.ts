@@ -32,6 +32,7 @@ export type {
   PermissionInput,
   OrganizationPatch,
   PermissionPreview,
+  MyCapabilities,
   OwnershipInfo,
   AuditLogEntry,
   ProfileQualityCheck,
@@ -205,6 +206,15 @@ export type {
   PartnerRbacSummary,
   PartnerAiRecommendation,
   PartnerDashboardOps,
+  RecruitingFunnelStage,
+  RecruitingStageOutcome,
+  TimeBucket,
+  TimeToHire,
+  TimeInStageItem,
+  PartnerRecruitingFunnel,
+  AdvertisingCampaignRow,
+  AdvertisingPerformanceTotals,
+  PartnerAdvertisingPerformance,
 } from "./dashboards";
 export { analyticsApi } from "./analytics";
 export type {

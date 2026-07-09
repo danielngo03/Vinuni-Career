@@ -4,13 +4,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
-  UploadSimple,
-  Trash,
-  ArrowClockwise,
-  WarningCircle,
-  ImageSquare,
+  Upload,
+  Trash2,
+  RotateCw,
+  AlertCircle,
+  Image as ImageIcon,
   Crosshair,
-} from "@phosphor-icons/react";
+} from "lucide-react";
 import {
   Button,
   Input,
@@ -239,7 +239,7 @@ export function CreativeManagerModal({
             {missing.length > 0 && (
               <div className="flex items-start gap-2.5 rounded-xl border border-[var(--amber-600)]/40 bg-[var(--amber-100)] px-3.5 py-3">
                 <span className="flex size-6 shrink-0 items-center justify-center rounded-md icon-chip-warning shadow-sm">
-                  <WarningCircle aria-hidden weight="duotone" className="size-3.5 text-white" />
+                  <AlertCircle aria-hidden className="size-3.5 text-white" strokeWidth={2} />
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-[var(--text-primary)]">
@@ -258,7 +258,7 @@ export function CreativeManagerModal({
             <section className="space-y-3">
               <h3 className="flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
                 <span className="flex size-6 shrink-0 items-center justify-center rounded-md icon-chip-success shadow-sm">
-                  <ImageSquare aria-hidden weight="duotone" className="size-3.5 text-white" />
+                  <ImageIcon aria-hidden className="size-3.5 text-white" strokeWidth={2} />
                 </span>
                 {t("existingTitle")}
               </h3>
@@ -312,7 +312,7 @@ export function CreativeManagerModal({
                         size="sm"
                         onClick={() => setDeleteTarget(c)}
                       >
-                        <Trash aria-hidden weight="bold" className="size-4" />
+                        <Trash2 aria-hidden className="size-4" strokeWidth={1.8} />
                         {tc("delete")}
                       </Button>
                     </li>
@@ -325,7 +325,7 @@ export function CreativeManagerModal({
             <section className="space-y-3 border-t border-[var(--border-default)] pt-5">
               <h3 className="flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
                 <span className="flex size-6 shrink-0 items-center justify-center rounded-md icon-chip-success shadow-sm">
-                  <UploadSimple aria-hidden weight="bold" className="size-3.5 text-white" />
+                  <Upload aria-hidden className="size-3.5 text-white" strokeWidth={2} />
                 </span>
                 {t("addTitle")}
               </h3>
@@ -438,11 +438,7 @@ export function CreativeManagerModal({
                           onClick={() => upload.mutate()}
                           className="inline-flex items-center gap-1 font-semibold text-[var(--brand-primary)] underline underline-offset-2"
                         >
-                          <ArrowClockwise
-                            aria-hidden
-                            weight="bold"
-                            className="size-3.5"
-                          />
+                          <RotateCw aria-hidden className="size-3.5" strokeWidth={2} />
                           {t("err.retry")}
                         </button>
                       )}
@@ -455,7 +451,7 @@ export function CreativeManagerModal({
                       loading={upload.isPending}
                       onClick={() => upload.mutate()}
                     >
-                      <UploadSimple aria-hidden weight="bold" className="size-4" />
+                      <Upload aria-hidden className="size-4" strokeWidth={1.9} />
                       {t("uploadBtn")}
                     </Button>
                     <Button
@@ -562,11 +558,7 @@ function DropZone({
             : "border-[var(--border-default)] bg-[var(--bg-subtle)]",
         )}
       >
-        <ImageSquare
-          aria-hidden
-          weight="duotone"
-          className="size-8 text-[var(--text-muted)]"
-        />
+        <ImageIcon aria-hidden className="size-8 text-[var(--text-muted)]" strokeWidth={1.6} />
         <p className="text-sm text-[var(--text-secondary)]">{dropHint}</p>
         <input
           ref={inputRef}
@@ -658,11 +650,7 @@ function FocalPointPicker({
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-1.5">
-        <Crosshair
-          aria-hidden
-          weight="duotone"
-          className="size-4 text-[var(--brand-primary)]"
-        />
+        <Crosshair aria-hidden className="size-4 text-[var(--brand-primary)]" strokeWidth={1.9} />
         <span className="text-sm font-semibold text-[var(--text-primary)]">
           {title}
         </span>
