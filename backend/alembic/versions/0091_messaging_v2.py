@@ -17,9 +17,14 @@ Extends the ADR-0012 institutional channel (migration ``0023``) into a full prod
 Postgres-only partial indexes are guarded by ``is_postgres``; the SQLite unit-test path
 builds from ORM metadata and never runs this migration.
 
-Revision ID: 0085_messaging_v2
-Revises: 0084_ai_provider_health_fields
+Revision ID: 0091_messaging_v2
+Revises: 0090_chat_export_files
 Create Date: 2026-07-09
+
+Rebased onto the live ``vinuni_career`` lineage head ``0090_chat_export_files``
+(was ``0084_ai_provider_health_fields``, a different fork now quarantined in
+``versions_orphaned/``) so it chains as a single head after the partner-ai /
+partner-chatbot migrations rather than forking Alembic.
 """
 
 from __future__ import annotations
@@ -30,8 +35,8 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-revision: str = "0085_messaging_v2"
-down_revision: str | None = "0084_ai_provider_health_fields"
+revision: str = "0091_messaging_v2"
+down_revision: str | None = "0090_chat_export_files"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 

@@ -3,6 +3,7 @@
 Endpoints:
   POST   /ai/chat/sessions                               Create a new chat session
   GET    /ai/chat/sessions                               List the caller's sessions (non-archived)
+  PATCH  /ai/chat/sessions/{id}                          Rename a session
   GET    /ai/chat/sessions/{id}/messages                 List messages in a session
   POST   /ai/chat/sessions/{id}/messages                 Send a message (runs LLM + tools)
   GET    /ai/chat/sessions/{id}/messages/stream          Stream a message response via SSE
@@ -26,14 +27,21 @@ import json
 import uuid
 from collections.abc import AsyncGenerator
 
-from fastapi import APIRouter, Depends, Query, status
-from fastapi.responses import StreamingResponse
+from fastapi import APIRouter, Depends, File, Query, UploadFile, status
+from fastapi.responses import Response, StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import get_settings
 from app.core.db import get_db_session
-from app.modules.ai_assistant.api.schemas import SendMessageRequest
-from app.modules.ai_assistant.application import chat_service, usage_service
+from app.modules.ai_assistant.api.schemas import SendMessageRequest, UpdateSessionRequest
+from app.modules.ai_assistant.application import (
+    attachment_service,
+    chat_exports,
+    chat_service,
+    usage_service,
+)
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
+from app.shared.exceptions import ValidationFailedError
 from app.shared.responses import success
 
 router = APIRouter(prefix="/ai/chat", tags=["ai-assistant"])
@@ -95,6 +103,25 @@ async def list_sessions(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await chat_service.list_sessions(session, principal=auth.principal, limit=limit)
+    return success(data)
+
+
+@router.patch(
+    "/sessions/{session_id}",
+    summary="Rename a chat session",
+)
+async def rename_session(
+    session_id: uuid.UUID,
+    body: UpdateSessionRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await chat_service.rename_session(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        title=body.title,
+    )
     return success(data)
 
 
@@ -199,6 +226,62 @@ async def confirm_tool_action(
         message_id=message_id,
     )
     return success(data)
+
+
+@router.get(
+    "/exports/{export_id}",
+    summary="Download an assistant-generated export file (owner-only, RBAC + expiry)",
+)
+async def download_export(
+    export_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> Response:
+    """Return the bytes of a file the assistant generated for the caller.
+
+    Owner-scoped and expiry-checked in ``chat_exports.fetch_export``; the raw
+    storage/bytes are never otherwise exposed (only the URL is handed out).
+    """
+    row = await chat_exports.fetch_export(session, auth.principal, export_id)
+    return Response(
+        content=row.content,
+        media_type=row.mime,
+        headers={"Content-Disposition": f'attachment; filename="{row.filename}"'},
+    )
+
+
+@router.post(
+    "/sessions/{session_id}/attachments",
+    status_code=status.HTTP_201_CREATED,
+    summary="Attach a file/image to a chat session for AI analysis (owner only)",
+)
+async def upload_attachment(
+    session_id: uuid.UUID,
+    file: UploadFile = File(...),
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Store an owner-scoped chat attachment; analysis is a separate metered tool.
+
+    Session ownership is enforced inside ``attachment_service.upload_attachment``
+    (404 on a non-owned session). Rejects blank/oversized/unsupported/
+    security-failed files with a user-safe error; raw bytes are never returned.
+    """
+    data = await file.read()
+    if len(data) > get_settings().max_upload_bytes:
+        raise ValidationFailedError(
+            "Tệp quá lớn. Hãy nén hoặc chia nhỏ tệp rồi tải lại.",
+            details={"reason": "file_too_large"},
+        )
+    result = await attachment_service.upload_attachment(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        filename=file.filename or "upload",
+        data=data,
+        content_type=file.content_type,
+    )
+    return success(result)
 
 
 @router.delete(

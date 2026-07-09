@@ -85,6 +85,20 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
             "recruitment events, salary, or career direction."
         ),
     },
+    "formatter.greeting_partner": {
+        "vi": (
+            "Xin chào! Mình là trợ lý tuyển dụng cho nhà tuyển dụng đối tác của VinUni. "
+            "Bạn có thể nhờ mình xem tin tuyển dụng, tra cứu ứng viên theo vòng, "
+            "soạn/mô tả công việc, gợi ý phiếu đánh giá, tóm tắt sàng lọc, hay xem sự kiện — "
+            "tất cả trong phạm vi tổ chức và quyền của bạn."
+        ),
+        "en": (
+            "Hi! I'm the recruiting assistant for VinUni partner employers. "
+            "Ask me to review your job postings, look up candidates by pipeline stage, "
+            "draft a job description, suggest a scorecard, summarise screening, or check events — "
+            "all scoped to your organisation and your permissions."
+        ),
+    },
     "formatter.stripped_tool_call_fallback": {
         "vi": "Mình đang tra cứu dữ liệu hệ thống. Vui lòng thử lại với câu hỏi cụ thể hơn.",
         "en": "I'm looking up platform data. Please try again with a more specific question.",

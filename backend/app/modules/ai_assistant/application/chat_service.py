@@ -36,10 +36,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.ai.gateway.base import AIMessage
 from app.ai.prompts.assistant import v1 as assistant_prompt
 from app.ai.prompts.assistant_partner import v1 as partner_prompt
+from app.ai.prompts.assistant_partner import v2 as partner_prompt_native
 from app.ai.retrieval.citation_verify import kb_source_titles, verify_citations
 from app.ai.safety.input_guard import sanitize_instruction
 from app.ai.safety.output_guard import enforce_keyword_scope
-from app.modules.ai_assistant.application import usage_service
+from app.modules.ai_assistant.application import native_loop, usage_service
 from app.modules.ai_assistant.application.agentic import planner
 from app.modules.ai_assistant.application.agents import build_agent_plan
 from app.modules.ai_assistant.application.messages import assistant_message
@@ -57,6 +58,7 @@ from app.modules.ai_assistant.application.session_history import (
     list_sessions,
     load_history,
     quick_reply,
+    rename_session,
     require_session,
     serialize_message,
 )
@@ -90,6 +92,7 @@ __all__ = [
     "create_session",
     "get_session_messages",
     "list_sessions",
+    "rename_session",
     "send_message",
     "stream_message",
 ]
@@ -102,6 +105,11 @@ _MAX_USER_MSG_LEN = 1500
 _logger = logging.getLogger("ai.rag")
 
 
+def _is_partner(principal: Principal) -> bool:
+    """True for any partner-recruiter persona (routes to the native tool loop)."""
+    return bool(principal.persona) and principal.persona.startswith("partner")
+
+
 def _system_prompt_for(principal: Principal) -> str:
     """Select the persona system prompt (§8.1 branching, partner assistant spec).
 
@@ -112,6 +120,74 @@ def _system_prompt_for(principal: Principal) -> str:
     if principal.persona == _PARTNER_PERSONA:
         return partner_prompt.PARTNER_SYSTEM_PROMPT
     return assistant_prompt.SYSTEM_PROMPT
+
+
+async def _partner_history(session: AsyncSession, principal: Principal, chat, clean: str):
+    """Build the LLM history for a partner turn (prior messages + context turn)."""
+    history = await load_history(session, chat)
+    user_context = await build_user_context(session, principal)
+    history.append(
+        AIMessage(
+            role="user",
+            content=partner_prompt_native.build_user_message(
+                clean, context=user_context, persona=principal.persona
+            ),
+        )
+    )
+    return history
+
+
+async def _run_partner_turn(
+    session: AsyncSession, *, principal: Principal, chat, clean: str, locale: str
+) -> dict:
+    """Run one partner turn via the native tool loop; return the final message."""
+    history = await _partner_history(session, principal, chat, clean)
+    specs = native_loop.available_specs(principal)
+    final_message: dict | None = None
+    async for ev in native_loop.run_native_turn(
+        session,
+        principal=principal,
+        chat=chat,
+        history=history,
+        system_prompt=partner_prompt_native.PARTNER_SYSTEM_PROMPT_NATIVE,
+        specs=specs,
+        locale=locale,
+    ):
+        if ev.get("type") == "done":
+            final_message = ev["message"]
+    if final_message is not None:
+        return final_message
+    # Defensive fallback — the generator always yields a terminal ``done``, but
+    # never leave the caller without a persisted reply.
+    assistant_msg = ChatMessage(
+        id=uuid.uuid4(),
+        session_id=chat.id,
+        role="assistant",
+        content=ai_unavailable_reply(locale),
+        created_at=datetime.now(UTC),
+    )
+    session.add(assistant_msg)
+    chat.last_message_at = datetime.now(UTC)
+    await session.commit()
+    return serialize_message(assistant_msg)
+
+
+async def _stream_partner_turn(
+    session: AsyncSession, *, principal: Principal, chat, clean: str, locale: str
+):
+    """Stream one partner turn via the native tool loop (yields SSE event dicts)."""
+    history = await _partner_history(session, principal, chat, clean)
+    specs = native_loop.available_specs(principal)
+    async for ev in native_loop.run_native_turn(
+        session,
+        principal=principal,
+        chat=chat,
+        history=history,
+        system_prompt=partner_prompt_native.PARTNER_SYSTEM_PROMPT_NATIVE,
+        specs=specs,
+        locale=locale,
+    ):
+        yield ev
 
 
 def _apply_citation_guard(final_text: str, kb_sources: list[str]) -> str:
@@ -199,7 +275,7 @@ async def send_message(
     if chat.title is None:
         chat.title = clean[:80]
 
-    if quick_text := fast_path_reply(clean):
+    if quick_text := fast_path_reply(clean, locale, persona=principal.persona):
         assistant_msg = ChatMessage(
             id=uuid.uuid4(),
             session_id=chat.id,
@@ -211,6 +287,15 @@ async def send_message(
         chat.last_message_at = datetime.now(UTC)
         await session.commit()
         return serialize_message(assistant_msg)
+
+    # Partner recruiter assistant: native function-calling loop over a
+    # persona+RBAC-filtered tool set (its own prompt/tools; bypasses the
+    # student-centric deterministic planner entirely). Returns the terminal
+    # message from the shared native turn generator.
+    if _is_partner(principal):
+        return await _run_partner_turn(
+            session, principal=principal, chat=chat, clean=clean, locale=locale
+        )
 
     if agent_plan := await build_agent_plan(
         clean,
@@ -411,7 +496,7 @@ async def stream_message(
 
     yield {"type": "status", "code": "received"}
 
-    if quick_text := fast_path_reply(clean):
+    if quick_text := fast_path_reply(clean, persona=principal.persona):
         assistant_msg = ChatMessage(
             id=uuid.uuid4(),
             session_id=chat.id,
@@ -426,6 +511,15 @@ async def stream_message(
         for chunk in local_stream_chunks(quick_text):
             yield {"type": "token", "text": chunk}
         yield {"type": "done", "message": serialize_message(assistant_msg)}
+        return
+
+    # Partner recruiter assistant: native function-calling loop (own prompt +
+    # persona/RBAC-filtered tools). Streams the same SSE event vocabulary.
+    if _is_partner(principal):
+        async for ev in _stream_partner_turn(
+            session, principal=principal, chat=chat, clean=clean, locale="vi"
+        ):
+            yield ev
         return
 
     if agent_plan := await build_agent_plan(

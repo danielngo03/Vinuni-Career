@@ -384,7 +384,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "jobs:read"],
         fallback="I couldn't load your jobs right now. Check /partner/jobs for your listings.",
         audit_event_type="TOOL_GET_PARTNER_JOBS",
     ),
@@ -399,7 +399,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         parameters={"type": "object", "properties": {}, "required": []},
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
         fallback=(
             "I couldn't load your pipeline summary right now. Check /partner/pipeline for details."
         ),
@@ -464,8 +464,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         persona=[STUDENT],
         required_permissions=["authenticated", "role:student"],
         fallback=(
-            "I couldn't generate recommendations right now. Browse /jobs to discover "
-            "opportunities."
+            "I couldn't generate recommendations right now. Browse /jobs to discover opportunities."
         ),
         audit_event_type="TOOL_RECOMMEND_JOBS",
         timeout_seconds=20,
@@ -566,8 +565,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
                 "role": {
                     "type": "string",
                     "description": (
-                        "Role title if no specific job ID, e.g. 'software engineer', 'data "
-                        "analyst'"
+                        "Role title if no specific job ID, e.g. 'software engineer', 'data analyst'"
                     ),
                 },
                 "round": {
@@ -684,7 +682,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
         fallback=(
             "I couldn't search candidates right now. Check /partner/pipeline for your applicants."
         ),
@@ -713,7 +711,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
         fallback=(
             "I couldn't load that candidate's details right now. Check the pipeline board "
             "at /partner/pipeline."
@@ -749,10 +747,9 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
         fallback=(
-            "I couldn't draft a job description right now. Try the JD writer at "
-            "/partner/jobs/new."
+            "I couldn't draft a job description right now. Try the JD writer at /partner/jobs/new."
         ),
         audit_event_type="TOOL_DRAFT_JOB_DESCRIPTION",
         timeout_seconds=20,
@@ -780,7 +777,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
         fallback=(
             "I couldn't rewrite that job description right now. Try editing it directly at "
             "/partner/jobs/{job_id}."
@@ -806,7 +803,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "jobs:read"],
         fallback="I couldn't run the bias check right now. Please review the text manually.",
         audit_event_type="TOOL_CHECK_JD_BIAS",
     ),
@@ -832,7 +829,11 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "ai_recruiting:suggest_scorecard",
+        ],
         fallback=(
             "I couldn't generate a scorecard suggestion right now. Fill in the scorecard "
             "manually from the application detail page."
@@ -859,7 +860,11 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "ai_recruiting:screen_candidate",
+        ],
         fallback=(
             "I couldn't generate a screening brief right now. Review the CV directly on "
             "the application page."
@@ -878,7 +883,7 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         parameters={"type": "object", "properties": {}, "required": []},
         permission_class="read_only",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=["authenticated", "role:partner_user", "events:read"],
         fallback="I couldn't load your events right now. Check /partner/events for your listings.",
         audit_event_type="TOOL_GET_UPCOMING_PARTNER_EVENTS",
     ),
@@ -901,7 +906,11 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         },
         permission_class="confirmation_required",
         persona=[PARTNER_USER],
-        required_permissions=["authenticated", "role:partner_user"],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "ai_recruiting:move_candidate_with_confirmation",
+        ],
         side_effects=[
             "UPDATE candidate_stages (close current, open next)",
             "UPDATE applications.version",
@@ -920,6 +929,132 @@ TOOL_SPECS: dict[str, ToolSpec] = {
             "/partner/pipeline to advance them manually."
         ),
         audit_event_type="TOOL_MOVE_CANDIDATE_STAGE",
+    ),
+    "export_applications": ToolSpec(
+        name="export_applications",
+        description=(
+            "Export the applicants of one of the partner's OWN jobs to a real "
+            "Excel (.xlsx) file the recruiter can download. Use this when the "
+            "recruiter asks to export/download/'xuất file' the applicant or "
+            "application list for a job, optionally filtered by pipeline stage or "
+            "status, and optionally with a chosen set of columns. Requires job_id "
+            "from a prior get_partner_jobs result. Returns a download link (shown "
+            "to the recruiter as a button) plus the row count — never raw file "
+            "bytes. Selectable columns: applicant, email, status, stage, "
+            "applied_at, last_status_at, rejection_reason, is_anonymous, "
+            "application_id. Only available to partner users with export rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {"type": "string", "description": "Job UUID owned by the partner's org"},
+                "stage": {
+                    "type": "string",
+                    "description": "Optional pipeline-stage name filter (e.g. 'Phỏng vấn')",
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Optional application-status filter (e.g. 'active', 'rejected')",
+                },
+                "columns": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": (
+                        "Optional subset/order of columns. Valid keys: applicant, email, "
+                        "status, stage, applied_at, last_status_at, rejection_reason, "
+                        "is_anonymous, application_id. Omit for a sensible default set."
+                    ),
+                },
+            },
+            "required": ["job_id"],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "applications:export"],
+        fallback=(
+            "I couldn't build the export right now. You can export applicants from "
+            "the pipeline board at /partner/pipeline."
+        ),
+        audit_event_type="TOOL_EXPORT_APPLICATIONS",
+        timeout_seconds=25,
+    ),
+    "get_recruitment_analytics_chart": ToolSpec(
+        name="get_recruitment_analytics_chart",
+        description=(
+            "Build a visual CHART of the partner org's recruiting analytics from real "
+            "aggregate data. Use this when the recruiter asks to 'show a chart/graph', "
+            "'vẽ biểu đồ', visualise their funnel, applications over time, top jobs by "
+            "applicants, or the pipeline across jobs. Pick 'chart': 'funnel' (applications "
+            "by status), 'monthly_trend' (applications per month, last 6 months), "
+            "'top_jobs' (most applied-to jobs), or 'pipeline_by_job' (active vs rejected "
+            "per job). Returns a chart rendered for the recruiter plus a short summary — "
+            "aggregate counts only, no candidate identities. Only available to partner users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "chart": {
+                    "type": "string",
+                    "enum": ["funnel", "monthly_trend", "top_jobs", "pipeline_by_job"],
+                    "description": "Which analytics chart to build (default: funnel)",
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
+        fallback=(
+            "I couldn't build that chart right now. Check /partner/analytics for your "
+            "recruiting metrics."
+        ),
+        audit_event_type="TOOL_GET_RECRUITMENT_ANALYTICS_CHART",
+        timeout_seconds=20,
+    ),
+    "analyze_attachment": ToolSpec(
+        name="analyze_attachment",
+        description=(
+            "Analyse a file or image the user uploaded to THIS chat session (PDF, "
+            "image/scan, DOCX, TXT, or CSV). Use this when the user attaches a "
+            "document and asks you to read, summarise, extract, or answer questions "
+            "about it — e.g. 'what does this file say?', 'tóm tắt tệp này', 'đọc CV "
+            "này giúp tôi'. Requires the attachment_id from the attachment the user "
+            "just uploaded (it appears in the message as an attachment reference). "
+            "Returns a text summary and an extracted-text preview (plus a small "
+            "table or key-values when detected) — never the raw file. Scanned/image "
+            "files are read with document vision; blank, corrupt, or unsupported "
+            "files are reported as not analysable, never fabricated."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "attachment_id": {
+                    "type": "string",
+                    "description": (
+                        "UUID of the attachment the user uploaded to this chat session"
+                    ),
+                },
+            },
+            "required": ["attachment_id"],
+        },
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "status": {"type": "string"},
+                "summary": {"type": "string"},
+                "extracted_text_preview": {"type": "string"},
+            },
+        },
+        permission_class="read_only",
+        persona=[STUDENT, PARTNER_USER, UNIVERSITY_STAFF],
+        required_permissions=["authenticated"],
+        fallback=(
+            "I couldn't analyse that attachment right now. Make sure you uploaded it "
+            "to this chat, then try again in a moment."
+        ),
+        audit_event_type="TOOL_ANALYZE_ATTACHMENT",
+        timeout_seconds=25,
     ),
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
