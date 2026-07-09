@@ -346,3 +346,33 @@ async def test_attachment_upload_send_list_and_gated_download(db_session) -> Non
             db_session, principal=outsider, attachment_id=uuid.UUID(att["id"])
         )
 
+
+async def test_attachment_only_message_allowed_but_blank_alone_rejected(db_session) -> None:
+    from app.modules.messaging.application import attachment_service
+    from app.modules.messaging.application.errors import BlankMessageError
+
+    _uu, _uorg, uni = await make_university(db_session)
+    student_user, _student = await make_student(db_session)
+    out = await thread_service.create_thread(
+        db_session, principal=uni, kind="direct", context_type="support",
+        context_id=None, recipient_ids=[student_user.id], first_message="Hi",
+        ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+
+    # A blank body with NO attachments is rejected.
+    with pytest.raises(BlankMessageError):
+        await message_service.send_message(
+            db_session, principal=uni, thread_id=tid, body="   ", ctx=CTX
+        )
+
+    # A blank body WITH an attachment is allowed (image-only message).
+    att = await attachment_service.upload(
+        db_session, principal=uni, thread_id=tid, file=_png_upload(), ctx=CTX
+    )
+    sent = await message_service.send_message(
+        db_session, principal=uni, thread_id=tid, body="",
+        attachment_ids=[uuid.UUID(att["id"])], ctx=CTX,
+    )
+    assert sent["attachments"] and sent["attachments"][0]["id"] == att["id"]
+

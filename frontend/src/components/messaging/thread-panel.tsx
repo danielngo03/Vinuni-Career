@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
   ArrowClockwise,
@@ -15,11 +15,13 @@ import {
   HourglassMedium,
   Megaphone,
   PaperPlaneTilt,
+  Paperclip,
   Prohibit,
   Trash,
   UserSwitch,
   WarningCircle,
   WifiSlash,
+  X,
   XCircle,
 } from "@phosphor-icons/react";
 import { Button, EmptyState, Skeleton, useToast } from "@/components/ui";
@@ -42,28 +44,47 @@ import {
   MESSAGING_INBOX_ROOT,
   MESSAGING_THREADS_KEY,
   MESSAGING_UNREAD_KEY,
+  messagingThreadDetailKey,
   messagingThreadKey,
 } from "./query-keys";
 import { useThreadMessages } from "./use-thread-messages";
+import { useThreadTyping } from "./use-messaging-socket";
 import { RequestChip } from "./thread-chips";
 import { AssignThreadModal } from "./assign-thread-modal";
+import { MessageAttachments } from "./message-attachments";
+import {
+  ATTACHMENT_ACCEPT,
+  ATTACHMENT_MAX_COUNT,
+  AttachmentUploadError,
+  attachmentKindOf,
+  formatBytes,
+  uploadMessagingAttachment,
+  validateAttachment,
+} from "./attachment-api";
 
 const DELETE_WINDOW_MS = 10 * 60 * 1000;
 
 /** Party axes where a staff member replies AS the org Page (masked identity). */
-const ORG_PAGE_KINDS = new Set([
-  "org_dm",
-  "org_to_org",
-  "application",
-  "support",
-]);
+const ORG_PAGE_KINDS = new Set(["org_dm", "org_to_org", "application", "support"]);
 
 interface PendingMessage {
   key: string;
   body: string;
   reply_to_id: string | null;
+  attachment_ids: string[];
   status: "sending" | "failed";
   created_at: string;
+}
+
+interface PendingAttachment {
+  localId: string;
+  name: string;
+  size: number;
+  kind: "image" | "file";
+  previewUrl?: string;
+  status: "uploading" | "done" | "error";
+  progress: number;
+  attachmentId?: string;
 }
 
 /** The org identity the caller replies as (for the "Replying as" affordance). */
@@ -78,27 +99,19 @@ export interface ThreadPanelProps {
   open: boolean;
   onBack: () => void;
   onChanged: () => void;
-  /**
-   * `personal` = my own thread list (I initiated pending requests). `org` = the
-   * shared org inbox (my org is the recipient of pending requests; team read).
-   */
   variant?: "personal" | "org";
-  /** When set, shows a "Replying as {name}" chip so staff know they are masked. */
   orgIdentity?: OrgIdentity | null;
-  /** Org inbox: expose Assign + Resolve controls (server re-checks the grant). */
   canAssign?: boolean;
-  /** Fired after an assign/resolve mutation so the inbox list refreshes. */
   onAssignmentChanged?: () => void;
 }
 
 /**
  * One open thread: header (masked counterpart + request/assignment state +
- * mute/report, plus Assign/Resolve in the org inbox), a polled, sanitized,
- * aria-live transcript, and a composer with optimistic send + retry (idempotent).
- * Adds the Messaging V2 first-contact request gate: a pending recipient sees an
- * Accept/Decline/Block bar; a pending initiator sees a waiting notice and keeps
- * the composer until the intro cap (409) is hit. Identity is the server label
- * only — never a reconstructed name/email.
+ * mute/report, plus Assign/Resolve in the org inbox), a polled + socket-accelerated
+ * sanitized aria-live transcript with a typing indicator, and a composer with
+ * optimistic send, retry, and attachments. The Messaging V2 request gate uses the
+ * authoritative `viewer_is_recipient` (Accept/Decline/Block bar) and the exact
+ * `request_message_count/limit` intro counter. Identity is the server label only.
  */
 export function ThreadPanel({
   thread,
@@ -122,21 +135,25 @@ export function ThreadPanel({
   const [closed, setClosed] = useState(thread.status === "closed");
   const [muted, setMuted] = useState(thread.muted);
   const [pending, setPending] = useState<PendingMessage[]>([]);
+  const [attachments, setAttachments] = useState<PendingAttachment[]>([]);
   const [draft, setDraft] = useState("");
   const [rateLimitMsg, setRateLimitMsg] = useState<string | null>(null);
   const [reportOpen, setReportOpen] = useState(false);
   const [assignOpen, setAssignOpen] = useState(false);
-  const [requestState, setRequestState] = useState<RequestState>(
-    thread.request_state,
-  );
+  const [requestState, setRequestState] = useState<RequestState>(thread.request_state);
   const [introLimitReached, setIntroLimitReached] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const liveRef = useRef<HTMLDivElement>(null);
+  const lastSeenId = useRef<string | null>(null);
+  const attachmentsRef = useRef<PendingAttachment[]>([]);
+  attachmentsRef.current = attachments;
 
   const assignmentState = (thread as Partial<InboxThreadSummary>).assignment_state;
   const isResolved = assignmentState === "resolved";
 
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const liveRef = useRef<HTMLDivElement>(null);
-  const lastSeenId = useRef<string | null>(null);
+  const isPending = requestState === "pending";
 
   // Reset per-thread local state when the open thread changes.
   useEffect(() => {
@@ -148,8 +165,22 @@ export function ThreadPanel({
     setRateLimitMsg(null);
     setIntroLimitReached(false);
     lastSeenId.current = null;
+    for (const a of attachmentsRef.current) {
+      if (a.previewUrl) URL.revokeObjectURL(a.previewUrl);
+    }
+    setAttachments([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [thread.id]);
+
+  // Revoke any remaining previews on unmount.
+  useEffect(
+    () => () => {
+      for (const a of attachmentsRef.current) {
+        if (a.previewUrl) URL.revokeObjectURL(a.previewUrl);
+      }
+    },
+    [],
+  );
 
   const messagesQuery = useThreadMessages(thread.id, open);
   const serverMessages = useMemo(
@@ -157,20 +188,28 @@ export function ThreadPanel({
     [messagesQuery.data],
   );
 
-  // The org inbox uses a TEAM-level read cursor; personal threads use the
-  // participant cursor. Non-participant org staff would 404 on the participant
-  // mark-read, so route by variant.
+  // Authoritative request facts (viewer_is_recipient + intro counter) come from
+  // the thread detail — only fetched while the thread is a pending request.
+  const detailQuery = useQuery({
+    queryKey: messagingThreadDetailKey(thread.id),
+    queryFn: () => messagingApi.getThread(thread.id),
+    enabled: open && isPending,
+    staleTime: 8_000,
+    retry: false,
+  });
+  const detail = detailQuery.data;
+
+  const { typing, sendTyping } = useThreadTyping(thread.id, open && !isAnnouncement);
+
+  // Mark read: org inbox = team cursor; personal = participant cursor.
   const markRead = useMutation({
     mutationFn: () =>
-      isOrg
-        ? messagingApi.markInboxRead(thread.id)
-        : messagingApi.markRead(thread.id),
+      isOrg ? messagingApi.markInboxRead(thread.id) : messagingApi.markRead(thread.id),
     onSuccess: () => {
       patchThreadUnread(qc, thread.id, 0);
       void qc.invalidateQueries({ queryKey: MESSAGING_UNREAD_KEY });
       if (isOrg) void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
     },
-    // Non-participant org read may 404 before the first reply — safe to ignore.
     onError: () => undefined,
   });
 
@@ -199,19 +238,23 @@ export function ThreadPanel({
 
   /* ------------------------------ Request gate ---------------------------- */
 
-  const isPending = requestState === "pending";
   const iSent = serverMessages.some((m) => m.is_mine && !m.is_system);
   const hasIncoming = serverMessages.some((m) => !m.is_mine && !m.is_system);
-  // Am I (my party) the recipient who must accept? The org inbox is the
-  // recipient-triage surface; a personal pending thread I did not send into with
-  // incoming messages is the rare cold inbound. Otherwise I am the initiator.
+  const inferredRecipient = isPending && !iSent && (isOrg ? true : hasIncoming);
+  // Prefer the authoritative flag; fall back to inference while detail loads.
   const iAmRequestRecipient =
-    isPending && !iSent && (isOrg ? true : hasIncoming);
+    isPending && (detail ? detail.viewer_is_recipient : inferredRecipient);
   const iAmRequestInitiator = isPending && !iAmRequestRecipient;
 
+  const introCount = detail?.request_message_count ?? thread.request_message_count;
+  const introLimit = detail?.request_message_limit ?? thread.request_message_limit;
+  const introRemaining = Math.max(0, introLimit - introCount);
+  const introExhausted =
+    introLimitReached ||
+    (iAmRequestInitiator && introLimit > 0 && introCount >= introLimit);
+
   const respond = useMutation({
-    mutationFn: (action: RequestAction) =>
-      messagingApi.respondRequest(thread.id, action),
+    mutationFn: (action: RequestAction) => messagingApi.respondRequest(thread.id, action),
     onSuccess: (res, action) => {
       setRequestState(res.request_state);
       show({
@@ -224,22 +267,21 @@ export function ThreadPanel({
               : t("requestBlockedToast"),
       });
       void messagesQuery.refetch();
-      void qc.invalidateQueries({ queryKey: messagingThreadKey(thread.id) });
+      void qc.invalidateQueries({ queryKey: messagingThreadDetailKey(thread.id) });
       onChanged();
       void qc.invalidateQueries({ queryKey: MESSAGING_THREADS_KEY });
       if (isOrg) void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
     },
     onError: (err) => {
       if (err instanceof ApiError && err.status === 409) {
-        // No longer pending (someone else acted) — resync.
         show({ tone: "info", title: t("requestNotPendingToast") });
         void messagesQuery.refetch();
+        void qc.invalidateQueries({ queryKey: messagingThreadDetailKey(thread.id) });
         onChanged();
       } else {
         show({
           tone: "error",
-          title:
-            err instanceof ApiError ? err.message : t("errors.requestActionFailed"),
+          title: err instanceof ApiError ? err.message : t("errors.requestActionFailed"),
         });
       }
     },
@@ -250,10 +292,7 @@ export function ThreadPanel({
   const resolve = useMutation({
     mutationFn: (next: boolean) => messagingApi.resolveThread(thread.id, next),
     onSuccess: (_res, next) => {
-      show({
-        tone: "success",
-        title: next ? t("resolvedToast") : t("reopenedToast"),
-      });
+      show({ tone: "success", title: next ? t("resolvedToast") : t("reopenedToast") });
       void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
       onAssignmentChanged?.();
       onChanged();
@@ -270,26 +309,113 @@ export function ThreadPanel({
       }),
   });
 
+  /* -------------------------------- Attachments --------------------------- */
+
+  function onPickFiles(list: FileList | null) {
+    if (!list || list.length === 0) return;
+    let room = ATTACHMENT_MAX_COUNT - attachmentsRef.current.length;
+    if (room <= 0) {
+      show({ tone: "error", title: t("attachTooMany", { max: ATTACHMENT_MAX_COUNT }) });
+      return;
+    }
+    for (const file of Array.from(list)) {
+      if (room <= 0) {
+        show({ tone: "error", title: t("attachTooMany", { max: ATTACHMENT_MAX_COUNT }) });
+        break;
+      }
+      const check = validateAttachment(file);
+      if (check === "type") {
+        show({ tone: "error", title: t("attachBadType", { name: file.name }) });
+        continue;
+      }
+      if (check === "size") {
+        show({ tone: "error", title: t("attachTooLarge", { name: file.name }) });
+        continue;
+      }
+      room -= 1;
+      const localId = newDedupeKey();
+      const kind = attachmentKindOf(file);
+      const previewUrl = kind === "image" ? URL.createObjectURL(file) : undefined;
+      setAttachments((prev) => [
+        ...prev,
+        { localId, name: file.name, size: file.size, kind, previewUrl, status: "uploading", progress: 0 },
+      ]);
+      void uploadMessagingAttachment(thread.id, file, {
+        onProgress: (percent) =>
+          setAttachments((prev) =>
+            prev.map((a) => (a.localId === localId ? { ...a, progress: percent } : a)),
+          ),
+      })
+        .then((att) =>
+          setAttachments((prev) =>
+            prev.map((a) =>
+              a.localId === localId
+                ? { ...a, status: "done", progress: 100, attachmentId: att.id }
+                : a,
+            ),
+          ),
+        )
+        .catch((err) => {
+          setAttachments((prev) =>
+            prev.map((a) => (a.localId === localId ? { ...a, status: "error" } : a)),
+          );
+          const reason = err instanceof AttachmentUploadError ? err.reason : "generic";
+          show({
+            tone: "error",
+            title:
+              reason === "size"
+                ? t("attachTooLarge", { name: file.name })
+                : reason === "type"
+                  ? t("attachBadType", { name: file.name })
+                  : t("attachUploadFailed", { name: file.name }),
+          });
+        });
+    }
+  }
+
+  function removeAttachment(localId: string) {
+    setAttachments((prev) => {
+      const target = prev.find((a) => a.localId === localId);
+      if (target?.previewUrl) URL.revokeObjectURL(target.previewUrl);
+      return prev.filter((a) => a.localId !== localId);
+    });
+  }
+
+  function clearAttachments() {
+    for (const a of attachmentsRef.current) {
+      if (a.previewUrl) URL.revokeObjectURL(a.previewUrl);
+    }
+    setAttachments([]);
+  }
+
+  const uploadingCount = attachments.filter((a) => a.status === "uploading").length;
+
   /* --------------------------------- Send --------------------------------- */
 
-  async function deliver(body: string, key: string, replyTo: string | null) {
+  async function deliver(
+    body: string,
+    key: string,
+    replyTo: string | null,
+    attachmentIds: string[],
+  ) {
     setRateLimitMsg(null);
     try {
       await messagingApi.sendMessage(thread.id, {
         body,
         reply_to_id: replyTo,
         client_dedupe_key: key,
+        attachment_ids: attachmentIds,
       });
       await qc.invalidateQueries({ queryKey: messagingThreadKey(thread.id) });
       setPending((p) => p.filter((m) => m.key !== key));
       onChanged();
       void qc.invalidateQueries({ queryKey: MESSAGING_THREADS_KEY });
+      void qc.invalidateQueries({ queryKey: messagingThreadDetailKey(thread.id) });
       if (isOrg) void qc.invalidateQueries({ queryKey: MESSAGING_INBOX_ROOT });
     } catch (err) {
       if (err instanceof ApiError) {
         const reason =
           typeof err.details?.reason === "string" ? err.details.reason : undefined;
-        // Request-gate 409s must be handled BEFORE the generic conflict→closed path.
         if (err.status === 409 && reason === "request_pending_limit") {
           setPending((p) => p.filter((m) => m.key !== key));
           setIntroLimitReached(true);
@@ -307,9 +433,7 @@ export function ThreadPanel({
           return;
         }
       }
-      setPending((p) =>
-        p.map((m) => (m.key === key ? { ...m, status: "failed" } : m)),
-      );
+      setPending((p) => p.map((m) => (m.key === key ? { ...m, status: "failed" } : m)));
       if (err instanceof ApiError) {
         if (err.isConflict) {
           setClosed(true);
@@ -344,21 +468,32 @@ export function ThreadPanel({
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const body = draft.trim();
-    if (!body || closed) return;
+    const attachmentIds = attachments
+      .filter((a) => a.status === "done" && a.attachmentId)
+      .map((a) => a.attachmentId as string);
+    // Allow an attachment-only message (no text) — the backend accepts a blank body
+    // when attachments are present.
+    if ((!body && attachmentIds.length === 0) || closed || uploadingCount > 0) return;
     const key = newDedupeKey();
     setPending((p) => [
       ...p,
-      { key, body, reply_to_id: null, status: "sending", created_at: new Date().toISOString() },
+      {
+        key,
+        body,
+        reply_to_id: null,
+        attachment_ids: attachmentIds,
+        status: "sending",
+        created_at: new Date().toISOString(),
+      },
     ]);
     setDraft("");
-    void deliver(body, key, null);
+    clearAttachments();
+    void deliver(body, key, null, attachmentIds);
   }
 
   function retry(m: PendingMessage) {
-    setPending((p) =>
-      p.map((x) => (x.key === m.key ? { ...x, status: "sending" } : x)),
-    );
-    void deliver(m.body, m.key, m.reply_to_id);
+    setPending((p) => p.map((x) => (x.key === m.key ? { ...x, status: "sending" } : x)));
+    void deliver(m.body, m.key, m.reply_to_id, m.attachment_ids);
   }
 
   function discard(key: string) {
@@ -382,8 +517,7 @@ export function ThreadPanel({
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (messageId: string) =>
-      messagingApi.deleteMessage(thread.id, messageId),
+    mutationFn: (messageId: string) => messagingApi.deleteMessage(thread.id, messageId),
     onSuccess: () => {
       void qc.invalidateQueries({ queryKey: messagingThreadKey(thread.id) });
     },
@@ -397,9 +531,6 @@ export function ThreadPanel({
   /* --------------------------------- Render ------------------------------- */
 
   const readError = messagesQuery.error;
-  // Partner shared-inbox staff who are not yet participants cannot read the
-  // transcript until they join (send/accept). Handle that gracefully instead of a
-  // generic offline error.
   const isReadBlocked =
     isOrg &&
     readError instanceof ApiError &&
@@ -415,8 +546,7 @@ export function ThreadPanel({
     serverMessages.length === 0 &&
     pending.length === 0;
 
-  const requestBlocked =
-    requestState === "declined" || requestState === "blocked";
+  const requestBlocked = requestState === "declined" || requestState === "blocked";
   const showRequestActions = iAmRequestRecipient && !requestBlocked;
   const canCompose =
     thread.can_reply &&
@@ -424,7 +554,7 @@ export function ThreadPanel({
     !closed &&
     !showRequestActions &&
     !requestBlocked &&
-    !introLimitReached;
+    !introExhausted;
 
   const actsAsOrgPage =
     !!orgIdentity && ORG_PAGE_KINDS.has(thread.thread_kind) && !isAnnouncement;
@@ -516,15 +646,10 @@ export function ThreadPanel({
         </div>
       </div>
 
-      {/* Org inbox: mobile Assign/Resolve row (buttons hidden on small header) */}
+      {/* Org inbox: mobile Assign/Resolve row */}
       {isOrg && canAssign && !isAnnouncement && (
         <div className="flex items-center gap-2 border-b border-[var(--border-default)] bg-[#fbfaf8] px-5 py-2 sm:hidden">
-          <Button
-            variant="secondary"
-            size="xs"
-            fullWidth
-            onClick={() => setAssignOpen(true)}
-          >
+          <Button variant="secondary" size="xs" fullWidth onClick={() => setAssignOpen(true)}>
             <UserSwitch aria-hidden weight="bold" className="size-3.5" />
             {assignmentState === "assigned" ? t("reassign") : t("assign")}
           </Button>
@@ -560,9 +685,7 @@ export function ThreadPanel({
             kind="empty"
             icon={HourglassMedium}
             title={t("joinToViewTitle")}
-            description={
-              isPending ? t("joinToViewPendingBody") : t("joinToViewBody")
-            }
+            description={isPending ? t("joinToViewPendingBody") : t("joinToViewBody")}
           />
         )}
 
@@ -573,11 +696,7 @@ export function ThreadPanel({
             title={tStates("offlineTitle")}
             description={t("offlineRetry")}
             action={
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => void messagesQuery.refetch()}
-              >
+              <Button variant="secondary" size="sm" onClick={() => void messagesQuery.refetch()}>
                 {tc("retry")}
               </Button>
             }
@@ -589,9 +708,7 @@ export function ThreadPanel({
             kind="empty"
             icon={PaperPlaneTilt}
             title={t("threadEmptyTitle")}
-            description={
-              canCompose ? t("threadEmptyBody") : t("threadEmptyReadOnly")
-            }
+            description={canCompose ? t("threadEmptyBody") : t("threadEmptyReadOnly")}
           />
         )}
 
@@ -614,10 +731,15 @@ export function ThreadPanel({
             failedLabel={t("sendFailed")}
             retryLabel={tc("retry")}
             discardLabel={tc("cancel")}
+            attachmentLabel={t("attachmentCount", { count: m.attachment_ids.length })}
             onRetry={() => retry(m)}
             onDiscard={() => discard(m.key)}
           />
         ))}
+
+        {typing && (
+          <TypingIndicator label={t("typingIndicator", { name: thread.counterpart_label })} />
+        )}
       </div>
 
       {/* aria-live region for incoming messages (visually hidden) */}
@@ -655,7 +777,7 @@ export function ThreadPanel({
           pending={respond.isPending}
           onAction={(a) => respond.mutate(a)}
         />
-      ) : introLimitReached ? (
+      ) : introExhausted ? (
         <ReadOnlyNotice
           text={t("requestLimitReachedNotice", { name: thread.counterpart_label })}
           icon={HourglassMedium}
@@ -665,13 +787,20 @@ export function ThreadPanel({
       ) : (
         <div className="border-t border-[var(--border-default)] bg-[#fbfaf8]">
           {iAmRequestInitiator && (
-            <p className="flex items-center gap-1.5 px-5 pt-3 text-xs font-medium text-[var(--text-secondary)]">
-              <HourglassMedium
-                aria-hidden
-                weight="duotone"
-                className="size-4 shrink-0 text-[var(--text-muted)]"
-              />
-              {t("requestWaitingNotice", { name: thread.counterpart_label })}
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-0.5 px-5 pt-3 text-xs font-medium text-[var(--text-secondary)]">
+              <span className="flex items-center gap-1.5">
+                <HourglassMedium
+                  aria-hidden
+                  weight="duotone"
+                  className="size-4 shrink-0 text-[var(--text-muted)]"
+                />
+                {t("requestWaitingNotice", { name: thread.counterpart_label })}
+              </span>
+              {introLimit > 0 && (
+                <span className="rounded-full bg-[var(--bg-muted)] px-1.5 py-0.5 text-[10px] font-semibold text-[var(--text-muted)]">
+                  {t("introMessagesLeft", { remaining: introRemaining, limit: introLimit })}
+                </span>
+              )}
             </p>
           )}
           {actsAsOrgPage && (
@@ -685,14 +814,54 @@ export function ThreadPanel({
               {t("replyingAs", { name: orgIdentity!.name })}
             </div>
           )}
+
+          {attachments.length > 0 && (
+            <ul className="flex flex-wrap gap-2 px-5 pt-3">
+              {attachments.map((a) => (
+                <li key={a.localId}>
+                  <AttachmentDraftChip
+                    attachment={a}
+                    onRemove={() => removeAttachment(a.localId)}
+                    removeLabel={tc("cancel")}
+                    uploadingLabel={t("attachUploading")}
+                    failedLabel={t("attachFailedShort")}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+
           <form onSubmit={onSubmit} className="flex items-end gap-2 px-5 py-3">
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              accept={ATTACHMENT_ACCEPT}
+              className="sr-only"
+              onChange={(e) => {
+                onPickFiles(e.target.files);
+                e.target.value = "";
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              aria-label={t("attachAdd")}
+              title={t("attachAdd")}
+              className="mb-0.5 shrink-0 rounded-lg p-2 text-[var(--text-muted)] outline-none hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+            >
+              <Paperclip aria-hidden weight="bold" className="size-5" />
+            </button>
             <label htmlFor="msg-composer" className="sr-only">
               {t("composerLabel")}
             </label>
             <textarea
               id="msg-composer"
               value={draft}
-              onChange={(e) => setDraft(e.target.value)}
+              onChange={(e) => {
+                setDraft(e.target.value);
+                if (e.target.value.trim()) sendTyping();
+              }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
@@ -707,13 +876,21 @@ export function ThreadPanel({
             <Button
               type="submit"
               size="md"
-              disabled={!draft.trim()}
+              disabled={
+                (!draft.trim() && !attachments.some((a) => a.status === "done")) ||
+                uploadingCount > 0
+              }
               aria-label={t("send")}
               className="shrink-0"
             >
               <PaperPlaneTilt aria-hidden weight="fill" className="size-4" />
             </Button>
           </form>
+          {uploadingCount > 0 && (
+            <p className="px-5 pb-2 text-[11px] text-[var(--text-muted)]">
+              {t("attachUploading")}
+            </p>
+          )}
         </div>
       )}
 
@@ -761,33 +938,101 @@ function RequestActionBar({
         {t("requestActionsBody", { name: counterpart })}
       </p>
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <Button
-          variant="primary"
-          size="sm"
-          loading={pending}
-          onClick={() => onAction("accept")}
-        >
+        <Button variant="primary" size="sm" loading={pending} onClick={() => onAction("accept")}>
           <CheckCircle aria-hidden weight="bold" className="size-4" />
           {t("requestAccept")}
         </Button>
-        <Button
-          variant="secondary"
-          size="sm"
-          disabled={pending}
-          onClick={() => onAction("decline")}
-        >
+        <Button variant="secondary" size="sm" disabled={pending} onClick={() => onAction("decline")}>
           <XCircle aria-hidden weight="bold" className="size-4" />
           {t("requestDecline")}
         </Button>
-        <Button
-          variant="danger"
-          size="sm"
-          disabled={pending}
-          onClick={() => onAction("block")}
-        >
+        <Button variant="danger" size="sm" disabled={pending} onClick={() => onAction("block")}>
           <Prohibit aria-hidden weight="bold" className="size-4" />
           {t("requestBlock")}
         </Button>
+      </div>
+    </div>
+  );
+}
+
+function AttachmentDraftChip({
+  attachment,
+  onRemove,
+  removeLabel,
+  uploadingLabel,
+  failedLabel,
+}: {
+  attachment: PendingAttachment;
+  onRemove: () => void;
+  removeLabel: string;
+  uploadingLabel: string;
+  failedLabel: string;
+}) {
+  const failed = attachment.status === "error";
+  const uploading = attachment.status === "uploading";
+  return (
+    <div
+      className={cn(
+        "relative flex items-center gap-2 rounded-lg border px-2 py-1.5 pr-7",
+        failed
+          ? "border-[var(--brand-red)]/40 bg-[var(--red-50)]"
+          : "border-[var(--border-default)] bg-white",
+      )}
+    >
+      {attachment.previewUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={attachment.previewUrl}
+          alt=""
+          aria-hidden
+          className={cn("size-8 rounded object-cover", uploading && "opacity-60")}
+        />
+      ) : (
+        <span className="flex size-8 items-center justify-center rounded bg-[var(--bg-muted)] text-[var(--text-secondary)]">
+          <Paperclip aria-hidden weight="bold" className="size-4" />
+        </span>
+      )}
+      <span className="min-w-0 max-w-[9rem]">
+        <span className="block truncate text-xs font-semibold text-[var(--text-primary)]">
+          {attachment.name}
+        </span>
+        <span className="block text-[10px] text-[var(--text-muted)]">
+          {failed
+            ? failedLabel
+            : uploading
+              ? `${uploadingLabel} ${attachment.progress}%`
+              : formatBytes(attachment.size)}
+        </span>
+      </span>
+      {uploading ? (
+        <CircleNotch aria-hidden className="size-3.5 shrink-0 animate-spin text-[var(--text-muted)]" />
+      ) : null}
+      <button
+        type="button"
+        onClick={onRemove}
+        aria-label={removeLabel}
+        className="absolute right-1 top-1 rounded p-0.5 text-[var(--text-muted)] outline-none hover:bg-[var(--bg-subtle)] hover:text-[var(--brand-red)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+      >
+        <X aria-hidden weight="bold" className="size-3" />
+      </button>
+    </div>
+  );
+}
+
+function TypingIndicator({ label }: { label: string }) {
+  return (
+    <div className="flex flex-col items-start">
+      <span className="sr-only" role="status">
+        {label}
+      </span>
+      <div className="flex items-center gap-1 rounded-2xl rounded-bl-sm bg-[var(--bg-subtle)] px-3 py-2.5">
+        {[0, 150, 300].map((delay) => (
+          <span
+            key={delay}
+            className="size-1.5 animate-bounce rounded-full bg-[var(--text-muted)] motion-reduce:animate-none"
+            style={{ animationDelay: `${delay}ms` }}
+          />
+        ))}
       </div>
     </div>
   );
@@ -811,6 +1056,7 @@ function MessageBubble({
   const age = Date.now() - new Date(message.created_at).getTime();
   const canDelete =
     mine && !message.is_system && !message.is_deleted && age < deletableUntil;
+  const hasAttachments = !message.is_deleted && message.attachments?.length > 0;
 
   return (
     <div className={cn("flex flex-col", mine ? "items-end" : "items-start")}>
@@ -837,6 +1083,9 @@ function MessageBubble({
         >
           {message.is_deleted ? message.body : renderMessageBody(message.body)}
         </div>
+        {hasAttachments && (
+          <MessageAttachments attachments={message.attachments} mine={mine} />
+        )}
         {canDelete && (
           <button
             type="button"
@@ -867,6 +1116,7 @@ function PendingBubble({
   failedLabel,
   retryLabel,
   discardLabel,
+  attachmentLabel,
   onRetry,
   onDiscard,
 }: {
@@ -875,6 +1125,7 @@ function PendingBubble({
   failedLabel: string;
   retryLabel: string;
   discardLabel: string;
+  attachmentLabel: string;
   onRetry: () => void;
   onDiscard: () => void;
 }) {
@@ -890,6 +1141,17 @@ function PendingBubble({
         )}
       >
         {renderMessageBody(message.body)}
+        {message.attachment_ids.length > 0 && (
+          <span
+            className={cn(
+              "mt-1 flex items-center gap-1 text-[10px]",
+              failed ? "text-[var(--text-muted)]" : "text-white/80",
+            )}
+          >
+            <Paperclip aria-hidden weight="bold" className="size-3" />
+            {attachmentLabel}
+          </span>
+        )}
       </div>
       {failed ? (
         <div className="mt-0.5 flex items-center gap-2 px-1 text-[10px]">
@@ -947,9 +1209,7 @@ function TranscriptSkeleton() {
     <div className="space-y-3" aria-hidden>
       {[0, 1, 2, 3].map((i) => (
         <div key={i} className={cn("flex", i % 2 ? "justify-end" : "justify-start")}>
-          <Skeleton
-            className={cn("h-10 rounded-2xl", i % 2 ? "w-2/5" : "w-3/5")}
-          />
+          <Skeleton className={cn("h-10 rounded-2xl", i % 2 ? "w-2/5" : "w-3/5")} />
         </div>
       ))}
     </div>
@@ -972,9 +1232,7 @@ function patchThreadUnread(
         ...prev,
         pages: prev.pages.map((page) => ({
           ...page,
-          data: page.data.map((th) =>
-            th.id === threadId ? { ...th, unread } : th,
-          ),
+          data: page.data.map((th) => (th.id === threadId ? { ...th, unread } : th)),
         })),
       };
     },

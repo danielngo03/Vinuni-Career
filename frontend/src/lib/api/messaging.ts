@@ -1,4 +1,4 @@
-import { api } from "./client";
+import { api, apiDownload } from "./client";
 import type { ApiListEnvelope } from "./types";
 
 /* ------------------------------- Vocabularies ----------------------------- */
@@ -85,6 +85,10 @@ export interface ThreadSummary {
   request_state: RequestState;
   /** Server-rendered, localized label for `request_state` (render verbatim). */
   request_label: string;
+  /** Intro messages the initiator has sent while pending (for the counter). */
+  request_message_count: number;
+  /** Max intro messages allowed before the recipient must accept. */
+  request_message_limit: number;
   unread: number;
   can_reply: boolean;
   muted: boolean;
@@ -113,6 +117,12 @@ export interface ThreadParticipant {
 /** Thread detail = summary + the rendered participant roster. */
 export interface ThreadDetail extends ThreadSummary {
   participants: ThreadParticipant[];
+  /**
+   * True only when this thread is a `pending` request AND the viewer is the
+   * recipient party (the one who accepts/declines/blocks). Authoritative — use
+   * this to decide the Accept/Decline/Block bar instead of inferring client-side.
+   */
+  viewer_is_recipient: boolean;
 }
 
 /**
@@ -129,7 +139,28 @@ export interface Message {
   is_deleted: boolean;
   sender_label: string;
   reply_to_id: string | null;
+  /** Bound attachments (empty on a soft-deleted message). */
+  attachments: MessageAttachment[];
   created_at: string;
+}
+
+/** Attachment kind: an inline image or a downloadable file. */
+export type MessageAttachmentKind = "image" | "file";
+
+/**
+ * A message attachment. `url` (`/api/v1/messaging/attachments/{id}`) is a GATED
+ * endpoint requiring the Bearer token — fetch it authenticated (never a plain
+ * `<img src>`), the storage key/path is never exposed.
+ */
+export interface MessageAttachment {
+  id: string;
+  kind: MessageAttachmentKind;
+  file_name: string;
+  content_type: string;
+  size_bytes: number;
+  width?: number | null;
+  height?: number | null;
+  url: string;
 }
 
 /** `POST /messaging/threads/{id}/read` result. */
@@ -432,6 +463,15 @@ export const messagingApi = {
       `/messaging/threads/${threadId}/report`,
       { reason: reason ?? null },
     );
+  },
+
+  /**
+   * Download a message attachment's bytes through the gated endpoint (Bearer
+   * auth via {@link apiDownload}). Returns a Blob — the caller makes an object
+   * URL for inline images / a download link for files, and revokes it on unmount.
+   */
+  downloadAttachment(attachmentId: string): Promise<Blob> {
+    return apiDownload(`/messaging/attachments/${attachmentId}`);
   },
 
   /** Lightweight badge poll: unread sum across non-muted threads. */

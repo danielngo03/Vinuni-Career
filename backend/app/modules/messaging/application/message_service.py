@@ -317,7 +317,8 @@ async def send_message(
     if not principal.is_authenticated or principal.user_id is None:
         raise ResourceNotFoundError()
     sender_id = principal.user_id
-    if not body or not body.strip():
+    # A blank body is allowed only for an attachment-only message (image/file send).
+    if (not body or not body.strip()) and not attachment_ids:
         raise BlankMessageError()
 
     thread = await _shared.load_thread(session, thread_id=thread_id, lock=True)

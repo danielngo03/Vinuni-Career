@@ -26,7 +26,9 @@ class CreateThreadBody(BaseModel):
 
 
 class SendMessageBody(BaseModel):
-    body: str = Field(min_length=1, max_length=8000)
+    # Empty body is allowed ONLY when the message carries attachments (image/file-only
+    # messages). The service rejects a blank body with no attachments.
+    body: str = Field(default="", max_length=8000)
     reply_to_id: uuid.UUID | None = Field(default=None)
     client_dedupe_key: str | None = Field(default=None, max_length=120)
     # Messaging V2: optionally bind previously-uploaded attachments to this message.

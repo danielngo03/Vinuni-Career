@@ -27,6 +27,7 @@ import { ThreadPanel } from "./thread-panel";
 import { NewMessageModal } from "./new-message-modal";
 import { RequestChip, AssignmentChip } from "./thread-chips";
 import { useMyOrgIdentity } from "./use-my-org";
+import { useMessagingRealtime } from "./use-messaging-socket";
 
 const SCOPES: InboxScope[] = ["unassigned", "mine", "all", "resolved"];
 
@@ -51,6 +52,7 @@ export function OrgInboxScreen({
   const permissions = useAuthStore((s) => s.user?.permissions ?? []);
   const isSuperadmin = useAuthStore((s) => s.user?.isSuperadmin ?? false);
   const orgIdentity = useMyOrgIdentity();
+  useMessagingRealtime();
 
   const canAssign =
     isSuperadmin ||

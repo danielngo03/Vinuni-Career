@@ -20,6 +20,7 @@ import { ThreadPanel } from "./thread-panel";
 import { NewMessageModal } from "./new-message-modal";
 import { RequestChip } from "./thread-chips";
 import { useMyOrgIdentity } from "./use-my-org";
+import { useMessagingRealtime } from "./use-messaging-socket";
 
 /**
  * Full-page two-column messaging workspace. Left rail: thread inbox. Right
@@ -44,6 +45,7 @@ export function MessagingScreen({
   const [composeOpen, setComposeOpen] = useState(false);
   const [pendingDeepLink, setPendingDeepLink] = useState(initialThreadId ?? null);
   const orgIdentity = useMyOrgIdentity();
+  useMessagingRealtime();
 
   // Deep-link: fetch the specific thread directly (it may not be on the first
   // inbox page) and select it once loaded. Falls through to the normal

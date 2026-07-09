@@ -10,6 +10,7 @@ import { messagingApi } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { MESSAGING_UNREAD_KEY } from "./query-keys";
 import { MessagingCenter } from "./messaging-center";
+import { useMessagingRealtime } from "./use-messaging-socket";
 
 /**
  * Shared topbar messaging entry: an envelope icon + a polled unread badge,
@@ -33,6 +34,10 @@ export function MessagingBell({
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const authed = useAuthStore((s) => s.status === "authenticated");
+
+  // One app-level realtime connection (ref-counted) that keeps the badge + open
+  // lists live; polling stays as the resilient fallback.
+  useMessagingRealtime();
 
   const { data: unreadCount = 0, refetch } = useQuery({
     queryKey: MESSAGING_UNREAD_KEY,

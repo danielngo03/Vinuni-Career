@@ -462,6 +462,8 @@ export type {
   ThreadParticipant,
   ThreadDetail,
   Message as MessagingMessage,
+  MessageAttachment as MessagingAttachment,
+  MessageAttachmentKind as MessagingAttachmentKind,
   MarkReadResult as MessagingMarkReadResult,
   MuteResult as MessagingMuteResult,
   DeleteMessageResult as MessagingDeleteMessageResult,
