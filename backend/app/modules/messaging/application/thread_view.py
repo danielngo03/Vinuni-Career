@@ -312,17 +312,26 @@ async def thread_unread(
     if participant is None:
         return 0
     anchor = participant.last_read_at or _EPOCH
-    return (
-        await session.execute(
-            select(func.count())
-            .select_from(Message)
-            .where(
-                Message.thread_id == thread_id,
-                Message.created_at > anchor,
-                or_(Message.sender_id.is_(None), Message.sender_id != viewer_id),
-                Message.deleted_at.is_(None),
+    conds = [
+        Message.thread_id == thread_id,
+        Message.created_at > anchor,
+        or_(Message.sender_id.is_(None), Message.sender_id != viewer_id),
+        Message.deleted_at.is_(None),
+    ]
+    # Exclude messages authored by the viewer's OWN party (e.g. a teammate replying
+    # as the same org Page) — those are the viewer's own side's outgoing messages and
+    # must not inflate their unread. For an individual (user-party) participant this
+    # is already covered by the sender_id filter above; it matters for shared org
+    # Pages where several staff hold participant rows on one party.
+    if participant.party_id is not None:
+        conds.append(
+            or_(
+                Message.sender_party_id.is_(None),
+                Message.sender_party_id != participant.party_id,
             )
         )
+    return (
+        await session.execute(select(func.count()).select_from(Message).where(*conds))
     ).scalar_one()
 
 

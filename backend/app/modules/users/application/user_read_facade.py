@@ -143,6 +143,27 @@ async def get_notification_in_app_preference(
     return None if row is None else bool(row.in_app_enabled)
 
 
+async def notification_email_muted(
+    session: AsyncSession, *, user_id: uuid.UUID, category: str
+) -> bool:
+    """Whether the recipient has turned OFF email for ``category``.
+
+    ``True`` only when a stored preference row sets ``email_setting = "off"``; an
+    unset preference (no row) defaults to sending. Lets a product write honor the
+    email mute before enqueuing an outbox row.
+    """
+
+    setting = (
+        await session.execute(
+            select(NotificationPreference.email_setting).where(
+                NotificationPreference.user_id == user_id,
+                NotificationPreference.category == category,
+            )
+        )
+    ).scalar_one_or_none()
+    return setting == "off"
+
+
 async def is_org_member(
     session: AsyncSession, *, user_id: uuid.UUID, org_id: uuid.UUID
 ) -> bool:

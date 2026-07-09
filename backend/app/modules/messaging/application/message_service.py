@@ -61,6 +61,8 @@ from app.shared.permissions import Principal
 _MESSAGE_NOTIF = "message.received"
 _FLAGGED_NOTIF = "message.flagged"
 _REQUEST_ACCEPTED_NOTIF = "message.request_accepted"
+# Preference category all messaging notif types share (message_catalog).
+_MESSAGE_CATEGORY = "message"
 
 
 # --------------------------------------------------------------------------- #
@@ -176,6 +178,7 @@ async def deliver_message(
         thread=thread,
         message=message,
         sender_id=sender_id,
+        sender_party_id=sender_party_id,
         relationship=relationship,
         locale=locale,
     )
@@ -188,6 +191,7 @@ async def _notify_participants(
     thread: MessageThread,
     message: Message,
     sender_id: uuid.UUID | None,
+    sender_party_id: uuid.UUID | None = None,
     relationship: ApplicationRelationship | None,
     locale: str,
 ) -> None:
@@ -195,6 +199,10 @@ async def _notify_participants(
     action_url = f"/messages/{thread.id}"
     for p in participants:
         if sender_id is not None and p.user_id == sender_id:
+            continue
+        # Never notify a teammate on the SENDER's own party (e.g. another staffer
+        # sharing the org Page) about their own side's outgoing message.
+        if sender_party_id is not None and p.party_id == sender_party_id:
             continue
         if p.muted:
             # Mute suppresses notifications (and stops refreshing the partner cap).
@@ -226,8 +234,11 @@ async def _notify_participants(
             locale=locale,
         )
         # Preference-gated email via the shipped outbox (drained later). No body.
+        # Honor the recipient's "message" email mute before enqueuing.
         recipient = await user_read_facade.get_user_contact(session, p.user_id)
-        if recipient is not None:
+        if recipient is not None and not await user_read_facade.notification_email_muted(
+            session, user_id=p.user_id, category=_MESSAGE_CATEGORY
+        ):
             await enqueue_notification(
                 session,
                 recipient_id=p.user_id,
@@ -300,7 +311,9 @@ async def notify_request_accepted(
             locale=locale,
         )
         recipient = await user_read_facade.get_user_contact(session, p.user_id)
-        if recipient is not None:
+        if recipient is not None and not await user_read_facade.notification_email_muted(
+            session, user_id=p.user_id, category=_MESSAGE_CATEGORY
+        ):
             await enqueue_notification(
                 session,
                 recipient_id=p.user_id,

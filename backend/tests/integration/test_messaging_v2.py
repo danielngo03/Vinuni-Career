@@ -180,6 +180,52 @@ async def test_decline_notifies_nobody(db_session) -> None:
     assert rows == []
 
 
+async def test_message_email_honors_mute_preference(db_session) -> None:
+    """A user who turns OFF the 'message' email category still gets the in-app feed
+    row but no email outbox row (the outbox is preference-gated as documented)."""
+    from app.modules.users.domain.models import NotificationPreference
+
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+    db_session.add(
+        NotificationPreference(
+            user_id=student_user.id, category="message", email_setting="off",
+        )
+    )
+    await db_session.commit()
+
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id], first_message="Hi", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+    await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="accept", ctx=CTX
+    )
+    await message_service.send_message(
+        db_session, principal=partner, thread_id=tid, body="Reply", ctx=CTX
+    )
+
+    feed = (
+        await db_session.execute(
+            select(Notification).where(
+                Notification.recipient_id == student_user.id,
+                Notification.notif_type == "message.received",
+            )
+        )
+    ).scalars().all()
+    assert len(feed) >= 1  # in-app still delivered
+    emails = (
+        await db_session.execute(
+            select(NotificationOutbox).where(
+                NotificationOutbox.recipient_id == student_user.id,
+                NotificationOutbox.template_key == "message.received",
+            )
+        )
+    ).scalars().all()
+    assert emails == []  # email muted
+
+
 async def test_partner_decline_blocks_further_sends(db_session) -> None:
     student_user, student = await make_student(db_session)
     partner_user, porg, partner = await make_partner(db_session)
