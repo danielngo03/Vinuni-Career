@@ -16,6 +16,7 @@ import uuid
 import pytest
 from app.core.config import get_settings
 from app.modules.messaging.application import (
+    assignment_service,
     inbox_service,
     message_service,
     recipient_service,
@@ -38,6 +39,7 @@ from tests.messaging_utils import (
     make_student,
     make_university,
 )
+from tests.org_utils import add_member, email
 
 
 async def _thread(db_session, thread_id: uuid.UUID) -> MessageThread:
@@ -311,6 +313,100 @@ async def test_org_staff_reads_inbox_thread_without_participant_row(db_session) 
         await thread_service.get_thread(
             db_session, principal=outsider, thread_id=tid
         )
+
+
+async def _make_department(db_session, org, name: str):
+    from app.modules.organization.domain.models import Department
+
+    dept = Department(org_id=org.id, name=name)
+    db_session.add(dept)
+    await db_session.flush()
+    await db_session.commit()
+    return dept
+
+
+async def _dept_scoped_member(db_session, org, dept, prefix: str):
+    """A non-admin org member with messaging read+send, scoped to one department."""
+    from app.modules.organization.domain.models import MembershipDepartment
+
+    user, membership, principal = await add_member(
+        db_session,
+        org=org,
+        member_email=email(prefix),
+        permissions=[("messaging", "read"), ("messaging", "send")],
+    )
+    db_session.add(
+        MembershipDepartment(membership_id=membership.id, department_id=dept.id)
+    )
+    await db_session.commit()
+    return user, principal
+
+
+async def test_department_scope_is_access_control_not_just_a_filter(db_session) -> None:
+    """A thread assigned to department B is unreachable by a department-A staffer via
+    a direct deep link (read AND send), while dept B + the admin reach it. Unassigned
+    threads stay visible to everyone (shared triage)."""
+    student_user, student = await make_student(db_session)
+    admin_user, porg, admin = await make_partner(db_session, display_name="Acme Co")
+
+    dept_a = await _make_department(db_session, porg, "Engineering")
+    dept_b = await _make_department(db_session, porg, "Finance")
+    _ua, member_a = await _dept_scoped_member(db_session, porg, dept_a, "eng")
+    _ub, member_b = await _dept_scoped_member(db_session, porg, dept_b, "fin")
+
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[admin_user.id],
+        first_message="Hello, a question for your team.", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+
+    # While UNASSIGNED, either department may triage it (shared inbox).
+    for principal in (member_a, member_b):
+        detail = await thread_service.get_thread(
+            db_session, principal=principal, thread_id=tid
+        )
+        assert detail["id"] == str(tid)
+
+    # Admin routes it to Finance.
+    await assignment_service.assign(
+        db_session, principal=admin, thread_id=tid,
+        department_id=dept_b.id, assignee_id=None, ctx=CTX,
+    )
+
+    # Engineering can no longer read it (deep link crosses a department boundary)...
+    with pytest.raises(ResourceNotFoundError):
+        await thread_service.get_thread(
+            db_session, principal=member_a, thread_id=tid
+        )
+    # ...nor accept/act on the request...
+    with pytest.raises(ResourceNotFoundError):
+        await request_service.respond(
+            db_session, principal=member_a, thread_id=tid, action="accept", ctx=CTX,
+        )
+    # ...nor reply as the Page.
+    with pytest.raises(ResourceNotFoundError):
+        await message_service.send_message(
+            db_session, principal=member_a, thread_id=tid, body="sneaking in", ctx=CTX,
+        )
+
+    # Finance (the owning department) reads it, accepts the request, and replies.
+    detail_b = await thread_service.get_thread(
+        db_session, principal=member_b, thread_id=tid
+    )
+    assert detail_b["id"] == str(tid)
+    await request_service.respond(
+        db_session, principal=member_b, thread_id=tid, action="accept", ctx=CTX,
+    )
+    await message_service.send_message(
+        db_session, principal=member_b, thread_id=tid, body="Finance here, happy to help.",
+        ctx=CTX,
+    )
+    # The admin (sees-all) always reaches it.
+    detail_admin = await thread_service.get_thread(
+        db_session, principal=admin, thread_id=tid
+    )
+    assert detail_admin["id"] == str(tid)
 
 
 # --------------------------------------------------------------------------- #

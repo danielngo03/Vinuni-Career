@@ -92,6 +92,9 @@ async def _send_party(
             and party.party_kind == rules.PARTY_ORG
             and party.org_id is not None
             and capability.can_send_as_org(principal, party.org_id)
+            and await capability.member_can_access_org_party(
+                session, principal=principal, party=party
+            )
         ):
             return party
     return None
@@ -111,15 +114,21 @@ async def _can_read_thread(
         return False
     org_party = (
         await session.execute(
-            select(MessageThreadParty.id).where(
+            select(MessageThreadParty).where(
                 MessageThreadParty.thread_id == thread.id,
                 MessageThreadParty.party_kind == rules.PARTY_ORG,
                 MessageThreadParty.org_id == principal.org_id,
             )
         )
-    ).first()
-    return org_party is not None and capability.can_read_org_inbox(
+    ).scalar_one_or_none()
+    if org_party is None or not capability.can_read_org_inbox(
         principal, principal.org_id
+    ):
+        return False
+    # Department scope is access control here too — a download deep link must not
+    # cross a department boundary.
+    return await capability.member_can_access_org_party(
+        session, principal=principal, party=org_party
     )
 
 

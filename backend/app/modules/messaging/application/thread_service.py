@@ -719,7 +719,12 @@ async def _load_readable(
         org_party = await _org_party_in_thread(
             session, thread_id=thread_id, org_id=principal.org_id
         )
-        if org_party is not None:
+        # Department scope is ACCESS CONTROL, not just a list filter: a non-admin
+        # staffer may only open a thread that is unassigned, assigned to them, or
+        # assigned to one of their departments — a deep link cannot cross depts.
+        if org_party is not None and await capability.member_can_access_org_party(
+            session, principal=principal, party=org_party
+        ):
             return thread, False
     raise ResourceNotFoundError()
 

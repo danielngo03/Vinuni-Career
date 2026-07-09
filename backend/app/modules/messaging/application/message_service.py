@@ -416,8 +416,13 @@ async def send_message(
         org_party = await party_service.party_for_user(
             session, thread_id=thread_id, user_id=sender_id, user_org_ids=user_org_ids
         )
-        if org_party is None or org_party.org_id is None or not capability.can_send_as_org(
-            principal, org_party.org_id
+        if (
+            org_party is None
+            or org_party.org_id is None
+            or not capability.can_send_as_org(principal, org_party.org_id)
+            or not await capability.member_can_access_org_party(
+                session, principal=principal, party=org_party
+            )
         ):
             raise ResourceNotFoundError()
         participant = MessageThreadParticipant(

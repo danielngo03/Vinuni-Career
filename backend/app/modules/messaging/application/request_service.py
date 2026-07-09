@@ -50,6 +50,9 @@ async def _actor_on_party(
         return (
             principal.org_id == party.org_id
             and capability.can_send_as_org(principal, party.org_id)
+            and await capability.member_can_access_org_party(
+                session, principal=principal, party=party
+            )
         )
     return False
 
