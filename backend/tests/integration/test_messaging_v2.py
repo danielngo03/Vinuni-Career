@@ -285,6 +285,47 @@ async def test_org_inbox_lists_incoming_and_scopes_by_org(db_session) -> None:
     assert all(i["id"] != tid for i in other_items)
 
 
+async def test_org_new_inbound_raises_team_badge_and_clears_on_read(db_session) -> None:
+    """A brand-new inbound lead raises the header badge for the whole org team even
+    with no participant rows yet, is scoped to the owning org, and clears when read in
+    the inbox — including after a staffer accepts (personal + team cursors sync)."""
+    student_user, student = await make_student(db_session)
+    admin_user, porg, admin = await make_partner(db_session, display_name="Acme Co")
+    _ou, _oorg, other = await make_partner(db_session, display_name="Other Co")
+
+    assert await message_service.unread_count(db_session, principal=admin) == 0
+
+    # Address the org PAGE directly (the real inbound flow): an org party with NO
+    # staff participant rows — the whole team relies on the shared cursor.
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[], target_org_id=porg.id,
+        first_message="Hi, a question for your team.", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+
+    # New inbound lead raises the shared team badge (no participant row on the org side).
+    assert await message_service.unread_count(db_session, principal=admin) >= 1
+    # A different org never sees it in their badge.
+    assert await message_service.unread_count(db_session, principal=other) == 0
+
+    # Reading it in the inbox clears the team badge.
+    await inbox_service.mark_org_read(db_session, principal=admin, thread_id=tid, ctx=CTX)
+    assert await message_service.unread_count(db_session, principal=admin) == 0
+
+    # After the admin accepts (gains a participant row) a new student message raises the
+    # badge again, and reading in the inbox still clears it (the two cursors stay in sync).
+    await request_service.respond(
+        db_session, principal=admin, thread_id=tid, action="accept", ctx=CTX
+    )
+    await message_service.send_message(
+        db_session, principal=student, thread_id=tid, body="one more thing", ctx=CTX
+    )
+    assert await message_service.unread_count(db_session, principal=admin) >= 1
+    await inbox_service.mark_org_read(db_session, principal=admin, thread_id=tid, ctx=CTX)
+    assert await message_service.unread_count(db_session, principal=admin) == 0
+
+
 async def test_org_staff_reads_inbox_thread_without_participant_row(db_session) -> None:
     # The whole team must be able to READ a shared-inbox thread via ``messaging:read``,
     # not only after someone replies (participant rows are created lazily on send/accept).

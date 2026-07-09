@@ -25,7 +25,7 @@ from datetime import UTC, datetime
 from sqlalchemy import column, func, or_, select, table
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.modules.messaging.application import _shared, party_service
+from app.modules.messaging.application import _shared, capability, party_service
 from app.modules.messaging.application.recruitment_relationship import (
     ApplicationRelationship,
 )
@@ -36,6 +36,7 @@ from app.modules.messaging.domain.models import (
     MessageThreadParticipant,
     MessageThreadParty,
 )
+from app.modules.organization.application import org_reporting_facade
 from app.modules.users.application import user_read_facade
 from app.shared.permissions import Principal
 
@@ -325,10 +326,97 @@ async def thread_unread(
     ).scalar_one()
 
 
+async def _org_inbox_unread(session: AsyncSession, *, principal: Principal) -> int:
+    """Team unread for org-Page threads the caller can access but is NOT yet a
+    participant of (brand-new inbound leads, not yet accepted/replied).
+
+    These use the SHARED party cursor, so a new lead raises the header badge for the
+    whole team and reading it in the inbox clears it for everyone. Threads the caller
+    already has a participant row on (recruitment/application threads, or org threads
+    they've accepted) are deliberately EXCLUDED here and counted by the personal
+    participant cursor in :func:`unread_count_total` — so existing accounting for
+    recruiter↔candidate threads never shifts. Department-scoped exactly like the
+    shared inbox; muted parties and resolved threads are excluded.
+    """
+
+    org_id = principal.org_id
+    if org_id is None or principal.user_id is None:
+        return 0
+    if not capability.can_read_org_inbox(principal, org_id):
+        return 0
+
+    party = MessageThreadParty
+    has_participant = (
+        select(MessageThreadParticipant.thread_id)
+        .where(
+            MessageThreadParticipant.thread_id == party.thread_id,
+            MessageThreadParticipant.user_id == principal.user_id,
+            MessageThreadParticipant.removed_at.is_(None),
+        )
+        .exists()
+    )
+    conds = [
+        party.party_kind == rules.PARTY_ORG,
+        party.org_id == org_id,
+        party.muted.is_(False),
+        party.assignment_state != rules.ASSIGN_RESOLVED,
+        MessageThread.deleted_at.is_(None),
+        ~has_participant,
+    ]
+    if not (capability.can_assign(principal, org_id) or principal.is_superadmin):
+        my_departments = await org_reporting_facade.department_ids_for_user_in_org(
+            session, org_id=org_id, user_id=principal.user_id
+        )
+        visibility = [
+            party.assigned_user_id == principal.user_id,
+            party.assigned_department_id.is_(None),
+        ]
+        if my_departments:
+            visibility.append(party.assigned_department_id.in_(my_departments))
+        conds.append(or_(*visibility))
+
+    party_rows = list(
+        (
+            await session.execute(
+                select(party)
+                .join(MessageThread, MessageThread.id == party.thread_id)
+                .where(*conds)
+            )
+        )
+        .scalars()
+        .all()
+    )
+    total = 0
+    for p in party_rows:
+        anchor = _shared.as_aware(p.last_read_at) if p.last_read_at else _EPOCH
+        total += (
+            await session.execute(
+                select(func.count())
+                .select_from(Message)
+                .where(
+                    Message.thread_id == p.thread_id,
+                    Message.created_at > anchor,
+                    or_(
+                        Message.sender_party_id.is_(None),
+                        Message.sender_party_id != p.id,
+                    ),
+                    Message.deleted_at.is_(None),
+                )
+            )
+        ).scalar_one()
+    return total
+
+
 async def unread_count_total(session: AsyncSession, *, principal: Principal) -> int:
-    """Sum of unread across the caller's non-muted, live threads (badge poll)."""
+    """Sum of unread across the caller's non-muted, live threads (badge poll).
+
+    Two sources, never double-counted: (1) the personal participant cursor for every
+    thread the caller has a participant row on, and (2) the shared org-Page team
+    cursor for accessible inbound threads the caller is NOT yet a participant of.
+    """
 
     assert principal.user_id is not None
+    total = await _org_inbox_unread(session, principal=principal)
     rows = list(
         (
             await session.execute(
@@ -346,7 +434,6 @@ async def unread_count_total(session: AsyncSession, *, principal: Principal) -> 
             )
         ).all()
     )
-    total = 0
     for thread_id, _last_read in rows:
         total += await thread_unread(
             session, thread_id=thread_id, viewer_id=principal.user_id

@@ -200,7 +200,16 @@ async def mark_org_read(
     ).scalar_one_or_none()
     if party is None:
         raise ResourceNotFoundError()
-    party.last_read_at = _shared.now()
+    now = _shared.now()
+    party.last_read_at = now
+    # If this staffer also has a personal participant row (they accepted/replied),
+    # advance their personal cursor too so the header badge — which counts such
+    # threads on the participant cursor — clears in lockstep with the team cursor.
+    participant = await _shared.get_participant(
+        session, thread_id=thread_id, user_id=principal.user_id
+    )
+    if participant is not None:
+        participant.last_read_at = now
     await session.flush()
     await session.commit()
     return {"status": "ok", "thread_id": str(thread_id), "unread": 0}
