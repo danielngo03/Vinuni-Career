@@ -1,19 +1,19 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Briefcase, CalendarBlank } from "@phosphor-icons/react";
+import { Briefcase, CalendarDays } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 const TABS = [
   { key: "jobs", href: "/university/moderation/jobs", icon: Briefcase },
-  { key: "events", href: "/university/moderation/events", icon: CalendarBlank },
+  { key: "events", href: "/university/moderation/events", icon: CalendarDays },
 ] as const;
 
 /**
  * Sub-navigation for the university moderation hub. The `/moderation` index and
  * `/moderation/jobs` both surface the jobs queue, so the Jobs tab is active for
- * either path.
+ * either path. v10 monochrome shell styling — ink pill for the active tab.
  */
 export function ModerationTabs() {
   const t = useTranslations("moderationHub");
@@ -33,7 +33,7 @@ export function ModerationTabs() {
     <div
       role="tablist"
       aria-label={t("tabsLabel")}
-      className="mb-5 flex gap-2 overflow-x-auto"
+      className="mb-5 flex gap-1.5 overflow-x-auto"
     >
       {TABS.map((tab) => {
         const active = isActive(tab.href);
@@ -46,13 +46,13 @@ export function ModerationTabs() {
             aria-selected={active}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "inline-flex items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold outline-none transition-all focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 focus-visible:ring-offset-1",
+              "inline-flex items-center gap-2 whitespace-nowrap rounded-full border px-4 py-1.5 text-[0.8125rem] font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
               active
-                ? "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
+                ? "border-transparent bg-[var(--btn-primary-bg)] text-[var(--btn-primary-fg)]"
+                : "border-border bg-card text-muted-foreground hover:border-border-strong hover:text-foreground",
             )}
           >
-            <Icon aria-hidden weight="duotone" className="size-4" />
+            <Icon aria-hidden className="size-4" strokeWidth={1.8} />
             {t(tab.key)}
           </Link>
         );

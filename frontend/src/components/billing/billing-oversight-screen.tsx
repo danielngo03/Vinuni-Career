@@ -1,27 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  CurrencyCircleDollar,
+  BadgeDollarSign,
+  CircleDollarSign,
   Hourglass,
+  Pencil,
+  Plus,
   Receipt,
-  ShieldWarning,
-  SignIn,
-  WarningCircle,
-} from "@phosphor-icons/react";
-import {
-  Button,
-  DataTable,
-  EmptyState,
-  StatusBadge,
-  useToast,
-  type Column,
-} from "@/components/ui";
+} from "lucide-react";
+import { Button, useToast } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/page-header";
-import { useBillingLabels, SUBSCRIPTION_STATUS_TONE } from "@/lib/billing/labels";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+  DataTable,
+  DetailSheet,
+  DetailSheetSection,
+  DetailRow,
+  EmptyState,
+  KpiRow,
+  KpiTile,
+  StatusChip,
+  type ChipTone,
+  type ColumnDef,
+} from "@/components/kit";
+import { useBillingLabels } from "@/lib/billing/labels";
 import { formatVnd, formatWindow } from "@/lib/billing/format";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import {
@@ -34,11 +44,8 @@ import {
   type SubscriptionPlan,
   type SubscriptionStatus,
 } from "@/lib/api";
-import { RevenueCard } from "./oversight/revenue-card";
-import { PlanCatalogSection } from "./oversight/plan-catalog-section";
-import { SubscriptionReviewModal } from "./oversight/subscription-review-modal";
-import { CancelSubscriptionModal, MarkPaidModal } from "./oversight/subscription-action-modals";
 import { PlanFormModal } from "./oversight/plan-form-modal";
+import { CancelSubscriptionModal, MarkPaidModal } from "./oversight/subscription-action-modals";
 import {
   AUDIENCE_FILTERS,
   EMPTY_PLAN_FORM,
@@ -49,6 +56,14 @@ import {
 } from "./oversight/utils";
 
 const STATUS_FILTERS = ["all", ...SUBSCRIPTION_STATUSES] as const;
+
+/** Subscription status → kit StatusChip tone (color carries meaning). */
+const STATUS_CHIP_TONE: Record<SubscriptionStatus, ChipTone> = {
+  pending: "warning",
+  active: "success",
+  expired: "neutral",
+  cancelled: "danger",
+};
 
 export function BillingOversightScreen() {
   const t = useTranslations("billingOversight");
@@ -61,30 +76,24 @@ export function BillingOversightScreen() {
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
 
-  const [statusFilter, setStatusFilter] = useState<string>("pending");
-  const [audienceFilter, setAudienceFilter] = useState<string>("all");
-  const [selected, setSelected] = useState<Subscription | null>(null);
-  const [dialog, setDialog] = useState<DialogKind>(null);
-  const [paymentRef, setPaymentRef] = useState("");
-  const [reason, setReason] = useState("");
-  const [textError, setTextError] = useState<string | null>(null);
-  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
-  const [planDialog, setPlanDialog] = useState<PlanDialogKind>(null);
-  const [planForm, setPlanForm] = useState<PlanForm>(EMPTY_PLAN_FORM);
-  const [planError, setPlanError] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = React.useState<string>("pending");
+  const [audienceFilter, setAudienceFilter] = React.useState<string>("all");
+  const [selectedId, setSelectedId] = React.useState<string | null>(null);
+  const [dialog, setDialog] = React.useState<DialogKind>(null);
+  const [paymentRef, setPaymentRef] = React.useState("");
+  const [reason, setReason] = React.useState("");
+  const [textError, setTextError] = React.useState<string | null>(null);
+  const [selectedPlan, setSelectedPlan] = React.useState<SubscriptionPlan | null>(null);
+  const [planDialog, setPlanDialog] = React.useState<PlanDialogKind>(null);
+  const [planForm, setPlanForm] = React.useState<PlanForm>(EMPTY_PLAN_FORM);
+  const [planError, setPlanError] = React.useState<string | null>(null);
 
   const query = useQuery({
     queryKey: ["admin", "billing", statusFilter, audienceFilter],
     queryFn: () =>
       billingApi.listAllSubscriptions({
-        status:
-          statusFilter === "all"
-            ? undefined
-            : (statusFilter as SubscriptionStatus),
-        audience:
-          audienceFilter === "all"
-            ? undefined
-            : (audienceFilter as "student" | "partner"),
+        status: statusFilter === "all" ? undefined : (statusFilter as SubscriptionStatus),
+        audience: audienceFilter === "all" ? undefined : (audienceFilter as "student" | "partner"),
         limit: 100,
       }),
     retry: false,
@@ -93,11 +102,12 @@ export function BillingOversightScreen() {
   const plansQuery = useQuery({
     queryKey: ["admin", "billing", "plans", audienceFilter],
     queryFn: () =>
-      billingApi.listAdminPlans(
-        audienceFilter === "all" ? undefined : (audienceFilter as BillingAudience),
-      ),
+      billingApi.listAdminPlans(audienceFilter === "all" ? undefined : (audienceFilter as BillingAudience)),
     retry: false,
   });
+
+  const rows = React.useMemo(() => query.data?.items ?? [], [query.data]);
+  const selected = React.useMemo(() => rows.find((r) => r.id === selectedId) ?? null, [rows, selectedId]);
 
   function refresh() {
     void qc.invalidateQueries({ queryKey: ["admin", "billing"] });
@@ -105,7 +115,7 @@ export function BillingOversightScreen() {
 
   function closeDialog() {
     setDialog(null);
-    setSelected(null);
+    setSelectedId(null);
     setPaymentRef("");
     setReason("");
     setTextError(null);
@@ -166,11 +176,7 @@ export function BillingOversightScreen() {
 
   function handleError(e: unknown) {
     if (e instanceof ApiError && e.isConflict) {
-      toast.show({
-        tone: "error",
-        title: tb("errors.conflictTitle"),
-        description: t("conflictBody"),
-      });
+      toast.show({ tone: "error", title: tb("errors.conflictTitle"), description: t("conflictBody") });
       closeDialog();
       refresh();
       return;
@@ -179,8 +185,7 @@ export function BillingOversightScreen() {
   }
 
   const markPaid = useMutation({
-    mutationFn: (s: Subscription) =>
-      billingApi.markPaid(s.id, paymentRef, s.version),
+    mutationFn: (s: Subscription) => billingApi.markPaid(s.id, paymentRef, s.version),
     onSuccess: () => {
       closeDialog();
       toast.show({ tone: "success", title: t("paidToast") });
@@ -191,10 +196,7 @@ export function BillingOversightScreen() {
 
   const cancel = useMutation({
     mutationFn: (s: Subscription) =>
-      billingApi.adminCancelSubscription(s.id, {
-        reason: reason.trim() || undefined,
-        version: s.version,
-      }),
+      billingApi.adminCancelSubscription(s.id, { reason: reason.trim() || undefined, version: s.version }),
     onSuccess: () => {
       closeDialog();
       toast.show({ tone: "success", title: t("cancelledToast") });
@@ -238,243 +240,199 @@ export function BillingOversightScreen() {
     onError: handleError,
   });
 
+  const header = <PageHeader title={t("title")} subtitle={t("subtitle")} />;
+
   /* ---- Permission / auth states ---- */
   if (query.isError && query.error instanceof ApiError) {
     const err = query.error;
     if (err.isPermissionError || err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("title")} description={t("subtitle")} />
+          {header}
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
-            title={
-              err.isPermissionError
-                ? tStates("permissionTitle")
-                : tStates("authTitle")
-            }
-            description={
-              err.isPermissionError ? t("permissionBody") : tStates("authBody")
-            }
+            title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
+            description={err.isPermissionError ? t("permissionBody") : tStates("authBody")}
           />
         </>
       );
     }
   }
 
-  const rows = query.data?.items ?? [];
   const revenue = query.data?.revenue ?? null;
+  const plans = plansQuery.data ?? [];
+  const canMarkPaid = selected?.status === "pending";
+  const canCancel = selected != null && ["pending", "active"].includes(selected.status);
 
-  const columns: Column<Subscription>[] = [
+  const subColumns: ColumnDef<Subscription, unknown>[] = [
     {
-      key: "plan",
+      accessorKey: "plan",
       header: t("colPlan"),
-      cell: (r) => (
-        <div className="min-w-0">
-          <p className="truncate font-semibold text-[var(--text-primary)]">
-            {r.plan?.name ?? "—"}
-          </p>
-          <p className="truncate text-xs text-[var(--text-secondary)]">
-            {r.plan
-              ? labels.audience(r.plan.audience, r.plan.audience_label)
-              : labels.audience(
-                  r.principal_type === "org" ? "partner" : "student",
-                )}
-            {r.principal_id ? ` · ${t("principalRef", { id: r.principal_id.slice(0, 8) })}` : ""}
-          </p>
-        </div>
-      ),
+      cell: ({ row }) => {
+        const r = row.original;
+        return (
+          <div className="min-w-0">
+            <span className="block truncate font-semibold text-foreground">{r.plan?.name ?? "—"}</span>
+            <span className="type-caption block truncate text-muted-foreground">
+              {r.plan
+                ? labels.audience(r.plan.audience, r.plan.audience_label)
+                : labels.audience(r.principal_type === "org" ? "partner" : "student")}
+              {r.principal_id ? ` · ${t("principalRef", { id: r.principal_id.slice(0, 8) })}` : ""}
+            </span>
+          </div>
+        );
+      },
     },
     {
-      key: "price",
+      accessorKey: "price_amount",
       header: t("colPrice"),
-      cell: (r) => (
-        <div className="flex flex-col">
-          <span className="font-semibold text-[var(--text-primary)]">
-            {formatVnd(r.price_amount, r.currency, locale)}
-          </span>
-          <span
-            className={`text-[11px] font-medium ${
-              r.is_paid ? "text-[var(--teal-600)]" : "text-[var(--amber-700)]"
-            }`}
-          >
-            {r.is_paid ? t("paid") : t("unpaid")}
-          </span>
-        </div>
-      ),
+      meta: { align: "right" },
+      cell: ({ row }) => {
+        const r = row.original;
+        return (
+          <div className="flex flex-col items-end">
+            <span className="font-semibold tabular-nums text-foreground">
+              {formatVnd(r.price_amount, r.currency, locale)}
+            </span>
+            <StatusChip tone={r.is_paid ? "success" : "warning"} size="sm">
+              {r.is_paid ? t("paid") : t("unpaid")}
+            </StatusChip>
+          </div>
+        );
+      },
     },
     {
-      key: "window",
+      id: "window",
       header: t("colWindow"),
-      cell: (r) => (
-        <span className="text-xs text-[var(--text-secondary)]">
-          {formatWindow(r.start_at, r.end_at, locale)}
+      enableSorting: false,
+      cell: ({ row }) => (
+        <span className="type-caption text-muted-foreground">
+          {formatWindow(row.original.start_at, row.original.end_at, locale)}
         </span>
       ),
     },
     {
-      key: "status",
+      accessorKey: "status",
       header: t("colStatus"),
-      cell: (r) => (
-        <StatusBadge tone={SUBSCRIPTION_STATUS_TONE[r.status] ?? "info"}>
-          {labels.status(r.status, r.status_label)}
-        </StatusBadge>
+      cell: ({ row }) => (
+        <StatusChip tone={STATUS_CHIP_TONE[row.original.status] ?? "neutral"} dot size="sm">
+          {labels.status(row.original.status, row.original.status_label)}
+        </StatusChip>
       ),
     },
     {
-      key: "actions",
+      id: "actions",
       header: "",
-      align: "right",
-      cell: (r) => (
-        <Button variant="ghost" size="sm" onClick={() => setSelected(r)}>
-          {t("review")}
-        </Button>
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <div onClick={(e) => e.stopPropagation()}>
+          <Button variant="ghost" size="sm" onClick={() => setSelectedId(row.original.id)}>
+            {t("review")}
+          </Button>
+        </div>
       ),
     },
   ];
 
-  const canMarkPaid = selected?.status === "pending";
-  const canCancel =
-    selected != null && ["pending", "active"].includes(selected.status);
-  const plans = plansQuery.data ?? [];
+  const loadError =
+    query.isError &&
+    !(query.error instanceof ApiError && (query.error.isPermissionError || query.error.isAuthError));
 
   return (
     <>
-      <PageHeader title={t("title")} description={t("subtitle")} />
+      {header}
 
-      <PlanCatalogSection
-        plans={plans}
-        loading={plansQuery.isPending}
-        locale={locale}
-        t={t}
-        onCreate={openCreatePlan}
-        onEdit={openEditPlan}
-      />
+      <div className="space-y-4">
+        {/* Revenue KPI row */}
+        <KpiRow cols={3}>
+          <KpiTile
+            label={t("revenueActive")}
+            value={revenue ? formatVnd(revenue.active_revenue_amount, revenue.currency, locale) : "—"}
+            icon={CircleDollarSign}
+          />
+          <KpiTile label={t("revenueActiveCount")} value={revenue ? String(revenue.active_count) : "—"} icon={Receipt} />
+          <KpiTile
+            label={t("revenuePending")}
+            value={revenue ? String(revenue.pending_count) : "—"}
+            icon={Hourglass}
+            hint={revenue && revenue.pending_count > 0 ? t("revenuePendingHint") : undefined}
+          />
+        </KpiRow>
 
-      {/* Revenue roll-up */}
-      <div className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <RevenueCard
-          label={t("revenueActive")}
-          value={
-            revenue
-              ? formatVnd(revenue.active_revenue_amount, revenue.currency, locale)
-              : "—"
-          }
-          loading={query.isPending}
-          icon={<CurrencyCircleDollar aria-hidden weight="duotone" className="size-5 text-white" />}
-          iconBg="icon-chip-success"
+        {/* Plan catalogue */}
+        <PlanCatalogueCard
+          plans={plans}
+          loading={plansQuery.isPending}
+          locale={locale}
+          onCreate={openCreatePlan}
+          onEdit={openEditPlan}
         />
-        <RevenueCard
-          label={t("revenueActiveCount")}
-          value={revenue ? String(revenue.active_count) : "—"}
-          loading={query.isPending}
-          icon={<Receipt aria-hidden weight="duotone" className="size-5 text-white" />}
-          iconBg="icon-chip-primary"
-        />
-        <RevenueCard
-          label={t("revenuePending")}
-          value={revenue ? String(revenue.pending_count) : "—"}
-          loading={query.isPending}
-          icon={<Hourglass aria-hidden weight="duotone" className="size-5 text-white" />}
-          iconBg="icon-chip-warning"
-        />
+
+        {/* Subscriptions */}
+        <Card>
+          <CardHeader>
+            <div>
+              <CardTitle>{t("subscriptionsTitle")}</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {/* Filters */}
+            <div className="mb-4 space-y-2.5">
+              <ChipGroup
+                ariaLabel={t("filterStatus")}
+                options={STATUS_FILTERS.map((s) => ({ value: s, label: s === "all" ? t("filterAll") : labels.status(s) }))}
+                value={statusFilter}
+                onChange={setStatusFilter}
+              />
+              <ChipGroup
+                ariaLabel={t("filterAudience")}
+                options={AUDIENCE_FILTERS.map((a) => ({ value: a, label: a === "all" ? t("filterAll") : labels.audience(a) }))}
+                value={audienceFilter}
+                onChange={setAudienceFilter}
+              />
+            </div>
+
+            {loadError ? (
+              <EmptyState
+                kind="error"
+                title={tStates("errorTitle")}
+                description={tStates("errorBody")}
+                action={
+                  <Button variant="secondary" onClick={() => query.refetch()}>
+                    {tc("retry")}
+                  </Button>
+                }
+              />
+            ) : (
+              <DataTable
+                columns={subColumns}
+                data={rows}
+                getRowId={(r) => r.id}
+                loading={query.isPending}
+                onRowClick={(r) => setSelectedId(r.id)}
+                activeRowId={selectedId ?? undefined}
+                pageSize={15}
+                empty={<EmptyState kind="empty" title={t("empty")} description={t("emptyBody")} />}
+              />
+            )}
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Status + audience filter tab chips */}
-      <div className="mb-4 space-y-2.5">
-        <div className="flex flex-wrap gap-2" role="group" aria-label={t("filterStatus")}>
-          {STATUS_FILTERS.map((s) => (
-            <button
-              key={s}
-              onClick={() => setStatusFilter(s)}
-              aria-pressed={statusFilter === s}
-              className={cn(
-                "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
-                statusFilter === s
-                  ? s === "pending"
-                    ? "border-[var(--amber-500)]/30 bg-[var(--amber-600)] text-white shadow-sm"
-                    : s === "active"
-                      ? "border-[var(--teal-500)]/30 bg-[var(--teal-600)] text-white shadow-sm"
-                      : s === "cancelled" || s === "expired"
-                        ? "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm"
-                        : "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
-              )}
-            >
-              {s === "all" ? t("filterAll") : labels.status(s)}
-            </button>
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-2" role="group" aria-label={t("filterAudience")}>
-          {AUDIENCE_FILTERS.map((a) => (
-            <button
-              key={a}
-              onClick={() => setAudienceFilter(a)}
-              aria-pressed={audienceFilter === a}
-              className={cn(
-                "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
-                audienceFilter === a
-                  ? a === "student"
-                    ? "border-teal-500/30 bg-teal-600 text-white shadow-sm"
-                    : a === "partner"
-                      ? "border-violet-500/30 bg-violet-600 text-white shadow-sm"
-                      : "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
-              )}
-            >
-              {a === "all" ? t("filterAll") : labels.audience(a)}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {query.isError &&
-      !(
-        query.error instanceof ApiError &&
-        (query.error.isPermissionError || query.error.isAuthError)
-      ) ? (
-        <EmptyState
-          kind="error"
-          icon={WarningCircle}
-          title={tStates("errorTitle")}
-          description={tStates("errorBody")}
-          action={
-            <Button variant="secondary" onClick={() => query.refetch()}>
-              {tc("retry")}
-            </Button>
-          }
-        />
-      ) : (
-        <DataTable
-          columns={columns}
-          rows={rows}
-          getRowId={(r) => r.id}
-          loading={query.isPending}
-          caption={t("title")}
-          empty={{
-            kind: "empty",
-            icon: Receipt,
-            title: t("empty"),
-            description: t("emptyBody"),
-          }}
-        />
-      )}
-
-      <SubscriptionReviewModal
-        selected={selected}
-        open={selected !== null && dialog === null}
+      {/* Review detail sheet */}
+      <SubscriptionDetailSheet
+        subscription={dialog === null ? selected : null}
         locale={locale}
-        t={t}
-        tc={tc}
         canMarkPaid={!!canMarkPaid}
         canCancel={canCancel}
-        onClose={() => setSelected(null)}
-        onOpenMarkPaid={() => {
+        onClose={() => setSelectedId(null)}
+        onMarkPaid={() => {
           setPaymentRef("");
           setTextError(null);
           setDialog("markPaid");
         }}
-        onOpenCancel={() => {
+        onCancel={() => {
           setReason("");
           setTextError(null);
           setDialog("cancel");
@@ -536,5 +494,261 @@ export function BillingOversightScreen() {
         }}
       />
     </>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Plan catalogue                                                              */
+/* -------------------------------------------------------------------------- */
+
+function PlanCatalogueCard({
+  plans,
+  loading,
+  locale,
+  onCreate,
+  onEdit,
+}: {
+  plans: SubscriptionPlan[];
+  loading: boolean;
+  locale: string;
+  onCreate: () => void;
+  onEdit: (plan: SubscriptionPlan) => void;
+}) {
+  const t = useTranslations("billingOversight");
+  const labels = useBillingLabels();
+
+  const columns: ColumnDef<SubscriptionPlan, unknown>[] = [
+    {
+      accessorKey: "name",
+      header: t("colPlan"),
+      cell: ({ row }) => (
+        <div className="min-w-0">
+          <span className="block truncate font-semibold text-foreground">{row.original.name}</span>
+          <span className="type-caption block truncate font-mono text-muted-foreground">{row.original.code}</span>
+        </div>
+      ),
+    },
+    {
+      accessorKey: "audience",
+      header: t("planAudience"),
+      cell: ({ row }) => (
+        <StatusChip tone={row.original.audience === "partner" ? "violet" : "teal"} size="sm">
+          {labels.audience(row.original.audience, row.original.audience_label)}
+        </StatusChip>
+      ),
+    },
+    {
+      accessorKey: "billing_period",
+      header: t("planPeriod"),
+      cell: ({ row }) => <span className="text-muted-foreground">{labels.period(row.original.billing_period, row.original.billing_period_label)}</span>,
+    },
+    {
+      accessorKey: "price_amount",
+      header: t("planPrice"),
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <span className="font-semibold tabular-nums text-foreground">
+          {formatVnd(row.original.price_amount, row.original.currency, locale)}
+        </span>
+      ),
+    },
+    {
+      id: "flags",
+      header: "",
+      enableSorting: false,
+      cell: ({ row }) => (
+        <div className="flex flex-wrap gap-1.5">
+          {row.original.is_default && <StatusChip tone="indigo" size="sm">{t("planDefault")}</StatusChip>}
+          <StatusChip tone={row.original.is_visible ? "success" : "neutral"} size="sm">
+            {row.original.is_visible ? t("planVisible") : t("planHidden")}
+          </StatusChip>
+        </div>
+      ),
+    },
+    {
+      id: "actions",
+      header: "",
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <div onClick={(e) => e.stopPropagation()}>
+          <Button variant="ghost" size="sm" onClick={() => onEdit(row.original)}>
+            <Pencil className="size-4" strokeWidth={1.8} />
+            {t("planEdit")}
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("planCatalogTitle")}</CardTitle>
+        </div>
+        <CardToolbar>
+          <Button variant="secondary" size="sm" onClick={onCreate}>
+            <Plus className="size-4" strokeWidth={2} />
+            {t("planCreate")}
+          </Button>
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        <DataTable
+          columns={columns}
+          data={plans}
+          getRowId={(r) => r.id}
+          loading={loading}
+          onRowClick={(r) => onEdit(r)}
+          empty={<EmptyState kind="empty" title={t("planEmpty")} description={t("planEmptyBody")} />}
+        />
+      </CardContent>
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Subscription detail sheet                                                    */
+/* -------------------------------------------------------------------------- */
+
+function SubscriptionDetailSheet({
+  subscription,
+  locale,
+  canMarkPaid,
+  canCancel,
+  onClose,
+  onMarkPaid,
+  onCancel,
+}: {
+  subscription: Subscription | null;
+  locale: string;
+  canMarkPaid: boolean;
+  canCancel: boolean;
+  onClose: () => void;
+  onMarkPaid: () => void;
+  onCancel: () => void;
+}) {
+  const t = useTranslations("billingOversight");
+  const tc = useTranslations("common");
+  const labels = useBillingLabels();
+  const open = subscription != null;
+
+  return (
+    <DetailSheet
+      open={open}
+      onClose={onClose}
+      title={subscription?.plan?.name ?? t("reviewTitle")}
+      subtitle={
+        subscription
+          ? labels.audience(
+              subscription.plan?.audience ?? (subscription.principal_type === "org" ? "partner" : "student"),
+              subscription.plan?.audience_label,
+            )
+          : undefined
+      }
+      status={
+        subscription ? (
+          <>
+            <StatusChip tone={STATUS_CHIP_TONE[subscription.status] ?? "neutral"} dot>
+              {labels.status(subscription.status, subscription.status_label)}
+            </StatusChip>
+            <StatusChip tone={subscription.is_paid ? "success" : "warning"}>
+              {subscription.is_paid ? t("paid") : t("unpaid")}
+            </StatusChip>
+          </>
+        ) : undefined
+      }
+      width="md"
+      closeLabel={tc("close")}
+      footer={
+        subscription && (canMarkPaid || canCancel) ? (
+          <>
+            {canCancel && (
+              <Button variant="ghost" size="sm" onClick={onCancel}>
+                {t("cancel")}
+              </Button>
+            )}
+            {canMarkPaid && (
+              <Button variant="primary" size="sm" onClick={onMarkPaid}>
+                <BadgeDollarSign className="size-4" strokeWidth={1.8} />
+                {t("markPaid")}
+              </Button>
+            )}
+          </>
+        ) : undefined
+      }
+    >
+      {subscription && (
+        <>
+          <DetailSheetSection title={t("reviewTitle")}>
+            <dl>
+              <DetailRow label={t("colPrice")}>
+                {formatVnd(subscription.price_amount, subscription.currency, locale)}
+              </DetailRow>
+              <DetailRow label={t("colWindow")}>
+                {formatWindow(subscription.start_at, subscription.end_at, locale)}
+              </DetailRow>
+              {subscription.principal_id && (
+                <DetailRow label={t("fieldPrincipal")}>
+                  <span className="font-mono text-xs">{subscription.principal_id}</span>
+                </DetailRow>
+              )}
+              {subscription.payment_reference && (
+                <DetailRow label={t("fieldPaymentRef")}>
+                  <span className="font-mono text-xs">{subscription.payment_reference}</span>
+                </DetailRow>
+              )}
+              {subscription.cancel_reason && (
+                <DetailRow label={t("fieldCancelReason")}>{subscription.cancel_reason}</DetailRow>
+              )}
+            </dl>
+            {!canMarkPaid && !canCancel && (
+              <p className="mt-3 type-small text-muted-foreground">{t("noActions")}</p>
+            )}
+          </DetailSheetSection>
+        </>
+      )}
+    </DetailSheet>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Chip filter group                                                            */
+/* -------------------------------------------------------------------------- */
+
+function ChipGroup({
+  ariaLabel,
+  options,
+  value,
+  onChange,
+}: {
+  ariaLabel: string;
+  options: { value: string; label: string }[];
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-1.5" role="group" aria-label={ariaLabel}>
+      {options.map((o) => {
+        const active = value === o.value;
+        return (
+          <button
+            key={o.value}
+            type="button"
+            aria-pressed={active}
+            onClick={() => onChange(o.value)}
+            className={cn(
+              "inline-flex items-center rounded-full border px-3 py-1 text-[0.8125rem] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+              active
+                ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                : "border-border bg-card text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {o.label}
+          </button>
+        );
+      })}
+    </div>
   );
 }

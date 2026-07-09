@@ -1,0 +1,112 @@
+{
+  "universityDashboard": {
+    "title": "Trung tâm điều hành trường",
+    "subtitle": "Kiểm duyệt, quản trị đối tác và sức khỏe dịch vụ hướng nghiệp trên toàn nền tảng.",
+    "viewReports": "Xem báo cáo",
+    "metaUpdated": "Dữ liệu thị trường cập nhật {time}",
+    "kpi": {
+      "pendingApprovals": "Phê duyệt đối tác",
+      "pendingApprovalsHint": "{count, plural, other {# đang chờ duyệt}}",
+      "moderationQueue": "Hàng chờ kiểm duyệt",
+      "moderationQueueHint": "{count, plural, other {# tin cần duyệt}}",
+      "atRisk": "Sinh viên cần hỗ trợ",
+      "atRiskHint": "Cảnh báo đang mở cần theo dõi",
+      "atRiskLocked": "Bị hạn chế truy cập",
+      "activePartners": "Đối tác hoạt động",
+      "activeJobs": "Tin đang tuyển"
+    },
+    "hero": {
+      "eyebrow": "Khối lượng quản trị",
+      "title": "Việc cần trường xử lý",
+      "caption": "{moderation} cần kiểm duyệt · {partners} phê duyệt đối tác",
+      "captionWithCare": "{moderation} cần kiểm duyệt · {partners} phê duyệt · {care} hỗ trợ sinh viên",
+      "statusOnTrack": "Đúng tiến độ",
+      "statusBuilding": "Đang tích tụ",
+      "statusOverloaded": "Cần chú ý",
+      "chipModeration": "{count} kiểm duyệt",
+      "chipPartners": "{count} phê duyệt",
+      "chipCare": "{count} hỗ trợ sinh viên"
+    },
+    "reviewLoad": {
+      "title": "Khối lượng cần xử lý theo loại",
+      "center": "Đang mở",
+      "moderation": "Kiểm duyệt tin",
+      "partners": "Phê duyệt đối tác",
+      "cvReviews": "Duyệt CV",
+      "atRisk": "Cảnh báo rủi ro",
+      "emptyTitle": "Không có việc cần xử lý",
+      "emptyBody": "Các hàng chờ kiểm duyệt, đối tác và hướng nghiệp đều trống."
+    },
+    "trend": {
+      "title": "Ứng tuyển theo thời gian",
+      "subtitle": "Toàn nền tảng, 6 tháng gần nhất",
+      "series": "Ứng tuyển",
+      "emptyTitle": "Chưa có dữ liệu ứng tuyển",
+      "emptyBody": "Số lượng ứng tuyển sẽ hiển thị khi sinh viên bắt đầu nộp hồ sơ."
+    },
+    "market": {
+      "title": "Thị trường tuyển dụng",
+      "subtitle": "Tin đang tuyển và đà tăng trong 30 ngày",
+      "activeJobs": "Tin đang tuyển",
+      "trend30d": "{count} tin đăng trong 30 ngày qua",
+      "trendUp": "Tăng so với 30 ngày trước",
+      "trendDown": "Giảm so với 30 ngày trước",
+      "trendFlat": "Ổn định so với 30 ngày trước",
+      "topSkills": "Kỹ năng được săn đón nhất",
+      "lowSignal": "Chưa đủ tin đăng để đánh giá thị trường.",
+      "emptyTitle": "Chưa có dữ liệu thị trường",
+      "emptyBody": "Tín hiệu tuyển dụng tổng hợp sẽ xuất hiện khi đối tác đăng tin.",
+      "viewReports": "Báo cáo thị trường đầy đủ"
+    },
+    "moderationQueue": {
+      "title": "Hàng chờ kiểm duyệt tin",
+      "openQueue": "Mở hàng chờ",
+      "colJob": "Tin tuyển dụng",
+      "colEmployer": "Nhà tuyển dụng",
+      "colSubmitted": "Đã gửi",
+      "unknownCompany": "Nhà tuyển dụng ẩn danh",
+      "emptyTitle": "Không có tin chờ duyệt",
+      "emptyBody": "Tin mới gửi sẽ xuất hiện tại đây để kiểm duyệt."
+    },
+    "partnerRequests": {
+      "title": "Yêu cầu đăng ký đối tác",
+      "openPartners": "Duyệt đối tác",
+      "requestedOn": "Đã gửi {date}",
+      "unknownCompany": "Nhà tuyển dụng ẩn danh",
+      "emptyTitle": "Không có yêu cầu đối tác",
+      "emptyBody": "Yêu cầu đăng ký đối tác mới sẽ xuất hiện tại đây."
+    },
+    "attention": {
+      "title": "Cần xem xét",
+      "moderation": "Tin đang chờ kiểm duyệt",
+      "partners": "Phê duyệt đối tác đang chờ",
+      "atRisk": "Sinh viên cần theo dõi",
+      "cvReviews": "CV đang chờ duyệt",
+      "emptyTitle": "Bạn đã xử lý hết",
+      "emptyBody": "Hiện không có việc nào cần trường xử lý.",
+      "priorityHigh": "Cao",
+      "priorityMedium": "Trung bình",
+      "priorityLow": "Thấp"
+    },
+    "careerServices": {
+      "title": "Sức khỏe dịch vụ hướng nghiệp",
+      "subtitle": "Tổng quan khối lượng công việc tư vấn",
+      "atRiskOpen": "Cảnh báo rủi ro đang mở",
+      "cvReviewsOpen": "CV chờ duyệt",
+      "activeCohorts": "Nhóm đang hoạt động",
+      "bySeverity": "Rủi ro theo mức độ",
+      "open": "Đang mở",
+      "lockedTitle": "Bị hạn chế truy cập hướng nghiệp",
+      "lockedBody": "Bạn không có quyền xem báo cáo dịch vụ hướng nghiệp.",
+      "emptyTitle": "Chưa có hoạt động hướng nghiệp",
+      "emptyBody": "Cảnh báo rủi ro và CV chờ duyệt sẽ xuất hiện khi tư vấn viên ghi nhận."
+    },
+    "activity": {
+      "title": "Gửi mới gần đây",
+      "moderationEvent": "Tin được gửi để kiểm duyệt",
+      "partnerEvent": "Đối tác gửi đăng ký",
+      "emptyTitle": "Không có gửi mới gần đây",
+      "emptyBody": "Tin và yêu cầu đối tác gần đây sẽ xuất hiện tại đây."
+    }
+  }
+}

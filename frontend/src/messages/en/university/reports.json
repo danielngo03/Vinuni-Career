@@ -1,21 +1,87 @@
 {
   "universityReports": {
-    "title": "Platform Reports",
-    "subtitle": "Platform-wide key metrics for governance and oversight.",
+    "title": "Platform reports",
+    "subtitle": "Platform-wide metrics, hiring-market intelligence, and career outcomes.",
+    "metaUpdated": "Market data as of {time}",
+    "metaStale": "Showing last saved snapshot",
+    "export": "Export CSV",
+    "exportFilename": "vinuni-platform-report",
     "kpisLabel": "Platform KPIs",
     "kpiStudents": "Students",
     "kpiPartners": "Partner members",
     "kpiJobs": "Jobs (all-time)",
     "kpiApplications": "Applications",
     "kpiEvents": "Published events",
-    "monthlyLabel": "Monthly Applications (last 6 months)",
-    "monthlyEmpty": "No application data yet.",
-    "aiInsightStrongDemand": "Strong demand: {count} applications per job posting on average.",
-    "aiInsightLowVolume": "Low application volume: {count} apps per job — consider promoting new openings.",
-    "aiInsightTrendUp": "Applications up {pct}% vs prior month — strong hiring momentum.",
-    "aiInsightTrendDown": "Applications down {pct}% vs prior month — check for seasonal drop.",
-    "aiInsightEvents": "{count} events active — events drive higher candidate engagement.",
-    "aiInsightActivePartners": "Partners are active: {count} jobs per partner member on average.",
-    "aiInsightsTitle": "Platform Insights"
+    "trend": {
+      "title": "Applications over time",
+      "subtitle": "Platform-wide, last 6 months",
+      "series": "Applications",
+      "empty": "No application data yet.",
+      "srCaption": "Applications per month",
+      "colMonth": "Month",
+      "colApplications": "Applications"
+    },
+    "market": {
+      "title": "Hiring market",
+      "subtitle": "Active postings and 30-day momentum",
+      "activeJobs": "Active jobs",
+      "posted30d": "Posted (30d)",
+      "posted30dHint": "vs {count} prior 30 days",
+      "trendUp": "Up",
+      "trendDown": "Down",
+      "trendFlat": "Flat",
+      "salaryDisclosure": "Salary disclosure",
+      "salaryDisclosureHint": "of active jobs list pay",
+      "lowSignal": "Not enough active postings yet to read the market reliably.",
+      "empty": "No active postings yet.",
+      "aiSummaryTitle": "Market summary",
+      "aiSummaryDisclaimer": "AI-generated from aggregate platform data. Advisory only — verify before acting."
+    },
+    "skills": {
+      "title": "Most in-demand skills",
+      "subtitle": "Across active job postings",
+      "empty": "No skill demand data yet."
+    },
+    "employmentTypes": {
+      "title": "Employment-type mix",
+      "subtitle": "Share of active postings by type",
+      "center": "Jobs",
+      "empty": "No employment-type data yet."
+    },
+    "empType": {
+      "full_time": "Full-time",
+      "part_time": "Part-time",
+      "internship": "Internship",
+      "contract": "Contract",
+      "temporary": "Temporary",
+      "freelance": "Freelance",
+      "volunteer": "Volunteer",
+      "other": "Other"
+    },
+    "outcomes": {
+      "sectionTitle": "Career outcomes",
+      "byTrustTitle": "Outcomes by verification",
+      "byTrustSubtitle": "Recorded graduate outcomes by trust level",
+      "byTrustCenter": "Outcomes",
+      "byTrustEmpty": "No recorded outcomes yet.",
+      "employersTitle": "Top hiring employers",
+      "employersSubtitle": "By recorded graduate outcomes",
+      "employersEmpty": "No employer outcomes yet.",
+      "recordsTitle": "Recent outcomes",
+      "recordsSubtitle": "Privacy-safe — no student identities.",
+      "colPosition": "Position",
+      "colEmployer": "Employer",
+      "colStart": "Start",
+      "colOutcome": "Outcome",
+      "colTrust": "Verification",
+      "colRecorded": "Recorded",
+      "unknownPosition": "—",
+      "filterLabel": "Verification",
+      "filterAll": "All levels",
+      "recordsEmpty": "No outcomes recorded yet.",
+      "recordsEmptyBody": "Verified graduate outcomes appear here as they are recorded.",
+      "lockedTitle": "Career-outcomes access restricted",
+      "lockedBody": "You do not have permission to view career-outcomes reporting."
+    }
   }
 }

@@ -423,6 +423,45 @@ export interface UniversityPlatformStats {
   monthly_applications: UniversityMonthlyPoint[];
 }
 
+/* ------------------ University market intelligence (read) ----------------- */
+
+export interface MarketEmploymentType {
+  type: string;
+  count: number;
+}
+
+export interface MarketSkill {
+  skill: string;
+  count: number;
+}
+
+/**
+ * Aggregate hiring-market intelligence read
+ * (`GET /dashboards/university/market-intelligence`, AI_PRODUCT_SPEC §3).
+ * University-staff-only. Deterministic aggregates only — no student /
+ * application / per-partner PII. `low_signal` (active_jobs < 5) means the
+ * numbers are too sparse to draw conclusions; the UI renders an honest note.
+ * The optional `ai_narrative` is a plain-text advisory briefing (no provider /
+ * model / token internals ever); `null` when the AI gateway is unavailable.
+ */
+export interface UniversityMarketIntelligence {
+  active_jobs: number;
+  jobs_last_30d: number;
+  jobs_prev_30d: number;
+  trend: "up" | "down" | "flat";
+  employment_types: MarketEmploymentType[];
+  top_skills: MarketSkill[];
+  /** Share of active jobs disclosing salary (0–100). */
+  salary_disclosure_rate: number;
+  low_signal: boolean;
+  /** ISO timestamp the snapshot was computed. */
+  computed_at: string;
+  /** True when serving a stale snapshot (live recompute failed). */
+  stale: boolean;
+  ai_narrative: string | null;
+  ai_narrative_available: boolean;
+}
+
 /* --------------------------- Pipeline overview ----------------------------- */
 
 export interface PipelineJobRow {
@@ -502,5 +541,15 @@ export const dashboardsApi = {
   /** University platform KPI reports. */
   universityReports(): Promise<UniversityPlatformStats> {
     return api.get<UniversityPlatformStats>("/dashboards/university/reports");
+  },
+
+  /**
+   * Aggregate hiring-market intelligence (university staff only). Deterministic
+   * aggregates + optional masked AI narrative; never PII, never provider/model.
+   */
+  marketIntelligence(): Promise<UniversityMarketIntelligence> {
+    return api.get<UniversityMarketIntelligence>(
+      "/dashboards/university/market-intelligence",
+    );
   },
 };

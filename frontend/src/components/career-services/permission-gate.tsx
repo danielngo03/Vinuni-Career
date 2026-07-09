@@ -1,6 +1,6 @@
 "use client";
 
-import { ShieldWarning, SignIn } from "@phosphor-icons/react";
+import { ShieldAlert, LogIn } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { EmptyState } from "@/components/ui";
 import { ApiError } from "@/lib/api";
@@ -27,7 +27,7 @@ export function CareerServicesPermissionGate({
   return (
     <EmptyState
       kind={error.isPermissionError ? "permission" : "auth"}
-      icon={error.isPermissionError ? ShieldWarning : SignIn}
+      icon={error.isPermissionError ? ShieldAlert : LogIn}
       title={
         error.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")
       }

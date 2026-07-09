@@ -3,25 +3,25 @@
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import {
-  Buildings,
+  LayoutDashboard,
+  Users,
+  AlertTriangle,
+  FileSearch,
   CalendarCheck,
-  ChartBar,
-  FileMagnifyingGlass,
-  FirstAidKit,
-  UsersThree,
-  WarningOctagon,
-} from "@phosphor-icons/react";
+  Building2,
+  HeartPulse,
+} from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { cn } from "@/lib/utils";
 
 const SECTIONS = [
-  { key: "overview", href: "/university/career-services", icon: ChartBar },
-  { key: "cohorts", href: "/university/career-services/cohorts", icon: UsersThree },
-  { key: "atRisk", href: "/university/career-services/at-risk", icon: WarningOctagon },
+  { key: "overview", href: "/university/career-services", icon: LayoutDashboard },
+  { key: "cohorts", href: "/university/career-services/cohorts", icon: Users },
+  { key: "atRisk", href: "/university/career-services/at-risk", icon: AlertTriangle },
   {
     key: "cvReview",
     href: "/university/career-services/cv-review",
-    icon: FileMagnifyingGlass,
+    icon: FileSearch,
   },
   {
     key: "appointments",
@@ -31,21 +31,21 @@ const SECTIONS = [
   {
     key: "employerNotes",
     href: "/university/career-services/employer-notes",
-    icon: Buildings,
+    icon: Building2,
   },
   {
     key: "interventions",
     href: "/university/career-services/interventions",
-    icon: FirstAidKit,
+    icon: HeartPulse,
   },
 ] as const;
 
 /**
- * Shared shell for the counselor workspace (B-554): page header + a local
- * section sub-nav. Each section is its own route (independent RBAC/loading
- * state per `docs/API_CONTRACTS.md` resource), not tab-switched client state,
- * so a counselor without a given capability still gets a real URL + permission
- * state instead of a hidden tab.
+ * Shared shell for the counselor workspace (v10): page header + a local section
+ * sub-nav. Each section is its own route (independent RBAC/loading state per
+ * `docs/API_CONTRACTS.md` resource), not tab-switched client state, so a
+ * counselor without a given capability still gets a real URL + permission state
+ * instead of a hidden tab. Monochrome shell chips; content stays colourful.
  */
 export function CareerServicesShell({
   title,
@@ -66,7 +66,7 @@ export function CareerServicesShell({
       <PageHeader title={title} description={description} actions={actions} />
       <nav
         aria-label={t("sectionsNavLabel")}
-        className="mb-5 flex gap-2 overflow-x-auto pb-1"
+        className="mb-5 flex gap-1.5 overflow-x-auto pb-1"
       >
         {SECTIONS.map((section) => {
           const active = pathname === section.href;
@@ -77,13 +77,13 @@ export function CareerServicesShell({
               href={section.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold outline-none transition-all focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30",
+                "inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-[0.8125rem] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
                 active
-                  ? "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                  : "border-white/60 bg-white/72 text-[var(--text-secondary)] backdrop-blur-sm hover:bg-white/90 hover:text-[var(--text-primary)]",
+                  ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                  : "border-border bg-card text-muted-foreground hover:text-foreground",
               )}
             >
-              <Icon aria-hidden weight="duotone" className="size-4" />
+              <Icon aria-hidden className="size-4" strokeWidth={1.8} />
               {t(`sections.${section.key}`)}
             </Link>
           );

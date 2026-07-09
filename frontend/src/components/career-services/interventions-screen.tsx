@@ -1,20 +1,18 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { FirstAidKit, PlusCircle } from "@phosphor-icons/react";
+import { HeartPulse, Plus } from "lucide-react";
+import { Button, Input, Modal, Select, Textarea, useToast } from "@/components/ui";
 import {
-  Button,
   DataTable,
-  Input,
-  Modal,
-  Select,
-  StatusBadge,
-  Textarea,
-  useToast,
-  type Column,
-} from "@/components/ui";
+  EmptyState,
+  FilterBar,
+  StatusChip,
+  type ChipTone,
+  type ColumnDef,
+} from "@/components/kit";
 import { CareerServicesShell } from "./career-services-shell";
 import { CareerServicesPermissionGate } from "./permission-gate";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
@@ -29,12 +27,12 @@ import {
 } from "@/lib/api";
 import { formatDateTime } from "@/lib/format";
 
-const OUTCOME_TONE: Record<InterventionOutcome, "pending" | "accepted" | "closed" | "rejected"> = {
-  no_outcome_yet: "pending",
-  improved: "accepted",
-  no_change: "closed",
-  escalated: "rejected",
-  resolved: "accepted",
+const OUTCOME_TONE: Record<InterventionOutcome, ChipTone> = {
+  no_outcome_yet: "warning",
+  improved: "success",
+  no_change: "neutral",
+  escalated: "danger",
+  resolved: "success",
 };
 
 export function InterventionsScreen() {
@@ -44,16 +42,16 @@ export function InterventionsScreen() {
   const getErrorMessage = useApiErrorMessage();
   const qc = useQueryClient();
 
-  const [studentFilter, setStudentFilter] = useState("");
-  const [createOpen, setCreateOpen] = useState(false);
-  const [studentId, setStudentId] = useState("");
-  const [type, setType] = useState<InterventionType>("advising_session");
-  const [description, setDescription] = useState("");
-  const [linkedAppointmentId, setLinkedAppointmentId] = useState("");
-  const [linkedFlagId, setLinkedFlagId] = useState("");
+  const [studentFilter, setStudentFilter] = React.useState("");
+  const [createOpen, setCreateOpen] = React.useState(false);
+  const [studentId, setStudentId] = React.useState("");
+  const [type, setType] = React.useState<InterventionType>("advising_session");
+  const [description, setDescription] = React.useState("");
+  const [linkedAppointmentId, setLinkedAppointmentId] = React.useState("");
+  const [linkedFlagId, setLinkedFlagId] = React.useState("");
 
-  const [outcomeTarget, setOutcomeTarget] = useState<InterventionRecord | null>(null);
-  const [outcome, setOutcome] = useState<InterventionOutcome>("improved");
+  const [outcomeTarget, setOutcomeTarget] = React.useState<InterventionRecord | null>(null);
+  const [outcome, setOutcome] = React.useState<InterventionOutcome>("improved");
 
   const query = useQuery({
     queryKey: ["career-services", "interventions", locale, studentFilter],
@@ -103,61 +101,83 @@ export function InterventionsScreen() {
     onError: (error) => toast.show({ tone: "error", title: getErrorMessage(error) }),
   });
 
-  const records = useMemo(() => query.data ?? [], [query.data]);
+  const records = query.data ?? [];
   const permissionState =
     query.isError && query.error instanceof ApiError ? (
       <CareerServicesPermissionGate error={query.error} bodyOverride={t("interventions.permissionBody")} />
     ) : null;
 
-  const columns: Column<InterventionRecord>[] = [
+  const logButton = (
+    <Button onClick={() => setCreateOpen(true)} size="sm">
+      <Plus className="size-4" strokeWidth={2} />
+      {t("interventions.logIntervention")}
+    </Button>
+  );
+
+  const columns: ColumnDef<InterventionRecord, unknown>[] = [
     {
-      key: "student",
+      accessorKey: "student_id",
       header: t("interventions.colStudent"),
-      cell: (r) => <span className="font-mono text-xs">{r.student_id}</span>,
+      cell: ({ row }) => <span className="font-mono text-xs text-foreground">{row.original.student_id}</span>,
     },
     {
-      key: "type",
+      accessorKey: "intervention_type_label",
       header: t("interventions.colType"),
-      cell: (r) => <span>{r.intervention_type_label}</span>,
+      cell: ({ row }) => <span className="text-foreground">{row.original.intervention_type_label}</span>,
     },
     {
-      key: "description",
+      id: "description",
       header: t("interventions.colDescription"),
-      cell: (r) => <span className="line-clamp-2 max-w-[280px] text-sm">{r.description}</span>,
+      enableSorting: false,
+      cell: ({ row }) => (
+        <span className="line-clamp-2 block max-w-[280px] type-small text-muted-foreground">
+          {row.original.description}
+        </span>
+      ),
     },
     {
-      key: "outcome",
+      accessorKey: "outcome",
       header: t("interventions.colOutcome"),
-      cell: (r) => <StatusBadge tone={OUTCOME_TONE[r.outcome]}>{r.outcome_label}</StatusBadge>,
+      cell: ({ row }) => (
+        <StatusChip tone={OUTCOME_TONE[row.original.outcome]}>{row.original.outcome_label}</StatusChip>
+      ),
     },
     {
-      key: "linked",
+      id: "linked",
       header: t("interventions.colLinked"),
-      cell: (r) =>
-        r.linked_appointment_id || r.linked_at_risk_flag_id ? (
-          <div className="flex flex-col gap-0.5 text-xs text-[var(--text-muted)]">
-            {r.linked_appointment_id && <span>{t("interventions.linkedAppointment")}</span>}
-            {r.linked_at_risk_flag_id && <span>{t("interventions.linkedAtRisk")}</span>}
+      enableSorting: false,
+      cell: ({ row }) =>
+        row.original.linked_appointment_id || row.original.linked_at_risk_flag_id ? (
+          <div className="flex flex-col gap-0.5 type-caption text-muted-foreground">
+            {row.original.linked_appointment_id && <span>{t("interventions.linkedAppointment")}</span>}
+            {row.original.linked_at_risk_flag_id && <span>{t("interventions.linkedAtRisk")}</span>}
           </div>
         ) : (
-          <span className="text-xs text-[var(--text-muted)]">—</span>
+          <span className="type-caption text-muted-foreground">—</span>
         ),
     },
     {
-      key: "created",
+      id: "created",
       header: t("interventions.colCreated"),
-      cell: (r) => <span className="text-xs text-[var(--text-secondary)]">{formatDateTime(r.created_at, locale)}</span>,
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <span className="type-small tabular-nums text-muted-foreground">
+          {formatDateTime(row.original.created_at, locale)}
+        </span>
+      ),
     },
     {
-      key: "actions",
-      header: t("interventions.colActions"),
-      cell: (r) => (
+      id: "actions",
+      header: "",
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => (
         <Button
           variant="ghost"
-          size="xs"
+          size="sm"
           onClick={() => {
-            setOutcomeTarget(r);
-            setOutcome(r.outcome === "no_outcome_yet" ? "improved" : r.outcome);
+            setOutcomeTarget(row.original);
+            setOutcome(row.original.outcome === "no_outcome_yet" ? "improved" : row.original.outcome);
           }}
         >
           {t("interventions.recordOutcome")}
@@ -170,40 +190,37 @@ export function InterventionsScreen() {
     <CareerServicesShell
       title={t("interventions.title")}
       description={t("interventions.subtitle")}
-      actions={
-        !permissionState && (
-          <div className="flex items-center gap-2">
-            <Input
-              aria-label={t("interventions.filterStudent")}
-              placeholder={t("interventions.filterStudentPlaceholder")}
-              value={studentFilter}
-              onChange={(e) => setStudentFilter(e.target.value)}
-              className="max-w-[220px]"
-            />
-            <Button onClick={() => setCreateOpen(true)}>
-              <PlusCircle aria-hidden weight="bold" className="size-4" />
-              {t("interventions.logIntervention")}
-            </Button>
-          </div>
-        )
-      }
+      actions={!permissionState ? logButton : undefined}
     >
       {permissionState ?? (
-        <DataTable
-          columns={columns}
-          rows={records}
-          getRowId={(r) => r.id}
-          loading={query.isLoading}
-          caption={t("interventions.title")}
-          empty={{
-            kind: "empty",
-            icon: FirstAidKit,
-            title: t("interventions.emptyTitle"),
-            description: t("interventions.emptyBody"),
-          }}
-        />
+        <div className="space-y-4">
+          <FilterBar
+            search={{
+              value: studentFilter,
+              onChange: setStudentFilter,
+              placeholder: t("interventions.filterStudentPlaceholder"),
+              ariaLabel: t("interventions.filterStudent"),
+            }}
+          />
+
+          <DataTable
+            columns={columns}
+            data={records}
+            getRowId={(r) => r.id}
+            loading={query.isPending}
+            empty={
+              <EmptyState
+                kind="empty"
+                icon={HeartPulse}
+                title={t("interventions.emptyTitle")}
+                description={t("interventions.emptyBody")}
+              />
+            }
+          />
+        </div>
       )}
 
+      {/* Log intervention */}
       <Modal
         open={createOpen}
         onClose={closeCreate}
@@ -263,6 +280,7 @@ export function InterventionsScreen() {
         </div>
       </Modal>
 
+      {/* Record outcome */}
       <Modal
         open={!!outcomeTarget}
         onClose={() => setOutcomeTarget(null)}

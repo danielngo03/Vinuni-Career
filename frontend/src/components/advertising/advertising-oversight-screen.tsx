@@ -1,48 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  LightbulbFilament,
-  Megaphone,
-  CheckCircle,
+  Ban,
+  Check,
+  CircleDollarSign,
+  Clock,
   Flag,
-  XCircle,
-  CurrencyCircleDollar,
   Hourglass,
-  Prohibit,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
+  Megaphone,
+  ShieldCheck,
+  ShieldX,
   UserCheck,
-  WarningCircle,
-} from "@phosphor-icons/react";
+  X,
+} from "lucide-react";
+import { Button, Input, Modal, useToast } from "@/components/ui";
 import {
-  Button,
   DataTable,
+  DetailSheet,
+  DetailSheetSection,
+  DetailRow,
   EmptyState,
-  Input,
-  Modal,
-  StatusBadge,
-  useToast,
-  type Column,
-} from "@/components/ui";
-import { cn } from "@/lib/utils";
+  FilterBar,
+  KpiTile,
+  StatusChip,
+  type ChipTone,
+  type ColumnDef,
+} from "@/components/kit";
 import { PageHeader } from "@/components/layout/page-header";
-import {
-  BulkResultList,
-  ClaimBadge,
-  ReasonCodeSelect,
-  RowSelectCheckbox,
-  SlaBadge,
-} from "@/components/moderation/queue-controls";
+import { cn } from "@/lib/utils";
+import { BulkResultList, ReasonCodeSelect } from "@/components/moderation/queue-controls";
 import { useAuthStore } from "@/stores/auth-store";
-import {
-  useAdvertisingLabels,
-  PLACEMENT_STATUS_TONE,
-  PLACEMENT_TYPE_TONE,
-} from "@/lib/advertising/labels";
+import { useAdvertisingLabels } from "@/lib/advertising/labels";
 import { formatVnd, formatWindow } from "@/lib/advertising/format";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import {
@@ -51,6 +42,8 @@ import {
   type BulkModerationResultItem,
   type ModerationReasonCode,
   type Placement,
+  type PlacementStatus,
+  type PlacementType,
 } from "@/lib/api";
 import { CreativeModerationPanel } from "./creative-moderation-panel";
 
@@ -64,28 +57,57 @@ const STATUS_FILTERS = [
   "cancelled",
 ] as const;
 
-type AdOversightInsightKey =
-  | "insightPendingApproval"
-  | "insightActiveCampaigns"
-  | "insightNoActivity"
-  | "insightHighSpend";
+const STATUS_CHIP: Record<PlacementStatus, ChipTone> = {
+  draft: "neutral",
+  pending_approval: "warning",
+  approved: "info",
+  active: "success",
+  completed: "success",
+  rejected: "danger",
+  cancelled: "neutral",
+};
 
-function deriveAdOversightInsights(
-  activeCount: number,
-  pendingCount: number,
-  activeSpendStr: string,
-): AdOversightInsightKey[] {
-  const out: AdOversightInsightKey[] = [];
-  const activeSpend = parseFloat(activeSpendStr) || 0;
-  if (pendingCount > 0) out.push("insightPendingApproval");
-  if (activeCount > 0) out.push("insightActiveCampaigns");
-  if (activeCount === 0 && pendingCount === 0) out.push("insightNoActivity");
-  if (activeSpend > 10_000_000) out.push("insightHighSpend");
-  return out.slice(0, 2);
-}
+const TYPE_CHIP: Record<PlacementType, ChipTone> = {
+  sponsored: "amber",
+  featured: "indigo",
+  both: "violet",
+};
 
 type DialogKind = "approve" | "reject" | "markPaid" | "disable" | "escalate" | null;
 type BulkKind = "approve" | "reject" | null;
+
+function SlaChip({
+  dueBy,
+  ageHours,
+  isOverdue,
+}: {
+  dueBy?: string | null;
+  ageHours?: number | null;
+  isOverdue?: boolean;
+}) {
+  const t = useTranslations("common");
+  if (dueBy == null && ageHours == null) return null;
+  const label = isOverdue
+    ? t("moderationQueue.slaOverdue", { hours: Math.round(ageHours ?? 0) })
+    : t("moderationQueue.slaAge", { hours: Math.round(ageHours ?? 0) });
+  return (
+    <StatusChip tone={isOverdue ? "danger" : "warning"} size="sm">
+      <Clock aria-hidden className="size-3" strokeWidth={2} />
+      {label}
+    </StatusChip>
+  );
+}
+
+function ClaimChip({ claimedBy, isMine }: { claimedBy?: string | null; isMine: boolean }) {
+  const t = useTranslations("common");
+  if (!claimedBy) return null;
+  return (
+    <StatusChip tone="info" size="sm">
+      <UserCheck aria-hidden className="size-3" strokeWidth={2} />
+      {isMine ? t("moderationQueue.claimedByMe") : t("moderationQueue.claimedByOther")}
+    </StatusChip>
+  );
+}
 
 export function AdvertisingOversightScreen() {
   const t = useTranslations("advertisingOversight");
@@ -100,19 +122,20 @@ export function AdvertisingOversightScreen() {
   const getMessage = useApiErrorMessage();
   const userId = useAuthStore((s) => s.user?.id);
 
-  const [statusFilter, setStatusFilter] = useState<string>("pending_approval");
-  const [selected, setSelected] = useState<Placement | null>(null);
-  const [dialog, setDialog] = useState<DialogKind>(null);
-  const [reason, setReason] = useState("");
-  const [reasonCode, setReasonCode] = useState<ModerationReasonCode | string>("other");
+  const [statusFilter, setStatusFilter] = React.useState<string>("pending_approval");
+  const [selected, setSelected] = React.useState<Placement | null>(null);
+  const [dialog, setDialog] = React.useState<DialogKind>(null);
+  const [reason, setReason] = React.useState("");
+  const [reasonCode, setReasonCode] = React.useState<ModerationReasonCode | string>("other");
   const [escalateReasonCode, setEscalateReasonCode] =
-    useState<ModerationReasonCode | string>("policy_violation");
-  const [paymentRef, setPaymentRef] = useState("");
-  const [textError, setTextError] = useState<string | null>(null);
+    React.useState<ModerationReasonCode | string>("policy_violation");
+  const [paymentRef, setPaymentRef] = React.useState("");
+  const [textError, setTextError] = React.useState<string | null>(null);
 
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [bulkKind, setBulkKind] = useState<BulkKind>(null);
-  const [bulkResults, setBulkResults] = useState<BulkModerationResultItem[] | null>(null);
+  const [bulkKind, setBulkKind] = React.useState<BulkKind>(null);
+  const [bulkIds, setBulkIds] = React.useState<string[]>([]);
+  const bulkClearRef = React.useRef<() => void>(() => {});
+  const [bulkResults, setBulkResults] = React.useState<BulkModerationResultItem[] | null>(null);
 
   const query = useQuery({
     queryKey: ["admin", "advertising", statusFilter],
@@ -130,7 +153,6 @@ export function AdvertisingOversightScreen() {
 
   function closeDialog() {
     setDialog(null);
-    setSelected(null);
     setReason("");
     setPaymentRef("");
     setTextError(null);
@@ -138,12 +160,9 @@ export function AdvertisingOversightScreen() {
 
   function handleError(e: unknown) {
     if (e instanceof ApiError && e.isConflict) {
-      toast.show({
-        tone: "error",
-        title: ta("errors.conflictTitle"),
-        description: ta("errors.conflictBody"),
-      });
+      toast.show({ tone: "error", title: ta("errors.conflictTitle"), description: ta("errors.conflictBody") });
       closeDialog();
+      setSelected(null);
       refresh();
       return;
     }
@@ -151,10 +170,10 @@ export function AdvertisingOversightScreen() {
   }
 
   const approve = useMutation({
-    mutationFn: (p: Placement) =>
-      advertisingApi.approvePlacement(p.id, { version: p.version }),
+    mutationFn: (p: Placement) => advertisingApi.approvePlacement(p.id, { version: p.version }),
     onSuccess: () => {
       closeDialog();
+      setSelected(null);
       toast.show({ tone: "success", title: t("approvedToast") });
       refresh();
     },
@@ -162,10 +181,10 @@ export function AdvertisingOversightScreen() {
   });
 
   const reject = useMutation({
-    mutationFn: (p: Placement) =>
-      advertisingApi.rejectPlacement(p.id, reason, p.version, reasonCode),
+    mutationFn: (p: Placement) => advertisingApi.rejectPlacement(p.id, reason, p.version, reasonCode),
     onSuccess: () => {
       closeDialog();
+      setSelected(null);
       toast.show({ tone: "success", title: t("rejectedToast") });
       refresh();
     },
@@ -173,8 +192,7 @@ export function AdvertisingOversightScreen() {
   });
 
   const markPaid = useMutation({
-    mutationFn: (p: Placement) =>
-      advertisingApi.markPaid(p.id, paymentRef, p.version),
+    mutationFn: (p: Placement) => advertisingApi.markPaid(p.id, paymentRef, p.version),
     onSuccess: () => {
       closeDialog();
       toast.show({ tone: "success", title: t("paidToast") });
@@ -185,12 +203,10 @@ export function AdvertisingOversightScreen() {
 
   const disable = useMutation({
     mutationFn: (p: Placement) =>
-      advertisingApi.disablePlacement(p.id, {
-        reason: reason.trim() || undefined,
-        version: p.version,
-      }),
+      advertisingApi.disablePlacement(p.id, { reason: reason.trim() || undefined, version: p.version }),
     onSuccess: () => {
       closeDialog();
+      setSelected(null);
       toast.show({ tone: "success", title: t("disabledToast") });
       refresh();
     },
@@ -225,6 +241,7 @@ export function AdvertisingOversightScreen() {
       }),
     onSuccess: () => {
       closeDialog();
+      setSelected(null);
       toast.show({ tone: "success", title: tm("moderationQueue.escalatedToast") });
       refresh();
     },
@@ -236,7 +253,7 @@ export function AdvertisingOversightScreen() {
     onSuccess: (results) => {
       setBulkKind(null);
       setBulkResults(results);
-      setSelectedIds(new Set());
+      bulkClearRef.current();
       refresh();
     },
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
@@ -244,499 +261,411 @@ export function AdvertisingOversightScreen() {
 
   const bulkReject = useMutation({
     mutationFn: (ids: string[]) =>
-      advertisingApi.bulkRejectPlacements(
-        ids.map((id) => ({ id, reason, reason_code: reasonCode })),
-      ),
+      advertisingApi.bulkRejectPlacements(ids.map((id) => ({ id, reason, reason_code: reasonCode }))),
     onSuccess: (results) => {
       setBulkKind(null);
       setBulkResults(results);
-      setSelectedIds(new Set());
+      bulkClearRef.current();
       setReason("");
       refresh();
     },
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
   });
 
-  /* ---- Permission / auth states ---- */
-  if (query.isError && query.error instanceof ApiError) {
-    const err = query.error;
-    if (err.isPermissionError || err.isAuthError) {
-      return (
-        <>
-          <PageHeader title={t("title")} description={t("subtitle")} />
-          <EmptyState
-            kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
-            title={
-              err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")
-            }
-            description={
-              err.isPermissionError ? t("permissionBody") : tStates("authBody")
-            }
-          />
-        </>
-      );
-    }
-  }
+  const isPermissionError =
+    query.isError &&
+    query.error instanceof ApiError &&
+    (query.error.isPermissionError || query.error.isAuthError);
 
   const rows = query.data?.items ?? [];
   const spend = query.data?.spend ?? null;
-  /** Keep the open review panel bound to the freshest row (creatives/version). */
-  const selectedLive = selected
-    ? (rows.find((r) => r.id === selected.id) ?? selected)
-    : null;
+  const selectedLive = selected ? (rows.find((r) => r.id === selected.id) ?? selected) : null;
 
-  function toggleRow(id: string, checked: boolean) {
-    setSelectedIds((prev) => {
-      const next = new Set(prev);
-      if (checked) next.add(id);
-      else next.delete(id);
-      return next;
-    });
-  }
-
-  const pendingRows = rows.filter((r) => r.status === "pending_approval");
-  const allPendingSelected =
-    pendingRows.length > 0 && pendingRows.every((r) => selectedIds.has(r.id));
-
-  const columns: Column<Placement>[] = [
+  const columns: ColumnDef<Placement, unknown>[] = [
     {
-      key: "select",
-      header: "",
-      className: "w-10",
-      cell: (r) =>
-        r.status === "pending_approval" ? (
-          <RowSelectCheckbox
-            checked={selectedIds.has(r.id)}
-            onChange={(checked) => toggleRow(r.id, checked)}
-            label={t("selectRow", { title: r.target_title ?? r.id })}
-          />
-        ) : null,
-    },
-    {
-      key: "target",
+      id: "target",
       header: t("colTarget"),
-      cell: (r) => (
+      cell: ({ row }) => (
         <div className="min-w-0">
-          <p className="truncate font-semibold text-[var(--text-primary)]">
-            {r.target_title ?? ta("targetUnavailable")}
+          <p className="truncate font-semibold text-foreground">
+            {row.original.target_title ?? ta("targetUnavailable")}
           </p>
-          <p className="truncate font-mono text-[11px] text-[var(--text-muted)]">
-            {t("orgRef", { id: r.org_id.slice(0, 8) })}
+          <p className="truncate type-caption text-muted-foreground">
+            {t("orgRef", { id: row.original.org_id.slice(0, 8) })}
             {" · "}
-            {labels.targetType(r.target_type, r.target_type_label)}
+            {labels.targetType(row.original.target_type, row.original.target_type_label)}
           </p>
         </div>
       ),
     },
     {
-      key: "package",
+      id: "package",
       header: t("colPackage"),
-      cell: (r) => (
+      cell: ({ row }) => (
         <div className="flex flex-col items-start gap-1">
-          <StatusBadge tone={PLACEMENT_TYPE_TONE[r.placement_type] ?? "info"}>
-            {labels.placementType(r.placement_type, r.placement_type_label)}
-          </StatusBadge>
-          <span className="text-xs text-[var(--text-secondary)]">
-            {r.package?.name ?? "—"}
-          </span>
+          <StatusChip tone={TYPE_CHIP[row.original.placement_type] ?? "neutral"} dot>
+            {labels.placementType(row.original.placement_type, row.original.placement_type_label)}
+          </StatusChip>
+          <span className="type-caption text-muted-foreground">{row.original.package?.name ?? "—"}</span>
         </div>
       ),
     },
     {
-      key: "price",
+      id: "price",
       header: t("colPrice"),
-      cell: (r) => (
-        <div className="flex flex-col">
-          <span className="font-semibold text-[var(--text-primary)]">
-            {formatVnd(r.price_amount, r.currency, locale)}
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <div className="flex flex-col items-end">
+          <span className="font-semibold tabular-nums text-foreground">
+            {formatVnd(row.original.price_amount, row.original.currency, locale)}
           </span>
           <span
-            className={`text-[11px] font-medium ${
-              r.is_paid ? "text-[var(--teal-600)]" : "text-[var(--amber-700)]"
-            }`}
+            className="type-caption font-medium"
+            style={{ color: row.original.is_paid ? "var(--content-success)" : "var(--content-warning)" }}
           >
-            {r.is_paid ? t("paid") : t("unpaid")}
+            {row.original.is_paid ? t("paid") : t("unpaid")}
           </span>
         </div>
       ),
     },
     {
-      key: "window",
+      id: "window",
       header: t("colWindow"),
-      cell: (r) => (
-        <span className="text-xs text-[var(--text-secondary)]">
-          {formatWindow(r.start_at, r.end_at, locale)}
+      enableSorting: false,
+      cell: ({ row }) => (
+        <span className="type-small text-muted-foreground">
+          {formatWindow(row.original.start_at, row.original.end_at, locale)}
         </span>
       ),
     },
     {
-      key: "sla",
+      id: "sla",
       header: t("colSla"),
-      cell: (r) => (
+      enableSorting: false,
+      cell: ({ row }) => (
         <div className="flex flex-col items-start gap-1">
-          <SlaBadge dueBy={r.due_by} ageHours={r.age_hours} isOverdue={r.is_overdue} />
-          <ClaimBadge claimedBy={r.claimed_by} isMine={r.claimed_by === userId} />
+          <SlaChip dueBy={row.original.due_by} ageHours={row.original.age_hours} isOverdue={row.original.is_overdue} />
+          <ClaimChip claimedBy={row.original.claimed_by} isMine={row.original.claimed_by === userId} />
         </div>
       ),
     },
     {
-      key: "status",
+      accessorKey: "status",
       header: t("colStatus"),
-      cell: (r) => (
-        <StatusBadge tone={PLACEMENT_STATUS_TONE[r.status] ?? "info"}>
-          {labels.status(r.status, r.status_label)}
-        </StatusBadge>
+      cell: ({ row }) => (
+        <StatusChip tone={STATUS_CHIP[row.original.status] ?? "neutral"}>
+          {labels.status(row.original.status, row.original.status_label)}
+        </StatusChip>
       ),
     },
     {
-      key: "actions",
+      id: "actions",
       header: "",
-      align: "right",
-      cell: (r) => (
-        <Button variant="ghost" size="sm" onClick={() => setSelected(r)}>
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <Button variant="ghost" size="sm" onClick={() => setSelected(row.original)}>
           {t("review")}
         </Button>
       ),
     },
   ];
 
-  const canApprove = selected?.status === "pending_approval";
-  const canMarkPaid =
-    selected?.status === "pending_approval" || selected?.status === "approved";
+  const canApprove = selectedLive?.status === "pending_approval";
+  const canMarkPaid = selectedLive?.status === "pending_approval" || selectedLive?.status === "approved";
   const canDisable =
-    selected != null &&
-    ["pending_approval", "approved", "active"].includes(selected.status);
-  const canClaim = canApprove && selected && !selected.claimed_by;
+    selectedLive != null && ["pending_approval", "approved", "active"].includes(selectedLive.status);
+  const canClaim = canApprove && selectedLive != null && !selectedLive.claimed_by;
 
   return (
     <>
       <PageHeader title={t("title")} description={t("subtitle")} />
 
-      {/* Spend roll-up */}
-      <div className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <SpendCard
-          label={t("spendActive")}
-          value={spend ? formatVnd(spend.active_spend_amount, spend.currency, locale) : "—"}
-          loading={query.isPending}
-          icon={<CurrencyCircleDollar aria-hidden weight="duotone" className="size-5 text-white" />}
-          iconBg="icon-chip-success"
-        />
-        <SpendCard
-          label={t("spendActiveCount")}
-          value={spend ? String(spend.active_count) : "—"}
-          loading={query.isPending}
-          icon={<Megaphone aria-hidden weight="duotone" className="size-5 text-white" />}
-          iconBg="icon-chip-primary"
-        />
-        <SpendCard
-          label={t("spendPending")}
-          value={spend ? String(spend.pending_approval_count) : "—"}
-          loading={query.isPending}
-          icon={<Hourglass aria-hidden weight="duotone" className="size-5 text-white" />}
-          iconBg="icon-chip-warning"
-        />
-      </div>
-
-      {/* AI Ad Oversight Insights */}
-      {!query.isPending && spend && (() => {
-        const insights = deriveAdOversightInsights(
-          spend.active_count,
-          spend.pending_approval_count,
-          spend.active_spend_amount,
-        );
-        if (insights.length === 0) return null;
-        return (
-          <section
-            className="mb-5 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 "
-            aria-label={t("aiInsightsTitle")}
-          >
-            <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              {t("aiInsightsTitle")}
-            </h2>
-            <ul className="space-y-1.5">
-              {insights.map((key) => (
-                <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                  {t(key)}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })()}
-
-      {/* Status filter tab chips */}
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex flex-wrap gap-2" role="group" aria-label={t("filterLabel")}>
-          {STATUS_FILTERS.map((s) => (
-            <button
-              key={s}
-              onClick={() => setStatusFilter(s)}
-              aria-pressed={statusFilter === s}
-              className={cn(
-                "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
-                statusFilter === s
-                  ? s === "pending_approval"
-                    ? "border-[var(--amber-500)]/30 bg-[var(--amber-600)] text-white shadow-sm"
-                    : s === "approved"
-                      ? "border-[var(--teal-500)]/30 bg-[var(--teal-600)] text-white shadow-sm"
-                      : s === "active"
-                        ? "border-teal-500/30 bg-teal-600 text-white shadow-sm"
-                        : s === "rejected"
-                          ? "border-[var(--red-500)]/30 bg-[var(--red-600)] text-white shadow-sm"
-                          : s === "cancelled" || s === "completed"
-                            ? "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm"
-                            : "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
-              )}
-            >
-              {s === "all" ? ta("filterAllStatuses") : labels.status(s)}
-            </button>
-          ))}
-        </div>
-        {pendingRows.length > 0 && statusFilter === "pending_approval" && (
-          <label className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)]">
-            <input
-              type="checkbox"
-              checked={allPendingSelected}
-              onChange={(e) =>
-                setSelectedIds(
-                  e.target.checked ? new Set(pendingRows.map((r) => r.id)) : new Set(),
-                )
-              }
-              className="size-4 cursor-pointer rounded border-[var(--border-default)] accent-[var(--brand-primary)]"
-            />
-            {tm("moderationQueue.selectAll")}
-          </label>
-        )}
-      </div>
-
-      {/* Bulk action bar */}
-      {selectedIds.size > 0 && (
-        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-[var(--border-default)] bg-white px-4 py-2.5">
-          <span className="text-sm font-semibold text-[var(--text-primary)]">
-            {tm("moderationQueue.selectedCount", { count: selectedIds.size })}
-          </span>
-          <div className="ml-auto flex flex-wrap gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setSelectedIds(new Set())}>
-              {tm("moderationQueue.clearSelection")}
-            </Button>
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={() => {
-                setReason("");
-                setTextError(null);
-                setBulkKind("reject");
-              }}
-            >
-              <XCircle aria-hidden weight="bold" className="size-4" />
-              {tm("moderationQueue.bulkReject")}
-            </Button>
-            <Button variant="primary" size="sm" onClick={() => setBulkKind("approve")}>
-              <CheckCircle aria-hidden weight="bold" className="size-4" />
-              {tm("moderationQueue.bulkApprove")}
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {query.isError &&
-      !(
-        query.error instanceof ApiError &&
-        (query.error.isPermissionError || query.error.isAuthError)
-      ) ? (
+      {isPermissionError ? (
         <EmptyState
-          kind="error"
-          icon={WarningCircle}
-          title={tStates("errorTitle")}
-          description={tStates("errorBody")}
-          action={
-            <Button variant="secondary" onClick={() => query.refetch()}>
-              {tc("retry")}
-            </Button>
+          kind={query.error instanceof ApiError && query.error.isPermissionError ? "permission" : "auth"}
+          title={
+            query.error instanceof ApiError && query.error.isPermissionError
+              ? tStates("permissionTitle")
+              : tStates("authTitle")
+          }
+          description={
+            query.error instanceof ApiError && query.error.isPermissionError
+              ? t("permissionBody")
+              : tStates("authBody")
           }
         />
       ) : (
-        <DataTable
-          columns={columns}
-          rows={rows}
-          getRowId={(r) => r.id}
-          loading={query.isPending}
-          caption={t("title")}
-          empty={{
-            kind: "empty",
-            icon: Megaphone,
-            title: t("empty"),
-            description: t("emptyBody"),
-          }}
-        />
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <KpiTile
+              label={t("spendActive")}
+              value={spend ? formatVnd(spend.active_spend_amount, spend.currency, locale) : "—"}
+              icon={CircleDollarSign}
+            />
+            <KpiTile
+              label={t("spendActiveCount")}
+              value={spend ? String(spend.active_count) : "—"}
+              icon={Megaphone}
+            />
+            <KpiTile
+              label={t("spendPending")}
+              value={spend ? String(spend.pending_approval_count) : "—"}
+              icon={Hourglass}
+            />
+          </div>
+
+          <FilterBar>
+            <div className="flex flex-wrap gap-1.5" role="group" aria-label={t("filterLabel")}>
+              {STATUS_FILTERS.map((s) => {
+                const active = statusFilter === s;
+                return (
+                  <button
+                    key={s}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setStatusFilter(s)}
+                    className={cn(
+                      "inline-flex items-center rounded-full border px-3 py-1 text-[0.8125rem] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+                      active
+                        ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                        : "border-border bg-card text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {s === "all" ? ta("filterAllStatuses") : labels.status(s)}
+                  </button>
+                );
+              })}
+            </div>
+          </FilterBar>
+
+          {query.isError && !isPermissionError ? (
+            <EmptyState
+              kind="error"
+              title={tStates("errorTitle")}
+              description={tStates("errorBody")}
+              action={
+                <Button variant="secondary" onClick={() => query.refetch()}>
+                  {tc("retry")}
+                </Button>
+              }
+            />
+          ) : (
+            <DataTable
+              columns={columns}
+              data={rows}
+              getRowId={(r) => r.id}
+              loading={query.isPending}
+              onRowClick={(r) => setSelected(r)}
+              activeRowId={selected?.id ?? undefined}
+              enableSelection={statusFilter === "pending_approval"}
+              bulkActions={(selectedRows, clear) => (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setBulkIds(selectedRows.map((r) => r.id));
+                      bulkClearRef.current = clear;
+                      setReason("");
+                      setReasonCode("other");
+                      setTextError(null);
+                      setBulkKind("reject");
+                    }}
+                  >
+                    <X className="size-4" strokeWidth={1.9} />
+                    {tm("moderationQueue.bulkReject")}
+                  </Button>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => {
+                      setBulkIds(selectedRows.map((r) => r.id));
+                      bulkClearRef.current = clear;
+                      setBulkKind("approve");
+                    }}
+                  >
+                    <Check className="size-4" strokeWidth={1.9} />
+                    {tm("moderationQueue.bulkApprove")}
+                  </Button>
+                </>
+              )}
+              empty={<EmptyState kind="empty" icon={Megaphone} title={t("empty")} description={t("emptyBody")} />}
+            />
+          )}
+        </div>
       )}
 
-      {/* Review + action panel (single modal; reused for all actions) */}
-      <Modal
-        open={selected !== null && dialog === null}
+      {/* Review + action drawer */}
+      <DetailSheet
+        open={selectedLive !== null && dialog === null && bulkKind === null}
         onClose={() => setSelected(null)}
-        title={t("reviewTitle")}
-        size="md"
+        title={selectedLive?.target_title ?? ta("targetUnavailable")}
+        subtitle={
+          selectedLive
+            ? labels.targetType(selectedLive.target_type, selectedLive.target_type_label)
+            : undefined
+        }
+        status={
+          selectedLive ? (
+            <>
+              <StatusChip tone={STATUS_CHIP[selectedLive.status] ?? "neutral"}>
+                {labels.status(selectedLive.status, selectedLive.status_label)}
+              </StatusChip>
+              <StatusChip tone={TYPE_CHIP[selectedLive.placement_type] ?? "neutral"} dot>
+                {labels.placementType(selectedLive.placement_type, selectedLive.placement_type_label)}
+              </StatusChip>
+              <SlaChip dueBy={selectedLive.due_by} ageHours={selectedLive.age_hours} isOverdue={selectedLive.is_overdue} />
+              <ClaimChip claimedBy={selectedLive.claimed_by} isMine={selectedLive.claimed_by === userId} />
+            </>
+          ) : undefined
+        }
+        width="lg"
         closeLabel={tc("close")}
       >
-        {selected && (
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-base font-bold text-[var(--text-primary)]">
-                {selected.target_title ?? ta("targetUnavailable")}
-              </h3>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                <StatusBadge tone={PLACEMENT_STATUS_TONE[selected.status] ?? "info"}>
-                  {labels.status(selected.status, selected.status_label)}
-                </StatusBadge>
-                <StatusBadge tone={PLACEMENT_TYPE_TONE[selected.placement_type] ?? "info"}>
-                  {labels.placementType(selected.placement_type, selected.placement_type_label)}
-                </StatusBadge>
-                <SlaBadge
-                  dueBy={selected.due_by}
-                  ageHours={selected.age_hours}
-                  isOverdue={selected.is_overdue}
-                />
-                <ClaimBadge claimedBy={selected.claimed_by} isMine={selected.claimed_by === userId} />
-              </div>
-            </div>
+        {selectedLive && (
+          <>
+            <DetailSheetSection>
+              <dl>
+                <DetailRow label={t("fieldOrg")}>
+                  <span className="font-mono text-xs">{selectedLive.org_id.slice(0, 8)}</span>
+                </DetailRow>
+                <DetailRow label={t("fieldTargetType")}>
+                  {labels.targetType(selectedLive.target_type, selectedLive.target_type_label)}
+                </DetailRow>
+                <DetailRow label={t("colPackage")}>{selectedLive.package?.name ?? "—"}</DetailRow>
+                <DetailRow label={t("colPrice")}>
+                  <span className="tabular-nums">
+                    {formatVnd(selectedLive.price_amount, selectedLive.currency, locale)}
+                  </span>{" "}
+                  <span style={{ color: selectedLive.is_paid ? "var(--content-success)" : "var(--content-warning)" }}>
+                    ({selectedLive.is_paid ? t("paid") : t("unpaid")})
+                  </span>
+                </DetailRow>
+                <DetailRow label={t("colWindow")}>
+                  {formatWindow(selectedLive.start_at, selectedLive.end_at, locale)}
+                </DetailRow>
+              </dl>
+            </DetailSheetSection>
 
-            <Field label={t("fieldOrg")}>
-              <span className="font-mono text-xs">{selected.org_id}</span>
-            </Field>
-            <Field label={t("fieldTargetType")}>
-              {labels.targetType(selected.target_type, selected.target_type_label)}
-            </Field>
-            <Field label={t("colPackage")}>{selected.package?.name ?? "—"}</Field>
-            <Field label={t("colPrice")}>
-              {formatVnd(selected.price_amount, selected.currency, locale)}{" "}
-              <span
-                className={selected.is_paid ? "text-[var(--teal-600)]" : "text-[var(--amber-700)]"}
-              >
-                ({selected.is_paid ? t("paid") : t("unpaid")})
-              </span>
-            </Field>
-            <Field label={t("colWindow")}>
-              {formatWindow(selected.start_at, selected.end_at, locale)}
-            </Field>
-            <Field label={t("fieldDisclosure")}>
-              {selected.disclosure_confirmed ? t("disclosureOk") : t("disclosureMissing")}
-            </Field>
-            {selected.payment_reference && (
-              <Field label={t("fieldPaymentRef")}>{selected.payment_reference}</Field>
-            )}
-            {selected.moderation_note && (
-              <Field label={t("fieldNote")}>
-                <span className="whitespace-pre-wrap">{selected.moderation_note}</span>
-              </Field>
-            )}
-
-            <div className="flex flex-col gap-2 pt-2">
-              {canClaim && (
-                <Button
-                  variant="secondary"
-                  fullWidth
-                  loading={claim.isPending}
-                  onClick={() => claim.mutate(selected)}
-                >
-                  <UserCheck aria-hidden weight="bold" className="size-4" />
-                  {tm("moderationQueue.claim")}
-                </Button>
+            {/* Disclosure enforcement */}
+            <DetailSheetSection title={t("fieldDisclosure")}>
+              {selectedLive.disclosure_confirmed ? (
+                <StatusChip tone="success">
+                  <ShieldCheck aria-hidden className="size-3.5" strokeWidth={2} />
+                  {t("disclosureOk")}
+                </StatusChip>
+              ) : (
+                <StatusChip tone="danger">
+                  <ShieldX aria-hidden className="size-3.5" strokeWidth={2} />
+                  {t("disclosureMissing")}
+                </StatusChip>
               )}
-              {canApprove && (
-                <Button variant="primary" fullWidth onClick={() => setDialog("approve")}>
-                  <CheckCircle aria-hidden weight="bold" className="size-4" />
-                  {t("approve")}
-                </Button>
-              )}
-              {canMarkPaid && (
-                <Button
-                  variant="secondary"
-                  fullWidth
-                  onClick={() => {
-                    setPaymentRef("");
-                    setTextError(null);
-                    setDialog("markPaid");
-                  }}
-                >
-                  <CurrencyCircleDollar aria-hidden weight="bold" className="size-4" />
-                  {selected.is_paid ? t("updatePayment") : t("markPaid")}
-                </Button>
-              )}
-              {canApprove && (
-                <Button
-                  variant="danger"
-                  fullWidth
-                  onClick={() => {
-                    setReason("");
-                    setReasonCode("other");
-                    setTextError(null);
-                    setDialog("reject");
-                  }}
-                >
-                  <XCircle aria-hidden weight="bold" className="size-4" />
-                  {t("reject")}
-                </Button>
-              )}
-              {canApprove && (
-                <Button
-                  variant="ghost"
-                  fullWidth
-                  onClick={() => {
-                    setReason("");
-                    setEscalateReasonCode("policy_violation");
-                    setTextError(null);
-                    setDialog("escalate");
-                  }}
-                >
-                  <Flag aria-hidden weight="bold" className="size-4" />
-                  {tm("moderationQueue.escalate")}
-                </Button>
-              )}
-              {canDisable && (
-                <Button
-                  variant="ghost"
-                  fullWidth
-                  onClick={() => {
-                    setReason("");
-                    setTextError(null);
-                    setDialog("disable");
-                  }}
-                >
-                  <Prohibit aria-hidden weight="bold" className="size-4" />
-                  {t("disable")}
-                </Button>
-              )}
-              {!canApprove && !canMarkPaid && !canDisable && (
-                <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-secondary)] ">
-                  {t("noActions")}
+              {selectedLive.payment_reference && (
+                <p className="mt-2 type-small text-muted-foreground">
+                  {t("fieldPaymentRef")}: <span className="font-mono">{selectedLive.payment_reference}</span>
                 </p>
               )}
-            </div>
+              {selectedLive.moderation_note && (
+                <p className="mt-2 whitespace-pre-wrap type-small text-muted-foreground">
+                  {t("fieldNote")}: {selectedLive.moderation_note}
+                </p>
+              )}
+            </DetailSheetSection>
 
-            {/* Creative moderation + inventory-class relabel. */}
-            {selectedLive && (
-              <CreativeModerationPanel
-                placement={selectedLive}
-                onChanged={() => setSelected(selectedLive)}
-              />
-            )}
-          </div>
+            {/* Actions */}
+            <DetailSheetSection>
+              <div className="flex flex-col gap-2">
+                {canClaim && (
+                  <Button variant="secondary" fullWidth loading={claim.isPending} onClick={() => claim.mutate(selectedLive)}>
+                    <UserCheck className="size-4" strokeWidth={1.9} />
+                    {tm("moderationQueue.claim")}
+                  </Button>
+                )}
+                {canApprove && (
+                  <Button variant="primary" fullWidth onClick={() => setDialog("approve")}>
+                    <Check className="size-4" strokeWidth={1.9} />
+                    {t("approve")}
+                  </Button>
+                )}
+                {canMarkPaid && (
+                  <Button
+                    variant="secondary"
+                    fullWidth
+                    onClick={() => {
+                      setPaymentRef("");
+                      setTextError(null);
+                      setDialog("markPaid");
+                    }}
+                  >
+                    <CircleDollarSign className="size-4" strokeWidth={1.9} />
+                    {selectedLive.is_paid ? t("updatePayment") : t("markPaid")}
+                  </Button>
+                )}
+                {canApprove && (
+                  <Button
+                    variant="danger"
+                    fullWidth
+                    onClick={() => {
+                      setReason("");
+                      setReasonCode("other");
+                      setTextError(null);
+                      setDialog("reject");
+                    }}
+                  >
+                    <X className="size-4" strokeWidth={1.9} />
+                    {t("reject")}
+                  </Button>
+                )}
+                {canApprove && (
+                  <Button
+                    variant="ghost"
+                    fullWidth
+                    onClick={() => {
+                      setReason("");
+                      setEscalateReasonCode("policy_violation");
+                      setTextError(null);
+                      setDialog("escalate");
+                    }}
+                  >
+                    <Flag className="size-4" strokeWidth={1.9} />
+                    {tm("moderationQueue.escalate")}
+                  </Button>
+                )}
+                {canDisable && (
+                  <Button
+                    variant="ghost"
+                    fullWidth
+                    onClick={() => {
+                      setReason("");
+                      setTextError(null);
+                      setDialog("disable");
+                    }}
+                  >
+                    <Ban className="size-4" strokeWidth={1.9} />
+                    {t("disable")}
+                  </Button>
+                )}
+                {!canApprove && !canMarkPaid && !canDisable && (
+                  <p className="type-small text-muted-foreground">{t("noActions")}</p>
+                )}
+              </div>
+            </DetailSheetSection>
+
+            {/* Creative moderation + disclosure relabel */}
+            <DetailSheetSection>
+              <CreativeModerationPanel placement={selectedLive} onChanged={() => setSelected(selectedLive)} />
+            </DetailSheetSection>
+          </>
         )}
-      </Modal>
+      </DetailSheet>
 
       {/* Approve */}
       <Modal
         open={dialog === "approve"}
         onClose={closeDialog}
         title={t("approveTitle")}
-        description={t("approveBody", { target: selected?.target_title ?? "" })}
+        description={t("approveBody", { target: selectedLive?.target_title ?? "" })}
         size="sm"
         closeLabel={tc("close")}
         footer={
@@ -744,17 +673,13 @@ export function AdvertisingOversightScreen() {
             <Button variant="ghost" onClick={closeDialog}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={approve.isPending}
-              onClick={() => selected && approve.mutate(selected)}
-            >
+            <Button variant="primary" loading={approve.isPending} onClick={() => selectedLive && approve.mutate(selectedLive)}>
               {t("approveConfirm")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("approveNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("approveNote")}</p>
       </Modal>
 
       {/* Reject */}
@@ -762,7 +687,7 @@ export function AdvertisingOversightScreen() {
         open={dialog === "reject"}
         onClose={closeDialog}
         title={t("rejectTitle")}
-        description={t("rejectBody", { target: selected?.target_title ?? "" })}
+        description={t("rejectBody", { target: selectedLive?.target_title ?? "" })}
         size="sm"
         closeLabel={tc("close")}
         footer={
@@ -778,7 +703,7 @@ export function AdvertisingOversightScreen() {
                   setTextError(t("reasonRequired"));
                   return;
                 }
-                if (selected) reject.mutate(selected);
+                if (selectedLive) reject.mutate(selectedLive);
               }}
             >
               {t("rejectConfirm")}
@@ -787,22 +712,17 @@ export function AdvertisingOversightScreen() {
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="ad-reject-reason-code"
-            value={reasonCode}
-            onChange={setReasonCode}
-          />
-          <LabeledTextarea
+          <ReasonCodeSelect id="ad-reject-reason-code" value={reasonCode} onChange={setReasonCode} />
+          <ReasonField
             id="ad-reject-reason"
             label={t("reasonLabel")}
-            required
+            hint={t("reasonHint")}
             value={reason}
             error={textError}
             onChange={(v) => {
               setReason(v);
               if (textError) setTextError(null);
             }}
-            hint={t("reasonHint")}
           />
         </div>
       </Modal>
@@ -820,28 +740,15 @@ export function AdvertisingOversightScreen() {
             <Button variant="ghost" onClick={closeDialog}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={escalate.isPending}
-              onClick={() => selected && escalate.mutate(selected)}
-            >
+            <Button variant="primary" loading={escalate.isPending} onClick={() => selectedLive && escalate.mutate(selectedLive)}>
               {tm("moderationQueue.escalateConfirm")}
             </Button>
           </>
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="ad-escalate-reason-code"
-            value={escalateReasonCode}
-            onChange={setEscalateReasonCode}
-          />
-          <LabeledTextarea
-            id="ad-escalate-note"
-            label={tm("moderationQueue.otherNoteLabel")}
-            value={reason}
-            onChange={setReason}
-          />
+          <ReasonCodeSelect id="ad-escalate-reason-code" value={escalateReasonCode} onChange={setEscalateReasonCode} />
+          <ReasonField id="ad-escalate-note" label={tm("moderationQueue.otherNoteLabel")} value={reason} onChange={setReason} />
         </div>
       </Modal>
 
@@ -850,7 +757,7 @@ export function AdvertisingOversightScreen() {
         open={dialog === "markPaid"}
         onClose={closeDialog}
         title={t("markPaidTitle")}
-        description={t("markPaidBody", { target: selected?.target_title ?? "" })}
+        description={t("markPaidBody", { target: selectedLive?.target_title ?? "" })}
         size="sm"
         closeLabel={tc("close")}
         footer={
@@ -866,7 +773,7 @@ export function AdvertisingOversightScreen() {
                   setTextError(t("paymentRefRequired"));
                   return;
                 }
-                if (selected) markPaid.mutate(selected);
+                if (selectedLive) markPaid.mutate(selectedLive);
               }}
             >
               {t("markPaidConfirm")}
@@ -875,7 +782,7 @@ export function AdvertisingOversightScreen() {
         }
       >
         <div className="space-y-3">
-          <p className="text-sm text-[var(--text-secondary)]">{t("markPaidNote")}</p>
+          <p className="text-sm text-muted-foreground">{t("markPaidNote")}</p>
           <Input
             id="ad-payment-ref"
             label={t("paymentRefLabel")}
@@ -897,7 +804,7 @@ export function AdvertisingOversightScreen() {
         open={dialog === "disable"}
         onClose={closeDialog}
         title={t("disableTitle")}
-        description={t("disableBody", { target: selected?.target_title ?? "" })}
+        description={t("disableBody", { target: selectedLive?.target_title ?? "" })}
         size="sm"
         closeLabel={tc("close")}
         footer={
@@ -905,33 +812,29 @@ export function AdvertisingOversightScreen() {
             <Button variant="ghost" onClick={closeDialog}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="danger"
-              loading={disable.isPending}
-              onClick={() => selected && disable.mutate(selected)}
-            >
+            <Button variant="danger" loading={disable.isPending} onClick={() => selectedLive && disable.mutate(selectedLive)}>
               {t("disableConfirm")}
             </Button>
           </>
         }
       >
         <div className="space-y-3">
-          <p className="text-sm text-[var(--text-secondary)]">{t("disableNote")}</p>
-          <LabeledTextarea
+          <p className="text-sm text-muted-foreground">{t("disableNote")}</p>
+          <ReasonField
             id="ad-disable-reason"
             label={t("disableReasonLabel")}
+            hint={t("disableReasonHint")}
             value={reason}
             onChange={setReason}
-            hint={t("disableReasonHint")}
           />
         </div>
       </Modal>
 
-      {/* Bulk approve confirm */}
+      {/* Bulk approve */}
       <Modal
         open={bulkKind === "approve"}
         onClose={() => setBulkKind(null)}
-        title={tm("moderationQueue.bulkApproveTitle", { count: selectedIds.size })}
+        title={tm("moderationQueue.bulkApproveTitle", { count: bulkIds.length })}
         description={tm("moderationQueue.bulkApproveBody")}
         size="sm"
         closeLabel={tc("close")}
@@ -940,24 +843,20 @@ export function AdvertisingOversightScreen() {
             <Button variant="ghost" onClick={() => setBulkKind(null)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={bulkApprove.isPending}
-              onClick={() => bulkApprove.mutate(Array.from(selectedIds))}
-            >
+            <Button variant="primary" loading={bulkApprove.isPending} onClick={() => bulkApprove.mutate(bulkIds)}>
               {tm("moderationQueue.bulkApproveConfirm")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("approveNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("approveNote")}</p>
       </Modal>
 
-      {/* Bulk reject confirm */}
+      {/* Bulk reject */}
       <Modal
         open={bulkKind === "reject"}
         onClose={() => setBulkKind(null)}
-        title={tm("moderationQueue.bulkRejectTitle", { count: selectedIds.size })}
+        title={tm("moderationQueue.bulkRejectTitle", { count: bulkIds.length })}
         description={tm("moderationQueue.bulkRejectBody")}
         size="sm"
         closeLabel={tc("close")}
@@ -974,7 +873,7 @@ export function AdvertisingOversightScreen() {
                   setTextError(t("reasonRequired"));
                   return;
                 }
-                bulkReject.mutate(Array.from(selectedIds));
+                bulkReject.mutate(bulkIds);
               }}
             >
               {tm("moderationQueue.bulkRejectConfirm")}
@@ -983,15 +882,10 @@ export function AdvertisingOversightScreen() {
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="ad-bulk-reject-reason-code"
-            value={reasonCode}
-            onChange={setReasonCode}
-          />
-          <LabeledTextarea
+          <ReasonCodeSelect id="ad-bulk-reject-reason-code" value={reasonCode} onChange={setReasonCode} />
+          <ReasonField
             id="ad-bulk-reject-reason"
             label={t("reasonLabel")}
-            required
             value={reason}
             error={textError}
             onChange={(v) => {
@@ -1002,7 +896,7 @@ export function AdvertisingOversightScreen() {
         </div>
       </Modal>
 
-      {/* Bulk result (partial success is normal) */}
+      {/* Bulk result */}
       <Modal
         open={bulkResults !== null}
         onClose={() => setBulkResults(null)}
@@ -1016,61 +910,22 @@ export function AdvertisingOversightScreen() {
         }
       >
         {bulkResults && (
-          <BulkResultList
-            results={bulkResults}
-            getLabel={(id) => rows.find((r) => r.id === id)?.target_title ?? id}
-          />
+          <BulkResultList results={bulkResults} getLabel={(id) => rows.find((r) => r.id === id)?.target_title ?? id} />
         )}
       </Modal>
     </>
   );
 }
 
-function SpendCard({
-  label,
-  value,
-  loading,
-  icon,
-  iconBg = "icon-chip-primary",
-}: {
-  label: string;
-  value: string;
-  loading: boolean;
-  icon: React.ReactNode;
-  iconBg?: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-[var(--border-default)] bg-white px-5 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
-      <div
-        className={`mb-3 flex size-11 items-center justify-center rounded-xl shadow-sm ${iconBg}`}
-      >
-        {icon}
-      </div>
-      <p className="text-3xl font-black tracking-tight text-[var(--text-primary)]">
-        {loading ? "…" : value}
-      </p>
-      <p className="mt-1 text-xs font-medium text-[var(--text-secondary)]">{label}</p>
-    </div>
-  );
-}
+/* -------------------------------------------------------------------------- */
+/* Shared reason textarea (v10 field treatment)                                */
+/* -------------------------------------------------------------------------- */
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-        {label}
-      </p>
-      <div className="mt-0.5 text-sm text-[var(--text-primary)]">{children}</div>
-    </div>
-  );
-}
-
-function LabeledTextarea({
+function ReasonField({
   id,
   label,
   value,
   onChange,
-  required,
   error,
   hint,
 }: {
@@ -1078,22 +933,13 @@ function LabeledTextarea({
   label: string;
   value: string;
   onChange: (v: string) => void;
-  required?: boolean;
   error?: string | null;
   hint?: string;
 }) {
   return (
     <div>
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
-      >
+      <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-foreground">
         {label}
-        {required && (
-          <span className="ml-0.5 text-[var(--brand-red)]" aria-hidden>
-            *
-          </span>
-        )}
       </label>
       <textarea
         id={id}
@@ -1102,14 +948,14 @@ function LabeledTextarea({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
-        className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
+        className="w-full rounded-lg border border-border bg-card px-3.5 py-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus-visible:border-[var(--field-focus-border)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]/30"
       />
       {error ? (
-        <p id={`${id}-error`} className="mt-1 text-xs font-medium text-[var(--brand-red)]">
+        <p id={`${id}-error`} className="mt-1 type-caption font-medium text-[var(--content-danger)]">
           {error}
         </p>
       ) : hint ? (
-        <p className="mt-1 text-xs text-[var(--text-muted)]">{hint}</p>
+        <p className="mt-1 type-caption text-muted-foreground">{hint}</p>
       ) : null}
     </div>
   );
