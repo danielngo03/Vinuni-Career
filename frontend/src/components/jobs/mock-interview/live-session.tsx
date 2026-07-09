@@ -21,6 +21,11 @@ type Phase = "interviewer_speaking" | "listening" | "thinking" | "ending";
 // this window, we stop waiting and degrade to the browser-voice/text tier.
 const REALTIME_CONNECT_TIMEOUT_MS = 12_000;
 
+// While it's the candidate's turn, this much silence (no recognized speech and
+// no typing) surfaces a calm nudge that also offers to switch to typing — the
+// escape hatch when browser STT is quietly failing to hear anything.
+const IDLE_HINT_MS = 22_000;
+
 function formatClock(seconds: number): string {
   const s = Math.max(0, Math.round(seconds));
   const m = Math.floor(s / 60);
@@ -68,6 +73,7 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
   const [questionCount, setQuestionCount] = useState(1);
   const [timeLeft, setTimeLeft] = useState(initialSeconds);
   const [turnError, setTurnError] = useState(false);
+  const [idleHint, setIdleHint] = useState(false);
   const [textDraft, setTextDraft] = useState("");
   // Realtime-only presentation states (unused on the V1/text path).
   const [realtimeConnecting, setRealtimeConnecting] = useState(!!realtime);
@@ -346,6 +352,20 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
     return () => window.clearInterval(id);
   }, [finalize]);
 
+  /* ----------------------- idle nudge / silent STT ------------------------ */
+  // While it's the candidate's turn, a long silence means they're either stuck
+  // or (on the browser/realtime voice path) STT isn't hearing them. After a
+  // grace period we surface a calm nudge offering to switch to typing. Any
+  // recognized speech (candidateCaption) or a phase change resets the wait.
+  useEffect(() => {
+    setIdleHint(false);
+    if (phase !== "listening" || endedRef.current) return;
+    const id = window.setTimeout(() => {
+      if (!endedRef.current) setIdleHint(true);
+    }, IDLE_HINT_MS);
+    return () => window.clearTimeout(id);
+  }, [phase, candidateCaption, effectiveMode]);
+
   /* ---------------------------- orb animation ----------------------------- */
   useEffect(() => {
     if (reduced) return; // static orb under reduced motion
@@ -520,6 +540,36 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
               </button>
             )}
           </div>
+        )}
+
+        {/* Idle nudge / silent-STT escape hatch. Only when nothing more urgent
+            (turn error, dropped realtime) is already offering the user a next
+            step. Voice: gently offer to switch to typing. Text: soft reassurance. */}
+        {idleHint && !turnError && !realtimeLost && (
+          effectiveMode === "voice" ? (
+            <div
+              role="status"
+              className="mx-auto max-w-xl rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2.5 text-center shadow-sm"
+            >
+              <p className="text-xs font-semibold text-[var(--text-primary)]">{t("idleHintTitle")}</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-[var(--text-secondary)]">
+                {t("idleHintVoiceBody")}
+              </p>
+              <div className="mt-2 flex justify-center">
+                <Button variant="secondary" size="sm" onClick={degradeToText}>
+                  <Keyboard aria-hidden weight="bold" className="size-4" />
+                  {t("idleSwitchToText")}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <p
+              role="status"
+              className="mx-auto max-w-xl text-center text-xs leading-relaxed text-[var(--text-muted)]"
+            >
+              {t("idleHintTextBody")}
+            </p>
+          )
         )}
 
         {effectiveMode === "text" ? (
