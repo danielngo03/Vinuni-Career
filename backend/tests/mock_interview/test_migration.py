@@ -15,12 +15,14 @@ from app.core.metadata import import_all_models, target_metadata
 from sqlalchemy import create_engine
 
 _VERSIONS = Path(__file__).resolve().parents[2] / "alembic" / "versions"
-_MIGRATION_0084 = _VERSIONS / "0084_mock_interview.py"
+# Re-chained onto the reconciled single head (0090) during consolidation; the
+# tables migration was originally authored as 0084 off 0083.
+_MIGRATION = _VERSIONS / "0091_mock_interview.py"
 
 _TABLES = {"mock_interview_sessions", "mock_interview_turns"}
 
 
-def _load_migration(path=_MIGRATION_0084, name="mock_interview_migration"):
+def _load_migration(path=_MIGRATION, name="mock_interview_migration"):
     spec = importlib.util.spec_from_file_location(name, path)
     assert spec and spec.loader
     mod = importlib.util.module_from_spec(spec)
@@ -32,8 +34,8 @@ def test_mock_interview_migration_well_formed() -> None:
     mod = _load_migration()
     assert callable(mod.upgrade)
     assert callable(mod.downgrade)
-    assert mod.revision == "0084_mock_interview"
-    assert mod.down_revision == "0083_ai_billable_usage"
+    assert mod.revision == "0091_mock_interview"
+    assert mod.down_revision == "0090_chat_export_files"
 
 
 def test_mock_interview_tables_registered_on_metadata() -> None:

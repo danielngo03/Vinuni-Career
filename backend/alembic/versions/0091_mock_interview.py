@@ -4,9 +4,12 @@ Creates the ``mock_interview`` module tables: student-owned practice sessions an
 their text-only transcript turns. Kept fully separate from ``recruitment`` real
 interviews.
 
-Revision ID: 0084_mock_interview
-Revises: 0083_ai_billable_usage
+Revision ID: 0091_mock_interview
+Revises: 0090_chat_export_files
 Create Date: 2026-07-09
+
+Re-chained onto the reconciled single head (0090) during consolidation of the
+mock-interview feature into the live app; originally authored as 0084 off 0083.
 """
 
 from __future__ import annotations
@@ -17,8 +20,8 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-revision: str = "0084_mock_interview"
-down_revision: str | None = "0083_ai_billable_usage"
+revision: str = "0091_mock_interview"
+down_revision: str | None = "0090_chat_export_files"
 branch_labels: Sequence[str] | None = None
 depends_on: Sequence[str] | None = None
 

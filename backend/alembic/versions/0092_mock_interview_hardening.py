@@ -10,8 +10,8 @@ Adds the DB-level integrity the layered cost/ordering model in ``caps.py`` and
 - ``uq_mock_interview_turns_session_seq`` — UNIQUE(session_id, seq) so two
   concurrent turn writers cannot mint the same seq and corrupt the transcript.
 
-Revision ID: 0085_mock_interview_hardening
-Revises: 0084_mock_interview
+Revision ID: 0092_mock_interview_hardening
+Revises: 0091_mock_interview
 Create Date: 2026-07-09
 """
 
@@ -22,8 +22,8 @@ from collections.abc import Sequence
 import sqlalchemy as sa
 from alembic import op
 
-revision: str = "0085_mock_interview_hardening"
-down_revision: str | None = "0084_mock_interview"
+revision: str = "0092_mock_interview_hardening"
+down_revision: str | None = "0091_mock_interview"
 branch_labels: Sequence[str] | None = None
 depends_on: Sequence[str] | None = None
 
