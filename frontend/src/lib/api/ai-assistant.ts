@@ -1,4 +1,4 @@
-import { api } from "./client";
+import { api, apiUpload } from "./client";
 
 /* ------------------------------- Wire types ------------------------------- */
 
@@ -79,6 +79,16 @@ export interface AiUsageDetail extends AiUsageSummary {
   recent: AiUsageActivity[];
 }
 
+export interface ChatAttachment {
+  id: string;
+  session_id: string;
+  filename: string;
+  content_type: string;
+  size: number;
+  status: string;
+  created_at: string;
+}
+
 export const aiAssistantApi = {
   /** My AI usage today vs the daily allowance. */
   myUsage(): Promise<AiUsageSummary> {
@@ -133,4 +143,16 @@ export const aiAssistantApi = {
   archiveSession(sessionId: string): Promise<{ status: string }> {
     return api.delete<{ status: string }>(`/ai/chat/sessions/${sessionId}`);
   },
+
+  /** Upload a file/image to a chat session for AI analysis (owner only). */
+  async uploadAttachment(sessionId: string, file: File): Promise<ChatAttachment> {
+    const form = new FormData();
+    form.append("file", file);
+    const res = await apiUpload<{ data: ChatAttachment }>(
+      `/ai/chat/sessions/${sessionId}/attachments`,
+      form,
+    );
+    return res.data;
+  },
+
 };

@@ -9,6 +9,7 @@ import {
   ArrowsOutSimple,
   ArrowUp,
   Check,
+  Paperclip,
   PencilSimple,
   Plus,
   Spinner,
@@ -20,7 +21,16 @@ import { getAccessToken } from "@/lib/api/session";
 import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/stores/auth-store";
-import { MAX_INPUT_LENGTH, STATUS_LABELS, type StreamEvent } from "./chat-window/constants";
+import {
+  ACCEPTED_ATTACHMENT_ACCEPT,
+  buildAttachmentRef,
+  isAcceptedAttachment,
+  MAX_ATTACHMENT_BYTES,
+  MAX_ATTACHMENTS,
+  MAX_INPUT_LENGTH,
+  STATUS_LABELS,
+  type StreamEvent,
+} from "./chat-window/constants";
 import {
   AssistantActivity,
   MessageBubble,
@@ -69,6 +79,10 @@ export function AiChatWindow({
   const [savingTitle, setSavingTitle] = useState(false);
   const [draftSession, setDraftSession] = useState(false);
   const [confirmingMessageId, setConfirmingMessageId] = useState<string | null>(null);
+  const [attachments, setAttachments] = useState<
+    { localId: string; filename: string; status: "uploading" | "ready" | "error"; id?: string }[]
+  >([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -187,10 +201,14 @@ export function AiChatWindow({
   }
 
   async function send(textOverride?: string) {
-    const text = (textOverride ?? input).trim();
+    if (attachments.some((a) => a.status === "uploading")) return;
+    const ready = attachments.filter((a) => a.status === "ready" && a.id);
+    const refs = ready.map((a) => buildAttachmentRef(a.filename, a.id!)).join("");
+    const text = ((textOverride ?? input).trim() + refs).trim();
     if (!text || sending) return;
 
     setInput("");
+    setAttachments([]);
     setSending(true);
     setStreamingText(null);
     setActiveToolName(null);
@@ -236,6 +254,40 @@ export function AiChatWindow({
       setStreamingText(null);
       setActiveToolName(null);
       setActivityStatus(null);
+    }
+  }
+
+  async function handleFilesPicked(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    const room = MAX_ATTACHMENTS - attachments.length;
+    const picked = Array.from(files).slice(0, Math.max(0, room));
+    if (fileInputRef.current) fileInputRef.current.value = "";
+    for (const [idx, file] of picked.entries()) {
+      const localId = `att-${Date.now()}-${idx}-${file.size}`;
+      if (!isAcceptedAttachment(file.name) || file.size > MAX_ATTACHMENT_BYTES) {
+        setAttachments((prev) => [
+          ...prev,
+          { localId, filename: file.name, status: "error" as const },
+        ]);
+        continue;
+      }
+      setAttachments((prev) => [
+        ...prev,
+        { localId, filename: file.name, status: "uploading" as const },
+      ]);
+      try {
+        const sid = await ensureSession();
+        const desc = await aiAssistantApi.uploadAttachment(sid, file);
+        setAttachments((prev) =>
+          prev.map((a) =>
+            a.localId === localId ? { ...a, status: "ready" as const, id: desc.id } : a,
+          ),
+        );
+      } catch {
+        setAttachments((prev) =>
+          prev.map((a) => (a.localId === localId ? { ...a, status: "error" as const } : a)),
+        );
+      }
     }
   }
 
@@ -649,7 +701,56 @@ export function AiChatWindow({
           {/* Input */}
           {isAuthed && (
             <div className="border-t border-[var(--border-default)] bg-[var(--surface-card)] px-4 pb-3 pt-3">
+              {attachments.length > 0 && (
+                <div className="mb-2 flex flex-wrap gap-1.5">
+                  {attachments.map((a) => (
+                    <span
+                      key={a.localId}
+                      className={cn(
+                        "inline-flex max-w-[200px] items-center gap-1.5 rounded-lg border px-2 py-1 text-[11px]",
+                        a.status === "error"
+                          ? "border-[var(--red-200,rgba(220,38,38,0.3))] bg-[var(--red-50,rgba(220,38,38,0.06))] text-[var(--red-600,#dc2626)]"
+                          : "border-[var(--border-default)] bg-[var(--surface-muted,rgba(0,0,0,0.03))] text-[var(--text-secondary)]",
+                      )}
+                    >
+                      {a.status === "uploading" ? (
+                        <Spinner aria-hidden weight="bold" className="size-3 shrink-0 animate-spin" />
+                      ) : (
+                        <Paperclip aria-hidden weight="bold" className="size-3 shrink-0" />
+                      )}
+                      <span className="truncate">{a.filename}</span>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setAttachments((prev) => prev.filter((x) => x.localId !== a.localId))
+                        }
+                        aria-label={t("removeAttachment")}
+                        className="shrink-0 opacity-60 transition hover:opacity-100"
+                      >
+                        <X aria-hidden weight="bold" className="size-3" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
               <div className="flex items-end gap-2">
+                <input
+                  type="file"
+                  multiple
+                  ref={fileInputRef}
+                  accept={ACCEPTED_ATTACHMENT_ACCEPT}
+                  onChange={(e) => void handleFilesPicked(e.target.files)}
+                  className="hidden"
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={sending || attachments.length >= MAX_ATTACHMENTS}
+                  aria-label={t("attachButton")}
+                  className="flex size-8 shrink-0 items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition hover:bg-[var(--surface-muted,rgba(0,0,0,0.04))] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <Paperclip aria-hidden weight="bold" className="size-4" />
+                </button>
                 <textarea
                   ref={inputRef}
                   value={input}
@@ -666,12 +767,12 @@ export function AiChatWindow({
                 <button
                   type="button"
                   onClick={() => void send()}
-                  disabled={!input.trim() || sending}
+                  disabled={(!input.trim() && !attachments.some((a) => a.status === "ready")) || sending}
                   aria-label={t("sendBtn")}
                   className={cn(
                     "flex size-8 shrink-0 items-center justify-center rounded-full outline-none transition-all",
                     "text-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
-                    input.trim() && !sending
+                    (input.trim() || attachments.some((a) => a.status === "ready")) && !sending
                       ? "bg-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/90 shadow-[0_1px_4px_rgba(45,95,166,0.30)]"
                       : "bg-[var(--text-muted)]/30 cursor-not-allowed",
                   )}

@@ -6,6 +6,7 @@ import {
   DownloadSimple,
   Lightning,
   MagnifyingGlass,
+  Paperclip,
   Sparkle,
   Spinner,
 } from "@phosphor-icons/react";
@@ -13,7 +14,7 @@ import { cn } from "@/lib/utils";
 import { env } from "@/lib/env";
 import type { ChatMessage } from "@/lib/api";
 import { getAccessToken } from "@/lib/api/session";
-import { TOOL_LABELS } from "./constants";
+import { TOOL_LABELS, extractAttachmentRefs } from "./constants";
 import {
   Bar,
   BarChart,
@@ -114,9 +115,36 @@ export function MessageBubble({
             : "rounded-bl-sm border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] text-[var(--text-primary)] shadow-[0_1px_4px_rgba(11,34,57,0.06)]",
         )}
       >
-        <FormattedContent content={message.content} isUser={isUser} />
+        {isUser ? (
+          <UserBubbleContent content={message.content} />
+        ) : (
+          <FormattedContent content={message.content} isUser={false} />
+        )}
         {!isUser && <MessageArtifacts message={message} />}
       </div>
+    </div>
+  );
+}
+
+/** User message: strip machine-readable attachment refs, show paperclip chips. */
+function UserBubbleContent({ content }: { content: string }) {
+  const { text, filenames } = extractAttachmentRefs(content);
+  return (
+    <div className="flex flex-col gap-1.5">
+      {text && <FormattedContent content={text} isUser />}
+      {filenames.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {filenames.map((name, i) => (
+            <span
+              key={i}
+              className="inline-flex max-w-[200px] items-center gap-1 rounded-lg bg-white/15 px-2 py-1 text-[11px]"
+            >
+              <Paperclip aria-hidden weight="bold" className="size-3 shrink-0" />
+              <span className="truncate">{name}</span>
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
