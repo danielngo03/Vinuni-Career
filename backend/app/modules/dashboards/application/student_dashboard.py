@@ -61,7 +61,11 @@ async def _resolve_affiliation(
         session, user_id=user_id
     )
     return await affiliation_facade.resolve_display(
-        session, user_id=user_id, login_email=email, seeker_type=seeker_type
+        session,
+        user_id=user_id,
+        login_email=email,
+        seeker_type=seeker_type,
+        persona=principal.persona,
     )
 
 

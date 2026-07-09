@@ -295,6 +295,7 @@ async def me(
         user_id=user.id,
         login_email=user.email,
         seeker_type=seeker_type,
+        persona=identity.persona,
     )
     return success(
         presenters.user_summary(

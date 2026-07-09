@@ -134,14 +134,16 @@ async def resolve_display(
     user_id: uuid.UUID,
     login_email: str | None,
     seeker_type: str | None,
+    persona: str | None = None,
 ) -> dict:
     """Resolve the affiliation to badge in the session / profile UI.
 
     ``{"affiliation": str, "verified": bool}``. If a stored affiliation exists AND
     the student is verified, it is returned as ``verified=True``. Otherwise a
-    provisional label is derived (``verified=False``) from the institution
-    login-email domain and onboarding seeker type — giving the otherwise-inert
-    ``seeker_type`` a real purpose without over-persisting.
+    provisional label is derived (``verified=False``): an existing ``alumni``
+    identity persona already IS the affiliation, so it wins; else the label comes
+    from the institution login-email domain and onboarding seeker type — giving the
+    otherwise-inert ``seeker_type`` a real purpose without over-persisting.
     """
 
     profile = await _shared.load_profile_by_user(session, user_id=user_id)
@@ -150,6 +152,10 @@ async def resolve_display(
             "affiliation": profile.affiliation or AFFILIATION_GENERAL,
             "verified": True,
         }
+    # An already-assigned alumni persona is authoritative for the label even before
+    # (re-)verification through this flow.
+    if persona == AFFILIATION_ALUMNI:
+        return {"affiliation": AFFILIATION_ALUMNI, "verified": False}
     return {
         "affiliation": _provisional_affiliation(login_email, seeker_type),
         "verified": False,
