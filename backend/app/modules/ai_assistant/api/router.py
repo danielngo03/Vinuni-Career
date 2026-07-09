@@ -28,12 +28,12 @@ import uuid
 from collections.abc import AsyncGenerator
 
 from fastapi import APIRouter, Depends, Query, status
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response, StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
 from app.modules.ai_assistant.api.schemas import SendMessageRequest, UpdateSessionRequest
-from app.modules.ai_assistant.application import chat_service, usage_service
+from app.modules.ai_assistant.application import chat_exports, chat_service, usage_service
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.shared.responses import success
 
@@ -219,6 +219,28 @@ async def confirm_tool_action(
         message_id=message_id,
     )
     return success(data)
+
+
+@router.get(
+    "/exports/{export_id}",
+    summary="Download an assistant-generated export file (owner-only, RBAC + expiry)",
+)
+async def download_export(
+    export_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> Response:
+    """Return the bytes of a file the assistant generated for the caller.
+
+    Owner-scoped and expiry-checked in ``chat_exports.fetch_export``; the raw
+    storage/bytes are never otherwise exposed (only the URL is handed out).
+    """
+    row = await chat_exports.fetch_export(session, auth.principal, export_id)
+    return Response(
+        content=row.content,
+        media_type=row.mime,
+        headers={"Content-Disposition": f'attachment; filename="{row.filename}"'},
+    )
 
 
 @router.delete(
