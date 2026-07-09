@@ -154,7 +154,7 @@ export function PublicMobileNav() {
             </Link>
             <Link
               href="/auth/register"
-              className="inline-flex h-10 items-center justify-center rounded-lg bg-[var(--brand-primary)] px-4 text-sm font-semibold text-white shadow-[var(--shadow-brand)] outline-none transition-colors hover:bg-[var(--blue-700)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+              className="inline-flex h-10 items-center justify-center rounded-lg bg-[var(--btn-primary-bg)] px-4 text-sm font-semibold text-[var(--btn-primary-fg)] shadow-[var(--shadow-brand)] outline-none transition-colors hover:bg-[var(--btn-primary-hover)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
             >
               {tNav("register")}
             </Link>
