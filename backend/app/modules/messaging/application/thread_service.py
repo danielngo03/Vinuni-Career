@@ -13,6 +13,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import func, or_, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
@@ -474,6 +475,17 @@ async def _persist_thread(
         prior_accepted_exists=prior_accepted,
     )
 
+    # Deterministic dedupe key for the two idempotent axes (application thread, direct
+    # org-Page thread). The upstream ``_existing_*`` queries are the fast path; this key
+    # + the partial UNIQUE index is the race-proof backstop (two concurrent creates can
+    # both pass the query, but only one INSERT survives). NULL for internal / arbitrary
+    # user-recipient threads — those may legitimately repeat.
+    dedupe_key: str | None = None
+    if target_org_id is not None:
+        dedupe_key = f"orgdm:{sender_id}:{target_org_id}"
+    elif context_type == rules.CONTEXT_APPLICATION and context_id is not None:
+        dedupe_key = f"app:{thread_org_id}:{context_id}"
+
     thread = MessageThread(
         kind=kind,
         context_type=context_type,
@@ -486,9 +498,39 @@ async def _persist_thread(
         request_message_count=0,
         created_by=sender_id,
         status=rules.STATUS_ACTIVE,
+        dedupe_key=dedupe_key,
     )
     session.add(thread)
-    await session.flush()
+    if dedupe_key is not None:
+        # Race-proof dedupe. On a lost create race the duplicate INSERT trips the
+        # partial UNIQUE index; we abandon our (otherwise empty) transaction and return
+        # the winner — the caller gets the same shape either way, never a duplicate or a
+        # 500. A full rollback (not a savepoint) is used deliberately: a failed flush
+        # poisons the transaction on SQLite, and there is nothing of ours worth keeping.
+        try:
+            await session.flush()
+        except IntegrityError:
+            # Roll back our poisoned transaction and drop the (now-expired) identity map
+            # so the winner is re-read as a fresh, fully-loaded row rather than lazily
+            # refreshed outside the async greenlet. Each real request owns its session,
+            # so this only ever discards THIS create's own in-flight work.
+            await session.rollback()
+            session.expunge_all()
+            winner = (
+                await session.execute(
+                    select(MessageThread).where(
+                        MessageThread.dedupe_key == dedupe_key,
+                        MessageThread.deleted_at.is_(None),
+                    )
+                )
+            ).scalars().first()
+            if winner is not None:
+                return await _present_created(
+                    session, thread=winner, principal=principal, locale=locale
+                )
+            raise
+    else:
+        await session.flush()
 
     # Participant rows: the author always; each USER recipient. Org/department
     # recipients carry NO user participants — access is via the org inbox (RBAC).
@@ -817,11 +859,19 @@ async def get_thread(
             ),
             None,
         )
-    viewer_is_recipient = (
-        thread.request_state == rules.REQUEST_PENDING
-        and viewer_party is not None
+    # The viewer is the RECIPIENT party (they did not initiate) — the party that
+    # controls the request gate. ``viewer_is_recipient`` narrows that to a still-pending
+    # request (→ Accept/Decline/Block prompt); ``viewer_is_recipient_party`` stays true
+    # across the whole life so the UI can offer Block on an open thread and Unblock on a
+    # blocked one. The initiator never sees these controls.
+    viewer_is_recipient_party = (
+        viewer_party is not None
         and thread.initiator_party_id is not None
         and viewer_party.id != thread.initiator_party_id
+    )
+    viewer_is_recipient = (
+        viewer_is_recipient_party
+        and thread.request_state == rules.REQUEST_PENDING
     )
     org_can_send = (
         me is None
@@ -840,4 +890,5 @@ async def get_thread(
         locale=locale,
     )
     detail["viewer_is_recipient"] = viewer_is_recipient
+    detail["viewer_is_recipient_party"] = viewer_is_recipient_party
     return detail

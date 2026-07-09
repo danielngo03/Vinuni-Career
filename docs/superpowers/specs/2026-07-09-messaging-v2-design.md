@@ -441,3 +441,43 @@ dropped):**
 current head) so it does not create a second Alembic head. A from-scratch DB is also
 blocked by a PRE-EXISTING seed bug in `0005_documents.py` (`KeyError: 'is_premium'`),
 unrelated to messaging.
+
+## 16. Hardening batch — dedupe race + full block lifecycle (2026-07-09)
+
+Two of the §15 deferred items shipped once the migration was rebased to a single head
+(`0091`). Backend + frontend, tested + green (56 messaging tests; ruff + mypy clean;
+tsc + eslint + i18n parity green).
+
+**Concurrent-create TOCTOU → DB-enforced.** `_existing_application_thread` /
+`_existing_direct_org_thread` were check-then-insert with a race window (two requests
+both see "none", both insert → duplicate threads). Added a deterministic
+`message_threads.dedupe_key` (`app:{org}:{application}` | `orgdm:{initiator}:{org}`;
+NULL for internal / arbitrary user-recipient threads) with a **partial UNIQUE index**
+(`WHERE dedupe_key IS NOT NULL AND deleted_at IS NULL`) declared on BOTH the model
+(`sqlite_where` — so SQLite tests get the real constraint) and the migration
+(`postgresql_where`). The fast-path queries stay as the common case; the index is the
+race backstop. On `IntegrityError` the losing create rolls back its own (empty)
+transaction, re-reads, and returns the winner — same shape, never a duplicate or a 500.
+Tested three ways: the pure constraint (dup key rejected, NULLs exempt), and the service
+race via a second concurrent session with the fast-path monkeypatched to miss.
+
+**Full block lifecycle (block / unblock / reopen).** The request gate was one-way
+(`pending` → accept/decline/block, terminal). Now the RECIPIENT party controls the gate
+for the whole conversation life via a pure state machine (`gate.request_transition`):
+`accept` (re)opens from pending **or declined**, `decline` only from pending, `block`
+from pending / declined / **accepted** (block an already-open thread → silences both
+sides immediately), `unblock` lifts a block back to a soft `declined`. The initiator
+never drives these (404, anti-enumeration, unchanged). `viewer_is_recipient_party`
+(state-independent) is now exposed on the thread detail so the UI can offer **Unblock**
+on a blocked thread and **Reopen** on a declined one (the `RequestReconsiderBar` — the
+old dead-end read-only notices now only show to the initiator). New en/vi copy;
+recipient-perspective wording (`blockedByYouNotice` / `declinedByYouNotice`) distinct
+from the initiator-perspective notices. One existing test updated (decline is no longer
+terminal to accept — a recipient may reopen).
+
+**Still deferred (unchanged):** university-staff moderation persona-gating; the
+pre-existing-participant-row dept-scope bypass; WS `org:{id}` not dept-scoped;
+`message.flagged` on the mutable "message" category; `declined` threads still listed in
+the org inbox; block-an-open-thread has backend + API support but no header button yet
+(would need `viewer_is_recipient_party` on the thread LIST to avoid a per-row detail
+fetch); browser QA of the new controls.

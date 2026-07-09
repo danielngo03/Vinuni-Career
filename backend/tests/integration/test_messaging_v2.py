@@ -27,10 +27,12 @@ from app.modules.messaging.application.errors import (
     RequestNotActionableError,
     RequestPendingError,
 )
+from app.modules.messaging.domain import gate
 from app.modules.messaging.domain.models import MessageThread
 from app.modules.notifications.domain.models import Notification, NotificationOutbox
 from app.shared.exceptions import ResourceNotFoundError
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from starlette.datastructures import Headers, UploadFile
 
 from tests.auth_utils import CTX
@@ -226,6 +228,214 @@ async def test_message_email_honors_mute_preference(db_session) -> None:
     assert emails == []  # email muted
 
 
+# --------------------------------------------------------------------------- #
+# Block lifecycle: block / unblock / reopen (recipient controls the gate)       #
+# --------------------------------------------------------------------------- #
+
+
+def test_request_transition_state_machine() -> None:
+    """The pure recipient-driven state machine: accept (re)opens from pending/declined,
+    decline only from pending, block from any live state, unblock only from blocked."""
+    T = gate.request_transition
+    # accept: pending/declined -> accepted; never from blocked or already-accepted.
+    assert T(current_state="pending", action="accept") == "accepted"
+    assert T(current_state="declined", action="accept") == "accepted"
+    assert T(current_state="blocked", action="accept") is None
+    assert T(current_state="accepted", action="accept") is None
+    # decline: only from pending.
+    assert T(current_state="pending", action="decline") == "declined"
+    assert T(current_state="accepted", action="decline") is None
+    # block: from pending / declined / accepted (block at any point); not re-block.
+    for s in ("pending", "declined", "accepted"):
+        assert T(current_state=s, action="block") == "blocked"
+    assert T(current_state="blocked", action="block") is None
+    # unblock: only from blocked -> declined (a soft no, not auto-accept).
+    assert T(current_state="blocked", action="unblock") == "declined"
+    assert T(current_state="pending", action="unblock") is None
+    # unknown action.
+    assert T(current_state="pending", action="frobnicate") is None
+    assert gate.REQUEST_ACTIONS == frozenset(
+        {"accept", "decline", "block", "unblock"}
+    )
+
+
+async def test_recipient_block_unblock_reopen_lifecycle(db_session) -> None:
+    """A recipient can block a pending request, later unblock it (→ a soft declined,
+    still no spam), then accept to reopen the conversation. The INITIATOR can never
+    drive these transitions (404, anti-enumeration)."""
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id], first_message="Hi", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+    assert out["request_state"] == "pending"
+
+    # Recipient blocks → initiator is hard-stopped.
+    res = await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="block", ctx=CTX
+    )
+    assert res["request_state"] == "blocked"
+    with pytest.raises(RequestPendingError):
+        await message_service.send_message(
+            db_session, principal=student, thread_id=tid, body="hello?", ctx=CTX
+        )
+
+    # The initiator (student) cannot unblock — not the recipient party → 404.
+    with pytest.raises(ResourceNotFoundError):
+        await request_service.respond(
+            db_session, principal=student, thread_id=tid, action="unblock", ctx=CTX
+        )
+
+    # Recipient unblocks → soft 'declined' (no longer hard-blocked, still no spam).
+    res = await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="unblock", ctx=CTX
+    )
+    assert res["request_state"] == "declined"
+    with pytest.raises(RequestPendingError):
+        await message_service.send_message(
+            db_session, principal=student, thread_id=tid, body="again?", ctx=CTX
+        )
+
+    # Recipient later accepts (reopen from declined) → open both ways.
+    res = await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="accept", ctx=CTX
+    )
+    assert res["request_state"] == "accepted"
+    await message_service.send_message(
+        db_session, principal=student, thread_id=tid, body="thanks!", ctx=CTX
+    )
+
+    # Only the recipient party carries the gate controls (initiator never does).
+    detail_p = await thread_service.get_thread(
+        db_session, principal=partner, thread_id=tid
+    )
+    assert detail_p["viewer_is_recipient_party"] is True
+    detail_s = await thread_service.get_thread(
+        db_session, principal=student, thread_id=tid
+    )
+    assert detail_s["viewer_is_recipient_party"] is False
+
+
+async def test_recipient_can_block_an_open_thread(db_session) -> None:
+    """Block is not only a first-contact action — a recipient can block an already
+    ACCEPTED conversation, silencing BOTH sides immediately."""
+    student_user, student = await make_student(db_session)
+    partner_user, porg, partner = await make_partner(db_session)
+    out = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[partner_user.id], first_message="Hi", ctx=CTX,
+    )
+    tid = uuid.UUID(out["id"])
+    await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="accept", ctx=CTX
+    )
+    await message_service.send_message(
+        db_session, principal=partner, thread_id=tid, body="hi back", ctx=CTX
+    )
+
+    # Recipient blocks the OPEN thread.
+    res = await request_service.respond(
+        db_session, principal=partner, thread_id=tid, action="block", ctx=CTX
+    )
+    assert res["request_state"] == "blocked"
+    # Both sides are now silenced.
+    with pytest.raises(RequestPendingError):
+        await message_service.send_message(
+            db_session, principal=student, thread_id=tid, body="hello?", ctx=CTX
+        )
+    with pytest.raises(RequestPendingError):
+        await message_service.send_message(
+            db_session, principal=partner, thread_id=tid, body="me too", ctx=CTX
+        )
+
+
+# --------------------------------------------------------------------------- #
+# Concurrent-create dedupe: DB-enforced, race-proof (closes the TOCTOU window)  #
+# --------------------------------------------------------------------------- #
+
+
+async def test_dedupe_key_partial_unique_index_enforced(db_session) -> None:
+    """The partial UNIQUE index makes concurrent duplicate creates impossible at the
+    DB level: two live rows may share a NULL key (internal threads repeat), but not a
+    non-null dedupe key."""
+    student_user, _student = await make_student(db_session)
+    _pu, porg, _partner = await make_partner(db_session)
+
+    # NULL keys are exempt — internal / user-recipient threads legitimately repeat.
+    for _ in range(2):
+        db_session.add(
+            MessageThread(
+                kind="direct", org_id=porg.id, created_by=student_user.id,
+                dedupe_key=None,
+            )
+        )
+    await db_session.flush()
+
+    # Two LIVE rows with the same non-null key → the second is rejected by the index.
+    key = f"orgdm:{student_user.id}:{porg.id}"
+    db_session.add(
+        MessageThread(
+            kind="direct", org_id=porg.id, created_by=student_user.id, dedupe_key=key
+        )
+    )
+    await db_session.flush()
+    db_session.add(
+        MessageThread(
+            kind="direct", org_id=porg.id, created_by=student_user.id, dedupe_key=key
+        )
+    )
+    with pytest.raises(IntegrityError):
+        await db_session.flush()
+
+
+async def test_concurrent_org_page_create_returns_winner(db_session, monkeypatch) -> None:
+    """Even if the service-side dedupe query misses (the TOCTOU window — both racers
+    see 'no existing thread'), the losing INSERT hits the unique index and the service
+    returns the winning thread instead of a duplicate or a 500. The losing create runs
+    in a SEPARATE session, exactly as a second concurrent HTTP request would."""
+    from app.core.db import get_sessionmaker
+
+    student_user, student = await make_student(db_session)
+    _pu, porg, _partner = await make_partner(db_session, display_name="Acme Co")
+
+    # Force the fast-path dedupe query to MISS, simulating two truly-concurrent creates
+    # that both observed "no existing thread" before either committed.
+    async def _always_none(*_a, **_k):
+        return None
+
+    monkeypatch.setattr(thread_service, "_existing_direct_org_thread", _always_none)
+
+    # Winner: commits first (its own session).
+    out1 = await thread_service.create_thread(
+        db_session, principal=student, kind="direct", context_type=None,
+        context_id=None, recipient_ids=[], target_org_id=porg.id,
+        first_message="Hi team", ctx=CTX,
+    )
+
+    # Loser: a fresh session (a second concurrent request) — its INSERT trips the index
+    # and the service returns the winner instead of erroring or duplicating.
+    async with get_sessionmaker()() as session2:
+        out2 = await thread_service.create_thread(
+            session2, principal=student, kind="direct", context_type=None,
+            context_id=None, recipient_ids=[], target_org_id=porg.id,
+            first_message="Hi team again", ctx=CTX,
+        )
+    assert out1["id"] == out2["id"]
+
+    # Exactly one live thread survived the race.
+    rows = (
+        await db_session.execute(
+            select(MessageThread).where(
+                MessageThread.dedupe_key == f"orgdm:{student_user.id}:{porg.id}",
+                MessageThread.deleted_at.is_(None),
+            )
+        )
+    ).scalars().all()
+    assert len(rows) == 1
+
+
 async def test_partner_decline_blocks_further_sends(db_session) -> None:
     student_user, student = await make_student(db_session)
     partner_user, porg, partner = await make_partner(db_session)
@@ -242,10 +452,13 @@ async def test_partner_decline_blocks_further_sends(db_session) -> None:
         await message_service.send_message(
             db_session, principal=student, thread_id=tid, body="please?", ctx=CTX
         )
-    # Re-responding to a settled request is a no-op error.
+    # Re-declining an already-declined request is not actionable (decline is only
+    # valid from pending). NOTE: the recipient CAN still reopen via accept — the
+    # full block/unblock/reopen lifecycle is covered by
+    # ``test_recipient_block_unblock_reopen_lifecycle``.
     with pytest.raises(RequestNotActionableError):
         await request_service.respond(
-            db_session, principal=partner, thread_id=tid, action="accept", ctx=CTX
+            db_session, principal=partner, thread_id=tid, action="decline", ctx=CTX
         )
 
 

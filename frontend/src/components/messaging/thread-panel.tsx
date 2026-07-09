@@ -188,16 +188,21 @@ export function ThreadPanel({
     [messagesQuery.data],
   );
 
-  // Authoritative request facts (viewer_is_recipient + intro counter) come from
-  // the thread detail — only fetched while the thread is a pending request.
+  // Authoritative request facts come from the thread detail: the intro counter +
+  // `viewer_is_recipient` while pending, and `viewer_is_recipient_party` when the
+  // thread is blocked/declined (so only the recipient sees Unblock / Reopen).
+  const needsDetail =
+    isPending || requestState === "blocked" || requestState === "declined";
   const detailQuery = useQuery({
     queryKey: messagingThreadDetailKey(thread.id),
     queryFn: () => messagingApi.getThread(thread.id),
-    enabled: open && isPending,
+    enabled: open && needsDetail,
     staleTime: 8_000,
     retry: false,
   });
   const detail = detailQuery.data;
+  // The recipient party controls the gate for the whole conversation life.
+  const iAmRecipientParty = detail?.viewer_is_recipient_party ?? false;
 
   const { typing, sendTyping } = useThreadTyping(thread.id, open && !isAnnouncement);
 
@@ -257,15 +262,15 @@ export function ThreadPanel({
     mutationFn: (action: RequestAction) => messagingApi.respondRequest(thread.id, action),
     onSuccess: (res, action) => {
       setRequestState(res.request_state);
-      show({
-        tone: action === "accept" ? "success" : "info",
-        title:
-          action === "accept"
-            ? t("requestAcceptedToast")
-            : action === "decline"
-              ? t("requestDeclinedToast")
-              : t("requestBlockedToast"),
-      });
+      const toastKey =
+        action === "accept"
+          ? "requestAcceptedToast"
+          : action === "decline"
+            ? "requestDeclinedToast"
+            : action === "unblock"
+              ? "requestUnblockedToast"
+              : "requestBlockedToast";
+      show({ tone: action === "accept" ? "success" : "info", title: t(toastKey) });
       void messagesQuery.refetch();
       void qc.invalidateQueries({ queryKey: messagingThreadDetailKey(thread.id) });
       onChanged();
@@ -761,16 +766,34 @@ export function ThreadPanel({
       ) : isAnnouncement ? (
         <ReadOnlyNotice text={t("announcementReadOnly")} icon={Megaphone} />
       ) : requestState === "blocked" ? (
-        <ReadOnlyNotice
-          text={t("requestBlockedNotice", { name: thread.counterpart_label })}
-          icon={Prohibit}
-          tone="danger"
-        />
+        iAmRecipientParty ? (
+          <RequestReconsiderBar
+            state="blocked"
+            counterpart={thread.counterpart_label}
+            pending={respond.isPending}
+            onAction={(a) => respond.mutate(a)}
+          />
+        ) : (
+          <ReadOnlyNotice
+            text={t("requestBlockedNotice", { name: thread.counterpart_label })}
+            icon={Prohibit}
+            tone="danger"
+          />
+        )
       ) : requestState === "declined" ? (
-        <ReadOnlyNotice
-          text={t("requestDeclinedNotice", { name: thread.counterpart_label })}
-          icon={XCircle}
-        />
+        iAmRecipientParty ? (
+          <RequestReconsiderBar
+            state="declined"
+            counterpart={thread.counterpart_label}
+            pending={respond.isPending}
+            onAction={(a) => respond.mutate(a)}
+          />
+        ) : (
+          <ReadOnlyNotice
+            text={t("requestDeclinedNotice", { name: thread.counterpart_label })}
+            icon={XCircle}
+          />
+        )
       ) : showRequestActions ? (
         <RequestActionBar
           counterpart={thread.counterpart_label}
@@ -950,6 +973,66 @@ function RequestActionBar({
           <Prohibit aria-hidden weight="bold" className="size-4" />
           {t("requestBlock")}
         </Button>
+      </div>
+    </div>
+  );
+}
+
+function RequestReconsiderBar({
+  state,
+  counterpart,
+  pending,
+  onAction,
+}: {
+  state: "blocked" | "declined";
+  counterpart: string;
+  pending: boolean;
+  onAction: (action: RequestAction) => void;
+}) {
+  const t = useTranslations("messaging");
+  const isBlocked = state === "blocked";
+  return (
+    <div className="border-t border-[var(--border-default)] bg-[var(--bg-subtle)] px-5 py-4">
+      <p
+        className={cn(
+          "flex items-center gap-1.5 text-sm font-semibold",
+          isBlocked ? "text-[var(--brand-red)]" : "text-[var(--text-primary)]",
+        )}
+      >
+        {isBlocked ? (
+          <Prohibit aria-hidden weight="duotone" className="size-4 shrink-0" />
+        ) : (
+          <XCircle aria-hidden weight="duotone" className="size-4 shrink-0" />
+        )}
+        {isBlocked
+          ? t("blockedByYouNotice", { name: counterpart })
+          : t("declinedByYouNotice", { name: counterpart })}
+      </p>
+      <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
+        {isBlocked ? t("unblockHint") : t("reopenHint")}
+      </p>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        {isBlocked ? (
+          <Button
+            variant="secondary"
+            size="sm"
+            loading={pending}
+            onClick={() => onAction("unblock")}
+          >
+            <ArrowUUpLeft aria-hidden weight="bold" className="size-4" />
+            {t("requestUnblock")}
+          </Button>
+        ) : (
+          <Button
+            variant="primary"
+            size="sm"
+            loading={pending}
+            onClick={() => onAction("accept")}
+          >
+            <CheckCircle aria-hidden weight="bold" className="size-4" />
+            {t("requestReopen")}
+          </Button>
+        )}
       </div>
     </div>
   );

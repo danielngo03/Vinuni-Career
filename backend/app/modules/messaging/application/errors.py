@@ -75,7 +75,8 @@ class RequestPendingError(AppError):
 
 
 class RequestNotActionableError(AppError):
-    # 409 — accept/decline/block on a thread that is not a pending request.
+    # 409 — an accept/decline/block/unblock that is illegal from the thread's current
+    # request state (e.g. declining an open thread, accepting a blocked one).
     code = "REQUEST_NOT_PENDING"
     http_status = 409
-    message = "Yêu cầu nhắn tin này không còn ở trạng thái chờ duyệt."
+    message = "Không thể thực hiện thao tác này cho cuộc trò chuyện hiện tại."

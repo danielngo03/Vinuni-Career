@@ -1,9 +1,13 @@
-"""Message-request responses — accept / decline / block (Messaging V2).
+"""Message-request responses — accept / decline / block / unblock (Messaging V2).
 
-The RECIPIENT party of a still-``pending`` request decides whether the conversation
-opens. Only a member of the recipient party may act (a user party = that user; an org
-party = a staff member with the ``messaging`` capability). Non-recipient / non-member
-callers get ``404`` (anti-enumeration). Every transition is audited (PII-safe).
+The RECIPIENT party controls the request gate for the whole life of the conversation
+(not only at first contact): they may **accept** (open, or re-open a declined thread),
+**decline** (soft no), **block** (hard stop at any point, including an already-open
+thread), or **unblock** (lift a block back to a soft no). Only a member of the recipient
+party may act (a user party = that user; an org party = a staff member with the
+``messaging`` capability). Non-recipient / non-member callers get ``404``
+(anti-enumeration). The exact from→to legality lives in the pure ``gate`` state machine.
+Every transition is audited (PII-safe).
 """
 
 from __future__ import annotations
@@ -15,7 +19,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.modules.auth.application.context import RequestContext
 from app.modules.messaging.application import _shared, capability, party_service
 from app.modules.messaging.application.errors import RequestNotActionableError
-from app.modules.messaging.domain import rules
+from app.modules.messaging.domain import gate, rules
 from app.modules.messaging.domain.models import (
     MessageThread,
     MessageThreadParticipant,
@@ -24,12 +28,6 @@ from app.modules.messaging.domain.models import (
 from app.shared.audit import write_audit
 from app.shared.exceptions import ResourceNotFoundError, ValidationFailedError
 from app.shared.permissions import Principal
-
-_ACTIONS = {
-    "accept": rules.REQUEST_ACCEPTED,
-    "decline": rules.REQUEST_DECLINED,
-    "block": rules.REQUEST_BLOCKED,
-}
 
 
 async def _recipient_party(
@@ -67,7 +65,7 @@ async def respond(
 ) -> dict:
     if not principal.is_authenticated or principal.user_id is None:
         raise ResourceNotFoundError()
-    if action not in _ACTIONS:
+    if action not in gate.REQUEST_ACTIONS:
         raise ValidationFailedError(details={"field": "action"})
 
     thread = await _shared.load_thread(session, thread_id=thread_id, lock=True)
@@ -79,10 +77,14 @@ async def respond(
         session, principal=principal, party=recipient
     ):
         raise ResourceNotFoundError()
-    if thread.request_state != rules.REQUEST_PENDING:
+    # Legality of the from→to move (e.g. can't decline an accepted thread, can't
+    # accept a blocked one) is the pure state machine's call.
+    new_state = gate.request_transition(
+        current_state=thread.request_state, action=action
+    )
+    if new_state is None:
         raise RequestNotActionableError()
 
-    new_state = _ACTIONS[action]
     thread.request_state = new_state
     thread.version += 1
 

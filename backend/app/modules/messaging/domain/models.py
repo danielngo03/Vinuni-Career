@@ -27,10 +27,12 @@ from sqlalchemy import (
     Boolean,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     String,
     Text,
     func,
+    text,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -98,6 +100,27 @@ class MessageThread(Base):
         DateTime(timezone=True), nullable=True
     )
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    # Deterministic idempotency key for the two check-then-insert dedupe paths — an
+    # application thread (one per ``(org, application)``) and a direct org-Page thread
+    # (one live thread per ``(initiator, target org)``). The check-then-insert has a
+    # TOCTOU window: two concurrent creates both see "none" and both insert. A partial
+    # UNIQUE index turns that race into a DB-enforced guarantee — the losing INSERT
+    # raises ``IntegrityError`` and the service returns the winner. NULL on every other
+    # thread (internal/user-recipient), excluded from the partial index so they are
+    # never falsely deduped. Unlike the migration-only partial indexes, this one IS
+    # declared on the model (``sqlite_where`` + ``postgresql_where``) so the guarantee
+    # holds under ``create_all`` on SQLite too — concurrency is testable, not just live.
+    dedupe_key: Mapped[str | None] = mapped_column(String(120), nullable=True)
+
+    __table_args__ = (
+        Index(
+            "uq_threads_dedupe",
+            "dedupe_key",
+            unique=True,
+            sqlite_where=text("dedupe_key IS NOT NULL AND deleted_at IS NULL"),
+            postgresql_where=text("dedupe_key IS NOT NULL AND deleted_at IS NULL"),
+        ),
+    )
 
 
 class MessageThreadParticipant(Base):

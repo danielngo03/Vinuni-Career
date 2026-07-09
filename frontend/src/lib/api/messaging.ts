@@ -123,6 +123,13 @@ export interface ThreadDetail extends ThreadSummary {
    * this to decide the Accept/Decline/Block bar instead of inferring client-side.
    */
   viewer_is_recipient: boolean;
+  /**
+   * True when the viewer is the recipient party (the side that did NOT initiate),
+   * regardless of request state. The recipient controls the gate across the whole
+   * conversation life — use this to offer Unblock on a `blocked` thread and Reopen
+   * on a `declined` one. The initiator never sees these controls.
+   */
+  viewer_is_recipient_party: boolean;
 }
 
 /**
@@ -261,7 +268,7 @@ export type RecipientTarget =
 export type InboxScope = "unassigned" | "mine" | "all" | "resolved";
 
 /** Message-request action the recipient may take on a `pending` thread. */
-export type RequestAction = "accept" | "decline" | "block";
+export type RequestAction = "accept" | "decline" | "block" | "unblock";
 
 /* --------------------------------- Inputs --------------------------------- */
 
