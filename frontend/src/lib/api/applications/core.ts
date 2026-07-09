@@ -233,6 +233,23 @@ export interface PartnerApplication {
    * `GET /applications/{id}/offers`. Optional: only the detail endpoint sets it.
    */
   pipeline?: { offer?: OfferBoardGlance | null } | null;
+  /**
+   * Current pipeline stage `{stage_id, stage_name}` from the ACTIVE
+   * `candidate_stages` row, or `null` for a pre-pipeline (submitted) application.
+   * Lets the flat candidates list show pipeline position without opening the board.
+   */
+  stage?: StageRef | null;
+  /**
+   * The recruiter this candidate is assigned to (partner-staff identity only,
+   * no student PII), or `null` when unassigned.
+   */
+  assignee?: CardAssignee | null;
+}
+
+/** A current-pipeline-stage reference on a partner application projection. */
+export interface StageRef {
+  stage_id: string;
+  stage_name: string;
 }
 
 /** Body for a partner rejection decision. `reason` is required. */
@@ -290,6 +307,17 @@ export interface PipelineEvaluation {
 }
 
 /**
+ * The recruiter who owns a candidate on a team board. `display_name` is a
+ * partner-org member (NOT the candidate), so it carries no student PII and is
+ * safe to render on an anonymous card. `null` assignee means unassigned.
+ */
+export interface CardAssignee {
+  membership_id: string;
+  user_id: string;
+  display_name: string;
+}
+
+/**
  * A single board card. Anonymity-safe by construction: the backend only ever
  * includes `display_name` when reveal/RBAC rules allow it; otherwise the card
  * carries the `anonymous_id` (UV-xxxx) handle. Never assume PII is present.
@@ -330,6 +358,11 @@ export interface PipelineCard {
    * carries a LIVE/terminal offer; otherwise it is absent.
    */
   offer?: OfferBoardGlance | null;
+  /**
+   * The recruiter this candidate is assigned to on a multi-person team board, or
+   * `null` when unassigned. Partner-staff identity only — never student PII.
+   */
+  assignee?: CardAssignee | null;
 }
 
 /**

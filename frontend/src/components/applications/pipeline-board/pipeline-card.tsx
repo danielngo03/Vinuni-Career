@@ -164,6 +164,21 @@ export function PipelineCardView({
         </p>
       )}
 
+      {/* Candidate owner (partner-staff identity; safe on anonymous cards) */}
+      <p
+        className={
+          card.assignee
+            ? "mt-1.5 inline-flex max-w-full items-center gap-1 text-[0.6875rem] font-medium text-muted-foreground"
+            : "mt-1.5 inline-flex items-center gap-1 text-[0.6875rem] text-muted-foreground/70"
+        }
+        title={card.assignee ? t("assignedTo", { name: card.assignee.display_name }) : t("unassigned")}
+      >
+        <UserRound aria-hidden className="size-3 shrink-0" strokeWidth={1.9} />
+        <span className="truncate">
+          {card.assignee ? t("assignedTo", { name: card.assignee.display_name }) : t("unassigned")}
+        </span>
+      </p>
+
       {/* Evaluation gate */}
       {showGate && (
         <div className="mt-2 flex flex-wrap items-center gap-1.5">

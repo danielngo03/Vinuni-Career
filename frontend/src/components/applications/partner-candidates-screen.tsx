@@ -442,6 +442,19 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
       ),
     },
     {
+      id: "stage",
+      enableSorting: false,
+      header: t("colStage"),
+      cell: ({ row }) =>
+        row.original.stage ? (
+          <StatusChip tone="indigo" size="sm">
+            {row.original.stage.stage_name}
+          </StatusChip>
+        ) : (
+          <span className="type-caption text-muted-foreground">{t("notInPipeline")}</span>
+        ),
+    },
+    {
       id: "reveal",
       enableSorting: false,
       header: t("colReveal"),
