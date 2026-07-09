@@ -36,7 +36,10 @@ export type NotifType =
   | "opportunities.event_cancelled"
   | "opportunities.event_reminder"
   | "organization.partner_approved"
-  | "messaging.message.received"
+  | "message.received"
+  | "message.request_accepted"
+  | "message.flagged"
+  | "messaging.thread_assigned"
   | "advertising.placement_approved"
   | "advertising.placement_rejected"
   | (string & {});

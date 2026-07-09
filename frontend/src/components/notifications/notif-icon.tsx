@@ -11,6 +11,7 @@ import {
   Money,
   SealCheck,
   UserPlus,
+  Warning,
   XCircle,
   type Icon,
 } from "@phosphor-icons/react";
@@ -139,8 +140,20 @@ const VISUALS: Record<string, NotifVisual> = {
     icon: Handshake,
     gradient: "icon-chip-success",
   },
-  "messaging.message.received": {
+  "message.received": {
     icon: ChatText,
+    gradient: "icon-chip-primary",
+  },
+  "message.request_accepted": {
+    icon: Handshake,
+    gradient: "icon-chip-success",
+  },
+  "message.flagged": {
+    icon: Warning,
+    gradient: "icon-chip-danger",
+  },
+  "messaging.thread_assigned": {
+    icon: ClipboardText,
     gradient: "icon-chip-primary",
   },
   "advertising.placement_approved": {
@@ -188,7 +201,10 @@ const CATEGORY_KEYS: Record<string, string> = {
   "opportunities.event_cancelled": "event",
   "opportunities.event_reminder": "event",
   "organization.partner_approved": "organization",
-  "messaging.message.received": "message",
+  "message.received": "message",
+  "message.request_accepted": "message",
+  "message.flagged": "message",
+  "messaging.thread_assigned": "message",
   "advertising.placement_approved": "advertising",
   "advertising.placement_rejected": "advertising",
 };
