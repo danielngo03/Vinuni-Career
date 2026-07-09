@@ -9,7 +9,6 @@ import {
   FileSignature,
   UserRoundSearch,
   CalendarDays,
-  MessageSquareText,
   Star,
   Megaphone,
   BarChart3,
@@ -164,7 +163,6 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       items: [
         { key: "team", href: "/team", icon: UsersRound },
         { key: "recruitingWorkflows", href: "/workflow", icon: Workflow },
-        { key: "messages", href: "/messages", icon: MessageSquareText },
         { key: "security", href: "/security", icon: ShieldCheck },
       ],
     },
@@ -198,7 +196,6 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
         { key: "events", href: "/events", icon: CalendarDays },
         { key: "reviews", href: "/reviews", icon: Star },
         { key: "advertising", href: "/advertising", icon: Megaphone },
-        { key: "messages", href: "/messages", icon: MessageSquareText },
       ],
     },
     {
