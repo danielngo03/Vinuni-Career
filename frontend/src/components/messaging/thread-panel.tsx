@@ -562,12 +562,12 @@ export function ThreadPanel({
   return (
     <div className="flex h-full flex-col">
       {/* Header */}
-      <div className="flex items-start gap-2 border-b border-[var(--border-default)] bg-white px-5 py-4">
+      <div className="flex items-start gap-2 border-b border-[var(--border-default)] bg-[var(--surface-card)] px-5 py-4">
         <button
           type="button"
           onClick={onBack}
           aria-label={tc("back")}
-          className="-ml-1 rounded-lg p-1.5 text-[var(--text-secondary)] outline-none hover:bg-[#f2f1ee] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+          className="-ml-1 rounded-lg p-1.5 text-[var(--text-secondary)] outline-none hover:bg-[var(--bg-subtle)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
         >
           <ArrowLeft aria-hidden weight="bold" className="size-5" />
         </button>
@@ -624,7 +624,7 @@ export function ThreadPanel({
                 aria-pressed={muted}
                 aria-label={muted ? t("unmute") : t("mute")}
                 title={muted ? t("unmute") : t("mute")}
-                className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+                className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
               >
                 {muted ? (
                   <BellSlash aria-hidden weight="duotone" className="size-4" />
@@ -648,7 +648,7 @@ export function ThreadPanel({
 
       {/* Org inbox: mobile Assign/Resolve row */}
       {isOrg && canAssign && !isAnnouncement && (
-        <div className="flex items-center gap-2 border-b border-[var(--border-default)] bg-[#fbfaf8] px-5 py-2 sm:hidden">
+        <div className="flex items-center gap-2 border-b border-[var(--border-default)] bg-[var(--bg-subtle)] px-5 py-2 sm:hidden">
           <Button variant="secondary" size="xs" fullWidth onClick={() => setAssignOpen(true)}>
             <UserSwitch aria-hidden weight="bold" className="size-3.5" />
             {assignmentState === "assigned" ? t("reassign") : t("assign")}
@@ -668,7 +668,7 @@ export function ThreadPanel({
       {/* Transcript */}
       <div
         ref={scrollRef}
-        className="flex-1 space-y-3 overflow-y-auto bg-white px-5 py-4"
+        className="flex-1 space-y-3 overflow-y-auto bg-[var(--surface-card)] px-5 py-4"
         aria-label={t("transcript")}
       >
         {isStale && (
@@ -785,7 +785,7 @@ export function ThreadPanel({
       ) : !thread.can_reply ? (
         <ReadOnlyNotice text={t("replyNotAllowed")} icon={WarningCircle} />
       ) : (
-        <div className="border-t border-[var(--border-default)] bg-[#fbfaf8]">
+        <div className="border-t border-[var(--border-default)] bg-[var(--bg-subtle)]">
           {iAmRequestInitiator && (
             <p className="flex flex-wrap items-center gap-x-2 gap-y-0.5 px-5 pt-3 text-xs font-medium text-[var(--text-secondary)]">
               <span className="flex items-center gap-1.5">
@@ -848,7 +848,7 @@ export function ThreadPanel({
               onClick={() => fileInputRef.current?.click()}
               aria-label={t("attachAdd")}
               title={t("attachAdd")}
-              className="mb-0.5 shrink-0 rounded-lg p-2 text-[var(--text-muted)] outline-none hover:bg-[#f2f1ee] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+              className="mb-0.5 shrink-0 rounded-lg p-2 text-[var(--text-muted)] outline-none hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
             >
               <Paperclip aria-hidden weight="bold" className="size-5" />
             </button>
@@ -871,7 +871,7 @@ export function ThreadPanel({
               rows={1}
               maxLength={8000}
               placeholder={t("composerPlaceholder")}
-              className="max-h-32 min-h-[40px] flex-1 resize-none rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:ring-2 focus:ring-[var(--brand-primary)]/20"
+              className="max-h-32 min-h-[40px] flex-1 resize-none rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)]/50 focus:ring-2 focus:ring-[var(--brand-primary)]/20"
             />
             <Button
               type="submit"
@@ -930,7 +930,7 @@ function RequestActionBar({
 }) {
   const t = useTranslations("messaging");
   return (
-    <div className="border-t border-[var(--border-default)] bg-[#fbfaf8] px-5 py-4">
+    <div className="border-t border-[var(--border-default)] bg-[var(--bg-subtle)] px-5 py-4">
       <p className="text-sm font-semibold text-[var(--text-primary)]">
         {t("requestActionsTitle")}
       </p>
@@ -976,7 +976,7 @@ function AttachmentDraftChip({
         "relative flex items-center gap-2 rounded-lg border px-2 py-1.5 pr-7",
         failed
           ? "border-[var(--brand-red)]/40 bg-[var(--red-50)]"
-          : "border-[var(--border-default)] bg-white",
+          : "border-[var(--border-default)] bg-[var(--surface-card)]",
       )}
     >
       {attachment.previewUrl ? (
@@ -1194,7 +1194,7 @@ function ReadOnlyNotice({
   return (
     <p
       className={cn(
-        "flex items-center justify-center gap-1.5 border-t border-[var(--border-default)] bg-[#fbfaf8] px-5 py-4 text-xs font-medium",
+        "flex items-center justify-center gap-1.5 border-t border-[var(--border-default)] bg-[var(--bg-subtle)] px-5 py-4 text-xs font-medium",
         tone === "danger" ? "text-[var(--brand-red)]" : "text-[var(--text-muted)]",
       )}
     >

@@ -116,11 +116,11 @@ export function MessagingScreen({
 
   return (
     <div className="flex h-full min-h-[560px] flex-col">
-      <div className="grid min-h-0 flex-1 overflow-hidden bg-white md:grid-cols-[340px_minmax(0,1fr)]">
+      <div className="grid min-h-0 flex-1 overflow-hidden bg-[var(--surface-card)] md:grid-cols-[340px_minmax(0,1fr)]">
         {/* ── Thread list (left rail) ── */}
         <aside
           className={cn(
-            "flex w-full flex-col overflow-y-auto bg-white p-3 md:shrink-0 md:border-r md:border-[var(--border-default)]",
+            "flex w-full flex-col overflow-y-auto bg-[var(--surface-card)] p-3 md:shrink-0 md:border-r md:border-[var(--border-default)]",
             selected && "hidden md:flex",
           )}
         >
@@ -131,7 +131,7 @@ export function MessagingScreen({
                   {t("title")}
                 </h2>
                 {threads.length > 0 && (
-                  <span className="rounded-full bg-[#f7f6f2] px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055)]">
+                  <span className="rounded-full bg-[var(--bg-subtle)] px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055)]">
                     {threads.length}
                   </span>
                 )}
@@ -144,7 +144,7 @@ export function MessagingScreen({
             <label htmlFor="message-search" className="sr-only">
               {t("searchLabel")}
             </label>
-            <div className="mt-2 flex h-9 items-center gap-2 rounded-full border border-[var(--border-default)] bg-[#f7f6f2] px-3 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-white">
+            <div className="mt-2 flex h-9 items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-[var(--surface-card)]">
               <MagnifyingGlass aria-hidden weight="bold" className="size-4 shrink-0" />
               <input
                 id="message-search"
@@ -226,7 +226,7 @@ export function MessagingScreen({
         {/* ── Thread detail (right pane) ── */}
         <div
           className={cn(
-            "flex min-h-0 flex-col overflow-hidden bg-white",
+            "flex min-h-0 flex-col overflow-hidden bg-[var(--surface-card)]",
             !selected && "hidden md:flex",
           )}
         >
@@ -300,9 +300,9 @@ function ThreadListRow({
       className={cn(
         "relative flex w-full cursor-pointer items-start gap-3 rounded-[16px] px-3 py-3 text-left outline-none transition-colors duration-200",
         active
-          ? "bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055),0_1px_2px_rgba(0,0,0,0.03)] before:absolute before:left-1.5 before:top-3 before:h-[calc(100%-1.5rem)] before:w-1 before:rounded-full before:bg-[var(--text-primary)]"
-          : "hover:bg-white focus-visible:bg-white",
-        !active && unread && "bg-white/70",
+          ? "bg-[var(--surface-card)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055),0_1px_2px_rgba(0,0,0,0.03)] before:absolute before:left-1.5 before:top-3 before:h-[calc(100%-1.5rem)] before:w-1 before:rounded-full before:bg-[var(--text-primary)]"
+          : "hover:bg-[var(--bg-subtle)] focus-visible:bg-[var(--bg-subtle)]",
+        !active && unread && "bg-[var(--surface-card)]",
       )}
     >
       <span
@@ -310,7 +310,7 @@ function ThreadListRow({
           "mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.045)]",
           active || unread
             ? "bg-[var(--text-primary)] text-white"
-            : "bg-[#f2f1ee] text-[var(--text-secondary)]",
+            : "bg-[var(--bg-muted)] text-[var(--text-secondary)]",
         )}
       >
         {isAnnouncement ? (

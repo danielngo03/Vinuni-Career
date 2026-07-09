@@ -156,7 +156,7 @@ export function AssignThreadModal({
         </div>
 
         {/* Search + pick */}
-        <div className="flex h-11 items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-white">
+        <div className="flex h-11 items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-[var(--surface-card)]">
           <MagnifyingGlass aria-hidden weight="bold" className="size-4 shrink-0" />
           <label htmlFor="assign-search" className="sr-only">
             {t("assignSearchLabel")}
@@ -231,7 +231,7 @@ function SelectedSlot({
   onClear: () => void;
 }) {
   return (
-    <div className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2">
+    <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
         {label}
       </p>

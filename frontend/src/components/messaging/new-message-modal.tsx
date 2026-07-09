@@ -176,7 +176,7 @@ function PickStep({
 
   return (
     <div className="space-y-3">
-      <div className="flex h-11 items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-white">
+      <div className="flex h-11 items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-[var(--surface-card)]">
         <MagnifyingGlass aria-hidden weight="bold" className="size-4 shrink-0" />
         <label htmlFor="recipient-search" className="sr-only">
           {t("recipientSearchLabel")}

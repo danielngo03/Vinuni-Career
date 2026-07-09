@@ -144,11 +144,11 @@ export function OrgInboxScreen({
 
   return (
     <div className="flex h-full min-h-[560px] flex-col">
-      <div className="grid min-h-0 flex-1 overflow-hidden bg-white md:grid-cols-[360px_minmax(0,1fr)]">
+      <div className="grid min-h-0 flex-1 overflow-hidden bg-[var(--surface-card)] md:grid-cols-[360px_minmax(0,1fr)]">
         {/* ── Inbox list (left rail) ── */}
         <aside
           className={cn(
-            "flex w-full flex-col overflow-y-auto bg-white p-3 md:shrink-0 md:border-r md:border-[var(--border-default)]",
+            "flex w-full flex-col overflow-y-auto bg-[var(--surface-card)] p-3 md:shrink-0 md:border-r md:border-[var(--border-default)]",
             selected && "hidden md:flex",
           )}
         >
@@ -191,7 +191,7 @@ export function OrgInboxScreen({
                     setDepartmentId(e.target.value);
                     setSelected(null);
                   }}
-                  className="h-9 w-full appearance-none rounded-lg border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 text-xs font-medium text-[var(--text-primary)] outline-none focus:border-[var(--border-strong)] focus:bg-white"
+                  className="h-9 w-full appearance-none rounded-lg border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 text-xs font-medium text-[var(--text-primary)] outline-none focus:border-[var(--border-strong)] focus:bg-[var(--surface-card)]"
                 >
                   {departmentOptions.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -200,7 +200,7 @@ export function OrgInboxScreen({
                   ))}
                 </select>
               </div>
-              <div className="flex h-9 flex-1 items-center gap-2 rounded-lg border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-white">
+              <div className="flex h-9 flex-1 items-center gap-2 rounded-lg border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 text-[var(--text-secondary)] focus-within:border-[var(--border-strong)] focus-within:bg-[var(--surface-card)]">
                 <label htmlFor="inbox-search" className="sr-only">
                   {t("searchLabel")}
                 </label>
@@ -281,7 +281,7 @@ export function OrgInboxScreen({
         {/* ── Thread detail (right pane) ── */}
         <div
           className={cn(
-            "flex min-h-0 flex-col overflow-hidden bg-white",
+            "flex min-h-0 flex-col overflow-hidden bg-[var(--surface-card)]",
             !selected && "hidden md:flex",
           )}
         >
@@ -357,7 +357,7 @@ function InboxRow({
       className={cn(
         "relative flex w-full cursor-pointer items-start gap-3 rounded-[16px] px-3 py-3 text-left outline-none transition-colors duration-200",
         active
-          ? "bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055),0_1px_2px_rgba(0,0,0,0.03)] before:absolute before:left-1.5 before:top-3 before:h-[calc(100%-1.5rem)] before:w-1 before:rounded-full before:bg-[var(--text-primary)]"
+          ? "bg-[var(--surface-card)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.055),0_1px_2px_rgba(0,0,0,0.03)] before:absolute before:left-1.5 before:top-3 before:h-[calc(100%-1.5rem)] before:w-1 before:rounded-full before:bg-[var(--text-primary)]"
           : "hover:bg-[var(--bg-subtle)] focus-visible:bg-[var(--bg-subtle)]",
       )}
     >
@@ -366,7 +366,7 @@ function InboxRow({
           "mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.045)]",
           active || unread
             ? "bg-[var(--text-primary)] text-white"
-            : "bg-[#f2f1ee] text-[var(--text-secondary)]",
+            : "bg-[var(--bg-muted)] text-[var(--text-secondary)]",
         )}
       >
         {isAnnouncement ? (

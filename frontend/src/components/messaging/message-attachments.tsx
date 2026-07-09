@@ -159,7 +159,7 @@ function AttachmentFile({
         "group flex max-w-[16rem] items-center gap-2.5 rounded-lg px-2.5 py-2 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
         mine
           ? "bg-white/15 hover:bg-white/25"
-          : "bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)] hover:bg-[var(--bg-subtle)]",
+          : "bg-[var(--surface-card)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)] hover:bg-[var(--bg-subtle)]",
       )}
     >
       <span
