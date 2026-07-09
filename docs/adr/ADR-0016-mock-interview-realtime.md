@@ -116,7 +116,9 @@ A cross-cutting audit (student UX, governance/RBAC, backend edge-cases) drove a
 hardening pass. Backend gates stay at the pre-existing baseline (ruff feature-
 clean; `mypy app` 45/15; `pytest tests/mock_interview` 81 passed) and a real
 OpenRouter + Gemini-Live E2E confirmed the flow (first-token ≈1s, no score/model
-leakage, ephemeral token minted). Migration `0085_mock_interview_hardening`.
+leakage, ephemeral token minted). Migration `0092_mock_interview_hardening`
+(renamed from `0085` and re-chained onto the reconciled head `0091` when the
+feature was consolidated into the live app).
 
 - **Privacy (was a real leak): the student `GET /sessions/{id}` route no longer
   widens ownership for a superadmin.** It previously returned another user's RAW
@@ -146,7 +148,24 @@ leakage, ephemeral token minted). Migration `0085_mock_interview_hardening`.
   date), and a Vietnamese-safe print font stack; the CV-fit ring is explicitly
   labelled "CV match" so it can't read as an interview score; realtime adds a
   connect-timeout that degrades to browser-voice/text.
-- **Known follow-ups (documented, not done):** in-session idle auto-nudge and a
-  "no speech detected → switch to typing" affordance on the browser-STT path;
-  history pagination; per-university aggregate scoping (moot today — single
-  university).
+## Update — 2026-07-09 (live-session idle nudge + silent-STT escape hatch)
+
+Closed the two deferred live-session edge cases. During the candidate's turn a
+long silence (~22s with no recognized speech and no typing) now surfaces a calm
+nudge; on the voice/realtime path it offers a one-tap **switch to typing** — the
+escape hatch for when browser STT quietly fails to hear anything (mic works but
+nothing is recognized). On the text path it's a soft "take your time"
+reassurance. Any recognized speech (interim caption) or phase change resets the
+wait, and the nudge is suppressed when a more urgent affordance (turn error /
+dropped realtime) is already offering a next step. Implemented as a single
+`setTimeout` watchdog mirroring the existing realtime connect-watchdog in
+`live-session.tsx`; vi/en copy added; frontend `tsc`/`build`/parity green.
+Consolidated into the running app (`vinuni-main-submission`) by fast-forward.
+
+- **Remaining follow-ups (documented, not done):** history pagination (low value
+  today — session count is bounded by the daily/weekly caps, and the list already
+  returns up to 50); a full `frontend-design` visual-redesign pass and
+  **browser/mic QA** of the live voice flow (needs a running browser + microphone
+  this environment can't exercise, so these surfaces stay `build verified` /
+  `API wired`, not `browser verified`); per-university aggregate scoping (moot
+  today — single university).
