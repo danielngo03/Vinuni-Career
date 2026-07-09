@@ -97,7 +97,10 @@ class MessagingSocket {
     }
     let ws: WebSocket;
     try {
-      ws = new WebSocket(`${apiWsUrl("/messaging/ws")}?token=${encodeURIComponent(token)}`);
+      // Token is NOT put in the URL (query strings leak into logs/history). It is
+      // sent as the first frame after open — the server subscribes nothing until
+      // that auth handshake validates.
+      ws = new WebSocket(apiWsUrl("/messaging/ws"));
     } catch {
       this.scheduleReconnect();
       return;
@@ -106,6 +109,11 @@ class MessagingSocket {
     ws.onopen = () => {
       this.attempts = 0;
       this.setConnected(true);
+      try {
+        ws.send(JSON.stringify({ type: "auth", token }));
+      } catch {
+        // If the first send fails the socket is already gone; reconnect logic handles it.
+      }
     };
     ws.onmessage = (e) => {
       let data: unknown;

@@ -1,19 +1,24 @@
-"""Messaging realtime WebSocket endpoint — ``/api/v1/messaging/ws?token=…``.
+"""Messaging realtime WebSocket endpoint — ``/api/v1/messaging/ws``.
 
-Auth is re-checked on connect (`.claude/rules/realtime.md`): the access token is
-decoded and the session/user/identity validated exactly like the HTTP path, then the
-socket subscribes to its ``user:{id}`` channel and — for a staff member with the
-``messaging:read`` capability — its ``org:{id}`` channel (shared inbox). Only lightweight
-signals flow over the socket (``{type, thread_id}``); clients refetch, so masking is
-never bypassed. The DB session is short-lived (auth + per-typing checks), never held for
-the connection lifetime.
+Auth is re-checked on connect (`.claude/rules/realtime.md`) via a FIRST-MESSAGE
+handshake: the client must send ``{"type": "auth", "token": "<access token>"}`` as
+its first frame after the socket opens; nothing is subscribed until it validates.
+The access token is deliberately NOT accepted as a URL query parameter — query
+strings leak into access logs, proxies, and browser history (security review). The
+token is decoded and the session/user/identity validated exactly like the HTTP path,
+then the socket subscribes to its ``user:{id}`` channel and — for a staff member with
+the ``messaging:read`` capability — its ``org:{id}`` channel (shared inbox). Only
+lightweight signals flow over the socket (``{type, thread_id}``); clients refetch, so
+masking is never bypassed. The DB session is short-lived (auth + per-typing checks),
+never held for the connection lifetime.
 """
 
 from __future__ import annotations
 
+import asyncio
 import uuid
 
-from fastapi import APIRouter, Query, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from sqlalchemy import select
 
 from app.core.db import get_sessionmaker
@@ -69,11 +74,30 @@ async def _user_in_thread(principal: Principal, thread_id: uuid.UUID) -> bool:
         )
 
 
+async def _await_auth_token(websocket: WebSocket) -> str | None:
+    """Read the required first-frame auth handshake ``{"type":"auth","token":...}``.
+
+    Returns the token, or ``None`` if the client sends the wrong frame, no token, or
+    nothing within the timeout — the caller then closes the socket unauthorized. The
+    token never travels in the URL, so it cannot leak into access logs.
+    """
+
+    try:
+        first = await asyncio.wait_for(websocket.receive_json(), timeout=10)
+    except (TimeoutError, WebSocketDisconnect, ValueError, TypeError):
+        return None
+    if not isinstance(first, dict) or first.get("type") != "auth":
+        return None
+    token = first.get("token")
+    return token if isinstance(token, str) and token else None
+
+
 @ws_router.websocket("/ws")
-async def messaging_ws(
-    websocket: WebSocket,
-    token: str = Query(default=""),
-) -> None:
+async def messaging_ws(websocket: WebSocket) -> None:
+    # Accept first so we can receive the auth handshake frame; NOTHING is subscribed
+    # or delivered until the token validates.
+    await websocket.accept()
+    token = await _await_auth_token(websocket)
     principal = await _principal_from_token(token) if token else None
     if principal is None or principal.user_id is None:
         await websocket.close(code=4401)  # unauthorized
@@ -84,8 +108,6 @@ async def messaging_ws(
         principal, principal.org_id
     ):
         channels.append(org_channel(principal.org_id))
-
-    await websocket.accept()
 
     async def _send(event: dict) -> None:
         await websocket.send_json(event)
