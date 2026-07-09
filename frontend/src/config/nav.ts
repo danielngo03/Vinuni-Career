@@ -1,21 +1,13 @@
 import {
-  SquaresFour,
-  UserCircle,
-  FileText as PhFileText,
-  Briefcase as PhBriefcase,
-  ClipboardText,
-  Calendar as PhCalendar,
-  BellSimple,
-  EnvelopeSimple,
-  Microphone,
-} from "@phosphor-icons/react";
-import {
+  LayoutDashboard,
   LayoutGrid,
   Briefcase,
   UsersRound,
   Users,
   Kanban,
-  BookUser,
+  CalendarClock,
+  FileSignature,
+  UserRoundSearch,
   CalendarDays,
   MessageSquareText,
   Star,
@@ -30,7 +22,6 @@ import {
   GraduationCap,
   FileText,
   Bot,
-  Layers,
   LineChart,
   Settings,
   HeartHandshake,
@@ -43,6 +34,9 @@ import {
   ToggleRight,
   Siren,
   Mic,
+  CircleUser,
+  ClipboardList,
+  Mail,
 } from "lucide-react";
 import type { Persona } from "@/stores/auth-store";
 
@@ -95,15 +89,15 @@ export interface NavItem {
  * `SavedButton`, not as a primary tab.
  */
 export const STUDENT_PRIMARY_NAV: NavItem[] = [
-  { key: "jobs", href: "/jobs", icon: PhBriefcase, absolute: true },
-  { key: "dashboard", href: "/dashboard", icon: SquaresFour },
-  { key: "cv", href: "/cv", icon: PhFileText },
-  { key: "profile", href: "/profile", icon: UserCircle },
-  { key: "applications", href: "/applications", icon: ClipboardText },
-  { key: "invitations", href: "/invitations", icon: EnvelopeSimple },
-  { key: "mockInterviews", href: "/interviews", icon: Microphone },
-  { key: "alerts", href: "/alerts", icon: BellSimple },
-  { key: "myEvents", href: "/events", icon: PhCalendar },
+  { key: "jobs", href: "/jobs", icon: Briefcase, absolute: true },
+  { key: "dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { key: "cv", href: "/cv", icon: FileText },
+  { key: "profile", href: "/profile", icon: CircleUser },
+  { key: "applications", href: "/applications", icon: ClipboardList },
+  { key: "invitations", href: "/invitations", icon: Mail },
+  { key: "mockInterviews", href: "/interviews", icon: Mic },
+  { key: "alerts", href: "/alerts", icon: Bell },
+  { key: "myEvents", href: "/events", icon: CalendarDays },
 ];
 
 /** Resolve a student nav item to its full path (persona-prefixed unless absolute). */
@@ -135,76 +129,86 @@ export interface NavGroup {
  */
 export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
   student: [{ key: null, items: STUDENT_PRIMARY_NAV }],
+  // Partner IA (design spec §3): OVERVIEW · HIRING · GROWTH · WORKSPACE.
+  // Flat, small-caps-titled groups so every operating surface is one click away
+  // (premium-admin pattern). Company profile / Billing / Settings live in the
+  // account menu + Settings leaf; the AI Assistant is a topbar quick action.
   partner: [
     {
-      key: null,
+      key: "overview",
       items: [
-        { key: "dashboard", href: "/dashboard", icon: LayoutGrid },
-        { key: "ops", href: "/ops", icon: Gauge },
+        { key: "dashboard", href: "/dashboard", icon: LayoutDashboard },
         { key: "jobs", href: "/jobs", icon: Briefcase },
       ],
     },
     {
-      key: "recruitment",
-      accordion: true,
-      icon: UsersRound,
+      key: "hiring",
       items: [
         { key: "candidates", href: "/candidates", icon: Users },
         { key: "pipeline", href: "/pipeline", icon: Kanban },
-        { key: "talentPool", href: "/talent-pool", icon: BookUser },
+        { key: "interviews", href: "/interviews", icon: CalendarClock },
+        { key: "offers", href: "/offers", icon: FileSignature },
+        { key: "talentPool", href: "/talent-pool", icon: UserRoundSearch },
+      ],
+    },
+    {
+      key: "growth",
+      items: [
+        { key: "analytics", href: "/analytics", icon: BarChart3 },
+        { key: "advertising", href: "/advertising", icon: Megaphone },
+        { key: "events", href: "/events", icon: CalendarDays },
+      ],
+    },
+    {
+      key: "workspace",
+      items: [
+        { key: "team", href: "/team", icon: UsersRound },
         { key: "recruitingWorkflows", href: "/workflow", icon: Workflow },
+        { key: "messages", href: "/messages", icon: MessageSquareText },
         { key: "security", href: "/security", icon: ShieldCheck },
       ],
     },
-    {
-      key: null,
-      items: [
-        { key: "events", href: "/events", icon: CalendarDays },
-        { key: "advertising", href: "/advertising", icon: Megaphone },
-        { key: "analytics", href: "/analytics", icon: BarChart3 },
-      ],
-    },
   ],
+  // University IA (design spec §3): OVERVIEW · GOVERNANCE · OPERATIONS ·
+  // INSTITUTION, then TRUST + SYSTEM ADMIN (kept as accordions — dense,
+  // less-frequent, superadmin-gated).
   university: [
     {
-      key: null,
+      key: "overview",
       items: [
-        { key: "dashboard", href: "/dashboard", icon: LayoutGrid },
+        { key: "dashboard", href: "/dashboard", icon: LayoutDashboard },
         { key: "reports", href: "/reports", icon: LineChart },
       ],
     },
     {
       key: "governance",
-      accordion: true,
-      icon: ShieldCheck,
       items: [
         { key: "moderation", href: "/moderation", icon: FileCheck },
         { key: "partners", href: "/partners", icon: Building2 },
         { key: "users", href: "/users", icon: Users },
+        { key: "auditLog", href: "/audit-log", icon: ScrollText },
         { key: "workflowBuilder", href: "/workflow", icon: Workflow },
       ],
     },
     {
-      key: "engagement",
+      key: "operations",
       items: [
         { key: "careerServices", href: "/career-services", icon: HeartHandshake },
         { key: "mockInterview", href: "/mock-interview", icon: Mic },
-        { key: "messages", href: "/messages", icon: MessageSquareText },
         { key: "events", href: "/events", icon: CalendarDays },
         { key: "reviews", href: "/reviews", icon: Star },
         { key: "advertising", href: "/advertising", icon: Megaphone },
+        { key: "messages", href: "/messages", icon: MessageSquareText },
       ],
     },
     {
-      key: "platform",
-      accordion: true,
-      icon: Layers,
+      key: "institution",
       items: [
         { key: "careerOutcomes", href: "/career-outcomes", icon: GraduationCap },
         { key: "cvTemplates", href: "/cv-templates", icon: FileText },
         { key: "notificationTemplates", href: "/notifications/templates", icon: Bell },
-        { key: "subscriptions", href: "/billing", icon: CreditCard },
         { key: "aiSettings", href: "/ai-settings", icon: Bot },
+        { key: "subscriptions", href: "/billing", icon: CreditCard },
       ],
     },
     {

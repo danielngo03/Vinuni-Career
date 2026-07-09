@@ -23,12 +23,13 @@ interface SidebarProps {
 }
 
 const ROW_CLASS =
-  "group/nav-row flex min-h-9 cursor-pointer items-center gap-2.5 rounded-[12px] px-3 py-1.5 text-[0.8125rem] font-semibold outline-none transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/25";
+  "group/nav-row flex min-h-9 cursor-pointer items-center gap-2.5 rounded-[10px] px-3 py-1.5 text-[0.8125rem] font-medium outline-none transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]";
 const ROW_IDLE_CLASS =
   "text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]";
-/** VinUni mark navy fill — the current route reads as a real selected button. */
+/** Subtle active pill (Linear/Vercel): soft fill + ink text + a hairline ring,
+ * not a heavy inverted button. Reads as "selected" without shouting. */
 const ROW_ACTIVE_CLASS =
-  "bg-[var(--nav-active-bg)] font-bold text-[var(--nav-active-fg)]";
+  "bg-[var(--bg-muted)] font-semibold text-[var(--text-primary)] shadow-[inset_0_0_0_1px_var(--border-subtle)]";
 
 function NavLink({
   href,
@@ -59,17 +60,15 @@ function NavLink({
     >
       <Icon
         aria-hidden
-        strokeWidth={active ? 2.2 : 1.7}
+        strokeWidth={active ? 2 : 1.7}
         className={cn(
-          "shrink-0",
+          "size-[18px] shrink-0 transition-colors duration-200",
           active
-            ? "size-5 text-[var(--nav-active-fg)]"
-            : "size-[18px] text-[var(--text-muted)] transition-colors duration-200 group-hover/nav-row:text-[var(--text-primary)]",
+            ? "text-[var(--text-primary)]"
+            : "text-[var(--text-muted)] group-hover/nav-row:text-[var(--text-primary)]",
         )}
       />
-      <span className={cn("min-w-0 truncate", active && "text-[0.8125rem]", collapsed && "sr-only")}>
-        {label}
-      </span>
+      <span className={cn("min-w-0 truncate", collapsed && "sr-only")}>{label}</span>
     </Link>
   );
 }
@@ -283,29 +282,22 @@ export function Sidebar({
                 >
                   <GroupIcon
                     aria-hidden
-                    strokeWidth={childActive ? 2.2 : 1.7}
+                    strokeWidth={childActive ? 2 : 1.7}
                     className={cn(
-                      "shrink-0",
+                      "size-[18px] shrink-0 transition-colors duration-200",
                       childActive
-                        ? "size-5 text-[var(--nav-active-fg)]"
-                        : "size-[18px] text-[var(--text-muted)] transition-colors duration-200 group-hover/nav-row:text-[var(--text-primary)]",
+                        ? "text-[var(--text-primary)]"
+                        : "text-[var(--text-muted)] group-hover/nav-row:text-[var(--text-primary)]",
                     )}
                   />
-                  <span
-                    className={cn(
-                      "min-w-0 flex-1 truncate text-left",
-                      childActive && "text-[0.8125rem]",
-                    )}
-                  >
-                    {label}
-                  </span>
+                  <span className="min-w-0 flex-1 truncate text-left">{label}</span>
                   <ChevronDown
                     aria-hidden
                     strokeWidth={2}
                     className={cn(
                       "size-3.5 shrink-0 transition-transform duration-150",
                       open && "rotate-180",
-                      childActive ? "text-[var(--nav-active-fg)]" : "text-[var(--text-muted)]",
+                      childActive ? "text-[var(--text-primary)]" : "text-[var(--text-muted)]",
                     )}
                   />
                 </button>

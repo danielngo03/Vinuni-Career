@@ -33,13 +33,26 @@ and browser verification.
 
 ## Visual Direction
 
-- Follow v9 Monochrome from `docs/DESIGN.md`: premium black/white/gray
-  hierarchy, restrained semantic color, no blue/navy accent surfaces unless a
-  spec explicitly allows it.
-- Do not use gradients, decorative blobs/orbs, emoji icons, fake screenshots, or
-  marketing filler in product operating surfaces.
-- Use the project icon library and stable dimensions for navigation, filters,
-  cards, toolbars, boards, tables, canvases, and preview panes.
+- Follow **v10 "Monochrome Shell + Data-viz Content"** (`docs/DESIGN.md §1.1.2`):
+  the SHELL (header, sidebar) stays premium black/white/gray with ink as the only
+  action color; the CONTENT area uses the defined data-viz palette (`--viz-*` +
+  `-soft` tints; `--content-{success,warning,danger,info,ai}`) for charts, KPI
+  tiles, category chips, and status. The blue→gray remap is reverted for CONTENT
+  only (sky/indigo for info + AI + primary data series); the shell ramp is mono.
+- Colour is for meaning and data density, not decoration. Chart series, KPI
+  deltas, status chips, and category tags may be colourful; page chrome may not.
+- Exactly ONE restrained gradient is allowed: the `--hero-gradient` (indigo→violet)
+  forecast/summary hero card, used sparingly (≤1 per surface). No decorative
+  blobs/orbs, no emoji icons, no fake screenshots, no marketing filler.
+- Build on the locked design system: shadcn/ui primitives in `@/components/ui`
+  and the shared kit in `@/components/kit` (Card, PageHeader, KpiTile/KpiRow,
+  GradientHeroCard, StatusChip, DetailSheet, DataTable, CommandPalette, charts,
+  ActivityFeed, AttentionPanel, FilterBar). Do NOT hand-roll one-off equivalents.
+- Icons: **lucide-react only** (no Phosphor). Type scale is locked
+  (`.type-display/h1/h2/h3/body/small/caption/metric` + `tabular-nums` for
+  metrics) — never set ad-hoc font sizes.
+- Use stable dimensions for navigation, filters, cards, toolbars, boards, tables,
+  canvases, and preview panes.
 - Typography must fit the container at desktop and mobile sizes. Do not scale
   font size directly with viewport width.
 - Hover, active, selected, disabled, loading, error, and focus states must be

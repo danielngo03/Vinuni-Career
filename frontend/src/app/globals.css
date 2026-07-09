@@ -1,4 +1,15 @@
 @import "tailwindcss";
+/* shadcn/ui entrance/exit animation utilities (animate-in, fade-in-0,
+   zoom-in-95, slide-in-from-*) used by dialog/sheet/popover/dropdown/command. */
+@import "tw-animate-css";
+
+/* ── shadcn/ui dark variant bridge ───────────────────────────────────────────
+   The app themes via [data-theme="dark"] (JS-resolved), NOT the `.dark` class
+   shadcn assumes. This custom variant makes shadcn's `dark:` utilities resolve
+   against our attribute so vendored shadcn components theme correctly. Most of
+   our shadcn tokens are aliased to the existing token ramp (which already flips
+   under [data-theme]), so `dark:` is only the belt-and-suspenders path. ─────── */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ── Self-hosted font catalogue (6 fonts, all supporting Vietnamese) ──────────
    latin subset for each font is preloaded by next/font/local (Plus Jakarta Sans)
@@ -409,6 +420,94 @@
   --aurora-indigo: rgba(229, 229, 229, 0.40);
   --aurora-emerald: rgba(245, 245, 245, 0.50);
   --aurora-base: #fafafa;
+
+  /* =======================================================================
+     v10 "Monochrome Shell + Data-viz Content" — CONTENT palette (DESIGN §1.1.2)
+     The shell (header/sidebar/nav) stays mono (tokens above). Everything in the
+     CONTENT area — charts, KPI tiles, category chips, status — may use this
+     colorful, colorblind-safe categorical ramp. Use `-soft` alpha tints for
+     chip/tile fills. Semantics: success=emerald, warn/sponsored=amber,
+     danger=VinUni red, info/AI=sky+indigo (the blue→gray remap is reverted for
+     CONTENT ONLY; the shell ramp is untouched).
+     ======================================================================= */
+  --viz-indigo: #6366f1;
+  --viz-teal: #14b8a6;
+  --viz-amber: #f59e0b;
+  --viz-rose: #f43f5e;
+  --viz-sky: #0ea5e9;
+  --viz-emerald: #10b981;
+  --viz-violet: #8b5cf6;
+  --viz-orange: #f97316;
+  /* Soft tints (~12% alpha) for chips/tiles — adapt to light/dark card fills. */
+  --viz-indigo-soft: rgba(99, 102, 241, 0.12);
+  --viz-teal-soft: rgba(20, 184, 166, 0.12);
+  --viz-amber-soft: rgba(245, 158, 11, 0.14);
+  --viz-rose-soft: rgba(244, 63, 94, 0.12);
+  --viz-sky-soft: rgba(14, 165, 233, 0.12);
+  --viz-emerald-soft: rgba(16, 185, 129, 0.12);
+  --viz-violet-soft: rgba(139, 92, 246, 0.12);
+  --viz-orange-soft: rgba(249, 115, 22, 0.13);
+  /* Content semantic aliases (do NOT reuse the shell's gray --color-info). */
+  --content-success: var(--viz-emerald);
+  --content-warning: var(--viz-amber);
+  --content-danger: var(--brand-red);
+  --content-info: var(--viz-sky);
+  --content-ai: var(--viz-indigo);
+  --content-success-soft: var(--viz-emerald-soft);
+  --content-warning-soft: var(--viz-amber-soft);
+  --content-danger-soft: rgba(200, 53, 56, 0.12);
+  --content-info-soft: var(--viz-sky-soft);
+  --content-ai-soft: var(--viz-indigo-soft);
+  /* ONE restrained hero gradient (indigo→violet), used sparingly for a single
+     top forecast/summary tile per surface. Never a full-page background. */
+  --hero-gradient: linear-gradient(135deg, #4f46e5 0%, #6d28d9 55%, #7c3aed 100%);
+  --hero-gradient-fg: #ffffff;
+
+  /* ── Locked type scale (Plus Jakarta Sans). Metrics use tabular-nums. ── */
+  --text-display: 1.875rem;  /* 30 / 36 / 600 */
+  --text-h1: 1.5rem;         /* 24 / 32 / 600 */
+  --text-h2: 1.25rem;        /* 20 / 28 / 600 */
+  --text-h3: 1rem;           /* 16 / 24 / 600 */
+  --text-body: 0.875rem;     /* 14 / 20 / 400 */
+  --text-small: 0.8125rem;   /* 13 / 18 / 400 */
+  --text-caption: 0.75rem;   /* 12 / 16 / 500 */
+
+  /* ── shadcn/ui semantic tokens — ALIASED to the token ramp so vendored
+     shadcn components inherit our light/dark theme automatically. Do not fork
+     these with literal colors; change the underlying tokens instead. ── */
+  --radius: 0.625rem;
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
+  --card: var(--surface-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--surface-dropdown);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--text-inverted);
+  --secondary: var(--bg-subtle);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-subtle);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--bg-muted);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--color-error);
+  --destructive-foreground: #ffffff;
+  --border: var(--border-default);
+  --input: var(--border-default);
+  --ring: var(--field-focus-border);
+  --chart-1: var(--viz-indigo);
+  --chart-2: var(--viz-teal);
+  --chart-3: var(--viz-amber);
+  --chart-4: var(--viz-rose);
+  --chart-5: var(--viz-sky);
+  --sidebar: var(--bg-base);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-primary: var(--nav-active-bg);
+  --sidebar-primary-foreground: var(--nav-active-fg);
+  --sidebar-accent: var(--bg-subtle);
+  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--border-default);
+  --sidebar-ring: var(--field-focus-border);
 }
 
 /* Designed dark — near-black, Vercel-style (NOT a flat inversion). */
@@ -586,6 +685,55 @@
   --color-warning: var(--color-warning);
   --color-error: var(--color-error);
   --color-info: var(--color-info);
+
+  /* ── shadcn/ui token → utility bridge (bg-card, text-muted-foreground,
+     border-input, ring-ring, bg-primary, rounded-lg…). ── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* ── Content data-viz palette utilities (bg-viz-indigo, text-viz-teal…). ── */
+  --color-viz-indigo: var(--viz-indigo);
+  --color-viz-teal: var(--viz-teal);
+  --color-viz-amber: var(--viz-amber);
+  --color-viz-rose: var(--viz-rose);
+  --color-viz-sky: var(--viz-sky);
+  --color-viz-emerald: var(--viz-emerald);
+  --color-viz-violet: var(--viz-violet);
+  --color-viz-orange: var(--viz-orange);
+
+  /* shadcn radius scale derived from --radius (sm/md/lg/xl). */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
 }
 
 /* =========================================================================
@@ -649,6 +797,57 @@ body {
   font-family: var(--font-mono);
   font-feature-settings: "tnum" 1, "ss01" 0;
   letter-spacing: -0.01em;
+}
+
+/* ── v10 locked type scale (DESIGN.md §1.1.2). Opt-in role classes so every
+   surface uses one enforced scale instead of ad-hoc text-[..]. Weights
+   400/500/600/700 available; metrics get tabular-nums. ── */
+.type-display {
+  font-size: var(--text-display);
+  line-height: 2.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.type-h1 {
+  font-size: var(--text-h1);
+  line-height: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.type-h2 {
+  font-size: var(--text-h2);
+  line-height: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.type-h3 {
+  font-size: var(--text-h3);
+  line-height: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.type-body {
+  font-size: var(--text-body);
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+.type-small {
+  font-size: var(--text-small);
+  line-height: 1.125rem;
+  font-weight: 400;
+}
+.type-caption {
+  font-size: var(--text-caption);
+  line-height: 1rem;
+  font-weight: 500;
+}
+/* Big tabular KPI number (28–32 / 600). */
+.type-metric {
+  font-size: 1.875rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 /* v8 "Operations" card treatment — a firm 1px border carries the shape;

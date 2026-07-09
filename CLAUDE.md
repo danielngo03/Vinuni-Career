@@ -197,11 +197,18 @@ Every non-trivial agent result should include:
   billing, pipeline, AI actions, exports, or click/view metrics hardcoded to a
   role name; gate them through service-layer RBAC by user/role/department scope
   per `docs/PARTNER_RBAC_ANALYTICS_SPEC.md`.
-- Visual direction is v9 "Monochrome" (DESIGN.md §1.1.2): minimalist premium
-  black/white with a full gray ramp for hierarchy (never flat #000/#fff), light
-  + dark themes, ink as the only action color, and color reserved for meaning
-  (green = verified/success, VinUni red = destructive/brand detail, amber =
-  sponsored disclosure). Do not reintroduce blue/navy accent surfaces.
+- Visual direction is v10 "Monochrome Shell + Data-viz Content" (DESIGN.md
+  §1.1.2). The SHELL (header/sidebar/nav) stays monochrome: full gray ramp for
+  hierarchy (never flat #000/#fff), light + dark themes, ink as the only shell
+  action color, subtle active pill. The CONTENT area (charts, KPI tiles, chips,
+  status) uses the locked, colorblind-safe data-viz palette (indigo/teal/amber/
+  rose/sky/emerald/violet/orange + `-soft` tints; success=emerald, warn/
+  sponsored=amber, danger=VinUni red, info/AI=sky/indigo) — the blue→gray remap
+  is reverted for CONTENT ONLY. Exactly one restrained indigo→violet gradient
+  hero tile per surface. Enforce the locked type scale (`.type-*`). Do not
+  reintroduce blue/navy accent surfaces in the SHELL. Build on shadcn/ui
+  (`@/components/ui`) + the v10 primitive kit (`@/components/kit`); icons are
+  lucide-react only.
 - Student CV workflows are CV-first: upload/template/raw-notes/AI/duplicate/job-fit
   flows must work without a mandatory education/experience profile form.
 - CV Studio must be implemented as a visual document/canvas editor with a
