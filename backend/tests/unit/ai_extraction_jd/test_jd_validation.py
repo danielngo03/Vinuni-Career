@@ -4,15 +4,19 @@ from app.ai.extraction.text_extraction import FileKind
 
 
 def test_real_jd_text_is_ok():
-    text = ("Tuyển dụng Nhân viên Kinh doanh. Mô tả công việc: tìm kiếm khách hàng. "
-            "Yêu cầu: tốt nghiệp đại học, 1 năm kinh nghiệm. Quyền lợi: lương thưởng hấp dẫn. "
-            "Mức lương: 10-15 triệu.")
+    text = (
+        "Tuyển dụng Nhân viên Kinh doanh. Mô tả công việc: tìm kiếm khách hàng. "
+        "Yêu cầu: tốt nghiệp đại học, 1 năm kinh nghiệm. Quyền lợi: lương thưởng hấp dẫn. "
+        "Mức lương: 10-15 triệu."
+    )
     assert classify_jd_content(text, kind=FileKind.PDF, ocr_used=False) == "ok"
 
 
 def test_cv_text_is_rejected_as_not_a_jd():
-    cv = ("Nguyen Van A. Email: a@example.com. Kinh nghiệm làm việc tại công ty X. "
-          "Học vấn: Đại học Bách Khoa. Kỹ năng: Python.")
+    cv = (
+        "Nguyen Van A. Email: a@example.com. Kinh nghiệm làm việc tại công ty X. "
+        "Học vấn: Đại học Bách Khoa. Kỹ năng: Python."
+    )
     assert classify_jd_content(cv, kind=FileKind.PDF, ocr_used=False) == "not_a_jd"
 
 

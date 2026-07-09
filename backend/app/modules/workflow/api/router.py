@@ -67,8 +67,13 @@ async def create_flow(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     flow = await flow_service.create_draft_flow(
-        session, principal=auth.principal, name=body.name, description=body.description,
-        trigger_type=body.trigger_type, graph=body.graph, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        name=body.name,
+        description=body.description,
+        trigger_type=body.trigger_type,
+        graph=body.graph,
+        ctx=auth.ctx,
     )
     return success(_presenter(flow))
 
@@ -81,8 +86,13 @@ async def update_flow(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     flow = await flow_service.update_draft_flow(
-        session, principal=auth.principal, flow_id=flow_id, name=body.name,
-        description=body.description, graph=body.graph, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        flow_id=flow_id,
+        name=body.name,
+        description=body.description,
+        graph=body.graph,
+        ctx=auth.ctx,
     )
     return success(_presenter(flow))
 
@@ -219,6 +229,10 @@ async def resolve_failed_node_task(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     task = await task_service.resolve_failed_node_task(
-        session, principal=auth.principal, task_id=task_id, resolution=body.resolution, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        task_id=task_id,
+        resolution=body.resolution,
+        ctx=auth.ctx,
     )
     return success(_task_presenter(task))

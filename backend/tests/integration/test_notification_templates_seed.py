@@ -40,12 +40,14 @@ async def test_seed_is_idempotent(db_session) -> None:
     assert created_second == 0
 
     total = (
-        await db_session.execute(
-            select(NotificationTemplate).where(
-                NotificationTemplate.status == "active"
+        (
+            await db_session.execute(
+                select(NotificationTemplate).where(NotificationTemplate.status == "active")
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(total) == expected_total
 
 
@@ -95,17 +97,13 @@ async def test_seeded_templates_render_for_all_locales(db_session) -> None:
     adapter = ConsoleEmailAdapter()
     # Drain every enqueued row in one pass (the default limit=50 would otherwise
     # leave the tail of a >50-template catalog unprocessed).
-    counts = await process_outbox(
-        db_session, email_adapter=adapter, limit=expected + 10
-    )
+    counts = await process_outbox(db_session, email_adapter=adapter, limit=expected + 10)
     await db_session.commit()
 
     # Every seeded template rendered + "sent"; none failed required/unknown checks.
     assert counts["sent"] == expected
     assert counts["failed"] == 0
-    rows = (
-        await db_session.execute(select(NotificationOutbox))
-    ).scalars().all()
+    rows = (await db_session.execute(select(NotificationOutbox))).scalars().all()
     assert all(r.status == "sent" for r in rows)
     # Personalisation substituted (name appears in at least one rendered body).
     assert any("Lan" in mail.body for mail in adapter.outbox)

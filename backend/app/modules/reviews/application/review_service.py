@@ -84,9 +84,7 @@ def _validate_content(payload: dict) -> None:
         raise InvalidReviewFieldError("interview_experience")
 
 
-async def _load_owned(
-    session: AsyncSession, *, review_id: uuid.UUID, principal
-) -> CompanyReview:
+async def _load_owned(session: AsyncSession, *, review_id: uuid.UUID, principal) -> CompanyReview:
     review = (
         await session.execute(
             select(CompanyReview).where(
@@ -103,9 +101,7 @@ async def _load_owned(
 
 async def _rating_for(session: AsyncSession, review_id: uuid.UUID) -> ReviewRating:
     return (
-        await session.execute(
-            select(ReviewRating).where(ReviewRating.review_id == review_id)
-        )
+        await session.execute(select(ReviewRating).where(ReviewRating.review_id == review_id))
     ).scalar_one()
 
 
@@ -184,10 +180,16 @@ async def submit_review(
         )
     )
     await write_audit(
-        session, action="review.created", resource_type="company_review",
-        resource_id=review.id, context=_audit_ctx(principal, ctx),
-        after={"org_id": str(org_id), "status": review.status,
-               "eligibility_type": eligibility_type},
+        session,
+        action="review.created",
+        resource_type="company_review",
+        resource_id=review.id,
+        context=_audit_ctx(principal, ctx),
+        after={
+            "org_id": str(org_id),
+            "status": review.status,
+            "eligibility_type": eligibility_type,
+        },
     )
     await session.commit()
     await session.refresh(review)
@@ -195,9 +197,7 @@ async def submit_review(
     return presenters.review_owner(review, rating, locale=locale)
 
 
-async def get_my_review(
-    session: AsyncSession, *, principal, slug: str, locale: str = "vi"
-) -> dict:
+async def get_my_review(session: AsyncSession, *, principal, slug: str, locale: str = "vi") -> dict:
     _require_student(principal)
     org_id = await _resolve_org(session, slug)
     review = (
@@ -256,8 +256,11 @@ async def update_review(
     rating.interview_experience = payload.get("interview_experience")
 
     await write_audit(
-        session, action="review.updated", resource_type="company_review",
-        resource_id=review.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="review.updated",
+        resource_type="company_review",
+        resource_id=review.id,
+        context=_audit_ctx(principal, ctx),
         after={"status": review.status},
     )
     # An edit pulls a previously-published review out of the public set.
@@ -277,8 +280,11 @@ async def delete_review(
     was_published = review.status == entities.STATUS_PUBLISHED
     review.deleted_at = _now()
     await write_audit(
-        session, action="review.deleted", resource_type="company_review",
-        resource_id=review.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="review.deleted",
+        resource_type="company_review",
+        resource_id=review.id,
+        context=_audit_ctx(principal, ctx),
         before={"status": review.status},
     )
     if was_published:
@@ -342,8 +348,11 @@ async def report_review(
     if review.status == entities.STATUS_PUBLISHED:
         review.status = entities.STATUS_FLAGGED
     await write_audit(
-        session, action="review.reported", resource_type="company_review",
-        resource_id=review_id, context=_audit_ctx(principal, ctx),
+        session,
+        action="review.reported",
+        resource_type="company_review",
+        resource_id=review_id,
+        context=_audit_ctx(principal, ctx),
         after={"reason_code": reason_code},
     )
     await session.commit()
@@ -377,17 +386,14 @@ async def list_public_reviews(
                 CompanyReview.status.in_(_PUBLIC_VISIBLE),
                 CompanyReview.deleted_at.is_(None),
             )
-            .order_by(CompanyReview.published_at.desc().nulls_last(),
-                      CompanyReview.id.desc())
+            .order_by(CompanyReview.published_at.desc().nulls_last(), CompanyReview.id.desc())
             .limit(page_limit)
         )
     ).all()
 
     # Resolve display names only for NON-anonymous authors (anonymity = no PII out).
     named_ids = [r.reviewer_id for (r, _rt) in rows if not r.is_anonymous]
-    names = await student_directory_facade.display_for(
-        session, named_ids, locale=locale
-    )
+    names = await student_directory_facade.display_for(session, named_ids, locale=locale)
 
     # Resolve caller's votes when authenticated.
     voter_set: set[uuid.UUID] = set()
@@ -396,18 +402,23 @@ async def list_public_reviews(
         review_ids = [r.id for (r, _rt) in rows]
         if review_ids:
             vote_rows = (
-                await session.execute(
-                    select(ReviewHelpfulVote.review_id).where(
-                        ReviewHelpfulVote.voter_id == principal.user_id,
-                        ReviewHelpfulVote.review_id.in_(review_ids),
+                (
+                    await session.execute(
+                        select(ReviewHelpfulVote.review_id).where(
+                            ReviewHelpfulVote.voter_id == principal.user_id,
+                            ReviewHelpfulVote.review_id.in_(review_ids),
+                        )
                     )
                 )
-            ).scalars().all()
+                .scalars()
+                .all()
+            )
             voter_set = set(vote_rows)
 
     items = [
         presenters.review_public(
-            review, rating,
+            review,
+            rating,
             author_name=names.get(review.reviewer_id),
             locale=locale,
             my_vote=(review.id in voter_set) if (voter_set or is_authed) else None,
@@ -422,9 +433,7 @@ async def list_public_reviews(
 # --------------------------------------------------------------------------- #
 
 
-async def _load_published_review(
-    session: AsyncSession, review_id: uuid.UUID
-) -> CompanyReview:
+async def _load_published_review(session: AsyncSession, review_id: uuid.UUID) -> CompanyReview:
     review = (
         await session.execute(
             select(CompanyReview).where(
@@ -466,11 +475,13 @@ async def vote_helpful(
     if existing is not None:
         return {"helpful_count": review.helpful_count, "my_vote": True}
 
-    session.add(ReviewHelpfulVote(
-        id=uuid.uuid4(),
-        review_id=review_id,
-        voter_id=principal.user_id,
-    ))
+    session.add(
+        ReviewHelpfulVote(
+            id=uuid.uuid4(),
+            review_id=review_id,
+            voter_id=principal.user_id,
+        )
+    )
     review.helpful_count += 1
     await session.commit()
     return {"helpful_count": review.helpful_count, "my_vote": True}
@@ -547,8 +558,10 @@ async def add_partner_response(
     review.partner_response = response_text
     review.partner_response_at = _now()
     await write_audit(
-        session, action="review.partner_response_added",
-        resource_type="company_review", resource_id=review_id,
+        session,
+        action="review.partner_response_added",
+        resource_type="company_review",
+        resource_id=review_id,
         context=_audit_ctx(principal, ctx),
     )
     await session.commit()

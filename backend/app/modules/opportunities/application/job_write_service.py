@@ -68,6 +68,7 @@ async def _invalidate_job_fit_cache(job_id: uuid.UUID) -> None:
     except Exception:
         pass
 
+
 # --------------------------------------------------------------------------- #
 # Create / update                                                             #
 # --------------------------------------------------------------------------- #
@@ -83,9 +84,7 @@ async def create_job(
 ) -> dict:
     if principal.org_id is None:
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=principal.org_id)
     _validate_fields(payload)
     assert principal.user_id is not None
 
@@ -102,7 +101,10 @@ async def create_job(
     await session.flush()
 
     await write_audit(
-        session, action="job.created", resource_type="job", resource_id=job.id,
+        session,
+        action="job.created",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, ctx),
         after={"title": job.title, "status": job.status, "slug": slug},
     )
@@ -112,26 +114,66 @@ async def create_job(
 
 
 _UPDATABLE = {
-    "title", "description", "requirements", "benefits", "employment_type",
-    "location_type", "location_city", "location_country", "locations",
-    "required_skills", "preferred_skills", "experience_min_years", "experience_max_years",
+    "title",
+    "description",
+    "requirements",
+    "benefits",
+    "employment_type",
+    "location_type",
+    "location_city",
+    "location_country",
+    "locations",
+    "required_skills",
+    "preferred_skills",
+    "experience_min_years",
+    "experience_max_years",
     "experience_mode",
-    "industry_id", "degree_required", "seniority_level", "candidate_requirements",
-    "salary_min", "salary_max", "salary_currency", "salary_is_disclosed", "headcount",
-    "salary_mode", "salary_period", "salary_gross_net",
-    "application_deadline", "visibility", "cv_language_required",
+    "industry_id",
+    "degree_required",
+    "seniority_level",
+    "candidate_requirements",
+    "salary_min",
+    "salary_max",
+    "salary_currency",
+    "salary_is_disclosed",
+    "headcount",
+    "salary_mode",
+    "salary_period",
+    "salary_gross_net",
+    "application_deadline",
+    "visibility",
+    "cv_language_required",
 }
 
 # Fields copied verbatim when duplicating a job (excludes runtime state fields).
 _DUPLICATE_COPY = (
-    "description", "requirements", "benefits", "employment_type",
-    "location_type", "location_city", "location_country", "locations",
-    "required_skills", "preferred_skills", "experience_min_years", "experience_max_years",
+    "description",
+    "requirements",
+    "benefits",
+    "employment_type",
+    "location_type",
+    "location_city",
+    "location_country",
+    "locations",
+    "required_skills",
+    "preferred_skills",
+    "experience_min_years",
+    "experience_max_years",
     "experience_mode",
-    "industry_id", "degree_required", "seniority_level", "candidate_requirements",
-    "salary_min", "salary_max", "salary_currency", "salary_is_disclosed", "headcount",
-    "salary_mode", "salary_period", "salary_gross_net",
-    "visibility", "cv_language_required",
+    "industry_id",
+    "degree_required",
+    "seniority_level",
+    "candidate_requirements",
+    "salary_min",
+    "salary_max",
+    "salary_currency",
+    "salary_is_disclosed",
+    "headcount",
+    "salary_mode",
+    "salary_period",
+    "salary_gross_net",
+    "visibility",
+    "cv_language_required",
 )
 
 
@@ -151,9 +193,7 @@ async def duplicate_job(
     copy through the normal review flow.
     """
     source = await _load_owned_job(session, principal=principal, job_id=job_id)
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=source.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=source.org_id)
     assert principal.user_id is not None
 
     suffix = "(Sao chép)" if locale == "vi" else "(Copy)"
@@ -173,7 +213,10 @@ async def duplicate_job(
     await session.flush()
 
     await write_audit(
-        session, action="job.duplicated", resource_type="job", resource_id=copy.id,
+        session,
+        action="job.duplicated",
+        resource_type="job",
+        resource_id=copy.id,
         context=_audit_ctx(principal, ctx),
         after={"title": copy.title, "source_job_id": str(source.id), "slug": slug},
     )
@@ -211,9 +254,7 @@ async def update_job(
     """
 
     job = await _load_owned_job(session, principal=principal, job_id=job_id, lock=True)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=job.org_id)
     if job.status not in lifecycle.EDITABLE_STATES:
         raise JobNotEditableError()
 
@@ -266,7 +307,10 @@ async def update_job(
         await session.flush()
 
     await write_audit(
-        session, action="job.updated", resource_type="job", resource_id=job.id,
+        session,
+        action="job.updated",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, ctx),
         before={"fields": sorted(before.keys())} if before else None,
         after=audit_after,
@@ -297,9 +341,7 @@ async def _transition(
     locale: str,
 ) -> dict:
     job = await _load_owned_job(session, principal=principal, job_id=job_id, lock=True)
-    permission_checker.require(
-        principal, _RESOURCE, action_permission, resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, action_permission, resource_org_id=job.org_id)
     if version is not None and version != job.version:
         raise JobVersionConflictError()
     if not lifecycle.can_transition(event, job.status):
@@ -324,7 +366,10 @@ async def _transition(
     await session.flush()
 
     await write_audit(
-        session, action=f"job.{event}", resource_type="job", resource_id=job.id,
+        session,
+        action=f"job.{event}",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, ctx),
         after={"status": job.status},
     )
@@ -336,7 +381,10 @@ async def _transition(
 
 
 async def check_jd_quality(
-    session: AsyncSession, *, principal: Principal, job_id: uuid.UUID,
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
     locale: str = "vi",
 ) -> dict:
     """Preview the deterministic JD quality-check rubric without submitting.
@@ -346,9 +394,7 @@ async def check_jd_quality(
     """
 
     job = await _load_owned_job(session, principal=principal, job_id=job_id)
-    permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=job.org_id)
     issues = jd_quality.evaluate(job)
     return {
         "passed": not jd_quality.has_blocking(issues),
@@ -357,8 +403,13 @@ async def check_jd_quality(
 
 
 async def submit_job(
-    session: AsyncSession, *, principal: Principal, job_id: uuid.UUID,
-    ctx: RequestContext, version: int | None = None, locale: str = "vi",
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    ctx: RequestContext,
+    version: int | None = None,
+    locale: str = "vi",
 ) -> dict:
     """Submit a ``draft``/``rejected`` job for university moderation.
 
@@ -375,9 +426,7 @@ async def submit_job(
     """
 
     job = await _load_owned_job(session, principal=principal, job_id=job_id, lock=True)
-    permission_checker.require(
-        principal, _RESOURCE, "submit", resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "submit", resource_org_id=job.org_id)
     if version is not None and version != job.version:
         raise JobVersionConflictError()
     if not lifecycle.can_transition("submit", job.status):
@@ -385,9 +434,7 @@ async def submit_job(
 
     issues = jd_quality.evaluate(job)
     if jd_quality.has_blocking(issues):
-        raise JobQualityCheckFailedError(
-            issues=[i.as_dict(locale=locale) for i in issues]
-        )
+        raise JobQualityCheckFailedError(issues=[i.as_dict(locale=locale) for i in issues])
 
     now = _now()
     job.status = lifecycle.PENDING_REVIEW
@@ -404,7 +451,10 @@ async def submit_job(
 
     warnings = [i.as_dict(locale=locale) for i in issues if i.severity == jd_quality.ADVISORY]
     await write_audit(
-        session, action="job.submit", resource_type="job", resource_id=job.id,
+        session,
+        action="job.submit",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, ctx),
         after={"status": job.status, "quality_warnings": warnings},
     )
@@ -416,40 +466,67 @@ async def submit_job(
 
 
 async def close_job(
-    session: AsyncSession, *, principal: Principal, job_id: uuid.UUID,
-    ctx: RequestContext, version: int | None = None, locale: str = "vi",
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    ctx: RequestContext,
+    version: int | None = None,
+    locale: str = "vi",
 ) -> dict:
     return await _transition(
-        session, principal=principal, job_id=job_id, event="close",
-        action_permission="publish", ctx=ctx, version=version, locale=locale,
+        session,
+        principal=principal,
+        job_id=job_id,
+        event="close",
+        action_permission="publish",
+        ctx=ctx,
+        version=version,
+        locale=locale,
     )
 
 
 async def reopen_job(
-    session: AsyncSession, *, principal: Principal, job_id: uuid.UUID,
-    ctx: RequestContext, version: int | None = None, locale: str = "vi",
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    ctx: RequestContext,
+    version: int | None = None,
+    locale: str = "vi",
 ) -> dict:
     return await _transition(
-        session, principal=principal, job_id=job_id, event="reopen",
-        action_permission="publish", ctx=ctx, version=version, locale=locale,
+        session,
+        principal=principal,
+        job_id=job_id,
+        event="reopen",
+        action_permission="publish",
+        ctx=ctx,
+        version=version,
+        locale=locale,
     )
 
 
 async def delete_job(
-    session: AsyncSession, *, principal: Principal, job_id: uuid.UUID,
-    ctx: RequestContext, locale: str = "vi",
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    job_id: uuid.UUID,
+    ctx: RequestContext,
+    locale: str = "vi",
 ) -> None:
     job = await _load_owned_job(session, principal=principal, job_id=job_id, lock=True)
-    permission_checker.require(
-        principal, _RESOURCE, "delete", resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "delete", resource_org_id=job.org_id)
     if job.status not in lifecycle.DELETABLE_STATES:
         raise JobNotEditableError()
     job.deleted_at = _now()
     job.version += 1
     await session.flush()
     await write_audit(
-        session, action="job.deleted", resource_type="job", resource_id=job.id,
+        session,
+        action="job.deleted",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, ctx),
         before={"status": job.status},
     )
@@ -461,9 +538,7 @@ async def delete_job(
 # --------------------------------------------------------------------------- #
 
 
-async def _notify_partner_auto_closed(
-    session: AsyncSession, *, job: Job, locale: str
-) -> None:
+async def _notify_partner_auto_closed(session: AsyncSession, *, job: Job, locale: str) -> None:
     """Notify the posting partner that a job auto-closed at its deadline.
 
     Deduped on ``job.auto_closed:{job_id}`` (outbox) and the natural in-app key so
@@ -519,7 +594,9 @@ async def sweep_deadline_closures(
                     Job.application_deadline <= now,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     for job in rows:
         job.status = lifecycle.CLOSED

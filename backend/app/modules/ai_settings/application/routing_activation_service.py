@@ -30,7 +30,7 @@ _FIELD_FOR_FAMILY = {family: field for field, family in ALIAS_FIELDS.items()}
 async def activate_routing_graph(
     session: AsyncSession, *, principal: Principal, graph_id: uuid.UUID, ctx: RequestContext
 ) -> AiRoutingGraph:
-    await settings_service._require_ai_settings_admin(session, principal, "manage")
+    settings_service.require_platform_superadmin(principal)
     row = await routing_service.get_graph(session, principal=principal, graph_id=graph_id)
 
     settings_row = await ai_settings_repo.get_or_create_platform(session)
@@ -79,7 +79,9 @@ async def activate_routing_graph(
         )
     )
     await write_audit(
-        session, action="ai_settings.routing_graph_activated", resource_type="ai_routing_graph",
+        session,
+        action="ai_settings.routing_graph_activated",
+        resource_type="ai_routing_graph",
         resource_id=row.id,
         context=AuditContext(
             actor_id=principal.user_id,

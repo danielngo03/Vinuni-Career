@@ -88,13 +88,9 @@ async def export_applications_csv(
     job = await job_read_facade.get_job_ref(session, job_id)
     if job is None:
         raise ResourceNotFoundError()
-    if not principal.is_superadmin and (
-        principal.org_id is None or principal.org_id != job.org_id
-    ):
+    if not principal.is_superadmin and (principal.org_id is None or principal.org_id != job.org_id):
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=job.org_id)
 
     # All applications (including terminal) ordered newest-first, capped.
     apps = list(
@@ -172,9 +168,15 @@ def _empty_csv(locale: str) -> str:
     writer = csv.writer(buf, lineterminator="\n")
     writer.writerow(
         [
-            "application_id", "applicant", "email", "status",
-            "stage", "applied_at", "last_status_at",
-            "rejection_reason", "is_anonymous",
+            "application_id",
+            "applicant",
+            "email",
+            "status",
+            "stage",
+            "applied_at",
+            "last_status_at",
+            "rejection_reason",
+            "is_anonymous",
         ]
     )
     return buf.getvalue()
@@ -204,8 +206,10 @@ def _export_cell(
     if col == "rejection_reason":
         return app.rejection_reason or ""
     if col == "is_anonymous":
-        return ("Có" if app.is_anonymous else "Không") if locale == "vi" else (
-            "Yes" if app.is_anonymous else "No"
+        return (
+            ("Có" if app.is_anonymous else "Không")
+            if locale == "vi"
+            else ("Yes" if app.is_anonymous else "No")
         )
     return ""
 
@@ -234,13 +238,9 @@ async def export_applications_xlsx(
     job = await job_read_facade.get_job_ref(session, job_id)
     if job is None:
         raise ResourceNotFoundError()
-    if not principal.is_superadmin and (
-        principal.org_id is None or principal.org_id != job.org_id
-    ):
+    if not principal.is_superadmin and (principal.org_id is None or principal.org_id != job.org_id):
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "export", resource_org_id=job.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "export", resource_org_id=job.org_id)
 
     # Resolve + validate the requested columns (fall back to a sensible default).
     resolved_cols = [c for c in (columns or []) if c in _EXPORT_COLUMN_LABELS]

@@ -27,10 +27,30 @@ ADVISORY = "advisory"
 # "testing" or containing the word "sample" must not be flagged.
 _PLACEHOLDER_TOKENS: frozenset[str] = frozenset(
     {
-        "test", "tests", "testing", "asdf", "asdfasdf", "xxx", "xxxx", "xx",
-        "n/a", "na", "tbd", "todo", "sample", "sample job", "sample text",
-        "placeholder", "chua co", "chưa có", "chưa cập nhật", "update later",
-        "de sau", "để sau", "chưa rõ", "chua ro",
+        "test",
+        "tests",
+        "testing",
+        "asdf",
+        "asdfasdf",
+        "xxx",
+        "xxxx",
+        "xx",
+        "n/a",
+        "na",
+        "tbd",
+        "todo",
+        "sample",
+        "sample job",
+        "sample text",
+        "placeholder",
+        "chua co",
+        "chưa có",
+        "chưa cập nhật",
+        "update later",
+        "de sau",
+        "để sau",
+        "chưa rõ",
+        "chua ro",
     }
 )
 
@@ -113,30 +133,31 @@ def evaluate(job: Job) -> list[QualityIssue]:
     if _contains_placeholder(title):
         issues.append(
             QualityIssue(
-                "title", "title_placeholder", BLOCKING,
-                "Tiêu đề có vẻ là nội dung tạm/thử nghiệm. Vui lòng cập nhật "
-                "tiêu đề thật.",
-                "The title looks like placeholder/test content. Please use a "
-                "real title.",
+                "title",
+                "title_placeholder",
+                BLOCKING,
+                "Tiêu đề có vẻ là nội dung tạm/thử nghiệm. Vui lòng cập nhật tiêu đề thật.",
+                "The title looks like placeholder/test content. Please use a real title.",
             )
         )
     elif len(title) < 5:
         issues.append(
             QualityIssue(
-                "title", "title_too_short", ADVISORY,
+                "title",
+                "title_too_short",
+                ADVISORY,
                 "Tiêu đề khá ngắn — hãy cân nhắc đặt tiêu đề rõ ràng, cụ thể hơn.",
-                "The title is quite short — consider a clearer, more specific "
-                "title.",
+                "The title is quite short — consider a clearer, more specific title.",
             )
         )
     elif len(title) > 150:
         issues.append(
             QualityIssue(
-                "title", "title_too_long", ADVISORY,
-                "Tiêu đề khá dài — ứng viên thường phản hồi tốt hơn với tiêu "
-                "đề ngắn gọn.",
-                "The title is quite long — candidates usually respond better "
-                "to concise titles.",
+                "title",
+                "title_too_long",
+                ADVISORY,
+                "Tiêu đề khá dài — ứng viên thường phản hồi tốt hơn với tiêu đề ngắn gọn.",
+                "The title is quite long — candidates usually respond better to concise titles.",
             )
         )
 
@@ -145,9 +166,10 @@ def evaluate(job: Job) -> list[QualityIssue]:
     if len(description) < 20 or _contains_placeholder(description):
         issues.append(
             QualityIssue(
-                "description", "description_too_short", BLOCKING,
-                "Mô tả công việc quá ngắn hoặc là nội dung tạm. Vui lòng viết "
-                "mô tả đầy đủ.",
+                "description",
+                "description_too_short",
+                BLOCKING,
+                "Mô tả công việc quá ngắn hoặc là nội dung tạm. Vui lòng viết mô tả đầy đủ.",
                 "The job description is too short or looks like placeholder "
                 "content. Please write a full description.",
             )
@@ -155,7 +177,9 @@ def evaluate(job: Job) -> list[QualityIssue]:
     elif len(description) < 200:
         issues.append(
             QualityIssue(
-                "description", "description_thin", ADVISORY,
+                "description",
+                "description_thin",
+                ADVISORY,
                 "Mô tả công việc khá ngắn — hãy bổ sung chi tiết về nhiệm vụ "
                 "và môi trường làm việc.",
                 "The description is quite thin — consider adding more detail "
@@ -168,17 +192,19 @@ def evaluate(job: Job) -> list[QualityIssue]:
     if requirements and _contains_placeholder(requirements):
         issues.append(
             QualityIssue(
-                "requirements", "requirements_placeholder", BLOCKING,
-                "Yêu cầu công việc có vẻ là nội dung tạm. Vui lòng cập nhật "
-                "nội dung thật.",
-                "The requirements look like placeholder content. Please add "
-                "the real requirements.",
+                "requirements",
+                "requirements_placeholder",
+                BLOCKING,
+                "Yêu cầu công việc có vẻ là nội dung tạm. Vui lòng cập nhật nội dung thật.",
+                "The requirements look like placeholder content. Please add the real requirements.",
             )
         )
     elif not requirements:
         issues.append(
             QualityIssue(
-                "requirements", "requirements_missing", ADVISORY,
+                "requirements",
+                "requirements_missing",
+                ADVISORY,
                 "Chưa có yêu cầu/trách nhiệm công việc — tin đăng có tỷ lệ "
                 "ứng tuyển tốt hơn khi liệt kê rõ ràng.",
                 "No requirements/responsibilities listed — postings convert "
@@ -188,11 +214,11 @@ def evaluate(job: Job) -> list[QualityIssue]:
     elif _count_bullets(requirements) < 3:
         issues.append(
             QualityIssue(
-                "requirements", "requirements_few_bullets", ADVISORY,
-                "Nên liệt kê ít nhất 3 gạch đầu dòng yêu cầu/trách nhiệm để "
-                "ứng viên dễ hiểu.",
-                "Consider listing at least 3 requirement/responsibility "
-                "bullets for clarity.",
+                "requirements",
+                "requirements_few_bullets",
+                ADVISORY,
+                "Nên liệt kê ít nhất 3 gạch đầu dòng yêu cầu/trách nhiệm để ứng viên dễ hiểu.",
+                "Consider listing at least 3 requirement/responsibility bullets for clarity.",
             )
         )
 
@@ -200,7 +226,9 @@ def evaluate(job: Job) -> list[QualityIssue]:
     if job.salary_is_disclosed and job.salary_min is None and job.salary_max is None:
         issues.append(
             QualityIssue(
-                "salary", "salary_disclosed_without_values", BLOCKING,
+                "salary",
+                "salary_disclosed_without_values",
+                BLOCKING,
                 "Bạn đã bật hiển thị mức lương nhưng chưa nhập khoảng lương.",
                 "Salary disclosure is on but no salary range was entered.",
             )
@@ -208,11 +236,11 @@ def evaluate(job: Job) -> list[QualityIssue]:
     elif not job.salary_is_disclosed:
         issues.append(
             QualityIssue(
-                "salary", "salary_not_disclosed", ADVISORY,
-                "Tin tuyển dụng công khai mức lương thường thu hút nhiều ứng "
-                "viên chất lượng hơn.",
-                "Jobs that disclose salary tend to attract more qualified "
-                "candidates.",
+                "salary",
+                "salary_not_disclosed",
+                ADVISORY,
+                "Tin tuyển dụng công khai mức lương thường thu hút nhiều ứng viên chất lượng hơn.",
+                "Jobs that disclose salary tend to attract more qualified candidates.",
             )
         )
 
@@ -220,9 +248,10 @@ def evaluate(job: Job) -> list[QualityIssue]:
     if job.location_type in {"onsite", "hybrid"} and not _has_city(job):
         issues.append(
             QualityIssue(
-                "location_city", "location_city_missing", BLOCKING,
-                "Công việc tại văn phòng/linh hoạt cần có thông tin thành phố "
-                "làm việc.",
+                "location_city",
+                "location_city_missing",
+                BLOCKING,
+                "Công việc tại văn phòng/linh hoạt cần có thông tin thành phố làm việc.",
                 "On-site/hybrid jobs need a work city.",
             )
         )
@@ -231,7 +260,9 @@ def evaluate(job: Job) -> list[QualityIssue]:
     if job.experience_min_years is None and job.experience_max_years is None:
         issues.append(
             QualityIssue(
-                "experience", "experience_not_set", ADVISORY,
+                "experience",
+                "experience_not_set",
+                ADVISORY,
                 "Chưa đặt yêu cầu kinh nghiệm — hãy chọn 'Không yêu cầu' hoặc "
                 "số năm cụ thể để ứng viên dễ tự đánh giá.",
                 "No experience requirement set — pick 'not required' or a "

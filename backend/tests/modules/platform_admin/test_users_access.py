@@ -456,13 +456,17 @@ async def test_revoke_session_writes_one_audit_row(
     # Fresh session to see committed audit rows.
     async with get_sessionmaker()() as fresh:
         rows = (
-            await fresh.execute(
-                select(AuditLog).where(
-                    AuditLog.action == "session.revoked_by_admin",
-                    AuditLog.resource_id == session_id,
+            (
+                await fresh.execute(
+                    select(AuditLog).where(
+                        AuditLog.action == "session.revoked_by_admin",
+                        AuditLog.resource_id == session_id,
+                    )
                 )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
     assert len(rows) == 1, f"Expected exactly 1 audit row, got {len(rows)}"
 
 
@@ -491,13 +495,17 @@ async def test_revoke_session_idempotent_no_extra_audit(
     # Fresh session — still exactly 1 audit row.
     async with get_sessionmaker()() as fresh:
         rows = (
-            await fresh.execute(
-                select(AuditLog).where(
-                    AuditLog.action == "session.revoked_by_admin",
-                    AuditLog.resource_id == session_id,
+            (
+                await fresh.execute(
+                    select(AuditLog).where(
+                        AuditLog.action == "session.revoked_by_admin",
+                        AuditLog.resource_id == session_id,
+                    )
                 )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
     assert len(rows) == 1, f"Idempotent second revoke must not add audit row; got {len(rows)}"
 
 
@@ -532,13 +540,17 @@ async def test_suspend_flips_is_active_and_audits(
 
     # Audit row written
     rows = (
-        await db_session.execute(
-            select(AuditLog).where(
-                AuditLog.action == "user.suspended",
-                AuditLog.resource_id == user.id,
+        (
+            await db_session.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "user.suspended",
+                    AuditLog.resource_id == user.id,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1, f"Expected 1 suspend audit row, got {len(rows)}"
     assert rows[0].after_snapshot == {"is_active": False}
 
@@ -561,13 +573,17 @@ async def test_unsuspend_flips_is_active_and_audits(
     assert user.is_active is True
 
     rows = (
-        await db_session.execute(
-            select(AuditLog).where(
-                AuditLog.action == "user.unsuspended",
-                AuditLog.resource_id == user.id,
+        (
+            await db_session.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "user.unsuspended",
+                    AuditLog.resource_id == user.id,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1, f"Expected 1 unsuspend audit row, got {len(rows)}"
     assert rows[0].after_snapshot == {"is_active": True}
 
@@ -646,6 +662,7 @@ async def test_grant_superadmin_flips_flag_and_audits(
     # DB row was updated
     async with get_sessionmaker()() as fresh:
         from app.modules.users.domain.models import User as UserModel
+
         refreshed = (
             await fresh.execute(select(UserModel).where(UserModel.id == target.id))
         ).scalar_one_or_none()
@@ -654,13 +671,17 @@ async def test_grant_superadmin_flips_flag_and_audits(
 
         # Exactly one audit row
         rows = (
-            await fresh.execute(
-                select(AuditLog).where(
-                    AuditLog.action == "user.superadmin_granted",
-                    AuditLog.resource_id == target.id,
+            (
+                await fresh.execute(
+                    select(AuditLog).where(
+                        AuditLog.action == "user.superadmin_granted",
+                        AuditLog.resource_id == target.id,
+                    )
                 )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
         assert len(rows) == 1
         assert rows[0].before_snapshot == {"is_superadmin": False}
         assert rows[0].after_snapshot == {"is_superadmin": True}
@@ -682,13 +703,17 @@ async def test_grant_superadmin_idempotent_no_extra_audit(
     # No audit row should have been written (idempotent no-op)
     async with get_sessionmaker()() as fresh:
         rows = (
-            await fresh.execute(
-                select(AuditLog).where(
-                    AuditLog.action == "user.superadmin_granted",
-                    AuditLog.resource_id == target.id,
+            (
+                await fresh.execute(
+                    select(AuditLog).where(
+                        AuditLog.action == "user.superadmin_granted",
+                        AuditLog.resource_id == target.id,
+                    )
                 )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
         assert len(rows) == 0, f"Idempotent grant must not write audit row; got {len(rows)}"
 
 
@@ -714,6 +739,7 @@ async def test_revoke_superadmin_flips_flag_and_audits(
 
     async with get_sessionmaker()() as fresh:
         from app.modules.users.domain.models import User as UserModel
+
         refreshed = (
             await fresh.execute(select(UserModel).where(UserModel.id == target.id))
         ).scalar_one_or_none()
@@ -721,13 +747,17 @@ async def test_revoke_superadmin_flips_flag_and_audits(
         assert refreshed.is_superadmin is False
 
         rows = (
-            await fresh.execute(
-                select(AuditLog).where(
-                    AuditLog.action == "user.superadmin_revoked",
-                    AuditLog.resource_id == target.id,
+            (
+                await fresh.execute(
+                    select(AuditLog).where(
+                        AuditLog.action == "user.superadmin_revoked",
+                        AuditLog.resource_id == target.id,
+                    )
                 )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
         assert len(rows) == 1
         assert rows[0].before_snapshot == {"is_superadmin": True}
         assert rows[0].after_snapshot == {"is_superadmin": False}
@@ -740,9 +770,7 @@ async def test_revoke_last_superadmin_rejected(
 ) -> None:
     """Revoking the only remaining superadmin must be rejected; user remains superadmin."""
     # Seed exactly ONE superadmin in the DB as the target
-    only_sa = await _seed_user(
-        db_session, email="only_superadmin@example.com", is_superadmin=True
-    )
+    only_sa = await _seed_user(db_session, email="only_superadmin@example.com", is_superadmin=True)
     await db_session.commit()
 
     resp = await sa_client.post(f"/admin/users/{only_sa.id}/revoke-superadmin")
@@ -758,6 +786,7 @@ async def test_revoke_last_superadmin_rejected(
     # The user must STILL be a superadmin (guard prevented the change)
     async with get_sessionmaker()() as fresh:
         from app.modules.users.domain.models import User as UserModel
+
         unchanged = (
             await fresh.execute(select(UserModel).where(UserModel.id == only_sa.id))
         ).scalar_one_or_none()
@@ -783,13 +812,17 @@ async def test_revoke_superadmin_idempotent_no_extra_audit(
     # No audit row
     async with get_sessionmaker()() as fresh:
         rows = (
-            await fresh.execute(
-                select(AuditLog).where(
-                    AuditLog.action == "user.superadmin_revoked",
-                    AuditLog.resource_id == target.id,
+            (
+                await fresh.execute(
+                    select(AuditLog).where(
+                        AuditLog.action == "user.superadmin_revoked",
+                        AuditLog.resource_id == target.id,
+                    )
                 )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
         assert len(rows) == 0, f"Idempotent revoke must not write audit row; got {len(rows)}"
 
 
@@ -850,7 +883,8 @@ async def test_revoke_last_active_superadmin_rejected_when_other_is_suspended(
         ).scalar_one_or_none()
         assert unchanged is not None
         assert unchanged.is_superadmin is True, (
-            "Active superadmin A must remain superadmin; suspended B must not count as valid remaining admin"
+            "Active superadmin A must remain superadmin; suspended B must not "
+            "count as valid remaining admin"
         )
 
 

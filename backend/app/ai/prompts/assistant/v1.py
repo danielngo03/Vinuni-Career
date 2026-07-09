@@ -18,13 +18,10 @@ PROMPT_VERSION = "assistant:v1"
 # Scope the student assistant's advertised tools to student + shared (non
 # persona-restricted) specs — partner-only tools (e.g. move_candidate_stage,
 # suggest_scorecard) are never mentioned in the student system prompt.
-_STUDENT_TOOL_SPECS = {
-    name: spec for name, spec in TOOL_SPECS.items() if STUDENT in spec.persona
-}
+_STUDENT_TOOL_SPECS = {name: spec for name, spec in TOOL_SPECS.items() if STUDENT in spec.persona}
 
 _TOOL_LIST = "\n".join(
-    f"- {spec.name}: {spec.description}"
-    for spec in _STUDENT_TOOL_SPECS.values()
+    f"- {spec.name}: {spec.description}" for spec in _STUDENT_TOOL_SPECS.values()
 )
 
 _TOOL_SCHEMAS = json.dumps(

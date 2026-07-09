@@ -45,10 +45,14 @@ async def test_duplicate_register_does_not_create_second_user(db_session) -> Non
             db_session, email=email, password="Other!", full_name="B", ctx=CTX
         )
     rows = (
-        await db_session.execute(
-            select(user_service.User).where(user_service.User.email == email)
+        (
+            await db_session.execute(
+                select(user_service.User).where(user_service.User.email == email)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1
 
 
@@ -71,10 +75,14 @@ async def test_register_resumes_pending_registration(db_session) -> None:
     assert result == {"status": "verification_sent", "email": email}
 
     rows = (
-        await db_session.execute(
-            select(user_service.User).where(user_service.User.email == email)
+        (
+            await db_session.execute(
+                select(user_service.User).where(user_service.User.email == email)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1  # no second user created
     resumed = rows[0]
     assert resumed.full_name == "B"
@@ -105,9 +113,7 @@ async def test_login_blocked_until_email_verified(db_session) -> None:
         db_session, email=email, password="Sup3rSecret!", full_name="A", ctx=CTX
     )
     with pytest.raises(errors.EmailNotVerifiedError):
-        await auth_service.login(
-            db_session, email=email, password="Sup3rSecret!", ctx=CTX
-        )
+        await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
 
 
 async def test_login_invalid_credentials(db_session) -> None:
@@ -117,9 +123,7 @@ async def test_login_invalid_credentials(db_session) -> None:
         await auth_service.login(db_session, email=email, password="wrong", ctx=CTX)
     # Unknown account also returns invalid credentials (no enumeration).
     with pytest.raises(errors.InvalidCredentialsError):
-        await auth_service.login(
-            db_session, email=_email(), password="whatever", ctx=CTX
-        )
+        await auth_service.login(db_session, email=_email(), password="whatever", ctx=CTX)
 
 
 async def test_login_lockout_after_five_failures(db_session) -> None:
@@ -130,51 +134,54 @@ async def test_login_lockout_after_five_failures(db_session) -> None:
             await auth_service.login(db_session, email=email, password="bad", ctx=CTX)
     # 6th attempt is locked out even with the correct password.
     with pytest.raises(errors.AccountLockedError):
-        await auth_service.login(
-            db_session, email=email, password="Sup3rSecret!", ctx=CTX
-        )
+        await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
 
 
 async def test_login_success_writes_session_event_and_audit(db_session) -> None:
     email = _email()
     user = await register_verified(db_session, email=email)
-    result = await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
+    result = await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
     assert result.tokens.access_token
     assert result.tokens.refresh_token
     sessions = (
-        await db_session.execute(
-            select(Session).where(Session.user_id == user.id)
-        )
-    ).scalars().all()
+        (await db_session.execute(select(Session).where(Session.user_id == user.id)))
+        .scalars()
+        .all()
+    )
     assert len(sessions) == 1
     events = (
-        await db_session.execute(
-            select(SecurityEvent).where(
-                SecurityEvent.user_id == user.id,
-                SecurityEvent.event_type == ev.LOGIN_SUCCESS,
+        (
+            await db_session.execute(
+                select(SecurityEvent).where(
+                    SecurityEvent.user_id == user.id,
+                    SecurityEvent.event_type == ev.LOGIN_SUCCESS,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(events) == 1
     # security event stores only hashed IP, never the raw value
     assert events[0].ip_hash and events[0].ip_hash != CTX.ip
     audits = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "auth.login",
-                                   AuditLog.actor_id == user.id)
+        (
+            await db_session.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "auth.login", AuditLog.actor_id == user.id
+                )
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(audits) == 1
 
 
 async def test_refresh_rotation_and_concurrent_double_submit(db_session) -> None:
     email = _email()
     await register_verified(db_session, email=email)
-    login = await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
+    login = await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
     t1 = login.tokens.refresh_token
     rotated = await auth_service.refresh(db_session, refresh_token=t1, ctx=CTX)
     t2 = rotated.refresh_token
@@ -192,9 +199,7 @@ async def test_refresh_rotation_and_concurrent_double_submit(db_session) -> None
 async def test_refresh_reuse_revokes_session(db_session) -> None:
     email = _email()
     user = await register_verified(db_session, email=email)
-    login = await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
+    login = await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
     t1 = login.tokens.refresh_token
     t2 = (await auth_service.refresh(db_session, refresh_token=t1, ctx=CTX)).refresh_token
     # advance the chain so t1 is genuinely stale (its replacement is rotated)
@@ -204,37 +209,35 @@ async def test_refresh_reuse_revokes_session(db_session) -> None:
     assert exc.value.details["reason"] == "token_reuse"
     # Session is revoked and a security event recorded.
     sessions = (
-        await db_session.execute(
-            select(Session).where(Session.user_id == user.id)
-        )
-    ).scalars().all()
+        (await db_session.execute(select(Session).where(Session.user_id == user.id)))
+        .scalars()
+        .all()
+    )
     assert all(s.revoked_at is not None for s in sessions)
     reuse_events = (
-        await db_session.execute(
-            select(SecurityEvent).where(
-                SecurityEvent.user_id == user.id,
-                SecurityEvent.event_type == ev.TOKEN_REUSE_DETECTED,
+        (
+            await db_session.execute(
+                select(SecurityEvent).where(
+                    SecurityEvent.user_id == user.id,
+                    SecurityEvent.event_type == ev.TOKEN_REUSE_DETECTED,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(reuse_events) == 1
 
 
 async def test_expired_refresh_token_rejected(db_session) -> None:
     email = _email()
     await register_verified(db_session, email=email)
-    login = await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
-    token_hash_row = (
-        await db_session.execute(select(RefreshToken))
-    ).scalars().all()[-1]
+    login = await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
+    token_hash_row = (await db_session.execute(select(RefreshToken))).scalars().all()[-1]
     token_hash_row.expires_at = datetime.now(tz=UTC) - timedelta(seconds=1)
     await db_session.commit()
     with pytest.raises(errors.SessionExpiredError):
-        await auth_service.refresh(
-            db_session, refresh_token=login.tokens.refresh_token, ctx=CTX
-        )
+        await auth_service.refresh(db_session, refresh_token=login.tokens.refresh_token, ctx=CTX)
 
 
 async def test_logout_revokes_session(db_session) -> None:
@@ -243,9 +246,7 @@ async def test_logout_revokes_session(db_session) -> None:
 
     email = _email()
     user = await register_verified(db_session, email=email)
-    login = await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
+    login = await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
     claims = decode_access_token(login.tokens.access_token)
     principal = Principal(user_id=user.id, persona="student")
     await auth_service.logout(
@@ -257,13 +258,9 @@ async def test_logout_revokes_session(db_session) -> None:
         ctx=CTX,
     )
     sess = (
-        await db_session.execute(
-            select(Session).where(Session.id == claims.session_id)
-        )
+        await db_session.execute(select(Session).where(Session.id == claims.session_id))
     ).scalar_one()
     assert sess.revoked_at is not None
     # The rotated refresh token is no longer usable.
     with pytest.raises(errors.SessionExpiredError):
-        await auth_service.refresh(
-            db_session, refresh_token=login.tokens.refresh_token, ctx=CTX
-        )
+        await auth_service.refresh(db_session, refresh_token=login.tokens.refresh_token, ctx=CTX)

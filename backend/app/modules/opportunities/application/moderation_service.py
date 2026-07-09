@@ -84,9 +84,7 @@ def _use_for_update() -> bool:
     return get_settings().database_url.startswith("postgresql")
 
 
-async def _require_university_moderator(
-    session: AsyncSession, principal: Principal
-) -> None:
+async def _require_university_moderator(session: AsyncSession, principal: Principal) -> None:
     if principal.is_superadmin:
         return
     permission_checker.require(principal, _RESOURCE, "moderate")
@@ -113,7 +111,11 @@ def _audit_ctx(principal: Principal, job: Job, ctx: RequestContext) -> AuditCont
 
 
 async def _notify_partner(
-    session: AsyncSession, *, job: Job, template_key: str, locale: str,
+    session: AsyncSession,
+    *,
+    job: Job,
+    template_key: str,
+    locale: str,
     extra: dict | None = None,
 ) -> None:
     poster = await user_service.get_by_id(session, job.posted_by)
@@ -179,9 +181,9 @@ async def list_moderation_queue(
     rows = list((await session.execute(stmt)).scalars().all())
     total = (
         await session.execute(
-            select(func.count()).select_from(Job).where(
-                Job.deleted_at.is_(None), Job.status == target_status
-            )
+            select(func.count())
+            .select_from(Job)
+            .where(Job.deleted_at.is_(None), Job.status == target_status)
         )
     ).scalar_one()
     items = [presenters.owner_job_summary(j, locale=locale) for j in rows]
@@ -225,13 +227,22 @@ async def approve_job(
     await session.flush()
 
     await write_audit(
-        session, action="job.approved", resource_type="job", resource_id=job.id,
+        session,
+        action="job.approved",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, job, ctx),
-        after={"status": job.status, "moderation_status": job.moderation_status,
-               "org_id": str(job.org_id)},
+        after={
+            "status": job.status,
+            "moderation_status": job.moderation_status,
+            "org_id": str(job.org_id),
+        },
     )
     await _notify_partner(
-        session, job=job, template_key="job.approved", locale=locale,
+        session,
+        job=job,
+        template_key="job.approved",
+        locale=locale,
         extra={"action_url": _job_url(job, locale=locale)},
     )
     await session.commit()
@@ -295,13 +306,23 @@ async def reject_job(
     await session.flush()
 
     await write_audit(
-        session, action="job.rejected", resource_type="job", resource_id=job.id,
+        session,
+        action="job.rejected",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, job, ctx),
-        after={"status": job.status, "moderation_status": job.moderation_status,
-               "reason_code": code, "org_id": str(job.org_id)},
+        after={
+            "status": job.status,
+            "moderation_status": job.moderation_status,
+            "reason_code": code,
+            "org_id": str(job.org_id),
+        },
     )
     await _notify_partner(
-        session, job=job, template_key="job.rejected", locale=locale,
+        session,
+        job=job,
+        template_key="job.rejected",
+        locale=locale,
         extra={"reason": reason.strip()},
     )
     await session.commit()
@@ -352,12 +373,15 @@ async def claim_job(
         .where(Job.id == job_id, Job.claimed_by.is_(None), Job.version == job.version)
         .values(claimed_by=principal.user_id, claimed_at=now, version=Job.version + 1)
     )
-    if result.rowcount == 0:
+    if getattr(result, "rowcount", 0) == 0:
         # Lost the race between load and update.
         raise JobAlreadyClaimedError()
     await session.flush()
     await write_audit(
-        session, action="job.claimed", resource_type="job", resource_id=job.id,
+        session,
+        action="job.claimed",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, job, ctx),
         after={"claimed_by": str(principal.user_id), "org_id": str(job.org_id)},
     )
@@ -385,7 +409,11 @@ async def bulk_approve_jobs(
     for job_id in job_ids:
         try:
             data = await approve_job(
-                session, principal=principal, job_id=job_id, ctx=ctx, locale=locale,
+                session,
+                principal=principal,
+                job_id=job_id,
+                ctx=ctx,
+                locale=locale,
             )
             results.append({"id": str(job_id), "success": True, "job": data})
         except AppError as exc:
@@ -475,10 +503,16 @@ async def escalate_job(
     await session.flush()
 
     await write_audit(
-        session, action="job.escalated", resource_type="job", resource_id=job.id,
+        session,
+        action="job.escalated",
+        resource_type="job",
+        resource_id=job.id,
         context=_audit_ctx(principal, job, ctx),
-        after={"moderation_status": job.moderation_status, "reason_code": code,
-               "org_id": str(job.org_id)},
+        after={
+            "moderation_status": job.moderation_status,
+            "reason_code": code,
+            "org_id": str(job.org_id),
+        },
     )
 
     from app.modules.moderation.application import review_queue_service

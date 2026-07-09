@@ -93,8 +93,11 @@ async def create_export(
     await session.flush()
 
     await write_audit(
-        session, action="cv.export.requested", resource_type="cv_export",
-        resource_id=export.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="cv.export.requested",
+        resource_type="cv_export",
+        resource_id=export.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"cv_id": str(cv.id), "version_id": str(version.id)},
     )
 
@@ -131,8 +134,11 @@ async def _execute_export(
         export.error_message = type(exc).__name__
         await session.flush()
         await write_audit(
-            session, action="cv.export.failed", resource_type="cv_export",
-            resource_id=export.id, context=_shared.audit_ctx(principal, ctx),
+            session,
+            action="cv.export.failed",
+            resource_type="cv_export",
+            resource_id=export.id,
+            context=_shared.audit_ctx(principal, ctx),
             after={"reason": "render_failed"},
         )
         await analytics.record_event_safe(
@@ -147,8 +153,11 @@ async def _execute_export(
         return
     await session.flush()
     await write_audit(
-        session, action="cv.export.completed", resource_type="cv_export",
-        resource_id=export.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="cv.export.completed",
+        resource_type="cv_export",
+        resource_id=export.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"status": "ready"},
     )
     await analytics.record_event_safe(
@@ -179,8 +188,13 @@ async def get_export(
     download_url: str | None = None
     if export.status == "ready" and export.storage_key:
         token = storage.make_signed_token(
-            {"kind": "export", "id": str(export.id), "uid": str(principal.user_id),
-             "purpose": "download", "wm": False}
+            {
+                "kind": "export",
+                "id": str(export.id),
+                "uid": str(principal.user_id),
+                "purpose": "download",
+                "wm": False,
+            }
         )
         base = get_settings().app_url.rstrip("/")
         download_url = f"{base}/api/v1/cv-files/{token}"

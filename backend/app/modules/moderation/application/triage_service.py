@@ -57,9 +57,7 @@ def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
     )
 
 
-async def _require_abuse(
-    session: AsyncSession, principal: Principal, action: str
-) -> None:
+async def _require_abuse(session: AsyncSession, principal: Principal, action: str) -> None:
     if not principal.is_authenticated:
         raise AuthRequiredError()
     if principal.is_superadmin:
@@ -110,11 +108,7 @@ async def list_triage(
     if source is None or source == SOURCE_USER_REPORT:
         report_stmt = (
             select(ContentReport)
-            .where(
-                ContentReport.status.in_(
-                    (REPORT_STATUS_PENDING, REPORT_STATUS_TRIAGED)
-                )
-            )
+            .where(ContentReport.status.in_((REPORT_STATUS_PENDING, REPORT_STATUS_TRIAGED)))
             .order_by(ContentReport.created_at.desc())
             .limit(limit)
         )
@@ -143,9 +137,7 @@ async def list_triage(
     return items[:limit]
 
 
-async def _severity_for_escalation(
-    session: AsyncSession, *, report: ContentReport
-) -> str:
+async def _severity_for_escalation(session: AsyncSession, *, report: ContentReport) -> str:
     same_entity_count = (
         await session.execute(
             select(func.count())
@@ -250,6 +242,7 @@ async def escalate_report(
 # Override — the one write path that must carry a real before/after diff     #
 # --------------------------------------------------------------------------- #
 
+
 # Resource-type reversal handlers, kept intentionally small (V1 scope): each
 # returns (before_state, after_state) or ``None`` if no wired reversal exists
 # for that resource type (documented gap — the override is still audited on
@@ -278,9 +271,7 @@ async def override_action(
         raise ValidationFailedError(details={"field": "note"})
 
     item = (
-        await session.execute(
-            select(HumanReviewItem).where(HumanReviewItem.id == review_item_id)
-        )
+        await session.execute(select(HumanReviewItem).where(HumanReviewItem.id == review_item_id))
     ).scalar_one_or_none()
     if item is None:
         raise ResourceNotFoundError()

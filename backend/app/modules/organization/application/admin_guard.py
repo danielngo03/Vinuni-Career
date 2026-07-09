@@ -30,9 +30,7 @@ from app.modules.organization.domain.models import (
 from app.shared.permissions import Principal, permission_checker
 
 
-def assert_can_grant(
-    principal: Principal, requested: Iterable[tuple[str, str]]
-) -> None:
+def assert_can_grant(principal: Principal, requested: Iterable[tuple[str, str]]) -> None:
     """Raise :class:`PermissionEscalationError` unless every requested
     ``(resource, action)`` is within the actor's own effective grants."""
 

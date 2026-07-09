@@ -38,9 +38,7 @@ def organization_detail(org: Organization, *, locale: str = "vi") -> dict:
         "subscription_tier": org.subscription_tier,
         "max_team_members": org.max_team_members,  # -1 = unlimited
         "trust_level": org.trust_level,
-        "owner_membership_id": (
-            str(org.owner_membership_id) if org.owner_membership_id else None
-        ),
+        "owner_membership_id": (str(org.owner_membership_id) if org.owner_membership_id else None),
         "settings": org.settings,
         "version": org.version,
         "created_at": org.created_at.isoformat() if org.created_at else None,
@@ -105,9 +103,7 @@ def invitation_summary(inv: Invitation, *, locale: str = "vi") -> dict:
     }
 
 
-def registration_summary(
-    req: PartnerRegistrationRequest, *, locale: str = "vi"
-) -> dict:
+def registration_summary(req: PartnerRegistrationRequest, *, locale: str = "vi") -> dict:
     return {
         "id": str(req.id),
         "company_name": req.company_name,

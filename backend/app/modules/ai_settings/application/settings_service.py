@@ -53,7 +53,12 @@ def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
 async def _require_ai_settings_admin(
     session: AsyncSession, principal: Principal, action: str
 ) -> None:
-    """Superadmin OR a university-org member holding ``ai_settings:{action}``."""
+    """Masked university governance surface.
+
+    This guards effective settings, rollout, budgets, and kill-switch controls.
+    Provider/model registry, keys, and routing internals are platform operations
+    and must use :func:`require_platform_superadmin` instead.
+    """
 
     if principal.is_superadmin:
         return
@@ -61,6 +66,13 @@ async def _require_ai_settings_admin(
     org_type = await org_reporting_facade.org_type_for(session, principal.org_id)
     if org_type != "university":
         raise PermissionDeniedError(details={"reason": "university_only"})
+
+
+def require_platform_superadmin(principal: Principal) -> None:
+    """Provider/model operations are platform-superadmin-only."""
+
+    if not principal.is_superadmin:
+        raise PermissionDeniedError(details={"reason": "platform_superadmin_only"})
 
 
 async def _allowed_aliases_for_field(session: AsyncSession, field: str) -> tuple[str, ...]:
@@ -77,17 +89,13 @@ async def _allowed_aliases_for_field(session: AsyncSession, field: str) -> tuple
 
     built_in = set(aliases.allowed_aliases(field))
     rows = (
-        await session.execute(
-            select(AiModelAlias).where(AiModelAlias.is_active.is_(True))
-        )
-    ).scalars().all()
+        (await session.execute(select(AiModelAlias).where(AiModelAlias.is_active.is_(True))))
+        .scalars()
+        .all()
+    )
     dynamic: set[str] = set()
     for row in rows:
-        families = {
-            item.strip()
-            for item in (row.task_families or "").split(",")
-            if item.strip()
-        }
+        families = {item.strip() for item in (row.task_families or "").split(",") if item.strip()}
         if not families or family in families:
             dynamic.add(row.alias_name)
     return tuple(sorted(built_in | dynamic))
@@ -115,9 +123,7 @@ def _validate_budget(value: Any) -> Decimal:
             details={"field": "daily_budget_usd", "reason": "invalid_number"}
         ) from exc
     if amount < 0 or amount > _MAX_DAILY_BUDGET_USD:
-        raise ValidationFailedError(
-            details={"field": "daily_budget_usd", "reason": "out_of_range"}
-        )
+        raise ValidationFailedError(details={"field": "daily_budget_usd", "reason": "out_of_range"})
     return amount.quantize(Decimal("0.01"))
 
 
@@ -206,9 +212,7 @@ async def _settings_view(session: AsyncSession, row: AiSettings) -> dict:
     return view
 
 
-async def get_effective_settings(
-    session: AsyncSession, *, principal: Principal
-) -> dict:
+async def get_effective_settings(session: AsyncSession, *, principal: Principal) -> dict:
     """Masked effective settings (read). Lazily seeds the singleton if absent."""
 
     await _require_ai_settings_admin(session, principal, "read")

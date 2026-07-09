@@ -54,12 +54,16 @@ def _ext(filename: str) -> str:
 
 async def _existing_checksums(session: AsyncSession, *, user_id: uuid.UUID) -> list[str]:
     rows = (
-        await session.execute(
-            select(Document.checksum_sha256).where(
-                Document.user_id == user_id, Document.deleted_at.is_(None)
+        (
+            await session.execute(
+                select(Document.checksum_sha256).where(
+                    Document.user_id == user_id, Document.deleted_at.is_(None)
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return list(rows)
 
 
@@ -90,17 +94,22 @@ async def upload_cv(
         ).scalar_one_or_none()
         if prior is not None:
             run = (
-                await session.execute(
-                    select(CvParseRun)
-                    .where(CvParseRun.document_id == prior.id)
-                    .order_by(CvParseRun.created_at.desc())
+                (
+                    await session.execute(
+                        select(CvParseRun)
+                        .where(CvParseRun.document_id == prior.id)
+                        .order_by(CvParseRun.created_at.desc())
+                    )
                 )
-            ).scalars().first()
+                .scalars()
+                .first()
+            )
             return {
                 "document_id": str(prior.id),
                 "parse_run_id": str(run.id) if run else None,
                 "status": run.status if run else "failed",
-                "next_action": _ACCEPTED_NEXT if run and run.status == "review_required"
+                "next_action": _ACCEPTED_NEXT
+                if run and run.status == "review_required"
                 else "upload_another",
             }
 
@@ -159,7 +168,10 @@ async def upload_cv(
     await session.flush()
 
     await write_audit(
-        session, action="cv.uploaded", resource_type="document", resource_id=document.id,
+        session,
+        action="cv.uploaded",
+        resource_type="document",
+        resource_id=document.id,
         context=_shared.audit_ctx(principal, ctx),
         after={"quality_code": outcome.quality_code, "status": run.status},
     )

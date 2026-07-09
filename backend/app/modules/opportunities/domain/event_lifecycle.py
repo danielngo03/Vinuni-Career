@@ -46,9 +46,7 @@ EDITABLE_STATES: frozenset[str] = frozenset({DRAFT, REJECTED})
 
 # States that may be soft-deleted/archived (a published event must be cancelled
 # before it can be deleted).
-DELETABLE_STATES: frozenset[str] = frozenset(
-    {DRAFT, REJECTED, CANCELLED, COMPLETED}
-)
+DELETABLE_STATES: frozenset[str] = frozenset({DRAFT, REJECTED, CANCELLED, COMPLETED})
 
 # Moderation vocabulary (shared shape with jobs).
 MOD_PENDING = "pending"
@@ -248,9 +246,7 @@ def registration_window_closed(
     return now >= deadline
 
 
-def registration_not_yet_open(
-    *, now: datetime, registration_opens_at: datetime | None
-) -> bool:
+def registration_not_yet_open(*, now: datetime, registration_opens_at: datetime | None) -> bool:
     """True when registration has an opening time that is still in the future."""
 
     return registration_opens_at is not None and now < registration_opens_at

@@ -88,9 +88,7 @@ def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
     )
 
 
-async def _require_billing_moderator(
-    session: AsyncSession, principal: Principal
-) -> None:
+async def _require_billing_moderator(session: AsyncSession, principal: Principal) -> None:
     if principal.is_superadmin:
         return
     permission_checker.require(principal, _RESOURCE, "moderate")
@@ -102,17 +100,13 @@ async def _require_billing_moderator(
 def _normalize_plan_code(value: str) -> str:
     code = value.strip().lower().replace(" ", "_").replace("-", "_")
     if not code or not all(ch.isalnum() or ch == "_" for ch in code):
-        raise ValidationFailedError(
-            details={"field": "code", "reason": "invalid_plan_code"}
-        )
+        raise ValidationFailedError(details={"field": "code", "reason": "invalid_plan_code"})
     return code
 
 
 def _validate_plan_vocab(audience: str, billing_period: str) -> None:
     if audience not in lifecycle.AUDIENCES:
-        raise ValidationFailedError(
-            details={"field": "audience", "reason": "invalid_audience"}
-        )
+        raise ValidationFailedError(details={"field": "audience", "reason": "invalid_audience"})
     if billing_period not in lifecycle.BILLING_PERIODS:
         raise ValidationFailedError(
             details={"field": "billing_period", "reason": "invalid_billing_period"}
@@ -127,9 +121,7 @@ def _normalize_price(value: Any) -> Decimal:
             details={"field": "price_amount", "reason": "invalid_number"}
         ) from exc
     if amount < 0:
-        raise ValidationFailedError(
-            details={"field": "price_amount", "reason": "out_of_range"}
-        )
+        raise ValidationFailedError(details={"field": "price_amount", "reason": "out_of_range"})
     return amount.quantize(Decimal("0.01"))
 
 
@@ -171,14 +163,18 @@ async def _ensure_single_default(
     keep_plan_id: uuid.UUID,
 ) -> None:
     rows = (
-        await session.execute(
-            select(SubscriptionPlan).where(
-                SubscriptionPlan.audience == audience,
-                SubscriptionPlan.id != keep_plan_id,
-                SubscriptionPlan.is_default.is_(True),
+        (
+            await session.execute(
+                select(SubscriptionPlan).where(
+                    SubscriptionPlan.audience == audience,
+                    SubscriptionPlan.id != keep_plan_id,
+                    SubscriptionPlan.is_default.is_(True),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     for row in rows:
         row.is_default = False
 
@@ -195,13 +191,9 @@ async def _load(
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
-async def _present(
-    session: AsyncSession, sub: Subscription, *, locale: str
-) -> dict:
+async def _present(session: AsyncSession, sub: Subscription, *, locale: str) -> dict:
     plan_obj = (
-        await session.execute(
-            select(SubscriptionPlan).where(SubscriptionPlan.id == sub.plan_id)
-        )
+        await session.execute(select(SubscriptionPlan).where(SubscriptionPlan.id == sub.plan_id))
     ).scalar_one_or_none()
     return presenters.subscription(sub, locale=locale, plan_obj=plan_obj, admin=True)
 
@@ -227,14 +219,18 @@ async def list_plans_admin(
             return []
         stmt = stmt.where(SubscriptionPlan.audience == audience)
     rows = (
-        await session.execute(
-            stmt.order_by(
-                SubscriptionPlan.audience.asc(),
-                SubscriptionPlan.sort_order.asc(),
-                SubscriptionPlan.price_amount.asc(),
+        (
+            await session.execute(
+                stmt.order_by(
+                    SubscriptionPlan.audience.asc(),
+                    SubscriptionPlan.sort_order.asc(),
+                    SubscriptionPlan.price_amount.asc(),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [presenters.plan(row, locale=locale) for row in rows]
 
 
@@ -254,14 +250,10 @@ async def create_plan(
     billing_period = str(payload.get("billing_period") or "monthly").strip().lower()
     _validate_plan_vocab(audience, billing_period)
     exists = (
-        await session.execute(
-            select(SubscriptionPlan.id).where(SubscriptionPlan.code == code)
-        )
+        await session.execute(select(SubscriptionPlan.id).where(SubscriptionPlan.code == code))
     ).scalar_one_or_none()
     if exists is not None:
-        raise ValidationFailedError(
-            details={"field": "code", "reason": "duplicate_plan_code"}
-        )
+        raise ValidationFailedError(details={"field": "code", "reason": "duplicate_plan_code"})
     plan_obj = SubscriptionPlan(
         code=code,
         name=str(payload["name"]).strip(),
@@ -279,9 +271,7 @@ async def create_plan(
     session.add(plan_obj)
     await session.flush()
     if plan_obj.is_default:
-        await _ensure_single_default(
-            session, audience=plan_obj.audience, keep_plan_id=plan_obj.id
-        )
+        await _ensure_single_default(session, audience=plan_obj.audience, keep_plan_id=plan_obj.id)
     await write_audit(
         session,
         action="billing.plan_created",
@@ -314,9 +304,7 @@ async def update_plan(
 
     await _require_billing_moderator(session, principal)
     plan_obj = (
-        await session.execute(
-            select(SubscriptionPlan).where(SubscriptionPlan.id == plan_id)
-        )
+        await session.execute(select(SubscriptionPlan).where(SubscriptionPlan.id == plan_id))
     ).scalar_one_or_none()
     if plan_obj is None:
         raise ResourceNotFoundError()
@@ -348,9 +336,7 @@ async def update_plan(
 
     await session.flush()
     if plan_obj.is_default:
-        await _ensure_single_default(
-            session, audience=plan_obj.audience, keep_plan_id=plan_obj.id
-        )
+        await _ensure_single_default(session, audience=plan_obj.audience, keep_plan_id=plan_obj.id)
     after = presenters.plan(plan_obj, locale=locale)
     await write_audit(
         session,
@@ -392,9 +378,7 @@ async def list_all(
         base_filters.append(Subscription.principal_id == principal_id)
     if audience is not None:
         # audience lives on the plan; join via a subquery of matching plan ids.
-        plan_ids = (
-            select(SubscriptionPlan.id).where(SubscriptionPlan.audience == audience)
-        )
+        plan_ids = select(SubscriptionPlan.id).where(SubscriptionPlan.audience == audience)
         base_filters.append(Subscription.plan_id.in_(plan_ids))
 
     stmt = (
@@ -408,9 +392,7 @@ async def list_all(
     )
     rows = list((await session.execute(stmt)).scalars().all())
     total = (
-        await session.execute(
-            select(func.count()).select_from(Subscription).where(*base_filters)
-        )
+        await session.execute(select(func.count()).select_from(Subscription).where(*base_filters))
     ).scalar_one()
 
     # Revenue oversight roll-up: total frozen price of ACTIVE subscriptions.
@@ -424,7 +406,9 @@ async def list_all(
     ).scalar_one()
     active_count = (
         await session.execute(
-            select(func.count()).select_from(Subscription).where(
+            select(func.count())
+            .select_from(Subscription)
+            .where(
                 Subscription.deleted_at.is_(None),
                 Subscription.status == lifecycle.ACTIVE,
             )
@@ -432,7 +416,9 @@ async def list_all(
     ).scalar_one()
     pending_count = (
         await session.execute(
-            select(func.count()).select_from(Subscription).where(
+            select(func.count())
+            .select_from(Subscription)
+            .where(
                 Subscription.deleted_at.is_(None),
                 Subscription.status == lifecycle.PENDING,
             )
@@ -477,9 +463,7 @@ async def mark_paid(
         raise IllegalSubscriptionTransitionError(event="mark_paid")
 
     plan_obj = (
-        await session.execute(
-            select(SubscriptionPlan).where(SubscriptionPlan.id == sub.plan_id)
-        )
+        await session.execute(select(SubscriptionPlan).where(SubscriptionPlan.id == sub.plan_id))
     ).scalar_one_or_none()
     duration_days = plan_obj.duration_days if plan_obj is not None else 30
 
@@ -494,19 +478,28 @@ async def mark_paid(
     sub.version += 1
     await session.flush()
     await write_audit(
-        session, action="billing.subscription_paid",
-        resource_type="subscription", resource_id=sub.id,
+        session,
+        action="billing.subscription_paid",
+        resource_type="subscription",
+        resource_id=sub.id,
         context=_audit_ctx(principal, ctx),
         # Revenue/reference metadata only (admin audit); never notified.
-        after={"status": sub.status, "paid": True,
-               "payment_reference": sub.payment_reference,
-               "price_amount": str(sub.price_amount)},
+        after={
+            "status": sub.status,
+            "paid": True,
+            "payment_reference": sub.payment_reference,
+            "price_amount": str(sub.price_amount),
+        },
     )
     await notify.notify_owner(
-        session, subscription=sub, template_key="billing.payment_recorded",
+        session,
+        subscription=sub,
+        template_key="billing.payment_recorded",
     )
     await notify.notify_owner(
-        session, subscription=sub, template_key="billing.active",
+        session,
+        subscription=sub,
+        template_key="billing.active",
     )
     await session.commit()
     await session.refresh(sub)
@@ -548,13 +541,17 @@ async def admin_cancel(
     sub.version += 1
     await session.flush()
     await write_audit(
-        session, action="billing.subscription_cancelled",
-        resource_type="subscription", resource_id=sub.id,
+        session,
+        action="billing.subscription_cancelled",
+        resource_type="subscription",
+        resource_id=sub.id,
         context=_audit_ctx(principal, ctx),
         after={"status": sub.status, "by": "university"},
     )
     await notify.notify_owner(
-        session, subscription=sub, template_key="billing.cancelled",
+        session,
+        subscription=sub,
+        template_key="billing.cancelled",
     )
     await session.commit()
     await session.refresh(sub)
@@ -593,15 +590,19 @@ async def admin_override_grant(
         raise ValidationFailedError(details={"field": "plan_id"})
 
     existing = (
-        await session.execute(
-            select(Subscription).where(
-                Subscription.principal_type == lifecycle.PRINCIPAL_USER,
-                Subscription.principal_id == user_id,
-                Subscription.status.in_(lifecycle.IN_FLIGHT_STATES),
-                Subscription.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(Subscription).where(
+                    Subscription.principal_type == lifecycle.PRINCIPAL_USER,
+                    Subscription.principal_id == user_id,
+                    Subscription.status.in_(lifecycle.IN_FLIGHT_STATES),
+                    Subscription.deleted_at.is_(None),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     now = _now()
     for row in existing:
         row.status = lifecycle.CANCELLED
@@ -639,11 +640,7 @@ async def admin_override_grant(
     return await _present(session, sub, locale=locale)
 
 
-async def _load_plan_any(
-    session: AsyncSession, plan_id: uuid.UUID
-) -> SubscriptionPlan | None:
+async def _load_plan_any(session: AsyncSession, plan_id: uuid.UUID) -> SubscriptionPlan | None:
     return (
-        await session.execute(
-            select(SubscriptionPlan).where(SubscriptionPlan.id == plan_id)
-        )
+        await session.execute(select(SubscriptionPlan).where(SubscriptionPlan.id == plan_id))
     ).scalar_one_or_none()

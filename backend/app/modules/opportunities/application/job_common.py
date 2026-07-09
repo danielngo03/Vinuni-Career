@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import UTC, datetime
+from typing import Any
 
 from sqlalchemy import Select, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -58,9 +59,7 @@ async def _unique_slug(session: AsyncSession, title: str) -> str:
     candidate = base
     suffix = 1
     while True:
-        exists = (
-            await session.execute(select(Job.id).where(Job.slug == candidate))
-        ).first()
+        exists = (await session.execute(select(Job.id).where(Job.slug == candidate))).first()
         if exists is None:
             return candidate
         suffix += 1
@@ -87,7 +86,7 @@ _SALARY_MODE_FIELDS = ("salary_mode", "salary_min", "salary_max", "salary_is_dis
 _EXPERIENCE_MODE_FIELDS = ("experience_mode", "experience_min_years", "experience_max_years")
 
 
-def _effective(payload: dict, existing: Job | None, field: str, default: object = None) -> object:
+def _effective(payload: dict, existing: Job | None, field: str, default: Any = None) -> Any:
     if field in payload:
         return payload[field]
     if existing is not None:
@@ -166,6 +165,7 @@ def _validate_fields(payload: dict, *, existing: Job | None = None) -> None:
         raise InvalidJobFieldError(field="experience_max_years")
 
     _validate_salary_and_experience_modes(payload, existing=existing)
+
 
 # --------------------------------------------------------------------------- #
 # Loading / ownership                                                         #

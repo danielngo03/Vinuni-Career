@@ -50,9 +50,7 @@ class Job(Base):
     org_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("organizations.id"), nullable=False, index=True
     )
-    posted_by: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("users.id"), nullable=False
-    )
+    posted_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), nullable=False)
 
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     slug: Mapped[str] = mapped_column(String(300), nullable=False, unique=True)
@@ -63,26 +61,16 @@ class Job(Base):
     employment_type: Mapped[str] = mapped_column(String(30), nullable=False)
     location_type: Mapped[str] = mapped_column(String(20), nullable=False)
     location_city: Mapped[str | None] = mapped_column(String(100), nullable=True)
-    location_country: Mapped[str] = mapped_column(
-        String(100), nullable=False, default="Vietnam"
-    )
+    location_country: Mapped[str] = mapped_column(String(100), nullable=False, default="Vietnam")
     # Multi-location: each item is {type, city, country}. First item mirrors the
     # legacy location_type/city/country fields for backward compat. Empty = use
     # legacy fields only.
     locations: Mapped[list] = mapped_column(JsonType, nullable=False, default=list)
 
-    required_skills: Mapped[list] = mapped_column(
-        JsonType, nullable=False, default=list
-    )
-    preferred_skills: Mapped[list] = mapped_column(
-        JsonType, nullable=False, default=list
-    )
-    experience_min_years: Mapped[int | None] = mapped_column(
-        SmallInteger, nullable=True
-    )
-    experience_max_years: Mapped[int | None] = mapped_column(
-        SmallInteger, nullable=True
-    )
+    required_skills: Mapped[list] = mapped_column(JsonType, nullable=False, default=list)
+    preferred_skills: Mapped[list] = mapped_column(JsonType, nullable=False, default=list)
+    experience_min_years: Mapped[int | None] = mapped_column(SmallInteger, nullable=True)
+    experience_max_years: Mapped[int | None] = mapped_column(SmallInteger, nullable=True)
     industry_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("industries.id", ondelete="SET NULL"), nullable=True, index=True
     )
@@ -91,31 +79,21 @@ class Job(Base):
     # Structured candidate eligibility/preferences. Shape is validated at the API
     # layer and intentionally JSON-backed so partners can express "not required",
     # multiple nationalities, age ranges, preferred-only requirements, etc.
-    candidate_requirements: Mapped[dict] = mapped_column(
-        JsonType, nullable=False, default=dict
-    )
+    candidate_requirements: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
 
     salary_min: Mapped[int | None] = mapped_column(Integer, nullable=True)
     salary_max: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    salary_currency: Mapped[str] = mapped_column(
-        String(5), nullable=False, default="VND"
-    )
-    salary_is_disclosed: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=False
-    )
+    salary_currency: Mapped[str] = mapped_column(String(5), nullable=False, default="VND")
+    salary_is_disclosed: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     # Structured salary mode (B-544/B-545): authoritative source for
     # `salary_is_disclosed` + min/max semantics. See ``api/schemas.py``
     # ``JobCreateRequest`` model_validator for the mode/min/max consistency rules.
     # 'negotiable' | 'hidden' | 'fixed' | 'range' | 'from' | 'to'
     salary_mode: Mapped[str | None] = mapped_column(String(20), nullable=True)
     # 'monthly' | 'yearly'
-    salary_period: Mapped[str] = mapped_column(
-        String(10), nullable=False, default="monthly"
-    )
+    salary_period: Mapped[str] = mapped_column(String(10), nullable=False, default="monthly")
     # 'unspecified' | 'gross' | 'net'
-    salary_gross_net: Mapped[str] = mapped_column(
-        String(15), nullable=False, default="unspecified"
-    )
+    salary_gross_net: Mapped[str] = mapped_column(String(15), nullable=False, default="unspecified")
     # Structured experience mode, mirrors salary_mode.
     # 'no_requirement' | 'fresher' | 'range' | 'min' | 'max'
     experience_mode: Mapped[str | None] = mapped_column(String(20), nullable=True)
@@ -124,9 +102,7 @@ class Job(Base):
         DateTime(timezone=True), nullable=True
     )
 
-    visibility: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="public"
-    )
+    visibility: Mapped[str] = mapped_column(String(20), nullable=False, default="public")
     status: Mapped[str] = mapped_column(
         String(20), nullable=False, default="draft"
     )  # draft|pending_review|active|closed|expired|rejected
@@ -137,41 +113,21 @@ class Job(Base):
     # Structured rejection/escalation reason code (``app.shared.moderation``);
     # ``moderation_note`` remains the optional supplementary free-text field for
     # backward compatibility with the original free-text-only reason.
-    moderation_reason_code: Mapped[str | None] = mapped_column(
-        String(30), nullable=True
-    )
-    approved_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
-    approved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    submitted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    moderation_reason_code: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    approved_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    approved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    submitted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     # SLA deadline computed at submission time (``settings.job_moderation_sla_hours``).
-    due_by: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    due_by: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     # Moderator currently reviewing this job (claim/assign). Cleared on
     # approve/reject/re-submit.
-    claimed_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
-    claimed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    published_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    closed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    claimed_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     view_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
-    application_count: Mapped[int] = mapped_column(
-        Integer, nullable=False, default=0
-    )
+    application_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     is_featured: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     is_sponsored: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     settings: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
@@ -180,23 +136,19 @@ class Job(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     # BCP-47 language code of the original JD content (detect at create time).
     # Default "en" matches the server_default in migration 0038.
-    language_code: Mapped[str] = mapped_column(
-        String(10), nullable=False, default="en"
-    )
+    language_code: Mapped[str] = mapped_column(String(10), nullable=False, default="en")
     # Language the submitted CV must be in. Default "any" (no requirement).
     # "en" | "vi" | "any"
-    cv_language_required: Mapped[str] = mapped_column(
-        String(5), nullable=False, default="any"
-    )
+    cv_language_required: Mapped[str] = mapped_column(String(5), nullable=False, default="any")
 
 
 class JobTranslation(Base):
@@ -273,13 +225,9 @@ class JobAlert(Base):
     location_type: Mapped[str | None] = mapped_column(String(20), nullable=True)
     province_code: Mapped[str | None] = mapped_column(String(10), nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
-    last_sent_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    last_sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
 
-    __table_args__ = (
-        UniqueConstraint("user_id", "name", name="uq_job_alerts_user_name"),
-    )
+    __table_args__ = (UniqueConstraint("user_id", "name", name="uq_job_alerts_user_name"),)

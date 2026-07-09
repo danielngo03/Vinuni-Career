@@ -69,8 +69,7 @@ async def test_happy_path_meets_threshold(family: str) -> None:
     assert total > 0, f"{family}: happy_path dataset is empty"
     rate = passed / total
     assert ok and rate >= run_eval.HAPPY_PATH_THRESHOLD, (
-        f"{family} happy_path pass rate {rate:.0%} < "
-        f"{run_eval.HAPPY_PATH_THRESHOLD:.0%}"
+        f"{family} happy_path pass rate {rate:.0%} < {run_eval.HAPPY_PATH_THRESHOLD:.0%}"
     )
 
 

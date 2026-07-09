@@ -22,13 +22,9 @@ class Industry(Base, TimestampMixin):
     """Hierarchical industry / career-field taxonomy node."""
 
     __tablename__ = "industries"
-    __table_args__ = (
-        UniqueConstraint("slug", name="uq_industries_slug"),
-    )
+    __table_args__ = (UniqueConstraint("slug", name="uq_industries_slug"),)
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        default=uuid.uuid4, primary_key=True
-    )
+    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
 
     # Bilingual display names
     name_vi: Mapped[str] = mapped_column(String(150), nullable=False)

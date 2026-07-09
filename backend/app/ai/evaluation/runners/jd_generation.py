@@ -50,8 +50,10 @@ async def run_case(case: dict[str, Any]) -> Probe:
 def check(key: str, exp: Any, probe: Probe) -> str | None:
     """Assertion checks for ``jd_generation`` probes."""
     if key == "error_code":
-        return None if probe.raised_code == exp else (
-            f"expected error_code {exp!r}, got {probe.raised_code!r}"
+        return (
+            None
+            if probe.raised_code == exp
+            else (f"expected error_code {exp!r}, got {probe.raised_code!r}")
         )
     if key == "no_stack_trace":
         bad = "traceback" in probe.raised_message.lower()

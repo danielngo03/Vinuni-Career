@@ -97,25 +97,29 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
         ok = got is None or got in probe.input_cv_ids
         return None if ok else f"recommended {got!r} is not in the owner's CV inputs"
     if key == "signal":
-        return None if result.get("signal") == exp else (
-            f"signal expected {exp!r}, got {result.get('signal')!r}"
+        return (
+            None
+            if result.get("signal") == exp
+            else (f"signal expected {exp!r}, got {result.get('signal')!r}")
         )
     if key == "result_count":
-        return None if len(results) == int(exp) else (
-            f"result_count expected {exp}, got {len(results)}"
+        return (
+            None
+            if len(results) == int(exp)
+            else (f"result_count expected {exp}, got {len(results)}")
         )
     if key == "ranking":
         order = [r.get("cv_id") for r in results]
         return None if order == list(exp) else f"ranking expected {exp}, got {order}"
     if key == "deterministic":
-        return None if probe.result == probe.second else (
-            "re-run produced a different result (non-deterministic)"
+        return (
+            None
+            if probe.result == probe.second
+            else ("re-run produced a different result (non-deterministic)")
         )
     if key == "ai_explanation_available":
         got = bool(result.get("ai_explanation_available"))
-        return None if got == bool(exp) else (
-            f"ai_explanation_available expected {exp}, got {got}"
-        )
+        return None if got == bool(exp) else (f"ai_explanation_available expected {exp}, got {got}")
     if key == "explanation_null":
         bad = [r.get("cv_id") for r in results if r.get("explanation") is not None]
         return None if not bad else f"explanation must be null offline; non-null for {bad}"
@@ -132,8 +136,10 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
         b = _result_by_id(probe, exp[1])
         if a is None or b is None:
             return f"score_gt: missing CV in results ({exp})"
-        return None if a["score"] > b["score"] else (
-            f"expected score[{exp[0]}]={a['score']} > score[{exp[1]}]={b['score']}"
+        return (
+            None
+            if a["score"] > b["score"]
+            else (f"expected score[{exp[0]}]={a['score']} > score[{exp[1]}]={b['score']}")
         )
     if key in ("matched_contains", "gaps_contains"):
         field_name = "matched_skills" if key == "matched_contains" else "gaps"

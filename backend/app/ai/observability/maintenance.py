@@ -129,9 +129,7 @@ async def reconcile_ai_usage_daily(db: AsyncSession, day: datetime) -> int:
         # authoritative).  Zero every counter so the grain remains visible but
         # truthful; do NOT delete so the day-grain stays discoverable.
         stale_rows = (
-            await db.scalars(
-                select(AiUsageDaily).where(AiUsageDaily.day == day_start)
-            )
+            await db.scalars(select(AiUsageDaily).where(AiUsageDaily.day == day_start))
         ).all()
         corrected = 0
         for row in stale_rows:

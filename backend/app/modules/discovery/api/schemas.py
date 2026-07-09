@@ -20,9 +20,7 @@ class DiscoveryEventRequest(BaseModel):
 
     event_type: str = Field(
         ...,
-        description=(
-            "impression|click|view|apply_start|save_intent|event_register_intent"
-        ),
+        description=("impression|click|view|apply_start|save_intent|event_register_intent"),
     )
     source_surface: str = Field(
         ..., description="Inventory-classed surface, e.g. homepage_recommended"

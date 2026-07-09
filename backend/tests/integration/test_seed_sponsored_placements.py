@@ -10,8 +10,6 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import select
-
 from app.modules.advertising.domain import lifecycle as ad_lifecycle
 from app.modules.advertising.domain.creatives import CREATIVE_APPROVED
 from app.modules.advertising.domain.models import (
@@ -21,8 +19,9 @@ from app.modules.advertising.domain.models import (
 )
 from app.modules.opportunities.domain.event_models import Event
 from app.modules.opportunities.domain.models import Job
-
 from scripts import seed_demo_marketplace as seed_mod
+from sqlalchemy import select
+
 from tests.org_utils import make_org_with_admin
 
 
@@ -32,9 +31,7 @@ async def _ensure_ad_package(db) -> None:
     """
 
     existing = (
-        await db.execute(
-            select(AdPackage).where(AdPackage.code == seed_mod._AD_PACKAGE_CODE)
-        )
+        await db.execute(select(AdPackage).where(AdPackage.code == seed_mod._AD_PACKAGE_CODE))
     ).scalar_one_or_none()
     if existing is not None:
         return
@@ -100,9 +97,7 @@ async def test_seed_creates_active_job_and_event_placements(db_session) -> None:
     _u, org, admin = await make_org_with_admin(db_session, display_name="Acme")
     job_a = await _make_job(db_session, org_id=org.id, poster_id=admin.user_id, title="Job A")
     job_b = await _make_job(db_session, org_id=org.id, poster_id=admin.user_id, title="Job B")
-    event = await _make_event(
-        db_session, org_id=org.id, creator_id=admin.user_id, title="Event A"
-    )
+    event = await _make_event(db_session, org_id=org.id, creator_id=admin.user_id, title="Event A")
 
     result = await seed_mod._seed_sponsored_placements(
         db_session, jobs=[job_a, job_b], event=event, poster=admin.user_id
@@ -110,22 +105,30 @@ async def test_seed_creates_active_job_and_event_placements(db_session) -> None:
     assert result == {"sponsored_placements_seeded": 3}
 
     placements = (
-        await db_session.execute(
-            select(SponsoredPlacement).where(
-                SponsoredPlacement.moderation_note == seed_mod._AD_DEMO_MARKER
+        (
+            await db_session.execute(
+                select(SponsoredPlacement).where(
+                    SponsoredPlacement.moderation_note == seed_mod._AD_DEMO_MARKER
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(placements) == 3
     assert all(p.status == ad_lifecycle.ACTIVE for p in placements)
 
     creatives = (
-        await db_session.execute(
-            select(CampaignCreative).where(
-                CampaignCreative.placement_id.in_([p.id for p in placements])
+        (
+            await db_session.execute(
+                select(CampaignCreative).where(
+                    CampaignCreative.placement_id.in_([p.id for p in placements])
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(creatives) == 3
     assert all(c.moderation_status == CREATIVE_APPROVED for c in creatives)
     assert {c.slot for c in creatives} == {"homepage_hero", "right_rail", "event_banner"}
@@ -146,12 +149,16 @@ async def test_seed_is_idempotent(db_session) -> None:
     assert second == {"sponsored_placements_seeded": 0}
 
     count = (
-        await db_session.execute(
-            select(SponsoredPlacement).where(
-                SponsoredPlacement.moderation_note == seed_mod._AD_DEMO_MARKER
+        (
+            await db_session.execute(
+                select(SponsoredPlacement).where(
+                    SponsoredPlacement.moderation_note == seed_mod._AD_DEMO_MARKER
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(count) == 1
 
 

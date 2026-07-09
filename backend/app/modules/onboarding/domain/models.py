@@ -36,12 +36,8 @@ class OnboardingState(Base):
     )
     role: Mapped[str | None] = mapped_column(String(20), nullable=True)
     seeker_type: Mapped[str | None] = mapped_column(String(30), nullable=True)
-    current_step: Mapped[str] = mapped_column(
-        String(50), nullable=False, default="role_select"
-    )
-    completed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    current_step: Mapped[str] = mapped_column(String(50), nullable=False, default="role_select")
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -77,13 +73,9 @@ class StudentVerification(Base):
         DateTime(timezone=True), nullable=True
     )
     id_card_file_path: Mapped[str | None] = mapped_column(String(500), nullable=True)
-    ai_check_status: Mapped[str] = mapped_column(
-        String(30), nullable=False, default="pending"
-    )
+    ai_check_status: Mapped[str] = mapped_column(String(30), nullable=False, default="pending")
     ai_check_result: Mapped[dict | None] = mapped_column(JsonType, nullable=True)
-    verified_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="unverified")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()

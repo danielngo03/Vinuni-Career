@@ -140,10 +140,7 @@ def normalize_scorecard_result(result: dict) -> dict:
 def fallback_scorecard_result() -> dict:
     """The neutral, no-signal response returned when AI is unavailable."""
     return {
-        "criteria": {
-            key: {"score": None, "reasoning": ""}
-            for key in sorted(_VALID_CRITERIA)
-        },
+        "criteria": {key: {"score": None, "reasoning": ""} for key in sorted(_VALID_CRITERIA)},
         "recommendation": None,
         "overall_reasoning": "",
         "confidence": "low",

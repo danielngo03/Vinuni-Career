@@ -54,25 +54,19 @@ async def display_names_for(
         return {}
     rows = (
         await session.execute(
-            select(Organization.id, Organization.display_name).where(
-                Organization.id.in_(ids)
-            )
+            select(Organization.id, Organization.display_name).where(Organization.id.in_(ids))
         )
     ).all()
     return {row.id: (row.display_name or _FALLBACK) for row in rows}
 
 
-async def display_name_for(
-    session: AsyncSession, org_id: uuid.UUID | None
-) -> str | None:
+async def display_name_for(session: AsyncSession, org_id: uuid.UUID | None) -> str | None:
     """Single-org display name lookup, or ``None`` if missing/``org_id`` is ``None``."""
 
     if org_id is None:
         return None
     return (
-        await session.execute(
-            select(Organization.display_name).where(Organization.id == org_id)
-        )
+        await session.execute(select(Organization.display_name).where(Organization.id == org_id))
     ).scalar_one_or_none()
 
 
@@ -82,9 +76,7 @@ async def org_type_for(session: AsyncSession, org_id: uuid.UUID | None) -> str |
     if org_id is None:
         return None
     return (
-        await session.execute(
-            select(Organization.org_type).where(Organization.id == org_id)
-        )
+        await session.execute(select(Organization.org_type).where(Organization.id == org_id))
     ).scalar_one_or_none()
 
 
@@ -98,9 +90,7 @@ async def is_university_org(session: AsyncSession, org_id: uuid.UUID | None) -> 
     return await org_type_for(session, org_id) == _UNIVERSITY
 
 
-async def trust_snapshot_for(
-    session: AsyncSession, org_id: uuid.UUID | None
-) -> dict | None:
+async def trust_snapshot_for(session: AsyncSession, org_id: uuid.UUID | None) -> dict | None:
     """Fraud-signal-relevant trust facts for one org, or ``None`` if missing.
 
     Returns ``{"created_at": datetime, "is_verified": bool}`` only — the
@@ -169,9 +159,7 @@ def _to_summary(org: Organization, *, rating: dict | None = None) -> OrgSummary:
     )
 
 
-async def summary_for(
-    session: AsyncSession, org_id: uuid.UUID | None
-) -> OrgSummary | None:
+async def summary_for(session: AsyncSession, org_id: uuid.UUID | None) -> OrgSummary | None:
     """Single-org public-safe summary, or ``None`` if missing/``org_id`` is ``None``."""
 
     if org_id is None:
@@ -196,8 +184,10 @@ async def summaries_for(
     if not ids:
         return {}
     rows = (
-        await session.execute(select(Organization).where(Organization.id.in_(ids)))
-    ).scalars().all()
+        (await session.execute(select(Organization).where(Organization.id.in_(ids))))
+        .scalars()
+        .all()
+    )
     from app.modules.reviews.application import company_rating_facade
 
     ratings = await company_rating_facade.ratings_for(session, ids)
@@ -213,14 +203,18 @@ async def active_member_ids(
     if not ids:
         return set()
     rows = (
-        await session.execute(
-            select(Membership.user_id).where(
-                Membership.org_id == org_id,
-                Membership.user_id.in_(ids),
-                Membership.status == "active",
+        (
+            await session.execute(
+                select(Membership.user_id).where(
+                    Membership.org_id == org_id,
+                    Membership.user_id.in_(ids),
+                    Membership.status == "active",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return set(rows)
 
 
@@ -292,12 +286,16 @@ async def department_ids_for_membership(
     """Department ids a membership belongs to (no ``MembershipDepartment`` export)."""
 
     rows = (
-        await session.execute(
-            select(MembershipDepartment.department_id).where(
-                MembershipDepartment.membership_id == membership_id
+        (
+            await session.execute(
+                select(MembershipDepartment.department_id).where(
+                    MembershipDepartment.membership_id == membership_id
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return list(rows)
 
 
@@ -312,9 +310,7 @@ async def department_ids_for_user_in_org(
 
     membership_id = (
         await session.execute(
-            select(Membership.id).where(
-                Membership.user_id == user_id, Membership.org_id == org_id
-            )
+            select(Membership.id).where(Membership.user_id == user_id, Membership.org_id == org_id)
         )
     ).scalar_one_or_none()
     if membership_id is None:

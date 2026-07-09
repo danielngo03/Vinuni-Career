@@ -67,20 +67,28 @@ async def _request_and_activate(
     db, *, subscriber, uni, plan, reference="BANK-REF-001"
 ) -> uuid.UUID:
     res = await subscription_service.request_subscription(
-        db, principal=subscriber, plan_id=plan.id, ctx=CTX,
+        db,
+        principal=subscriber,
+        plan_id=plan.id,
+        ctx=CTX,
     )
     sub_id = uuid.UUID(res["id"])
     await moderation_service.mark_paid(
-        db, principal=uni, subscription_id=sub_id,
-        payment_reference=reference, ctx=CTX,
+        db,
+        principal=uni,
+        subscription_id=sub_id,
+        payment_reference=reference,
+        ctx=CTX,
     )
     return sub_id
 
 
 async def _make_blank(db, student, title: str) -> dict:
     return await cv_service.create_cv(
-        db, principal=student,
-        payload={"title": title, "creation_mode": "blank_template"}, ctx=CTX,
+        db,
+        principal=student,
+        payload={"title": title, "creation_mode": "blank_template"},
+        ctx=CTX,
     )
 
 
@@ -93,7 +101,9 @@ async def test_list_plans_scoped_by_audience(db_session) -> None:
     await seed_plans(db_session)
     _u, student = await make_student(db_session)
     plans = await subscription_service.list_plans(
-        db_session, principal=student, audience="student",
+        db_session,
+        principal=student,
+        audience="student",
     )
     assert {p["code"] for p in plans} == {"student_free", "student_pro"}
     pro = next(p for p in plans if p["code"] == "student_pro")
@@ -113,7 +123,10 @@ async def test_request_then_mark_paid_activates_with_window(db_session) -> None:
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
 
     res = await subscription_service.request_subscription(
-        db_session, principal=student, plan_id=plans["student_pro"].id, ctx=CTX,
+        db_session,
+        principal=student,
+        plan_id=plans["student_pro"].id,
+        ctx=CTX,
     )
     assert res["status"] == "pending"
     assert res["price_amount"] == "99000.00"  # frozen at request
@@ -121,8 +134,11 @@ async def test_request_then_mark_paid_activates_with_window(db_session) -> None:
     sub_id = uuid.UUID(res["id"])
 
     activated = await moderation_service.mark_paid(
-        db_session, principal=uni, subscription_id=sub_id,
-        payment_reference="BANK-REF-XYZ", ctx=CTX,
+        db_session,
+        principal=uni,
+        subscription_id=sub_id,
+        payment_reference="BANK-REF-XYZ",
+        ctx=CTX,
     )
     assert activated["status"] == "active"
     assert activated["start_at"] is not None and activated["end_at"] is not None
@@ -141,19 +157,18 @@ async def test_cv_quota_override_lets_student_pro_create_sixth_cv(db_session) ->
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
 
     # No subscription: the documented VinUni default of 5 holds.
-    limit, source = await cv_service._resolve_active_cv_limit(
-        db_session, principal=student
-    )
+    limit, source = await cv_service._resolve_active_cv_limit(db_session, principal=student)
     assert (limit, source) == (5, "student_tier")
 
     await _request_and_activate(
-        db_session, subscriber=student, uni=uni, plan=plans["student_pro"],
+        db_session,
+        subscriber=student,
+        uni=uni,
+        plan=plans["student_pro"],
     )
 
     # Active student_pro overrides the cap to 10 (source flips to subscription).
-    limit, source = await cv_service._resolve_active_cv_limit(
-        db_session, principal=student
-    )
+    limit, source = await cv_service._resolve_active_cv_limit(db_session, principal=student)
     assert (limit, source) == (10, "subscription")
     quota = await cv_service.cv_library_quota(db_session, principal=student)
     assert quota["active_cv_limit"] == 10
@@ -172,9 +187,7 @@ async def test_cv_quota_default_five_without_subscription(db_session) -> None:
     quota = await cv_service.cv_library_quota(db_session, principal=student)
     assert quota["active_cv_limit"] == 5
     assert quota["quota_source"] == "student_tier"
-    limit, source = await cv_service._resolve_active_cv_limit(
-        db_session, principal=student
-    )
+    limit, source = await cv_service._resolve_active_cv_limit(db_session, principal=student)
     assert (limit, source) == (5, "student_tier")
 
 
@@ -201,10 +214,7 @@ async def test_vinuni_student_gets_higher_ai_quota_than_external_student(
 
     assert vinuni_limits["student_segment"] == "vinuni_student"
     assert external_limits["student_segment"] == "external_student"
-    assert (
-        vinuni_limits["ai_daily_cost_quota_usd"]
-        > external_limits["ai_daily_cost_quota_usd"]
-    )
+    assert vinuni_limits["ai_daily_cost_quota_usd"] > external_limits["ai_daily_cost_quota_usd"]
 
 
 async def test_student_pro_plan_overrides_segment_ai_quota(db_session) -> None:
@@ -327,7 +337,10 @@ async def test_expiry_reverts_cv_quota_to_default(db_session) -> None:
     user, student = await make_student(db_session)
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
     sub_id = await _request_and_activate(
-        db_session, subscriber=student, uni=uni, plan=plans["student_pro"],
+        db_session,
+        subscriber=student,
+        uni=uni,
+        plan=plans["student_pro"],
     )
     limit, _ = await cv_service._resolve_active_cv_limit(db_session, principal=student)
     assert limit == 10
@@ -342,9 +355,7 @@ async def test_expiry_reverts_cv_quota_to_default(db_session) -> None:
     await db_session.commit()
     assert result["expired"] == 1
 
-    limit, source = await cv_service._resolve_active_cv_limit(
-        db_session, principal=student
-    )
+    limit, source = await cv_service._resolve_active_cv_limit(db_session, principal=student)
     assert (limit, source) == (5, "student_tier")
 
 
@@ -357,11 +368,17 @@ async def test_second_request_while_in_flight_is_409(db_session) -> None:
     plans = await seed_plans(db_session)
     _u, student = await make_student(db_session)
     await subscription_service.request_subscription(
-        db_session, principal=student, plan_id=plans["student_pro"].id, ctx=CTX,
+        db_session,
+        principal=student,
+        plan_id=plans["student_pro"].id,
+        ctx=CTX,
     )
     with pytest.raises(SubscriptionExistsError):
         await subscription_service.request_subscription(
-            db_session, principal=student, plan_id=plans["student_pro"].id, ctx=CTX,
+            db_session,
+            principal=student,
+            plan_id=plans["student_pro"].id,
+            ctx=CTX,
         )
 
 
@@ -370,7 +387,10 @@ async def test_request_wrong_audience_is_422(db_session) -> None:
     _u, student = await make_student(db_session)
     with pytest.raises(PlanAudienceMismatchError):
         await subscription_service.request_subscription(
-            db_session, principal=student, plan_id=plans["partner_pro"].id, ctx=CTX,
+            db_session,
+            principal=student,
+            plan_id=plans["partner_pro"].id,
+            ctx=CTX,
         )
 
 
@@ -379,13 +399,18 @@ async def test_cross_principal_get_is_404(db_session) -> None:
     _ua, student_a = await make_student(db_session, prefix="a")
     _ub, student_b = await make_student(db_session, prefix="b")
     res = await subscription_service.request_subscription(
-        db_session, principal=student_a, plan_id=plans["student_pro"].id, ctx=CTX,
+        db_session,
+        principal=student_a,
+        plan_id=plans["student_pro"].id,
+        ctx=CTX,
     )
     sub_id = uuid.UUID(res["id"])
     # B may not view A's subscription — indistinguishable from missing (404).
     with pytest.raises(ResourceNotFoundError):
         await subscription_service.get(
-            db_session, principal=student_b, subscription_id=sub_id,
+            db_session,
+            principal=student_b,
+            subscription_id=sub_id,
         )
 
 
@@ -399,14 +424,20 @@ async def test_partner_admin_cannot_mark_paid(db_session) -> None:
     _u, student = await make_student(db_session)
     _pu, _po, partner = await make_org_with_admin(db_session)  # partner admin *:*
     res = await subscription_service.request_subscription(
-        db_session, principal=student, plan_id=plans["student_pro"].id, ctx=CTX,
+        db_session,
+        principal=student,
+        plan_id=plans["student_pro"].id,
+        ctx=CTX,
     )
     sub_id = uuid.UUID(res["id"])
     # Partner admin holds *:* but org_type != university -> 403.
     with pytest.raises(PermissionDeniedError):
         await moderation_service.mark_paid(
-            db_session, principal=partner, subscription_id=sub_id,
-            payment_reference="REF", ctx=CTX,
+            db_session,
+            principal=partner,
+            subscription_id=sub_id,
+            payment_reference="REF",
+            ctx=CTX,
         )
 
 
@@ -417,16 +448,23 @@ async def test_revenue_rollup_sums_active_frozen_prices(db_session) -> None:
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
 
     await _request_and_activate(
-        db_session, subscriber=student, uni=uni, plan=plans["student_pro"],
+        db_session,
+        subscriber=student,
+        uni=uni,
+        plan=plans["student_pro"],
         reference="REF-STU",
     )
     await _request_and_activate(
-        db_session, subscriber=partner, uni=uni, plan=plans["partner_pro"],
+        db_session,
+        subscriber=partner,
+        uni=uni,
+        plan=plans["partner_pro"],
         reference="REF-PARTNER",
     )
 
     items, total, revenue = await moderation_service.list_all(
-        db_session, principal=uni,
+        db_session,
+        principal=uni,
     )
     assert total == 2
     assert revenue["active_count"] == 2
@@ -445,7 +483,10 @@ async def test_expiry_sweep_via_tick_is_idempotent(db_session) -> None:
     _u, student = await make_student(db_session)
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
     sub_id = await _request_and_activate(
-        db_session, subscriber=student, uni=uni, plan=plans["student_pro"],
+        db_session,
+        subscriber=student,
+        uni=uni,
+        plan=plans["student_pro"],
     )
     sub = (
         await db_session.execute(select(Subscription).where(Subscription.id == sub_id))
@@ -470,10 +511,17 @@ async def test_audit_row_per_write(db_session) -> None:
     _u, student = await make_student(db_session)
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
     sub_id = await _request_and_activate(
-        db_session, subscriber=student, uni=uni, plan=plans["student_pro"],
+        db_session,
+        subscriber=student,
+        uni=uni,
+        plan=plans["student_pro"],
     )
     await moderation_service.admin_cancel(
-        db_session, principal=uni, subscription_id=sub_id, reason="policy", ctx=CTX,
+        db_session,
+        principal=uni,
+        subscription_id=sub_id,
+        reason="policy",
+        ctx=CTX,
     )
     assert await _audit_count(db_session, "billing.subscription_requested") == 1
     assert await _audit_count(db_session, "billing.subscription_paid") == 1
@@ -491,18 +539,23 @@ async def test_no_payment_reference_in_notification_bodies(db_session) -> None:
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
     secret_ref = "BANK-REF-SECRET-12345"
     await _request_and_activate(
-        db_session, subscriber=student, uni=uni, plan=plans["student_pro"],
+        db_session,
+        subscriber=student,
+        uni=uni,
+        plan=plans["student_pro"],
         reference=secret_ref,
     )
 
     # Outbox (email) rows for the owner carry only name/email — never the reference.
     outbox = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.recipient_id == user.id
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(NotificationOutbox.recipient_id == user.id)
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     billing_rows = [r for r in outbox if r.template_key.startswith("billing.")]
     assert billing_rows  # at least payment_recorded + active were enqueued
     for row in billing_rows:
@@ -556,11 +609,6 @@ def test_documents_only_imports_the_billing_limit_facade() -> None:
                     if node.module == allowed:
                         targets = [allowed]
             elif isinstance(node, ast.Import):
-                targets = [
-                    a.name for a in node.names
-                    if a.name.startswith("app.modules.billing")
-                ]
-            offenders.extend(
-                f"{path}: {t}" for t in targets if t != allowed
-            )
+                targets = [a.name for a in node.names if a.name.startswith("app.modules.billing")]
+            offenders.extend(f"{path}: {t}" for t in targets if t != allowed)
     assert offenders == [], offenders

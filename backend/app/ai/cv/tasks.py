@@ -33,8 +33,17 @@ ATS_KEYWORDS = "ats_keyword_suggestions"
 FABRICATION_CHECK = "cv_fabrication_check"
 
 _SECTION_PRIORITY = [
-    "skills", "experience", "projects", "summary", "education",
-    "certifications", "awards", "languages", "activities", "publications", "custom",
+    "skills",
+    "experience",
+    "projects",
+    "summary",
+    "education",
+    "certifications",
+    "awards",
+    "languages",
+    "activities",
+    "publications",
+    "custom",
 ]
 
 
@@ -193,10 +202,7 @@ def _context_block(ctx: CvAiContext) -> str:
     if ctx.job and ctx.job.get("text"):
         lines.append(f"- Job posting: {ctx.job['text'][:1500]}")
     if ctx.instruction:
-        lines.append(
-            "USER REQUEST (a directive only, not evidence): "
-            f"{ctx.instruction[:1000]}"
-        )
+        lines.append(f"USER REQUEST (a directive only, not evidence): {ctx.instruction[:1000]}")
     return "\n".join(lines)
 
 
@@ -216,11 +222,7 @@ def _source_by_type(ctx: CvAiContext) -> dict[str, dict]:
     consider(ctx.source_cv_sections)
     if isinstance(ctx.upload_extracted, dict):
         for stype, value in ctx.upload_extracted.items():
-            if (
-                stype not in by_type
-                and isinstance(value, dict)
-                and grounding.section_texts(value)
-            ):
+            if stype not in by_type and isinstance(value, dict) and grounding.section_texts(value):
                 by_type[stype] = {"items": list(value.get("items", []))}
     return by_type
 
@@ -239,9 +241,7 @@ async def _rewrite(ctx: CvAiContext) -> CvAiResult:
         system_prompt=rewrite_prompt.build_system_prompt(ctx.output_language),
         user_content=_context_block(ctx),
     )
-    claims = find_unsupported_claims(
-        grounding.content_to_text(after_content), _evidence(ctx)
-    )
+    claims = find_unsupported_claims(grounding.content_to_text(after_content), _evidence(ctx))
     n = len(grounding.section_texts(after_content))
     summary = (
         f"Đã viết lại {n} nội dung trong mục."
@@ -264,11 +264,7 @@ async def _rewrite(ctx: CvAiContext) -> CvAiResult:
 async def _bullets(ctx: CvAiContext) -> CvAiResult:
     target = ctx.target_section or {}
     before_content = target.get("content") or {}
-    existing = (
-        list(before_content.get("items", []))
-        if isinstance(before_content, dict)
-        else []
-    )
+    existing = list(before_content.get("items", [])) if isinstance(before_content, dict) else []
     new_bullets = [{"text": _clean(line)} for line in _split_notes(ctx.raw_notes)]
     after_content = dict(before_content) if isinstance(before_content, dict) else {}
     after_content["items"] = existing + new_bullets
@@ -314,9 +310,7 @@ async def _draft(ctx: CvAiContext) -> CvAiResult:
         system_prompt=draft_prompt.build_system_prompt(ctx.output_language),
         user_content=_context_block(ctx),
     )
-    claims = find_unsupported_claims(
-        grounding.sections_to_text(after_sections), _evidence(ctx)
-    )
+    claims = find_unsupported_claims(grounding.sections_to_text(after_sections), _evidence(ctx))
     if after_sections:
         summary = (
             f"Đã soạn bản nháp CV với {len(after_sections)} mục từ hồ sơ."
@@ -357,9 +351,7 @@ async def _fill(ctx: CvAiContext) -> CvAiResult:
         system_prompt=fill_prompt.build_system_prompt(ctx.output_language),
         user_content=_context_block(ctx),
     )
-    claims = find_unsupported_claims(
-        grounding.sections_to_text(after_specs), _evidence(ctx)
-    )
+    claims = find_unsupported_claims(grounding.sections_to_text(after_specs), _evidence(ctx))
     summary = (
         f"Đã điền {len(after_specs)} mục còn trống từ nguồn dữ liệu."
         if ctx.language == "vi"
@@ -386,8 +378,8 @@ async def _optimize(ctx: CvAiContext) -> CvAiResult:
 
     def _priority(section: dict) -> int:
         stype = section.get("section_type") or ""
-        return _SECTION_PRIORITY.index(stype) if stype in _SECTION_PRIORITY else len(
-            _SECTION_PRIORITY
+        return (
+            _SECTION_PRIORITY.index(stype) if stype in _SECTION_PRIORITY else len(_SECTION_PRIORITY)
         )
 
     ordered = sorted(ctx.cv_sections, key=_priority)

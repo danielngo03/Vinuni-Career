@@ -287,9 +287,7 @@ async def _make_cv_with_pii(session, *, student) -> dict:
 async def _load_snapshot(db, snapshot_id: str) -> ApplicationCvSnapshot:
     return (
         await db.execute(
-            select(ApplicationCvSnapshot).where(
-                ApplicationCvSnapshot.id == uuid.UUID(snapshot_id)
-            )
+            select(ApplicationCvSnapshot).where(ApplicationCvSnapshot.id == uuid.UUID(snapshot_id))
         )
     ).scalar_one()
 
@@ -323,9 +321,9 @@ async def test_anonymous_apply_stores_redacted_snapshot_copy(db_session) -> None
     assert "912 345 678" not in redacted
     assert "github.com/realperson" not in redacted
 
-    header = next(
-        s for s in snap.redacted_json["sections"] if s["section_type"] == "header"
-    )["content_json"]
+    header = next(s for s in snap.redacted_json["sections"] if s["section_type"] == "header")[
+        "content_json"
+    ]
     assert header["name"] == "[Ẩn danh]"
     for field in ("email", "phone", "location", "links"):
         assert field not in header
@@ -334,9 +332,9 @@ async def test_anonymous_apply_stores_redacted_snapshot_copy(db_session) -> None
     assert "Software Intern" in redacted
     assert "Example Tech" in redacted
     assert "Built REST APIs with FastAPI" in redacted
-    skills = next(
-        s for s in snap.redacted_json["sections"] if s["section_type"] == "skills"
-    )["content_json"]
+    skills = next(s for s in snap.redacted_json["sections"] if s["section_type"] == "skills")[
+        "content_json"
+    ]
     assert {i["name"]: i["level"] for i in skills["items"]} == {"Python": 85, "FastAPI": 70}
 
 

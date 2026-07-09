@@ -26,6 +26,7 @@ from app.ai.gateway.runtime_config import EffectiveAiConfig
 # Helper: build a mock EffectiveAiConfig with a real platform budget
 # ---------------------------------------------------------------------------
 
+
 def _make_cfg(daily_budget_usd: float = 10.0) -> EffectiveAiConfig:
     return EffectiveAiConfig(
         real_calls_active=True,

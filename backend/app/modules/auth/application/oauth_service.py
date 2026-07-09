@@ -106,9 +106,7 @@ async def _find_link(
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
-async def _notify_oauth_linked(
-    session: AsyncSession, *, user, provider: str
-) -> None:
+async def _notify_oauth_linked(session: AsyncSession, *, user, provider: str) -> None:
     await enqueue_notification(
         session,
         recipient_id=user.id,
@@ -130,9 +128,7 @@ async def handle_callback(
 ) -> OAuthCallbackResult:
     ensure_provider_configured(provider)
     prov = get_oauth_provider(provider)
-    user_info: OAuthUserInfo = await prov.exchange_code(
-        code=code, redirect_uri=redirect_uri
-    )
+    user_info: OAuthUserInfo = await prov.exchange_code(code=code, redirect_uri=redirect_uri)
 
     existing_link = await _find_link(
         session, provider=provider, provider_user_id=user_info.provider_user_id

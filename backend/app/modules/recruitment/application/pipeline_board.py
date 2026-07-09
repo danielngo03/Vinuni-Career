@@ -82,17 +82,13 @@ async def _load_org_scoped_job(
     job = await job_read_facade.get_job_ref(session, job_id)
     if job is None:
         raise ResourceNotFoundError()
-    if not principal.is_superadmin and (
-        principal.org_id is None or principal.org_id != job.org_id
-    ):
+    if not principal.is_superadmin and (principal.org_id is None or principal.org_id != job.org_id):
         raise ResourceNotFoundError()
     permission_checker.require(principal, _RESOURCE, "read", resource_org_id=job.org_id)
     return job
 
 
-async def _board_stages(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> list[PipelineStage]:
+async def _board_stages(session: AsyncSession, *, org_id: uuid.UUID) -> list[PipelineStage]:
     """The ordered template stages = the kanban columns (lazily seeded if absent)."""
 
     tmpl = await stage_service.ensure_org_default_template(session, org_id=org_id)
@@ -218,14 +214,10 @@ async def _batch_stage_evaluations(
 
     out: dict[uuid.UUID, dict] = {}
     for app_id, current_stage_id in current_stage_by_app.items():
-        required = scorecard.required_for_action(
-            required_by_stage.get(current_stage_id, "")
-        )
+        required = scorecard.required_for_action(required_by_stage.get(current_stage_id, ""))
         cards = buckets.get(app_id, [])
         submitted_count = len(cards)
-        overalls = [
-            float(o) for _r, o in cards if isinstance(o, (int, float, Decimal))
-        ]
+        overalls = [float(o) for _r, o in cards if isinstance(o, (int, float, Decimal))]
         rec_summary = dict.fromkeys(scorecard.RECOMMENDATION_ORDER, 0)
         for recommendation, _o in cards:
             if recommendation in rec_summary:
@@ -234,9 +226,7 @@ async def _batch_stage_evaluations(
             "submitted_count": submitted_count,
             "required": required,
             "gate_met": scorecard.gate_met(submitted_count, required),
-            "avg_overall": (
-                round(sum(overalls) / len(overalls), 1) if overalls else None
-            ),
+            "avg_overall": (round(sum(overalls) / len(overalls), 1) if overalls else None),
             "recommendation_summary": rec_summary,
         }
     return out
@@ -272,9 +262,7 @@ async def get_job_pipeline_board(
     cards_raw, truncated = await _fetch_cards(session, job_id=job.id)
     app_ids = [app.id for app, _stage_id, _entered in cards_raw]
 
-    reveal_status = await _batch_reveal_status(
-        session, application_ids=app_ids, org_id=job.org_id
-    )
+    reveal_status = await _batch_reveal_status(session, application_ids=app_ids, org_id=job.org_id)
     # Only revealed / non-anonymous cards need a real user row; anonymous-unrevealed
     # cards render from the deterministic handle alone (no user fetch, no leak).
     revealed_user_ids = [

@@ -109,7 +109,13 @@ async def test_list_returns_only_own_rows_newest_first_with_unread_count(db_sess
     assert unread == 3
     # Feed item shape matches the contract (no internal fields leaked).
     assert set(items[0]) == {
-        "id", "notif_type", "title", "body", "action_url", "is_read", "created_at"
+        "id",
+        "notif_type",
+        "title",
+        "body",
+        "action_url",
+        "is_read",
+        "created_at",
     }
 
 
@@ -205,9 +211,7 @@ async def test_mark_all_read_zeroes_unread(db_session):
     assert result == {"updated": 4, "unread_count": 0}
     assert await feed_service.unread_count(db_session, principal=_principal(me.id)) == 0
     # The other user's unread is unaffected.
-    assert (
-        await feed_service.unread_count(db_session, principal=_principal(other.id)) == 2
-    )
+    assert await feed_service.unread_count(db_session, principal=_principal(other.id)) == 2
 
 
 # --------------------------------------------------------------------------- #
@@ -252,9 +256,7 @@ async def test_create_in_app_respects_in_app_disabled_preference(db_session):
     user = await register_verified(db_session, email=_email("muted"))
     # Mute the (non-mandatory) category that reveal/application notifs map to.
     db_session.add(
-        NotificationPreference(
-            user_id=user.id, category="application_status", in_app_enabled=False
-        )
+        NotificationPreference(user_id=user.id, category="application_status", in_app_enabled=False)
     )
     await db_session.commit()
 
@@ -273,12 +275,18 @@ async def test_create_in_app_respects_in_app_disabled_preference(db_session):
 async def test_create_in_app_dedupes_on_action_url(db_session):
     user = await register_verified(db_session, email=_email("dedupe"))
     a = await feed_service.create_in_app(
-        db_session, recipient_id=user.id, notif_type="opportunities.job_approved",
-        action_url="/partner/jobs/9", variables={"job_title": "X"},
+        db_session,
+        recipient_id=user.id,
+        notif_type="opportunities.job_approved",
+        action_url="/partner/jobs/9",
+        variables={"job_title": "X"},
     )
     b = await feed_service.create_in_app(
-        db_session, recipient_id=user.id, notif_type="opportunities.job_approved",
-        action_url="/partner/jobs/9", variables={"job_title": "X"},
+        db_session,
+        recipient_id=user.id,
+        notif_type="opportunities.job_approved",
+        action_url="/partner/jobs/9",
+        variables={"job_title": "X"},
     )
     await db_session.commit()
     assert a is not None and b is not None
@@ -329,7 +337,9 @@ async def _feed_for(db, recipient_id: uuid.UUID, notif_type: str) -> list[Notifi
                     Notification.notif_type == notif_type,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -368,8 +378,11 @@ async def test_reveal_request_creates_in_app_for_student(db_session):
     app_id = uuid.UUID(app["id"])
 
     await reveal_service.request_reveal(
-        db_session, principal=partner, application_id=app_id,
-        reason="We would like to learn more about your internship experience.", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="We would like to learn more about your internship experience.",
+        ctx=CTX,
     )
 
     rows = await _feed_for(db_session, su.id, "recruitment.reveal_requested")
@@ -385,12 +398,8 @@ async def test_job_approve_creates_in_app_for_partner(db_session):
         db_session, principal=partner, payload=job_payload("Data Intern"), ctx=CTX
     )
     job_id = uuid.UUID(created["id"])
-    await job_service.submit_job(
-        db_session, principal=partner, job_id=job_id, ctx=CTX
-    )
-    await moderation_service.approve_job(
-        db_session, principal=uni, job_id=job_id, ctx=CTX
-    )
+    await job_service.submit_job(db_session, principal=partner, job_id=job_id, ctx=CTX)
+    await moderation_service.approve_job(db_session, principal=uni, job_id=job_id, ctx=CTX)
 
     rows = await _feed_for(db_session, partner_user.id, "opportunities.job_approved")
     # The helper already approved one job; assert the new job produced its own row.

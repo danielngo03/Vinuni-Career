@@ -62,9 +62,7 @@ async def create_note(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=org_id)
     if category not in catalog.NOTE_CATEGORIES:
         raise ValidationFailedError(details={"reason": "invalid_category"})
     if visibility not in catalog.NOTE_VISIBILITIES:
@@ -126,9 +124,7 @@ async def update_note(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=org_id)
     note = await _get_note(session, org_id=org_id, note_id=note_id)
     if note is None:
         raise ResourceNotFoundError()

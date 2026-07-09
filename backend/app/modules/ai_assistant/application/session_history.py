@@ -21,8 +21,8 @@ from app.shared.exceptions import AuthRequiredError, ResourceNotFoundError
 from app.shared.permissions import Principal
 
 _MAX_HISTORY_MESSAGES = 20
-_COMPRESS_THRESHOLD = 16   # compress when history exceeds this many messages
-_SUMMARY_KEEP_RECENT = 6   # keep the N most recent turns after compression
+_COMPRESS_THRESHOLD = 16  # compress when history exceeds this many messages
+_SUMMARY_KEEP_RECENT = 6  # keep the N most recent turns after compression
 
 
 # --------------------------------------------------------------------------- #
@@ -61,16 +61,20 @@ async def list_sessions(
     if not principal.is_authenticated:
         raise AuthRequiredError()
     rows = (
-        await session.execute(
-            select(ChatSession)
-            .where(
-                ChatSession.user_id == principal.user_id,
-                ChatSession.is_archived.is_(False),
+        (
+            await session.execute(
+                select(ChatSession)
+                .where(
+                    ChatSession.user_id == principal.user_id,
+                    ChatSession.is_archived.is_(False),
+                )
+                .order_by(ChatSession.last_message_at.desc().nullslast())
+                .limit(limit)
             )
-            .order_by(ChatSession.last_message_at.desc().nullslast())
-            .limit(limit)
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [serialize_session(r) for r in rows]
 
 
@@ -86,14 +90,18 @@ async def get_session_messages(
         raise AuthRequiredError()
     chat = await require_session(session, principal, session_id)
     rows = (
-        await session.execute(
-            select(ChatMessage)
-            .where(ChatMessage.session_id == chat.id)
-            .where(ChatMessage.role != "tool_result")
-            .order_by(ChatMessage.created_at.asc())
-            .limit(limit)
+        (
+            await session.execute(
+                select(ChatMessage)
+                .where(ChatMessage.session_id == chat.id)
+                .where(ChatMessage.role != "tool_result")
+                .order_by(ChatMessage.created_at.asc())
+                .limit(limit)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [serialize_message(m) for m in rows]
 
 
@@ -204,13 +212,17 @@ async def load_history(
     window stays bounded without losing long-term conversational context.
     """
     rows = (
-        await session.execute(
-            select(ChatMessage)
-            .where(ChatMessage.session_id == chat.id)
-            .order_by(ChatMessage.created_at.desc())
-            .limit(_MAX_HISTORY_MESSAGES)
+        (
+            await session.execute(
+                select(ChatMessage)
+                .where(ChatMessage.session_id == chat.id)
+                .order_by(ChatMessage.created_at.desc())
+                .limit(_MAX_HISTORY_MESSAGES)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     rows = list(reversed(rows))
 
     history: list[AIMessage] = []
@@ -281,6 +293,7 @@ async def _summarize_history(old_turns: list[AIMessage]) -> str:
 
     try:
         from app.ai.gateway.output_guard import scrub_text
+
         completion = await provider.complete(
             summarize_messages, alias=alias, temperature=0.1, max_tokens=300
         )

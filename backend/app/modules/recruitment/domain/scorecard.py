@@ -68,9 +68,7 @@ RECOMMENDATION_LABELS: dict[str, dict[str, str]] = {
 
 SCORECARD_SUBMITTED = "submitted"
 SCORECARD_WITHDRAWN = "withdrawn"
-SCORECARD_STATUSES: frozenset[str] = frozenset(
-    {SCORECARD_SUBMITTED, SCORECARD_WITHDRAWN}
-)
+SCORECARD_STATUSES: frozenset[str] = frozenset({SCORECARD_SUBMITTED, SCORECARD_WITHDRAWN})
 
 # --------------------------------------------------------------------------- #
 # Advance gate — V1 fixes ``required = 1`` (assignee/threshold model deferred)   #
@@ -85,9 +83,7 @@ GATE_REQUIRED_DEFAULT = 1
 # ``required`` assignee-derived (all assigned interviewers must submit) and adds the
 # ``score_threshold`` average gate on top of the same count requirement. Both share
 # the ADR-0005 fallback ``required = 1`` when a stage has no interview/assignees.
-_SCORECARD_GATED_ACTIONS: frozenset[str] = frozenset(
-    {ACTION_SCORECARD, "score_threshold"}
-)
+_SCORECARD_GATED_ACTIONS: frozenset[str] = frozenset({ACTION_SCORECARD, "score_threshold"})
 
 
 @dataclass(frozen=True, slots=True)
@@ -117,11 +113,7 @@ def required_for_action(required_action: str) -> int:
     Every other action contributes no scorecard requirement (``0``).
     """
 
-    return (
-        GATE_REQUIRED_DEFAULT
-        if required_action in _SCORECARD_GATED_ACTIONS
-        else 0
-    )
+    return GATE_REQUIRED_DEFAULT if required_action in _SCORECARD_GATED_ACTIONS else 0
 
 
 def gate_met(submitted_count: int, required: int) -> bool:
@@ -134,9 +126,7 @@ def is_valid_score(value: object) -> bool:
     """A criterion score is an int in ``[1, 5]`` (``bool`` is rejected)."""
 
     return (
-        isinstance(value, int)
-        and not isinstance(value, bool)
-        and SCORE_MIN <= value <= SCORE_MAX
+        isinstance(value, int) and not isinstance(value, bool) and SCORE_MIN <= value <= SCORE_MAX
     )
 
 

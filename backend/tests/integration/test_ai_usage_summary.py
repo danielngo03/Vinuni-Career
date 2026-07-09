@@ -46,9 +46,7 @@ async def _log_calls(
 
 
 async def _principal(db_session) -> Principal:
-    user = await register_verified(
-        db_session, email=f"usage_{uuid.uuid4().hex[:8]}@vinuni.edu.vn"
-    )
+    user = await register_verified(db_session, email=f"usage_{uuid.uuid4().hex[:8]}@vinuni.edu.vn")
     return Principal(user_id=user.id, persona="partner", permissions=frozenset())
 
 

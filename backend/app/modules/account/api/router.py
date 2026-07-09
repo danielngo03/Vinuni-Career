@@ -102,9 +102,7 @@ async def totp_setup(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await account_service.totp_setup(
-        session, principal=auth.principal, ctx=auth.ctx
-    )
+    data = await account_service.totp_setup(session, principal=auth.principal, ctx=auth.ctx)
     return success(data)
 
 

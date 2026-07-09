@@ -39,9 +39,22 @@ from tests.org_utils import make_org_with_admin
 # --------------------------------------------------------------------------- #
 
 _FORBIDDEN = [
-    "openrouter", "openai", "anthropic", "claude", "gpt-4", "gemini", "deepseek",
-    "chat_cheap", "reasoning_cheap", "model_alias", "prompt_tokens",
-    "completion_tokens", "storage_path", "storage_key", "confidence", "embedding",
+    "openrouter",
+    "openai",
+    "anthropic",
+    "claude",
+    "gpt-4",
+    "gemini",
+    "deepseek",
+    "chat_cheap",
+    "reasoning_cheap",
+    "model_alias",
+    "prompt_tokens",
+    "completion_tokens",
+    "storage_path",
+    "storage_key",
+    "confidence",
+    "embedding",
 ]
 
 _VALID_LEVELS = {"low", "medium", "high", "very_high"}
@@ -86,9 +99,7 @@ def _job_payload(**over) -> dict:
     return base
 
 
-async def _publish_job(
-    db: AsyncSession, *, partner_principal, uni_principal, **over
-) -> uuid.UUID:
+async def _publish_job(db: AsyncSession, *, partner_principal, uni_principal, **over) -> uuid.UUID:
     """Create, submit, and approve a job (active + moderation_approved)."""
     created = await job_service.create_job(
         db, principal=partner_principal, payload=_job_payload(**over), ctx=CTX
@@ -149,8 +160,16 @@ async def test_response_keys_all_present(db_session: AsyncSession) -> None:
         db_session, principal=GUEST, job_id=job_id
     )
 
-    for key in ("level", "label", "explanation", "ai_explanation_available",
-                "basis", "jd_complexity_score", "application_count", "updated_at"):
+    for key in (
+        "level",
+        "label",
+        "explanation",
+        "ai_explanation_available",
+        "basis",
+        "jd_complexity_score",
+        "application_count",
+        "updated_at",
+    ):
         assert key in result, f"missing key: {key!r}"
 
 
@@ -177,9 +196,7 @@ async def test_draft_job_is_not_visible(db_session: AsyncSession) -> None:
     # Do NOT submit or approve — job remains a draft.
 
     with pytest.raises(ResourceNotFoundError):
-        await competition_service.competition_signal(
-            db_session, principal=GUEST, job_id=job_id
-        )
+        await competition_service.competition_signal(db_session, principal=GUEST, job_id=job_id)
 
 
 async def test_pending_review_job_is_not_visible(db_session: AsyncSession) -> None:
@@ -194,9 +211,7 @@ async def test_pending_review_job_is_not_visible(db_session: AsyncSession) -> No
     # Not approved → still invisible to public.
 
     with pytest.raises(ResourceNotFoundError):
-        await competition_service.competition_signal(
-            db_session, principal=GUEST, job_id=job_id
-        )
+        await competition_service.competition_signal(db_session, principal=GUEST, job_id=job_id)
 
 
 # --------------------------------------------------------------------------- #
@@ -208,7 +223,9 @@ async def test_guest_can_access_public_visibility_job(db_session: AsyncSession) 
     _u, _org, partner = await make_org_with_admin(db_session)
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     job_id = await _publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
         visibility="public",
     )
 
@@ -287,9 +304,7 @@ async def test_application_count_exposed_when_opted_in(db_session: AsyncSession)
     await _insert_application(db_session, job_id=job_id, org_id=org.id, status="under_review")
 
     # Opt the partner in by updating job.settings directly
-    job = (
-        await db_session.execute(select(Job).where(Job.id == job_id))
-    ).scalar_one()
+    job = (await db_session.execute(select(Job).where(Job.id == job_id))).scalar_one()
     job.settings = {**job.settings, "show_application_count": True}
     await db_session.commit()
 
@@ -312,9 +327,7 @@ async def test_rejected_applications_not_counted(db_session: AsyncSession) -> No
     await _insert_application(db_session, job_id=job_id, org_id=org.id, status="withdrawn")
 
     # Opt in so we can inspect the count
-    job = (
-        await db_session.execute(select(Job).where(Job.id == job_id))
-    ).scalar_one()
+    job = (await db_session.execute(select(Job).where(Job.id == job_id))).scalar_one()
     job.settings = {**job.settings, "show_application_count": True}
     await db_session.commit()
 
@@ -359,17 +372,24 @@ async def test_signal_reflects_experience_requirement(db_session: AsyncSession) 
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
 
     entry_job_id = await _publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Entry Role", employment_type="full_time",
-        required_skills=["python"], experience_min_years=None,
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Entry Role",
+        employment_type="full_time",
+        required_skills=["python"],
+        experience_min_years=None,
     )
     _u2, _org2, partner2 = await make_org_with_admin(db_session, display_name="Corp B")
     _uu2, _uorg2, uni2 = await make_org_with_admin(
         db_session, org_type="university", display_name="Uni B"
     )
     senior_job_id = await _publish_job(
-        db_session, partner_principal=partner2, uni_principal=uni2,
-        title="Senior Role", employment_type="full_time",
+        db_session,
+        partner_principal=partner2,
+        uni_principal=uni2,
+        title="Senior Role",
+        employment_type="full_time",
         required_skills=["python", "fastapi", "postgresql", "redis", "kafka", "aws", "docker"],
         experience_min_years=7,
     )

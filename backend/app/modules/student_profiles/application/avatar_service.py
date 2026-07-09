@@ -62,9 +62,7 @@ async def upload_avatar(
     profile = await load_owned_profile(session, principal=principal)
 
     try:
-        media = avatar_media.validate_avatar(
-            data, content_type, max_bytes=_AVATAR_MAX_BYTES
-        )
+        media = avatar_media.validate_avatar(data, content_type, max_bytes=_AVATAR_MAX_BYTES)
     except avatar_media.AvatarValidationError as exc:
         message = exc.message_vi if locale == "vi" else exc.message_en
         raise ValidationFailedError(message, details={"reason": exc.reason}) from exc

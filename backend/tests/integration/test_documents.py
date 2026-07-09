@@ -142,8 +142,7 @@ async def test_template_seed_is_idempotent_and_listed(db_session) -> None:
     # The 8 layouts are visually distinct (no two share the same layout kind +
     # sidebar background).
     signatures = {
-        (t["theme"]["layout"]["kind"], t["theme"]["palette"]["sidebarBg"])
-        for t in templates
+        (t["theme"]["layout"]["kind"], t["theme"]["palette"]["sidebarBg"]) for t in templates
     }
     assert len(signatures) == len(templates)
 
@@ -190,27 +189,25 @@ async def test_university_admin_can_manage_cv_templates(db_session) -> None:
 async def test_partner_admin_cannot_manage_cv_templates(db_session) -> None:
     _u, _org, partner_admin = await make_org_with_admin(db_session)
     with pytest.raises(PermissionDeniedError):
-        await template_admin_service.list_templates_admin(
-            db_session, principal=partner_admin
-        )
+        await template_admin_service.list_templates_admin(db_session, principal=partner_admin)
 
 
 async def test_seed_creates_template_version_rows(db_session) -> None:
     # Each seeded template ships with an immutable version-1 design snapshot.
     await template_seed.ensure_default_templates(db_session)
     await db_session.commit()
-    templates = (
-        await db_session.execute(select(CvTemplate))
-    ).scalars().all()
+    templates = (await db_session.execute(select(CvTemplate))).scalars().all()
     assert len(templates) == 8
     for t in templates:
         rows = (
-            await db_session.execute(
-                select(CvTemplateVersion).where(
-                    CvTemplateVersion.template_id == t.id
+            (
+                await db_session.execute(
+                    select(CvTemplateVersion).where(CvTemplateVersion.template_id == t.id)
                 )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
         assert len(rows) == 1
         assert rows[0].version_number == 1
         assert rows[0].design_json == t.layout_schema
@@ -221,9 +218,7 @@ async def test_public_template_list_excludes_non_published(db_session) -> None:
     await db_session.commit()
     # Archive one template directly; it must drop out of the public catalogue.
     tpl = (
-        await db_session.execute(
-            select(CvTemplate).where(CvTemplate.key == "modern_teal")
-        )
+        await db_session.execute(select(CvTemplate).where(CvTemplate.key == "modern_teal"))
     ).scalar_one()
     tpl.status = "archived"
     await db_session.commit()
@@ -256,10 +251,14 @@ async def test_admin_layout_change_publishes_new_version(db_session) -> None:
     tid = uuid.UUID(created["id"])
     assert created["version"] == 1
     v1_rows = (
-        await db_session.execute(
-            select(CvTemplateVersion).where(CvTemplateVersion.template_id == tid)
+        (
+            await db_session.execute(
+                select(CvTemplateVersion).where(CvTemplateVersion.template_id == tid)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(v1_rows) == 1
 
     # A design change bumps the version and snapshots a NEW immutable row; the
@@ -273,12 +272,16 @@ async def test_admin_layout_change_publishes_new_version(db_session) -> None:
     )
     assert updated["version"] == 2
     rows = (
-        await db_session.execute(
-            select(CvTemplateVersion)
-            .where(CvTemplateVersion.template_id == tid)
-            .order_by(CvTemplateVersion.version_number)
+        (
+            await db_session.execute(
+                select(CvTemplateVersion)
+                .where(CvTemplateVersion.template_id == tid)
+                .order_by(CvTemplateVersion.version_number)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert [r.version_number for r in rows] == [1, 2]
     assert rows[0].design_json["layout"]["kind"] == "single"
     assert rows[1].design_json["layout"]["kind"] == "left-sidebar"
@@ -292,8 +295,13 @@ async def test_admin_layout_change_publishes_new_version(db_session) -> None:
 async def test_upload_happy_creates_review_run_with_fields(db_session) -> None:
     _u, student = await make_student(db_session)
     result = await upload_service.upload_cv(
-        db_session, principal=student, filename="cv.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     assert result["status"] == "review_required"
     assert result["next_action"] == "review_fields"
@@ -317,12 +325,22 @@ async def test_upload_idempotent_returns_same_document(db_session) -> None:
     _u, student = await make_student(db_session)
     key = new_key()
     r1 = await upload_service.upload_cv(
-        db_session, principal=student, filename="cv.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=key, ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=key,
+        ctx=CTX,
     )
     r2 = await upload_service.upload_cv(
-        db_session, principal=student, filename="cv.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=key, ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=key,
+        ctx=CTX,
     )
     assert r1["document_id"] == r2["document_id"]
 
@@ -350,8 +368,13 @@ _EICAR_CV = cv_validation._EICAR + b" experience education skills"
 async def test_upload_negative_quality_codes(db_session, filename, data, expected) -> None:
     _u, student = await make_student(db_session)
     result = await upload_service.upload_cv(
-        db_session, principal=student, filename=filename, data=data,
-        content_type="application/octet-stream", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename=filename,
+        data=data,
+        content_type="application/octet-stream",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     assert result["status"] == "failed"
     run = await upload_service.get_parse_run(
@@ -364,12 +387,22 @@ async def test_upload_negative_quality_codes(db_session, filename, data, expecte
 async def test_upload_duplicate_file_detected(db_session) -> None:
     _u, student = await make_student(db_session)
     await upload_service.upload_cv(
-        db_session, principal=student, filename="cv.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     dup = await upload_service.upload_cv(
-        db_session, principal=student, filename="cv-again.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv-again.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     run = await upload_service.get_parse_run(
         db_session, principal=student, parse_run_id=uuid.UUID(dup["parse_run_id"])
@@ -380,9 +413,13 @@ async def test_upload_duplicate_file_detected(db_session) -> None:
 async def test_security_rejected_file_not_stored(db_session) -> None:
     _u, student = await make_student(db_session)
     result = await upload_service.upload_cv(
-        db_session, principal=student, filename="virus.txt",
+        db_session,
+        principal=student,
+        filename="virus.txt",
         data=cv_validation._EICAR + b" experience education skills",
-        content_type="text/plain", idempotency_key=new_key(), ctx=CTX,
+        content_type="text/plain",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     from app.modules.documents.domain.models import Document
 
@@ -399,8 +436,13 @@ async def test_parse_run_owner_only(db_session) -> None:
     _u, student = await make_student(db_session)
     _u2, other = await make_student(db_session, prefix="other")
     result = await upload_service.upload_cv(
-        db_session, principal=student, filename="cv.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     with pytest.raises(ResourceNotFoundError):
         await upload_service.get_parse_run(
@@ -418,9 +460,14 @@ async def test_create_blank_template_seeds_sections_and_version(db_session) -> N
     _u, student = await make_student(db_session)
     tpl = await _first_template_id(db_session)
     cv = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "My CV", "template_id": str(tpl),
-                 "creation_mode": "blank_template", "language": "vi"},
+        db_session,
+        principal=student,
+        payload={
+            "title": "My CV",
+            "template_id": str(tpl),
+            "creation_mode": "blank_template",
+            "language": "vi",
+        },
         ctx=CTX,
     )
     assert cv["status"] == "draft"
@@ -442,9 +489,14 @@ async def test_delete_cv_soft_deletes_and_audits(db_session) -> None:
     _u, student = await make_student(db_session)
     tpl = await _first_template_id(db_session)
     cv = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "Temp CV", "template_id": str(tpl),
-                 "creation_mode": "blank_template", "language": "vi"},
+        db_session,
+        principal=student,
+        payload={
+            "title": "Temp CV",
+            "template_id": str(tpl),
+            "creation_mode": "blank_template",
+            "language": "vi",
+        },
         ctx=CTX,
     )
     cv_id = uuid.UUID(cv["id"])
@@ -463,15 +515,18 @@ async def test_delete_cv_cross_owner_forbidden(db_session) -> None:
     _u2, other = await make_student(db_session, prefix="other")
     tpl = await _first_template_id(db_session)
     cv = await cv_service.create_cv(
-        db_session, principal=owner,
-        payload={"title": "Owned", "template_id": str(tpl),
-                 "creation_mode": "blank_template", "language": "vi"},
+        db_session,
+        principal=owner,
+        payload={
+            "title": "Owned",
+            "template_id": str(tpl),
+            "creation_mode": "blank_template",
+            "language": "vi",
+        },
         ctx=CTX,
     )
     with pytest.raises(ResourceNotFoundError):
-        await cv_service.delete_cv(
-            db_session, principal=other, cv_id=uuid.UUID(cv["id"]), ctx=CTX
-        )
+        await cv_service.delete_cv(db_session, principal=other, cv_id=uuid.UUID(cv["id"]), ctx=CTX)
 
 
 # --------------------------------------------------------------------------- #
@@ -493,9 +548,9 @@ async def test_create_cv_rejects_removed_creation_modes(db_session, mode) -> Non
     _u, student = await make_student(db_session)
     with pytest.raises(InvalidCvFieldError) as exc:
         await cv_service.create_cv(
-            db_session, principal=student,
-            payload={"title": "X", "creation_mode": mode,
-                     "source": {"raw_notes": "hi"}},
+            db_session,
+            principal=student,
+            payload={"title": "X", "creation_mode": mode, "source": {"raw_notes": "hi"}},
             ctx=CTX,
         )
     assert exc.value.details["field"] == "creation_mode"
@@ -511,13 +566,18 @@ async def test_create_cv_rejects_removed_creation_modes(db_session, mode) -> Non
 async def test_section_upsert_bumps_version_and_snapshots(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(cv["id"])
     section_id = uuid.UUID(cv["sections"][0]["id"])
     out = await cv_service.upsert_section(
-        db_session, principal=student, cv_id=cv_id, section_id=section_id,
+        db_session,
+        principal=student,
+        cv_id=cv_id,
+        section_id=section_id,
         payload={"content": {"items": [{"text": "Hello"}]}, "expected_version": cv["version"]},
         ctx=CTX,
     )
@@ -528,15 +588,21 @@ async def test_section_upsert_bumps_version_and_snapshots(db_session) -> None:
 async def test_section_upsert_version_conflict_returns_current(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(cv["id"])
     section_id = uuid.UUID(cv["sections"][0]["id"])
     with pytest.raises(CvVersionConflictError) as exc:
         await cv_service.upsert_section(
-            db_session, principal=student, cv_id=cv_id, section_id=section_id,
-            payload={"content": {"items": []}, "expected_version": 999}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=cv_id,
+            section_id=section_id,
+            payload={"content": {"items": []}, "expected_version": 999},
+            ctx=CTX,
         )
     assert exc.value.details["current_version"] == cv["version"]
 
@@ -549,8 +615,10 @@ async def test_section_upsert_version_conflict_returns_current(db_session) -> No
 async def test_get_cv_exposes_current_version_id_that_resolves(db_session) -> None:
     _u, student = await make_student(db_session)
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(created["id"])
     detail = await cv_service.get_cv(db_session, principal=student, cv_id=cv_id)
@@ -579,14 +647,19 @@ async def test_list_versions_newest_first_and_owner_only(db_session) -> None:
     _u, student = await make_student(db_session)
     _u2, other = await make_student(db_session, prefix="other")
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(created["id"])
     # Add a section -> a second version.
     await cv_service.create_section(
-        db_session, principal=student, cv_id=cv_id,
-        payload={"section_type": "awards", "title": "Awards"}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=cv_id,
+        payload={"section_type": "awards", "title": "Awards"},
+        ctx=CTX,
     )
     versions = await cv_service.list_versions(db_session, principal=student, cv_id=cv_id)
     assert [v["version"] for v in versions] == [2, 1]  # newest-first
@@ -600,16 +673,23 @@ async def test_list_versions_newest_first_and_owner_only(db_session) -> None:
 async def test_create_section_adds_section_version_and_audit(db_session) -> None:
     _u, student = await make_student(db_session)
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(created["id"])
     before = len(created["sections"])
     out = await cv_service.create_section(
-        db_session, principal=student, cv_id=cv_id,
-        payload={"section_type": "languages", "title": "Languages",
-                 "content": {"items": [{"text": "English"}]},
-                 "expected_version": created["version"]},
+        db_session,
+        principal=student,
+        cv_id=cv_id,
+        payload={
+            "section_type": "languages",
+            "title": "Languages",
+            "content": {"items": [{"text": "English"}]},
+            "expected_version": created["version"],
+        },
         ctx=CTX,
     )
     assert out["cv_version"] == created["version"] + 1
@@ -627,26 +707,36 @@ async def test_create_section_cross_owner_404(db_session) -> None:
     _u, student = await make_student(db_session)
     _u2, other = await make_student(db_session, prefix="other")
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     with pytest.raises(ResourceNotFoundError):
         await cv_service.create_section(
-            db_session, principal=other, cv_id=uuid.UUID(created["id"]),
-            payload={"section_type": "awards"}, ctx=CTX,
+            db_session,
+            principal=other,
+            cv_id=uuid.UUID(created["id"]),
+            payload={"section_type": "awards"},
+            ctx=CTX,
         )
 
 
 async def test_create_section_version_conflict(db_session) -> None:
     _u, student = await make_student(db_session)
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     with pytest.raises(CvVersionConflictError) as exc:
         await cv_service.create_section(
-            db_session, principal=student, cv_id=uuid.UUID(created["id"]),
-            payload={"section_type": "awards", "expected_version": 999}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(created["id"]),
+            payload={"section_type": "awards", "expected_version": 999},
+            ctx=CTX,
         )
     assert exc.value.details["current_version"] == created["version"]
 
@@ -654,21 +744,28 @@ async def test_create_section_version_conflict(db_session) -> None:
 async def test_create_section_rejects_unknown_type(db_session) -> None:
     _u, student = await make_student(db_session)
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     with pytest.raises(InvalidCvFieldError):
         await cv_service.create_section(
-            db_session, principal=student, cv_id=uuid.UUID(created["id"]),
-            payload={"section_type": "not_a_real_type"}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(created["id"]),
+            payload={"section_type": "not_a_real_type"},
+            ctx=CTX,
         )
 
 
 async def test_restore_version_rebuilds_sections_and_keeps_history(db_session) -> None:
     _u, student = await make_student(db_session)
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(created["id"])
     base_sections = len(created["sections"])
@@ -676,16 +773,23 @@ async def test_restore_version_rebuilds_sections_and_keeps_history(db_session) -
 
     # Add a section -> v2 has an extra section.
     out = await cv_service.create_section(
-        db_session, principal=student, cv_id=cv_id,
-        payload={"section_type": "awards", "title": "Awards"}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=cv_id,
+        payload={"section_type": "awards", "title": "Awards"},
+        ctx=CTX,
     )
     detail_v2 = await cv_service.get_cv(db_session, principal=student, cv_id=cv_id)
     assert len(detail_v2["sections"]) == base_sections + 1
 
     # Restore v1 -> sections back to base, new version (v3) recorded, history kept.
     restored = await cv_service.restore_version(
-        db_session, principal=student, cv_id=cv_id, version_id=v1_id,
-        payload={"expected_version": out["cv_version"]}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=cv_id,
+        version_id=v1_id,
+        payload={"expected_version": out["cv_version"]},
+        ctx=CTX,
     )
     assert len(restored["sections"]) == base_sections
     assert len(restored["versions"]) == 3  # v1, v2, v3(restore)
@@ -697,13 +801,19 @@ async def test_restore_version_rebuilds_sections_and_keeps_history(db_session) -
 async def test_restore_unknown_version_404(db_session) -> None:
     _u, student = await make_student(db_session)
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     with pytest.raises(ResourceNotFoundError):
         await cv_service.restore_version(
-            db_session, principal=student, cv_id=uuid.UUID(created["id"]),
-            version_id=uuid.uuid4(), payload=None, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(created["id"]),
+            version_id=uuid.uuid4(),
+            payload=None,
+            ctx=CTX,
         )
 
 
@@ -712,16 +822,23 @@ async def test_export_using_version_id_from_get_detail(db_session) -> None:
 
     _u, student = await make_student(db_session)
     created = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "Export from GET", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "Export from GET", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     cv_id = uuid.UUID(created["id"])
     detail = await cv_service.get_cv(db_session, principal=student, cv_id=cv_id)
     version_id = uuid.UUID(detail["current_version_id"])
 
     export = await export_service.create_export(
-        db_session, principal=student, cv_id=cv_id, version_id=version_id,
-        export_format="pdf", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=cv_id,
+        version_id=version_id,
+        export_format="pdf",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     got = await export_service.get_export(
         db_session, principal=student, export_id=uuid.UUID(export["export_id"])
@@ -740,13 +857,18 @@ async def test_export_using_version_id_from_get_detail(db_session) -> None:
 async def test_duplicate_does_not_mutate_source(db_session) -> None:
     _u, student = await make_student(db_session)
     src = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "Original", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "Original", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     src_id = uuid.UUID(src["id"])
     dup = await cv_service.duplicate_cv(
-        db_session, principal=student, cv_id=src_id,
-        payload={"title": "Copy", "idempotency_key": new_key()}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=src_id,
+        payload={"title": "Copy", "idempotency_key": new_key()},
+        ctx=CTX,
     )
     assert dup["id"] != src["id"]
     assert dup["source_type"] == "duplicate_existing"
@@ -766,17 +888,25 @@ async def test_duplicate_does_not_mutate_source(db_session) -> None:
 async def test_duplicate_is_idempotent(db_session) -> None:
     _u, student = await make_student(db_session)
     src = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "Original", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "Original", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     key = new_key()
     d1 = await cv_service.duplicate_cv(
-        db_session, principal=student, cv_id=uuid.UUID(src["id"]),
-        payload={"idempotency_key": key}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(src["id"]),
+        payload={"idempotency_key": key},
+        ctx=CTX,
     )
     d2 = await cv_service.duplicate_cv(
-        db_session, principal=student, cv_id=uuid.UUID(src["id"]),
-        payload={"idempotency_key": key}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(src["id"]),
+        payload={"idempotency_key": key},
+        ctx=CTX,
     )
     assert d1["id"] == d2["id"]
 
@@ -788,8 +918,10 @@ async def test_duplicate_is_idempotent(db_session) -> None:
 
 async def _make_blank(db, student, title: str = "CV") -> dict:
     return await cv_service.create_cv(
-        db, principal=student,
-        payload={"title": title, "creation_mode": "blank_template"}, ctx=CTX,
+        db,
+        principal=student,
+        payload={"title": title, "creation_mode": "blank_template"},
+        ctx=CTX,
     )
 
 
@@ -798,7 +930,9 @@ async def _seed_header_name(db, student, cv: dict, name: str = "Test Candidate")
 
     header = next(s for s in cv["sections"] if s["section_type"] == "header")
     await cv_service.upsert_section(
-        db, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         section_id=uuid.UUID(header["id"]),
         payload={"content": {"name": name}, "expected_version": cv["version"]},
         ctx=CTX,
@@ -846,8 +980,11 @@ async def test_create_and_duplicate_never_quota_gated(db_session, monkeypatch) -
     assert draft["status"] == "draft"
     # Duplicate the library CV -> a new draft, also allowed.
     dup = await cv_service.duplicate_cv(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]),
-        payload={"idempotency_key": new_key()}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
+        payload={"idempotency_key": new_key()},
+        ctx=CTX,
     )
     assert dup["status"] == "draft"
     # Library count unchanged (only the one ready CV).
@@ -865,14 +1002,15 @@ async def test_finalize_at_library_full_is_blocked(db_session, monkeypatch) -> N
     await _seed_header_name(db_session, student, draft)
     with pytest.raises(CvQuotaReachedError) as exc:
         await cv_lifecycle_service.finalize_cv(
-            db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(draft["id"]),
+            ctx=CTX,
         )
     assert exc.value.details["current"] == 2
     assert exc.value.details["limit"] == 2
     # Nothing mutated: the draft is still a draft.
-    still = await cv_service.get_cv(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"])
-    )
+    still = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(draft["id"]))
     assert still["status"] == "draft"
 
 
@@ -886,18 +1024,27 @@ async def test_archiving_a_ready_cv_frees_a_library_slot(db_session, monkeypatch
     await _seed_header_name(db_session, student, draft)
     with pytest.raises(CvQuotaReachedError):
         await cv_lifecycle_service.finalize_cv(
-            db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(draft["id"]),
+            ctx=CTX,
         )
 
     # Archiving a ready CV frees a slot immediately.
     await cv_service.update_cv(
-        db_session, principal=student, cv_id=uuid.UUID(a["id"]),
-        payload={"status": "archived"}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(a["id"]),
+        payload={"status": "archived"},
+        ctx=CTX,
     )
     assert await cv_service.count_cvs(db_session, principal=student) == 1
 
     finalized = await cv_lifecycle_service.finalize_cv(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
+        ctx=CTX,
     )
     assert finalized["status"] == "ready"
     assert await cv_service.count_cvs(db_session, principal=student) == 2
@@ -911,9 +1058,7 @@ async def test_soft_deleted_ready_cvs_do_not_count_toward_quota(db_session, monk
 
     # Soft-delete A.
     row = (
-        await db_session.execute(
-            select(CvProfile).where(CvProfile.id == uuid.UUID(a["id"]))
-        )
+        await db_session.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(a["id"])))
     ).scalar_one()
     row.deleted_at = _shared.now()
     await db_session.commit()
@@ -922,7 +1067,10 @@ async def test_soft_deleted_ready_cvs_do_not_count_toward_quota(db_session, monk
     draft = await _make_blank(db_session, student, "C")
     await _seed_header_name(db_session, student, draft)
     finalized = await cv_lifecycle_service.finalize_cv(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
+        ctx=CTX,
     )
     assert finalized["status"] == "ready"
 
@@ -944,8 +1092,10 @@ async def test_cross_owner_cv_access_is_404(db_session) -> None:
     _u, student = await make_student(db_session)
     _u2, other = await make_student(db_session, prefix="other")
     cv = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     with pytest.raises(ResourceNotFoundError):
         await cv_service.get_cv(db_session, principal=other, cv_id=uuid.UUID(cv["id"]))
@@ -958,7 +1108,9 @@ async def test_cross_owner_cv_access_is_404(db_session) -> None:
 
 async def _export_ready(db, student) -> tuple[uuid.UUID, uuid.UUID]:
     cv = await cv_service.create_cv(
-        db, principal=student, payload={"title": "Export CV", "creation_mode": "blank_template"},
+        db,
+        principal=student,
+        payload={"title": "Export CV", "creation_mode": "blank_template"},
         ctx=CTX,
     )
     cv_id = uuid.UUID(cv["id"])
@@ -966,11 +1118,16 @@ async def _export_ready(db, student) -> tuple[uuid.UUID, uuid.UUID]:
     from app.modules.documents.domain.models import CvVersion
 
     version = (
-        await db.execute(select(CvVersion).where(CvVersion.cv_id == cv_id))
-    ).scalars().first()
+        (await db.execute(select(CvVersion).where(CvVersion.cv_id == cv_id))).scalars().first()
+    )
     export = await export_service.create_export(
-        db, principal=student, cv_id=cv_id, version_id=version.id,
-        export_format="pdf", idempotency_key=new_key(), ctx=CTX,
+        db,
+        principal=student,
+        cv_id=cv_id,
+        version_id=version.id,
+        export_format="pdf",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     return cv_id, uuid.UUID(export["export_id"])
 
@@ -989,10 +1146,14 @@ async def test_export_produces_pdf_and_signed_download(db_session) -> None:
     assert result.content[:4] == b"%PDF"
     # Download was audited (no watermark for the owner).
     access = (
-        await db_session.execute(
-            select(SignedFileAccess).where(SignedFileAccess.resource_id == export_id)
+        (
+            await db_session.execute(
+                select(SignedFileAccess).where(SignedFileAccess.resource_id == export_id)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(access) == 1 and access[0].has_watermark is False
     assert await _audit_count(db_session, "cv.export.completed") == 1
 
@@ -1000,22 +1161,36 @@ async def test_export_produces_pdf_and_signed_download(db_session) -> None:
 async def test_export_idempotent(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await cv_service.create_cv(
-        db_session, principal=student, payload={"title": "CV", "creation_mode": "blank_template"},
+        db_session,
+        principal=student,
+        payload={"title": "CV", "creation_mode": "blank_template"},
         ctx=CTX,
     )
     from app.modules.documents.domain.models import CvVersion
 
     version = (
-        await db_session.execute(select(CvVersion).where(CvVersion.cv_id == uuid.UUID(cv["id"])))
-    ).scalars().first()
+        (await db_session.execute(select(CvVersion).where(CvVersion.cv_id == uuid.UUID(cv["id"]))))
+        .scalars()
+        .first()
+    )
     key = new_key()
     e1 = await export_service.create_export(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]), version_id=version.id,
-        export_format="pdf", idempotency_key=key, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        version_id=version.id,
+        export_format="pdf",
+        idempotency_key=key,
+        ctx=CTX,
     )
     e2 = await export_service.create_export(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]), version_id=version.id,
-        export_format="pdf", idempotency_key=key, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        version_id=version.id,
+        export_format="pdf",
+        idempotency_key=key,
+        ctx=CTX,
     )
     assert e1["export_id"] == e2["export_id"]
 
@@ -1030,8 +1205,13 @@ async def test_bad_and_expired_tokens_rejected(db_session) -> None:
 
     # Expired token (negative TTL).
     expired = storage.make_signed_token(
-        {"kind": "export", "id": str(export_id), "uid": str(student.user_id),
-         "purpose": "download", "wm": False},
+        {
+            "kind": "export",
+            "id": str(export_id),
+            "uid": str(student.user_id),
+            "purpose": "download",
+            "wm": False,
+        },
         ttl_seconds=-10,
     )
     with pytest.raises(download_service.InvalidDownloadTokenError):
@@ -1039,11 +1219,16 @@ async def test_bad_and_expired_tokens_rejected(db_session) -> None:
 
     # Signature tamper: mutate a payload char so the HMAC no longer matches.
     valid = storage.make_signed_token(
-        {"kind": "export", "id": str(export_id), "uid": str(student.user_id),
-         "purpose": "download", "wm": False}
+        {
+            "kind": "export",
+            "id": str(export_id),
+            "uid": str(student.user_id),
+            "purpose": "download",
+            "wm": False,
+        }
     )
     pos = 8  # inside the payload segment
-    tampered = valid[:pos] + ("X" if valid[pos] != "X" else "Y") + valid[pos + 1:]
+    tampered = valid[:pos] + ("X" if valid[pos] != "X" else "Y") + valid[pos + 1 :]
     with pytest.raises(download_service.InvalidDownloadTokenError):
         await download_service.resolve_download(db_session, token=tampered, ctx=CTX)
 
@@ -1066,10 +1251,15 @@ async def _make_snapshot(db, student) -> ApplicationCvSnapshot:
     # snapshotted for an application (design spec 2026-07-05).
     cv = await make_ready_cv(db, student=student, title="Snap CV")
     return await snapshot_service.create_application_cv_snapshot(
-        db, owner_id=student.user_id,
-        cv_selection={"type": "builder_cv", "cv_profile_id": cv["id"],
-                      "cv_version_id": cv["current_version_id"]},
-        idempotency_key=new_key(), ctx=CTX,
+        db,
+        owner_id=student.user_id,
+        cv_selection={
+            "type": "builder_cv",
+            "cv_profile_id": cv["id"],
+            "cv_version_id": cv["current_version_id"],
+        },
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
 
 
@@ -1086,13 +1276,20 @@ async def test_snapshot_created_and_immutable(db_session) -> None:
 async def test_snapshot_from_uploaded_document(db_session) -> None:
     _u, student = await make_student(db_session)
     up = await upload_service.upload_cv(
-        db_session, principal=student, filename="cv.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     snap = await snapshot_service.create_application_cv_snapshot(
-        db_session, owner_id=student.user_id,
+        db_session,
+        owner_id=student.user_id,
         cv_selection={"type": "uploaded_document", "uploaded_document_id": up["document_id"]},
-        idempotency_key=new_key(), ctx=CTX,
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     assert snap.snapshot_json.get("source_type") == "uploaded"
 
@@ -1133,10 +1330,14 @@ async def test_snapshot_partner_download_is_watermarked(db_session) -> None:
     result = await download_service.resolve_download(db_session, token=token, ctx=CTX)
     assert result.content[:4] == b"%PDF"
     access = (
-        await db_session.execute(
-            select(SignedFileAccess).where(SignedFileAccess.resource_id == snap.id)
+        (
+            await db_session.execute(
+                select(SignedFileAccess).where(SignedFileAccess.resource_id == snap.id)
+            )
         )
-    ).scalars().one()
+        .scalars()
+        .one()
+    )
     assert access.has_watermark is True
     assert access.watermark_text == "VinUni Career - Partner Co"
 
@@ -1151,13 +1352,14 @@ async def test_finalize_promotes_draft_to_ready_with_version_and_audit(db_sessio
     draft = await _make_blank(db_session, student, "To finalize")
     await _seed_header_name(db_session, student, draft)
     versions_before = len(
-        await cv_service.list_versions(
-            db_session, principal=student, cv_id=uuid.UUID(draft["id"])
-        )
+        await cv_service.list_versions(db_session, principal=student, cv_id=uuid.UUID(draft["id"]))
     )
 
     detail = await cv_lifecycle_service.finalize_cv(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
+        ctx=CTX,
     )
 
     assert detail["status"] == "ready"
@@ -1180,14 +1382,15 @@ async def test_finalize_empty_cv_is_rejected(db_session) -> None:
     draft = await _make_blank(db_session, student, "Empty")
     with pytest.raises(CvEmptyError) as exc:
         await cv_lifecycle_service.finalize_cv(
-            db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(draft["id"]),
+            ctx=CTX,
         )
     assert exc.value.details["reason"] == "cv_empty"
     assert exc.value.http_status == 422
     # Nothing committed; still a draft, still not counted.
-    still = await cv_service.get_cv(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"])
-    )
+    still = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(draft["id"]))
     assert still["status"] == "draft"
     assert await cv_service.count_cvs(db_session, principal=student) == 0
 
@@ -1198,14 +1401,18 @@ async def test_finalize_accepts_content_only_cv_without_header_name(db_session) 
     draft = await _make_blank(db_session, student, "Skills only")
     skills = next(s for s in draft["sections"] if s["section_type"] == "skills")
     await cv_service.upsert_section(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
         section_id=uuid.UUID(skills["id"]),
-        payload={"content": {"items": [{"text": "Python"}]},
-                 "expected_version": draft["version"]},
+        payload={"content": {"items": [{"text": "Python"}]}, "expected_version": draft["version"]},
         ctx=CTX,
     )
     detail = await cv_lifecycle_service.finalize_cv(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
+        ctx=CTX,
     )
     assert detail["status"] == "ready"
 
@@ -1218,7 +1425,10 @@ async def test_finalize_is_idempotent_when_already_ready(db_session) -> None:
 
     # Re-finalize -> same ready detail, no new version, no double audit, no re-count.
     again = await cv_lifecycle_service.finalize_cv(
-        db_session, principal=student, cv_id=cv_id, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=cv_id,
+        ctx=CTX,
     )
     assert again["status"] == "ready"
     assert len(again["versions"]) == versions_after_first
@@ -1233,7 +1443,10 @@ async def test_finalize_cross_owner_is_404(db_session) -> None:
     await _seed_header_name(db_session, student, draft)
     with pytest.raises(ResourceNotFoundError):
         await cv_lifecycle_service.finalize_cv(
-            db_session, principal=other, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+            db_session,
+            principal=other,
+            cv_id=uuid.UUID(draft["id"]),
+            ctx=CTX,
         )
 
 
@@ -1243,36 +1456,29 @@ async def test_finalize_cross_owner_is_404(db_session) -> None:
 
 
 async def _matching_json(db, cv_id: uuid.UUID) -> dict | None:
-    row = (
-        await db.execute(select(CvProfile).where(CvProfile.id == cv_id))
-    ).scalar_one()
+    row = (await db.execute(select(CvProfile).where(CvProfile.id == cv_id))).scalar_one()
     return row.matching_json
 
 
 async def test_finalize_writes_matching_representation(db_session) -> None:
     _u, student = await make_student(db_session)
     draft = await _make_blank(db_session, student, "Rich CV")
-    header_id = next(
-        s for s in draft["sections"] if s["section_type"] == "header"
-    )["id"]
-    skills_id = next(
-        s for s in draft["sections"] if s["section_type"] == "skills"
-    )["id"]
-    exp_id = next(
-        s for s in draft["sections"] if s["section_type"] == "experience"
-    )["id"]
+    header_id = next(s for s in draft["sections"] if s["section_type"] == "header")["id"]
+    skills_id = next(s for s in draft["sections"] if s["section_type"] == "skills")["id"]
+    exp_id = next(s for s in draft["sections"] if s["section_type"] == "experience")["id"]
 
     # Header with contact + links; skills with named items; experience entries.
     await cv_service.upsert_section(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
         section_id=uuid.UUID(header_id),
         payload={
             "content": {
                 "name": "Nguyen Van A",
                 "email": "a@example.com",
                 "phone": "+84900000000",
-                "links": [{"label": "GitHub", "url": "https://github.com/a",
-                           "type": "github"}],
+                "links": [{"label": "GitHub", "url": "https://github.com/a", "type": "github"}],
             },
             "expected_version": draft["version"],
         },
@@ -1280,24 +1486,32 @@ async def test_finalize_writes_matching_representation(db_session) -> None:
     )
     v = draft["version"] + 1
     await cv_service.upsert_section(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
         section_id=uuid.UUID(skills_id),
         payload={
-            "content": {"items": [{"name": "Python", "level": 90},
-                                  {"name": "FastAPI"}, {"name": "python"}]},
+            "content": {
+                "items": [{"name": "Python", "level": 90}, {"name": "FastAPI"}, {"name": "python"}]
+            },
             "expected_version": v,
         },
         ctx=CTX,
     )
     v += 1
     await cv_service.upsert_section(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
         section_id=uuid.UUID(exp_id),
         payload={
             "content": {
                 "entries": [
-                    {"heading": "Software Intern", "subheading": "Example Tech",
-                     "highlights": ["Built REST APIs with FastAPI and PostgreSQL"]},
+                    {
+                        "heading": "Software Intern",
+                        "subheading": "Example Tech",
+                        "highlights": ["Built REST APIs with FastAPI and PostgreSQL"],
+                    },
                 ]
             },
             "expected_version": v,
@@ -1306,7 +1520,10 @@ async def test_finalize_writes_matching_representation(db_session) -> None:
     )
 
     detail = await cv_lifecycle_service.finalize_cv(
-        db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(draft["id"]),
+        ctx=CTX,
     )
     assert detail["status"] == "ready"
     # The matching snapshot is INTERNAL — it must NOT leak into the response.
@@ -1342,7 +1559,10 @@ async def test_finalize_matching_is_idempotent_and_quota_gated(db_session) -> No
     versions_after_first = len(detail["versions"])
 
     again = await cv_lifecycle_service.finalize_cv(
-        db_session, principal=student, cv_id=cv_id, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=cv_id,
+        ctx=CTX,
     )
     assert again["status"] == "ready"
     assert len(again["versions"]) == versions_after_first  # no new version
@@ -1354,15 +1574,16 @@ async def test_finalize_empty_cv_does_not_write_matching(db_session) -> None:
     draft = await _make_blank(db_session, student, "Empty")
     with pytest.raises(CvEmptyError):
         await cv_lifecycle_service.finalize_cv(
-            db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(draft["id"]),
+            ctx=CTX,
         )
     # A rejected finalize never analyzed the CV.
     assert await _matching_json(db_session, uuid.UUID(draft["id"])) is None
 
 
-async def test_finalize_at_library_full_does_not_write_matching(
-    db_session, monkeypatch
-) -> None:
+async def test_finalize_at_library_full_does_not_write_matching(db_session, monkeypatch) -> None:
     monkeypatch.setattr(_cv_core, "_active_cv_limit", lambda: 1)
     _u, student = await make_student(db_session)
     await make_ready_cv(db_session, student=student, title="Full")  # library 1/1
@@ -1370,7 +1591,10 @@ async def test_finalize_at_library_full_does_not_write_matching(
     await _seed_header_name(db_session, student, draft)
     with pytest.raises(CvQuotaReachedError):
         await cv_lifecycle_service.finalize_cv(
-            db_session, principal=student, cv_id=uuid.UUID(draft["id"]), ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(draft["id"]),
+            ctx=CTX,
         )
     # Quota gate runs before analysis: nothing was written.
     assert await _matching_json(db_session, uuid.UUID(draft["id"])) is None
@@ -1386,16 +1610,26 @@ async def test_upload_import_creates_ready_library_cv(db_session) -> None:
 
     _u, student = await make_student(db_session)
     up = await ingestion_service.create_upload(
-        db_session, principal=student, filename="cv.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     ing = await ingestion_service.start_ingestion(
-        db_session, principal=student,
-        document_id=uuid.UUID(up["document_id"]), ctx=CTX,
+        db_session,
+        principal=student,
+        document_id=uuid.UUID(up["document_id"]),
+        ctx=CTX,
     )
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={"title": "Uploaded CV", "fact_confirmation": True}, ctx=CTX,
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={"title": "Uploaded CV", "fact_confirmation": True},
+        ctx=CTX,
     )
     # An uploaded CV is analyzed on arrival -> lands directly in the library.
     assert detail["status"] == "ready"
@@ -1414,13 +1648,20 @@ async def test_upload_start_blocked_when_library_full(db_session, monkeypatch) -
     await make_ready_cv(db_session, student=student, title="Library full")
 
     up = await ingestion_service.create_upload(
-        db_session, principal=student, filename="cv.txt", data=cv_text_en(),
-        content_type="text/plain", idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        principal=student,
+        filename="cv.txt",
+        data=cv_text_en(),
+        content_type="text/plain",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     with pytest.raises(CvQuotaReachedError):
         await ingestion_service.start_ingestion(
-            db_session, principal=student,
-            document_id=uuid.UUID(up["document_id"]), ctx=CTX,
+            db_session,
+            principal=student,
+            document_id=uuid.UUID(up["document_id"]),
+            ctx=CTX,
         )
 
 
@@ -1435,16 +1676,25 @@ async def test_apply_snapshot_rejects_draft_cv(db_session) -> None:
     from app.modules.documents.domain.models import CvVersion
 
     version = (
-        await db_session.execute(
-            select(CvVersion).where(CvVersion.cv_id == uuid.UUID(draft["id"]))
+        (
+            await db_session.execute(
+                select(CvVersion).where(CvVersion.cv_id == uuid.UUID(draft["id"]))
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     with pytest.raises(CvNotInLibraryError) as exc:
         await snapshot_service.create_application_cv_snapshot(
-            db_session, owner_id=student.user_id,
-            cv_selection={"type": "builder_cv", "cv_profile_id": draft["id"],
-                          "cv_version_id": str(version.id)},
-            idempotency_key=new_key(), ctx=CTX,
+            db_session,
+            owner_id=student.user_id,
+            cv_selection={
+                "type": "builder_cv",
+                "cv_profile_id": draft["id"],
+                "cv_version_id": str(version.id),
+            },
+            idempotency_key=new_key(),
+            ctx=CTX,
         )
     assert exc.value.details["reason"] == "cv_not_in_library"
     assert exc.value.http_status == 409
@@ -1454,9 +1704,14 @@ async def test_apply_snapshot_accepts_ready_cv(db_session) -> None:
     _u, student = await make_student(db_session)
     detail = await make_ready_cv(db_session, student=student, title="Library CV")
     snap = await snapshot_service.create_application_cv_snapshot(
-        db_session, owner_id=student.user_id,
-        cv_selection={"type": "builder_cv", "cv_profile_id": detail["id"],
-                      "cv_version_id": detail["current_version_id"]},
-        idempotency_key=new_key(), ctx=CTX,
+        db_session,
+        owner_id=student.user_id,
+        cv_selection={
+            "type": "builder_cv",
+            "cv_profile_id": detail["id"],
+            "cv_version_id": detail["current_version_id"],
+        },
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     assert snap.cv_id == uuid.UUID(detail["id"])

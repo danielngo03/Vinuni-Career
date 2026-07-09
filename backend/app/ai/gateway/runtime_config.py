@@ -104,9 +104,7 @@ class EffectiveAiConfig:
     job_fit_ai_explanation_enabled: bool
     daily_budget_usd: float
     provider_routes: dict[str, tuple[str, str, str]] = field(default_factory=dict)
-    provider_route_chains: dict[str, list[tuple[str, str, str]]] = field(
-        default_factory=dict
-    )
+    provider_route_chains: dict[str, list[tuple[str, str, str]]] = field(default_factory=dict)
     provider_key_ciphertexts: dict[str, str] = field(default_factory=dict)
 
 
@@ -179,9 +177,11 @@ def _bootstrap_from_env() -> EffectiveAiConfig:
     # leak-safe. The default provider serves all slots (one shared key); admins
     # can rebind a slot to another provider from the admin UI (DB routes win).
     _prov = s.ai_default_provider
-    _base = openrouter_url if _prov == "openrouter" else _BUILTIN_ROUTES.get(
-        "chat_cheap", (_prov, "", "")
-    )[1]
+    _base = (
+        openrouter_url
+        if _prov == "openrouter"
+        else _BUILTIN_ROUTES.get("chat_cheap", (_prov, "", ""))[1]
+    )
     routes["chat_default"] = (_prov, _base, s.ai_chat_model)
     routes["reasoning_default"] = (_prov, _base, s.ai_reasoning_model)
     routes["embedding_default"] = (_prov, _base, s.ai_embedding_model)

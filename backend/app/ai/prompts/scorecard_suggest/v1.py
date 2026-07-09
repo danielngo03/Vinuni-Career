@@ -56,9 +56,7 @@ _SCHEMA = (
     "}"
 )
 
-STATIC_SYSTEM_PROMPT = (
-    f"{_IDENTITY}\n\n{_RULES}\n\n{_CRITERIA_DEFINITIONS}\n\n{_SCHEMA}"
-)
+STATIC_SYSTEM_PROMPT = f"{_IDENTITY}\n\n{_RULES}\n\n{_CRITERIA_DEFINITIONS}\n\n{_SCHEMA}"
 
 
 def build_user_message(inputs: dict) -> str:

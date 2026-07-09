@@ -56,6 +56,7 @@ def build_effective_config(
     # Merge DB routes into a copy of the bootstrap routes so built-in aliases
     # are always present even if DB hasn't been seeded yet.
     from app.ai.gateway.runtime_config import _BUILTIN_ROUTES
+
     merged_routes: dict[str, tuple[str, str, str]] = dict(_BUILTIN_ROUTES)
     if provider_routes:
         merged_routes.update(provider_routes)
@@ -81,9 +82,7 @@ def build_effective_config(
     real_calls_active = bool(
         env_real
         and db_real
-        and runtime_config.selected_aliases_accessible(
-            selected, merged_routes, encrypted_keys
-        )
+        and runtime_config.selected_aliases_accessible(selected, merged_routes, encrypted_keys)
     )
 
     return EffectiveAiConfig(

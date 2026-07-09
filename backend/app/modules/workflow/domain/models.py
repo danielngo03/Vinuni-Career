@@ -33,9 +33,7 @@ class WorkflowFlow(Base):
     version: Mapped[int] = mapped_column(default=1)
     created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
-    activated_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), default=None
-    )
+    activated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=None)
     # Ownership: a flow is owned by either a partner org or the university org
     # (docs/PARTNER_RBAC_ANALYTICS_SPEC.md "Allowed flow owners"). Nullable for
     # backward compatibility with rows written before this column existed;
@@ -61,9 +59,7 @@ class WorkflowExecution(Base):
     idempotency_key: Mapped[str] = mapped_column(String(200))
     status: Mapped[str] = mapped_column(String(20))
     started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
-    finished_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), default=None
-    )
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=None)
     node_logs: Mapped[list] = mapped_column(JsonType, default=list)
     # ``True`` for dry-run/test executions (docs contract's ``/test`` endpoint):
     # no real side effects are performed and the row is excluded from
@@ -94,9 +90,7 @@ class WorkflowNodeExecutionLog(Base):
     user_safe_error: Mapped[str | None] = mapped_column(Text(), default=None)
     is_simulated: Mapped[bool] = mapped_column(default=False)
     entered_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
-    exited_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), default=None
-    )
+    exited_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=None)
 
 
 class WorkflowFailedNodeTask(Base):
@@ -120,7 +114,5 @@ class WorkflowFailedNodeTask(Base):
     user_safe_error: Mapped[str] = mapped_column(Text())
     status: Mapped[str] = mapped_column(String(20), default="open")  # open|resolved|dismissed
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
-    resolved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), default=None
-    )
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=None)
     resolved_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), default=None)

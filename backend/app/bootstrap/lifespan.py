@@ -16,6 +16,7 @@ from app.ai.extraction.adapters import (
 from app.core.config import get_settings
 from app.core.db import dispose_engine, get_sessionmaker
 from app.core.metadata import import_all_models
+from app.core.worker import get_queue
 from app.modules.ai_settings.application import resolver as ai_settings_resolver
 from app.modules.documents.application.template_seed import (
     ensure_default_templates as ensure_default_cv_templates,
@@ -23,7 +24,6 @@ from app.modules.documents.application.template_seed import (
 from app.modules.notifications.application.template_seed import ensure_default_templates
 from app.modules.onboarding.application import doc_verification
 from app.modules.recruitment.application.access import install_authorizer
-from app.core.worker import get_queue
 
 logger = logging.getLogger(__name__)
 
@@ -108,9 +108,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     if settings.background_worker_mode == "scheduler":
         from app.modules.automation.scheduler import runner  # noqa: PLC0415
 
-        scheduler_task = asyncio.create_task(
-            runner.run_forever(), name="embedded-scheduler"
-        )
+        scheduler_task = asyncio.create_task(runner.run_forever(), name="embedded-scheduler")
         logger.info("scheduler.embedded_started")
 
     try:

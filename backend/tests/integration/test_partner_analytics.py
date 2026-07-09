@@ -65,13 +65,25 @@ async def test_record_job_metric_event_upserts_counters(db_session) -> None:
     job_id = uuid.uuid4()
 
     await partner_job_metrics_service.record_job_metric_event(
-        db_session, org_id=org_id, job_id=job_id, event_type="detail_view", source="organic",
+        db_session,
+        org_id=org_id,
+        job_id=job_id,
+        event_type="detail_view",
+        source="organic",
     )
     await partner_job_metrics_service.record_job_metric_event(
-        db_session, org_id=org_id, job_id=job_id, event_type="detail_view", source="organic",
+        db_session,
+        org_id=org_id,
+        job_id=job_id,
+        event_type="detail_view",
+        source="organic",
     )
     await partner_job_metrics_service.record_job_metric_event(
-        db_session, org_id=org_id, job_id=job_id, event_type="save_click", source="sponsored",
+        db_session,
+        org_id=org_id,
+        job_id=job_id,
+        event_type="save_click",
+        source="sponsored",
     )
     await db_session.commit()
 
@@ -90,14 +102,21 @@ async def test_record_job_metric_event_unknown_type_is_a_safe_noop(db_session) -
     org_id, job_id = uuid.uuid4(), uuid.uuid4()
     # Must never raise — bad input degrades to a no-op, not a broken request.
     await partner_job_metrics_service.record_job_metric_event(
-        db_session, org_id=org_id, job_id=job_id, event_type="not_a_real_event",
+        db_session,
+        org_id=org_id,
+        job_id=job_id,
+        event_type="not_a_real_event",
     )
     await db_session.commit()
     rows = (
-        await db_session.execute(
-            select(PartnerJobMetricDaily).where(PartnerJobMetricDaily.job_id == job_id)
+        (
+            await db_session.execute(
+                select(PartnerJobMetricDaily).where(PartnerJobMetricDaily.job_id == job_id)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert rows == []
 
 
@@ -106,7 +125,10 @@ async def test_job_detail_view_hook_records_metric(db_session) -> None:
     _su, student = await make_student(db_session)
 
     await job_service.get_job(
-        db_session, principal=student, job_id=job_id, user_agent="Mozilla/5.0 iPhone Mobile",
+        db_session,
+        principal=student,
+        job_id=job_id,
+        user_agent="Mozilla/5.0 iPhone Mobile",
     )
 
     row = (
@@ -148,8 +170,10 @@ async def test_apply_hook_records_apply_start_and_submitted(db_session) -> None:
     sel = await make_builder_cv(db_session, student=student)
 
     await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
 
     row = (
@@ -171,7 +195,8 @@ async def test_candidate_access_events_recorded_for_open_download_reveal(db_sess
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
+        db_session,
+        principal=student,
         payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
         ctx=CTX,
     )
@@ -179,34 +204,50 @@ async def test_candidate_access_events_recorded_for_open_download_reveal(db_sess
 
     # Partner opens the application -> application_opened.
     await apply_service.get_application(
-        db_session, principal=partner_principal, application_id=application_id,
+        db_session,
+        principal=partner_principal,
+        application_id=application_id,
     )
     # Partner requests reveal -> identity_reveal_requested.
     await reveal_service.request_reveal(
-        db_session, principal=partner_principal, application_id=application_id,
-        reason=_REVEAL_REASON, ctx=CTX,
+        db_session,
+        principal=partner_principal,
+        application_id=application_id,
+        reason=_REVEAL_REASON,
+        ctx=CTX,
     )
     # Student accepts.
     await reveal_service.respond_reveal(
-        db_session, principal=student, application_id=application_id,
-        decision="accepted", ctx=CTX,
+        db_session,
+        principal=student,
+        application_id=application_id,
+        decision="accepted",
+        ctx=CTX,
     )
     # Partner re-opens (now revealed) -> application_opened + identity_revealed_viewed.
     await apply_service.get_application(
-        db_session, principal=partner_principal, application_id=application_id,
+        db_session,
+        principal=partner_principal,
+        application_id=application_id,
     )
     # Partner downloads the CV -> cv_downloaded.
     await apply_service.get_application_cv_download(
-        db_session, principal=partner_principal, application_id=application_id,
+        db_session,
+        principal=partner_principal,
+        application_id=application_id,
     )
 
     rows = (
-        await db_session.execute(
-            select(PartnerCandidateAccessEvent).where(
-                PartnerCandidateAccessEvent.application_id == application_id
+        (
+            await db_session.execute(
+                select(PartnerCandidateAccessEvent).where(
+                    PartnerCandidateAccessEvent.application_id == application_id
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     event_types = [r.event_type for r in rows]
     assert event_types.count("application_opened") == 2
     assert "identity_reveal_requested" in event_types
@@ -221,14 +262,19 @@ async def test_detect_access_alerts_empty_when_under_threshold(db_session) -> No
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     await apply_service.get_application_cv_download(
-        db_session, principal=partner_principal, application_id=uuid.UUID(app["id"]),
+        db_session,
+        principal=partner_principal,
+        application_id=uuid.UUID(app["id"]),
     )
     alerts = await partner_candidate_access_service.detect_access_alerts(
-        db_session, org_id=porg.id,
+        db_session,
+        org_id=porg.id,
     )
     assert alerts == []  # a single download never trips the spike threshold
 
@@ -241,7 +287,10 @@ async def test_detect_access_alerts_empty_when_under_threshold(db_session) -> No
 async def test_activity_feed_shows_job_created_for_admin(db_session) -> None:
     partner_principal, porg, _uni, _job_id = await _setup_published(db_session, title="Feed Job")
     feed = await partner_activity_feed_service.list_partner_activity_feed(
-        db_session, principal=partner_principal, org_id=porg.id, limit=20,
+        db_session,
+        principal=partner_principal,
+        org_id=porg.id,
+        limit=20,
     )
     actions = {row["action"] for row in feed}
     assert "job.created" in actions
@@ -253,22 +302,32 @@ async def test_activity_feed_hides_billing_without_grant(db_session) -> None:
     from app.shared.audit import AuditContext, write_audit
 
     await write_audit(
-        db_session, action="billing.subscription_requested", resource_type="subscription",
+        db_session,
+        action="billing.subscription_requested",
+        resource_type="subscription",
         context=AuditContext(actor_id=partner_principal.user_id, actor_org_id=porg.id),
         after={"plan": "premium"},
     )
     await db_session.commit()
 
     non_admin_user, _membership, non_admin = await add_member(
-        db_session, org=porg, permissions=[("jobs", "read"), ("applications", "read")],
+        db_session,
+        org=porg,
+        permissions=[("jobs", "read"), ("applications", "read")],
     )
     feed = await partner_activity_feed_service.list_partner_activity_feed(
-        db_session, principal=non_admin, org_id=porg.id, limit=20,
+        db_session,
+        principal=non_admin,
+        org_id=porg.id,
+        limit=20,
     )
     assert all(row["action"] != "billing.subscription_requested" for row in feed)
 
     admin_feed = await partner_activity_feed_service.list_partner_activity_feed(
-        db_session, principal=partner_principal, org_id=porg.id, limit=20,
+        db_session,
+        principal=partner_principal,
+        org_id=porg.id,
+        limit=20,
     )
     assert any(row["action"] == "billing.subscription_requested" for row in admin_feed)
 
@@ -284,7 +343,8 @@ async def test_ops_dashboard_admin_sees_unlocked_job_performance(db_session) -> 
     await job_service.get_job(db_session, principal=student, job_id=job_id)
 
     data = await partner_ops_dashboard_service.get_partner_dashboard_ops(
-        db_session, principal=partner_principal,
+        db_session,
+        principal=partner_principal,
     )
     assert data["rbac_summary"]["is_org_admin"] is True
     assert data["job_performance"]["locked"] is False
@@ -298,10 +358,13 @@ async def test_ops_dashboard_admin_sees_unlocked_job_performance(db_session) -> 
 async def test_ops_dashboard_non_admin_without_grant_sees_locked_widgets(db_session) -> None:
     _partner_principal, porg, _uni, _job_id = await _setup_published(db_session)
     _user, _membership, non_admin = await add_member(
-        db_session, org=porg, permissions=[("jobs", "read"), ("applications", "read")],
+        db_session,
+        org=porg,
+        permissions=[("jobs", "read"), ("applications", "read")],
     )
     data = await partner_ops_dashboard_service.get_partner_dashboard_ops(
-        db_session, principal=non_admin,
+        db_session,
+        principal=non_admin,
     )
     assert data["rbac_summary"]["is_org_admin"] is False
     assert data["rbac_summary"]["grants"]["analytics:view_job_metrics"] is False
@@ -313,14 +376,17 @@ async def test_ops_dashboard_non_admin_without_grant_sees_locked_widgets(db_sess
 async def test_ops_dashboard_non_admin_with_grant_sees_honest_no_data_yet(db_session) -> None:
     _partner_principal, porg, _uni, _job_id = await _setup_published(db_session)
     _user, _membership, granted = await add_member(
-        db_session, org=porg,
+        db_session,
+        org=porg,
         permissions=[
-            ("jobs", "read"), ("applications", "read"),
+            ("jobs", "read"),
+            ("applications", "read"),
             ("analytics", "view_job_metrics"),
         ],
     )
     data = await partner_ops_dashboard_service.get_partner_dashboard_ops(
-        db_session, principal=granted,
+        db_session,
+        principal=granted,
     )
     # No engagement events yet for this org -> honest fallback, never fabricated.
     assert data["metrics"]["engagement"]["available"] is False
@@ -333,7 +399,8 @@ async def test_ops_dashboard_wrong_persona_forbidden(db_session) -> None:
     _su, student = await make_student(db_session)
     with pytest.raises(PermissionDeniedError):
         await partner_ops_dashboard_service.get_partner_dashboard_ops(
-            db_session, principal=student,
+            db_session,
+            principal=student,
         )
 
 
@@ -345,7 +412,8 @@ async def test_ops_dashboard_tenant_isolation(db_session) -> None:
     await job_service.get_job(db_session, principal=student, job_id=job_a)
 
     data_b = await partner_ops_dashboard_service.get_partner_dashboard_ops(
-        db_session, principal=partner_b,
+        db_session,
+        principal=partner_b,
     )
     assert data_b["job_performance"]["items"] == []
     assert data_b["metrics"]["engagement"]["available"] is False

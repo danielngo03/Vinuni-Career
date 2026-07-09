@@ -64,8 +64,7 @@ def _has_real_content(content: dict) -> bool:
     for key in ("entries", "items"):
         value = content.get(key)
         if isinstance(value, list) and any(
-            isinstance(v, (dict, str)) and (v if isinstance(v, dict) else v.strip())
-            for v in value
+            isinstance(v, (dict, str)) and (v if isinstance(v, dict) else v.strip()) for v in value
         ):
             return True
     text = content.get("text")
@@ -123,11 +122,7 @@ def _latest_activity_at(cv: CvProfile, sections: list[CvSection]) -> str | None:
     """
 
     stamps = [cv.last_edited_at, *[s.updated_at for s in sections]]
-    utc = [
-        (v if v.tzinfo is not None else v.replace(tzinfo=UTC))
-        for v in stamps
-        if v is not None
-    ]
+    utc = [(v if v.tzinfo is not None else v.replace(tzinfo=UTC)) for v in stamps if v is not None]
     return max(utc).isoformat() if utc else None
 
 
@@ -190,9 +185,7 @@ async def finalize_cv(
     permission_checker.require(principal, _RESOURCE, "update")
     assert principal.user_id is not None
 
-    cv = await _cv_core._load_owned_cv(
-        session, principal=principal, cv_id=cv_id, lock=True
-    )
+    cv = await _cv_core._load_owned_cv(session, principal=principal, cv_id=cv_id, lock=True)
 
     # Idempotent: an already-committed library CV returns current detail with no
     # re-count, no new version, no duplicate audit (retry-safe).

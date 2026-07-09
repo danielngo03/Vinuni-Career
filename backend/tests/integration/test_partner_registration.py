@@ -54,12 +54,14 @@ async def _reviewer(db_session):
 
 async def _outbox(db_session, template_key: str):
     return (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.template_key == template_key
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(NotificationOutbox.template_key == template_key)
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -92,12 +94,14 @@ async def test_duplicate_email_rejected_but_idempotency_key_returns_existing(db_
     p = _payload()
     first = await prs.register_partner(db_session, payload=p, ctx=CTX)
     with pytest.raises(DuplicateRegistrationError):
-        await prs.register_partner(db_session, payload=_payload(
-            contact_email=p["contact_email"], tax_code="9999"
-        ), ctx=CTX)
+        await prs.register_partner(
+            db_session, payload=_payload(contact_email=p["contact_email"], tax_code="9999"), ctx=CTX
+        )
     again = await prs.register_partner(
-        db_session, payload=_payload(contact_email=p["contact_email"]),
-        ctx=CTX, idempotency_key="abc-123",
+        db_session,
+        payload=_payload(contact_email=p["contact_email"]),
+        ctx=CTX,
+        idempotency_key="abc-123",
     )
     assert again["registration_id"] == first["registration_id"]
 
@@ -122,9 +126,12 @@ async def test_approve_bootstraps_org_admin_and_audits(db_session) -> None:
     reviewer = await _reviewer(db_session)
 
     out = await prs.approve_partner(
-        db_session, principal=reviewer,
+        db_session,
+        principal=reviewer,
         partner_id=uuid.UUID(reg["registration_id"]),
-        trust_level="verified", note="welcome", ctx=CTX,
+        trust_level="verified",
+        note="welcome",
+        ctx=CTX,
     )
     assert out["status"] == "approved"
     org_id = uuid.UUID(out["organization_id"])
@@ -138,10 +145,10 @@ async def test_approve_bootstraps_org_admin_and_audits(db_session) -> None:
 
     # First admin membership exists.
     members = (
-        await db_session.execute(
-            select(Membership).where(Membership.org_id == org_id)
-        )
-    ).scalars().all()
+        (await db_session.execute(select(Membership).where(Membership.org_id == org_id)))
+        .scalars()
+        .all()
+    )
     assert len(members) == 1 and members[0].status == "active"
 
     # Audit trail for the approval + bootstrap.
@@ -153,9 +160,7 @@ async def test_approve_bootstraps_org_admin_and_audits(db_session) -> None:
     ):
         count = (
             await db_session.execute(
-                select(func.count()).select_from(AuditLog).where(
-                    AuditLog.action == action
-                )
+                select(func.count()).select_from(AuditLog).where(AuditLog.action == action)
             )
         ).scalar_one()
         assert count >= 1, action
@@ -181,9 +186,7 @@ async def test_approve_is_idempotent(db_session) -> None:
     # Exactly one partner org created.
     count = (
         await db_session.execute(
-            select(func.count()).select_from(Organization).where(
-                Organization.org_type == "partner"
-            )
+            select(func.count()).select_from(Organization).where(Organization.org_type == "partner")
         )
     ).scalar_one()
     assert count == 1
@@ -194,14 +197,22 @@ async def test_concurrent_approve_version_conflict(db_session) -> None:
     reviewer = await _reviewer(db_session)
     pid = uuid.UUID(reg["registration_id"])
     await prs.approve_partner(
-        db_session, principal=reviewer, partner_id=pid, trust_level="standard",
-        version=1, ctx=CTX,
+        db_session,
+        principal=reviewer,
+        partner_id=pid,
+        trust_level="standard",
+        version=1,
+        ctx=CTX,
     )
     # A second reviewer holding the stale version loses.
     with pytest.raises(VersionConflictError):
         await prs.approve_partner(
-            db_session, principal=reviewer, partner_id=pid, trust_level="standard",
-            version=1, ctx=CTX,
+            db_session,
+            principal=reviewer,
+            partner_id=pid,
+            trust_level="standard",
+            version=1,
+            ctx=CTX,
         )
 
 
@@ -210,8 +221,11 @@ async def test_approved_admin_can_activate_and_login(db_session) -> None:
     reg = await prs.register_partner(db_session, payload=p, ctx=CTX)
     reviewer = await _reviewer(db_session)
     await prs.approve_partner(
-        db_session, principal=reviewer,
-        partner_id=uuid.UUID(reg["registration_id"]), trust_level="standard", ctx=CTX,
+        db_session,
+        principal=reviewer,
+        partner_id=uuid.UUID(reg["registration_id"]),
+        trust_level="standard",
+        ctx=CTX,
     )
     approved = await _outbox(db_session, "partner.registration_approved")
     token = approved[0].variables["token"]
@@ -236,17 +250,17 @@ async def test_reject_creates_nothing_and_notifies(db_session) -> None:
     reg = await prs.register_partner(db_session, payload=_payload(), ctx=CTX)
     reviewer = await _reviewer(db_session)
     out = await prs.reject_partner(
-        db_session, principal=reviewer,
+        db_session,
+        principal=reviewer,
         partner_id=uuid.UUID(reg["registration_id"]),
-        reason="Hồ sơ chưa đầy đủ.", ctx=CTX,
+        reason="Hồ sơ chưa đầy đủ.",
+        ctx=CTX,
     )
     assert out["status"] == "rejected"
     # No partner org created.
     count = (
         await db_session.execute(
-            select(func.count()).select_from(Organization).where(
-                Organization.org_type == "partner"
-            )
+            select(func.count()).select_from(Organization).where(Organization.org_type == "partner")
         )
     ).scalar_one()
     assert count == 0
@@ -258,12 +272,13 @@ async def test_approve_after_reject_conflicts(db_session) -> None:
     reg = await prs.register_partner(db_session, payload=_payload(), ctx=CTX)
     reviewer = await _reviewer(db_session)
     pid = uuid.UUID(reg["registration_id"])
-    await prs.reject_partner(
-        db_session, principal=reviewer, partner_id=pid, reason="no", ctx=CTX
-    )
+    await prs.reject_partner(db_session, principal=reviewer, partner_id=pid, reason="no", ctx=CTX)
     with pytest.raises(AlreadyRejectedError):
         await prs.approve_partner(
-            db_session, principal=reviewer, partner_id=pid, trust_level="standard",
+            db_session,
+            principal=reviewer,
+            partner_id=pid,
+            trust_level="standard",
             ctx=CTX,
         )
 
@@ -278,8 +293,10 @@ async def test_partner_admin_cannot_approve_partners(db_session) -> None:
 
     with pytest.raises(PermissionDeniedError):
         await prs.approve_partner(
-            db_session, principal=partner_admin,
-            partner_id=uuid.UUID(reg["registration_id"]), trust_level="standard",
+            db_session,
+            principal=partner_admin,
+            partner_id=uuid.UUID(reg["registration_id"]),
+            trust_level="standard",
             ctx=CTX,
         )
 
@@ -289,8 +306,11 @@ async def test_re_register_allowed_after_rejection(db_session) -> None:
     reg = await prs.register_partner(db_session, payload=p, ctx=CTX)
     reviewer = await _reviewer(db_session)
     await prs.reject_partner(
-        db_session, principal=reviewer,
-        partner_id=uuid.UUID(reg["registration_id"]), reason="incomplete", ctx=CTX,
+        db_session,
+        principal=reviewer,
+        partner_id=uuid.UUID(reg["registration_id"]),
+        reason="incomplete",
+        ctx=CTX,
     )
     # Same contact may register again (no pending request blocks it).
     again = await prs.register_partner(db_session, payload=p, ctx=CTX)

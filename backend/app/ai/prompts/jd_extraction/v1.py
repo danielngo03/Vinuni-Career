@@ -62,6 +62,5 @@ def build_user_message(raw_text: str) -> str:
     if len(raw_text) > 6000:
         truncated += "\n\n[... document truncated ...]"
     return (
-        f"<JOB_DESCRIPTION_TEXT>\n{truncated}\n</JOB_DESCRIPTION_TEXT>\n\n"
-        "Extract fields as JSON."
+        f"<JOB_DESCRIPTION_TEXT>\n{truncated}\n</JOB_DESCRIPTION_TEXT>\n\nExtract fields as JSON."
     )

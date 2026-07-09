@@ -97,9 +97,7 @@ async def _due_rows(
     return due
 
 
-async def _pick_recipient(
-    session: AsyncSession, *, app: Application, entered_by
-):
+async def _pick_recipient(session: AsyncSession, *, app: Application, entered_by):
     """The pipeline-owner user row to notify, or ``None`` when no active org
     member can be resolved (never a hardcoded org-wide broadcast).
 
@@ -149,12 +147,13 @@ async def _notify_one(
     if recipient is None:
         return False
 
-    locale = message_catalog.normalize_locale(
-        getattr(recipient, "preferred_language", None)
-    )
+    locale = message_catalog.normalize_locale(getattr(recipient, "preferred_language", None))
     job_title = await job_read_facade.get_job_title(session, app.job_id) or ""
     level_label = _LEVEL_LABEL[level].get(locale, _LEVEL_LABEL[level]["vi"])
-    deadline_label = _deadline_label(cs.entered_at, stage.sla_hours)
+    sla_hours = stage.sla_hours
+    if sla_hours is None or sla_hours <= 0:
+        return False
+    deadline_label = _deadline_label(cs.entered_at, sla_hours)
     dedupe_key = f"pipeline.sla_reminder:{cs.id}:{level}"
 
     if await dispatch_service.dedupe_exists(session, dedupe_key=dedupe_key):
@@ -218,5 +217,7 @@ async def sweep_sla_reminders(
 
 
 def _stage_ratio(cs: CandidateStage, stage: PipelineStage, now: datetime) -> float:
+    if stage.sla_hours is None or stage.sla_hours <= 0:
+        return 0.0
     elapsed_hours = (now - _shared.as_aware(cs.entered_at)).total_seconds() / 3600
     return elapsed_hours / stage.sla_hours

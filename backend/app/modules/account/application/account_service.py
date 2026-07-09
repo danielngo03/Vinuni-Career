@@ -58,9 +58,7 @@ def _audit_ctx(
 # --------------------------------------------------------------------------- #
 
 
-async def get_preferences(
-    session: AsyncSession, *, principal: Principal
-) -> dict:
+async def get_preferences(session: AsyncSession, *, principal: Principal) -> dict:
     permission_checker.require(principal, _RESOURCE, "read")
     assert principal.user_id is not None
     return await preferences_service.get_preferences(session, principal.user_id)
@@ -71,9 +69,7 @@ async def update_preferences(
 ) -> dict:
     permission_checker.require(principal, _RESOURCE, "write")
     assert principal.user_id is not None
-    result = await preferences_service.patch_preferences(
-        session, principal.user_id, payload
-    )
+    result = await preferences_service.patch_preferences(session, principal.user_id, payload)
     await write_audit(
         session,
         action="account.preferences_updated",
@@ -118,9 +114,7 @@ async def revoke_session(
 ) -> None:
     permission_checker.require(principal, _RESOURCE, "write")
     assert principal.user_id is not None
-    result = await facade_revoke_session(
-        session, user_id=principal.user_id, session_id=session_id
-    )
+    result = await facade_revoke_session(session, user_id=principal.user_id, session_id=session_id)
     if result is None:
         raise ResourceNotFoundError()
     if result.newly_revoked:
@@ -196,9 +190,7 @@ async def change_password(
 
     # Revoke every OTHER active session; keep the current one signed in.
     now = datetime.now(tz=UTC)
-    await revoke_other_sessions(
-        session, user_id=user.id, keep_session_id=current_session_id
-    )
+    await revoke_other_sessions(session, user_id=user.id, keep_session_id=current_session_id)
 
     await record_security_event(
         session,
@@ -231,9 +223,7 @@ async def change_password(
 # --------------------------------------------------------------------------- #
 
 
-async def totp_setup(
-    session: AsyncSession, *, principal: Principal, ctx: RequestContext
-) -> dict:
+async def totp_setup(session: AsyncSession, *, principal: Principal, ctx: RequestContext) -> dict:
     permission_checker.require(principal, _RESOURCE, "write")
     assert principal.user_id is not None
     user = await user_service.get_by_id(session, principal.user_id)

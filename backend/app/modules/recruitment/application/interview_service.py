@@ -116,15 +116,11 @@ async def open_interview_id(
 ) -> uuid.UUID | None:
     """The id of the stage's OPEN interview (used to auto-link a scorecard)."""
 
-    iv = await _open_interview(
-        session, application_id=application_id, stage_id=stage_id
-    )
+    iv = await _open_interview(session, application_id=application_id, stage_id=stage_id)
     return iv.id if iv is not None else None
 
 
-async def _assignee_ids(
-    session: AsyncSession, *, interview_id: uuid.UUID
-) -> list[uuid.UUID]:
+async def _assignee_ids(session: AsyncSession, *, interview_id: uuid.UUID) -> list[uuid.UUID]:
     return list(
         (
             await session.execute(
@@ -132,7 +128,9 @@ async def _assignee_ids(
                     InterviewAssignee.interview_id == interview_id
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -145,9 +143,7 @@ async def open_interview_assignee_ids(
     has an open interview with assignees, ``required`` = this set's size.
     """
 
-    iv = await _open_interview(
-        session, application_id=application_id, stage_id=stage_id
-    )
+    iv = await _open_interview(session, application_id=application_id, stage_id=stage_id)
     if iv is None:
         return set()
     return set(await _assignee_ids(session, interview_id=iv.id))
@@ -173,9 +169,7 @@ async def _active_org_member_ids(
 ) -> set[uuid.UUID]:
     if not user_ids:
         return set()
-    return await org_reporting_facade.active_member_ids(
-        session, org_id=org_id, user_ids=user_ids
-    )
+    return await org_reporting_facade.active_member_ids(session, org_id=org_id, user_ids=user_ids)
 
 
 async def _interviews_for_application(
@@ -188,7 +182,9 @@ async def _interviews_for_application(
                 .where(Interview.application_id == application_id)
                 .order_by(Interview.scheduled_at, Interview.created_at)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -206,9 +202,7 @@ def _clean_text(value: str | None) -> str | None:
     return trimmed or None
 
 
-def _validate_mode_payload(
-    *, mode: str, location: str | None, meeting_link: str | None
-) -> None:
+def _validate_mode_payload(*, mode: str, location: str | None, meeting_link: str | None) -> None:
     if mode not in interview_domain.MODES:
         raise InvalidApplicationFieldError(field="mode")
     if mode == interview_domain.MODE_ONLINE and not (meeting_link or "").strip():
@@ -228,9 +222,7 @@ async def _validate_assignees(
         if uid not in seen:
             seen.add(uid)
             deduped.append(uid)
-    members = await _active_org_member_ids(
-        session, org_id=org_id, user_ids=set(deduped)
-    )
+    members = await _active_org_member_ids(session, org_id=org_id, user_ids=set(deduped))
     if set(deduped) - members:
         raise InvalidApplicationFieldError(field="assignee_ids")
     return deduped
@@ -277,9 +269,7 @@ async def _interview_view(
     principal: Principal,
     locale: str,
 ) -> dict:
-    assignee_views, assignee_id_set = await _assignee_views(
-        session, interview_id=iv.id
-    )
+    assignee_views, assignee_id_set = await _assignee_views(session, interview_id=iv.id)
     viewer_is_attendee = principal.user_id in assignee_id_set
     evaluation = await _stage_evaluation_for(
         session, application_id=iv.application_id, stage_id=iv.stage_id
@@ -321,9 +311,7 @@ async def schedule_interview(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, _PERM_SCHEDULE, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, _PERM_SCHEDULE, resource_org_id=app.org_id)
 
     # Reveal precondition (NON-NEGOTIABLE §3): an anonymous app with no accepted
     # reveal can NOT be scheduled — the handshake is the only identity path.
@@ -333,9 +321,7 @@ async def schedule_interview(
     # Only meaningful while the application is actively in the pipeline.
     if app.status != lifecycle.UNDER_REVIEW:
         raise IllegalApplicationTransitionError(event=_EVENT)
-    active = await stage_service._active_stage(
-        session, application_id=app.id, lock=True
-    )
+    active = await stage_service._active_stage(session, application_id=app.id, lock=True)
     if active is None:
         raise IllegalApplicationTransitionError(event=_EVENT)
     stage_id = active.stage_id
@@ -347,9 +333,7 @@ async def schedule_interview(
 
     # One OPEN interview per (application, stage).
     if (
-        await _open_interview(
-            session, application_id=app.id, stage_id=stage_id, lock=True
-        )
+        await _open_interview(session, application_id=app.id, stage_id=stage_id, lock=True)
         is not None
     ):
         raise InterviewExistsError()
@@ -406,9 +390,7 @@ async def schedule_interview(
         notif_type="recruitment.interview_scheduled",
         dedupe_suffix="scheduled",
     )
-    await _notify_assignees_assigned(
-        session, app=app, iv=iv, assignee_ids=clean_assignees
-    )
+    await _notify_assignees_assigned(session, app=app, iv=iv, assignee_ids=clean_assignees)
 
     await session.commit()
     await session.refresh(iv)
@@ -443,13 +425,9 @@ async def reschedule_interview(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, _PERM_SCHEDULE, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, _PERM_SCHEDULE, resource_org_id=app.org_id)
 
-    iv = await _load_interview(
-        session, application_id=app.id, interview_id=interview_id, lock=True
-    )
+    iv = await _load_interview(session, application_id=app.id, interview_id=interview_id, lock=True)
     if iv is None:
         raise ResourceNotFoundError()
     if version is not None and version != iv.version:
@@ -466,9 +444,7 @@ async def reschedule_interview(
         effective_link: str | None = meeting_link
     else:
         effective_link = "stored" if iv.meeting_link else None
-    _validate_mode_payload(
-        mode=new_mode, location=new_location, meeting_link=effective_link
-    )
+    _validate_mode_payload(mode=new_mode, location=new_location, meeting_link=effective_link)
 
     iv.mode = new_mode
     iv.location = _clean_text(new_location)
@@ -548,13 +524,9 @@ async def set_assignees(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, _PERM_ASSIGN, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, _PERM_ASSIGN, resource_org_id=app.org_id)
 
-    iv = await _load_interview(
-        session, application_id=app.id, interview_id=interview_id, lock=True
-    )
+    iv = await _load_interview(session, application_id=app.id, interview_id=interview_id, lock=True)
     if iv is None:
         raise ResourceNotFoundError()
 
@@ -562,9 +534,7 @@ async def set_assignees(
         session, org_id=app.org_id, assignee_ids=assignee_ids
     )
     existing = set(await _assignee_ids(session, interview_id=iv.id))
-    await session.execute(
-        delete(InterviewAssignee).where(InterviewAssignee.interview_id == iv.id)
-    )
+    await session.execute(delete(InterviewAssignee).where(InterviewAssignee.interview_id == iv.id))
     for uid in clean_assignees:
         session.add(InterviewAssignee(interview_id=iv.id, user_id=uid))
     await session.flush()
@@ -582,9 +552,7 @@ async def set_assignees(
     )
 
     newly_assigned = [uid for uid in clean_assignees if uid not in existing]
-    await _notify_assignees_assigned(
-        session, app=app, iv=iv, assignee_ids=newly_assigned
-    )
+    await _notify_assignees_assigned(session, app=app, iv=iv, assignee_ids=newly_assigned)
 
     await session.commit()
     await session.refresh(iv)
@@ -613,13 +581,9 @@ async def cancel_interview(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, _PERM_CANCEL, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, _PERM_CANCEL, resource_org_id=app.org_id)
 
-    iv = await _load_interview(
-        session, application_id=app.id, interview_id=interview_id, lock=True
-    )
+    iv = await _load_interview(session, application_id=app.id, interview_id=interview_id, lock=True)
     if iv is None:
         raise ResourceNotFoundError()
     if version is not None and version != iv.version:
@@ -678,16 +642,12 @@ async def complete_interview(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, _PERM_COMPLETE, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, _PERM_COMPLETE, resource_org_id=app.org_id)
 
     if outcome not in interview_domain.COMPLETE_OUTCOMES:
         raise InvalidApplicationFieldError(field="outcome")
 
-    iv = await _load_interview(
-        session, application_id=app.id, interview_id=interview_id, lock=True
-    )
+    iv = await _load_interview(session, application_id=app.id, interview_id=interview_id, lock=True)
     if iv is None:
         raise ResourceNotFoundError()
     if version is not None and version != iv.version:
@@ -745,14 +705,11 @@ async def list_interviews(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, _PERM_READ, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, _PERM_READ, resource_org_id=app.org_id)
 
     rows = await _interviews_for_application(session, application_id=app.id)
     items = [
-        await _interview_view(session, iv=iv, principal=principal, locale=locale)
-        for iv in rows
+        await _interview_view(session, iv=iv, principal=principal, locale=locale) for iv in rows
     ]
     return {"application_id": str(app.id), "interviews": items}
 
@@ -767,15 +724,19 @@ async def student_interview_block(
     """
 
     iv = (
-        await session.execute(
-            select(Interview)
-            .where(
-                Interview.application_id == application_id,
-                Interview.status == interview_domain.STATUS_SCHEDULED,
+        (
+            await session.execute(
+                select(Interview)
+                .where(
+                    Interview.application_id == application_id,
+                    Interview.status == interview_domain.STATUS_SCHEDULED,
+                )
+                .order_by(Interview.scheduled_at)
             )
-            .order_by(Interview.scheduled_at)
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     if iv is None:
         return None
     return presenters.student_interview_card(iv, locale=locale)
@@ -795,11 +756,7 @@ def _location_or_link(iv: Interview, *, locale: str) -> str:
         return decrypt_meeting_link(iv.meeting_link) or ""
     if iv.mode == interview_domain.MODE_ONSITE:
         return iv.location or ""
-    return (
-        "Nhà tuyển dụng sẽ gọi cho bạn."
-        if locale == "vi"
-        else "The company will call you."
-    )
+    return "Nhà tuyển dụng sẽ gọi cho bạn." if locale == "vi" else "The company will call you."
 
 
 def _scheduled_label(iv: Interview) -> str:
@@ -827,9 +784,7 @@ async def _notify_candidate(
     student = await user_service.get_by_id(session, app.applicant_id)
     if student is None:
         return
-    locale = message_catalog.normalize_locale(
-        getattr(student, "preferred_language", None)
-    )
+    locale = message_catalog.normalize_locale(getattr(student, "preferred_language", None))
     job_title = await _job_title(session, job_id=app.job_id)
     mode_label = interview_domain.MODE_LABELS[iv.mode].get(
         locale, interview_domain.MODE_LABELS[iv.mode]["vi"]
@@ -882,9 +837,7 @@ async def _notify_assignees_assigned(
         member = await user_service.get_by_id(session, uid)
         if member is None:
             continue
-        locale = message_catalog.normalize_locale(
-            getattr(member, "preferred_language", None)
-        )
+        locale = message_catalog.normalize_locale(getattr(member, "preferred_language", None))
         mode_label = interview_domain.MODE_LABELS[iv.mode].get(
             locale, interview_domain.MODE_LABELS[iv.mode]["vi"]
         )
@@ -907,9 +860,7 @@ async def _notify_assignees_assigned(
             session,
             recipient_id=uid,
             notif_type="recruitment.interview_assigned",
-            action_url=(
-                f"/partner/applications/{app.id}?interview={iv.id}&n={dedupe_suffix}"
-            ),
+            action_url=(f"/partner/applications/{app.id}?interview={iv.id}&n={dedupe_suffix}"),
             variables={
                 "job_title": job_title,
                 "scheduled_at": _scheduled_label(iv),
@@ -951,7 +902,9 @@ async def sweep_due_reminders(
                     Interview.scheduled_at <= horizon,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
     enqueued = 0
@@ -961,15 +914,11 @@ async def sweep_due_reminders(
             # The window is "open" once now has reached scheduled_at - delta.
             if sched - delta > now:
                 continue
-            enqueued += await _enqueue_reminder_for_window(
-                session, iv=iv, window=window
-            )
+            enqueued += await _enqueue_reminder_for_window(session, iv=iv, window=window)
     return {"reminders": enqueued}
 
 
-async def _enqueue_reminder_for_window(
-    session: AsyncSession, *, iv: Interview, window: str
-) -> int:
+async def _enqueue_reminder_for_window(session: AsyncSession, *, iv: Interview, window: str) -> int:
     count = 0
     app = await _shared.load_application(session, application_id=iv.application_id)
 
@@ -978,9 +927,7 @@ async def _enqueue_reminder_for_window(
     if not await _outbox_dedupe_exists(session, dedupe_key=cand_key):
         student = await user_service.get_by_id(session, app.applicant_id)
         if student is not None:
-            locale = message_catalog.normalize_locale(
-                getattr(student, "preferred_language", None)
-            )
+            locale = message_catalog.normalize_locale(getattr(student, "preferred_language", None))
             job_title = await _job_title(session, job_id=app.job_id)
             mode_label = interview_domain.MODE_LABELS[iv.mode].get(
                 locale, interview_domain.MODE_LABELS[iv.mode]["vi"]
@@ -1005,9 +952,7 @@ async def _enqueue_reminder_for_window(
                 session,
                 recipient_id=app.applicant_id,
                 notif_type="recruitment.interview_reminder",
-                action_url=(
-                    f"/student/applications/{app.id}?interview={iv.id}&w={window}"
-                ),
+                action_url=(f"/student/applications/{app.id}?interview={iv.id}&w={window}"),
                 variables={
                     "job_title": job_title,
                     "scheduled_at": _scheduled_label(iv),
@@ -1027,9 +972,7 @@ async def _enqueue_reminder_for_window(
             member = await user_service.get_by_id(session, uid)
             if member is None:
                 continue
-            locale = message_catalog.normalize_locale(
-                getattr(member, "preferred_language", None)
-            )
+            locale = message_catalog.normalize_locale(getattr(member, "preferred_language", None))
             mode_label = interview_domain.MODE_LABELS[iv.mode].get(
                 locale, interview_domain.MODE_LABELS[iv.mode]["vi"]
             )
@@ -1054,9 +997,7 @@ async def _enqueue_reminder_for_window(
                 session,
                 recipient_id=uid,
                 notif_type="recruitment.interview_reminder_assignee",
-                action_url=(
-                    f"/partner/applications/{app.id}?interview={iv.id}&w={window}"
-                ),
+                action_url=(f"/partner/applications/{app.id}?interview={iv.id}&w={window}"),
                 variables={
                     "job_title": job_title,
                     "scheduled_at": _scheduled_label(iv),

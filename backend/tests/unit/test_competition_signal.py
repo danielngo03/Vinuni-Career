@@ -8,13 +8,11 @@ determinism guarantee, and boundary values.
 from __future__ import annotations
 
 import pytest
-
 from app.modules.opportunities.application.competition_service import (
     compute_jd_complexity,
     compute_signal,
     map_raw_to_level,
 )
-
 
 # --------------------------------------------------------------------------- #
 # JD complexity: experience tier                                               #
@@ -187,19 +185,22 @@ def test_mid_fulltime_medium_skills_score() -> None:
 # --------------------------------------------------------------------------- #
 
 
-@pytest.mark.parametrize("raw,expected", [
-    (-10, "low"),
-    (0, "low"),
-    (19, "low"),
-    (20, "medium"),
-    (30, "medium"),
-    (44, "medium"),
-    (45, "high"),
-    (55, "high"),
-    (64, "high"),
-    (65, "very_high"),
-    (100, "very_high"),
-])
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        (-10, "low"),
+        (0, "low"),
+        (19, "low"),
+        (20, "medium"),
+        (30, "medium"),
+        (44, "medium"),
+        (45, "high"),
+        (55, "high"),
+        (64, "high"),
+        (65, "very_high"),
+        (100, "very_high"),
+    ],
+)
 def test_level_mapping_boundaries(raw: int, expected: str) -> None:
     assert map_raw_to_level(raw) == expected
 
@@ -255,15 +256,15 @@ def test_many_applications_drives_level_to_very_high() -> None:
 
 def test_same_inputs_always_same_output() -> None:
     """Determinism: identical inputs must produce identical results every time."""
-    kwargs = dict(
-        experience_min_years=3,
-        required_skills_count=5,
-        employment_type="full_time",
-    )
+    kwargs = {
+        "experience_min_years": 3,
+        "required_skills_count": 5,
+        "employment_type": "full_time",
+    }
     assert compute_jd_complexity(**kwargs) == compute_jd_complexity(**kwargs)
 
     jd_score, _, _ = compute_jd_complexity(**kwargs)
-    sig_kwargs = dict(jd_complexity=jd_score, application_count=7)
+    sig_kwargs = {"jd_complexity": jd_score, "application_count": 7}
     assert compute_signal(**sig_kwargs) == compute_signal(**sig_kwargs)
 
 

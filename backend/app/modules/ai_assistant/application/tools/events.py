@@ -73,7 +73,8 @@ async def search_events(session: AsyncSession, principal: Principal, args: dict)
                 "capacity": e.get("capacity"),
                 "spots_left": (
                     (e.get("capacity") or 0) - (e.get("registration_count") or 0)
-                    if e.get("capacity") else None
+                    if e.get("capacity")
+                    else None
                 ),
                 "url": f"/events/{e.get('id', '')}",
             }

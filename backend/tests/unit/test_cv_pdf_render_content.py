@@ -155,9 +155,7 @@ def test_experience_and_education_entries_are_not_dropped() -> None:
     assert "Backend Intern" in all_headings
     assert "BSc Computer Science" in all_headings
 
-    highlights = [
-        h for b in entries_blocks for e in b["entries"] for h in e["highlights"]
-    ]
+    highlights = [h for b in entries_blocks for e in b["entries"] for h in e["highlights"]]
     assert "Built a FastAPI service handling 1k rps" in highlights
     assert "Cut p95 latency 30%" in highlights
 

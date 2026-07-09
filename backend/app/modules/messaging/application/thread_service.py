@@ -52,9 +52,7 @@ async def _recipient_personas(
 ) -> tuple[list[str], set[uuid.UUID]]:
     """Effective persona per recipient + the set of org_ids they belong to."""
 
-    resolved, org_ids = await _shared.resolve_effective_personas(
-        session, recipient_ids
-    )
+    resolved, org_ids = await _shared.resolve_effective_personas(session, recipient_ids)
     personas = [resolved[r] for r in recipient_ids if r in resolved]
     return personas, org_ids
 
@@ -71,20 +69,22 @@ async def _existing_application_thread(
     """One direct thread per (application, partner org) — service-side dedupe guard."""
 
     return (
-        await session.execute(
-            select(MessageThread).where(
-                MessageThread.context_type == rules.CONTEXT_APPLICATION,
-                MessageThread.context_id == context_id,
-                MessageThread.org_id == org_id,
-                MessageThread.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(MessageThread).where(
+                    MessageThread.context_type == rules.CONTEXT_APPLICATION,
+                    MessageThread.context_id == context_id,
+                    MessageThread.org_id == org_id,
+                    MessageThread.deleted_at.is_(None),
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
-async def _enforce_thread_rate_limit(
-    session: AsyncSession, *, sender_id: uuid.UUID
-) -> None:
+async def _enforce_thread_rate_limit(session: AsyncSession, *, sender_id: uuid.UUID) -> None:
     settings = get_settings()
     start = _shared.start_of_utc_day()
     count = (
@@ -161,9 +161,8 @@ async def create_thread(
     thread_org_id = principal.org_id
 
     # Partner↔student requires a bound application relationship (and its context).
-    is_partner_student = (
-        principal.persona == rules.PARTNER_MEMBER
-        and any(p in (rules.STUDENT, rules.ALUMNI) for p in recipient_personas)
+    is_partner_student = principal.persona == rules.PARTNER_MEMBER and any(
+        p in (rules.STUDENT, rules.ALUMNI) for p in recipient_personas
     )
     if is_partner_student:
         if context_type != rules.CONTEXT_APPLICATION or context_id is None:
@@ -286,9 +285,7 @@ async def create_thread(
 
     await session.commit()
     await session.refresh(thread)
-    return await _present_created(
-        session, thread=thread, principal=principal, locale=locale
-    )
+    return await _present_created(session, thread=thread, principal=principal, locale=locale)
 
 
 async def _present_created(
@@ -303,9 +300,7 @@ async def _present_created(
     participants = await _shared.list_participants(session, thread_id=thread.id)
     relationship = None
     if thread.context_type == rules.CONTEXT_APPLICATION and thread.context_id:
-        relationship = await load_relationship(
-            session, application_id=thread.context_id
-        )
+        relationship = await load_relationship(session, application_id=thread.context_id)
     is_mod = await _shared.is_university_moderator(session, principal)
     counterpart = await thread_view.counterpart_label(
         session,
@@ -318,7 +313,9 @@ async def _present_created(
     )
     me = next((p for p in participants if p.user_id == principal.user_id), None)
     unread = await thread_view.thread_unread(
-        session, thread_id=thread.id, viewer_id=principal.user_id  # type: ignore[arg-type]
+        session,
+        thread_id=thread.id,
+        viewer_id=principal.user_id,  # type: ignore[arg-type]
     )
     return presenters.thread_summary(
         thread,
@@ -364,9 +361,7 @@ async def list_mine(
                 func.coalesce(MessageThread.last_message_at, MessageThread.created_at)
                 < anchor_sort,
                 (
-                    func.coalesce(
-                        MessageThread.last_message_at, MessageThread.created_at
-                    )
+                    func.coalesce(MessageThread.last_message_at, MessageThread.created_at)
                     == anchor_sort
                 )
                 & (MessageThread.id < anchor_id),
@@ -392,9 +387,7 @@ async def list_mine(
         participants = await _shared.list_participants(session, thread_id=thread.id)
         relationship = None
         if thread.context_type == rules.CONTEXT_APPLICATION and thread.context_id:
-            relationship = await load_relationship(
-                session, application_id=thread.context_id
-            )
+            relationship = await load_relationship(session, application_id=thread.context_id)
         counterpart = await thread_view.counterpart_label(
             session,
             viewer=principal,
@@ -405,9 +398,7 @@ async def list_mine(
             locale=locale,
         )
         me = next((p for p in participants if p.user_id == user_id), None)
-        unread = await thread_view.thread_unread(
-            session, thread_id=thread.id, viewer_id=user_id
-        )
+        unread = await thread_view.thread_unread(session, thread_id=thread.id, viewer_id=user_id)
         items.append(
             presenters.thread_summary(
                 thread,
@@ -431,9 +422,7 @@ async def _load_readable(
     is_mod = await _shared.is_university_moderator(session, principal)
     if is_mod:
         return thread, True
-    participant = await _shared.get_participant(
-        session, thread_id=thread_id, user_id=user_id
-    )
+    participant = await _shared.get_participant(session, thread_id=thread_id, user_id=user_id)
     if participant is None:
         raise ResourceNotFoundError()
     return thread, False
@@ -448,15 +437,11 @@ async def get_thread(
 ) -> dict:
     from app.modules.messaging.application import thread_view
 
-    thread, is_mod = await _load_readable(
-        session, principal=principal, thread_id=thread_id
-    )
+    thread, is_mod = await _load_readable(session, principal=principal, thread_id=thread_id)
     participants = await _shared.list_participants(session, thread_id=thread.id)
     relationship = None
     if thread.context_type == rules.CONTEXT_APPLICATION and thread.context_id:
-        relationship = await load_relationship(
-            session, application_id=thread.context_id
-        )
+        relationship = await load_relationship(session, application_id=thread.context_id)
     counterpart = await thread_view.counterpart_label(
         session,
         viewer=principal,
@@ -484,7 +469,9 @@ async def get_thread(
         )
     me = next((p for p in participants if p.user_id == principal.user_id), None)
     unread = await thread_view.thread_unread(
-        session, thread_id=thread.id, viewer_id=principal.user_id  # type: ignore[arg-type]
+        session,
+        thread_id=thread.id,
+        viewer_id=principal.user_id,  # type: ignore[arg-type]
     )
     return presenters.thread_detail(
         thread,

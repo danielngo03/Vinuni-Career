@@ -191,9 +191,7 @@ async def my_usage_detail(
         feature_counts[feature] = feature_counts.get(feature, 0) + int(n)
     by_feature = [
         {"feature": feature, "count": count}
-        for feature, count in sorted(
-            feature_counts.items(), key=lambda kv: (-kv[1], kv[0])
-        )
+        for feature, count in sorted(feature_counts.items(), key=lambda kv: (-kv[1], kv[0]))
     ]
 
     # Recent activity. Over-fetch so excluded system rows don't starve the list.
@@ -214,9 +212,7 @@ async def my_usage_detail(
         feature = _feature_for(task_type)
         if feature is None:
             continue
-        recent.append(
-            {"feature": feature, "ok": bool(success), "at": _iso_utc(created_at)}
-        )
+        recent.append({"feature": feature, "ok": bool(success), "at": _iso_utc(created_at)})
         if len(recent) >= recent_limit:
             break
 

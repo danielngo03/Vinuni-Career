@@ -78,9 +78,7 @@ async def _load(session: AsyncSession, review_id: uuid.UUID) -> CompanyReview:
 
 async def _rating(session: AsyncSession, review_id: uuid.UUID) -> ReviewRating:
     return (
-        await session.execute(
-            select(ReviewRating).where(ReviewRating.review_id == review_id)
-        )
+        await session.execute(select(ReviewRating).where(ReviewRating.review_id == review_id))
     ).scalar_one()
 
 
@@ -115,13 +113,13 @@ async def list_queue(
         )
     ).all()
     total = (
-        await session.execute(
-            select(func.count()).select_from(CompanyReview).where(*filters)
-        )
+        await session.execute(select(func.count()).select_from(CompanyReview).where(*filters))
     ).scalar_one()
     pending = (
         await session.execute(
-            select(func.count()).select_from(CompanyReview).where(
+            select(func.count())
+            .select_from(CompanyReview)
+            .where(
                 CompanyReview.deleted_at.is_(None),
                 CompanyReview.status == entities.STATUS_PENDING,
             )
@@ -129,7 +127,9 @@ async def list_queue(
     ).scalar_one()
     flagged = (
         await session.execute(
-            select(func.count()).select_from(CompanyReview).where(
+            select(func.count())
+            .select_from(CompanyReview)
+            .where(
                 CompanyReview.deleted_at.is_(None),
                 CompanyReview.status == entities.STATUS_FLAGGED,
             )
@@ -142,7 +142,9 @@ async def list_queue(
     )
     items = [
         presenters.review_moderation(
-            review, rating, author_name=names.get(review.reviewer_id),
+            review,
+            rating,
+            author_name=names.get(review.reviewer_id),
             locale=locale,
         )
         for (review, rating) in rows
@@ -174,8 +176,11 @@ async def publish_review(
     review.moderated_at = _now()
     review.version += 1
     await write_audit(
-        session, action="review.published", resource_type="company_review",
-        resource_id=review.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="review.published",
+        resource_type="company_review",
+        resource_id=review.id,
+        context=_audit_ctx(principal, ctx),
         after={"status": review.status, "org_id": str(review.org_id)},
     )
     await rating_projection.recompute(session, review.org_id)
@@ -207,11 +212,13 @@ async def remove_review(
     review.moderated_at = _now()
     review.version += 1
     await write_audit(
-        session, action="review.removed", resource_type="company_review",
-        resource_id=review.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="review.removed",
+        resource_type="company_review",
+        resource_id=review.id,
+        context=_audit_ctx(principal, ctx),
         before={"status": before},
-        after={"status": review.status, "reason": reason,
-               "org_id": str(review.org_id)},
+        after={"status": review.status, "reason": reason, "org_id": str(review.org_id)},
     )
     await rating_projection.recompute(session, review.org_id)
     await session.commit()
@@ -236,8 +243,11 @@ async def restore_review(
     review.moderated_at = _now()
     review.version += 1
     await write_audit(
-        session, action="review.restored", resource_type="company_review",
-        resource_id=review.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="review.restored",
+        resource_type="company_review",
+        resource_id=review.id,
+        context=_audit_ctx(principal, ctx),
         after={"status": review.status, "org_id": str(review.org_id)},
     )
     await rating_projection.recompute(session, review.org_id)
@@ -245,13 +255,9 @@ async def restore_review(
     return await _present(session, review, locale=locale)
 
 
-async def _present(
-    session: AsyncSession, review: CompanyReview, *, locale: str
-) -> dict:
+async def _present(session: AsyncSession, review: CompanyReview, *, locale: str) -> dict:
     rating = await _rating(session, review.id)
-    names = await student_directory_facade.display_for(
-        session, [review.reviewer_id], locale=locale
-    )
+    names = await student_directory_facade.display_for(session, [review.reviewer_id], locale=locale)
     return presenters.review_moderation(
         review, rating, author_name=names.get(review.reviewer_id), locale=locale
     )

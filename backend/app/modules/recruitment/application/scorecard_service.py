@@ -69,9 +69,7 @@ _AUDIT_WITHDRAWN = "application.scorecard_withdrawn"
 # --------------------------------------------------------------------------- #
 
 
-def _validate_submission(
-    *, recommendation: str, scores: Sequence[dict]
-) -> dict[str, int]:
+def _validate_submission(*, recommendation: str, scores: Sequence[dict]) -> dict[str, int]:
     """Validate recommendation + the full criteria set; return ``{key: score}``.
 
     Raises :class:`InvalidApplicationFieldError` (422) for a bad/missing
@@ -114,15 +112,19 @@ async def _reviewer_active_scorecard(
     """The caller's current ACTIVE (submitted) scorecard for this stage, if any."""
 
     return (
-        await session.execute(
-            select(Scorecard).where(
-                Scorecard.application_id == application_id,
-                Scorecard.stage_id == stage_id,
-                Scorecard.submitted_by_user_id == reviewer_id,
-                Scorecard.status == scorecard.SCORECARD_SUBMITTED,
+        (
+            await session.execute(
+                select(Scorecard).where(
+                    Scorecard.application_id == application_id,
+                    Scorecard.stage_id == stage_id,
+                    Scorecard.submitted_by_user_id == reviewer_id,
+                    Scorecard.status == scorecard.SCORECARD_SUBMITTED,
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
 async def _submitted_scorecards(
@@ -139,7 +141,9 @@ async def _submitted_scorecards(
                 )
                 .order_by(Scorecard.submitted_at, Scorecard.id)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -180,9 +184,7 @@ async def _scores_for(
     ordered: dict[uuid.UUID, dict[str, int]] = {}
     for sid, mapping in out.items():
         ordered[sid] = {
-            c["key"]: mapping[c["key"]]
-            for c in scorecard.DEFAULT_CRITERIA
-            if c["key"] in mapping
+            c["key"]: mapping[c["key"]] for c in scorecard.DEFAULT_CRITERIA if c["key"] in mapping
         }
     return ordered
 
@@ -215,7 +217,9 @@ async def _submitted_assignee_scorecards(
                 )
                 .order_by(Scorecard.submitted_at, Scorecard.id)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -256,9 +260,7 @@ async def _gate_inputs(
             assignee_ids=assignee_ids,
         )
         return cards, len(assignee_ids)
-    cards = await _submitted_scorecards(
-        session, application_id=application_id, stage_id=stage.id
-    )
+    cards = await _submitted_scorecards(session, application_id=application_id, stage_id=stage.id)
     return cards, scorecard.required_for_action(stage.required_action)
 
 
@@ -266,13 +268,17 @@ async def _load_scorecard(
     session: AsyncSession, *, scorecard_id: uuid.UUID, application_id: uuid.UUID
 ) -> Scorecard | None:
     return (
-        await session.execute(
-            select(Scorecard).where(
-                Scorecard.id == scorecard_id,
-                Scorecard.application_id == application_id,
+        (
+            await session.execute(
+                select(Scorecard).where(
+                    Scorecard.id == scorecard_id,
+                    Scorecard.application_id == application_id,
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -302,11 +308,7 @@ def _by_criterion(
     for card in cards:
         for key, value in scores_by_card.get(card.id, {}).items():
             totals.setdefault(key, []).append(value)
-    return {
-        key: round(sum(values) / len(values), 1)
-        for key, values in totals.items()
-        if values
-    }
+    return {key: round(sum(values) / len(values), 1) for key, values in totals.items() if values}
 
 
 def _build_aggregate(
@@ -330,9 +332,7 @@ def _build_aggregate(
         "gate_met": scorecard.gate_met(submitted_count, required),
     }
     if not reveal_scores:
-        base.update(
-            {"avg_overall": None, "recommendation_summary": {}, "by_criterion": {}}
-        )
+        base.update({"avg_overall": None, "recommendation_summary": {}, "by_criterion": {}})
         return base
     base.update(
         {
@@ -373,9 +373,7 @@ async def evaluate_advance_gate(
     if scorecard.required_for_action(stage.required_action) == 0:
         return scorecard.AdvanceGate(allowed=True, submitted=0, required=0)
 
-    cards, required = await _gate_inputs(
-        session, application_id=application_id, stage=stage
-    )
+    cards, required = await _gate_inputs(session, application_id=application_id, stage=stage)
     submitted = len(cards)
     count_met = scorecard.gate_met(submitted, required)
 
@@ -435,9 +433,7 @@ async def stage_evaluation_summary(
             "recommendation_summary": _recommendation_summary(cards),
         }
 
-    cards, required = await _gate_inputs(
-        session, application_id=application_id, stage=stage
-    )
+    cards, required = await _gate_inputs(session, application_id=application_id, stage=stage)
     threshold = _threshold_of(stage)
     avg = _avg_overall(cards)
     count_met = scorecard.gate_met(len(cards), required)
@@ -546,12 +542,8 @@ async def _read_stage_scorecards(
     submitted = await _submitted_scorecards(
         session, application_id=application_id, stage_id=resolved_stage_id
     )
-    scores_by_card = await _scores_for(
-        session, scorecard_ids=[s.id for s in submitted]
-    )
-    mine = next(
-        (s for s in submitted if s.submitted_by_user_id == principal.user_id), None
-    )
+    scores_by_card = await _scores_for(session, scorecard_ids=[s.id for s in submitted])
+    mine = next((s for s in submitted if s.submitted_by_user_id == principal.user_id), None)
     caller_submitted = mine is not None
     others = [s for s in submitted if s.submitted_by_user_id != principal.user_id]
 
@@ -619,9 +611,7 @@ async def submit_scorecard(
     # while the application is actively in the pipeline (under_review).
     if app.status != lifecycle.UNDER_REVIEW:
         raise IllegalApplicationTransitionError(event="scorecard")
-    active = await stage_service._active_stage(
-        session, application_id=app.id, lock=True
-    )
+    active = await stage_service._active_stage(session, application_id=app.id, lock=True)
     if active is None:
         raise IllegalApplicationTransitionError(event="scorecard")
     stage_id = active.stage_id
@@ -638,7 +628,10 @@ async def submit_scorecard(
     )
 
     existing = await _reviewer_active_scorecard(
-        session, application_id=app.id, stage_id=stage_id, reviewer_id=principal.user_id  # type: ignore[arg-type]
+        session,
+        application_id=app.id,
+        stage_id=stage_id,
+        reviewer_id=principal.user_id,  # type: ignore[arg-type]
     )
     if existing is None:
         sc = Scorecard(
@@ -668,9 +661,7 @@ async def submit_scorecard(
         sc.overall_score = overall
         sc.comment = clean_comment
         sc.version += 1
-        await session.execute(
-            delete(ScorecardScore).where(ScorecardScore.scorecard_id == sc.id)
-        )
+        await session.execute(delete(ScorecardScore).where(ScorecardScore.scorecard_id == sc.id))
         await session.flush()
         _add_scores(session, scorecard_id=sc.id, scores=clean_scores)
         audit_action = _AUDIT_UPDATED
@@ -702,13 +693,9 @@ async def submit_scorecard(
     )
 
 
-def _add_scores(
-    session: AsyncSession, *, scorecard_id: uuid.UUID, scores: dict[str, int]
-) -> None:
+def _add_scores(session: AsyncSession, *, scorecard_id: uuid.UUID, scores: dict[str, int]) -> None:
     for key, value in scores.items():
-        session.add(
-            ScorecardScore(scorecard_id=scorecard_id, criterion_key=key, score=value)
-        )
+        session.add(ScorecardScore(scorecard_id=scorecard_id, criterion_key=key, score=value))
 
 
 async def withdraw_scorecard(
@@ -731,9 +718,7 @@ async def withdraw_scorecard(
         principal, _SCORECARD_RESOURCE, _PERM_SUBMIT, resource_org_id=app.org_id
     )
 
-    sc = await _load_scorecard(
-        session, scorecard_id=scorecard_id, application_id=app.id
-    )
+    sc = await _load_scorecard(session, scorecard_id=scorecard_id, application_id=app.id)
     # Author-only: another reviewer (or a missing scorecard) is indistinguishable
     # from not-found (404, never 403) — a reviewer may only touch their own.
     if sc is None or sc.submitted_by_user_id != principal.user_id:

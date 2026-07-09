@@ -136,7 +136,9 @@ async def activate_account(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     user = await auth_service.activate_account(
-        session, token=body.token, password=body.password,
+        session,
+        token=body.token,
+        password=body.password,
         ctx=context_from_request(request),
     )
     return success({"email": user.email, "email_verified": user.is_email_verified})
@@ -200,9 +202,7 @@ async def login(
     )
     # Confirmed-TOTP accounts get a challenge, not tokens: no cookie is set.
     if isinstance(result, LoginChallenge):
-        return success(
-            {"totp_required": True, "challenge_token": result.challenge_token}
-        )
+        return success({"totp_required": True, "challenge_token": result.challenge_token})
     _set_refresh_cookie(response, result.tokens.refresh_token)
     payload = presenters.tokens_payload(result.tokens)
     payload["user"] = presenters.user_summary(result.user, result.identity)
@@ -292,9 +292,7 @@ async def list_identities(
     assert auth.principal.user_id is not None
     identities = await user_service.list_identities(session, auth.principal.user_id)
     items = [
-        presenters.identity_summary(
-            identity, is_active=identity.id == auth.claims.identity_id
-        )
+        presenters.identity_summary(identity, is_active=identity.id == auth.claims.identity_id)
         for identity in identities
     ]
     return success(items)
@@ -375,9 +373,7 @@ async def oauth_start(
         return_to=return_to,
         redirect_uri=_oauth_redirect_uri(provider),
     )
-    resp = RedirectResponse(
-        url=f"{authorize_url}", status_code=status.HTTP_302_FOUND
-    )
+    resp = RedirectResponse(url=f"{authorize_url}", status_code=status.HTTP_302_FOUND)
     _set_oauth_nonce_cookie(resp, nonce)
     return resp
 

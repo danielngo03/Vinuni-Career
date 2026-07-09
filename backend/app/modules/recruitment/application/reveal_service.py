@@ -38,15 +38,19 @@ async def _pending_request(
     session: AsyncSession, *, application_id: uuid.UUID
 ) -> ApplicationRevealRequest | None:
     return (
-        await session.execute(
-            select(ApplicationRevealRequest)
-            .where(
-                ApplicationRevealRequest.application_id == application_id,
-                ApplicationRevealRequest.status == lifecycle.REVEAL_PENDING,
+        (
+            await session.execute(
+                select(ApplicationRevealRequest)
+                .where(
+                    ApplicationRevealRequest.application_id == application_id,
+                    ApplicationRevealRequest.status == lifecycle.REVEAL_PENDING,
+                )
+                .order_by(ApplicationRevealRequest.created_at.desc())
             )
-            .order_by(ApplicationRevealRequest.created_at.desc())
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
 async def _existing_for_org(
@@ -76,13 +80,9 @@ async def request_reveal(
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
-    app = await _shared.load_application(
-        session, application_id=application_id, lock=True
-    )
+    app = await _shared.load_application(session, application_id=application_id, lock=True)
     # Partner-of-org scope (cross-org indistinguishable from missing).
-    if not principal.is_superadmin and (
-        principal.org_id is None or principal.org_id != app.org_id
-    ):
+    if not principal.is_superadmin and (principal.org_id is None or principal.org_id != app.org_id):
         raise ResourceNotFoundError()
     permission_checker.require(principal, _RESOURCE, "read", resource_org_id=app.org_id)
     assert principal.user_id is not None
@@ -97,9 +97,7 @@ async def request_reveal(
         raise InvalidApplicationFieldError(field="reason")
 
     org_id = principal.org_id if principal.org_id is not None else app.org_id
-    existing = await _existing_for_org(
-        session, application_id=app.id, org_id=org_id
-    )
+    existing = await _existing_for_org(session, application_id=app.id, org_id=org_id)
     if existing is not None and existing.status == lifecycle.REVEAL_PENDING:
         return presenters.reveal_request(existing, locale=locale)  # idempotent in-flight
     if existing is not None and existing.status not in (
@@ -136,8 +134,11 @@ async def request_reveal(
     await session.flush()
 
     await write_audit(
-        session, action="application.reveal_requested", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.reveal_requested",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"reveal_request_id": str(req.id), "org_id": str(org_id)},
     )
     await timeline.record_timeline_event(
@@ -156,7 +157,11 @@ async def request_reveal(
 
 
 async def _record_reveal_requested_access(
-    session: AsyncSession, *, app: Application, principal: Principal, org_id: uuid.UUID,
+    session: AsyncSession,
+    *,
+    app: Application,
+    principal: Principal,
+    org_id: uuid.UUID,
 ) -> None:
     """Best-effort hook into ``partner_candidate_access_events``
     (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`). Instrumentation only."""
@@ -222,9 +227,7 @@ async def respond_reveal(
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
-    app = await _shared.load_application(
-        session, application_id=application_id, lock=True
-    )
+    app = await _shared.load_application(session, application_id=application_id, lock=True)
     if principal.user_id is None or app.applicant_id != principal.user_id:
         raise ResourceNotFoundError()
     permission_checker.require(principal, _RESOURCE, "update")
@@ -253,8 +256,11 @@ async def respond_reveal(
     await session.flush()
 
     await write_audit(
-        session, action="application.reveal_responded", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.reveal_responded",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"reveal_request_id": str(req.id), "decision": decision},
     )
     if decision == lifecycle.REVEAL_ACCEPTED:
@@ -277,9 +283,7 @@ async def respond_reveal(
 # --------------------------------------------------------------------------- #
 
 
-async def sweep_expired(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def sweep_expired(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Transition every overdue ``pending`` reveal request to ``expired``.
 
     Called by the periodic scheduler (ADR-0003 §2). Idempotent and status-gated:
@@ -297,7 +301,9 @@ async def sweep_expired(
                     ApplicationRevealRequest.expires_at <= now,
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     for req in rows:
         req.status = lifecycle.REVEAL_EXPIRED

@@ -250,8 +250,10 @@ class TestFactoryChainResolution:
 
         with monkeypatch.context() as m:
             m.setattr(factory, "real_provider_active", lambda: False)
-            m.setattr(runtime_config, "current", lambda: replace(
-                runtime_config._bootstrap_from_env(), real_calls_active=False
-            ))
+            m.setattr(
+                runtime_config,
+                "current",
+                lambda: replace(runtime_config._bootstrap_from_env(), real_calls_active=False),
+            )
             provider = factory.get_provider_for_alias("chat_cheap")
         assert isinstance(provider, OfflineProvider)

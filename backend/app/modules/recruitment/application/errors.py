@@ -71,10 +71,7 @@ class RollbackLimitReachedError(ConflictError):
     deferred to a later slice.
     """
 
-    message = (
-        "Hồ sơ đã đạt số lần chuyển về tối đa. Cần phê duyệt của quản trị viên "
-        "để tiếp tục."
-    )
+    message = "Hồ sơ đã đạt số lần chuyển về tối đa. Cần phê duyệt của quản trị viên để tiếp tục."
 
     def __init__(self) -> None:
         super().__init__(
@@ -138,10 +135,7 @@ class RevealRequiredError(ConflictError):
     consent before scheduling" and deep-links the reveal flow. Partner-internal.
     """
 
-    message = (
-        "Cần yêu cầu và được ứng viên đồng ý tiết lộ danh tính trước khi đặt lịch "
-        "phỏng vấn."
-    )
+    message = "Cần yêu cầu và được ứng viên đồng ý tiết lộ danh tính trước khi đặt lịch phỏng vấn."
 
     def __init__(self) -> None:
         super().__init__(self.message, details={"reason": "reveal_required"})

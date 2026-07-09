@@ -32,9 +32,7 @@ class PlatformSettings(Base):
     # Applied via CSS variable override so the whole app adopts the custom font.
     google_font_family: Mapped[str | None] = mapped_column(String(100), nullable=True)
 
-    updated_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
+    updated_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

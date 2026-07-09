@@ -33,9 +33,7 @@ def plan(p: SubscriptionPlan, *, locale: str = "vi") -> dict:
         "audience": p.audience,
         "audience_label": lifecycle.audience_label(p.audience, locale=locale),
         "billing_period": p.billing_period,
-        "billing_period_label": lifecycle.billing_period_label(
-            p.billing_period, locale=locale
-        ),
+        "billing_period_label": lifecycle.billing_period_label(p.billing_period, locale=locale),
         "duration_days": p.duration_days,
         "price_amount": _amount(p.price_amount),
         "currency": p.currency,
@@ -59,9 +57,7 @@ def subscription(
         "plan_id": str(s.plan_id),
         "plan": plan(plan_obj, locale=locale) if plan_obj is not None else None,
         "billing_period": s.billing_period,
-        "billing_period_label": lifecycle.billing_period_label(
-            s.billing_period, locale=locale
-        ),
+        "billing_period_label": lifecycle.billing_period_label(s.billing_period, locale=locale),
         "price_amount": _amount(s.price_amount),
         "currency": s.currency,
         "status": s.status,

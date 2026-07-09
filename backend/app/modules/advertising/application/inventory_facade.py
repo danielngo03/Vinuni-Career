@@ -87,18 +87,21 @@ async def approved_creative_for_slot(
 
     now = now or _now()
     rows = (
-        await session.execute(
-            select(CampaignCreative)
-            .where(
-                CampaignCreative.placement_id == placement_id,
-                CampaignCreative.slot == slot,
-                CampaignCreative.deleted_at.is_(None),
-                CampaignCreative.moderation_status
-                == creative_vocab.CREATIVE_APPROVED,
+        (
+            await session.execute(
+                select(CampaignCreative)
+                .where(
+                    CampaignCreative.placement_id == placement_id,
+                    CampaignCreative.slot == slot,
+                    CampaignCreative.deleted_at.is_(None),
+                    CampaignCreative.moderation_status == creative_vocab.CREATIVE_APPROVED,
+                )
+                .order_by(CampaignCreative.created_at.desc())
             )
-            .order_by(CampaignCreative.created_at.desc())
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     for c in rows:
         if c.start_at is not None and now < _aware(c.start_at):
             continue
@@ -258,9 +261,7 @@ async def is_target_sponsored_now(
     return row is not None
 
 
-async def count_active_sponsored(
-    session: AsyncSession, *, now: datetime | None = None
-) -> int:
+async def count_active_sponsored(session: AsyncSession, *, now: datetime | None = None) -> int:
     """Count of live sponsored placements across job + event targets (health)."""
 
     jobs = await list_active_sponsored(
@@ -289,4 +290,5 @@ async def count_campaigns_by_status_for_org(
             .group_by(SponsoredPlacement.status)
         )
     ).all()
-    return {status: count for status, count in rows}
+    row_pairs = [(str(status), int(count or 0)) for status, count in rows]
+    return dict(row_pairs)

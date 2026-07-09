@@ -62,9 +62,7 @@ def output_language_directive(output_language: str | None) -> str:
     )
 
 
-def static_system_prompt(
-    task_instruction: str, *, output_language: str | None = None
-) -> str:
+def static_system_prompt(task_instruction: str, *, output_language: str | None = None) -> str:
     """Compose the static system prompt (identity + rules + task + language)."""
 
     return "\n\n".join(

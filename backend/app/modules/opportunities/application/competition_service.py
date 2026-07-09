@@ -131,9 +131,7 @@ async def _load_job(
 # --------------------------------------------------------------------------- #
 
 
-async def _count_active_applications(
-    session: AsyncSession, *, job_id: uuid.UUID
-) -> int:
+async def _count_active_applications(session: AsyncSession, *, job_id: uuid.UUID) -> int:
     """Count active (non-rejected, non-withdrawn) applications for the job.
 
     Cross-module read contract: queries the ``applications`` table directly via
@@ -271,10 +269,7 @@ async def _maybe_explain(
     On AI failure → ``(None, False)``; no exception propagates.
     """
 
-    if (
-        not real_provider_active()
-        or not runtime_config.current().job_fit_ai_explanation_enabled
-    ):
+    if not real_provider_active() or not runtime_config.current().job_fit_ai_explanation_enabled:
         return None, False
 
     try:
@@ -390,9 +385,7 @@ def _student_fit_bucket(fit_score: int | None) -> str:
     return "needs_improvement"
 
 
-async def _source_mix(
-    session: AsyncSession, *, job_id: uuid.UUID
-) -> dict[str, float] | None:
+async def _source_mix(session: AsyncSession, *, job_id: uuid.UUID) -> dict[str, float] | None:
     """Organic/recommended/sponsored view-event ratio for this job (real data).
 
     Built from ``discovery_events`` (privacy-safe by construction; no PII).
@@ -417,13 +410,18 @@ async def _source_mix(
     for surface, n in rows:
         n = int(n)
         if surface in {
-            "homepage_sponsored", "search_sponsored", "right_rail_banner",
-            "email_sponsored", "mega_sponsored",
+            "homepage_sponsored",
+            "search_sponsored",
+            "right_rail_banner",
+            "email_sponsored",
+            "mega_sponsored",
         }:
             buckets["sponsored"] += n
         elif surface in {
-            "homepage_recommended", "search_recommended",
-            "job_detail_recommended_cv", "mega_jobs_recommended",
+            "homepage_recommended",
+            "search_recommended",
+            "job_detail_recommended_cv",
+            "mega_jobs_recommended",
         }:
             buckets["recommendation"] += n
         elif surface in {"employer_spotlight", "career_explore", "university_curated"}:
@@ -454,10 +452,7 @@ async def _applicant_quality_pool(
     them — never an individual score, a rank, a percentile, or an identity.
     """
 
-    sql = (
-        "SELECT user_id, MAX(score) AS best FROM cv_job_fit_scores"
-        " WHERE job_id = :job_id"
-    )
+    sql = "SELECT user_id, MAX(score) AS best FROM cv_job_fit_scores WHERE job_id = :job_id"
     params: dict[str, object] = {"job_id": job_id}
     binds = [bindparam("job_id", type_=Uuid(as_uuid=True))]
     if exclude_user_id is not None:
@@ -549,22 +544,15 @@ _GUIDANCE_STRINGS: dict[str, dict[str, str]] = {
     "vi": {
         "already_applied": "Bạn đã ứng tuyển công việc này.",
         "low_signal": (
-            "Chưa đủ hoạt động để đánh giá chính xác mức độ cạnh tranh — ứng tuyển "
-            "sớm vẫn có lợi."
+            "Chưa đủ hoạt động để đánh giá chính xác mức độ cạnh tranh — ứng tuyển sớm vẫn có lợi."
         ),
-        "strengthen_cv": (
-            "Củng cố bằng chứng trong CV cho vai trò này trước khi ứng tuyển."
-        ),
+        "strengthen_cv": ("Củng cố bằng chứng trong CV cho vai trò này trước khi ứng tuyển."),
         "strong_fit_high_comp": (
             "Mức độ cạnh tranh có vẻ cao, nhưng CV của bạn rất phù hợp — hãy ứng "
             "tuyển kèm thư xin việc được điều chỉnh riêng."
         ),
-        "deadline_final_days": (
-            "Hạn nộp hồ sơ sẽ đóng trong vài ngày tới."
-        ),
-        "deadline_closing_soon": (
-            "Hạn nộp hồ sơ đang đến gần — hãy ứng tuyển sớm."
-        ),
+        "deadline_final_days": ("Hạn nộp hồ sơ sẽ đóng trong vài ngày tới."),
+        "deadline_closing_soon": ("Hạn nộp hồ sơ đang đến gần — hãy ứng tuyển sớm."),
         "apply_when_ready": (
             "Hãy ứng tuyển khi CV của bạn phản ánh tốt nhất yêu cầu của vai trò này."
         ),
@@ -572,25 +560,16 @@ _GUIDANCE_STRINGS: dict[str, dict[str, str]] = {
     "en": {
         "already_applied": "You have already applied to this job.",
         "low_signal": (
-            "Not enough activity yet to gauge competition precisely — "
-            "applying early still helps."
+            "Not enough activity yet to gauge competition precisely — applying early still helps."
         ),
-        "strengthen_cv": (
-            "Strengthen your CV evidence for this role before applying."
-        ),
+        "strengthen_cv": ("Strengthen your CV evidence for this role before applying."),
         "strong_fit_high_comp": (
             "Competition looks high, but your CV fit is strong — apply with a "
             "tailored cover letter."
         ),
-        "deadline_final_days": (
-            "The application deadline is closing in the next few days."
-        ),
-        "deadline_closing_soon": (
-            "The application deadline is approaching — apply soon."
-        ),
-        "apply_when_ready": (
-            "Apply when your CV best reflects this role's requirements."
-        ),
+        "deadline_final_days": ("The application deadline is closing in the next few days."),
+        "deadline_closing_soon": ("The application deadline is approaching — apply soon."),
+        "apply_when_ready": ("Apply when your CV best reflects this role's requirements."),
     },
 }
 
@@ -645,7 +624,8 @@ def _guidance(
     if weak_cv:
         lines.append(_g(locale, "strengthen_cv"))
     elif fit_bucket in ("competitive", "highly_competitive") and level in (
-        "high", "very_high",
+        "high",
+        "very_high",
     ):
         lines.append(_g(locale, "strong_fit_high_comp"))
     if deadline_line is not None:

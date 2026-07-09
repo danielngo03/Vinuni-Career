@@ -28,9 +28,7 @@ def _key_hash(email: str) -> str:
     return hashlib.sha256(normalized.encode()).hexdigest()
 
 
-async def check_and_touch_throttle(
-    session: AsyncSession, *, scope: str, email: str
-) -> None:
+async def check_and_touch_throttle(session: AsyncSession, *, scope: str, email: str) -> None:
     """Raise :class:`errors.RateLimitedError` if ``scope``+``email`` is
     cooling down or has exceeded the rolling-hour cap; otherwise record this
     attempt and return normally.
@@ -65,9 +63,7 @@ async def check_and_touch_throttle(
     elapsed = (now - last_attempt).total_seconds()
     if elapsed < settings.auth_resend_cooldown_seconds:
         retry_after = int(settings.auth_resend_cooldown_seconds - elapsed) or 1
-        raise errors.RateLimitedError(
-            reason="resend_cooldown", retry_after_seconds=retry_after
-        )
+        raise errors.RateLimitedError(reason="resend_cooldown", retry_after_seconds=retry_after)
 
     window_started = ensure_aware(row.window_started_at)
     if now - window_started > _ROLLING_WINDOW:

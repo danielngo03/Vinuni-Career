@@ -58,19 +58,17 @@ class AdPackage(Base):
     price_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     currency: Mapped[str] = mapped_column(String(5), nullable=False, default="VND")
     duration_days: Mapped[int] = mapped_column(Integer, nullable=False)
-    grants_sponsored: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=False
-    )
-    grants_featured: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=False
-    )
+    grants_sponsored: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    grants_featured: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -88,9 +86,7 @@ class SponsoredPlacement(Base):
     org_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("organizations.id"), nullable=False, index=True
     )
-    created_by: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("users.id"), nullable=False
-    )
+    created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), nullable=False)
 
     # Polymorphic target — NO FK (points at jobs OR events); CHECK on target_type,
     # service-layer ownership validation.
@@ -100,21 +96,13 @@ class SponsoredPlacement(Base):
     placement_type: Mapped[str] = mapped_column(
         String(10), nullable=False
     )  # sponsored | featured | both
-    package_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("ad_packages.id"), nullable=False
-    )
+    package_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("ad_packages.id"), nullable=False)
     # Frozen snapshot of the package price at submit (price freeze). NULL while draft.
-    price_amount: Mapped[Decimal | None] = mapped_column(
-        Numeric(12, 2), nullable=True
-    )
+    price_amount: Mapped[Decimal | None] = mapped_column(Numeric(12, 2), nullable=True)
     currency: Mapped[str] = mapped_column(String(5), nullable=False, default="VND")
 
-    start_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
-    end_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
+    start_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    end_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
     status: Mapped[str] = mapped_column(
         String(20), nullable=False, default="draft"
@@ -128,53 +116,27 @@ class SponsoredPlacement(Base):
         nullable=False,
         default=disclosure_vocab.DEFAULT_DISCLOSURE_CLASS,
     )
-    disclosure_confirmed: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=False
-    )
+    disclosure_confirmed: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     moderation_note: Mapped[str | None] = mapped_column(Text, nullable=True)
     # Structured rejection/escalation reason code (``app.shared.moderation``);
     # ``moderation_note`` remains the optional supplementary free-text field.
-    moderation_reason_code: Mapped[str | None] = mapped_column(
-        String(30), nullable=True
-    )
+    moderation_reason_code: Mapped[str | None] = mapped_column(String(30), nullable=True)
 
-    approved_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
-    paid_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    approved_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    paid_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     payment_reference: Mapped[str | None] = mapped_column(String(120), nullable=True)
-    paid_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
+    paid_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
 
-    submitted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    submitted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     # SLA deadline computed at submission time
     # (``settings.advertising_moderation_sla_hours``).
-    due_by: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    claimed_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
-    claimed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    approved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    activated_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    completed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    cancelled_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    due_by: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    claimed_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    approved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    activated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    cancelled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     # T-24h "ending soon" notification dedupe stamp (set by the completion sweep).
     ending_notified_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
@@ -186,12 +148,12 @@ class SponsoredPlacement(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
 
 
@@ -239,33 +201,23 @@ class CampaignCreative(Base):
     moderation_note: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     # Optional per-creative display window (defaults to the placement window).
-    start_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    end_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    start_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    end_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     # Where impressions/clicks attributed to this creative are surfaced (analytics).
-    analytics_source_surface: Mapped[str | None] = mapped_column(
-        String(60), nullable=True
-    )
+    analytics_source_surface: Mapped[str | None] = mapped_column(String(60), nullable=True)
 
-    created_by: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("users.id"), nullable=False
-    )
-    reviewed_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
+    created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), nullable=False)
+    reviewed_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)

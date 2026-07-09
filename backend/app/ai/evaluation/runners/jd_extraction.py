@@ -51,14 +51,20 @@ async def run_case(case: dict[str, Any]) -> Probe:
     set_ocr_adapter(_NoOcr())
     try:
         with mock.patch.object(
-            cascade, "extract_text",
-            return_value=type("R", (), {"text": raw_text, "page_count": 1,
-                                         "engine": "pdfplumber", "ocr_used": False})(),
+            cascade,
+            "extract_text",
+            return_value=type(
+                "R",
+                (),
+                {"text": raw_text, "page_count": 1, "engine": "pdfplumber", "ocr_used": False},
+            )(),
         ):
             try:
                 result = await svc.extract_jd_from_upload_with(
-                    filename="jd.pdf", data=b"%PDF-fake",
-                    structurer=_fake_structurer, vision_runner=_fake_vision,
+                    filename="jd.pdf",
+                    data=b"%PDF-fake",
+                    structurer=_fake_structurer,
+                    vision_runner=_fake_vision,
                 )
             except Exception as exc:  # noqa: BLE001
                 # Prefer details["reason"] (the JD status like "not_a_jd") when
@@ -78,8 +84,10 @@ async def run_case(case: dict[str, Any]) -> Probe:
 def check(key: str, exp: Any, probe: Probe) -> str | None:
     """Assertion checks for ``jd_extraction`` probes."""
     if key == "error_code":
-        return None if probe.raised_code == exp else (
-            f"expected error_code {exp!r}, got {probe.raised_code!r}"
+        return (
+            None
+            if probe.raised_code == exp
+            else (f"expected error_code {exp!r}, got {probe.raised_code!r}")
         )
     if key == "no_stack_trace":
         bad = "traceback" in probe.raised_message.lower()
@@ -104,9 +112,7 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
         field = exp.get("field")
         want = bool(exp.get("value"))
         got = (d.get("field_confidence", {}).get(field) or {}).get("needs_review")
-        return None if got == want else (
-            f"{field} needs_review expected {want}, got {got!r}"
-        )
+        return None if got == want else (f"{field} needs_review expected {want}, got {got!r}")
     if key == "needs_review":
         got = d.get("needs_review")
         return None if got == exp else f"needs_review expected {exp!r}, got {got!r}"

@@ -54,18 +54,34 @@ AGGREGATE_TYPES: frozenset[str] = frozenset(
     }
 )
 
-ACTOR_TYPES: frozenset[str] = frozenset(
-    {"student", "partner", "university", "system", "guest"}
-)
+ACTOR_TYPES: frozenset[str] = frozenset({"student", "partner", "university", "system", "guest"})
 
 # Forbidden property keys — belt-and-braces explicit reject list; the allowlist
 # below already default-denies anything not named here.
 _FORBIDDEN_PROPERTY_KEYS: frozenset[str] = frozenset(
     {
-        "name", "full_name", "email", "phone", "phone_number",
-        "cv_text", "raw_cv", "resume_text", "document_text", "prompt",
-        "completion", "provider", "model", "token", "tokens", "confidence",
-        "ip", "ip_address", "raw_ip", "gps", "latitude", "longitude",
+        "name",
+        "full_name",
+        "email",
+        "phone",
+        "phone_number",
+        "cv_text",
+        "raw_cv",
+        "resume_text",
+        "document_text",
+        "prompt",
+        "completion",
+        "provider",
+        "model",
+        "token",
+        "tokens",
+        "confidence",
+        "ip",
+        "ip_address",
+        "raw_ip",
+        "gps",
+        "latitude",
+        "longitude",
     }
 )
 

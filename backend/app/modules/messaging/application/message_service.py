@@ -70,19 +70,21 @@ async def _existing_dedupe(
     if client_dedupe_key is None:
         return None
     return (
-        await session.execute(
-            select(Message).where(
-                Message.thread_id == thread_id,
-                Message.sender_id == sender_id,
-                Message.client_dedupe_key == client_dedupe_key,
+        (
+            await session.execute(
+                select(Message).where(
+                    Message.thread_id == thread_id,
+                    Message.sender_id == sender_id,
+                    Message.client_dedupe_key == client_dedupe_key,
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
-async def _participant_personas(
-    session: AsyncSession, user_ids: list[uuid.UUID]
-) -> list[str]:
+async def _participant_personas(session: AsyncSession, user_ids: list[uuid.UUID]) -> list[str]:
     """Effective persona per participant (for the send-time student↔student block).
 
     Institutional identities win, so a university staffer / partner who also holds
@@ -311,9 +313,7 @@ async def send_message(
     thread = await _shared.load_thread(session, thread_id=thread_id, lock=True)
 
     # Non-participant (or cross-tenant) is indistinguishable from missing -> 404.
-    participant = await _shared.get_participant(
-        session, thread_id=thread_id, user_id=sender_id
-    )
+    participant = await _shared.get_participant(session, thread_id=thread_id, user_id=sender_id)
     is_author = thread.created_by == sender_id
     if participant is None and not is_author:
         raise ResourceNotFoundError()
@@ -338,9 +338,7 @@ async def send_message(
         thread_status=thread.status,
         thread_deleted=thread.deleted_at is not None,
         relationship_ok=(
-            relationship is not None
-            if thread.context_type == rules.CONTEXT_APPLICATION
-            else True
+            relationship is not None if thread.context_type == rules.CONTEXT_APPLICATION else True
         ),
     )
     if reason == rules.REASON_THREAD_NOT_ACTIVE:
@@ -356,9 +354,7 @@ async def send_message(
         client_dedupe_key=client_dedupe_key,
     )
     if existing is not None:
-        return presenters.message_item(
-            existing, sender_label="", is_mine=True, locale=locale
-        )
+        return presenters.message_item(existing, sender_label="", is_mine=True, locale=locale)
 
     await _enforce_send_rate_limit(
         session, sender_id=sender_id, thread=thread, relationship=relationship
@@ -377,9 +373,7 @@ async def send_message(
     )
     await session.commit()
     await session.refresh(message)
-    return presenters.message_item(
-        message, sender_label="", is_mine=True, locale=locale
-    )
+    return presenters.message_item(message, sender_label="", is_mine=True, locale=locale)
 
 
 # --------------------------------------------------------------------------- #
@@ -398,9 +392,7 @@ async def list_messages(
 ) -> tuple[list[dict], str | None, int]:
     from app.modules.messaging.application.thread_service import _load_readable
 
-    thread, is_mod = await _load_readable(
-        session, principal=principal, thread_id=thread_id
-    )
+    thread, is_mod = await _load_readable(session, principal=principal, thread_id=thread_id)
     relationship = await _relationship_for(session, thread)
     page_limit = clamp_limit(limit)
 
@@ -415,9 +407,7 @@ async def list_messages(
                 (Message.created_at == anchor_created) & (Message.id > anchor_id),
             )
         )
-    stmt = stmt.order_by(Message.created_at.asc(), Message.id.asc()).limit(
-        page_limit + 1
-    )
+    stmt = stmt.order_by(Message.created_at.asc(), Message.id.asc()).limit(page_limit + 1)
     rows = list((await session.execute(stmt)).scalars().all())
     page = build_cursor_page(
         rows,
@@ -503,9 +493,7 @@ async def delete_message(
 
     message = (
         await session.execute(
-            select(Message).where(
-                Message.id == message_id, Message.thread_id == thread_id
-            )
+            select(Message).where(Message.id == message_id, Message.thread_id == thread_id)
         )
     ).scalar_one_or_none()
     if message is None:
@@ -603,9 +591,7 @@ async def report_thread(
     )
 
     # Notify university moderators (the "reported to university admin" rule).
-    staff_ids = await user_read_facade.get_user_ids_by_persona(
-        session, rules.UNIVERSITY_STAFF
-    )
+    staff_ids = await user_read_facade.get_user_ids_by_persona(session, rules.UNIVERSITY_STAFF)
     for staff_id in staff_ids[:20]:
         await feed_service.create_in_app(
             session,

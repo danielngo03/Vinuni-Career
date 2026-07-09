@@ -35,9 +35,7 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
             "assign_owner",
         }
     ),
-    "events": frozenset(
-        {"read", "create", "update", "submit", "moderate", "register", "manage"}
-    ),
+    "events": frozenset({"read", "create", "update", "submit", "moderate", "register", "manage"}),
     # Application read/write surface (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`
     # `applications` row). `read` is the base partner-of-org gate reused by
     # every recruitment write (`decision_service`, `interview_service`,
@@ -45,18 +43,14 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     # withdraw/reveal-response actions (granted to the `student` persona
     # baseline, not partner roles); `review`/`reject`/`bulk_review`/`export` are
     # additive partner-grantable actions for a future finer-grained decision gate.
-    "applications": frozenset(
-        {"read", "update", "review", "reject", "bulk_review", "export"}
-    ),
+    "applications": frozenset({"read", "update", "review", "reject", "bulk_review", "export"}),
     # ``manage`` covers CRM oversight of an existing partner org: campus
     # relationship owner assignment, risk/trust flags, and university-only notes
     # (B-553). Distinct from ``approve``/``reject`` (registration review).
     "partners": frozenset({"read", "approve", "reject", "manage"}),
     # Advertising / sponsored placements (ADR-0009). Partner verbs:
     # view/create/edit/submit/manage; university oversight verb: moderate.
-    "advertising": frozenset(
-        {"view", "create", "edit", "submit", "manage", "moderate"}
-    ),
+    "advertising": frozenset({"view", "create", "edit", "submit", "manage", "moderate"}),
     # Subscriptions / manual billing (ADR-0010). Self-service subscriber verbs:
     # view/subscribe; university oversight verb: moderate; plan admin: manage.
     "billing": frozenset({"view", "subscribe", "manage", "moderate"}),
@@ -102,9 +96,7 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     # row): advancing/rolling back a candidate's stage and configuring an org's
     # stage template. Distinct from `applications:*` so a narrow "pipeline
     # coordinator" role need not also hold application review/reject rights.
-    "pipeline": frozenset(
-        {"read", "move_candidate", "rollback", "configure_template"}
-    ),
+    "pipeline": frozenset({"read", "move_candidate", "rollback", "configure_template"}),
     # Scorecard evaluation actions (ADR-0005/ADR-0006; `docs/
     # PARTNER_RBAC_ANALYTICS_SPEC.md` `scorecards` row). `submit` covers both
     # submit and author-only withdraw; `read` covers the anchored partner list;
@@ -126,9 +118,7 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     "career_services_cohorts": frozenset({"read", "create", "update", "delete"}),
     "career_services_at_risk": frozenset({"read", "create", "update"}),
     "career_services_cv_review": frozenset({"read", "create", "update", "assign"}),
-    "career_services_appointments": frozenset(
-        {"read", "create", "update", "cancel"}
-    ),
+    "career_services_appointments": frozenset({"read", "create", "update", "cancel"}),
     "career_services_notes": frozenset({"read", "create", "update"}),
     "career_services_interventions": frozenset({"read", "create", "update"}),
     "career_services_reporting": frozenset({"read"}),
@@ -137,9 +127,7 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
     # manages default/global templates; a Partner Admin (or a delegated
     # recruiter with a granted permission) may manage templates scoped to
     # their own org only — never another org's templates.
-    "notification_templates": frozenset(
-        {"read", "create", "update", "activate", "archive"}
-    ),
+    "notification_templates": frozenset({"read", "create", "update", "activate", "archive"}),
     # Platform trust — support console, privacy/compliance, abuse/fraud
     # (ADR-0014, E36). No new hardcoded role: grantable on any university-org
     # role like `jobs:moderate`; every service gate additionally requires
@@ -230,12 +218,8 @@ def status_label(status: str, *, locale: str = "vi") -> str:
 
 
 def member_status_label(status: str, *, locale: str = "vi") -> str:
-    return _MEMBER_STATUS_LABELS.get(locale, _MEMBER_STATUS_LABELS["vi"]).get(
-        status, status
-    )
+    return _MEMBER_STATUS_LABELS.get(locale, _MEMBER_STATUS_LABELS["vi"]).get(status, status)
 
 
 def invite_status_label(status: str, *, locale: str = "vi") -> str:
-    return _INVITE_STATUS_LABELS.get(locale, _INVITE_STATUS_LABELS["vi"]).get(
-        status, status
-    )
+    return _INVITE_STATUS_LABELS.get(locale, _INVITE_STATUS_LABELS["vi"]).get(status, status)

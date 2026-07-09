@@ -93,11 +93,15 @@ async def relationship_exists(
 ) -> bool:
     """True if any live application binds this partner org to this applicant."""
 
-    stmt = select(func.count()).select_from(_applications).where(
-        and_(
-            _applications.c.org_id == org_id,
-            _applications.c.applicant_id == applicant_id,
-            _applications.c.deleted_at.is_(None),
+    stmt = (
+        select(func.count())
+        .select_from(_applications)
+        .where(
+            and_(
+                _applications.c.org_id == org_id,
+                _applications.c.applicant_id == applicant_id,
+                _applications.c.deleted_at.is_(None),
+            )
         )
     )
     return bool((await session.execute(stmt)).scalar_one())

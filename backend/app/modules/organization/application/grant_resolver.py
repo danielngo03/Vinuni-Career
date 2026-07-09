@@ -53,9 +53,7 @@ async def grants_for_membership(
     return frozenset(f"{resource}:{action}" for resource, action in rows)
 
 
-async def grants_for_roles(
-    session: AsyncSession, *, role_ids: list[uuid.UUID]
-) -> frozenset[str]:
+async def grants_for_roles(session: AsyncSession, *, role_ids: list[uuid.UUID]) -> frozenset[str]:
     """Render every permission tuple reachable from a set of role ids directly.
 
     Used by permission-preview for a hypothetical (not-yet-assigned) role
@@ -71,9 +69,7 @@ async def grants_for_roles(
     return frozenset(f"{resource}:{action}" for resource, action in rows)
 
 
-async def resolve_grants(
-    session: AsyncSession, *, user_id: uuid.UUID, identity
-) -> frozenset[str]:
+async def resolve_grants(session: AsyncSession, *, user_id: uuid.UUID, identity) -> frozenset[str]:
     """Resolve the effective permission set for ``user_id`` acting as ``identity``.
 
     - No org context -> Phase 1a persona baseline (unchanged).

@@ -143,17 +143,13 @@ async def get_discovery_health(
 
     policy_flags: list[dict] = []
     if broken_target > 0:
-        policy_flags.append(
-            {"code": "sponsored_target_unavailable", "count": broken_target}
-        )
+        policy_flags.append({"code": "sponsored_target_unavailable", "count": broken_target})
     if missing_logo > 0:
         policy_flags.append({"code": "sponsored_missing_logo", "count": missing_logo})
 
     events = await _event_health(session, now=now)
     if events["zero_ctr_outliers"]:
-        policy_flags.append(
-            {"code": "zero_ctr_surface", "count": len(events["zero_ctr_outliers"])}
-        )
+        policy_flags.append({"code": "zero_ctr_surface", "count": len(events["zero_ctr_outliers"])})
 
     return {
         "rails": rails,

@@ -44,8 +44,15 @@ class JdVisionEngine(Protocol):
     @property
     def available(self) -> bool: ...
 
-    def extract(self, data: bytes, kind: FileKind, *, max_image_px: int,
-                max_pages: int, native_text: str | None = None) -> dict | None: ...
+    def extract(
+        self,
+        data: bytes,
+        kind: FileKind,
+        *,
+        max_image_px: int,
+        max_pages: int,
+        native_text: str | None = None,
+    ) -> dict | None: ...
 
 
 class DisabledJdVisionAdapter:
@@ -102,8 +109,9 @@ class GatewayJdVisionAdapter:
             content.append({"type": "text", "text": _NATIVE_TEXT_PREFIX + redacted})
         for jpeg in images:
             b64 = base64.b64encode(jpeg).decode("ascii")
-            content.append({"type": "image_url",
-                            "image_url": {"url": f"data:image/jpeg;base64,{b64}"}})
+            content.append(
+                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}}
+            )
 
         payload = {
             "model": model_id,
@@ -120,29 +128,43 @@ class GatewayJdVisionAdapter:
             "HTTP-Referer": "https://career.vinuni.edu.vn",
             "X-Title": "VinUni Career Platform",
         }
-        prompt_chars = (len(prompt.VISION_SYSTEM_PROMPT) + len(prompt.VISION_USER_PROMPT)
-                        + len(native_text or ""))
+        prompt_chars = (
+            len(prompt.VISION_SYSTEM_PROMPT)
+            + len(prompt.VISION_USER_PROMPT)
+            + len(native_text or "")
+        )
         try:
             with httpx.Client(timeout=float(get_settings().jd_extraction_max_seconds)) as client:
-                resp = client.post(f"{base_url.rstrip('/')}/chat/completions",
-                                   json=payload, headers=headers)
+                resp = client.post(
+                    f"{base_url.rstrip('/')}/chat/completions", json=payload, headers=headers
+                )
                 resp.raise_for_status()
                 body = resp.json()
         except (httpx.HTTPError, ValueError):
-            log_ai_usage(task_type="jd_vision_extraction", alias=alias, success=False,
-                         prompt_chars=prompt_chars)
+            log_ai_usage(
+                task_type="jd_vision_extraction",
+                alias=alias,
+                success=False,
+                prompt_chars=prompt_chars,
+            )
             return None
 
         choice = (body.get("choices") or [{}])[0]
         raw = (choice.get("message") or {}).get("content", "")
         if isinstance(raw, list):
             raw = "".join(p.get("text", "") for p in raw if isinstance(p, dict))
-        log_ai_usage(task_type="jd_vision_extraction", alias=alias, success=True,
-                     prompt_chars=prompt_chars, completion_chars=len(raw or ""))
+        log_ai_usage(
+            task_type="jd_vision_extraction",
+            alias=alias,
+            success=True,
+            prompt_chars=prompt_chars,
+            completion_chars=len(raw or ""),
+        )
         return _extract_json(scrub_text(raw or ""))
 
 
 # ---- JD-local image prep (independent copy; do not import from CV vision) ----
+
 
 def _prepare_images(data: bytes, kind: FileKind, *, max_px: int, max_pages: int) -> list[bytes]:
     if kind is FileKind.IMAGE:
@@ -156,6 +178,7 @@ def _prepare_images(data: bytes, kind: FileKind, *, max_px: int, max_pages: int)
 def _downscale_to_jpeg(data: bytes, max_px: int) -> bytes | None:
     try:
         from PIL import Image
+
         with Image.open(io.BytesIO(data)) as opened:
             img = opened.convert("RGB")
             longest = max(img.size)
@@ -173,6 +196,7 @@ def _pdf_pages_to_jpeg(data: bytes, *, max_pages: int, max_px: int) -> list[byte
     pages: list[bytes] = []
     try:
         import fitz  # PyMuPDF
+
         with fitz.open(stream=data, filetype="pdf") as doc:
             for index, page in enumerate(doc):
                 if index >= max_pages:
@@ -197,7 +221,7 @@ def _extract_json(raw: str) -> dict | None:
     if start < 0 or end <= start:
         return None
     try:
-        parsed = json.loads(text[start:end + 1])
+        parsed = json.loads(text[start : end + 1])
     except json.JSONDecodeError:
         return None
     return parsed if isinstance(parsed, dict) else None
@@ -220,9 +244,15 @@ def set_jd_vision_adapter(adapter: JdVisionEngine | None) -> None:
     _adapter = adapter
 
 
-def run_jd_vision_extraction(data: bytes, kind: FileKind, *, enabled: bool,
-                             max_image_px: int, max_pages: int,
-                             native_text: str | None = None) -> dict | None:
+def run_jd_vision_extraction(
+    data: bytes,
+    kind: FileKind,
+    *,
+    enabled: bool,
+    max_image_px: int,
+    max_pages: int,
+    native_text: str | None = None,
+) -> dict | None:
     """Run the JD vision tier if enabled + available. Best-effort; never raises."""
     if not enabled:
         return None
@@ -230,13 +260,18 @@ def run_jd_vision_extraction(data: bytes, kind: FileKind, *, enabled: bool,
     if not adapter.available:
         return None
     try:
-        return adapter.extract(data, kind, max_image_px=max_image_px,
-                               max_pages=max_pages, native_text=native_text)
+        return adapter.extract(
+            data, kind, max_image_px=max_image_px, max_pages=max_pages, native_text=native_text
+        )
     except Exception:  # noqa: BLE001 - vision is best-effort
         return None
 
 
 __all__ = [
-    "JdVisionEngine", "DisabledJdVisionAdapter", "GatewayJdVisionAdapter",
-    "get_jd_vision_adapter", "set_jd_vision_adapter", "run_jd_vision_extraction",
+    "JdVisionEngine",
+    "DisabledJdVisionAdapter",
+    "GatewayJdVisionAdapter",
+    "get_jd_vision_adapter",
+    "set_jd_vision_adapter",
+    "run_jd_vision_extraction",
 ]

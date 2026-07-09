@@ -98,9 +98,7 @@ async def list_flags(session: AsyncSession) -> list[dict[str, Any]]:
     """Return all feature flags sorted by key. No RBAC gate here; callers
     (router) must enforce superadmin.
     """
-    result = await session.execute(
-        select(FeatureFlag).order_by(FeatureFlag.key)
-    )
+    result = await session.execute(select(FeatureFlag).order_by(FeatureFlag.key))
     flags = result.scalars().all()
     return [_flag_to_dict(f) for f in flags]
 
@@ -169,9 +167,7 @@ async def update_flag(
     """
     _require_superadmin(principal)
 
-    result = await session.execute(
-        select(FeatureFlag).where(FeatureFlag.id == flag_id)
-    )
+    result = await session.execute(select(FeatureFlag).where(FeatureFlag.id == flag_id))
     flag = result.scalar_one_or_none()
     if flag is None:
         raise ResourceNotFoundError("Feature flag not found.")

@@ -41,9 +41,7 @@ async def load_job_for_fit(
     """
 
     levels = lifecycle.visible_levels_for(persona, is_authenticated=True)
-    stmt = apply_visible_filter(
-        select(Job).where(Job.id == job_id), levels=levels, now=_now()
-    )
+    stmt = apply_visible_filter(select(Job).where(Job.id == job_id), levels=levels, now=_now())
     job = (await session.execute(stmt)).scalar_one_or_none()
     if job is None:
         return None
@@ -51,9 +49,7 @@ async def load_job_for_fit(
     org = await org_reporting_facade.summary_for(session, job.org_id)
 
     jd_text = " ".join(
-        part
-        for part in (job.title, job.description, job.requirements, job.benefits)
-        if part
+        part for part in (job.title, job.description, job.requirements, job.benefits) if part
     )
     return {
         "id": str(job.id),

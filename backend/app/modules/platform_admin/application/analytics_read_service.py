@@ -172,14 +172,17 @@ async def _funnel_raw(session: AsyncSession, *, since: datetime) -> dict[str, in
     # ---- application.status_changed — split by properties["status"]
     # We load only event_type and properties within the window; no actor_id selected.
     status_rows = (
-        await session.execute(
-            select(AnalyticsEvent.properties)
-            .where(
-                AnalyticsEvent.event_type == _APP_STATUS_CHANGED,
-                AnalyticsEvent.occurred_at >= since,
+        (
+            await session.execute(
+                select(AnalyticsEvent.properties).where(
+                    AnalyticsEvent.event_type == _APP_STATUS_CHANGED,
+                    AnalyticsEvent.occurred_at >= since,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
     status_counts: dict[str, int] = defaultdict(int)
     for props in status_rows:
@@ -230,14 +233,14 @@ async def funnel(session: AsyncSession, *, range_days: int) -> dict[str, Any]:
     prev_count: int | None = None
     for stage_name in _FUNNEL_STAGES:
         count = raw.get(stage_name, 0)
-        conversion: float | None = (
-            None if prev_count is None else _safe_rate(count, prev_count)
+        conversion: float | None = None if prev_count is None else _safe_rate(count, prev_count)
+        stages.append(
+            {
+                "stage": stage_name,
+                "count": count,
+                "conversion_from_previous": conversion,
+            }
         )
-        stages.append({
-            "stage": stage_name,
-            "count": count,
-            "conversion_from_previous": conversion,
-        })
         prev_count = count
 
     return {
@@ -265,17 +268,18 @@ async def _growth_raw(
 
     # ---- Build the gap-filled day spine (most recent last) -----------------
     today = datetime.now(tz=UTC).date()
-    day_spine: list[date] = [
-        today - timedelta(days=d) for d in range(range_days - 1, -1, -1)
-    ]
+    day_spine: list[date] = [today - timedelta(days=d) for d in range(range_days - 1, -1, -1)]
 
     # ---- Signups: users.created_at in window --------------------------------
     signup_rows = (
-        await session.execute(
-            select(User.created_at)
-            .where(User.created_at >= since, User.deleted_at.is_(None))
+        (
+            await session.execute(
+                select(User.created_at).where(User.created_at >= since, User.deleted_at.is_(None))
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
     signups_by_day: dict[date, int] = defaultdict(int)
     for created_at in signup_rows:
@@ -284,14 +288,17 @@ async def _growth_raw(
 
     # ---- Applications submitted per day -------------------------------------
     app_rows = (
-        await session.execute(
-            select(AnalyticsEvent.occurred_at)
-            .where(
-                AnalyticsEvent.event_type == _APP_SUBMITTED,
-                AnalyticsEvent.occurred_at >= since,
+        (
+            await session.execute(
+                select(AnalyticsEvent.occurred_at).where(
+                    AnalyticsEvent.event_type == _APP_SUBMITTED,
+                    AnalyticsEvent.occurred_at >= since,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
     apps_by_day: dict[date, int] = defaultdict(int)
     for occurred_at in app_rows:
@@ -303,8 +310,7 @@ async def _growth_raw(
     # actor_ids per day is done in Python to stay cross-DB safe.
     active_rows = (
         await session.execute(
-            select(AnalyticsEvent.actor_id, AnalyticsEvent.occurred_at)
-            .where(
+            select(AnalyticsEvent.actor_id, AnalyticsEvent.occurred_at).where(
                 AnalyticsEvent.actor_id.isnot(None),
                 AnalyticsEvent.occurred_at >= since,
             )
@@ -320,12 +326,14 @@ async def _growth_raw(
     # ---- Compose the gap-filled series -------------------------------------
     series = []
     for day in day_spine:
-        series.append({
-            "day": day.isoformat(),
-            "signups": signups_by_day.get(day, 0),
-            "applications": apps_by_day.get(day, 0),
-            "active_users": len(actors_by_day.get(day, set())),
-        })
+        series.append(
+            {
+                "day": day.isoformat(),
+                "signups": signups_by_day.get(day, 0),
+                "applications": apps_by_day.get(day, 0),
+                "active_users": len(actors_by_day.get(day, set())),
+            }
+        )
 
     return {"series": series}
 

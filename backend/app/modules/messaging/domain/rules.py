@@ -59,14 +59,10 @@ REASON_THREAD_NOT_ACTIVE = "thread_not_active"
 REASON_RELATIONSHIP_REVOKED = "relationship_revoked"
 
 
-def student_to_student_blocked(
-    sender_persona: str, recipient_personas: list[str]
-) -> bool:
+def student_to_student_blocked(sender_persona: str, recipient_personas: list[str]) -> bool:
     """The hard first check: a student/alumni may NEVER message another student/alumni."""
 
-    return sender_persona in _STUDENT_SIDE and any(
-        p in _STUDENT_SIDE for p in recipient_personas
-    )
+    return sender_persona in _STUDENT_SIDE and any(p in _STUDENT_SIDE for p in recipient_personas)
 
 
 def evaluate_open(

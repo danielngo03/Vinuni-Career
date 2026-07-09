@@ -45,9 +45,7 @@ def _to_info(row: Session) -> SessionInfo:
     )
 
 
-async def list_active_sessions(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> list[SessionInfo]:
+async def list_active_sessions(session: AsyncSession, *, user_id: uuid.UUID) -> list[SessionInfo]:
     now = datetime.now(tz=UTC)
     stmt = (
         select(Session)

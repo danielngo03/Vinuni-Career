@@ -44,11 +44,9 @@ def _core(
         "my_vote": my_vote,
         "partner_response": review.partner_response,
         "partner_response_at": (
-            review.partner_response_at.isoformat()
-            if review.partner_response_at else None
+            review.partner_response_at.isoformat() if review.partner_response_at else None
         ),
-        "published_at": review.published_at.isoformat()
-        if review.published_at else None,
+        "published_at": review.published_at.isoformat() if review.published_at else None,
         "created_at": review.created_at.isoformat() if review.created_at else None,
     }
 
@@ -72,9 +70,7 @@ def review_public(
     return data
 
 
-def review_owner(
-    review: CompanyReview, rating: ReviewRating, *, locale: str = "vi"
-) -> dict:
+def review_owner(review: CompanyReview, rating: ReviewRating, *, locale: str = "vi") -> dict:
     """Author's own view — includes status + version for edit/optimistic lock."""
 
     data = _core(review, rating, locale=locale)

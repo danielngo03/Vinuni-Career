@@ -83,9 +83,7 @@ def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
     )
 
 
-async def _require_advertising_moderator(
-    session: AsyncSession, principal: Principal
-) -> None:
+async def _require_advertising_moderator(session: AsyncSession, principal: Principal) -> None:
     if principal.is_superadmin:
         return
     permission_checker.require(principal, _RESOURCE, "moderate")
@@ -106,21 +104,21 @@ async def _load(
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
-async def _present(
-    session: AsyncSession, placement: SponsoredPlacement, *, locale: str
-) -> dict:
+async def _present(session: AsyncSession, placement: SponsoredPlacement, *, locale: str) -> dict:
     pkg = (
-        await session.execute(
-            select(AdPackage).where(AdPackage.id == placement.package_id)
-        )
+        await session.execute(select(AdPackage).where(AdPackage.id == placement.package_id))
     ).scalar_one_or_none()
     ref = await sponsorship_facade.load_target(
         session, target_type=placement.target_type, target_id=placement.target_id
     )
     creatives = await creative_service.load_for_placement(session, placement.id)
     return presenters.placement(
-        placement, locale=locale, pkg=pkg,
-        target_title=ref.title if ref else None, admin=True, creatives=creatives,
+        placement,
+        locale=locale,
+        pkg=pkg,
+        target_title=ref.title if ref else None,
+        admin=True,
+        creatives=creatives,
     )
 
 
@@ -175,7 +173,9 @@ async def list_all(
     ).scalar_one()
     pending = (
         await session.execute(
-            select(func.count()).select_from(SponsoredPlacement).where(
+            select(func.count())
+            .select_from(SponsoredPlacement)
+            .where(
                 SponsoredPlacement.deleted_at.is_(None),
                 SponsoredPlacement.status == lifecycle.PENDING_APPROVAL,
             )
@@ -225,13 +225,17 @@ async def approve_placement(
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_approved",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_approved",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         after={"status": placement.status, "org_id": str(placement.org_id)},
     )
     await notify.notify_partner(
-        session, placement=placement, template_key="advertising.approved",
+        session,
+        placement=placement,
+        template_key="advertising.approved",
     )
     # Inline activation if already paid + window open (instant go-live).
     await activation_service.try_activate_inline(
@@ -284,14 +288,17 @@ async def reject_placement(
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_rejected",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_rejected",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
-        after={"status": placement.status, "reason_code": code,
-               "org_id": str(placement.org_id)},
+        after={"status": placement.status, "reason_code": code, "org_id": str(placement.org_id)},
     )
     await notify.notify_partner(
-        session, placement=placement, template_key="advertising.rejected",
+        session,
+        placement=placement,
+        template_key="advertising.rejected",
         extra={"reason": reason.strip()},
     )
     await session.commit()
@@ -339,12 +346,14 @@ async def claim_placement(
             version=SponsoredPlacement.version + 1,
         )
     )
-    if result.rowcount == 0:
+    if getattr(result, "rowcount", 0) == 0:
         raise PlacementAlreadyClaimedError()
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_claimed",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_claimed",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         after={"claimed_by": str(principal.user_id), "org_id": str(placement.org_id)},
     )
@@ -370,7 +379,10 @@ async def bulk_approve_placements(
     for placement_id in placement_ids:
         try:
             data = await approve_placement(
-                session, principal=principal, placement_id=placement_id, ctx=ctx,
+                session,
+                principal=principal,
+                placement_id=placement_id,
+                ctx=ctx,
                 locale=locale,
             )
             results.append({"id": str(placement_id), "success": True, "placement": data})
@@ -450,8 +462,10 @@ async def escalate_placement(
     await session.flush()
 
     await write_audit(
-        session, action="advertising.placement_escalated",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_escalated",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         after={"reason_code": code, "org_id": str(placement.org_id)},
     )
@@ -499,9 +513,7 @@ async def mark_paid(
         raise ResourceNotFoundError()
     if version is not None and version != placement.version:
         raise PlacementVersionConflictError()
-    if placement.status not in (
-        lifecycle.PENDING_APPROVAL, lifecycle.APPROVED
-    ):
+    if placement.status not in (lifecycle.PENDING_APPROVAL, lifecycle.APPROVED):
         raise IllegalPlacementTransitionError(event="mark_paid")
 
     now = _now()
@@ -511,15 +523,22 @@ async def mark_paid(
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_paid",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_paid",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         # Spend metadata only (no PII); the reference is intentionally recorded.
-        after={"paid": True, "payment_reference": placement.payment_reference,
-               "org_id": str(placement.org_id)},
+        after={
+            "paid": True,
+            "payment_reference": placement.payment_reference,
+            "org_id": str(placement.org_id),
+        },
     )
     await notify.notify_partner(
-        session, placement=placement, template_key="advertising.payment_recorded",
+        session,
+        placement=placement,
+        template_key="advertising.payment_recorded",
     )
     # Inline activation if already approved + window open.
     await activation_service.try_activate_inline(
@@ -564,16 +583,19 @@ async def admin_cancel(
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_cancelled",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_cancelled",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
-        after={"status": placement.status, "by": "university",
-               "org_id": str(placement.org_id)},
+        after={"status": placement.status, "by": "university", "org_id": str(placement.org_id)},
     )
     if was_active:
         await activation_service.recompute_target_flags(
-            session, target_type=placement.target_type,
-            target_id=placement.target_id, actor=principal,
+            session,
+            target_type=placement.target_type,
+            target_id=placement.target_id,
+            actor=principal,
             reason="placement_disabled",
         )
     await session.commit()
@@ -625,8 +647,10 @@ async def set_disclosure_class(
     placement.version += 1
     await session.flush()
     await write_audit(
-        session, action="advertising.placement_disclosure_class_set",
-        resource_type="advertising_placement", resource_id=placement.id,
+        session,
+        action="advertising.placement_disclosure_class_set",
+        resource_type="advertising_placement",
+        resource_id=placement.id,
         context=_audit_ctx(principal, ctx),
         before={"disclosure_class": before},
         after={"disclosure_class": disclosure_class, "org_id": str(placement.org_id)},
@@ -697,10 +721,10 @@ async def review_creative(
     await write_audit(
         session,
         action=f"advertising.creative_{new_status}",
-        resource_type="advertising_creative", resource_id=creative.id,
+        resource_type="advertising_creative",
+        resource_id=creative.id,
         context=_audit_ctx(principal, ctx),
-        after={"moderation_status": new_status,
-               "placement_id": str(creative.placement_id)},
+        after={"moderation_status": new_status, "placement_id": str(creative.placement_id)},
     )
     await session.commit()
     await session.refresh(creative)

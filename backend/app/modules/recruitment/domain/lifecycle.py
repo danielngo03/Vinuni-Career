@@ -31,9 +31,7 @@ REJECTED = "rejected"
 # needed. ``hired`` is the positive sibling of ``rejected`` (terminal + inactive).
 HIRED = "hired"
 
-STATUSES: frozenset[str] = frozenset(
-    {SUBMITTED, UNDER_REVIEW, WITHDRAWN, REJECTED, HIRED}
-)
+STATUSES: frozenset[str] = frozenset({SUBMITTED, UNDER_REVIEW, WITHDRAWN, REJECTED, HIRED})
 
 # Statuses that occupy the single "active application per (job, applicant)" slot.
 # ``hired`` is terminal/inactive (NOT here) — it frees the slot like rejected/withdrawn.

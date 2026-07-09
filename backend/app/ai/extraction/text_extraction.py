@@ -167,7 +167,5 @@ def extract_text(filename: str, data: bytes) -> ExtractionResult:
             text = _ocr_hook(data, get_settings().tesseract_ocr_langs)
         except Exception:
             text = ""
-        return ExtractionResult(
-            text=text.strip(), page_count=1, engine="tesseract", ocr_used=True
-        )
+        return ExtractionResult(text=text.strip(), page_count=1, engine="tesseract", ocr_used=True)
     raise ExtractionError("UNSUPPORTED_FILE_TYPE")

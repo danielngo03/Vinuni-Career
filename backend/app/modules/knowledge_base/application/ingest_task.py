@@ -91,9 +91,7 @@ async def run_ingest(document_id: str, *, session) -> None:
 
     doc: KnowledgeBaseDocument | None = (
         await session.execute(
-            select(KnowledgeBaseDocument).where(
-                KnowledgeBaseDocument.id == uuid.UUID(document_id)
-            )
+            select(KnowledgeBaseDocument).where(KnowledgeBaseDocument.id == uuid.UUID(document_id))
         )
     ).scalar_one_or_none()
 
@@ -126,9 +124,7 @@ async def run_ingest(document_id: str, *, session) -> None:
 
         # --- Step 4: Delete old chunks and upsert fresh ones ---
         await session.execute(
-            delete(KnowledgeBaseChunk).where(
-                KnowledgeBaseChunk.document_id == doc.id
-            )
+            delete(KnowledgeBaseChunk).where(KnowledgeBaseChunk.document_id == doc.id)
         )
 
         for chunk, embedding in zip(chunks, embeddings, strict=True):

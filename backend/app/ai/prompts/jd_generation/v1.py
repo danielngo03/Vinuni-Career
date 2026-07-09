@@ -51,8 +51,10 @@ def build_system_prompt(output_language: str | None = None) -> str:
 
     parts = [STATIC_IDENTITY_BLOCK, STATIC_RULES_BLOCK, TASK_INSTRUCTION]
     if output_language:
-        lang_name = "Vietnamese" if output_language.lower() == "vi" else (
-            "English" if output_language.lower() == "en" else output_language
+        lang_name = (
+            "Vietnamese"
+            if output_language.lower() == "vi"
+            else ("English" if output_language.lower() == "en" else output_language)
         )
         parts.append(
             f"OUTPUT LANGUAGE: Write the job description in {lang_name}. "

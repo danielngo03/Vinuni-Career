@@ -151,14 +151,18 @@ def test_salary_mode_authoritative_over_client_disclosed_flag() -> None:
     """A client sending a contradictory salary_is_disclosed is overridden by mode."""
     req = JobCreateRequest(
         **_create_payload(
-            salary_mode="negotiable", salary_is_disclosed=True,
+            salary_mode="negotiable",
+            salary_is_disclosed=True,
         )
     )
     assert req.salary_is_disclosed is False
 
     req2 = JobCreateRequest(
         **_create_payload(
-            salary_mode="fixed", salary_min=1, salary_max=1, salary_is_disclosed=False,
+            salary_mode="fixed",
+            salary_min=1,
+            salary_max=1,
+            salary_is_disclosed=False,
         )
     )
     assert req2.salary_is_disclosed is True
@@ -195,9 +199,7 @@ def test_experience_mode_no_requirement_requires_empty_years() -> None:
 
 def test_experience_mode_fresher_requires_zero_zero() -> None:
     req = JobCreateRequest(
-        **_create_payload(
-            experience_mode="fresher", experience_min_years=0, experience_max_years=0
-        )
+        **_create_payload(experience_mode="fresher", experience_min_years=0, experience_max_years=0)
     )
     assert req.experience_mode == "fresher"
     with pytest.raises(ValidationError):
@@ -210,9 +212,7 @@ def test_experience_mode_fresher_requires_zero_zero() -> None:
 
 def test_experience_mode_range_requires_min_lt_max() -> None:
     JobCreateRequest(
-        **_create_payload(
-            experience_mode="range", experience_min_years=1, experience_max_years=3
-        )
+        **_create_payload(experience_mode="range", experience_min_years=1, experience_max_years=3)
     )
     with pytest.raises(ValidationError):
         JobCreateRequest(
@@ -229,20 +229,14 @@ def test_experience_mode_range_requires_min_lt_max() -> None:
 
 
 def test_experience_mode_min_and_max() -> None:
-    req_min = JobCreateRequest(
-        **_create_payload(experience_mode="min", experience_min_years=2)
-    )
+    req_min = JobCreateRequest(**_create_payload(experience_mode="min", experience_min_years=2))
     assert req_min.experience_max_years is None
-    req_max = JobCreateRequest(
-        **_create_payload(experience_mode="max", experience_max_years=5)
-    )
+    req_max = JobCreateRequest(**_create_payload(experience_mode="max", experience_max_years=5))
     assert req_max.experience_min_years is None
 
     with pytest.raises(ValidationError):
         JobCreateRequest(
-            **_create_payload(
-                experience_mode="min", experience_min_years=2, experience_max_years=5
-            )
+            **_create_payload(experience_mode="min", experience_min_years=2, experience_max_years=5)
         )
 
 
@@ -254,14 +248,19 @@ def test_experience_mode_min_and_max() -> None:
 def test_validate_salary_mode_function_raises_value_error_on_bad_combo() -> None:
     with pytest.raises(ValueError):
         validate_salary_mode(
-            salary_mode="range", salary_min=10, salary_max=5, salary_is_disclosed=False,
+            salary_mode="range",
+            salary_min=10,
+            salary_max=5,
+            salary_is_disclosed=False,
         )
 
 
 def test_validate_experience_mode_function_raises_value_error_on_bad_combo() -> None:
     with pytest.raises(ValueError):
         validate_experience_mode(
-            experience_mode="fresher", experience_min_years=1, experience_max_years=0,
+            experience_mode="fresher",
+            experience_min_years=1,
+            experience_max_years=0,
         )
 
 
@@ -300,7 +299,9 @@ def test_salary_display_prefers_stored_mode(
 
 def test_salary_raw_block_hides_hidden_mode_from_public_but_shows_owner() -> None:
     job = _job(
-        salary_mode="hidden", salary_min=10_000_000, salary_max=15_000_000,
+        salary_mode="hidden",
+        salary_min=10_000_000,
+        salary_max=15_000_000,
         salary_is_disclosed=False,
     )
     assert presenters._salary(job, is_owner=False) is None
@@ -310,7 +311,9 @@ def test_salary_raw_block_hides_hidden_mode_from_public_but_shows_owner() -> Non
 
 def test_salary_raw_block_negotiable_hidden_from_everyone() -> None:
     job = _job(
-        salary_mode="negotiable", salary_min=None, salary_max=None,
+        salary_mode="negotiable",
+        salary_min=None,
+        salary_max=None,
         salary_is_disclosed=False,
     )
     assert presenters._salary(job, is_owner=False) is None
@@ -344,7 +347,9 @@ def test_salary_display_legacy_fallback_when_mode_missing() -> None:
     assert display["kind"] == "negotiable"
 
     job2 = _job(
-        salary_mode=None, salary_min=15_000_000, salary_max=15_000_000,
+        salary_mode=None,
+        salary_min=15_000_000,
+        salary_max=15_000_000,
         salary_is_disclosed=True,
     )
     display2 = presenters._salary_display(job2, locale="vi")

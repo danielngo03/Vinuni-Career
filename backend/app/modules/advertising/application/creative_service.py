@@ -82,9 +82,7 @@ def _require_creative_write(principal: Principal, *, org_id: uuid.UUID) -> None:
         return
     if permission_checker.can(principal, _RESOURCE, "edit", resource_org_id=org_id):
         return
-    if permission_checker.can(
-        principal, "organizations", "update", resource_org_id=org_id
-    ):
+    if permission_checker.can(principal, "organizations", "update", resource_org_id=org_id):
         return
     raise PermissionDeniedError(details={"reason": "creative_write_denied"})
 
@@ -149,7 +147,9 @@ async def load_for_placement(
                 )
                 .order_by(CampaignCreative.created_at.desc())
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -265,22 +265,22 @@ async def list_creatives(
 ) -> list[dict]:
     """Creatives on the caller's placement (owner-scoped; cross-org -> 404)."""
 
-    placement = await _load_owned_placement(
-        session, principal=principal, placement_id=placement_id
-    )
-    permission_checker.require(
-        principal, _RESOURCE, "view", resource_org_id=placement.org_id
-    )
+    placement = await _load_owned_placement(session, principal=principal, placement_id=placement_id)
+    permission_checker.require(principal, _RESOURCE, "view", resource_org_id=placement.org_id)
     rows = (
-        await session.execute(
-            select(CampaignCreative)
-            .where(
-                CampaignCreative.placement_id == placement.id,
-                CampaignCreative.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(CampaignCreative)
+                .where(
+                    CampaignCreative.placement_id == placement.id,
+                    CampaignCreative.deleted_at.is_(None),
+                )
+                .order_by(CampaignCreative.created_at.desc())
             )
-            .order_by(CampaignCreative.created_at.desc())
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [presenters.creative(c, locale=locale) for c in rows]
 
 
@@ -356,8 +356,7 @@ async def serve_creative(
             select(CampaignCreative).where(
                 CampaignCreative.id == creative_id,
                 CampaignCreative.deleted_at.is_(None),
-                CampaignCreative.moderation_status
-                == creative_vocab.CREATIVE_APPROVED,
+                CampaignCreative.moderation_status == creative_vocab.CREATIVE_APPROVED,
             )
         )
     ).scalar_one_or_none()
@@ -366,9 +365,7 @@ async def serve_creative(
 
     placement = (
         await session.execute(
-            select(SponsoredPlacement).where(
-                SponsoredPlacement.id == creative.placement_id
-            )
+            select(SponsoredPlacement).where(SponsoredPlacement.id == creative.placement_id)
         )
     ).scalar_one_or_none()
     if placement is None or not _placement_is_live(placement, now):

@@ -88,6 +88,7 @@ _JSON_ARRAY_RE = re.compile(r"\[.*\]", re.DOTALL)
 # Term normalization + diacritic detection                                    #
 # --------------------------------------------------------------------------- #
 
+
 def _norm_key(term: str) -> str:
     """Lowercase + collapse whitespace — the cache key / dedupe key for a term."""
     return grounding.normalize(term)
@@ -133,6 +134,7 @@ def _lru_store(source_norm: str, translated: str) -> None:
 # --------------------------------------------------------------------------- #
 # Persistent DB cache helpers                                                  #
 # --------------------------------------------------------------------------- #
+
 
 async def get_cached_translations(source_norms: list[str]) -> dict[str, str]:
     """Return the cached ``source_norm -> translated`` map for the given keys.
@@ -189,11 +191,7 @@ async def put_translation(source_norm: str, translated: str) -> None:
                 )
             ).scalar_one_or_none()
             if existing is None:
-                session.add(
-                    SkillTranslationCache(
-                        source_norm=source_norm, translated=translated
-                    )
-                )
+                session.add(SkillTranslationCache(source_norm=source_norm, translated=translated))
                 await session.commit()
     except Exception:  # noqa: BLE001 - cache write is advisory; never raise.
         return
@@ -202,6 +200,7 @@ async def put_translation(source_norm: str, translated: str) -> None:
 # --------------------------------------------------------------------------- #
 # Translation                                                                 #
 # --------------------------------------------------------------------------- #
+
 
 def _parse_translation_array(raw: str, expected: int) -> list[str] | None:
     """Extract a JSON string array from a model response, tolerating junk.
@@ -259,13 +258,19 @@ async def _translate_batch(terms: list[str]) -> dict[str, str]:
     if parsed is None:
         # Model responded but the output was unusable — still a real (billable) call.
         log_ai_usage(
-            task_type=_TRANSLATE_TASK_TYPE, alias=_TRANSLATE_ALIAS, success=False,
-            prompt_chars=len(content), completion_chars=len(completion.text or ""),
+            task_type=_TRANSLATE_TASK_TYPE,
+            alias=_TRANSLATE_ALIAS,
+            success=False,
+            prompt_chars=len(content),
+            completion_chars=len(completion.text or ""),
         )
         return {}
     log_ai_usage(
-        task_type=_TRANSLATE_TASK_TYPE, alias=_TRANSLATE_ALIAS, success=True,
-        prompt_chars=len(content), completion_chars=len(completion.text or ""),
+        task_type=_TRANSLATE_TASK_TYPE,
+        alias=_TRANSLATE_ALIAS,
+        success=True,
+        prompt_chars=len(content),
+        completion_chars=len(completion.text or ""),
     )
     out: dict[str, str] = {}
     for original, english in zip(terms, parsed, strict=True):
@@ -375,9 +380,7 @@ async def normalize_terms_to_en(
         # failure.) A genuine translation — or an ASCII/English echo, which is a
         # valid identity — is still cached exactly as before.
         poisoned = bool(
-            english
-            and _has_vietnamese_diacritics(original)
-            and _has_vietnamese_diacritics(english)
+            english and _has_vietnamese_diacritics(original) and _has_vietnamese_diacritics(english)
         )
         if english and not poisoned:
             _lru_store(key, english)
@@ -391,6 +394,7 @@ async def normalize_terms_to_en(
 # --------------------------------------------------------------------------- #
 # English augmentation of JD + CV inputs                                       #
 # --------------------------------------------------------------------------- #
+
 
 def _cv_skill_item_names(cv: job_fit.CvInput) -> list[str]:
     """Collect one CV's skill-section item names/text (for translation)."""
@@ -448,14 +452,10 @@ def _cv_prose_text(cv: job_fit.CvInput) -> str:
     """
     parts: list[str] = []
     for section in cv.sections:
-        stype = grounding.normalize(str(section.get("section_type") or "")).replace(
-            " ", "_"
-        )
+        stype = grounding.normalize(str(section.get("section_type") or "")).replace(" ", "_")
         if stype not in _PROSE_SECTION_TYPES:
             continue
-        text = grounding.content_to_text(
-            section.get("content") or section.get("content_json")
-        )
+        text = grounding.content_to_text(section.get("content") or section.get("content_json"))
         if text.strip():
             parts.append(text.strip())
     collected = " ".join(parts).strip()
@@ -536,9 +536,7 @@ async def english_augment(
 
     # One deduped translation set for the whole job + all CVs (batched, cached).
     jd_terms = _jd_skill_terms(job)
-    cv_terms_by_id: dict[str, list[str]] = {
-        cv.cv_id: _cv_skill_item_names(cv) for cv in cv_inputs
-    }
+    cv_terms_by_id: dict[str, list[str]] = {cv.cv_id: _cv_skill_item_names(cv) for cv in cv_inputs}
     all_terms: list[str] = [*jd_terms]
     for terms in cv_terms_by_id.values():
         all_terms.extend(terms)
@@ -596,9 +594,7 @@ async def english_augment(
                     original = value.strip()
                     translation_map[_norm_key(original)] = original
                     translation_map[_norm_key(english)] = original
-        job2[key] = _dedupe_keep_order(
-            [v for v in augmented if isinstance(v, str) and v.strip()]
-        )
+        job2[key] = _dedupe_keep_order([v for v in augmented if isinstance(v, str) and v.strip()])
     if translation_map:
         # Internal surfacing hint consumed by ``job_fit.resolve_requirements``;
         # never surfaced to end users (stripped by the response presenter, which
@@ -636,9 +632,7 @@ async def english_augment(
 
         prose = _cv_prose_text(cv)
         if prose and _has_vietnamese_diacritics(prose):
-            english_prose = await _translate_prose_unit(
-                prose, allow_model_calls=allow_model_calls
-            )
+            english_prose = await _translate_prose_unit(prose, allow_model_calls=allow_model_calls)
             if english_prose:
                 extra_sections.append(
                     {

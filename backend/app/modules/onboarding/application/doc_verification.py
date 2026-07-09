@@ -39,12 +39,13 @@ async def run_verification(payload: dict) -> None:
     Called by InlineTaskQueue (tests/dev) or Celery worker (production).
     Must be registered via ``get_task_queue().register(TASK_NAME, run_verification)``.
     """
-    from app.core.db import async_session_factory
+    from app.core.db import get_sessionmaker
     from app.modules.organization.application import partner_registration_facade
 
     request_id = uuid.UUID(payload["request_id"])
+    session_factory = get_sessionmaker()
 
-    async with async_session_factory() as session:
+    async with session_factory() as session:
         req = await partner_registration_facade.get_by_id(session, request_id)
 
         if req is None or req.ai_doc_status not in ("pending",):
@@ -96,6 +97,7 @@ async def run_verification(payload: dict) -> None:
 
 # ── OCR ─────────────────────────────────────────────────────────────────────
 
+
 async def _run_ocr(document_path: str) -> dict:
     """Extract text from PDF or image. Returns structured fields."""
     import asyncio
@@ -138,13 +140,14 @@ def _extract_field(text: str, labels: list[str]) -> str | None:
     for label in labels:
         idx = text.find(label)
         if idx != -1:
-            line = text[idx + len(label):idx + len(label) + 200].split("\n")[0].strip()
+            line = text[idx + len(label) : idx + len(label) + 200].split("\n")[0].strip()
             if line:
                 return line
     return None
 
 
 # ── Tamper detection ─────────────────────────────────────────────────────────
+
 
 async def _run_tamper_detection(document_path: str, _ocr_result: dict) -> int:
     """Return tamper score 0–100 (higher = more suspicious)."""
@@ -212,6 +215,7 @@ def _image_tamper_score(path: str) -> int:
 
 # ── GDT Tax API ──────────────────────────────────────────────────────────────
 
+
 async def _verify_tax_id(tax_id: str | None, ocr_company_name: str | None) -> dict:
     """Call GDT API to verify MST. Returns match result."""
     if not tax_id:
@@ -264,6 +268,7 @@ def _parse_gdt_company_name(html: str) -> str | None:
 
 
 # ── Decision matrix ──────────────────────────────────────────────────────────
+
 
 def _make_decision(*, tamper_score: int, gdt_result: dict) -> dict:
     gdt_matched = gdt_result.get("matched", False)

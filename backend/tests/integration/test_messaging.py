@@ -65,9 +65,7 @@ async def test_student_to_student_create_blocked(db_session) -> None:
             ctx=CTX,
         )
     # Nothing persisted.
-    count = (
-        await db_session.execute(select(func.count()).select_from(MessageThread))
-    ).scalar_one()
+    count = (await db_session.execute(select(func.count()).select_from(MessageThread))).scalar_one()
     assert count == 0
 
 
@@ -79,8 +77,11 @@ async def test_student_to_student_send_blocked(db_session) -> None:
     _uu, uorg, _uni = await make_university(db_session)
 
     thread = MessageThread(
-        kind="direct", context_type="support", org_id=uorg.id,
-        created_by=student1.user_id, status="active",
+        kind="direct",
+        context_type="support",
+        org_id=uorg.id,
+        created_by=student1.user_id,
+        status="active",
     )
     db_session.add(thread)
     await db_session.flush()
@@ -96,9 +97,7 @@ async def test_student_to_student_send_blocked(db_session) -> None:
         await message_service.send_message(
             db_session, principal=student1, thread_id=thread.id, body="hi", ctx=CTX
         )
-    msgs = (
-        await db_session.execute(select(func.count()).select_from(Message))
-    ).scalar_one()
+    msgs = (await db_session.execute(select(func.count()).select_from(Message))).scalar_one()
     assert msgs == 0
 
 
@@ -113,15 +112,25 @@ async def test_university_initiates_to_student_and_partner(db_session) -> None:
     partner_user, _porg, _partner = await make_partner(db_session)
 
     to_student = await thread_service.create_thread(
-        db_session, principal=uni, kind="direct", context_type="support",
-        context_id=None, recipient_ids=[student_user.id], first_message="Welcome",
+        db_session,
+        principal=uni,
+        kind="direct",
+        context_type="support",
+        context_id=None,
+        recipient_ids=[student_user.id],
+        first_message="Welcome",
         ctx=CTX,
     )
     assert to_student["status"] == "active"
 
     to_partner = await thread_service.create_thread(
-        db_session, principal=uni, kind="direct", context_type=None,
-        context_id=None, recipient_ids=[partner_user.id], first_message="Hello",
+        db_session,
+        principal=uni,
+        kind="direct",
+        context_type=None,
+        context_id=None,
+        recipient_ids=[partner_user.id],
+        first_message="Hello",
         ctx=CTX,
     )
     assert to_partner["id"]
@@ -138,9 +147,14 @@ async def test_partner_to_student_without_application_blocked(db_session) -> Non
     # A context_id that does not bind this org/applicant -> 404 (masked).
     with pytest.raises(ResourceNotFoundError):
         await thread_service.create_thread(
-            db_session, principal=partner, kind="direct",
-            context_type="application", context_id=uuid.uuid4(),
-            recipient_ids=[student_user.id], first_message="hi", ctx=CTX,
+            db_session,
+            principal=partner,
+            kind="direct",
+            context_type="application",
+            context_id=uuid.uuid4(),
+            recipient_ids=[student_user.id],
+            first_message="hi",
+            ctx=CTX,
         )
 
 
@@ -149,21 +163,29 @@ async def test_partner_to_student_missing_context_rejected(db_session) -> None:
     student_user, _student = await make_student(db_session)
     with pytest.raises(ValidationFailedError):
         await thread_service.create_thread(
-            db_session, principal=partner, kind="direct", context_type=None,
-            context_id=None, recipient_ids=[student_user.id], ctx=CTX,
+            db_session,
+            principal=partner,
+            kind="direct",
+            context_type=None,
+            context_id=None,
+            recipient_ids=[student_user.id],
+            ctx=CTX,
         )
 
 
 async def test_partner_to_student_with_application_ok(db_session) -> None:
     _pu, porg, partner = await make_partner(db_session)
     student_user, _student = await make_student(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     out = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id],
-        first_message="We reviewed your application.", ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="We reviewed your application.",
+        ctx=CTX,
     )
     assert out["context_type"] == "application"
     assert out["is_anonymous"] is False
@@ -209,12 +231,16 @@ async def test_partner_opens_anonymous_thread_without_recipient_ids(db_session) 
     # Recipient was resolved to the bound applicant.
     thread_id = uuid.UUID(created["id"])
     parts = (
-        await db_session.execute(
-            select(MessageThreadParticipant.user_id).where(
-                MessageThreadParticipant.thread_id == thread_id
+        (
+            await db_session.execute(
+                select(MessageThreadParticipant.user_id).where(
+                    MessageThreadParticipant.thread_id == thread_id
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert student_user.id in parts
     assert partner.user_id in parts
 
@@ -227,10 +253,14 @@ async def test_partner_opens_anonymous_thread_without_recipient_ids(db_session) 
 
     # Audit stores ids/codes only, never the student identity.
     audit_rows = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "messaging.thread.create")
+        (
+            await db_session.execute(
+                select(AuditLog).where(AuditLog.action == "messaging.thread.create")
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert audit_rows
     for row in audit_rows:
         blob = json.dumps(row.after_snapshot or {}, ensure_ascii=False)
@@ -247,19 +277,29 @@ async def test_partner_open_anonymous_thread_idempotent(db_session) -> None:
         db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
     )
     first = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[], ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[],
+        ctx=CTX,
     )
     second = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[], ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[],
+        ctx=CTX,
     )
     assert first["id"] == second["id"]
     count = (
         await db_session.execute(
-            select(func.count()).select_from(MessageThread).where(
-                MessageThread.context_id == app_id
-            )
+            select(func.count())
+            .select_from(MessageThread)
+            .where(MessageThread.context_id == app_id)
         )
     ).scalar_one()
     assert count == 1
@@ -276,8 +316,13 @@ async def test_partner_open_anonymous_thread_other_org_404(db_session) -> None:
     _ou, _oorg, other_partner = await make_partner(db_session, display_name="Other Co")
     with pytest.raises(ResourceNotFoundError):
         await thread_service.create_thread(
-            db_session, principal=other_partner, kind="direct",
-            context_type="application", context_id=app_id, recipient_ids=[], ctx=CTX,
+            db_session,
+            principal=other_partner,
+            kind="direct",
+            context_type="application",
+            context_id=app_id,
+            recipient_ids=[],
+            ctx=CTX,
         )
 
 
@@ -288,12 +333,15 @@ async def test_partner_context_overrides_recipient_to_applicant(db_session) -> N
     student_user, _student = await make_student(db_session)
     decoy_user, _decoy = await make_second_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[decoy_user.id], ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[decoy_user.id],
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     parts = set(
@@ -303,7 +351,9 @@ async def test_partner_context_overrides_recipient_to_applicant(db_session) -> N
                     MessageThreadParticipant.thread_id == thread_id
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     assert student_user.id in parts  # the bound applicant
     assert decoy_user.id not in parts  # the smuggled non-applicant is ignored
@@ -320,13 +370,16 @@ async def test_partner_open_thread_reveal_flips_to_real_name(db_session) -> None
         db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
     )
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[], ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[],
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
-    masked = await thread_service.get_thread(
-        db_session, principal=partner, thread_id=thread_id
-    )
+    masked = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
     assert masked["counterpart_label"].startswith("Ứng viên ẩn danh")
 
     app_row = (
@@ -335,9 +388,7 @@ async def test_partner_open_thread_reveal_flips_to_real_name(db_session) -> None
     app_row.reveal_approved_at = datetime.now(tz=UTC)
     await db_session.commit()
 
-    revealed = await thread_service.get_thread(
-        db_session, principal=partner, thread_id=thread_id
-    )
+    revealed = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
     assert revealed["counterpart_label"] == "Khanh Le Unique"
 
 
@@ -352,19 +403,27 @@ async def test_partner_partner_same_org_ok_cross_org_404(db_session) -> None:
         db_session, org=porg, permissions=[("jobs", "read")]
     )
     same = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="team",
-        context_id=None, recipient_ids=[teammate_user.id], first_message="standup",
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="team",
+        context_id=None,
+        recipient_ids=[teammate_user.id],
+        first_message="standup",
         ctx=CTX,
     )
     assert same["id"]
 
-    other_user, _porg2, _partner2 = await make_partner(
-        db_session, display_name="Other Co"
-    )
+    other_user, _porg2, _partner2 = await make_partner(db_session, display_name="Other Co")
     with pytest.raises(ResourceNotFoundError):
         await thread_service.create_thread(
-            db_session, principal=partner, kind="direct", context_type="team",
-            context_id=None, recipient_ids=[other_user.id], ctx=CTX,
+            db_session,
+            principal=partner,
+            kind="direct",
+            context_type="team",
+            context_id=None,
+            recipient_ids=[other_user.id],
+            ctx=CTX,
         )
 
 
@@ -377,8 +436,13 @@ async def test_student_initiates_support_ok(db_session) -> None:
     _su, student = await make_student(db_session)
     uni_user, _uorg, _uni = await make_university(db_session)
     out = await thread_service.create_thread(
-        db_session, principal=student, kind="direct", context_type="support",
-        context_id=None, recipient_ids=[uni_user.id], first_message="I need help",
+        db_session,
+        principal=student,
+        kind="direct",
+        context_type="support",
+        context_id=None,
+        recipient_ids=[uni_user.id],
+        first_message="I need help",
         ctx=CTX,
     )
     assert out["id"]
@@ -389,25 +453,36 @@ async def test_student_cannot_initiate_partner_thread(db_session) -> None:
     partner_user, _porg, _partner = await make_partner(db_session)
     with pytest.raises(MessagingNotAllowedError):
         await thread_service.create_thread(
-            db_session, principal=student, kind="direct", context_type=None,
-            context_id=None, recipient_ids=[partner_user.id], ctx=CTX,
+            db_session,
+            principal=student,
+            kind="direct",
+            context_type=None,
+            context_id=None,
+            recipient_ids=[partner_user.id],
+            ctx=CTX,
         )
 
 
 async def test_student_replies_into_partner_thread(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id],
-        first_message="Are you available?", ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="Are you available?",
+        ctx=CTX,
     )
     reply = await message_service.send_message(
-        db_session, principal=student, thread_id=uuid.UUID(created["id"]),
-        body="Yes, I am.", ctx=CTX,
+        db_session,
+        principal=student,
+        thread_id=uuid.UUID(created["id"]),
+        body="Yes, I am.",
+        ctx=CTX,
     )
     assert reply["is_mine"] is True
 
@@ -427,21 +502,28 @@ async def test_anonymous_masking_until_reveal(db_session) -> None:
         db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
     )
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id],
-        first_message="Hello candidate", ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="Hello candidate",
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
 
     # Student replies -> partner gets a PII-safe, anonymous notification.
     await message_service.send_message(
-        db_session, principal=student, thread_id=thread_id, body="Hi there", ctx=CTX,
+        db_session,
+        principal=student,
+        thread_id=thread_id,
+        body="Hi there",
+        ctx=CTX,
     )
 
     # Partner's thread view masks the student.
-    detail = await thread_service.get_thread(
-        db_session, principal=partner, thread_id=thread_id
-    )
+    detail = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
     assert detail["counterpart_label"].startswith("Ứng viên ẩn danh")
     serialized = json.dumps(detail, ensure_ascii=False)
     assert student_user.email not in serialized
@@ -449,13 +531,17 @@ async def test_anonymous_masking_until_reveal(db_session) -> None:
 
     # Partner's NEW-MESSAGE notification stays anonymous (no name/email/body).
     notif = (
-        await db_session.execute(
-            select(Notification).where(
-                Notification.recipient_id == partner.user_id,
-                Notification.notif_type == "message.received",
+        (
+            await db_session.execute(
+                select(Notification).where(
+                    Notification.recipient_id == partner.user_id,
+                    Notification.notif_type == "message.received",
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert notif is not None
     blob = f"{notif.title} {notif.body}"
     assert "Ứng viên ẩn danh" in notif.body
@@ -464,16 +550,12 @@ async def test_anonymous_masking_until_reveal(db_session) -> None:
 
     # After reveal, the same projection flips to the real name.
     app_row = (
-        await db_session.execute(
-            select(Application).where(Application.id == app_id)
-        )
+        await db_session.execute(select(Application).where(Application.id == app_id))
     ).scalar_one()
     app_row.reveal_approved_at = datetime.now(tz=UTC)
     await db_session.commit()
 
-    detail2 = await thread_service.get_thread(
-        db_session, principal=partner, thread_id=thread_id
-    )
+    detail2 = await thread_service.get_thread(db_session, principal=partner, thread_id=thread_id)
     assert detail2["counterpart_label"] == "Linh Nguyen Unique"
 
 
@@ -484,8 +566,13 @@ async def test_student_sees_partner_org_name(db_session) -> None:
         db_session, org_id=porg.id, applicant_id=student_user.id, is_anonymous=True
     )
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], first_message="Hi",
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="Hi",
         ctx=CTX,
     )
     detail = await thread_service.get_thread(
@@ -502,31 +589,38 @@ async def test_student_sees_partner_org_name(db_session) -> None:
 async def test_persist_before_deliver(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], first_message="hello",
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="hello",
         ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     # The message row is COMMITTED before any delivery is observable.
     msg = (
-        await db_session.execute(
-            select(Message).where(Message.thread_id == thread_id)
-        )
-    ).scalars().first()
+        (await db_session.execute(select(Message).where(Message.thread_id == thread_id)))
+        .scalars()
+        .first()
+    )
     assert msg is not None
     # The notification feed row exists in the SAME committed transaction.
     notif = (
-        await db_session.execute(
-            select(Notification).where(
-                Notification.recipient_id == student_user.id,
-                Notification.notif_type == "message.received",
+        (
+            await db_session.execute(
+                select(Notification).where(
+                    Notification.recipient_id == student_user.id,
+                    Notification.notif_type == "message.received",
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert notif is not None
     assert "hello" not in f"{notif.title} {notif.body}"
 
@@ -534,17 +628,24 @@ async def test_persist_before_deliver(db_session) -> None:
 async def test_notification_dedupe_coalesces_burst(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], first_message="1", ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="1",
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     for n in range(3):
         await message_service.send_message(
-            db_session, principal=partner, thread_id=thread_id, body=f"msg {n}",
+            db_session,
+            principal=partner,
+            thread_id=thread_id,
+            body=f"msg {n}",
             ctx=CTX,
         )
     feed_rows = (
@@ -563,29 +664,40 @@ async def test_notification_dedupe_coalesces_burst(db_session) -> None:
 async def test_idempotent_send_same_dedupe_key(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     key = "retry-key-1"
     first = await message_service.send_message(
-        db_session, principal=partner, thread_id=thread_id, body="hi",
-        client_dedupe_key=key, ctx=CTX,
+        db_session,
+        principal=partner,
+        thread_id=thread_id,
+        body="hi",
+        client_dedupe_key=key,
+        ctx=CTX,
     )
     second = await message_service.send_message(
-        db_session, principal=partner, thread_id=thread_id, body="hi",
-        client_dedupe_key=key, ctx=CTX,
+        db_session,
+        principal=partner,
+        thread_id=thread_id,
+        body="hi",
+        client_dedupe_key=key,
+        ctx=CTX,
     )
     assert first["id"] == second["id"]
     count = (
         await db_session.execute(
-            select(func.count()).select_from(Message).where(
-                Message.thread_id == thread_id, Message.client_dedupe_key == key
-            )
+            select(func.count())
+            .select_from(Message)
+            .where(Message.thread_id == thread_id, Message.client_dedupe_key == key)
         )
     ).scalar_one()
     assert count == 1
@@ -601,20 +713,31 @@ async def test_global_rate_limit(db_session, monkeypatch) -> None:
     monkeypatch.setattr(settings, "messaging_max_messages_per_sender_per_day", 1)
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     await message_service.send_message(
-        db_session, principal=partner, thread_id=thread_id, body="one", ctx=CTX,
+        db_session,
+        principal=partner,
+        thread_id=thread_id,
+        body="one",
+        ctx=CTX,
     )
     with pytest.raises(MessageRateLimitedError) as exc:
         await message_service.send_message(
-            db_session, principal=partner, thread_id=thread_id, body="two", ctx=CTX,
+            db_session,
+            principal=partner,
+            thread_id=thread_id,
+            body="two",
+            ctx=CTX,
         )
     assert exc.value.details["reset_at"]
     assert exc.value.http_status == 429
@@ -630,16 +753,29 @@ async def test_inactive_application_taper(db_session, monkeypatch) -> None:
         db_session, org_id=porg.id, applicant_id=student_user.id, status="rejected"
     )
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     await message_service.send_message(
-        db_session, principal=partner, thread_id=thread_id, body="one", ctx=CTX,
+        db_session,
+        principal=partner,
+        thread_id=thread_id,
+        body="one",
+        ctx=CTX,
     )
     with pytest.raises(MessageRateLimitedError) as exc:
         await message_service.send_message(
-            db_session, principal=partner, thread_id=thread_id, body="two", ctx=CTX,
+            db_session,
+            principal=partner,
+            thread_id=thread_id,
+            body="two",
+            ctx=CTX,
         )
     assert exc.value.details["scope"] == "inactive_application"
 
@@ -653,34 +789,53 @@ async def test_delete_own_within_window_then_too_late(db_session) -> None:
     student_user, student = await make_student(db_session)
     uni_user, _uorg, uni = await make_university(db_session)
     created = await thread_service.create_thread(
-        db_session, principal=student, kind="direct", context_type="support",
-        context_id=None, recipient_ids=[uni_user.id], first_message="hello", ctx=CTX,
+        db_session,
+        principal=student,
+        kind="direct",
+        context_type="support",
+        context_id=None,
+        recipient_ids=[uni_user.id],
+        first_message="hello",
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     sent = await message_service.send_message(
-        db_session, principal=student, thread_id=thread_id, body="oops", ctx=CTX,
+        db_session,
+        principal=student,
+        thread_id=thread_id,
+        body="oops",
+        ctx=CTX,
     )
     msg_id = uuid.UUID(sent["id"])
     out = await message_service.delete_message(
-        db_session, principal=student, thread_id=thread_id, message_id=msg_id, ctx=CTX,
+        db_session,
+        principal=student,
+        thread_id=thread_id,
+        message_id=msg_id,
+        ctx=CTX,
     )
     assert out["status"] == "deleted"
 
     # A second message backdated past the window cannot be deleted.
     sent2 = await message_service.send_message(
-        db_session, principal=student, thread_id=thread_id, body="late", ctx=CTX,
+        db_session,
+        principal=student,
+        thread_id=thread_id,
+        body="late",
+        ctx=CTX,
     )
     msg2 = (
-        await db_session.execute(
-            select(Message).where(Message.id == uuid.UUID(sent2["id"]))
-        )
+        await db_session.execute(select(Message).where(Message.id == uuid.UUID(sent2["id"])))
     ).scalar_one()
     msg2.created_at = datetime.now(tz=UTC) - timedelta(minutes=30)
     await db_session.commit()
     with pytest.raises(MessageDeleteNotAllowedError):
         await message_service.delete_message(
-            db_session, principal=student, thread_id=thread_id,
-            message_id=msg2.id, ctx=CTX,
+            db_session,
+            principal=student,
+            thread_id=thread_id,
+            message_id=msg2.id,
+            ctx=CTX,
         )
 
 
@@ -688,61 +843,75 @@ async def test_system_message_undeletable_and_university_deletes_any(db_session)
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
     _uu, _uorg, uni = await make_university(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], first_message="partner msg",
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="partner msg",
         ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
 
     # University moderator may delete the partner's message.
     partner_msg = (
-        await db_session.execute(
-            select(Message).where(Message.thread_id == thread_id)
-        )
-    ).scalars().first()
+        (await db_session.execute(select(Message).where(Message.thread_id == thread_id)))
+        .scalars()
+        .first()
+    )
     out = await message_service.delete_message(
-        db_session, principal=uni, thread_id=thread_id,
-        message_id=partner_msg.id, ctx=CTX,
+        db_session,
+        principal=uni,
+        thread_id=thread_id,
+        message_id=partner_msg.id,
+        ctx=CTX,
     )
     assert out["status"] == "deleted"
 
     # A system message can never be deleted (even by a moderator).
-    sysmsg = Message(
-        thread_id=thread_id, sender_id=None, body="System notice", is_system=True
-    )
+    sysmsg = Message(thread_id=thread_id, sender_id=None, body="System notice", is_system=True)
     db_session.add(sysmsg)
     await db_session.commit()
     with pytest.raises(MessageDeleteNotAllowedError):
         await message_service.delete_message(
-            db_session, principal=uni, thread_id=thread_id,
-            message_id=sysmsg.id, ctx=CTX,
+            db_session,
+            principal=uni,
+            thread_id=thread_id,
+            message_id=sysmsg.id,
+            ctx=CTX,
         )
 
 
 async def test_partner_cannot_delete_message_to_student(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], first_message="hi", ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="hi",
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     msg = (
-        await db_session.execute(
-            select(Message).where(Message.thread_id == thread_id)
-        )
-    ).scalars().first()
+        (await db_session.execute(select(Message).where(Message.thread_id == thread_id)))
+        .scalars()
+        .first()
+    )
     with pytest.raises(MessageDeleteNotAllowedError):
         await message_service.delete_message(
-            db_session, principal=partner, thread_id=thread_id,
-            message_id=msg.id, ctx=CTX,
+            db_session,
+            principal=partner,
+            thread_id=thread_id,
+            message_id=msg.id,
+            ctx=CTX,
         )
 
 
@@ -754,23 +923,29 @@ async def test_partner_cannot_delete_message_to_student(db_session) -> None:
 async def test_cross_tenant_thread_access_404(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], first_message="hi", ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="hi",
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
 
     _ou, _oorg, other_partner = await make_partner(db_session, display_name="Other")
     with pytest.raises(ResourceNotFoundError):
-        await thread_service.get_thread(
-            db_session, principal=other_partner, thread_id=thread_id
-        )
+        await thread_service.get_thread(db_session, principal=other_partner, thread_id=thread_id)
     with pytest.raises(ResourceNotFoundError):
         await message_service.send_message(
-            db_session, principal=other_partner, thread_id=thread_id, body="x", ctx=CTX,
+            db_session,
+            principal=other_partner,
+            thread_id=thread_id,
+            body="x",
+            ctx=CTX,
         )
 
 
@@ -782,23 +957,30 @@ async def test_cross_tenant_thread_access_404(db_session) -> None:
 async def test_mute_suppresses_notification(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], ctx=CTX,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
-    await message_service.set_mute(
-        db_session, principal=student, thread_id=thread_id, muted=True
-    )
+    await message_service.set_mute(db_session, principal=student, thread_id=thread_id, muted=True)
     await message_service.send_message(
-        db_session, principal=partner, thread_id=thread_id, body="hello", ctx=CTX,
+        db_session,
+        principal=partner,
+        thread_id=thread_id,
+        body="hello",
+        ctx=CTX,
     )
     feed_rows = (
         await db_session.execute(
-            select(func.count()).select_from(Notification).where(
+            select(func.count())
+            .select_from(Notification)
+            .where(
                 Notification.recipient_id == student_user.id,
                 Notification.notif_type == "message.received",
             )
@@ -811,25 +993,35 @@ async def test_report_audits_and_notifies_university(db_session) -> None:
     student_user, student = await make_student(db_session)
     uni_user, _uorg, _uni = await make_university(db_session)
     created = await thread_service.create_thread(
-        db_session, principal=student, kind="direct", context_type="support",
-        context_id=None, recipient_ids=[uni_user.id], first_message="help", ctx=CTX,
+        db_session,
+        principal=student,
+        kind="direct",
+        context_type="support",
+        context_id=None,
+        recipient_ids=[uni_user.id],
+        first_message="help",
+        ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     out = await message_service.report_thread(
-        db_session, principal=student, thread_id=thread_id, reason="spam", ctx=CTX,
+        db_session,
+        principal=student,
+        thread_id=thread_id,
+        reason="spam",
+        ctx=CTX,
     )
     assert out["status"] == "reported"
     audit = (
         await db_session.execute(
-            select(func.count()).select_from(AuditLog).where(
-                AuditLog.action == "messaging.report"
-            )
+            select(func.count()).select_from(AuditLog).where(AuditLog.action == "messaging.report")
         )
     ).scalar_one()
     assert audit == 1
     flagged = (
         await db_session.execute(
-            select(func.count()).select_from(Notification).where(
+            select(func.count())
+            .select_from(Notification)
+            .where(
                 Notification.recipient_id == uni_user.id,
                 Notification.notif_type == "message.flagged",
             )
@@ -846,19 +1038,20 @@ async def test_report_audits_and_notifies_university(db_session) -> None:
 async def test_unread_count_and_mark_read(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     created = await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], first_message="hello",
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message="hello",
         ctx=CTX,
     )
     thread_id = uuid.UUID(created["id"])
     assert await message_service.unread_count(db_session, principal=student) == 1
-    await message_service.mark_read(
-        db_session, principal=student, thread_id=thread_id
-    )
+    await message_service.mark_read(db_session, principal=student, thread_id=thread_id)
     assert await message_service.unread_count(db_session, principal=student) == 0
 
 
@@ -870,20 +1063,27 @@ async def test_unread_count_and_mark_read(db_session) -> None:
 async def test_audit_carries_no_pii(db_session) -> None:
     student_user, student = await make_student(db_session)
     _pu, porg, partner = await make_partner(db_session)
-    app_id = await seed_application(
-        db_session, org_id=porg.id, applicant_id=student_user.id
-    )
+    app_id = await seed_application(db_session, org_id=porg.id, applicant_id=student_user.id)
     secret_body = "My phone is 0900111222 secret"
     await thread_service.create_thread(
-        db_session, principal=partner, kind="direct", context_type="application",
-        context_id=app_id, recipient_ids=[student_user.id], first_message=secret_body,
+        db_session,
+        principal=partner,
+        kind="direct",
+        context_type="application",
+        context_id=app_id,
+        recipient_ids=[student_user.id],
+        first_message=secret_body,
         ctx=CTX,
     )
     rows = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "messaging.message.send")
+        (
+            await db_session.execute(
+                select(AuditLog).where(AuditLog.action == "messaging.message.send")
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert rows
     for row in rows:
         blob = json.dumps(row.after_snapshot or {}, ensure_ascii=False)

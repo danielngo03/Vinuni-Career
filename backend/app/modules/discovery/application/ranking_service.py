@@ -128,7 +128,7 @@ async def _build_ctx(
     search_terms = _coarse_list(tags, "search_terms")
     query_terms: list[str] = []
     seen: set[str] = set()
-    for raw in [*( [q] if q else [] ), *search_terms]:
+    for raw in [*([q] if q else []), *search_terms]:
         norm = taxonomy.normalize(raw)
         if norm and norm not in seen:
             seen.add(norm)
@@ -147,17 +147,17 @@ async def _build_ctx(
     saved_signals: dict = {}
     if principal.is_authenticated and principal.persona == "student":
         try:
-            cv_inputs = await cv_ranking_facade.build_cv_inputs(
-                session, principal=principal
-            )
+            cv_inputs = await cv_ranking_facade.build_cv_inputs(session, principal=principal)
         except Exception:  # noqa: BLE001 — a CV-read failure must not 500 discovery
             cv_inputs = []
         prefs = await preferences_facade.get_ranking_preferences(
-            session, user_id=principal.user_id  # type: ignore[arg-type]
+            session,
+            user_id=principal.user_id,  # type: ignore[arg-type]
         )
         try:
             saved_signals = await saved_jobs_service.get_saved_job_signals(
-                session, user_id=principal.user_id  # type: ignore[arg-type]
+                session,
+                user_id=principal.user_id,  # type: ignore[arg-type]
             )
         except Exception:  # noqa: BLE001 — saved-read failure must not 500 discovery
             saved_signals = {}
@@ -206,15 +206,9 @@ def _query_component(
 ) -> tuple[float | None, dict | None]:
     if not ctx.query_terms:
         return None, None
-    matched = [
-        term
-        for term in ctx.query_terms
-        if taxonomy.term_matches(term, tokens, haystack)
-    ]
+    matched = [term for term in ctx.query_terms if taxonomy.term_matches(term, tokens, haystack)]
     frac = len(matched) / len(ctx.query_terms)
-    reason = (
-        {"code": ranking.REASON_MATCHES_SEARCH, "term": matched[0]} if matched else None
-    )
+    reason = {"code": ranking.REASON_MATCHES_SEARCH, "term": matched[0]} if matched else None
     return frac, reason
 
 
@@ -223,9 +217,7 @@ def _cv_component(
 ) -> tuple[float | None, dict | None, str | None]:
     if not ctx.cv_inputs:
         return None, None, None
-    outcome = job_fit.evaluate(
-        cand.as_fit_job(), ctx.cv_inputs, stale_days=ctx.stale_days
-    )
+    outcome = job_fit.evaluate(cand.as_fit_job(), ctx.cv_inputs, stale_days=ctx.stale_days)
     if not outcome.results:
         return None, None, None
     best = outcome.results[0]
@@ -265,19 +257,13 @@ def _preference_component(
         hit = bool(pref_city) and pref_city == cand_city
         checks.append(1.0 if hit else 0.0)
         if hit:
-            reasons.append(
-                {"code": ranking.REASON_PREFERRED_LOCATION, "value": cand.location_city}
-            )
+            reasons.append({"code": ranking.REASON_PREFERRED_LOCATION, "value": cand.location_city})
     if prefs.field:
         field_tokens = taxonomy.tokens_of(prefs.field, None)
-        hit = bool(field_tokens & tokens) or any(
-            t in haystack for t in field_tokens
-        )
+        hit = bool(field_tokens & tokens) or any(t in haystack for t in field_tokens)
         checks.append(1.0 if hit else 0.0)
         if hit:
-            reasons.append(
-                {"code": ranking.REASON_PREFERRED_FIELD, "value": prefs.field}
-            )
+            reasons.append({"code": ranking.REASON_PREFERRED_FIELD, "value": prefs.field})
     if not checks:
         return None, []
     return sum(checks) / len(checks), reasons
@@ -365,9 +351,7 @@ def _secondary_reasons(cand: RankingCandidate, ctx: _RankCtx) -> list[dict]:
     if deadline is not None:
         remaining = (deadline - ctx.now).total_seconds() / 86400.0
         if 0 <= remaining <= ranking.DEADLINE_SOON_DAYS:
-            reasons.append(
-                {"code": ranking.REASON_DEADLINE_SOON, "days": max(0, round(remaining))}
-            )
+            reasons.append({"code": ranking.REASON_DEADLINE_SOON, "days": max(0, round(remaining))})
     if cand.application_count >= ranking.POPULAR_REASON_MIN:
         reasons.append({"code": ranking.REASON_POPULAR})
     if cand.is_verified_employer:
@@ -432,9 +416,7 @@ def _present(
     item = dict(scored.candidate.summary)
     item["score"] = scored.score
     item["source"] = source
-    item["reason_codes"] = (
-        reasons_override if reasons_override is not None else scored.reasons
-    )
+    item["reason_codes"] = reasons_override if reasons_override is not None else scored.reasons
     item["recommended_cv_id"] = scored.recommended_cv_id
     item["sponsored_disclosure"] = sponsored_disclosure
     item["placement_id"] = str(placement_id) if placement_id is not None else None
@@ -442,9 +424,7 @@ def _present(
 
 
 def _fallback_reason(source: str) -> list[dict]:
-    code = ranking.REASON_POPULAR if source == ranking.SOURCE_POPULAR else (
-        ranking.REASON_RECENT
-    )
+    code = ranking.REASON_POPULAR if source == ranking.SOURCE_POPULAR else (ranking.REASON_RECENT)
     return [{"code": code}]
 
 
@@ -521,9 +501,7 @@ async def recommend_jobs(
             discovery_session_id=discovery_session_id,
         )
         # Dedupe: a sponsored job never also appears in the organic stream.
-        organic_items = [
-            it for it in organic_items if uuid.UUID(it["id"]) not in sponsored_ids
-        ]
+        organic_items = [it for it in organic_items if uuid.UUID(it["id"]) not in sponsored_ids]
 
     composed = ranking.inject_sponsored(organic_items, sponsored_items)
     return {
@@ -613,9 +591,7 @@ async def similar_jobs(
     if seed is None:
         raise ResourceNotFoundError()
 
-    seed_tokens = taxonomy.tokens_of(
-        seed.title, [*seed.required_skills, *seed.preferred_skills]
-    )
+    seed_tokens = taxonomy.tokens_of(seed.title, [*seed.required_skills, *seed.preferred_skills])
     seed_family = taxonomy.role_family_of(seed.title)
 
     pool = await ranking_read.list_candidates(
@@ -668,9 +644,7 @@ async def similar_jobs(
     for s in sims[:limit]:
         reasons: list[dict] = []
         if s.overlap_terms:
-            reasons.append(
-                {"code": ranking.REASON_SKILL_MATCH, "skills": s.overlap_terms[:3]}
-            )
+            reasons.append({"code": ranking.REASON_SKILL_MATCH, "skills": s.overlap_terms[:3]})
         if s.family_hit:
             reasons.append({"code": ranking.REASON_SIMILAR_ROLE})
         if s.candidate.is_verified_employer:
@@ -699,9 +673,7 @@ async def similar_jobs(
 # --------------------------------------------------------------------------- #
 
 
-async def popular_roles(
-    session: AsyncSession, *, limit: int = 8, locale: str = "vi"
-) -> list[dict]:
+async def popular_roles(session: AsyncSession, *, limit: int = 8, locale: str = "vi") -> list[dict]:
     """Most-common role families across eligible jobs (real counts; hide-if-empty).
 
     Aggregated from real visible jobs by deterministic role family; titles that

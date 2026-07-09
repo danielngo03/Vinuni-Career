@@ -58,34 +58,43 @@ async def _make_uploaded_cv(db, student) -> dict:
     await template_seed.ensure_default_templates(db)
     await db.commit()
     up = await ingestion_service.create_upload(
-        db, principal=student, filename="cv.pdf", data=F.text_pdf_en(),
-        content_type="application/pdf", idempotency_key=new_key(), ctx=CTX,
+        db,
+        principal=student,
+        filename="cv.pdf",
+        data=F.text_pdf_en(),
+        content_type="application/pdf",
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
     ing = await ingestion_service.start_ingestion(
-        db, principal=student, document_id=uuid.UUID(up["document_id"]), ctx=CTX,
+        db,
+        principal=student,
+        document_id=uuid.UUID(up["document_id"]),
+        ctx=CTX,
     )
     detail = await ingestion_service.import_ingestion(
-        db, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={"title": "Uploaded CV"}, ctx=CTX,
+        db,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={"title": "Uploaded CV"},
+        ctx=CTX,
     )
-    assert detail["source_type"] == catalog.SOURCE_TYPE_FOR_MODE[
-        catalog.CREATION_UPLOADED_IMPORT
-    ]
+    assert detail["source_type"] == catalog.SOURCE_TYPE_FOR_MODE[catalog.CREATION_UPLOADED_IMPORT]
     assert detail["is_uploaded"] is True
     return detail
 
 
 async def _make_builder_cv(db, student) -> dict:
     return await cv_service.create_cv(
-        db, principal=student,
-        payload={"title": "Builder CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db,
+        principal=student,
+        payload={"title": "Builder CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
 
 
 def _header_id(detail: dict) -> uuid.UUID:
-    return uuid.UUID(
-        next(s for s in detail["sections"] if s["section_type"] == "header")["id"]
-    )
+    return uuid.UUID(next(s for s in detail["sections"] if s["section_type"] == "header")["id"])
 
 
 # --------------------------------------------------------------------------- #
@@ -99,9 +108,12 @@ async def test_uploaded_cv_section_upsert_blocked(db_session) -> None:
     cv_id = uuid.UUID(detail["id"])
     with pytest.raises(UploadedCvReadOnlyError) as exc:
         await cv_section_service.upsert_section(
-            db_session, principal=student, cv_id=cv_id,
+            db_session,
+            principal=student,
+            cv_id=cv_id,
             section_id=_header_id(detail),
-            payload={"content": {"name": "Hacker"}}, ctx=CTX,
+            payload={"content": {"name": "Hacker"}},
+            ctx=CTX,
         )
     assert exc.value.details["reason"] == "uploaded_cv_read_only"
     assert "duplicate" in exc.value.details["actions"]
@@ -112,7 +124,9 @@ async def test_uploaded_cv_create_section_blocked(db_session) -> None:
     detail = await _make_uploaded_cv(db_session, student)
     with pytest.raises(UploadedCvReadOnlyError):
         await cv_section_service.create_section(
-            db_session, principal=student, cv_id=uuid.UUID(detail["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(detail["id"]),
             payload={"section_type": "custom", "title": "New", "content": {"items": []}},
             ctx=CTX,
         )
@@ -124,8 +138,12 @@ async def test_uploaded_cv_restore_version_blocked(db_session) -> None:
     version_id = uuid.UUID(detail["versions"][0]["id"])
     with pytest.raises(UploadedCvReadOnlyError):
         await cv_section_service.restore_version(
-            db_session, principal=student, cv_id=uuid.UUID(detail["id"]),
-            version_id=version_id, payload=None, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(detail["id"]),
+            version_id=version_id,
+            payload=None,
+            ctx=CTX,
         )
 
 
@@ -134,8 +152,11 @@ async def test_uploaded_cv_canvas_update_blocked(db_session) -> None:
     detail = await _make_uploaded_cv(db_session, student)
     with pytest.raises(UploadedCvReadOnlyError):
         await cv_canvas_service.update_canvas(
-            db_session, principal=student, cv_id=uuid.UUID(detail["id"]),
-            payload={"page": {"margin": "narrow"}}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(detail["id"]),
+            payload={"page": {"margin": "narrow"}},
+            ctx=CTX,
         )
 
 
@@ -144,7 +165,9 @@ async def test_uploaded_cv_ai_suggestion_blocked(db_session) -> None:
     detail = await _make_uploaded_cv(db_session, student)
     with pytest.raises(UploadedCvReadOnlyError):
         await cv_ai_service.request_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(detail["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(detail["id"]),
             payload={"task_type": catalog.TASK_ATS_KEYWORDS, "job_id": str(uuid.uuid4())},
             ctx=CTX,
         )
@@ -155,7 +178,9 @@ async def test_uploaded_cv_ai_edit_command_blocked(db_session) -> None:
     detail = await _make_uploaded_cv(db_session, student)
     with pytest.raises(UploadedCvReadOnlyError):
         await cv_ai_service.request_edit_command(
-            db_session, principal=student, cv_id=uuid.UUID(detail["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(detail["id"]),
             payload={"instruction": "rewrite my summary", "idempotency_key": new_key()},
             ctx=CTX,
         )
@@ -168,8 +193,12 @@ async def test_uploaded_cv_ai_accept_blocked(db_session) -> None:
     detail = await _make_uploaded_cv(db_session, student)
     with pytest.raises(UploadedCvReadOnlyError):
         await cv_ai_service.accept_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(detail["id"]),
-            suggestion_id=uuid.uuid4(), payload={"fact_confirmation": True}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(detail["id"]),
+            suggestion_id=uuid.uuid4(),
+            payload={"fact_confirmation": True},
+            ctx=CTX,
         )
 
 
@@ -182,7 +211,9 @@ async def test_uploaded_cv_read_still_allowed(db_session) -> None:
     _u, student = await make_student(db_session)
     detail = await _make_uploaded_cv(db_session, student)
     got = await cv_service.get_cv(
-        db_session, principal=student, cv_id=uuid.UUID(detail["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(detail["id"]),
     )
     assert got["is_uploaded"] is True
     assert got["sections"]
@@ -197,7 +228,9 @@ async def test_builder_cv_still_editable(db_session) -> None:
     _u, student = await make_student(db_session)
     detail = await _make_builder_cv(db_session, student)
     res = await cv_section_service.upsert_section(
-        db_session, principal=student, cv_id=uuid.UUID(detail["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(detail["id"]),
         section_id=_header_id(detail),
         payload={"content": {"name": "Real Owner"}, "expected_version": detail["version"]},
         ctx=CTX,
@@ -215,15 +248,20 @@ async def test_duplicate_of_uploaded_cv_is_editable(db_session) -> None:
     uploaded = await _make_uploaded_cv(db_session, student)
 
     dup = await cv_creation_service.duplicate_cv(
-        db_session, principal=student, cv_id=uuid.UUID(uploaded["id"]),
-        payload={"idempotency_key": new_key()}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(uploaded["id"]),
+        payload={"idempotency_key": new_key()},
+        ctx=CTX,
     )
     assert dup["is_uploaded"] is False
     assert dup["source_type"] == catalog.SOURCE_TYPE_FOR_MODE[catalog.CREATION_DUPLICATE]
 
     # The duplicated copy IS editable (it is a builder CV, not an uploaded one).
     res = await cv_section_service.upsert_section(
-        db_session, principal=student, cv_id=uuid.UUID(dup["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(dup["id"]),
         section_id=_header_id(dup),
         payload={"content": {"name": "Edited Copy"}, "expected_version": dup["version"]},
         ctx=CTX,
@@ -242,8 +280,6 @@ async def test_uploaded_cv_source_type_value(db_session) -> None:
     _u, student = await make_student(db_session)
     detail = await _make_uploaded_cv(db_session, student)
     row = (
-        await db_session.execute(
-            select(CvProfile).where(CvProfile.id == uuid.UUID(detail["id"]))
-        )
+        await db_session.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(detail["id"])))
     ).scalar_one()
     assert row.source_type == "uploaded_import"

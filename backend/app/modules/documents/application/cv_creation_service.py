@@ -100,11 +100,17 @@ async def create_cv(
     await _cv_core._seed_sections(session, cv_id=cv.id, sections=catalog.DEFAULT_SECTIONS)
 
     await _cv_core._snapshot_version(
-        session, cv=cv, change_source="manual",
-        change_summary="initial", created_by=principal.user_id,
+        session,
+        cv=cv,
+        change_source="manual",
+        change_summary="initial",
+        created_by=principal.user_id,
     )
     await write_audit(
-        session, action="cv.created", resource_type="cv", resource_id=cv.id,
+        session,
+        action="cv.created",
+        resource_type="cv",
+        resource_id=cv.id,
         context=_shared.audit_ctx(principal, ctx),
         after={"source_type": cv.source_type, "creation_mode": catalog.CREATION_BLANK},
     )
@@ -182,15 +188,22 @@ async def create_cv_from_sections(
     cv.matching_json = build_matching_representation(cv, seeded)
 
     await _cv_core._snapshot_version(
-        session, cv=cv, change_source=change_source,
-        change_summary="initial", created_by=principal.user_id,
+        session,
+        cv=cv,
+        change_source=change_source,
+        change_summary="initial",
+        created_by=principal.user_id,
     )
     after = {"source_type": cv.source_type}
     if audit_extra:
         after.update(audit_extra)
     await write_audit(
-        session, action=audit_action, resource_type="cv", resource_id=cv.id,
-        context=_shared.audit_ctx(principal, ctx), after=after,
+        session,
+        action=audit_action,
+        resource_type="cv",
+        resource_id=cv.id,
+        context=_shared.audit_ctx(principal, ctx),
+        after=after,
     )
     await session.commit()
     await session.refresh(cv)
@@ -262,11 +275,17 @@ async def duplicate_cv(
     await session.flush()
 
     await _cv_core._snapshot_version(
-        session, cv=new_cv, change_source="import",
-        change_summary=f"duplicate of {source.id}", created_by=principal.user_id,
+        session,
+        cv=new_cv,
+        change_source="import",
+        change_summary=f"duplicate of {source.id}",
+        created_by=principal.user_id,
     )
     await write_audit(
-        session, action="cv.duplicated", resource_type="cv", resource_id=new_cv.id,
+        session,
+        action="cv.duplicated",
+        resource_type="cv",
+        resource_id=new_cv.id,
         context=_shared.audit_ctx(principal, ctx),
         after={"source_cv_id": str(source.id)},
     )

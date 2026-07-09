@@ -98,11 +98,17 @@ async def upsert_section(
     await session.flush()
 
     await _cv_core._snapshot_version(
-        session, cv=cv, change_source="manual",
-        change_summary=f"section {section.section_type}", created_by=principal.user_id,
+        session,
+        cv=cv,
+        change_source="manual",
+        change_summary=f"section {section.section_type}",
+        created_by=principal.user_id,
     )
     await write_audit(
-        session, action=action, resource_type="cv_section", resource_id=section.id,
+        session,
+        action=action,
+        resource_type="cv_section",
+        resource_id=section.id,
         context=_shared.audit_ctx(principal, ctx),
         after={"cv_id": str(cv.id), "section_type": section.section_type},
     )
@@ -169,13 +175,18 @@ async def create_section(
     await session.flush()
 
     await _cv_core._snapshot_version(
-        session, cv=cv, change_source="manual",
+        session,
+        cv=cv,
+        change_source="manual",
         change_summary=f"add section {section.section_type}",
         created_by=principal.user_id,
     )
     await write_audit(
-        session, action="cv.section.created", resource_type="cv_section",
-        resource_id=section.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="cv.section.created",
+        resource_type="cv_section",
+        resource_id=section.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"cv_id": str(cv.id), "section_type": section.section_type},
     )
     await session.commit()
@@ -259,15 +270,22 @@ async def restore_version(
     await session.flush()
 
     await _cv_core._snapshot_version(
-        session, cv=cv, change_source="restore",
+        session,
+        cv=cv,
+        change_source="restore",
         change_summary=f"restored v{target.version_number}",
         created_by=principal.user_id,
     )
     await write_audit(
-        session, action="cv.version.restored", resource_type="cv",
-        resource_id=cv.id, context=_shared.audit_ctx(principal, ctx),
-        after={"restored_from_version": target.version_number,
-               "restored_from_version_id": str(target.id)},
+        session,
+        action="cv.version.restored",
+        resource_type="cv",
+        resource_id=cv.id,
+        context=_shared.audit_ctx(principal, ctx),
+        after={
+            "restored_from_version": target.version_number,
+            "restored_from_version_id": str(target.id),
+        },
     )
     await session.commit()
     await session.refresh(cv)

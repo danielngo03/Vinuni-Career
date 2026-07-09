@@ -109,6 +109,7 @@ def known_aliases() -> frozenset[str]:
     # Include aliases from the published runtime snapshot (DB-backed custom aliases)
     try:
         from app.ai.gateway import runtime_config
+
         route_aliases = frozenset(runtime_config.current().provider_routes.keys())
     except Exception:
         route_aliases = frozenset()
@@ -287,9 +288,7 @@ class OpenAICompatibleProvider(AIProvider):
         except (httpx.HTTPError, ValueError) as exc:
             raise AIUnavailableError() from exc
 
-        raw_data: list[dict] = sorted(
-            data.get("data", []), key=lambda d: d.get("index", 0)
-        )
+        raw_data: list[dict] = sorted(data.get("data", []), key=lambda d: d.get("index", 0))
         usage = data.get("usage", {})
         return [
             AIEmbedding(

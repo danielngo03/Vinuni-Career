@@ -39,9 +39,7 @@ def _staff_or_admin(principal: Principal) -> bool:
     return principal.is_superadmin or principal.persona == "university_staff"
 
 
-def passive_view_decision(
-    principal: Principal, profile: StudentProfile
-) -> ViewDecision:
+def passive_view_decision(principal: Principal, profile: StudentProfile) -> ViewDecision:
     """Decision for the passive ``GET /students/{id}/profile`` read (no app context)."""
 
     if not principal.is_authenticated:

@@ -40,9 +40,7 @@ def _event_body(**over) -> dict:
     return body
 
 
-async def test_events_public_sets_cookie_and_returns_no_internal_data(
-    client, db_session
-) -> None:
+async def test_events_public_sets_cookie_and_returns_no_internal_data(client, db_session) -> None:
     resp = await client.post("/discovery/events", json=_event_body())
     assert resp.status_code == 200
 
@@ -64,18 +62,12 @@ async def test_events_public_sets_cookie_and_returns_no_internal_data(
     assert count == 1
 
 
-async def test_events_idempotent_and_session_reused_over_cookie(
-    client, db_session
-) -> None:
+async def test_events_idempotent_and_session_reused_over_cookie(client, db_session) -> None:
     key = uuid.uuid4().hex
-    first = await client.post(
-        "/discovery/events", json=_event_body(idempotency_key=key)
-    )
+    first = await client.post("/discovery/events", json=_event_body(idempotency_key=key))
     assert first.status_code == 200
     # Client retains the cookie; repeat same idempotency key.
-    second = await client.post(
-        "/discovery/events", json=_event_body(idempotency_key=key)
-    )
+    second = await client.post("/discovery/events", json=_event_body(idempotency_key=key))
     assert second.status_code == 200
 
     events = (
@@ -100,25 +92,19 @@ async def test_events_merges_only_allowlisted_signal_tags(client, db_session) ->
         ),
     )
     assert resp.status_code == 200
-    row = (
-        await db_session.execute(select(DiscoverySession))
-    ).scalar_one()
+    row = (await db_session.execute(select(DiscoverySession))).scalar_one()
     assert row.coarse_tags == {"categories": ["data analyst"]}
 
 
 async def test_invalid_event_returns_422(client) -> None:
-    resp = await client.post(
-        "/discovery/events", json=_event_body(source_surface="bogus_surface")
-    )
+    resp = await client.post("/discovery/events", json=_event_body(source_surface="bogus_surface"))
     assert resp.status_code == 422
     assert resp.json()["error"]["code"] == "VALIDATION_FAILED"
 
 
 async def test_extra_fields_rejected(client) -> None:
     # extra="forbid" → a stray PII-looking field is a schema error, never stored.
-    resp = await client.post(
-        "/discovery/events", json=_event_body(email="leak@example.com")
-    )
+    resp = await client.post("/discovery/events", json=_event_body(email="leak@example.com"))
     assert resp.status_code == 422
 
 

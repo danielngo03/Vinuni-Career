@@ -127,9 +127,7 @@ async def _get_incidents(db: AsyncSession) -> list[Incident]:
 
 
 async def _get_audit_rows(db: AsyncSession, resource_type: str) -> list[AuditLog]:
-    result = await db.execute(
-        select(AuditLog).where(AuditLog.resource_type == resource_type)
-    )
+    result = await db.execute(select(AuditLog).where(AuditLog.resource_type == resource_type))
     return list(result.scalars().all())
 
 
@@ -709,9 +707,7 @@ async def test_resolve_missing_incident_returns_404(sa_client: AsyncClient) -> N
 # ---------------------------------------------------------------------------
 
 
-async def test_list_incidents_no_filter(
-    sa_client: AsyncClient, db_session: AsyncSession
-) -> None:
+async def test_list_incidents_no_filter(sa_client: AsyncClient, db_session: AsyncSession) -> None:
     rule = await _insert_rule(db_session)
     for _ in range(3):
         await _create_open_incident(db_session, rule)

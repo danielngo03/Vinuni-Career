@@ -69,8 +69,7 @@ async def count_student_applications(
         by_status[status] = count
     total = sum(by_status.values())
     active = sum(
-        count for status, count in by_status.items()
-        if status in lifecycle.ACTIVE_STATUSES
+        count for status, count in by_status.items() if status in lifecycle.ACTIVE_STATUSES
     )
     return {"total": total, "active": active}
 
@@ -85,20 +84,22 @@ async def list_recent_student_applications(
     """Newest-first compact rows of the student's own applications (with employer)."""
 
     apps = (
-        await session.execute(
-            select(Application)
-            .where(
-                Application.applicant_id == user_id,
-                Application.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(Application)
+                .where(
+                    Application.applicant_id == user_id,
+                    Application.deleted_at.is_(None),
+                )
+                .order_by(Application.applied_at.desc(), Application.id.desc())
+                .limit(max(limit, 0))
             )
-            .order_by(Application.applied_at.desc(), Application.id.desc())
-            .limit(max(limit, 0))
         )
-    ).scalars().all()
-    titles = await job_read_facade.get_job_titles(session, (a.job_id for a in apps))
-    names = await org_reporting_facade.display_names_for(
-        session, (a.org_id for a in apps)
+        .scalars()
+        .all()
     )
+    titles = await job_read_facade.get_job_titles(session, (a.job_id for a in apps))
+    names = await org_reporting_facade.display_names_for(session, (a.org_id for a in apps))
     return [
         {
             "id": str(app.id),
@@ -171,9 +172,7 @@ async def list_upcoming_student_interviews(
         )
     ).all()
     titles = await job_read_facade.get_job_titles(session, (job_id for _, job_id in rows))
-    names = await org_reporting_facade.display_names_for(
-        session, (iv.org_id for iv, _ in rows)
-    )
+    names = await org_reporting_facade.display_names_for(session, (iv.org_id for iv, _ in rows))
     return [
         {
             "id": str(iv.id),
@@ -190,9 +189,7 @@ async def list_upcoming_student_interviews(
     ]
 
 
-async def count_pending_reveals_for_student(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> int:
+async def count_pending_reveals_for_student(session: AsyncSession, *, user_id: uuid.UUID) -> int:
     return len(await _pending_reveals_for_student(session, user_id=user_id))
 
 
@@ -230,16 +227,12 @@ async def count_all_applications(session: AsyncSession) -> int:
 
     return (
         await session.execute(
-            select(func.count())
-            .select_from(Application)
-            .where(Application.deleted_at.is_(None))
+            select(func.count()).select_from(Application).where(Application.deleted_at.is_(None))
         )
     ).scalar_one()
 
 
-async def monthly_application_counts(
-    session: AsyncSession, *, months: int = 6
-) -> list[dict]:
+async def monthly_application_counts(session: AsyncSession, *, months: int = 6) -> list[dict]:
     """Applied-count per calendar month for the last ``months`` months (oldest first)."""
 
     now = datetime.now(tz=UTC)
@@ -274,9 +267,7 @@ async def monthly_application_counts(
     return out
 
 
-async def count_org_applications(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> int:
+async def count_org_applications(session: AsyncSession, *, org_id: uuid.UUID) -> int:
     return (
         await session.execute(
             select(func.count())
@@ -286,20 +277,22 @@ async def count_org_applications(
     ).scalar_one()
 
 
-async def count_org_pending_reveals(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> int:
+async def count_org_pending_reveals(session: AsyncSession, *, org_id: uuid.UUID) -> int:
     """Reveal requests this org initiated that are still awaiting a student
     response (non-expired ``pending``)."""
 
     rows = (
-        await session.execute(
-            select(ApplicationRevealRequest).where(
-                ApplicationRevealRequest.requester_org_id == org_id,
-                ApplicationRevealRequest.status == lifecycle.REVEAL_PENDING,
+        (
+            await session.execute(
+                select(ApplicationRevealRequest).where(
+                    ApplicationRevealRequest.requester_org_id == org_id,
+                    ApplicationRevealRequest.status == lifecycle.REVEAL_PENDING,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     now = _shared.now()
     return sum(1 for req in rows if _shared.as_aware(req.expires_at) > now)
 
@@ -318,13 +311,17 @@ async def list_recent_org_applications(
     """
 
     apps = (
-        await session.execute(
-            select(Application)
-            .where(Application.org_id == org_id, Application.deleted_at.is_(None))
-            .order_by(Application.applied_at.desc(), Application.id.desc())
-            .limit(max(limit, 0))
+        (
+            await session.execute(
+                select(Application)
+                .where(Application.org_id == org_id, Application.deleted_at.is_(None))
+                .order_by(Application.applied_at.desc(), Application.id.desc())
+                .limit(max(limit, 0))
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     titles = await job_read_facade.get_job_titles(session, (a.job_id for a in apps))
     return [
         {
@@ -360,22 +357,16 @@ async def list_recent_org_applications(
 # the pre-pipeline "new" buckets read from ``candidate_stages``.
 
 
-async def _coarse_status_counts(
-    session: AsyncSession, *, where
-) -> dict[str, int]:
+async def _coarse_status_counts(session: AsyncSession, *, where) -> dict[str, int]:
     rows = (
         await session.execute(
-            select(Application.status, func.count())
-            .where(*where)
-            .group_by(Application.status)
+            select(Application.status, func.count()).where(*where).group_by(Application.status)
         )
     ).all()
     return {row[0]: row[1] for row in rows}
 
 
-async def _active_stage_counts(
-    session: AsyncSession, *, where
-) -> dict[uuid.UUID, int]:
+async def _active_stage_counts(session: AsyncSession, *, where) -> dict[uuid.UUID, int]:
     """Count ACTIVE ``candidate_stages`` rows per stage for under_review apps.
 
     Joins ``applications`` so the coarse outcome gates the count: a withdrawn
@@ -445,9 +436,7 @@ def _assemble_pipeline_counts(
     }
 
 
-async def pipeline_counts_for_job(
-    session: AsyncSession, *, job_id: uuid.UUID
-) -> dict:
+async def pipeline_counts_for_job(session: AsyncSession, *, job_id: uuid.UUID) -> dict:
     """``proj_partner_pipeline`` counts for ONE job, derived from candidate_stages.
 
     Returns ``{new, by_stage:{stage_id: count}, active_total, rejected,
@@ -462,14 +451,10 @@ async def pipeline_counts_for_job(
     )
     by_stage = await _active_stage_counts(session, where=job_where)
     new_count = await _new_bucket_count(session, where=job_where)
-    return _assemble_pipeline_counts(
-        coarse=coarse, by_stage=by_stage, new_count=new_count
-    )
+    return _assemble_pipeline_counts(coarse=coarse, by_stage=by_stage, new_count=new_count)
 
 
-async def pipeline_counts_for_org(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> dict:
+async def pipeline_counts_for_org(session: AsyncSession, *, org_id: uuid.UUID) -> dict:
     """``proj_partner_pipeline`` counts rolled up across ALL of an org's jobs.
 
     Same shape as :func:`pipeline_counts_for_job`; powers the partner dashboard
@@ -483,9 +468,7 @@ async def pipeline_counts_for_org(
     )
     by_stage = await _active_stage_counts(session, where=org_where)
     new_count = await _new_bucket_count(session, where=org_where)
-    return _assemble_pipeline_counts(
-        coarse=coarse, by_stage=by_stage, new_count=new_count
-    )
+    return _assemble_pipeline_counts(coarse=coarse, by_stage=by_stage, new_count=new_count)
 
 
 # --------------------------------------------------------------------------- #
@@ -514,12 +497,8 @@ async def pipeline_overview_for_org(
     active_sum = func.sum(
         case((Application.status.in_(list(lifecycle.ACTIVE_STATUSES)), 1), else_=0)
     )
-    rejected_sum = func.sum(
-        case((Application.status == lifecycle.REJECTED, 1), else_=0)
-    )
-    withdrawn_sum = func.sum(
-        case((Application.status == lifecycle.WITHDRAWN, 1), else_=0)
-    )
+    rejected_sum = func.sum(case((Application.status == lifecycle.REJECTED, 1), else_=0))
+    withdrawn_sum = func.sum(case((Application.status == lifecycle.WITHDRAWN, 1), else_=0))
     count_rows = (
         await session.execute(
             select(
@@ -554,9 +533,7 @@ async def pipeline_overview_for_org(
             "job_id": str(ref.id),
             "title": ref.title or "",
             "status": ref.status,
-            "deadline": ref.application_deadline.isoformat()
-            if ref.application_deadline
-            else None,
+            "deadline": ref.application_deadline.isoformat() if ref.application_deadline else None,
             "total": total,
             "active_total": active_total,
             "rejected": rejected,
@@ -572,9 +549,7 @@ async def pipeline_overview_for_org(
 # --------------------------------------------------------------------------- #
 
 
-async def analytics_application_funnel(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> list[dict]:
+async def analytics_application_funnel(session: AsyncSession, *, org_id: uuid.UUID) -> list[dict]:
     """Application funnel counts grouped by coarse status for an org.
 
     Returns counts for active statuses in pipeline order, then terminal statuses.

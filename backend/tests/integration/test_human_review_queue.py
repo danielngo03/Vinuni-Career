@@ -27,9 +27,7 @@ from tests.recruitment_utils import job_payload
 
 
 def _student() -> Principal:
-    return Principal(
-        user_id=uuid.uuid4(), persona="student", permissions=frozenset()
-    )
+    return Principal(user_id=uuid.uuid4(), persona="student", permissions=frozenset())
 
 
 async def _enqueue(db, **over) -> HumanReviewItem:
@@ -56,13 +54,9 @@ class TestEnqueue:
     async def test_enqueue_dedups_open_item_per_resource(self, db_session) -> None:
         rid = uuid.uuid4()
         first = await _enqueue(db_session, resource_id=rid)
-        second = await _enqueue(
-            db_session, resource_id=rid, findings={"content_check": {"v": 2}}
-        )
+        second = await _enqueue(db_session, resource_id=rid, findings={"content_check": {"v": 2}})
         assert second.id == first.id  # refreshed, not duplicated
-        rows = (
-            (await db_session.execute(select(HumanReviewItem))).scalars().all()
-        )
+        rows = (await db_session.execute(select(HumanReviewItem))).scalars().all()
         assert len(rows) == 1
         assert rows[0].findings_json == {"content_check": {"v": 2}}
 
@@ -103,9 +97,7 @@ class TestListAndDecide:
             db_session, org_type="university", display_name="VinUni"
         )
         item = await _enqueue(db_session)
-        await review_queue_service.resolve_item(
-            db_session, principal=uni, ctx=CTX, item_id=item.id
-        )
+        await review_queue_service.resolve_item(db_session, principal=uni, ctx=CTX, item_id=item.id)
         with pytest.raises(ConflictError):
             await review_queue_service.dismiss_item(
                 db_session, principal=uni, ctx=CTX, item_id=item.id
@@ -113,9 +105,7 @@ class TestListAndDecide:
 
     async def test_student_denied(self, db_session) -> None:
         with pytest.raises(PermissionDeniedError):
-            await review_queue_service.list_items(
-                db_session, principal=_student()
-            )
+            await review_queue_service.list_items(db_session, principal=_student())
 
     async def test_partner_admin_denied(self, db_session) -> None:
         _u, _org, partner = await make_org_with_admin(
@@ -144,9 +134,7 @@ class TestJdDraftEscalation:
             )
 
         assert result["bias_check"]["requires_human_review"] is True
-        rows = (
-            (await db_session.execute(select(HumanReviewItem))).scalars().all()
-        )
+        rows = (await db_session.execute(select(HumanReviewItem))).scalars().all()
         assert len(rows) == 1
         assert rows[0].source == review_queue_service.SOURCE_BIAS
         assert rows[0].resource_id == job_id
@@ -168,9 +156,7 @@ class TestJdDraftEscalation:
                 job_id=uuid.UUID(created["id"]),
                 payload={},
             )
-        rows = (
-            (await db_session.execute(select(HumanReviewItem))).scalars().all()
-        )
+        rows = (await db_session.execute(select(HumanReviewItem))).scalars().all()
         assert rows == []
 
 
@@ -184,8 +170,7 @@ class TestFraudScan:
             principal=partner,
             payload=job_payload(
                 description=(
-                    "Vui lòng nộp phí hồ sơ 200k. "
-                    "Nhắn tin qua Zalo trước để được nhận việc."
+                    "Vui lòng nộp phí hồ sơ 200k. Nhắn tin qua Zalo trước để được nhận việc."
                 )
             ),
             ctx=CTX,
@@ -202,12 +187,8 @@ class TestFraudScan:
         assert result["risk_level"] == "high"
         assert result["escalated"] is True
         assert "risk_score" not in result  # raw score never in the response
-        rows = (
-            (await db_session.execute(select(HumanReviewItem))).scalars().all()
-        )
-        assert any(
-            r.source == review_queue_service.SOURCE_FRAUD for r in rows
-        )
+        rows = (await db_session.execute(select(HumanReviewItem))).scalars().all()
+        assert any(r.source == review_queue_service.SOURCE_FRAUD for r in rows)
 
     async def test_clean_job_not_escalated(self, db_session) -> None:
         _u, _org, partner = await make_org_with_admin(

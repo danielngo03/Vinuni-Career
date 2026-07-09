@@ -129,10 +129,7 @@ async def search_by_embedding(
         {"qvec": vec_literal, "limit": limit},
     )
 
-    return [
-        (uuid.UUID(str(row.job_id)), float(row.score))
-        for row in rows
-    ]
+    return [(uuid.UUID(str(row.job_id)), float(row.score)) for row in rows]
 
 
 async def delete_job_embedding(

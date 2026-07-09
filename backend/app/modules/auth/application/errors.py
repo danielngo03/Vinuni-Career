@@ -41,10 +41,7 @@ class EmailAlreadyRegisteredError(AppError):
 class AccountLockedError(AppError):
     code = "RATE_LIMITED"
     http_status = 429
-    message = (
-        "Tài khoản tạm thời bị khóa do đăng nhập sai nhiều lần. "
-        "Vui lòng thử lại sau ít phút."
-    )
+    message = "Tài khoản tạm thời bị khóa do đăng nhập sai nhiều lần. Vui lòng thử lại sau ít phút."
 
     def __init__(self, *, retry_after_minutes: int) -> None:
         super().__init__(
@@ -87,6 +84,4 @@ class RateLimitedError(AppError):
     message = "Bạn thao tác quá nhanh. Vui lòng thử lại sau giây lát."
 
     def __init__(self, *, reason: str, retry_after_seconds: int) -> None:
-        super().__init__(
-            details={"reason": reason, "retry_after_seconds": retry_after_seconds}
-        )
+        super().__init__(details={"reason": reason, "retry_after_seconds": retry_after_seconds})

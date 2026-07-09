@@ -58,12 +58,8 @@ async def test_resend_verification_cooldown_applies_identically_known_and_unknow
 
     unknown_email = _email()
 
-    known_first = await client.post(
-        "/auth/verify-email/resend", json={"email": known_email}
-    )
-    unknown_first = await client.post(
-        "/auth/verify-email/resend", json={"email": unknown_email}
-    )
+    known_first = await client.post("/auth/verify-email/resend", json={"email": known_email})
+    unknown_first = await client.post("/auth/verify-email/resend", json={"email": unknown_email})
     assert known_first.status_code == unknown_first.status_code == 200
     assert (
         known_first.json()["data"]["status"]
@@ -71,12 +67,8 @@ async def test_resend_verification_cooldown_applies_identically_known_and_unknow
         == "verification_sent"
     )
 
-    known_second = await client.post(
-        "/auth/verify-email/resend", json={"email": known_email}
-    )
-    unknown_second = await client.post(
-        "/auth/verify-email/resend", json={"email": unknown_email}
-    )
+    known_second = await client.post("/auth/verify-email/resend", json={"email": known_email})
+    unknown_second = await client.post("/auth/verify-email/resend", json={"email": unknown_email})
     assert known_second.status_code == unknown_second.status_code == 429
     assert (
         known_second.json()["error"]["details"]["reason"]
@@ -90,25 +82,15 @@ async def test_forgot_password_cooldown_applies_identically_known_and_unknown(
     client, db_session
 ) -> None:
     known_email = _email()
-    await client.post(
-        "/auth/register", json={"email": known_email, "password": "Sup3rSecret!"}
-    )
+    await client.post("/auth/register", json={"email": known_email, "password": "Sup3rSecret!"})
     unknown_email = _email()
 
-    known_first = await client.post(
-        "/auth/forgot-password", json={"email": known_email}
-    )
-    unknown_first = await client.post(
-        "/auth/forgot-password", json={"email": unknown_email}
-    )
+    known_first = await client.post("/auth/forgot-password", json={"email": known_email})
+    unknown_first = await client.post("/auth/forgot-password", json={"email": unknown_email})
     assert known_first.status_code == unknown_first.status_code == 200
 
-    known_second = await client.post(
-        "/auth/forgot-password", json={"email": known_email}
-    )
-    unknown_second = await client.post(
-        "/auth/forgot-password", json={"email": unknown_email}
-    )
+    known_second = await client.post("/auth/forgot-password", json={"email": known_email})
+    unknown_second = await client.post("/auth/forgot-password", json={"email": unknown_email})
     assert known_second.status_code == unknown_second.status_code == 429
     assert (
         known_second.json()["error"]["details"]["reason"]
@@ -119,9 +101,7 @@ async def test_forgot_password_cooldown_applies_identically_known_and_unknown(
 
 async def test_hourly_cap_returns_rate_limited_reason(client, db_session) -> None:
     email = _email()
-    await client.post(
-        "/auth/register", json={"email": email, "password": "Sup3rSecret!"}
-    )
+    await client.post("/auth/register", json={"email": email, "password": "Sup3rSecret!"})
 
     # Simulate having already made auth_email_request_rate_limit_per_hour (5)
     # attempts earlier in the current rolling window (each past its own
@@ -195,24 +175,18 @@ async def test_oauth_new_verified_user_creates_account_and_logs_in(db_session) -
     assert user.password_hash is None
 
     link = (
-        await db_session.execute(
-            select(OidcAccount).where(OidcAccount.user_id == user.id)
-        )
+        await db_session.execute(select(OidcAccount).where(OidcAccount.user_id == user.id))
     ).scalar_one()
     assert link.provider == "google"
 
-    login_result = await oauth_service.exchange_ticket(
-        db_session, ticket=result.ticket, ctx=CTX
-    )
+    login_result = await oauth_service.exchange_ticket(db_session, ticket=result.ticket, ctx=CTX)
     assert login_result.user.id == user.id
     assert login_result.tokens.access_token
 
 
 async def test_oauth_auto_links_passwordless_existing_account(db_session) -> None:
     email = _email()
-    user = await create_user(
-        db_session, email=email, password_hash=None, full_name="SSO Only"
-    )
+    user = await create_user(db_session, email=email, password_hash=None, full_name="SSO Only")
     await create_identity(db_session, user_id=user.id, persona="student", is_primary=True)
     await db_session.commit()
 
@@ -236,20 +210,22 @@ async def test_oauth_auto_links_passwordless_existing_account(db_session) -> Non
     assert isinstance(result, oauth_service.OAuthLoggedIn)
 
     link = (
-        await db_session.execute(
-            select(OidcAccount).where(OidcAccount.user_id == user.id)
-        )
+        await db_session.execute(select(OidcAccount).where(OidcAccount.user_id == user.id))
     ).scalar_one()
     assert link.provider == "google"
 
     outbox = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.recipient_id == user.id,
-                NotificationOutbox.template_key == "account.oauth_linked",
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.recipient_id == user.id,
+                    NotificationOutbox.template_key == "account.oauth_linked",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(outbox) == 1
 
 
@@ -286,13 +262,17 @@ async def test_oauth_conflict_requires_password_confirm(db_session) -> None:
     assert link is None
 
     outbox = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.recipient_id == verified_user.id,
-                NotificationOutbox.template_key == "account.oauth_conflict",
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.recipient_id == verified_user.id,
+                    NotificationOutbox.template_key == "account.oauth_conflict",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(outbox) == 1
 
     # Wrong password -> uniform 401, no account created.

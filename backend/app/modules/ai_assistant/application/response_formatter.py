@@ -22,9 +22,7 @@ def ai_unavailable_reply(locale: str = "vi") -> str:
     return assistant_message("formatter.ai_unavailable", locale)
 
 
-def fast_path_reply(
-    text: str, locale: str = "vi", *, persona: str | None = None
-) -> str | None:
+def fast_path_reply(text: str, locale: str = "vi", *, persona: str | None = None) -> str | None:
     """Return deterministic replies for tiny conversational turns.
 
     These turns do not need a model call. Keeping them local reduces latency,

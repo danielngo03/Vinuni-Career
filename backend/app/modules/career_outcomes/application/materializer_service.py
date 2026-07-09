@@ -106,9 +106,7 @@ async def materialize_career_outcomes(
             # sweep, and log PII-safe (ids only) for follow-up.
             event.published_at = now
             counts["invalid"] += 1
-            logger.warning(
-                "career_outcomes.invalid_event", extra={"event_id": str(event.id)}
-            )
+            logger.warning("career_outcomes.invalid_event", extra={"event_id": str(event.id)})
             continue
 
         existing = (
@@ -128,9 +126,7 @@ async def materialize_career_outcomes(
                     offer_id=offer_id,
                     org_id=org_id,
                     employer_org_id=employer_org_id,
-                    position_title=(
-                        position_title if isinstance(position_title, str) else None
-                    ),
+                    position_title=(position_title if isinstance(position_title, str) else None),
                     start_date=start.date() if start is not None else None,
                     outcome_type=OUTCOME_HIRED,
                     trust_level=TRUST_LEVEL_ESTIMATED,

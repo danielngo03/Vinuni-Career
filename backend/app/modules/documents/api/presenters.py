@@ -30,9 +30,7 @@ def _iso(value) -> str | None:
     return value.isoformat() if value else None
 
 
-def template(
-    t: CvTemplate, *, locale: str = "vi", include_admin_fields: bool = False
-) -> dict:
+def template(t: CvTemplate, *, locale: str = "vi", include_admin_fields: bool = False) -> dict:
     data = {
         "id": str(t.id),
         "key": t.key,
@@ -120,8 +118,7 @@ def cv_detail(
     current_id = str(rows[0].id) if rows else None
     data["current_version_id"] = current_id
     data["versions"] = [
-        cv_version_summary(v, is_current=(str(v.id) == current_id), locale=locale)
-        for v in rows
+        cv_version_summary(v, is_current=(str(v.id) == current_id), locale=locale) for v in rows
     ]
     return data
 

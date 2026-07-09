@@ -62,16 +62,12 @@ async def generate_cover_letter(
 
     # Load the publicly visible job.
     job = (
-        await session.execute(
-            select(Job).where(Job.id == job_id, Job.deleted_at.is_(None))
-        )
+        await session.execute(select(Job).where(Job.id == job_id, Job.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if job is None:
         raise ResourceNotFoundError()
 
-    levels = visible_levels_for(
-        principal.persona, is_authenticated=principal.is_authenticated
-    )
+    levels = visible_levels_for(principal.persona, is_authenticated=principal.is_authenticated)
     import datetime
 
     now = datetime.datetime.utcnow()

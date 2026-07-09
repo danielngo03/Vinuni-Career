@@ -93,9 +93,7 @@ async def _resolve_active_cv_limit(
     return int(limit), source
 
 
-async def _enforce_active_cv_quota(
-    session: AsyncSession, *, principal: Principal
-) -> None:
+async def _enforce_active_cv_quota(session: AsyncSession, *, principal: Principal) -> None:
     """Raise ``CvQuotaReachedError`` (409 QUOTA_EXCEEDED) when the owner is at or
     over the active CV library limit (``ready`` CVs). Called at the service layer
     BEFORE a CV is committed into the library — on **finalize** (draft -> ready) and
@@ -135,7 +133,9 @@ async def _load_sections(session: AsyncSession, *, cv_id: uuid.UUID) -> list[CvS
                 .where(CvSection.cv_id == cv_id)
                 .order_by(CvSection.sort_order, CvSection.id)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -149,7 +149,9 @@ async def _load_versions(session: AsyncSession, *, cv_id: uuid.UUID) -> list[CvV
                 .where(CvVersion.cv_id == cv_id)
                 .order_by(CvVersion.version_number.desc(), CvVersion.id.desc())
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -187,9 +189,7 @@ def guard_editable(cv: CvProfile) -> None:
         raise UploadedCvReadOnlyError()
 
 
-async def _uploaded_original_preview_url(
-    session: AsyncSession, *, cv: CvProfile
-) -> str | None:
+async def _uploaded_original_preview_url(session: AsyncSession, *, cv: CvProfile) -> str | None:
     """Signed preview URL of the ORIGINAL uploaded file backing an uploaded CV.
 
     Uploaded CVs are viewed read-only (the student's own document), so the detail
@@ -203,17 +203,20 @@ async def _uploaded_original_preview_url(
     from app.modules.documents.infrastructure import storage
 
     document_id = (
-        await session.execute(
-            select(CvIngestion.document_id)
-            .where(CvIngestion.imported_cv_id == cv.id)
-            .order_by(CvIngestion.created_at.desc())
+        (
+            await session.execute(
+                select(CvIngestion.document_id)
+                .where(CvIngestion.imported_cv_id == cv.id)
+                .order_by(CvIngestion.created_at.desc())
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     if document_id is None:
         return None
     token = storage.make_signed_token(
-        {"kind": "document", "id": str(document_id), "uid": str(cv.user_id),
-         "purpose": "preview"}
+        {"kind": "document", "id": str(document_id), "uid": str(cv.user_id), "purpose": "preview"}
     )
     base = get_settings().app_url.rstrip("/")
     return f"{base}/api/v1/cv-files/{token}"
@@ -236,16 +239,13 @@ def _canvas_photo_url(cv: CvProfile, document_id: object) -> str | None:
     except (ValueError, TypeError, AttributeError):
         return None
     token = storage.make_signed_token(
-        {"kind": "document", "id": str(doc_uuid), "uid": str(cv.user_id),
-         "purpose": "preview"}
+        {"kind": "document", "id": str(doc_uuid), "uid": str(cv.user_id), "purpose": "preview"}
     )
     base = get_settings().app_url.rstrip("/")
     return f"{base}/api/v1/cv-files/{token}"
 
 
-async def _detail_response(
-    session: AsyncSession, *, cv: CvProfile, locale: str
-) -> dict:
+async def _detail_response(session: AsyncSession, *, cv: CvProfile, locale: str) -> dict:
     """Build the full CV detail (sections + version history + current_version_id).
 
     For uploaded CVs the response also carries ``is_uploaded`` + the original
@@ -275,9 +275,7 @@ async def _detail_response(
 
     data["is_uploaded"] = is_uploaded_cv(cv)
     if data["is_uploaded"]:
-        data["original_preview_url"] = await _uploaded_original_preview_url(
-            session, cv=cv
-        )
+        data["original_preview_url"] = await _uploaded_original_preview_url(session, cv=cv)
     return data
 
 
@@ -303,9 +301,7 @@ async def _snapshot_version(
     return version
 
 
-async def _seed_sections(
-    session: AsyncSession, *, cv_id: uuid.UUID, sections: list[dict]
-) -> None:
+async def _seed_sections(session: AsyncSession, *, cv_id: uuid.UUID, sections: list[dict]) -> None:
     for spec in sections:
         session.add(
             CvSection(

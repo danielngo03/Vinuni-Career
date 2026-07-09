@@ -58,9 +58,15 @@ async def _seed_packages(db) -> dict[str, AdPackage]:
     out: dict[str, AdPackage] = {}
     for code, name, ptype, price, days, gs, gf in specs:
         pkg = AdPackage(
-            code=code, name=name, placement_type=ptype, price_amount=price,
-            currency="VND", duration_days=days, grants_sponsored=gs,
-            grants_featured=gf, is_active=True,
+            code=code,
+            name=name,
+            placement_type=ptype,
+            price_amount=price,
+            currency="VND",
+            duration_days=days,
+            grants_sponsored=gs,
+            grants_featured=gf,
+            is_active=True,
         )
         db.add(pkg)
         out[code] = pkg
@@ -93,12 +99,8 @@ async def _published_job(db, partner, uni, *, title="Live Job") -> uuid.UUID:
     created = await job_service.create_job(
         db, principal=partner, payload=_job_payload(title), ctx=CTX
     )
-    await job_service.submit_job(
-        db, principal=partner, job_id=uuid.UUID(created["id"]), ctx=CTX
-    )
-    await jobs_moderation.approve_job(
-        db, principal=uni, job_id=uuid.UUID(created["id"]), ctx=CTX
-    )
+    await job_service.submit_job(db, principal=partner, job_id=uuid.UUID(created["id"]), ctx=CTX)
+    await jobs_moderation.approve_job(db, principal=uni, job_id=uuid.UUID(created["id"]), ctx=CTX)
     return uuid.UUID(created["id"])
 
 
@@ -115,9 +117,7 @@ async def _audit_count(db, action: str) -> int:
 
 
 async def _flags(db, model, target_id: uuid.UUID) -> tuple[bool, bool]:
-    row = (
-        await db.execute(select(model).where(model.id == target_id))
-    ).scalar_one()
+    row = (await db.execute(select(model).where(model.id == target_id))).scalar_one()
     return row.is_sponsored, row.is_featured
 
 
@@ -126,8 +126,15 @@ def _now() -> datetime:
 
 
 async def _create_draft(
-    db, partner, *, target_type, target_id, package, placement_type,
-    start_offset_days=0, disclosure=True,
+    db,
+    partner,
+    *,
+    target_type,
+    target_id,
+    package,
+    placement_type,
+    start_offset_days=0,
+    disclosure=True,
 ):
     return await placement_service.create_placement(
         db,
@@ -171,12 +178,19 @@ async def test_submit_without_disclosure_is_422(db_session) -> None:
     job_id = await _published_job(db_session, partner, uni)
 
     draft = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["sponsored_14d"], placement_type="sponsored", disclosure=False,
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
+        disclosure=False,
     )
     with pytest.raises(DisclosureRequiredError):
         await placement_service.submit_placement(
-            db_session, principal=partner, placement_id=uuid.UUID(draft["id"]),
+            db_session,
+            principal=partner,
+            placement_id=uuid.UUID(draft["id"]),
             ctx=CTX,
         )
 
@@ -200,8 +214,12 @@ async def test_list_my_placements_resolves_target_title(db_session) -> None:
     job_id = await _published_job(db_session, partner, uni, title="Backend Intern")
 
     await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["sponsored_14d"], placement_type="sponsored",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
     )
 
     items, _cursor, _limit = await placement_service.list_my_placements(
@@ -224,32 +242,43 @@ async def test_full_flow_job_flips_sponsored_on_then_off(db_session) -> None:
 
     # Window already open so approve/mark_paid activates inline.
     draft = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["sponsored_14d"], placement_type="sponsored",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
         start_offset_days=-1,
     )
     pid = uuid.UUID(draft["id"])
     await placement_service.submit_placement(
-        db_session, principal=partner, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=partner,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.approve_placement(
-        db_session, principal=uni, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        ctx=CTX,
     )
     # Approved but unpaid -> NOT active yet, flags OFF.
     assert await _flags(db_session, Job, job_id) == (False, False)
 
     res = await moderation_service.mark_paid(
-        db_session, principal=uni, placement_id=pid,
-        payment_reference="BANK-REF-001", ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        payment_reference="BANK-REF-001",
+        ctx=CTX,
     )
     assert res["status"] == "active"
     assert await _flags(db_session, Job, job_id) == (True, False)
 
     # Completion (window end passed) -> flag OFF.
     placement = (
-        await db_session.execute(
-            select(SponsoredPlacement).where(SponsoredPlacement.id == pid)
-        )
+        await db_session.execute(select(SponsoredPlacement).where(SponsoredPlacement.id == pid))
     ).scalar_one()
     placement.end_at = _now() - timedelta(minutes=1)
     await db_session.commit()
@@ -265,20 +294,33 @@ async def test_full_flow_event_target_featured(db_session) -> None:
     event_id = await _published_event(db_session, partner, uni)
 
     draft = await _create_draft(
-        db_session, partner, target_type="event", target_id=event_id,
-        package=pkgs["featured_7d"], placement_type="featured",
+        db_session,
+        partner,
+        target_type="event",
+        target_id=event_id,
+        package=pkgs["featured_7d"],
+        placement_type="featured",
         start_offset_days=-1,
     )
     pid = uuid.UUID(draft["id"])
     await placement_service.submit_placement(
-        db_session, principal=partner, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=partner,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.approve_placement(
-        db_session, principal=uni, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.mark_paid(
-        db_session, principal=uni, placement_id=pid,
-        payment_reference="BANK-REF-EVT", ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        payment_reference="BANK-REF-EVT",
+        ctx=CTX,
     )
     # featured ON, sponsored stays OFF.
     assert await _flags(db_session, Event, event_id) == (False, True)
@@ -296,24 +338,32 @@ async def test_activation_requires_paid(db_session) -> None:
     job_id = await _published_job(db_session, partner, uni)
 
     draft = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["sponsored_14d"], placement_type="sponsored",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
         start_offset_days=-1,
     )
     pid = uuid.UUID(draft["id"])
     await placement_service.submit_placement(
-        db_session, principal=partner, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=partner,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.approve_placement(
-        db_session, principal=uni, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        ctx=CTX,
     )
     # Approved + in-window + unpaid: the activation sweep must NOT activate it.
     await activation_service.activation_sweep(db_session, now=_now())
     await db_session.commit()
     placement = (
-        await db_session.execute(
-            select(SponsoredPlacement).where(SponsoredPlacement.id == pid)
-        )
+        await db_session.execute(select(SponsoredPlacement).where(SponsoredPlacement.id == pid))
     ).scalar_one()
     assert placement.status == "approved"
     assert await _flags(db_session, Job, job_id) == (False, False)
@@ -332,19 +382,33 @@ async def test_two_active_placements_keep_flag_until_both_complete(db_session) -
 
     async def _activate_on(pkg, placement_type) -> uuid.UUID:
         draft = await _create_draft(
-            db_session, partner, target_type="job", target_id=job_id,
-            package=pkg, placement_type=placement_type, start_offset_days=-1,
+            db_session,
+            partner,
+            target_type="job",
+            target_id=job_id,
+            package=pkg,
+            placement_type=placement_type,
+            start_offset_days=-1,
         )
         pid = uuid.UUID(draft["id"])
         await placement_service.submit_placement(
-            db_session, principal=partner, placement_id=pid, ctx=CTX,
+            db_session,
+            principal=partner,
+            placement_id=pid,
+            ctx=CTX,
         )
         await moderation_service.approve_placement(
-            db_session, principal=uni, placement_id=pid, ctx=CTX,
+            db_session,
+            principal=uni,
+            placement_id=pid,
+            ctx=CTX,
         )
         await moderation_service.mark_paid(
-            db_session, principal=uni, placement_id=pid,
-            payment_reference=f"REF-{placement_type}", ctx=CTX,
+            db_session,
+            principal=uni,
+            placement_id=pid,
+            payment_reference=f"REF-{placement_type}",
+            ctx=CTX,
         )
         return pid
 
@@ -358,11 +422,19 @@ async def test_two_active_placements_keep_flag_until_both_complete(db_session) -
     # Use a separate job-fit: bypass uniqueness by creating it post-activation via
     # the service is blocked by design; seed it directly to model true overlap.
     second = SponsoredPlacement(
-        org_id=partner.org_id, created_by=partner.user_id, target_type="job",
-        target_id=job_id, placement_type="sponsored", package_id=pkgs["sponsored_14d"].id,
-        price_amount="3000000.00", currency="VND",
-        start_at=_now() - timedelta(days=1), end_at=_now() + timedelta(days=13),
-        status="active", disclosure_confirmed=True, paid_at=_now(),
+        org_id=partner.org_id,
+        created_by=partner.user_id,
+        target_type="job",
+        target_id=job_id,
+        placement_type="sponsored",
+        package_id=pkgs["sponsored_14d"].id,
+        price_amount="3000000.00",
+        currency="VND",
+        start_at=_now() - timedelta(days=1),
+        end_at=_now() + timedelta(days=13),
+        status="active",
+        disclosure_confirmed=True,
+        paid_at=_now(),
         activated_at=_now(),
     )
     db_session.add(second)
@@ -371,9 +443,7 @@ async def test_two_active_placements_keep_flag_until_both_complete(db_session) -
 
     # Complete p1 -> the other active placement keeps sponsored ON.
     placement = (
-        await db_session.execute(
-            select(SponsoredPlacement).where(SponsoredPlacement.id == p1)
-        )
+        await db_session.execute(select(SponsoredPlacement).where(SponsoredPlacement.id == p1))
     ).scalar_one()
     placement.end_at = _now() - timedelta(minutes=1)
     await db_session.commit()
@@ -403,8 +473,12 @@ async def test_create_on_cross_org_target_is_404(db_session) -> None:
 
     with pytest.raises(ResourceNotFoundError):
         await _create_draft(
-            db_session, partner_b, target_type="job", target_id=job_a,
-            package=pkgs["sponsored_14d"], placement_type="sponsored",
+            db_session,
+            partner_b,
+            target_type="job",
+            target_id=job_a,
+            package=pkgs["sponsored_14d"],
+            placement_type="sponsored",
         )
 
 
@@ -413,8 +487,12 @@ async def test_create_on_unknown_target_is_404(db_session) -> None:
     _u, _o, partner = await make_org_with_admin(db_session)
     with pytest.raises(ResourceNotFoundError):
         await _create_draft(
-            db_session, partner, target_type="job", target_id=uuid.uuid4(),
-            package=pkgs["sponsored_14d"], placement_type="sponsored",
+            db_session,
+            partner,
+            target_type="job",
+            target_id=uuid.uuid4(),
+            package=pkgs["sponsored_14d"],
+            placement_type="sponsored",
         )
 
 
@@ -430,19 +508,33 @@ async def test_double_in_flight_on_same_target_is_409(db_session) -> None:
     job_id = await _published_job(db_session, partner, uni)
 
     d1 = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["sponsored_14d"], placement_type="sponsored",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
     )
     await placement_service.submit_placement(
-        db_session, principal=partner, placement_id=uuid.UUID(d1["id"]), ctx=CTX,
+        db_session,
+        principal=partner,
+        placement_id=uuid.UUID(d1["id"]),
+        ctx=CTX,
     )
     d2 = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["featured_7d"], placement_type="featured",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["featured_7d"],
+        placement_type="featured",
     )
     with pytest.raises(PlacementExistsError):
         await placement_service.submit_placement(
-            db_session, principal=partner, placement_id=uuid.UUID(d2["id"]), ctx=CTX,
+            db_session,
+            principal=partner,
+            placement_id=uuid.UUID(d2["id"]),
+            ctx=CTX,
         )
 
 
@@ -460,20 +552,34 @@ async def test_per_org_concurrency_cap_is_409(db_session) -> None:
     for i in range(3):
         job_id = await _published_job(db_session, partner, uni, title=f"Job {i}")
         d = await _create_draft(
-            db_session, partner, target_type="job", target_id=job_id,
-            package=pkgs["sponsored_14d"], placement_type="sponsored",
+            db_session,
+            partner,
+            target_type="job",
+            target_id=job_id,
+            package=pkgs["sponsored_14d"],
+            placement_type="sponsored",
         )
         await placement_service.submit_placement(
-            db_session, principal=partner, placement_id=uuid.UUID(d["id"]), ctx=CTX,
+            db_session,
+            principal=partner,
+            placement_id=uuid.UUID(d["id"]),
+            ctx=CTX,
         )
     job4 = await _published_job(db_session, partner, uni, title="Job 4")
     d4 = await _create_draft(
-        db_session, partner, target_type="job", target_id=job4,
-        package=pkgs["sponsored_14d"], placement_type="sponsored",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job4,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
     )
     with pytest.raises(ActivePlacementLimitError):
         await placement_service.submit_placement(
-            db_session, principal=partner, placement_id=uuid.UUID(d4["id"]), ctx=CTX,
+            db_session,
+            principal=partner,
+            placement_id=uuid.UUID(d4["id"]),
+            ctx=CTX,
         )
 
 
@@ -489,24 +595,42 @@ async def test_university_can_disable_any_active_placement(db_session) -> None:
     job_id = await _published_job(db_session, partner, uni)
 
     draft = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["premium_30d"], placement_type="both", start_offset_days=-1,
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["premium_30d"],
+        placement_type="both",
+        start_offset_days=-1,
     )
     pid = uuid.UUID(draft["id"])
     await placement_service.submit_placement(
-        db_session, principal=partner, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=partner,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.approve_placement(
-        db_session, principal=uni, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.mark_paid(
-        db_session, principal=uni, placement_id=pid,
-        payment_reference="REF-PREMIUM", ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        payment_reference="REF-PREMIUM",
+        ctx=CTX,
     )
     assert await _flags(db_session, Job, job_id) == (True, True)
 
     res = await moderation_service.admin_cancel(
-        db_session, principal=uni, placement_id=pid, reason="Policy", ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        reason="Policy",
+        ctx=CTX,
     )
     assert res["status"] == "cancelled"
     assert await _flags(db_session, Job, job_id) == (False, False)
@@ -523,18 +647,29 @@ async def test_partner_admin_cannot_moderate(db_session) -> None:
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
     job_id = await _published_job(db_session, partner, uni)
     draft = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["sponsored_14d"], placement_type="sponsored",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
     )
     pid = uuid.UUID(draft["id"])
     await placement_service.submit_placement(
-        db_session, principal=partner, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=partner,
+        placement_id=pid,
+        ctx=CTX,
     )
     from app.shared.exceptions import PermissionDeniedError
+
     # Partner admin holds *:* but org_type != university -> 403.
     with pytest.raises(PermissionDeniedError):
         await moderation_service.approve_placement(
-            db_session, principal=partner, placement_id=pid, ctx=CTX,
+            db_session,
+            principal=partner,
+            placement_id=pid,
+            ctx=CTX,
         )
 
 
@@ -550,20 +685,33 @@ async def test_audit_row_per_write(db_session) -> None:
     job_id = await _published_job(db_session, partner, uni)
 
     draft = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["sponsored_14d"], placement_type="sponsored",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
         start_offset_days=-1,
     )
     pid = uuid.UUID(draft["id"])
     await placement_service.submit_placement(
-        db_session, principal=partner, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=partner,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.approve_placement(
-        db_session, principal=uni, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.mark_paid(
-        db_session, principal=uni, placement_id=pid,
-        payment_reference="REF-AUDIT", ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        payment_reference="REF-AUDIT",
+        ctx=CTX,
     )
     assert await _audit_count(db_session, "advertising.placement_created") == 1
     assert await _audit_count(db_session, "advertising.placement_submitted") == 1
@@ -587,20 +735,33 @@ async def test_activation_and_completion_sweeps_idempotent(db_session) -> None:
 
     # Approved + paid + window opens in the future; sweep activates when open.
     draft = await _create_draft(
-        db_session, partner, target_type="job", target_id=job_id,
-        package=pkgs["sponsored_14d"], placement_type="sponsored",
+        db_session,
+        partner,
+        target_type="job",
+        target_id=job_id,
+        package=pkgs["sponsored_14d"],
+        placement_type="sponsored",
         start_offset_days=1,
     )
     pid = uuid.UUID(draft["id"])
     await placement_service.submit_placement(
-        db_session, principal=partner, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=partner,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.approve_placement(
-        db_session, principal=uni, placement_id=pid, ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        ctx=CTX,
     )
     await moderation_service.mark_paid(
-        db_session, principal=uni, placement_id=pid,
-        payment_reference="REF-SWEEP", ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=pid,
+        payment_reference="REF-SWEEP",
+        ctx=CTX,
     )
     # Window not yet open -> still approved, flags OFF.
     assert await _flags(db_session, Job, job_id) == (False, False)
@@ -633,11 +794,19 @@ async def test_flag_reconcile_self_heals_drift(db_session) -> None:
 
     # An ACTIVE placement exists but the job flag was (incorrectly) left OFF.
     placement = SponsoredPlacement(
-        org_id=partner.org_id, created_by=partner.user_id, target_type="job",
-        target_id=job_id, placement_type="both", package_id=pkgs["premium_30d"].id,
-        price_amount="6000000.00", currency="VND",
-        start_at=_now() - timedelta(days=1), end_at=_now() + timedelta(days=29),
-        status="active", disclosure_confirmed=True, paid_at=_now(),
+        org_id=partner.org_id,
+        created_by=partner.user_id,
+        target_type="job",
+        target_id=job_id,
+        placement_type="both",
+        package_id=pkgs["premium_30d"].id,
+        price_amount="6000000.00",
+        currency="VND",
+        start_at=_now() - timedelta(days=1),
+        end_at=_now() + timedelta(days=29),
+        status="active",
+        disclosure_confirmed=True,
+        paid_at=_now(),
         activated_at=_now(),
     )
     db_session.add(placement)
@@ -659,9 +828,7 @@ def test_advertising_does_not_import_opportunities_orm() -> None:
     import ast
     import pathlib
 
-    root = pathlib.Path(
-        "app/modules/advertising"
-    )
+    root = pathlib.Path("app/modules/advertising")
     forbidden = "app.modules.opportunities.domain"
     offenders: list[str] = []
     for path in root.rglob("*.py"):

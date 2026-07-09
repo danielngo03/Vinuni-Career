@@ -82,14 +82,13 @@ async def _setup_reviewed(db, *, is_anonymous=False):
     su, student = await make_student(db, prefix="student")
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
-        db, principal=student,
+        db,
+        principal=student,
         payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
-    await decision_service.review_application(
-        db, principal=partner, application_id=app_id, ctx=CTX
-    )
+    await decision_service.review_application(db, principal=partner, application_id=app_id, ctx=CTX)
     return porg, partner, su, student, job_id, app_id
 
 
@@ -109,11 +108,9 @@ async def _set_current_action(db, app_id, action: str) -> None:
 
 async def _scorecard_rows(db, app_id) -> list[Scorecard]:
     return list(
-        (
-            await db.execute(
-                select(Scorecard).where(Scorecard.application_id == app_id)
-            )
-        ).scalars().all()
+        (await db.execute(select(Scorecard).where(Scorecard.application_id == app_id)))
+        .scalars()
+        .all()
     )
 
 
@@ -121,11 +118,11 @@ async def _score_rows_for(db, scorecard_id) -> list[ScorecardScore]:
     return list(
         (
             await db.execute(
-                select(ScorecardScore).where(
-                    ScorecardScore.scorecard_id == scorecard_id
-                )
+                select(ScorecardScore).where(ScorecardScore.scorecard_id == scorecard_id)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -159,10 +156,13 @@ async def test_submit_creates_scorecard_with_overall_mean(db_session) -> None:
     _org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
 
     out = await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
+        db_session,
+        principal=partner,
+        application_id=app_id,
         recommendation="strong_yes",
         scores=_scores(technical=5, communication=4, culture_fit=3, motivation=2),
-        comment="Solid candidate.", ctx=CTX,
+        comment="Solid candidate.",
+        ctx=CTX,
     )
     assert out["mine"]["recommendation"] == "strong_yes"
     assert out["mine"]["overall_score"] == 3.5  # mean(5,4,3,2)
@@ -180,13 +180,20 @@ async def test_submit_creates_scorecard_with_overall_mean(db_session) -> None:
 async def test_resubmit_upserts_same_row_and_bumps_version(db_session) -> None:
     _org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="yes", scores=_scores(technical=3), ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="yes",
+        scores=_scores(technical=3),
+        ctx=CTX,
     )
     out2 = await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="strong_yes", scores=_scores(technical=5, communication=5,
-        culture_fit=5, motivation=5), ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="strong_yes",
+        scores=_scores(technical=5, communication=5, culture_fit=5, motivation=5),
+        ctx=CTX,
     )
     # Same single row, edited in place; version bumped; scores replaced (no dupes).
     rows = await _scorecard_rows(db_session, app_id)
@@ -204,12 +211,20 @@ async def test_second_reviewer_creates_distinct_row(db_session) -> None:
     reviewer_b = await _second_reviewer(db_session, org)
 
     await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="yes", scores=_scores(), ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="yes",
+        scores=_scores(),
+        ctx=CTX,
     )
     out = await scorecard_service.submit_scorecard(
-        db_session, principal=reviewer_b, application_id=app_id,
-        recommendation="no", scores=_scores(technical=2), ctx=CTX,
+        db_session,
+        principal=reviewer_b,
+        application_id=app_id,
+        recommendation="no",
+        scores=_scores(technical=2),
+        ctx=CTX,
     )
     rows = await _scorecard_rows(db_session, app_id)
     assert len(rows) == 2
@@ -229,8 +244,12 @@ async def test_anchoring_hides_others_until_caller_submits(db_session) -> None:
     reviewer_b = await _second_reviewer(db_session, org)
 
     await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="strong_yes", scores=_scores(technical=5), ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="strong_yes",
+        scores=_scores(technical=5),
+        ctx=CTX,
     )
 
     # B has NOT submitted: sees only the round-progress count, never A's scores.
@@ -245,8 +264,12 @@ async def test_anchoring_hides_others_until_caller_submits(db_session) -> None:
 
     # B submits -> now sees A's scorecard + the full aggregate.
     await scorecard_service.submit_scorecard(
-        db_session, principal=reviewer_b, application_id=app_id,
-        recommendation="no", scores=_scores(technical=2), ctx=CTX,
+        db_session,
+        principal=reviewer_b,
+        application_id=app_id,
+        recommendation="no",
+        scores=_scores(technical=2),
+        ctx=CTX,
     )
     after = await scorecard_service.list_scorecards(
         db_session, principal=reviewer_b, application_id=app_id
@@ -268,14 +291,22 @@ async def test_withdraw_excludes_from_gate_and_aggregate(db_session) -> None:
     await _set_current_action(db_session, app_id, scorecard.ACTION_SCORECARD)
 
     out = await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="yes", scores=_scores(), ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="yes",
+        scores=_scores(),
+        ctx=CTX,
     )
     sc_id = uuid.UUID(out["mine"]["id"])
     assert out["aggregate"]["gate_met"] is True
 
     res = await scorecard_service.withdraw_scorecard(
-        db_session, principal=partner, application_id=app_id, scorecard_id=sc_id, ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        scorecard_id=sc_id,
+        ctx=CTX,
     )
     assert res["mine"] is None
     assert res["aggregate"]["submitted_count"] == 0
@@ -295,15 +326,22 @@ async def test_withdraw_other_reviewers_card_is_404(db_session) -> None:
     org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     reviewer_b = await _second_reviewer(db_session, org)
     out = await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="yes", scores=_scores(), ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="yes",
+        scores=_scores(),
+        ctx=CTX,
     )
     sc_id = uuid.UUID(out["mine"]["id"])
     # B may not withdraw A's scorecard — indistinguishable from not found.
     with pytest.raises(ResourceNotFoundError):
         await scorecard_service.withdraw_scorecard(
-            db_session, principal=reviewer_b, application_id=app_id,
-            scorecard_id=sc_id, ctx=CTX,
+            db_session,
+            principal=reviewer_b,
+            application_id=app_id,
+            scorecard_id=sc_id,
+            ctx=CTX,
         )
 
 
@@ -321,13 +359,19 @@ async def test_advance_blocked_without_scorecard_then_allowed(db_session) -> Non
             db_session, principal=partner, application_id=app_id, ctx=CTX
         )
     assert exc.value.details == {
-        "reason": "scorecard_required", "submitted": 0, "required": 1,
+        "reason": "scorecard_required",
+        "submitted": 0,
+        "required": 1,
     }
 
     # Submit one scorecard on the current (scorecard-gated) stage -> gate met.
     await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="yes", scores=_scores(), ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="yes",
+        scores=_scores(),
+        ctx=CTX,
     )
     out = await stage_service.advance_application_stage(
         db_session, principal=partner, application_id=app_id, ctx=CTX
@@ -358,8 +402,12 @@ async def test_cross_org_submit_and_list_are_404(db_session) -> None:
 
     with pytest.raises(ResourceNotFoundError):
         await scorecard_service.submit_scorecard(
-            db_session, principal=partner_b, application_id=app_id,
-            recommendation="yes", scores=_scores(), ctx=CTX,
+            db_session,
+            principal=partner_b,
+            application_id=app_id,
+            recommendation="yes",
+            scores=_scores(),
+            ctx=CTX,
         )
     with pytest.raises(ResourceNotFoundError):
         await scorecard_service.list_scorecards(
@@ -371,8 +419,12 @@ async def test_invalid_recommendation_is_422(db_session) -> None:
     _org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     with pytest.raises(InvalidApplicationFieldError):
         await scorecard_service.submit_scorecard(
-            db_session, principal=partner, application_id=app_id,
-            recommendation="maybe", scores=_scores(), ctx=CTX,
+            db_session,
+            principal=partner,
+            application_id=app_id,
+            recommendation="maybe",
+            scores=_scores(),
+            ctx=CTX,
         )
 
 
@@ -381,8 +433,12 @@ async def test_missing_criterion_is_422(db_session) -> None:
     partial = _scores()[:3]  # only 3 of the 4 required criteria
     with pytest.raises(InvalidApplicationFieldError):
         await scorecard_service.submit_scorecard(
-            db_session, principal=partner, application_id=app_id,
-            recommendation="yes", scores=partial, ctx=CTX,
+            db_session,
+            principal=partner,
+            application_id=app_id,
+            recommendation="yes",
+            scores=partial,
+            ctx=CTX,
         )
 
 
@@ -390,8 +446,12 @@ async def test_score_out_of_range_is_422(db_session) -> None:
     _org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     with pytest.raises(InvalidApplicationFieldError):
         await scorecard_service.submit_scorecard(
-            db_session, principal=partner, application_id=app_id,
-            recommendation="yes", scores=_scores(technical=6), ctx=CTX,
+            db_session,
+            principal=partner,
+            application_id=app_id,
+            recommendation="yes",
+            scores=_scores(technical=6),
+            ctx=CTX,
         )
 
 
@@ -404,13 +464,19 @@ async def test_submit_requires_active_stage(db_session) -> None:
     su, student = await make_student(db_session, prefix="student")
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     with pytest.raises(IllegalApplicationTransitionError):
         await scorecard_service.submit_scorecard(
-            db_session, principal=partner, application_id=uuid.UUID(app["id"]),
-            recommendation="yes", scores=_scores(), ctx=CTX,
+            db_session,
+            principal=partner,
+            application_id=uuid.UUID(app["id"]),
+            recommendation="yes",
+            scores=_scores(),
+            ctx=CTX,
         )
 
 
@@ -422,14 +488,16 @@ async def test_submit_requires_active_stage(db_session) -> None:
 async def test_student_projection_has_no_evaluation(db_session) -> None:
     _org, partner, _su, student, _job, app_id = await _setup_reviewed(db_session)
     await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="strong_yes", scores=_scores(technical=5),
-        comment="internal note", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="strong_yes",
+        scores=_scores(technical=5),
+        comment="internal note",
+        ctx=CTX,
     )
     # The student's own application view must carry NO scorecard/evaluation field.
-    view = await apply_service.get_application(
-        db_session, principal=student, application_id=app_id
-    )
+    view = await apply_service.get_application(db_session, principal=student, application_id=app_id)
     assert "pipeline" not in view
     assert "evaluation" not in view
     blob = str(view).lower()
@@ -443,9 +511,7 @@ async def test_partner_projection_carries_evaluation(db_session) -> None:
     _org, partner, _su, _student, _job, app_id = await _setup_reviewed(db_session)
     await _set_current_action(db_session, app_id, scorecard.ACTION_SCORECARD)
     # Partner detail before a scorecard -> gate not met.
-    view = await apply_service.get_application(
-        db_session, principal=partner, application_id=app_id
-    )
+    view = await apply_service.get_application(db_session, principal=partner, application_id=app_id)
     assert view["pipeline"]["evaluation"]["gate_met"] is False
     assert view["pipeline"]["current_stage"]["required_action"] == scorecard.ACTION_SCORECARD
 
@@ -462,8 +528,12 @@ async def test_board_evaluation_partner_only_and_gate_met(db_session) -> None:
     assert card["evaluation"]["submitted_count"] == 0
 
     await scorecard_service.submit_scorecard(
-        db_session, principal=partner, application_id=app_id,
-        recommendation="yes", scores=_scores(), ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        recommendation="yes",
+        scores=_scores(),
+        ctx=CTX,
     )
     board2 = await pipeline_board.get_job_pipeline_board(
         db_session, principal=partner, job_id=job_id

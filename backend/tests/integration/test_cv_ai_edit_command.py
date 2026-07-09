@@ -35,9 +35,20 @@ from tests.auth_utils import CTX
 from tests.documents_utils import make_student, new_key
 
 _FORBIDDEN = [
-    "openrouter", "openai", "anthropic", "claude", "gpt-4", "gemini", "deepseek",
-    "chat_cheap", "reasoning_cheap", "model_alias", "prompt_tokens",
-    "completion_tokens", "storage_path", "storage_key",
+    "openrouter",
+    "openai",
+    "anthropic",
+    "claude",
+    "gpt-4",
+    "gemini",
+    "deepseek",
+    "chat_cheap",
+    "reasoning_cheap",
+    "model_alias",
+    "prompt_tokens",
+    "completion_tokens",
+    "storage_path",
+    "storage_key",
 ]
 
 
@@ -57,15 +68,19 @@ async def _audit_count(db, action: str) -> int:
 
 async def _make_cv(db, student, *, title="My CV") -> dict:
     return await cv_service.create_cv(
-        db, principal=student, payload={"title": title, "creation_mode": "blank_template"},
+        db,
+        principal=student,
+        payload={"title": title, "creation_mode": "blank_template"},
         ctx=CTX,
     )
 
 
 async def _seed_section_content(db, cv_id, section_type, items) -> uuid.UUID:
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     target = next(s for s in sections if s.section_type == section_type)
     target.content_json = {"items": items}
     await db.commit()
@@ -74,8 +89,10 @@ async def _seed_section_content(db, cv_id, section_type, items) -> uuid.UUID:
 
 async def _seed_entry_content(db, cv_id, section_type, entries) -> uuid.UUID:
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     target = next(s for s in sections if s.section_type == section_type)
     target.content_json = {"entries": entries}
     await db.commit()
@@ -106,9 +123,7 @@ async def test_edit_command_produces_pending_diff_without_mutating_cv(
 ) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
-    await _seed_section_content(
-        db_session, cv["id"], "summary", [{"text": "junior dev"}]
-    )
+    await _seed_section_content(db_session, cv["id"], "summary", [{"text": "junior dev"}])
     seeded = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
     version_before = seeded["version"]
 
@@ -128,7 +143,9 @@ async def test_edit_command_produces_pending_diff_without_mutating_cv(
     )
 
     res = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "instruction": "make this summary more suitable for data analyst roles",
             "idempotency_key": new_key(),
@@ -172,12 +189,16 @@ async def test_edit_command_accept_creates_version_and_audit(db_session, monkeyp
         },
     )
     sug = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={"instruction": "tailor for data analyst", "idempotency_key": new_key()},
         ctx=CTX,
     )
     accepted = await cv_ai_service.accept_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         suggestion_id=uuid.UUID(sug["suggestion_id"]),
         payload={"fact_confirmation": True, "idempotency_key": new_key()},
         ctx=CTX,
@@ -199,19 +220,29 @@ async def test_edit_command_reject_leaves_cv_unchanged(db_session, monkeypatch) 
         monkeypatch,
         {
             "operations": [
-                {"op": "update_item_text", "section_type": "summary", "item_index": 0,
-                 "text": "Something else"}
+                {
+                    "op": "update_item_text",
+                    "section_type": "summary",
+                    "item_index": 0,
+                    "text": "Something else",
+                }
             ],
             "explanation": "x",
         },
     )
     sug = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"instruction": "change it", "idempotency_key": new_key()}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"instruction": "change it", "idempotency_key": new_key()},
+        ctx=CTX,
     )
     rejected = await cv_ai_service.reject_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        suggestion_id=uuid.UUID(sug["suggestion_id"]), ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        suggestion_id=uuid.UUID(sug["suggestion_id"]),
+        ctx=CTX,
     )
     assert rejected["status"] == "rejected"
     cv_now = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
@@ -225,10 +256,22 @@ async def test_edit_command_reject_leaves_cv_unchanged(db_session, monkeypatch) 
 
 
 _ENTRIES = [
-    {"heading": "Intern", "subheading": "Acme", "timeframe": "2023",
-     "location": "", "note": "", "highlights": ["Built APIs", "Wrote tests"]},
-    {"heading": "Analyst", "subheading": "Beta", "timeframe": "2022",
-     "location": "", "note": "", "highlights": ["Analysed data"]},
+    {
+        "heading": "Intern",
+        "subheading": "Acme",
+        "timeframe": "2023",
+        "location": "",
+        "note": "",
+        "highlights": ["Built APIs", "Wrote tests"],
+    },
+    {
+        "heading": "Analyst",
+        "subheading": "Beta",
+        "timeframe": "2022",
+        "location": "",
+        "note": "",
+        "highlights": ["Analysed data"],
+    },
 ]
 
 
@@ -237,8 +280,12 @@ async def test_edit_command_updates_entry_highlight_pending_then_accept(
 ) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
-    await _seed_entry_content(db_session, cv["id"], "experience",
-                              [dict(e, highlights=list(e["highlights"])) for e in _ENTRIES])
+    await _seed_entry_content(
+        db_session,
+        cv["id"],
+        "experience",
+        [dict(e, highlights=list(e["highlights"])) for e in _ENTRIES],
+    )
     before = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
     versions_before = len(before["versions"])
 
@@ -246,17 +293,22 @@ async def test_edit_command_updates_entry_highlight_pending_then_accept(
         monkeypatch,
         {
             "operations": [
-                {"op": "update_highlight", "section_type": "experience",
-                 "entry_index": 0, "highlight_index": 0,
-                 "text": "Built REST APIs with FastAPI"}
+                {
+                    "op": "update_highlight",
+                    "section_type": "experience",
+                    "entry_index": 0,
+                    "highlight_index": 0,
+                    "text": "Built REST APIs with FastAPI",
+                }
             ],
             "explanation": "Made the first experience bullet more specific.",
         },
     )
     sug = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"instruction": "rewrite my first experience bullet",
-                 "idempotency_key": new_key()},
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"instruction": "rewrite my first experience bullet", "idempotency_key": new_key()},
         ctx=CTX,
     )
     assert sug["diff"]["applicable"] is True
@@ -272,9 +324,12 @@ async def test_edit_command_updates_entry_highlight_pending_then_accept(
 
     # Accepting applies the entry diff and creates a new version.
     accepted = await cv_ai_service.accept_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         suggestion_id=uuid.UUID(sug["suggestion_id"]),
-        payload={"fact_confirmation": True, "idempotency_key": new_key()}, ctx=CTX,
+        payload={"fact_confirmation": True, "idempotency_key": new_key()},
+        ctx=CTX,
     )
     assert len(accepted["versions"]) == versions_before + 1
     exp2 = next(s for s in accepted["sections"] if s["section_type"] == "experience")
@@ -284,8 +339,12 @@ async def test_edit_command_updates_entry_highlight_pending_then_accept(
 async def test_edit_command_reorders_entries(db_session, monkeypatch) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
-    await _seed_entry_content(db_session, cv["id"], "experience",
-                              [dict(e, highlights=list(e["highlights"])) for e in _ENTRIES])
+    await _seed_entry_content(
+        db_session,
+        cv["id"],
+        "experience",
+        [dict(e, highlights=list(e["highlights"])) for e in _ENTRIES],
+    )
 
     _patch_provider(
         monkeypatch,
@@ -297,7 +356,9 @@ async def test_edit_command_reorders_entries(db_session, monkeypatch) -> None:
         },
     )
     sug = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={"instruction": "put my analyst role first", "idempotency_key": new_key()},
         ctx=CTX,
     )
@@ -327,7 +388,9 @@ async def test_edit_command_reorders_sections(db_session, monkeypatch) -> None:
         },
     )
     res = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "instruction": "move projects above experience for this internship",
             "idempotency_key": new_key(),
@@ -351,16 +414,21 @@ async def test_edit_command_unmappable_request_not_applicable(db_session, monkey
         monkeypatch, {"operations": [], "explanation": "This request is not CV-related."}
     )
     res = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={"instruction": "what's the weather today", "idempotency_key": new_key()},
         ctx=CTX,
     )
     assert res["diff"]["applicable"] is False
     with pytest.raises(SuggestionNotApplicableError):
         await cv_ai_service.accept_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
             suggestion_id=uuid.UUID(res["suggestion_id"]),
-            payload={"fact_confirmation": True}, ctx=CTX,
+            payload={"fact_confirmation": True},
+            ctx=CTX,
         )
 
 
@@ -374,15 +442,22 @@ async def test_edit_command_unknown_section_type_dropped(db_session, monkeypatch
         monkeypatch,
         {
             "operations": [
-                {"op": "update_item_text", "section_type": "not_a_real_section",
-                 "item_index": 0, "text": "hacked"},
+                {
+                    "op": "update_item_text",
+                    "section_type": "not_a_real_section",
+                    "item_index": 0,
+                    "text": "hacked",
+                },
             ],
             "explanation": "x",
         },
     )
     res = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"instruction": "hack it", "idempotency_key": new_key()}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"instruction": "hack it", "idempotency_key": new_key()},
+        ctx=CTX,
     )
     assert res["diff"]["applicable"] is False
     blob = json.dumps(res)
@@ -399,8 +474,11 @@ async def test_edit_command_requires_instruction(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(AiSourceRequiredError):
         await cv_ai_service.request_edit_command(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"instruction": "   "}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"instruction": "   "},
+            ctx=CTX,
         )
 
 
@@ -417,20 +495,30 @@ async def test_edit_command_is_idempotent(db_session, monkeypatch) -> None:
         monkeypatch,
         {
             "operations": [
-                {"op": "update_item_text", "section_type": "summary", "item_index": 0,
-                 "text": "Hi there"}
+                {
+                    "op": "update_item_text",
+                    "section_type": "summary",
+                    "item_index": 0,
+                    "text": "Hi there",
+                }
             ],
             "explanation": "x",
         },
     )
     key = new_key()
     r1 = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"instruction": "polish it", "idempotency_key": key}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"instruction": "polish it", "idempotency_key": key},
+        ctx=CTX,
     )
     r2 = await cv_ai_service.request_edit_command(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"instruction": "polish it", "idempotency_key": key}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={"instruction": "polish it", "idempotency_key": key},
+        ctx=CTX,
     )
     assert r1["suggestion_id"] == r2["suggestion_id"]
 
@@ -454,8 +542,11 @@ async def test_edit_command_provider_unavailable_returns_ai_unavailable(
 
     with pytest.raises(AIUnavailableError):
         await cv_ai_service.request_edit_command(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"instruction": "polish it", "idempotency_key": new_key()}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"instruction": "polish it", "idempotency_key": new_key()},
+            ctx=CTX,
         )
 
 
@@ -469,8 +560,11 @@ async def test_edit_command_malformed_json_returns_ai_unavailable(db_session, mo
     cv = await _make_cv(db_session, student)
     with pytest.raises(AIUnavailableError):
         await cv_ai_service.request_edit_command(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"instruction": "polish it", "idempotency_key": new_key()}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"instruction": "polish it", "idempotency_key": new_key()},
+            ctx=CTX,
         )
 
 
@@ -486,6 +580,9 @@ async def test_edit_command_cross_owner_404(db_session, monkeypatch) -> None:
     _patch_provider(monkeypatch, {"operations": [], "explanation": "x"})
     with pytest.raises(ResourceNotFoundError):
         await cv_ai_service.request_edit_command(
-            db_session, principal=other, cv_id=uuid.UUID(cv["id"]),
-            payload={"instruction": "polish it", "idempotency_key": new_key()}, ctx=CTX,
+            db_session,
+            principal=other,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"instruction": "polish it", "idempotency_key": new_key()},
+            ctx=CTX,
         )

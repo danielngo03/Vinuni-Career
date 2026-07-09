@@ -27,9 +27,7 @@ from app.ai.observability.models import AiModelPrice
 _CHARS_PER_TOKEN = 4.0
 
 
-async def resolve_price(
-    session: AsyncSession, provider: str, model: str
-) -> AiModelPrice | None:
+async def resolve_price(session: AsyncSession, provider: str, model: str) -> AiModelPrice | None:
     """Return the active price row for ``(provider, model)``, or ``None``."""
     row = await session.scalar(
         select(AiModelPrice).where(

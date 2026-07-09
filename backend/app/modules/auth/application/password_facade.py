@@ -39,14 +39,18 @@ async def revoke_other_sessions(
 
     now = datetime.now(tz=UTC)
     others = (
-        await session.execute(
-            select(Session).where(
-                Session.user_id == user_id,
-                Session.id != keep_session_id,
-                Session.revoked_at.is_(None),
+        (
+            await session.execute(
+                select(Session).where(
+                    Session.user_id == user_id,
+                    Session.id != keep_session_id,
+                    Session.revoked_at.is_(None),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     for other_session in others:
         other_session.revoked_at = now
         other_session.revoked_reason = "password_change"

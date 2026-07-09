@@ -249,7 +249,7 @@ async def send_message(
     await usage_service.enforce_quota(session, principal=principal)
 
     # Sanitize user input
-    text = text.strip()[: _MAX_USER_MSG_LEN]
+    text = text.strip()[:_MAX_USER_MSG_LEN]
     clean, _ = sanitize_instruction(text)
     if not clean:
         reply = quick_reply(
@@ -476,7 +476,7 @@ async def stream_message(
         return
 
     # Sanitize input
-    clean_text = text.strip()[: _MAX_USER_MSG_LEN]
+    clean_text = text.strip()[:_MAX_USER_MSG_LEN]
     clean, _ = sanitize_instruction(clean_text)
     if not clean:
         yield {"type": "error", "code": "invalid_message"}

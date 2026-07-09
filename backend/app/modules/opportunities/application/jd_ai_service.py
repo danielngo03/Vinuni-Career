@@ -135,9 +135,7 @@ async def draft_description(
 
     Returns ``{ "draft": "<ai text>", "prompt_version": 1 }`` — no stored row.
     """
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=principal.org_id)
     # Load job to confirm org ownership (raises ResourceNotFoundError on miss).
     job = await _load_owned_job(session, principal=principal, job_id=job_id)
 

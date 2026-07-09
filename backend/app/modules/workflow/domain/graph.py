@@ -99,6 +99,8 @@ def required_capability_for_node(node: dict) -> tuple[str, str] | None:
         return resource, action
 
     node_type = node.get("type")
+    if not isinstance(node_type, str):
+        return None
     try:
         return DEFAULT_NODE_CAPABILITY.get(NodeType(node_type))
     except ValueError:

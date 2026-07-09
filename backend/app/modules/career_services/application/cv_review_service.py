@@ -64,9 +64,7 @@ async def create_item(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=org_id)
     if priority not in catalog.CV_REVIEW_PRIORITIES:
         raise ValidationFailedError(details={"reason": "invalid_priority"})
 
@@ -108,9 +106,7 @@ async def list_items(
             raise ValidationFailedError(details={"reason": "invalid_status"})
         stmt = stmt.where(CvReviewQueueItem.status == status)
     if assigned_counselor_id is not None:
-        stmt = stmt.where(
-            CvReviewQueueItem.assigned_counselor_id == assigned_counselor_id
-        )
+        stmt = stmt.where(CvReviewQueueItem.assigned_counselor_id == assigned_counselor_id)
     stmt = stmt.order_by(CvReviewQueueItem.created_at.desc())
     rows = (await session.execute(stmt)).scalars().all()
     return [_presenter(i, locale=locale) for i in rows]
@@ -126,9 +122,7 @@ async def assign_counselor(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "assign", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "assign", resource_org_id=org_id)
     item = await _get_item(session, org_id=org_id, item_id=item_id)
     if item is None:
         raise ResourceNotFoundError()
@@ -160,9 +154,7 @@ async def update_status(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=org_id)
     item = await _get_item(session, org_id=org_id, item_id=item_id)
     if item is None:
         raise ResourceNotFoundError()

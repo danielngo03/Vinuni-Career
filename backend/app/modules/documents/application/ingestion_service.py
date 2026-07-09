@@ -77,8 +77,7 @@ def _ext(filename: str) -> str:
 
 def _preview_url(document: Document, *, accessor_id: uuid.UUID) -> str:
     token = storage.make_signed_token(
-        {"kind": "document", "id": str(document.id), "uid": str(accessor_id),
-         "purpose": "preview"}
+        {"kind": "document", "id": str(document.id), "uid": str(accessor_id), "purpose": "preview"}
     )
     base = get_settings().app_url.rstrip("/")
     return f"{base}/api/v1/cv-files/{token}"
@@ -158,8 +157,11 @@ async def create_upload(
     session.add(document)
     await session.flush()
     await write_audit(
-        session, action="cv.upload.stored", resource_type="document",
-        resource_id=document.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="cv.upload.stored",
+        resource_type="document",
+        resource_id=document.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"size": document.file_size_bytes, "content_type": document.mime_type},
     )
     await session.commit()
@@ -225,12 +227,16 @@ async def start_ingestion(
 
     # Resumable/idempotent: reuse an existing ingestion for this document.
     ing = (
-        await session.execute(
-            select(CvIngestion)
-            .where(CvIngestion.document_id == document.id)
-            .order_by(CvIngestion.created_at.desc())
+        (
+            await session.execute(
+                select(CvIngestion)
+                .where(CvIngestion.document_id == document.id)
+                .order_by(CvIngestion.created_at.desc())
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     if ing is None:
         # Upload-start quota pre-check: an uploaded CV lands DIRECTLY in the library
         # (``ready``), so if the library is already full there is no point spending
@@ -252,8 +258,11 @@ async def start_ingestion(
         session.add(ing)
         await session.flush()
         await write_audit(
-            session, action="cv.ingestion.started", resource_type="cv_ingestion",
-            resource_id=ing.id, context=_shared.audit_ctx(principal, ctx),
+            session,
+            action="cv.ingestion.started",
+            resource_type="cv_ingestion",
+            resource_id=ing.id,
+            context=_shared.audit_ctx(principal, ctx),
             after={"document_id": str(document.id)},
         )
         await session.commit()
@@ -267,9 +276,7 @@ async def start_ingestion(
         await _execute_ingestion(session, ingestion_id=ingestion_id)
         await session.commit()
 
-    refreshed = await _load_owned_ingestion(
-        session, principal=principal, ingestion_id=ingestion_id
-    )
+    refreshed = await _load_owned_ingestion(session, principal=principal, ingestion_id=ingestion_id)
     await session.refresh(refreshed)
     return presenters.ingestion(refreshed, locale=locale)
 
@@ -322,14 +329,18 @@ async def _execute_ingestion(session: AsyncSession, *, ingestion_id: uuid.UUID) 
 
     # Duplicate detection excludes the document itself.
     others = (
-        await session.execute(
-            select(Document.checksum_sha256).where(
-                Document.user_id == ing.user_id,
-                Document.id != document.id,
-                Document.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(Document.checksum_sha256).where(
+                    Document.user_id == ing.user_id,
+                    Document.id != document.id,
+                    Document.deleted_at.is_(None),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
     policy = resolve_policy()
     # run_cascade is synchronous and CPU/IO-heavy (PDF rasterization, PIL
@@ -347,7 +358,9 @@ async def _execute_ingestion(session: AsyncSession, *, ingestion_id: uuid.UUID) 
     _apply_outcome(ing, outcome)
     await session.flush()
     await write_audit(
-        session, action="cv.ingestion.completed", resource_type="cv_ingestion",
+        session,
+        action="cv.ingestion.completed",
+        resource_type="cv_ingestion",
         resource_id=ing.id,
         context=None,
         after={
@@ -363,9 +376,7 @@ async def _execute_ingestion(session: AsyncSession, *, ingestion_id: uuid.UUID) 
 
 def _apply_outcome(ing: CvIngestion, outcome: IngestionOutcome) -> None:
     if outcome.accepted:
-        status = (
-            catalog.INGEST_NEEDS_REVIEW if outcome.needs_review else catalog.INGEST_READY
-        )
+        status = catalog.INGEST_NEEDS_REVIEW if outcome.needs_review else catalog.INGEST_READY
     else:
         status = catalog.INGEST_FAILED
     ing.status = status
@@ -466,7 +477,8 @@ def _header_content(contact: object) -> dict | None:
             label = link.get("label")
             links.append(
                 {
-                    "label": label.strip() if isinstance(label, str) and label.strip()
+                    "label": label.strip()
+                    if isinstance(label, str) and label.strip()
                     else url.strip(),
                     "url": url.strip(),
                 }
@@ -616,9 +628,7 @@ def _apply_overrides(
     for section_key, indices in rejected_items.items():
         section = data.get(section_key)
         if isinstance(section, dict) and isinstance(section.get("items"), list):
-            section["items"] = [
-                item for i, item in enumerate(section["items"]) if i not in indices
-            ]
+            section["items"] = [item for i, item in enumerate(section["items"]) if i not in indices]
 
     return data
 
@@ -696,19 +706,28 @@ async def import_ingestion(
     target_cv_id = _shared.to_uuid(payload.get("target_cv_id"))
     if target_cv_id is not None:
         detail = await _import_into_draft(
-            session, principal=principal, target_cv_id=target_cv_id,
-            sections=sections, ctx=ctx, locale=locale,
+            session,
+            principal=principal,
+            target_cv_id=target_cv_id,
+            sections=sections,
+            ctx=ctx,
+            locale=locale,
         )
         imported_id = uuid.UUID(detail["id"])
     else:
         detail = await cv_creation_service.create_cv_from_sections(
-            session, principal=principal, title=title,
-            language=ing.detected_language or "vi", template_id=template_id,
-            sections=sections, source_type=catalog.SOURCE_TYPE_FOR_MODE[
-                catalog.CREATION_UPLOADED_IMPORT
-            ],
-            change_source="import", ctx=ctx, audit_action="cv.imported_from_upload",
-            audit_extra={"ingestion_id": str(ing.id)}, locale=locale,
+            session,
+            principal=principal,
+            title=title,
+            language=ing.detected_language or "vi",
+            template_id=template_id,
+            sections=sections,
+            source_type=catalog.SOURCE_TYPE_FOR_MODE[catalog.CREATION_UPLOADED_IMPORT],
+            change_source="import",
+            ctx=ctx,
+            audit_action="cv.imported_from_upload",
+            audit_extra={"ingestion_id": str(ing.id)},
+            locale=locale,
         )
         imported_id = uuid.UUID(detail["id"])
 

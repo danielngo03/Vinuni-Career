@@ -59,9 +59,7 @@ class AiProviderConfig(Base):
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     is_builtin: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    created_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
+    created_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -83,9 +81,7 @@ class AiModelAlias(Base):
     """
 
     __tablename__ = "ai_model_aliases"
-    __table_args__ = (
-        UniqueConstraint("alias_name", name="uq_ai_model_aliases_alias_name"),
-    )
+    __table_args__ = (UniqueConstraint("alias_name", name="uq_ai_model_aliases_alias_name"),)
 
     id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
     alias_name: Mapped[str] = mapped_column(String(60), nullable=False, unique=True)
@@ -94,11 +90,13 @@ class AiModelAlias(Base):
         ForeignKey("ai_provider_configs.id"), nullable=False
     )
     task_families: Mapped[str | None] = mapped_column(
-        String(200), nullable=True,
-        doc="Comma-separated list e.g. 'chat,eval'. NULL = usable for any task."
+        String(200),
+        nullable=True,
+        doc="Comma-separated list e.g. 'chat,eval'. NULL = usable for any task.",
     )
     fallback_provider_names: Mapped[str | None] = mapped_column(
-        Text, nullable=True,
+        Text,
+        nullable=True,
         doc=(
             "Comma-separated, ORDERED list of additional provider names to try, "
             "in order, if the primary provider's circuit is open or a call fails "
@@ -112,9 +110,7 @@ class AiModelAlias(Base):
     # Rotation strategy across the ordered provider chain: 'priority' (default —
     # try hops in order, failover only) or 'round_robin' (spread calls across
     # healthy hops, still failing over to the rest). Both skip circuit-open hops.
-    rotation_strategy: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="priority"
-    )
+    rotation_strategy: Mapped[str] = mapped_column(String(20), nullable=False, default="priority")
     # Richer ordered fallback: a JSON list of ``{"provider_name", "model_id"}``
     # so each hop can carry its OWN model id (providers rarely share model ids).
     # When present it supersedes ``fallback_provider_names`` for chain building.
@@ -127,9 +123,7 @@ class AiModelAlias(Base):
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     is_builtin: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    created_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
+    created_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -137,6 +131,4 @@ class AiModelAlias(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now()
     )
 
-    provider: Mapped[AiProviderConfig] = relationship(
-        "AiProviderConfig", back_populates="aliases"
-    )
+    provider: Mapped[AiProviderConfig] = relationship("AiProviderConfig", back_populates="aliases")

@@ -31,9 +31,7 @@ async def start_bulk_screening_brief_run(
     ``GET /ai/workforce/runs/{run_id}`` route) for progress/results.
     """
 
-    run = await coordinator.start_bulk_screening_run(
-        session, principal=principal, job_id=job_id
-    )
+    run = await coordinator.start_bulk_screening_run(session, principal=principal, job_id=job_id)
     return {
         "run_id": str(run.id),
         "status": run.status,

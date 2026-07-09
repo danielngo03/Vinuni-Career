@@ -79,15 +79,11 @@ def _enable_ai(monkeypatch, fake: _CountingSemantic) -> None:
 
 
 async def _cache_rows(db) -> list[CvFitExplanationCache]:
-    return list(
-        (await db.execute(select(CvFitExplanationCache))).scalars().all()
-    )
+    return list((await db.execute(select(CvFitExplanationCache))).scalars().all())
 
 
 async def _recommended_explanation(out: dict) -> str | None:
-    rec = next(
-        r for r in out["results"] if r["cv_id"] == out["recommended_cv_id"]
-    )
+    rec = next(r for r in out["results"] if r["cv_id"] == out["recommended_cv_id"])
     return rec["explanation"]
 
 
@@ -96,9 +92,7 @@ async def _recommended_explanation(out: dict) -> str | None:
 # --------------------------------------------------------------------------- #
 
 
-async def test_two_cvs_same_evidence_reuse_one_generation(
-    db_session, monkeypatch
-) -> None:
+async def test_two_cvs_same_evidence_reuse_one_generation(db_session, monkeypatch) -> None:
     _user, student_a = await make_student(db_session)
     _user_b, student_b = await make_student(db_session)
 
@@ -139,9 +133,7 @@ async def test_two_cvs_same_evidence_reuse_one_generation(
     assert cache[0].hit_count == 1
 
     # Both CVs now carry the explanation on their own fit row.
-    rows = (
-        (await db_session.execute(select(CvJobFitScore))).scalars().all()
-    )
+    rows = (await db_session.execute(select(CvJobFitScore))).scalars().all()
     explained = [r for r in rows if r.explanation is not None]
     assert {str(r.cv_id) for r in explained} == {cv_a, cv_b}
 
@@ -234,9 +226,7 @@ async def test_different_job_generates_separately(db_session, monkeypatch) -> No
 # --------------------------------------------------------------------------- #
 
 
-async def test_job_version_bump_new_fingerprint_regenerates(
-    db_session, monkeypatch
-) -> None:
+async def test_job_version_bump_new_fingerprint_regenerates(db_session, monkeypatch) -> None:
     _user, student = await make_student(db_session)
     await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
@@ -274,9 +264,7 @@ async def test_ai_gate_off_no_explanation_no_cache(db_session) -> None:
     job_id = await _create_job(db_session)
 
     # Default offline provider (no gate patching) -> both AI gates closed.
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert out["ai_explanation_available"] is False
     assert all(r["explanation"] is None for r in out["results"])
     assert out["results"][0]["score"] > 0

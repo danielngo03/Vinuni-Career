@@ -35,9 +35,7 @@ REJECTED = "rejected"
 CLOSED = "closed"
 EXPIRED = "expired"
 
-STATUSES: frozenset[str] = frozenset(
-    {DRAFT, PENDING_REVIEW, ACTIVE, REJECTED, CLOSED, EXPIRED}
-)
+STATUSES: frozenset[str] = frozenset({DRAFT, PENDING_REVIEW, ACTIVE, REJECTED, CLOSED, EXPIRED})
 
 # States in which the partner may PATCH job content. ``ACTIVE`` is included for
 # the post-publication amendment policy (B-552): once published, only a subset
@@ -70,13 +68,30 @@ FREE_AMEND_FIELDS: frozenset[str] = frozenset(
 
 REMODERATION_FIELDS: frozenset[str] = frozenset(
     {
-        "title", "description", "requirements", "employment_type",
-        "location_type", "location_city", "location_country", "locations",
-        "required_skills", "preferred_skills", "experience_min_years",
-        "experience_max_years", "experience_mode", "industry_id",
-        "degree_required", "seniority_level", "candidate_requirements",
-        "salary_min", "salary_max", "salary_currency", "salary_is_disclosed",
-        "salary_mode", "salary_period", "salary_gross_net",
+        "title",
+        "description",
+        "requirements",
+        "employment_type",
+        "location_type",
+        "location_city",
+        "location_country",
+        "locations",
+        "required_skills",
+        "preferred_skills",
+        "experience_min_years",
+        "experience_max_years",
+        "experience_mode",
+        "industry_id",
+        "degree_required",
+        "seniority_level",
+        "candidate_requirements",
+        "salary_min",
+        "salary_max",
+        "salary_currency",
+        "salary_is_disclosed",
+        "salary_mode",
+        "salary_period",
+        "salary_gross_net",
     }
 )
 
@@ -124,9 +139,7 @@ def target_state(event: str) -> str:
 # Enumerated field vocabularies                                               #
 # --------------------------------------------------------------------------- #
 
-EMPLOYMENT_TYPES: frozenset[str] = frozenset(
-    {"full_time", "part_time", "internship", "contract"}
-)
+EMPLOYMENT_TYPES: frozenset[str] = frozenset({"full_time", "part_time", "internship", "contract"})
 LOCATION_TYPES: frozenset[str] = frozenset({"onsite", "remote", "hybrid"})
 
 # Visibility levels (``docs/BUSINESS_LOGIC.md`` §5 enforcement matrix).
@@ -249,9 +262,7 @@ _PERSONA_VISIBILITY: dict[str, frozenset[str]] = {
     "student": frozenset({PUBLIC, AUTHENTICATED, STUDENTS_ONLY, VINUNI_ONLY}),
     "alumni": frozenset({PUBLIC, AUTHENTICATED, STUDENTS_ONLY}),
     "partner_member": frozenset({PUBLIC, AUTHENTICATED}),
-    "university_staff": frozenset(
-        {PUBLIC, AUTHENTICATED, STUDENTS_ONLY, VINUNI_ONLY}
-    ),
+    "university_staff": frozenset({PUBLIC, AUTHENTICATED, STUDENTS_ONLY, VINUNI_ONLY}),
 }
 
 

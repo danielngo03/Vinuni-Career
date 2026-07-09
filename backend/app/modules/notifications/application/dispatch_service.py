@@ -64,9 +64,7 @@ async def get_outbox_row(
     """Single-row lookup — the seam ``platform_support`` reads/mutates through."""
 
     return (
-        await session.execute(
-            select(NotificationOutbox).where(NotificationOutbox.id == outbox_id)
-        )
+        await session.execute(select(NotificationOutbox).where(NotificationOutbox.id == outbox_id))
     ).scalar_one_or_none()
 
 
@@ -75,9 +73,7 @@ async def status_counts(session: AsyncSession) -> dict[str, int]:
 
     rows = (
         await session.execute(
-            select(NotificationOutbox.status, func.count()).group_by(
-                NotificationOutbox.status
-            )
+            select(NotificationOutbox.status, func.count()).group_by(NotificationOutbox.status)
         )
     ).all()
     counts = {"pending": 0, "sent": 0, "failed": 0, "skipped": 0, "dead": 0}
@@ -107,9 +103,7 @@ async def oldest_pending_age_seconds(
     return int((now - oldest).total_seconds())
 
 
-async def retry_scheduled_count(
-    session: AsyncSession, *, now: datetime | None = None
-) -> int:
+async def retry_scheduled_count(session: AsyncSession, *, now: datetime | None = None) -> int:
     """Count of ``pending`` rows backoff-scheduled into the future (``retry_scheduled``)."""
 
     now = now or datetime.now(tz=UTC)
@@ -126,9 +120,7 @@ async def retry_scheduled_count(
     ).scalar_one()
 
 
-async def requeue_dead_letter(
-    session: AsyncSession, *, outbox_id: uuid.UUID
-) -> NotificationOutbox:
+async def requeue_dead_letter(session: AsyncSession, *, outbox_id: uuid.UUID) -> NotificationOutbox:
     """Re-arm a dead-lettered row for redelivery (support-console requeue action).
 
     Only legal on ``status="dead"`` rows — the caller (``platform_support``)
@@ -157,9 +149,7 @@ async def dedupe_exists(session: AsyncSession, *, dedupe_key: str) -> bool:
 
     return (
         await session.execute(
-            select(NotificationOutbox.id).where(
-                NotificationOutbox.dedupe_key == dedupe_key
-            )
+            select(NotificationOutbox.id).where(NotificationOutbox.dedupe_key == dedupe_key)
         )
     ).first() is not None
 
@@ -293,9 +283,7 @@ async def process_outbox(
                     extra={"template_key": row.template_key, "attempts": row.attempts},
                 )
             else:
-                row.next_attempt_at = now + timedelta(
-                    seconds=_backoff_seconds(row.attempts)
-                )
+                row.next_attempt_at = now + timedelta(seconds=_backoff_seconds(row.attempts))
                 counts["retry"] += 1
                 logger.info(
                     "notification.send_retry",

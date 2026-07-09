@@ -48,6 +48,12 @@ def test_invalid_enum_field_is_dropped_not_fatal():
 
 
 def test_expected_keys_include_new_fields():
-    for k in ("salary_mode", "experience_mode", "seniority_level",
-              "industry", "application_deadline", "candidate_requirements"):
+    for k in (
+        "salary_mode",
+        "experience_mode",
+        "seniority_level",
+        "industry",
+        "application_deadline",
+        "candidate_requirements",
+    ):
         assert k in EXPECTED_KEYS

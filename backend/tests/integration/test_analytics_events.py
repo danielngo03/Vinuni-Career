@@ -8,8 +8,6 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime, timedelta
 
-from sqlalchemy import func, select
-
 from app.modules.analytics.application import ingestion_service
 from app.modules.analytics.application.ingestion_service import (
     InvalidAnalyticsEventError,
@@ -17,6 +15,7 @@ from app.modules.analytics.application.ingestion_service import (
 from app.modules.analytics.domain.models import AnalyticsEvent
 from app.modules.discovery.application import frequency_cap
 from app.modules.discovery.domain.models import DiscoveryEvent
+from sqlalchemy import func, select
 
 
 async def test_record_event_persists_sanitized_row(db_session) -> None:
@@ -34,9 +33,7 @@ async def test_record_event_persists_sanitized_row(db_session) -> None:
     await db_session.commit()
 
     row = (
-        await db_session.execute(
-            select(AnalyticsEvent).where(AnalyticsEvent.id == event.id)
-        )
+        await db_session.execute(select(AnalyticsEvent).where(AnalyticsEvent.id == event.id))
     ).scalar_one()
     assert row.event_type == "job.applied"
     assert row.aggregate_id == job_id
@@ -54,7 +51,7 @@ async def test_record_event_rejects_unknown_event_type(db_session) -> None:
             aggregate_type="job",
             aggregate_id=uuid.uuid4(),
         )
-        assert False, "expected InvalidAnalyticsEventError"
+        raise AssertionError("expected InvalidAnalyticsEventError")
     except InvalidAnalyticsEventError:
         pass
 
@@ -131,7 +128,5 @@ async def test_frequency_cap_ignores_impressions_outside_window(db_session) -> N
 
 
 async def test_frequency_cap_anonymous_viewer_is_never_capped(db_session) -> None:
-    capped = await frequency_cap.over_capped_placements(
-        db_session, session_id=None, user_id=None
-    )
+    capped = await frequency_cap.over_capped_placements(db_session, session_id=None, user_id=None)
     assert capped == set()

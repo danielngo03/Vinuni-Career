@@ -53,9 +53,7 @@ _MAX_MATCH_ROWS = 5
 # ``student``), so candidate jobs are filtered at the student visibility tier.
 # This deliberately EXCLUDES ``invitation_only`` (and any tier a student may not
 # discover) exactly like public discovery.
-_ALERT_VISIBILITY_LEVELS = lifecycle.visible_levels_for(
-    "student", is_authenticated=True
-)
+_ALERT_VISIBILITY_LEVELS = lifecycle.visible_levels_for("student", is_authenticated=True)
 
 
 async def sweep_job_alerts(session: AsyncSession, now: datetime) -> dict[str, int]:
@@ -154,9 +152,7 @@ async def _find_matches(
         stmt = stmt.where(_keyword_predicate(alert.keywords))
 
     if alert.province_code:
-        stmt = stmt.where(
-            _province_predicate(alert.province_code, use_jsonb=use_jsonb)
-        )
+        stmt = stmt.where(_province_predicate(alert.province_code, use_jsonb=use_jsonb))
 
     stmt = stmt.order_by(Job.published_at.desc()).limit(_MAX_MATCH_ROWS)
 

@@ -39,9 +39,7 @@ def package(pkg: AdPackage, *, locale: str = "vi") -> dict:
         "code": pkg.code,
         "name": pkg.name,
         "placement_type": pkg.placement_type,
-        "placement_type_label": lifecycle.placement_type_label(
-            pkg.placement_type, locale=locale
-        ),
+        "placement_type_label": lifecycle.placement_type_label(pkg.placement_type, locale=locale),
         "price_amount": _amount(pkg.price_amount),
         "currency": pkg.currency,
         "duration_days": pkg.duration_days,
@@ -104,19 +102,13 @@ def placement(
         "id": str(p.id),
         "org_id": str(p.org_id),
         "target_type": p.target_type,
-        "target_type_label": lifecycle.target_type_label(
-            p.target_type, locale=locale
-        ),
+        "target_type_label": lifecycle.target_type_label(p.target_type, locale=locale),
         "target_id": str(p.target_id),
         "target_title": target_title,
         "placement_type": p.placement_type,
-        "placement_type_label": lifecycle.placement_type_label(
-            p.placement_type, locale=locale
-        ),
+        "placement_type_label": lifecycle.placement_type_label(p.placement_type, locale=locale),
         "disclosure_class": p.disclosure_class,
-        "disclosure": disclosure_vocab.disclosure_payload(
-            p.disclosure_class, locale=locale
-        ),
+        "disclosure": disclosure_vocab.disclosure_payload(p.disclosure_class, locale=locale),
         "package_id": str(p.package_id),
         "package": package(pkg, locale=locale) if pkg is not None else None,
         "price_amount": _amount(p.price_amount),
@@ -144,9 +136,7 @@ def placement(
         # Asset-requirements / missing-asset state for the primary public slots
         # (partner uploader + university "missing/broken creative" inspector).
         present_slots = {
-            c.slot
-            for c in live
-            if c.moderation_status == creative_vocab.CREATIVE_APPROVED
+            c.slot for c in live if c.moderation_status == creative_vocab.CREATIVE_APPROVED
         }
         data["missing_primary_slots"] = sorted(
             s for s in creative_vocab.PRIMARY_SLOTS if s not in present_slots
@@ -158,14 +148,10 @@ def placement(
         data["created_by"] = str(p.created_by)
         data["approved_by"] = str(p.approved_by) if p.approved_by else None
         data["moderation_reason_code"] = p.moderation_reason_code
-        data["moderation_reason_label"] = reason_code_label(
-            p.moderation_reason_code, locale=locale
-        )
+        data["moderation_reason_label"] = reason_code_label(p.moderation_reason_code, locale=locale)
         data["claimed_by"] = str(p.claimed_by) if p.claimed_by else None
         data["claimed_at"] = _iso(p.claimed_at)
         data.update(
-            queue_age_fields(
-                submitted_at=p.submitted_at, due_by=p.due_by, now=datetime.now(tz=UTC)
-            )
+            queue_age_fields(submitted_at=p.submitted_at, due_by=p.due_by, now=datetime.now(tz=UTC))
         )
     return data

@@ -26,9 +26,7 @@ def _now() -> datetime:
     return datetime.now(tz=UTC)
 
 
-async def session_cleanup(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def session_cleanup(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Prune expired discovery sessions and out-of-retention events. Flush-only."""
 
     now = now or _now()
@@ -37,9 +35,7 @@ async def session_cleanup(
 
     sessions_result = cast(
         "CursorResult[object]",
-        await session.execute(
-            delete(DiscoverySession).where(DiscoverySession.expires_at <= now)
-        ),
+        await session.execute(delete(DiscoverySession).where(DiscoverySession.expires_at <= now)),
     )
     events_result = cast(
         "CursorResult[object]",

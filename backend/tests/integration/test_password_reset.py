@@ -33,12 +33,16 @@ async def _reset_token(session, user_id) -> str:
 
 async def _reset_variables(session, user_id) -> dict:
     rows = (
-        await session.execute(
-            select(NotificationOutbox)
-            .where(NotificationOutbox.recipient_id == user_id)
-            .order_by(NotificationOutbox.created_at.desc())
+        (
+            await session.execute(
+                select(NotificationOutbox)
+                .where(NotificationOutbox.recipient_id == user_id)
+                .order_by(NotificationOutbox.created_at.desc())
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     for row in rows:
         if row.template_key == "account.password_reset":
             return dict(row.variables)
@@ -47,13 +51,17 @@ async def _reset_variables(session, user_id) -> dict:
 
 async def _count_reset_tokens(session, user_id) -> int:
     rows = (
-        await session.execute(
-            select(EmailVerification).where(
-                EmailVerification.user_id == user_id,
-                EmailVerification.purpose == "password_reset",
+        (
+            await session.execute(
+                select(EmailVerification).where(
+                    EmailVerification.user_id == user_id,
+                    EmailVerification.purpose == "password_reset",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return len(rows)
 
 
@@ -67,9 +75,7 @@ async def test_forgot_password_same_response_known_and_unknown(db_session) -> No
     await register_verified(db_session, email=email)
 
     known = await auth_service.forgot_password(db_session, email=email, ctx=CTX)
-    unknown = await auth_service.forgot_password(
-        db_session, email=_email(), ctx=CTX
-    )
+    unknown = await auth_service.forgot_password(db_session, email=_email(), ctx=CTX)
     # Identical generic shape regardless of account existence.
     assert known["status"] == unknown["status"] == "reset_email_sent"
     assert set(known.keys()) == set(unknown.keys())
@@ -121,8 +127,12 @@ async def test_forgot_password_action_url_points_to_frontend_with_locale(db_sess
 async def test_verification_email_action_url_points_to_frontend_with_locale(db_session) -> None:
     email = _email()
     await auth_service.register(
-        db_session, email=email, password="Sup3rSecret!", full_name="A",
-        locale="vi", ctx=CTX,
+        db_session,
+        email=email,
+        password="Sup3rSecret!",
+        full_name="A",
+        locale="vi",
+        ctx=CTX,
     )
     user = await user_service.get_by_email(db_session, email)
     assert user is not None
@@ -143,31 +153,21 @@ async def test_reset_password_happy_path_and_revokes_all_sessions(db_session) ->
     email = _email()
     user = await register_verified(db_session, email=email)
     # Two active logins (sessions) prior to reset.
-    login1 = await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
-    login2 = await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
+    login1 = await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
+    login2 = await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
 
     await auth_service.forgot_password(db_session, email=email, ctx=CTX)
     token = await _reset_token(db_session, user.id)
 
-    await auth_service.reset_password(
-        db_session, token=token, password="BrandNewPass1!", ctx=CTX
-    )
+    await auth_service.reset_password(db_session, token=token, password="BrandNewPass1!", ctx=CTX)
 
     # New password works.
-    relog = await auth_service.login(
-        db_session, email=email, password="BrandNewPass1!", ctx=CTX
-    )
+    relog = await auth_service.login(db_session, email=email, password="BrandNewPass1!", ctx=CTX)
     assert relog.tokens.access_token
 
     # Old password rejected.
     with pytest.raises(errors.InvalidCredentialsError):
-        await auth_service.login(
-            db_session, email=email, password="Sup3rSecret!", ctx=CTX
-        )
+        await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
 
     # All pre-reset sessions revoked; their refresh tokens rejected.
     for login in (login1, login2):
@@ -176,49 +176,59 @@ async def test_reset_password_happy_path_and_revokes_all_sessions(db_session) ->
                 db_session, refresh_token=login.tokens.refresh_token, ctx=CTX
             )
     pre_reset = (
-        await db_session.execute(
-            select(Session).where(
-                Session.user_id == user.id,
-                Session.revoked_reason == "password_reset",
+        (
+            await db_session.execute(
+                select(Session).where(
+                    Session.user_id == user.id,
+                    Session.revoked_reason == "password_reset",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(pre_reset) == 2
 
     # Security event + audit recorded.
     events = (
-        await db_session.execute(
-            select(SecurityEvent).where(
-                SecurityEvent.user_id == user.id,
-                SecurityEvent.event_type == ev.PASSWORD_RESET,
+        (
+            await db_session.execute(
+                select(SecurityEvent).where(
+                    SecurityEvent.user_id == user.id,
+                    SecurityEvent.event_type == ev.PASSWORD_RESET,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(events) == 1
     audits = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "auth.password_reset")
-        )
-    ).scalars().all()
+        (await db_session.execute(select(AuditLog).where(AuditLog.action == "auth.password_reset")))
+        .scalars()
+        .all()
+    )
     assert len(audits) == 1
     # Confirmation email enqueued.
     confirm = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.recipient_id == user.id,
-                NotificationOutbox.template_key == "account.password_changed",
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.recipient_id == user.id,
+                    NotificationOutbox.template_key == "account.password_changed",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(confirm) == 1
 
 
 async def test_reset_password_with_otp_happy_path(db_session) -> None:
     email = _email()
     user = await register_verified(db_session, email=email)
-    login = await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
+    login = await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
 
     await auth_service.forgot_password(db_session, email=email, ctx=CTX)
     variables = await _reset_variables(db_session, user.id)
@@ -232,19 +242,13 @@ async def test_reset_password_with_otp_happy_path(db_session) -> None:
         ctx=CTX,
     )
 
-    relog = await auth_service.login(
-        db_session, email=email, password="OtpFresh2026!", ctx=CTX
-    )
+    relog = await auth_service.login(db_session, email=email, password="OtpFresh2026!", ctx=CTX)
     assert relog.tokens.access_token
 
     with pytest.raises(errors.InvalidCredentialsError):
-        await auth_service.login(
-            db_session, email=email, password="Sup3rSecret!", ctx=CTX
-        )
+        await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
     with pytest.raises(errors.SessionExpiredError):
-        await auth_service.refresh(
-            db_session, refresh_token=login.tokens.refresh_token, ctx=CTX
-        )
+        await auth_service.refresh(db_session, refresh_token=login.tokens.refresh_token, ctx=CTX)
 
 
 async def test_reset_password_otp_wrong_attempts_are_counted(db_session) -> None:
@@ -279,9 +283,7 @@ async def test_reset_password_token_is_single_use(db_session) -> None:
     await auth_service.forgot_password(db_session, email=email, ctx=CTX)
     token = await _reset_token(db_session, user.id)
 
-    await auth_service.reset_password(
-        db_session, token=token, password="BrandNewPass1!", ctx=CTX
-    )
+    await auth_service.reset_password(db_session, token=token, password="BrandNewPass1!", ctx=CTX)
     with pytest.raises(errors.InvalidTokenError) as exc:
         await auth_service.reset_password(
             db_session, token=token, password="AnotherPass1!", ctx=CTX
@@ -372,13 +374,9 @@ async def test_resend_verification_same_response_all_cases(db_session) -> None:
     verified_email = _email()
     await register_verified(db_session, email=verified_email)
     # Unknown email.
-    unknown = await auth_service.resend_verification(
-        db_session, email=_email(), ctx=CTX
-    )
+    unknown = await auth_service.resend_verification(db_session, email=_email(), ctx=CTX)
     pending = await auth_service.resend_verification(db_session, email=email, ctx=CTX)
-    already = await auth_service.resend_verification(
-        db_session, email=verified_email, ctx=CTX
-    )
+    already = await auth_service.resend_verification(db_session, email=verified_email, ctx=CTX)
     assert unknown["status"] == pending["status"] == already["status"] == "verification_sent"
     assert set(unknown.keys()) == set(pending.keys()) == set(already.keys())
 
@@ -407,7 +405,9 @@ async def test_resend_verification_invalidates_prior_token(db_session) -> None:
                     NotificationOutbox.template_key == "account.email_verification",
                 )
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     }
     new_tokens = tokens - {first_token}
     assert len(new_tokens) == 1
@@ -420,21 +420,29 @@ async def test_resend_verification_no_email_for_verified_user(db_session) -> Non
     email = _email()
     user = await register_verified(db_session, email=email)
     before = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.recipient_id == user.id,
-                NotificationOutbox.template_key == "account.email_verification",
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.recipient_id == user.id,
+                    NotificationOutbox.template_key == "account.email_verification",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     await auth_service.resend_verification(db_session, email=email, ctx=CTX)
     after = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.recipient_id == user.id,
-                NotificationOutbox.template_key == "account.email_verification",
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.recipient_id == user.id,
+                    NotificationOutbox.template_key == "account.email_verification",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     # No additional verification email for an already-verified account.
     assert len(after) == len(before)

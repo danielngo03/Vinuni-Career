@@ -35,7 +35,9 @@ def _missing_capabilities(principal: Principal, graph: dict) -> list[str]:
         if capability is None:
             continue
         resource_type, action = capability
-        if not permission_checker.can(principal, resource_type, action, resource_org_id=principal.org_id):
+        if not permission_checker.can(
+            principal, resource_type, action, resource_org_id=principal.org_id
+        ):
             label = f"{resource_type}:{action}"
             if label not in missing:
                 missing.append(label)

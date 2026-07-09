@@ -294,9 +294,7 @@ async def _resume_pending_registration(
 
     throttled = False
     try:
-        await check_and_touch_throttle(
-            session, scope="register_resume", email=user.email
-        )
+        await check_and_touch_throttle(session, scope="register_resume", email=user.email)
     except errors.RateLimitedError:
         throttled = True
 
@@ -306,9 +304,7 @@ async def _resume_pending_registration(
     await session.flush()
 
     if not throttled:
-        await _invalidate_outstanding(
-            session, user_id=user.id, purpose=PURPOSE_REGISTER
-        )
+        await _invalidate_outstanding(session, user_id=user.id, purpose=PURPOSE_REGISTER)
         await _issue_email_verification(session, user=user, purpose=PURPOSE_REGISTER)
 
     await write_audit(
@@ -374,12 +370,8 @@ async def register(
         await session.rollback()
         raise errors.EmailAlreadyRegisteredError() from exc
 
-    await create_identity(
-        session, user_id=user.id, persona=DEFAULT_PERSONA, is_primary=True
-    )
-    await set_preference(
-        session, user_id=user.id, locale=locale, timezone=user.timezone
-    )
+    await create_identity(session, user_id=user.id, persona=DEFAULT_PERSONA, is_primary=True)
+    await set_preference(session, user_id=user.id, locale=locale, timezone=user.timezone)
     await session.flush()
     await _issue_email_verification(session, user=user, purpose="register")
     await write_audit(
@@ -394,20 +386,14 @@ async def register(
     return {"status": "verification_sent", "email": normalized}
 
 
-async def verify_email(
-    session: AsyncSession, *, token: str, ctx: RequestContext
-) -> User:
+async def verify_email(session: AsyncSession, *, token: str, ctx: RequestContext) -> User:
     stmt = select(EmailVerification).where(
         EmailVerification.token_hash == hash_token(token),
         EmailVerification.purpose == "register",
     )
     record = (await session.execute(stmt)).scalar_one_or_none()
     now = datetime.now(tz=UTC)
-    if (
-        record is None
-        or record.used_at is not None
-        or ensure_aware(record.expires_at) <= now
-    ):
+    if record is None or record.used_at is not None or ensure_aware(record.expires_at) <= now:
         raise errors.InvalidTokenError("verification_invalid")
 
     user = await user_service.get_by_id(session, record.user_id)
@@ -418,9 +404,7 @@ async def verify_email(
         user.email_verified_at = now
     record.used_at = now
     await session.flush()
-    await record_security_event(
-        session, user_id=user.id, event_type=ev.EMAIL_VERIFIED, ctx=ctx
-    )
+    await record_security_event(session, user_id=user.id, event_type=ev.EMAIL_VERIFIED, ctx=ctx)
     await write_audit(
         session,
         action="auth.email_verified",
@@ -451,8 +435,7 @@ async def issue_activation_token(session: AsyncSession, *, user: User) -> str:
             user_id=user.id,
             token_hash=hash_token(raw),
             purpose=PURPOSE_REGISTER,
-            expires_at=datetime.now(tz=UTC)
-            + timedelta(hours=EMAIL_VERIFICATION_TTL_HOURS),
+            expires_at=datetime.now(tz=UTC) + timedelta(hours=EMAIL_VERIFICATION_TTL_HOURS),
         )
     )
     await session.flush()
@@ -475,11 +458,7 @@ async def activate_account(
         EmailVerification.purpose == PURPOSE_REGISTER,
     )
     record = (await session.execute(stmt)).scalar_one_or_none()
-    if (
-        record is None
-        or record.used_at is not None
-        or ensure_aware(record.expires_at) <= now
-    ):
+    if record is None or record.used_at is not None or ensure_aware(record.expires_at) <= now:
         raise errors.InvalidTokenError("activation_invalid")
     user = await user_service.get_by_id(session, record.user_id)
     if user is None or not user.is_active or user.password_hash is not None:
@@ -489,9 +468,7 @@ async def activate_account(
     user.email_verified_at = now
     record.used_at = now
     await session.flush()
-    await record_security_event(
-        session, user_id=user.id, event_type=ev.EMAIL_VERIFIED, ctx=ctx
-    )
+    await record_security_event(session, user_id=user.id, event_type=ev.EMAIL_VERIFIED, ctx=ctx)
     await write_audit(
         session,
         action="auth.account_activated",
@@ -514,16 +491,12 @@ async def resend_verification(
     already-verified emails (``docs/EDGE_CASES_FAILURE_MODES.md``).
     """
 
-    await check_and_touch_throttle(
-        session, scope="resend_verification", email=email
-    )
+    await check_and_touch_throttle(session, scope="resend_verification", email=email)
 
     normalized = user_service.normalize_email(email)
     user = await user_service.get_by_email(session, normalized)
     if user is not None and user.is_active and not user.is_email_verified:
-        await _invalidate_outstanding(
-            session, user_id=user.id, purpose=PURPOSE_REGISTER
-        )
+        await _invalidate_outstanding(session, user_id=user.id, purpose=PURPOSE_REGISTER)
         await _issue_email_verification(session, user=user, purpose=PURPOSE_REGISTER)
         await write_audit(
             session,
@@ -552,16 +525,12 @@ async def forgot_password(
     with a FRONTEND link (``docs/SECURITY_PRIVACY.md``).
     """
 
-    await check_and_touch_throttle(
-        session, scope="forgot_password", email=email
-    )
+    await check_and_touch_throttle(session, scope="forgot_password", email=email)
 
     normalized = user_service.normalize_email(email)
     user = await user_service.get_by_email(session, normalized)
     if user is not None and user.is_active:
-        await _invalidate_outstanding(
-            session, user_id=user.id, purpose=PURPOSE_PASSWORD_RESET
-        )
+        await _invalidate_outstanding(session, user_id=user.id, purpose=PURPOSE_PASSWORD_RESET)
         raw = generate_token()
         otp = generate_otp()
         ttl_minutes = get_settings().password_reset_ttl_minutes
@@ -627,9 +596,7 @@ async def _complete_password_reset(
         sess.revoked_reason = "password_reset"
         await _revoke_session_tokens(session, sess.id)
 
-    await record_security_event(
-        session, user_id=user.id, event_type=ev.PASSWORD_RESET, ctx=ctx
-    )
+    await record_security_event(session, user_id=user.id, event_type=ev.PASSWORD_RESET, ctx=ctx)
     await enqueue_notification(
         session,
         recipient_id=user.id,
@@ -677,9 +644,7 @@ async def reset_password(
     if user is None or not user.is_active:
         raise errors.InvalidTokenError("reset_invalid")
 
-    await _complete_password_reset(
-        session, user=user, record=record, password=password, ctx=ctx
-    )
+    await _complete_password_reset(session, user=user, record=record, password=password, ctx=ctx)
 
 
 async def reset_password_otp(
@@ -727,9 +692,7 @@ async def reset_password_otp(
         await session.flush()
         raise errors.InvalidTokenError(f"otp_wrong:{remaining}")
 
-    await _complete_password_reset(
-        session, user=user, record=record, password=password, ctx=ctx
-    )
+    await _complete_password_reset(session, user=user, record=record, password=password, ctx=ctx)
 
 
 # --------------------------------------------------------------------------- #
@@ -737,9 +700,7 @@ async def reset_password_otp(
 # --------------------------------------------------------------------------- #
 
 
-async def _active_sessions(
-    session: AsyncSession, user_id: uuid.UUID
-) -> list[Session]:
+async def _active_sessions(session: AsyncSession, user_id: uuid.UUID) -> list[Session]:
     now = datetime.now(tz=UTC)
     stmt = (
         select(Session)
@@ -838,9 +799,7 @@ async def _recent_failed_logins(
     return len(list((await session.execute(stmt)).scalars().all()))
 
 
-async def _confirmed_totp(
-    session: AsyncSession, user_id: uuid.UUID
-) -> UserTotp | None:
+async def _confirmed_totp(session: AsyncSession, user_id: uuid.UUID) -> UserTotp | None:
     """Return the user's TOTP enrolment only if it has been confirmed."""
 
     totp = (
@@ -849,9 +808,7 @@ async def _confirmed_totp(
     return totp if totp is not None and totp.is_confirmed else None
 
 
-async def _finalize_login(
-    session: AsyncSession, *, user: User, ctx: RequestContext
-) -> LoginResult:
+async def _finalize_login(session: AsyncSession, *, user: User, ctx: RequestContext) -> LoginResult:
     """Mint a session + tokens for a fully-authenticated user (post password and,
     when enrolled, post second factor). Records the success event + audit."""
 
@@ -864,9 +821,7 @@ async def _finalize_login(
     sess, raw_refresh = await _create_session_with_token(
         session, user=user, identity=identity, ctx=ctx
     )
-    tokens = _issue_tokens(
-        user=user, sess=sess, identity=identity, raw_refresh=raw_refresh
-    )
+    tokens = _issue_tokens(user=user, sess=sess, identity=identity, raw_refresh=raw_refresh)
 
     user.last_login_at = datetime.now(tz=UTC)
     user.login_count += 1
@@ -882,9 +837,7 @@ async def _finalize_login(
         action="auth.login",
         resource_type="session",
         resource_id=sess.id,
-        context=_audit_ctx(
-            ctx, actor_id=user.id, session_id=sess.id, org_id=identity.org_id
-        ),
+        context=_audit_ctx(ctx, actor_id=user.id, session_id=sess.id, org_id=identity.org_id),
     )
     await session.commit()
     return LoginResult(user=user, identity=identity, tokens=tokens)
@@ -912,19 +865,13 @@ async def login(
     if user is None or not user.is_active:
         raise errors.InvalidCredentialsError()
 
-    window_start = datetime.now(tz=UTC) - timedelta(
-        minutes=settings.account_lockout_minutes
-    )
+    window_start = datetime.now(tz=UTC) - timedelta(minutes=settings.account_lockout_minutes)
     failures = await _recent_failed_logins(session, user.id, since=window_start)
     if failures >= settings.account_lockout_failures:
-        raise errors.AccountLockedError(
-            retry_after_minutes=settings.account_lockout_minutes
-        )
+        raise errors.AccountLockedError(retry_after_minutes=settings.account_lockout_minutes)
 
     if not verify_password(password, user.password_hash):
-        await record_security_event(
-            session, user_id=user.id, event_type=ev.LOGIN_FAILED, ctx=ctx
-        )
+        await record_security_event(session, user_id=user.id, event_type=ev.LOGIN_FAILED, ctx=ctx)
         await write_audit(
             session,
             action="auth.login_failed",
@@ -941,9 +888,7 @@ async def login(
     # Second factor: a confirmed TOTP enrolment gates token issuance.
     if await _confirmed_totp(session, user.id) is not None:
         challenge_token = jwt_infra.issue_totp_challenge_token(user_id=user.id)
-        await record_security_event(
-            session, user_id=user.id, event_type=ev.TOTP_CHALLENGE, ctx=ctx
-        )
+        await record_security_event(session, user_id=user.id, event_type=ev.TOTP_CHALLENGE, ctx=ctx)
         await write_audit(
             session,
             action="auth.totp_challenge_issued",
@@ -983,22 +928,16 @@ async def login_totp(
     if user is None or not user.is_active or totp is None:
         raise errors.InvalidCredentialsError()
 
-    window_start = datetime.now(tz=UTC) - timedelta(
-        minutes=settings.account_lockout_minutes
-    )
+    window_start = datetime.now(tz=UTC) - timedelta(minutes=settings.account_lockout_minutes)
     failures = await _recent_failed_logins(session, user.id, since=window_start)
     if failures >= settings.account_lockout_failures:
-        raise errors.AccountLockedError(
-            retry_after_minutes=settings.account_lockout_minutes
-        )
+        raise errors.AccountLockedError(retry_after_minutes=settings.account_lockout_minutes)
 
     secret, was_plaintext = decrypt_totp_secret(totp.secret)
     if was_plaintext:
         totp.secret = encrypt_totp_secret(secret)
     if not pyotp.TOTP(secret).verify(code, valid_window=1):
-        await record_security_event(
-            session, user_id=user.id, event_type=ev.LOGIN_FAILED, ctx=ctx
-        )
+        await record_security_event(session, user_id=user.id, event_type=ev.LOGIN_FAILED, ctx=ctx)
         await write_audit(
             session,
             action="auth.totp_login_failed",
@@ -1017,13 +956,9 @@ async def login_totp(
 # --------------------------------------------------------------------------- #
 
 
-async def refresh(
-    session: AsyncSession, *, refresh_token: str, ctx: RequestContext
-) -> AuthTokens:
+async def refresh(session: AsyncSession, *, refresh_token: str, ctx: RequestContext) -> AuthTokens:
     now = datetime.now(tz=UTC)
-    stmt = select(RefreshToken).where(
-        RefreshToken.token_hash == hash_token(refresh_token)
-    )
+    stmt = select(RefreshToken).where(RefreshToken.token_hash == hash_token(refresh_token))
     # Row-lock the token under Postgres to serialise concurrent rotation; SQLite
     # (unit tests) does not support SELECT ... FOR UPDATE.
     if get_settings().database_url.startswith("postgresql"):
@@ -1049,11 +984,7 @@ async def refresh(
             ).scalar_one_or_none()
         # Benign concurrent double-submit of the immediately-previous token:
         # its replacement is still the current active token -> ask client to retry.
-        if (
-            replacement is not None
-            and replacement.is_active(now=now)
-            and sess.revoked_at is None
-        ):
+        if replacement is not None and replacement.is_active(now=now) and sess.revoked_at is None:
             raise errors.SessionExpiredError("concurrent_refresh")
 
         # Genuine reuse of a stale token -> revoke the whole session.
@@ -1083,9 +1014,7 @@ async def refresh(
 
     user = await user_service.get_by_id(session, sess.user_id)
     identity = (
-        await session.execute(
-            select(Identity).where(Identity.id == sess.identity_id)
-        )
+        await session.execute(select(Identity).where(Identity.id == sess.identity_id))
     ).scalar_one_or_none()
     if user is None or not user.is_active or identity is None:
         raise errors.SessionExpiredError("session_expired")
@@ -1103,9 +1032,7 @@ async def refresh(
     token.replaced_by_id = new_token.id
     sess.last_seen_at = now
 
-    tokens = _issue_tokens(
-        user=user, sess=sess, identity=identity, raw_refresh=raw_refresh
-    )
+    tokens = _issue_tokens(user=user, sess=sess, identity=identity, raw_refresh=raw_refresh)
     await write_audit(
         session,
         action="auth.refresh",
@@ -1203,9 +1130,7 @@ async def switch_identity(
     sess.last_seen_at = now
     await session.flush()
 
-    tokens = _issue_tokens(
-        user=user, sess=sess, identity=identity, raw_refresh=raw_refresh
-    )
+    tokens = _issue_tokens(user=user, sess=sess, identity=identity, raw_refresh=raw_refresh)
     await write_audit(
         session,
         action="auth.identity_switched",

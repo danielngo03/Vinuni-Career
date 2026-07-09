@@ -91,9 +91,7 @@ class CvNotInLibraryError(ConflictError):
     student to finalize the CV first.
     """
 
-    message = (
-        "CV này chưa ở trong thư viện. Hãy lưu CV vào thư viện trước khi ứng tuyển."
-    )
+    message = "CV này chưa ở trong thư viện. Hãy lưu CV vào thư viện trước khi ứng tuyển."
 
     def __init__(self, *, status: str) -> None:
         super().__init__(
@@ -163,22 +161,16 @@ class AiSourceRequiredError(ValidationFailedError):
     message = "Thiếu thông tin cần thiết cho yêu cầu AI này."
 
     def __init__(self, *, field: str) -> None:
-        super().__init__(
-            self.message, details={"reason": "ai_source_required", "field": field}
-        )
+        super().__init__(self.message, details={"reason": "ai_source_required", "field": field})
 
 
 class FactConfirmationRequiredError(ValidationFailedError):
     """Accept attempted on a suggestion that needs explicit fact confirmation."""
 
-    message = (
-        "Gợi ý này chứa thông tin cần bạn xác nhận tính chính xác trước khi áp dụng."
-    )
+    message = "Gợi ý này chứa thông tin cần bạn xác nhận tính chính xác trước khi áp dụng."
 
     def __init__(self) -> None:
-        super().__init__(
-            self.message, details={"reason": "fact_confirmation_required"}
-        )
+        super().__init__(self.message, details={"reason": "fact_confirmation_required"})
 
 
 class SuggestionNotPendingError(ConflictError):
@@ -198,9 +190,7 @@ class SuggestionNotApplicableError(ValidationFailedError):
     message = "Gợi ý này chỉ mang tính tư vấn và không thể áp dụng trực tiếp."
 
     def __init__(self) -> None:
-        super().__init__(
-            self.message, details={"reason": "suggestion_not_applicable"}
-        )
+        super().__init__(self.message, details={"reason": "suggestion_not_applicable"})
 
 
 class ExportNotReadyError(ValidationFailedError):
@@ -234,9 +224,7 @@ class FactConfirmationFieldsRequiredError(ValidationFailedError):
     """Ingestion needs-review fields must be individually confirmed/edited or the
     student must pass a blanket ``fact_confirmation`` before import."""
 
-    message = (
-        "Vui lòng xác nhận hoặc chỉnh sửa các trường cần kiểm tra trước khi nhập."
-    )
+    message = "Vui lòng xác nhận hoặc chỉnh sửa các trường cần kiểm tra trước khi nhập."
 
     def __init__(self, *, fields: list[str]) -> None:
         super().__init__(
@@ -255,6 +243,9 @@ class UploadRejectedError(ValidationFailedError):
     def __init__(self, *, quality_code: str, message: str, next_actions: list[str]) -> None:
         super().__init__(
             message,
-            details={"reason": "upload_rejected", "quality_code": quality_code,
-                     "next_actions": next_actions},
+            details={
+                "reason": "upload_rejected",
+                "quality_code": quality_code,
+                "next_actions": next_actions,
+            },
         )

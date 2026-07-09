@@ -32,6 +32,7 @@ from sqlalchemy import func, select
 # Fake provider returning known usage
 # ---------------------------------------------------------------------------
 
+
 class FakeProvider(AIProvider):
     """Deterministic test provider with known prompt/completion token counts."""
 
@@ -101,6 +102,7 @@ class FakeProvider(AIProvider):
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _patch_provider(monkeypatch: Any, provider: AIProvider) -> None:
     """Patch gateway factory so AiTaskRunner uses our fake provider.
 
@@ -122,6 +124,7 @@ def _patch_provider(monkeypatch: Any, provider: AIProvider) -> None:
         lambda: True,
         raising=True,
     )
+
     # Patch the budget guard to be a no-op for these tests.
     async def _noop_check(*_a: Any, **_kw: Any) -> None:
         return None
@@ -136,6 +139,7 @@ def _patch_provider(monkeypatch: Any, provider: AIProvider) -> None:
 # ---------------------------------------------------------------------------
 # Core test: ops event + usage log both written
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_complete_writes_ops_event_and_keeps_usage_log(
@@ -155,18 +159,12 @@ async def test_complete_writes_ops_event_and_keeps_usage_log(
     )
     await runner.complete([AIMessage(role="user", content="hi")])
 
-    assert (
-        await db_session.scalar(select(func.count()).select_from(AiOpsEvent))
-    ) == 1
-    assert (
-        await db_session.scalar(select(func.count()).select_from(AiUsageLog))
-    ) == 1
+    assert (await db_session.scalar(select(func.count()).select_from(AiOpsEvent))) == 1
+    assert (await db_session.scalar(select(func.count()).select_from(AiUsageLog))) == 1
 
 
 @pytest.mark.asyncio
-async def test_complete_ops_event_has_correct_fields(
-    db_session: Any, monkeypatch: Any
-) -> None:
+async def test_complete_ops_event_has_correct_fields(db_session: Any, monkeypatch: Any) -> None:
     """The AiOpsEvent row has resolved provider/model, real tokens, latency >= 0, status=ok."""
     from app.ai.gateway.task_runner import AiTaskRunner
 
@@ -289,9 +287,7 @@ async def test_complete_budget_blocked_writes_ops_event_with_blocked_status(
 
 
 @pytest.mark.asyncio
-async def test_complete_org_id_none_is_accepted(
-    db_session: Any, monkeypatch: Any
-) -> None:
+async def test_complete_org_id_none_is_accepted(db_session: Any, monkeypatch: Any) -> None:
     """org_id=None (default) is backward-compatible — no exception."""
     from app.ai.gateway.task_runner import AiTaskRunner
 

@@ -26,17 +26,13 @@ __all__ = [
 async def make_partner(session: AsyncSession, *, display_name: str = "Partner Co"):
     """Return (user, org, partner_principal) for a partner org admin."""
 
-    return await make_org_with_admin(
-        session, org_type="partner", display_name=display_name
-    )
+    return await make_org_with_admin(session, org_type="partner", display_name=display_name)
 
 
 async def make_university(session: AsyncSession, *, display_name: str = "VinUni"):
     """Return (user, org, university_staff_principal)."""
 
-    return await make_org_with_admin(
-        session, org_type="university", display_name=display_name
-    )
+    return await make_org_with_admin(session, org_type="university", display_name=display_name)
 
 
 async def make_second_student(session: AsyncSession, *, prefix: str = "student2"):

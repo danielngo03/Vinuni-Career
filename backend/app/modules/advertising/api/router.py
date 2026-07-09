@@ -53,9 +53,7 @@ from app.shared.permissions import GUEST, Principal
 from app.shared.responses import paginated, success
 
 router = APIRouter(prefix="/advertising", tags=["advertising"])
-admin_router = APIRouter(
-    prefix="/admin/advertising", tags=["advertising-admin"]
-)
+admin_router = APIRouter(prefix="/admin/advertising", tags=["advertising-admin"])
 
 
 # --------------------------------------------------------------------------- #
@@ -95,14 +93,18 @@ async def list_placements(
     placement_status: str | None = Query(default=None, alias="status"),
 ) -> dict:
     items, next_cursor, page_limit = await placement_service.list_my_placements(
-        session, principal=auth.principal, status=placement_status,
-        cursor=cursor, limit=limit,
+        session,
+        principal=auth.principal,
+        status=placement_status,
+        cursor=cursor,
+        limit=limit,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
 
 @router.post(
-    "/placements", status_code=status.HTTP_201_CREATED,
+    "/placements",
+    status_code=status.HTTP_201_CREATED,
     summary="Create a draft placement request",
 )
 async def create_placement(
@@ -111,7 +113,10 @@ async def create_placement(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await placement_service.create_placement(
-        session, principal=auth.principal, payload=body.model_dump(), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        payload=body.model_dump(),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -123,7 +128,9 @@ async def get_placement(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await placement_service.get_placement(
-        session, principal=auth.principal, placement_id=placement_id,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
     )
     return success(data)
 
@@ -136,8 +143,11 @@ async def update_placement(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await placement_service.update_placement(
-        session, principal=auth.principal, placement_id=placement_id,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        payload=body.model_dump(exclude_unset=True),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -152,8 +162,12 @@ async def submit_placement(
     version = body.version if body else None
     disclosure = body.disclosure_confirmed if body else None
     data = await placement_service.submit_placement(
-        session, principal=auth.principal, placement_id=placement_id, ctx=auth.ctx,
-        version=version, disclosure_confirmed=disclosure,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        ctx=auth.ctx,
+        version=version,
+        disclosure_confirmed=disclosure,
     )
     return success(data)
 
@@ -167,7 +181,10 @@ async def cancel_placement(
 ) -> dict:
     version = body.version if body else None
     data = await placement_service.cancel_placement(
-        session, principal=auth.principal, placement_id=placement_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        ctx=auth.ctx,
         version=version,
     )
     return success(data)
@@ -180,7 +197,10 @@ async def delete_placement(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     await placement_service.delete_placement(
-        session, principal=auth.principal, placement_id=placement_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        ctx=auth.ctx,
     )
     return success({"status": "deleted"})
 
@@ -200,7 +220,9 @@ async def list_creatives(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     items = await creative_service.list_creatives(
-        session, principal=auth.principal, placement_id=placement_id,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
     )
     return success(items, meta={"count": len(items)})
 
@@ -231,10 +253,19 @@ async def upload_creative(
             details={"reason": "file_too_large"},
         )
     result = await creative_service.upload_creative(
-        session, principal=auth.principal, placement_id=placement_id, slot=slot,
-        data=data, content_type=file.content_type, alt_vi=alt_vi, alt_en=alt_en,
-        focal_x=focal_x, focal_y=focal_y, click_target=click_target,
-        analytics_source_surface=analytics_source_surface, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        slot=slot,
+        data=data,
+        content_type=file.content_type,
+        alt_vi=alt_vi,
+        alt_en=alt_en,
+        focal_x=focal_x,
+        focal_y=focal_y,
+        click_target=click_target,
+        analytics_source_surface=analytics_source_surface,
+        ctx=auth.ctx,
     )
     return success(result)
 
@@ -246,7 +277,10 @@ async def delete_creative(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     await creative_service.delete_creative(
-        session, principal=auth.principal, creative_id=creative_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        creative_id=creative_id,
+        ctx=auth.ctx,
     )
     return success({"status": "deleted"})
 
@@ -287,8 +321,11 @@ async def list_all_placements(
     limit: int | None = Query(default=None),
 ) -> dict:
     items, total, spend = await moderation_service.list_all(
-        session, principal=auth.principal, status=placement_status,
-        org_id=org_id, limit=limit,
+        session,
+        principal=auth.principal,
+        status=placement_status,
+        org_id=org_id,
+        limit=limit,
     )
     return success(items, meta={"count": total, "spend": spend})
 
@@ -303,8 +340,12 @@ async def approve_placement(
     note = body.note if body else None
     version = body.version if body else None
     data = await moderation_service.approve_placement(
-        session, principal=auth.principal, placement_id=placement_id,
-        note=note, version=version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        note=note,
+        version=version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -317,23 +358,28 @@ async def reject_placement(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await moderation_service.reject_placement(
-        session, principal=auth.principal, placement_id=placement_id,
-        reason=body.reason, reason_code=body.reason_code, version=body.version,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        reason=body.reason,
+        reason_code=body.reason_code,
+        version=body.version,
         ctx=auth.ctx,
     )
     return success(data)
 
 
-@admin_router.post(
-    "/placements/{placement_id}/claim", summary="Claim a placement for review"
-)
+@admin_router.post("/placements/{placement_id}/claim", summary="Claim a placement for review")
 async def claim_placement(
     placement_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await moderation_service.claim_placement(
-        session, principal=auth.principal, placement_id=placement_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -351,8 +397,12 @@ async def escalate_placement(
     reason_code = body.reason_code if body else None
     note = body.note if body else None
     data = await moderation_service.escalate_placement(
-        session, principal=auth.principal, placement_id=placement_id,
-        reason_code=reason_code, note=note, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        reason_code=reason_code,
+        note=note,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -364,7 +414,9 @@ async def bulk_approve_placements(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     results = await moderation_service.bulk_approve_placements(
-        session, principal=auth.principal, placement_ids=body.placement_ids,
+        session,
+        principal=auth.principal,
+        placement_ids=body.placement_ids,
         ctx=auth.ctx,
     )
     return success(results)
@@ -378,7 +430,10 @@ async def bulk_reject_placements(
 ) -> dict:
     items = [item.model_dump() for item in body.items]
     results = await moderation_service.bulk_reject_placements(
-        session, principal=auth.principal, items=items, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        items=items,
+        ctx=auth.ctx,
     )
     return success(results)
 
@@ -394,15 +449,17 @@ async def mark_paid(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await moderation_service.mark_paid(
-        session, principal=auth.principal, placement_id=placement_id,
-        payment_reference=body.payment_reference, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        payment_reference=body.payment_reference,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@admin_router.post(
-    "/placements/{placement_id}/cancel", summary="Disable any placement immediately"
-)
+@admin_router.post("/placements/{placement_id}/cancel", summary="Disable any placement immediately")
 async def admin_cancel(
     placement_id: uuid.UUID,
     body: PlacementAdminCancelRequest | None = None,
@@ -412,8 +469,12 @@ async def admin_cancel(
     reason = body.reason if body else None
     version = body.version if body else None
     data = await moderation_service.admin_cancel(
-        session, principal=auth.principal, placement_id=placement_id,
-        reason=reason, version=version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        reason=reason,
+        version=version,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -429,15 +490,17 @@ async def set_disclosure_class(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await moderation_service.set_disclosure_class(
-        session, principal=auth.principal, placement_id=placement_id,
-        disclosure_class=body.disclosure_class, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        placement_id=placement_id,
+        disclosure_class=body.disclosure_class,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@admin_router.post(
-    "/creatives/{creative_id}/review", summary="Approve or reject a creative"
-)
+@admin_router.post("/creatives/{creative_id}/review", summary="Approve or reject a creative")
 async def review_creative(
     creative_id: uuid.UUID,
     body: CreativeReviewRequest,
@@ -445,7 +508,12 @@ async def review_creative(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await moderation_service.review_creative(
-        session, principal=auth.principal, creative_id=creative_id,
-        decision=body.decision, note=body.note, version=body.version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        creative_id=creative_id,
+        decision=body.decision,
+        note=body.note,
+        version=body.version,
+        ctx=auth.ctx,
     )
     return success(data)

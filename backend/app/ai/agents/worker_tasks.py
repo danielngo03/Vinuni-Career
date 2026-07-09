@@ -144,9 +144,7 @@ async def _execute_and_record(
     default_retry_delay=5,
     acks_late=True,
 )
-def run_subtask(
-    self, run_id: str, subtask_key: str, subtask_type: str, payload: dict
-) -> dict:
+def run_subtask(self, run_id: str, subtask_key: str, subtask_type: str, payload: dict) -> dict:
     """Execute one workforce subtask and persist its terminal result.
 
     Idempotent: dedup happens by ``subtask_key`` inside ``_execute_and_record``

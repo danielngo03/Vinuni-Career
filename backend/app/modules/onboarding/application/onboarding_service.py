@@ -64,9 +64,7 @@ async def get_or_create_onboarding_state(
     session: AsyncSession, *, user_id: uuid.UUID
 ) -> OnboardingState:
     state = (
-        await session.execute(
-            select(OnboardingState).where(OnboardingState.user_id == user_id)
-        )
+        await session.execute(select(OnboardingState).where(OnboardingState.user_id == user_id))
     ).scalar_one_or_none()
     if state is None:
         state = OnboardingState(user_id=user_id, current_step="role_select")
@@ -75,9 +73,7 @@ async def get_or_create_onboarding_state(
     return state
 
 
-async def get_status(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> dict:
+async def get_status(session: AsyncSession, *, user_id: uuid.UUID) -> dict:
     """Return current onboarding state for redirect guard / frontend wizard."""
     user = await user_service.get_by_id(session, user_id)
     if user is None:
@@ -435,9 +431,7 @@ async def submit_employer_docs(
     return {"status": "submitted", "ai_doc_status": "pending"}
 
 
-async def get_employer_doc_status(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> dict:
+async def get_employer_doc_status(session: AsyncSession, *, user_id: uuid.UUID) -> dict:
     req = await partner_registration_facade.get_by_user(session, user_id)
     if req is None:
         raise NotFoundError("employer_request_not_found")

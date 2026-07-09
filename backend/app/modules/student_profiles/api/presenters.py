@@ -57,9 +57,7 @@ def owner_profile(p: StudentProfile, *, user, locale: str = "vi") -> dict:
         "location_city": p.location_city,
         "location_country": p.location_country,
         "profile_visibility": p.profile_visibility,
-        "profile_visibility_label": vocab.visibility_label(
-            p.profile_visibility, locale=locale
-        ),
+        "profile_visibility_label": vocab.visibility_label(p.profile_visibility, locale=locale),
         "show_email": p.show_email,
         "show_email_label": vocab.contact_label(p.show_email, locale=locale),
         "show_phone": p.show_phone,

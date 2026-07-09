@@ -36,8 +36,12 @@ async def test_seed_is_idempotent(db_session) -> None:
     await provider_registry.ensure_defaults(db_session)
     await db_session.flush()
     rows = (
-        await db_session.execute(
-            select(AiModelAlias).where(AiModelAlias.alias_name == "chat_default")
+        (
+            await db_session.execute(
+                select(AiModelAlias).where(AiModelAlias.alias_name == "chat_default")
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1

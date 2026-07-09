@@ -31,9 +31,7 @@ async def get_student_dashboard(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await student_dashboard.get_student_dashboard(
-        session, principal=auth.principal
-    )
+    data = await student_dashboard.get_student_dashboard(session, principal=auth.principal)
     return success(data)
 
 
@@ -42,9 +40,7 @@ async def get_partner_dashboard(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await partner_dashboard.get_partner_dashboard(
-        session, principal=auth.principal
-    )
+    data = await partner_dashboard.get_partner_dashboard(session, principal=auth.principal)
     return success(data)
 
 
@@ -53,9 +49,7 @@ async def get_university_dashboard(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await university_dashboard.get_university_dashboard(
-        session, principal=auth.principal
-    )
+    data = await university_dashboard.get_university_dashboard(session, principal=auth.principal)
     return success(data)
 
 

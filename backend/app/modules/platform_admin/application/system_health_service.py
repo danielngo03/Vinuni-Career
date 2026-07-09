@@ -158,9 +158,7 @@ async def queues_health(*, principal: Principal) -> dict[str, Any]:
     if redis_ok:
         queue_depth = await _celery_queue_depth()
 
-    broker_configured = bool(
-        getattr(settings, "redis_url", None)
-    )
+    broker_configured = bool(getattr(settings, "redis_url", None))
 
     return {
         "redis": "ok" if redis_ok else "down",

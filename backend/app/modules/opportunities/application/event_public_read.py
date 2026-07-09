@@ -109,10 +109,7 @@ async def list_related_summaries(
     seed_formats = {e.format for e in seeds}
     seed_org_ids = {e.org_id for e in seeds}
     seed_tags = {
-        str(tag).strip().lower()
-        for e in seeds
-        for tag in (e.tags or [])
-        if str(tag).strip()
+        str(tag).strip().lower() for e in seeds for tag in (e.tags or []) if str(tag).strip()
     }
 
     candidate_stmt = _visible(select(Event).where(Event.id.not_in(seed_event_ids)))
@@ -122,11 +119,7 @@ async def list_related_summaries(
     candidates = list((await session.execute(candidate_stmt)).scalars().all())
 
     def score(event: Event) -> tuple[int, datetime, uuid.UUID]:
-        tags = {
-            str(tag).strip().lower()
-            for tag in (event.tags or [])
-            if str(tag).strip()
-        }
+        tags = {str(tag).strip().lower() for tag in (event.tags or []) if str(tag).strip()}
         value = 0
         if event.event_type in seed_types:
             value += 4
@@ -146,6 +139,4 @@ async def count_visible_events(session: AsyncSession) -> int:
 
     from sqlalchemy import func
 
-    return (
-        await session.execute(_visible(select(func.count(Event.id))))
-    ).scalar_one()
+    return (await session.execute(_visible(select(func.count(Event.id))))).scalar_one()

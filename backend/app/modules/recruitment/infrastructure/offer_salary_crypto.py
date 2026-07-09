@@ -34,9 +34,7 @@ def _fernet() -> Fernet:
     else:
         # Local-dev fallback: derive a stable 32-byte key from the JWT secret with a
         # purpose label distinct from the TOTP / meeting-link derivations.
-        digest = hashlib.sha256(
-            f"offer-salary:{get_settings().jwt_secret_key}".encode()
-        ).digest()
+        digest = hashlib.sha256(f"offer-salary:{get_settings().jwt_secret_key}".encode()).digest()
         key = base64.urlsafe_b64encode(digest)
     return Fernet(key)
 

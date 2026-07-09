@@ -188,9 +188,7 @@ async def start_bulk_screening_run(
         },
         subtask_keys_json=[s.key for s in subtasks],
         subtask_results_json={},
-        summary_json=(
-            aggregate_screening_results({}) if not subtasks else None
-        ),
+        summary_json=(aggregate_screening_results({}) if not subtasks else None),
     )
     if not subtasks:
         run.completed_at = datetime.now(tz=UTC)
@@ -227,9 +225,7 @@ async def _load_run(session: AsyncSession, run_id: uuid.UUID) -> WorkforceRun:
     return run
 
 
-async def get_run(
-    session: AsyncSession, *, principal: Principal, run_id: uuid.UUID
-) -> dict:
+async def get_run(session: AsyncSession, *, principal: Principal, run_id: uuid.UUID) -> dict:
     """Owner/org-scoped read of a workforce run's current status + results."""
 
     run = await _load_run(session, run_id)
@@ -292,9 +288,7 @@ async def record_subtask_result(
     if new_status in {RunStatus.COMPLETE, RunStatus.PARTIAL, RunStatus.FAILED}:
         run.summary_json = aggregate_screening_results(results)
         run.completed_at = datetime.now(tz=UTC)
-        logger.info(
-            "workforce_run.end", extra={"run_id": str(run_id), "status": new_status.value}
-        )
+        logger.info("workforce_run.end", extra={"run_id": str(run_id), "status": new_status.value})
     await session.flush()
     await session.commit()
 

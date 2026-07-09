@@ -22,9 +22,11 @@ _REDACT_PATTERNS = [
     re.compile(r"(api[_-]?key\s*[=:]\s*)[^\s,;]+", re.IGNORECASE),
 ]
 
-_STANDARD_ATTRS = set(
-    logging.LogRecord("", 0, "", 0, "", (), None).__dict__.keys()
-) | {"message", "asctime", "taskName"}
+_STANDARD_ATTRS = set(logging.LogRecord("", 0, "", 0, "", (), None).__dict__.keys()) | {
+    "message",
+    "asctime",
+    "taskName",
+}
 
 
 def _redact(text: str) -> str:

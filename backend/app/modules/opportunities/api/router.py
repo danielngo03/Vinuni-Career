@@ -72,6 +72,7 @@ async def _get_redis():
     finally:
         await client.aclose()
 
+
 router = APIRouter(tags=["opportunities"])
 
 jobs_router = APIRouter(prefix="/jobs")
@@ -96,10 +97,12 @@ async def jobs_config() -> dict:
     These mirror DB enum columns. Frontend must call this and wait before
     rendering filter chips — do not render any filter chips from static frontend arrays.
     """
-    return success({
-        "employment_types": ["full_time", "part_time", "internship", "contract"],
-        "location_types": ["onsite", "remote", "hybrid"],
-    })
+    return success(
+        {
+            "employment_types": ["full_time", "part_time", "internship", "contract"],
+            "location_types": ["onsite", "remote", "hybrid"],
+        }
+    )
 
 
 @jobs_router.get("", summary="Public job discovery (RBAC-aware, visible only)")
@@ -146,16 +149,25 @@ async def list_jobs(
         except Exception:  # noqa: BLE001
             principal = GUEST
     items, next_cursor, page_limit, total = await job_service.list_public_jobs(
-        session, principal=principal, cursor=cursor, page=page, limit=limit,
-        q=q, employment_type=employment_type, location_type=location_type,
+        session,
+        principal=principal,
+        cursor=cursor,
+        page=page,
+        limit=limit,
+        q=q,
+        employment_type=employment_type,
+        location_type=location_type,
         location_types=location_types,
-        province_code=province_code, ward_code=ward_code,
-        province_codes=province_codes, ward_codes=ward_codes,
+        province_code=province_code,
+        ward_code=ward_code,
+        province_codes=province_codes,
+        ward_codes=ward_codes,
         industry_terms=industry_terms,
         industry_group_id=industry_group_id,
         industry_id=industry_id,
         specialization_id=specialization_id,
-        salary_min=salary_min, salary_max=salary_max,
+        salary_min=salary_min,
+        salary_max=salary_max,
         experience_min_years=experience_min_years,
         experience_max_years=experience_max_years,
         posted_within_days=posted_within_days,
@@ -175,8 +187,11 @@ async def list_my_jobs(
     job_status: str | None = Query(default=None, alias="status"),
 ) -> dict:
     items, next_cursor, page_limit = await job_service.list_my_jobs(
-        session, principal=auth.principal, status=job_status,
-        cursor=cursor, limit=limit,
+        session,
+        principal=auth.principal,
+        status=job_status,
+        cursor=cursor,
+        limit=limit,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
@@ -195,7 +210,9 @@ async def get_job(
         except Exception:  # noqa: BLE001
             principal = GUEST
     data = await job_service.get_job(
-        session, principal=principal, job_id=job_id,
+        session,
+        principal=principal,
+        job_id=job_id,
         user_agent=request.headers.get("user-agent"),
     )
     return success(data)
@@ -251,9 +268,7 @@ async def get_competition_signal(
         except Exception:  # noqa: BLE001
             principal = GUEST
 
-    data = await competition_service.competition_signal(
-        session, principal=principal, job_id=job_id
-    )
+    data = await competition_service.competition_signal(session, principal=principal, job_id=job_id)
     return success(data)
 
 
@@ -288,7 +303,10 @@ async def get_student_intelligence(
 
     locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
     data = await student_intelligence_service.student_intelligence_for_job(
-        session, principal=auth.principal, job_id=job_id, cv_id=cv_id,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        cv_id=cv_id,
         locale=locale,
     )
     return success(data)
@@ -389,15 +407,15 @@ async def create_job(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await job_service.create_job(
-        session, principal=auth.principal,
-        payload=body.model_dump(), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        payload=body.model_dump(),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@jobs_router.patch(
-    "/{job_id}", summary="Update a draft/rejected job, or amend a published job"
-)
+@jobs_router.patch("/{job_id}", summary="Update a draft/rejected job, or amend a published job")
 async def update_job(
     job_id: uuid.UUID,
     body: JobUpdateRequest,
@@ -405,8 +423,11 @@ async def update_job(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await job_service.update_job(
-        session, principal=auth.principal, job_id=job_id,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        payload=body.model_dump(exclude_unset=True),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -420,7 +441,11 @@ async def submit_job(
 ) -> dict:
     version = body.version if body else None
     data = await job_service.submit_job(
-        session, principal=auth.principal, job_id=job_id, ctx=auth.ctx, version=version,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        ctx=auth.ctx,
+        version=version,
     )
     return success(data)
 
@@ -435,7 +460,9 @@ async def quality_check_job(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await job_service.check_jd_quality(
-        session, principal=auth.principal, job_id=job_id,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
     )
     return success(data)
 
@@ -451,7 +478,10 @@ async def preview_job(
     as_persona: str = Query(default="guest", alias="as"),
 ) -> dict:
     data = await job_service.preview_job(
-        session, principal=auth.principal, job_id=job_id, as_persona=as_persona,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        as_persona=as_persona,
     )
     return success(data)
 
@@ -465,7 +495,11 @@ async def close_job(
 ) -> dict:
     version = body.version if body else None
     data = await job_service.close_job(
-        session, principal=auth.principal, job_id=job_id, ctx=auth.ctx, version=version,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        ctx=auth.ctx,
+        version=version,
     )
     return success(data)
 
@@ -479,7 +513,11 @@ async def reopen_job(
 ) -> dict:
     version = body.version if body else None
     data = await job_service.reopen_job(
-        session, principal=auth.principal, job_id=job_id, ctx=auth.ctx, version=version,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        ctx=auth.ctx,
+        version=version,
     )
     return success(data)
 
@@ -491,7 +529,10 @@ async def delete_job(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     await job_service.delete_job(
-        session, principal=auth.principal, job_id=job_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        ctx=auth.ctx,
     )
     return success({"status": "deleted"})
 
@@ -664,9 +705,7 @@ async def save_job(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await saved_jobs_service.save_job(
-        session, principal=auth.principal, job_id=job_id
-    )
+    data = await saved_jobs_service.save_job(session, principal=auth.principal, job_id=job_id)
     return success(data)
 
 
@@ -680,9 +719,7 @@ async def unsave_job(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await saved_jobs_service.unsave_job(
-        session, principal=auth.principal, job_id=job_id
-    )
+    data = await saved_jobs_service.unsave_job(session, principal=auth.principal, job_id=job_id)
     return success(data)
 
 
@@ -813,9 +850,7 @@ async def translate_job(
     from app.shared.exceptions import ResourceNotFoundError, ValidationFailedError
 
     job = (
-        await session.execute(
-            _select(Job).where(Job.id == job_id, Job.deleted_at.is_(None))
-        )
+        await session.execute(_select(Job).where(Job.id == job_id, Job.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if job is None:
         raise ResourceNotFoundError("Không tìm thấy tin tuyển dụng.")
@@ -829,9 +864,7 @@ async def translate_job(
         # Distinguish "same language" from "AI unavailable" in the response
         source_lang = job.language_code or "en"
         if source_lang == target_lang:
-            raise ValidationFailedError(
-                f"Tin tuyển dụng đã ở ngôn ngữ '{target_lang}'."
-            )
+            raise ValidationFailedError(f"Tin tuyển dụng đã ở ngôn ngữ '{target_lang}'.")
         raise HTTPException(
             status_code=503,
             detail="translation_unavailable",
@@ -910,7 +943,10 @@ async def moderation_queue(
     limit: int | None = Query(default=None),
 ) -> dict:
     items, total = await moderation_service.list_moderation_queue(
-        session, principal=auth.principal, status=job_status, limit=limit,
+        session,
+        principal=auth.principal,
+        status=job_status,
+        limit=limit,
     )
     return success(items, meta={"count": total})
 
@@ -925,8 +961,12 @@ async def approve_job(
     version = body.version if body else None
     note = body.note if body else None
     data = await moderation_service.approve_job(
-        session, principal=auth.principal, job_id=job_id, version=version,
-        note=note, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        version=version,
+        note=note,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -939,8 +979,12 @@ async def reject_job(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await moderation_service.reject_job(
-        session, principal=auth.principal, job_id=job_id,
-        reason=body.reason, reason_code=body.reason_code, version=body.version,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        reason=body.reason,
+        reason_code=body.reason_code,
+        version=body.version,
         ctx=auth.ctx,
     )
     return success(data)
@@ -953,14 +997,15 @@ async def claim_job(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await moderation_service.claim_job(
-        session, principal=auth.principal, job_id=job_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@admin_jobs_router.post(
-    "/{job_id}/escalate", summary="Escalate a job to the human review queue"
-)
+@admin_jobs_router.post("/{job_id}/escalate", summary="Escalate a job to the human review queue")
 async def escalate_job(
     job_id: uuid.UUID,
     body: JobEscalateRequest | None = None,
@@ -970,8 +1015,12 @@ async def escalate_job(
     reason_code = body.reason_code if body else None
     note = body.note if body else None
     data = await moderation_service.escalate_job(
-        session, principal=auth.principal, job_id=job_id,
-        reason_code=reason_code, note=note, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        job_id=job_id,
+        reason_code=reason_code,
+        note=note,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -983,7 +1032,10 @@ async def bulk_approve_jobs(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     results = await moderation_service.bulk_approve_jobs(
-        session, principal=auth.principal, job_ids=body.job_ids, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        job_ids=body.job_ids,
+        ctx=auth.ctx,
     )
     return success(results)
 
@@ -996,7 +1048,10 @@ async def bulk_reject_jobs(
 ) -> dict:
     items = [item.model_dump() for item in body.items]
     results = await moderation_service.bulk_reject_jobs(
-        session, principal=auth.principal, items=items, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        items=items,
+        ctx=auth.ctx,
     )
     return success(results)
 

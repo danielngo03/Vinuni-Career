@@ -92,12 +92,12 @@ class Application(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
 
 
@@ -159,20 +159,14 @@ class PipelineStage(Base):
     name: Mapped[str] = mapped_column(String(150), nullable=False)
     stage_type: Mapped[str] = mapped_column(String(30), nullable=False)
     sort_order: Mapped[int] = mapped_column(SmallInteger, nullable=False)
-    required_action: Mapped[str] = mapped_column(
-        String(30), nullable=False, default="manual"
-    )
+    required_action: Mapped[str] = mapped_column(String(30), nullable=False, default="manual")
     sla_hours: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # ADR-0006: average-score gate for ``required_action='score_threshold'``;
     # nullable (meaningful only for that action). NUMERIC(2,1) matches overall_score.
     score_threshold: Mapped[Decimal | None] = mapped_column(Numeric(2, 1), nullable=True)
     is_terminal: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    candidate_visible: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=True
-    )
-    automation_rules: Mapped[dict] = mapped_column(
-        JsonType, nullable=False, default=dict
-    )
+    candidate_visible: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    automation_rules: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
 
 
 class CandidateStage(Base):
@@ -200,9 +194,7 @@ class CandidateStage(Base):
     entered_by: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
-    exited_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    exited_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     exit_kind: Mapped[str | None] = mapped_column(String(20), nullable=True)
     reason: Mapped[str | None] = mapped_column(Text, nullable=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(200), nullable=True)
@@ -266,13 +258,9 @@ class Scorecard(Base):
         ForeignKey("interviews.id", ondelete="SET NULL"), nullable=True, index=True
     )
     recommendation: Mapped[str] = mapped_column(String(20), nullable=False)
-    overall_score: Mapped[Decimal | None] = mapped_column(
-        Numeric(2, 1), nullable=True
-    )
+    overall_score: Mapped[Decimal | None] = mapped_column(Numeric(2, 1), nullable=True)
     comment: Mapped[str | None] = mapped_column(Text, nullable=True)
-    status: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="submitted"
-    )
+    status: Mapped[str] = mapped_column(String(20), nullable=False, default="submitted")
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     submitted_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
@@ -281,7 +269,9 @@ class Scorecard(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -347,18 +337,12 @@ class Interview(Base):
     )
     title: Mapped[str | None] = mapped_column(String(150), nullable=True)
     mode: Mapped[str] = mapped_column(String(20), nullable=False)
-    scheduled_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
-    duration_minutes: Mapped[int] = mapped_column(
-        SmallInteger, nullable=False, default=60
-    )
+    scheduled_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    duration_minutes: Mapped[int] = mapped_column(SmallInteger, nullable=False, default=60)
     location: Mapped[str | None] = mapped_column(String(500), nullable=True)
     # Fernet ciphertext (urlsafe base64) — never stored as plaintext at rest.
     meeting_link: Mapped[str | None] = mapped_column(String(1000), nullable=True)
-    status: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="scheduled"
-    )
+    status: Mapped[str] = mapped_column(String(20), nullable=False, default="scheduled")
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_by: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
@@ -368,7 +352,9 @@ class Interview(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -382,9 +368,7 @@ class InterviewAssignee(Base):
     """
 
     __tablename__ = "interview_assignees"
-    __table_args__ = (
-        UniqueConstraint("interview_id", "user_id", name="uq_interview_assignee"),
-    )
+    __table_args__ = (UniqueConstraint("interview_id", "user_id", name="uq_interview_assignee"),)
 
     id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
     interview_id: Mapped[uuid.UUID] = mapped_column(
@@ -442,17 +426,11 @@ class Offer(Base):
     start_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     # Fernet ciphertext (urlsafe base64) — never stored in plaintext at rest.
     salary_amount: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    salary_currency: Mapped[str] = mapped_column(
-        String(5), nullable=False, default="VND"
-    )
-    salary_period: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="monthly"
-    )
+    salary_currency: Mapped[str] = mapped_column(String(5), nullable=False, default="VND")
+    salary_period: Mapped[str] = mapped_column(String(20), nullable=False, default="monthly")
     benefits_summary: Mapped[str | None] = mapped_column(Text, nullable=True)
     terms_notes: Mapped[str | None] = mapped_column(Text, nullable=True)
-    expiry_date: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
+    expiry_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="draft")
     created_by: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
@@ -460,12 +438,8 @@ class Offer(Base):
     approved_by: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
-    approved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    sent_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    approved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     student_response_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
@@ -475,7 +449,9 @@ class Offer(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -506,9 +482,7 @@ class ApplicationTimelineEvent(Base):
     actor_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
-    event_metadata: Mapped[dict] = mapped_column(
-        "metadata", JsonType, nullable=False, default=dict
-    )
+    event_metadata: Mapped[dict] = mapped_column("metadata", JsonType, nullable=False, default=dict)
     occurred_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -538,12 +512,8 @@ class ApplicationRevealRequest(Base):
     )
     reason: Mapped[str] = mapped_column(Text, nullable=False)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
-    expires_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
-    responded_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    responded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -580,19 +550,15 @@ class JobApplicationInvitation(Base):
     )
     message: Mapped[str | None] = mapped_column(Text, nullable=True)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
-    expires_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
-    responded_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    responded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)

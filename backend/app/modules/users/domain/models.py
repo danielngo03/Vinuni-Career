@@ -40,12 +40,8 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     is_superadmin: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     preferred_language: Mapped[str] = mapped_column(String(5), nullable=False, default="vi")
-    timezone: Mapped[str] = mapped_column(
-        String(50), nullable=False, default="Asia/Ho_Chi_Minh"
-    )
-    last_login_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    timezone: Mapped[str] = mapped_column(String(50), nullable=False, default="Asia/Ho_Chi_Minh")
+    last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     login_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
@@ -56,9 +52,7 @@ class User(Base):
         server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     @property
     def is_email_verified(self) -> bool:
@@ -94,14 +88,10 @@ class UserPreference(Base):
         ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
     )
     locale: Mapped[str] = mapped_column(String(5), nullable=False, default="vi")
-    timezone: Mapped[str] = mapped_column(
-        String(100), nullable=False, default="Asia/Ho_Chi_Minh"
-    )
+    timezone: Mapped[str] = mapped_column(String(100), nullable=False, default="Asia/Ho_Chi_Minh")
     theme: Mapped[str] = mapped_column(String(20), nullable=False, default="system")
     quiet_hours: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
-    notification_settings: Mapped[dict] = mapped_column(
-        JsonType, nullable=False, default=dict
-    )
+    notification_settings: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,

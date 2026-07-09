@@ -107,10 +107,7 @@ JSON schema:
 Set is_cv=false only if the document is clearly not a CV/resume (invoice, article,
 form, receipt, or a blank page)."""
 
-_USER_PROMPT = (
-    "Transcribe and structure this CV into the JSON schema. "
-    "Return only the JSON object."
-)
+_USER_PROMPT = "Transcribe and structure this CV into the JSON schema. Return only the JSON object."
 
 
 @runtime_checkable
@@ -241,16 +238,25 @@ class GatewayVisionExtractionAdapter:
                 resp.raise_for_status()
                 body = resp.json()
         except (httpx.HTTPError, ValueError):
-            log_ai_usage(task_type="cv_vision_extraction", alias=alias, success=False,
-                         prompt_chars=prompt_chars)
+            log_ai_usage(
+                task_type="cv_vision_extraction",
+                alias=alias,
+                success=False,
+                prompt_chars=prompt_chars,
+            )
             return None
 
         choice = (body.get("choices") or [{}])[0]
         raw = (choice.get("message") or {}).get("content", "")
         if isinstance(raw, list):  # some providers return content as parts
             raw = "".join(p.get("text", "") for p in raw if isinstance(p, dict))
-        log_ai_usage(task_type="cv_vision_extraction", alias=alias, success=True,
-                     prompt_chars=prompt_chars, completion_chars=len(raw or ""))
+        log_ai_usage(
+            task_type="cv_vision_extraction",
+            alias=alias,
+            success=True,
+            prompt_chars=prompt_chars,
+            completion_chars=len(raw or ""),
+        )
         parsed = _extract_json(scrub_text(raw or ""))
         if parsed is None:
             return None
@@ -262,9 +268,7 @@ class GatewayVisionExtractionAdapter:
 # --------------------------------------------------------------------------- #
 
 
-def _prepare_images(
-    data: bytes, kind: FileKind, *, max_px: int, max_pages: int
-) -> list[bytes]:
+def _prepare_images(data: bytes, kind: FileKind, *, max_px: int, max_pages: int) -> list[bytes]:
     if kind is FileKind.IMAGE:
         jpeg = _downscale_to_jpeg(data, max_px)
         return [jpeg] if jpeg else []
@@ -284,9 +288,7 @@ def _downscale_to_jpeg(data: bytes, max_px: int) -> bytes | None:
             longest = max(img.size)
             if longest > max_px:
                 scale = max_px / float(longest)
-                img = img.resize(
-                    (max(1, int(img.width * scale)), max(1, int(img.height * scale)))
-                )
+                img = img.resize((max(1, int(img.width * scale)), max(1, int(img.height * scale))))
             buf = io.BytesIO()
             img.save(buf, format="JPEG", quality=85)
             return buf.getvalue()
@@ -491,8 +493,18 @@ _ENTRY_MAPPERS = {
 }
 
 _ALL_SECTIONS = (
-    "summary", "experience", "education", "projects", "skills", "languages",
-    "certifications", "awards", "activities", "interests", "publications", "references",
+    "summary",
+    "experience",
+    "education",
+    "projects",
+    "skills",
+    "languages",
+    "certifications",
+    "awards",
+    "activities",
+    "interests",
+    "publications",
+    "references",
 )
 
 

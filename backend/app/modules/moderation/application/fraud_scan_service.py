@@ -30,9 +30,7 @@ from app.shared.permissions import Principal
 
 
 async def _collect_signals(session: AsyncSession, job_snapshot: dict) -> dict:
-    trust = await org_reporting_facade.trust_snapshot_for(
-        session, job_snapshot["org_id"]
-    )
+    trust = await org_reporting_facade.trust_snapshot_for(session, job_snapshot["org_id"])
 
     org_age_days: float | None = None
     has_verified = None
@@ -94,7 +92,5 @@ async def scan_job(
         "risk_level": assessment.risk_level,
         "requires_human_review": assessment.requires_human_review,
         "escalated": escalated,
-        "signals": [
-            {"code": s.code, "reason": s.reason} for s in assessment.signals
-        ],
+        "signals": [{"code": s.code, "reason": s.reason} for s in assessment.signals],
     }
