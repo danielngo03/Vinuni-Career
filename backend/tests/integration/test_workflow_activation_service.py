@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import pytest
 from app.modules.workflow.application import activation_service, flow_service
-from app.modules.workflow.application.errors import FlowNotEditableError
+from app.modules.workflow.application.errors import FlowNotEditableError, InvalidGraphError
+from app.modules.workflow.domain.models import WorkflowFlow
 
 from tests.auth_utils import CTX
 from tests.org_utils import make_org_with_admin
@@ -28,6 +29,39 @@ async def test_activate_draft_flow_sets_active_and_activated_at(db_session) -> N
 
     assert activated.status == "ACTIVE"
     assert activated.activated_at is not None
+
+
+@pytest.mark.asyncio
+async def test_activation_revalidates_graph_and_refuses_invalid(db_session) -> None:
+    """A flow persisted before a validation rule tightened (or otherwise
+    reaching activation with a stale/invalid graph) must NOT go live. The
+    activation gate re-runs graph validation, not only write-time validation."""
+
+    _user, org, admin = await make_org_with_admin(db_session, org_type="university")
+    flow = await flow_service.create_draft_flow(
+        db_session,
+        principal=admin,
+        name="Stale flow",
+        description=None,
+        trigger_type="system.partner_registered",
+        graph=VALID_GRAPH,
+        ctx=CTX,
+    )
+
+    # Force an invalid graph (no trigger node) directly into the row, bypassing
+    # the write-time validation, to simulate a stale/tightened graph.
+    row = await db_session.get(WorkflowFlow, flow.id)
+    row.graph = {"nodes": [{"id": "a", "type": "end", "data": {}}], "edges": []}
+    await db_session.flush()
+    await db_session.commit()
+
+    with pytest.raises(InvalidGraphError):
+        await activation_service.activate_flow(
+            db_session, principal=admin, flow_id=flow.id, ctx=CTX
+        )
+
+    refreshed = await db_session.get(WorkflowFlow, flow.id)
+    assert refreshed.status == "DRAFT"  # never activated
 
 
 @pytest.mark.asyncio

@@ -30,11 +30,59 @@ from app.modules.knowledge_base.domain.models import (
     KnowledgeBase,
     KnowledgeBaseDocument,
 )
-from app.shared.permissions import Principal
+from app.shared.exceptions import AuthRequiredError, PermissionDeniedError
+from app.shared.permissions import Principal, permission_checker
 
 # ---------------------------------------------------------------------------
 # Access control
 # ---------------------------------------------------------------------------
+
+
+def _can_manage_scope(
+    principal: Principal, *, scope: str, org_id: uuid.UUID | None
+) -> bool:
+    """WRITE authorization for a KB of ``scope``/``org_id``.
+
+    This is the gate that stops RAG poisoning / cross-tenant AI-content
+    injection: documents uploaded here are surfaced by ``knowledge_base_query``
+    as authoritative answers, so who may WRITE must be far narrower than who may
+    READ (``_can_query_kb``).
+
+    - **Platform KB** is queryable by *every* authenticated user, so only
+      platform/university staff (or a superadmin) may write to it. A partner
+      must never be able to inject content that all users then see.
+    - **Partner / job KB** is org-scoped: only a member of the OWNING org
+      (matching ``org_id``) may write, enforced through
+      ``permission_checker.can`` so tenant isolation is applied consistently
+      with the rest of the platform.
+    """
+
+    if not principal.is_authenticated:
+        return False
+    if principal.is_superadmin:
+        return True
+
+    persona = principal.persona or ""
+    if scope == KB_SCOPE_PLATFORM:
+        return persona.startswith("university")
+    if scope in (KB_SCOPE_PARTNER, KB_SCOPE_JOB):
+        # resource_org_id=org_id makes ``can`` reject a principal from another
+        # org (principal.org_id != kb.org_id) — the cross-tenant fix.
+        return org_id is not None and permission_checker.can(
+            principal, "knowledge_base", "manage", resource_org_id=org_id
+        )
+    return False
+
+
+def _require_manage_scope(
+    principal: Principal, *, scope: str, org_id: uuid.UUID | None
+) -> None:
+    """Raise 401/403 if the principal may not write to this KB scope."""
+
+    if not principal.is_authenticated:
+        raise AuthRequiredError()
+    if not _can_manage_scope(principal, scope=scope, org_id=org_id):
+        raise PermissionDeniedError()
 
 
 async def _can_query_kb(
@@ -126,7 +174,9 @@ async def create_kb(
     org_id: uuid.UUID | None = None,
     job_id: uuid.UUID | None = None,
 ) -> dict:
-    """Create a new knowledge base. Requires staff or partner-admin role."""
+    """Create a new knowledge base. Requires staff (platform scope) or a member
+    of the owning org with the ``knowledge_base:manage`` grant (org scopes)."""
+    _require_manage_scope(principal, scope=scope, org_id=org_id)
     kb = KnowledgeBase(
         id=uuid.uuid4(),
         name=name,
@@ -212,6 +262,10 @@ async def upload_document(
     ).scalar_one_or_none()
     if kb is None:
         raise ValueError("knowledge_base_not_found")
+
+    # WRITE authz — the RAG-poisoning gate. READ access (``_can_query_kb``) is
+    # deliberately wide (applicants can query an org KB); WRITE must be narrow.
+    _require_manage_scope(principal, scope=kb.scope, org_id=kb.org_id)
 
     doc = KnowledgeBaseDocument(
         id=uuid.uuid4(),

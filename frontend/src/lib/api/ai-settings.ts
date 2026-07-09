@@ -129,7 +129,9 @@ export interface AiProvider {
   id: string;
   name: string;
   provider_type: AiProviderType;
-  base_url: string;
+  // base_url is WRITE-ONLY: never returned by the API (security rule). Only a
+  // boolean "is an endpoint configured" signal comes back.
+  has_base_url: boolean;
   description: string | null;
   is_active: boolean;
   is_builtin: boolean;

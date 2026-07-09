@@ -20,6 +20,7 @@ Security
 
 from __future__ import annotations
 
+import logging
 import uuid
 from datetime import UTC, datetime
 
@@ -43,6 +44,8 @@ from app.modules.organization.application import org_reporting_facade
 from app.shared.permissions import Principal, permission_checker
 
 _RESOURCE = _shared.RESOURCE
+
+logger = logging.getLogger(__name__)
 
 # Maximum job_ids accepted per request. The caller (frontend page) sends at most
 # 50 job cards per page, but we enforce a hard server-side cap.
@@ -251,11 +254,23 @@ async def batch_fit_for_jobs(
         return f"{job_fit.SCORER_VERSION}:{job_versions.get(job_id, 'x')}:{cv_sig}"
 
     # 2. Check Redis cache (self-validating on the content signature).
+    #    Redis is a best-effort accelerator, NOT the source of truth (the DB
+    #    ``fit_store`` is). If Redis is down or errors, degrade to "always miss"
+    #    and recompute from the store — the endpoint must never 500 because the
+    #    cache is unavailable. ``redis_ok`` short-circuits after the first failure
+    #    so one outage doesn't retry-and-log once per job on the page.
     scores: dict[str, dict] = {}
     misses: list[uuid.UUID] = []
+    redis_ok = redis is not None
 
     for jid in deduped:
-        cached = await get_cached(redis, principal.user_id, jid, sig=_sig(jid))
+        cached = None
+        if redis_ok:
+            try:
+                cached = await get_cached(redis, principal.user_id, jid, sig=_sig(jid))
+            except Exception:  # noqa: BLE001 — Redis down: fall back to DB store
+                redis_ok = False
+                logger.warning("fit_cache read unavailable; falling back to store")
         if cached is not None:
             scores[str(jid)] = cached
         else:
@@ -293,7 +308,12 @@ async def batch_fit_for_jobs(
             cv_inputs=cv_inputs,
         )
         scores[str(job.id)] = result
-        await set_cached(redis, principal.user_id, job.id, result, sig=_sig(job.id))
+        if redis_ok:
+            try:
+                await set_cached(redis, principal.user_id, job.id, result, sig=_sig(job.id))
+            except Exception:  # noqa: BLE001 — Redis down: computed score still returned
+                redis_ok = False
+                logger.warning("fit_cache write unavailable; result not cached")
 
     # Persist any fit rows upserted on cache-miss jobs. A commit with no dirty
     # rows (every miss hit its fresh store row) issues no SQL, so a fully cached

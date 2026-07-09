@@ -9,10 +9,12 @@ from app.modules.auth.application.context import RequestContext
 from app.modules.workflow.application import flow_service
 from app.modules.workflow.application.errors import (
     FlowNotActivatableError,
+    InvalidGraphError,
     MissingActivationCapabilitiesError,
 )
 from app.modules.workflow.domain.graph import required_capability_for_node
 from app.modules.workflow.domain.models import WorkflowFlow
+from app.modules.workflow.domain.validation import validate_graph
 from app.shared.audit import write_audit
 from app.shared.permissions import Principal, permission_checker
 
@@ -52,6 +54,13 @@ async def activate_flow(
 
     if flow.status not in ("DRAFT", "PAUSED"):
         raise FlowNotActivatableError(from_status=flow.status)
+
+    # Re-validate the graph at the activation gate, not only at write time: a flow
+    # persisted before a validation rule tightened (or otherwise reaching ACTIVE
+    # with a stale/invalid graph) must not go live.
+    graph_errors = validate_graph(flow.graph)
+    if graph_errors:
+        raise InvalidGraphError(graph_errors)
 
     missing = _missing_capabilities(principal, flow.graph)
     if missing:

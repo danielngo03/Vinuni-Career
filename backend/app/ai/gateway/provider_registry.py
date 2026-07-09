@@ -591,7 +591,11 @@ def _serialize_provider(r: AiProviderConfig) -> dict:
         "id": str(r.id),
         "name": r.name,
         "provider_type": r.provider_type,
-        "base_url": r.base_url,
+        # base_url is WRITE-ONLY. It is never returned by any API at any privilege
+        # level (CLAUDE.md / .claude/rules/ai.md: "API keys and base URLs are
+        # never returned"). The admin UI edits it blind (like the API key) and
+        # only ``has_base_url`` signals whether an endpoint is configured.
+        "has_base_url": bool(r.base_url),
         "description": r.description,
         "is_active": r.is_active,
         "is_builtin": r.is_builtin,

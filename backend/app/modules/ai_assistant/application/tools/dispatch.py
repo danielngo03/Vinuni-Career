@@ -21,6 +21,7 @@ from . import (
     partner,
     student,
 )
+from .authorization import is_authorized
 from .specs import TOOL_SPECS
 
 SUPPORTED_TOOL_NAMES = frozenset(
@@ -80,14 +81,38 @@ async def dispatch_tool(
     Never raises — always returns ``{"ok": bool, ...}``.
     Callers must not surface raw error messages to end users.
     """
+    # Central RBAC choke point (fail-closed). Every dispatch path — native loop,
+    # legacy plan loop, confirmation replay, chat_service — passes through here,
+    # so a persona/grant mismatch can never execute even if the model named a
+    # tool it was never offered or a handler forgot its own service-layer check.
+    spec = TOOL_SPECS.get(name)
+    if spec is None:
+        return {"ok": False, "error": "unknown_tool"}
+    if not is_authorized(principal, spec):
+        # Do not leak WHY (which grant/persona is missing) to the model/end user.
+        await _record_tool_event(session, name=name, ok=False, principal=principal)
+        return {"ok": False, "error": "not_authorized"}
+
     valid, error = _validate_tool_args(name, args)
     if not valid:
         return {"ok": False, "error": error}
 
     result = await _execute_tool(name, args, session=session, principal=principal)
-    # Metadata-only product-analytics fact (tool name + outcome, never prompt/
-    # completion text or provider/model/token internals — those live in
-    # ``ai_usage_log`` per .claude/rules/ai.md, a separate cost-tracking ledger).
+    await _record_tool_event(session, name=name, ok=bool(result.get("ok")), principal=principal)
+    return result
+
+
+async def _record_tool_event(
+    session: AsyncSession, *, name: str, ok: bool, principal: Principal
+) -> None:
+    """Record a metadata-only product-analytics fact (tool name + outcome).
+
+    Never records prompt/completion text or provider/model/token internals —
+    those live in ``ai_usage_log`` per .claude/rules/ai.md, a separate
+    cost-tracking ledger. Emitted for both executed and RBAC-denied calls so a
+    denied tool attempt is still auditable.
+    """
+
     await analytics.record_event_safe(
         session,
         event_type="ai.tool.called",
@@ -95,9 +120,8 @@ async def dispatch_tool(
         aggregate_id=uuid.uuid4(),
         actor_id=principal.user_id if principal.is_authenticated else None,
         actor_type=_actor_type(principal),
-        properties={"tool": name, "ok": bool(result.get("ok"))},
+        properties={"tool": name, "ok": ok},
     )
-    return result
 
 
 def _actor_type(principal: Principal) -> str:

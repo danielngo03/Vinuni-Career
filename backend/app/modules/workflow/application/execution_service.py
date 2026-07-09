@@ -9,13 +9,23 @@ resume entrypoint is out of scope for this plan (Phase A ships the
 auto-approve/condition/end path end-to-end; the human-decision resume API is a
 fast-follow, tracked in the plan's follow-up list, not silently implied here).
 
-Only ``send_notification`` performs a real cross-module side effect today (via
-the approved ``notifications.dispatch_service.enqueue_notification`` seam).
-``assign_owner``, ``create_task``, ``move_candidate``, and ``webhook`` are
-intentionally logged-intent stubs — they record what would happen without
-calling into ``recruitment``/external systems, since this module owns no
-approved write interface into those domains yet. Wiring those up for real is
-flagged as backlog/follow-up, not silently pretended to be complete.
+Real (non-simulated) side effects are wired only where an approved, tenant-safe
+seam exists:
+- ``send_notification`` → ``notifications.dispatch_service.enqueue_notification``
+  (idempotent via a per-node ``dedupe_key``);
+- ``move_candidate`` → ``recruitment.stage_service.advance_application_stage``
+  (idempotency-key aware, executed under a system principal scoped to the flow's
+  owning org so tenant isolation still holds — a cross-org application is a 404);
+- ``webhook`` → the SSRF-guarded ``webhook_dispatch.post_webhook`` (redacted
+  payload only, private/internal targets refused, redirects off, time-boxed).
+
+``assign_owner`` and ``create_task`` remain logged-intent stubs: there is still
+no approved job-owner-assignment seam and no generic task entity to write into,
+so recording the intent is honest rather than fabricating a write. Every real
+node degrades a failure into a recoverable failed-node task; dry-run no-ops all
+of them. Human Review / Request Approval / AI Suggestion nodes pause execution
+(status stays RUNNING) until a separate review-decision call resumes the flow —
+that resume entrypoint remains a fast-follow.
 """
 
 from __future__ import annotations
@@ -35,24 +45,95 @@ from app.modules.workflow.domain.models import (
     WorkflowFlow,
     WorkflowNodeExecutionLog,
 )
+from app.shared.permissions import Principal
 
-_PII_KEYS = {
+# Keys whose *value* is a direct identifier and must be masked before it is
+# persisted to a node log / shown in a dry-run. Matched case-insensitively.
+# ``name`` is deliberately EXACT-only (so ``template_name`` / ``job_name`` /
+# ``filename`` are NOT redacted and conditions stay exercisable), while the
+# unambiguous tokens below also match as substrings so nested/prefixed variants
+# like ``candidate_email`` / ``student_phone`` / ``applicant_passport_number``
+# are caught too.
+_PII_EXACT_KEYS = {
     "email",
+    "e_mail",
     "phone",
     "phone_number",
+    "mobile",
     "full_name",
     "name",
+    "first_name",
+    "last_name",
+    "middle_name",
+    "display_name",
+    "candidate_name",
+    "student_name",
+    "applicant_name",
+    "recipient_name",
     "address",
+    "home_address",
     "national_id",
+    "identity_number",
+    "id_number",
+    "cccd",
+    "cmnd",
+    "passport",
+    "ssn",
     "cv_text",
     "resume_text",
     "cover_letter",
+    "date_of_birth",
+    "dob",
+    "gpa",
+    "salary",
+}
+_PII_KEY_SUBSTRINGS = (
+    "email",
+    "phone",
+    "passport",
+    "national_id",
+    "identity_number",
     "ssn",
     "date_of_birth",
-    "identity_number",
-}
+    "cover_letter",
+    "cv_text",
+    "resume_text",
+)
+# Bound recursion so a hostile/cyclic-looking payload can never blow the stack.
+_MAX_REDACT_DEPTH = 6
+_REDACTED = "[redacted]"
 
 _CONDITION_RE = re.compile(r"^\s*(?P<left>.+?)\s*(?P<op>>=|<=|==|!=|>|<)\s*(?P<right>.+?)\s*$")
+
+
+def _is_pii_key(key: object) -> bool:
+    if not isinstance(key, str):
+        return False
+    lowered = key.lower()
+    if lowered in _PII_EXACT_KEYS:
+        return True
+    return any(sub in lowered for sub in _PII_KEY_SUBSTRINGS)
+
+
+def _redact(value: object, *, depth: int = 0) -> object:
+    """Recursively mask PII-looking keys inside nested dicts/lists.
+
+    The old implementation only checked top-level, exact-lowercase keys, so a
+    ``{"candidate": {"email": ...}}`` object or the whole trigger payload nested
+    under ``"trigger"`` slipped through unredacted. This walks the structure so
+    embedded identifiers are masked wherever they appear.
+    """
+
+    if depth > _MAX_REDACT_DEPTH:
+        return "[trimmed]"
+    if isinstance(value, dict):
+        redacted: dict = {}
+        for key, item in value.items():
+            redacted[key] = _REDACTED if _is_pii_key(key) else _redact(item, depth=depth + 1)
+        return redacted
+    if isinstance(value, (list, tuple)):
+        return [_redact(item, depth=depth + 1) for item in value]
+    return value
 
 
 class NodeExecutionFailed(Exception):
@@ -74,21 +155,19 @@ def redact_sample_event(event: dict) -> dict:
     since it is needed to exercise conditions realistically.
     """
 
-    redacted: dict = {}
-    for key, value in event.items():
-        if key.lower() in _PII_KEYS:
-            redacted[key] = "[redacted]"
-        else:
-            redacted[key] = value
-    return redacted
+    result = _redact(event)
+    return result if isinstance(result, dict) else {}
 
 
 def _summarize(value: dict) -> dict:
     """Redact/trim a node's input or output before it is persisted to a log
     row — never store raw CV text, prompts, tokens, or full trigger payloads.
+    Recurses into nested dicts/lists so embedded identifiers (e.g. a candidate
+    object under the trigger payload) are masked too.
     """
 
-    return redact_sample_event(value)
+    result = _redact(value)
+    return result if isinstance(result, dict) else {}
 
 
 async def execute_flow(
@@ -117,7 +196,9 @@ async def execute_flow(
     while current is not None:
         entered_at = datetime.now(tz=UTC)
         try:
-            result = await _execute_node(session, current, context, simulate=simulate)
+            result = await _execute_node(
+                session, current, context, simulate=simulate, flow=flow, execution=execution
+            )
         except NodeExecutionFailed as exc:
             exited_at = datetime.now(tz=UTC)
             logs.append(
@@ -239,7 +320,9 @@ async def dry_run_flow(
         visited += 1
         entered_at = datetime.now(tz=UTC)
         try:
-            result = await _execute_node(session, current, context, simulate=True)
+            result = await _execute_node(
+                session, current, context, simulate=True, flow=flow, execution=execution
+            )
             status, error, decision = "success", None, result.decision
             output_summary = _summarize(result.output_variables)
         except NodeExecutionFailed as exc:
@@ -366,7 +449,13 @@ def _find_trigger_node(nodes_by_id: dict[str, dict]) -> dict | None:
 
 
 async def _execute_node(
-    session: AsyncSession, node: dict, context: FlowContext, *, simulate: bool
+    session: AsyncSession,
+    node: dict,
+    context: FlowContext,
+    *,
+    simulate: bool,
+    flow: WorkflowFlow,
+    execution: WorkflowExecution,
 ) -> _NodeResult:
     node_type = node["type"]
     data = node.get("data", {})
@@ -419,14 +508,30 @@ async def _execute_node(
                 channel=data.get("channel", "email"),
                 locale=data.get("locale", "vi"),
                 variables=_summarize(context.variables),
+                # Idempotency: a retry / duplicate trigger delivery of the same
+                # node must not enqueue a second outbox row.
+                dedupe_key=_node_idempotency_key(execution, node),
             )
         except Exception as exc:  # noqa: BLE001 — convert to a user-safe, recoverable failure
             raise NodeExecutionFailed("Không thể gửi thông báo do lỗi hệ thống.") from exc
         return _NodeResult(decision="done", output_variables={"notification_sent": True})
 
-    if node_type in ("assign_owner", "create_task", "move_candidate", "webhook", "action"):
-        # Logged-intent stub: records what would happen without a real
-        # cross-module write (see module docstring for rationale/follow-up).
+    if node_type == "move_candidate":
+        return await _run_move_candidate(
+            session, node=node, data=data, context=context, flow=flow, execution=execution,
+            simulate=simulate,
+        )
+
+    if node_type == "webhook":
+        return await _run_webhook(
+            node=node, data=data, context=context, execution=execution, simulate=simulate
+        )
+
+    if node_type in ("assign_owner", "create_task", "action"):
+        # Logged-intent stub: these have no approved, tenant-safe cross-module
+        # write interface yet (there is no job-owner assignment seam and no
+        # generic task entity — see module docstring). Recording the intent is
+        # honest; fabricating a write is not.
         label = "simulated_action" if simulate else "action_taken"
         return _NodeResult(decision="done", output_variables={label: data.get("action", node_type)})
 
@@ -434,6 +539,143 @@ async def _execute_node(
         return _NodeResult(decision="done")
 
     raise ValueError(f"unsupported node type: {node_type}")
+
+
+def _node_idempotency_key(execution: WorkflowExecution, node: dict) -> str:
+    """Stable per-(execution, node) key so a retry / duplicate trigger delivery
+    of the same node never double-applies its side effect.
+    """
+
+    return f"wf:{execution.id}:{node['id']}"
+
+
+def _automation_principal(flow: WorkflowFlow) -> Principal:
+    """A tenant-scoped system identity for a flow's consequential writes.
+
+    Authorization for the flow was already established at ACTIVATION time (the
+    activator had to hold every node's capability). Execution then runs as a
+    non-superadmin system principal scoped to the flow's OWNING org, so a
+    downstream service (e.g. ``recruitment.stage_service``) still enforces
+    tenant isolation: a cross-org resource is a 404, exactly as for a human
+    partner of that org. It is never superadmin and never impersonates a user.
+    """
+
+    return Principal(
+        user_id=None,
+        persona="system",
+        org_id=flow.owner_org_id,
+        is_superadmin=False,
+        permissions=frozenset({"applications:read"}),
+    )
+
+
+def _resolve_application_id(data: dict, context: FlowContext) -> uuid.UUID | None:
+    """Which application a ``move_candidate`` node acts on: an explicit
+    ``data.application_id``, else a flow variable named by
+    ``data.application_variable`` (default ``application_id``), else the trigger
+    event's ``application_id``.
+    """
+
+    raw = (
+        data.get("application_id")
+        or context.variables.get(data.get("application_variable", "application_id"))
+        or context.trigger.get("application_id")
+    )
+    if raw is None:
+        return None
+    try:
+        return uuid.UUID(str(raw))
+    except (ValueError, TypeError, AttributeError):
+        return None
+
+
+async def _run_move_candidate(
+    session: AsyncSession,
+    *,
+    node: dict,
+    data: dict,
+    context: FlowContext,
+    flow: WorkflowFlow,
+    execution: WorkflowExecution,
+    simulate: bool,
+) -> _NodeResult:
+    """Advance an application to its next pipeline stage via the approved
+    ``recruitment.stage_service`` seam (idempotency-key aware, org-scoped).
+    """
+
+    if simulate:
+        return _NodeResult(
+            decision="done", output_variables={"simulated_action": "move_candidate"}
+        )
+    if flow.owner_org_id is None:
+        raise NodeExecutionFailed("Không thể chuyển ứng viên: workflow không thuộc tổ chức nào.")
+    application_id = _resolve_application_id(data, context)
+    if application_id is None:
+        raise NodeExecutionFailed("Không thể chuyển ứng viên: thiếu mã hồ sơ ứng tuyển hợp lệ.")
+
+    from app.modules.auth.application.context import RequestContext
+    from app.modules.recruitment.application.stage_service import advance_application_stage
+
+    try:
+        await advance_application_stage(
+            session,
+            principal=_automation_principal(flow),
+            application_id=application_id,
+            idempotency_key=_node_idempotency_key(execution, node),
+            ctx=RequestContext(),
+            locale=data.get("locale", "vi"),
+        )
+    except NodeExecutionFailed:
+        raise
+    except Exception as exc:  # noqa: BLE001 — any downstream error is a recoverable node failure
+        # Covers cross-org 404, version conflict, illegal transition, etc. The
+        # user-safe message never leaks the underlying reason/PII.
+        raise NodeExecutionFailed(
+            "Không thể chuyển ứng viên sang giai đoạn tiếp theo."
+        ) from exc
+    return _NodeResult(decision="done", output_variables={"candidate_moved": True})
+
+
+async def _run_webhook(
+    *,
+    node: dict,
+    data: dict,
+    context: FlowContext,
+    execution: WorkflowExecution,
+    simulate: bool,
+) -> _NodeResult:
+    """Deliver a redacted event to an external URL through the SSRF-guarded
+    dispatcher. No raw PII leaves the platform (payload is redacted), private/
+    internal targets are refused, redirects are disabled, and the call is
+    time-boxed. Any failure becomes a recoverable node failure.
+    """
+
+    if simulate:
+        return _NodeResult(decision="done", output_variables={"simulated_action": "webhook"})
+
+    from app.modules.workflow.application import webhook_dispatch
+
+    url = context.interpolate(str(data.get("url", "")))
+    trigger = execution.trigger_event if isinstance(execution.trigger_event, dict) else {}
+    payload = {
+        "event": data.get("event_key") or trigger.get("type"),
+        "flow_id": str(execution.flow_id),
+        "execution_id": str(execution.id),
+        "node_id": node["id"],
+        "data": _summarize(context.variables),
+    }
+    try:
+        status = await webhook_dispatch.post_webhook(
+            url,
+            payload,
+            delivery_id=_node_idempotency_key(execution, node),
+            timeout=float(data.get("timeout_seconds", 5.0)),
+        )
+    except webhook_dispatch.WebhookError as exc:
+        raise NodeExecutionFailed(f"Webhook bị từ chối: {exc.user_safe_error}") from exc
+    except Exception as exc:  # noqa: BLE001
+        raise NodeExecutionFailed("Không thể gọi webhook do lỗi kết nối.") from exc
+    return _NodeResult(decision="done", output_variables={"webhook_status": status})
 
 
 def _coerce_condition_value(value: str) -> float | bool | str:

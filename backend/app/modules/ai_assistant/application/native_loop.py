@@ -47,16 +47,11 @@ from app.modules.ai_assistant.application.tool_loop import (
     MAX_TOOL_CALLS_PER_TURN,
     persist_tool_result,
 )
-from app.modules.ai_assistant.application.tool_registry import TOOL_SPECS, dispatch_tool
-from app.modules.ai_assistant.application.tools.specs import (
-    PARTNER_USER,
-    STUDENT,
-    UNIVERSITY_STAFF,
-    ToolSpec,
-)
+from app.modules.ai_assistant.application.tool_registry import dispatch_tool
+from app.modules.ai_assistant.application.tools.specs import ToolSpec
 from app.modules.ai_assistant.domain.models import ChatMessage
 from app.shared.exceptions import AIUnavailableError
-from app.shared.permissions import Principal, permission_checker
+from app.shared.permissions import Principal
 
 _TASK_TYPE = "ai_assistant_chat"
 
@@ -70,72 +65,22 @@ _MAX_TOOL_RESULT_CHARS = 6000
 # --------------------------------------------------------------------------- #
 
 
-def _persona_token(principal: Principal) -> str | None:
-    """Map the real login persona to a ``ToolSpec.persona`` vocabulary token.
+# The persona + RBAC gate now lives in ``tools.authorization`` (the single
+# source of truth used both here for offer-time filtering AND inside
+# ``dispatch_tool`` for the execution-time re-check). Re-exported under the
+# historical names so callers/tests importing them from ``native_loop`` keep
+# working.
+from app.modules.ai_assistant.application.tools.authorization import (  # noqa: E402
+    authorize_tool,
+    available_specs,
+    is_authorized,
+)
 
-    Returns ``None`` for an unrecognised persona (then persona filtering is a
-    no-op and only ``authorize_tool`` gates the tool).
-    """
-    persona = principal.persona or ""
-    if persona == "student":
-        return STUDENT
-    if persona.startswith("partner"):
-        return PARTNER_USER
-    if persona.startswith("university"):
-        return UNIVERSITY_STAFF
-    return None
-
-
-def _persona_matches_role(principal: Principal, want: str) -> bool:
-    persona = principal.persona or ""
-    if want == "student":
-        return persona == "student"
-    if want in ("partner_user", "partner", "partner_member"):
-        return persona.startswith("partner")
-    if want in ("university_staff", "university"):
-        return persona.startswith("university")
-    return persona == want
-
-
-def authorize_tool(principal: Principal, spec: ToolSpec) -> bool:
-    """Central RBAC gate — True iff ``principal`` may invoke ``spec``.
-
-    Interprets each ``ToolSpec.required_permissions`` entry:
-    - ``"authenticated"``          → the principal has a user id.
-    - ``"role:<persona>"``         → persona-family match (student/partner/university).
-    - ``"<resource>:<action>"``    → ``permission_checker.can`` (real grant + tenant).
-    All entries must pass (fail-closed).
-    """
-    for req in spec.required_permissions:
-        if req == "authenticated":
-            if not principal.is_authenticated:
-                return False
-        elif req.startswith("role:"):
-            if not _persona_matches_role(principal, req.split(":", 1)[1]):
-                return False
-        elif ":" in req:
-            resource, action = req.split(":", 1)
-            if not permission_checker.can(
-                principal, resource, action, resource_org_id=principal.org_id
-            ):
-                return False
-        else:  # unknown token — require at least authentication
-            if not principal.is_authenticated:
-                return False
-    return True
-
-
-def available_specs(principal: Principal) -> list[ToolSpec]:
-    """Tools this principal may use: persona-scoped AND grant-authorized."""
-    token = _persona_token(principal)
-    out: list[ToolSpec] = []
-    for spec in TOOL_SPECS.values():
-        if token is not None and token not in spec.persona:
-            continue
-        if not authorize_tool(principal, spec):
-            continue
-        out.append(spec)
-    return out
+__all__ = [
+    "authorize_tool",
+    "available_specs",
+    "is_authorized",
+]
 
 
 def specs_to_openai_tools(specs: list[ToolSpec]) -> list[dict]:

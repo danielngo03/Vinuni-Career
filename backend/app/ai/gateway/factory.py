@@ -37,19 +37,66 @@ class _CircuitState:
     failure_count: int = 0
     last_failure_at: float = 0.0
     opened_at: float = 0.0
+    #: HALF_OPEN single-probe guard — True while the one allowed trial call is
+    #: in flight, so concurrent callers keep shedding until it resolves.
+    probe_in_flight: bool = False
+
+    def state(self) -> str:
+        """Tri-state per AI_PRODUCT_SPEC §5.2: ``closed`` | ``open`` | ``half_open``.
+
+        - ``closed``    — under the failure threshold; full concurrency.
+        - ``open``      — threshold hit and still inside the recovery window;
+          every call fast-fails to the fallback / degraded path.
+        - ``half_open`` — recovery window elapsed; ONE probe is allowed through
+          to test recovery (see :meth:`acquire`).
+        """
+
+        if self.failure_count < _CB_THRESHOLD:
+            return "closed"
+        if (time.monotonic() - self.opened_at) < _CB_RECOVERY_SECS:
+            return "open"
+        return "half_open"
 
     def is_open(self) -> bool:
-        if self.failure_count < _CB_THRESHOLD:
+        """True only in the fully-OPEN (fast-fail) state.
+
+        Kept for the selection gate and existing callers/tests: a ``half_open``
+        circuit is admissible (it must be reachable so its single probe can
+        run), so only ``open`` short-circuits provider selection.
+        """
+
+        return self.state() == "open"
+
+    def acquire(self) -> bool:
+        """Call-time admission decision (used by ``CircuitAwareProvider``).
+
+        - ``closed``    → admit (no gating; full concurrency).
+        - ``open``      → refuse (shed to the next hop / degraded reply).
+        - ``half_open`` → admit EXACTLY ONE probe; concurrent callers are
+          refused until the probe resolves. ``record_success`` /
+          ``record_failure`` always release the guard, so it can never wedge.
+        """
+
+        st = self.state()
+        if st == "open":
             return False
-        return (time.monotonic() - self.opened_at) < _CB_RECOVERY_SECS
+        if st == "half_open":
+            if self.probe_in_flight:
+                return False
+            self.probe_in_flight = True
+        return True
 
     def record_success(self) -> None:
         self.failure_count = 0
         self.opened_at = 0.0
+        self.probe_in_flight = False
 
     def record_failure(self) -> None:
         self.failure_count += 1
         self.last_failure_at = time.monotonic()
+        # Release the probe guard and (re-)open the window on threshold: a failed
+        # half-open probe must send the circuit back to OPEN for another cooldown.
+        self.probe_in_flight = False
         if self.failure_count >= _CB_THRESHOLD:
             self.opened_at = time.monotonic()
 
@@ -65,11 +112,11 @@ def _get_circuit(provider_name: str) -> _CircuitState:
 
 
 def get_circuit_state(provider_name: str) -> str:
-    """Public read-only accessor for the routing canvas — never invents a
-    'half_open' state since this module's _CircuitState only tracks a binary
-    open/closed condition (see is_open()'s recovery-window check above)."""
+    """Public read-only accessor for the routing canvas: the real tri-state
+    (``closed`` | ``open`` | ``half_open``). Read-only — never consumes the
+    half-open probe slot (that only happens on an actual call via ``acquire``)."""
 
-    return "open" if _get_circuit(provider_name).is_open() else "closed"
+    return _get_circuit(provider_name).state()
 
 
 # ---------------------------------------------------------------------------
@@ -246,6 +293,12 @@ class CircuitAwareProvider(AIProvider):
         tool_choice=None,
     ):
         circuit = _get_circuit(self._provider_name)
+        if not circuit.acquire():
+            # Circuit OPEN, or a HALF_OPEN probe is already in flight: shed this
+            # call WITHOUT recording a provider failure (it never reached the
+            # upstream). Raising AIUnavailableError lets the fallback chain move
+            # to the next hop / the caller degrade gracefully.
+            raise AIUnavailableError()
         try:
             result = await self._inner.complete(
                 messages,
@@ -263,6 +316,8 @@ class CircuitAwareProvider(AIProvider):
 
     async def stream(self, messages, *, alias, temperature=0.2, max_tokens=1024):
         circuit = _get_circuit(self._provider_name)
+        if not circuit.acquire():
+            raise AIUnavailableError()
         try:
             async for chunk in self._inner.stream(
                 messages, alias=alias, temperature=temperature, max_tokens=max_tokens
@@ -275,6 +330,8 @@ class CircuitAwareProvider(AIProvider):
 
     async def embed(self, texts, *, alias):
         circuit = _get_circuit(self._provider_name)
+        if not circuit.acquire():
+            raise AIUnavailableError()
         try:
             result = await self._inner.embed(texts, alias=alias)
             circuit.record_success()

@@ -154,7 +154,9 @@ function ProviderForm({
     ? {
         name: mode.provider.name,
         provider_type: mode.provider.provider_type,
-        base_url: mode.provider.base_url,
+        // base_url is write-only (never returned by the API), so edit starts
+        // blank; leaving it blank keeps the current endpoint on save.
+        base_url: "",
         api_key: "",
         clear_api_key: false,
         description: mode.provider.description ?? "",
@@ -186,7 +188,9 @@ function ProviderForm({
       );
       if (taken) errs.name = "A provider with this name already exists.";
     }
-    if (form.provider_type !== "ollama" && !form.base_url.trim())
+    // On CREATE a base URL is required; on EDIT it is write-only and optional
+    // (blank keeps the current endpoint, which the API never returns).
+    if (!isEdit && form.provider_type !== "ollama" && !form.base_url.trim())
       errs.base_url = "Base URL is required for this provider type.";
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -229,7 +233,8 @@ function ProviderForm({
       updateMut.mutate({
         id: mode.provider.id,
         body: {
-          base_url: form.base_url.trim(),
+          // Omit when blank so the existing (write-only) endpoint is kept.
+          base_url: form.base_url.trim() || undefined,
           api_key: form.api_key.trim() || undefined,
           clear_api_key: form.clear_api_key || undefined,
           description: form.description.trim() || undefined,
@@ -291,7 +296,7 @@ function ProviderForm({
         />
         <Input
           id="prov-url"
-          label="Base URL"
+          label={isEdit ? "Base URL (leave blank to keep current)" : "Base URL"}
           placeholder="https://api.example.com/v1"
           value={form.base_url}
           error={errors.base_url}
@@ -443,10 +448,10 @@ export function ProvidersSection() {
                     <Code aria-hidden className="size-3" />
                     {providerTypeLabel(p.provider_type)}
                   </span>
-                  {p.base_url && (
-                    <span className="inline-flex items-center gap-1 truncate max-w-[200px]">
+                  {p.has_base_url && (
+                    <span className="inline-flex items-center gap-1">
                       <Link aria-hidden className="size-3 shrink-0" />
-                      {p.base_url}
+                      Endpoint set
                     </span>
                   )}
                   {p.description && (

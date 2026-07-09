@@ -31,7 +31,16 @@ class _StubProvider(AIProvider):
         self._fail_with = fail_with
         self.calls = 0
 
-    async def complete(self, messages, *, alias, temperature=0.2, max_tokens=1024):
+    async def complete(
+        self,
+        messages,
+        *,
+        alias,
+        temperature=0.2,
+        max_tokens=1024,
+        tools=None,
+        tool_choice=None,
+    ):
         self.calls += 1
         if self._fail_with is not None:
             raise self._fail_with
