@@ -64,9 +64,10 @@ export function Sheet({
           "absolute flex flex-col border border-white/60 bg-white/92 shadow-[0_20px_60px_rgba(11,34,57,0.16)] backdrop-blur-xl outline-none",
           // Mobile: bottom sheet
           "inset-x-0 bottom-0 max-h-[85vh] rounded-t-2xl",
-          // Desktop: side drawer
+          // Desktop: side drawer — reset the mobile `inset-x-0` so the panel pins
+          // to the intended edge (left:0 + right:0 + width would pin it left)
           "sm:inset-y-0 sm:bottom-auto sm:top-0 sm:h-full sm:w-[380px] sm:max-h-none sm:rounded-none",
-          side === "right" ? "sm:right-0" : "sm:left-0",
+          side === "right" ? "sm:left-auto sm:right-0" : "sm:right-auto sm:left-0",
         )}
       >
         <div className="flex items-center justify-between border-b border-white/40 px-5 py-4">

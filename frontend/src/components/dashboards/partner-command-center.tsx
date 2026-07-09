@@ -12,11 +12,14 @@ import {
   Gauge,
   Layers,
   ListChecks,
+  Mail,
   Plus,
+  Send,
   ShieldAlert,
   Sparkles,
   Target,
   TrendingUp,
+  UserRound,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui";
@@ -80,6 +83,11 @@ function trendDelta(points: AnalyticsMonthlyPoint[]): KpiDelta | undefined {
 
 const TODO_META: Record<string, { icon: React.ElementType; tone: (p: PartnerOpsTodo["priority"]) => ChipTone }> = {
   respond_reveals: { icon: Eye, tone: () => "danger" },
+  reveals_awaiting_candidate: { icon: Eye, tone: () => "warning" },
+  applications_to_review: { icon: ListChecks, tone: () => "warning" },
+  offers_to_approve: { icon: Send, tone: () => "info" },
+  offers_to_send: { icon: Send, tone: () => "info" },
+  unread_messages: { icon: Mail, tone: () => "info" },
   jobs_pending_review: { icon: FileText, tone: () => "warning" },
   jobs_in_draft: { icon: FileText, tone: () => "neutral" },
   review_access_alerts: { icon: ShieldAlert, tone: () => "danger" },
@@ -133,6 +141,7 @@ export function PartnerCommandCenter() {
   const tf = useTranslations("dashboard.partnerOps.flagship");
   const locale = useLocale();
   const authed = useAuthStore((s) => s.status === "authenticated");
+  const userName = useAuthStore((s) => s.user?.name ?? null);
 
   const opsQ = useQuery({
     queryKey: ["dashboard", "partner", "ops"],
@@ -158,13 +167,22 @@ export function PartnerCommandCenter() {
   const header = (
     <PageHeader
       title={tf("title")}
-      subtitle={tf("subtitle")}
       meta={
-        opsQ.data?.org_name ? (
-          <span className="inline-flex items-center gap-1.5">
-            <Briefcase className="size-3.5" strokeWidth={1.8} />
-            {opsQ.data.org_name}
-          </span>
+        userName || opsQ.data?.org_name ? (
+          <>
+            {userName && (
+              <span className="inline-flex items-center gap-1.5">
+                <UserRound className="size-3.5" strokeWidth={1.8} />
+                {tf("greeting", { name: userName })}
+              </span>
+            )}
+            {opsQ.data?.org_name && (
+              <span className="inline-flex items-center gap-1.5">
+                <Briefcase className="size-3.5" strokeWidth={1.8} />
+                {opsQ.data.org_name}
+              </span>
+            )}
+          </>
         ) : undefined
       }
       actions={
@@ -228,20 +246,20 @@ export function PartnerCommandCenter() {
       <div className="space-y-4">
         <KpiSection ops={ops} monthly={analyticsQ.data?.monthly_trend ?? []} />
 
-        {/* Hero + pipeline health */}
-        <div className="grid gap-4 lg:grid-cols-3">
-          <HeroSection ops={ops} pipeline={pipelineQ.data} className="lg:col-span-2" />
-          <PipelineHealthCard pipeline={pipelineQ.data} loading={pipelineQ.isPending} />
+        {/* Hero + applications trend (left) · pipeline health + funnel (right) */}
+        <div className="grid gap-4 lg:grid-cols-3 lg:items-start">
+          <div className="space-y-4 lg:col-span-2">
+            <HeroSection ops={ops} pipeline={pipelineQ.data} />
+            <TrendCard monthly={analyticsQ.data?.monthly_trend ?? []} loading={analyticsQ.isPending} />
+          </div>
+          <div className="space-y-4">
+            <PipelineHealthCard pipeline={pipelineQ.data} loading={pipelineQ.isPending} />
+            <FunnelCard funnel={analyticsQ.data?.funnel ?? []} loading={analyticsQ.isPending} />
+          </div>
         </div>
 
-        {/* Funnel + trend */}
-        <div className="grid gap-4 lg:grid-cols-2">
-          <FunnelCard funnel={analyticsQ.data?.funnel ?? []} loading={analyticsQ.isPending} />
-          <TrendCard monthly={analyticsQ.data?.monthly_trend ?? []} loading={analyticsQ.isPending} />
-        </div>
-
-        {/* Job performance + rail */}
-        <div className="grid gap-4 lg:grid-cols-3">
+        {/* Job performance + operational rail */}
+        <div className="grid gap-4 lg:grid-cols-3 lg:items-start">
           <div className="space-y-4 lg:col-span-2">
             <JobPerformanceCard ops={ops} />
             <TeamActivityCard ops={ops} locale={locale} />
@@ -328,6 +346,15 @@ function HeroSection({
     ? `${engagement.conversion_rate_pct}%`
     : null;
 
+  const topRoles = React.useMemo(
+    () =>
+      (pipeline?.jobs ?? [])
+        .filter((j) => j.active_total > 0)
+        .sort((a, b) => b.active_total - a.active_total)
+        .slice(0, 3),
+    [pipeline],
+  );
+
   return (
     <GradientHeroCard
       className={className}
@@ -336,6 +363,26 @@ function HeroSection({
       title={tf("heroTitle")}
       value={nf.format(inPlay)}
       caption={tf("heroCaption", { roles, apps: nf.format(ops.metrics.applications_total) })}
+      aside={
+        topRoles.length > 0 ? (
+          <div className="w-full space-y-1.5 sm:w-[260px]">
+            <div className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-white/70">
+              {tf("heroTopRoles")}
+            </div>
+            {topRoles.map((j) => (
+              <div
+                key={j.job_id}
+                className="flex items-center justify-between gap-3 rounded-lg bg-white/10 px-2.5 py-1.5 backdrop-blur-sm"
+              >
+                <span className="truncate text-[0.8125rem] font-medium text-white/90">{j.title}</span>
+                <span className="shrink-0 text-sm font-bold tabular-nums text-white">
+                  {nf.format(j.active_total)}
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : undefined
+      }
       footer={
         <>
           {conversion && (

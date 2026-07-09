@@ -82,8 +82,9 @@ export function DetailSheet({
           "absolute flex flex-col bg-card shadow-[var(--shadow-xl)] outline-none",
           // mobile: bottom sheet
           "inset-x-0 bottom-0 max-h-[88vh] rounded-t-2xl animate-in slide-in-from-bottom-4",
-          // desktop: right drawer
-          "sm:inset-y-0 sm:bottom-auto sm:right-0 sm:top-0 sm:h-full sm:max-h-none sm:rounded-none sm:border-l sm:border-border sm:animate-in sm:slide-in-from-right-8",
+          // desktop: right drawer — reset the mobile `inset-x-0` left:0 so the
+          // panel pins to the RIGHT edge (left:0 + right:0 + width would pin left)
+          "sm:inset-y-0 sm:bottom-auto sm:left-auto sm:right-0 sm:top-0 sm:h-full sm:max-h-none sm:rounded-none sm:border-l sm:border-border sm:animate-in sm:slide-in-from-right-8",
           width === "lg" ? "sm:w-[600px]" : "sm:w-[480px]",
         )}
       >
