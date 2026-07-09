@@ -1149,6 +1149,28 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         audit_event_type="TOOL_CREATE_JOB",
         timeout_seconds=20,
     ),
+    "get_hiring_funnel_diagram": ToolSpec(
+        name="get_hiring_funnel_diagram",
+        description=(
+            "Draw the partner org's hiring funnel as a stage-flow DIAGRAM showing the "
+            "progression between pipeline stages and the drop-off/conversion at each "
+            "step (submitted -> review -> shortlist -> interview -> offer -> hired). "
+            "Use this when the recruiter asks to 'visualise/diagram our hiring funnel', "
+            "'where are candidates dropping off', or wants a funnel/flow view (as "
+            "opposed to a plain bar chart). Aggregate counts only — no candidate "
+            "identities. Only available to partner users."
+        ),
+        parameters={"type": "object", "properties": {}, "required": []},
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
+        fallback=(
+            "I couldn't build the funnel diagram right now. Check /partner/analytics "
+            "for your pipeline metrics."
+        ),
+        audit_event_type="TOOL_GET_HIRING_FUNNEL_DIAGRAM",
+        timeout_seconds=20,
+    ),
     "knowledge_base_query": ToolSpec(
         name="knowledge_base_query",
         description=(

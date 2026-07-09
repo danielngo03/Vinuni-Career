@@ -60,6 +60,7 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "move_candidate_stage",
         "export_applications",
         "get_recruitment_analytics_chart",
+        "get_hiring_funnel_diagram",
         "analyze_attachment",
         "draft_job_from_attachment",
         "create_job",
@@ -188,6 +189,8 @@ async def _execute_tool(
             return await partner.export_applications(session, principal, args)
         if name == "get_recruitment_analytics_chart":
             return await analytics_charts.get_recruitment_analytics_chart(session, principal, args)
+        if name == "get_hiring_funnel_diagram":
+            return await analytics_charts.get_hiring_funnel_diagram(session, principal, args)
         if name == "analyze_attachment":
             return await attachments.analyze_attachment(session, principal, args)
         if name == "draft_job_from_attachment":
