@@ -62,6 +62,28 @@ export function GlobalPipelineScreen() {
     retry: false,
   });
 
+  // Hooks must run unconditionally, before any early return. Derive aggregates
+  // from the (possibly-undefined) query data, defaulting to empty.
+  const data = query.data;
+  const jobs = data?.jobs ?? [];
+  const totalActive = data?.total_active ?? 0;
+  const isPending = query.isPending;
+  const agg = React.useMemo(() => {
+    let active = 0;
+    let rejected = 0;
+    let withdrawn = 0;
+    for (const j of jobs) {
+      active += j.active_total;
+      rejected += j.rejected;
+      withdrawn += j.withdrawn;
+    }
+    return { active, rejected, withdrawn, total: active + rejected + withdrawn };
+  }, [jobs]);
+  const insights = React.useMemo(
+    () => derivePipelineInsights(jobs, totalActive, t),
+    [jobs, totalActive, t],
+  );
+
   const header = <PageHeader title={t("title")} description={t("subtitle")} />;
 
   /* ---- error states ---- */
@@ -97,25 +119,6 @@ export function GlobalPipelineScreen() {
       </>
     );
   }
-
-  const data = query.data;
-  const jobs = data?.jobs ?? [];
-  const totalActive = data?.total_active ?? 0;
-  const isPending = query.isPending;
-
-  const agg = React.useMemo(() => {
-    let active = 0;
-    let rejected = 0;
-    let withdrawn = 0;
-    for (const j of jobs) {
-      active += j.active_total;
-      rejected += j.rejected;
-      withdrawn += j.withdrawn;
-    }
-    return { active, rejected, withdrawn, total: active + rejected + withdrawn };
-  }, [jobs]);
-
-  const insights = React.useMemo(() => derivePipelineInsights(jobs, totalActive, t), [jobs, totalActive, t]);
 
   const columns: ColumnDef<PipelineJobRow, unknown>[] = [
     {
