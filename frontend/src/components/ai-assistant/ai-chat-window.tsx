@@ -4,14 +4,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  ArrowLeft,
   ArrowsInSimple,
   ArrowsOutSimple,
   ArrowUp,
+  Check,
+  PencilSimple,
   Plus,
-  Robot,
   Spinner,
   X,
 } from "@phosphor-icons/react";
+import { Sparkles } from "lucide-react";
 import { aiAssistantApi, type ChatMessage, type ChatSession } from "@/lib/api";
 import { getAccessToken } from "@/lib/api/session";
 import { env } from "@/lib/env";
@@ -37,9 +40,11 @@ import { AuthLoadingPrompt, GuestPrompt, WelcomeScreen } from "./chat-window/wel
 export function AiChatWindow({
   open,
   onClose,
+  variant = "floating",
 }: {
   open: boolean;
   onClose: () => void;
+  variant?: "floating" | "embedded";
 }) {
   const t = useTranslations("aiAssistant");
   const authStatus = useAuthStore((s) => s.status);
@@ -55,6 +60,10 @@ export function AiChatWindow({
   const [activityStatus, setActivityStatus] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [expanded, setExpanded] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [renaming, setRenaming] = useState(false);
+  const [renameDraft, setRenameDraft] = useState("");
+  const [savingTitle, setSavingTitle] = useState(false);
   const [draftSession, setDraftSession] = useState(false);
   const [confirmingMessageId, setConfirmingMessageId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -118,6 +127,14 @@ export function AiChatWindow({
     }
   }, [open]);
 
+  useEffect(() => {
+    const el = inputRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${Math.min(el.scrollHeight, 112)}px`;
+    el.style.overflowY = el.scrollHeight > 112 ? "auto" : "hidden";
+  }, [input]);
+
   // Cleanup SSE on unmount or close.
   useEffect(() => {
     if (!open) {
@@ -149,6 +166,7 @@ export function AiChatWindow({
     setSending(false);
     setInput("");
     setDraftSession(true);
+    setHistoryOpen(false);
     setTimeout(() => inputRef.current?.focus(), 40);
   }
 
@@ -162,6 +180,7 @@ export function AiChatWindow({
     setActiveToolName(null);
     setActivityStatus(null);
     setDraftSession(false);
+    setHistoryOpen(false);
   }
 
   async function send(textOverride?: string) {
@@ -400,53 +419,79 @@ export function AiChatWindow({
 
   if (!open) return null;
 
+  const embedded = variant === "embedded";
+  const showExpandedLayout = expanded && !embedded;
+  const isWorkspaceFullscreen = embedded && expanded;
+  const showHistoryPane = historyOpen || showExpandedLayout;
+  const historyAsFullPanel = historyOpen && embedded && !expanded;
+  const activeSession = sessionsQuery.data?.find((session) => session.id === sessionId);
+  const currentTitle = draftSession
+    ? t("untitledSession")
+    : (activeSession?.title || t("untitledSession"));
+
+  function startRename() {
+    setRenameDraft(currentTitle);
+    setRenaming(true);
+    setHistoryOpen(false);
+  }
+
+  async function saveRename() {
+    if (!sessionId || savingTitle) return;
+    const title = renameDraft.trim();
+    if (!title) return;
+    setSavingTitle(true);
+    try {
+      const updated = await aiAssistantApi.renameSession(sessionId, title);
+      qc.setQueryData<ChatSession[]>(["ai-assistant", "sessions"], (prev) =>
+        prev?.map((session) => (session.id === updated.id ? updated : session)) ?? [updated],
+      );
+      await qc.invalidateQueries({ queryKey: ["ai-assistant", "sessions"] });
+      setRenaming(false);
+    } finally {
+      setSavingTitle(false);
+    }
+  }
+
   return (
     <div
       role="dialog"
       aria-label={t("panelTitle")}
-      aria-modal="true"
+      aria-modal={embedded && !isWorkspaceFullscreen ? undefined : true}
       className={cn(
-        "fixed z-50 flex flex-col",
-        expanded
-          ? "inset-4 w-auto"
-          : "bottom-20 right-4 w-[min(92vw,400px)]",
-        "rounded-2xl border border-[var(--glass-border)] shadow-[0_8px_40px_rgba(11,34,57,0.18)] backdrop-blur-xl",
-        "bg-[var(--glass-surface)]",
-        "animate-in fade-in slide-in-from-bottom-4 duration-200",
+        "flex min-h-0 flex-col bg-[var(--surface-card)]",
+        embedded
+          ? isWorkspaceFullscreen
+            ? "fixed inset-x-0 bottom-0 top-[60px] z-[60] h-[calc(100dvh-60px)] w-screen overflow-hidden bg-[var(--surface-card)] animate-in slide-in-from-right-4 duration-200"
+            : "h-full w-full overflow-hidden"
+          : cn(
+              "fixed z-50 rounded-2xl border border-[var(--glass-border)] shadow-[0_8px_40px_rgba(11,34,57,0.18)] backdrop-blur-xl",
+              expanded ? "inset-4 w-auto" : "bottom-20 right-4 w-[min(92vw,400px)]",
+              "bg-[var(--glass-surface)] animate-in fade-in slide-in-from-bottom-4 duration-200",
+            ),
       )}
-      style={{ maxHeight: expanded ? "calc(100vh - 2rem)" : "min(80vh, 640px)" }}
+      style={
+        embedded
+          ? undefined
+          : { maxHeight: expanded ? "calc(100vh - 2rem)" : "min(80vh, 640px)" }
+      }
     >
       {/* Header */}
       <div
-        className="flex items-center gap-2.5 rounded-t-2xl border-b border-[var(--glass-border)] px-4 py-3"
-        style={{
-          background: "linear-gradient(135deg, rgba(23,23,23,0.06) 0%, rgba(5,150,105,0.06) 100%)",
-        }}
+        className={cn(
+          "flex items-center gap-2.5 border-b border-[var(--border-default)] px-4 py-2.5",
+          embedded ? "bg-[var(--surface-card)]" : "rounded-t-2xl bg-[var(--bg-subtle)]",
+        )}
       >
-        <span className="relative flex size-7 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-[var(--shadow-sm)]">
-          <Robot aria-hidden weight="fill" className="size-4 text-white" />
-          {/* Live indicator */}
-          {isAuthed && (
-            <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full border border-[var(--surface-card)] bg-[var(--teal-400)]" />
-          )}
-        </span>
+        <Sparkles
+          aria-hidden
+          strokeWidth={1.9}
+          className="size-5 shrink-0 text-[var(--text-primary)]"
+        />
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-bold text-[var(--text-primary)]">
+          <p className="truncate text-[0.8125rem] font-bold text-[var(--text-primary)]">
             {t("panelTitle")}
           </p>
-          <p className="text-[11px] text-[var(--text-muted)]">
-            {t("panelSubtitle")}
-          </p>
         </div>
-        <button
-          type="button"
-          onClick={startNewChat}
-          aria-label={t("newChat")}
-          title={t("newChat")}
-          className="rounded-lg p-1 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
-        >
-          <Plus aria-hidden weight="bold" className="size-4" />
-        </button>
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
@@ -470,8 +515,74 @@ export function AiChatWindow({
         </button>
       </div>
 
-      <div className={cn("flex min-h-0 flex-1", expanded && "lg:grid lg:grid-cols-[260px_minmax(0,1fr)]")}>
-        {expanded && isAuthed && (
+      <div className="flex h-10 shrink-0 items-center gap-2 border-b border-[var(--border-subtle)] px-3">
+        {historyOpen ? (
+          <p className="min-w-0 flex-1 truncate text-[0.8125rem] font-semibold text-[var(--text-primary)]">
+            {t("conversationHistory")}
+          </p>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => setHistoryOpen(true)}
+              aria-label={t("conversationHistory")}
+              title={t("conversationHistory")}
+              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+            >
+              <ArrowLeft aria-hidden weight="bold" className="size-4" />
+            </button>
+            {renaming ? (
+              <input
+                value={renameDraft}
+                onChange={(event) => setRenameDraft(event.target.value.slice(0, 120))}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    void saveRename();
+                  }
+                  if (event.key === "Escape") {
+                    setRenaming(false);
+                  }
+                }}
+                autoFocus
+                className="min-w-0 flex-1 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-1 text-[0.8125rem] font-semibold text-[var(--text-primary)] outline-none focus:border-[var(--text-primary)]/35"
+              />
+            ) : (
+              <p className="min-w-0 flex-1 truncate text-[0.8125rem] font-semibold text-[var(--text-primary)]">
+                {currentTitle}
+              </p>
+            )}
+            <button
+              type="button"
+              onClick={() => (renaming ? void saveRename() : startRename())}
+              disabled={renaming && (!renameDraft.trim() || savingTitle || !sessionId)}
+              aria-label={renaming ? t("saveTitle") : t("renameSession")}
+              title={renaming ? t("saveTitle") : t("renameSession")}
+              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40 disabled:cursor-not-allowed disabled:opacity-45"
+            >
+              {savingTitle ? (
+                <Spinner aria-hidden weight="bold" className="size-4 animate-spin" />
+              ) : renaming ? (
+                <Check aria-hidden weight="bold" className="size-4" />
+              ) : (
+                <PencilSimple aria-hidden weight="bold" className="size-4" />
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={startNewChat}
+              aria-label={t("newChat")}
+              title={t("newChat")}
+              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+            >
+              <Plus aria-hidden weight="bold" className="size-4" />
+            </button>
+          </>
+        )}
+      </div>
+
+      <div className="flex min-h-0 flex-1">
+        {showHistoryPane && isAuthed && (
           <SessionRail
             sessions={sessionsQuery.data ?? []}
             activeId={sessionId}
@@ -479,87 +590,103 @@ export function AiChatWindow({
             onNew={startNewChat}
             onSelect={selectSession}
             t={t}
+            searchable
+            showHeading={!historyAsFullPanel}
+            showNewButton={false}
+            className={cn(
+              "w-[280px] shrink-0",
+              historyAsFullPanel && "!flex w-full border-r-0",
+              !historyAsFullPanel && "!hidden lg:!flex",
+            )}
           />
         )}
 
-        {/* Messages */}
-        <div className="flex min-h-[260px] flex-1 flex-col gap-3 overflow-y-auto p-4">
-          {isAuthLoading ? (
-            <AuthLoadingPrompt />
-          ) : !isAuthed ? (
-            <GuestPrompt t={t} />
-          ) : messages.length === 0 && !messagesQuery.isPending ? (
-            <WelcomeScreen t={t} onPrompt={(prompt) => void send(prompt)} />
-          ) : (
-            messages.map((msg) => (
-              <MessageBubble
-                key={msg.id}
-                message={msg}
-                expanded={expanded}
-                confirming={confirmingMessageId === msg.id}
-                onConfirm={() => void confirmTool(msg)}
-                t={t}
-              />
-            ))
+        <div className={cn("flex min-w-0 flex-1 flex-col", historyAsFullPanel && "hidden")}>
+          {/* Messages */}
+          <div
+            className={cn(
+              "flex flex-1 flex-col gap-3 overflow-y-auto p-4",
+              embedded ? "min-h-0 text-[0.9rem]" : "min-h-[260px]",
+            )}
+          >
+            {isAuthLoading ? (
+              <AuthLoadingPrompt />
+            ) : !isAuthed ? (
+              <GuestPrompt t={t} />
+            ) : messages.length === 0 && !messagesQuery.isPending ? (
+              <WelcomeScreen t={t} onPrompt={(prompt) => void send(prompt)} />
+            ) : (
+              messages.map((msg) => (
+                <MessageBubble
+                  key={msg.id}
+                  message={msg}
+                  expanded={expanded}
+                  confirming={confirmingMessageId === msg.id}
+                  onConfirm={() => void confirmTool(msg)}
+                  t={t}
+                />
+              ))
+            )}
+
+            {(activityStatus || activeToolName) && (
+              <AssistantActivity status={activityStatus} toolName={activeToolName} />
+            )}
+
+            {/* Streaming text bubble */}
+            {streamingText && !activeToolName && (
+              <StreamingBubble text={streamingText} expanded={expanded} />
+            )}
+
+            {/* Typing indicator (before streaming starts) */}
+            {sending && !streamingText && !activeToolName && <TypingIndicator />}
+
+            <div ref={bottomRef} />
+          </div>
+
+          {/* Input */}
+          {isAuthed && (
+            <div className="border-t border-[var(--border-default)] bg-[var(--surface-card)] px-4 pb-3 pt-3">
+              <div className="flex items-end gap-2">
+                <textarea
+                  ref={inputRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value.slice(0, MAX_INPUT_LENGTH))}
+                  onKeyDown={handleKeyDown}
+                  placeholder={t("inputPlaceholder")}
+                  aria-label={t("inputPlaceholder")}
+                  rows={1}
+                  wrap="soft"
+                  disabled={sending}
+                  className="min-h-9 min-w-0 flex-1 resize-none appearance-none overflow-y-hidden overflow-x-hidden rounded-xl border border-[var(--border-default)] bg-transparent px-3 py-2 text-[0.8125rem] leading-5 text-[var(--text-primary)] outline-none [overflow-wrap:anywhere] [word-break:break-word] placeholder:text-[var(--text-muted)] focus:border-[var(--text-primary)]/35 focus:ring-0 disabled:opacity-60"
+                  style={{ maxHeight: "112px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => void send()}
+                  disabled={!input.trim() || sending}
+                  aria-label={t("sendBtn")}
+                  className={cn(
+                    "flex size-8 shrink-0 items-center justify-center rounded-full outline-none transition-all",
+                    "text-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
+                    input.trim() && !sending
+                      ? "bg-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/90 shadow-[0_1px_4px_rgba(45,95,166,0.30)]"
+                      : "bg-[var(--text-muted)]/30 cursor-not-allowed",
+                  )}
+                >
+                  {sending ? (
+                    <Spinner aria-hidden weight="bold" className="size-3.5 animate-spin" />
+                  ) : (
+                    <ArrowUp aria-hidden weight="bold" className="size-3.5" />
+                  )}
+                </button>
+              </div>
+              <p className="mt-1.5 text-center text-[11px] text-[var(--text-muted)]">
+                {t("disclaimer")}
+              </p>
+            </div>
           )}
-
-          {(activityStatus || activeToolName) && (
-            <AssistantActivity status={activityStatus} toolName={activeToolName} />
-          )}
-
-          {/* Streaming text bubble */}
-          {streamingText && !activeToolName && (
-            <StreamingBubble text={streamingText} expanded={expanded} />
-          )}
-
-          {/* Typing indicator (before streaming starts) */}
-          {sending && !streamingText && !activeToolName && <TypingIndicator />}
-
-          <div ref={bottomRef} />
         </div>
       </div>
-
-      {/* Input */}
-      {isAuthed && (
-        <div className="border-t border-[var(--glass-border)] px-3 pb-3 pt-2.5">
-          <div className="flex items-end gap-2 rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface)] px-3 py-2 shadow-[0_1px_4px_rgba(11,34,57,0.06)] transition-all focus-within:border-[var(--brand-primary)]/50 focus-within:bg-[var(--glass-surface-heavy)] focus-within:shadow-[0_2px_8px_rgba(11,34,57,0.10)]">
-            <textarea
-              ref={inputRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value.slice(0, MAX_INPUT_LENGTH))}
-              onKeyDown={handleKeyDown}
-              placeholder={t("inputPlaceholder")}
-              aria-label={t("inputPlaceholder")}
-              rows={1}
-              disabled={sending}
-              className="flex-1 resize-none bg-transparent text-sm leading-snug text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] disabled:opacity-60"
-              style={{ maxHeight: "100px" }}
-            />
-            <button
-              type="button"
-              onClick={() => void send()}
-              disabled={!input.trim() || sending}
-              aria-label={t("sendBtn")}
-              className={cn(
-                "shrink-0 rounded-lg p-1.5 outline-none transition-all",
-                "text-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
-                input.trim() && !sending
-                  ? "bg-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/90 shadow-[0_1px_4px_rgba(45,95,166,0.30)]"
-                  : "bg-[var(--text-muted)]/30 cursor-not-allowed",
-              )}
-            >
-              {sending ? (
-                <Spinner aria-hidden weight="bold" className="size-3.5 animate-spin" />
-              ) : (
-                <ArrowUp aria-hidden weight="bold" className="size-3.5" />
-              )}
-            </button>
-          </div>
-          <p className="mt-1.5 text-center text-[11px] text-[var(--text-muted)]">
-            {t("disclaimer")}
-          </p>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Robot, Sparkle, Spinner } from "@phosphor-icons/react";
+import { Sparkle, Spinner } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { QUICK_PROMPTS, SUGGESTION_ITEMS } from "./constants";
 
@@ -83,7 +83,7 @@ export function GuestPrompt({ t }: { t: (k: string) => string }) {
         className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)]"
         style={{ boxShadow: "0 4px 20px rgba(45,95,166,0.25)" }}
       >
-        <Robot aria-hidden weight="fill" className="size-7 text-white" />
+        <Sparkle aria-hidden weight="fill" className="size-7 text-white" />
       </span>
       <p className="text-sm font-bold text-[var(--text-primary)]">{t("guestTitle")}</p>
       <p className="text-xs text-[var(--text-secondary)]">{t("guestBody")}</p>

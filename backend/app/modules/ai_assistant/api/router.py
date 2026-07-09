@@ -3,6 +3,7 @@
 Endpoints:
   POST   /ai/chat/sessions                               Create a new chat session
   GET    /ai/chat/sessions                               List the caller's sessions (non-archived)
+  PATCH  /ai/chat/sessions/{id}                          Rename a session
   GET    /ai/chat/sessions/{id}/messages                 List messages in a session
   POST   /ai/chat/sessions/{id}/messages                 Send a message (runs LLM + tools)
   GET    /ai/chat/sessions/{id}/messages/stream          Stream a message response via SSE
@@ -31,7 +32,7 @@ from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
-from app.modules.ai_assistant.api.schemas import SendMessageRequest
+from app.modules.ai_assistant.api.schemas import SendMessageRequest, UpdateSessionRequest
 from app.modules.ai_assistant.application import chat_service, usage_service
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.shared.responses import success
@@ -95,6 +96,25 @@ async def list_sessions(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await chat_service.list_sessions(session, principal=auth.principal, limit=limit)
+    return success(data)
+
+
+@router.patch(
+    "/sessions/{session_id}",
+    summary="Rename a chat session",
+)
+async def rename_session(
+    session_id: uuid.UUID,
+    body: UpdateSessionRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await chat_service.rename_session(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        title=body.title,
+    )
     return success(data)
 
 

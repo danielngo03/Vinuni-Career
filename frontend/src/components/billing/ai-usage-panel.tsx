@@ -23,8 +23,7 @@ import { cn } from "@/lib/utils";
 /**
  * AI usage panel for the billing/usage screen (student + partner). Surfaces the
  * caller's real AI request consumption from `GET /ai/usage/summary`:
- *   - daily + weekly quota meters (the same two gates the backend enforces) with
- *     a live reset countdown,
+ *   - rolling session + weekly quota meters with a live weekly reset countdown,
  *   - a per-feature breakdown over the last 30 days,
  *   - a recent-activity list.
  *
@@ -110,7 +109,6 @@ function UsageBody({
     [data.by_feature],
   );
 
-  const dayReset = relativeTime(data.day_reset, locale);
   const weekReset = relativeTime(data.week_reset, locale);
 
   return (
@@ -118,14 +116,14 @@ function UsageBody({
       {/* Meters */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Meter
-          label={t("usage.dayLabel")}
-          window={data.day}
-          blocked={data.blocked_scope === "day"}
+          label={t("usage.sessionLabel")}
+          window={data.session}
+          blocked={data.blocked_scope === "session"}
           countLabel={t("usage.count", {
-            used: data.day.used,
-            limit: data.day.limit,
+            used: data.session.used,
+            limit: data.session.limit,
           })}
-          resetLabel={dayReset ? t("usage.resetsIn", { when: dayReset }) : null}
+          resetLabel={t("usage.sessionWindow")}
         />
         <Meter
           label={t("usage.weekLabel")}
@@ -144,7 +142,7 @@ function UsageBody({
         <Banner tone="error">
           {data.blocked_scope === "week"
             ? t("usage.blockedWeek", { when: weekReset ?? "" })
-            : t("usage.blockedDay", { when: dayReset ?? "" })}
+            : t("usage.blockedSession")}
           <span className="block font-normal text-[var(--text-secondary)]">
             {t("usage.seePlans")}
           </span>

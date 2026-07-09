@@ -57,6 +57,7 @@ from app.modules.ai_assistant.application.session_history import (
     list_sessions,
     load_history,
     quick_reply,
+    rename_session,
     require_session,
     serialize_message,
 )
@@ -90,6 +91,7 @@ __all__ = [
     "create_session",
     "get_session_messages",
     "list_sessions",
+    "rename_session",
     "send_message",
     "stream_message",
 ]

@@ -1,8 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { ChevronRight, Menu } from "lucide-react";
-import { Sparkle } from "@phosphor-icons/react";
+import { ChevronRight, Menu, Sparkles } from "lucide-react";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeSwitcher } from "./theme-switcher";
 import { BrandMark } from "./brand-mark";
@@ -148,20 +147,25 @@ export function Topbar({
             title={tNav("aiAssistant")}
             onClick={onAiClick}
             className={cn(
-              "relative inline-flex size-9 items-center justify-center rounded-lg border outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--ai-accent)]/50",
+              "inline-flex h-9 cursor-pointer items-center gap-2 rounded-full border px-3.5 text-[0.8125rem] font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
               aiActive
-                ? "border-[var(--ai-accent)] bg-[var(--ai-accent)] text-white shadow-[var(--shadow-teal)] hover:bg-[var(--ai-accent-strong)]"
-                : "border-[var(--ai-accent-ring)] bg-[var(--ai-accent-surface)] text-[var(--ai-accent-strong)] shadow-[var(--ai-chip-shadow)] hover:border-[var(--ai-accent)] hover:bg-[var(--ai-accent-surface-hover)]",
+                ? "border-[var(--text-primary)] bg-[var(--text-primary)] text-white shadow-[0_8px_18px_rgba(0,0,0,0.12)] hover:bg-black"
+                : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-primary)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-subtle)]",
             )}
           >
-            <Sparkle
+            <Sparkles
               aria-hidden
-              weight="fill"
-              className={cn("size-5", aiActive ? "text-white" : "text-[var(--ai-accent-strong)]")}
+              strokeWidth={1.8}
+              className={cn("size-4", aiActive ? "text-white" : "text-[var(--text-secondary)]")}
             />
+            <span className="hidden lg:inline">AI</span>
           </button>
         )}
-        <AccountMenu settingsHref={`/${persona}/settings`} showName />
+        <AccountMenu
+          settingsHref={`/${persona}/settings`}
+          showName
+          showHelpSupport
+        />
       </div>
     </header>
   );

@@ -23,7 +23,7 @@ interface SidebarProps {
 }
 
 const ROW_CLASS =
-  "group/nav-row flex min-h-10 cursor-pointer items-center gap-3 rounded-[14px] px-3.5 py-2 text-[0.875rem] font-semibold outline-none transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/25";
+  "group/nav-row flex min-h-9 cursor-pointer items-center gap-2.5 rounded-[12px] px-3 py-1.5 text-[0.8125rem] font-semibold outline-none transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/25";
 const ROW_IDLE_CLASS =
   "text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]";
 /** VinUni mark navy fill — the current route reads as a real selected button. */
@@ -67,7 +67,7 @@ function NavLink({
             : "size-[18px] text-[var(--text-muted)] transition-colors duration-200 group-hover/nav-row:text-[var(--text-primary)]",
         )}
       />
-      <span className={cn("min-w-0 truncate", active && "text-sm", collapsed && "sr-only")}>
+      <span className={cn("min-w-0 truncate", active && "text-[0.8125rem]", collapsed && "sr-only")}>
         {label}
       </span>
     </Link>
@@ -92,7 +92,7 @@ function SubNavLink({
       aria-current={active ? "page" : undefined}
       onClick={onNavigate}
       className={cn(
-        "flex min-h-8 cursor-pointer items-center rounded-[10px] px-3 py-1.5 text-[0.8125rem] outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/20",
+        "flex min-h-7 cursor-pointer items-center rounded-[9px] px-2.5 py-1 text-[0.75rem] outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/20",
         active
           ? "bg-[var(--bg-subtle)] font-semibold text-[var(--nav-active-text)]"
           : "font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:bg-[var(--bg-subtle)] focus-visible:text-[var(--text-primary)]",
@@ -294,7 +294,7 @@ export function Sidebar({
                   <span
                     className={cn(
                       "min-w-0 flex-1 truncate text-left",
-                      childActive && "text-sm",
+                      childActive && "text-[0.8125rem]",
                     )}
                   >
                     {label}

@@ -4,7 +4,7 @@ import {
   ArrowSquareOut,
   Lightning,
   MagnifyingGlass,
-  Robot,
+  Sparkle,
   Spinner,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
@@ -62,7 +62,7 @@ export function MessageBubble({
     >
       {!isUser && (
         <span className="mb-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
-          <Robot aria-hidden weight="fill" className="size-3.5 text-white" />
+          <Sparkle aria-hidden weight="fill" className="size-3.5 text-white" />
         </span>
       )}
       <div
@@ -70,7 +70,7 @@ export function MessageBubble({
           "rounded-2xl px-3 py-2.5 text-sm leading-relaxed",
           expanded ? "max-w-[min(72ch,82%)]" : "max-w-[82%]",
           isUser
-            ? "rounded-br-sm icon-chip-primary text-white shadow-[var(--shadow-sm)]"
+            ? "rounded-br-sm bg-[var(--text-primary)] text-[var(--text-inverted)] shadow-[0_1px_6px_rgba(0,0,0,0.16)]"
             : "rounded-bl-sm border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] text-[var(--text-primary)] shadow-[0_1px_4px_rgba(11,34,57,0.06)]",
         )}
       >
@@ -90,7 +90,7 @@ export function StreamingBubble({
   return (
     <div className="flex items-end gap-2">
       <span className="mb-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
-        <Robot aria-hidden weight="fill" className="size-3.5 text-white" />
+        <Sparkle aria-hidden weight="fill" className="size-3.5 text-white" />
       </span>
       <div
         className={cn(
@@ -205,7 +205,7 @@ export function TypingIndicator() {
   return (
     <div className="flex items-end gap-2">
       <span className="mb-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-teal)] shadow-sm">
-        <Robot aria-hidden weight="fill" className="size-3.5 text-white" />
+        <Sparkle aria-hidden weight="fill" className="size-3.5 text-white" />
       </span>
       <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-sm border border-[var(--glass-border-strong)] bg-[var(--glass-surface-heavy)] px-4 py-3 shadow-[0_1px_4px_rgba(11,34,57,0.06)]">
         {[0, 1, 2].map((i) => (
