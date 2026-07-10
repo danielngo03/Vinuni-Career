@@ -45,6 +45,7 @@ from app.modules.mock_interview.api.schemas import (
 )
 from app.modules.mock_interview.application import progress_service, session_service
 from app.shared.exceptions import AppError, ValidationFailedError
+from app.shared.permissions import Principal
 from app.shared.responses import success
 
 logger = logging.getLogger(__name__)
@@ -322,13 +323,16 @@ async def live_interview(websocket: WebSocket, session_id: uuid.UUID) -> None:
     await websocket.accept()
 
     maker = get_sessionmaker()
-    # 1) Authenticate + build the grounded context (short DB session, then release).
+    # 1) Authenticate + build the grounded context + energy precheck (short DB
+    # session, then release). The precheck runs BEFORE the Live socket is opened.
+    refuse_reason: str | None = None
     try:
         async with maker() as db:
             principal = await principal_from_access_token(db, token)
             ctx = await session_service.build_live_relay_context(
                 db, principal=principal, session_id=session_id
             )
+            refuse_reason = await _relay_precheck(db, principal=principal)
     except AppError as exc:
         await websocket.send_json({"type": "error", "reason": exc.code})
         await websocket.close(code=1008)
@@ -339,14 +343,82 @@ async def live_interview(websocket: WebSocket, session_id: uuid.UUID) -> None:
         await websocket.close(code=1011)
         return
 
+    if refuse_reason is not None:
+        # Energy exhausted: refuse with a leak-safe reason and let the client
+        # degrade to the turn-based voice / text tier.
+        await _try_send(websocket, {"type": "error", "reason": refuse_reason})
+        await websocket.close(code=1008)
+        return
+
+    request_ctx = RequestContext(
+        ip=websocket.client.host if websocket.client else None,
+        user_agent=websocket.headers.get("user-agent"),
+    )
+    # A per-turn counter (mutable box so the closure can bump it) drives an
+    # idempotent per-turn energy charge key.
+    turn_counter = {"seq": 0}
+
+    async def _on_turn(batch: list[dict[str, str]]) -> None:
+        """Persist + meter the just-completed turn(s) in a SHORT DB session.
+
+        Called on every ``turn_complete`` (and once on close for the tail), so a
+        crash mid-interview no longer loses the transcript. Best-effort: a
+        persistence/accounting failure is logged but never breaks the relay.
+        """
+
+        turn_counter["seq"] += 1
+        seq = turn_counter["seq"]
+        try:
+            async with maker() as db2:
+                # ``record_turns`` re-runs the injection guard on candidate text,
+                # caps the running total, and commits internally.
+                await session_service.record_turns(
+                    db2,
+                    principal=principal,
+                    session_id=session_id,
+                    turns_in=batch,
+                    ctx=request_ctx,
+                )
+                interviewer_chars = sum(
+                    len(t.get("text") or "")
+                    for t in batch
+                    if t.get("speaker") == "interviewer"
+                )
+                candidate_chars = sum(
+                    len(t.get("text") or "")
+                    for t in batch
+                    if t.get("speaker") != "interviewer"
+                )
+                if interviewer_chars:
+                    # Ops telemetry (metadata only) + masked energy settlement for
+                    # the realtime tier — previously the relay logged NOTHING.
+                    from app.ai.observability.usage import log_ai_usage_async
+
+                    await log_ai_usage_async(
+                        db2,
+                        task_type="mock_interview_realtime",
+                        alias="interview_realtime",
+                        success=True,
+                        prompt_chars=candidate_chars,
+                        completion_chars=interviewer_chars,
+                        user_id=principal.user_id,
+                        session_id=session_id,
+                    )
+                    await _settle_relay_energy(
+                        db2, principal=principal, session_id=session_id, seq=seq
+                    )
+                    await db2.commit()
+        except Exception:  # noqa: BLE001 - persistence/accounting is best-effort
+            logger.warning("live_interview.turn_persist_failed", exc_info=True)
+
     # 2) Run the relay — NO DB session held during the (minutes-long) stream.
-    turns: list[dict[str, str]] = []
+    # Turns are persisted incrementally through the ``_on_turn`` callback.
     try:
         await live_relay.run_interview_live(
             websocket,
             system_instruction=ctx["system_instruction"],
             voice=ctx["voice"],
-            turns_sink=turns,
+            on_turn=_on_turn,
             max_seconds=int(ctx["max_seconds"]),
         )
     except WebSocketDisconnect:
@@ -356,24 +428,6 @@ async def live_interview(websocket: WebSocket, session_id: uuid.UUID) -> None:
     except Exception:
         logger.warning("live_interview.relay_failed", exc_info=True)
         await _try_send(websocket, {"type": "error", "reason": "relay_failed"})
-
-    # 3) Persist the transcript turns (fresh short DB session; best-effort).
-    if turns:
-        try:
-            async with maker() as db:
-                request_ctx = RequestContext(
-                    ip=websocket.client.host if websocket.client else None,
-                    user_agent=websocket.headers.get("user-agent"),
-                )
-                await session_service.record_turns(
-                    db,
-                    principal=principal,
-                    session_id=session_id,
-                    turns_in=turns,
-                    ctx=request_ctx,
-                )
-        except Exception:
-            logger.warning("live_interview.persist_failed", exc_info=True)
 
     try:
         await websocket.close()
@@ -388,3 +442,66 @@ async def _try_send(websocket: WebSocket, payload: dict) -> None:
         await websocket.send_json(payload)
     except Exception:
         pass
+
+
+async def _relay_precheck(db: AsyncSession, *, principal: Principal) -> str | None:
+    """Best-effort energy/enablement precheck BEFORE opening the Live socket.
+
+    Returns a leak-safe reason string when the relay must be refused (the
+    student's masked energy account is exhausted), else ``None``. Never raises for
+    a non-decision error — a transient billing hiccup must not block the
+    interview; the per-turn settlement still records real usage once it runs.
+    """
+
+    if principal.user_id is None:
+        return None
+    try:
+        from app.modules.billing.application import energy_service
+
+        if await energy_service.is_exhausted(
+            db, scope_type=energy_service.ACCOUNT_SCOPE_USER, scope_id=principal.user_id
+        ):
+            return "energy_exhausted"
+    except Exception:  # noqa: BLE001 - precheck is best-effort
+        logger.debug("live_interview.precheck_skipped", exc_info=True)
+    return None
+
+
+async def _settle_relay_energy(
+    db: AsyncSession, *, principal: Principal, session_id: uuid.UUID, seq: int
+) -> None:
+    """Best-effort energy settlement for one realtime interviewer turn (turn count).
+
+    Idempotent on ``(session, "realtime", seq)`` so a re-run never double charges.
+    Never raises — accounting must not break the live interview. Degrades to a
+    no-op when billing is unavailable (the ``ai_usage_log`` row still exists)."""
+
+    if principal.user_id is None:
+        return
+    try:
+        from app.ai.observability.billable_usage import (
+            FEATURE_INTERVIEW_SIM,
+            PERSONA_STUDENT,
+            RESULT_SUCCESS,
+            SCOPE_USER,
+            UsageContext,
+            make_idempotency_key,
+        )
+        from app.modules.billing.application.energy_service import charge
+
+        ctx = UsageContext(
+            actor_persona=PERSONA_STUDENT,
+            feature_key=FEATURE_INTERVIEW_SIM,
+            task_type="mock_interview_realtime",
+            billing_scope=SCOPE_USER,
+            actor_user_id=principal.user_id,
+            session_id=session_id,
+            resource_type="mock_interview_session",
+            resource_id=session_id,
+            idempotency_key=make_idempotency_key(
+                FEATURE_INTERVIEW_SIM, session_id, "realtime", seq
+            ),
+        )
+        await charge(db, ctx=ctx, result_status=RESULT_SUCCESS, base_units=1)
+    except Exception:  # noqa: BLE001 - accounting must never break the interview
+        logger.debug("live_interview.energy_settle_skipped", exc_info=True)

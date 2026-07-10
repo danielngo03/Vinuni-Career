@@ -32,9 +32,17 @@ import asyncio
 import json
 import logging
 import os
+from collections.abc import Awaitable, Callable
 from typing import Any
 
+from app.ai.gateway.output_guard import scrub_text
+
 logger = logging.getLogger(__name__)
+
+# A DB-free callback: the router passes this in and persists the just-completed
+# turn(s) in a short session. Keeping persistence in the caller keeps this relay
+# free of any DB import (it is the app's only server WS bridge).
+OnTurn = Callable[[list[dict[str, str]]], Awaitable[None]]
 
 SPEAKER_CANDIDATE = "candidate"
 SPEAKER_INTERVIEWER = "interviewer"
@@ -123,14 +131,23 @@ async def run_interview_live(
     *,
     system_instruction: str,
     voice: str,
-    turns_sink: list[dict[str, str]],
+    on_turn: OnTurn | None = None,
     max_seconds: int = 600,
 ) -> None:
     """Bridge an accepted WebSocket to a Gemini Live interview session.
 
-    Appends completed ``{"speaker","text"}`` turns to ``turns_sink`` (the caller
-    persists them after the relay ends). Returns when either side closes or the
-    hard ``max_seconds`` cap is hit. Never raises for a normal client disconnect.
+    On EACH ``turn_complete`` (and once more on close for any tail) the just
+    completed ``{"speaker","text"}`` turn(s) are handed to ``on_turn`` so the
+    caller can persist them incrementally in a short DB session — a crash/kill
+    mid-interview no longer loses the whole transcript. This relay stays DB-free:
+    persistence lives entirely in the injected callback.
+
+    The interviewer's transcript is output-guarded BEFORE it is streamed to the
+    browser AND before it is accumulated for persistence, so a leaked
+    provider/model string can never reach the student or the stored turn.
+
+    Returns when either side closes or the hard ``max_seconds`` cap is hit. Never
+    raises for a normal client disconnect.
     """
 
     from google.genai import types
@@ -144,15 +161,25 @@ async def run_interview_live(
     cur_in: list[str] = []
     cur_out: list[str] = []
 
-    def _flush_turns() -> None:
+    async def _flush_turns() -> None:
+        # Candidate text is the student's own speech (re-checked by the caller's
+        # injection guard on persist). Interviewer text is model output: scrub the
+        # JOINED text so a provider/model string split across streamed fragments
+        # is still caught before it is stored.
         joined_in = "".join(cur_in).strip()
-        joined_out = "".join(cur_out).strip()
+        joined_out = scrub_text("".join(cur_out).strip()).strip()
+        batch: list[dict[str, str]] = []
         if joined_in:
-            turns_sink.append({"speaker": SPEAKER_CANDIDATE, "text": joined_in})
+            batch.append({"speaker": SPEAKER_CANDIDATE, "text": joined_in})
             cur_in.clear()
         if joined_out:
-            turns_sink.append({"speaker": SPEAKER_INTERVIEWER, "text": joined_out})
+            batch.append({"speaker": SPEAKER_INTERVIEWER, "text": joined_out})
             cur_out.clear()
+        if batch and on_turn is not None:
+            try:
+                await on_turn(batch)
+            except Exception:  # noqa: BLE001 - persistence must not break the relay
+                logger.warning("live_relay.on_turn_failed", exc_info=True)
 
     async with client.aio.live.connect(
         model=model, config=_live_config(system_instruction, voice)
@@ -207,12 +234,16 @@ async def run_interview_live(
                         await ws.send_json({"type": "input_transcript", "text": in_tx.text})
                     out_tx = getattr(sc, "output_transcription", None)
                     if out_tx and out_tx.text:
+                        # Accumulate the RAW fragment for a join-then-scrub at
+                        # flush; scrub the fragment separately for the live send.
                         cur_out.append(out_tx.text)
-                        await ws.send_json({"type": "output_transcript", "text": out_tx.text})
+                        await ws.send_json(
+                            {"type": "output_transcript", "text": scrub_text(out_tx.text)}
+                        )
                     if getattr(sc, "interrupted", None):
                         await ws.send_json({"type": "interrupted"})
                     if getattr(sc, "turn_complete", None):
-                        _flush_turns()
+                        await _flush_turns()
                         await ws.send_json({"type": "turn_complete"})
 
         t_in = asyncio.create_task(client_to_live())
@@ -231,4 +262,4 @@ async def run_interview_live(
                 if exc is not None:
                     logger.warning("live_relay.pump_failed", exc_info=exc)
         finally:
-            _flush_turns()
+            await _flush_turns()
