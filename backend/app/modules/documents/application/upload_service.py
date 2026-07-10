@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import asyncio
 import uuid
-from pathlib import PurePosixPath
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -45,11 +44,6 @@ _SECURITY_REJECT = "FILE_REJECTED_SECURITY"
 
 # quality_code -> next_action surfaced on the upload response.
 _ACCEPTED_NEXT = "review_fields"
-
-
-def _ext(filename: str) -> str:
-    suffix = PurePosixPath(filename).suffix.lower()
-    return suffix if len(suffix) <= 10 else ""
 
 
 async def _existing_checksums(session: AsyncSession, *, user_id: uuid.UUID) -> list[str]:
@@ -128,19 +122,28 @@ async def upload_cv(
 
     document_id = uuid.uuid4()
     is_security_reject = outcome.quality_code == _SECURITY_REJECT
+    # An image CV is stored/served as a PDF (owner decision 2026-07-10); the
+    # cascade above already ran on the ORIGINAL image bytes, so extraction is
+    # unaffected. The checksum stays the original-bytes checksum for stable
+    # duplicate detection.
+    from app.modules.documents.infrastructure.image_pdf import served_upload_artifact
+
+    stored_bytes, stored_mime, stored_name, stored_ext = served_upload_artifact(
+        filename, data, content_type
+    )
     storage_key = ""
     if not is_security_reject:
-        storage_key = f"cv-uploads/{principal.user_id}/{document_id}{_ext(filename)}"
-        storage.get_storage().save(storage_key, data)
+        storage_key = f"cv-uploads/{principal.user_id}/{document_id}{stored_ext}"
+        storage.get_storage().save(storage_key, stored_bytes)
 
     document = Document(
         id=document_id,
         user_id=principal.user_id,
         doc_type="cv",
-        original_name=filename[:500],
+        original_name=stored_name,
         storage_path=storage_key,
-        mime_type=(content_type or "application/octet-stream")[:100],
-        file_size_bytes=len(data),
+        mime_type=stored_mime,
+        file_size_bytes=len(stored_bytes),
         checksum_sha256=outcome.checksum or cv_validation.compute_checksum(data),
         virus_scan_status="infected" if is_security_reject else "clean",
         virus_scan_at=_shared.now(),

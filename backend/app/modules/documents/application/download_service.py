@@ -24,7 +24,7 @@ from app.modules.documents.domain.models import (
     Document,
     SignedFileAccess,
 )
-from app.modules.documents.infrastructure import pdf_render, storage
+from app.modules.documents.infrastructure import pdf_render, pdf_watermark, storage
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.hashing import hash_ip
 
@@ -149,6 +149,27 @@ async def resolve_download(
     else:
         raise InvalidDownloadTokenError()
 
+    # ``disp`` on the token REQUESTS a disposition, but the final decision is made
+    # by ``_safe_serving`` against the type allowlist + magic number — a hostile
+    # (HTML/SVG/spoofed) upload is force-downgraded to a sandboxed attachment and
+    # can never be rendered inline, regardless of the token.
+    requested = "attachment" if payload.get("disp") == "attachment" else "inline"
+    served_media, disposition = _safe_serving(content, media_type, requested)
+
+    # Partner CV DOWNLOAD is watermarked (owner decision 2026-07-10;
+    # ``docs/SECURITY_PRIVACY.md``): the inline VIEW stays the clean original, but
+    # the attachment DOWNLOAD of a partner-accessed candidate CV (``snapshot_original``)
+    # is stamped with the VinUni logo + "VinUni Career". Guard on a trusted PDF so a
+    # spoofed/non-PDF upload (force-downgraded to octet-stream) is left untouched.
+    stamped_watermark = watermark
+    if (
+        kind == "snapshot_original"
+        and disposition == "attachment"
+        and served_media == "application/pdf"
+    ):
+        content = pdf_watermark.stamp_watermark(content)
+        stamped_watermark = pdf_watermark.WATERMARK_TEXT
+
     session.add(
         SignedFileAccess(
             resource_kind=str(kind),
@@ -156,19 +177,13 @@ async def resolve_download(
             document_id=document_id,
             accessor_id=accessor_id,
             purpose=str(payload.get("purpose") or "download"),
-            has_watermark=watermark is not None,
-            watermark_text=watermark,
+            has_watermark=stamped_watermark is not None,
+            watermark_text=stamped_watermark,
             signed_url_hash=storage.token_hash(token),
             ip_hash=hash_ip(ctx.ip),
         )
     )
     await session.commit()
-    # ``disp`` on the token REQUESTS a disposition, but the final decision is made
-    # by ``_safe_serving`` against the type allowlist + magic number — a hostile
-    # (HTML/SVG/spoofed) upload is force-downgraded to a sandboxed attachment and
-    # can never be rendered inline, regardless of the token.
-    requested = "attachment" if payload.get("disp") == "attachment" else "inline"
-    served_media, disposition = _safe_serving(content, media_type, requested)
     return DownloadResult(
         content=content,
         media_type=served_media,

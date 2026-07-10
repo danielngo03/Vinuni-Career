@@ -28,6 +28,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.notifications.application.dispatch_service import enqueue_notification
+from app.modules.workflow.application.errors import NodeExecutionFailed
 from app.modules.workflow.domain.graph import FlowContext
 from app.modules.workflow.domain.models import (
     WorkflowExecution,
@@ -54,16 +55,9 @@ _PII_KEYS = {
 
 _CONDITION_RE = re.compile(r"^\s*(?P<left>.+?)\s*(?P<op>>=|<=|==|!=|>|<)\s*(?P<right>.+?)\s*$")
 
-
-class NodeExecutionFailed(Exception):
-    """Raised by a node handler for a recoverable failure. ``user_safe_error``
-    is stored on the node log and the created follow-up task; never include
-    stack traces, provider/internal details, or raw PII in it.
-    """
-
-    def __init__(self, user_safe_error: str) -> None:
-        self.user_safe_error = user_safe_error
-        super().__init__(user_safe_error)
+# ``NodeExecutionFailed`` moved to ``errors`` (so cross-module node handlers can
+# import it without a cycle); re-exported here for backward-compatible imports.
+__all__ = ["NodeExecutionFailed", "dry_run_flow", "execute_flow", "list_flow_executions"]
 
 
 def redact_sample_event(event: dict) -> dict:
@@ -117,7 +111,7 @@ async def execute_flow(
     while current is not None:
         entered_at = datetime.now(tz=UTC)
         try:
-            result = await _execute_node(session, current, context, simulate=simulate)
+            result = await _execute_node(session, current, context, simulate=simulate, flow=flow)
         except NodeExecutionFailed as exc:
             exited_at = datetime.now(tz=UTC)
             logs.append(
@@ -239,7 +233,7 @@ async def dry_run_flow(
         visited += 1
         entered_at = datetime.now(tz=UTC)
         try:
-            result = await _execute_node(session, current, context, simulate=True)
+            result = await _execute_node(session, current, context, simulate=True, flow=flow)
             status, error, decision = "success", None, result.decision
             output_summary = _summarize(result.output_variables)
         except NodeExecutionFailed as exc:
@@ -366,13 +360,34 @@ def _find_trigger_node(nodes_by_id: dict[str, dict]) -> dict | None:
 
 
 async def _execute_node(
-    session: AsyncSession, node: dict, context: FlowContext, *, simulate: bool
+    session: AsyncSession,
+    node: dict,
+    context: FlowContext,
+    *,
+    simulate: bool,
+    flow: WorkflowFlow | None = None,
 ) -> _NodeResult:
     node_type = node["type"]
     data = node.get("data", {})
 
     if node_type == "trigger":
         return _NodeResult(decision="entered")
+
+    if node_type in (
+        "ai_screen_application",
+        "auto_advance_on_gate",
+        "notify",
+        "jd_pdf_to_draft",
+    ):
+        # Recruiting-automation node types (Wave 2B). Delegated to the isolated
+        # cross-module handler; imported lazily to avoid a workflow<->recruitment
+        # import cycle. Each honors ``simulate`` as a no-op internally.
+        from app.modules.workflow.application import recruiting_nodes
+
+        outcome = await recruiting_nodes.execute(
+            session, flow=flow, node=node, context=context, simulate=simulate
+        )
+        return _NodeResult(decision=outcome.decision, output_variables=outcome.output)
 
     if node_type == "condition":
         expression = context.interpolate(data["expression"])

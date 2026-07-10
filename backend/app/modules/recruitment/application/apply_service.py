@@ -190,7 +190,37 @@ async def apply_to_job(
 
     await session.commit()
     await session.refresh(app)
+    await _dispatch_application_submitted(session, app=app)
     return presenters.applicant_application(app, job_title=job.title, locale=locale)
+
+
+async def _dispatch_application_submitted(session: AsyncSession, *, app: Application) -> None:
+    """Best-effort ``system.application_submitted`` workflow trigger (post-commit).
+
+    Fires the workflow engine so partner flows (e.g. "on new application -> AI
+    screen -> notify") can run against the just-created application. PII-safe
+    payload (ids only). Idempotent per application. A workflow-engine problem must
+    NEVER fail an application submit, so this is fully guarded and runs after the
+    apply transaction has already committed.
+    """
+
+    from app.modules.workflow.application.trigger_service import dispatch_trigger
+
+    try:
+        await dispatch_trigger(
+            session,
+            trigger_type="system.application_submitted",
+            payload={
+                "application_id": str(app.id),
+                "job_id": str(app.job_id),
+                "org_id": str(app.org_id),
+                "snapshot_id": str(app.snapshot_id) if app.snapshot_id else None,
+            },
+            idempotency_key=f"application_submitted:{app.id}",
+            scope_org_id=app.org_id,
+        )
+    except Exception:  # noqa: BLE001 — workflow dispatch must never break an apply
+        pass
 
 
 async def _record_apply_metrics(session: AsyncSession, *, job, principal: Principal) -> None:
@@ -898,10 +928,12 @@ async def get_application_cv_download(
 ) -> dict:
     """Return a signed snapshot download URL.
 
-    Applicant -> owner self-download. Authorized partner -> the STUDENT'S ORIGINAL
-    file, unwatermarked (owner decision 2026-07-10). Anyone else -> ``404``. The
-    partner path is gated on ``candidate_identity:download_cv`` and every download
-    is audited (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
+    Applicant -> owner self-download (clean, unwatermarked). Authorized partner ->
+    the STUDENT'S ORIGINAL file WATERMARKED with the VinUni logo + "VinUni Career"
+    (owner decision 2026-07-10; the inline view stays clean, only the download is
+    stamped). Anyone else -> ``404``. The partner path is gated on
+    ``candidate_identity:download_cv`` and every download is audited
+    (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
     """
 
     app = await _shared.load_application(session, application_id=application_id)
@@ -931,7 +963,8 @@ async def get_application_cv_download(
         principal=principal,
         event_type="cv_downloaded",
     )
-    # Serve the student's ORIGINAL file as an attachment — no watermark.
+    # Serve the student's ORIGINAL file as a WATERMARKED attachment (VinUni logo +
+    # "VinUni Career"), stamped by the download service on the attachment path.
     return await snapshot_service.build_snapshot_original_download(
         session, snapshot_id=app.snapshot_id, actor_id=principal.user_id
     )

@@ -64,6 +64,7 @@ from app.modules.platform_support.api import router as platform_support_router
 from app.modules.recruitment.api import router as recruitment_router
 from app.modules.reviews.api import router as reviews_router
 from app.modules.student_profiles.api import router as student_profiles_router
+from app.modules.talent_pool.api import router as talent_pool_router
 from app.modules.users.api import router as admin_users_router
 from app.modules.workflow.api import router as workflow_router
 
@@ -96,6 +97,7 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(reviews_router.router)
     api.include_router(reviews_router.admin_router)
     api.include_router(student_profiles_router.router)
+    api.include_router(talent_pool_router.router)
     api.include_router(dashboards_router.router)
     api.include_router(dashboards_admin_router)
     api.include_router(career_outcomes_router.router)

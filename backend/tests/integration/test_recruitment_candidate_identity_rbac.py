@@ -103,8 +103,9 @@ async def test_cv_download_allowed_with_candidate_identity_grant(db_session) -> 
     )
     assert out.get("download_url")
     # Owner decision 2026-07-10: partner downloads the student's ORIGINAL file
-    # (no watermark). RBAC + audit are retained; the derived-watermark copy is gone.
-    assert out.get("has_watermark") is False
+    # WATERMARKED (VinUni logo + "VinUni Career"); the inline view stays clean.
+    # RBAC + audit are retained.
+    assert out.get("has_watermark") is True
 
 
 # --------------------------------------------------------------------------- #

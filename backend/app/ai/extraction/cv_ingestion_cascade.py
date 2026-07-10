@@ -98,9 +98,14 @@ def run_cascade(
     max_bytes: int,
     existing_checksums: tuple[str, ...] | list[str] = (),
     policy: EnginePolicy | None = None,
+    precomputed_checksum: str | None = None,
 ) -> IngestionOutcome:
     policy = policy or resolve_policy()
-    checksum = cv_validation.compute_checksum(data)
+    # ``precomputed_checksum`` lets the caller pin the checksum used for duplicate
+    # detection to the ORIGINAL upload bytes even when ``data`` here is a derived
+    # artifact (e.g. an image CV converted to a served PDF, whose bytes are not
+    # byte-identical across runs). Falls back to hashing ``data`` directly.
+    checksum = precomputed_checksum or cv_validation.compute_checksum(data)
 
     # ---- 1. Security + file gates -------------------------------------------
     if len(data) > max_bytes:

@@ -56,6 +56,7 @@ from app.modules.reviews.domain import models as _reviews_models  # noqa: F401
 from app.modules.student_profiles.domain import (  # noqa: F401
     models as _student_profile_models,
 )
+from app.modules.talent_pool.domain import models as _talent_pool_models  # noqa: F401
 from app.modules.users.domain import models as _user_models  # noqa: F401
 from app.modules.workflow.domain import models as _workflow_models  # noqa: F401
 
@@ -98,6 +99,7 @@ def import_all_models() -> None:
         _mock_interview_models,
         _moderation_models,
         _student_profile_models,
+        _talent_pool_models,
         _career_outcome_models,
         _career_services_models,
         _compliance_models,

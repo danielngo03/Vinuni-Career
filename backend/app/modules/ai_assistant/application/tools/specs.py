@@ -1205,4 +1205,164 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         audit_event_type="TOOL_KB_QUERY",
         timeout_seconds=20,
     ),
+    "search_candidates": ToolSpec(
+        name="search_candidates",
+        description=(
+            "Find candidates in the VinUni talent pool by a free-text brief, a pasted/uploaded "
+            "external job description, and/or specific skills. Use this when the recruiter asks "
+            "to 'find candidates for X', 'tìm ứng viên biết Python', 'who matches this JD', or "
+            "wants a shortlist for a role that may NOT be posted yet. Provide any of query_text "
+            "(a short brief), jd_text (the full JD text), or skills (a list). Returns ranked "
+            "candidates with human-readable match reasons and evidence gaps — never a similarity "
+            "score. Candidates are always identified (real names); open each candidate's CV via "
+            "their profile link to verify. Only available to partner users with talent-pool "
+            "search rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "query_text": {
+                    "type": "string",
+                    "description": "Short free-text brief, e.g. 'backend intern with FastAPI'",
+                },
+                "jd_text": {
+                    "type": "string",
+                    "description": "Full external job-description text to match candidates against",
+                },
+                "skills": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Required/desired skills, e.g. ['Python', 'SQL']",
+                },
+                "filters": {
+                    "type": "object",
+                    "description": (
+                        "Optional structured filters (experience_years, major, location, "
+                        "work_mode, availability). Deterministic; applied around the ranking."
+                    ),
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "Max candidates to return (default 10, max 20)",
+                },
+            },
+            "required": [],
+        },
+        output_schema={
+            "type": "object",
+            "properties": {
+                "ok": {"type": "boolean"},
+                "candidates": {"type": "array", "items": {"type": "object"}},
+                "ai_ranked": {"type": "boolean"},
+                "source": {"type": "string"},
+            },
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        # Same candidate-access grant the talent-pool service enforces
+        # (``candidate_identity:view_cv``) — tool gate and service gate stay in sync.
+        required_permissions=["authenticated", "role:partner_user", "candidate_identity:view_cv"],
+        fallback=(
+            "I couldn't search the talent pool right now. You can browse candidates on the "
+            "Talent Pool page at /partner/talent."
+        ),
+        audit_event_type="TOOL_SEARCH_CANDIDATES",
+        timeout_seconds=25,
+    ),
+    "job_stats": ToolSpec(
+        name="job_stats",
+        description=(
+            "Get application statistics for the partner's OWN jobs: total applicants, how many "
+            "are unreviewed (new to screen), and how many are in an active pipeline stage. Use "
+            "this when the recruiter asks 'how many applicants do I have', 'which roles need "
+            "screening', 'bao nhiêu ứng viên chưa xem', or wants a numeric glance across their "
+            "jobs. Optionally pass job_id (from get_partner_jobs) to scope to one job, or status "
+            "to filter. Aggregate counts only — no candidate identities. Only available to "
+            "partner users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {
+                    "type": "string",
+                    "description": "Optional job UUID to scope to a single job",
+                },
+                "status": {
+                    "type": "string",
+                    "enum": ["draft", "pending", "active", "closed"],
+                    "description": "Optional job-status filter",
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
+        fallback=(
+            "I couldn't load your job statistics right now. Check /partner/jobs for your "
+            "applicant counts."
+        ),
+        audit_event_type="TOOL_JOB_STATS",
+        timeout_seconds=20,
+    ),
+    "pipeline_summary": ToolSpec(
+        name="pipeline_summary",
+        description=(
+            "Show how one job's candidates are distributed across pipeline STAGES (e.g. how many "
+            "in screening vs interview vs offer). Use this when the recruiter asks 'where are my "
+            "candidates for [role]', 'show the pipeline for this job', 'bao nhiêu người đang phỏng "
+            "vấn', or wants a stage-by-stage breakdown. Requires job_id from a prior "
+            "get_partner_jobs result. Returns per-stage counts plus a chart — aggregate counts "
+            "only, no candidate identities. Only available to partner users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {"type": "string", "description": "Job UUID owned by the partner's org"},
+            },
+            "required": ["job_id"],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "applications:read"],
+        fallback=(
+            "I couldn't load that pipeline right now. Check the pipeline board at "
+            "/partner/pipeline."
+        ),
+        audit_event_type="TOOL_PIPELINE_SUMMARY",
+        timeout_seconds=20,
+    ),
+    "recruiting_analytics": ToolSpec(
+        name="recruiting_analytics",
+        description=(
+            "Answer a recruiting-METRIC question for the partner org with a chart: 'conversion' "
+            "(applied -> screened -> interview -> offer -> hired funnel + overall rate), "
+            "'time_to_fill' (median/avg days to hire + time spent per stage), or 'source_mix' "
+            "(where applicants came from: organic, search, recommendation, sponsored, invitation, "
+            "direct). Use this when the recruiter asks 'what's our time to fill', 'how are we "
+            "converting applicants', 'tỷ lệ chuyển đổi', or 'where do applicants come from'. "
+            "Returns chart-ready aggregate data — no candidate identities. Only available to "
+            "partner users with analytics rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "metric": {
+                    "type": "string",
+                    "enum": ["conversion", "time_to_fill", "source_mix"],
+                    "description": "Which recruiting metric to analyse (default: conversion)",
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "analytics:view_job_metrics"],
+        fallback=(
+            "I couldn't build that analytics view right now. Check /partner/analytics for your "
+            "recruiting metrics."
+        ),
+        audit_event_type="TOOL_RECRUITING_ANALYTICS",
+        timeout_seconds=20,
+    ),
 }

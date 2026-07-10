@@ -475,8 +475,10 @@ async def build_partner_cv_view(
         "filename": _snapshot_filename(body),
         "view_url": _original_cv_url(snap, actor_id=actor_id, disp="inline"),
         "download_url": _original_cv_url(snap, actor_id=actor_id, disp="attachment"),
-        # Explicit for the frontend + audits: the partner CV is the original file,
-        # never a watermarked copy (owner decision 2026-07-10).
+        # ``has_watermark`` describes the INLINE VIEW, which stays the clean
+        # original (owner decision 2026-07-10). The DOWNLOAD served via
+        # ``download_url`` IS watermarked (VinUni logo + "VinUni Career") — the
+        # download service stamps it on the attachment path.
         "has_watermark": False,
     }
 
@@ -487,19 +489,22 @@ async def build_snapshot_original_download(
     snapshot_id: uuid.UUID,
     actor_id: uuid.UUID | None,
 ) -> dict:
-    """Return a signed download URL for a snapshot's ORIGINAL file (no watermark).
+    """Return a signed download URL for a snapshot's WATERMARKED partner download.
 
     Used by the recruitment ``/applications/{id}/cv-download`` endpoint for the
     partner path. The caller MUST have already verified org ownership +
-    ``download_cv`` RBAC. Shaped like :func:`get_snapshot_download` (``{snapshot_id,
-    has_watermark, download_url}``) so the response contract is unchanged, but the
-    bytes are the student's original file served as an attachment.
+    ``download_cv`` RBAC. The served attachment is stamped with the VinUni logo +
+    "VinUni Career" at render time by the download service (owner decision
+    2026-07-10; ``docs/SECURITY_PRIVACY.md``: partner CV downloads are
+    watermarked). The inline VIEW (:func:`build_partner_cv_view`) stays the clean
+    original. Shaped like :func:`get_snapshot_download` (``{snapshot_id,
+    has_watermark, download_url}``) so the response contract is unchanged.
     """
 
     snap = await _load_snapshot(session, snapshot_id=snapshot_id)
     return {
         "snapshot_id": str(snap.id),
-        "has_watermark": False,
+        "has_watermark": True,
         "download_url": _original_cv_url(snap, actor_id=actor_id, disp="attachment"),
     }
 

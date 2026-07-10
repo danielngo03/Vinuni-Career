@@ -177,6 +177,89 @@ async def test_spoofed_pdf_mime_but_html_bytes_forced_to_attachment(db_session) 
     assert result.media_type == "application/octet-stream"
 
 
+# --------------------------------------------------------------------------- #
+# Partner CV DOWNLOAD is watermarked; the inline VIEW stays clean               #
+# --------------------------------------------------------------------------- #
+
+
+def _pdf_text(pdf_bytes: bytes) -> str:
+    import fitz
+
+    with fitz.open(stream=pdf_bytes, filetype="pdf") as doc:
+        return "".join(page.get_text() for page in doc)
+
+
+def _cv_pdf() -> bytes:
+    """A clean PDF CV (an image CV converted to PDF, as real uploads now are)."""
+
+    import io
+
+    from app.modules.documents.infrastructure.image_pdf import image_to_pdf
+    from PIL import Image, ImageDraw
+
+    img = Image.new("RGB", (480, 640), "white")
+    ImageDraw.Draw(img).text((20, 40), "Ứng viên", fill="black")
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    pdf = image_to_pdf(buf.getvalue())
+    assert pdf is not None
+    return pdf
+
+
+async def test_partner_download_is_watermarked_view_stays_clean(db_session) -> None:
+    from app.modules.documents.domain.models import SignedFileAccess
+    from sqlalchemy import select
+
+    clean_pdf = _cv_pdf()
+    assert "VinUni Career" not in _pdf_text(clean_pdf)  # the source is genuinely clean
+
+    _su, student = await make_student(db_session, prefix="wm")
+    snap = await _make_uploaded_snapshot(
+        db_session, user_id=student.user_id, mime="application/pdf", name="cv.pdf", data=clean_pdf
+    )
+    view = await snapshot_service.build_partner_cv_view(
+        db_session, snapshot_id=snap.id, actor_id=student.user_id
+    )
+    assert view is not None and view["has_watermark"] is False  # the response = original
+
+    # Inline VIEW: clean original PDF, byte-identical, no watermark text.
+    inline = await download_service.resolve_download(
+        db_session, token=_token_of(view["view_url"]), ctx=CTX
+    )
+    assert inline.disposition == "inline"
+    assert inline.media_type == "application/pdf"
+    assert inline.content == clean_pdf
+    assert "VinUni Career" not in _pdf_text(inline.content)
+
+    # DOWNLOAD: watermarked PDF (VinUni logo + "VinUni Career"), still a valid PDF.
+    dl = await download_service.resolve_download(
+        db_session, token=_token_of(view["download_url"]), ctx=CTX
+    )
+    assert dl.disposition == "attachment"
+    assert dl.media_type == "application/pdf"
+    assert dl.content[:5] == b"%PDF-"
+    assert dl.content != clean_pdf
+    assert "VinUni Career" in _pdf_text(dl.content)
+
+    # Audit: the download access row records the applied watermark.
+    rows = (
+        (
+            await db_session.execute(
+                select(SignedFileAccess).where(
+                    SignedFileAccess.resource_kind == "snapshot_original"
+                )
+            )
+        )
+        .scalars()
+        .all()
+    )
+    watermarked = [r for r in rows if r.has_watermark]
+    assert len(watermarked) == 1
+    assert watermarked[0].watermark_text == "VinUni Career"
+    # The inline view access was recorded WITHOUT a watermark.
+    assert any(r.has_watermark is False for r in rows)
+
+
 async def test_real_uploaded_png_served_inline(db_session) -> None:
     _su, student = await make_student(db_session, prefix="png")
     png = b"\x89PNG\r\n\x1a\n" + b"\x00" * 32

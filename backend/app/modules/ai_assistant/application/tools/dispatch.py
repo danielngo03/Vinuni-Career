@@ -19,7 +19,9 @@ from . import (
     jobs,
     kb,
     partner,
+    recruiting,
     student,
+    talent,
 )
 from .specs import TOOL_SPECS
 
@@ -64,6 +66,10 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "analyze_attachment",
         "draft_job_from_attachment",
         "create_job",
+        "search_candidates",
+        "job_stats",
+        "pipeline_summary",
+        "recruiting_analytics",
     }
 )
 
@@ -197,6 +203,16 @@ async def _execute_tool(
             return await jd_jobs.draft_job_from_attachment(session, principal, args)
         if name == "create_job":
             return await jd_jobs.create_job(session, principal, args)
+
+        # --- Talent-pool AI search + recruiting intelligence tools ---
+        if name == "search_candidates":
+            return await talent.search_candidates(session, principal, args)
+        if name == "job_stats":
+            return await recruiting.job_stats(session, principal, args)
+        if name == "pipeline_summary":
+            return await recruiting.pipeline_summary(session, principal, args)
+        if name == "recruiting_analytics":
+            return await recruiting.recruiting_analytics(session, principal, args)
 
         # --- CV / AI tools ---
         if name == "get_my_cvs":

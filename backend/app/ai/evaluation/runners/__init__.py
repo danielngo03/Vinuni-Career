@@ -30,6 +30,7 @@ from app.ai.evaluation.runners import (
     recommend,
     scorecard_suggest,
     screening_brief,
+    talent_match,
 )
 
 RUN_CASE_BY_FAMILY = {
@@ -53,6 +54,7 @@ RUN_CASE_BY_FAMILY = {
     "fraud_detection": fraud_detection.run_case,
     "market_intelligence": market_intelligence.run_case,
     "mock_interview_report": mock_interview_report.run_case,
+    "talent_match": talent_match.run_case,
 }
 
 CHECK_BY_KIND = {
@@ -76,6 +78,7 @@ CHECK_BY_KIND = {
     "fraud_detection": fraud_detection.check,
     "market_intelligence": market_intelligence.check,
     "mock_interview_report": mock_interview_report.check,
+    "talent_match": talent_match.check,
 }
 
 __all__ = ["RUN_CASE_BY_FAMILY", "CHECK_BY_KIND"]

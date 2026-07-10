@@ -16,6 +16,7 @@ Covers (``docs/CV_INGESTION_EXTRACTION_SPEC.md`` §8 eval set + minimum acceptan
 
 from __future__ import annotations
 
+import io
 import json
 import uuid
 
@@ -214,6 +215,101 @@ async def test_upload_rejects_infected_file_without_storing(db_session) -> None:
             data=infected,
             content_type="text/plain",
         )
+
+
+# --------------------------------------------------------------------------- #
+# Image CV -> PDF on upload (owner decision 2026-07-10)                         #
+# --------------------------------------------------------------------------- #
+
+
+def _real_png(text: str = "Candidate CV") -> bytes:
+    from PIL import Image, ImageDraw
+
+    img = Image.new("RGB", (480, 640), "white")
+    ImageDraw.Draw(img).text((20, 40), text, fill="black")
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def _real_webp(text: str = "Candidate CV") -> bytes:
+    from PIL import Image, ImageDraw
+
+    img = Image.new("RGB", (480, 640), "white")
+    ImageDraw.Draw(img).text((20, 40), text, fill="black")
+    buf = io.BytesIO()
+    img.save(buf, format="WEBP")
+    return buf.getvalue()
+
+
+@pytest.mark.parametrize(
+    ("filename", "builder", "content_type"),
+    [
+        ("resume.png", _real_png, "image/png"),
+        ("resume.webp", _real_webp, "image/webp"),
+    ],
+)
+async def test_image_cv_is_stored_and_served_as_pdf(
+    db_session, filename, builder, content_type
+) -> None:
+    _u, student = await make_student(db_session)
+    result = await _upload(
+        db_session, student, filename=filename, data=builder(), content_type=content_type
+    )
+    # The upload preview reports a PDF artifact + a ``.pdf`` display name.
+    assert result["content_type"] == "application/pdf"
+    assert result["filename"].endswith(".pdf")
+
+    # The stored document is a real PDF (magic %PDF), and the preview token serves it.
+    doc = (
+        await db_session.execute(
+            select(Document).where(Document.id == uuid.UUID(result["document_id"]))
+        )
+    ).scalar_one()
+    assert doc.mime_type == "application/pdf"
+    assert storage.get_storage().load(doc.storage_path)[:5] == b"%PDF-"
+
+    token = result["preview_url"].rsplit("/", 1)[-1]
+    served = await download_service.resolve_download(db_session, token=token, ctx=CTX)
+    assert served.media_type == "application/pdf"
+    assert served.content[:5] == b"%PDF-"
+
+
+async def test_corrupt_image_upload_stored_then_rejected_by_cascade(db_session) -> None:
+    # A corrupt image cannot be wrapped into a PDF: the upload does NOT crash (the
+    # original bytes are stored) and the ingestion cascade classifies it as a
+    # failed low-quality scan — never fabricated into a CV.
+    _u, student = await make_student(db_session)
+    corrupt = b"\x89PNG\r\n\x1a\n" + b"not-a-decodable-image" * 4
+    result = await _upload(
+        db_session, student, filename="broken.png", data=corrupt, content_type="image/png"
+    )
+    # Unconvertible -> stored as the original image (no crash).
+    assert result["content_type"] == "image/png"
+    doc = (
+        await db_session.execute(
+            select(Document).where(Document.id == uuid.UUID(result["document_id"]))
+        )
+    ).scalar_one()
+    assert storage.get_storage().load(doc.storage_path) == corrupt
+
+    ing = await _ingest(db_session, student, result["document_id"])
+    assert ing["status"] == "failed"
+    assert ing["quality_code"] in ("LOW_QUALITY_SCAN", "CORRUPT_FILE")
+
+
+async def test_duplicate_image_cv_detected_despite_pdf_conversion(db_session) -> None:
+    # Two uploads of the SAME image become two (non-byte-identical) PDFs, but the
+    # checksum is pinned to the ORIGINAL image bytes so the duplicate is still caught
+    # at the cascade's file gate (before any OCR/vision work).
+    _u, student = await make_student(db_session)
+    img = _real_png("Dup CV")
+    up1 = await _upload(db_session, student, filename="a.png", data=img, content_type="image/png")
+    await _ingest(db_session, student, up1["document_id"])
+    up2 = await _upload(db_session, student, filename="b.png", data=img, content_type="image/png")
+    ing2 = await _ingest(db_session, student, up2["document_id"])
+    assert ing2["status"] == "failed"
+    assert ing2["quality_code"] == "DUPLICATE_FILE"
 
 
 # --------------------------------------------------------------------------- #

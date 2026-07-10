@@ -54,6 +54,45 @@ _ADVANCE = "advance"
 _ROLLBACK = "rollback"
 
 
+async def _emit_stage_changed(
+    session: AsyncSession,
+    *,
+    app: Application,
+    from_stage: PipelineStage | None,
+    to_stage: PipelineStage,
+    stage_row_id: uuid.UUID,
+) -> None:
+    """Best-effort ``system.stage_changed`` workflow trigger after a MANUAL advance.
+
+    Fires the workflow engine so partner flows (e.g. "on stage change -> notify")
+    can run. PII-safe payload (ids + stage metadata only). Idempotent per stage row
+    (a re-fired trigger dedupes on the same key). A workflow-engine problem must
+    NEVER fail the stage move, so this is fully guarded. Automation-driven moves
+    pass ``emit_trigger=False`` and never reach here — that is what prevents a
+    ``stage_changed`` -> auto-advance flow from cascading into itself.
+    """
+
+    from app.modules.workflow.application.trigger_service import dispatch_trigger
+
+    try:
+        await dispatch_trigger(
+            session,
+            trigger_type="system.stage_changed",
+            payload={
+                "application_id": str(app.id),
+                "job_id": str(app.job_id),
+                "org_id": str(app.org_id),
+                "from_stage_id": str(from_stage.id) if from_stage is not None else None,
+                "to_stage_id": str(to_stage.id),
+                "to_order": to_stage.sort_order,
+            },
+            idempotency_key=f"stage_changed:{stage_row_id}",
+            scope_org_id=app.org_id,
+        )
+    except Exception:  # noqa: BLE001 — workflow dispatch must never break a stage move
+        pass
+
+
 # --------------------------------------------------------------------------- #
 # Default-template provider (lazy, idempotent)                                 #
 # --------------------------------------------------------------------------- #
@@ -339,6 +378,7 @@ async def _materialize_first_stage(
     idempotency_key: str | None,
     ctx: RequestContext,
     locale: str,
+    emit_trigger: bool = True,
 ) -> dict:
     """First-advance pipeline ENTRY for an under_review app with no ACTIVE row.
 
@@ -408,6 +448,10 @@ async def _materialize_first_stage(
 
     await session.commit()
     await session.refresh(app)
+    if emit_trigger:
+        await _emit_stage_changed(
+            session, app=app, from_stage=None, to_stage=first_stage, stage_row_id=new_row.id
+        )
     return await _projection(session, app=app, principal=principal, locale=locale)
 
 
@@ -420,6 +464,7 @@ async def advance_application_stage(
     idempotency_key: str | None = None,
     ctx: RequestContext,
     locale: str = "vi",
+    emit_trigger: bool = True,
 ) -> dict:
     """Move the active stage row to the next stage by ``sort_order``.
 
@@ -464,6 +509,7 @@ async def advance_application_stage(
             idempotency_key=idempotency_key,
             ctx=ctx,
             locale=locale,
+            emit_trigger=emit_trigger,
         )
 
     current = await _load_stage(session, stage_id=active.stage_id)
@@ -555,6 +601,10 @@ async def advance_application_stage(
 
     await session.commit()
     await session.refresh(app)
+    if emit_trigger:
+        await _emit_stage_changed(
+            session, app=app, from_stage=current, to_stage=next_stage, stage_row_id=new_row.id
+        )
     return await _projection(session, app=app, principal=principal, locale=locale)
 
 

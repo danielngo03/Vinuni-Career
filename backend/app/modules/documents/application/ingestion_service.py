@@ -22,7 +22,6 @@ import asyncio
 import copy
 import re
 import uuid
-from pathlib import PurePosixPath
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -68,11 +67,6 @@ def _next_actions(status: str, quality_code: str | None) -> list[str]:
         _vi, _en, _recover, actions = cv_validation.copy_for(quality_code)
         return actions
     return ["wait"]
-
-
-def _ext(filename: str) -> str:
-    suffix = PurePosixPath(filename).suffix.lower()
-    return suffix if len(suffix) <= 10 else ""
 
 
 def _preview_url(document: Document, *, accessor_id: uuid.UUID) -> str:
@@ -137,19 +131,29 @@ async def create_upload(
     if cv_validation.security_gate(data, filename) is not None:
         _reject("FILE_REJECTED_SECURITY", locale=locale)
 
+    # An image CV is converted to a PDF for the served/downloaded artifact; the
+    # checksum stays that of the ORIGINAL bytes so duplicate detection is stable
+    # (a re-generated PDF is not byte-identical across runs).
+    from app.modules.documents.infrastructure.image_pdf import served_upload_artifact
+
+    original_checksum = cv_validation.compute_checksum(data)
+    stored_bytes, stored_mime, stored_name, stored_ext = served_upload_artifact(
+        filename, data, content_type
+    )
+
     document_id = uuid.uuid4()
-    storage_key = f"cv-uploads/{principal.user_id}/{document_id}{_ext(filename)}"
-    storage.get_storage().save(storage_key, data)
+    storage_key = f"cv-uploads/{principal.user_id}/{document_id}{stored_ext}"
+    storage.get_storage().save(storage_key, stored_bytes)
 
     document = Document(
         id=document_id,
         user_id=principal.user_id,
         doc_type="cv",
-        original_name=filename[:500],
+        original_name=stored_name,
         storage_path=storage_key,
-        mime_type=(content_type or "application/octet-stream")[:100],
-        file_size_bytes=len(data),
-        checksum_sha256=cv_validation.compute_checksum(data),
+        mime_type=stored_mime,
+        file_size_bytes=len(stored_bytes),
+        checksum_sha256=original_checksum,
         virus_scan_status="clean",
         virus_scan_at=_shared.now(),
         idempotency_key=idempotency_key,
@@ -353,6 +357,10 @@ async def _execute_ingestion(session: AsyncSession, *, ingestion_id: uuid.UUID) 
         max_bytes=get_settings().max_upload_bytes,
         existing_checksums=list(others),
         policy=policy,
+        # The stored bytes may be a derived PDF (image CVs are converted on
+        # upload); pin duplicate detection to the document's original-bytes
+        # checksum so identical image uploads are still caught.
+        precomputed_checksum=document.checksum_sha256,
     )
 
     _apply_outcome(ing, outcome)

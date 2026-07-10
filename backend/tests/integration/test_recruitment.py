@@ -421,12 +421,13 @@ async def test_partner_cv_download_original_and_non_partner_404(db_session) -> N
     )
     assert own["has_watermark"] is False
 
-    # Authorized partner download serves the student's ORIGINAL file (owner
-    # decision 2026-07-10) — no watermark; the download URL is present.
+    # Authorized partner download serves the student's ORIGINAL file WATERMARKED
+    # with the VinUni logo + "VinUni Career" (owner decision 2026-07-10; the inline
+    # view stays clean, only the download is stamped). The download URL is present.
     partner_dl = await apply_service.get_application_cv_download(
         db_session, principal=partner, application_id=app_id
     )
-    assert partner_dl["has_watermark"] is False
+    assert partner_dl["has_watermark"] is True
     assert partner_dl["download_url"]
 
     # A non-partner third party cannot download -> 404.
