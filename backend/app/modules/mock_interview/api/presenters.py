@@ -11,7 +11,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
-from app.modules.mock_interview.application import plan_service
+from app.modules.mock_interview.application import plan_service, report_service
 from app.modules.mock_interview.domain.models import (
     MockInterviewSession,
     MockInterviewTurn,
@@ -71,8 +71,18 @@ def session_detail(
     data = session_summary(row)
     data["share_opt_in"] = bool(row.share_opt_in)
     data["transcript"] = [turn(t) for t in turns]
-    data["report"] = row.report_json
+    # Enrich each coaching gap with deterministic learning links at the API boundary
+    # ({label, why, learning}); the stored report_json keeps string gaps for the
+    # internal read models. Never mutates the ORM row (returns a copy).
+    data["report"] = report_service.enrich_report_gaps(
+        row.report_json, row.grounding_json, row.locale
+    )
     # Leak-safe interview-plan progress: which competencies are covered / still to
     # cover (labels + counts only — no weights, question bank, ids, or scores).
     data["coverage"] = plan_service.coverage_summary(row.coverage_json)
+    # Leak-safe multi-round persona progress (labels + status only), plus the active
+    # round id — the room renders these as round chips.
+    prog = plan_service.round_progress(row.plan_json, row.coverage_json, row.locale)
+    data["rounds"] = prog["rounds"] if prog else None
+    data["current_round"] = prog["current_round"] if prog else None
     return data

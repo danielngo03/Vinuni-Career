@@ -28,7 +28,15 @@ from typing import Any
 # opening, the conversation system prompt, and the plan-slice injection. No other
 # invariant (single question/turn, CV+JD grounding, no numeric score, no protected
 # characteristic, no name placeholder, no provider/model leak, [END]) changed.
-PROMPT_VERSION = 2
+# v3 (2026-07-11): MULTI-ROUND PERSONAS. The interview now advances through 2-3
+# deterministically derived rounds (screening / technical / hiring_manager), each
+# with a distinct interviewer VOICE injected into the per-turn plan slice (the
+# static prefix is unchanged so it stays cacheable). Still ONE question/turn, still
+# CV+JD grounded, still NO numeric score. The rounds are derived from the frozen
+# competency map with no extra model call; the delivery prompt only adopts the
+# CURRENT round's persona. Nudge/learning copy added below is deterministic product
+# text (localized vi/en), consistent with the fallback-copy exception.
+PROMPT_VERSION = 3
 PLAN_VERSION = 1
 
 CONVERSATION_TASK_TYPE = "mock_interview_turn"
@@ -154,13 +162,37 @@ own name and move straight into the question.
 Begin with a brief, warm greeting and your first question."""
 
 
+# Distinct interviewer VOICE per round persona (English instruction text). Only the
+# CURRENT round's persona is injected into the per-turn plan slice, so the delivery
+# prompt adopts a screening / technical / hiring-manager style as the interview
+# advances — still ONE grounded question per turn, still no score.
+_PERSONA_STYLE = {
+    "screening": (
+        "Play a friendly SCREENING interviewer (recruiter / early stage): warm and "
+        "welcoming, focus on motivation, background, and why this role and company; "
+        "build rapport and keep the tone light."
+    ),
+    "technical": (
+        "Play a rigorous TECHNICAL interviewer (senior engineer / domain expert): "
+        "probe hands-on depth, reasoning, and trade-offs; ask HOW and WHY and push "
+        "for concrete detail on what they actually built or would build."
+    ),
+    "hiring_manager": (
+        "Play a HIRING MANAGER: explore ownership, judgement under ambiguity, a "
+        "realistic scenario or 'what would you do', collaboration, and culture / "
+        "role fit; connect answers to real impact."
+    ),
+}
+
+
 def _render_plan_slice(plan_slice: dict[str, Any] | None) -> str:
     """Render the deterministic 'ask this next' plan slice for the interviewer.
 
     ``plan_slice`` is produced with NO LLM by ``plan_service.build_plan_slice`` and
     tells the brain which planned competency to target next, at which difficulty
-    tier, plus what has already been covered — so text and voice interviews follow
-    the same frozen plan in the same order with coverage awareness.
+    tier, which ROUND PERSONA voice to use now, plus what has already been covered —
+    so text and voice interviews follow the same frozen plan, in the same order,
+    through the same rounds, with coverage awareness.
     """
 
     if not plan_slice:
@@ -174,10 +206,13 @@ def _render_plan_slice(plan_slice: dict[str, Any] | None) -> str:
         str(c) for c in (plan_slice.get("remaining_labels") or []) if str(c).strip()
     ]
     cand = [str(q) for q in (plan_slice.get("candidate_questions") or []) if str(q).strip()]
-    lines = [
-        "=== PLAN SLICE (follow the interview plan) ===",
-        f"NEXT TARGET COMPETENCY: {target[:120]} (aim at a {tier} depth).",
-    ]
+    lines = ["=== PLAN SLICE (follow the interview plan) ==="]
+    persona = str(plan_slice.get("persona") or "").strip()
+    if persona in _PERSONA_STYLE:
+        round_label = str(plan_slice.get("round_label") or "").strip()
+        header = f"CURRENT ROUND: {round_label[:60]}" if round_label else "CURRENT ROUND"
+        lines.append(f"{header} — {_PERSONA_STYLE[persona]}")
+    lines.append(f"NEXT TARGET COMPETENCY: {target[:120]} (aim at a {tier} depth).")
     if plan_slice.get("star_target"):
         lines.append("For this competency, steer the candidate toward a STAR story.")
     if cand:
@@ -356,6 +391,32 @@ def build_answer_signal_user_message(question: str, answer: str) -> str:
         + str(answer or "")[:1600]
         + "\n\nReturn the JSON now."
     )
+
+
+# Real-time coaching NUDGE copy — deterministic, user-facing product text (localized
+# vi/en, like the fallback copy). A nudge is a SHORT tip about the answer just given,
+# never a score. ``conversation_service`` maps the answer signal → a nudge kind and
+# surfaces the text on the stream_turn ``done`` event (or ``None`` when the answer
+# was already strong).
+def interview_nudge_text(kind: str, locale: str) -> str:
+    """One short, leak-safe coaching tip for a nudge ``kind`` in ``locale``."""
+
+    vi = (locale or "vi").lower().startswith("vi")
+    if kind == "specifics":
+        return (
+            "Thử thêm một số liệu hoặc ví dụ cụ thể để câu trả lời thuyết phục hơn."
+            if vi
+            else "Try adding a concrete number or a specific example to make your "
+            "answer stronger."
+        )
+    if kind == "star":
+        return (
+            "Dùng cấu trúc STAR (Tình huống – Nhiệm vụ – Hành động – Kết quả) để trả "
+            "lời rõ ràng hơn."
+            if vi
+            else "Structure your answer with STAR (Situation, Task, Action, Result)."
+        )
+    return ""
 
 
 # --------------------------------------------------------------------------- #

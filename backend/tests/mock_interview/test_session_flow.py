@@ -193,6 +193,8 @@ async def test_presenters_never_leak_internal_fields(db_session) -> None:
         "transcript",
         "report",
         "coverage",
+        "rounds",
+        "current_round",
     }
     # Direct presenter call on the raw row is also clean (no flagged/model_ref).
     row = await repo.get_session(db_session, session_id=sid, user_id=student.user_id)

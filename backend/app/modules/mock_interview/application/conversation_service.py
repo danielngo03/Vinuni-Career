@@ -15,6 +15,7 @@ so the billable/energy ledger settles the turn (idempotent per seq).
 from __future__ import annotations
 
 import json
+import re
 import uuid
 from collections.abc import AsyncGenerator, Iterable
 from typing import Any, Literal
@@ -205,9 +206,27 @@ async def stream_interviewer(
 
 
 # --------------------------------------------------------------------------- #
-# Adaptive difficulty — a cheap, best-effort answer-depth signal              #
+# Adaptive difficulty + real-time nudge — a cheap, best-effort answer signal   #
 # --------------------------------------------------------------------------- #
 _TIER_ORDER = list(caps.DIFFICULTY_TIERS)
+
+_DEPTHS = ("shallow", "solid", "deep")
+
+# Bilingual cues for the DETERMINISTIC depth/STAR read (no LLM). Deliberately small
+# and boundary-tolerant; the LLM only ENRICHES this base when a real provider is on.
+_REASONING_CUES = (
+    "because", "so that", "therefore", "trade-off", "tradeoff", "decided", "chose",
+    "reason", "vì", "bởi", "nên", "quyết định", "lý do", "do đó",
+)
+_RESULT_CUES = (
+    "result", "outcome", "impact", "increased", "reduced", "improved", "achieved",
+    "led to", "grew", "kết quả", "tăng", "giảm", "cải thiện", "đạt được", "dẫn đến",
+)
+_ACTION_CUES = (
+    "i built", "i implemented", "i designed", "i led", "i wrote", "i created",
+    "i developed", "i optimiz", "tôi đã", "xây dựng", "triển khai", "thiết kế",
+    "phát triển", "tôi làm", "mình đã",
+)
 
 
 def _step_tier(current: str, direction: int) -> str:
@@ -221,7 +240,44 @@ def _step_tier(current: str, direction: int) -> str:
     return _TIER_ORDER[idx]
 
 
-async def answer_signal(
+def _deterministic_depth(answer: str) -> tuple[str, bool]:
+    """Deterministic depth + STAR read of an answer — no LLM, offline-safe.
+
+    Returns ``(depth, star)`` where depth is shallow / solid / deep. This is the
+    always-present base for both adaptive difficulty and the real-time nudge; the
+    optional LLM signal only refines it.
+    """
+
+    ans = (answer or "").strip()
+    if not ans:
+        return "shallow", False
+    low = ans.lower()
+    n = len(re.findall(r"[\wÀ-ỹ]+", low))
+    has_number = bool(re.search(r"\d", ans)) or "%" in ans
+    reasoning = any(k in low for k in _REASONING_CUES)
+    result = any(k in low for k in _RESULT_CUES) or "%" in ans
+    action = any(k in low for k in _ACTION_CUES)
+    star = bool(action and result and n >= 25)
+    if n < 18 and not has_number:
+        depth = "shallow"
+    elif has_number and (reasoning or result) and n >= 35:
+        depth = "deep"
+    else:
+        depth = "solid"
+    return depth, star
+
+
+def _next_tier(depth: str, current: str) -> str:
+    """A deep answer escalates one tier; a shallow answer eases one tier."""
+
+    if depth == "deep":
+        return _step_tier(current, +1)
+    if depth == "shallow":
+        return _step_tier(current, -1)
+    return current
+
+
+async def read_answer_signal(
     db: AsyncSession,
     *,
     user_id: uuid.UUID,
@@ -229,28 +285,67 @@ async def answer_signal(
     question: str,
     answer: str,
     current_tier: str,
-) -> str:
-    """Pick the NEXT difficulty tier from a cheap depth read of the last answer.
+) -> dict[str, Any]:
+    """Read the last answer's depth + STAR + the next difficulty tier.
 
-    Best-effort and non-blocking to the interview: OPTIONAL by design. It only runs
-    when a real provider is active (offline/tests stay deterministic), and on ANY
-    failure it returns ``current_tier`` unchanged — the interview never depends on
-    it. A "deep" answer escalates one tier, a "shallow" answer eases one tier.
+    Deterministic-first: the depth/STAR base is computed with NO LLM (offline/tests
+    stay deterministic). Only when a real provider is active do we spend a tiny,
+    best-effort flash probe to REFINE it; on ANY failure the deterministic base
+    stands. Returns ``{"depth", "star", "next_tier"}``. The interview never depends
+    on this — it drives adaptive difficulty and the real-time nudge only.
     """
 
     current = current_tier if current_tier in caps.DIFFICULTY_TIERS else "intermediate"
     ans = (answer or "").strip()
-    if not ans:
-        return current
-    # Avoid a pointless offline round-trip (and needless metering) in tests / when
-    # real calls are off — deterministically keep the same tier.
-    try:
-        from app.ai.gateway.factory import real_provider_active
+    depth, star = _deterministic_depth(ans)
+    if ans:
+        try:
+            from app.ai.gateway.factory import real_provider_active
 
-        if not real_provider_active():
-            return current
-    except Exception:  # noqa: BLE001
-        return current
+            active = real_provider_active()
+        except Exception:  # noqa: BLE001
+            active = False
+        if active:
+            refined = await _llm_answer_signal(
+                db,
+                user_id=user_id,
+                session_id=session_id,
+                question=question,
+                answer=ans,
+            )
+            if refined is not None:
+                llm_depth, llm_star = refined
+                if llm_depth in _DEPTHS:
+                    depth = llm_depth
+                if llm_star is not None:
+                    star = llm_star
+    return {"depth": depth, "star": star, "next_tier": _next_tier(depth, current)}
+
+
+def build_nudge(depth: str, star: bool, locale: str) -> dict[str, str] | None:
+    """Map an answer signal to a SHORT, leak-safe coaching nudge (or ``None``).
+
+    Deterministic and never a score: a shallow answer -> add specifics; a solid
+    answer without STAR structure -> try STAR; a deep answer (or a solid STAR
+    answer) is already strong -> no nudge.
+    """
+
+    if depth == "shallow":
+        return {"text": prompts.interview_nudge_text("specifics", locale)}
+    if depth == "solid" and not star:
+        return {"text": prompts.interview_nudge_text("star", locale)}
+    return None
+
+
+async def _llm_answer_signal(
+    db: AsyncSession,
+    *,
+    user_id: uuid.UUID,
+    session_id: uuid.UUID,
+    question: str,
+    answer: str,
+) -> tuple[str | None, bool | None] | None:
+    """Best-effort flash probe for (depth, star). ``None`` on any failure."""
 
     runner = AiTaskRunner(
         db,
@@ -271,23 +366,20 @@ async def answer_signal(
                 AIMessage(role="system", content=prompts.ANSWER_SIGNAL_SYSTEM_PROMPT),
                 AIMessage(
                     role="user",
-                    content=prompts.build_answer_signal_user_message(question, ans),
+                    content=prompts.build_answer_signal_user_message(question, answer),
                 ),
             ],
             temperature=0.0,
             max_tokens=caps.ANSWER_SIGNAL_MAX_TOKENS,
         )
-        depth = _parse_depth(resp.text)
-    except Exception:  # noqa: BLE001 - signal is optional; keep tier on any failure
-        return current
-    if depth == "deep":
-        return _step_tier(current, +1)
-    if depth == "shallow":
-        return _step_tier(current, -1)
-    return current
+    except Exception:  # noqa: BLE001 - signal is optional; deterministic base stands
+        return None
+    return _parse_signal(resp.text)
 
 
-def _parse_depth(text: str | None) -> str | None:
+def _parse_signal(text: str | None) -> tuple[str | None, bool | None]:
+    """Parse the depth + star signal from the flash probe's JSON (best-effort)."""
+
     raw = (text or "").strip()
     start, end = raw.find("{"), raw.rfind("}")
     if start != -1 and end != -1 and end > start:
@@ -295,12 +387,15 @@ def _parse_depth(text: str | None) -> str | None:
             obj = json.loads(raw[start : end + 1])
             if isinstance(obj, dict):
                 depth = str(obj.get("depth") or "").lower()
-                if depth in {"shallow", "solid", "deep"}:
-                    return depth
+                star = obj.get("star")
+                return (
+                    depth if depth in _DEPTHS else None,
+                    bool(star) if isinstance(star, bool) else None,
+                )
         except (ValueError, TypeError):
             pass
     low = raw.lower()
     for depth in ("shallow", "deep", "solid"):
         if depth in low:
-            return depth
-    return None
+            return depth, None
+    return None, None

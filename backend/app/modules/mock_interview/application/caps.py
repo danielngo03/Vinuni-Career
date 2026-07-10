@@ -46,6 +46,12 @@ ANSWER_SIGNAL_MAX_TOKENS = 40  # just a tier keyword / short JSON
 MAX_COMPETENCIES = 6  # how many competencies the plan tracks (cost + focus cap)
 DIFFICULTY_TIERS = ("foundational", "intermediate", "advanced")
 
+# Multi-round interview personas (in natural interview order). Rounds are derived
+# DETERMINISTICALLY from the competency map (no extra model call); each round adopts
+# one of these interviewer personas as the interview advances.
+PERSONAS = ("screening", "technical", "hiring_manager")
+MAX_ROUNDS = 3  # a realistic interview is 2-3 phases
+
 
 def clamp_questions(n: int) -> int:
     """Clamp a requested question count into ``[3, MAX_QUESTIONS]``."""

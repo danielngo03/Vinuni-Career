@@ -271,6 +271,7 @@ async def create_session(
     )
     await session.commit()
 
+    prog = plan_service.round_progress(plan, coverage, locale)
     return {
         "session_id": str(row.id),
         "modality": modality,
@@ -285,6 +286,9 @@ async def create_session(
         },
         "low_signal": bool(grounding.get("low_signal")),
         "coverage": plan_service.coverage_summary(coverage),
+        # Leak-safe multi-round plan (persona labels + status) + the active round.
+        "rounds": prog["rounds"] if prog else None,
+        "current_round": prog["current_round"] if prog else None,
         "realtime": realtime,
     }
 
@@ -464,30 +468,36 @@ async def stream_turn(
     turns.append(candidate_turn)
 
     grounding = row.grounding_json or {}
+    locale = grounding.get("locale") or row.locale or "vi"
     plan = row.plan_json or {}
     coverage = row.coverage_json or (
         plan_service.init_coverage(plan, difficulty=grounding.get("difficulty"))
         if plan
         else {}
     )
+    # Real-time answer signal (deterministic depth/STAR base; LLM-refined only when a
+    # real provider is active). Drives BOTH adaptive difficulty and the leak-safe
+    # coaching nudge shown on the done event. Best-effort — never blocks the turn.
+    last_q = next(
+        (t.text for t in reversed(turns[:-1]) if t.speaker == SPEAKER_INTERVIEWER),
+        "",
+    )
+    signal = await conversation_service.read_answer_signal(
+        session,
+        user_id=row.user_id,
+        session_id=row.id,
+        question=last_q or "",
+        answer=candidate_text,
+        current_tier=str(coverage.get("current_tier") or "intermediate"),
+    )
+    nudge = conversation_service.build_nudge(
+        signal["depth"], bool(signal["star"]), locale
+    )
     plan_slice: dict[str, Any] | None = None
     targeted_id: str | None = None
     if plan and coverage:
-        # Adaptive difficulty: a cheap, best-effort read of the answer just given
-        # picks the next tier (no-op / same tier when AI is unavailable or offline).
-        last_q = next(
-            (t.text for t in reversed(turns[:-1]) if t.speaker == SPEAKER_INTERVIEWER),
-            "",
-        )
-        new_tier = await conversation_service.answer_signal(
-            session,
-            user_id=row.user_id,
-            session_id=row.id,
-            question=last_q or "",
-            answer=candidate_text,
-            current_tier=str(coverage.get("current_tier") or "intermediate"),
-        )
-        coverage = plan_service.set_tier(coverage, new_tier)
+        # Adaptive difficulty advances the tier for the next planned competency.
+        coverage = plan_service.set_tier(coverage, signal["next_tier"])
         plan_slice = plan_service.build_plan_slice(plan, coverage)
         targeted_id = plan_slice.get("target_id") if plan_slice else None
 
@@ -522,6 +532,7 @@ async def stream_turn(
             "text": clean_text,
             "question_count": int((fresh or row).question_count or 0),
             "ended": True,
+            "nudge": nudge,
         }
         return
 
@@ -559,8 +570,10 @@ async def stream_turn(
             "text": clean_text,
             "question_count": int(fresh.question_count or 0),
             "ended": reached_end,
+            "nudge": nudge,
         }
         return
+    prog = plan_service.round_progress(plan, fresh.coverage_json, locale)
     yield {
         "type": "done",
         "seq": iseq,
@@ -570,6 +583,12 @@ async def stream_turn(
         # Live coverage so the room's topic chips advance per turn (leak-safe
         # summary — covered/remaining labels only, never ids/weights/scores).
         "coverage": plan_service.coverage_summary(fresh.coverage_json),
+        # Live round progression (persona labels + status) so the room's round
+        # indicator advances per turn — leak-safe (no persona keys / ids / scores).
+        "rounds": prog["rounds"] if prog else None,
+        "current_round": prog["current_round"] if prog else None,
+        # A short, leak-safe coaching tip about the answer just given (or null).
+        "nudge": nudge,
     }
 
 

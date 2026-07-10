@@ -51,6 +51,111 @@ _STOP = frozenset(
 
 _WORD_RE = re.compile(r"[a-zA-ZÀ-ỹ0-9+#.]+")
 
+# --------------------------------------------------------------------------- #
+# Multi-round persona labels (leak-safe, localized product copy)              #
+# --------------------------------------------------------------------------- #
+# Short human labels for the presenter/room chips. The raw ``persona`` key stays
+# internal; only these localized labels are exposed.
+_PERSONA_LABELS = {
+    "screening": {"vi": "Sơ loại", "en": "Screening"},
+    "technical": {"vi": "Chuyên môn", "en": "Technical"},
+    "hiring_manager": {"vi": "Nhà tuyển dụng", "en": "Hiring manager"},
+}
+# Deterministic round display name (used when the plan has no explicit label).
+_ROUND_LABELS = {
+    "screening": {"vi": "Vòng sơ loại", "en": "Screening round"},
+    "technical": {"vi": "Vòng chuyên môn", "en": "Technical round"},
+    "hiring_manager": {"vi": "Vòng nhà tuyển dụng", "en": "Hiring manager round"},
+}
+
+# Competency labels that read as behavioral/soft (screening/hiring-manager fodder).
+_BEHAVIORAL_HINTS = frozenset(
+    {
+        "motivat", "fit", "communicat", "team", "leadership", "ownership",
+        "collaborat", "manage", "culture", "mentor", "stakeholder", "conflict",
+        "interpersonal", "adapt", "problem solv", "learning", "growth", "attitude",
+    }
+)
+
+
+def _loc(locale: str | None) -> str:
+    return "vi" if (locale or "vi").lower().startswith("vi") else "en"
+
+
+def _persona_label(persona: str | None, locale: str) -> str:
+    return _PERSONA_LABELS.get(str(persona or ""), {}).get(_loc(locale), "")
+
+
+def _competency_kind(label: str, focus: str) -> str:
+    """Classify a competency as ``behavioral`` or ``technical`` (deterministic)."""
+
+    low = str(label or "").lower()
+    if any(h in low for h in _BEHAVIORAL_HINTS):
+        return "behavioral"
+    return "behavioral" if focus == "behavioral" else "technical"
+
+
+# --------------------------------------------------------------------------- #
+# Deterministic ROUND derivation (no LLM, no extra model call)                 #
+# --------------------------------------------------------------------------- #
+def _derive_rounds(
+    competency_map: list[dict[str, Any]], grounding: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Partition the competency map into 2-3 realistic interview rounds.
+
+    Deterministic and leak-safe: behavioral/intro competencies form a warm
+    ``screening`` round, technical competencies form a ``technical`` round, and the
+    single highest-weight (or genuine-gap) competency is reserved for a
+    ``hiring_manager`` scenario round. Every competency lands in EXACTLY one round
+    (a clean partition), so round-by-round progression covers them all. Rounds with
+    no competencies are dropped, yielding 1-3 rounds depending on the JD.
+    """
+
+    focus = str(grounding.get("focus") or "mixed")
+    locale = _loc(grounding.get("locale"))
+    comps = [c for c in competency_map if isinstance(c, dict) and c.get("id")]
+    if not comps:
+        return []
+    order = [str(c["id"]) for c in comps]
+    kinds = {str(c["id"]): _competency_kind(str(c.get("label") or ""), focus) for c in comps}
+
+    # Reserve ONE hiring-manager competency only when there are enough to fill a
+    # third round: a genuine gap with the highest weight, else the highest-weight
+    # competency overall (tie-break to the LAST/most-scenario one, not the intro).
+    hm_id: str | None = None
+    if len(comps) >= 3:
+        gaps = [c for c in comps if str(c.get("cv_evidence") or "").lower() == "gap"]
+        pool = gaps or comps
+        hm = max(pool, key=lambda c: (int(c.get("weight") or 1), order.index(str(c["id"]))))
+        hm_id = str(hm["id"])
+
+    screening = [cid for cid in order if cid != hm_id and kinds[cid] == "behavioral"]
+    technical = [cid for cid in order if cid != hm_id and kinds[cid] == "technical"]
+    # A screening round always opens with background/motivation: if the JD produced
+    # no behavioral competency, borrow the most-important technical one to open on.
+    if not screening and technical:
+        screening = [technical.pop(0)]
+
+    ordered: list[tuple[str, list[str]]] = []
+    if screening:
+        ordered.append(("screening", screening))
+    if technical:
+        ordered.append(("technical", technical))
+    if hm_id:
+        ordered.append(("hiring_manager", [hm_id]))
+    if not ordered:  # pathological: all competencies filtered — one screening round
+        ordered = [("screening", order)]
+
+    return [
+        {
+            "id": f"r{i}",
+            "label": _ROUND_LABELS[persona][locale],
+            "persona": persona,
+            "competency_ids": ids,
+        }
+        for i, (persona, ids) in enumerate(ordered, start=1)
+    ]
+
 
 # --------------------------------------------------------------------------- #
 # Tokenization / matching helpers                                             #
@@ -196,6 +301,7 @@ def _deterministic_plan(grounding: dict[str, Any]) -> dict[str, Any]:
         "source": "deterministic",
         "competency_map": competency_map,
         "question_bank": question_bank,
+        "rounds": _derive_rounds(competency_map, grounding),
         "opening": prompts.fallback_first_turn(grounding),
     }
 
@@ -285,6 +391,9 @@ def _validate_llm_plan(
         "source": "llm",
         "competency_map": competency_map,
         "question_bank": question_bank,
+        # Rounds are DERIVED deterministically from the (LLM or fallback) competency
+        # map — no extra model call, always a clean partition over the final ids.
+        "rounds": _derive_rounds(competency_map, grounding),
         "opening": opening or prompts.fallback_first_turn(grounding),
     }
 
@@ -367,12 +476,48 @@ def init_coverage(plan: dict[str, Any], *, difficulty: str | None = None) -> dic
             "asked_seq": [],
         }
     tier = difficulty if difficulty in caps.DIFFICULTY_TIERS else "intermediate"
+    rounds = plan.get("rounds") or []
     return {
         "version": prompts.PLAN_VERSION,
         "current_tier": tier,
+        # The round whose competencies are being probed now (first round at start).
+        "current_round": str(rounds[0]["id"]) if rounds else None,
         "order": order,
         "competencies": comps,
     }
+
+
+# --------------------------------------------------------------------------- #
+# Round progression (deterministic, no LLM)                                    #
+# --------------------------------------------------------------------------- #
+def _next_target_by_rounds(
+    plan: dict[str, Any], coverage: dict[str, Any]
+) -> tuple[str | None, dict[str, Any] | None]:
+    """First uncovered competency in ROUND order + the round it belongs to.
+
+    Round order is the primary progression axis: we finish a round's competencies
+    before moving to the next round. Falls back to ``(None, None)`` when the plan
+    has no rounds (legacy plan) so the caller uses the flat order instead.
+    """
+
+    rounds = plan.get("rounds") or []
+    if not rounds:
+        return None, None
+    covered = set(_covered_ids(coverage))
+    for rnd in rounds:
+        if not isinstance(rnd, dict):
+            continue
+        for cid in rnd.get("competency_ids") or []:
+            if str(cid) not in covered:
+                return str(cid), rnd
+    return None, None
+
+
+def _current_round_id(plan: dict[str, Any], coverage: dict[str, Any]) -> str | None:
+    """The round being probed now: the first round with an uncovered competency."""
+
+    _cid, rnd = _next_target_by_rounds(plan, coverage)
+    return str(rnd["id"]) if rnd else None
 
 
 def _covered_ids(coverage: dict[str, Any]) -> list[str]:
@@ -454,6 +599,9 @@ def record_interviewer_question(
     asked = entry.setdefault("asked_seq", [])
     if seq not in asked:
         asked.append(int(seq))
+    # Advance the round pointer: after marking this competency covered, the current
+    # round is whichever round still has an uncovered competency (None when done).
+    updated["current_round"] = _current_round_id(plan, updated)
     return updated
 
 
@@ -486,7 +634,12 @@ def build_plan_slice(
 
     if not coverage or not plan:
         return None
-    target = next_target_id(coverage)
+    # Round-aware target: finish a round's competencies before the next round, so
+    # the persona voice advances screening -> technical -> hiring_manager. Legacy
+    # plans (no rounds) fall back to the flat competency order.
+    target, rnd = _next_target_by_rounds(plan, coverage)
+    if target is None and not (plan.get("rounds") or []):
+        target = next_target_id(coverage)
     if target is None:
         return None
     bank = next(
@@ -503,7 +656,7 @@ def build_plan_slice(
     if tier not in caps.DIFFICULTY_TIERS:
         tier = "intermediate"
     candidate = [q for q in [tiers.get(tier), tiers.get("intermediate")] if q]
-    return {
+    slice_out: dict[str, Any] = {
         "target_id": target,
         "target_label": _label(coverage, target),
         "target_tier": tier,
@@ -512,6 +665,11 @@ def build_plan_slice(
         "covered_labels": [_label(coverage, c) for c in _covered_ids(coverage)],
         "remaining_labels": [_label(coverage, c) for c in _remaining_ids(coverage)][:8],
     }
+    if isinstance(rnd, dict):
+        slice_out["round_id"] = str(rnd.get("id") or "")
+        slice_out["round_label"] = str(rnd.get("label") or "")
+        slice_out["persona"] = str(rnd.get("persona") or "")
+    return slice_out
 
 
 def coverage_summary(coverage: dict[str, Any] | None) -> dict[str, Any] | None:
@@ -528,3 +686,53 @@ def coverage_summary(coverage: dict[str, Any] | None) -> dict[str, Any] | None:
         "covered": covered,
         "remaining": remaining,
     }
+
+
+def round_progress(
+    plan: dict[str, Any] | None,
+    coverage: dict[str, Any] | None,
+    locale: str | None,
+) -> dict[str, Any] | None:
+    """Leak-safe multi-round progress for the presenter / create / done event.
+
+    Returns ``{"rounds": [{id, label, persona_label, status}], "current_round": id}``
+    where ``status`` is ``done`` (all competencies covered), ``active`` (the round
+    being probed now), or ``upcoming``. Only labels are exposed — never persona
+    keys, competency ids, weights, or scores. ``None`` for a legacy plan with no
+    rounds.
+    """
+
+    if not plan or not coverage:
+        return None
+    rounds = plan.get("rounds") or []
+    if not rounds:
+        return None
+    covered = set(_covered_ids(coverage))
+    current: str | None = None
+    for rnd in rounds:
+        if isinstance(rnd, dict) and any(
+            str(c) not in covered for c in (rnd.get("competency_ids") or [])
+        ):
+            current = str(rnd.get("id") or "")
+            break
+    out: list[dict[str, Any]] = []
+    for rnd in rounds:
+        if not isinstance(rnd, dict):
+            continue
+        ids = [str(c) for c in (rnd.get("competency_ids") or [])]
+        rid = str(rnd.get("id") or "")
+        if ids and all(c in covered for c in ids):
+            status = "done"
+        elif rid == current:
+            status = "active"
+        else:
+            status = "upcoming"
+        out.append(
+            {
+                "id": rid,
+                "label": str(rnd.get("label") or ""),
+                "persona_label": _persona_label(rnd.get("persona"), locale or "vi"),
+                "status": status,
+            }
+        )
+    return {"rounds": out, "current_round": current}
