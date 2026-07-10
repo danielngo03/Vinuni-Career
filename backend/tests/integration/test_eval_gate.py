@@ -104,16 +104,16 @@ def test_cli_entrypoint_exits_zero_when_green() -> None:
 
 _INTERVIEW_FAMILY_TARGETS = {
     "mock_interview_turn": {
-        "happy_path": 15,
-        "adversarial": 10,
-        "privacy_boundary": 8,
-        "low_quality_input": 6,
-        "fallback": 5,
+        "happy_path": 24,
+        "adversarial": 15,
+        "privacy_boundary": 12,
+        "low_quality_input": 10,
+        "fallback": 8,
     },
     "interview_grounding": {
-        "happy_path": 12,
+        "happy_path": 18,
         "adversarial": 6,
-        "privacy_boundary": 6,
+        "privacy_boundary": 8,
         "low_quality_input": 6,
         "fallback": 3,
     },

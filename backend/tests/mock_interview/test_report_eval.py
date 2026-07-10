@@ -189,11 +189,11 @@ def test_turn_guard_detects_deterministic_fallback() -> None:
 # --------------------------------------------------------------------------- #
 async def test_turn_family_meets_minimum_counts() -> None:
     minimums = {
-        "happy_path": 15,
-        "adversarial": 10,
-        "privacy_boundary": 8,
-        "low_quality_input": 6,
-        "fallback": 5,
+        "happy_path": 24,
+        "adversarial": 15,
+        "privacy_boundary": 12,
+        "low_quality_input": 10,
+        "fallback": 8,
     }
     for category, floor in minimums.items():
         cases = run_eval._load_cases(TURN_FAMILY, category)
@@ -238,9 +238,9 @@ async def test_turn_no_score_and_no_protected_across_all_categories() -> None:
 # --------------------------------------------------------------------------- #
 async def test_grounding_family_meets_minimum_counts() -> None:
     minimums = {
-        "happy_path": 12,
+        "happy_path": 18,
         "adversarial": 6,
-        "privacy_boundary": 6,
+        "privacy_boundary": 8,
         "low_quality_input": 6,
         "fallback": 3,
     }
@@ -292,7 +292,7 @@ def test_judge_datasets_are_wellformed_and_paired() -> None:
 
     for family in ("mock_interview_turn", "mock_interview_report"):
         rows = _load_judge(family)
-        assert len(rows) >= 15, f"{family}/judge.jsonl expected >= 15 rows, got {len(rows)}"
+        assert len(rows) >= 30, f"{family}/judge.jsonl expected >= 30 rows, got {len(rows)}"
         labels = {"good": 0, "bad": 0}
         ids: set[str] = set()
         for row in rows:
@@ -313,3 +313,77 @@ def test_judge_datasets_are_wellformed_and_paired() -> None:
         assert labels["good"] >= 5 and labels["bad"] >= 5, (
             f"{family}: expected paired good/bad coverage, got {labels}"
         )
+
+
+def test_judge_sets_include_codeswitch_and_english_examples() -> None:
+    """Both gold judge sets carry code-switched + English paired coverage.
+
+    A real judged run must measure grounding-faithfulness and fabrication catch
+    across languages, not just Vietnamese — so both sets must contain explicit
+    code-switch and English rows (good AND bad)."""
+
+    for family in ("mock_interview_turn", "mock_interview_report"):
+        ids = {row["id"] for row in _load_judge(family)}
+        assert any("codeswitch" in i for i in ids), f"{family}: no code-switch judge row"
+        assert any("english" in i or "_en" in i for i in ids), f"{family}: no English judge row"
+
+
+# --------------------------------------------------------------------------- #
+# v2 language handling — code-switching + language-mirroring                     #
+# --------------------------------------------------------------------------- #
+def test_prompt_version_bumped_and_language_relaxed() -> None:
+    """v2 relaxed 'Speak ONLY in {language}' into natural code-switching."""
+
+    assert prompts.PROMPT_VERSION >= 2
+    system = prompts.build_conversation_system_prompt(
+        _GROUND, target_questions=6
+    )
+    # The hard single-language rule is gone; code-switch + mirroring is in.
+    assert "Speak ONLY in" not in system
+    assert "Mirror the candidate" in system
+    assert "original form" in system
+    # Every other interviewer invariant remains present in the prompt.
+    for invariant in ("exactly ONE question", "[END]", "protected", "score"):
+        assert invariant in system, f"invariant {invariant!r} dropped from v2 prompt"
+
+
+def test_turn_rubric_covers_language_appropriateness() -> None:
+    """The mock_interview_turn judge rubric scores natural code-switching."""
+
+    rubric = RUBRICS["mock_interview_turn"].lower()
+    assert "code-switch" in rubric
+    assert "technical terms" in rubric
+    assert "seven dimensions" in rubric
+
+
+def test_turn_guard_recognizes_codeswitched_english_tech_terms() -> None:
+    """A VI turn that keeps an English tech term still grounds when the term is in
+    the grounding's (English) skills/requirements — code-switch is not penalised."""
+
+    grounding = {
+        "locale": "vi",
+        "job": {
+            "title": "Kỹ sư Backend",
+            "required_skills": ["SQL", "async", "CI/CD", "Kubernetes"],
+        },
+        "cv": {"skills": ["Python", "SQL", "async"]},
+        "matched_skills": ["SQL"],
+        "gaps": ["Kubernetes"],
+    }
+    for turn in (
+        "Bạn tối ưu truy vấn SQL như thế nào?",
+        "Bạn xử lý các tác vụ async trong dự án ra sao?",
+        "Kinh nghiệm CI/CD của bạn thế nào?",
+        "Bạn có kinh nghiệm với Kubernetes chưa?",
+    ):
+        a = turn_guard.assess_turn_offline(turn, grounding)
+        assert a["cites_cv_or_jd"] is True, turn
+
+
+def test_turn_guard_term_match_is_boundary_aware() -> None:
+    """Short/punctuated tech terms match as standalone chunks only (no substrings)."""
+
+    assert turn_guard._term_in_text("go", "why did you pick Go here") is True
+    assert turn_guard._term_in_text("go", "are you going home") is False
+    assert turn_guard._term_in_text("ai", "send me an email") is False
+    assert turn_guard._term_in_text("ci/cd", "your CI/CD pipeline") is True

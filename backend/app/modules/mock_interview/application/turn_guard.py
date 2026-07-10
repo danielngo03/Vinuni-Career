@@ -154,6 +154,56 @@ def _words(text: str) -> set[str]:
     return {w for w in re.split(r"[^0-9a-zà-ỹ]+", text.lower()) if len(w) >= 3}
 
 
+def _grounding_terms(grounding: dict[str, Any]) -> list[str]:
+    """Discrete skill / requirement TERMS from the grounding (nested OR flat).
+
+    These are matched case-insensitively and boundary-aware against the turn so a
+    code-switched turn that keeps an English tech term (``SQL``, ``async``,
+    ``CI/CD``, ``Kubernetes``, ``REST API``) is still recognised as grounded even
+    when the rest of the sentence is Vietnamese. Both EN and VI terms are kept
+    verbatim. This complements the 3-char token overlap below, which misses short
+    or punctuated tech tokens (``Go``, ``ML``, ``C++``, ``CI/CD``).
+    """
+
+    terms: list[str] = []
+    job_raw = grounding.get("job")
+    cv_raw = grounding.get("cv")
+    job: dict[str, Any] = job_raw if isinstance(job_raw, dict) else {}
+    cv: dict[str, Any] = cv_raw if isinstance(cv_raw, dict) else {}
+
+    def _add(value: Any) -> None:
+        if isinstance(value, list):
+            for it in value:
+                if isinstance(it, str) and it.strip():
+                    terms.append(it.strip())
+
+    # Nested (real grounding) shape — the discrete skill lists only.
+    _add(job.get("required_skills"))
+    _add(job.get("preferred_skills"))
+    _add(cv.get("skills"))
+    # Flat-shape + owner-scoped skill/gap lists.
+    for key in ("required_skills", "preferred_skills", "skills", "matched_skills", "gaps"):
+        _add(grounding.get(key))
+    return terms
+
+
+def _term_in_text(term: str, text: str) -> bool:
+    """Boundary-aware, case-insensitive match of one grounding term in the turn.
+
+    The term must be a standalone chunk (its edges are non-alphanumeric, not part
+    of a larger word) so ``go`` does not match ``going`` and ``ai`` does not match
+    ``email``. Handles punctuated/multi-word tech terms (``C++``, ``CI/CD``,
+    ``A/B``, ``REST API``) that plain token overlap would drop. Both arguments are
+    lowercased internally, so callers may pass raw or pre-lowered text.
+    """
+
+    normalized = term.lower().strip()
+    if len(normalized) < 2:
+        return False
+    pattern = r"(?<![0-9a-zà-ỹ])" + re.escape(normalized) + r"(?![0-9a-zà-ỹ])"
+    return re.search(pattern, text.lower()) is not None
+
+
 def _cites_cv_or_jd(text: str, grounding: dict[str, Any]) -> bool:
     """True when the turn references the candidate's CV and/or the JD."""
 
@@ -167,6 +217,13 @@ def _cites_cv_or_jd(text: str, grounding: dict[str, Any]) -> bool:
     for item in items:
         phrase = item.strip().lower()
         if len(phrase) >= 4 and " " in phrase and phrase in lowered:
+            return True
+
+    # Discrete skill/requirement TERMS, boundary-aware and language-agnostic — a
+    # code-switched turn that keeps an English tech term (SQL / async / CI/CD /
+    # Kubernetes) still counts as grounding even when the prose is Vietnamese.
+    for term in _grounding_terms(grounding):
+        if _term_in_text(term, lowered):
             return True
 
     ground_tokens = {

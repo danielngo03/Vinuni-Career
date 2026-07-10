@@ -227,12 +227,15 @@ def test_conversation_prompt_has_no_score_and_safety_rules() -> None:
 
 
 def test_conversation_prompt_language_switches_with_locale() -> None:
-    assert "Speak ONLY in Vietnamese" in prompts.build_conversation_system_prompt(
-        _grounding("vi"), target_questions=5
-    )
-    assert "Speak ONLY in English" in prompts.build_conversation_system_prompt(
-        _grounding("en"), target_questions=5
-    )
+    vi = prompts.build_conversation_system_prompt(_grounding("vi"), target_questions=5)
+    en = prompts.build_conversation_system_prompt(_grounding("en"), target_questions=5)
+    # v2: the interview is CONDUCTED in the session language (switches per locale),
+    # but the old hard "Speak ONLY in {language}" single-language rule was relaxed
+    # into natural code-switching + candidate-mirroring.
+    assert "Conduct the interview in Vietnamese" in vi
+    assert "Conduct the interview in English" in en
+    assert "Speak ONLY in" not in vi and "Speak ONLY in" not in en
+    assert "original form" in vi and "Mirror the candidate" in vi
 
 
 def test_report_prompt_forbids_scores() -> None:
