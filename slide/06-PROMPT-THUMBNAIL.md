@@ -9,38 +9,41 @@
 
 ```
 I have attached the OFFICIAL logo of this product: a black geometric chevron "V" mark.
-Use the attached logo EXACTLY as-is — do not redraw, restyle, recolor or distort it.
+Place the attached logo EXACTLY as-is in the bottom-left corner — do not redraw,
+restyle, recolor or distort it.
 
-Create a modern, premium 16:9 thumbnail for "VinUni Career Platform" — a university
-career platform connecting students, companies and the university.
+Create a modern, premium 16:9 hero thumbnail for "VinUni Career Platform" — an
+AI-powered university career platform.
 
-STYLE: clean flat vector illustration with very subtle soft shadows, top-tier SaaS
-marketing style (Dribbble / Behance quality), crisp, minimal, generous whitespace,
-no clutter. NOT 3D render, NOT photorealistic, no stock photos.
+SCENE: a friendly Vietnamese university student (early 20s, warm confident smile,
+smart-casual shirt) sitting at a laptop, positioned on the right half of the frame,
+looking at the camera. Around the laptop float translucent frosted-glass UI panels
+with rounded corners and soft shadows:
+ (1) a CV/resume checklist panel with green checkmarks,
+ (2) a circular match-score ring showing "87",
+ (3) a job card with a small briefcase icon,
+ (4) an AI chat panel with a sparkle icon,
+ (5) a university analytics panel with a graduation cap and tiny bar chart.
+BACKGROUND: a bright modern university campus — glass buildings, trees, a few
+students walking with backpacks — softly blurred and washed out into a warm cream
+white haze (#F8F7F1 tone) so the foreground pops. Soft optimistic daylight.
 
-BACKGROUND: warm paper cream #F8F7F1, perfectly flat.
+TEXT BLOCK (left half, on the clean cream area, left-aligned with a thin vertical
+gradient accent bar from indigo #4f46e5 to violet #7c3aed):
+ line 1 — small uppercase label, indigo #4f46e5, bold: "VINUNI CAREER PLATFORM"
+ line 2 — big bold headline, near-black ink #171717: "Cho Sinh Viên Thời AI"
+          (render the Vietnamese diacritics EXACTLY; the word "AI" in violet #7c3aed)
+ line 3 — small gray #57534e: "CV • Việc làm • Phỏng vấn AI"
 
-COMPOSITION:
-- Left side: the attached black logo mark placed above a big bold headline
-  "VinUni Career Platform" in near-black ink #171717, modern geometric sans-serif,
-  tight letter spacing. Under the headline, a thin row of 8 small colored dots:
-  indigo #6366f1, teal #14b8a6, amber #f59e0b, rose #f43f5e, sky #0ea5e9,
-  emerald #10b981, violet #8b5cf6, orange #f97316.
-- Right side: a floating cluster of 4 white rounded cards (soft shadows, 18px-style
-  rounded corners), connected by thin dotted lines:
-  (1) the largest card: a donut/progress ring chart with the number "87" in the
-      center and a small green "match" chip;
-  (2) a CV/resume document card with a green checkmark;
-  (3) an AI chat bubble card with a sparkle icon;
-  (4) a card with a graduation cap and a small briefcase side by side.
-- One single accent: a smooth diagonal gradient ribbon flowing behind the card
-  cluster, from indigo #4f46e5 to violet #7c3aed — the ONLY gradient in the image.
+COLOR SYSTEM: warm cream white base #F8F7F1 (NOT blue, NOT teal cast), white/glass
+panels, near-black ink text, primary accents indigo #4f46e5 → violet #7c3aed, small
+touches of emerald #10b981 (checkmarks), amber #f59e0b and sky #0ea5e9 in tiny chart
+details only. No navy background, no neon, no dark mode.
 
-COLOR DISCIPLINE: cream background, white cards, near-black text, plus the 8 accent
-colors above only. No navy backgrounds, no neon, no dark mode.
-
-MOOD: trustworthy, modern, optimistic — a real working product, not a concept.
-TEXT ON IMAGE: only "VinUni Career Platform", spelled exactly. No other words.
+STYLE: photo-illustrative blend like premium tech-product key visuals — realistic
+person, clean vector-glass UI panels, high detail, crisp light. Trustworthy, modern,
+optimistic. No watermark, no extra logos, no gibberish text — only the three text
+lines above and the attached logo.
 ```
 
 ---
