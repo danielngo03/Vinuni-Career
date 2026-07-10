@@ -5,7 +5,56 @@
 
 ---
 
-## ✅ PROMPT CHUẨN (dán nguyên khối này)
+## ✅ PROMPT CHUẨN v5 — trắng đen chủ đạo, logo lockup trên đầu (dán nguyên khối này)
+
+```
+I have attached the OFFICIAL logo of this product: a black geometric chevron "V" mark.
+Use the attached logo EXACTLY as-is — do not redraw, restyle, recolor or distort it.
+
+Create a modern, premium 16:9 hero thumbnail for "VinUni Career Platform" — an
+AI-powered university career platform. FULL FLAT VECTOR ILLUSTRATION style, like
+top-tier SaaS landing-page hero art (Dribbble / Behance quality): clean shapes,
+smooth rounded corners, subtle soft shadows. NOT photorealistic, NOT 3D.
+
+OVERALL COLOR RULE — MONOCHROME FIRST: the design is essentially BLACK & WHITE on a
+warm cream background #F8F7F1. All text, the accent bar, icons, outlines and the
+student's clothing are near-black ink #171717, white and grays ONLY. Small colors are
+allowed ONLY inside the data/UI details: emerald #10b981 checkmarks and "match" chip,
+a multicolor donut ring (indigo #6366f1, teal #14b8a6, amber #f59e0b), tiny bar chart
+bars, and a few small scattered accent dots. NO purple/violet theme, no gradient bar,
+no colored clothing, no navy, no neon.
+
+TOP-LEFT BRAND LOCKUP: the attached black logo mark (small), then a thin vertical
+divider line "|", then bold uppercase ink text "VINUNI CAREER PLATFORM" — all on one
+horizontal line, like a professional website header.
+
+TEXT BLOCK (left half, below the brand lockup, left-aligned):
+ line 1 — huge bold headline in ink #171717: "Cho Sinh Viên Thời AI"
+          (render the Vietnamese diacritics EXACTLY; keep "AI" ink black too)
+ line 2 — small gray #57534e: "CV • Việc làm • Phỏng vấn AI"
+
+SCENE (right half): a cheerful vector-illustrated Vietnamese university student
+(simple friendly face, BLACK or charcoal sweater over a white shirt) at a laptop.
+Around them float clean WHITE rounded UI cards with thin ink icons, soft shadows,
+connected by thin dotted ink lines:
+ (1) a "Match-score" card with a multicolor donut ring showing "87" and a small
+     emerald "match" chip,
+ (2) a CV/resume checklist card with emerald checkmarks,
+ (3) an "AI chat" card with a black sparkle icon,
+ (4) a "Job" card with a black briefcase icon,
+ (5) an "Analytics" card with a black graduation cap and a tiny colored bar chart.
+Background: a very light gray flat vector campus skyline (geometric buildings, clock
+tower, trees, two tiny walking students in grayscale) plus a few small scattered
+dots (mostly gray, 2-3 tiny colored ones) and one thin curved dotted line.
+
+MOOD: clean, confident, editorial — like a serious product, not a toy. No watermark,
+no extra logos, no gibberish text — only the lockup text, the two headline lines, and
+short English labels on the UI cards (Match-score, AI chat, Job, Analytics).
+```
+
+---
+
+## Bản cũ v4 (nhiều màu tím — giữ để so sánh)
 
 ```
 I have attached the OFFICIAL logo of this product: a black geometric chevron "V" mark.
