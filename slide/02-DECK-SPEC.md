@@ -4,12 +4,21 @@
 > **Trực quan hóa** (vẽ gì, bố trí ra sao), **Số liệu** (con số nổi bật), **Bố cục & màu**. Tất cả số liệu
 > quy mô là **code-verified**. Ô `[ĐIỀN SỐ]` là chỗ bạn tự bổ sung (docs không có), **không được bịa**.
 >
+> **Storyline (đã tối ưu cho hội đồng — front-load business/quy mô/thách thức, đóng bằng business):**
+> Vấn đề → Cơ hội & tầm nhìn nền tảng → Giải pháp → Sản phẩm thật → **Quy mô (bằng chứng đã dựng)** →
+> **Mô hình kinh doanh** → Đối thủ → Người dùng → (7 slide chiều sâu sản phẩm/AI) → Kiến trúc & công nghệ →
+> **Roadmap + Đường mở rộng + Ask**.
+>
+> **Motif xuyên suốt — "Ưu tiên VinUni, sẵn sàng thành nền tảng"** (*beachhead → mở rộng*): thắng sâu ở
+> VinUni trước (dữ liệu đã xác thực, vòng lặp khép kín), và **kiến trúc đã sẵn sàng** (multi-tenant RBAC,
+> multi-identity, đã phục vụ cả external/general user) để mở thành nền tảng độc lập cho mọi người. Trình bày
+> là **tầm nhìn + tính sẵn-sàng-kỹ-thuật**, KHÔNG phải cam kết V1 → an toàn khi bị vặn.
+>
 > **Design system chung áp cho MỌI slide** (chi tiết ở `03-BRAND-DESIGN-SYSTEM.md`): nền `#F8F7F1`, thẻ
 > trắng `#ffffff` bo góc 14px viền 1px `#e5e5e5`; chữ Plus Jakarta Sans, số/metric dùng JetBrains Mono;
 > khung monochrome (ink `#171717`), nhấn bằng palette data-viz (indigo `#6366f1`, teal `#14b8a6`, amber
 > `#f59e0b`, rose `#f43f5e`, sky `#0ea5e9`, emerald `#10b981`, violet `#8b5cf6`, orange `#f97316`); **tối đa
-> 1 panel gradient indigo→violet mỗi slide**. Mỗi slide có **kicker** (11px, uppercase, tracking rộng, xám)
-> + **số slide** + **logo nhỏ VinUni** ở footer.
+> 1 panel gradient indigo→violet mỗi slide**. Mỗi slide có **kicker** + **số slide** + **logo nhỏ VinUni** ở footer.
 
 ---
 
@@ -19,7 +28,7 @@
 - **Nội dung chữ:**
   - Logo **VinUni** (lớn, trên cùng — đây là slide có logo như bạn yêu cầu).
   - Tên sản phẩm: **VinUni Career Platform**
-  - Tagline: *"Hệ điều hành tuyển dụng chính thức của Đại học VinUni — AI-first, dành riêng cho hệ sinh thái VinUni."*
+  - Tagline: *"Hệ điều hành tuyển dụng chính thức của Đại học VinUni — AI-first, sẵn sàng thành nền tảng."*
   - Dòng phụ: *"Một nền tảng · Bốn bề mặt vận hành · Toàn bộ vòng đời sự nghiệp"*
   - Chân slide: `[TÊN TEAM]` · `[MÔN/CUỘC THI]` · Tháng 7, 2026
 - **Trực quan hóa:** Nền `#F8F7F1` sạch, nhiều khoảng trắng. Một dải "signature" mảnh chạy ngang phía dưới
@@ -30,9 +39,9 @@
 
 ---
 
-## Slide 02 — Thực trạng & Vấn đề
+## Slide 02 — Thực trạng & Thách thức
 
-- **Mục tiêu:** Chỉ ra sự phân mảnh & nông của công cụ hướng nghiệp đại học hiện nay.
+- **Mục tiêu:** Chỉ ra sự phân mảnh & nông của công cụ hướng nghiệp đại học — và vì sao chưa ai giải được.
 - **Nội dung chữ:** Tiêu đề: **"Hướng nghiệp đại học hôm nay: rời rạc và hời hợt"**. 3 cột nỗi đau:
   - 🎓 **Sinh viên:** Không có tín hiệu độ-phù-hợp cá nhân hóa; không có trợ lý AI viết/soi CV; không được
     luyện phỏng vấn; mù mờ về mức độ cạnh tranh & deadline.
@@ -40,33 +49,41 @@
     ứng viên không được xác thực; **không có pipeline & talent pool gắn với campus**.
   - 🏛️ **Nhà trường:** Không có kiểm duyệt tập trung, không quản trị đối tác, không đo được **career
     outcome** (tỉ lệ có việc, lương, time-to-hire) để phục vụ kiểm định (ABET/AUN-QA).
-  - Câu chốt: *"Job board đơn thuần **không** quản được cả vòng đời tuyển dụng."*
-- **Trực quan hóa:** 3 thẻ trắng cạnh nhau, mỗi thẻ 1 icon lucide (`graduation-cap`, `building-2`,
-  `landmark`), tiêu đề persona + 3 gạch đầu dòng ngắn. Bên dưới: 1 dải "công cụ rời rạc" — các chip xám mờ
-  đứt gãy (CV Word · Google Form · Email · Excel · Job board) có dấu `×` để thể hiện sự phân mảnh.
+  - **Vì sao chưa ai giải được (thách thức):** ATS doanh nghiệp *quá nặng*, job board *quá nông*, tự xây
+    in-house *quá khó* (AI + pipeline + governance + realtime). *"Job board đơn thuần **không** quản được cả
+    vòng đời tuyển dụng."*
+- **Trực quan hóa:** 3 thẻ trắng persona (icon lucide `graduation-cap`, `building-2`, `landmark`) + 3 gạch đầu
+  dòng. Bên dưới: dải "3 thách thức" — 3 chip (*Quá nặng · Quá nông · Quá khó tự xây*) với icon rào cản; và
+  dải "công cụ rời rạc" (CV Word · Google Form · Email · Excel · Job board) có dấu `×` thể hiện phân mảnh.
 - **Số liệu:** Có thể để 1 dòng insight định tính (không bịa số). Nếu muốn số, dùng `[ĐIỀN SỐ]`.
-- **Bố cục & màu:** Khung monochrome; mỗi cột dùng 1 màu icon-chip khác nhau (indigo/teal/amber) để phân biệt,
-  không tô nền đậm.
+- **Bố cục & màu:** Khung monochrome; mỗi cột 1 màu icon-chip (indigo/teal/amber); dải thách thức tông đỏ-cam nhạt.
 
 ---
 
-## Slide 03 — Thị trường & Vì sao là bây giờ
+## Slide 03 — Cơ hội thị trường & Tầm nhìn nền tảng
 
-- **Mục tiêu:** Định vị thị trường mục tiêu + tính thời điểm (AI).
-- **Nội dung chữ:** Tiêu đề: **"Xây riêng cho hệ sinh thái VinUni — không phải SaaS bán đại trà"**.
-  - **Thị trường mục tiêu:** hệ sinh thái VinUni khép kín — Sinh viên, Cựu sinh viên (Alumni), Đối tác tuyển
-    dụng, và Nhà trường. *(Docs nêu rõ: "xây dựng dành riêng cho hệ sinh thái VinUni, không phải sản phẩm bán
-    cho trường khác.")*
-  - **Vì sao campus-native thắng:** danh tính đã xác thực + dữ liệu vòng đời khép kín (học → CV → ứng tuyển →
-    tuyển → outcome → phản hồi vào chương trình học).
+- **Mục tiêu:** Định vị thị trường + gieo **motif beachhead → mở rộng** (điểm business cốt lõi).
+- **Nội dung chữ:** Tiêu đề: **"Bắt đầu từ VinUni — kiến trúc sẵn sàng thành nền tảng cho mọi người"**.
+  - **Beachhead (điểm tựa):** thắng sâu ở hệ sinh thái VinUni trước — Sinh viên, **Cựu sinh viên (Alumni)**,
+    Đối tác tuyển dụng, Nhà trường. Lợi thế: **danh tính đã xác thực + vòng lặp dữ liệu khép kín** (Học → CV
+    → Ứng tuyển → Tuyển → Outcome → phản hồi vào chương trình học).
+  - **Đã vượt khỏi "chỉ VinUni":** hệ thống *đã* phục vụ **External Student** (SV trường khác) và **General
+    User** (người đi làm) với quyền hạn chế + có thể mua nâng cấp — tức **người ngoài VinUni dùng được ngay**.
+  - **Sẵn sàng thành nền tảng độc lập:** **multi-identity** + mô hình **Organization → Roles → Permissions**
+    (multi-tenant RBAC) + biên module rõ ràng ⇒ *cùng một codebase* có thể mở thành nền tảng đa-tổ chức phục
+    vụ nhiều trường / mọi người, **không phải viết lại**.
   - **Vì sao là bây giờ:** làn sóng LLM khiến bóc tách CV, matching, trợ lý & luyện phỏng vấn *thực sự hữu
     ích* với chi phí thấp — điều 2–3 năm trước chưa khả thi.
-  - **Quy mô thị trường (TAM/SAM):** `[ĐIỀN SỐ — docs không nêu]` (số SV/năm, số đối tác, v.v.).
-- **Trực quan hóa:** Sơ đồ **vòng tròn đồng tâm** (bull's-eye): lõi = "VinUni", vòng 2 = 4 nhóm người dùng,
-  vòng ngoài = "vòng lặp dữ liệu khép kín" với 4 mũi tên xoay (Học → Ứng tuyển → Tuyển dụng → Outcome). Bên
-  phải: 3 chip "động lực thời điểm" (AI chi phí thấp · Nhu cầu kiểm định · Kỳ vọng SV số hóa).
-- **Số liệu:** 4 ô KPI placeholder cho thị trường: SV/khóa `[ĐIỀN SỐ]`, Đối tác mục tiêu `[ĐIỀN SỐ]`, v.v.
-- **Bố cục & màu:** Vòng tròn dùng gradient nhẹ theo palette; giữ 1 gradient hero nếu chưa dùng ở đâu khác.
+  - **Quy mô thị trường (TAM/SAM):** `[ĐIỀN SỐ — docs không nêu]`.
+- **Trực quan hóa:** **Sơ đồ 3 vòng mở rộng đồng tâm** (ẩn dụ beachhead): lõi = *VinUni (bây giờ)* → vòng 2 =
+  *Alumni + SV ngoài + người đi làm (đã hỗ trợ)* → vòng 3 = *Nền tảng độc lập / đa-trường (sẵn sàng)*. Mỗi
+  vòng 1 nhãn + mốc. Bên phải: thẻ "Vòng lặp dữ liệu khép kín" (4 mũi tên xoay) + 3 chip "động lực thời điểm".
+- **Số liệu:** 3 badge mốc mở rộng; 2 ô TAM/SAM placeholder `[ĐIỀN SỐ]`.
+- **Bố cục & màu:** 3 vòng dùng indigo→violet nhạt dần (đây có thể là panel gradient hero của slide). Vòng
+  "sẵn sàng" vẽ nét đứt để thể hiện *tầm nhìn*, không phải cam kết.
+- **⚠️ Ghi chú trung thực (đừng in lên slide):** docs khung V1 = tập trung VinUni. Trình bày vòng 3 là **tầm
+  nhìn + tính sẵn-sàng-kỹ-thuật**, không nói "đang bán cho trường khác". Nếu bị hỏi: *"V1 tối ưu cho VinUni;
+  kiến trúc multi-tenant khiến việc mở rộng là một lựa chọn có sẵn, không phải dự án làm lại."*
 
 ---
 
@@ -79,11 +96,11 @@
   3. **Partner Recruiting OS** — đăng JD, pipeline ATS đa vòng, talent pool, quảng cáo, analytics.
   4. **University Operations Center** — kiểm duyệt, quản trị đối tác, workflow automation, career outcomes.
   - Câu chốt: *"AI trợ giúp thật ở mọi bước — không phải demo trang trí."*
-- **Trực quan hóa:** **Đây là slide hero** → dùng **1 panel gradient indigo→violet** làm nền cho dải tiêu đề
-  hoặc cho 1 thẻ trung tâm "AI-first core", 4 bề mặt là 4 thẻ trắng vệ tinh xung quanh (bố cục 2×2 hoặc hình
-  chữ thập). Mỗi bề mặt có icon lucide (`compass`, `layout-dashboard`, `briefcase`, `landmark`) + 3 từ khóa.
+- **Trực quan hóa:** **Đây là slide hero** → dùng **1 panel gradient indigo→violet** cho thẻ trung tâm
+  "AI-first core", 4 bề mặt là 4 thẻ trắng vệ tinh quanh (bố cục chữ thập / 2×2). Mỗi bề mặt có icon lucide
+  (`compass`, `layout-dashboard`, `briefcase`, `landmark`) + 3 từ khóa.
 - **Số liệu:** 4 chip nhỏ: "1 nền tảng", "4 persona-surface", "AI ở mọi bước", "vi/en".
-- **Bố cục & màu:** Đây là điểm nhấn thị giác mạnh nhất của deck — cho phép gradient hero lớn hơn slide khác.
+- **Bố cục & màu:** Điểm nhấn thị giác mạnh nhất của deck — cho phép gradient hero lớn hơn slide khác.
 
 ---
 
@@ -103,45 +120,95 @@
 
 ---
 
-## Slide 06 — Phân tích đối thủ
+## Slide 06 — Quy mô & Mức độ hoàn thiện *(BẰNG CHỨNG "ĐÃ DỰNG THẬT")*
 
-- **Mục tiêu:** Chứng minh khác biệt phòng thủ được (defensible).
-- **Nội dung chữ:** Tiêu đề: **"Chúng tôi đứng ở đâu"**. Bảng định vị (theo PRD §1.2):
-  - **vs LinkedIn** (mạng lưới toàn cầu) → *AI cá nhân hóa + talent đã xác thực + pipeline ATS*.
-  - **vs TopCV / VietnamWorks** (job board VN quen thuộc) → *pipeline đa vòng + luyện phỏng vấn + mạng alumni*.
-  - **vs Handshake** (campus Mỹ) → *AI matching sâu hơn + hệ quảng cáo + quản lý sự kiện*.
-  - **vs Greenhouse / Workday** (ATS doanh nghiệp) → *nhẹ hơn, campus-native, AI-first*.
-- **Trực quan hóa:** Chọn 1 trong 2:
-  - (a) **Bảng so sánh** 5 cột (Đối thủ · Thế mạnh của họ · Khoảng trống · Lợi thế VinUni) — dòng VinUni tô
-    nền `-soft` indigo để nổi.
-  - (b) **Ma trận 2×2**: trục X = "Generic ↔ Campus-native", trục Y = "Job board ↔ Full lifecycle+AI". Đặt
-    logo/tên các đối thủ; **VinUni ở góc phải-trên** (campus-native × full lifecycle+AI) với chấm indigo lớn.
-  - → Khuyến nghị (b) trực quan hơn cho hội đồng.
-- **Số liệu:** không cần số; nhấn vị trí.
-- **Bố cục & màu:** Đối thủ dùng chấm xám trung tính, **chỉ VinUni** dùng màu indigo — nguyên tắc "màu = ý nghĩa".
+- **Mục tiêu:** De-risk cho hội đồng — *"đây là hệ thống thật, không phải mockup/slideware"*. Đặt sớm để tạo
+  niềm tin trước khi vào chi tiết.
+- **Nội dung chữ:** Tiêu đề: **"Không phải ý tưởng trên giấy — hệ thống đã dựng thật"**.
+  - 4 bề mặt persona đã hoạt động · light + dark · song ngữ vi/en · pipeline AI end-to-end.
+  - Câu chốt: *"Mọi con số dưới đây đếm trực tiếp từ mã nguồn — kiểm chứng được."*
+- **Trực quan hóa:** **Hàng KPI tiles** lớn (số dùng JetBrains Mono cỡ lớn, mỗi tile 1 icon-chip màu palette).
+  Có thể dùng 1 tile gradient hero cho con số ấn tượng nhất ("2.022 test"). Dưới: dải "trạng thái hoàn thiện"
+  gồm chip *Backend · Frontend · AI pipeline · i18n · Tests*.
+- **Số liệu (CODE-VERIFIED — chọn ~6 mạnh nhất làm KPI):**
+  - **34** backend modules · **98** Alembic migrations · **766** file Python
+  - **2.022** test backend / **201** file test · **~477** route (41 `APIRouter`)
+  - **120** màn hình frontend · **655** file TS/TSX
+  - **54 vi + 54 en** i18n (parity) · **20** bộ dataset đánh giá AI
+  - → KPI tiles gợi ý: **34 module · 98 migration · 2.022 test · 120 màn hình · vi/en · 20 bộ eval AI**.
+- **Bố cục & màu:** KPI tiles là ngôi sao; số to tabular, delta/label ngắn gọn.
+- **⚠️ Ghi chú trung thực (đừng in lên slide):** đây là **quy mô đã dựng**, không đồng nghĩa "toàn bộ test
+  xanh". Trình bày là "quy mô hệ thống"; nếu bị hỏi sâu, nói thẳng là đang ổn định các quality gate.
 
 ---
 
-## Slide 07 — Người dùng & Phân quyền (Personas + RBAC)
+## Slide 07 — Mô hình kinh doanh & Doanh thu
 
-- **Mục tiêu:** Cho thấy chiều sâu mô hình người dùng & phân quyền linh hoạt (điểm mạnh kỹ thuật-sản phẩm).
-- **Nội dung chữ:** Tiêu đề: **"Nhiều persona, một mô hình phân quyền cấu hình được"**.
-  - **Persona:** Sinh viên VinUni · Alumni · External Student · General User · Guest · Partner Admin · Nhân sự
-    Partner (vai trò tự đặt tên) · University Super Admin · Nhân sự Trường (vai trò tự đặt tên) · Platform
-    Superadmin · Mentor.
+- **Mục tiêu:** Tính khả thi thương mại + kinh tế khi mở rộng nền tảng (business chiều sâu).
+- **Nội dung chữ:** Tiêu đề: **"Bốn dòng doanh thu hôm nay — kinh tế nền tảng ngày mai"** (PRD §1.3):
+  - **4 dòng doanh thu (ai trả tiền):**
+    1. **Gói đối tác (Partner packages)** — *đối tác trả*: quota đăng tin, spotlight, featured.
+    2. **Quảng cáo đối tác** — *đối tác trả*: banner, sponsored jobs, email ads, tài trợ sự kiện (**luôn có
+       nhãn `Được tài trợ`/`Quảng cáo`, không gỡ**).
+    3. **Gói sinh viên (subscriptions)** — *External/General user trả*: mua AI credit + tính năng premium.
+    4. **Gói sự kiện** — *đối tác/nhà tài trợ trả*: slot tài trợ / vé.
+  - **Cơ chế kiếm tiền từ AI:** sổ **AI credit/usage** bền vững; SV/đối tác **nâng cấp hoặc mua thêm credit**;
+    **nhà trường dùng ngân sách admin, KHÔNG bị upsell** (đúng đạo đức với người dùng nội bộ).
+  - **Kinh tế khi mở rộng nền tảng (beachhead → mở rộng):** cùng bộ máy monetization áp cho tổ chức mới ⇒
+    thêm **doanh thu theo tổ chức** (license/SaaS theo chỗ ngồi hoặc theo tính năng) khi mở ra ngoài VinUni —
+    biên phí cận biên thấp vì hạ tầng AI dùng chung, metering đã sẵn.
+  - **V1 thanh toán = chuyển khoản/manual**; VNPay/MoMo/ZaloPay là phase sau. **Giá gói:** `[ĐIỀN SỐ — admin
+    cấu hình, không cố định]`.
+- **Trực quan hóa:** Trái = 4 thẻ doanh thu (icon `package`, `megaphone`, `graduation-cap`, `calendar`), mỗi
+  thẻ ghi rõ **"ai trả"**, hội tụ vào 1 thẻ trung tâm **"AI Credit / Usage Ledger"**. Phải = dải "kinh tế mở
+  rộng": mũi tên *VinUni (4 dòng doanh thu) → Tổ chức mới (+ license/SaaS)*. Chip **`Được tài trợ`** minh họa
+  (không gỡ). Chú thích phân tầng exhaustion: SV/Đối tác → mua/nâng cấp · Trường → yêu cầu admin.
+- **Số liệu:** 4 chip nguồn doanh thu + 1 ô giá `[ĐIỀN SỐ]`.
+- **Bố cục & màu:** Amber cho yếu tố sponsored (đúng semantics); credit/ledger dùng indigo; mũi tên mở rộng violet.
+
+---
+
+## Slide 08 — Phân tích đối thủ & Định vị
+
+- **Mục tiêu:** Chứng minh khác biệt phòng thủ được (defensible) **và** có đường mở rộng.
+- **Nội dung chữ:** Tiêu đề: **"Chúng tôi đứng ở đâu — và vì sao lợi thế còn nới rộng"**. Định vị (PRD §1.2):
+  - **vs LinkedIn** (mạng lưới toàn cầu) → *AI cá nhân hóa + talent đã xác thực + pipeline ATS*.
+  - **vs TopCV / VietnamWorks** (job board VN) → *pipeline đa vòng + luyện phỏng vấn + mạng alumni*.
+  - **vs Handshake** (campus Mỹ) → *AI matching sâu hơn + hệ quảng cáo + quản lý sự kiện*.
+  - **vs Greenhouse / Workday** (ATS doanh nghiệp) → *nhẹ hơn, campus-native, AI-first*.
+  - **Moat kép:** *campus-native + AI-first* vừa là **hào phòng thủ** (dữ liệu xác thực + vòng lặp khép kín
+    khó sao chép) vừa là **bệ phóng** (kiến trúc multi-tenant → mở thành nền tảng).
+- **Trực quan hóa:** **Ma trận 2×2**: trục X = "Generic ↔ Campus-native", trục Y = "Job board ↔ Full
+  lifecycle + AI". Đặt tên đối thủ (chấm xám trung tính); **VinUni ở góc phải-trên** (chấm indigo lớn) + mũi
+  tên nhỏ chỉ ra ngoài ghi *"sẵn sàng mở rộng"*. (Tùy chọn: bảng 5 cột Đối thủ · Thế mạnh · Khoảng trống ·
+  Lợi thế VinUni bên dưới.)
+- **Số liệu:** không cần số; nhấn vị trí.
+- **Bố cục & màu:** Đối thủ chấm xám, **chỉ VinUni** màu indigo (nguyên tắc "màu = ý nghĩa"); mũi tên mở rộng violet.
+
+---
+
+## Slide 09 — Người dùng & Phân quyền (Personas + RBAC)
+
+- **Mục tiêu:** Chiều sâu mô hình người dùng + **nền tảng cho tính multi-tenant** (chống lưng cho slide 3/8).
+- **Nội dung chữ:** Tiêu đề: **"Nhiều persona, một mô hình phân quyền cấu hình được (multi-tenant-ready)"**.
+  - **Persona:** Sinh viên VinUni · Alumni · **External Student** · **General User** · Guest · Partner Admin ·
+    Nhân sự Partner (vai trò tự đặt tên) · University Super Admin · Nhân sự Trường (tự đặt tên) · Platform
+    Superadmin · Mentor. *(External/General = bằng chứng "người ngoài VinUni đã dùng được".)*
   - **Multi-identity:** một tài khoản giữ nhiều danh tính (vd SV + nhân viên đối tác), đổi ở header.
   - **RBAC:** năng lực (analytics, xem CV/định danh, billing, pipeline, hành động AI, export…) là **capability
     cấp phát được** theo **user / role / department** ở **service layer** — *không hardcode theo tên vai trò*.
-- **Trực quan hóa:** Cột trái = **bản đồ persona** gom theo 4 nhóm (Public/Student · Partner · University ·
-  Platform) dạng các chip. Cột phải = **sơ đồ RBAC 3 tầng**: `Organization → Roles/Departments → Permissions`
-  với ví dụ "Partner Admin cấp quyền 'xem định danh ứng viên' cho 'Technical Interviewer'". Thêm badge
-  **multi-identity** (icon `repeat`/`users`).
-- **Số liệu:** "11 loại persona · vai trò tự đặt tên · phân quyền theo department".
-- **Bố cục & màu:** Mỗi nhóm persona 1 màu chip; sơ đồ RBAC monochrome + 1 nhánh highlight màu.
+  - **→ Vì sao đây là "platform-ready":** `Organization → Roles → Permissions` chính là mô hình **đa-tổ chức**;
+    thêm một tổ chức mới = thêm một Organization, không đụng code.
+- **Trực quan hóa:** Cột trái = **bản đồ persona** gom 4 nhóm (Public/Student · Partner · University · Platform)
+  dạng chip. Cột phải = **sơ đồ RBAC 3 tầng** `Organization → Roles/Departments → Permissions` với ví dụ
+  "Partner Admin cấp quyền 'xem định danh ứng viên' cho 'Technical Interviewer'"; thêm badge **multi-identity**
+  và nhãn nhỏ *"1 org hôm nay → N org khi mở rộng"*.
+- **Số liệu:** "11 loại persona · vai trò tự đặt tên · phân quyền theo department · multi-tenant model".
+- **Bố cục & màu:** Mỗi nhóm persona 1 màu chip; sơ đồ RBAC monochrome + 1 nhánh highlight indigo.
 
 ---
 
-## Slide 08 — Hành trình Sinh viên (Flow 1)
+## Slide 10 — Hành trình Sinh viên (Flow 1)
 
 - **Mục tiêu:** Trình bày luồng end-to-end đắt giá nhất: từ khách → ứng tuyển có dữ liệu.
 - **Nội dung chữ:** Tiêu đề: **"Từ khách vãng lai đến ứng tuyển thông minh"**. 7 bước (đánh số để vẽ flow):
@@ -153,15 +220,15 @@
      tín hiệu cạnh tranh**.
   6. Nộp → hệ thống tạo **CV snapshot bất biến**.
   7. `/student/applications` theo dõi trạng thái, timeline, tin nhắn, phỏng vấn.
-- **Trực quan hóa:** **Flow ngang 7 node** (mỗi node là 1 pill bo tròn có icon lucide), mũi tên nối. Node 5 phóng
+- **Trực quan hóa:** **Flow ngang 7 node** (mỗi node 1 pill bo tròn có icon lucide), mũi tên nối. Node 5 phóng
   to thành 1 thẻ "job-intelligence" mini (vòng fit-score + 2 chip gap). Dải "Guest → Auth → Student" đổi màu
   nền nhạt để thể hiện chuyển ngữ cảnh.
 - **Số liệu:** Badge "CV snapshot bất biến khi nộp" · "Guest không thấy fit/cạnh tranh".
-- **Bố cục & màu:** Node trung tính; node có AI (4,5) viền sky/indigo (info/AI). Tránh quá nhiều màu.
+- **Bố cục & màu:** Node trung tính; node có AI (4,5) viền sky/indigo (info/AI).
 
 ---
 
-## Slide 09 — CV Studio
+## Slide 11 — CV Studio
 
 - **Mục tiêu:** Khoe tính năng chữ ký: trình soạn CV canvas kiểu Canva + AI sửa có kiểm soát.
 - **Nội dung chữ:** Tiêu đề: **"CV Studio — soạn CV trực quan như Canva, an toàn nhờ AI có xác nhận"**.
@@ -180,7 +247,7 @@
 
 ---
 
-## Slide 10 — CV Ingestion Cascade *(câu chuyện kỹ thuật chữ ký)*
+## Slide 12 — CV Ingestion Cascade *(câu chuyện kỹ thuật chữ ký)*
 
 - **Mục tiêu:** Chứng minh chiều sâu kỹ thuật + tư duy chi phí: pipeline bóc tách CV phân tầng.
 - **Nội dung chữ:** Tiêu đề: **"Bóc tách CV phân tầng theo chi phí — local-first, gọi AI khi cần"**. Các tầng
@@ -202,12 +269,12 @@
   chi phí (`Free`/`Rẻ`/`Rẻ+`) · mũi tên "chỉ chạy nếu tầng trên chưa đủ". Nhánh rẽ đỏ "reject" ở tầng 1. Bên
   phải: thẻ "Structured Output" minh họa 1 entry (role/org/timeframe/skills-bar).
 - **Số liệu:** Chip nhãn chi phí tăng dần; badge "skills 0–100" · "feeds CV–JD matching".
-- **Bố cục & màu:** Dùng gradient chi phí: tầng rẻ = emerald-soft, tầng đắt dần = amber→rose-soft. Nhánh reject
-  = VinUni red `#c83538`.
+- **Bố cục & màu:** Gradient chi phí: tầng rẻ = emerald-soft, tầng đắt dần = amber→rose-soft. Nhánh reject =
+  VinUni red `#c83538`.
 
 ---
 
-## Slide 11 — CV–JD Matching & Competition Intelligence
+## Slide 13 — CV–JD Matching & Competition Intelligence
 
 - **Mục tiêu:** Cho thấy AI ra quyết định **tất định, giải thích được, tôn trọng riêng tư**.
 - **Nội dung chữ:** Tiêu đề: **"Điểm khớp tất định, cạnh tranh minh bạch — không phải điểm ma thuật"**.
@@ -218,19 +285,19 @@
   - **Lưu có version-stamp:** cache nhanh chỉ dùng khi `content_version == cv.version`; **sửa CV là re-score**.
   - **Learning cache:** phần *giải thích AI* (chỉ cho CV được đề xuất) cache theo `(cv_version, job_version)`;
     điểm tất định **miễn phí**, chỉ phần chữ AI mới tốn credit.
-  - **Competition Intelligence:** tín hiệu sản phẩm dựa trên **input thật** (seats/hiring target, số lượng &
-    vận tốc ứng tuyển, phân bố chất lượng ứng viên dạng bucket, **fit percentile của SV**, độ tươi deadline,
-    source mix) — **không** lộ ứng viên khác/PII/điểm nội bộ/confidence; dữ liệu yếu thì **tắt mềm**, không bịa.
-- **Trực quan hóa:** Trái = **thẻ score**: vòng tròn tiến độ 0–100 (donut) + 4 thanh band (skills 50% /
-  experience 25% / logistics 10% / quality 15%) đúng trọng số + 2 chip "matched" (emerald) & "gap" (amber).
-  Phải = **thẻ competition**: thanh percentile "Bạn nằm ở top X%", chip mức cạnh tranh (Thấp/Vừa/Cao), + dòng
-  privacy "Không hiển thị ứng viên khác". Guest overlay mờ + khóa 🔒.
+  - **Competition Intelligence:** tín hiệu dựa trên **input thật** (seats/hiring target, số lượng & vận tốc
+    ứng tuyển, phân bố chất lượng ứng viên dạng bucket, **fit percentile của SV**, độ tươi deadline, source
+    mix) — **không** lộ ứng viên khác/PII/điểm nội bộ; dữ liệu yếu thì **tắt mềm**, không bịa.
+- **Trực quan hóa:** Trái = **thẻ score**: donut 0–100 + 4 thanh band đúng trọng số (skills 50% / experience
+  25% / logistics 10% / quality 15%) + 2 chip "matched" (emerald) & "gap" (amber). Phải = **thẻ competition**:
+  thanh percentile "Bạn ở top X%", chip mức cạnh tranh (Thấp/Vừa/Cao), dòng privacy "Không hiển thị ứng viên
+  khác". Guest overlay mờ + khóa 🔒.
 - **Số liệu:** "0–100 · 4 band · re-score khi CV đổi · điểm tất định miễn phí".
 - **Bố cục & màu:** Donut theo màu band; competition dùng sky/indigo (info). Nhấn dòng privacy.
 
 ---
 
-## Slide 12 — AI Career Assistant & Interview Simulator
+## Slide 14 — AI Career Assistant & Interview Simulator
 
 - **Mục tiêu:** Khoe lớp AI-agent thật sự hữu ích, có kiểm soát.
 - **Nội dung chữ:** Tiêu đề: **"Trợ lý AI biết làm việc — và luyện phỏng vấn bám JD/CV"**.
@@ -244,11 +311,11 @@
   nộp job đầu" → agent trả lời + **thẻ xác nhận "Xác nhận nộp đơn?"** (nút emerald/xám). Phải = mock **màn
   phỏng vấn**: câu hỏi + ô ghi âm + panel "Phản hồi từng câu" (điểm mạnh/điểm cần cải thiện), thanh tiến bộ.
 - **Số liệu:** "25+ tool · streaming · confirm-before-write · JD+CV grounded".
-- **Bố cục & màu:** Viền info sky/indigo cho khối AI; thẻ xác nhận là điểm nhấn (nhắc thông điệp "AI an toàn").
+- **Bố cục & màu:** Viền info sky/indigo cho khối AI; thẻ xác nhận là điểm nhấn ("AI an toàn").
 
 ---
 
-## Slide 13 — Partner Recruiting OS (Flow 2) + Talent Pool
+## Slide 15 — Partner Recruiting OS (Flow 2) + Talent Pool
 
 - **Mục tiêu:** Trình bày ATS campus-native đầy đủ + tìm kiếm thụ động.
 - **Nội dung chữ:** Tiêu đề: **"Recruiting OS: từ JD đến offer, cộng talent pool chủ động"**. Flow 6 bước:
@@ -265,11 +332,11 @@
   mock **Kanban 5 cột** (Applied · Screening · Interview · Offer · Hired) với thẻ ứng viên (tên **ẩn** "Ứng
   viên #A7" + vòng fit-score + chip stage). Một thẻ bên phải minh họa "reveal identity → cần quyền + audit".
 - **Số liệu:** "pipeline đa vòng cấu hình được · identity masked + RBAC · pgvector talent search".
-- **Bố cục & màu:** Kanban là nơi khoe palette (mỗi cột 1 màu header nhạt). Nhấn khóa 🔒 ở thẻ ẩn danh.
+- **Bố cục & màu:** Kanban khoe palette (mỗi cột 1 màu header nhạt). Nhấn khóa 🔒 ở thẻ ẩn danh.
 
 ---
 
-## Slide 14 — University Operations Center (Flow 3)
+## Slide 16 — University Operations Center (Flow 3)
 
 - **Mục tiêu:** Cho thấy lớp quản trị/governance mà job board không có.
 - **Nội dung chữ:** Tiêu đề: **"Trung tâm vận hành của Nhà trường"**. Flow 4 bước:
@@ -281,15 +348,14 @@
      theo RBAC, **node hệ trọng cần xác nhận người**.
   4. **Analytics & Career Outcomes**: tỉ lệ placement/lương/time-to-employment (**ngưỡng riêng tư tối thiểu
      5**), export async gated RBAC, báo cáo kiểm định.
-- **Trực quan hóa:** **Flow 4 node dọc/ngang** với icon (`shield-check`, `building-2`, `workflow`,
-  `bar-chart-3`). Node 4 phóng to thành mini-dashboard (funnel placement + KPI lương). Badge "min-5 privacy
-  floor" cạnh analytics.
+- **Trực quan hóa:** **Flow 4 node** với icon (`shield-check`, `building-2`, `workflow`, `bar-chart-3`). Node
+  4 phóng to thành mini-dashboard (funnel placement + KPI lương). Badge "min-5 privacy floor" cạnh analytics.
 - **Số liệu:** "SLA-aware · immutable active version · min-5 privacy · export cho kiểm định (ABET/AUN-QA)".
 - **Bố cục & màu:** Governance = tông trung tính + emerald cho "approved", VinUni red cho "reject/risk".
 
 ---
 
-## Slide 15 — Visual Workflow Builder
+## Slide 17 — Visual Workflow Builder
 
 - **Mục tiêu:** Khoe automation cấu hình được (không phải pipeline hardcode).
 - **Nội dung chữ:** Tiêu đề: **"Tự động hóa quy trình bằng DAG trực quan, có kiểm soát"**.
@@ -301,11 +367,11 @@
   cần xác nhận)** → Cập nhật pipeline) nối bằng cạnh cong. Thanh trên hiện badge trạng thái `DRAFT/TEST/ACTIVE`
   + nút *Dry-run*. Panel phải = inspector của node đang chọn.
 - **Số liệu:** "DRAFT→TEST→ACTIVE · dry-run · immutable · human-confirm node".
-- **Bố cục & màu:** Node AI/ghi dùng viền amber (cảnh báo cần xác nhận); trạng thái ACTIVE = emerald.
+- **Bố cục & màu:** Node AI/ghi dùng viền amber (cần xác nhận); trạng thái ACTIVE = emerald.
 
 ---
 
-## Slide 16 — AI Governance, Safety & Trust
+## Slide 18 — AI Governance, Safety & Trust
 
 - **Mục tiêu:** Điểm cộng lớn với hội đồng: AI có trách nhiệm, đo đếm & che giấu đúng.
 - **Nội dung chữ:** Tiêu đề: **"AI có kế toán, có rào chắn, có che giấu đúng chỗ"**.
@@ -323,104 +389,68 @@
   - **Tách sponsored:** organic / recommended / **sponsored (`Được tài trợ`/`Quảng cáo`)** / university-curated
     luôn phân biệt; nhãn công bố **không gỡ được**.
 - **Trực quan hóa:** Lưới **6 thẻ trust** (icon lucide): Metering & Ledger · Idempotency · Human-confirm ·
-  Provider masking · Guardrails · Sponsored separation. Có thể thêm 1 dải "UsageContext" nhỏ thể hiện các field
-  (principal · org · feature_key · billing_scope).
+  Provider masking · Guardrails · Sponsored separation. Có thể thêm dải "UsageContext" nhỏ (principal · org ·
+  feature_key · billing_scope).
 - **Số liệu:** "3 ledger · idempotency · 20 bộ eval AI · rate-limit 30/60/100".
-- **Bố cục & màu:** Đây là slide "niềm tin" → tông trung tính, chấm màu theo vai trò (info/success/warning).
+- **Bố cục & màu:** Slide "niềm tin" → tông trung tính, chấm màu theo vai trò (info/success/warning).
 
 ---
 
-## Slide 17 — Mô hình kinh doanh & Monetization
+## Slide 19 — Kiến trúc & Công nghệ *(platform-ready)*
 
-- **Mục tiêu:** Tính khả thi thương mại.
-- **Nội dung chữ:** Tiêu đề: **"Bốn dòng doanh thu, một sổ AI credit minh bạch"** (PRD §1.3):
-  1. **Gói đối tác (Partner packages)** — quota đăng tin, spotlight, featured.
-  2. **Quảng cáo đối tác** — banner, sponsored jobs, email ads, tài trợ sự kiện (**luôn có nhãn công bố**).
-  3. **Gói sinh viên (subscriptions)** — External/General user mua AI + tính năng premium.
-  4. **Gói sự kiện** — slot tài trợ / vé.
-  - **Cơ chế:** sổ AI credit/usage bền vững; SV/đối tác **nâng cấp hoặc mua thêm**; **trường dùng ngân sách
-    admin, không upsell**. Billing có proration (không thiệt khi nâng cấp), grace period, reset quota.
-  - **V1 thanh toán = chuyển khoản/manual**; VNPay/MoMo/ZaloPay là phase sau.
-  - **Giá gói:** `[ĐIỀN SỐ — docs để admin cấu hình, không cố định]`.
-- **Trực quan hóa:** 4 thẻ doanh thu (icon `package`, `megaphone`, `graduation-cap`, `calendar`) → hội tụ vào
-  1 thẻ trung tâm **"AI Credit / Usage Ledger"**. Bên dưới: dải phân tầng exhaustion "SV/Đối tác → mua/nâng
-  cấp" vs "Trường → yêu cầu admin". Có 1 chip **`Được tài trợ`** minh họa (không được gỡ).
-- **Số liệu:** 4 chip nguồn doanh thu; ô giá `[ĐIỀN SỐ]`.
-- **Bố cục & màu:** Amber cho các yếu tố sponsored (đúng semantics); phần credit dùng indigo.
-
----
-
-## Slide 18 — Kiến trúc tổng quan (Architecture)
-
-- **Mục tiêu:** Thuyết phục hội đồng kỹ thuật: kiến trúc sạch, có kỷ luật.
-- **Nội dung chữ:** Tiêu đề: **"Kiến trúc DDD theo module — biên rõ ràng, sự kiện & audit ở mọi ghi"**.
+- **Mục tiêu:** Thuyết phục hội đồng kỹ thuật + **chống lưng cho tầm nhìn nền tảng**: kiến trúc sạch, sẵn sàng mở rộng.
+- **Nội dung chữ:** Tiêu đề: **"Kiến trúc DDD theo module — sạch, có kỷ luật, sẵn sàng thành nền tảng"**.
   - **Luồng request:** `Client (Next.js)` → `API (router + Pydantic)` → `Application (service, RBAC ở đây,
     transaction)` → `Domain (models thuần + repo interface)` → `Infrastructure (SQLAlchemy repo, adapter)` → `PostgreSQL`.
   - **Nguyên tắc bất di:** không import chéo module (giao tiếp qua service/event), không business-logic trong
-    router, không ORM trong domain, **không JOIN đa-domain trực tiếp cho dashboard**.
-  - **Read model / projection:** `proj_student_dashboard`, `proj_partner_pipeline`, `proj_university_kpi`.
+    router, không ORM trong domain, **không JOIN đa-domain trực tiếp cho dashboard** (dùng read model /
+    projection: `proj_student_dashboard`, `proj_partner_pipeline`, `proj_university_kpi`).
   - **Event-driven:** **outbox pattern** (`outbox_events` + `analytics_events`) do scheduler rút; **audit ở
     mọi ghi** (`audit_logs`). Pipeline là state machine có version (ADR-0004→0007).
   - **AI Gateway** provider-agnostic: task → chọn model → load-balance → adapter → fallback chain; UsageContext
-    + observability (Langfuse) + output guard.
-- **Trực quan hóa:** **Sơ đồ layered dọc** 5 tầng (mỗi tầng 1 băng ngang, nhãn trách nhiệm), mũi tên xuống là
-  request / lên là response. Bên phải tách 1 nhánh **AI Gateway** (task→model→fallback). Dưới cùng: 3 thành
-  phần ngang **Read Models · Outbox/Events · Audit Log** như "xương sống dữ liệu". Băng "RBAC" gắn ở tầng
-  Application để nhấn "RBAC ở service layer".
-- **Số liệu:** "34 module · biên DDD cứng · outbox + audit + read-model".
-- **Bố cục & màu:** Monochrome là chính; mỗi tầng 1 sắc xám khác; **AI Gateway** tô indigo-soft để nổi.
+    + Langfuse + output guard.
+  - **→ Vì sao platform-ready:** **Organization multi-tenant RBAC** + **biên module cứng** + **AI gateway
+    provider-agnostic** ⇒ có thể vận hành như **nền tảng đa-tổ chức/SaaS** mà không phá kiến trúc.
+  - **Tech stack:**
+    - *Backend:* Python 3.12 · **FastAPI** · SQLAlchemy 2 async + asyncpg · Pydantic v2 · **PostgreSQL 16 +
+      pgvector** · Alembic · **Celery + Redis** · JWT + Argon2 + TOTP 2FA · OIDC/SAML SSO · AI gateway
+      (OpenRouter/OpenAI-compatible/Gemini/Anthropic) · **Langfuse** · OCR (PyMuPDF4LLM, Tesseract vie+eng) ·
+      pytest · ruff/mypy · **uv**.
+    - *Frontend:* **Next.js 15 App Router** · React 19 · TypeScript 5.7 strict · **Tailwind v4 + shadcn/ui** ·
+      lucide-react · TanStack Query + Zustand · Recharts · **next-intl (vi/en)** · `@xyflow/react` · `@dnd-kit`
+      · Vitest + Playwright.
+- **Trực quan hóa:** Trên/trái = **sơ đồ layered dọc** 5 tầng (mỗi tầng 1 băng ngang, nhãn trách nhiệm), băng
+  "RBAC" gắn ở tầng Application; nhánh **AI Gateway** bên phải tô indigo-soft; dải đáy **Read Models · Outbox
+  · Audit**. Dưới cùng = 2 hàng **chip công nghệ** (Backend / Frontend). Badge nhỏ *"multi-tenant-ready"* cạnh
+  tầng Organization/RBAC.
+- **Số liệu:** "34 module · biên DDD cứng · outbox + audit + read-model · multi-tenant RBAC".
+- **Bố cục & màu:** Monochrome là chính; mỗi tầng 1 sắc xám; **AI Gateway** + badge multi-tenant tô indigo-soft.
 
 ---
 
-## Slide 19 — Công nghệ & Quy mô (Tech Stack + Scale)
+## Slide 20 — Roadmap, Đường mở rộng & Kết luận
 
-- **Mục tiêu:** "Đây là hệ thống lớn thật" — bằng số đếm được, không nói suông.
-- **Nội dung chữ:** Tiêu đề: **"Stack hiện đại · quy mô đã dựng thật"**.
-  - **Backend:** Python 3.12 · **FastAPI** · SQLAlchemy 2 async + asyncpg · Pydantic v2 · **PostgreSQL 16 +
-    pgvector** (RAG) · Alembic · **Celery + Redis** · JWT + Argon2 + TOTP 2FA · OIDC/SAML SSO · AI gateway
-    (OpenRouter default, OpenAI-compatible/Gemini/Anthropic) · **Langfuse** · OCR (PyMuPDF4LLM, pdfplumber,
-    Tesseract vie+eng) · pytest · ruff/mypy · **uv**.
-  - **Frontend:** **Next.js 15 (App Router)** · React 19 · TypeScript 5.7 strict · **Tailwind v4 + shadcn/ui**
-    · lucide-react · TanStack Query + Zustand · Recharts · **next-intl (vi/en)** · `@xyflow/react` (workflow)
-    · `@dnd-kit` (CV Studio/kanban) · Vitest + Playwright.
-- **Trực quan hóa:** Trên = 2 hàng chip công nghệ (Backend / Frontend), mỗi chip 1 tên (không cần logo ngoài;
-  nếu có logo thì embed data-URI). Dưới = **hàng KPI tiles** khoe số liệu (số dùng JetBrains Mono cỡ lớn).
-- **Số liệu (CODE-VERIFIED — đếm bằng lệnh, ghi kèm để bảo vệ trước hội đồng):**
-  - **34** backend modules — `ls backend/app/modules/ | grep -v __ | wc -l`
-  - **98** Alembic migrations — `ls backend/alembic/versions/*.py | grep -v __ | wc -l`
-  - **766** file Python backend — `find backend/app -name '*.py' | wc -l`
-  - **~477** route decorator (195 trên `@router` chính) · **41** `APIRouter`
-  - **2.022** hàm test backend / **201** file test — `grep -rE '^\s*(async )?def test_' backend/tests | wc -l`
-  - **120** màn hình frontend (`page.tsx`) · **655** file TS/TSX
-  - **54 vi + 54 en** file i18n (parity) · **20** bộ dataset đánh giá AI
-  - → chọn ~6 con số mạnh nhất làm KPI tiles: **34 module · 98 migration · 2.022 test · 120 màn hình · vi/en
-    · 20 bộ eval AI**.
-- **Bố cục & màu:** KPI tiles là ngôi sao — mỗi tile 1 icon-chip màu palette, số to tabular. Có thể dùng 1 tile
-  gradient hero cho con số ấn tượng nhất (vd "2.022 test").
-
-> **Ghi chú trung thực (đừng đưa lên slide, để bạn biết):** đây là **quy mô đã dựng**, không đồng nghĩa "toàn
-> bộ test xanh". Trình bày là "quy mô hệ thống", đừng khẳng định "100% pass" trước hội đồng nếu bị hỏi sâu.
-
----
-
-## Slide 20 — Roadmap, Traction & Kết luận
-
-- **Mục tiêu:** Chốt bằng lộ trình khả thi + tầm nhìn + logo.
-- **Nội dung chữ:** Tiêu đề: **"Lộ trình rõ ràng — và một tầm nhìn khép kín"**.
-  - **6 phase (~36 tuần, đội nhỏ 2–3 kỹ sư + 1 AI engineer):**
-    - P0 Foundation (t1–3) · P1 Core Loops (t4–8) · P2 Advanced Hiring/ATS (t9–14) · P3 AI Intelligence
-      (t15–20) · P4 Events + Monetization (t21–27) *(+P4b realtime/messaging/workflow)* · P5 University
-      Intelligence (t28–36: mentorship, alumni, career outcomes, tích hợp SIS).
-  - **Đã dựng (theo scale slide 19):** 4 bề mặt persona, CV Studio, pipeline ATS, AI assistant, workflow,
-    analytics — 120 màn hình, 34 module.
+- **Mục tiêu:** Chốt bằng lộ trình khả thi + **đường mở rộng (GTM) + business ask** + logo.
+- **Nội dung chữ:** Tiêu đề: **"Lộ trình rõ ràng — và một đường mở rộng có sẵn"**.
+  - **6 phase (~36 tuần, đội nhỏ 2–3 kỹ sư + 1 AI engineer):** P0 Foundation (t1–3) · P1 Core Loops (t4–8) ·
+    P2 Advanced Hiring/ATS (t9–14) · P3 AI Intelligence (t15–20) · P4 Events + Monetization (t21–27) *(+P4b
+    realtime/messaging/workflow)* · P5 University Intelligence (t28–36: mentorship, alumni, career outcomes,
+    tích hợp SIS).
+  - **Đường mở rộng (beachhead → mở rộng, 3 chặng — đây là phần business đóng deck):**
+    1. **VinUni sâu** *(bây giờ)* — dữ liệu xác thực + vòng lặp khép kín, 4 dòng doanh thu.
+    2. **Alumni + SV ngoài + người đi làm** *(đã hỗ trợ, tăng trưởng người dùng trả phí)*.
+    3. **Nền tảng độc lập / đa-trường** *(sẵn sàng kỹ thuật)* — thêm doanh thu license/SaaS theo tổ chức.
   - **Tầm nhìn:** *"Vòng lặp dữ liệu khép kín Học → Ứng tuyển → Tuyển dụng → Outcome → phản hồi vào chương
     trình học."*
-  - **Kết:** Logo VinUni + 1 câu CTA + `[TÊN TEAM]` + liên hệ.
-- **Trực quan hóa:** **Timeline ngang 6 mốc** (P0→P5) với thanh tiến độ tô phần "đã dựng". Dưới: 3 chip tầm
-  nhìn (Closed-loop data · AI-first · Campus-native). Góc: logo VinUni + gradient hero khép lại (đối xứng với
-  slide 1).
-- **Số liệu:** "6 phase · ~36 tuần · 4 bề mặt đã dựng".
-- **Bố cục & màu:** Timeline theo palette tăng dần; phần "đã dựng" tô indigo→violet gradient (điểm nhấn cuối).
+  - **Ask / CTA:** `[ĐIỀN — vd: xin phê duyệt triển khai thí điểm toàn trường / nguồn lực / đối tác]`.
+  - **Kết:** Logo VinUni + `[TÊN TEAM]` + liên hệ.
+- **Trực quan hóa:** Trên = **timeline ngang 6 mốc** (P0→P5) với thanh tiến độ tô phần "đã dựng". Dưới = **3
+  chặng mở rộng** dạng bậc thang đi lên (VinUni → Alumni/ngoài → Nền tảng) — chặng 3 nét đứt (*sẵn sàng, chưa
+  cam kết*). Góc: logo VinUni + gradient hero khép lại (đối xứng slide 1). 1 dòng CTA nổi bật.
+- **Số liệu:** "6 phase · ~36 tuần · 4 bề mặt đã dựng · 3 chặng mở rộng".
+- **Bố cục & màu:** Timeline theo palette tăng dần; bậc thang mở rộng tô indigo→violet gradient (điểm nhấn cuối).
+- **⚠️ Ghi chú trung thực:** chặng 3 là **tầm nhìn + sẵn-sàng-kỹ-thuật**; giữ nét đứt & từ "sẵn sàng", không
+  hứa mốc thời gian mở SaaS nếu chưa có kế hoạch thật.
 
 ---
 
@@ -430,9 +460,11 @@
 |---|---|---|
 | `[TÊN TEAM]` | 1, 20 | Tên nhóm / thành viên |
 | `[MÔN/CUỘC THI]` | 1 | Bối cảnh trình bày |
-| `[ĐIỀN SỐ]` (thị trường) | 3 | TAM/SAM, số SV/khóa, số đối tác mục tiêu — docs **không** có |
-| `[ĐIỀN SỐ]` (giá) | 17 | Giá gói đối tác/SV — docs để admin cấu hình |
+| `[ĐIỀN SỐ]` (thị trường) | 3 | TAM/SAM, số SV/khóa, số đối tác — docs **không** có |
+| `[ĐIỀN SỐ]` (giá) | 7 | Giá gói đối tác/SV — docs để admin cấu hình |
+| `[ĐIỀN — Ask/CTA]` | 20 | Lời kêu gọi cụ thể (thí điểm, nguồn lực, đối tác) |
 | Logo + screenshot | 1, 5, 20 | Bỏ vào `assets/` (xem `assets/README.md`) |
 
 **Nguyên tắc vàng:** phần *quy mô/kỹ thuật* dùng số code-verified (mạnh & an toàn); phần *thị trường/tài chính*
-để placeholder — **thà trống còn hơn bịa số** trước hội đồng.
+để placeholder — **thà trống còn hơn bịa số** trước hội đồng. Câu chuyện *nền tảng* trình bày là **tầm nhìn +
+sẵn-sàng-kỹ-thuật**, không phải cam kết V1.

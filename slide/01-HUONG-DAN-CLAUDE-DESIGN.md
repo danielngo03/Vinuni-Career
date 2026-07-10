@@ -32,8 +32,8 @@ Tài liệu này giải thích **chính xác** claude.ai/design là gì, và **2
    - (kèm logo VinUni nếu có, xem `assets/README.md`)
 3. Mở một chat trong Project, **dán toàn bộ nội dung `04-MASTER-PROMPT.md`**.
 4. Claude trả về một **Artifact HTML**. Yêu cầu chỉnh sửa bằng ngôn ngữ tự nhiên, ví dụ:
-   - *"Slide 10 vẽ pipeline theo chiều dọc, mỗi tầng 1 hàng, thêm nhãn chi phí Free/Rẻ/Rẻ+"*
-   - *"Dùng đúng gradient hero indigo→violet ở slide 4 và 19, các slide khác không dùng gradient"*
+   - *"Slide 12 vẽ pipeline theo chiều dọc, mỗi tầng 1 hàng, thêm nhãn chi phí Free/Rẻ/Rẻ+"*
+   - *"Dùng đúng gradient hero indigo→violet ở slide 4 và 20, các slide khác tối đa 1 panel gradient"*
 5. **Chia cụm nếu deck dài:** nếu 20 slide 1 lần bị cắt/nhạt, bảo Claude:
    *"Dựng trước slide 1–5 thật kỹ trong 1 artifact"* → duyệt → *"Dựng tiếp 6–10 cùng style"* … rồi cuối cùng
    *"Gộp tất cả vào 1 file HTML deck duy nhất, giữ nguyên style"*.
@@ -86,6 +86,8 @@ card, chỉnh từng slide độc lập.
 - [ ] Logo VinUni đã đặt ở `assets/` và xuất hiện đúng ở slide 1 + 20.
 - [ ] Đã thay mọi placeholder `[ĐIỀN SỐ]` / `[TÊN TEAM]` (xem cuối `02-DECK-SPEC.md`).
 - [ ] Chỉ **1 panel gradient indigo→violet mỗi slide** (đúng quy tắc v10) — không lạm dụng.
-- [ ] Nhãn `Được tài trợ` / `Quảng cáo` **không bị bỏ** ở slide monetization (17) & showcase (5).
-- [ ] Số liệu quy mô (slide 19) khớp với lệnh đếm trong spec.
+- [ ] Nhãn `Được tài trợ` / `Quảng cáo` **không bị bỏ** ở business (7), showcase (5), governance (18).
+- [ ] Số liệu quy mô (slide 6) khớp với lệnh đếm trong spec.
+- [ ] Câu chuyện "nền tảng" (slide 3, 8, 19, 20) giữ khung *tầm nhìn + sẵn-sàng-kỹ-thuật* (vòng/chặng mở rộng
+      vẽ nét đứt), không hứa mốc bán SaaS.
 - [ ] Thử in PDF landscape: mỗi slide = đúng 1 trang, không tràn.

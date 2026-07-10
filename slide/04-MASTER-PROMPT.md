@@ -32,7 +32,7 @@ YÊU CẦU THIẾT KẾ (tuân thủ 03-BRAND-DESIGN-SYSTEM.md):
   JetBrains Mono tabular-nums.
 - Mỗi slide có: kicker (11px uppercase xám) + tiêu đề + logo nhỏ VinUni + số trang ở footer.
 - Icon: chỉ dùng inline SVG kiểu lucide (nét mảnh monochrome). KHÔNG dùng emoji làm icon.
-- KHÔNG gỡ nhãn "Được tài trợ"/"Quảng cáo" ở slide 5 và 17. KHÔNG phơi tên provider/model AI.
+- KHÔNG gỡ nhãn "Được tài trợ"/"Quảng cáo" ở slide 5, 7 và 18. KHÔNG phơi tên provider/model AI.
 - Vẽ đúng các sơ đồ mà spec yêu cầu (flow node, pipeline bậc thang, layered architecture,
   bull's-eye thị trường, ma trận 2×2 đối thủ, Kanban, DAG, donut score, timeline roadmap...).
   Ưu tiên SVG/HTML+CSS thuần, KHÔNG phụ thuộc thư viện ngoài. File phải chạy offline.
@@ -55,13 +55,17 @@ Bắt đầu bằng slide 01–05.
 
 ## Prompt phụ (khi cần chỉnh sửa) — ví dụ mẫu
 
-- *"Slide 10: vẽ pipeline 6 tầng theo bậc thang dọc, mỗi tầng gắn nhãn chi phí Free/Rẻ/Rẻ+, nhánh reject màu
+- *"Slide 12: vẽ pipeline 6 tầng theo bậc thang dọc, mỗi tầng gắn nhãn chi phí Free/Rẻ/Rẻ+, nhánh reject màu
   đỏ VinUni ở tầng 1. Bên phải thêm thẻ 'Structured Output' minh họa 1 entry role/org/timeframe + thanh skill 0–100."*
-- *"Slide 18: layered architecture 5 tầng dọc Client→API→Application(RBAC)→Domain→Infrastructure→PostgreSQL,
-  tách nhánh AI Gateway bên phải tô indigo-soft, dải xương sống Read Models · Outbox · Audit ở đáy."*
-- *"Slide 19: hàng 6 KPI tile — 34 module, 98 migration, 2.022 test, 120 màn hình, vi/en, 20 bộ eval AI — số
+- *"Slide 19: layered architecture 5 tầng dọc Client→API→Application(RBAC)→Domain→Infrastructure→PostgreSQL,
+  tách nhánh AI Gateway bên phải tô indigo-soft, dải xương sống Read Models · Outbox · Audit ở đáy, badge
+  'multi-tenant-ready' cạnh tầng Organization; 2 hàng chip công nghệ Backend/Frontend ở dưới."*
+- *"Slide 06: hàng 6 KPI tile — 34 module, 98 migration, 2.022 test, 120 màn hình, vi/en, 20 bộ eval AI — số
   dùng JetBrains Mono cỡ lớn; 1 tile dùng gradient hero cho con số 2.022 test."*
-- *"Giảm bớt màu ở slide 8, chỉ node AI (bước 4,5) viền sky; các node còn lại trung tính."*
+- *"Slide 07: 4 thẻ doanh thu (ghi rõ 'ai trả') hội tụ vào thẻ AI Credit Ledger; bên phải mũi tên 'VinUni →
+  Tổ chức mới (+ license/SaaS)'; giữ 1 chip 'Được tài trợ' màu amber."*
+- *"Slide 03: 3 vòng mở rộng đồng tâm VinUni → Alumni/SV ngoài → Nền tảng độc lập (vòng ngoài nét đứt)."*
+- *"Giảm bớt màu ở slide 10, chỉ node AI (bước 4,5) viền sky; các node còn lại trung tính."*
 - *"Export: thêm CSS print để mỗi slide vừa đúng 1 trang A4 ngang, ẩn thanh điều hướng khi in."*
 
 ---
