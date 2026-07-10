@@ -102,7 +102,9 @@ async def test_cv_download_allowed_with_candidate_identity_grant(db_session) -> 
         db_session, principal=downloader, application_id=app_id
     )
     assert out.get("download_url")
-    assert out.get("has_watermark") is True
+    # Owner decision 2026-07-10: partner downloads the student's ORIGINAL file
+    # (no watermark). RBAC + audit are retained; the derived-watermark copy is gone.
+    assert out.get("has_watermark") is False
 
 
 # --------------------------------------------------------------------------- #

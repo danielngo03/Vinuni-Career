@@ -94,7 +94,13 @@ backend/app/modules/{domain}/
 - Organization logos/media use safe delivery URLs (`logo_url`/media URL) and
   never expose raw `logo_path`, object keys, local paths, bucket names, or
   document storage keys in public/company/job/dashboard responses.
-- CV download by partner requires watermark.
+- Partner CV VIEW serves the student's ORIGINAL file inline (owner 2026-07-10:
+  no derived/watermarked copy — "use the original CV"), sandboxed + type-allowlisted
+  against stored-XSS. Partner CV DOWNLOAD watermark is UNDER OWNER REVIEW (currently
+  serves the original); either way access stays RBAC-gated (`candidate_access`) and
+  fully audited (`cv_previewed` on inline view, `cv_downloaded` on download). NOTE:
+  `docs/SECURITY_PRIVACY.md` still mandates download watermark — reconcile once the
+  owner confirms.
 - Applications are always identified (owner decision 2026-07-10): no anonymous
   apply, blind-screening, or identity-reveal flow. Do not add `is_anonymous`
   gating, redacted previews, or a reveal/`candidate_identity` capability.

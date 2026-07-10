@@ -108,11 +108,14 @@ def partner_application(
 ) -> dict:
     """One application as a partner sees it — always fully identified.
 
-    ``applicant`` is the real identity block (:func:`applicant_block`). ``cv`` and
-    ``fit`` are DETAIL-only enrichments the service supplies (``None`` on the flat
-    list): ``cv`` = ``{snapshot_id, filename, view_url, download_url}`` (watermarked,
-    permission-gated), ``fit`` = ``{score, band, reasons}`` or ``None`` when the
-    CV-JD fit is not computable.
+    ``applicant`` is the real identity block (:func:`applicant_block`). ``cv`` =
+    ``{snapshot_id, filename, view_url, download_url, has_watermark:false}`` points
+    at the STUDENT'S ORIGINAL file (owner decision 2026-07-10; never a watermarked
+    derivative), permission-gated on ``candidate_identity:view_cv`` and DETAIL-only
+    (``None`` on the flat list). ``fit`` is supplied on BOTH surfaces: the LIST
+    carries the batched ``{score, band}`` (match ring); DETAIL carries the richer
+    ``{score, band, reasons}``. ``fit`` is ``None`` when the CV-JD fit is not
+    computable.
     """
 
     return {
@@ -124,9 +127,11 @@ def partner_application(
         "screening_answers": dict(app.screening_answers or {}),
         "cover_letter": app.cover_letter,
         "snapshot_id": str(app.snapshot_id) if app.snapshot_id else None,
-        # DETAIL-only: watermarked inline view + download URLs for the CV snapshot.
+        # DETAIL-only: inline view + download URLs for the student's ORIGINAL CV
+        # file (no watermark), permission-gated. ``None`` on the flat LIST.
         "cv": cv,
-        # DETAIL-only: user-safe CV-JD fit ``{score, band, reasons}`` | ``None``.
+        # User-safe CV-JD fit. LIST: batched ``{score, band}`` (match ring). DETAIL:
+        # ``{score, band, reasons}``. ``None`` when the fit is not computable.
         "fit": fit,
         # Decision metadata is partner/owner-only (the student view never carries
         # the coded reason or the partner's internal note). ``rejection_reason`` is

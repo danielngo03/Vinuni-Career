@@ -11,24 +11,38 @@ import {
 } from "@tanstack/react-query";
 import {
   ArrowLeft,
+  ArrowUpDown,
+  BadgeCheck,
+  Ban,
   CheckCheck,
   ChevronLeft,
   ChevronRight,
+  Copy,
   Download,
   Eye,
   Inbox,
   Kanban,
   Loader2,
-  BadgeCheck,
-  Search,
-  Ban,
-  ShieldAlert,
   LogIn,
+  MoreHorizontal,
+  Search,
+  ShieldAlert,
+  UserRound,
   Users2,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button, useToast } from "@/components/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { MessageCandidateButton } from "@/components/messaging/message-candidate-button";
 import {
   DataTable,
@@ -47,6 +61,7 @@ import {
   ApiError,
   applicationsApi,
   jobsApi,
+  organizationApi,
   resolveDownloadUrl,
   type PartnerApplication,
   type RejectionReason,
@@ -54,8 +69,15 @@ import {
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { CandidateDetail } from "./candidates-screen/candidate-detail";
 import { RejectModal } from "./candidates-screen/reject-modal";
-import { MatchRing, fitChipTone, fitTierKey } from "./candidates-screen/match-ring";
-import { nowIso, STAGE_FILTERS, type ForJobData } from "./candidates-screen/utils";
+import { MatchRing, matchTierKey, matchTone } from "./candidates-screen/match-ring";
+import {
+  nowIso,
+  sortRows,
+  SORT_KEYS,
+  STAGE_FILTERS,
+  type ForJobData,
+  type SortKey,
+} from "./candidates-screen/utils";
 import { APPLICATION_STATUS_CHIP, initials } from "./chip-tones";
 
 const nf = new Intl.NumberFormat();
@@ -63,6 +85,9 @@ const nf = new Intl.NumberFormat();
 type RejectTarget =
   | { kind: "single"; id: string }
   | { kind: "bulk"; ids: string[]; clear: () => void };
+
+/** Assignee filter value: "all" | "mine" | "unassigned" | a membership id. */
+type AssigneeFilter = string;
 
 export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
   const t = useTranslations("candidates");
@@ -79,6 +104,8 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
   );
   const [search, setSearch] = React.useState("");
   const [statusFilter, setStatusFilter] = React.useState<string>("all");
+  const [sortKey, setSortKey] = React.useState<SortKey>("needs_action");
+  const [assigneeFilter, setAssigneeFilter] = React.useState<AssigneeFilter>("all");
   const [downloading, setDownloading] = React.useState(false);
   const [exportingCsv, setExportingCsv] = React.useState(false);
 
@@ -93,6 +120,29 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     queryFn: () => jobsApi.getOwned(jobId),
     retry: false,
   });
+
+  // Team directory + "me" — drive the assignee filter (read-only; there is no
+  // application-assign endpoint yet, see handoff).
+  const capsQuery = useQuery({
+    queryKey: ["org", "me", "capabilities"],
+    queryFn: () => organizationApi.getMyCapabilities(),
+    retry: false,
+    staleTime: 5 * 60_000,
+  });
+  const membersQuery = useQuery({
+    queryKey: ["org", "members"],
+    queryFn: () => organizationApi.listMembers(),
+    retry: false,
+    staleTime: 5 * 60_000,
+  });
+  const myMembershipId = capsQuery.data?.membership_id ?? null;
+  const members = React.useMemo(
+    () =>
+      (membersQuery.data?.data ?? [])
+        .filter((m) => m.status === "active")
+        .map((m) => ({ id: m.id, name: m.full_name || m.user_email })),
+    [membersQuery.data],
+  );
 
   const forJobKey = React.useMemo(
     () => ["applications", "forJob", jobId] as const,
@@ -130,11 +180,28 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     return { total: rows.length, submitted, underReview, hired };
   }, [rows]);
 
-  const filteredRows: PartnerApplication[] = React.useMemo(
-    () =>
-      statusFilter === "all" ? rows : rows.filter((r) => r.status === statusFilter),
-    [rows, statusFilter],
-  );
+  // Parent owns filter + sort so the table order === prev/next order === count.
+  const visibleRows: PartnerApplication[] = React.useMemo(() => {
+    let out = rows;
+    if (statusFilter !== "all") out = out.filter((r) => r.status === statusFilter);
+    if (assigneeFilter === "unassigned") {
+      out = out.filter((r) => !r.assignee);
+    } else if (assigneeFilter === "mine") {
+      out = out.filter((r) => r.assignee?.membership_id === myMembershipId);
+    } else if (assigneeFilter !== "all") {
+      out = out.filter((r) => r.assignee?.membership_id === assigneeFilter);
+    }
+    const q = search.trim().toLowerCase();
+    if (q) {
+      out = out.filter(
+        (r) =>
+          r.applicant.full_name.toLowerCase().includes(q) ||
+          (r.applicant.email?.toLowerCase().includes(q) ?? false) ||
+          (r.applicant.headline?.toLowerCase().includes(q) ?? false),
+      );
+    }
+    return sortRows(out, sortKey);
+  }, [rows, statusFilter, assigneeFilter, myMembershipId, search, sortKey]);
 
   const detailQuery = useQuery({
     queryKey: ["applications", "partnerDetail", selectedId],
@@ -147,16 +214,49 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
   const detailKey = (id: string) =>
     ["applications", "partnerDetail", id] as const;
 
-  /* --------------- prev/next navigation within the filtered list ---------- */
-  const currentIndex = React.useMemo(
-    () => (selectedId ? filteredRows.findIndex((r) => r.id === selectedId) : -1),
-    [filteredRows, selectedId],
-  );
-  const prevId = currentIndex > 0 ? filteredRows[currentIndex - 1]!.id : null;
+  /* --------- prev/next: STABLE ordered snapshot captured on drawer open ------ */
+  const [navOrder, setNavOrder] = React.useState<string[]>([]);
+  const drawerOpenRef = React.useRef(false);
+  React.useEffect(() => {
+    if (!selectedId) {
+      drawerOpenRef.current = false;
+      if (navOrder.length) setNavOrder([]);
+      return;
+    }
+    // Snapshot once per open session, as soon as rows are available, so a status
+    // mutation that re-sorts/re-filters the live list can't make prev/next jump.
+    if (!drawerOpenRef.current && visibleRows.length > 0) {
+      setNavOrder(visibleRows.map((r) => r.id));
+      drawerOpenRef.current = true;
+    }
+  }, [selectedId, visibleRows, navOrder.length]);
+
+  const navIds = navOrder.length ? navOrder : visibleRows.map((r) => r.id);
+  const currentIndex = selectedId ? navIds.indexOf(selectedId) : -1;
+  const prevId = currentIndex > 0 ? navIds[currentIndex - 1]! : null;
   const nextId =
-    currentIndex >= 0 && currentIndex < filteredRows.length - 1
-      ? filteredRows[currentIndex + 1]!.id
+    currentIndex >= 0 && currentIndex < navIds.length - 1
+      ? navIds[currentIndex + 1]!
       : null;
+
+  // ←/→ keyboard navigation while the drawer is open (ignores form fields).
+  React.useEffect(() => {
+    if (!selectedId || rejectTarget) return;
+    const onKey = (e: KeyboardEvent) => {
+      const el = e.target as HTMLElement | null;
+      if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+      if (el?.isContentEditable) return;
+      if (e.key === "ArrowLeft" && prevId) {
+        e.preventDefault();
+        setSelectedId(prevId);
+      } else if (e.key === "ArrowRight" && nextId) {
+        e.preventDefault();
+        setSelectedId(nextId);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selectedId, prevId, nextId, rejectTarget]);
 
   /* ----------------------- optimistic cache helpers ----------------------- */
 
@@ -326,6 +426,15 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     }
   }
 
+  async function copyEmail(email: string) {
+    try {
+      await navigator.clipboard.writeText(email);
+      toast.show({ tone: "success", title: t("emailCopied") });
+    } catch {
+      toast.show({ tone: "error", title: t("emailCopyFailed") });
+    }
+  }
+
   function handleDownload() {
     const cv = selected?.cv;
     if (!cv) return;
@@ -390,29 +499,48 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
 
   const jobTitle = jobQuery.data?.title ?? t("title");
 
+  const sortLabel: Record<SortKey, string> = {
+    needs_action: t("sortNeedsAction"),
+    newest: t("sortNewest"),
+    oldest: t("sortOldest"),
+    best_match: t("sortBestMatch"),
+    status: t("sortStatus"),
+  };
+  const assigneeLabel =
+    assigneeFilter === "all"
+      ? t("assigneeAll")
+      : assigneeFilter === "mine"
+        ? t("assigneeMine")
+        : assigneeFilter === "unassigned"
+          ? t("unassigned")
+          : members.find((m) => m.id === assigneeFilter)?.name ?? t("assigneeAll");
+
   const columns: ColumnDef<PartnerApplication, unknown>[] = [
     {
       id: "match",
-      accessorFn: (r) => r.fit?.score ?? -1,
+      enableSorting: false,
       header: t("colMatch"),
-      size: 78,
+      size: 72,
       cell: ({ row }) => {
         const score = row.original.fit?.score ?? null;
         return (
-          <MatchRing
-            score={score}
-            size={34}
-            ariaLabel={score != null ? t("matchAria", { score: Math.round(score) }) : undefined}
-          />
+          <span title={t("matchTooltip")}>
+            <MatchRing
+              score={score}
+              size={34}
+              ariaLabel={score != null ? t("matchAria", { score: Math.round(score) }) : undefined}
+            />
+          </span>
         );
       },
     },
     {
       id: "applicant",
-      accessorFn: (r) => r.applicant.full_name,
+      enableSorting: false,
       header: t("colApplicant"),
       cell: ({ row }) => {
         const a = row.original.applicant;
+        const secondary = a.headline || a.email;
         return (
           <span className="inline-flex min-w-0 items-center gap-2.5">
             <Avatar size="sm">
@@ -421,8 +549,8 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
             </Avatar>
             <span className="min-w-0">
               <span className="block truncate font-medium text-foreground">{a.full_name}</span>
-              {a.email && (
-                <span className="block type-caption truncate text-muted-foreground">{a.email}</span>
+              {secondary && (
+                <span className="block type-caption truncate text-muted-foreground">{secondary}</span>
               )}
             </span>
           </span>
@@ -431,7 +559,7 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     },
     {
       id: "status",
-      accessorFn: (r) => r.status,
+      enableSorting: false,
       header: t("colStatus"),
       cell: ({ row }) => (
         <StatusChip tone={APPLICATION_STATUS_CHIP[row.original.status] ?? "neutral"}>
@@ -467,7 +595,7 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     },
     {
       id: "applied_at",
-      accessorFn: (r) => r.applied_at,
+      enableSorting: false,
       header: t("colApplied"),
       meta: { align: "right" },
       cell: ({ row }) => (
@@ -484,35 +612,54 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
       enableSorting: false,
       meta: { align: "right" },
       header: "",
-      cell: ({ row }) => (
-        <div className="flex items-center justify-end gap-1 whitespace-nowrap">
-          {row.original.status === "submitted" && (
-            <Button
-              variant="ghost"
-              size="sm"
-              loading={reviewMutation.isPending && reviewMutation.variables === row.original.id}
-              onClick={(e) => {
-                e.stopPropagation();
-                reviewMutation.mutate(row.original.id);
-              }}
-            >
-              <Search aria-hidden className="size-4" strokeWidth={1.8} />
-              {t("startReview")}
-            </Button>
-          )}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              setSelectedId(row.original.id);
-            }}
-          >
-            <Eye aria-hidden className="size-4" strokeWidth={1.8} />
-            {t("view")}
-          </Button>
-        </div>
-      ),
+      size: 48,
+      cell: ({ row }) => {
+        const r = row.original;
+        const canReview = r.status === "submitted";
+        const canReject = r.status === "submitted" || r.status === "under_review";
+        return (
+          <div className="flex justify-end" onClick={(e) => e.stopPropagation()}>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  aria-label={t("rowActions")}
+                  className="inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+                >
+                  <MoreHorizontal aria-hidden className="size-4" strokeWidth={1.8} />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="min-w-[11rem]">
+                <DropdownMenuItem onSelect={() => setSelectedId(r.id)}>
+                  <Eye aria-hidden strokeWidth={1.8} />
+                  {t("openDetail")}
+                </DropdownMenuItem>
+                {canReview && (
+                  <DropdownMenuItem onSelect={() => reviewMutation.mutate(r.id)}>
+                    <Search aria-hidden strokeWidth={1.8} />
+                    {t("startReview")}
+                  </DropdownMenuItem>
+                )}
+                {r.applicant.email && (
+                  <DropdownMenuItem onSelect={() => copyEmail(r.applicant.email as string)}>
+                    <Copy aria-hidden strokeWidth={1.8} />
+                    {t("copyEmail")}
+                  </DropdownMenuItem>
+                )}
+                {canReject && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem variant="destructive" onSelect={() => openRejectSingle(r.id)}>
+                      <Ban aria-hidden strokeWidth={1.8} />
+                      {t("reject")}
+                    </DropdownMenuItem>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        );
+      },
     },
   ];
 
@@ -593,11 +740,47 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
                 </span>
               ) : rows.length > 0 ? (
                 <span className="type-caption tabular-nums text-muted-foreground">
-                  {t("resultCount", { count: filteredRows.length })}
+                  {t("resultCount", { count: visibleRows.length })}
                 </span>
               ) : undefined
             }
           >
+            {/* Sort control — DEFAULT = needs-action (protects review SLA). */}
+            <ToolbarMenu icon={ArrowUpDown} label={t("sortLabel")} value={sortLabel[sortKey]}>
+              <DropdownMenuLabel>{t("sortLabel")}</DropdownMenuLabel>
+              <DropdownMenuRadioGroup
+                value={sortKey}
+                onValueChange={(v) => setSortKey(v as SortKey)}
+              >
+                {SORT_KEYS.map((k) => (
+                  <DropdownMenuRadioItem key={k} value={k}>
+                    {sortLabel[k]}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </ToolbarMenu>
+
+            {/* Assignee filter — team triage (read-only; no assign endpoint yet). */}
+            <ToolbarMenu icon={UserRound} label={t("assigneeLabel")} value={assigneeLabel}>
+              <DropdownMenuLabel>{t("assigneeLabel")}</DropdownMenuLabel>
+              <DropdownMenuRadioGroup
+                value={assigneeFilter}
+                onValueChange={setAssigneeFilter}
+              >
+                <DropdownMenuRadioItem value="all">{t("assigneeAll")}</DropdownMenuRadioItem>
+                {myMembershipId && (
+                  <DropdownMenuRadioItem value="mine">{t("assigneeMine")}</DropdownMenuRadioItem>
+                )}
+                <DropdownMenuRadioItem value="unassigned">{t("unassigned")}</DropdownMenuRadioItem>
+                {members.length > 0 && <DropdownMenuSeparator />}
+                {members.map((m) => (
+                  <DropdownMenuRadioItem key={m.id} value={m.id}>
+                    {m.name}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </ToolbarMenu>
+
             <div className="flex flex-wrap gap-1.5" role="group" aria-label={t("filterStatusLabel")}>
               {STAGE_FILTERS.map((s) => {
                 const activeChip = statusFilter === s;
@@ -622,15 +805,13 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
 
           <DataTable
             columns={columns}
-            data={filteredRows}
+            data={visibleRows}
             getRowId={(r) => r.id}
             loading={query.isPending}
-            globalFilter={search}
             pageSize={12}
             enableSelection
             activeRowId={selectedId ?? undefined}
             onRowClick={(r) => setSelectedId(r.id)}
-            initialSort={[{ id: "match", desc: true }]}
             bulkActions={(sel, clear) => {
               const reviewable = sel.filter((r) => r.status === "submitted").map((r) => r.id);
               const rejectable = sel
@@ -674,6 +855,7 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
                       variant="secondary"
                       onClick={() => {
                         setStatusFilter("all");
+                        setAssigneeFilter("all");
                         setSearch("");
                       }}
                     >
@@ -694,7 +876,7 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
         width="lg"
         closeLabel={tc("close")}
         title={selName}
-        subtitle={selected ? selected.applicant.email ?? jobTitle : undefined}
+        subtitle={selected ? selected.applicant.headline ?? selected.applicant.email ?? jobTitle : undefined}
         avatar={
           selected ? (
             <Avatar size="lg">
@@ -715,8 +897,8 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
                     size={34}
                     ariaLabel={t("matchAria", { score: Math.round(selScore) })}
                   />
-                  <StatusChip tone={fitChipTone(selScore)} size="sm">
-                    {t(fitTierKey(selScore))}
+                  <StatusChip tone={matchTone(selScore)} size="sm">
+                    {t(matchTierKey(selScore))}
                   </StatusChip>
                 </span>
               )}
@@ -734,10 +916,14 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
         headerActions={
           selected ? (
             <div className="flex items-center gap-1">
-              <div className="mr-1 flex items-center gap-0.5 rounded-lg border border-border">
+              <div
+                className="mr-1 flex items-center gap-0.5 rounded-lg border border-border"
+                title={t("navKeyHint")}
+              >
                 <button
                   type="button"
                   aria-label={t("prevCandidate")}
+                  aria-keyshortcuts="ArrowLeft"
                   disabled={!prevId}
                   onClick={() => prevId && setSelectedId(prevId)}
                   className="inline-flex size-8 items-center justify-center rounded-l-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-40"
@@ -746,12 +932,13 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
                 </button>
                 {currentIndex >= 0 && (
                   <span className="min-w-[3rem] px-1 text-center type-caption tabular-nums text-muted-foreground">
-                    {currentIndex + 1}/{filteredRows.length}
+                    {currentIndex + 1}/{navIds.length}
                   </span>
                 )}
                 <button
                   type="button"
                   aria-label={t("nextCandidate")}
+                  aria-keyshortcuts="ArrowRight"
                   disabled={!nextId}
                   onClick={() => nextId && setSelectedId(nextId)}
                   className="inline-flex size-8 items-center justify-center rounded-r-lg text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-40"
@@ -823,7 +1010,12 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
             />
           </div>
         ) : (
-          <CandidateDetail app={selected} downloading={downloading} onDownload={handleDownload} />
+          <CandidateDetail
+            key={selected.id}
+            app={selected}
+            downloading={downloading}
+            onDownload={handleDownload}
+          />
         )}
       </DetailSheet>
 
@@ -844,5 +1036,36 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
         onSubmit={submitReject}
       />
     </>
+  );
+}
+
+/** Toolbar dropdown-select (label + current value) for sort / assignee filters. */
+function ToolbarMenu({
+  icon: Icon,
+  label,
+  value,
+  children,
+}: {
+  icon: typeof ArrowUpDown;
+  label: string;
+  value: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-border bg-card px-3 text-[0.8125rem] font-medium text-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+        >
+          <Icon aria-hidden className="size-4 text-muted-foreground" strokeWidth={1.8} />
+          <span className="text-muted-foreground">{label}:</span>
+          <span className="max-w-[9rem] truncate">{value}</span>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="min-w-[12rem]">
+        {children}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

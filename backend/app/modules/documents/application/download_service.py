@@ -36,11 +36,73 @@ class InvalidDownloadTokenError(ResourceNotFoundError):
     """
 
 
+# Stored-XSS hardening (owner/security decision 2026-07-10): a student can upload
+# a hostile "CV" (HTML / SVG / a file whose stored ``mime_type`` is spoofed).
+# Only these types may EVER be rendered inline in the recruiter's browser; every
+# other type is forced to ``attachment`` and served as an opaque octet-stream so
+# it cannot execute script in-session. ``text/html`` / ``image/svg+xml`` /
+# ``application/xhtml+xml`` are deliberately absent.
+_INLINE_ALLOWLIST = frozenset(
+    {"application/pdf", "image/png", "image/jpeg", "image/webp"}
+)
+
+
+def _magic_matches(content: bytes, base_media: str) -> bool:
+    """Best-effort magic-number check that ``content`` really is ``base_media``.
+
+    Guards against a spoofed ``document.mime_type`` (e.g. an HTML file stored as
+    ``application/pdf``). Conservative: unknown/empty content returns False so a
+    mismatch downgrades to a safe attachment rather than trusting the label.
+    """
+
+    if not content:
+        return False
+    head = content[:16]
+    if base_media == "application/pdf":
+        # A leading BOM/whitespace before %PDF is tolerated by viewers.
+        return b"%PDF" in content[:1024]
+    if base_media == "image/png":
+        return head.startswith(b"\x89PNG\r\n\x1a\n")
+    if base_media == "image/jpeg":
+        return head.startswith(b"\xff\xd8\xff")
+    if base_media == "image/webp":
+        return head[:4] == b"RIFF" and head[8:12] == b"WEBP"
+    return False
+
+
+def _safe_serving(
+    content: bytes, media_type: str, requested_disposition: str
+) -> tuple[str, str]:
+    """Resolve the (served_media_type, disposition) safe to return to a browser.
+
+    - Inline is allowed ONLY for an allowlisted type whose bytes match its magic
+      number. Anything else is forced to ``attachment`` + ``application/octet-stream``
+      so a hostile upload can never render/execute inline.
+    - An explicit ``attachment`` request is always honoured (never upgraded to
+      inline).
+    """
+
+    base_media = (media_type or "").split(";")[0].strip().lower()
+    # An allowlisted type is only TRUSTED when its bytes match the magic number,
+    # so a spoofed ``mime_type`` (HTML stored as ``application/pdf``) can neither be
+    # rendered inline NOR served under the claimed content-type.
+    trusted = base_media in _INLINE_ALLOWLIST and _magic_matches(content, base_media)
+    if requested_disposition == "inline" and trusted:
+        return base_media, "inline"
+    # Attachment path: keep the real content-type only for a trusted allowlisted
+    # type; serve everything else as an opaque octet-stream.
+    served_media = base_media if trusted else "application/octet-stream"
+    return served_media, "attachment"
+
+
 @dataclass(slots=True)
 class DownloadResult:
     content: bytes
     media_type: str
     filename: str
+    # "inline" (embeddable in an <iframe> / PDF viewer) or "attachment" (download).
+    # Always resolved through ``_safe_serving`` — never trusted from the token alone.
+    disposition: str = "inline"
 
 
 async def resolve_download(
@@ -69,6 +131,15 @@ async def resolve_download(
         content, document_id = await _snapshot_bytes(
             session, snapshot_id=resource_uuid, watermark=watermark
         )
+    elif kind == "snapshot_original":
+        # Partner CV view/download: serve the STUDENT'S ORIGINAL stored file (the
+        # uploaded PDF/image, or the template-CV's rendered PDF) — NOT a
+        # watermarked derivative (owner decision 2026-07-10). The token was minted
+        # only after the recruitment service verified org ownership + CV-access
+        # RBAC, so it is the capability; no owner check here (unlike ``document``).
+        content, media_type, filename, document_id = await _snapshot_original_bytes(
+            session, snapshot_id=resource_uuid
+        )
     elif kind == "document":
         # Original uploaded-file preview (owner-scoped via the token ``uid``).
         content, media_type, filename = await _document_bytes(
@@ -92,7 +163,18 @@ async def resolve_download(
         )
     )
     await session.commit()
-    return DownloadResult(content=content, media_type=media_type, filename=filename)
+    # ``disp`` on the token REQUESTS a disposition, but the final decision is made
+    # by ``_safe_serving`` against the type allowlist + magic number — a hostile
+    # (HTML/SVG/spoofed) upload is force-downgraded to a sandboxed attachment and
+    # can never be rendered inline, regardless of the token.
+    requested = "attachment" if payload.get("disp") == "attachment" else "inline"
+    served_media, disposition = _safe_serving(content, media_type, requested)
+    return DownloadResult(
+        content=content,
+        media_type=served_media,
+        filename=filename,
+        disposition=disposition,
+    )
 
 
 async def _document_bytes(
@@ -143,3 +225,60 @@ async def _snapshot_bytes(
     # Snapshots are immutable; render the stored snapshot JSON (watermarked for partners).
     content = pdf_render.render_cv_pdf(snap.snapshot_json or {}, watermark=watermark)
     return content, snap.uploaded_document_id
+
+
+async def _snapshot_original_bytes(
+    session: AsyncSession, *, snapshot_id: uuid.UUID
+) -> tuple[bytes, str, str, uuid.UUID | None]:
+    """Serve the ORIGINAL CV a candidate submitted (owner decision 2026-07-10).
+
+    Two snapshot shapes:
+
+    - Uploaded-CV snapshot (``uploaded_document_id`` set): serve the STUDENT'S
+      ORIGINAL uploaded bytes (PDF/image) with their real mime + filename — no
+      re-render, no watermark. The recruiter sees exactly what the student
+      submitted.
+    - Builder-CV snapshot (no uploaded document): there is no stored source file,
+      so render the immutable snapshot JSON to a PDF (the template CV's rendered
+      PDF) — still WITHOUT a watermark.
+
+    Raises ``InvalidDownloadTokenError`` (→ 404) when the snapshot is missing, has
+    been retention-tombstoned, or its original bytes are gone.
+    """
+
+    snap = (
+        await session.execute(
+            select(ApplicationCvSnapshot).where(ApplicationCvSnapshot.id == snapshot_id)
+        )
+    ).scalar_one_or_none()
+    if snap is None:
+        raise InvalidDownloadTokenError()
+    body = snap.snapshot_json if isinstance(snap.snapshot_json, dict) else {}
+    if body.get("_retention_anonymized"):
+        # PII scrubbed by the retention sweep — nothing renderable.
+        raise InvalidDownloadTokenError()
+
+    if snap.uploaded_document_id is not None:
+        document = (
+            await session.execute(
+                select(Document).where(
+                    Document.id == snap.uploaded_document_id, Document.deleted_at.is_(None)
+                )
+            )
+        ).scalar_one_or_none()
+        if document is not None and document.storage_path:
+            try:
+                content = storage.get_storage().load(document.storage_path)
+            except storage.StorageError as exc:
+                raise InvalidDownloadTokenError() from exc
+            media_type = document.mime_type or "application/pdf"
+            filename = document.original_name or "cv.pdf"
+            return content, media_type, filename, document.id
+        # Original bytes gone (security-rejected / purged) — fall through to render.
+
+    # Builder-CV snapshot (or missing upload bytes): render the immutable JSON,
+    # unwatermarked. A title suffix keeps a friendly filename.
+    content = pdf_render.render_cv_pdf(body, watermark=None)
+    raw_title = str(body.get("title") or "cv").strip() or "cv"
+    filename = raw_title if raw_title.lower().endswith(".pdf") else f"{raw_title}.pdf"
+    return content, "application/pdf", filename, snap.uploaded_document_id

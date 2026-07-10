@@ -175,6 +175,12 @@ export interface PartnerApplicant {
   full_name: string;
   avatar_url: string | null;
   email: string | null;
+  /**
+   * Optional, pre-composed identity subtitle for the candidate row/drawer
+   * (e.g. "K65 · Computer Science"). Backend-composed so the frontend never
+   * assembles grad-year/major itself. Falls back to email when absent.
+   */
+  headline?: string | null;
 }
 
 /**
@@ -269,6 +275,76 @@ export interface CvDownloadInfo {
   snapshot_id: string;
   has_watermark: boolean;
   download_url: string;
+}
+
+/* ----------------------------- CV evaluation ------------------------------ */
+
+/**
+ * Categorical HR verdict for an on-demand AI CV evaluation. `strong` |
+ * `consider` | `weak` is the wire contract; localized labels live in i18n
+ * (`candidates.evaluate*`). Open union so an unknown value renders a neutral
+ * chip instead of crashing. This is the recruiter's read of the CV against the
+ * JD — NOT an AI confidence score and never a provider/model internal.
+ */
+export type CvEvaluationRecommendation =
+  | "strong"
+  | "consider"
+  | "weak"
+  | (string & {});
+
+/** A strength the CV evidences, with the concrete supporting evidence. */
+export interface CvEvaluationStrength {
+  point: string;
+  /** The concrete CV evidence behind the strength. */
+  evidence: string;
+}
+
+/** A gap phrased as "not evidenced" (never "candidate lacks"). */
+export interface CvEvaluationGap {
+  point: string;
+  /** Why the missing/weak evidence matters for THIS role. */
+  why_it_matters: string;
+}
+
+/** A per-criterion verdict. `verdict` is a short backend-provided label. */
+export interface CvEvaluationCriterion {
+  name: string;
+  /** Human-readable verdict, e.g. "met" | "partial" | "not evidenced". */
+  verdict: string;
+  note: string;
+}
+
+/**
+ * On-demand, recruiter-style AI evaluation of a candidate's CV against the job
+ * (`POST /applications/{id}/cv-evaluation`). Categorical-first: the
+ * `recommendation` chip + evidence-backed strengths/gaps + per-criterion
+ * verdicts lead. `overall_score` is retained for completeness but is NOT the
+ * headline — the deterministic CV–JD match ring is the surfaced number. Backend
+ * persists + version-stamps the result; `evaluated_at` reflects the last run.
+ */
+export interface CvEvaluation {
+  overall_score: number;
+  recommendation: CvEvaluationRecommendation;
+  summary: string;
+  strengths: CvEvaluationStrength[];
+  gaps: CvEvaluationGap[];
+  criteria: CvEvaluationCriterion[];
+  /** ISO timestamp of the run, when the backend returns it. */
+  evaluated_at?: string | null;
+  /** A suggested next step for the recruiter (advisory), when present. */
+  next_step?: string | null;
+  /** The deterministic CV–JD match number + localized band (the ring's value). */
+  match_score?: number | null;
+  match_band?: string | null;
+  /**
+   * True when the verdict is the deterministic rule-based fallback (AI down /
+   * over budget / guarded) rather than a full model read. The UI must disclose
+   * this honestly instead of presenting it as an AI evaluation.
+   */
+  is_fallback?: boolean;
+  fallback_reason?: string | null;
+  /** True when returned from the version-stamped cache (no fresh spend). */
+  cached?: boolean;
 }
 
 /* ------------------------------ Pipeline board ---------------------------- */
@@ -450,6 +526,21 @@ export const applicationsCoreApi = {
   /* Partner: obtain a watermarked, signed CV download URL. */
   getCvDownload(id: string): Promise<CvDownloadInfo> {
     return api.get<CvDownloadInfo>(`/applications/${id}/cv-download`);
+  },
+
+  /**
+   * Partner: run an on-demand, recruiter-style AI evaluation of the candidate's
+   * CV against the job. Explicit, cost-bearing action (usage-metered) — only
+   * called on the recruiter's click, never automatically. The backend persists
+   * + version-stamps the result, so a repeat GET-style call returns the cached
+   * evaluation; passing `force` re-runs it. 402/QUOTA_EXCEEDED when the org's AI
+   * allowance is exhausted; AI_UNAVAILABLE when the provider is down.
+   */
+  evaluateCv(id: string, opts?: { force?: boolean }): Promise<CvEvaluation> {
+    // Re-run is signalled via the `refresh` query param (backend re-meters when
+    // truthy); the normal call returns the version-stamped cached verdict.
+    const qs = opts?.force ? "?refresh=true" : "";
+    return api.post<CvEvaluation>(`/applications/${id}/cv-evaluation${qs}`, {});
   },
 
   /* Partner: move `submitted` → `under_review` (idempotent). */

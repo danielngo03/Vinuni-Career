@@ -7,12 +7,15 @@ documents services or ORM internals). At application-submit time it calls
 a builder CV version or an uploaded document. Snapshots are never updated or
 deleted (``docs/CV_STUDIO_SPEC.md`` §5; ``docs/SECURITY_PRIVACY.md``).
 
-Partner access to a snapshot (always watermarked) is granted through an injectable
-authorizer seam (:func:`set_snapshot_access_authorizer`) so the recruitment module
-supplies its own context check (e.g. "this partner owns the job the snapshot was
-submitted to") without the documents module importing recruitment internals.
-Until an authorizer is wired, only the snapshot owner can access it; everyone else
-gets ``404``.
+Partner CV view/download serves the STUDENT'S ORIGINAL file (owner decision
+2026-07-10) via :func:`build_partner_cv_view` / :func:`build_snapshot_original_download`
+— NOT a watermarked derivative. The recruitment service verifies org ownership +
+CV-access RBAC before minting the signed URL, and every byte fetch is audited.
+
+The legacy watermarked authorizer seam (:func:`set_snapshot_access_authorizer` /
+:func:`get_snapshot_download`) is retained for the owner self-download path (and
+backward compatibility); until an authorizer is wired, only the snapshot owner can
+use that path and everyone else gets ``404``.
 """
 
 from __future__ import annotations
@@ -271,26 +274,69 @@ async def get_snapshot_download(
     }
 
 
+_DOC_EXTENSIONS = (".pdf", ".png", ".jpg", ".jpeg", ".webp", ".docx", ".doc")
+
+
+def _snapshot_filename(body: dict) -> str:
+    """Friendly display filename for a snapshot's ORIGINAL file.
+
+    Uploaded-CV snapshots store the real ``document.original_name`` as ``title``
+    (often already carrying an extension); builder-CV snapshots store the CV
+    title (no extension → append ``.pdf`` since a builder CV renders to PDF).
+    """
+
+    raw_title = str(body.get("title") or "cv").strip() or "cv"
+    if raw_title.lower().endswith(_DOC_EXTENSIONS):
+        return raw_title
+    return f"{raw_title}.pdf"
+
+
+def _original_cv_url(snap: ApplicationCvSnapshot, *, actor_id: uuid.UUID | None, disp: str) -> str:
+    """Mint a signed ``/cv-files`` URL that serves the snapshot's ORIGINAL bytes.
+
+    ``disp`` is ``"inline"`` (embeddable view) or ``"attachment"`` (download). The
+    token carries only a resource reference + access metadata (never a storage
+    path) and NO watermark flag — the partner sees the student's real file.
+    """
+
+    token = storage.make_signed_token(
+        {
+            "kind": "snapshot_original",
+            "id": str(snap.id),
+            "uid": str(actor_id) if actor_id else "",
+            "purpose": "application_review" if disp == "inline" else "application_download",
+            "disp": disp,
+        }
+    )
+    base = get_settings().app_url.rstrip("/")
+    return f"{base}/api/v1/cv-files/{token}"
+
+
 async def build_partner_cv_view(
     session: AsyncSession,
     *,
     snapshot_id: uuid.UUID,
     actor_id: uuid.UUID | None,
-    watermark_text: str,
 ) -> dict | None:
-    """Mint a WATERMARKED, embeddable inline view + download URL for a snapshot.
+    """Mint an embeddable inline view + download URL for a snapshot's ORIGINAL file.
 
-    The recruitment service calls this AFTER it has verified the partner's org
-    ownership + CV-access RBAC for the application, so this trusts the caller
-    (no authorizer seam). It returns ``{snapshot_id, filename, view_url,
-    download_url}``: both URLs point at the token-authorized ``/api/v1/cv-files``
-    endpoint, which serves the rendered snapshot PDF ``inline`` (embeddable in an
-    ``<iframe>`` / PDF viewer) with the partner watermark burned in at render
-    time. The token carries only a resource reference + access metadata — never a
-    storage path. Every byte fetch is audited via ``signed_file_accesses``.
+    Owner decision 2026-07-10: the partner sees the STUDENT'S ORIGINAL CV — the
+    file the student uploaded, or the template CV's rendered PDF — NOT a
+    watermarked derivative. The recruitment service calls this AFTER it has
+    verified the partner's org ownership + CV-access RBAC for the application, so
+    this trusts the caller (no authorizer seam). Returns ``{snapshot_id,
+    filename, view_url, download_url}``:
 
-    Returns ``None`` when the snapshot is missing or has been retention-tombstoned
-    (nothing renderable), so the caller surfaces ``cv: null``.
+    - ``view_url`` serves the original ``inline`` (``Content-Disposition: inline``,
+      no ``X-Frame-Options``) so the frontend can embed it in an ``<iframe>``.
+    - ``download_url`` serves the same original bytes as an ``attachment``.
+
+    Both point at the token-authorized ``/api/v1/cv-files`` endpoint; the token
+    carries only a resource reference (never a storage path) and every byte fetch
+    is audited via ``signed_file_accesses``.
+
+    Returns ``None`` when the snapshot is missing or retention-tombstoned (nothing
+    renderable), so the caller surfaces ``cv: null``.
     """
 
     snap = await _load_snapshot(session, snapshot_id=snapshot_id)
@@ -298,25 +344,37 @@ async def build_partner_cv_view(
     if not body or body.get(_RETENTION_TOMBSTONE_MARKER):
         return None
 
-    watermark = watermark_text or "VinUni Career"
-    token = storage.make_signed_token(
-        {
-            "kind": "snapshot",
-            "id": str(snap.id),
-            "uid": str(actor_id) if actor_id else "",
-            "purpose": "application_review",
-            "wm": watermark,
-        }
-    )
-    base = get_settings().app_url.rstrip("/")
-    url = f"{base}/api/v1/cv-files/{token}"
-    raw_title = str(body.get("title") or "cv").strip() or "cv"
-    filename = raw_title if raw_title.lower().endswith(".pdf") else f"{raw_title}.pdf"
     return {
         "snapshot_id": str(snap.id),
-        "filename": filename,
-        "view_url": url,
-        "download_url": url,
+        "filename": _snapshot_filename(body),
+        "view_url": _original_cv_url(snap, actor_id=actor_id, disp="inline"),
+        "download_url": _original_cv_url(snap, actor_id=actor_id, disp="attachment"),
+        # Explicit for the frontend + audits: the partner CV is the original file,
+        # never a watermarked copy (owner decision 2026-07-10).
+        "has_watermark": False,
+    }
+
+
+async def build_snapshot_original_download(
+    session: AsyncSession,
+    *,
+    snapshot_id: uuid.UUID,
+    actor_id: uuid.UUID | None,
+) -> dict:
+    """Return a signed download URL for a snapshot's ORIGINAL file (no watermark).
+
+    Used by the recruitment ``/applications/{id}/cv-download`` endpoint for the
+    partner path. The caller MUST have already verified org ownership +
+    ``download_cv`` RBAC. Shaped like :func:`get_snapshot_download` (``{snapshot_id,
+    has_watermark, download_url}``) so the response contract is unchanged, but the
+    bytes are the student's original file served as an attachment.
+    """
+
+    snap = await _load_snapshot(session, snapshot_id=snapshot_id)
+    return {
+        "snapshot_id": str(snap.id),
+        "has_watermark": False,
+        "download_url": _original_cv_url(snap, actor_id=actor_id, disp="attachment"),
     }
 
 

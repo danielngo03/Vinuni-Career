@@ -534,3 +534,69 @@ class JobApplicationInvitation(Base):
         onupdate=func.now(),
     )
     deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+# --------------------------------------------------------------------------- #
+# On-demand HR CV↔JD evaluation cache (partner AI screen — "evaluate this CV")  #
+# --------------------------------------------------------------------------- #
+
+
+class CvEvaluation(Base):
+    """A persisted, version-stamped AI verdict of one application's CV vs its JD.
+
+    The partner "AI evaluate this candidate" action screens the application's
+    IMMUTABLE CV snapshot against the job it was submitted to and stores the
+    user-safe verdict here so re-opening the modal returns instantly with no
+    token re-spend. ``?refresh=true`` recomputes and re-meters (updates the row).
+
+    Freshness stamps: ``snapshot_id`` IS the CV-content version (immutable), so a
+    row is invalidated (recomputed in place) only when the JD changes
+    (``job_version`` != the live ``jobs.version``). ``cv_version`` is a stable
+    stamp reserved for a future re-snapshot scheme (always ``1`` today) and is
+    part of the natural key so the cache is keyed by
+    ``(snapshot_id, job_id, cv_version)``.
+
+    ``result_json`` holds ONLY the user-safe verdict (recommendation / summary /
+    strengths / gaps / criteria) — never provider/model/token/latency/prompt
+    internals. ``snapshot_id`` is a bare UUID (no FK) because the immutable
+    snapshot is owned by the ``documents`` module.
+    """
+
+    __tablename__ = "cv_evaluations"
+    __table_args__ = (
+        UniqueConstraint(
+            "snapshot_id", "job_id", "cv_version", name="uq_cv_evaluations_snapshot_job"
+        ),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
+    application_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("applications.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    # Bare UUID — the immutable snapshot is owned by the documents module.
+    snapshot_id: Mapped[uuid.UUID] = mapped_column(nullable=False, index=True)
+    job_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("jobs.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    org_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    cv_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    job_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    recommendation: Mapped[str] = mapped_column(String(20), nullable=False)
+    overall_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    deterministic_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    result_json: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
+    is_fallback: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    created_by: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+    )

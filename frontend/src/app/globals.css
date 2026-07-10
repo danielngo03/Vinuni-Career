@@ -458,9 +458,23 @@
   --content-danger-soft: rgba(200, 53, 56, 0.12);
   --content-info-soft: var(--viz-sky-soft);
   --content-ai-soft: var(--viz-indigo-soft);
-  /* ONE restrained hero gradient (indigo→violet), used sparingly for a single
-     top forecast/summary tile per surface. Never a full-page background. */
-  --hero-gradient: linear-gradient(135deg, #4f46e5 0%, #6d28d9 55%, #7c3aed 100%);
+
+  /* CV↔JD match / fit scale — colorblind-safe, drives MatchRing stroke + band
+     bars. LOCKED 3-band product semantics (owner 2026-07-07, no blue/black
+     tier): strong ≥80 = emerald "ready", mid 50–79 = amber "usable with work",
+     weak <50 = red "not there yet". Always paired with a numeric label + tier
+     chip so it never relies on hue alone. `--fit-track` is the unfilled ring/
+     bar groove. These read on both light + dark. */
+  --fit-strong: var(--viz-emerald);
+  --fit-mid: var(--viz-amber);
+  --fit-weak: var(--viz-rose);
+  --fit-track: var(--bg-muted);
+
+  /* ONE restrained hero gradient — indigo-ONLY deep wash (NO violet/purple),
+     used sparingly for a single top forecast/summary tile per surface. Never a
+     full-page background. Violet is a chart-series color only, never a hero
+     (owner 2026-07-10). Dark theme deepens it (see [data-theme="dark"]). */
+  --hero-gradient: linear-gradient(135deg, #312e81 0%, #3730a3 48%, #4f46e5 100%);
   --hero-gradient-fg: #ffffff;
 
   /* ── Locked type scale (Plus Jakarta Sans). Metrics use tabular-nums. ── */
@@ -553,6 +567,11 @@
   --kicker: #8f8f8f;
   --class-curated: #ededed;
   --class-strategic: #a1a1a1;
+
+  /* Hero gradient deepens for the near-black shell — indigo-950→indigo-700 so
+     the single hero tile reads as intentional/premium against #0a0a0a instead
+     of glowing. Still indigo-only (no violet). Same token name; value only. */
+  --hero-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 52%, #4338ca 100%);
 
   /* "Blue"/ink ramp flips for dark so old call sites stay legible */
   --blue-950: #fafafa;

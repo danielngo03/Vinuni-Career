@@ -21,11 +21,11 @@ export interface MessagingCenterProps {
 }
 
 /**
- * Slide-in messaging center. Master view = the inbox (my threads, masked
+ * Slide-in messaging center. Master view = the inbox (my threads, server-provided
  * counterpart labels, unread chips, announcement markers); detail view = one
  * open thread (transcript + composer). Polls the thread list while open so a new
- * institutional message surfaces without a refresh. Identity is the server label
- * only — the partner side renders an anonymous handle until reveal.
+ * institutional message surfaces without a refresh. Counterpart identity is always
+ * the server-supplied label.
  */
 export function MessagingCenter({
   open,

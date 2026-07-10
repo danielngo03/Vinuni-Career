@@ -67,20 +67,53 @@ const STATUS_TONE: Record<JobStatus, ChipTone> = {
   expired: "neutral",
 };
 
-/** JD moderation/quality gate state, derived from lifecycle status. */
-function gateFor(status: JobStatus): { key: string; tone: ChipTone } | null {
+/**
+ * JD approval-workflow stage, derived from lifecycle status. Rendered as a quiet
+ * sub-label under the Status chip (folded in per recruiter review — a standalone
+ * column just duplicated Status). Returns null for terminal/active states where
+ * the Status chip already tells the whole story.
+ */
+function gateFor(status: JobStatus): { key: string } | null {
   switch (status) {
     case "draft":
-      return { key: "gatePreSubmit", tone: "amber" };
+      return { key: "gatePreSubmit" };
     case "rejected":
-      return { key: "gateRejected", tone: "danger" };
+      return { key: "gateRejected" };
     case "pending_review":
-      return { key: "gateInReview", tone: "sky" };
-    case "active":
-      return { key: "gateCleared", tone: "emerald" };
+      return { key: "gateInReview" };
     default:
       return null;
   }
+}
+
+/** Triage sort order: reqs that need the recruiter first (open > awaiting > drafts > closed). */
+const STATUS_PRIORITY: Record<JobStatus, number> = {
+  active: 0,
+  pending_review: 1,
+  draft: 2,
+  rejected: 3,
+  expired: 4,
+  closed: 5,
+};
+
+/**
+ * Count of new applications not yet reviewed for a job. Forward-compatible: the
+ * owner jobs read-model does not expose this yet, so it reads defensively and the
+ * column shows "—" until the backend adds `unreviewed_count` (Lane 1 / backend).
+ */
+function unreviewedOf(r: OwnerJobSummary): number | null {
+  const v = (r as { unreviewed_count?: number | null }).unreviewed_count;
+  return typeof v === "number" ? v : null;
+}
+
+/** Deadline risk for an active/open req: overdue (passed) or closing within 7 days. */
+function deadlineRisk(iso: string | null, status: JobStatus): "overdue" | "soon" | null {
+  if (!iso || status !== "active") return null;
+  const ms = new Date(iso).getTime() - Date.now();
+  if (Number.isNaN(ms)) return null;
+  if (ms < 0) return "overdue";
+  if (ms < 7 * 86_400_000) return "soon";
+  return null;
 }
 
 export function PartnerJobsScreen() {
@@ -236,36 +269,62 @@ export function PartnerJobsScreen() {
     {
       accessorKey: "status",
       header: t("colStatus"),
-      cell: ({ row }) => (
-        <StatusChip tone={STATUS_TONE[row.original.status] ?? "neutral"} dot>
-          {labels.status(row.original.status, row.original.status_label)}
-        </StatusChip>
-      ),
-    },
-    {
-      id: "gate",
-      header: t("colGate"),
-      enableSorting: false,
+      // Triage order: open reqs first, then awaiting-review, drafts, terminal.
+      sortingFn: (a, b) =>
+        (STATUS_PRIORITY[a.original.status] ?? 99) - (STATUS_PRIORITY[b.original.status] ?? 99),
       cell: ({ row }) => {
-        const gate = gateFor(row.original.status);
-        if (!gate) return <span className="text-muted-foreground">—</span>;
-        return <StatusChip tone={gate.tone} size="sm">{t(gate.key)}</StatusChip>;
+        const r = row.original;
+        const gate = gateFor(r.status);
+        return (
+          <div className="flex min-w-0 flex-col items-start gap-1">
+            <StatusChip tone={STATUS_TONE[r.status] ?? "neutral"} dot>
+              {labels.status(r.status, r.status_label)}
+            </StatusChip>
+            {gate && (
+              <span
+                className="type-caption truncate text-muted-foreground"
+                title={r.moderation_reason_label ?? undefined}
+              >
+                {t(gate.key)}
+              </span>
+            )}
+          </div>
+        );
       },
     },
     {
-      id: "views",
-      header: t("colViews"),
+      id: "new",
+      header: t("colNew"),
       meta: { align: "right" },
-      cell: ({ row }) => (
-        <span className="tabular-nums text-foreground">
-          {row.original.view_count != null ? nf.format(row.original.view_count) : "—"}
-        </span>
-      ),
+      // accessorFn (not just sortingFn) is required for the column to be sortable
+      // in TanStack; `-1` sentinel sinks the unknown "—" rows below real counts.
+      accessorFn: (r) => unreviewedOf(r) ?? -1,
+      enableGlobalFilter: false,
+      cell: ({ row }) => {
+        const n = unreviewedOf(row.original);
+        if (n == null) {
+          return (
+            <span className="tabular-nums text-muted-foreground" title={t("colNewHint")}>
+              —
+            </span>
+          );
+        }
+        if (n === 0) return <span className="tabular-nums text-muted-foreground">0</span>;
+        return (
+          <span className="inline-flex justify-end">
+            <StatusChip tone="amber" size="sm" className="tabular-nums">
+              {nf.format(n)}
+            </StatusChip>
+          </span>
+        );
+      },
     },
     {
       id: "applies",
       header: t("colApplies"),
       meta: { align: "right" },
+      accessorFn: (r) => r.application_count ?? 0,
+      enableGlobalFilter: false,
       cell: ({ row }) => (
         <span className="tabular-nums text-foreground">
           {row.original.application_count != null ? nf.format(row.original.application_count) : "—"}
@@ -277,14 +336,34 @@ export function PartnerJobsScreen() {
       accessorKey: "application_deadline",
       header: t("colDeadline"),
       meta: { align: "right" },
+      enableGlobalFilter: false,
       cell: ({ row }) => {
-        const dl = row.original.application_deadline;
+        const r = row.original;
+        const dl = r.application_deadline;
+        if (!dl) return <span className="tabular-nums text-muted-foreground">—</span>;
+        const risk = deadlineRisk(dl, r.status);
+        const color =
+          risk === "overdue"
+            ? "var(--content-danger)"
+            : risk === "soon"
+              ? "var(--content-warning)"
+              : undefined;
+        const riskLabel =
+          risk === "overdue" ? t("deadlineOverdue") : risk === "soon" ? t("deadlineSoon") : null;
         return (
           <span
-            className="tabular-nums text-muted-foreground"
-            title={dl ? formatDateTimeShort(dl) : undefined}
+            className="inline-flex items-center justify-end gap-1.5 tabular-nums"
+            title={riskLabel ? `${riskLabel} · ${formatDateTimeShort(dl)}` : formatDateTimeShort(dl)}
+            style={color ? { color } : undefined}
           >
-            {dl ? formatDateShort(dl) : "—"}
+            {risk && (
+              <span
+                aria-hidden
+                className="size-1.5 shrink-0 rounded-full"
+                style={{ background: color }}
+              />
+            )}
+            <span className={color ? "font-medium" : "text-muted-foreground"}>{formatDateShort(dl)}</span>
           </span>
         );
       },
@@ -397,6 +476,11 @@ export function PartnerJobsScreen() {
               getRowId={(r) => r.id}
               loading={listQ.isPending}
               globalFilter={search}
+              // Default triage sort: open reqs first, biggest untriaged pile up top.
+              initialSort={[
+                { id: "status", desc: false },
+                { id: "new", desc: true },
+              ]}
               onRowClick={(r) => setOpenJobId(r.id)}
               activeRowId={openJobId ?? undefined}
               enableSelection

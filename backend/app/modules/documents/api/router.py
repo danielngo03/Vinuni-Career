@@ -671,6 +671,55 @@ async def get_export(
 # --------------------------------------------------------------------------- #
 
 
+def _content_disposition(disposition: str, filename: str) -> str:
+    """Build a header-injection-safe ``Content-Disposition`` value.
+
+    Strips CR/LF/control chars + quotes/backslash from the name (header-injection
+    guard) and adds an RFC 5987 ``filename*`` for non-ASCII names so a Vietnamese
+    CV name survives without breaking the header.
+    """
+
+    from urllib.parse import quote
+
+    safe = "".join(
+        ch for ch in (filename or "") if ord(ch) >= 0x20 and ord(ch) != 0x7F and ch not in '"\\'
+    ).strip()
+    if not safe:
+        safe = "cv"
+    ascii_name = safe.encode("ascii", "ignore").decode("ascii").strip() or "cv"
+    encoded = quote(safe, safe="")
+    return f"{disposition}; filename=\"{ascii_name}\"; filename*=UTF-8''{encoded}"
+
+
+def _cv_file_security_headers(disposition: str, filename: str) -> dict[str, str]:
+    """Stored-XSS-safe response headers for the signed file-serve path.
+
+    - ``X-Content-Type-Options: nosniff`` — the browser must not MIME-sniff a
+      served PDF into HTML.
+    - ``Content-Security-Policy: sandbox …`` — the KEY control: the served
+      document runs in a maximally-restrictive sandbox (no script execution),
+      neutralizing any hostile CV even when embedded in the recruiter's iframe.
+      Works cross-origin (the file is served from the API origin, the FE embeds
+      it from a different origin), so ``frame-ancestors`` (NOT ``X-Frame-Options``,
+      which would block the legitimate cross-origin iframe) restricts WHO may
+      frame it to the app's own FE origins.
+    """
+
+    settings = get_settings()
+    frame_ancestors = ["'self'", settings.frontend_url.rstrip("/")]
+    for origin in settings.cors_origins_list:
+        origin = origin.strip().rstrip("/")
+        if origin and origin != "*" and origin not in frame_ancestors:
+            frame_ancestors.append(origin)
+    csp = "sandbox; frame-ancestors " + " ".join(frame_ancestors)
+    return {
+        "Content-Disposition": _content_disposition(disposition, filename),
+        "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": csp,
+        "Referrer-Policy": "no-referrer",
+    }
+
+
 @files_router.get("/{token}", summary="Download a file via a signed token")
 async def download_file(
     token: str,
@@ -679,10 +728,13 @@ async def download_file(
     ctx: RequestContext = Depends(get_request_context),
 ) -> Response:
     result = await download_service.resolve_download(session, token=token, ctx=ctx)
+    # ``inline`` lets the FE embed an ALLOWLISTED (PDF/PNG/JPEG/WebP) CV in an
+    # <iframe>/PDF viewer; anything else was force-downgraded to ``attachment`` +
+    # octet-stream by ``resolve_download``. Every response is sandboxed + nosniff.
     return Response(
         content=result.content,
         media_type=result.media_type,
-        headers={"Content-Disposition": f'inline; filename="{result.filename}"'},
+        headers=_cv_file_security_headers(result.disposition, result.filename),
     )
 
 

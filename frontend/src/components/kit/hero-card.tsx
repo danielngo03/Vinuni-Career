@@ -2,10 +2,12 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * GradientHeroCard — the ONE restrained indigo→violet gradient tile per surface
- * (v10 rule). Reserved for a top forecast / weighted-pipeline / headline summary
- * (à la Pipeline-OS). Do NOT use more than one per screen and never as a page
- * background. White foreground; content stays legible on the gradient.
+ * GradientHeroCard — the ONE restrained indigo-only gradient tile per surface
+ * (v10 rule). A deep indigo wash driven by `--hero-gradient` (NO violet/purple —
+ * violet is a chart-series color only). Reserved for a top forecast /
+ * weighted-pipeline / headline summary (à la Pipeline-OS). Do NOT use more than
+ * one per screen and never as a page background. White foreground; content stays
+ * legible on the gradient in both light + dark themes.
  */
 export function GradientHeroCard({
   eyebrow,

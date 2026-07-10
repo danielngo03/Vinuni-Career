@@ -110,8 +110,12 @@ function CommandCenterSkeleton() {
         ))}
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
-        <div className="h-40 animate-skeleton rounded-xl bg-[var(--bg-muted)] lg:col-span-2" />
-        <div className="h-40 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
+        <div className="h-52 animate-skeleton rounded-xl bg-[var(--bg-muted)] lg:col-span-2" />
+        <div className="h-52 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
+      </div>
+      <div className="grid gap-4 lg:grid-cols-3">
+        <div className="h-[264px] animate-skeleton rounded-xl bg-[var(--bg-muted)] lg:col-span-2" />
+        <div className="h-[264px] animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="h-72 animate-skeleton rounded-xl bg-[var(--bg-muted)] lg:col-span-2" />
@@ -243,32 +247,44 @@ export function PartnerCommandCenter() {
       <div className="space-y-4">
         <KpiSection ops={ops} monthly={analyticsQ.data?.monthly_trend ?? []} />
 
-        {/* Hero + applications trend (left) · pipeline health + funnel (right) */}
+        {/* Company pipeline hero + this recruiter's queue (personal next actions) */}
         <div className="grid gap-4 lg:grid-cols-3 lg:items-start">
-          <div className="space-y-4 lg:col-span-2">
-            <HeroSection ops={ops} pipeline={pipelineQ.data} />
+          <HeroSection className="lg:col-span-2" ops={ops} pipeline={pipelineQ.data} />
+          <AttentionCard ops={ops} />
+        </div>
+
+        {/* Applications trend + pipeline health */}
+        <div className="grid gap-4 lg:grid-cols-3 lg:items-start">
+          <div className="lg:col-span-2">
             <TrendCard monthly={analyticsQ.data?.monthly_trend ?? []} loading={analyticsQ.isPending} />
           </div>
+          <PipelineHealthCard pipeline={pipelineQ.data} loading={pipelineQ.isPending} />
+        </div>
+
+        {/* Job performance table + conversion funnel / source mix */}
+        <div className="grid gap-4 lg:grid-cols-3 lg:items-start">
+          <div className="lg:col-span-2">
+            <JobPerformanceCard ops={ops} />
+          </div>
           <div className="space-y-4">
-            <PipelineHealthCard pipeline={pipelineQ.data} loading={pipelineQ.isPending} />
             <FunnelCard funnel={analyticsQ.data?.funnel ?? []} loading={analyticsQ.isPending} />
+            <ChannelMixCard ops={ops} />
           </div>
         </div>
 
-        {/* Job performance + operational rail */}
+        {/* Team activity + access alerts / engagement */}
         <div className="grid gap-4 lg:grid-cols-3 lg:items-start">
-          <div className="space-y-4 lg:col-span-2">
-            <JobPerformanceCard ops={ops} />
+          <div className="lg:col-span-2">
             <TeamActivityCard ops={ops} locale={locale} />
           </div>
           <div className="space-y-4">
-            <AttentionCard ops={ops} />
             <AccessAlertsCard ops={ops} />
-            <ChannelMixCard ops={ops} />
             <EngagementCard ops={ops} />
-            <AiCard ops={ops} locale={locale} />
           </div>
         </div>
+
+        {/* Advisory AI (masked) — full-width, only renders when signals exist */}
+        <AiCard ops={ops} locale={locale} />
       </div>
     </>
   );

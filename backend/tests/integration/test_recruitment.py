@@ -368,17 +368,28 @@ async def test_partner_view_always_identified_with_cv_and_fit(db_session) -> Non
     assert applicant["email"] == su.email
     assert "is_anonymous" not in applicant and "anonymous_id" not in applicant
     assert items[0]["cover_letter"] is not None
+    # CV embed stays DETAIL-only (None on the list); the match-ring ``fit`` is now
+    # ALSO on the list ({score, band} minimum) so the FE renders a ring per row.
     assert "cv" in items[0] and items[0]["cv"] is None
     assert "reveal_status" not in items[0] and "cv_download_available" not in items[0]
+    assert "fit" in items[0]
+    if items[0]["fit"] is not None:
+        assert 0 <= items[0]["fit"]["score"] <= 100
+        assert items[0]["fit"]["band"]
+        # List fit is the lean ring only — no reasons/internals.
+        assert set(items[0]["fit"].keys()) == {"score", "band"}
 
-    # DETAIL: identity + a watermarked cv block (admin holds the wildcard) + a fit
-    # block (None or a user-safe {score, band, reasons}).
+    # DETAIL: identity + the ORIGINAL (un-watermarked) cv block (admin holds the
+    # wildcard) + a fit block (None or a user-safe {score, band, reasons}).
     detail = await apply_service.get_application(
         db_session, principal=partner, application_id=app_id
     )
     assert detail["applicant"]["user_id"] == str(student.user_id)
     assert detail["cv"] is not None
     assert detail["cv"]["view_url"] and detail["cv"]["download_url"]
+    # Owner decision 2026-07-10: partner sees the student's ORIGINAL file, never a
+    # watermarked derivative.
+    assert detail["cv"]["has_watermark"] is False
     assert "fit" in detail
     if detail["fit"] is not None:
         assert 0 <= detail["fit"]["score"] <= 100
@@ -388,11 +399,11 @@ async def test_partner_view_always_identified_with_cv_and_fit(db_session) -> Non
 
 
 # --------------------------------------------------------------------------- #
-# Partner watermarked CV download                                            #
+# Partner CV download = the student's ORIGINAL file (no watermark) + 404 guard  #
 # --------------------------------------------------------------------------- #
 
 
-async def test_partner_cv_download_watermarked_and_non_partner_404(db_session) -> None:
+async def test_partner_cv_download_original_and_non_partner_404(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
@@ -410,11 +421,13 @@ async def test_partner_cv_download_watermarked_and_non_partner_404(db_session) -
     )
     assert own["has_watermark"] is False
 
-    # Authorized partner download IS watermarked.
+    # Authorized partner download serves the student's ORIGINAL file (owner
+    # decision 2026-07-10) — no watermark; the download URL is present.
     partner_dl = await apply_service.get_application_cv_download(
         db_session, principal=partner, application_id=app_id
     )
-    assert partner_dl["has_watermark"] is True
+    assert partner_dl["has_watermark"] is False
+    assert partner_dl["download_url"]
 
     # A non-partner third party cannot download -> 404.
     _ou, outsider = await make_student(db_session, prefix="outsider")

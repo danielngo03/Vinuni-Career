@@ -1,14 +1,69 @@
 "use client";
 
 import type { ChipTone } from "@/components/kit";
-import { fitColor, fitTier, type FitTier } from "@/lib/cv/fit";
+
+/**
+ * Partner candidate CV–JD FIT gauge scale.
+ *
+ * The LOCKED 3-band, colorblind-safe scale (owner decision 2026-07-07 removed
+ * the blue "medium" tier). Colour is derived PURELY from the numeric product
+ * fit score (0–100) — it is a deterministic CV–JD match, never an AI confidence
+ * rating and never decorative. There is deliberately NO violet/indigo band here.
+ *
+ *   strong (>= 80) → --fit-strong (emerald)   "ready"
+ *   mid    (50–79) → --fit-mid    (amber)      "usable, with gaps"
+ *   weak   (<  50) → --fit-weak   (rose)       "weak signal"
+ *
+ * The same score→colour mapping drives the list-column ring and the drawer-
+ * header ring so they can never diverge. Ring copy is always "CV–JD fit".
+ */
+export type MatchBand = "strong" | "mid" | "weak";
+
+export type MatchTierKey = "matchTierStrong" | "matchTierMid" | "matchTierWeak";
+
+interface BandDef {
+  /** Semantic StatusChip tone (soft-tinted pill), paired with the tier label. */
+  tone: ChipTone;
+  /** Saturated ring-stroke / score-number colour token. */
+  color: string;
+  /** i18n tier-label key (candidates.*). */
+  key: MatchTierKey;
+}
+
+const BANDS: Record<MatchBand, BandDef> = {
+  strong: { tone: "success", color: "var(--fit-strong)", key: "matchTierStrong" },
+  mid: { tone: "warning", color: "var(--fit-mid)", key: "matchTierMid" },
+  weak: { tone: "danger", color: "var(--fit-weak)", key: "matchTierWeak" },
+};
+
+/** Score → band. Single source of truth for the whole match UI. */
+export function matchBand(score: number): MatchBand {
+  if (score >= 80) return "strong";
+  if (score >= 50) return "mid";
+  return "weak";
+}
+
+/** Semantic StatusChip tone for a score (emerald/amber/rose). */
+export function matchTone(score: number): ChipTone {
+  return BANDS[matchBand(score)].tone;
+}
+
+/** i18n tier-label key for a score, for the chip beside the ring. */
+export function matchTierKey(score: number): MatchTierKey {
+  return BANDS[matchBand(score)].key;
+}
+
+/** Saturated ring/number colour token for a score. */
+export function matchColor(score: number): string {
+  return BANDS[matchBand(score)].color;
+}
 
 /**
  * MatchRing — compact CV↔JD fit gauge. A colorblind-safe ring (emerald/amber/
- * rose bands, driven purely by the numeric PRODUCT score — never an AI
- * confidence rating) with the score in the center. Used both as a list column
- * and, larger, in the candidate detail drawer header. Renders a neutral
- * placeholder when no score is available so the column never fabricates a value.
+ * rose bands driven purely by the numeric PRODUCT score — never an AI confidence
+ * rating) with the score in the centre. Renders instantly from the list/detail
+ * `fit.score`, and renders a neutral dashed placeholder when there is no score
+ * so a column never fabricates a value.
  */
 export function MatchRing({
   score,
@@ -34,7 +89,7 @@ export function MatchRing({
     );
   }
   const clamped = Math.max(0, Math.min(100, Math.round(score)));
-  const color = fitColor(clamped);
+  const color = matchColor(clamped);
   const r = (size - strokeWidth) / 2;
   const c = 2 * Math.PI * r;
   const offset = c * (1 - clamped / 100);
@@ -51,7 +106,7 @@ export function MatchRing({
           cy={size / 2}
           r={r}
           fill="none"
-          stroke="var(--bg-muted)"
+          stroke="var(--fit-track)"
           strokeWidth={strokeWidth}
         />
         <circle
@@ -74,18 +129,4 @@ export function MatchRing({
       </span>
     </span>
   );
-}
-
-/** i18n key for the tier label of a score, for a small chip next to the ring. */
-export function fitTierKey(score: number): `matchTier${Capitalize<FitTier>}` {
-  const tier = fitTier(score);
-  return (
-    tier === "strong" ? "matchTierStrong" : tier === "mid" ? "matchTierMid" : "matchTierWeak"
-  );
-}
-
-/** Semantic StatusChip tone for a fit score (emerald / amber / red bands). */
-export function fitChipTone(score: number): ChipTone {
-  const tier = fitTier(score);
-  return tier === "strong" ? "success" : tier === "mid" ? "warning" : "danger";
 }

@@ -44,6 +44,7 @@ from app.modules.recruitment.api.schemas import (
 from app.modules.recruitment.application import (
     apply_service,
     assignment_service,
+    cv_evaluation_service,
     decision_service,
     export_service,
     interview_service,
@@ -350,6 +351,41 @@ async def ai_scorecard_suggest(
         notes=body.get("notes", ""),
         job_title=body.get("job_title"),
         interview_stage=body.get("interview_stage"),
+        locale=locale,
+    )
+    return success(data)
+
+
+@applications_router.post(
+    "/{application_id}/cv-evaluation",
+    summary="On-demand HR CV↔JD evaluation for a candidate (partner; advisory only)",
+)
+async def cv_evaluation(
+    application_id: uuid.UUID,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    refresh: bool = Query(default=False, description="Force a re-run (re-meters)"),
+    accept_language: str | None = Header(default=None),
+) -> dict:
+    """Produce a categorical HR verdict of how well this candidate's CV matches the JD.
+
+    Gated on ``ai_recruiting:screen_candidate`` and audited. Grounded in the
+    deterministic CV-JD match signals + the CV snapshot + the JD; metered through
+    the usage-aware gateway. Re-opening returns the STORED verdict instantly;
+    ``?refresh=true`` recomputes and re-meters. Falls back to a rules-based verdict
+    (never a 500) when AI is unavailable / over budget.
+
+    Returns ``{ data: { recommendation, overall_score, summary, strengths,
+    gaps, criteria, next_step, match_score, match_band, is_fallback,
+    fallback_reason, cached } }``.
+    """
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
+    data = await cv_evaluation_service.evaluate_candidate_cv(
+        session,
+        principal=auth.principal,
+        application_id=application_id,
+        ctx=auth.ctx,
+        refresh=refresh,
         locale=locale,
     )
     return success(data)

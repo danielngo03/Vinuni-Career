@@ -34,7 +34,7 @@ from app.modules.notifications.application.dispatch_service import enqueue_notif
 from app.modules.opportunities.application import job_read_facade, job_service
 from app.modules.organization.application import org_reporting_facade
 from app.modules.recruitment.api import presenters
-from app.modules.recruitment.application import _shared, access
+from app.modules.recruitment.application import _shared
 from app.modules.recruitment.application.errors import (
     ApplicationNotWithdrawableError,
     ApplicationVersionConflictError,
@@ -444,11 +444,18 @@ async def get_application(
         from app.modules.recruitment.application import stage_service
 
         view["pipeline"] = await stage_service._pipeline_block(session, app=app)
+        # Audit sensitive candidate access. ``application_opened`` always; a
+        # ``cv_previewed`` event ALSO fires when this member can (and thus does)
+        # see the inline CV — a silent inline view of a candidate's CV/PII must
+        # still be logged, not only the explicit download path.
+        access_events = ["application_opened"]
+        if view.get("cv") is not None:
+            access_events.append("cv_previewed")
         await _record_candidate_access(
             session,
             app=app,
             principal=principal,
-            event_type="application_opened",
+            event_type=access_events,
         )
         return view
 
@@ -569,12 +576,15 @@ async def _applicant_block_for(session: AsyncSession, *, app: Application) -> di
 async def _cv_block_for(
     session: AsyncSession, *, app: Application, principal: Principal
 ) -> dict | None:
-    """Watermarked inline CV view/download block for the partner detail.
+    """Inline CV view/download block for the partner detail — the ORIGINAL file.
 
-    Gated on ``candidate_identity:view_cv`` (the CV-preview capability, additive to
-    the base ``applications:read``) so CV access can be granted narrowly; a member
-    without it sees the candidate but not the CV embed (``cv: null``). Returns
-    ``None`` when the application carries no snapshot / nothing renderable.
+    Owner decision 2026-07-10: the partner sees the STUDENT'S ORIGINAL CV (the
+    uploaded file, or the template CV's rendered PDF), NOT a watermarked
+    derivative. Gated on ``candidate_identity:view_cv`` (the CV-preview
+    capability, additive to the base ``applications:read``) so CV access can be
+    granted narrowly; a member without it sees the candidate but not the CV embed
+    (``cv: null``). Returns ``None`` when the application carries no snapshot /
+    nothing renderable.
     """
 
     if app.snapshot_id is None:
@@ -583,13 +593,10 @@ async def _cv_block_for(
         principal, "candidate_identity", "view_cv", resource_org_id=app.org_id
     ):
         return None
-    org_name = await _shared.org_display_name(session, app.org_id)
-    watermark = f"VinUni Career • {org_name}"
     return await snapshot_service.build_partner_cv_view(
         session,
         snapshot_id=app.snapshot_id,
         actor_id=principal.user_id,
-        watermark_text=watermark,
     )
 
 
@@ -620,15 +627,19 @@ async def _partner_view(
     stage: dict | None = None,
     applicant: dict | None = None,
     include_detail: bool = False,
+    fit: dict | None = None,
 ) -> dict:
     if applicant is None:
         applicant = await _applicant_block_for(session, app=app)
     assignee = await _assignee_block(session, app=app)
     cv = None
-    fit = None
+    # LIST rows receive a precomputed ``fit`` (batched ``{score, band}`` — enough
+    # for the match ring). DETAIL additionally loads the CV embed + the richer
+    # ``{score, band, reasons}`` fit (unless the caller already passed a fit).
     if include_detail:
         cv = await _cv_block_for(session, app=app, principal=principal)
-        fit = await _fit_block_for(session, app=app, locale=locale)
+        if fit is None:
+            fit = await _fit_block_for(session, app=app, locale=locale)
     return presenters.partner_application(
         app,
         applicant=applicant,
@@ -799,11 +810,20 @@ async def list_job_applications(
     applicant_ids = [a.applicant_id for a in page.items]
     contacts = await user_read_facade.get_user_contacts(session, applicant_ids)
     avatars = await avatar_facade.avatar_urls_for(session, applicant_ids)
+    # Deterministic CV-JD fit ``{score, band}`` per row — ONE batched pass (all rows
+    # share this job, so the JD is resolved once and every snapshot scored together;
+    # no per-row job load, no AI, no latency spike). Lets the LIST render a match
+    # ring on every candidate INSTANTLY without a per-row fit call.
+    snapshot_ids = [a.snapshot_id for a in page.items if a.snapshot_id is not None]
+    fits = await application_fit_service.application_snapshot_fits_for_job(
+        session, snapshot_ids=snapshot_ids, job_id=job.id, locale=locale
+    )
     items: list[dict] = []
     for a in page.items:
         applicant = presenters.applicant_block(
             a, user=contacts.get(a.applicant_id), avatar_url=avatars.get(a.applicant_id)
         )
+        row_fit = fits.get(a.snapshot_id) if a.snapshot_id is not None else None
         items.append(
             await _partner_view(
                 session,
@@ -812,6 +832,7 @@ async def list_job_applications(
                 locale=locale,
                 stage=stages.get(a.id),
                 applicant=applicant,
+                fit=row_fit,
             )
         )
     return items, page.next_cursor, page.limit
@@ -831,16 +852,17 @@ async def get_application_cv_download(
 ) -> dict:
     """Return a signed snapshot download URL.
 
-    Applicant -> unwatermarked (owner). Authorized partner -> watermarked. Anyone
-    else -> ``404``. The partner path is gated on ``candidate_identity:download_cv``
-    and every download is audited (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
+    Applicant -> owner self-download. Authorized partner -> the STUDENT'S ORIGINAL
+    file, unwatermarked (owner decision 2026-07-10). Anyone else -> ``404``. The
+    partner path is gated on ``candidate_identity:download_cv`` and every download
+    is audited (``docs/PARTNER_RBAC_ANALYTICS_SPEC.md``).
     """
 
     app = await _shared.load_application(session, application_id=application_id)
     if app.snapshot_id is None:
         raise ResourceNotFoundError()
 
-    # Applicant self-download (unwatermarked) goes straight through the facade.
+    # Applicant self-download goes straight through the owner facade.
     if principal.user_id is not None and app.applicant_id == principal.user_id:
         return await snapshot_service.get_snapshot_download(
             session, principal=principal, snapshot_id=app.snapshot_id
@@ -857,22 +879,16 @@ async def get_application_cv_download(
         principal, "candidate_identity", "download_cv", resource_org_id=app.org_id
     )
 
-    org_name = await _shared.org_display_name(session, app.org_id)
-    watermark = f"VinUni Career • {org_name}"
     await _record_candidate_access(
         session,
         app=app,
         principal=principal,
         event_type="cv_downloaded",
     )
-    with access.authorized_download(
-        snapshot_id=app.snapshot_id,
-        user_id=principal.user_id,
-        watermark_text=watermark,
-    ):
-        return await snapshot_service.get_snapshot_download(
-            session, principal=principal, snapshot_id=app.snapshot_id
-        )
+    # Serve the student's ORIGINAL file as an attachment — no watermark.
+    return await snapshot_service.build_snapshot_original_download(
+        session, snapshot_id=app.snapshot_id, actor_id=principal.user_id
+    )
 
 
 async def _record_candidate_access(
@@ -880,24 +896,27 @@ async def _record_candidate_access(
     *,
     app: Application,
     principal: Principal,
-    event_type: str,
+    event_type: str | list[str],
 ) -> None:
     """Best-effort hook into ``partner_candidate_access_events``
     (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`). Instrumentation only — never raises,
-    never changes the caller's authorization/business outcome."""
+    never changes the caller's authorization/business outcome. ``event_type`` may
+    be a single event or a list (e.g. ``application_opened`` + ``cv_previewed``)."""
 
+    event_types = [event_type] if isinstance(event_type, str) else list(event_type)
     try:
         from app.modules.analytics.application import partner_candidate_access_service as access_log
 
-        await access_log.record_access_event(
-            session,
-            org_id=app.org_id,
-            actor_id=principal.user_id,
-            application_id=app.id,
-            job_id=app.job_id,
-            candidate_id=app.applicant_id,
-            event_type=event_type,
-        )
+        for evt in event_types:
+            await access_log.record_access_event(
+                session,
+                org_id=app.org_id,
+                actor_id=principal.user_id,
+                application_id=app.id,
+                job_id=app.job_id,
+                candidate_id=app.applicant_id,
+                event_type=evt,
+            )
         # Both call sites (``get_application`` / ``get_application_cv_download``)
         # are otherwise pure reads (no commit) — this write must commit explicitly
         # or the session close at the end of the request would silently discard it.

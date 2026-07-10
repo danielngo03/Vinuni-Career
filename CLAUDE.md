@@ -231,9 +231,11 @@ Every non-trivial agent result should include:
   status) uses the locked, colorblind-safe data-viz palette (indigo/teal/amber/
   rose/sky/emerald/violet/orange + `-soft` tints; success=emerald, warn/
   sponsored=amber, danger=VinUni red, info/AI=sky/indigo) — the blue→gray remap
-  is reverted for CONTENT ONLY. Exactly one restrained indigo→violet gradient
-  hero tile per surface. Enforce the locked type scale (`.type-*`). Do not
-  reintroduce blue/navy accent surfaces in the SHELL. Build on shadcn/ui
+  is reverted for CONTENT ONLY. Exactly one restrained indigo-only gradient
+  hero tile per surface (NO violet/purple in the hero or any UI accent — violet
+  is a chart-series color only; owner 2026-07-10). Enforce the locked type scale
+  (`.type-*`). Do not reintroduce blue/navy accent surfaces in the SHELL, and do
+  not use purple as a UI accent. Build on shadcn/ui
   (`@/components/ui`) + the v10 primitive kit (`@/components/kit`); icons are
   lucide-react only.
 - Student CV workflows are CV-first: upload/template/raw-notes/AI/duplicate/job-fit
