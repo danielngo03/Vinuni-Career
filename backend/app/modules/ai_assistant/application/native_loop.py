@@ -29,19 +29,21 @@ non-streaming ``send_message`` consumes it and returns the terminal message.
 from __future__ import annotations
 
 import json
+import time
 import uuid
-from collections.abc import AsyncGenerator
+from collections.abc import AsyncGenerator, Callable
 from datetime import UTC, datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AICompletion, AIMessage
+from app.modules.ai_assistant.application import turn_telemetry
 from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.response_formatter import (
     ai_unavailable_reply,
     local_stream_chunks,
 )
-from app.modules.ai_assistant.application.session_history import serialize_message
+from app.modules.ai_assistant.application.session_history import next_seq, serialize_message
 from app.modules.ai_assistant.application.tool_loop import (
     MAX_ITERATIONS,
     MAX_TOOL_CALLS_PER_TURN,
@@ -55,7 +57,7 @@ from app.modules.ai_assistant.application.tools.specs import (
     ToolSpec,
 )
 from app.modules.ai_assistant.domain.models import ChatMessage
-from app.shared.exceptions import AIUnavailableError
+from app.shared.exceptions import AIUnavailableError, PaymentRequiredError, QuotaExceededError
 from app.shared.permissions import Principal, permission_checker
 
 _TASK_TYPE = "ai_assistant_chat"
@@ -166,13 +168,15 @@ async def llm_complete_native(
     db: AsyncSession | None = None,
     user_id: uuid.UUID | None = None,
     session_id: uuid.UUID | None = None,
+    alias: str | None = None,
 ) -> AICompletion:
     """Call the chat model with the native ``tools`` interface.
 
     Mirrors ``tool_loop.llm_complete``'s cost tracking + budget guard + output
     guard, but returns the full :class:`AICompletion` (text AND ``tool_calls``).
-    Degrades to the offline provider when real calls are disabled (returns a
-    plain text answer with no tool_calls).
+    ``alias`` overrides the configured chat alias (multi-tier routing — never
+    exposed to callers/users). Degrades to the offline provider when real calls
+    are disabled (returns a plain text answer with no tool_calls).
     """
     from app.ai.gateway import runtime_config
     from app.ai.gateway.factory import get_provider_for_alias, real_provider_active
@@ -182,7 +186,7 @@ async def llm_complete_native(
     from app.ai.observability.usage import log_ai_usage, log_ai_usage_async
     from app.modules.ai_settings.application.budget_guard import check_async
 
-    alias = runtime_config.current().chat_model_alias
+    alias = alias or runtime_config.current().chat_model_alias
     messages = [AIMessage(role="system", content=system_prompt)] + history
 
     if real_provider_active():
@@ -260,13 +264,19 @@ async def llm_complete_native(
 # --------------------------------------------------------------------------- #
 
 
+def _default_chat_alias() -> str:
+    from app.ai.gateway import runtime_config
+
+    return runtime_config.current().chat_model_alias
+
+
 def _tool_result_message(call_id: str, name: str, result: dict) -> AIMessage:
     payload = json.dumps(result, ensure_ascii=False)[:_MAX_TOOL_RESULT_CHARS]
     return AIMessage(role="tool", content=payload, tool_call_id=call_id, name=name)
 
 
 def _confirmation_message(
-    chat_id: uuid.UUID, spec: ToolSpec, name: str, args: dict, locale: str
+    chat_id: uuid.UUID, spec: ToolSpec, name: str, args: dict, locale: str, seq: int | None = None
 ) -> ChatMessage:
     copy = spec.confirmation_copy
     if copy:
@@ -281,6 +291,7 @@ def _confirmation_message(
         tool_name=name,
         tool_args=args,
         requires_confirmation=True,
+        seq=seq,
         created_at=datetime.now(UTC),
     )
 
@@ -294,18 +305,40 @@ async def run_native_turn(
     system_prompt: str,
     specs: list[ToolSpec],
     locale: str = "vi",
+    model_alias: str | None = None,
+    escalate_alias: str | None = None,
+    text_guard: Callable[[str, bool], str] | None = None,
+    limit_reply: str | None = None,
 ) -> AsyncGenerator[dict, None]:
     """Drive one assistant turn with native tool-calling.
 
     ``history`` must already end with the current user message (with any context
     injection). Yields SSE event dicts and ends with a ``done`` event carrying
     either the final assistant message or a pending confirmation card.
+
+    Multi-tier routing: ``model_alias`` selects the serving alias for this turn
+    (internal only); when the chosen tier fails or returns an empty completion
+    and ``escalate_alias`` is set, the loop retries ONCE on that alias.
+    ``text_guard(text, used_tool)`` is applied to a model-produced final answer
+    (persona scope guard); ``limit_reply`` is the persona-appropriate user-safe
+    message for budget/allowance exhaustion mid-turn.
     """
+    from app.ai.gateway.factory import real_provider_active
+    from app.ai.observability.cost_estimator import estimate_cost_usd
+
     openai_tools = specs_to_openai_tools(specs)
     allowed = {s.name: s for s in specs}
+    alias = model_alias or _default_chat_alias()
+    escalated = False
     iterations = 0
     tool_calls_used = 0
     final_text: str | None = None
+    final_from_model = False
+    turn_status = "ok"
+    turn_cost_usd = 0.0
+    tool_names: list[str] = []
+    guard_flags: list[str] = []
+    t0 = time.monotonic()
     # Render-worthy artifacts (download buttons, charts, ...) surfaced from tool
     # results to the FE via the final assistant message — NOT fed to the model.
     artifacts: list[dict] = []
@@ -321,14 +354,48 @@ async def run_native_turn(
                 db=session,
                 user_id=principal.user_id,
                 session_id=chat.id,
+                alias=alias,
             )
-        except AIUnavailableError:
-            final_text = ai_unavailable_reply(locale)
+        except (PaymentRequiredError, QuotaExceededError):
+            # Budget/allowance exhausted mid-turn — persona-appropriate copy,
+            # no charge, turn marked blocked.
+            final_text = limit_reply or ai_unavailable_reply(locale)
+            turn_status = "blocked"
+            guard_flags.append("budget_blocked")
             break
+        except AIUnavailableError:
+            if escalate_alias and not escalated:
+                escalated = True
+                alias = escalate_alias
+                guard_flags.append("escalated")
+                iterations -= 1  # the failed call does not consume an iteration
+                continue
+            final_text = ai_unavailable_reply(locale)
+            turn_status = "error"
+            break
+
+        turn_cost_usd += estimate_cost_usd(
+            alias,
+            prompt_chars=sum(len(m.content or "") for m in history),
+            completion_chars=len(completion.text or ""),
+        )
 
         calls = completion.tool_calls
         if not calls:
-            final_text = completion.text.strip() or ai_unavailable_reply(locale)
+            text = (completion.text or "").strip()
+            if not text and escalate_alias and not escalated:
+                # Empty completion — one escalation retry on the stronger tier.
+                escalated = True
+                alias = escalate_alias
+                guard_flags.append("escalated")
+                iterations -= 1
+                continue
+            if text:
+                final_text = text
+                final_from_model = True
+            else:
+                final_text = ai_unavailable_reply(locale)
+                turn_status = "error"
             break
 
         # Echo the assistant's tool-call turn back into history so the next hop
@@ -363,10 +430,33 @@ async def run_native_turn(
                 continue
 
             if spec.permission_class == "confirmation_required":
-                confirm_msg = _confirmation_message(chat.id, spec, name, args, locale)
+                confirm_msg = _confirmation_message(
+                    chat.id, spec, name, args, locale, seq=await next_seq(session, chat.id)
+                )
                 session.add(confirm_msg)
                 chat.last_message_at = datetime.now(UTC)
                 await session.commit()
+                guard_flags.append("confirmation_pending")
+                await turn_telemetry.record_chat_turn(
+                    session,
+                    principal=principal,
+                    session_id=chat.id,
+                    alias=alias,
+                    status="ok",
+                    latency_ms=int((time.monotonic() - t0) * 1000),
+                    iterations=iterations,
+                    tool_names=[*tool_names, name],
+                    guard_flags=guard_flags,
+                )
+                if real_provider_active():
+                    # Real tokens produced this user-visible confirmation card.
+                    await turn_telemetry.record_turn_billable(
+                        session,
+                        principal=principal,
+                        assistant_message_id=confirm_msg.id,
+                        session_id=chat.id,
+                        provider_cost_usd=turn_cost_usd or None,
+                    )
                 yield {"type": "done", "message": serialize_message(confirm_msg)}
                 return
 
@@ -382,6 +472,7 @@ async def run_native_turn(
             yield {"type": "tool_call", "name": name}
             result = await dispatch_tool(name, args, session=session, principal=principal)
             tool_calls_used += 1
+            tool_names.append(name)
             # A ``render`` block is a FE-only artifact (download/chart). Pull it
             # out so it reaches the client but not the model's context/cost.
             render = result.pop("render", None) if isinstance(result, dict) else None
@@ -394,6 +485,15 @@ async def run_native_turn(
 
     if final_text is None:
         final_text = ai_unavailable_reply(locale)
+        turn_status = "error" if turn_status == "ok" else turn_status
+
+    # Post-LLM deterministic scope guard on a model-produced pure-text answer
+    # (a tool-grounded answer is trusted by construction — skip flag inside).
+    if text_guard is not None and final_from_model:
+        guarded = text_guard(final_text, tool_calls_used > 0)
+        if guarded != final_text:
+            guard_flags.append("scope_refused")
+            final_text = guarded
 
     yield {"type": "status", "code": "responding"}
     for chunk in local_stream_chunks(final_text):
@@ -407,9 +507,32 @@ async def run_native_turn(
         # Attach render artifacts (downloads/charts) for the FE. Reuses the
         # existing tool_result JSON column; serialize_message forwards it.
         tool_result={"artifacts": artifacts} if artifacts else None,
+        seq=await next_seq(session, chat.id),
         created_at=datetime.now(UTC),
     )
     session.add(assistant_msg)
     chat.last_message_at = datetime.now(UTC)
     await session.commit()
+
+    # Per-turn observability (metadata only) + idempotent energy accounting.
+    await turn_telemetry.record_chat_turn(
+        session,
+        principal=principal,
+        session_id=chat.id,
+        alias=alias,
+        status=turn_status,
+        latency_ms=int((time.monotonic() - t0) * 1000),
+        iterations=iterations,
+        tool_names=tool_names,
+        guard_flags=guard_flags,
+    )
+    if turn_status == "ok" and final_from_model and real_provider_active():
+        await turn_telemetry.record_turn_billable(
+            session,
+            principal=principal,
+            assistant_message_id=assistant_msg.id,
+            session_id=chat.id,
+            provider_cost_usd=turn_cost_usd or None,
+        )
+
     yield {"type": "done", "message": serialize_message(assistant_msg)}

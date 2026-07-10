@@ -110,6 +110,51 @@ _BOUNDARY_PROBE_SIGNALS = [
     re.compile(r"(your|the)\s+(api\s+key|key\s+is|token\s+is|secret)", re.I),
     re.compile(r"ignore\s+(all\s+|the\s+)?(previous|prior|above|earlier)\s+instructions?", re.I),
     re.compile(r"how much does it cost\s+(to|per|each)", re.I),
+    # --- Vietnamese provider/model/system-prompt probes (kept conservative:  --
+    # --- every pattern needs a probe VERB + probe TARGET so legitimate asks  --
+    # --- like "tạo mô hình phỏng vấn" or "đóng vai nhà tuyển dụng" pass).    --
+    # "bạn dùng model gì" / "bạn là mô hình nào" / "chạy LLM nào"
+    re.compile(
+        r"(dùng|sử\s*dụng|chạy|là|thuộc)\s*(model|mô\s*hình|llm)\s*(ai\s*)?(gì|nào)\b",
+        re.I,
+    ),
+    # "AI của hãng nào" / "model của công ty nào" / "nhà cung cấp AI nào"
+    re.compile(
+        r"\b(ai|model|mô\s*hình|llm)\s*(của\s*)?(hãng|công\s*ty|nhà\s*cung\s*cấp)\s*(ai\s*)?nào\b",
+        re.I,
+    ),
+    # "bạn là GPT hay Gemini?" / "bạn dùng ChatGPT à?" — direct brand probes
+    re.compile(
+        r"\b(bạn|mày|em)\s*(có\s*phải\s*)?(là|dùng|chạy)\s*(chat)?"
+        r"(gpt|claude|gemini|deepseek|llama)\b",
+        re.I,
+    ),
+    # "cho tôi xem / tiết lộ prompt hệ thống" — reveal the system prompt
+    re.compile(
+        r"(cho\s*(tôi|mình|tao)?\s*xem|tiết\s*lộ|hiển\s*thị|in\s*ra|đọc|lộ)"
+        r".{0,30}(prompt|lệnh|chỉ\s*dẫn|hướng\s*dẫn)\s*(hệ\s*thống|gốc|nội\s*bộ)",
+        re.I,
+    ),
+    # "prompt hệ thống của bạn là gì / thế nào"
+    re.compile(
+        r"(prompt|lệnh|chỉ\s*thị)\s*(hệ\s*thống|gốc).{0,20}(là\s*gì|của\s*bạn|thế\s*nào)",
+        re.I,
+    ),
+    # "bỏ qua (mọi) hướng dẫn/chỉ thị/quy tắc trước đó" — vi injection
+    re.compile(
+        r"(bỏ\s*qua|phớt\s*lờ|quên)\s*(hết\s*|tất\s*cả\s*|mọi\s*|các\s*|những\s*)?"
+        r"(hướng\s*dẫn|chỉ\s*dẫn|chỉ\s*thị|lệnh|quy\s*tắc)",
+        re.I,
+    ),
+    # "giả vờ là một AI khác / không bị giới hạn" — vi jailbreak roleplay.
+    # Requires the unrestricted/other-AI tail so mock-interview roleplay
+    # ("đóng vai nhà tuyển dụng") never triggers.
+    re.compile(
+        r"(giả\s*vờ|đóng\s*vai|trở\s*thành)\s*(rằng\s*|là\s*)?(bạn\s*|mày\s*)?(là\s*)?(một\s*)?"
+        r"(ai|trợ\s*lý|chatbot|mô\s*hình|hệ\s*thống)?\s*"
+        r"(khác|không\s*(bị\s*)?(giới\s*hạn|kiểm\s*duyệt|ràng\s*buộc)|tự\s*do|dan)\b",
+        re.I,
+    ),
 ]
 
 _HARMFUL_SIGNALS = [
@@ -140,6 +185,31 @@ _EXTERNAL_SOURCE_SIGNALS = [
         r"vieclam24h|careerbuilder|indeed|"
         r"google|internet|web|website)\b.{0,50}"
         r"\b(job|post|recommend|search|review|đánh\s*giá|gợi\s*ý|việc|công\s*ty)\b",
+        re.I,
+    ),
+    # Direct web/URL access asks: fetch/open/read a URL, browse the web, or
+    # reach data outside the platform. The assistant has no browsing tools —
+    # refuse instead of letting the model hallucinate an "I fetched it" answer.
+    re.compile(
+        r"\b(fetch|open|visit|browse|crawl|scrape|read|summari[sz]e|"
+        r"truy\s*cập|mở|đọc|tóm\s*tắt)\b.{0,50}(https?://|www\.)",
+        re.I,
+    ),
+    re.compile(
+        r"(https?://|www\.)\S+.{0,40}\b(fetch|crawl|scrape|browse|summari[sz]e|"
+        r"tóm\s*tắt|đọc|truy\s*cập|phân\s*tích)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\b(browse|search|surf|look\s*up)\b.{0,20}\b(the\s+)?(web|online|internet)\b", re.I
+    ),
+    re.compile(
+        r"\b(tìm|tra\s*cứu|tìm\s*kiếm|xem|lấy)\b.{0,40}"
+        r"\b(trên\s*mạng|ngoài\s*hệ\s*thống|bên\s*ngoài\s*hệ\s*thống|nguồn\s*ngoài)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\baccess\b.{0,30}\b(external|outside)\b.{0,25}\b(system|source|website|data)\b",
         re.I,
     ),
 ]

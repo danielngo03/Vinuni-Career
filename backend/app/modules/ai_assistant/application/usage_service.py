@@ -295,12 +295,29 @@ async def enforce_quota(session: AsyncSession, *, principal: Any) -> None:
     Raises ``QuotaExceededError`` (409) when the weekly allowance is exhausted.
     The daily window was removed (WS-1); cost-weighted metering lives in the
     masked-energy account, and this coarse request-count gate keeps only the
-    weekly hard cap.
+    weekly hard cap. The message is persona-appropriate: partner exhaustion
+    points at the org admin's limit/top-up controls, university staff at an
+    admin limit request (never a billing upsell), students at the weekly reset.
     """
     usage = await my_usage(session, principal=principal)
     if not usage["blocked"]:
         return
+    persona = str(getattr(principal, "persona", "") or "")
+    if persona.startswith("partner"):
+        message = (
+            "Tổ chức của bạn đã dùng hết hạn mức yêu cầu AI trong tuần. "
+            "Quản trị viên tổ chức có thể điều chỉnh hoặc nạp thêm hạn mức; "
+            "hạn mức cũng sẽ được đặt lại vào thứ Hai."
+        )
+    elif persona.startswith("university"):
+        message = (
+            "Hạn mức yêu cầu AI trong tuần của bạn đã hết. "
+            "Bạn có thể đề nghị quản trị viên của trường tăng hạn mức cho đơn vị; "
+            "hạn mức cũng sẽ được đặt lại vào thứ Hai."
+        )
+    else:
+        message = "Bạn đã dùng hết hạn mức AI trong tuần. Hạn mức sẽ được đặt lại vào thứ Hai."
     raise QuotaExceededError(
-        "Bạn đã dùng hết hạn mức AI trong tuần. Hạn mức sẽ được đặt lại vào thứ Hai.",
+        message,
         details={"reason": "AI_WEEKLY_QUOTA_EXCEEDED"},
     )

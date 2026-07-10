@@ -33,11 +33,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
 from app.core.db import get_db_session
-from app.modules.ai_assistant.api.schemas import SendMessageRequest, UpdateSessionRequest
+from app.modules.ai_assistant.api.schemas import (
+    ConfirmActionRequest,
+    EditMessageRequest,
+    SendMessageRequest,
+    UpdateSessionRequest,
+)
 from app.modules.ai_assistant.application import (
     attachment_service,
     chat_exports,
     chat_service,
+    conversation_service,
     usage_service,
 )
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
@@ -203,23 +209,89 @@ async def stream_message(
 
 @router.post(
     "/sessions/{session_id}/messages/{message_id}/confirm",
-    summary="Confirm a pending tool_call and execute it",
+    summary="Confirm or cancel a pending tool_call",
 )
 async def confirm_tool_action(
+    session_id: uuid.UUID,
+    message_id: uuid.UUID,
+    body: ConfirmActionRequest | None = None,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Resolve a ``confirmation_required`` tool that was paused for user review.
+
+    The frontend calls this after the user taps "Confirm" or "Cancel" on a tool
+    confirmation card. The message identified by ``message_id`` must be owned by
+    the caller, belong to ``session_id``, and have ``requires_confirmation=True``.
+
+    Body ``{"decision": "confirm"|"cancel"}``; an omitted body means confirm
+    (backward compatible). Confirm executes the tool (idempotent — a second
+    confirm returns the cached result). Cancel executes NOTHING, resolves the
+    card, and returns ``{"confirmed": false, "reply": <ack message>}``.
+    """
+    decision = body.decision if body is not None else "confirm"
+    if decision == "cancel":
+        data = await conversation_service.cancel_tool_action(
+            session,
+            principal=auth.principal,
+            session_id=session_id,
+            message_id=message_id,
+        )
+        return success(data)
+    data = await conversation_service.confirm_tool_action_normalized(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        message_id=message_id,
+    )
+    return success(data)
+
+
+@router.patch(
+    "/sessions/{session_id}/messages/{message_id}",
+    summary="Edit a user message and replay the turn (owner only)",
+)
+async def edit_message(
+    session_id: uuid.UUID,
+    message_id: uuid.UUID,
+    body: EditMessageRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Edit one of the caller's own USER messages.
+
+    Sets ``edited_at``, soft-deletes every later message in the thread, and
+    re-runs the assistant turn through the same pipeline as send_message.
+    Returns ``{"reply": <message dict>}``; the client should refetch the thread
+    (GET messages excludes soft-deleted rows).
+    """
+    data = await conversation_service.edit_message(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        message_id=message_id,
+        text=body.text,
+    )
+    return success(data)
+
+
+@router.post(
+    "/sessions/{session_id}/messages/{message_id}/regenerate",
+    summary="Regenerate the assistant reply for the last user message (owner only)",
+)
+async def regenerate_reply(
     session_id: uuid.UUID,
     message_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    """Execute a ``confirmation_required`` tool that was paused for user review.
+    """Redo the assistant reply for the thread's LAST user message.
 
-    The frontend calls this after the user taps "Confirm" on a tool confirmation
-    card. The message identified by ``message_id`` must be owned by the caller,
-    belong to ``session_id``, and have ``requires_confirmation=True``. Executing
-    the action is idempotent — a second confirm on the same message returns the
-    cached result.
+    ``message_id`` may be that user message or the assistant message being
+    redone (both validated as the tail of the thread). The stale reply chain is
+    soft-deleted and a fresh turn runs. Returns ``{"reply": <message dict>}``.
     """
-    data = await chat_service.confirm_tool_action(
+    data = await conversation_service.regenerate_reply(
         session,
         principal=auth.principal,
         session_id=session_id,
