@@ -36,11 +36,18 @@ export function PartnerScorecardPanel({
   applicationId,
   canSubmit,
   jobTitle,
+  hideHeader = false,
 }: {
   applicationId: string;
   /** Submitting/editing is only possible while the candidate is under review. */
   canSubmit: boolean;
   jobTitle?: string;
+  /**
+   * Suppress the panel's own section header — used when the panel is embedded in
+   * a surface (e.g. the pipeline-board scorecard modal) that already provides the
+   * title/context, so the heading is not rendered twice.
+   */
+  hideHeader?: boolean;
 }) {
   const t = useTranslations("scorecards");
   const tc = useTranslations("common");
@@ -160,7 +167,7 @@ export function PartnerScorecardPanel({
   }
 
   /* -------------------------------- header ------------------------------- */
-  const header = (
+  const header = hideHeader ? null : (
     <div className="flex items-center gap-2">
       <span
         className="flex size-7 shrink-0 items-center justify-center rounded-lg"

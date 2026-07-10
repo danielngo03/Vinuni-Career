@@ -6,6 +6,7 @@ import {
   AlertCircle,
   ArrowRight,
   CheckSquare,
+  ClipboardCheck,
   Clock,
   Download,
   ExternalLink,
@@ -32,6 +33,7 @@ export function PipelineCardView({
   jobId,
   requiredAction,
   canRollback,
+  canScore,
   locale,
   statusTone,
   statusLabel,
@@ -40,6 +42,7 @@ export function PipelineCardView({
   onToggleSelect,
   onAdvance,
   onRollback,
+  onScorecard,
   t,
 }: {
   card: PipelineCard;
@@ -50,6 +53,12 @@ export function PipelineCardView({
   jobId: string;
   requiredAction: string | null;
   canRollback: boolean;
+  /**
+   * Whether the caller may read scorecards (holds `scorecards:read` / org admin).
+   * Gates the "score candidate" affordance on a scorecard-gated stage — the
+   * server stays the final authority; this only hides a dead button.
+   */
+  canScore: boolean;
   locale: string;
   statusTone: (status: string) => ChipTone;
   statusLabel: (status: string, label?: string | null) => string;
@@ -58,6 +67,8 @@ export function PipelineCardView({
   onToggleSelect: () => void;
   onAdvance: () => void;
   onRollback: () => void;
+  /** Open the focused scorecard modal for this card's current stage. */
+  onScorecard: () => void;
   t: ReturnType<typeof useTranslations>;
 }) {
   const toast = useToast();
@@ -72,6 +83,10 @@ export function PipelineCardView({
   const ev = card.evaluation ?? null;
   const showGate = evalGated && ev != null && ev.required > 0;
   const gateBlocked = showGate && ev!.gate_met === false;
+  // A card in a scorecard-gated stage can be scored here (the re-homed workflow),
+  // as long as the caller can read scorecards. When the gate blocks advancing,
+  // scoring is the candidate's real next action and takes the primary CTA.
+  const showScorecard = evalGated && canScore;
 
   // A card is draggable when it has somewhere to go (forward or backward).
   const draggable = canAdvance || canRollback;
@@ -213,10 +228,29 @@ export function PipelineCardView({
 
       {/* Actions */}
       <div className="mt-3 flex flex-wrap items-center gap-1.5">
+        {/* Gate blocked → scoring is the real next action (primary, leads). */}
+        {showScorecard && gateBlocked && (
+          <Button variant="primary" size="sm" onClick={onScorecard}>
+            <ClipboardCheck aria-hidden className="size-4" strokeWidth={2} />
+            {t("scorecardAction")}
+          </Button>
+        )}
         {canAdvance && (
-          <Button variant="primary" size="sm" loading={advancePending} onClick={onAdvance}>
+          <Button
+            variant={showScorecard && gateBlocked ? "secondary" : "primary"}
+            size="sm"
+            loading={advancePending}
+            onClick={onAdvance}
+          >
             <ArrowRight aria-hidden className="size-4" strokeWidth={2} />
             {isNewBucket ? t("startStage") : t("advance")}
+          </Button>
+        )}
+        {/* Gate met / already scoreable → scoring stays available (secondary). */}
+        {showScorecard && !gateBlocked && (
+          <Button variant="secondary" size="sm" onClick={onScorecard}>
+            <ClipboardCheck aria-hidden className="size-4" strokeWidth={2} />
+            {t("scorecardAction")}
           </Button>
         )}
         {canRollback && (

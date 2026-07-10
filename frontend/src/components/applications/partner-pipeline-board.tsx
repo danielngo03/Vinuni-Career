@@ -29,6 +29,7 @@ import {
   ApiError,
   applicationsApi,
   newIdempotencyKey,
+  organizationApi,
   type PipelineCard,
   type PipelineColumn,
   type PipelineStage,
@@ -39,6 +40,7 @@ import { PipelineColumnView } from "./pipeline-board/pipeline-column";
 import { BulkActionBar } from "./pipeline-board/bulk-action-bar";
 import { BulkRejectModal } from "./pipeline-board/bulk-reject-modal";
 import { RollbackModal } from "./pipeline-board/rollback-modal";
+import { ScorecardModal } from "./pipeline-board/scorecard-modal";
 import { BoardSkeleton } from "./pipeline-board/board-skeleton";
 import {
   APPLICATION_CHIP_TONE,
@@ -52,6 +54,13 @@ type RollbackTarget = {
   applicationId: string;
   stageId: string | null;
   handle: string;
+};
+
+type ScorecardTarget = {
+  applicationId: string;
+  handle: string;
+  stageName: string;
+  canSubmit: boolean;
 };
 
 export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
@@ -73,6 +82,23 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   });
 
   const board = query.data;
+
+  // Caller capabilities — gate the per-card scorecard affordance (advisory only;
+  // the service layer stays the final authority). No endpoint gap: the existing
+  // `/organizations/members/me` read already returns the effective grant set.
+  const capsQuery = useQuery({
+    queryKey: ["org", "me", "capabilities"],
+    queryFn: () => organizationApi.getMyCapabilities(),
+    staleTime: 60_000,
+    retry: false,
+  });
+  const caps = capsQuery.data;
+  const canReadScorecards = caps
+    ? caps.is_org_admin || caps.grants.includes("scorecards:read")
+    : false;
+  const canSubmitScorecards = caps
+    ? caps.is_org_admin || caps.grants.includes("scorecards:submit")
+    : false;
 
   /* ------------------------------ bulk selection ----------------------------- */
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -134,6 +160,21 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
   const [rollbackStageId, setRollbackStageId] = useState("");
   const [rollbackReason, setRollbackReason] = useState("");
   const [rollbackFieldError, setRollbackFieldError] = useState<string | null>(null);
+
+  /* ------------------------------ scorecard modal ---------------------------- */
+  const [scorecardTarget, setScorecardTarget] = useState<ScorecardTarget | null>(null);
+
+  function openScorecard(card: PipelineCard) {
+    const stage = board?.stages.find((s) => s.id === card.stage_id) ?? null;
+    setScorecardTarget({
+      applicationId: card.application_id,
+      handle: cardHandle(card),
+      stageName: stage?.name ?? "",
+      // Submit/edit needs the grant AND an under-review candidate (the backend
+      // enforces both); otherwise the panel opens read-only.
+      canSubmit: canSubmitScorecards && card.status === "under_review",
+    });
+  }
 
   function refetchBoard() {
     void qc.invalidateQueries({ queryKey: boardKey });
@@ -505,6 +546,7 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
                   column.stage_id ? requiredActionByStage.get(column.stage_id) ?? null : null
                 }
                 hasPriorStage={(stageId) => priorStagesFor(stageId).length > 0}
+                canScore={canReadScorecards}
                 locale={locale}
                 statusTone={(s) => APPLICATION_CHIP_TONE[s] ?? "sky"}
                 statusLabel={(s, l) => labels.status(s, l)}
@@ -515,6 +557,7 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
                 onToggleSelect={toggleSelect}
                 onAdvance={(id) => advanceMutation.mutate(id)}
                 onRollback={(card) => openRollback(card)}
+                onScorecard={(card) => openScorecard(card)}
                 t={t}
               />
             );
@@ -568,6 +611,21 @@ export function PartnerPipelineBoard({ jobId }: { jobId: string }) {
         onClose={closeRollback}
         onSubmit={submitRollback}
       />
+
+      {/* Focused scorecard surface — the re-homed scorecard workflow. Rendered
+          only while a target is set so the panel's scorecard read fires exactly
+          when the modal is open. On submit the panel invalidates the pipeline
+          query, so the advance gate on the card refreshes honestly. */}
+      {scorecardTarget && (
+        <ScorecardModal
+          applicationId={scorecardTarget.applicationId}
+          handle={scorecardTarget.handle}
+          stageName={scorecardTarget.stageName}
+          canSubmit={scorecardTarget.canSubmit}
+          jobTitle={board.job.title}
+          onClose={() => setScorecardTarget(null)}
+        />
+      )}
     </>
   );
 }

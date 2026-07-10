@@ -15,6 +15,7 @@ export function PipelineColumnView({
   jobId,
   requiredAction,
   hasPriorStage,
+  canScore,
   locale,
   statusTone,
   statusLabel,
@@ -23,6 +24,7 @@ export function PipelineColumnView({
   onToggleSelect,
   onAdvance,
   onRollback,
+  onScorecard,
   t,
 }: {
   column: PipelineColumn;
@@ -32,6 +34,8 @@ export function PipelineColumnView({
   jobId: string;
   requiredAction: string | null;
   hasPriorStage: (stageId: string | null) => boolean;
+  /** Whether the caller may read scorecards — gates the per-card score action. */
+  canScore: boolean;
   locale: string;
   statusTone: (status: string) => ChipTone;
   statusLabel: (status: string, label?: string | null) => string;
@@ -40,6 +44,8 @@ export function PipelineColumnView({
   onToggleSelect: (id: string) => void;
   onAdvance: (id: string) => void;
   onRollback: (card: PipelineCard) => void;
+  /** Open the focused scorecard modal for a card's current stage. */
+  onScorecard: (card: PipelineCard) => void;
   t: ReturnType<typeof useTranslations>;
 }) {
   const isNewBucket = column.stage_id === null;
@@ -117,6 +123,7 @@ export function PipelineColumnView({
           jobId={jobId}
           requiredAction={requiredAction}
           canRollback={hasPriorStage(card.stage_id)}
+          canScore={canScore}
           locale={locale}
           statusTone={statusTone}
           statusLabel={statusLabel}
@@ -125,6 +132,7 @@ export function PipelineColumnView({
           onToggleSelect={() => onToggleSelect(card.application_id)}
           onAdvance={() => onAdvance(card.application_id)}
           onRollback={() => onRollback(card)}
+          onScorecard={() => onScorecard(card)}
           t={t}
         />
       ))}
