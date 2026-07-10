@@ -1,0 +1,5 @@
+{"id": "pt_lq_empty_string", "input": {"untrusted_text": ""}, "expect": {"neutralized": false, "marker_present": false, "no_provider_leak": true}}
+{"id": "pt_lq_benign_dict_no_injection", "input": {"payload": {"name": "Hoang Van E", "note": "Reliable, punctual, good team player."}}, "expect": {"neutralized": false, "marker_present": false, "scalar_keys_preserved": true, "output_preserves": ["hoang van e", "team player"]}}
+{"id": "pt_lq_whitespace_only", "input": {"untrusted_text": "   \n   \t  "}, "expect": {"neutralized": false, "marker_present": false}}
+{"id": "pt_lq_partial_keyword_no_false_positive", "input": {"untrusted_text": "The candidate tends to ignore deadlines and skip standups sometimes."}, "expect": {"neutralized": false, "marker_present": false, "output_preserves": ["candidate", "deadlines"]}}
+{"id": "pt_lq_number_scalar_preserved", "input": {"payload": {"note": "solid mid-level backend profile", "years": 4, "score": 87}}, "expect": {"neutralized": false, "scalar_keys_preserved": true, "output_preserves": ["87", "backend"]}}

@@ -28,7 +28,10 @@ from app.ai.evaluation.runners import (
     market_intelligence,
     mock_interview_report,
     partner_chat,
+    partner_golden,
     partner_jd_builder,
+    partner_rag,
+    partner_tool_injection,
     recommend,
     scorecard_suggest,
     screening_brief,
@@ -58,7 +61,10 @@ RUN_CASE_BY_FAMILY = {
     "mock_interview_report": mock_interview_report.run_case,
     "talent_match": talent_match.run_case,
     "partner_chat": partner_chat.run_case,
+    "partner_golden": partner_golden.run_case,
     "partner_jd_builder": partner_jd_builder.run_case,
+    "partner_rag": partner_rag.run_case,
+    "partner_tool_injection": partner_tool_injection.run_case,
 }
 
 CHECK_BY_KIND = {
@@ -84,7 +90,10 @@ CHECK_BY_KIND = {
     "mock_interview_report": mock_interview_report.check,
     "talent_match": talent_match.check,
     "partner_chat": partner_chat.check,
+    "partner_golden": partner_golden.check,
     "partner_jd_builder": partner_jd_builder.check,
+    "partner_rag": partner_rag.check,
+    "partner_tool_injection": partner_tool_injection.check,
 }
 
 __all__ = ["RUN_CASE_BY_FAMILY", "CHECK_BY_KIND"]

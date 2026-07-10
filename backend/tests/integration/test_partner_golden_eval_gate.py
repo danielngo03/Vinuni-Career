@@ -1,0 +1,232 @@
+"""Enforce the partner-chatbot GOLDEN multi-turn benchmark in the test suite.
+
+Companion to ``test_partner_chat_eval_gate.py``. Where that file locks the
+per-category ``partner_chat`` / ``partner_jd_builder`` seams, this file locks
+the curated, higher-bar ``partner_golden`` family: >=34 hand-authored,
+bilingual (vi/en) recruiter CONVERSATIONS, each a SEQUENCE of turns with
+deterministic per-turn checks (route tier, tool group, RBAC visibility,
+argument validation, refusal, artifact kind, memory recall, leak-free) run
+against the REAL seams under the offline provider.
+
+Everything here is offline/deterministic: no DB, no network, no real model
+call. The real end-to-end answer-quality mode (``--real-golden``) is opt-in and
+asserted only to REFUSE without the opt-in env — it is never executed in CI.
+"""
+
+from __future__ import annotations
+
+import json
+
+from app.ai.evaluation import run_eval
+
+FAMILY = "partner_golden"
+
+_MINIMUMS = {
+    "happy_path": 10,
+    "adversarial": 5,
+    "privacy_boundary": 5,
+    "low_quality_input": 5,
+    "fallback": 3,
+}
+_CATEGORIES = tuple(_MINIMUMS.keys())
+
+
+# --------------------------------------------------------------------------- #
+# Registration + dataset gate                                                  #
+# --------------------------------------------------------------------------- #
+
+
+def test_family_registered() -> None:
+    assert FAMILY in run_eval.TASK_FAMILIES
+
+
+def test_dataset_minimum_coverage() -> None:
+    for category, floor in _MINIMUMS.items():
+        cases = run_eval._load_cases(FAMILY, category)
+        assert len(cases) >= floor, (
+            f"{FAMILY}/{category}: expected >= {floor} conversations, got {len(cases)}"
+        )
+
+
+def test_golden_case_schema_is_valid() -> None:
+    """Every golden case has id/lang/journey, turns[] with input+checks, and a
+    conversation-level ``expect`` carrying ``golden_pass`` + a leakage guard."""
+    seen_ids: set[str] = set()
+    total = 0
+    for category in _CATEGORIES:
+        for case in run_eval._load_cases(FAMILY, category):
+            total += 1
+            cid = case.get("id")
+            assert isinstance(cid, str) and cid, f"{category}: case missing id"
+            assert cid not in seen_ids, f"duplicate golden id {cid!r}"
+            seen_ids.add(cid)
+            assert case.get("lang") in ("vi", "en"), f"{cid}: lang must be vi/en"
+            assert case.get("journey"), f"{cid}: missing journey"
+            turns = case.get("turns")
+            assert isinstance(turns, list) and turns, f"{cid}: turns must be a non-empty list"
+            for ti, turn in enumerate(turns):
+                assert isinstance(turn.get("input"), dict), f"{cid} t{ti}: input must be a dict"
+                checks = turn.get("checks")
+                assert isinstance(checks, list), f"{cid} t{ti}: checks must be a list"
+                for chk in checks:
+                    assert "key" in chk, f"{cid} t{ti}: check missing key"
+            expect = case.get("expect") or {}
+            assert expect.get("golden_pass") is True, f"{cid}: expect.golden_pass must be true"
+            assert any(
+                k in expect for k in ("no_provider_leak", "no_model_leak")
+            ), f"{cid}: expect must carry a provider/model leakage guard"
+    assert total >= 20, f"golden set should have >= 20 conversations, got {total}"
+
+
+async def test_gate_passes_offline() -> None:
+    text, ok = await run_eval.run(FAMILY)
+    assert ok, f"{FAMILY} golden gate FAILED:\n{text}"
+
+
+async def test_privacy_and_leakage_cases_are_100_percent() -> None:
+    report = await run_eval.evaluate_family(FAMILY)
+
+    privacy = report.by_category("privacy_boundary")
+    assert privacy, f"{FAMILY}: privacy_boundary dataset is empty"
+    privacy_failures = [(c.case_id, c.failures) for c in privacy if not c.passed]
+    assert not privacy_failures, f"{FAMILY} privacy_boundary failures: {privacy_failures}"
+
+    leakage = [c for c in report.cases if c.is_leakage]
+    assert leakage, f"{FAMILY}: no leakage-flagged cases found"
+    leakage_failures = [(c.case_id, c.failures) for c in leakage if not c.passed]
+    assert not leakage_failures, f"{FAMILY} leakage failures: {leakage_failures}"
+
+
+# --------------------------------------------------------------------------- #
+# Runner contracts (dataset-independent)                                       #
+# --------------------------------------------------------------------------- #
+
+
+def test_artifact_and_phase_taxonomies_are_coherent() -> None:
+    """Every artifact kind maps to a leak-safe status phase, and every mapped
+    tool name is a real (or Lane B) tool."""
+    from app.ai.evaluation.runners import partner_golden as pg
+    from app.modules.ai_assistant.application.tools.specs import TOOL_SPECS
+
+    lane_b = {
+        "draft_job_from_text", "validate_job_draft", "export_jobs", "export_interviews",
+        "export_offers", "export_events", "generate_image",
+    }
+    for tool, artifact in pg.ARTIFACT_KIND.items():
+        assert tool in TOOL_SPECS or tool in lane_b, f"unknown tool in ARTIFACT_KIND: {tool}"
+        assert artifact in pg.PHASE_BY_ARTIFACT, f"artifact {artifact!r} has no phase mapping"
+    # Phases must be drawn from the leak-safe streaming vocabulary.
+    allowed_phases = {
+        "understanding", "retrieving", "analyzing", "drafting", "visualizing",
+        "exporting", "generating_image", "composing",
+    }
+    assert set(pg.PHASE_BY_ARTIFACT.values()) <= allowed_phases
+
+
+async def test_runner_reports_failed_checks_when_expectation_wrong() -> None:
+    """A deliberately wrong expectation must be caught (guards against a runner
+    that silently passes everything)."""
+    from app.ai.evaluation.runners import partner_golden as pg
+
+    bad_case = {
+        "id": "pg_neg",
+        "lang": "vi",
+        "journey": "neg",
+        "turns": [
+            {
+                "input": {"principal": "guest", "tool_name": "get_partner_jobs"},
+                "checks": [{"key": "tool_visible", "expect": True}],  # guest sees nothing
+            }
+        ],
+        "expect": {"golden_pass": True},
+    }
+    probe = await pg.run_case(bad_case)
+    assert probe.data["golden_pass"] is False
+    assert probe.data["failed_checks"], "expected a recorded failure"
+    assert pg.check("golden_pass", True, probe) is not None
+
+
+async def test_memory_recall_probes_the_real_memory_seam() -> None:
+    from app.ai.evaluation.runners import partner_golden as pg
+
+    good = {
+        "id": "pg_mem_ok", "lang": "vi", "journey": "mem",
+        "turns": [
+            {"input": {"message": "Soạn JD cho vị trí Data Analyst"}, "checks": []},
+            {"input": {"message": "Nhắc lại vị trí?"},
+             "checks": [{"key": "memory_recall", "expect": "Data Analyst"}]},
+        ],
+        "expect": {"golden_pass": True},
+    }
+    assert (await pg.run_case(good)).data["golden_pass"] is True
+
+    bad = {
+        "id": "pg_mem_bad", "lang": "vi", "journey": "mem",
+        "turns": [
+            {"input": {"message": "Soạn JD cho vị trí Data Analyst"},
+             "checks": [{"key": "memory_recall", "expect": "Marketing Manager"}]},
+        ],
+        "expect": {"golden_pass": True},
+    }
+    assert (await pg.run_case(bad)).data["golden_pass"] is False
+
+
+# --------------------------------------------------------------------------- #
+# Benchmark: golden section + real-golden refusal                              #
+# --------------------------------------------------------------------------- #
+
+
+async def test_benchmark_golden_journeys_all_pass_offline() -> None:
+    from app.ai.evaluation import benchmark_partner_chat as bench
+
+    rows, summary = await bench.run_golden_journeys()
+    assert summary["journeys_total"] >= 20
+    assert summary["journeys_passed"] == summary["journeys_total"]
+    assert summary["checks_passed"] == summary["checks_total"] > 0
+    failing = [r["id"] for r in rows if not r["passed"]]
+    assert not failing, f"golden journeys failed: {failing}"
+
+
+def test_benchmark_cli_offline_includes_golden(tmp_path) -> None:
+    from app.ai.evaluation import benchmark_partner_chat as bench
+
+    rc = bench.main(["--out-dir", str(tmp_path)])
+    assert rc == 0
+
+    json_files = list(tmp_path.glob("benchmark_partner_chat_*.json"))
+    assert json_files
+    payload = json.loads(json_files[0].read_text(encoding="utf-8"))
+    assert payload["overall_ok"] is True
+    gs = payload["golden_summary"]
+    assert gs["journeys_passed"] == gs["journeys_total"]
+    assert payload["golden_journeys"], "benchmark must include golden journeys"
+    assert "real_golden" not in payload, "offline run must not carry live golden scores"
+
+    md_files = list(tmp_path.glob("benchmark_partner_chat_*.md"))
+    lowered = md_files[0].read_text(encoding="utf-8").lower()
+    for term in ("openrouter", "openai", "deepseek", "model_alias", "prompt_tokens", "chat_cheap"):
+        assert term not in lowered, f"golden benchmark report leaked {term!r}"
+
+
+def test_real_golden_case_selection_is_eligible_only() -> None:
+    from app.ai.evaluation import benchmark_partner_chat as bench
+
+    cases = bench.select_real_golden_cases(bench._MAX_REAL_GOLDEN)
+    assert cases, "expected some real-eligible golden journeys"
+    for case in cases:
+        assert case.get("real_rubric") in ("partner_chat_answer", "jd_draft_quality")
+        utterances = [
+            (t.get("input") or {}).get("message") or (t.get("input") or {}).get("route_message")
+            for t in case["turns"]
+        ]
+        assert any(utterances), f"{case['id']}: real case has no user utterance"
+
+
+def test_real_golden_mode_refuses_when_disabled(tmp_path, monkeypatch) -> None:
+    """--real-golden must refuse (exit 2, no report, zero calls) without opt-in."""
+    from app.ai.evaluation import benchmark_partner_chat as bench
+
+    monkeypatch.delenv("AI_REAL_CALLS_ENABLED", raising=False)
+    rc = bench.main(["--real-golden", "--out-dir", str(tmp_path)])
+    assert rc == 2
+    assert not list(tmp_path.iterdir()), "refused --real-golden run must not write a report"

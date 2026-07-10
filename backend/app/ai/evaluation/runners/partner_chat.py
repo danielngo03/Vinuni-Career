@@ -276,6 +276,22 @@ def _run_reply_seam(inp: dict[str, Any], data: dict[str, Any]) -> None:
         data["reply_text"] = QuotaExceededError().message
 
 
+def _run_grounding_seam(inp: dict[str, Any], data: dict[str, Any]) -> None:
+    """Probe the deterministic ungrounded-numeric telemetry detector.
+
+    A partner answer that asserts a specific recruiting count/%/salary while
+    using NO tool this turn has no source — ``has_ungrounded_numeric_claim``
+    (guardrails §grounding) flags it so telemetry/eval can catch fabrication.
+    The detector never mutates user-facing text; the eval only reads its verdict.
+    """
+    claim = inp.get("ungrounded_claim")
+    if claim is None:
+        return
+    from app.modules.ai_assistant.application.guardrails import has_ungrounded_numeric_claim
+
+    data["ungrounded_numeric_flagged"] = has_ungrounded_numeric_claim(str(claim))
+
+
 async def run_case(case: dict[str, Any]) -> Probe:
     inp = case.get("input") or {}
     data: dict[str, Any] = {}
@@ -287,6 +303,7 @@ async def run_case(case: dict[str, Any]) -> Probe:
         _run_route_seam(inp, data)
         _run_scrub_seam(inp, data)
         _run_reply_seam(inp, data)
+        _run_grounding_seam(inp, data)
     except Exception as exc:  # a runner crash is itself an eval failure
         data["runner_error"] = type(exc).__name__
     if pending:
@@ -476,6 +493,10 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
     # --- model router seam (Lane A) ---
     if key in _ROUTE_KEYS:
         return _check_route(d, key, exp)
+
+    # --- grounding seam (ungrounded-numeric telemetry detector) ---
+    if key == "ungrounded_numeric_flagged":
+        return _check_bool(d, "ungrounded_numeric_flagged", exp)
 
     # --- output guard / reply seams ---
     if key == "scrubbed_excludes":

@@ -382,3 +382,118 @@ deterministic output; full disable removes the endpoints) immediately if any of:
 
 Fallback while disabled: the deterministic non-AI CV builder (blank template,
 profile import, duplicate) remains fully available.
+
+## Partner chatbot GOLDEN multi-turn benchmark (`partner_golden`)
+
+A curated, higher-bar benchmark distinct from the per-category `partner_chat`
+jsonl files: each dataset case is one hand-authored, bilingual (vi/en) recruiter
+CONVERSATION (a sequence of turns) with deterministic per-turn checks run
+against the REAL seams (policy, model router, RBAC native-loop, arg validation,
+output guard, memory) under the offline provider — no DB, no network, no real
+model call. Runner: `runners/partner_golden.py`. Gate:
+`uv run python -m app.ai.evaluation.run_eval --task-family partner_golden`.
+
+### Case schema (`datasets/partner_golden/{category}.jsonl`)
+
+```json
+{
+  "id": "pg_hp_...",                 // unique, stable
+  "lang": "vi" | "en",
+  "journey": "pipeline_then_funnel_chart",
+  "real_rubric": "partner_chat_answer" | "jd_draft_quality",  // optional: real-mode judged
+  "turns": [
+    {
+      "input": { <one partner_chat single-turn input> },
+      "checks": [ {"key": "route_tier", "expect": "default"}, ... ]
+    }
+  ],
+  "expect": {"golden_pass": true, "no_provider_leak": true, "no_model_leak": true}
+}
+```
+
+- `input` reuses the `partner_chat` single-turn seam vocabulary:
+  `message`/`route_message`/`tool_class`/`locale`/`persona` (policy + routing +
+  fast-path), `principal`/`tool_name`/`tool_args`/`pending_ok`/`subset_of`
+  (RBAC + arg validation), `scrub` (output guard), `check` (fallback replies).
+- `checks[]` keys understood by `partner_chat.check` (route_tier, route_confident,
+  route_tool_groups_contains, route_selects_full_set, policy_action,
+  policy_flag_contains, clean_text_is_none/excludes, refusal_message_present,
+  fast_path_partner_variant, tool_visible, authorized, permission_class,
+  requires_confirmation, schema_excludes, validation_ok, validation_error,
+  visible_includes/excludes, visible_count, scrubbed_excludes,
+  reply_text_excludes) PLUS three golden-native keys:
+  - `artifact_kind` — the user-facing artifact the turn's tool produces
+    (chart/download/job_draft/image/candidate_list/event_list/...), via
+    `ARTIFACT_KIND`.
+  - `phase` — the leak-safe streaming status phase the turn should surface
+    (understanding/retrieving/analyzing/drafting/visualizing/exporting/
+    generating_image/composing), via `PHASE_BY_ARTIFACT`. A live backend phase
+    helper is imported defensively; absence is a pending item, never a failure.
+  - `memory_recall` — summarizes accumulated user turns via the real memory seam
+    (`session_history._summarize_history`) and asserts an anchor survives.
+- The conversation-level `expect.golden_pass` folds every per-turn check into one
+  pass/fail; the leakage keys scan the accumulated user-facing blob (no provider/
+  model/alias/token/prompt ever enters it). Register keeps `partner_golden` in
+  the 5-category harness (10/5/5/5/3 minimums) so the generic eval gate covers it.
+
+### Real END-TO-END answer-quality mode (opt-in, never in CI)
+
+`benchmark_partner_chat --real-golden` drives each `real_rubric`-tagged golden
+conversation turn-by-turn through the LIVE pipeline (`chat_service.send_message`)
+against a real provider, then scores the final answer with `judge.judge_response`
+(grounding / language / leak / actionability). It needs a DB session + a
+logged-in-equivalent principal (a synthetic partner_admin by default, or inject
+via `run_real_golden_batch(session_factory=..., principal_name=...)`). It refuses
+without `AI_REAL_CALLS_ENABLED=true` + an active provider (exit 2, no report),
+clamps to `min(--max-real-cases, AI_MAX_REAL_CALLS_PER_TEST_RUN, 6)`, and stores
+ONLY per-journey scores/flags/leak-free booleans — never the transcript, judge
+reasoning, or any provider/model/token detail.
+
+See `GAP_ANALYSIS.md` for the per-layer gap map and the P0/P1/P2 backlog.
+
+## Partner chatbot eval family inventory (this lane)
+
+Five registered offline/deterministic families back the partner chatbot
+(`run_eval --task-family <name>`; all in the CI gate + benchmark scoreboard):
+
+| family | shape | what it locks |
+|---|---|---|
+| `partner_chat` | single-turn seam probes (37/16/18/15/12) | policy refusals (vi+en), model routing/tiering, RBAC tool visibility, §7 arg validation, output scrub, ungrounded-numeric detector, cross-org schema hygiene |
+| `partner_golden` | 34 multi-turn conversations (199 checks) | full recruiter journeys end-to-end at the real seams incl. artifact/phase + memory recall |
+| `partner_tool_injection` | 29 payload/RBAC cases | `neutralize_untrusted_text` / `neutralize_tool_payload` defuse EN+VI injection in tool results / attachments / KB chunks; document content can NEVER escalate RBAC |
+| `partner_rag` | 28 grounding cases | `verify_citations` keeps grounded / strips fabricated citations; KB tool is read-only + org-scoped; refuse-when-insufficient; chunk-injection defused |
+| `partner_jd_builder` | JD draft core (Wave-1) | required-field / ready / bias-warning contract |
+
+### `partner_tool_injection` case schema
+`input`: `payload` (dict/list/str tool result) OR `untrusted_text` (a string),
+plus optional `principal`/`tool_name` for scope-invariance. Checks: `neutralized`,
+`marker_present`, `output_defuses`/`output_preserves`, `scalar_keys_preserved`,
+`rbac_content_independent`, `tool_visible`/`authorized`/`visible_excludes`.
+
+### `partner_rag` case schema
+`input`: `answer`+`sources` (citation grounding), `chunk` (chunk injection),
+`principal`+`tool_name` (retrieval-tool RBAC). Checks: `hallucination_risk`,
+`cited_count`/`grounded_count`/`ungrounded_count`, `clean_answer_contains`/
+`_excludes`, `chunk_neutralized`/`chunk_defuses`, `permission_class`,
+`schema_excludes`.
+
+## Robustness scoreboard (benchmark)
+
+`benchmark_partner_chat` attributes every offline assertion to a product SAFETY/
+QUALITY LAYER and rolls them into a single 0-100 score with a per-layer, per-
+family, and per-category breakdown (md + json). Layers + their check keys are
+defined by `_LAYER_BY_KEY` in `benchmark_partner_chat.py`:
+
+- **rbac** — tool_visible / authorized / visible_* / rbac_content_independent
+- **policy** — policy_action / policy_flag_contains / clean_text_* / refusal_*
+- **injection_defense** — neutralized / marker_present / output_defuses / chunk_*
+- **grounding** — hallucination_risk / cited/grounded/ungrounded_count /
+  clean_answer_* / ungrounded_numeric_flagged / memory_recall
+- **leak** — no_provider_leak / no_model_leak / no_internal_status_codes /
+  no_pii_in_response / scrubbed_excludes / reply_text_excludes / schema_excludes
+- **artifact_correctness** — route_* / tool_exists / permission_class /
+  requires_confirmation / validation_* / artifact_kind / phase
+
+Overall score = micro-average (all passed checks / all scored checks × 100). The
+`--real` / `--real-golden` judge scores are reported in separate sections and
+never fold into this deterministic robustness number.
