@@ -42,3 +42,7 @@ example/
 # Browser QA artifacts
 .playwright-mcp/
 frontend/test-results/
+
+# AI evaluation benchmark reports (generated artifacts)
+backend/app/ai/evaluation/reports/*
+!backend/app/ai/evaluation/reports/.gitkeep

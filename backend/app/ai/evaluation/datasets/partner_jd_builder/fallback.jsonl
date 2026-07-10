@@ -1,0 +1,4 @@
+{"id": "jdb_fb_core_degrades_safely", "input": {"draft": {"title": "Support Specialist", "description": "Answer partner questions and triage tickets in Vietnamese and English.", "employment_type": "full_time", "location_type": "onsite"}}, "expect": {"no_crash": true, "ready": true, "bias_flagged": false, "no_provider_leak": true, "no_internal_status_codes": true}}
+{"id": "jdb_fb_bias_engine_empty_text", "input": {"draft": {"salary_min": 10000000}}, "expect": {"no_crash": true, "bias_flagged": false}}
+{"id": "jdb_fb_ai_unavailable_reply_vi", "input": {"check": "ai_unavailable_reply", "locale": "vi"}, "expect": {"reply_text_excludes": ["traceback", "exception"], "no_provider_leak": true, "no_model_leak": true}}
+{"id": "jdb_fb_ai_unavailable_reply_en", "input": {"check": "ai_unavailable_reply", "locale": "en"}, "expect": {"reply_text_excludes": ["traceback", "exception"], "no_provider_leak": true, "no_model_leak": true}}

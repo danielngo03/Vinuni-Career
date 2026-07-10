@@ -54,6 +54,22 @@ RUBRICS: dict[str, str] = {
     "bias_detection": (
         "Score precision/recall of the flagged phrases versus human-labeled bias phrases."
     ),
+    "partner_chat_answer": (
+        "Score the assistant's reply to a partner recruiter. 5 requires: every number, "
+        "count, name, and date is grounded in the provided tool data (invented figures are "
+        "fabrication); no provider/model/token/internal detail appears; the reply matches "
+        "the user's language (Vietnamese question gets a Vietnamese answer, English gets "
+        "English); and the reply is concretely actionable for the recruiting workflow "
+        "(next step, filter, or candidate/job reference) rather than generic prose."
+    ),
+    "jd_draft_quality": (
+        "Score a job-description draft against its source text. 5 requires: structural "
+        "completeness (title, responsibilities, requirements, and benefits where the source "
+        "provides them); strict faithfulness to the source (no invented requirements, "
+        "salary figures, benefits, or seniority — omitting an unknown is correct, guessing "
+        "is fabrication); and bias-free, inclusive wording with no age/gender/appearance/"
+        "marital-status constraints."
+    ),
 }
 
 _SYSTEM_PROMPT = """\

@@ -161,6 +161,118 @@ a reimplementation of it:
   (`deep-translator`, `AiTaskRunner`); verified the AI → machine-translation
   → `None` three-tier degrade chain and that unexpected JSON keys never leak.
 
+### Addendum — partner chatbot power-up families (2026-07-11)
+
+Two new families give the partner recruiter chatbot real, seam-level
+benchmark coverage (not eval-theater — every check runs the actual production
+code path, offline and deterministic):
+
+- `partner_chat` (runner `runners/partner_chat.py`, kind `partner_chat`).
+  Bilingual (vi/en) dataset over the assistant's tool-calling safety belt:
+  - **Policy seam** — `policy_orchestrator.check_policy`: injection/system-
+    prompt probes, EN model probes, DAN/dev-mode jailbreaks, web/LinkedIn
+    browse asks (refuse), PII rewrite, benign partner asks (allow), truncation.
+  - **RBAC visibility seam** — `native_loop.available_specs`/`authorize_tool`
+    over five synthetic principals built with the REAL `permission_checker`:
+    `partner_admin` (`*` wildcard), `partner_member_jobs_read` (`jobs:read`
+    only), `partner_member_exporter` (`jobs:read` + `applications:read` +
+    `applications:export`, deliberately WITHOUT `candidate_identity:view_cv`
+    and analytics), `student`, `guest`. Cases assert exact tool visibility,
+    denial (`authorize_tool`), member ⊆ admin, guest sees zero tools, and
+    students never see a partner tool — the chatbot can never exceed the
+    human's own grants.
+  - **Arg-validation seam** — `tools.dispatch._validate_tool_args` for old +
+    new tools: missing/typed args, unknown tools, and smuggled `org_id`/
+    `user_id` params (schema never exposes an identity/tenant override —
+    cross-org args cannot reach a service through the tool schema).
+  - **Model-router seam (Lane A)** — `model_router.route_turn` +
+    `select_specs`: exact tier assertions (`cheap` greeting / `default`
+    operational ask / `reasoning` deep-analysis), determinism (two calls),
+    tool-group matching, and the FAIL-OPEN rule (a non-confident route must
+    pass the full tool set — never silently drop a capability). Aliases from
+    the decision (`model_alias`/`escalate_alias`) are never copied into probe
+    data, so leak scans stay meaningful.
+  - **Output-guard seam** — `output_guard.scrub_text` over canned leak-y
+    completions (model paths, token counts/fields, API keys).
+  - **Fallback copy** — `ai_unavailable_reply` (vi+en), quota-exhausted copy
+    (`QuotaExceededError.message`), tool fallback texts: user-safe, no
+    internal status codes, no provider/model terms.
+- `partner_jd_builder` (runner `runners/partner_jd_builder.py`). The
+  deterministic core behind `validate_job_draft` (`tools/jd_builder.py`:
+  `coerce_draft_input` + `evaluate_draft`): required-field reporting
+  (`title`, `description`, `employment_type`), ready flags, blocking vs
+  advisory warning codes, whitespace-only coercion, plus a strict independent
+  `check_bias` pass (vi/en age/gender/appearance rules → `bias_language`
+  warning). Privacy contract: the probe blob never echoes raw draft text, so
+  injected instructions, PII, keys, or model-name bait pasted into a draft
+  are asserted to never leak through the validator's user-facing payload.
+
+Parallel-lane integration note: both runners were written while Lane A
+(`model_router`) and Lane B (`jd_builder` + `draft_job_from_text`,
+`validate_job_draft`, `export_jobs/interviews/offers/events`,
+`generate_image`) were landing in the same worktree. Both lanes landed
+mid-session, so all route/tool checks are pinned STRICT to the real
+contracts. A residual `pending_ok` mechanism remains in the `partner_chat`
+runner for Lane B tools (`LANE_B_TOOLS`): if a listed tool is missing from
+`TOOL_SPECS` the dataset case reports a PENDING pass, while
+`tests/integration/test_partner_chat_eval_gate.py::test_lane_b_tools_registered_with_safe_specs`
+and the benchmark's `lane_integration` section fail/flag loudly — so a
+future de-registration cannot silently pass.
+
+Judge rubrics `partner_chat_answer` (grounded in tool data, no invented
+numbers, no internals, vi/en language match, actionable) and
+`jd_draft_quality` (structure completeness, no fabricated
+requirements/salary/benefits, bias-free, source-faithful) were added to
+`judge.py` for the opt-in real-call batch. They are intentionally NOT part
+of the CI gate (§10.3 — the gate stays offline/deterministic).
+
+Dataset repair in the same pass: the `jd_extraction` datasets predated the
+cascade's `is_jd` hard gate (`cascade._finalize` rejects any structurer
+payload without `is_jd: true`), so all 23 successful-extraction cases were
+red at the branch base. Each such case's mocked `llm_json` now carries
+`"is_jd": true`, matching the real structurer contract; not-a-JD/blank cases
+stay unflagged and keep asserting rejection.
+
+### Benchmark CLI — `benchmark_partner_chat.py`
+
+Runnable benchmark report for the partner chatbot (offline eval families +
+direct seam sweeps + markdown/JSON report):
+
+```bash
+uv run python -m app.ai.evaluation.benchmark_partner_chat
+uv run python -m app.ai.evaluation.benchmark_partner_chat --out-dir /tmp/eval-reports
+```
+
+Writes `benchmark_partner_chat_{UTC-stamp}.md/.json` into
+`app/ai/evaluation/reports/` (kept via `.gitkeep`; generated reports are
+throwaway artifacts — do not commit them) with per-category pass rates for
+`partner_chat` + `partner_jd_builder`, a per-check seam breakdown
+(rbac_visibility, policy, arg_validation, output_guard, model_router,
+jd_builder_core, lane_integration), pending-lane inventory, timestamp, and
+git rev. Exit 0 = green (PENDING items don't fail; any FAIL does). The
+report never contains provider names, model ids, aliases, keys, token
+counts, or prompt text.
+
+Opt-in real-call mode (NOT run by CI; run only after the offline gate is
+green, per §18):
+
+```bash
+AI_REAL_CALLS_ENABLED=true uv run python -m app.ai.evaluation.benchmark_partner_chat --real
+```
+
+`--real` scores ≤ 6 canned partner transcripts with the isolated judge alias
+under the two new rubrics. It refuses (exit 2, zero calls, no report) unless
+`AI_REAL_CALLS_ENABLED=true` AND a real provider is actually configured;
+it respects `AI_MAX_REAL_CALLS_PER_TEST_RUN`; and it stores ONLY
+score/flags/verdict per case — never the judged text, judge reasoning, or
+any provider/model/token detail. Cost ceiling: 6 judge calls × ≤400
+completion tokens on the cheap eval alias (well under a cent).
+
+Enforced in the suite by `tests/integration/test_partner_chat_eval_gate.py`
+(family gates, RBAC matrix, router contract incl. fail-open, jd core
+contract, scrub seam, Lane B registry contract, benchmark CLI offline run +
+leak scan, and `--real` refusal without opt-in env).
+
 Datasets: `datasets/{family}/{happy_path,adversarial,privacy_boundary,low_quality_input,fallback}.jsonl`.
 
 These are offline (no network/keys). They run against the deterministic offline
@@ -187,6 +299,8 @@ uv run python -m app.ai.evaluation.run_eval --task-family knowledge_base_query
 uv run python -m app.ai.evaluation.run_eval --task-family bias_detection
 uv run python -m app.ai.evaluation.run_eval --task-family cover_letter
 uv run python -m app.ai.evaluation.run_eval --task-family scorecard_suggest
+uv run python -m app.ai.evaluation.run_eval --task-family partner_chat
+uv run python -m app.ai.evaluation.run_eval --task-family partner_jd_builder
 ```
 
 The CLI never prints provider names, model names, token counts, latency, raw

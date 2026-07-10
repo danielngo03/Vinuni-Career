@@ -1,0 +1,5 @@
+{"id": "jdb_lowq_empty_draft", "input": {"draft": {}}, "expect": {"no_crash": true, "missing_required_includes": ["title"], "bias_flagged": false}}
+{"id": "jdb_lowq_whitespace_title", "input": {"draft": {"title": "   ", "description": "Assist the operations team with daily logistics coordination."}}, "expect": {"no_crash": true, "missing_required_includes": ["title"], "bias_flagged": false}}
+{"id": "jdb_lowq_one_char_fields", "input": {"draft": {"title": "x", "description": "y"}}, "expect": {"no_crash": true, "bias_flagged": false}}
+{"id": "jdb_lowq_emoji_description", "input": {"draft": {"title": "Barista", "description": "☕🔥💯"}}, "expect": {"no_crash": true, "bias_flagged": false}}
+{"id": "jdb_lowq_gibberish_description", "input": {"draft": {"title": "Assistant", "description": "asdkjh qwe zzz kl mn opq rst uvw xyz asdkjh qwe zzz kl mn opq rst uvw xyz asdkjh qwe zzz kl mn opq rst uvw xyz"}}, "expect": {"no_crash": true, "bias_flagged": false, "no_provider_leak": true}}
