@@ -6,8 +6,6 @@ import {
   Loader2,
   Paperclip,
   Pencil,
-  RotateCcw,
-  Search,
   Sparkles,
   Zap,
 } from "lucide-react";
@@ -49,9 +47,6 @@ export function MessageBubble({
   onEditStart,
   onEditCancel,
   onEditSubmit,
-  regenerable = false,
-  regenerating = false,
-  onRegenerate,
 }: {
   message: ChatMessage;
   expanded: boolean;
@@ -67,9 +62,6 @@ export function MessageBubble({
   onEditStart?: () => void;
   onEditCancel?: () => void;
   onEditSubmit?: (text: string) => void;
-  regenerable?: boolean;
-  regenerating?: boolean;
-  onRegenerate?: () => void;
 }) {
   const t = useTranslations("aiAssistant");
   const isUser = message.role === "user";
@@ -151,23 +143,6 @@ export function MessageBubble({
           </button>
         )}
       </div>
-      {!isUser && regenerable && (
-        <div className="ml-8 mt-1">
-          <button
-            type="button"
-            onClick={onRegenerate}
-            disabled={regenerating}
-            className="type-caption inline-flex items-center gap-1.5 rounded-lg px-2 py-1 font-medium text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {regenerating ? (
-              <Loader2 aria-hidden className="size-3 animate-spin" />
-            ) : (
-              <RotateCcw aria-hidden strokeWidth={1.9} className="size-3" />
-            )}
-            {t("regenerate")}
-          </button>
-        </div>
-      )}
     </div>
   );
 }
@@ -400,52 +375,35 @@ export function StreamingBubble({ text, expanded }: { text: string; expanded: bo
   );
 }
 
-export function AssistantActivity({
-  status,
-  toolName,
-}: {
-  status: string | null;
-  toolName: string | null;
-}) {
+/**
+ * Animated, leak-safe "thinking/doing" line shown while the assistant works.
+ * Renders ONLY the localized high-level phase text (`phase.*`) plus a subtle
+ * pulse + 3-dot animation — never a raw tool/provider/model name. Unknown or
+ * absent phase codes fall back to a generic "processing" label (AI_PRODUCT_SPEC
+ * §9: no tool/provider/model internals surfaced to the user).
+ */
+export function PhaseIndicator({ phase }: { phase: string | null }) {
   const t = useTranslations("aiAssistant");
-  const label = toolName
-    ? t.has(`tools.${toolName}`)
-      ? t(`tools.${toolName}`)
-      : t("processing")
-    : (status ?? t("statusThinking"));
+  const label = phase && t.has(`phase.${phase}`) ? t(`phase.${phase}`) : t("processing");
   return (
-    <div className="flex items-center gap-2 self-start" aria-live="polite">
-      <span
-        aria-hidden
-        className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-[var(--content-ai-soft)]"
-      >
-        <Search strokeWidth={1.9} className="size-3 text-[var(--content-ai)]" />
-      </span>
-      <div className="type-caption rounded-2xl rounded-bl-sm border border-[var(--content-ai)]/25 bg-[var(--content-ai-soft)] px-3 py-2 text-[var(--content-ai)]">
-        <div className="flex items-center gap-2">
-          <Loader2 className="size-3 animate-spin" />
-          {label}
-        </div>
-        {status && toolName && (
-          <p className="mt-0.5 font-normal text-[var(--content-ai)]/75">{status}</p>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export function TypingIndicator() {
-  return (
-    <div className="flex items-end gap-2">
+    <div className="flex items-end gap-2 self-start" aria-live="polite" aria-atomic="true">
       <AssistantAvatar />
-      <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-sm border border-[var(--border-default)] bg-[var(--bg-subtle)] px-4 py-3 shadow-[var(--shadow-sm)]">
-        {[0, 1, 2].map((i) => (
-          <span
-            key={i}
-            className="size-1.5 animate-bounce rounded-full bg-[var(--text-muted)]"
-            style={{ animationDelay: `${i * 0.15}s` }}
-          />
-        ))}
+      <div className="flex items-center gap-2 rounded-2xl rounded-bl-sm border border-[var(--content-ai)]/25 bg-[var(--content-ai-soft)] px-3.5 py-2.5 shadow-[var(--shadow-sm)]">
+        {/* Keyed wrapper fades in on each phase change for a smooth transition. */}
+        <span key={label} className="animate-in fade-in duration-300">
+          <span className="type-small animate-pulse font-medium text-[var(--content-ai)]">
+            {label}
+          </span>
+        </span>
+        <span className="flex items-center gap-1" aria-hidden>
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              className="size-1 animate-bounce rounded-full bg-[var(--content-ai)]/70"
+              style={{ animationDelay: `${i * 0.15}s` }}
+            />
+          ))}
+        </span>
       </div>
     </div>
   );

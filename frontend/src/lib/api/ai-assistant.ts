@@ -163,17 +163,6 @@ export const aiAssistantApi = {
     );
   },
 
-  /** Regenerate the assistant reply for a message; refetch the thread after. */
-  regenerateMessage(
-    sessionId: string,
-    messageId: string,
-  ): Promise<{ reply: ChatMessage }> {
-    return api.post<{ reply: ChatMessage }>(
-      `/ai/chat/sessions/${sessionId}/messages/${messageId}/regenerate`,
-      {},
-    );
-  },
-
   /** Archive (soft-delete) a session. */
   archiveSession(sessionId: string): Promise<{ status: string }> {
     return api.delete<{ status: string }>(`/ai/chat/sessions/${sessionId}`);

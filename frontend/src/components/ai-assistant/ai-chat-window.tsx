@@ -31,14 +31,24 @@ import {
   type StreamEvent,
 } from "./chat-window/constants";
 import {
-  AssistantActivity,
   MessageBubble,
+  PhaseIndicator,
   StreamingBubble,
-  TypingIndicator,
   type ToolResolution,
 } from "./chat-window/message-bubble";
 import { SessionRail } from "./chat-window/session-rail";
 import { AuthLoadingPrompt, GuestPrompt, WelcomeScreen } from "./chat-window/welcome-screen";
+
+/**
+ * Map a tool-call to a leak-safe phase code. The tool NAME is never rendered —
+ * this only advances the animated "thinking" line when the backend omits an
+ * explicit `status` event. Frozen leak-safe codes only (AI_PRODUCT_SPEC §9).
+ */
+function derivePhaseFromTool(name: string): string {
+  if (name.startsWith("export_")) return "exporting";
+  if (name === "generate_image") return "generating_image";
+  return "retrieving";
+}
 
 /**
  * AI career assistant chat window. Renders as a floating panel anchored at the
@@ -69,8 +79,9 @@ export function AiChatWindow({
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [streamingText, setStreamingText] = useState<string | null>(null);
-  const [activeToolName, setActiveToolName] = useState<string | null>(null);
-  const [activityStatus, setActivityStatus] = useState<string | null>(null);
+  // Leak-safe high-level phase code for the animated "thinking" line. Never a
+  // raw tool/provider/model name — it only maps to localized `phase.*` text.
+  const [phase, setPhase] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [expanded, setExpanded] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -86,7 +97,6 @@ export function AiChatWindow({
   const [resolvedActions, setResolvedActions] = useState<Record<string, ToolResolution>>({});
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
   const [editBusy, setEditBusy] = useState(false);
-  const [regenerating, setRegenerating] = useState(false);
   const [attachments, setAttachments] = useState<
     { localId: string; filename: string; status: "uploading" | "ready" | "error"; id?: string }[]
   >([]);
@@ -180,20 +190,13 @@ export function AiChatWindow({
     return s.id;
   }, [sessionId, qc]);
 
-  // Status codes stream from the backend; labels live in i18n (`status.*`).
-  const statusLabel = useCallback(
-    (code: string) => (t.has(`status.${code}`) ? t(`status.${code}`) : t("statusThinking")),
-    [t],
-  );
-
   function startNewChat() {
     abortRef.current?.abort();
     abortRef.current = null;
     setSessionId(null);
     setMessages([]);
     setStreamingText(null);
-    setActiveToolName(null);
-    setActivityStatus(null);
+    setPhase(null);
     setSending(false);
     setInput("");
     setDraftSession(true);
@@ -210,8 +213,7 @@ export function AiChatWindow({
     setSessionId(session.id);
     setMessages([]);
     setStreamingText(null);
-    setActiveToolName(null);
-    setActivityStatus(null);
+    setPhase(null);
     setDraftSession(false);
     setHistoryOpen(false);
     setResolvedActions({});
@@ -229,8 +231,7 @@ export function AiChatWindow({
     setAttachments([]);
     setSending(true);
     setStreamingText(null);
-    setActiveToolName(null);
-    setActivityStatus(t("statusReceived"));
+    setPhase(null);
 
     // Optimistic user message
     const optimistic: ChatMessage = {
@@ -270,8 +271,7 @@ export function AiChatWindow({
     } finally {
       setSending(false);
       setStreamingText(null);
-      setActiveToolName(null);
-      setActivityStatus(null);
+      setPhase(null);
     }
   }
 
@@ -404,22 +404,21 @@ export function AiChatWindow({
         }
 
         if (event.type === "status") {
-          setActivityStatus(statusLabel(event.code));
+          // Authoritative leak-safe phase code from the backend.
+          setPhase(event.code);
         } else if (event.type === "tool_call") {
-          setActivityStatus(statusLabel("using_tool"));
-          setActiveToolName(event.name);
+          // Never render the tool name; only derive a leak-safe phase from it
+          // so the animated line stays lively if a `status` event is missing.
+          setPhase(derivePhaseFromTool(event.name));
         } else if (event.type === "tool_result") {
-          setActiveToolName(null);
-          setActivityStatus(statusLabel("synthesizing"));
+          setPhase("analyzing");
         } else if (event.type === "token") {
           accumulated += event.text;
-          setActivityStatus(statusLabel("responding"));
           setStreamingText(accumulated);
         } else if (event.type === "done") {
           const finalMsg = event.message;
           setStreamingText(null);
-          setActiveToolName(null);
-          setActivityStatus(null);
+          setPhase(null);
           commitAssistantTurn(sid, optimistic, finalMsg);
           void qc.invalidateQueries({ queryKey: ["ai-assistant", "messages", sid] });
           return;
@@ -495,7 +494,7 @@ export function AiChatWindow({
     }
   }
 
-  /** Refetch and commit the full thread (after server-side edit/regenerate). */
+  /** Refetch and commit the full thread (after a server-side edit re-run). */
   async function reloadThread(sid: string) {
     const fresh = await aiAssistantApi.getMessages(sid);
     messagesRef.current = fresh;
@@ -531,27 +530,6 @@ export function AiChatWindow({
     }
   }
 
-  /** Regenerate the final assistant reply, then refetch the thread. */
-  async function regenerateReply(message: ChatMessage) {
-    if (!sessionId || regenerating || sending) return;
-    setRegenerating(true);
-    setSending(true);
-    // Optimistic: drop the stale reply so the typing indicator shows.
-    const without = messagesRef.current.filter((m) => m.id !== message.id);
-    messagesRef.current = without;
-    setMessages(without);
-    try {
-      await aiAssistantApi.regenerateMessage(sessionId, message.id);
-      await reloadThread(sessionId);
-    } catch {
-      appendLocalError(t("regenerateFailed"));
-      void qc.invalidateQueries({ queryKey: ["ai-assistant", "messages", sessionId] });
-    } finally {
-      setSending(false);
-      setRegenerating(false);
-    }
-  }
-
   /** Archive (soft-delete) a session from the history rail. */
   async function deleteSession(session: ChatSession) {
     await aiAssistantApi.archiveSession(session.id);
@@ -566,8 +544,7 @@ export function AiChatWindow({
       setSessionId(null);
       setMessages([]);
       setStreamingText(null);
-      setActiveToolName(null);
-      setActivityStatus(null);
+      setPhase(null);
       setResolvedActions({});
       setEditingMessageId(null);
       // Not a draft: the restore effect picks the next most-recent session.
@@ -588,7 +565,10 @@ export function AiChatWindow({
   const showExpandedLayout = expanded && !embedded;
   const isWorkspaceFullscreen = embedded && expanded;
   const showHistoryPane = historyOpen || showExpandedLayout;
-  const historyAsFullPanel = historyOpen && embedded && !expanded;
+  // In the compact (non-expanded) panel — floating or embedded — the history
+  // list takes over the whole panel so the session rail (with its always-visible
+  // "new chat" button) is never clipped by a breakpoint.
+  const historyAsFullPanel = historyOpen && !expanded && isAuthed;
   const activeSession = sessionsQuery.data?.find((session) => session.id === sessionId);
   const currentTitle = draftSession
     ? t("untitledSession")
@@ -597,15 +577,10 @@ export function AiChatWindow({
   // Conversation management targets: only server-persisted messages qualify
   // (optimistic/error/stream drafts have local prefixes and no server row).
   const isServerId = (id: string) => !/^(opt|err|stream)-/.test(id);
-  const lastMessage = messages.length > 0 ? messages[messages.length - 1] : undefined;
   const lastUserMessage = [...messages].reverse().find((m) => m.role === "user");
   const editableMessageId =
     sessionId && !sending && lastUserMessage && isServerId(lastUserMessage.id)
       ? lastUserMessage.id
-      : null;
-  const regenerableMessageId =
-    sessionId && !sending && lastMessage?.role === "assistant" && isServerId(lastMessage.id)
-      ? lastMessage.id
       : null;
 
   function startRename() {
@@ -697,9 +672,20 @@ export function AiChatWindow({
 
       <div className="flex h-10 shrink-0 items-center gap-2 border-b border-[var(--border-subtle)] px-3">
         {historyOpen ? (
-          <p className="type-caption min-w-0 flex-1 truncate font-semibold text-[var(--text-primary)]">
-            {t("conversationHistory")}
-          </p>
+          <>
+            <button
+              type="button"
+              onClick={() => setHistoryOpen(false)}
+              aria-label={t("backToChat")}
+              title={t("backToChat")}
+              className="rounded-lg p-1.5 text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+            >
+              <ArrowLeft aria-hidden strokeWidth={1.9} className="size-4" />
+            </button>
+            <p className="type-caption min-w-0 flex-1 truncate font-semibold text-[var(--text-primary)]">
+              {t("conversationHistory")}
+            </p>
+          </>
         ) : (
           <>
             <button
@@ -773,7 +759,7 @@ export function AiChatWindow({
             t={t}
             searchable
             showHeading={!historyAsFullPanel}
-            showNewButton={false}
+            showNewButton
             className={cn(
               "w-[280px] shrink-0",
               historyAsFullPanel && "!flex w-full border-r-0",
@@ -812,24 +798,15 @@ export function AiChatWindow({
                   onEditStart={() => setEditingMessageId(msg.id)}
                   onEditCancel={() => setEditingMessageId(null)}
                   onEditSubmit={(text) => void submitEdit(msg, text)}
-                  regenerable={msg.id === regenerableMessageId}
-                  regenerating={regenerating}
-                  onRegenerate={() => void regenerateReply(msg)}
                 />
               ))
             )}
 
-            {(activityStatus || activeToolName) && (
-              <AssistantActivity status={activityStatus} toolName={activeToolName} />
-            )}
+            {/* Streamed answer */}
+            {streamingText && <StreamingBubble text={streamingText} expanded={expanded} />}
 
-            {/* Streaming text bubble */}
-            {streamingText && !activeToolName && (
-              <StreamingBubble text={streamingText} expanded={expanded} />
-            )}
-
-            {/* Typing indicator (before streaming starts) */}
-            {sending && !streamingText && !activeToolName && <TypingIndicator />}
+            {/* Animated, leak-safe phase line before the streamed text appears */}
+            {sending && !streamingText && <PhaseIndicator phase={phase} />}
 
             <div ref={bottomRef} />
           </div>
