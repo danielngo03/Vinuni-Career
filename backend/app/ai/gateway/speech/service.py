@@ -63,10 +63,8 @@ def _speech_key() -> str:
 
     s = get_settings()
     for candidate in (
-        getattr(s, "gemini_api_key", "") or "",
-        os.environ.get("GEMINI_API_KEY", ""),
+        getattr(s, "google_api_key", "") or "",
         os.environ.get("GOOGLE_API_KEY", ""),
-        os.environ.get("AI_PROVIDER_GEMINI_LIVE_API_KEY", ""),
     ):
         cand = (candidate or "").strip()
         if cand and cand.lower() not in _PLACEHOLDERS:
@@ -109,7 +107,7 @@ def _client() -> object:
        ``GOOGLE_CLOUD_PROJECT`` + ``GOOGLE_APPLICATION_CREDENTIALS`` →
        ``genai.Client(vertexai=True, project=..., location=...)``.
     2. **AI Studio developer key** (simplest free path): ``AI_SPEECH_USE_VERTEX=
-       false`` + ``GEMINI_API_KEY=AIza...`` → ``genai.Client(api_key=...)``.
+       false`` + ``GOOGLE_API_KEY=AIza...`` → ``genai.Client(api_key=...)``.
     3. **Vertex express key** (``AQ...``): ``AI_SPEECH_USE_VERTEX=true`` + key →
        ``genai.Client(vertexai=True, api_key=...)`` (limited free quota).
     """
