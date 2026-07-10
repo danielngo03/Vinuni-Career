@@ -13,37 +13,40 @@ Place the attached logo EXACTLY as-is in the bottom-left corner — do not redra
 restyle, recolor or distort it.
 
 Create a modern, premium 16:9 hero thumbnail for "VinUni Career Platform" — an
-AI-powered university career platform.
+AI-powered university career platform. FULL FLAT VECTOR ILLUSTRATION style, like
+top-tier SaaS landing-page hero art (Dribbble / Behance quality, Notion / Slack
+illustration vibes): clean shapes, smooth rounded corners, subtle soft shadows,
+lively but disciplined. NOT photorealistic, NOT 3D render, no real photos.
 
-SCENE: a friendly Vietnamese university student (early 20s, warm confident smile,
-smart-casual shirt) sitting at a laptop, positioned on the right half of the frame,
-looking at the camera. Around the laptop float translucent frosted-glass UI panels
-with rounded corners and soft shadows:
- (1) a CV/resume checklist panel with green checkmarks,
- (2) a circular match-score ring showing "87",
- (3) a job card with a small briefcase icon,
- (4) an AI chat panel with a sparkle icon,
- (5) a university analytics panel with a graduation cap and tiny bar chart.
-BACKGROUND: a bright modern university campus — glass buildings, trees, a few
-students walking with backpacks — softly blurred and washed out into a warm cream
-white haze (#F8F7F1 tone) so the foreground pops. Soft optimistic daylight.
+SCENE (right half of the frame): a cheerful vector-illustrated Vietnamese university
+student character (simple friendly face, smart-casual shirt) sitting at a laptop.
+Floating around the character, clean white rounded UI cards with soft shadows,
+connected by thin dotted lines:
+ (1) a circular match-score ring showing "87" with a small emerald "match" chip,
+ (2) a CV/resume checklist card with emerald green checkmarks,
+ (3) an AI chat bubble card with a violet sparkle icon,
+ (4) a job card with a small briefcase icon,
+ (5) a small analytics card with a graduation cap and tiny bar chart.
+Behind the character: a simplified flat vector campus skyline (geometric buildings,
+a clock tower, trees, two tiny walking student figures) in very light muted tones
+so the foreground pops. A few floating accent dots and one thin curved dotted path
+across the background for a sense of motion.
 
-TEXT BLOCK (left half, on the clean cream area, left-aligned with a thin vertical
+TEXT BLOCK (left half, on clean cream space, left-aligned, with a thin vertical
 gradient accent bar from indigo #4f46e5 to violet #7c3aed):
- line 1 — small uppercase label, indigo #4f46e5, bold: "VINUNI CAREER PLATFORM"
- line 2 — big bold headline, near-black ink #171717: "Cho Sinh Viên Thời AI"
-          (render the Vietnamese diacritics EXACTLY; the word "AI" in violet #7c3aed)
+ line 1 — small uppercase bold label in indigo #4f46e5: "VINUNI CAREER PLATFORM"
+ line 2 — big bold headline in near-black ink #171717: "Cho Sinh Viên Thời AI"
+          (render the Vietnamese diacritics EXACTLY; color the word "AI" violet #7c3aed)
  line 3 — small gray #57534e: "CV • Việc làm • Phỏng vấn AI"
 
-COLOR SYSTEM: warm cream white base #F8F7F1 (NOT blue, NOT teal cast), white/glass
-panels, near-black ink text, primary accents indigo #4f46e5 → violet #7c3aed, small
-touches of emerald #10b981 (checkmarks), amber #f59e0b and sky #0ea5e9 in tiny chart
-details only. No navy background, no neon, no dark mode.
+COLOR SYSTEM: warm cream background #F8F7F1 (NOT blue or teal cast), white cards,
+near-black ink text; primary accent indigo #4f46e5 → violet #7c3aed (gradient allowed
+only on the accent bar and ONE soft ribbon behind the card cluster); small meaningful
+touches of emerald #10b981 (checkmarks), amber #f59e0b, sky #0ea5e9 and teal #14b8a6
+in chart details and tiny chips. No navy background, no neon, no dark mode.
 
-STYLE: photo-illustrative blend like premium tech-product key visuals — realistic
-person, clean vector-glass UI panels, high detail, crisp light. Trustworthy, modern,
-optimistic. No watermark, no extra logos, no gibberish text — only the three text
-lines above and the attached logo.
+MOOD: optimistic, trustworthy, energetic — a real working product. No watermark, no
+extra logos, no gibberish text — only the three text lines above and the attached logo.
 ```
 
 ---
