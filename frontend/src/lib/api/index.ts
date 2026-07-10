@@ -644,7 +644,14 @@ export { locationsApi } from "./locations";
 export type { Province, Ward } from "./locations";
 export type { JobLocationItem } from "./jobs";
 export { talentPoolApi } from "./talent-pool";
-export type { TalentCard, TalentPage, TalentSearchParams } from "./talent-pool";
+export type {
+  MatchTier,
+  TalentSearchSource,
+  TalentMatch,
+  TalentSearchPage,
+  TalentSearchResult,
+  TalentSearchBody,
+} from "./talent-pool";
 export { adminUsersApi } from "./admin-users";
 export type { AdminUserRow, AdminUsersPage, AdminUsersParams } from "./admin-users";
 export { invitationsApi } from "./invitations";
@@ -656,7 +663,13 @@ export type {
 } from "./invitations";
 export { feedbackApi } from "./feedback";
 export type { FeedbackBody, FeedbackResult } from "./feedback";
-export { workflowsApi, SIDE_EFFECTING_NODE_TYPES, ADVISORY_NODE_TYPES } from "./workflows";
+export {
+  workflowsApi,
+  SIDE_EFFECTING_NODE_TYPES,
+  ADVISORY_NODE_TYPES,
+  CONSEQUENTIAL_NODE_TYPES,
+  HUMAN_CONFIRM_NODE_TYPES,
+} from "./workflows";
 export type {
   WorkflowNodeType,
   WorkflowOwnerType,

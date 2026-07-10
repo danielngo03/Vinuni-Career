@@ -2,11 +2,15 @@ import type { ElementType } from "react";
 import {
   ArrowRightLeft,
   Bell,
+  BellRing,
+  ChevronsRight,
   Clock,
   Cog,
+  FilePlus2,
   Flag,
   GitBranch,
   ListTodo,
+  ScanSearch,
   ShieldCheck,
   Sparkles,
   Timer,
@@ -25,7 +29,8 @@ import type { WorkflowNodeType } from "@/lib/api/workflows";
  * card is a mono card with a category-coded CONTENT accent (left bar + icon
  * chip). Categories follow docs/DESIGN.md §1.1.2 data-viz semantics:
  *   trigger → indigo · logic/wait → amber · action/notify/task → teal ·
- *   ai → content-ai · human/approval → violet · end → neutral.
+ *   ai → content-ai · human/approval → orange · end → neutral.
+ *   (No purple/violet in the builder UI — owner 2026-07-10.)
  */
 export interface NodeVisual {
   icon: ElementType;
@@ -47,9 +52,16 @@ export const NODE_VISUALS: Record<WorkflowNodeType, NodeVisual> = {
   move_candidate: { icon: ArrowRightLeft, accent: "var(--viz-teal)", tone: "teal" },
   webhook: { icon: Webhook, accent: "var(--viz-teal)", tone: "teal" },
   ai_suggestion: { icon: Sparkles, accent: "var(--content-ai)", tone: "ai" },
-  human_review: { icon: UserCheck, accent: "var(--viz-violet)", tone: "violet" },
-  request_approval: { icon: ShieldCheck, accent: "var(--viz-violet)", tone: "violet" },
+  human_review: { icon: UserCheck, accent: "var(--viz-orange)", tone: "orange" },
+  request_approval: { icon: ShieldCheck, accent: "var(--viz-orange)", tone: "orange" },
   end: { icon: Flag, accent: "var(--border-strong)", tone: "neutral" },
+  // Recruiting-automation nodes (Wave 2B). AI screening reads as AI; auto-advance
+  // + notify read as pipeline/notification actions (teal); JD→draft reads as a
+  // human-review step (orange) because it always pauses for confirm-create.
+  ai_screen_application: { icon: ScanSearch, accent: "var(--content-ai)", tone: "ai" },
+  auto_advance_on_gate: { icon: ChevronsRight, accent: "var(--viz-teal)", tone: "teal" },
+  notify: { icon: BellRing, accent: "var(--viz-teal)", tone: "teal" },
+  jd_pdf_to_draft: { icon: FilePlus2, accent: "var(--viz-orange)", tone: "orange" },
 };
 
 /** Resolve a node's visual, falling back to the generic action look. */

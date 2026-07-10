@@ -16,6 +16,12 @@ const DEFAULT_NODE_CAPABILITY: Partial<Record<WorkflowNodeType, string>> = {
   human_review: "workflow:request_approval",
   ai_suggestion: "ai_assistant:suggest",
   webhook: "workflow:webhook",
+  // Recruiting-automation nodes: activation requires the SAME capability the
+  // equivalent manual action needs (backend `DEFAULT_NODE_CAPABILITY`).
+  ai_screen_application: "ai_recruiting:screen_candidate",
+  auto_advance_on_gate: "pipeline:move_candidate",
+  notify: "notifications:send",
+  jd_pdf_to_draft: "jobs:create",
 };
 
 /** Resolves the capability a node requires, honoring an explicit `data.capability` override. */

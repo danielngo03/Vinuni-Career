@@ -42,12 +42,50 @@ const STATUS_CHIP_TONE: Record<WorkflowStatus, ChipTone> = {
   ARCHIVED: "neutral",
 };
 
+const DEFAULT_TRIGGER = "system.student_registered";
+
+/**
+ * Start-event options for the trigger picker, scoped by owner type. Partner flows
+ * react to recruiting events (a new application, a stage change, an uploaded JD);
+ * university flows react to account/registration events. `system.application_submitted`
+ * and `system.stage_changed` are the recruiting-automation triggers (Wave 2B).
+ */
+function triggerOptionsFor(
+  t: ReturnType<typeof useTranslations>,
+  ownerType: WorkflowOwnerType,
+): { value: string; label: string }[] {
+  if (ownerType === "partner") {
+    return [
+      { value: "system.application_submitted", label: t("triggerApplicationSubmitted") },
+      { value: "system.stage_changed", label: t("triggerStageChanged") },
+      { value: "system.file_uploaded", label: t("triggerFileUploaded") },
+      { value: "scheduler.cron", label: t("triggerScheduler") },
+    ];
+  }
+  return [
+    { value: "system.student_registered", label: t("triggerStudentRegistered") },
+    { value: "system.partner_registered", label: t("triggerPartnerRegistered") },
+    { value: "system.application_submitted", label: t("triggerApplicationSubmitted") },
+    { value: "system.stage_changed", label: t("triggerStageChanged") },
+    { value: "scheduler.cron", label: t("triggerScheduler") },
+  ];
+}
+
+/** The start event this graph is bound to — derived from its (single) trigger node. */
+function graphTriggerType(graph: FlowGraph): string {
+  const trigger = graph.nodes.find((n) => n.type === "trigger");
+  const value = trigger?.data.trigger_type;
+  return typeof value === "string" && value ? value : DEFAULT_TRIGGER;
+}
+
 function nodeTypeDefs(
   t: ReturnType<typeof useTranslations>,
   ownerType: WorkflowOwnerType,
 ): NodeTypeDef[] {
+  const defaultTrigger =
+    ownerType === "partner" ? "system.application_submitted" : DEFAULT_TRIGGER;
   const shared: NodeTypeDef[] = [
-    { type: "trigger", label: t("nodeTrigger"), defaultData: { trigger_type: "system.student_registered" } },
+    { type: "trigger", label: t("nodeTrigger"), defaultData: { trigger_type: defaultTrigger } },
     { type: "condition", label: t("nodeCondition"), defaultData: { expression: "" } },
     { type: "wait", label: t("nodeWait"), defaultData: { hours: 24 } },
   ];
@@ -56,6 +94,21 @@ function nodeTypeDefs(
     { type: "move_candidate", label: t("nodeMoveCandidate"), defaultData: {} },
     { type: "ai_suggestion", label: t("nodeAiSuggestion"), defaultData: {} },
     { type: "webhook", label: t("nodeWebhook"), defaultData: {} },
+  ];
+  // Recruiting-automation nodes (Wave 2B) — partner recruiting flows only.
+  const recruitingAutomation: NodeTypeDef[] = [
+    {
+      type: "ai_screen_application",
+      label: t("nodeAiScreen"),
+      defaultData: { mode: "deterministic", strong_threshold: 80, consider_threshold: 50 },
+    },
+    { type: "auto_advance_on_gate", label: t("nodeAutoAdvance"), defaultData: {} },
+    {
+      type: "notify",
+      label: t("nodeNotify"),
+      defaultData: { recipient_mode: "assignee", channel: "email", locale: "vi" },
+    },
+    { type: "jd_pdf_to_draft", label: t("nodeJdPdfToDraft"), defaultData: {} },
   ];
   const universityOnly: NodeTypeDef[] = [
     { type: "human_review", label: t("nodeHumanReview"), defaultData: { assignee_mode: "queue", sla_hours: 24 } },
@@ -68,7 +121,7 @@ function nodeTypeDefs(
     { type: "end", label: t("nodeEnd"), defaultData: {} },
   ];
   return ownerType === "partner"
-    ? [...shared, ...partnerOnly, ...common]
+    ? [...shared, ...partnerOnly, ...recruitingAutomation, ...common]
     : [...shared, ...universityOnly, ...common];
 }
 
@@ -120,6 +173,7 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
   const canActivate = status === "DRAFT" || status === "PAUSED";
 
   const defs = useMemo(() => nodeTypeDefs(t, ownerType), [t, ownerType]);
+  const triggerOptions = useMemo(() => triggerOptionsFor(t, ownerType), [t, ownerType]);
 
   const preCheckMissing = useMemo(
     () =>
@@ -144,9 +198,12 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
   const save = useMutation({
     mutationFn: async () => {
       if (isNew) {
+        // The flow's start-event binding is set at creation from the trigger node
+        // the author configured. (The update API does not accept a new trigger, so
+        // it is fixed afterward — see the inspector's locked trigger picker.)
         return workflowsApi.create({
           name: name || "Untitled workflow",
-          trigger_type: "system.student_registered",
+          trigger_type: graphTriggerType(graph),
           graph,
         });
       }
@@ -380,6 +437,8 @@ export function WorkflowBuilderScreen({ flowId, ownerType }: WorkflowBuilderScre
         <NodeInspector
           node={selectedNode}
           readOnly={readOnly}
+          triggerOptions={triggerOptions}
+          triggerLocked={!isNew}
           onClose={() => setSelectedNodeId(null)}
           onChange={(nodeId, data) => {
             const nextNodes = effectiveGraph.nodes.map((n) => (n.id === nodeId ? { ...n, data } : n));
