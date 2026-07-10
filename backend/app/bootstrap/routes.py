@@ -7,6 +7,7 @@ from fastapi import APIRouter, FastAPI
 from app.ai.agents.api import router as ai_workforce_router
 from app.api import health
 from app.modules.account.api import router as account_router
+from app.modules.advertising.api import campaign_router as advertising_campaign_router
 from app.modules.advertising.api import router as advertising_router
 from app.modules.ai_assistant.api.router import router as ai_assistant_router
 from app.modules.ai_assistant.api.router import usage_router as ai_usage_router
@@ -112,6 +113,8 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(platform_support_router.router)
     api.include_router(advertising_router.router)
     api.include_router(advertising_router.admin_router)
+    api.include_router(advertising_campaign_router.campaign_router)
+    api.include_router(advertising_campaign_router.campaign_admin_router)
     api.include_router(analytics_partner_router)
     api.include_router(billing_router.router)
     api.include_router(billing_router.admin_router)

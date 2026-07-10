@@ -800,3 +800,9 @@ async def reject_partner(
 router.include_router(org_router)
 router.include_router(partner_router)
 router.include_router(admin_partner_router)
+
+# Company profile + university approval workflow (owner decision 2026-07-10).
+from app.modules.organization.api import company_profile_router  # noqa: E402
+
+router.include_router(company_profile_router.partner_router)
+router.include_router(company_profile_router.admin_router)

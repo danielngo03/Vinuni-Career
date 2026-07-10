@@ -140,6 +140,41 @@ class NoteCreateRequest(BaseModel):
     body: str = Field(min_length=1, max_length=5000)
 
 
+class CompanyProfileUpdateRequest(BaseModel):
+    """Partner company-profile edit.
+
+    Cosmetic fields apply immediately; sensitive legal-identity fields
+    (``legal_name``, ``tax_code``, ``registration_number``) create/merge a
+    pending university approval request. All optional; only ``exclude_unset``
+    fields are considered.
+    """
+
+    # Sensitive (approval-gated).
+    legal_name: str | None = Field(default=None, max_length=255)
+    tax_code: str | None = Field(default=None, max_length=50)
+    registration_number: str | None = Field(default=None, max_length=100)
+    # Cosmetic (immediate). ``display_name`` matches the legacy PATCH surface.
+    display_name: str | None = Field(default=None, min_length=2, max_length=255)
+    description: str | None = Field(default=None, max_length=5000)
+    website_url: str | None = Field(default=None, max_length=500)
+    industry: str | None = Field(default=None, max_length=100)
+    company_size: str | None = Field(default=None, max_length=30)
+    founded_year: int | None = Field(default=None, ge=1800, le=2100)
+    headquarters_city: str | None = Field(default=None, max_length=100)
+    headquarters_country: str | None = Field(default=None, max_length=100)
+    version: int | None = None
+
+
+class CompanyApproveRequest(BaseModel):
+    note: str | None = Field(default=None, max_length=2000)
+    version: int | None = None
+
+
+class CompanyRejectRequest(BaseModel):
+    reason: str = Field(min_length=1, max_length=2000)
+    version: int | None = None
+
+
 class PartnerApproveRequest(BaseModel):
     trust_level: str = Field(default="standard")
     package_id: uuid.UUID | None = None

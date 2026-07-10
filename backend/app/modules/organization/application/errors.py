@@ -129,6 +129,33 @@ class NotUniversityActorError(PermissionDeniedError):
         super().__init__(self.message, details={"reason": "not_university_actor"})
 
 
+class NoProfileChangesError(ValidationFailedError):
+    """A profile update carried no recognizable fields or file attachments."""
+
+    message = "Không có thay đổi nào để lưu."
+
+    def __init__(self) -> None:
+        super().__init__(self.message, details={"reason": "no_changes"})
+
+
+class InvalidCompanyDocumentError(ValidationFailedError):
+    """An attached company file failed type/size/kind validation."""
+
+    def __init__(self, reason: str) -> None:
+        super().__init__(
+            "Tệp tài liệu doanh nghiệp không hợp lệ.", details={"reason": reason}
+        )
+
+
+class ChangeRequestNotPendingError(ConflictError):
+    """A decision/withdraw was attempted on an already-decided change request."""
+
+    message = "Yêu cầu thay đổi này đã được xử lý trước đó."
+
+    def __init__(self, reason: str = "change_request_not_pending") -> None:
+        super().__init__(self.message, details={"reason": reason})
+
+
 class SeatLimitReachedError(ConflictError):
     """Partner org has reached its seat cap for the current subscription tier."""
 

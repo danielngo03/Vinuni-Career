@@ -214,6 +214,17 @@ class Settings(BaseSettings):
     # ``submit`` that would exceed this is rejected ``409 active_placement_limit``.
     advertising_max_active_per_org: int = 3
 
+    # Campaign-grade allocation engine (spec §7.0). Max concurrent in-flight
+    # (pending_review | approved | active | paused) CAMPAIGNS per advertiser org.
+    advertising_max_active_campaigns_per_org: int = 5
+    # Default frozen CPM (cost per 1000 impressions, VND) used to derive a
+    # campaign's notional impression goal + per-impression spend for budget pacing.
+    # V1 has no bidding; this is a fixed rate-card value, frozen onto the campaign
+    # at submit. Never surfaced as a "bid" — it is an internal spend/pacing rate.
+    advertising_default_cpm_vnd: str = "50000.00"
+    # TTL (seconds) an allocation-plan row stays "current" before recomputation.
+    advertising_allocation_ttl_seconds: int = 600
+
     # CV-to-job fit: a CV whose latest content update is older than this many days
     # is flagged ``stale: true`` in job-fit results (docs/BUSINESS_LOGIC.md §4B.3B,
     # docs/CV_STUDIO_SPEC.md §recommend). Deterministic; never a model parameter.
