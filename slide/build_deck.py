@@ -559,14 +559,14 @@ def s13():
             <span style="font-size:.8rem;line-height:1.38">{b}</span></div>''' for b in bullets)
         cards += f'''<div style="flex:1;display:flex;flex-direction:column;position:relative">
           {'<div style="position:absolute;top:24px;left:-13%;width:26%;height:4px;background:' + (PAL["emerald"] if i == 1 else "#e5e2da") + ';z-index:0"></div>' if i else ''}
-          <div class="card" style="padding:1.1rem 1.15rem;display:flex;flex-direction:column;gap:.45rem;position:relative;z-index:1;height:100%;{dash}">
+          <div class="card" style="padding:1.1rem 1.15rem;display:flex;flex-direction:column;gap:.45rem;position:relative;z-index:1;height:100%;justify-content:center;{dash}">
             <div style="display:flex;align-items:center;justify-content:space-between">{icbox(ic, c, 44, 24)}{badge}</div>
             <div style="font-weight:800;font-size:1rem">{name}</div>
             <div>{rows}</div></div></div>'''
     return head(13, "Phần 4 · Lộ trình", "Lộ trình phát triển",
                 "Phần khó nhất — xây dựng nền tảng — đã hoàn thành. Trọng tâm tiếp theo là triển khai và mở rộng.") + f'''
     <div class="body" style="flex-direction:column;justify-content:center;gap:.9rem">
-      <div style="display:flex;gap:1rem;flex:1;align-items:stretch;max-height:340px">{cards}</div>
+      <div style="display:flex;gap:1rem;align-items:stretch">{cards}</div>
       <div class="card" style="padding:.75rem 1.2rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap">
         {icbox("idea", PAL["amber"], 32, 18, 9)}
         <span style="font-size:.82rem">Chi phí giai đoạn thí điểm chủ yếu là <b>vận hành &amp; ngân sách AI</b> — hạ tầng nhẹ, không cần đội ngũ lớn.</span></div>
