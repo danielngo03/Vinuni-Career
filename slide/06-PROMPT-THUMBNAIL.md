@@ -5,7 +5,31 @@
 
 ---
 
-## ✅ PROMPT CHUẨN (v6 — dán nguyên khối này)
+## ⚡ PROMPT SỬA TIẾP ẢNH ĐÃ CÓ (khuyên dùng — dán ngay sau ảnh vừa tạo, cùng đoạn chat)
+
+```
+Refine this image. Keep the overall composition, the character, the campus skyline
+and all five floating cards EXACTLY as they are. Change ONLY the text block:
+
+1. SHRINK the headline by about 35% — it must occupy at most 40% of the image width,
+   still extra-bold ink #171717, two lines:
+   "Kết nối Sinh viên,
+    Doanh nghiệp & Nhà trường"
+2. Replace the bullet subtitle line with ONE short gray #57534e sentence right under
+   the headline: "Một nền tảng duy nhất — AI hỗ trợ từng bước."
+3. Fill the EMPTY bottom-left corner with a neat row of 3 small white pill chips
+   (rounded-full, thin border, soft shadow), each with a tiny pastel icon:
+   • violet document icon + "CV thông minh"
+   • mini multicolor donut + "Điểm phù hợp 0–100"
+   • sky sparkle + "Phỏng vấn thử AI"
+4. Rebalance vertical spacing of the left column: lockup top, headline centered
+   around the upper third, pill chips anchored near the bottom margin — no large
+   empty gaps. Keep all margins even. Render Vietnamese diacritics exactly.
+```
+
+---
+
+## ✅ PROMPT CHUẨN (v7 — bản full, dùng khi tạo lại từ đầu)
 
 ```
 I have attached the OFFICIAL logo: a black geometric chevron "V" mark. Use it EXACTLY
@@ -17,17 +41,23 @@ at every step. FULL FLAT VECTOR ILLUSTRATION, top-tier SaaS hero art (Dribbble /
 Behance quality): clean geometry, rounded corners, soft shadows, balanced whitespace.
 NOT photorealistic, NOT 3D.
 
-TYPOGRAPHY (one modern geometric sans-serif family, like Inter / SF Pro / Plus
-Jakarta Sans; render Vietnamese diacritics EXACTLY):
-- Top-left brand lockup, one row: attached logo (small) + thin vertical divider "|" +
+TYPOGRAPHY & LEFT-COLUMN LAYOUT (one modern geometric sans-serif family, like
+Inter / SF Pro / Plus Jakarta Sans; render Vietnamese diacritics EXACTLY; the whole
+text block stays within the LEFT 40% of the frame, evenly spaced top-to-bottom with
+NO large empty gaps):
+- Top: brand lockup in one row — attached logo (small) + thin vertical divider "|" +
   "VINUNI CAREER PLATFORM" in bold uppercase ink #171717, slight letter-spacing.
-- Headline below, LARGE (dominant element of the left half, ~4x the lockup size),
-  extra-bold ink #171717, tight line-height, two lines:
+- Upper third: headline, extra-bold ink #171717, tight line-height, MODERATE size
+  (each line about 2.5x the lockup text height — impactful but NOT oversized, max
+  40% of image width), two lines:
   "Kết nối Sinh viên,
    Doanh nghiệp & Nhà trường"
-- Subtitle, medium gray #57534e, ~1/4 headline size:
-  "CV thông minh • Điểm phù hợp 0–100 • Phỏng vấn thử AI"
-- Keep generous margins; text block occupies the left 45% on clean cream space.
+- Right under it: one short sentence in gray #57534e, ~1/3 headline size:
+  "Một nền tảng duy nhất — AI hỗ trợ từng bước."
+- Anchored near the BOTTOM margin (fills the lower-left corner): a neat row of 3
+  small white pill chips (rounded-full, thin border, soft shadow), each with a tiny
+  pastel icon: violet document + "CV thông minh"; mini multicolor donut + "Điểm phù
+  hợp 0–100"; sky sparkle + "Phỏng vấn thử AI".
 
 COLOR SYSTEM (this is the product's real design language — follow strictly):
 - Background: warm cream #F8F7F1. Text: ink #171717 + gray. NO purple theme, no navy,
