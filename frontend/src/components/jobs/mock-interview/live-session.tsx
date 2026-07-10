@@ -10,6 +10,8 @@ import {
   MicrophoneSlash,
   PhoneDisconnect,
   Stop,
+  VideoCamera,
+  VideoCameraSlash,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui";
 import {
@@ -22,6 +24,9 @@ import { GeminiLiveClient } from "@/lib/mock-interview/gemini-live-client";
 import { LiveRelayClient } from "@/lib/mock-interview/live-relay-client";
 import { usePrefersReducedMotion } from "@/lib/hooks/use-mount-animation";
 import { cn } from "@/lib/utils";
+import { InterviewerAvatar, type AvatarState } from "./interviewer-avatar";
+import { SelfViewTile, useSelfViewCamera } from "./student-self-view";
+import { CoverageChips } from "./coverage-progress";
 import type { AnswerMode } from "./pre-session-setup";
 
 type Phase = "interviewer_speaking" | "listening" | "thinking" | "ending";
@@ -101,6 +106,7 @@ export function LiveSession({
 }: Props) {
   const t = useTranslations("jobs.mockInterview");
   const reduced = usePrefersReducedMotion();
+  const camera = useSelfViewCamera();
 
   const target = Math.max(1, session.caps.target_questions || session.caps.max_questions || 1);
 
@@ -174,7 +180,6 @@ export function LiveSession({
   const startedAtRef = useRef<number>(Date.now());
   const endedRef = useRef(false);
   const turnsRef = useRef<RecordTurnInput[]>([]);
-  const orbRef = useRef<HTMLDivElement>(null);
   // Server voice tier: TTS playback element + recorder graph.
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
@@ -811,36 +816,18 @@ export function LiveSession({
     return () => window.clearTimeout(id);
   }, [phase, candidateCaption, effectiveMode]);
 
-  /* ---------------------------- orb animation ----------------------------- */
-  useEffect(() => {
-    if (reduced) return; // static orb under reduced motion
-    let raf = 0;
-    let scale = 1;
-    const loop = () => {
-      let goalTarget = 1;
-      const p = phaseRef.current;
-      if (effectiveModeRef.current === "voice" && p === "listening") {
-        goalTarget =
-          1 +
-          (relayRef.current?.level ??
-            geminiRef.current?.level ??
-            controllerRef.current?.level ??
-            0) *
-            0.22;
-      } else if (p === "interviewer_speaking") {
-        goalTarget = 1.05 + 0.05 * (0.5 + 0.5 * Math.sin(performance.now() / 320));
-      } else if (p === "thinking") {
-        goalTarget = 1.02 + 0.02 * (0.5 + 0.5 * Math.sin(performance.now() / 600));
-      }
-      scale += (goalTarget - scale) * 0.12;
-      if (orbRef.current) {
-        orbRef.current.style.transform = `scale(${scale.toFixed(3)})`;
-      }
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, [reduced]);
+  /* ------------------------ interviewer audio level ----------------------- */
+  // Smoothed 0..1 amplitude of the INTERVIEWER's live audio, used to drive the
+  // avatar's mouth. The realtime relay / descriptor tiers expose the REAL PCM
+  // playback amplitude (a pure side-tap that never touches playback). The
+  // turn-based TTS and browser speech-synthesis tiers expose no amplitude, so
+  // the avatar falls back to a lifelike synthetic talk envelope while the
+  // interviewer speaks (see InterviewerAvatar).
+  const getInterviewerLevel = useCallback(() => {
+    if (relayRef.current) return relayRef.current.outputLevel;
+    if (geminiRef.current) return geminiRef.current.outputLevel;
+    return 0;
+  }, []);
 
   /* --------------------------------- render ------------------------------- */
   const statusLabel = realtimeConnecting
@@ -855,105 +842,155 @@ export function LiveSession({
             ? t("yourTurnLabel")
             : t("waitingLabel");
 
+  const avatarState: AvatarState = realtimeConnecting
+    ? "idle"
+    : phase === "interviewer_speaking"
+      ? "speaking"
+      : phase === "thinking"
+        ? "thinking"
+        : phase === "listening"
+          ? "listening"
+          : "idle";
+
   const bigCaption = interviewerStreaming ?? currentQuestion;
   const lastMinute = timeLeft <= 60;
   const announceMinutes = Math.ceil(timeLeft / 60);
+  const speaking = phase === "interviewer_speaking";
+  const progressPct = Math.round((Math.min(questionCount, target) / target) * 100);
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-var(--topbar-height))] max-w-3xl flex-col px-4 py-6">
-      {/* Quiet top row: counter + countdown */}
-      <div className="flex items-center justify-between">
-        <span className="font-data text-xs text-[var(--text-muted)]">
-          {t("questionCounter", { current: Math.min(questionCount, target), target })}
-        </span>
-        <span
-          className={cn(
-            "font-data text-xs tabular-nums",
-            lastMinute ? "text-[var(--brand-red)]" : "text-[var(--text-muted)]",
-          )}
-          aria-hidden
-        >
-          {formatClock(timeLeft)}
-        </span>
+    <div className="mx-auto flex min-h-[calc(100vh-var(--topbar-height))] w-full max-w-4xl flex-col gap-3 px-3 py-4 sm:px-4 sm:py-5">
+      {/* Top bar: room label + status · question progress + countdown */}
+      <header className="flex items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2.5">
+          <span className="kicker shrink-0">{t("roomTitle")}</span>
+          <StatusPill state={avatarState} label={statusLabel} />
+        </div>
+        <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+          <span className="hidden font-data text-xs text-[var(--text-muted)] sm:inline">
+            {t("questionCounter", { current: Math.min(questionCount, target), target })}
+          </span>
+          <span
+            aria-hidden
+            className="hidden h-1.5 w-16 overflow-hidden rounded-full bg-[var(--bg-muted)] sm:block"
+          >
+            <span
+              className="block h-full rounded-full bg-[var(--brand-primary)] transition-all duration-500"
+              style={{ width: `${Math.max(progressPct, 4)}%` }}
+            />
+          </span>
+          <span
+            aria-hidden
+            className={cn(
+              "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-data text-xs tabular-nums",
+              lastMinute
+                ? "border-[var(--brand-red)]/30 bg-[var(--red-50)] text-[var(--brand-red)]"
+                : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)]",
+            )}
+          >
+            {formatClock(timeLeft)}
+          </span>
+        </div>
         {/* Coarse, non-chatty SR announcement for the countdown. */}
         <span aria-live="polite" className="sr-only">
           {lastMinute ? t("timeLastMinute") : t("timeLeftAnnounce", { minutes: announceMinutes })}
         </span>
-      </div>
+      </header>
 
-      {/* Center stage */}
-      <div className="flex flex-1 flex-col items-center justify-center gap-8 py-8 text-center">
-        {/* Presence orb */}
-        <div className="relative flex size-44 items-center justify-center sm:size-52">
-          <div
-            aria-hidden
-            className={cn(
-              "absolute inset-0 rounded-full blur-2xl transition-opacity duration-500",
-              phase === "interviewer_speaking" ? "opacity-70" : "opacity-40",
-            )}
-            style={{
-              background:
-                "radial-gradient(circle at 50% 45%, var(--gray-500) 0%, transparent 70%)",
-            }}
-          />
-          <div
-            ref={orbRef}
-            role="img"
-            aria-label={t("orbAria")}
-            className="relative size-36 rounded-full sm:size-44"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 42%, var(--text-primary) 0%, var(--gray-600) 46%, var(--gray-800) 72%, transparent 78%)",
-              boxShadow: "0 12px 48px rgba(0,0,0,0.22)",
-              transform: "scale(1)",
-              transition: reduced ? "none" : undefined,
-            }}
-          />
-          {/* Status ring label */}
-          <span className="pointer-events-none absolute -bottom-1 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-0.5 text-[11px] font-semibold text-[var(--text-secondary)] shadow-sm">
-            {statusLabel}
-          </span>
-        </div>
-
-        {/* Captions — the accessibility layer */}
-        <div className="w-full max-w-xl space-y-3" aria-live="polite">
-          <p className="kicker">{t("interviewerLabel")}</p>
-          <p
-            className="text-balance text-xl font-semibold leading-snug text-[var(--text-primary)] sm:text-2xl"
-            style={{ fontFamily: "var(--font-sans)" }}
-          >
-            {bigCaption}
-          </p>
-          {candidateCaption && (
-            <div className="pt-1">
-              <p className="kicker">{t("youLabel")}</p>
-              <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
-                {candidateCaption}
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Question timeline */}
+      {/* Stage — the interviewer "video tile" + student self-view PiP */}
+      <div
+        className="relative flex min-h-[280px] flex-1 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border-default)] p-4 sm:p-6"
+        style={{
+          background:
+            "radial-gradient(120% 85% at 50% 10%, var(--viz-indigo-soft), transparent 58%), linear-gradient(180deg, var(--bg-muted) 0%, var(--bg-subtle) 100%)",
+        }}
+      >
+        {/* Interviewer camera tile */}
         <div
-          className="flex items-center gap-1.5"
-          role="img"
-          aria-label={t("timelineAria", { current: Math.min(questionCount, target), target })}
+          className={cn(
+            "relative aspect-[4/5] h-full max-h-[min(52vh,420px)] overflow-hidden rounded-2xl shadow-xl transition-shadow duration-500",
+            speaking
+              ? "ring-2 ring-[var(--content-info)]/55"
+              : "ring-1 ring-black/10",
+          )}
         >
-          {Array.from({ length: target }).map((_, i) => (
+          <div
+            className="absolute inset-0"
+            style={{
+              background: "linear-gradient(165deg, #eef1f7 0%, #dee3ee 55%, #cfd6e4 100%)",
+            }}
+          />
+          {/* soft speaking glow */}
+          {speaking && !reduced && (
             <span
-              key={i}
-              className={cn(
-                "h-1.5 rounded-full transition-all duration-300",
-                i < questionCount ? "w-6 bg-[var(--brand-primary)]" : "w-3 bg-[var(--bg-muted)]",
-              )}
+              aria-hidden
+              className="pointer-events-none absolute -inset-2 rounded-3xl opacity-70 blur-xl"
+              style={{ background: "radial-gradient(50% 40% at 50% 60%, var(--viz-indigo-soft), transparent 70%)" }}
             />
-          ))}
+          )}
+          <InterviewerAvatar
+            state={avatarState}
+            getLevel={getInterviewerLevel}
+            reduced={reduced}
+            className="relative"
+          />
+
+          {/* Thinking indicator */}
+          {avatarState === "thinking" && <ThinkingDots reduced={reduced} label={t("thinkingLabel")} />}
+
+          {/* Nameplate */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-2.5">
+            <div className="flex items-center gap-1.5 rounded-lg bg-black/45 px-2 py-1 backdrop-blur-sm">
+              <span className="text-xs font-semibold text-white">{t("interviewerName")}</span>
+              <span className="rounded bg-white/20 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
+                {t("roomAiTag")}
+              </span>
+            </div>
+          </div>
         </div>
+
+        {/* Student self-view PiP */}
+        <div className="absolute bottom-3 right-3 z-10">
+          <SelfViewTile camera={camera} />
+        </div>
+
+        {/* Connecting overlay */}
+        {realtimeConnecting && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/35 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-black/55 px-3.5 py-2 text-xs font-semibold text-white">
+              <CircleNotch aria-hidden weight="bold" className="size-4 animate-spin" />
+              {t("realtimeConnectingLabel")}
+            </span>
+          </div>
+        )}
       </div>
+
+      {/* Captions — the accessibility layer */}
+      <div
+        className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 sm:px-5"
+        aria-live="polite"
+      >
+        <p className="kicker">{t("interviewerLabel")}</p>
+        <p className="mt-1 text-balance text-base font-semibold leading-snug text-[var(--text-primary)] sm:text-lg">
+          {bigCaption}
+        </p>
+        {candidateCaption && (
+          <div className="mt-3 border-t border-[var(--border-subtle)] pt-3">
+            <p className="kicker">{t("youLabel")}</p>
+            <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+              {candidateCaption}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Subtle interview-topic coverage (real backend summary) */}
+      {session.coverage ? (
+        <CoverageChips coverage={session.coverage} className="justify-center px-1" />
+      ) : null}
 
       {/* Bottom controls */}
-      <div className="mt-2 space-y-3">
+      <div className="space-y-3">
         {realtimeLost && (
           <div
             role="alert"
@@ -1096,7 +1133,8 @@ export function LiveSession({
           </div>
         )}
 
-        <div className="flex justify-center pt-1">
+        <div className="flex items-center justify-center gap-2 pt-1">
+          <CameraToggleButton camera={camera} />
           <Button
             variant="primaryRed"
             size="md"
@@ -1111,6 +1149,76 @@ export function LiveSession({
         <p className="text-center text-[11px] text-[var(--text-muted)]">{t("disclaimer")}</p>
       </div>
     </div>
+  );
+}
+
+/** Small state pill for the room top bar (dot colour encodes the phase). */
+function StatusPill({ state, label }: { state: AvatarState; label: string }) {
+  const tone =
+    state === "speaking"
+      ? "var(--content-info)"
+      : state === "listening"
+        ? "var(--content-success)"
+        : state === "thinking"
+          ? "var(--content-warning)"
+          : "var(--text-muted)";
+  return (
+    <span className="inline-flex min-w-0 items-center gap-1.5 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-0.5">
+      <span aria-hidden className="size-2 shrink-0 rounded-full" style={{ backgroundColor: tone }} />
+      <span className="truncate text-[11px] font-semibold text-[var(--text-secondary)]">{label}</span>
+    </span>
+  );
+}
+
+/** Three-dot "thinking" bubble shown over the avatar between turns. */
+function ThinkingDots({ reduced, label }: { reduced: boolean; label: string }) {
+  return (
+    <div className="pointer-events-none absolute left-1/2 top-3 -translate-x-1/2">
+      <span
+        className="inline-flex items-center gap-1 rounded-full bg-black/45 px-2.5 py-1.5 backdrop-blur-sm"
+        role="status"
+        aria-label={label}
+      >
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            aria-hidden
+            className={cn("size-1.5 rounded-full bg-white/85", !reduced && "animate-bounce")}
+            style={!reduced ? { animationDelay: `${i * 150}ms`, animationDuration: "1s" } : undefined}
+          />
+        ))}
+      </span>
+    </div>
+  );
+}
+
+/** Round camera on/off toggle for the controls bar (mirrors the PiP tile). */
+function CameraToggleButton({ camera }: { camera: ReturnType<typeof useSelfViewCamera> }) {
+  const t = useTranslations("jobs.mockInterview");
+  const on = camera.status === "on" || camera.status === "starting";
+  const unsupported = camera.status === "unsupported" || !camera.supported;
+  return (
+    <button
+      type="button"
+      onClick={camera.toggle}
+      disabled={unsupported}
+      aria-pressed={on}
+      aria-label={on ? t("cameraDisable") : t("cameraEnable")}
+      title={on ? t("cameraDisable") : t("cameraEnable")}
+      className={cn(
+        "inline-flex h-10 items-center gap-2 rounded-full border px-3.5 text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-50",
+        on
+          ? "border-[var(--brand-primary)] bg-[var(--brand-primary)] text-[var(--text-inverted)]"
+          : "border-[var(--border-strong)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]",
+      )}
+    >
+      {on ? (
+        <VideoCamera aria-hidden weight="fill" className="size-4" />
+      ) : (
+        <VideoCameraSlash aria-hidden weight="regular" className="size-4" />
+      )}
+      <span className="hidden sm:inline">{t("cameraLabel")}</span>
+    </button>
   );
 }
 

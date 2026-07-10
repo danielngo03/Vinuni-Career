@@ -156,6 +156,11 @@ export class GeminiLiveClient {
     return this.mic?.level ?? 0;
   }
 
+  /** Interviewer playback amplitude in [0,1] for avatar lip movement. */
+  get outputLevel(): number {
+    return this.player?.level ?? 0;
+  }
+
   /* -------------------------------- start --------------------------------- */
 
   /**

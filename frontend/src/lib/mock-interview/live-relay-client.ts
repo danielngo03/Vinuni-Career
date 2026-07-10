@@ -115,6 +115,11 @@ export class LiveRelayClient {
     return this.mic?.level ?? 0;
   }
 
+  /** Interviewer playback amplitude in [0,1] for avatar lip movement. */
+  get outputLevel(): number {
+    return this.player?.level ?? 0;
+  }
+
   /** True while the student's push-to-talk is engaged. */
   get isSpeaking(): boolean {
     return this.speaking;

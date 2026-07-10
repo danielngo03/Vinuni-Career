@@ -425,6 +425,7 @@ export type {
   MockInterviewOpening,
   MockInterviewCaps,
   MockInterviewRealtimeDescriptor,
+  MockInterviewCoverage,
   MockInterviewSession,
   MockInterviewTranscriptTurn,
   CoachingReportQuestion,

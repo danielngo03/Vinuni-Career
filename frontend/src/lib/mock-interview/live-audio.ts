@@ -405,6 +405,9 @@ export class Pcm24Player {
   private readonly idleDebounceMs: number;
   private ctx: AudioContext | null = null;
   private gain: GainNode | null = null;
+  private analyser: AnalyserNode | null = null;
+  private levelBuf: Uint8Array<ArrayBuffer> | null = null;
+  private smoothedLevel = 0;
   private readonly activeSources = new Set<AudioBufferSourceNode>();
   private nextStartTime = 0;
   private idleTimer: number | null = null;
@@ -426,12 +429,51 @@ export class Pcm24Player {
     const gain = ctx.createGain();
     gain.gain.value = 1;
     gain.connect(ctx.destination);
+    // Tap the output for an amplitude read used to drive the avatar's mouth. An
+    // AnalyserNode is a passthrough that produces data from its input alone, so
+    // this side-tap never affects playback (gain still reaches destination).
+    try {
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = 0.6;
+      gain.connect(analyser);
+      this.analyser = analyser;
+      this.levelBuf = new Uint8Array(new ArrayBuffer(analyser.frequencyBinCount));
+    } catch {
+      this.analyser = null;
+      this.levelBuf = null;
+    }
     this.gain = gain;
     this.nextStartTime = ctx.currentTime;
   }
 
   get isSpeaking(): boolean {
     return this.speaking;
+  }
+
+  /**
+   * Interviewer playback amplitude in [0,1] for avatar lip movement. Smoothed
+   * (attack/release) so the mouth reads naturally rather than jittering. Returns
+   * 0 when not speaking or when the analyser is unavailable.
+   */
+  get level(): number {
+    if (!this.analyser || !this.levelBuf || !this.speaking) {
+      // Ease back to closed when playback drains.
+      this.smoothedLevel *= 0.6;
+      return this.smoothedLevel;
+    }
+    this.analyser.getByteTimeDomainData(this.levelBuf);
+    let sumSq = 0;
+    for (let i = 0; i < this.levelBuf.length; i++) {
+      const v = (this.levelBuf[i] ?? 128) - 128;
+      sumSq += v * v;
+    }
+    const rms = Math.sqrt(sumSq / this.levelBuf.length) / 128;
+    const target = Math.min(1, rms * 4.2);
+    // Fast attack, slower release for a lifelike mouth.
+    const k = target > this.smoothedLevel ? 0.55 : 0.2;
+    this.smoothedLevel += (target - this.smoothedLevel) * k;
+    return this.smoothedLevel;
   }
 
   enqueue(samples: Float32Array): void {
@@ -505,6 +547,16 @@ export class Pcm24Player {
       window.clearTimeout(this.idleTimer);
       this.idleTimer = null;
     }
+    if (this.analyser) {
+      try {
+        this.analyser.disconnect();
+      } catch {
+        /* ignore */
+      }
+      this.analyser = null;
+    }
+    this.levelBuf = null;
+    this.smoothedLevel = 0;
     if (this.ctx) {
       try {
         void this.ctx.close();

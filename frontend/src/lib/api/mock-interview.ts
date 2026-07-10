@@ -96,6 +96,19 @@ export interface MockInterviewRealtimeDescriptor {
   turn_limit: number;
 }
 
+/**
+ * Leak-safe interview-plan progress. Labels + counts only — never weights,
+ * question ids, the question bank, tiers, or any score. `covered` are the
+ * competencies already touched; `remaining` are still to cover. Rendered as a
+ * subtle "topics" progress in the room and in the coaching report.
+ */
+export interface MockInterviewCoverage {
+  total: number;
+  covered_count: number;
+  covered: string[];
+  remaining: string[];
+}
+
 export interface MockInterviewSession {
   session_id: string;
   modality: MockInterviewModality;
@@ -104,6 +117,13 @@ export interface MockInterviewSession {
   opening: MockInterviewOpening;
   caps: MockInterviewCaps;
   realtime: MockInterviewRealtimeDescriptor | null;
+  /**
+   * Interview-plan topic coverage captured at session start (the opening
+   * question's plan). Static during the live session — the SSE turn stream does
+   * not currently re-emit coverage — so the room shows it as the interview PLAN,
+   * and the coaching report shows the FINAL coverage from the session detail.
+   */
+  coverage?: MockInterviewCoverage | null;
 }
 
 export interface MockInterviewTranscriptTurn {
@@ -149,6 +169,8 @@ export interface MockInterviewSessionDetail {
   share_opt_in: boolean;
   transcript: MockInterviewTranscriptTurn[];
   report: CoachingReport | null;
+  /** Final interview-plan topic coverage (labels + counts only). */
+  coverage?: MockInterviewCoverage | null;
 }
 
 /**

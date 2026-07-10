@@ -254,6 +254,7 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
         <div className="space-y-6">
           <CoachingReport
             report={phase.detail.report}
+            coverage={phase.detail.coverage}
             jobTitle={phase.detail.job_title}
             completedAt={phase.detail.ended_at}
           />

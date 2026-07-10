@@ -10,6 +10,7 @@ import {
   Keyboard,
   Microphone,
   Star,
+  VideoCamera,
   WarningCircle,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
@@ -253,6 +254,16 @@ export function PreSessionSetup({
                 {t("serverVoiceHint")}
               </p>
             ) : null}
+
+            {/* Device hint: mic for voice + optional local-only camera. */}
+            <div className="mt-3 flex items-start gap-2.5 rounded-xl border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3.5 py-3">
+              <span aria-hidden className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-neutral">
+                <VideoCamera weight="duotone" className="size-3.5" />
+              </span>
+              <p className="text-xs leading-relaxed text-[var(--text-secondary)]">
+                {t("setupDeviceHint")}
+              </p>
+            </div>
           </section>
 
           {/* Start */}

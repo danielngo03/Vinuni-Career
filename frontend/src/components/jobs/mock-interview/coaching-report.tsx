@@ -14,9 +14,10 @@ import {
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui";
-import type { CoachingReport } from "@/lib/api";
+import type { CoachingReport, MockInterviewCoverage } from "@/lib/api";
 import { usePrefersReducedMotion } from "@/lib/hooks/use-mount-animation";
 import { cn } from "@/lib/utils";
+import { CoverageReport } from "./coverage-progress";
 
 /**
  * Renders the score-free coaching report. There is deliberately NO score,
@@ -30,12 +31,14 @@ import { cn } from "@/lib/utils";
  */
 export function CoachingReport({
   report,
+  coverage,
   jobId,
   jobTitle,
   completedAt,
   printable = true,
 }: {
   report: CoachingReport | null;
+  coverage?: MockInterviewCoverage | null;
   jobId?: string | null;
   jobTitle?: string | null;
   completedAt?: string | null;
@@ -126,6 +129,12 @@ export function CoachingReport({
           </section>
         </Reveal>
       )}
+
+      {coverage ? (
+        <Reveal>
+          <CoverageReport coverage={coverage} />
+        </Reveal>
+      ) : null}
 
       {report.strengths.length > 0 && (
         <Reveal>
