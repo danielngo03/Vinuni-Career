@@ -33,9 +33,26 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
             # lead role) without full job edit rights. Also the default capability
             # the visual workflow builder's ``assign_owner`` node requires.
             "assign_owner",
+            # Own-org job-list export (assistant ``export_jobs`` xlsx). Distinct
+            # from ``read`` so a partner admin can grant the file-export surface
+            # narrowly, mirroring ``applications:export``.
+            "export",
         }
     ),
-    "events": frozenset({"read", "create", "update", "submit", "moderate", "register", "manage"}),
+    "events": frozenset(
+        {
+            "read",
+            "create",
+            "update",
+            "submit",
+            "moderate",
+            "register",
+            "manage",
+            # Own-org events export (assistant ``export_events`` xlsx) —
+            # aggregate attendee counts only, never attendee PII.
+            "export",
+        }
+    ),
     # Application read/write surface (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`
     # `applications` row). `read` is the base partner-of-org gate reused by
     # every recruitment write (`decision_service`, `interview_service`,
@@ -87,6 +104,11 @@ PERMISSION_CATALOG: dict[str, frozenset[str]] = {
             "screen_candidate",
             "suggest_scorecard",
             "move_candidate_with_confirmation",
+            # AI image generation for recruiting/employer-branding content
+            # (assistant ``generate_image``). Grantable to partner roles and to
+            # university-staff roles; metered and content-policy gated in the
+            # service layer. Never auto-published anywhere.
+            "generate_image",
         }
     ),
     # Sensitive candidate CV access (`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`

@@ -1365,4 +1365,340 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         audit_event_type="TOOL_RECRUITING_ANALYTICS",
         timeout_seconds=20,
     ),
+    "draft_job_from_text": ToolSpec(
+        name="draft_job_from_text",
+        description=(
+            "Structure a PASTED job-description text (Vietnamese or English, may "
+            "include email noise) into a job DRAFT with fields like title, "
+            "description, skills, employment type, salary. Use this when the "
+            "recruiter pastes a JD into the chat and asks to build a posting from "
+            "it, e.g. 'tạo tin từ JD này', 'turn this into a job post'. Nothing is "
+            "saved. The result includes missing_required + warnings — fill those "
+            "conversationally, re-check with validate_job_draft, then call "
+            "create_job when the recruiter confirms. If the text is not a job "
+            "description, it is rejected (never fabricated). Only available to "
+            "partner users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "jd_text": {
+                    "type": "string",
+                    "description": "The pasted job-description text (max 20000 characters)",
+                },
+                "target_language": {
+                    "type": "string",
+                    "enum": ["vi", "en"],
+                    "description": "Optional preferred output language for the posting",
+                },
+            },
+            "required": ["jd_text"],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
+        fallback=(
+            "I couldn't structure that JD right now. You can paste it into the job "
+            "form at /partner/jobs/new instead."
+        ),
+        audit_event_type="TOOL_DRAFT_JOB_FROM_TEXT",
+        timeout_seconds=30,
+    ),
+    "validate_job_draft": ToolSpec(
+        name="validate_job_draft",
+        description=(
+            "Deterministically validate a job DRAFT during conversational slot-"
+            "filling: reports missing required fields (title, description, "
+            "employment_type), invalid values (salary range, currency, experience "
+            "range, enums), recommended completeness (location, ≥3 required "
+            "skills, description length), and biased phrasing — plus a ready flag. "
+            "Use this after collecting/changing draft fields and BEFORE calling "
+            "create_job. No AI call, nothing saved. Pass whatever draft fields you "
+            "currently have. Only available to partner users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "title": {"type": "string"},
+                "description": {"type": "string"},
+                "requirements": {"type": "string"},
+                "benefits": {"type": "string"},
+                "employment_type": {"type": "string"},
+                "location_type": {"type": "string"},
+                "location_city": {"type": "string"},
+                "required_skills": {"type": "array", "items": {"type": "string"}},
+                "preferred_skills": {"type": "array", "items": {"type": "string"}},
+                "experience_min_years": {"type": "integer"},
+                "experience_max_years": {"type": "integer"},
+                "seniority_level": {"type": "string"},
+                "salary_min": {"type": "integer"},
+                "salary_max": {"type": "integer"},
+                "salary_currency": {"type": "string"},
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "ai_recruiting:draft_jd"],
+        fallback=(
+            "I couldn't validate the draft right now. Review the required fields "
+            "(title, description, employment type) manually before creating the job."
+        ),
+        audit_event_type="TOOL_VALIDATE_JOB_DRAFT",
+    ),
+    "export_jobs": ToolSpec(
+        name="export_jobs",
+        description=(
+            "Export the partner org's OWN job list to a real Excel (.xlsx) file the "
+            "recruiter can download. Use this when the recruiter asks to export/"
+            "download their job listings ('xuất danh sách tin tuyển dụng'), "
+            "optionally filtered by status or created-date range, with a chosen "
+            "column subset. Returns a download link plus the row count — never raw "
+            "bytes. Selectable columns: title, status, applicants, unreviewed, "
+            "deadline, created_at, owner. Only available to partner users with "
+            "job-export rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": "Optional job-status filter (e.g. 'active', 'draft', 'pending')",
+                },
+                "created_from": {
+                    "type": "string",
+                    "description": "Optional lower bound on creation date (YYYY-MM-DD)",
+                },
+                "created_to": {
+                    "type": "string",
+                    "description": "Optional upper bound on creation date (YYYY-MM-DD, inclusive)",
+                },
+                "columns": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": (
+                        "Optional subset/order of columns. Valid keys: title, status, "
+                        "applicants, unreviewed, deadline, created_at, owner."
+                    ),
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "jobs:export"],
+        fallback=(
+            "I couldn't build the job export right now. You can review your listings "
+            "at /partner/jobs."
+        ),
+        audit_event_type="TOOL_EXPORT_JOBS",
+        timeout_seconds=25,
+    ),
+    "export_interviews": ToolSpec(
+        name="export_interviews",
+        description=(
+            "Export the org's interview schedule (across all jobs) to a real Excel "
+            "(.xlsx) file. Use this when the recruiter asks to export/download the "
+            "interview list ('xuất lịch phỏng vấn'), optionally scoped to upcoming/"
+            "past, one job, or a date range, with a chosen column subset. Returns a "
+            "download link plus the row count. Meeting links are NEVER included in "
+            "the file. Selectable columns: candidate, job, stage, scheduled_at, "
+            "mode, interviewers, status. Only available to partner users with "
+            "export + interview-read rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "scope": {
+                    "type": "string",
+                    "enum": ["upcoming", "past", "all"],
+                    "description": "Which interviews to include (default: all)",
+                },
+                "job_id": {
+                    "type": "string",
+                    "description": "Optional job UUID (from get_partner_jobs) to scope to one job",
+                },
+                "scheduled_from": {
+                    "type": "string",
+                    "description": "Optional lower bound on interview date (YYYY-MM-DD)",
+                },
+                "scheduled_to": {
+                    "type": "string",
+                    "description": "Optional upper bound on interview date (YYYY-MM-DD, inclusive)",
+                },
+                "columns": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": (
+                        "Optional subset/order of columns. Valid keys: candidate, job, "
+                        "stage, scheduled_at, mode, interviewers, status."
+                    ),
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "applications:export",
+            # Same read gate the org interview board enforces — tool visibility
+            # stays in sync with the service-layer check.
+            "interviews:read",
+        ],
+        fallback=(
+            "I couldn't build the interview export right now. Check /partner/interviews "
+            "for the schedule."
+        ),
+        audit_event_type="TOOL_EXPORT_INTERVIEWS",
+        timeout_seconds=25,
+    ),
+    "export_offers": ToolSpec(
+        name="export_offers",
+        description=(
+            "Export the org's offers (across all jobs) to a real Excel (.xlsx) file. "
+            "Use this when the recruiter asks to export/download the offer list "
+            "('xuất danh sách offer'), optionally filtered by offer status or one "
+            "job, with a chosen column subset. Returns a download link plus the row "
+            "count. The salary column is included only when the caller holds the "
+            "offer-management grant. Selectable columns: candidate, job, position, "
+            "status, salary, sent_at, decided_at. Only available to partner users "
+            "with export + offer rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "draft",
+                        "pending_approval",
+                        "approved",
+                        "sent",
+                        "accepted",
+                        "declined",
+                        "expired",
+                        "rescinded",
+                    ],
+                    "description": "Optional offer-status filter",
+                },
+                "job_id": {
+                    "type": "string",
+                    "description": "Optional job UUID (from get_partner_jobs) to scope to one job",
+                },
+                "columns": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": (
+                        "Optional subset/order of columns. Valid keys: candidate, job, "
+                        "position, status, salary, sent_at, decided_at."
+                    ),
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=[
+            "authenticated",
+            "role:partner_user",
+            "applications:export",
+            # Same gate the org offer board enforces (also unlocks the salary
+            # column) — tool visibility stays in sync with the service check.
+            "offers:create",
+        ],
+        fallback=(
+            "I couldn't build the offer export right now. Check /partner/offers for "
+            "the offer board."
+        ),
+        audit_event_type="TOOL_EXPORT_OFFERS",
+        timeout_seconds=25,
+    ),
+    "export_events": ToolSpec(
+        name="export_events",
+        description=(
+            "Export the partner org's OWN hosted events to a real Excel (.xlsx) "
+            "file with AGGREGATE attendee counts (registered/waitlisted/attended) — "
+            "never attendee names or contact info. Use this when the recruiter asks "
+            "to export/download their event list or registration numbers ('xuất "
+            "danh sách sự kiện'), optionally filtered by status, with a chosen "
+            "column subset. Selectable columns: title, event_type, format, status, "
+            "starts_at, ends_at, capacity, registered, waitlisted, attended, "
+            "created_at. Only available to partner users with event-export rights."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": (
+                        "Optional event-status filter (e.g. 'published', 'draft', 'completed')"
+                    ),
+                },
+                "columns": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": (
+                        "Optional subset/order of columns. Valid keys: title, event_type, "
+                        "format, status, starts_at, ends_at, capacity, registered, "
+                        "waitlisted, attended, created_at."
+                    ),
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER],
+        required_permissions=["authenticated", "role:partner_user", "events:export"],
+        fallback=(
+            "I couldn't build the event export right now. Check /partner/events for "
+            "your event list."
+        ),
+        audit_event_type="TOOL_EXPORT_EVENTS",
+        timeout_seconds=25,
+    ),
+    "generate_image": ToolSpec(
+        name="generate_image",
+        description=(
+            "Generate ONE professional illustration image (PNG) for recruiting/"
+            "employer-branding content — job-post visuals, career-event banners, "
+            "company-page illustrations. Use this when the user asks to create/"
+            "generate an image, banner, or illustration ('tạo ảnh', 'vẽ banner'). "
+            "Provide a concise visual description; optionally an aspect_ratio "
+            "(1:1, 16:9, 9:16, 4:3) and a style hint. The image is returned as a "
+            "downloadable/previewable file. Refuses real-person likenesses, other "
+            "companies' logos/trademarks, and sexual/violent/political content. "
+            "Available to partner and university staff with the image-generation "
+            "grant."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "prompt": {
+                    "type": "string",
+                    "description": "Visual description of the image to generate (max 600 chars)",
+                },
+                "aspect_ratio": {
+                    "type": "string",
+                    "enum": ["1:1", "16:9", "9:16", "4:3"],
+                    "description": "Output framing (default 1:1)",
+                },
+                "style_hint": {
+                    "type": "string",
+                    "description": "Optional style guidance, e.g. 'flat illustration', 'photo'",
+                },
+            },
+            "required": ["prompt"],
+        },
+        permission_class="read_only",
+        persona=[PARTNER_USER, UNIVERSITY_STAFF],
+        required_permissions=["authenticated", "ai_recruiting:generate_image"],
+        fallback=(
+            "I couldn't generate the image right now. Please try again later or use "
+            "your own creative assets."
+        ),
+        audit_event_type="TOOL_GENERATE_IMAGE",
+        timeout_seconds=70,
+    ),
 }

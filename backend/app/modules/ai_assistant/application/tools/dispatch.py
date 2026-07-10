@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import uuid
+from collections.abc import Awaitable, Callable
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -15,6 +16,9 @@ from . import (
     companies,
     cv_ai,
     events,
+    exports,
+    image,
+    jd_builder,
     jd_jobs,
     jobs,
     kb,
@@ -25,8 +29,24 @@ from . import (
 )
 from .specs import TOOL_SPECS
 
+# Dict-based handler registry (new tools route here; the legacy if/elif chain in
+# ``_execute_tool`` remains for the pre-existing names). Every handler shares the
+# ``(session, principal, args) -> dict`` signature.
+_HANDLERS: dict[
+    str, Callable[[AsyncSession, Principal, dict], Awaitable[dict]]
+] = {
+    "draft_job_from_text": jd_builder.draft_job_from_text,
+    "validate_job_draft": jd_builder.validate_job_draft,
+    "export_jobs": exports.export_jobs,
+    "export_interviews": exports.export_interviews,
+    "export_offers": exports.export_offers,
+    "export_events": exports.export_events,
+    "generate_image": image.generate_image,
+}
+
 SUPPORTED_TOOL_NAMES = frozenset(
     {
+        *(_HANDLERS.keys()),
         "search_jobs",
         "get_job_detail",
         "get_job_alerts",
@@ -128,6 +148,11 @@ async def _execute_tool(
     principal: Principal,
 ) -> dict:
     try:
+        # --- Dict-registered tools (JD builder, exports, image) ---
+        handler = _HANDLERS.get(name)
+        if handler is not None:
+            return await handler(session, principal, args)
+
         # --- Job tools ---
         if name == "search_jobs":
             return await jobs.search_jobs(session, principal, args)

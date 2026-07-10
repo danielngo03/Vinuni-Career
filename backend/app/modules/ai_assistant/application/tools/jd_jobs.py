@@ -5,10 +5,14 @@ Human-in-the-loop, two-step:
 1. ``draft_job_from_attachment`` (read_only) — reads a JD file the partner
    uploaded to the chat (PDF/image/DOCX), runs the cost-tiered JD extraction
    cascade, and additionally screens the extracted description for biased/
-   discriminatory phrasing. Returns a structured DRAFT — nothing is persisted.
-   This is a small multi-step pipeline (extract → bias scan → assemble).
+   discriminatory phrasing. Returns a structured DRAFT — nothing is persisted —
+   using the FROZEN ``job_draft`` render artifact from ``jd_builder`` (draft +
+   missing_required + warnings + ready) so the frontend renders every JD tool
+   the same way.
 2. ``create_job`` (confirmation_required) — creates the job as a DRAFT posting
    (moderation pending) only after the recruiter confirms. Never auto-publishes.
+   Accepts the full ``DRAFT_FIELDS`` set — every field maps 1:1 onto
+   ``job_write_service.create_job``'s validated column set.
 
 Both are org-scoped to ``principal.org_id`` and RBAC-gated in the service layer
 (``jobs:create`` / ``ai_recruiting:draft_jd``). No provider/model/token internals
@@ -21,7 +25,7 @@ import uuid as _uuid
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.modules.opportunities.domain import lifecycle
+from app.modules.ai_assistant.application.tools import jd_builder
 from app.shared.exceptions import (
     AuthRequiredError,
     PermissionDeniedError,
@@ -30,24 +34,11 @@ from app.shared.exceptions import (
 )
 from app.shared.permissions import Principal
 
-# Job fields we lift from the extracted JD / accept from the model.
-_DRAFT_FIELDS = (
-    "title",
-    "description",
-    "requirements",
-    "benefits",
-    "employment_type",
-    "location_type",
-    "location_city",
-    "required_skills",
-    "preferred_skills",
-    "experience_min_years",
-    "experience_max_years",
-    "seniority_level",
-    "salary_min",
-    "salary_max",
-    "salary_currency",
-)
+# Canonical field tuple + pure coercion helpers live in jd_builder (shared by
+# every JD tool); re-exported here for backward-compatible imports/tests.
+_DRAFT_FIELDS = jd_builder.DRAFT_FIELDS
+_as_skill_list = jd_builder._as_skill_list
+_as_int = jd_builder._as_int
 
 
 def _parse_uuid(raw: str | None) -> _uuid.UUID | None:
@@ -59,28 +50,10 @@ def _parse_uuid(raw: str | None) -> _uuid.UUID | None:
         return None
 
 
-def _as_skill_list(value) -> list[str]:
-    if isinstance(value, list):
-        return [str(x).strip() for x in value if str(x).strip()][:30]
-    if isinstance(value, str):
-        return [s.strip() for s in value.split(",") if s.strip()][:30]
-    return []
-
-
-def _as_int(value) -> int | None:
-    try:
-        if value in (None, ""):
-            return None
-        return int(value)
-    except (TypeError, ValueError):
-        return None
-
-
 async def draft_job_from_attachment(
     session: AsyncSession, principal: Principal, args: dict
 ) -> dict:
     """Extract a structured job DRAFT from an uploaded JD file (never persists)."""
-    from app.ai.safety.bias_detection import check_bias
     from app.modules.ai_assistant.application import attachment_service
     from app.modules.opportunities.application import jd_upload_service
 
@@ -112,49 +85,25 @@ async def draft_job_from_attachment(
     if jd.get("status") == "ai_unavailable":
         return {"ok": False, "error": "ai_unavailable"}
 
-    draft = {}
-    for k in _DRAFT_FIELDS:
-        v = jd.get(k)
-        if v in (None, "", [], {}):
-            continue
-        if k in ("required_skills", "preferred_skills"):
-            v = _as_skill_list(v)
-            if not v:
-                continue
-        elif k in ("experience_min_years", "experience_max_years", "salary_min", "salary_max"):
-            v = _as_int(v)
-            if v is None:
-                continue
-        elif k == "employment_type" and v not in lifecycle.EMPLOYMENT_TYPES:
-            continue
-        elif k == "location_type" and v not in lifecycle.LOCATION_TYPES:
-            continue
-        elif k == "seniority_level" and v not in lifecycle.SENIORITY_LEVELS:
-            continue
-        draft[k] = v
+    draft = jd_builder.normalize_draft_fields(jd)
 
-    # Multi-step: screen the extracted description for biased phrasing before the
-    # recruiter builds a posting from it.
-    bias_flagged = False
-    desc = draft.get("description") or ""
-    if desc:
-        try:
-            bias_flagged = bool(check_bias(desc[:6000]).as_dict().get("flagged", False))
-        except Exception:
-            bias_flagged = False
-
-    return {
-        "ok": True,
-        "draft": draft,
-        "needs_review": bool(jd.get("needs_review", False)),
-        "bias_flagged": bias_flagged,
-        "note": (
+    # The shared job_draft payload runs the deterministic validator (which
+    # includes the bias scan on the extracted description) and attaches the
+    # FROZEN render artifact.
+    result = jd_builder.job_draft_result(
+        draft,
+        note=(
             "Draft extracted from the uploaded JD — nothing saved yet. Review the "
-            "fields with the recruiter, then call create_job to create it as a DRAFT "
-            "(it still needs the recruiter's review + submission for moderation). If "
-            "bias_flagged is true, advise fixing the wording first."
+            "fields with the recruiter (fill missing_required conversationally), "
+            "then call create_job to create it as a DRAFT (it still needs the "
+            "recruiter's review + submission for moderation). If a bias warning "
+            "is present, advise fixing the wording first."
         ),
-    }
+        needs_review=bool(jd.get("needs_review", False)),
+    )
+    # Backward-compatible convenience flag (pre-artifact consumers/tests).
+    result["bias_flagged"] = any(w["code"] == "bias_language" for w in result["warnings"])
+    return result
 
 
 async def create_job(session: AsyncSession, principal: Principal, args: dict) -> dict:
@@ -173,28 +122,12 @@ async def create_job(session: AsyncSession, principal: Principal, args: dict) ->
     if not description:
         return {"ok": False, "error": "description_required"}
 
-    payload: dict = {"title": title[:255], "description": description}
-    for k in _DRAFT_FIELDS:
-        if k in ("title", "description"):
-            continue
-        v = args.get(k)
-        if v in (None, "", [], {}):
-            continue
-        if k in ("required_skills", "preferred_skills"):
-            v = _as_skill_list(v)
-            if not v:
-                continue
-        elif k in ("experience_min_years", "experience_max_years", "salary_min", "salary_max"):
-            v = _as_int(v)
-            if v is None:
-                continue
-        elif k == "employment_type" and v not in lifecycle.EMPLOYMENT_TYPES:
-            continue
-        elif k == "location_type" and v not in lifecycle.LOCATION_TYPES:
-            continue
-        elif k == "seniority_level" and v not in lifecycle.SENIORITY_LEVELS:
-            continue
-        payload[k] = v
+    # Full DRAFT_FIELDS mapping (invalid enum values are dropped, not rejected —
+    # job_write_service re-validates the final payload as the single source of
+    # truth for salary/experience sanity).
+    payload: dict = dict(jd_builder.normalize_draft_fields(args))
+    payload["title"] = title[:255]
+    payload["description"] = description
 
     # NOT-NULL columns need a safe default when the JD didn't specify them.
     payload.setdefault("employment_type", "full_time")

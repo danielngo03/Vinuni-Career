@@ -259,7 +259,13 @@ async def get_candidate_detail(session: AsyncSession, principal: Principal, args
 
 
 async def draft_job_description(session: AsyncSession, principal: Principal, args: dict) -> dict:
-    """LLM draft only — never persisted. The partner must review/edit/apply it."""
+    """LLM draft only — never persisted. The partner must review/edit/apply it.
+
+    Returns the FROZEN ``job_draft`` artifact (see ``jd_builder``): the generated
+    description plus whatever structured fields the recruiter already supplied,
+    with the deterministic missing/warnings/ready evaluation for slot-filling.
+    """
+    from app.modules.ai_assistant.application.tools import jd_builder
     from app.modules.opportunities.application import jd_ai_service
 
     if not principal.is_authenticated or principal.org_id is None:
@@ -290,13 +296,30 @@ async def draft_job_description(session: AsyncSession, principal: Principal, arg
         return {"ok": False, "error": "tool_failed"}
 
     bias = result.get("bias_check") or {}
-    return {
-        "ok": True,
-        "draft": result.get("draft", ""),
-        "bias_flagged": bias.get("flagged", False),
-        "requires_human_review": bias.get("requires_human_review", False),
-        "note": "Draft only — review and edit before creating the job posting.",
+
+    # Assemble the structured draft: generated description + the caller-supplied
+    # structured fields (invalid enum values are dropped by the normalizer; the
+    # free-text ``location`` arg maps onto ``location_city``).
+    draft_source = {
+        "title": title,
+        "description": result.get("draft", ""),
+        "employment_type": args.get("employment_type"),
+        "location_city": args.get("location"),
+        "required_skills": args.get("required_skills"),
+        "preferred_skills": args.get("preferred_skills"),
+        "benefits": args.get("benefits"),
+        "seniority_level": args.get("experience_level"),
     }
+    draft = jd_builder.normalize_draft_fields(draft_source)
+    out = jd_builder.job_draft_result(
+        draft,
+        note="Draft only — review and edit before creating the job posting.",
+        requires_human_review=bias.get("requires_human_review", False),
+    )
+    out["bias_flagged"] = bool(bias.get("flagged", False)) or any(
+        w["code"] == "bias_language" for w in out["warnings"]
+    )
+    return out
 
 
 async def rewrite_job_description(session: AsyncSession, principal: Principal, args: dict) -> dict:

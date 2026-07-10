@@ -29,6 +29,11 @@ EVENT_TYPES: frozenset[str] = frozenset(
         "cv.export.failed",
         "ai.suggestion.generated",
         "ai.tool.called",
+        # Assistant-generated downloadable artifacts (xlsx exports / images):
+        # metadata-only facts (kind, row_count, dims) — never row content,
+        # prompt text, or file bytes.
+        "ai.chat_export.generated",
+        "ai.image.generated",
         "event.viewed",
         "event.registered",
         "event.checked_in",
@@ -52,6 +57,7 @@ AGGREGATE_TYPES: frozenset[str] = frozenset(
         "event_registration",
         "notification",
         "ai_tool",
+        "chat_export",
         "workflow_execution",
         "ad_placement",
         "mock_interview_session",
