@@ -100,7 +100,7 @@ connector is needed.
 ```bash
 printf '%s' '<value>' | gcloud secrets create JWT_SECRET_KEY --data-file=-
 # Repeat for: DATABASE_URL, GOOGLE_OAUTH_CLIENT_SECRET, OPENROUTER_API_KEY,
-# GEMINI_API_KEY, SMTP_PASSWORD, AI_PROVIDER_KEY_ENCRYPTION_KEYS, TOTP_ENCRYPTION_KEY
+# GOOGLE_API_KEY, SMTP_PASSWORD, AI_PROVIDER_KEY_ENCRYPTION_KEYS, TOTP_ENCRYPTION_KEY
 ```
 
 Generate the two Fernet keys (both REQUIRED when `APP_ENV != local` — startup
@@ -133,7 +133,7 @@ EMAIL_FROM_ADDRESS=career@vinuni.edu.vn
 BACKGROUND_WORKER_MODE=inline             # scheduler service overrides to `scheduler`
 GOOGLE_OAUTH_CLIENT_ID=xxxx.apps.googleusercontent.com   # + secret for the client secret
 OAUTH_REDIRECT_BASE_URL=https://career.example.com
-AI_DEFAULT_PROVIDER=openrouter            # + OPENROUTER_API_KEY / GEMINI_API_KEY secrets
+AI_DEFAULT_PROVIDER=openrouter            # + OPENROUTER_API_KEY / GOOGLE_API_KEY secrets
 ```
 
 Only the scheduler service sets `BACKGROUND_WORKER_MODE=scheduler`. Never set
