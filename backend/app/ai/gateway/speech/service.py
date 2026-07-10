@@ -80,11 +80,10 @@ def speech_enabled() -> bool:
     if _speech_key():
         return True
     project = getattr(s, "google_cloud_project", "") or os.environ.get("GOOGLE_CLOUD_PROJECT", "")
-    return bool(
-        getattr(s, "ai_speech_use_vertex", True)
-        and os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-        and project
+    cred = getattr(s, "google_application_credentials", "") or os.environ.get(
+        "GOOGLE_APPLICATION_CREDENTIALS", ""
     )
+    return bool(getattr(s, "ai_speech_use_vertex", True) and cred and project)
 
 
 _client_cache: object | None = None
@@ -125,7 +124,16 @@ def _client() -> object:
         or os.environ.get("GOOGLE_CLOUD_LOCATION", "")
         or "us-central1"
     ).strip()
-    has_adc = bool(os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"))
+    # A service-account JSON path in settings/.env is exported into the process
+    # env so google-auth ADC can find it, regardless of how the app was launched
+    # (pydantic-settings does NOT populate os.environ on its own).
+    cred_path = (
+        getattr(s, "google_application_credentials", "")
+        or os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
+    ).strip()
+    if cred_path and not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = cred_path
+    has_adc = bool(cred_path)
     key = _speech_key()
     try:
         if use_vertex and has_adc and project:

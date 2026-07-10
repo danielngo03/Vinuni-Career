@@ -154,6 +154,15 @@ class Settings(BaseSettings):
     ai_speech_max_audio_seconds: int = 90  # cap uploaded answer audio length
     ai_speech_max_audio_bytes: int = 8 * 1024 * 1024  # hard upload ceiling (8 MB)
 
+    # Google Cloud / Vertex AI binding for the speech tier (and any future native
+    # Google model). ``google_application_credentials`` is a FILE PATH to a
+    # service-account JSON key — the file itself lives OUTSIDE the repo and is
+    # never committed; only its path is configured here. When set, the speech
+    # client authenticates via ADC (full quota) instead of an express API key.
+    google_cloud_project: str = ""
+    google_cloud_location: str = "global"
+    google_application_credentials: str = ""
+
     # OCR / extraction (lightweight defaults)
     backend_ai_extras: str = "ai-lite"
     local_ocr_engine: str = "auto"
