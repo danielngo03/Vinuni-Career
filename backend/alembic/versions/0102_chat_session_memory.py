@@ -14,8 +14,8 @@ Adds the two columns the AI-assistant persistent-memory layer needs:
 
 Reversible.
 
-Revision ID: 0101_chat_session_memory
-Revises: 0100_platform_settings_google_font
+Revision ID: 0102_chat_session_memory
+Revises: 0101_interview_plan_coverage
 Create Date: 2026-07-10
 """
 
@@ -26,8 +26,8 @@ from collections.abc import Sequence
 import sqlalchemy as sa
 from alembic import op
 
-revision: str = "0101_chat_session_memory"
-down_revision: str | None = "0100_platform_settings_google_font"
+revision: str = "0102_chat_session_memory"
+down_revision: str | None = "0101_interview_plan_coverage"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 

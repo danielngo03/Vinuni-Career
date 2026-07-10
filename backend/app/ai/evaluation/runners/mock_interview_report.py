@@ -47,10 +47,17 @@ dispatch):
 ────────────────────────────────────────────────────────────────────────────
 ROLLBACK CRITERIA (``.claude/rules/ai.md`` §17 — define BEFORE enabling the task)
 ────────────────────────────────────────────────────────────────────────────
-The ``mock_interview_report`` task is DISABLED (feature-flagged off, callers fall
-back to ``static_fallback_report``) and this eval is treated as the release gate.
-Roll back to the deterministic static report — and page ai-engineer — if ANY of
-the following holds. These are ordered "hard safety first":
+The ``mock_interview_report`` task is ENABLED: ``report_service.generate_report``
+ALWAYS attempts the model through ``AiTaskRunner`` (budget/policy guards, output
+scrub, usage log, 1% eval sampling) and degrades to ``static_fallback_report`` on
+ANY failure — there is no feature flag that skips the model path, only the
+gateway-level real-calls gate (``AI_REAL_CALLS_ENABLED`` / provider availability),
+under which the runner returns the deterministic offline completion. This offline
+eval is the release gate. "Rolling back" therefore means disabling the model path
+at the gateway (turn real calls off / rebind the interview alias to the offline
+provider), which still leaves the deterministic static report in place — safe and
+lossless. Roll back — and page ai-engineer — if ANY of the following holds; they
+are ordered "hard safety first":
 
   1. Privacy/leakage regression (HARD, auto-rollback): this offline gate's
      ``privacy_boundary`` category drops below 100%, OR any leakage-flagged case

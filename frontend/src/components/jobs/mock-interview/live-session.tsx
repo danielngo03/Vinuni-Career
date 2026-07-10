@@ -6,10 +6,14 @@ import {
   ArrowRight,
   CircleNotch,
   Keyboard,
+  Lightbulb,
   Microphone,
   MicrophoneSlash,
   PhoneDisconnect,
   Stop,
+  VideoCamera,
+  VideoCameraSlash,
+  X,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui";
 import {
@@ -19,8 +23,13 @@ import {
 } from "@/lib/api";
 import { VoiceController } from "@/lib/mock-interview/voice-controller";
 import { GeminiLiveClient } from "@/lib/mock-interview/gemini-live-client";
+import { LiveRelayClient } from "@/lib/mock-interview/live-relay-client";
 import { usePrefersReducedMotion } from "@/lib/hooks/use-mount-animation";
 import { cn } from "@/lib/utils";
+import { InterviewerAvatar, type AvatarState } from "./interviewer-avatar";
+import { SelfViewTile, useSelfViewCamera } from "./student-self-view";
+import { CoverageChips } from "./coverage-progress";
+import { RoundPill } from "./round-indicator";
 import type { AnswerMode } from "./pre-session-setup";
 
 type Phase = "interviewer_speaking" | "listening" | "thinking" | "ending";
@@ -56,6 +65,13 @@ interface Props {
    * When false, voice mode uses the browser voice tier / text as before.
    */
   serverVoice?: boolean;
+  /**
+   * True when the true full-duplex realtime relay tier is active (the session
+   * was created with `modality: "realtime"`). This is the PREFERRED voice path:
+   * mic audio streams to our server and the interviewer's native audio streams
+   * back in real time. Takes precedence over server voice and browser voice.
+   */
+  realtimeRelay?: boolean;
   onRequestEnd: (payload: { duration_seconds: number; turns?: RecordTurnInput[] }) => void;
 }
 
@@ -83,9 +99,17 @@ function pickRecorderMime(): string | undefined {
  * controller (STT → SSE turn → TTS) or a text answer box. Captions are the
  * accessibility layer for the voice conversation.
  */
-export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }: Props) {
+export function LiveSession({
+  session,
+  mode,
+  locale,
+  serverVoice,
+  realtimeRelay,
+  onRequestEnd,
+}: Props) {
   const t = useTranslations("jobs.mockInterview");
   const reduced = usePrefersReducedMotion();
+  const camera = useSelfViewCamera();
 
   const target = Math.max(1, session.caps.target_questions || session.caps.max_questions || 1);
 
@@ -93,10 +117,6 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
   // Its visible countdown never exceeds the hard live-voice duration cap.
   const realtime = session.realtime;
 
-  // Server-mediated voice tier: AI narrates the interviewer (TTS) and answers
-  // are transcribed server-side (STT). Only when there is no realtime descriptor
-  // and the server advertised it via prep. Distinct from the browser voice tier.
-  const serverVoiceActive = !realtime && serverVoice === true;
   const recorderSupported = useMemo(
     () =>
       typeof window !== "undefined" &&
@@ -113,18 +133,43 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
 
   const [effectiveMode, setEffectiveMode] = useState<AnswerMode>(mode);
   const [degraded, setDegraded] = useState(false);
+  // The relay tier can be disabled at runtime when it fails and we fall back to
+  // the turn-based server-voice tier (see degradeFromRelay).
+  const [relayDisabled, setRelayDisabled] = useState(false);
+
+  // Realtime relay (Tier V3, PREFERRED): true full-duplex live voice over our
+  // server WebSocket. Active when the session is `modality: "realtime"`, no
+  // direct descriptor is present, and it hasn't fallen back. Takes precedence
+  // over server voice and browser voice.
+  const useRelay = realtimeRelay === true && !realtime && !relayDisabled;
+
+  // Server-mediated voice tier: AI narrates the interviewer (TTS) and answers
+  // are transcribed server-side (STT). Only when neither realtime tier is active
+  // and the server advertised it via prep. Distinct from the browser voice tier.
+  const serverVoiceActive = !realtime && !useRelay && serverVoice === true;
   const [phase, setPhase] = useState<Phase>(mode === "voice" ? "interviewer_speaking" : "listening");
   const [currentQuestion, setCurrentQuestion] = useState(session.opening.text);
   const [interviewerStreaming, setInterviewerStreaming] = useState<string | null>(null);
   const [candidateCaption, setCandidateCaption] = useState("");
   const [questionCount, setQuestionCount] = useState(1);
+  // Live topic coverage: seeded from the plan at session start, then advanced
+  // per turn from each done event's leak-safe coverage summary.
+  const [liveCoverage, setLiveCoverage] = useState(session.coverage ?? null);
   const [timeLeft, setTimeLeft] = useState(initialSeconds);
   const [turnError, setTurnError] = useState(false);
   const [idleHint, setIdleHint] = useState(false);
   const [textDraft, setTextDraft] = useState("");
-  // Realtime-only presentation states (unused on the V1/text path).
-  const [realtimeConnecting, setRealtimeConnecting] = useState(!!realtime);
+  // Advisory, non-blocking coaching nudge from the last turn's `done` event.
+  // Clears on the next turn (and on manual dismiss). Absent/null → nothing shown.
+  const [nudge, setNudge] = useState<string | null>(null);
+  // Realtime-only presentation states (unused on the V1/text path). Both the
+  // descriptor tier and the relay tier show the "connecting live voice" state.
+  const [realtimeConnecting, setRealtimeConnecting] = useState(
+    !!realtime || (useRelay && mode === "voice"),
+  );
   const [realtimeLost, setRealtimeLost] = useState(false);
+  // Relay push-to-talk: true while the student holds/toggles the mic to speak.
+  const [relaySpeaking, setRelaySpeaking] = useState(false);
   // Server voice tier presentation states.
   const [recording, setRecording] = useState(false);
   const [transcribing, setTranscribing] = useState(false);
@@ -134,13 +179,16 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
   const effectiveModeRef = useRef<AnswerMode>(effectiveMode);
   const controllerRef = useRef<VoiceController | null>(null);
   const geminiRef = useRef<GeminiLiveClient | null>(null);
+  const relayRef = useRef<LiveRelayClient | null>(null);
+  // Growing per-turn caption buffers for the relay tier (incremental chunks).
+  const relayInBufRef = useRef("");
+  const relayOutBufRef = useRef("");
   const abortRef = useRef<AbortController | null>(null);
   const interviewerBufRef = useRef("");
   const lastAnswerRef = useRef("");
   const startedAtRef = useRef<number>(Date.now());
   const endedRef = useRef(false);
   const turnsRef = useRef<RecordTurnInput[]>([]);
-  const orbRef = useRef<HTMLDivElement>(null);
   // Server voice tier: TTS playback element + recorder graph.
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
@@ -360,10 +408,18 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
     disposeServerVoice();
     setPhaseNow("ending");
 
+    const relay = relayRef.current;
     const gemini = geminiRef.current;
-    if (gemini) {
-      // Realtime: stop (releases mic, flushes remaining turns) BEFORE ending so
-      // the coaching report sees the full transcript. Turns are already
+    if (relay) {
+      // Relay tier: say bye + release the socket BEFORE ending so the report
+      // sees the full transcript. The relay persists turns server-side, so
+      // there is nothing to hand off to endSession.
+      void relay.end().then(() => {
+        onRequestEnd({ duration_seconds: duration });
+      });
+    } else if (gemini) {
+      // Descriptor realtime: stop (releases mic, flushes remaining turns) BEFORE
+      // ending so the coaching report sees the full transcript. Turns are already
       // persisted via recordTurns; hand over only what a failed final flush left
       // behind so endSession can persist it without double-recording.
       void gemini.stop().then(() => {
@@ -388,6 +444,8 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
       if (!text || endedRef.current) return;
       lastAnswerRef.current = text;
       setTurnError(false);
+      // A fresh answer starts a new turn → dismiss any prior coaching nudge.
+      setNudge(null);
       setCandidateCaption(text);
       setInterviewerStreaming("");
       interviewerBufRef.current = "";
@@ -414,6 +472,10 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
             setCurrentQuestion(finalText);
             setQuestionCount(evt.question_count > 0 ? evt.question_count : (c) => c + 1);
             setCandidateCaption("");
+            if (evt.coverage) setLiveCoverage(evt.coverage);
+            // Optional advisory nudge for the answer just given (never blocks).
+            const nudgeText = evt.nudge?.text?.trim();
+            setNudge(nudgeText ? nudgeText : null);
             if (evt.ended) {
               finalize();
               return;
@@ -464,11 +526,43 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
     degradeToText();
   }, [degradeToText]);
 
+  /**
+   * Relay failed (not a clean mid-session drop) → prefer the turn-based
+   * server-voice tier when the server advertised it, else fall to text. This
+   * keeps the room alive instead of hard-crashing.
+   */
+  const degradeFromRelay = useCallback(() => {
+    if (serverVoice === true) {
+      setRelayDisabled(true);
+      setRealtimeConnecting(false);
+      setRealtimeLost(false);
+      setRelaySpeaking(false);
+      setPhaseNow("interviewer_speaking");
+    } else {
+      degradeToText();
+    }
+  }, [serverVoice, degradeToText, setPhaseNow]);
+
+  /* --------------------- relay (V3) push-to-talk toggle ------------------- */
+  const toggleRelaySpeak = useCallback(() => {
+    const relay = relayRef.current;
+    if (!relay) return;
+    if (relaySpeaking) {
+      relay.stopSpeaking();
+      setRelaySpeaking(false);
+    } else {
+      // startSpeaking flushes interviewer playback (barge-in) inside the client.
+      relay.startSpeaking();
+      setRelaySpeaking(true);
+    }
+  }, [relaySpeaking]);
+
   /* ---------------------------- voice lifecycle --------------------------- */
   useEffect(() => {
-    // Realtime (Tier V2) owns the voice tier when a descriptor is present; the
-    // browser STT/TTS controller must not also grab the mic.
+    // Realtime tiers (descriptor V2 or relay V3) own the voice tier; the browser
+    // STT/TTS controller must not also grab the mic.
     if (realtime && effectiveMode === "voice") return;
+    if (useRelay && effectiveMode === "voice") return;
     // Server voice tier owns the mic/narration for voice mode; the browser
     // SpeechRecognition/synthesis controller must not also run.
     if (serverVoiceActive && effectiveMode === "voice") return;
@@ -595,6 +689,99 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtime, effectiveMode]);
 
+  /* ------------------- realtime relay (V3) speech-to-speech --------------- */
+  useEffect(() => {
+    if (!useRelay) return; // Not the relay tier.
+    if (effectiveMode !== "voice") return; // Degraded to text → text tier runs.
+
+    let cancelled = false;
+    let connected = false;
+    const markConnected = () => {
+      connected = true;
+    };
+    const client = new LiveRelayClient();
+    relayRef.current = client;
+    relayInBufRef.current = "";
+    relayOutBufRef.current = "";
+
+    // Connect watchdog: a socket that never produces `ready`/audio/transcription
+    // would otherwise leave the student stuck on "Connecting live voice…". Fall
+    // back to the turn-based tier when available, else text.
+    const connectTimer = window.setTimeout(() => {
+      if (!cancelled && !connected) degradeFromRelay();
+    }, REALTIME_CONNECT_TIMEOUT_MS);
+
+    void client
+      .connect(session.session_id, {
+        onReady: () => {
+          if (cancelled) return;
+          markConnected();
+          setRealtimeConnecting(false);
+        },
+        onStateChange: (state) => {
+          if (cancelled) return;
+          markConnected();
+          setRealtimeConnecting(false);
+          // Interviewer took the floor → release the student's push-to-talk so
+          // the mic isn't left streaming behind an idle-looking button.
+          if (state === "speaking") {
+            relayRef.current?.stopSpeaking();
+            setRelaySpeaking(false);
+          }
+          setPhaseNow(state === "speaking" ? "interviewer_speaking" : "listening");
+        },
+        onInputTranscript: (chunk) => {
+          if (cancelled) return;
+          markConnected();
+          relayInBufRef.current += chunk;
+          setCandidateCaption(relayInBufRef.current);
+        },
+        onOutputTranscript: (chunk) => {
+          if (cancelled) return;
+          markConnected();
+          setRealtimeConnecting(false);
+          relayOutBufRef.current += chunk;
+          setInterviewerStreaming(relayOutBufRef.current);
+        },
+        onTurnComplete: () => {
+          if (cancelled) return;
+          const finalText = relayOutBufRef.current.trim();
+          relayOutBufRef.current = "";
+          relayInBufRef.current = "";
+          setInterviewerStreaming(null);
+          if (finalText) setCurrentQuestion(finalText);
+          setCandidateCaption("");
+          setQuestionCount((c) => c + 1);
+        },
+        onError: (reason) => {
+          if (cancelled) return;
+          if (reason === "connection_lost") {
+            // Established then dropped → calm banner offering to continue by text.
+            setRealtimeConnecting(false);
+            setRealtimeLost(true);
+          } else if (reason === "mic_denied") {
+            // Mic unavailable → the turn-based tier needs it too; drop to text.
+            degradeToText();
+          } else {
+            // unsupported / connection_failed / server_error → turn-based tier
+            // when available, else text.
+            degradeFromRelay();
+          }
+        },
+      })
+      .catch(() => {
+        // onError already fired and drove degradation; nothing else to do.
+      });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(connectTimer);
+      void client.end();
+      if (relayRef.current === client) relayRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [useRelay, effectiveMode]);
+
   /* --------------------- server voice: opening narration ------------------ */
   // Narrate the opening line when the server voice tier is engaged. Captions
   // already show the line; audio is a bonus and never blocks the turn.
@@ -644,30 +831,18 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
     return () => window.clearTimeout(id);
   }, [phase, candidateCaption, effectiveMode]);
 
-  /* ---------------------------- orb animation ----------------------------- */
-  useEffect(() => {
-    if (reduced) return; // static orb under reduced motion
-    let raf = 0;
-    let scale = 1;
-    const loop = () => {
-      let goalTarget = 1;
-      const p = phaseRef.current;
-      if (effectiveModeRef.current === "voice" && p === "listening") {
-        goalTarget = 1 + (geminiRef.current?.level ?? controllerRef.current?.level ?? 0) * 0.22;
-      } else if (p === "interviewer_speaking") {
-        goalTarget = 1.05 + 0.05 * (0.5 + 0.5 * Math.sin(performance.now() / 320));
-      } else if (p === "thinking") {
-        goalTarget = 1.02 + 0.02 * (0.5 + 0.5 * Math.sin(performance.now() / 600));
-      }
-      scale += (goalTarget - scale) * 0.12;
-      if (orbRef.current) {
-        orbRef.current.style.transform = `scale(${scale.toFixed(3)})`;
-      }
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, [reduced]);
+  /* ------------------------ interviewer audio level ----------------------- */
+  // Smoothed 0..1 amplitude of the INTERVIEWER's live audio, used to drive the
+  // avatar's mouth. The realtime relay / descriptor tiers expose the REAL PCM
+  // playback amplitude (a pure side-tap that never touches playback). The
+  // turn-based TTS and browser speech-synthesis tiers expose no amplitude, so
+  // the avatar falls back to a lifelike synthetic talk envelope while the
+  // interviewer speaks (see InterviewerAvatar).
+  const getInterviewerLevel = useCallback(() => {
+    if (relayRef.current) return relayRef.current.outputLevel;
+    if (geminiRef.current) return geminiRef.current.outputLevel;
+    return 0;
+  }, []);
 
   /* --------------------------------- render ------------------------------- */
   const statusLabel = realtimeConnecting
@@ -682,105 +857,183 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
             ? t("yourTurnLabel")
             : t("waitingLabel");
 
+  const avatarState: AvatarState = realtimeConnecting
+    ? "idle"
+    : phase === "interviewer_speaking"
+      ? "speaking"
+      : phase === "thinking"
+        ? "thinking"
+        : phase === "listening"
+          ? "listening"
+          : "idle";
+
   const bigCaption = interviewerStreaming ?? currentQuestion;
   const lastMinute = timeLeft <= 60;
   const announceMinutes = Math.ceil(timeLeft / 60);
+  const speaking = phase === "interviewer_speaking";
+  const progressPct = Math.round((Math.min(questionCount, target) / target) * 100);
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-var(--topbar-height))] max-w-3xl flex-col px-4 py-6">
-      {/* Quiet top row: counter + countdown */}
-      <div className="flex items-center justify-between">
-        <span className="font-data text-xs text-[var(--text-muted)]">
-          {t("questionCounter", { current: Math.min(questionCount, target), target })}
-        </span>
-        <span
-          className={cn(
-            "font-data text-xs tabular-nums",
-            lastMinute ? "text-[var(--brand-red)]" : "text-[var(--text-muted)]",
-          )}
-          aria-hidden
-        >
-          {formatClock(timeLeft)}
-        </span>
+    <div className="mx-auto flex min-h-[calc(100vh-var(--topbar-height))] w-full max-w-4xl flex-col gap-3 px-3 py-4 sm:px-4 sm:py-5">
+      {/* Call header: status + phase · question progress + countdown */}
+      <header className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <div className="flex min-w-0 flex-wrap items-center gap-2">
+          <span className="kicker hidden shrink-0 sm:inline">{t("roomTitle")}</span>
+          <StatusPill state={avatarState} label={statusLabel} />
+          <RoundPill
+            rounds={session.rounds}
+            current={session.current_round}
+            className="max-w-[15rem]"
+          />
+        </div>
+        <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+          <span className="hidden font-data text-xs text-[var(--text-muted)] sm:inline">
+            {t("questionCounter", { current: Math.min(questionCount, target), target })}
+          </span>
+          <span
+            aria-hidden
+            className="hidden h-1.5 w-16 overflow-hidden rounded-full bg-[var(--bg-muted)] sm:block"
+          >
+            <span
+              className="block h-full rounded-full bg-[var(--brand-primary)] transition-all duration-500"
+              style={{ width: `${Math.max(progressPct, 4)}%` }}
+            />
+          </span>
+          <span
+            aria-hidden
+            className={cn(
+              "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 font-data text-xs tabular-nums",
+              lastMinute
+                ? "border-[var(--brand-red)]/30 bg-[var(--red-50)] text-[var(--brand-red)]"
+                : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)]",
+            )}
+          >
+            {formatClock(timeLeft)}
+          </span>
+        </div>
         {/* Coarse, non-chatty SR announcement for the countdown. */}
         <span aria-live="polite" className="sr-only">
           {lastMinute ? t("timeLastMinute") : t("timeLeftAnnounce", { minutes: announceMinutes })}
         </span>
-      </div>
+      </header>
 
-      {/* Center stage */}
-      <div className="flex flex-1 flex-col items-center justify-center gap-8 py-8 text-center">
-        {/* Presence orb */}
-        <div className="relative flex size-44 items-center justify-center sm:size-52">
+      {/* Stage — the interviewer "video tile" + student self-view PiP */}
+      <div
+        className="relative flex min-h-[280px] flex-1 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border-default)] p-4 sm:p-6"
+        style={{
+          background:
+            "radial-gradient(120% 85% at 50% 10%, var(--viz-indigo-soft), transparent 58%), linear-gradient(180deg, var(--bg-muted) 0%, var(--bg-subtle) 100%)",
+        }}
+      >
+        {/* Interviewer camera tile */}
+        <div
+          className={cn(
+            "relative aspect-[4/5] h-full max-h-[min(52vh,420px)] overflow-hidden rounded-2xl shadow-xl transition-shadow duration-500",
+            speaking
+              ? "ring-2 ring-[var(--content-info)]/55"
+              : "ring-1 ring-black/10",
+          )}
+        >
           <div
-            aria-hidden
-            className={cn(
-              "absolute inset-0 rounded-full blur-2xl transition-opacity duration-500",
-              phase === "interviewer_speaking" ? "opacity-70" : "opacity-40",
-            )}
+            className="absolute inset-0"
             style={{
-              background:
-                "radial-gradient(circle at 50% 45%, var(--gray-500) 0%, transparent 70%)",
+              background: "linear-gradient(165deg, #eef1f7 0%, #dee3ee 55%, #cfd6e4 100%)",
             }}
           />
-          <div
-            ref={orbRef}
-            role="img"
-            aria-label={t("orbAria")}
-            className="relative size-36 rounded-full sm:size-44"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 42%, var(--text-primary) 0%, var(--gray-600) 46%, var(--gray-800) 72%, transparent 78%)",
-              boxShadow: "0 12px 48px rgba(0,0,0,0.22)",
-              transform: "scale(1)",
-              transition: reduced ? "none" : undefined,
-            }}
+          {/* soft speaking glow */}
+          {speaking && !reduced && (
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -inset-2 rounded-3xl opacity-70 blur-xl"
+              style={{ background: "radial-gradient(50% 40% at 50% 60%, var(--viz-indigo-soft), transparent 70%)" }}
+            />
+          )}
+          <InterviewerAvatar
+            state={avatarState}
+            getLevel={getInterviewerLevel}
+            reduced={reduced}
+            className="relative"
           />
-          {/* Status ring label */}
-          <span className="pointer-events-none absolute -bottom-1 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-0.5 text-[11px] font-semibold text-[var(--text-secondary)] shadow-sm">
-            {statusLabel}
-          </span>
+
+          {/* Thinking indicator */}
+          {avatarState === "thinking" && <ThinkingDots reduced={reduced} label={t("thinkingLabel")} />}
+
+          {/* Nameplate */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-2.5">
+            <div className="flex items-center gap-1.5 rounded-lg bg-black/45 px-2 py-1 backdrop-blur-sm">
+              <span className="text-xs font-semibold text-white">{t("interviewerName")}</span>
+              <span className="rounded bg-white/20 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
+                {t("roomAiTag")}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Captions — the accessibility layer */}
-        <div className="w-full max-w-xl space-y-3" aria-live="polite">
+        {/* Student self-view PiP — active-speaker ring when it's your turn */}
+        <div className="absolute bottom-3 right-3 z-10">
+          <SelfViewTile
+            camera={camera}
+            active={phase === "listening" && !realtimeConnecting}
+          />
+        </div>
+
+        {/* Connecting overlay */}
+        {realtimeConnecting && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/35 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-black/55 px-3.5 py-2 text-xs font-semibold text-white">
+              <CircleNotch aria-hidden weight="bold" className="size-4 animate-spin" />
+              {t("realtimeConnectingLabel")}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Captions — the accessibility layer */}
+      <div
+        className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:px-5"
+        aria-live="polite"
+      >
+        <div className="flex items-center gap-2">
           <p className="kicker">{t("interviewerLabel")}</p>
-          <p
-            className="text-balance text-xl font-semibold leading-snug text-[var(--text-primary)] sm:text-2xl"
-            style={{ fontFamily: "var(--font-sans)" }}
-          >
-            {bigCaption}
-          </p>
-          {candidateCaption && (
-            <div className="pt-1">
-              <p className="kicker">{t("youLabel")}</p>
-              <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
-                {candidateCaption}
-              </p>
-            </div>
+          {speaking && (
+            <span aria-hidden className="flex items-center gap-0.5">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className={cn(
+                    "block w-0.5 rounded-full bg-[var(--content-info)]",
+                    reduced ? "h-2" : "animate-pulse",
+                  )}
+                  style={
+                    reduced
+                      ? undefined
+                      : { height: `${5 + i * 3}px`, animationDelay: `${i * 160}ms`, animationDuration: "0.9s" }
+                  }
+                />
+              ))}
+            </span>
           )}
         </div>
-
-        {/* Question timeline */}
-        <div
-          className="flex items-center gap-1.5"
-          role="img"
-          aria-label={t("timelineAria", { current: Math.min(questionCount, target), target })}
-        >
-          {Array.from({ length: target }).map((_, i) => (
-            <span
-              key={i}
-              className={cn(
-                "h-1.5 rounded-full transition-all duration-300",
-                i < questionCount ? "w-6 bg-[var(--brand-primary)]" : "w-3 bg-[var(--bg-muted)]",
-              )}
-            />
-          ))}
-        </div>
+        <p className="mt-1 text-balance text-base font-semibold leading-snug text-[var(--text-primary)] sm:text-lg">
+          {bigCaption}
+        </p>
+        {candidateCaption && (
+          <div className="mt-3 rounded-xl bg-[var(--bg-subtle)] px-3.5 py-2.5">
+            <p className="kicker">{t("youLabel")}</p>
+            <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+              {candidateCaption}
+            </p>
+          </div>
+        )}
       </div>
 
+      {/* Subtle interview-topic coverage (real backend summary, advances live) */}
+      {liveCoverage ? (
+        <CoverageChips coverage={liveCoverage} className="justify-center px-1" />
+      ) : null}
+
       {/* Bottom controls */}
-      <div className="mt-2 space-y-3">
+      <div className="space-y-3">
         {realtimeLost && (
           <div
             role="alert"
@@ -865,6 +1118,33 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
           </p>
         )}
 
+        {/* Advisory coaching nudge (optional backend signal). Calm, dismissible,
+            never blocks; auto-clears on the next turn. Absent → nothing shown. */}
+        {nudge && !turnError && !realtimeLost && (
+          <div
+            role="status"
+            className="mx-auto flex max-w-xl items-start gap-2 rounded-xl border border-[var(--viz-indigo)]/25 bg-[var(--viz-indigo-soft)] px-3 py-2"
+          >
+            <Lightbulb
+              aria-hidden
+              weight="fill"
+              className="mt-0.5 size-4 shrink-0 text-[var(--viz-indigo)]"
+            />
+            <p className="min-w-0 flex-1 text-xs leading-relaxed text-[var(--text-secondary)]">
+              <span className="sr-only">{t("nudgeLabel")}: </span>
+              {nudge}
+            </p>
+            <button
+              type="button"
+              onClick={() => setNudge(null)}
+              aria-label={t("nudgeDismiss")}
+              className="-mr-0.5 -mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition-colors hover:bg-black/5 hover:text-[var(--text-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+            >
+              <X aria-hidden weight="bold" className="size-3" />
+            </button>
+          </div>
+        )}
+
         {effectiveMode === "text" ? (
           <TextAnswerBar
             value={textDraft}
@@ -876,6 +1156,14 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
               setTextDraft("");
               void beginTurn(v);
             }}
+          />
+        ) : useRelay ? (
+          <RelayAnswerBar
+            speaking={relaySpeaking}
+            connecting={realtimeConnecting}
+            disabled={realtimeConnecting || phase === "ending"}
+            onToggleSpeak={toggleRelaySpeak}
+            onSwitchToText={degradeToText}
           />
         ) : serverVoiceActive ? (
           <ServerVoiceAnswerBar
@@ -915,7 +1203,8 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
           </div>
         )}
 
-        <div className="flex justify-center pt-1">
+        <div className="flex items-center justify-center gap-2 border-t border-[var(--border-subtle)] pt-3">
+          <CameraToggleButton camera={camera} />
           <Button
             variant="primaryRed"
             size="md"
@@ -930,6 +1219,76 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
         <p className="text-center text-[11px] text-[var(--text-muted)]">{t("disclaimer")}</p>
       </div>
     </div>
+  );
+}
+
+/** Small state pill for the room top bar (dot colour encodes the phase). */
+function StatusPill({ state, label }: { state: AvatarState; label: string }) {
+  const tone =
+    state === "speaking"
+      ? "var(--content-info)"
+      : state === "listening"
+        ? "var(--content-success)"
+        : state === "thinking"
+          ? "var(--content-warning)"
+          : "var(--text-muted)";
+  return (
+    <span className="inline-flex min-w-0 items-center gap-1.5 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-0.5">
+      <span aria-hidden className="size-2 shrink-0 rounded-full" style={{ backgroundColor: tone }} />
+      <span className="truncate text-[11px] font-semibold text-[var(--text-secondary)]">{label}</span>
+    </span>
+  );
+}
+
+/** Three-dot "thinking" bubble shown over the avatar between turns. */
+function ThinkingDots({ reduced, label }: { reduced: boolean; label: string }) {
+  return (
+    <div className="pointer-events-none absolute left-1/2 top-3 -translate-x-1/2">
+      <span
+        className="inline-flex items-center gap-1 rounded-full bg-black/45 px-2.5 py-1.5 backdrop-blur-sm"
+        role="status"
+        aria-label={label}
+      >
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            aria-hidden
+            className={cn("size-1.5 rounded-full bg-white/85", !reduced && "animate-bounce")}
+            style={!reduced ? { animationDelay: `${i * 150}ms`, animationDuration: "1s" } : undefined}
+          />
+        ))}
+      </span>
+    </div>
+  );
+}
+
+/** Round camera on/off toggle for the controls bar (mirrors the PiP tile). */
+function CameraToggleButton({ camera }: { camera: ReturnType<typeof useSelfViewCamera> }) {
+  const t = useTranslations("jobs.mockInterview");
+  const on = camera.status === "on" || camera.status === "starting";
+  const unsupported = camera.status === "unsupported" || !camera.supported;
+  return (
+    <button
+      type="button"
+      onClick={camera.toggle}
+      disabled={unsupported}
+      aria-pressed={on}
+      aria-label={on ? t("cameraDisable") : t("cameraEnable")}
+      title={on ? t("cameraDisable") : t("cameraEnable")}
+      className={cn(
+        "inline-flex h-10 items-center gap-2 rounded-full border px-3.5 text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-50",
+        on
+          ? "border-[var(--brand-primary)] bg-[var(--brand-primary)] text-[var(--text-inverted)]"
+          : "border-[var(--border-strong)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]",
+      )}
+    >
+      {on ? (
+        <VideoCamera aria-hidden weight="fill" className="size-4" />
+      ) : (
+        <VideoCameraSlash aria-hidden weight="regular" className="size-4" />
+      )}
+      <span className="hidden sm:inline">{t("cameraLabel")}</span>
+    </button>
   );
 }
 
@@ -1079,6 +1438,75 @@ function ServerVoiceAnswerBar({
           t("serverVoiceTypeHint")
         )}
       </p>
+    </div>
+  );
+}
+
+/**
+ * Relay (Tier V3) push-to-talk control: one prominent mic button the student
+ * taps to speak and taps again to finish (`aria-pressed` reflects the state).
+ * There is no text answer box in this tier — captions are the a11y floor — but a
+ * "type instead" escape hatch always drops to the text tier.
+ */
+function RelayAnswerBar({
+  speaking,
+  connecting,
+  disabled,
+  onToggleSpeak,
+  onSwitchToText,
+}: {
+  speaking: boolean;
+  connecting: boolean;
+  disabled: boolean;
+  onToggleSpeak: () => void;
+  onSwitchToText: () => void;
+}) {
+  const t = useTranslations("jobs.mockInterview");
+  return (
+    <div className="mx-auto flex max-w-xl flex-col items-center gap-2.5">
+      <button
+        type="button"
+        onClick={onToggleSpeak}
+        disabled={disabled}
+        aria-pressed={speaking}
+        aria-label={speaking ? t("relaySpeakStop") : t("relaySpeakStart")}
+        className={cn(
+          "relative flex size-14 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-50",
+          speaking
+            ? "bg-[var(--brand-red)] text-white"
+            : "bg-[var(--bg-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-muted)]",
+        )}
+      >
+        {speaking && (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 animate-ping rounded-full bg-[var(--brand-red)]/40"
+          />
+        )}
+        {speaking ? (
+          <Stop aria-hidden weight="fill" className="relative size-6" />
+        ) : (
+          <Microphone aria-hidden weight="fill" className="relative size-6" />
+        )}
+      </button>
+      <p
+        className="text-center text-[11px] leading-relaxed text-[var(--text-muted)]"
+        aria-live="polite"
+      >
+        {connecting
+          ? t("realtimeConnectingLabel")
+          : speaking
+            ? t("relayHintSpeaking")
+            : t("relayHintIdle")}
+      </p>
+      <button
+        type="button"
+        onClick={onSwitchToText}
+        className="inline-flex items-center gap-1.5 rounded text-[11px] font-semibold text-[var(--text-muted)] outline-none transition-colors hover:text-[var(--text-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+      >
+        <Keyboard aria-hidden weight="bold" className="size-3.5" />
+        {t("idleSwitchToText")}
+      </button>
     </div>
   );
 }

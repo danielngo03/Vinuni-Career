@@ -91,9 +91,12 @@ def _image_key() -> str:
 
     s = get_settings()
     for candidate in (
+        # google_api_key is the canonical field (GEMINI_API_KEY retired 2026-07-11);
+        # keep the legacy attr + env names as fallbacks for older local .env files.
+        getattr(s, "google_api_key", "") or "",
         getattr(s, "gemini_api_key", "") or "",
-        os.environ.get("GEMINI_API_KEY", ""),
         os.environ.get("GOOGLE_API_KEY", ""),
+        os.environ.get("GEMINI_API_KEY", ""),
     ):
         cand = (candidate or "").strip()
         if cand and cand.lower() not in _PLACEHOLDERS:

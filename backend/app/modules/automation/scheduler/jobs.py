@@ -32,6 +32,9 @@ from app.modules.career_outcomes.application import materializer_service
 from app.modules.compliance.application import retention_service as compliance_retention
 from app.modules.dashboards.application import snapshot_service as mi_snapshot
 from app.modules.discovery.application import cleanup_service as discovery_cleanup
+from app.modules.mock_interview.application import (
+    stale_sweep_service as mock_interview_sweep,
+)
 from app.modules.notifications.application import dispatch_service
 from app.modules.opportunities.application import (
     job_alert_dispatch_service,
@@ -143,6 +146,10 @@ async def _market_intelligence_reconcile(session: AsyncSession, now: datetime) -
     return await mi_snapshot.reconcile(session, now=now)
 
 
+async def _mock_interview_stale_sweep(session: AsyncSession, now: datetime) -> dict[str, int]:
+    return await mock_interview_sweep.sweep_stale_active(session, now=now)
+
+
 async def _evaluate_alerts(session: AsyncSession, _now: datetime) -> dict[str, int]:
     """Evaluate all enabled alert rules and open/resolve incidents. Never raises."""
     import logging  # noqa: PLC0415
@@ -218,6 +225,12 @@ REGISTRY: tuple[ScheduledJob, ...] = (
     # (rollup rows in ai_usage_daily are never pruned). Both are idempotent.
     ScheduledJob("ai_ops.usage_daily_reconcile", 3600, _ai_usage_daily_reconcile),
     ScheduledJob("ai_ops.prune", 86400, _ai_ops_prune),
+    # P0-3: platform-wide expiry of abandoned ``active`` mock-interview sessions
+    # past the hard session cap + grace. Previously only lazily expired per-user
+    # at the next create; an abandoned session for an absent student lingered as
+    # ``active`` forever, inflating governance counts. Idempotent (re-tick finds
+    # only newly-stale rows); never touches a session still within the cap.
+    ScheduledJob("mock_interview.stale_session_sweep", 300, _mock_interview_stale_sweep),
     # P7: Alert rule evaluation — opens/resolves incidents on threshold breaches.
     # Runs every 5 minutes. Never raises (errors logged, never crashes the scheduler).
     ScheduledJob("alerts.evaluate", 300, _evaluate_alerts),

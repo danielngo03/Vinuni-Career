@@ -98,6 +98,15 @@ class MockInterviewSession(Base):
     # every turn + the report use a stable interview even if the CV/JD later change,
     # and so per-turn grounding is not re-derived. Leak-safe (no provider/model).
     grounding_json: Mapped[dict | None] = mapped_column(JsonType, nullable=True)
+    # Frozen interview PLAN (competency map + tiered question bank + opening),
+    # built ONCE at create (planner_service) and reused by every turn/tier/report —
+    # never re-derived per turn. Leak-safe product data (no provider/model/tokens).
+    plan_json: Mapped[dict | None] = mapped_column(JsonType, nullable=True)
+    plan_version: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Deterministic coverage state (which planned competency has been asked/covered
+    # and the current difficulty tier). Updated with NO LLM after each interviewer
+    # turn; drives which competency the next turn targets. Leak-safe.
+    coverage_json: Mapped[dict | None] = mapped_column(JsonType, nullable=True)
     # Coaching report (NO score fields — see report_service). Nullable until end.
     report_json: Mapped[dict | None] = mapped_column(JsonType, nullable=True)
 

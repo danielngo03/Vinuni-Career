@@ -10,8 +10,9 @@ Design (``docs/SECURITY_PRIVACY.md``, ``.claude/rules/backend.md``):
   a decoded token never reveals a storage path.
 - Tokens are tamper-evident (HMAC-SHA256 over the canonical payload) and expire.
 
-The default backend is a local filesystem under ``LOCAL_STORAGE_DIR``. The same
-``StorageBackend`` interface is later backed by S3/MinIO without changing callers.
+The default backend is a local filesystem under ``LOCAL_STORAGE_DIR``. Setting
+``STORAGE_BACKEND=gcs`` + ``GCS_BUCKET_NAME`` switches every caller to Google
+Cloud Storage without any schema change (keys are opaque strings either way).
 """
 
 from __future__ import annotations
@@ -86,7 +87,75 @@ class LocalStorageBackend:
             return
 
 
+class GcsStorageBackend:
+    """Google Cloud Storage-backed storage for Cloud Run / production.
+
+    Credentials come from Application Default Credentials (the Cloud Run
+    service account in production, ``gcloud auth application-default login``
+    locally). Bucket must stay private; all reads flow through the app's
+    RBAC/signed-token download endpoints, never public object URLs.
+    """
+
+    def __init__(self, bucket_name: str, *, prefix: str = "") -> None:
+        try:
+            from google.cloud import storage as gcs
+        except ImportError as exc:  # pragma: no cover - dependency is in pyproject
+            raise StorageError("google-cloud-storage is not installed") from exc
+        if not bucket_name:
+            raise StorageError("GCS_BUCKET_NAME is not configured")
+        self._client = gcs.Client()
+        self._bucket = self._client.bucket(bucket_name)
+        self._prefix = prefix.strip("/")
+
+    def _blob(self, key: str):  # noqa: ANN202 - google types are untyped here
+        norm = key.lstrip("/")
+        if not norm or ".." in norm.split("/"):
+            raise StorageError("invalid storage key")
+        name = f"{self._prefix}/{norm}" if self._prefix else norm
+        return self._bucket.blob(name)
+
+    def save(self, key: str, data: bytes) -> None:
+        blob = self._blob(key)
+        try:
+            blob.upload_from_string(data, content_type="application/octet-stream")
+        except Exception as exc:  # noqa: BLE001 - normalize provider errors
+            raise StorageError("object write failed") from exc
+
+    def load(self, key: str) -> bytes:
+        blob = self._blob(key)
+        try:
+            return blob.download_as_bytes()
+        except Exception as exc:  # noqa: BLE001 - includes NotFound
+            raise StorageError("object not found") from exc
+
+    def exists(self, key: str) -> bool:
+        try:
+            return bool(self._blob(key).exists())
+        except StorageError:
+            return False
+        except Exception:  # noqa: BLE001
+            return False
+
+    def delete(self, key: str) -> None:
+        try:
+            self._blob(key).delete()
+        except StorageError:
+            return
+        except Exception:  # noqa: BLE001 - missing objects are fine on delete
+            return
+
+
 _backend: StorageBackend | None = None
+
+
+def _build_backend() -> StorageBackend:
+    settings = get_settings()
+    kind = (settings.storage_backend or "local").strip().lower()
+    if kind == "local":
+        return LocalStorageBackend(settings.local_storage_dir)
+    if kind == "gcs":
+        return GcsStorageBackend(settings.gcs_bucket_name, prefix=settings.gcs_key_prefix)
+    raise StorageError(f"unsupported STORAGE_BACKEND: {kind}")
 
 
 def get_storage() -> StorageBackend:
@@ -94,9 +163,7 @@ def get_storage() -> StorageBackend:
 
     global _backend
     if _backend is None:
-        settings = get_settings()
-        # Only the local backend is wired for now; cloud backends slot in here.
-        _backend = LocalStorageBackend(settings.local_storage_dir)
+        _backend = _build_backend()
     return _backend
 
 

@@ -14,8 +14,10 @@ metadata only (``ai_usage_log``) with a leak-safe alias.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import io
 import logging
+import math
 import uuid
 import wave
 
@@ -26,6 +28,13 @@ logger = logging.getLogger(__name__)
 # Leak-safe aliases surfaced in usage logs (never the concrete model id).
 _TTS_ALIAS = "interview_tts"
 _STT_ALIAS = "interview_stt"
+
+# Energy base-unit derivation for the voice tiers (masked product currency).
+# TTS is billed by synthesized characters (one unit per ~400 chars, min 1); STT
+# is billed per transcribed answer (turn count). These are deterministic weights
+# passed to the single energy settlement choke point so the voice tiers are
+# metered, not invisible/uncapped.
+_TTS_CHARS_PER_UNIT = 400
 
 _PLACEHOLDERS = {"", "changeme", "your-key", "placeholder", "none", "null"}
 
@@ -54,10 +63,8 @@ def _speech_key() -> str:
 
     s = get_settings()
     for candidate in (
-        getattr(s, "gemini_api_key", "") or "",
-        os.environ.get("GEMINI_API_KEY", ""),
+        getattr(s, "google_api_key", "") or "",
         os.environ.get("GOOGLE_API_KEY", ""),
-        os.environ.get("AI_PROVIDER_GEMINI_LIVE_API_KEY", ""),
     ):
         cand = (candidate or "").strip()
         if cand and cand.lower() not in _PLACEHOLDERS:
@@ -100,7 +107,7 @@ def _client() -> object:
        ``GOOGLE_CLOUD_PROJECT`` + ``GOOGLE_APPLICATION_CREDENTIALS`` →
        ``genai.Client(vertexai=True, project=..., location=...)``.
     2. **AI Studio developer key** (simplest free path): ``AI_SPEECH_USE_VERTEX=
-       false`` + ``GEMINI_API_KEY=AIza...`` → ``genai.Client(api_key=...)``.
+       false`` + ``GOOGLE_API_KEY=AIza...`` → ``genai.Client(api_key=...)``.
     3. **Vertex express key** (``AQ...``): ``AI_SPEECH_USE_VERTEX=true`` + key →
        ``genai.Client(vertexai=True, api_key=...)`` (limited free quota).
     """
@@ -193,6 +200,72 @@ async def _log_usage(
         logger.debug("speech.usage_log_failed", exc_info=True)
 
 
+def _dedupe_digest(value: str | bytes) -> str:
+    """Short stable digest used ONLY as an idempotency-key suffix.
+
+    Keeps identical re-synthesis / re-transcription of the same content from
+    double-charging, while distinct content charges separately. Never surfaced.
+    """
+
+    raw = value.encode("utf-8", "ignore") if isinstance(value, str) else value
+    return hashlib.sha1(raw).hexdigest()[:16]
+
+
+async def _settle_energy(
+    session: object | None,
+    *,
+    kind: str,
+    dedupe: str,
+    base_units: int,
+    user_id: uuid.UUID | None,
+    session_id: uuid.UUID | None,
+) -> None:
+    """Best-effort energy settlement for a successful voice-tier call.
+
+    Mirrors :func:`_log_usage`: never raises, never blocks correctness. Routes the
+    charge through the single settlement choke point (``energy_service.charge``)
+    so the student's masked energy account reflects the voice tiers. Idempotent on
+    a ``(session, kind, content-digest)`` key so a client retry never double
+    charges. Degrades to a no-op — the ``ai_usage_log`` row already exists — when
+    the billing module is unavailable at call time (cross-lane resilience).
+    """
+
+    if session is None or user_id is None or session_id is None:
+        return
+    try:
+        from app.ai.observability.billable_usage import (
+            FEATURE_INTERVIEW_SIM,
+            PERSONA_STUDENT,
+            RESULT_SUCCESS,
+            SCOPE_USER,
+            UsageContext,
+            make_idempotency_key,
+        )
+        from app.modules.billing.application.energy_service import charge
+
+        ctx = UsageContext(
+            actor_persona=PERSONA_STUDENT,
+            feature_key=FEATURE_INTERVIEW_SIM,
+            task_type=f"mock_interview_{kind}",
+            billing_scope=SCOPE_USER,
+            actor_user_id=user_id,
+            session_id=session_id,
+            resource_type="mock_interview_session",
+            resource_id=session_id,
+            idempotency_key=make_idempotency_key(
+                FEATURE_INTERVIEW_SIM, session_id, kind, dedupe
+            ),
+        )
+        await charge(
+            session,  # type: ignore[arg-type]
+            ctx=ctx,
+            result_status=RESULT_SUCCESS,
+            base_units=max(1, int(base_units)),
+        )
+    except Exception:  # pragma: no cover - accounting must never break the call
+        logger.debug("speech.energy_settle_skipped", exc_info=True)
+
+
 async def synthesize(
     text: str,
     *,
@@ -210,6 +283,13 @@ async def synthesize(
     if not getattr(s, "ai_speech_enabled", False):
         raise SpeechUnavailableError("disabled")
     clean = (text or "").strip()
+    if not clean:
+        raise SpeechUnavailableError("empty_text")
+    # Output-guard the interviewer text BEFORE it is spoken: if a provider/model
+    # string ever slipped into the turn, it must never be synthesized to audio.
+    from app.ai.gateway.output_guard import scrub_text
+
+    clean = scrub_text(clean).strip()
     if not clean:
         raise SpeechUnavailableError("empty_text")
     max_chars = int(getattr(s, "ai_speech_max_tts_chars", 1200))
@@ -261,6 +341,14 @@ async def synthesize(
     await _log_usage(
         session, task_type="mock_interview_tts", alias=_TTS_ALIAS,
         success=True, chars=len(clean), user_id=user_id, session_id=session_id,
+    )
+    await _settle_energy(
+        session,
+        kind="tts",
+        dedupe=_dedupe_digest(clean),
+        base_units=max(1, math.ceil(len(clean) / _TTS_CHARS_PER_UNIT)),
+        user_id=user_id,
+        session_id=session_id,
     )
     return wav, "audio/wav"
 
@@ -324,5 +412,14 @@ async def transcribe(
     await _log_usage(
         session, task_type="mock_interview_stt", alias=_STT_ALIAS,
         success=True, chars=len(text), user_id=user_id, session_id=session_id,
+    )
+    # STT is billed per transcribed answer (one spoken turn = one unit).
+    await _settle_energy(
+        session,
+        kind="stt",
+        dedupe=_dedupe_digest(audio),
+        base_units=1,
+        user_id=user_id,
+        session_id=session_id,
     )
     return text

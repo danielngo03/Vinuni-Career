@@ -53,6 +53,11 @@ _BUILTIN_ROUTES: dict[str, tuple[str, str, str]] = {
     # Mock Interview conversational brain + coaching report. Fast, Vietnamese-
     # capable, cheap — bound to ``ai_interview_model`` at bootstrap.
     "interview_default": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-flash"),
+    # Mock Interview PLANNER — a STRONG model run ONCE per session to build the
+    # frozen competency map + tiered question bank (then reused for free by every
+    # turn/tier/report). Routes to the same interview provider; a superadmin can
+    # rebind this alias to any model. Leak-safe alias (never surfaced to users).
+    "interview_planner": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-pro"),
     # Legacy aliases — resolvable synonyms (removed from allowlist/UI).
     "chat_cheap": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
     "chat_free": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),

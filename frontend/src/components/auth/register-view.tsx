@@ -16,10 +16,23 @@ import { SocialAuthButtons } from "./social-auth-buttons";
 import { VerifyEmailView } from "./verify-email-view";
 import { cn } from "@/lib/utils";
 
-export function RegisterView() {
+export function RegisterView({
+  returnTo,
+  email: initialEmail,
+}: {
+  returnTo?: string;
+  email?: string;
+} = {}) {
   const t = useTranslations("auth");
   const tv = useTranslations("auth.validation");
   const getMessage = useApiErrorMessage();
+
+  // Preserve the guest's original intent when they switch to the login screen.
+  const loginHref = returnTo
+    ? `/auth/login?returnTo=${encodeURIComponent(returnTo)}${
+        initialEmail ? `&email=${encodeURIComponent(initialEmail)}` : ""
+      }`
+    : "/auth/login";
 
   const [formError, setFormError] = useState<string | null>(null);
   const [doneEmail, setDoneEmail] = useState<string | null>(null);
@@ -35,7 +48,7 @@ export function RegisterView() {
   } = useForm<RegisterValues>({
     resolver: zodResolver(registerSchema(tv)),
     defaultValues: {
-      email: "",
+      email: initialEmail ?? "",
       password: "",
       confirm_password: "",
       accept_terms: false as unknown as true,
@@ -60,7 +73,7 @@ export function RegisterView() {
     <>
       {t("haveAccount")}{" "}
       <Link
-        href="/auth/login"
+        href={loginHref}
         className="font-semibold text-[var(--brand-primary)] hover:underline"
       >
         {t("loginTitle")}

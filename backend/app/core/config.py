@@ -131,9 +131,10 @@ class Settings(BaseSettings):
     ai_realtime_model: str = "gemini-2.5-flash-preview-native-audio-dialog"
     ai_realtime_voice: str = "Aoede"  # provider voice name (Aoede/Puck/Charon/…)
     ai_realtime_ttl_seconds: int = 660  # ephemeral-token / session hard-cap ceiling
-    # Native Gemini/Google AI key for the realtime Live tier (NOT OpenRouter).
-    # Also read from GEMINI_API_KEY / GOOGLE_API_KEY / AI_PROVIDER_GEMINI_LIVE_API_KEY.
-    gemini_api_key: str = ""
+    # Native Google GenAI key (AI Studio developer key or Vertex express key)
+    # for the voice tiers (Live realtime, speech STT/TTS). NOT OpenRouter.
+    # Canonical env var: GOOGLE_API_KEY (GEMINI_API_KEY was retired 2026-07-11).
+    google_api_key: str = ""
 
     # --- Mock Interview: server-mediated Gemini voice tier (STT + TTS) ----------
     # A turn-based spoken interview that runs on a Google/Vertex GenAI key WITHOUT
@@ -284,8 +285,13 @@ class Settings(BaseSettings):
     cv_stale_after_days: int = 60
 
     # Storage
+    # "local" (LOCAL_STORAGE_DIR on disk) or "gcs" (Google Cloud Storage bucket).
+    # Cloud Run's filesystem is ephemeral, so production must use "gcs" (or mount
+    # a persistent volume) or uploaded CVs/logos vanish on instance recycle.
     storage_backend: str = "local"
     local_storage_dir: str = ".dev/storage"
+    gcs_bucket_name: str = ""
+    gcs_key_prefix: str = ""  # optional folder prefix inside the bucket
     signed_url_ttl_seconds: int = 900
     max_upload_mb: int = 50
     # Organization logo upload cap (docs/API_CONTRACTS.md "Organization Media And

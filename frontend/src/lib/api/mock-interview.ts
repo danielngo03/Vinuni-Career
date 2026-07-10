@@ -49,6 +49,15 @@ export interface MockInterviewPrep {
   recommended_cv_id: string | null;
   signal: MockInterviewFitSignal;
   /**
+   * True when the true full-duplex realtime relay tier is available: the
+   * student's mic audio streams to our server and the interviewer's native
+   * audio streams back in real time (a live spoken conversation). This is the
+   * PREFERRED voice tier — when set, create the session with
+   * `modality: "realtime"` and drive it with the relay WebSocket client. No
+   * provider/model identity is ever carried here.
+   */
+  realtime_relay?: boolean;
+  /**
    * True when the server-mediated voice tier is available (the interviewer's
    * questions are narrated by AI and answers can be spoken and transcribed
    * server-side). When false, voice mode falls back to the browser voice tier
@@ -56,6 +65,14 @@ export interface MockInterviewPrep {
    * prep contract. No provider/model identity is ever carried here.
    */
   server_voice?: boolean;
+  /**
+   * Optional multi-round interview plan preview (screening → technical → …), so
+   * the setup screen can show "what to expect" before starting. Defensive: when
+   * the backend omits it the hero simply hides the plan. The authoritative plan
+   * is returned again on create-session. No prompts/model identity carried here.
+   */
+  rounds?: MockInterviewRound[] | null;
+  current_round?: string | number | null;
 }
 
 /* ------------------------------- sessions --------------------------------- */
@@ -87,6 +104,34 @@ export interface MockInterviewRealtimeDescriptor {
   turn_limit: number;
 }
 
+/**
+ * Leak-safe interview-plan progress. Labels + counts only — never weights,
+ * question ids, the question bank, tiers, or any score. `covered` are the
+ * competencies already touched; `remaining` are still to cover. Rendered as a
+ * subtle "topics" progress in the room and in the coaching report.
+ */
+export interface MockInterviewCoverage {
+  total: number;
+  covered_count: number;
+  covered: string[];
+  remaining: string[];
+}
+
+export type MockInterviewRoundStatus = "done" | "active" | "upcoming";
+
+/**
+ * One phase of a multi-round interview (e.g. screening → technical → behavioral).
+ * Leak-safe: labels only — never a persona prompt, model, or score. Optional in
+ * every contract; when absent the UI simply hides the round/phase indicator.
+ */
+export interface MockInterviewRound {
+  id: string;
+  label: string;
+  /** Human-readable persona/style of this round (e.g. "Technical interview"). */
+  persona_label?: string | null;
+  status: MockInterviewRoundStatus;
+}
+
 export interface MockInterviewSession {
   session_id: string;
   modality: MockInterviewModality;
@@ -95,6 +140,20 @@ export interface MockInterviewSession {
   opening: MockInterviewOpening;
   caps: MockInterviewCaps;
   realtime: MockInterviewRealtimeDescriptor | null;
+  /**
+   * Interview-plan topic coverage captured at session start (the opening
+   * question's plan). Static during the live session — the SSE turn stream does
+   * not currently re-emit coverage — so the room shows it as the interview PLAN,
+   * and the coaching report shows the FINAL coverage from the session detail.
+   */
+  coverage?: MockInterviewCoverage | null;
+  /**
+   * Multi-round interview plan (screening → technical → behavioral …). Optional;
+   * when present the live room shows a tasteful phase indicator. Absent → hidden.
+   */
+  rounds?: MockInterviewRound[] | null;
+  /** Active round — the round `id` or a 0-based index. Advisory; `status` wins. */
+  current_round?: string | number | null;
 }
 
 export interface MockInterviewTranscriptTurn {
@@ -110,6 +169,24 @@ export interface CoachingReportQuestion {
   observation: string;
 }
 
+/** A concrete next-step learning resource attached to a gap (leak-safe: no url
+ *  internals required — `title` + a coarse `kind` badge only). */
+export interface MockInterviewLearningSuggestion {
+  title: string;
+  /** Coarse resource kind, e.g. "course" | "article" | "video" | "practice". */
+  kind?: string | null;
+}
+
+/**
+ * A gap the student should work on. The backend may send a plain string (legacy)
+ * or an object carrying attached learning suggestions. The UI normalizes both
+ * via {@link normalizeGap}.
+ */
+export interface CoachingReportGap {
+  text: string;
+  learning?: MockInterviewLearningSuggestion[] | null;
+}
+
 /**
  * Score-free coaching output. There is intentionally NO `score`/`rating`/
  * `percentage` field — mock interview is formative practice, not assessment.
@@ -117,7 +194,8 @@ export interface CoachingReportQuestion {
 export interface CoachingReport {
   per_question: CoachingReportQuestion[];
   overall_observations: string;
-  gaps_to_work_on: string[];
+  /** Plain strings (legacy) or `{ text, learning[] }` objects. */
+  gaps_to_work_on: Array<string | CoachingReportGap>;
   strengths: string[];
   prompt_version: number;
   is_fallback: boolean;
@@ -140,6 +218,11 @@ export interface MockInterviewSessionDetail {
   share_opt_in: boolean;
   transcript: MockInterviewTranscriptTurn[];
   report: CoachingReport | null;
+  /** Final interview-plan topic coverage (labels + counts only). */
+  coverage?: MockInterviewCoverage | null;
+  /** Interview phases the session ran through (all typically `done`). Optional. */
+  rounds?: MockInterviewRound[] | null;
+  current_round?: string | number | null;
 }
 
 /**
@@ -303,6 +386,15 @@ export interface TurnDoneEvent {
   text: string;
   question_count: number;
   ended: boolean;
+  /** Live topic coverage after this turn (leak-safe summary), so the room's
+   * coverage chips advance per turn. Absent on early-end/conflict paths. */
+  coverage?: MockInterviewCoverage | null;
+  /**
+   * Optional advisory coaching nudge for the answer just given (e.g. "try adding
+   * a concrete metric"). Rendered as a calm, dismissible chip that clears on the
+   * next turn. Never blocking; absent/null → nothing shown.
+   */
+  nudge?: { text: string } | null;
 }
 
 export interface TurnErrorEvent {
@@ -617,4 +709,71 @@ export function topJobTitle(item: MockInterviewTopJob): string {
   const title = item.title?.trim();
   if (title) return title;
   return `#${item.job_id.slice(0, 8)}`;
+}
+
+/** A gap normalized to `{ text, learning[] }` regardless of the wire shape. */
+export interface NormalizedGap {
+  text: string;
+  learning: MockInterviewLearningSuggestion[];
+}
+
+/**
+ * Accepts either the legacy plain-string gap or the `{ text, learning }` object
+ * and returns a stable shape. Learning entries missing a title are dropped so
+ * the UI never renders an empty chip.
+ */
+export function normalizeGap(item: string | CoachingReportGap): NormalizedGap {
+  if (typeof item === "string") return { text: item, learning: [] };
+  const text = typeof item?.text === "string" ? item.text : "";
+  const learning = Array.isArray(item?.learning)
+    ? item.learning.filter(
+        (l): l is MockInterviewLearningSuggestion =>
+          !!l && typeof l.title === "string" && l.title.trim().length > 0,
+      )
+    : [];
+  return { text, learning };
+}
+
+/** Derived, render-ready multi-round plan. */
+export interface RoundPlan {
+  rounds: MockInterviewRound[];
+  /** 0-based index of the active (or, in a finished report, final) round. */
+  activeIndex: number;
+  total: number;
+}
+
+/**
+ * Normalize the optional `rounds` + `current_round` contract into a render-ready
+ * plan. Returns `null` when no usable rounds are present so callers can hide the
+ * phase indicator entirely. Prefers a round with `status: "active"`; falls back
+ * to `current_round` (id or index), then to the round after the last `done`.
+ */
+export function deriveRoundPlan(
+  rounds: MockInterviewRound[] | null | undefined,
+  current?: string | number | null,
+): RoundPlan | null {
+  if (!Array.isArray(rounds) || rounds.length === 0) return null;
+  const clean = rounds.filter(
+    (r): r is MockInterviewRound =>
+      !!r && typeof r.id === "string" && typeof r.label === "string" && r.label.trim().length > 0,
+  );
+  if (clean.length === 0) return null;
+
+  let activeIndex = clean.findIndex((r) => r.status === "active");
+  if (activeIndex === -1 && current != null) {
+    activeIndex =
+      typeof current === "number"
+        ? current
+        : clean.findIndex((r) => r.id === current);
+  }
+  if (activeIndex === -1) {
+    // No explicit active round → the one after the last completed round.
+    let lastDone = -1;
+    clean.forEach((r, i) => {
+      if (r.status === "done") lastDone = i;
+    });
+    activeIndex = Math.min(lastDone + 1, clean.length - 1);
+  }
+  activeIndex = Math.max(0, Math.min(activeIndex, clean.length - 1));
+  return { rounds: clean, activeIndex, total: clean.length };
 }

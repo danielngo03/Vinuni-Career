@@ -606,6 +606,9 @@ function SessionReview({
         <div className="space-y-6">
           <CoachingReport
             report={query.data.report}
+            coverage={query.data.coverage}
+            rounds={query.data.rounds}
+            currentRound={query.data.current_round}
             jobId={query.data.job_id}
             jobTitle={query.data.job_title}
             completedAt={query.data.ended_at}

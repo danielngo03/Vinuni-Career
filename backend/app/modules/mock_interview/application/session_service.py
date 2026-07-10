@@ -26,9 +26,11 @@ from app.core.config import get_settings
 from app.modules.analytics.application import ingestion_service
 from app.modules.mock_interview.api import presenters
 from app.modules.mock_interview.application import (
+    analysis_service,
     caps,
     conversation_service,
     grounding_service,
+    plan_service,
     report_service,
 )
 from app.modules.mock_interview.domain.models import (
@@ -181,11 +183,16 @@ async def create_session(
 
     await usage_service.enforce_quota(session, principal=principal)
 
-    # 5) Persist the session row (active). The partial unique index
-    # (uq_mock_interview_one_active_per_user) is the authoritative concurrency
-    # guard: if two creates race past the count check above, the second flush
-    # trips IntegrityError here — BEFORE any opening LLM call is billed.
+    # 5) TXN 1 — claim the single active slot FAST, BEFORE any model latency.
+    # The partial unique index (uq_mock_interview_one_active_per_user) is the
+    # authoritative concurrency guard: if two creates race past the count check
+    # above, the second COMMIT trips IntegrityError here — BEFORE any planner /
+    # opening LLM call is made. Committing now (instead of holding the row +
+    # partial-unique lock across the planner+opening latency) mirrors how
+    # ``stream_turn`` commits the candidate turn before streaming.
+    session_row_id = uuid.uuid4()
     row = MockInterviewSession(
+        id=session_row_id,
         user_id=user_id,
         job_id=job_id,
         cv_profile_id=uuid.UUID(chosen_cv_id) if chosen_cv_id else None,
@@ -200,7 +207,7 @@ async def create_session(
     )
     session.add(row)
     try:
-        await session.flush()
+        await session.commit()
     except IntegrityError as exc:
         await session.rollback()
         raise ConflictError(
@@ -208,27 +215,42 @@ async def create_session(
             details={"reason": "ACTIVE_SESSION_EXISTS"},
         ) from exc
 
-    # 6) Opening interviewer turn (LLM; never raises — static fallback inside).
-    opening_text = await conversation_service.generate_opening(
-        session,
-        user_id=user_id,
-        grounding=grounding,
-        target_questions=caps.DEFAULT_TARGET_QUESTIONS,
+    # 6) PLANNER — ONE strong-model call, FROZEN on the row and reused every turn
+    # (deterministic fallback inside; never blocks create). No txn/lock held.
+    plan = await plan_service.build_plan(
+        session, grounding=grounding, user_id=user_id, session_id=session_row_id
     )
+    coverage = plan_service.init_coverage(
+        plan, difficulty=grounding.get("difficulty")
+    )
+    opening_text = str(plan.get("opening") or "") or prompts.fallback_first_turn(grounding)
+    # The opening is a greeting + first question. Attribute it to a competency
+    # ONLY on a real keyword match (no forced target) so a generic "introduce
+    # yourself" greeting does not consume a competency slot.
+    coverage = plan_service.record_interviewer_question(
+        coverage, plan, question_text=opening_text, seq=1, targeted_id=None
+    )
+
+    # 7) TXN 2 — persist the frozen plan + coverage + opening turn (short txn).
     opening = MockInterviewTurn(
-        session_id=row.id,
+        session_id=session_row_id,
         seq=1,
         speaker=SPEAKER_INTERVIEWER,
         text=opening_text,
         text_redacted=_redacted(opening_text),
     )
     session.add(opening)
+    row.plan_json = plan
+    row.plan_version = int(plan.get("plan_version") or prompts.PLAN_VERSION)
+    row.coverage_json = coverage
     row.question_count = 1
 
-    # 7) Optional realtime (Tier V2). Falls back to browser voice on any failure.
+    # 8) Optional realtime (Tier V2). Falls back to browser voice on any failure.
     realtime: dict[str, Any] | None = None
     if modality == MODALITY_REALTIME:
-        realtime = await _try_mint_realtime(session, row=row, grounding=grounding)
+        realtime = await _try_mint_realtime(
+            session, row=row, grounding=grounding, plan=plan, coverage=coverage
+        )
         if realtime is None:
             row.modality = MODALITY_VOICE
             modality = MODALITY_VOICE
@@ -239,7 +261,7 @@ async def create_session(
         resource_type="mock_interview_session",
         resource_id=row.id,
         context=_audit_ctx(principal, ctx),
-        after={"job_id": str(job_id), "modality": modality},
+        after={"job_id": str(job_id), "modality": modality, "plan_source": plan.get("source")},
     )
     await _record_event(
         session,
@@ -249,6 +271,7 @@ async def create_session(
     )
     await session.commit()
 
+    prog = plan_service.round_progress(plan, coverage, locale)
     return {
         "session_id": str(row.id),
         "modality": modality,
@@ -262,15 +285,29 @@ async def create_session(
             "target_questions": caps.DEFAULT_TARGET_QUESTIONS,
         },
         "low_signal": bool(grounding.get("low_signal")),
+        "coverage": plan_service.coverage_summary(coverage),
+        # Leak-safe multi-round plan (persona labels + status) + the active round.
+        "rounds": prog["rounds"] if prog else None,
+        "current_round": prog["current_round"] if prog else None,
         "realtime": realtime,
     }
 
 
 async def _try_mint_realtime(
-    session: AsyncSession, *, row: MockInterviewSession, grounding: dict[str, Any]
+    session: AsyncSession,
+    *,
+    row: MockInterviewSession,
+    grounding: dict[str, Any],
+    plan: dict[str, Any] | None = None,
+    coverage: dict[str, Any] | None = None,
 ) -> dict[str, Any] | None:
+    plan_slice = (
+        plan_service.build_plan_slice(plan, coverage) if plan and coverage else None
+    )
     instruction = prompts.build_conversation_system_prompt(
-        grounding, target_questions=caps.DEFAULT_TARGET_QUESTIONS
+        grounding,
+        target_questions=caps.DEFAULT_TARGET_QUESTIONS,
+        plan_slice=plan_slice,
     )
     try:
         descriptor = await mint_session(
@@ -431,6 +468,39 @@ async def stream_turn(
     turns.append(candidate_turn)
 
     grounding = row.grounding_json or {}
+    locale = grounding.get("locale") or row.locale or "vi"
+    plan = row.plan_json or {}
+    coverage = row.coverage_json or (
+        plan_service.init_coverage(plan, difficulty=grounding.get("difficulty"))
+        if plan
+        else {}
+    )
+    # Real-time answer signal (deterministic depth/STAR base; LLM-refined only when a
+    # real provider is active). Drives BOTH adaptive difficulty and the leak-safe
+    # coaching nudge shown on the done event. Best-effort — never blocks the turn.
+    last_q = next(
+        (t.text for t in reversed(turns[:-1]) if t.speaker == SPEAKER_INTERVIEWER),
+        "",
+    )
+    signal = await conversation_service.read_answer_signal(
+        session,
+        user_id=row.user_id,
+        session_id=row.id,
+        question=last_q or "",
+        answer=candidate_text,
+        current_tier=str(coverage.get("current_tier") or "intermediate"),
+    )
+    nudge = conversation_service.build_nudge(
+        signal["depth"], bool(signal["star"]), locale
+    )
+    plan_slice: dict[str, Any] | None = None
+    targeted_id: str | None = None
+    if plan and coverage:
+        # Adaptive difficulty advances the tier for the next planned competency.
+        coverage = plan_service.set_tier(coverage, signal["next_tier"])
+        plan_slice = plan_service.build_plan_slice(plan, coverage)
+        targeted_id = plan_slice.get("target_id") if plan_slice else None
+
     parts: list[str] = []
     async for chunk in conversation_service.stream_interviewer(
         session,
@@ -438,6 +508,9 @@ async def stream_turn(
         grounding=grounding,
         turns=turns,
         target_questions=caps.DEFAULT_TARGET_QUESTIONS,
+        session_id=row.id,
+        plan_slice=plan_slice,
+        turn_seq=next_seq,
     ):
         parts.append(chunk)
         yield {"type": "token", "text": chunk}
@@ -459,6 +532,7 @@ async def stream_turn(
             "text": clean_text,
             "question_count": int((fresh or row).question_count or 0),
             "ended": True,
+            "nudge": nudge,
         }
         return
 
@@ -474,6 +548,12 @@ async def stream_turn(
         )
     )
     fresh.question_count = int(fresh.question_count or 0) + 1
+    # Deterministic coverage update (NO LLM): attribute the asked question to a
+    # planned competency so the NEXT turn targets what is still uncovered.
+    if plan and coverage:
+        fresh.coverage_json = plan_service.record_interviewer_question(
+            coverage, plan, question_text=clean_text, seq=iseq, targeted_id=targeted_id
+        )
     reached_end = (
         ended
         or fresh.question_count >= caps.DEFAULT_TARGET_QUESTIONS
@@ -490,14 +570,25 @@ async def stream_turn(
             "text": clean_text,
             "question_count": int(fresh.question_count or 0),
             "ended": reached_end,
+            "nudge": nudge,
         }
         return
+    prog = plan_service.round_progress(plan, fresh.coverage_json, locale)
     yield {
         "type": "done",
         "seq": iseq,
         "text": clean_text,
         "question_count": fresh.question_count,
         "ended": reached_end,
+        # Live coverage so the room's topic chips advance per turn (leak-safe
+        # summary — covered/remaining labels only, never ids/weights/scores).
+        "coverage": plan_service.coverage_summary(fresh.coverage_json),
+        # Live round progression (persona labels + status) so the room's round
+        # indicator advances per turn — leak-safe (no persona keys / ids / scores).
+        "rounds": prog["rounds"] if prog else None,
+        "current_round": prog["current_round"] if prog else None,
+        # A short, leak-safe coaching tip about the answer just given (or null).
+        "nudge": nudge,
     }
 
 
@@ -592,13 +683,13 @@ async def end_session(
     turns_in: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     _require_student(principal)
-    row = await _load_owned(session, principal=principal, session_id=session_id)
-
-    # Idempotent: ending an already-completed session returns its stored detail.
-    if row.status == STATUS_COMPLETED:
+    # Fast idempotency pre-check (no lock) — short-circuit an already-completed
+    # session without taking a row lock or reaching any model.
+    pre = await _load_owned(session, principal=principal, session_id=session_id)
+    if pre.status == STATUS_COMPLETED:
         turns = await repo.load_turns(session, session_id=session_id)
-        return presenters.session_detail(row, turns)
-    if row.status != STATUS_ACTIVE:
+        return presenters.session_detail(pre, turns)
+    if pre.status != STATUS_ACTIVE:
         raise ConflictError(details={"reason": "SESSION_NOT_ACTIVE"})
 
     if turns_in:
@@ -610,23 +701,28 @@ async def end_session(
             ctx=ctx,
         )
 
-    turns = await repo.load_turns(session, session_id=session_id)
-    grounding = row.grounding_json or {}
-    transcript_lines = conversation_service.build_transcript_lines(turns)
-    report = await report_service.generate_report(
-        session,
-        user_id=row.user_id,
-        grounding=grounding,
-        transcript_lines=transcript_lines,
+    # TXN A — claim completion UNDER LOCK, re-checking status AFTER the lock, so a
+    # second concurrent ``/end`` cannot also generate + bill a report. We mark the
+    # session completed here and COMMIT (releasing the lock) BEFORE the expensive
+    # report generation, so the lock is never held across model latency.
+    row = await repo.get_session(
+        session, session_id=session_id, user_id=principal.user_id, for_update=True
     )
+    if row is None:
+        raise ResourceNotFoundError()
+    if row.status == STATUS_COMPLETED:
+        # A concurrent ``/end`` won the claim first — return its stored detail
+        # idempotently (its report may still be generating; the client re-fetches).
+        turns = await repo.load_turns(session, session_id=session_id)
+        return presenters.session_detail(row, turns)
+    if row.status != STATUS_ACTIVE:
+        raise ConflictError(details={"reason": "SESSION_NOT_ACTIVE"})
 
     now = datetime.now(tz=UTC)
-    row.report_json = report
+    turns = await repo.load_turns(session, session_id=session_id)
     row.status = STATUS_COMPLETED
     row.ended_at = now
-    row.question_count = sum(
-        1 for t in turns if t.speaker == SPEAKER_INTERVIEWER
-    )
+    row.question_count = sum(1 for t in turns if t.speaker == SPEAKER_INTERVIEWER)
     row.duration_seconds = caps.clamp_duration(
         duration_seconds
         if duration_seconds is not None
@@ -634,7 +730,36 @@ async def end_session(
     )
     # Flagged sessions are escalated to moderation at FLAG time (see
     # _flag_and_escalate), so ending does not need to re-enqueue.
+    await session.commit()  # claim committed; lock released; report_json still null
 
+    # Report generation runs OUTSIDE the open txn / lock (analyzer + report LLM
+    # calls, latency OK). Analyzer + coverage enrich the coaching; both degrade to
+    # deterministic output and never raise.
+    grounding = row.grounding_json or {}
+    plan = row.plan_json or {}
+    coverage = row.coverage_json or {}
+    transcript_lines = conversation_service.build_transcript_lines(turns)
+    analysis = await analysis_service.analyze(
+        session,
+        user_id=row.user_id,
+        session_id=row.id,
+        grounding=grounding,
+        plan=plan,
+        coverage=coverage,
+        transcript_lines=transcript_lines,
+    )
+    report = await report_service.generate_report(
+        session,
+        user_id=row.user_id,
+        grounding=grounding,
+        transcript_lines=transcript_lines,
+        session_id=row.id,
+        analysis=analysis,
+        coverage=coverage,
+    )
+
+    # TXN B — attach the report + audit + event (short txn).
+    row.report_json = report
     await write_audit(
         session,
         action="mock_interview.session_completed",
@@ -910,8 +1035,15 @@ async def build_live_relay_context(
             details={"reason": "SESSION_NOT_ACTIVE"},
         )
     grounding = dict(row.grounding_json or {})
+    plan = row.plan_json or {}
+    coverage = row.coverage_json or {}
+    plan_slice = (
+        plan_service.build_plan_slice(plan, coverage) if plan and coverage else None
+    )
     instruction = prompts.build_conversation_system_prompt(
-        grounding, target_questions=caps.DEFAULT_TARGET_QUESTIONS
+        grounding,
+        target_questions=caps.DEFAULT_TARGET_QUESTIONS,
+        plan_slice=plan_slice,
     )
     voice = getattr(get_settings(), "ai_realtime_voice", "Aoede")
     return {

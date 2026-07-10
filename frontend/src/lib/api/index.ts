@@ -413,7 +413,13 @@ export type {
   OfferBoardResult,
 } from "./recruiting";
 export { interviewPrepApi, coverLetterApi } from "./interview-prep";
-export { mockInterviewApi, sessionListTitle, topJobTitle } from "./mock-interview";
+export {
+  mockInterviewApi,
+  sessionListTitle,
+  topJobTitle,
+  normalizeGap,
+  deriveRoundPlan,
+} from "./mock-interview";
 export type {
   MockInterviewModality,
   MockInterviewSpeaker,
@@ -425,9 +431,16 @@ export type {
   MockInterviewOpening,
   MockInterviewCaps,
   MockInterviewRealtimeDescriptor,
+  MockInterviewCoverage,
+  MockInterviewRoundStatus,
+  MockInterviewRound,
+  RoundPlan,
   MockInterviewSession,
   MockInterviewTranscriptTurn,
   CoachingReportQuestion,
+  MockInterviewLearningSuggestion,
+  CoachingReportGap,
+  NormalizedGap,
   CoachingReport,
   MockInterviewSessionDetail,
   MockInterviewSessionListItem,

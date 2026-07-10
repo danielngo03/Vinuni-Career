@@ -29,6 +29,28 @@ MAX_TURNS_PERSISTED = 60  # transcript hard ceiling (2 * MAX_QUESTIONS + slack)
 # --- LLM token budgets (keep cheap) ---------------------------------------- #
 QUESTION_MAX_TOKENS = 320  # one interviewer turn (a question + short follow-up)
 REPORT_MAX_TOKENS = 1400  # the whole coaching report
+# The planner runs ONCE at session create on a stronger model and is FROZEN on
+# the session row, so every later turn/tier/report reuses it for free — a single
+# larger call amortized across the whole session.
+PLAN_MAX_TOKENS = 3000  # the frozen interview plan (competencies + question bank).
+# A 6-competency plan with a 3-tier question bank + evidence does not fit in ~1300
+# output tokens: the JSON truncates mid-structure and the strong-model plan silently
+# degrades to the deterministic one. 3000 lets the LLM plan actually land (still one
+# amortized call per session).
+# The analyzer runs ONCE at end on a reasoning model (latency is fine there).
+ANALYSIS_MAX_TOKENS = 1100  # per-competency coverage / STAR / gap analysis
+# The adaptive-difficulty signal is a tiny, best-effort, cheap flash probe.
+ANSWER_SIGNAL_MAX_TOKENS = 40  # just a tier keyword / short JSON
+
+# --- planner / coverage shape (deterministic knobs) ------------------------ #
+MAX_COMPETENCIES = 6  # how many competencies the plan tracks (cost + focus cap)
+DIFFICULTY_TIERS = ("foundational", "intermediate", "advanced")
+
+# Multi-round interview personas (in natural interview order). Rounds are derived
+# DETERMINISTICALLY from the competency map (no extra model call); each round adopts
+# one of these interviewer personas as the interview advances.
+PERSONAS = ("screening", "technical", "hiring_manager")
+MAX_ROUNDS = 3  # a realistic interview is 2-3 phases
 
 
 def clamp_questions(n: int) -> int:

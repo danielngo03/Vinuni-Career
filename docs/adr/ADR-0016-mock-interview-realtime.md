@@ -94,7 +94,8 @@ Transcripts are TEXT ONLY — audio is never persisted.
   mints a Gemini Live ephemeral token via `POST /v1alpha/auth_tokens` with
   `bidiGenerateContentSetup` constraints (model + system instruction locked
   server-side; request format verified against Google's live endpoint). Reads
-  `GEMINI_API_KEY`; default model `gemini-2.5-flash-preview-native-audio-dialog`.
+  `GEMINI_API_KEY` (renamed: canonical var is `GOOGLE_API_KEY` since 2026-07-11);
+  default model `gemini-2.5-flash-preview-native-audio-dialog`.
   Missing/invalid key → graceful fallback to browser-voice. Frontend
   `gemini-live-client.ts` streams mic PCM16@16kHz ⇄ plays PCM16@24kHz with
   barge-in and maps input/output transcription to stored turns. Status: API
