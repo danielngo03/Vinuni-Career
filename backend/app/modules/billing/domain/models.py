@@ -30,11 +30,14 @@ from sqlalchemy import (
     Boolean,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     Numeric,
     SmallInteger,
     String,
     Text,
+    UniqueConstraint,
+    Uuid,
     func,
 )
 from sqlalchemy.orm import Mapped, mapped_column
@@ -138,3 +141,59 @@ class Subscription(Base):
     )
     deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+
+
+class AiEnergyAccount(Base):
+    """Masked AI-energy ceiling + persistent top-up wallet per scope (migration 0084).
+
+    One row per ``(scope_type, scope_id)`` where ``scope_type`` is ``user`` (a
+    student's own energy), ``org`` (a partner org / university), or ``department``.
+    The account holds only the CEILING configuration — it never stores consumption:
+
+    - ``weekly_allowance_units`` — an OPTIONAL weekly ceiling override. ``NULL``
+      means "use the tier-resolved default" (see
+      :func:`limit_facade.resolve_user_weekly_energy_units`). It resets every
+      week; consumption for the current week is summed on demand from
+      ``ai_billable_usage.units_charged`` (the durable ledger), never decremented
+      here.
+    - ``wallet_units`` — a NON-resetting purchased top-up balance. Credited by a
+      confirmed ``ai_energy_topups`` purchase and spent (decremented) by
+      :func:`app.modules.billing.application.energy_service.charge` only for the
+      portion of a charge that exceeds the current week's remaining allowance.
+
+    Never exposes provider/model/token/USD internals — units are a masked product
+    currency shown to users only as a percentage by the energy surface.
+    """
+
+    __tablename__ = "ai_energy_accounts"
+    __table_args__ = (
+        UniqueConstraint("scope_type", "scope_id", name="uq_ai_energy_accounts_scope"),
+        Index("ix_ai_energy_accounts_org_id", "org_id"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+        server_default=func.gen_random_uuid(),
+    )
+    # "user" | "org" | "department"
+    scope_type: Mapped[str] = mapped_column(String(16), nullable=False)
+    scope_id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    # Denormalised owning org for org/department scopes (indexed for admin reads).
+    org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    # NULL == use the tier-resolved default weekly allowance.
+    weekly_allowance_units: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Non-resetting purchased top-up balance (credited by confirmed top-ups).
+    wallet_units: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    updated_by: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+    )
