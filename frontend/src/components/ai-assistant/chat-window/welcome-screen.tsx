@@ -3,7 +3,7 @@
 import { Loader2, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
-  QUICK_PROMPTS_BY_PERSONA,
+  QUICK_PROMPT_KEYS_BY_PERSONA,
   SUGGESTION_ITEMS_BY_PERSONA,
   type ChatPersona,
 } from "./constants";
@@ -34,7 +34,8 @@ export function WelcomeScreen({
   persona?: ChatPersona;
 }) {
   const isPartner = persona === "partner";
-  const prompts = QUICK_PROMPTS_BY_PERSONA[persona] ?? QUICK_PROMPTS_BY_PERSONA.student;
+  const promptKeys =
+    QUICK_PROMPT_KEYS_BY_PERSONA[persona] ?? QUICK_PROMPT_KEYS_BY_PERSONA.student;
   const links = SUGGESTION_ITEMS_BY_PERSONA[persona] ?? SUGGESTION_ITEMS_BY_PERSONA.student;
   return (
     <div className="flex flex-col items-center gap-4 py-2 text-center">
@@ -51,14 +52,14 @@ export function WelcomeScreen({
 
       {/* Quick-prompt chips */}
       <div className="flex w-full flex-wrap justify-center gap-1.5">
-        {prompts.map((prompt) => (
+        {promptKeys.map((key) => (
           <button
-            key={prompt}
+            key={key}
             type="button"
-            onClick={() => onPrompt(prompt)}
+            onClick={() => onPrompt(t(key))}
             className="type-caption rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-1 font-medium text-[var(--text-secondary)] outline-none transition-colors hover:border-[var(--field-focus-border)] hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
           >
-            {prompt}
+            {t(key)}
           </button>
         ))}
       </div>

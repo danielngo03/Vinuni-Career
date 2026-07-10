@@ -2,10 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { useLocale } from "next-intl";
-import { Plus, Search } from "lucide-react";
+import { Loader2, Plus, Search, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui";
 import { SectionLabel } from "@/components/kit";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import type { ChatSession } from "@/lib/api";
 
 export function SessionRail({
@@ -14,6 +15,7 @@ export function SessionRail({
   loading,
   onNew,
   onSelect,
+  onDelete,
   t,
   className,
   showNewButton = true,
@@ -25,6 +27,8 @@ export function SessionRail({
   loading: boolean;
   onNew: () => void;
   onSelect: (session: ChatSession) => void;
+  /** Archive (soft-delete) a session; reject to keep the confirm popover open. */
+  onDelete?: (session: ChatSession) => Promise<void>;
   t: (k: string) => string;
   className?: string;
   showNewButton?: boolean;
@@ -91,39 +95,145 @@ export function SessionRail({
           </p>
         ) : (
           <div className="space-y-1">
-            {filteredSessions.map((session) => {
-              const active = session.id === activeId;
-              return (
-                <button
-                  key={session.id}
-                  type="button"
-                  aria-current={active ? "true" : undefined}
-                  onClick={() => onSelect(session)}
-                  className={cn(
-                    "block w-full cursor-pointer rounded-lg px-3 py-2 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
-                    active
-                      ? "bg-[var(--bg-muted)] text-[var(--text-primary)] shadow-[inset_0_0_0_1px_var(--border-subtle)]"
-                      : "text-[var(--text-primary)] hover:bg-[var(--bg-muted)]",
-                  )}
-                >
-                  <span
-                    className={cn(
-                      "type-small block truncate",
-                      active ? "font-semibold" : "font-medium",
-                    )}
-                  >
-                    {session.title || t("untitledSession")}
-                  </span>
-                  <span className="type-caption mt-0.5 block truncate font-normal tabular-nums text-[var(--text-muted)]">
-                    {formatSessionTime(session.last_message_at ?? session.created_at, locale)}
-                  </span>
-                </button>
-              );
-            })}
+            {filteredSessions.map((session) => (
+              <SessionRow
+                key={session.id}
+                session={session}
+                active={session.id === activeId}
+                locale={locale}
+                onSelect={onSelect}
+                onDelete={onDelete}
+                t={t}
+              />
+            ))}
           </div>
         )}
       </div>
     </aside>
+  );
+}
+
+function SessionRow({
+  session,
+  active,
+  locale,
+  onSelect,
+  onDelete,
+  t,
+}: {
+  session: ChatSession;
+  active: boolean;
+  locale: string;
+  onSelect: (session: ChatSession) => void;
+  onDelete?: (session: ChatSession) => Promise<void>;
+  t: (k: string) => string;
+}) {
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  async function handleDelete() {
+    if (!onDelete || busy) return;
+    setBusy(true);
+    setFailed(false);
+    try {
+      await onDelete(session);
+      setConfirmOpen(false);
+    } catch {
+      setFailed(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="group/session relative">
+      <button
+        type="button"
+        aria-current={active ? "true" : undefined}
+        onClick={() => onSelect(session)}
+        className={cn(
+          "block w-full cursor-pointer rounded-lg px-3 py-2 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+          onDelete && "pr-8",
+          active
+            ? "bg-[var(--bg-muted)] text-[var(--text-primary)] shadow-[inset_0_0_0_1px_var(--border-subtle)]"
+            : "text-[var(--text-primary)] hover:bg-[var(--bg-muted)]",
+        )}
+      >
+        <span
+          className={cn(
+            "type-small block truncate",
+            active ? "font-semibold" : "font-medium",
+          )}
+        >
+          {session.title || t("untitledSession")}
+        </span>
+        <span className="type-caption mt-0.5 block truncate font-normal tabular-nums text-[var(--text-muted)]">
+          {formatSessionTime(session.last_message_at ?? session.created_at, locale)}
+        </span>
+      </button>
+
+      {onDelete && (
+        <Popover
+          open={confirmOpen}
+          onOpenChange={(open) => {
+            setConfirmOpen(open);
+            if (!open) setFailed(false);
+          }}
+        >
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              aria-label={t("deleteSession")}
+              title={t("deleteSession")}
+              className={cn(
+                "absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-[var(--text-muted)] outline-none transition-all hover:bg-[var(--surface-card)] hover:text-[var(--content-danger)] focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+                confirmOpen
+                  ? "opacity-100"
+                  : "opacity-60 sm:opacity-0 sm:group-focus-within/session:opacity-100 sm:group-hover/session:opacity-100",
+              )}
+            >
+              <Trash2 aria-hidden strokeWidth={1.9} className="size-3.5" />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent
+            align="end"
+            className="w-60 rounded-xl border-[var(--border-default)] bg-[var(--surface-card)] p-3 shadow-[var(--shadow-lg)]"
+          >
+            <p className="type-small font-semibold text-[var(--text-primary)]">
+              {t("deleteSessionTitle")}
+            </p>
+            <p className="type-caption mt-1 font-normal leading-relaxed text-[var(--text-secondary)]">
+              {t("deleteSessionBody")}
+            </p>
+            {failed && (
+              <p className="type-caption mt-1.5 font-medium text-[var(--content-danger)]">
+                {t("deleteFailed")}
+              </p>
+            )}
+            <div className="mt-2.5 flex items-center justify-end gap-1.5">
+              <button
+                type="button"
+                onClick={() => setConfirmOpen(false)}
+                disabled={busy}
+                className="type-caption rounded-full px-3 py-1.5 font-medium text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {t("deleteCancel")}
+              </button>
+              <button
+                type="button"
+                onClick={() => void handleDelete()}
+                disabled={busy}
+                className="type-caption inline-flex items-center gap-1.5 rounded-full bg-[var(--content-danger)] px-3 py-1.5 font-semibold text-white outline-none transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-[var(--content-danger)]/40 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {busy && <Loader2 aria-hidden className="size-3 animate-spin" />}
+                {t("deleteConfirm")}
+              </button>
+            </div>
+          </PopoverContent>
+        </Popover>
+      )}
+    </div>
   );
 }
 

@@ -1,65 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
-  ArrowUpRight,
-  Download,
   Loader2,
   Paperclip,
+  Pencil,
+  RotateCcw,
   Search,
   Sparkles,
   Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { env } from "@/lib/env";
 import type { ChatMessage } from "@/lib/api";
-import { getAccessToken } from "@/lib/api/session";
-import { TOOL_LABELS, extractAttachmentRefs } from "./constants";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { StatusChip } from "@/components/kit";
+import { extractAttachmentRefs, MAX_INPUT_LENGTH } from "./constants";
+import { contentHasTable, FormattedContent } from "./markdown";
+import { MessageArtifacts, readArtifacts } from "./artifacts";
 
-/** A chart spec the backend emits for the FE to render with Recharts. */
-type ChartSpec = {
-  type?: string;
-  title?: string;
-  x_key?: string;
-  series?: { key: string; name?: string }[];
-  data?: Record<string, number | string>[];
-};
-
-/** A funnel/flow diagram spec the backend emits for the FE to draw (no lib). */
-type DiagramSpec = {
-  type?: string;
-  title?: string;
-  note?: string;
-  stages?: { label: string; count: number; pct: number }[];
-};
-
-/** A render artifact the backend attaches to an assistant message (download/chart/diagram). */
-type MessageArtifact = {
-  kind: string;
-  download_path?: string;
-  filename?: string;
-  row_count?: number;
-  format?: string;
-  chart?: ChartSpec;
-  diagram?: DiagramSpec;
-};
-
-function readArtifacts(message: ChatMessage): MessageArtifact[] {
-  const raw = (message.tool_result as { artifacts?: unknown } | null)?.artifacts;
-  return Array.isArray(raw) ? (raw as MessageArtifact[]) : [];
-}
+/** How a pending tool-call was resolved (server confirm or local cancel). */
+export type ToolResolution = "confirmed" | "canceled";
 
 /**
  * Assistant identity marker — one restrained `--content-ai` accent (v10 §1.1.2).
@@ -79,66 +39,193 @@ function AssistantAvatar() {
 export function MessageBubble({
   message,
   expanded,
-  confirming,
+  confirmBusy = null,
+  resolution = null,
   onConfirm,
-  t,
+  onCancel,
+  editable = false,
+  editing = false,
+  editBusy = false,
+  onEditStart,
+  onEditCancel,
+  onEditSubmit,
+  regenerable = false,
+  regenerating = false,
+  onRegenerate,
 }: {
   message: ChatMessage;
   expanded: boolean;
-  confirming: boolean;
-  onConfirm: () => void;
-  t: (k: string) => string;
+  /** Which decision is currently in flight for this tool-call message. */
+  confirmBusy?: "confirm" | "cancel" | null;
+  /** Locally-known resolution (falls back to `confirmed_at` from the server). */
+  resolution?: ToolResolution | null;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+  editable?: boolean;
+  editing?: boolean;
+  editBusy?: boolean;
+  onEditStart?: () => void;
+  onEditCancel?: () => void;
+  onEditSubmit?: (text: string) => void;
+  regenerable?: boolean;
+  regenerating?: boolean;
+  onRegenerate?: () => void;
 }) {
+  const t = useTranslations("aiAssistant");
   const isUser = message.role === "user";
-  const isToolCall = message.role === "tool_call";
 
   // Proposed write action — a distinct confirmable card. The confirmation gate
-  // is preserved exactly: AI never auto-executes; the user must click confirm.
-  if (isToolCall) {
+  // is preserved exactly: AI never auto-executes; the user must decide.
+  if (message.role === "tool_call") {
     return (
-      <div className="flex items-start gap-2">
-        <span
-          aria-hidden
-          className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-lg bg-[var(--content-warning-soft)]"
-        >
-          <Zap strokeWidth={1.9} className="size-3.5 text-[var(--content-warning)]" />
-        </span>
-        <div className="min-w-0 flex-1 rounded-xl border border-[var(--content-warning)]/30 bg-[var(--content-warning-soft)] px-3 py-2.5">
-          <p className="type-small text-[var(--text-primary)]">{message.content}</p>
-          {message.requires_confirmation && (
-            <button
-              type="button"
-              onClick={onConfirm}
-              disabled={confirming}
-              className="type-caption mt-2 inline-flex items-center gap-1.5 rounded-full bg-[var(--content-warning)] px-3 py-1.5 font-semibold text-white outline-none transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-[var(--content-warning)]/40 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {confirming && <Loader2 className="size-3 animate-spin" />}
-              {confirming ? t("confirmingAction") : t("confirmAction")}
-            </button>
-          )}
-        </div>
-      </div>
+      <ToolCallCard
+        message={message}
+        busy={confirmBusy}
+        resolution={resolution}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+      />
     );
   }
 
+  // Inline edit mode for the last user message (PATCH → server truncates + re-runs).
+  if (isUser && editing) {
+    return (
+      <UserEditBubble
+        initial={extractAttachmentRefs(message.content).text}
+        busy={editBusy}
+        onSubmit={onEditSubmit}
+        onCancel={onEditCancel}
+        t={t}
+      />
+    );
+  }
+
+  const artifacts = isUser ? [] : readArtifacts(message);
+  // Artifact-bearing or table-bearing bubbles take the full available width so
+  // charts/tables/cards can breathe; plain text keeps a readable cap.
+  const wide = !isUser && (artifacts.length > 0 || contentHasTable(message.content));
+
   return (
-    <div className={cn("flex items-end gap-2", isUser ? "flex-row-reverse" : "flex-row")}>
-      {!isUser && <AssistantAvatar />}
+    <div className="group flex flex-col">
       <div
         className={cn(
-          "type-body rounded-2xl px-3 py-2.5",
-          expanded ? "max-w-[min(72ch,82%)]" : "max-w-[82%]",
-          isUser
-            ? "rounded-br-sm bg-[var(--brand-primary)] text-[var(--text-inverted)]"
-            : "rounded-bl-sm border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--text-primary)] shadow-[var(--shadow-sm)]",
+          "flex gap-2",
+          isUser ? "flex-row-reverse items-end" : wide ? "items-start" : "items-end",
         )}
       >
-        {isUser ? (
-          <UserBubbleContent content={message.content} />
-        ) : (
-          <FormattedContent content={message.content} isUser={false} />
+        {!isUser && <AssistantAvatar />}
+        <div
+          className={cn(
+            "type-body min-w-0 rounded-2xl px-3 py-2.5 [overflow-wrap:anywhere] [word-break:break-word]",
+            wide
+              ? "w-full max-w-full flex-1"
+              : expanded
+                ? "max-w-[min(72ch,82%)]"
+                : "max-w-[82%]",
+            isUser
+              ? "rounded-br-sm bg-[var(--brand-primary)] text-[var(--text-inverted)]"
+              : "rounded-bl-sm border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--text-primary)] shadow-[var(--shadow-sm)]",
+          )}
+        >
+          {isUser ? (
+            <UserBubbleContent content={message.content} />
+          ) : (
+            <FormattedContent
+              content={message.content}
+              isUser={false}
+              constrainText={expanded && wide}
+            />
+          )}
+          {!isUser && <MessageArtifacts message={message} expanded={expanded} />}
+        </div>
+        {isUser && editable && (
+          <button
+            type="button"
+            onClick={onEditStart}
+            aria-label={t("editMessage")}
+            title={t("editMessage")}
+            className="shrink-0 self-end rounded-lg p-1.5 text-[var(--text-muted)] opacity-60 outline-none transition-opacity hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100"
+          >
+            <Pencil aria-hidden strokeWidth={1.9} className="size-3.5" />
+          </button>
         )}
-        {!isUser && <MessageArtifacts message={message} />}
+      </div>
+      {!isUser && regenerable && (
+        <div className="ml-8 mt-1">
+          <button
+            type="button"
+            onClick={onRegenerate}
+            disabled={regenerating}
+            className="type-caption inline-flex items-center gap-1.5 rounded-lg px-2 py-1 font-medium text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {regenerating ? (
+              <Loader2 aria-hidden className="size-3 animate-spin" />
+            ) : (
+              <RotateCcw aria-hidden strokeWidth={1.9} className="size-3" />
+            )}
+            {t("regenerate")}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Inline textarea replacing the last user bubble while editing. */
+function UserEditBubble({
+  initial,
+  busy,
+  onSubmit,
+  onCancel,
+  t,
+}: {
+  initial: string;
+  busy: boolean;
+  onSubmit?: (text: string) => void;
+  onCancel?: () => void;
+  t: (k: string) => string;
+}) {
+  const [draft, setDraft] = useState(initial);
+  const canSave = draft.trim().length > 0 && !busy;
+  return (
+    <div className="flex justify-end">
+      <div className="w-full max-w-[min(60ch,92%)] rounded-2xl border border-[var(--field-focus-border)] bg-[var(--surface-card)] p-2 shadow-[var(--shadow-sm)]">
+        <textarea
+          value={draft}
+          onChange={(e) => setDraft(e.target.value.slice(0, MAX_INPUT_LENGTH))}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              if (canSave) onSubmit?.(draft.trim());
+            }
+            if (e.key === "Escape") onCancel?.();
+          }}
+          autoFocus
+          rows={3}
+          disabled={busy}
+          aria-label={t("editMessage")}
+          className="type-small w-full resize-none rounded-lg bg-transparent px-1.5 py-1 leading-5 text-[var(--text-primary)] outline-none [overflow-wrap:anywhere] [word-break:break-word] disabled:opacity-60"
+        />
+        <div className="mt-1 flex items-center justify-end gap-1.5">
+          <button
+            type="button"
+            onClick={onCancel}
+            disabled={busy}
+            className="type-caption rounded-full px-3 py-1.5 font-medium text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {t("editCancel")}
+          </button>
+          <button
+            type="button"
+            onClick={() => canSave && onSubmit?.(draft.trim())}
+            disabled={!canSave}
+            className="type-caption inline-flex items-center gap-1.5 rounded-full bg-[var(--btn-primary-bg)] px-3 py-1.5 font-semibold text-[var(--btn-primary-fg)] shadow-[var(--shadow-sm)] outline-none transition-colors hover:opacity-90 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {busy && <Loader2 aria-hidden className="size-3 animate-spin" />}
+            {t("editSend")}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -167,213 +254,145 @@ function UserBubbleContent({ content }: { content: string }) {
   );
 }
 
-/** Render backend-attached artifacts (download / chart / diagram). */
-function MessageArtifacts({ message }: { message: ChatMessage }) {
-  const artifacts = readArtifacts(message);
-  if (artifacts.length === 0) return null;
+/* ------------------------------- Tool confirm ------------------------------ */
+
+function prettifyKey(key: string): string {
+  const s = key.replace(/_/g, " ").trim();
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function formatArgValue(v: unknown): string {
+  if (v === null || v === undefined) return "—";
+  if (typeof v === "string") {
+    const s = UUID_RE.test(v) ? `${v.slice(0, 8)}…` : v;
+    return s.length > 160 ? `${s.slice(0, 160)}…` : s;
+  }
+  if (typeof v === "number" || typeof v === "boolean") return String(v);
+  if (Array.isArray(v)) return v.map((x) => formatArgValue(x)).join(", ");
+  try {
+    const s = JSON.stringify(v);
+    return s.length > 160 ? `${s.slice(0, 160)}…` : s;
+  } catch {
+    return "—";
+  }
+}
+
+/** Pending/resolved AI write-action card: labeled arg summary + confirm/cancel. */
+function ToolCallCard({
+  message,
+  busy,
+  resolution,
+  onConfirm,
+  onCancel,
+}: {
+  message: ChatMessage;
+  busy: "confirm" | "cancel" | null;
+  resolution: ToolResolution | null;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+}) {
+  const t = useTranslations("aiAssistant");
+  const toolName = message.tool_name;
+  const title =
+    toolName && t.has(`toolNames.${toolName}`)
+      ? t(`toolNames.${toolName}`)
+      : t("confirmTitle");
+  const args =
+    message.tool_args && typeof message.tool_args === "object"
+      ? Object.entries(message.tool_args).filter(([, v]) => v !== null && v !== undefined)
+      : [];
+  const resolved: ToolResolution | null =
+    resolution ?? (message.confirmed_at ? "confirmed" : null);
+  const pending = message.requires_confirmation && !resolved;
+
   return (
-    <div className="mt-2 flex flex-col gap-1.5">
-      {artifacts.map((a, i) =>
-        a.kind === "download" && a.download_path ? (
-          <DownloadArtifact key={i} artifact={a} />
-        ) : a.kind === "chart" && a.chart ? (
-          <ChartArtifact key={i} artifact={a} />
-        ) : a.kind === "diagram" && a.diagram ? (
-          <FunnelDiagram key={i} artifact={a} />
-        ) : null,
-      )}
+    <div className="flex items-start gap-2">
+      <span
+        aria-hidden
+        className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-lg bg-[var(--content-warning-soft)]"
+      >
+        <Zap strokeWidth={1.9} className="size-3.5 text-[var(--content-warning)]" />
+      </span>
+      <div className="min-w-0 flex-1 rounded-xl border border-[var(--content-warning)]/30 bg-[var(--content-warning-soft)] px-3 py-2.5 [overflow-wrap:anywhere]">
+        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+          <p className="type-small font-semibold text-[var(--text-primary)]">{title}</p>
+          {resolved === "confirmed" && (
+            <StatusChip tone="success" size="sm" dot>
+              {t("resolvedConfirmed")}
+            </StatusChip>
+          )}
+          {resolved === "canceled" && (
+            <StatusChip tone="neutral" size="sm" dot>
+              {t("resolvedCanceled")}
+            </StatusChip>
+          )}
+        </div>
+        {message.content && (
+          <p className="type-small mt-1 font-normal text-[var(--text-primary)]">
+            {message.content}
+          </p>
+        )}
+        {args.length > 0 && (
+          <dl className="mt-2 space-y-1 rounded-lg bg-[var(--surface-card)]/60 px-2.5 py-2">
+            {args.slice(0, 8).map(([key, value]) => (
+              <div key={key} className="flex items-baseline gap-2">
+                <dt className="type-caption w-28 shrink-0 truncate font-medium text-[var(--text-muted)]">
+                  {t.has(`args.${key}`) ? t(`args.${key}`) : prettifyKey(key)}
+                </dt>
+                <dd className="type-caption min-w-0 flex-1 font-normal text-[var(--text-primary)] [overflow-wrap:anywhere]">
+                  {formatArgValue(value)}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        {pending && (
+          <div className="mt-2.5 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={onConfirm}
+              disabled={busy !== null}
+              className="type-caption inline-flex items-center gap-1.5 rounded-full bg-[var(--content-warning)] px-3 py-1.5 font-semibold text-white outline-none transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-[var(--content-warning)]/40 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {busy === "confirm" && <Loader2 aria-hidden className="size-3 animate-spin" />}
+              {busy === "confirm" ? t("confirmingAction") : t("confirmAction")}
+            </button>
+            <button
+              type="button"
+              onClick={onCancel}
+              disabled={busy !== null}
+              className="type-caption inline-flex items-center gap-1.5 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-1.5 font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {busy === "cancel" && <Loader2 aria-hidden className="size-3 animate-spin" />}
+              {busy === "cancel" ? t("cancelingAction") : t("confirmCancel")}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-function DownloadArtifact({ artifact }: { artifact: MessageArtifact }) {
-  const [busy, setBusy] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const onDownload = async () => {
-    if (!artifact.download_path) return;
-    setBusy(true);
-    setFailed(false);
-    try {
-      const base = env.apiBaseUrl.replace(/\/$/, "");
-      const token = getAccessToken();
-      const res = await fetch(`${base}${artifact.download_path}`, {
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
-        credentials: "include",
-      });
-      if (!res.ok) throw new Error(`download failed: ${res.status}`);
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = artifact.filename || "export.xlsx";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    } catch {
-      setFailed(true);
-    } finally {
-      setBusy(false);
-    }
-  };
-  return (
-    <button
-      type="button"
-      onClick={onDownload}
-      disabled={busy}
-      className="inline-flex w-fit items-center gap-2 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 text-left outline-none transition-colors hover:border-[var(--field-focus-border)] hover:bg-[var(--bg-subtle)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-60"
-    >
-      {busy ? (
-        <Loader2 className="size-4 shrink-0 animate-spin text-[var(--content-ai)]" />
-      ) : (
-        <Download aria-hidden strokeWidth={1.9} className="size-4 shrink-0 text-[var(--content-ai)]" />
-      )}
-      <span className="flex flex-col items-start leading-tight">
-        <span className="type-small font-semibold text-[var(--text-primary)]">
-          {failed ? "Tải thất bại — thử lại" : (artifact.filename ?? "Tải tệp")}
-        </span>
-        {typeof artifact.row_count === "number" && !failed && (
-          <span className="type-caption font-normal tabular-nums text-[var(--text-muted)]">
-            {artifact.format === "xlsx" ? "Excel" : "Tệp"} · {artifact.row_count} dòng
-          </span>
-        )}
-      </span>
-    </button>
-  );
-}
-
-// Content data-viz palette (locked categorical order: indigo · teal · amber).
-const CHART_COLORS = ["var(--viz-indigo)", "var(--viz-teal)", "var(--viz-amber)"];
-
-/** Render a backend-emitted analytics chart (bar/line) with Recharts. */
-function ChartArtifact({ artifact }: { artifact: MessageArtifact }) {
-  const chart = artifact.chart;
-  if (!chart || !Array.isArray(chart.data) || chart.data.length === 0) return null;
-  const xKey = chart.x_key ?? "label";
-  const series = chart.series && chart.series.length > 0 ? chart.series : [{ key: "value" }];
-  const isLine = chart.type === "line";
-  const many = chart.data.length > 4;
-  return (
-    <figure className="mt-1 w-full rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3">
-      {chart.title && (
-        <figcaption className="type-caption mb-2 font-semibold text-[var(--text-secondary)]">
-          {chart.title}
-        </figcaption>
-      )}
-      <div className="h-[220px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          {isLine ? (
-            <LineChart data={chart.data} margin={{ top: 4, right: 8, bottom: 4, left: -14 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-default)" vertical={false} />
-              <XAxis
-                dataKey={xKey}
-                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
-                interval="preserveStartEnd"
-              />
-              <YAxis
-                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
-                allowDecimals={false}
-                width={30}
-              />
-              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-              {series.length > 1 && <Legend wrapperStyle={{ fontSize: 11 }} />}
-              {series.map((sr, i) => (
-                <Line
-                  key={sr.key}
-                  type="monotone"
-                  dataKey={sr.key}
-                  name={sr.name ?? sr.key}
-                  stroke={CHART_COLORS[i % CHART_COLORS.length]}
-                  strokeWidth={2}
-                  dot={{ r: 3 }}
-                />
-              ))}
-            </LineChart>
-          ) : (
-            <BarChart data={chart.data} margin={{ top: 4, right: 8, bottom: 4, left: -14 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-default)" vertical={false} />
-              <XAxis
-                dataKey={xKey}
-                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
-                interval={0}
-                angle={many ? -20 : 0}
-                textAnchor={many ? "end" : "middle"}
-                height={many ? 52 : 24}
-              />
-              <YAxis
-                tick={{ fontSize: 10, fill: "var(--text-muted)" }}
-                allowDecimals={false}
-                width={30}
-              />
-              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
-              {series.length > 1 && <Legend wrapperStyle={{ fontSize: 11 }} />}
-              {series.map((sr, i) => (
-                <Bar
-                  key={sr.key}
-                  dataKey={sr.key}
-                  name={sr.name ?? sr.key}
-                  fill={CHART_COLORS[i % CHART_COLORS.length]}
-                  radius={[3, 3, 0, 0]}
-                  maxBarSize={44}
-                />
-              ))}
-            </BarChart>
-          )}
-        </ResponsiveContainer>
-      </div>
-    </figure>
-  );
-}
-
-/** Render a backend-emitted hiring-funnel diagram (vertical flow, no library). */
-function FunnelDiagram({ artifact }: { artifact: MessageArtifact }) {
-  const diagram = artifact.diagram;
-  if (!diagram || !Array.isArray(diagram.stages) || diagram.stages.length === 0) return null;
-  return (
-    <figure className="mt-1 w-full rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3">
-      {diagram.title && (
-        <figcaption className="type-caption mb-2 font-semibold text-[var(--text-secondary)]">
-          {diagram.title}
-        </figcaption>
-      )}
-      <div className="flex flex-col gap-1.5">
-        {diagram.stages.map((st, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <span className="type-caption w-24 shrink-0 truncate font-normal text-[var(--text-secondary)]">
-              {st.label}
-            </span>
-            <div className="relative h-6 flex-1 overflow-hidden rounded-md bg-[var(--bg-muted)]">
-              <div
-                className="flex h-full items-center rounded-md bg-[var(--viz-indigo)] px-2 transition-all"
-                style={{ width: `${Math.max(st.pct, 6)}%` }}
-              >
-                <span className="type-caption font-semibold tabular-nums text-white">{st.count}</span>
-              </div>
-            </div>
-            <span className="type-caption w-10 shrink-0 text-right font-normal tabular-nums text-[var(--text-muted)]">
-              {st.pct}%
-            </span>
-          </div>
-        ))}
-      </div>
-      {diagram.note && (
-        <p className="type-caption mt-2 font-normal text-[var(--text-muted)]">{diagram.note}</p>
-      )}
-    </figure>
-  );
-}
+/* --------------------------------- Streaming -------------------------------- */
 
 export function StreamingBubble({ text, expanded }: { text: string; expanded: boolean }) {
+  const wide = contentHasTable(text);
   return (
-    <div className="flex items-end gap-2">
+    <div className={cn("flex gap-2", wide ? "items-start" : "items-end")}>
       <AssistantAvatar />
       <div
         className={cn(
-          "type-body rounded-2xl rounded-bl-sm border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3 py-2.5 text-[var(--text-primary)] shadow-[var(--shadow-sm)]",
-          expanded ? "max-w-[min(72ch,82%)]" : "max-w-[82%]",
+          "type-body min-w-0 rounded-2xl rounded-bl-sm border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3 py-2.5 text-[var(--text-primary)] shadow-[var(--shadow-sm)] [overflow-wrap:anywhere] [word-break:break-word]",
+          wide
+            ? "w-full max-w-full flex-1"
+            : expanded
+              ? "max-w-[min(72ch,82%)]"
+              : "max-w-[82%]",
         )}
       >
-        <FormattedContent content={text} isUser={false} />
+        <FormattedContent content={text} isUser={false} constrainText={expanded && wide} />
         {/* Blinking cursor */}
         <span className="ml-0.5 inline-block h-3.5 w-0.5 animate-pulse rounded-full bg-[var(--content-ai)] align-text-bottom" />
       </div>
@@ -388,7 +407,12 @@ export function AssistantActivity({
   status: string | null;
   toolName: string | null;
 }) {
-  const label = toolName ? (TOOL_LABELS[toolName] ?? "Đang xử lý…") : "Đang xử lý…";
+  const t = useTranslations("aiAssistant");
+  const label = toolName
+    ? t.has(`tools.${toolName}`)
+      ? t(`tools.${toolName}`)
+      : t("processing")
+    : (status ?? t("statusThinking"));
   return (
     <div className="flex items-center gap-2 self-start" aria-live="polite">
       <span
@@ -400,7 +424,7 @@ export function AssistantActivity({
       <div className="type-caption rounded-2xl rounded-bl-sm border border-[var(--content-ai)]/25 bg-[var(--content-ai-soft)] px-3 py-2 text-[var(--content-ai)]">
         <div className="flex items-center gap-2">
           <Loader2 className="size-3 animate-spin" />
-          {toolName ? label : (status ?? "Đang suy nghĩ…")}
+          {label}
         </div>
         {status && toolName && (
           <p className="mt-0.5 font-normal text-[var(--content-ai)]/75">{status}</p>
@@ -408,149 +432,6 @@ export function AssistantActivity({
       </div>
     </div>
   );
-}
-
-const _TABLE_ROW = /^\s*\|.*\|\s*$/;
-const _TABLE_SEP = /^\s*\|?[\s:|-]*-[\s:|-]*\|?\s*$/;
-
-function parseCells(row: string): string[] {
-  return row
-    .trim()
-    .replace(/^\|/, "")
-    .replace(/\|$/, "")
-    .split("|")
-    .map((c) => c.trim());
-}
-
-/** Render plain text with basic markdown: **bold**, lists, tables, internal links. */
-export function FormattedContent({
-  content,
-  isUser,
-}: {
-  content: string;
-  isUser: boolean;
-}) {
-  const lines = content.split("\n").filter((l) => l.trim() !== "");
-  const nodes: React.ReactNode[] = [];
-  let i = 0;
-  while (i < lines.length) {
-    const line = lines[i]!;
-    // Markdown table: a `| ... |` row immediately followed by a `|---|` separator.
-    if (_TABLE_ROW.test(line) && i + 1 < lines.length && _TABLE_SEP.test(lines[i + 1]!)) {
-      const body: string[] = [];
-      let j = i + 2;
-      while (j < lines.length && _TABLE_ROW.test(lines[j]!) && !_TABLE_SEP.test(lines[j]!)) {
-        body.push(lines[j]!);
-        j += 1;
-      }
-      nodes.push(<MarkdownTable key={i} header={line} rows={body} isUser={isUser} />);
-      i = j;
-      continue;
-    }
-    nodes.push(renderLine(line, i, isUser));
-    i += 1;
-  }
-  return <div className="space-y-1">{nodes}</div>;
-}
-
-function renderLine(line: string, key: number, isUser: boolean): React.ReactNode {
-  if (line.startsWith("- ") || line.startsWith("• ") || line.startsWith("* ")) {
-    return (
-      <p key={key} className="pl-3">
-        <span className="mr-1.5 opacity-50">•</span>
-        {renderInline(line.replace(/^[-•*]\s*/, ""), isUser)}
-      </p>
-    );
-  }
-  const numberedMatch = line.match(/^(\d+)\.\s+(.+)/);
-  if (numberedMatch) {
-    return (
-      <p key={key} className="pl-3">
-        <span className="mr-1.5 font-medium opacity-60">{numberedMatch[1]}.</span>
-        {renderInline(numberedMatch[2] ?? "", isUser)}
-      </p>
-    );
-  }
-  if (line.match(/^\/\w/)) {
-    return (
-      <a
-        key={key}
-        href={line}
-        className={cn(
-          "type-caption flex items-center gap-1 font-medium underline underline-offset-2",
-          isUser ? "text-[var(--text-inverted)]/90" : "text-[var(--content-ai)]",
-        )}
-      >
-        {line}
-        <ArrowUpRight aria-hidden strokeWidth={1.9} className="size-3 shrink-0" />
-      </a>
-    );
-  }
-  return <p key={key}>{renderInline(line, isUser)}</p>;
-}
-
-function MarkdownTable({
-  header,
-  rows,
-  isUser,
-}: {
-  header: string;
-  rows: string[];
-  isUser: boolean;
-}) {
-  const headers = parseCells(header);
-  const body = rows.map(parseCells);
-  return (
-    <div className="my-1.5 overflow-x-auto rounded-lg border border-[var(--border-default)]">
-      <table className="type-caption w-full border-collapse">
-        <thead>
-          <tr className="bg-[var(--bg-muted)]">
-            {headers.map((h, i) => (
-              <th
-                key={i}
-                className="whitespace-nowrap border-b border-[var(--border-default)] px-2 py-1.5 text-left font-semibold text-[var(--text-primary)]"
-              >
-                {renderInline(h, isUser)}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {body.map((r, ri) => (
-            <tr key={ri} className="even:bg-[var(--bg-subtle)]">
-              {r.map((c, ci) => (
-                <td
-                  key={ci}
-                  className="border-b border-[var(--border-subtle)] px-2 py-1 align-top font-normal text-[var(--text-secondary)]"
-                >
-                  {renderInline(c, isUser)}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-/** Bold (**text**) inline rendering. */
-function renderInline(text: string, isUser: boolean): React.ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  if (parts.length === 1) return text;
-  return parts.map((part, i) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return (
-        <strong
-          key={i}
-          className={isUser ? "font-bold text-[var(--text-inverted)]" : "font-semibold"}
-        >
-          {part.slice(2, -2)}
-        </strong>
-      );
-    }
-    return part;
-  });
 }
 
 export function TypingIndicator() {

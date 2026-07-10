@@ -28,7 +28,6 @@ import {
   MAX_ATTACHMENT_BYTES,
   MAX_ATTACHMENTS,
   MAX_INPUT_LENGTH,
-  STATUS_LABELS,
   type StreamEvent,
 } from "./chat-window/constants";
 import {
@@ -36,6 +35,7 @@ import {
   MessageBubble,
   StreamingBubble,
   TypingIndicator,
+  type ToolResolution,
 } from "./chat-window/message-bubble";
 import { SessionRail } from "./chat-window/session-rail";
 import { AuthLoadingPrompt, GuestPrompt, WelcomeScreen } from "./chat-window/welcome-screen";
@@ -78,7 +78,15 @@ export function AiChatWindow({
   const [renameDraft, setRenameDraft] = useState("");
   const [savingTitle, setSavingTitle] = useState(false);
   const [draftSession, setDraftSession] = useState(false);
-  const [confirmingMessageId, setConfirmingMessageId] = useState<string | null>(null);
+  const [confirmingAction, setConfirmingAction] = useState<{
+    id: string;
+    decision: "confirm" | "cancel";
+  } | null>(null);
+  // Local record of how tool-calls were resolved (cancel has no server marker).
+  const [resolvedActions, setResolvedActions] = useState<Record<string, ToolResolution>>({});
+  const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
+  const [editBusy, setEditBusy] = useState(false);
+  const [regenerating, setRegenerating] = useState(false);
   const [attachments, setAttachments] = useState<
     { localId: string; filename: string; status: "uploading" | "ready" | "error"; id?: string }[]
   >([]);
@@ -172,6 +180,12 @@ export function AiChatWindow({
     return s.id;
   }, [sessionId, qc]);
 
+  // Status codes stream from the backend; labels live in i18n (`status.*`).
+  const statusLabel = useCallback(
+    (code: string) => (t.has(`status.${code}`) ? t(`status.${code}`) : t("statusThinking")),
+    [t],
+  );
+
   function startNewChat() {
     abortRef.current?.abort();
     abortRef.current = null;
@@ -184,6 +198,8 @@ export function AiChatWindow({
     setInput("");
     setDraftSession(true);
     setHistoryOpen(false);
+    setResolvedActions({});
+    setEditingMessageId(null);
     setTimeout(() => inputRef.current?.focus(), 40);
   }
 
@@ -198,6 +214,8 @@ export function AiChatWindow({
     setActivityStatus(null);
     setDraftSession(false);
     setHistoryOpen(false);
+    setResolvedActions({});
+    setEditingMessageId(null);
   }
 
   async function send(textOverride?: string) {
@@ -386,16 +404,16 @@ export function AiChatWindow({
         }
 
         if (event.type === "status") {
-          setActivityStatus(STATUS_LABELS[event.code] ?? t("statusThinking"));
+          setActivityStatus(statusLabel(event.code));
         } else if (event.type === "tool_call") {
-          setActivityStatus(STATUS_LABELS.using_tool ?? t("statusThinking"));
+          setActivityStatus(statusLabel("using_tool"));
           setActiveToolName(event.name);
         } else if (event.type === "tool_result") {
           setActiveToolName(null);
-          setActivityStatus(STATUS_LABELS.synthesizing ?? t("statusThinking"));
+          setActivityStatus(statusLabel("synthesizing"));
         } else if (event.type === "token") {
           accumulated += event.text;
-          setActivityStatus(STATUS_LABELS.responding ?? t("statusThinking"));
+          setActivityStatus(statusLabel("responding"));
           setStreamingText(accumulated);
         } else if (event.type === "done") {
           const finalMsg = event.message;
@@ -434,34 +452,126 @@ export function AiChatWindow({
     }
   }
 
-  async function confirmTool(message: ChatMessage) {
-    if (!sessionId || confirmingMessageId) return;
-    setConfirmingMessageId(message.id);
+  function appendLocalError(content: string) {
+    const errMsg: ChatMessage = {
+      id: `err-${Date.now()}`,
+      session_id: sessionId ?? "",
+      role: "assistant",
+      content,
+      tool_name: null,
+      tool_args: null,
+      tool_result: null,
+      requires_confirmation: false,
+      confirmed_at: null,
+      created_at: new Date().toISOString(),
+    };
+    setMessages((prev) => [...prev, errMsg]);
+  }
+
+  /** Confirm or cancel a pending AI write action. The confirmation gate is
+   * preserved: nothing executes until the user explicitly decides. */
+  async function resolveTool(message: ChatMessage, decision: "confirm" | "cancel") {
+    if (!sessionId || confirmingAction) return;
+    setConfirmingAction({ id: message.id, decision });
     try {
-      const result = await aiAssistantApi.confirmToolAction(sessionId, message.id);
+      const result = await aiAssistantApi.confirmToolAction(sessionId, message.id, decision);
+      const confirmedMsg =
+        result.confirmed && typeof result.confirmed === "object" ? result.confirmed : null;
       const next = messagesRef.current
-        .map((m) => (m.id === message.id ? result.confirmed : m))
+        .map((m) => (m.id === message.id ? (confirmedMsg ?? m) : m))
         .concat(result.reply);
       messagesRef.current = next;
       setMessages(next);
+      setResolvedActions((prev) => ({
+        ...prev,
+        [message.id]: decision === "confirm" ? "confirmed" : "canceled",
+      }));
       qc.setQueryData(["ai-assistant", "messages", sessionId], next);
       void qc.invalidateQueries({ queryKey: ["ai-assistant", "messages", sessionId] });
     } catch {
-      const errMsg: ChatMessage = {
-        id: `err-${Date.now()}`,
-        session_id: sessionId,
-        role: "assistant",
-        content: t("toolConfirmError"),
-        tool_name: null,
-        tool_args: null,
-        tool_result: null,
-        requires_confirmation: false,
-        confirmed_at: null,
-        created_at: new Date().toISOString(),
-      };
-      setMessages((prev) => [...prev, errMsg]);
+      appendLocalError(t("toolConfirmError"));
     } finally {
-      setConfirmingMessageId(null);
+      setConfirmingAction(null);
+    }
+  }
+
+  /** Refetch and commit the full thread (after server-side edit/regenerate). */
+  async function reloadThread(sid: string) {
+    const fresh = await aiAssistantApi.getMessages(sid);
+    messagesRef.current = fresh;
+    setMessages(fresh);
+    qc.setQueryData(["ai-assistant", "messages", sid], fresh);
+  }
+
+  /** Edit the last user message: server truncates later turns and re-runs. */
+  async function submitEdit(message: ChatMessage, text: string) {
+    if (!sessionId || editBusy || sending) return;
+    setEditBusy(true);
+    setSending(true);
+    setEditingMessageId(null);
+    // Optimistic: swap in the edited text and truncate everything after it.
+    const idx = messagesRef.current.findIndex((m) => m.id === message.id);
+    if (idx >= 0) {
+      const truncated = [
+        ...messagesRef.current.slice(0, idx),
+        { ...message, content: text },
+      ];
+      messagesRef.current = truncated;
+      setMessages(truncated);
+    }
+    try {
+      await aiAssistantApi.editMessage(sessionId, message.id, text);
+      await reloadThread(sessionId);
+    } catch {
+      appendLocalError(t("editFailed"));
+      void qc.invalidateQueries({ queryKey: ["ai-assistant", "messages", sessionId] });
+    } finally {
+      setSending(false);
+      setEditBusy(false);
+    }
+  }
+
+  /** Regenerate the final assistant reply, then refetch the thread. */
+  async function regenerateReply(message: ChatMessage) {
+    if (!sessionId || regenerating || sending) return;
+    setRegenerating(true);
+    setSending(true);
+    // Optimistic: drop the stale reply so the typing indicator shows.
+    const without = messagesRef.current.filter((m) => m.id !== message.id);
+    messagesRef.current = without;
+    setMessages(without);
+    try {
+      await aiAssistantApi.regenerateMessage(sessionId, message.id);
+      await reloadThread(sessionId);
+    } catch {
+      appendLocalError(t("regenerateFailed"));
+      void qc.invalidateQueries({ queryKey: ["ai-assistant", "messages", sessionId] });
+    } finally {
+      setSending(false);
+      setRegenerating(false);
+    }
+  }
+
+  /** Archive (soft-delete) a session from the history rail. */
+  async function deleteSession(session: ChatSession) {
+    await aiAssistantApi.archiveSession(session.id);
+    qc.setQueryData<ChatSession[]>(
+      ["ai-assistant", "sessions"],
+      (prev) => prev?.filter((s) => s.id !== session.id) ?? [],
+    );
+    void qc.invalidateQueries({ queryKey: ["ai-assistant", "sessions"] });
+    if (session.id === sessionId) {
+      abortRef.current?.abort();
+      abortRef.current = null;
+      setSessionId(null);
+      setMessages([]);
+      setStreamingText(null);
+      setActiveToolName(null);
+      setActivityStatus(null);
+      setResolvedActions({});
+      setEditingMessageId(null);
+      // Not a draft: the restore effect picks the next most-recent session.
+      setDraftSession(false);
     }
   }
 
@@ -483,6 +593,20 @@ export function AiChatWindow({
   const currentTitle = draftSession
     ? t("untitledSession")
     : (activeSession?.title || t("untitledSession"));
+
+  // Conversation management targets: only server-persisted messages qualify
+  // (optimistic/error/stream drafts have local prefixes and no server row).
+  const isServerId = (id: string) => !/^(opt|err|stream)-/.test(id);
+  const lastMessage = messages.length > 0 ? messages[messages.length - 1] : undefined;
+  const lastUserMessage = [...messages].reverse().find((m) => m.role === "user");
+  const editableMessageId =
+    sessionId && !sending && lastUserMessage && isServerId(lastUserMessage.id)
+      ? lastUserMessage.id
+      : null;
+  const regenerableMessageId =
+    sessionId && !sending && lastMessage?.role === "assistant" && isServerId(lastMessage.id)
+      ? lastMessage.id
+      : null;
 
   function startRename() {
     setRenameDraft(currentTitle);
@@ -645,6 +769,7 @@ export function AiChatWindow({
             loading={sessionsQuery.isPending}
             onNew={startNewChat}
             onSelect={selectSession}
+            onDelete={deleteSession}
             t={t}
             searchable
             showHeading={!historyAsFullPanel}
@@ -677,9 +802,19 @@ export function AiChatWindow({
                   key={msg.id}
                   message={msg}
                   expanded={expanded}
-                  confirming={confirmingMessageId === msg.id}
-                  onConfirm={() => void confirmTool(msg)}
-                  t={t}
+                  confirmBusy={confirmingAction?.id === msg.id ? confirmingAction.decision : null}
+                  resolution={resolvedActions[msg.id] ?? null}
+                  onConfirm={() => void resolveTool(msg, "confirm")}
+                  onCancel={() => void resolveTool(msg, "cancel")}
+                  editable={msg.id === editableMessageId}
+                  editing={editingMessageId === msg.id}
+                  editBusy={editBusy}
+                  onEditStart={() => setEditingMessageId(msg.id)}
+                  onEditCancel={() => setEditingMessageId(null)}
+                  onEditSubmit={(text) => void submitEdit(msg, text)}
+                  regenerable={msg.id === regenerableMessageId}
+                  regenerating={regenerating}
+                  onRegenerate={() => void regenerateReply(msg)}
                 />
               ))
             )}

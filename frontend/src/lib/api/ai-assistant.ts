@@ -29,6 +29,9 @@ export interface ChatMessage {
   created_at: string;
 }
 
+/** User decision for a pending tool action. */
+export type ToolDecision = "confirm" | "cancel";
+
 /* --------------------------------- Calls ---------------------------------- */
 
 /** One AI quota window for the sidebar meter. */
@@ -134,13 +137,39 @@ export const aiAssistantApi = {
     });
   },
 
-  /** Confirm and execute a pending tool action. */
+  /** Confirm (execute) or cancel a pending tool action. Cancel resolves with
+   * `confirmed: false` plus the assistant's follow-up reply. */
   confirmToolAction(
     sessionId: string,
     messageId: string,
-  ): Promise<{ confirmed: ChatMessage; reply: ChatMessage }> {
-    return api.post<{ confirmed: ChatMessage; reply: ChatMessage }>(
+    decision: ToolDecision = "confirm",
+  ): Promise<{ confirmed: ChatMessage | false; reply: ChatMessage }> {
+    return api.post<{ confirmed: ChatMessage | false; reply: ChatMessage }>(
       `/ai/chat/sessions/${sessionId}/messages/${messageId}/confirm`,
+      { decision },
+    );
+  },
+
+  /** Edit a user message; the server truncates later turns and re-runs. The
+   * caller should refetch the whole thread afterwards. */
+  editMessage(
+    sessionId: string,
+    messageId: string,
+    text: string,
+  ): Promise<{ reply: ChatMessage }> {
+    return api.patch<{ reply: ChatMessage }>(
+      `/ai/chat/sessions/${sessionId}/messages/${messageId}`,
+      { text },
+    );
+  },
+
+  /** Regenerate the assistant reply for a message; refetch the thread after. */
+  regenerateMessage(
+    sessionId: string,
+    messageId: string,
+  ): Promise<{ reply: ChatMessage }> {
+    return api.post<{ reply: ChatMessage }>(
+      `/ai/chat/sessions/${sessionId}/messages/${messageId}/regenerate`,
       {},
     );
   },

@@ -149,7 +149,7 @@ export function WorkspaceShell({
             className={cn(
               "flex min-h-0 flex-1",
               aiOpen &&
-              "xl:grid xl:grid-cols-[minmax(0,5fr)_minmax(380px,2fr)] xl:gap-5 xl:overflow-hidden",
+              "xl:grid xl:grid-cols-[minmax(0,5fr)_minmax(440px,2.5fr)] xl:gap-5 xl:overflow-hidden",
             )}
           >
             <main
