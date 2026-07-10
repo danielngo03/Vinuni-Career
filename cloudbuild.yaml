@@ -1,0 +1,118 @@
+# Cloud Build pipeline: GitHub push -> build images -> migrate DB -> deploy Cloud Run.
+#
+# One-time setup (gcloud commands + substitution values): docs/DEPLOYMENT_GCP.md.
+# Connect this file to a Cloud Build GitHub trigger on the production branch and
+# set the _SUBSTITUTIONS below in the trigger configuration.
+
+substitutions:
+  _REGION: asia-southeast1
+  _REPO: vinuni-career          # Artifact Registry repository name
+  _API_SERVICE: vinuni-career-api
+  _WEB_SERVICE: vinuni-career-web
+  _SCHEDULER_SERVICE: vinuni-career-scheduler
+  _MIGRATE_JOB: vinuni-career-migrate
+  # Public site origin (custom domain or the web service's run.app URL).
+  _PUBLIC_ORIGIN: https://career.example.com
+  # Backend origin the Next.js proxy forwards to (api service's run.app URL).
+  _API_ORIGIN: https://vinuni-career-api-xxxxxxxx.a.run.app
+
+steps:
+  # ---- Backend image -------------------------------------------------------
+  - id: build-api
+    name: gcr.io/cloud-builders/docker
+    dir: backend
+    args:
+      - build
+      - --build-arg=INSTALL_OCR=true
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:$COMMIT_SHA
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:latest
+      - .
+
+  - id: push-api
+    name: gcr.io/cloud-builders/docker
+    args: [push, --all-tags, "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api"]
+    waitFor: [build-api]
+
+  # ---- Frontend image (NEXT_PUBLIC_* are baked at build time) --------------
+  - id: build-web
+    name: gcr.io/cloud-builders/docker
+    dir: frontend
+    args:
+      - build
+      - --build-arg=NEXT_PUBLIC_APP_URL=${_PUBLIC_ORIGIN}
+      - --build-arg=NEXT_PUBLIC_API_URL=${_API_ORIGIN}
+      - --build-arg=NEXT_PUBLIC_API_BASE_URL=/api/v1
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/web:$COMMIT_SHA
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/web:latest
+      - .
+    waitFor: ["-"]
+
+  - id: push-web
+    name: gcr.io/cloud-builders/docker
+    args: [push, --all-tags, "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/web"]
+    waitFor: [build-web]
+
+  # ---- Database migration (Cloud Run job created in one-time setup) --------
+  - id: migrate
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - jobs
+      - update
+      - ${_MIGRATE_JOB}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:$COMMIT_SHA
+      - --region=${_REGION}
+      - --execute-now
+      - --wait
+    waitFor: [push-api]
+
+  # ---- Deploy ---------------------------------------------------------------
+  - id: deploy-api
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_API_SERVICE}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:$COMMIT_SHA
+      - --region=${_REGION}
+    waitFor: [migrate]
+
+  - id: deploy-scheduler
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_SCHEDULER_SERVICE}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:$COMMIT_SHA
+      - --region=${_REGION}
+      - --command=python
+      - --args=-m,app.worker
+    waitFor: [migrate]
+
+  - id: deploy-web
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_WEB_SERVICE}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/web:$COMMIT_SHA
+      - --region=${_REGION}
+    waitFor: [push-web, deploy-api]
+
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:$COMMIT_SHA
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/web:$COMMIT_SHA
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_HIGHCPU_8
+
+timeout: 2400s

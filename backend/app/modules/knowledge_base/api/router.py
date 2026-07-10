@@ -25,6 +25,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
+from app.shared.storage import save_bytes
 
 router = APIRouter(prefix="/knowledge-bases", tags=["knowledge_base"])
 
@@ -125,6 +126,7 @@ async def upload_document(
         raise HTTPException(status_code=413, detail="file_too_large")
 
     storage_path = f"kb/{kb_id}/{uuid.uuid4()}/{file.filename}"
+    save_bytes(storage_path, content)
 
     try:
         doc = await kb_service.upload_document(
