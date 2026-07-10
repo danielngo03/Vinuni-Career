@@ -108,14 +108,28 @@ export function useSelfViewCamera(): SelfViewCamera {
  * local camera when on; a calm placeholder otherwise. Clicking the placeholder
  * toggles the camera (the controls bar also has a labelled camera button).
  */
-export function SelfViewTile({ camera }: { camera: SelfViewCamera }) {
+export function SelfViewTile({
+  camera,
+  active = false,
+}: {
+  camera: SelfViewCamera;
+  /** True when it's the student's turn — draws a calm active-speaker ring. */
+  active?: boolean;
+}) {
   const t = useTranslations("jobs.mockInterview");
   const { status, videoRef, toggle } = camera;
   const live = status === "on";
 
   return (
     <div className="pointer-events-auto w-28 sm:w-36 md:w-44">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/15 bg-[var(--gray-900)] shadow-lg ring-1 ring-black/20">
+      <div
+        className={cn(
+          "relative aspect-[4/3] overflow-hidden rounded-xl border bg-[var(--gray-900)] shadow-lg transition-shadow duration-300",
+          active
+            ? "border-[var(--viz-emerald)]/60 ring-2 ring-[var(--viz-emerald)]/60"
+            : "border-white/15 ring-1 ring-black/20",
+        )}
+      >
         {/* video is always mounted so the stream can attach; hidden when off */}
         <video
           ref={videoRef}

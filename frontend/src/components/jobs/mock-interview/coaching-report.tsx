@@ -4,20 +4,32 @@ import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   ArrowClockwise,
+  Article,
+  Barbell,
+  BookOpen,
   CheckCircle,
   FilePdf,
+  GraduationCap,
   Lightbulb,
   Notepad,
+  PlayCircle,
   Sparkle,
   TrendUp,
   Warning,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui";
-import type { CoachingReport, MockInterviewCoverage } from "@/lib/api";
+import {
+  normalizeGap,
+  type CoachingReport,
+  type MockInterviewCoverage,
+  type MockInterviewLearningSuggestion,
+  type MockInterviewRound,
+} from "@/lib/api";
 import { usePrefersReducedMotion } from "@/lib/hooks/use-mount-animation";
 import { cn } from "@/lib/utils";
 import { CoverageReport } from "./coverage-progress";
+import { RoundStepper } from "./round-indicator";
 
 /**
  * Renders the score-free coaching report. There is deliberately NO score,
@@ -32,6 +44,8 @@ import { CoverageReport } from "./coverage-progress";
 export function CoachingReport({
   report,
   coverage,
+  rounds,
+  currentRound,
   jobId,
   jobTitle,
   completedAt,
@@ -39,6 +53,8 @@ export function CoachingReport({
 }: {
   report: CoachingReport | null;
   coverage?: MockInterviewCoverage | null;
+  rounds?: MockInterviewRound[] | null;
+  currentRound?: string | number | null;
   jobId?: string | null;
   jobTitle?: string | null;
   completedAt?: string | null;
@@ -119,6 +135,14 @@ export function CoachingReport({
         </p>
       )}
 
+      {rounds && rounds.length > 0 && (
+        <Reveal>
+          <section className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5">
+            <RoundStepper variant="card" rounds={rounds} current={currentRound} />
+          </section>
+        </Reveal>
+      )}
+
       {report.overall_observations.trim() && (
         <Reveal>
           <section className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5">
@@ -162,13 +186,34 @@ export function CoachingReport({
               <TrendUp aria-hidden weight="duotone" className="size-4 text-[var(--amber-600)]" />
               {t("gapsTitle")}
             </h3>
-            <ul className="space-y-2">
-              {report.gaps_to_work_on.map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed text-[var(--text-secondary)]">
-                  <span aria-hidden className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--amber-500)]" />
-                  {item}
-                </li>
-              ))}
+            <ul className="space-y-3.5">
+              {report.gaps_to_work_on.map((item, i) => {
+                const gap = normalizeGap(item);
+                if (!gap.text.trim() && gap.learning.length === 0) return null;
+                return (
+                  <li key={i}>
+                    <div className="flex items-start gap-2.5 text-sm leading-relaxed text-[var(--text-secondary)]">
+                      <span aria-hidden className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--amber-500)]" />
+                      <span className="min-w-0">{gap.text}</span>
+                    </div>
+                    {gap.learning.length > 0 && (
+                      <div className="ml-4 mt-2">
+                        <p className="kicker mb-1.5 flex items-center gap-1">
+                          <Lightbulb aria-hidden weight="fill" className="size-3 text-[var(--amber-600)]" />
+                          {t("learningLabel")}
+                        </p>
+                        <ul className="flex flex-wrap gap-1.5">
+                          {gap.learning.map((s, j) => (
+                            <li key={j}>
+                              <LearningChip suggestion={s} />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </section>
         </Reveal>
@@ -263,6 +308,43 @@ function Row({
         {text}
       </p>
     </div>
+  );
+}
+
+/** Map a coarse learning-resource kind to a representative icon (defensive). */
+function iconForKind(kind: string | null | undefined): React.ElementType {
+  switch ((kind ?? "").toLowerCase()) {
+    case "course":
+    case "cert":
+    case "certification":
+      return GraduationCap;
+    case "article":
+    case "read":
+    case "guide":
+    case "doc":
+      return Article;
+    case "video":
+    case "watch":
+      return PlayCircle;
+    case "practice":
+    case "exercise":
+    case "drill":
+      return Barbell;
+    default:
+      return BookOpen;
+  }
+}
+
+/** A neat learning-suggestion chip rendered under a gap. */
+function LearningChip({ suggestion }: { suggestion: MockInterviewLearningSuggestion }) {
+  const Icon = iconForKind(suggestion.kind);
+  return (
+    <span className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 py-1 text-[11px] font-medium text-[var(--text-secondary)]">
+      <Icon aria-hidden weight="duotone" className="size-3 shrink-0 text-[var(--content-ai)]" />
+      <span className="truncate" title={suggestion.title}>
+        {suggestion.title}
+      </span>
+    </span>
   );
 }
 

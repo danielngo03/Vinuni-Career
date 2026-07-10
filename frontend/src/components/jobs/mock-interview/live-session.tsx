@@ -6,12 +6,14 @@ import {
   ArrowRight,
   CircleNotch,
   Keyboard,
+  Lightbulb,
   Microphone,
   MicrophoneSlash,
   PhoneDisconnect,
   Stop,
   VideoCamera,
   VideoCameraSlash,
+  X,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui";
 import {
@@ -27,6 +29,7 @@ import { cn } from "@/lib/utils";
 import { InterviewerAvatar, type AvatarState } from "./interviewer-avatar";
 import { SelfViewTile, useSelfViewCamera } from "./student-self-view";
 import { CoverageChips } from "./coverage-progress";
+import { RoundPill } from "./round-indicator";
 import type { AnswerMode } from "./pre-session-setup";
 
 type Phase = "interviewer_speaking" | "listening" | "thinking" | "ending";
@@ -156,6 +159,9 @@ export function LiveSession({
   const [turnError, setTurnError] = useState(false);
   const [idleHint, setIdleHint] = useState(false);
   const [textDraft, setTextDraft] = useState("");
+  // Advisory, non-blocking coaching nudge from the last turn's `done` event.
+  // Clears on the next turn (and on manual dismiss). Absent/null → nothing shown.
+  const [nudge, setNudge] = useState<string | null>(null);
   // Realtime-only presentation states (unused on the V1/text path). Both the
   // descriptor tier and the relay tier show the "connecting live voice" state.
   const [realtimeConnecting, setRealtimeConnecting] = useState(
@@ -438,6 +444,8 @@ export function LiveSession({
       if (!text || endedRef.current) return;
       lastAnswerRef.current = text;
       setTurnError(false);
+      // A fresh answer starts a new turn → dismiss any prior coaching nudge.
+      setNudge(null);
       setCandidateCaption(text);
       setInterviewerStreaming("");
       interviewerBufRef.current = "";
@@ -465,6 +473,9 @@ export function LiveSession({
             setQuestionCount(evt.question_count > 0 ? evt.question_count : (c) => c + 1);
             setCandidateCaption("");
             if (evt.coverage) setLiveCoverage(evt.coverage);
+            // Optional advisory nudge for the answer just given (never blocks).
+            const nudgeText = evt.nudge?.text?.trim();
+            setNudge(nudgeText ? nudgeText : null);
             if (evt.ended) {
               finalize();
               return;
@@ -864,11 +875,16 @@ export function LiveSession({
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-var(--topbar-height))] w-full max-w-4xl flex-col gap-3 px-3 py-4 sm:px-4 sm:py-5">
-      {/* Top bar: room label + status · question progress + countdown */}
-      <header className="flex items-center justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-2.5">
-          <span className="kicker shrink-0">{t("roomTitle")}</span>
+      {/* Call header: status + phase · question progress + countdown */}
+      <header className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <div className="flex min-w-0 flex-wrap items-center gap-2">
+          <span className="kicker hidden shrink-0 sm:inline">{t("roomTitle")}</span>
           <StatusPill state={avatarState} label={statusLabel} />
+          <RoundPill
+            rounds={session.rounds}
+            current={session.current_round}
+            className="max-w-[15rem]"
+          />
         </div>
         <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
           <span className="hidden font-data text-xs text-[var(--text-muted)] sm:inline">
@@ -886,7 +902,7 @@ export function LiveSession({
           <span
             aria-hidden
             className={cn(
-              "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-data text-xs tabular-nums",
+              "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 font-data text-xs tabular-nums",
               lastMinute
                 ? "border-[var(--brand-red)]/30 bg-[var(--red-50)] text-[var(--brand-red)]"
                 : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-secondary)]",
@@ -953,9 +969,12 @@ export function LiveSession({
           </div>
         </div>
 
-        {/* Student self-view PiP */}
+        {/* Student self-view PiP — active-speaker ring when it's your turn */}
         <div className="absolute bottom-3 right-3 z-10">
-          <SelfViewTile camera={camera} />
+          <SelfViewTile
+            camera={camera}
+            active={phase === "listening" && !realtimeConnecting}
+          />
         </div>
 
         {/* Connecting overlay */}
@@ -971,15 +990,35 @@ export function LiveSession({
 
       {/* Captions — the accessibility layer */}
       <div
-        className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 sm:px-5"
+        className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-4 py-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:px-5"
         aria-live="polite"
       >
-        <p className="kicker">{t("interviewerLabel")}</p>
+        <div className="flex items-center gap-2">
+          <p className="kicker">{t("interviewerLabel")}</p>
+          {speaking && (
+            <span aria-hidden className="flex items-center gap-0.5">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className={cn(
+                    "block w-0.5 rounded-full bg-[var(--content-info)]",
+                    reduced ? "h-2" : "animate-pulse",
+                  )}
+                  style={
+                    reduced
+                      ? undefined
+                      : { height: `${5 + i * 3}px`, animationDelay: `${i * 160}ms`, animationDuration: "0.9s" }
+                  }
+                />
+              ))}
+            </span>
+          )}
+        </div>
         <p className="mt-1 text-balance text-base font-semibold leading-snug text-[var(--text-primary)] sm:text-lg">
           {bigCaption}
         </p>
         {candidateCaption && (
-          <div className="mt-3 border-t border-[var(--border-subtle)] pt-3">
+          <div className="mt-3 rounded-xl bg-[var(--bg-subtle)] px-3.5 py-2.5">
             <p className="kicker">{t("youLabel")}</p>
             <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
               {candidateCaption}
@@ -1079,6 +1118,33 @@ export function LiveSession({
           </p>
         )}
 
+        {/* Advisory coaching nudge (optional backend signal). Calm, dismissible,
+            never blocks; auto-clears on the next turn. Absent → nothing shown. */}
+        {nudge && !turnError && !realtimeLost && (
+          <div
+            role="status"
+            className="mx-auto flex max-w-xl items-start gap-2 rounded-xl border border-[var(--viz-indigo)]/25 bg-[var(--viz-indigo-soft)] px-3 py-2"
+          >
+            <Lightbulb
+              aria-hidden
+              weight="fill"
+              className="mt-0.5 size-4 shrink-0 text-[var(--viz-indigo)]"
+            />
+            <p className="min-w-0 flex-1 text-xs leading-relaxed text-[var(--text-secondary)]">
+              <span className="sr-only">{t("nudgeLabel")}: </span>
+              {nudge}
+            </p>
+            <button
+              type="button"
+              onClick={() => setNudge(null)}
+              aria-label={t("nudgeDismiss")}
+              className="-mr-0.5 -mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition-colors hover:bg-black/5 hover:text-[var(--text-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+            >
+              <X aria-hidden weight="bold" className="size-3" />
+            </button>
+          </div>
+        )}
+
         {effectiveMode === "text" ? (
           <TextAnswerBar
             value={textDraft}
@@ -1137,7 +1203,7 @@ export function LiveSession({
           </div>
         )}
 
-        <div className="flex items-center justify-center gap-2 pt-1">
+        <div className="flex items-center justify-center gap-2 border-t border-[var(--border-subtle)] pt-3">
           <CameraToggleButton camera={camera} />
           <Button
             variant="primaryRed"

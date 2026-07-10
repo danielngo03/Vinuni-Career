@@ -255,6 +255,8 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
           <CoachingReport
             report={phase.detail.report}
             coverage={phase.detail.coverage}
+            rounds={phase.detail.rounds}
+            currentRound={phase.detail.current_round}
             jobTitle={phase.detail.job_title}
             completedAt={phase.detail.ended_at}
           />
@@ -309,7 +311,7 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
   // setup
   return (
     <div className="relative">
-      <div className="mx-auto max-w-2xl px-4 pt-6">{backLink}</div>
+      <div className="mx-auto max-w-4xl px-4 pt-6">{backLink}</div>
       <PreSessionSetup
         jobId={jobId}
         locale={locale}
