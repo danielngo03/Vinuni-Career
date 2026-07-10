@@ -64,6 +64,17 @@ export interface CvSelectionInput {
 /** Free-form screening answers, keyed by screening question id. */
 export type ScreeningAnswers = Record<string, string | string[]>;
 
+/**
+ * A resolved screening Q&A pair for the partner DETAIL view — the backend maps
+ * each stored answer to its job question prompt. `question` is null when the
+ * job no longer defines that question (the UI then falls back to "Answer N").
+ */
+export interface PartnerScreeningItem {
+  question_id: string;
+  question: string | null;
+  answer: string | string[];
+}
+
 export interface ApplyBody {
   job_id: string;
   cv_selection: CvSelectionInput;
@@ -216,6 +227,12 @@ export interface PartnerApplication {
   status_label: string;
   applicant: PartnerApplicant;
   screening_answers: ScreeningAnswers;
+  /**
+   * DETAIL-only: each screening answer resolved to its question prompt. Prefer
+   * this over `screening_answers` for rendering. Null on the flat list and when
+   * there are no answers.
+   */
+  screening?: PartnerScreeningItem[] | null;
   cover_letter: string | null;
   snapshot_id: string;
   /**
@@ -554,6 +571,29 @@ export const applicationsCoreApi = {
   /* Partner: reject `{submitted,under_review}` → `rejected` (reason required). */
   reject(id: string, body: RejectBody): Promise<PartnerApplication> {
     return api.post<PartnerApplication>(`/applications/${id}/reject`, body);
+  },
+
+  /**
+   * Partner: assign (or clear) the recruiter who OWNS this candidate. Pass an
+   * ACTIVE org membership id in `assigneeMembershipId` to assign; pass `null`
+   * to unassign. "Assign to me" is this SAME call with the CALLER's own
+   * membership id (from `organizationApi.getMyCapabilities().membership_id`).
+   * Returns the updated application with `assignee` populated. Requires the
+   * `applications:update` capability (403 otherwise); 422 for a
+   * non-member / cross-org / inactive membership; 409 on a stale write.
+   *
+   * NOTE: the LIVE backend body is `{ assignee_membership_id }` (a membership
+   * UUID) — NOT the `{ assignee_id, self }` shape from the parallel spec draft.
+   * "Assign to me" therefore resolves the caller's membership id client-side
+   * rather than sending a `self` flag.
+   */
+  assign(
+    id: string,
+    opts: { assigneeMembershipId: string | null },
+  ): Promise<PartnerApplication> {
+    return api.post<PartnerApplication>(`/applications/${id}/assign`, {
+      assignee_membership_id: opts.assigneeMembershipId,
+    });
   },
 
   /* Partner: anonymity-safe pipeline board for one job (kanban projection). */

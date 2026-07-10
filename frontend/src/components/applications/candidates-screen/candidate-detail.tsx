@@ -9,6 +9,9 @@ import {
   MessageSquareText,
   ShieldCheck,
   Sparkles,
+  UserMinus,
+  UserPlus,
+  UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui";
 import { EmptyState } from "@/components/kit";
@@ -19,6 +22,22 @@ import { CvEvaluationPanel } from "./cv-evaluation-panel";
 import { isOpaqueQuestionKey } from "./utils";
 
 type DetailTab = "cv" | "application" | "evaluate";
+
+/**
+ * Candidate ownership control for the detail drawer header. The parent owns the
+ * assign mutation + RBAC gate; this component only renders the current owner and
+ * the "assign to me" / "unassign" affordance. `canSelfAssign` is false when the
+ * caller can assign but has no membership id (e.g. a superadmin acting in-org).
+ */
+export interface CandidateOwnerControl {
+  canAssign: boolean;
+  canSelfAssign: boolean;
+  assignedToMe: boolean;
+  assigneeName: string | null;
+  pending: boolean;
+  onAssignToMe: () => void;
+  onUnassign: () => void;
+}
 
 /**
  * Candidate detail BODY — a CV-first, tabbed recruiter surface:
@@ -36,20 +55,34 @@ export function CandidateDetail({
   app,
   downloading,
   onDownload,
+  owner,
 }: {
   app: PartnerApplication;
   downloading: boolean;
   onDownload: () => void;
+  owner?: CandidateOwnerControl;
 }) {
   const t = useTranslations("candidates");
   const reasonLabel = useRejectionReasonLabel();
   const [tab, setTab] = React.useState<DetailTab>("cv");
 
   const cv = app.cv ?? null;
-  const answers = React.useMemo(
-    () => Object.entries(app.screening_answers ?? {}),
-    [app.screening_answers],
-  );
+  // Prefer the resolved `screening` block (carries the real question prompt);
+  // fall back to the flat `screening_answers` map (opaque keys → "Answer N").
+  const answers = React.useMemo(() => {
+    if (app.screening && app.screening.length > 0) {
+      return app.screening.map((s) => ({
+        key: s.question_id,
+        label: s.question,
+        value: s.answer,
+      }));
+    }
+    return Object.entries(app.screening_answers ?? {}).map(([key, value]) => ({
+      key,
+      label: isOpaqueQuestionKey(key) ? null : key,
+      value,
+    }));
+  }, [app.screening, app.screening_answers]);
   const answerCount = answers.length + (app.cover_letter ? 1 : 0);
 
   const tabs: { id: DetailTab; label: string; icon: typeof FileText; badge?: number }[] = [
@@ -65,6 +98,41 @@ export function CandidateDetail({
 
   return (
     <div className={cn("flex min-h-0 flex-col", tab === "cv" && "h-full")}>
+      {/* Ownership strip — who owns this candidate + claim/release affordance. */}
+      {owner && (
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-5 py-2.5">
+          <span className="inline-flex min-w-0 items-center gap-1.5 type-small text-muted-foreground">
+            <UserRound aria-hidden className="size-4 shrink-0" strokeWidth={1.8} />
+            <span className="shrink-0">{t("colOwner")}:</span>
+            <span className="truncate font-medium text-foreground">
+              {owner.assigneeName ?? t("unassigned")}
+            </span>
+          </span>
+          {owner.canAssign &&
+            (owner.assignedToMe ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                loading={owner.pending}
+                onClick={owner.onUnassign}
+              >
+                <UserMinus aria-hidden className="size-4" strokeWidth={1.8} />
+                {t("unassign")}
+              </Button>
+            ) : owner.canSelfAssign ? (
+              <Button
+                variant="secondary"
+                size="sm"
+                loading={owner.pending}
+                onClick={owner.onAssignToMe}
+              >
+                <UserPlus aria-hidden className="size-4" strokeWidth={1.8} />
+                {t("assignToMe")}
+              </Button>
+            ) : null)}
+        </div>
+      )}
+
       {/* Rejection outcome (partner-only reason + note) — read-only context. */}
       {app.status === "rejected" && app.rejection_reason && (
         <div className="shrink-0 border-b border-border px-5 py-3">
@@ -137,9 +205,12 @@ export function CandidateDetail({
                 {t("downloadCv")}
               </Button>
             </div>
+            {/* `#toolbar=0&navpanes=0` strips the browser PDF chrome (print,
+                download, save-to-Drive, page thumbnails) so only the document
+                shows — the recruiter uses our own Download button above. */}
             <iframe
               title={t("cvViewerTitle")}
-              src={resolveDownloadUrl(cv.view_url)}
+              src={`${resolveDownloadUrl(cv.view_url)}#toolbar=0&navpanes=0&view=FitH`}
               className="min-h-[60vh] w-full flex-1 border-0 bg-[var(--bg-muted)]"
             />
             <p className="flex shrink-0 items-start gap-1.5 border-t border-border px-5 py-2 type-caption text-muted-foreground">
@@ -180,15 +251,13 @@ export function CandidateDetail({
                   {t("screeningAnswersTitle")}
                 </h4>
                 <dl className="space-y-3">
-                  {answers.map(([key, value], i) => (
-                    <div key={key} className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3">
+                  {answers.map((item, i) => (
+                    <div key={item.key} className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3">
                       <dt className="type-caption font-semibold text-muted-foreground">
-                        {isOpaqueQuestionKey(key)
-                          ? t("screeningAnswerN", { n: i + 1 })
-                          : key}
+                        {item.label ?? t("screeningAnswerN", { n: i + 1 })}
                       </dt>
                       <dd className="mt-1 whitespace-pre-wrap type-small text-foreground">
-                        {Array.isArray(value) ? value.join(", ") : value}
+                        {Array.isArray(item.value) ? item.value.join(", ") : item.value}
                       </dd>
                     </div>
                   ))}

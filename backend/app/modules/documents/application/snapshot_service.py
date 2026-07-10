@@ -20,6 +20,7 @@ use that path and everyone else gets ``404``.
 
 from __future__ import annotations
 
+import re
 import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -236,6 +237,131 @@ async def get_snapshot_json_for_application(
         .first()
     )
     return dict(snap.snapshot_json or {}) if snap is not None else None
+
+
+_YEAR_RE = re.compile(r"\b(?:19|20)\d{2}\b")
+_HEADLINE_HEADING_KEYS = (
+    "heading",
+    "degree",
+    "title",
+    "program",
+    "school",
+    "institution",
+    "organization",
+)
+_HEADLINE_MAJOR_KEYS = (
+    "subheading",
+    "field",
+    "major",
+    "field_of_study",
+    "organization",
+    "institution",
+    "school",
+)
+_HEADLINE_DATE_KEYS = ("timeframe", "period", "dates", "end_date", "graduation", "year")
+
+
+def _first_str(item: dict, keys: tuple[str, ...]) -> str | None:
+    for key in keys:
+        value = item.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
+
+
+def _grad_year_from(text: str | None) -> str | None:
+    """The latest 4-digit year in a timeframe string (the graduation year)."""
+
+    if not text:
+        return None
+    years = _YEAR_RE.findall(text)
+    return years[-1] if years else None
+
+
+def _derive_headline(body: dict) -> str | None:
+    """A short "grad-year · major"-style descriptor from a CV snapshot, or ``None``.
+
+    Prefers the CV's own header ``headline`` (the student's professional tagline);
+    otherwise derives ``"{grad_year} · {major}"`` from the first education entry.
+    Only content a recruiter already sees on the CV is used — never contact PII.
+    """
+
+    sections = body.get("sections")
+    if not isinstance(sections, list):
+        return None
+
+    # 1) The student's own professional headline on the header section.
+    for section in sections:
+        if not isinstance(section, dict):
+            continue
+        stype = str(section.get("section_type") or "").lower()
+        title = str(section.get("title") or "").lower()
+        if stype == "header" or "header" in title or "contact" in title:
+            content = section.get("content_json") or section.get("content") or {}
+            if isinstance(content, dict):
+                headline = content.get("headline")
+                if isinstance(headline, str) and headline.strip():
+                    return headline.strip()[:120]
+
+    # 2) First education entry -> "{grad_year} · {major}" (best available parts).
+    for section in sections:
+        if not isinstance(section, dict):
+            continue
+        stype = str(section.get("section_type") or "").lower()
+        title = str(section.get("title") or "").lower()
+        if stype == "education" or "education" in title or "học vấn" in title:
+            content = section.get("content_json") or section.get("content") or {}
+            entries = []
+            if isinstance(content, dict):
+                raw = content.get("entries") or content.get("items")
+                entries = raw if isinstance(raw, list) else []
+            for entry in entries:
+                if not isinstance(entry, dict):
+                    continue
+                major = _first_str(entry, _HEADLINE_MAJOR_KEYS) or _first_str(
+                    entry, _HEADLINE_HEADING_KEYS
+                )
+                grad_year = _grad_year_from(_first_str(entry, _HEADLINE_DATE_KEYS))
+                if major and grad_year:
+                    return f"{grad_year} · {major}"[:120]
+                if major:
+                    return major[:120]
+                if grad_year:
+                    return grad_year
+    return None
+
+
+async def snapshot_headlines_for(
+    session: AsyncSession, snapshot_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, str]:
+    """Batch ``{snapshot_id: headline}`` short descriptors for a page of snapshots.
+
+    ONE query over the immutable snapshots' structured JSON; each headline is a
+    "grad-year · major"-style line derived from the CV (see :func:`_derive_headline`).
+    Snapshots with no derivable descriptor are simply absent from the map (the caller
+    falls back to the candidate's email). Never exposes contact PII or storage keys.
+    """
+
+    ids = {sid for sid in snapshot_ids if sid is not None}
+    if not ids:
+        return {}
+    rows = (
+        (
+            await session.execute(
+                select(
+                    ApplicationCvSnapshot.id, ApplicationCvSnapshot.snapshot_json
+                ).where(ApplicationCvSnapshot.id.in_(ids))
+            )
+        )
+        .all()
+    )
+    out: dict[uuid.UUID, str] = {}
+    for snap_id, snapshot_json in rows:
+        body = snapshot_json if isinstance(snapshot_json, dict) else {}
+        headline = _derive_headline(body)
+        if headline:
+            out[snap_id] = headline
+    return out
 
 
 async def get_snapshot_download(

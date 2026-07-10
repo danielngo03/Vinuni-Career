@@ -300,6 +300,16 @@ export interface OwnerJobSummary extends JobSummary {
    */
   view_count?: number;
   application_count?: number;
+  /**
+   * Partner triage funnel (owner LIST projection): `unreviewed_count` = still
+   * `submitted` ("new to screen"), `in_pipeline_count` = in an active stage,
+   * `owner_name` = the poster's safe display name (never email). Optional — the
+   * Jobs table renders "—" when absent.
+   */
+  unreviewed_count?: number | null;
+  in_pipeline_count?: number | null;
+  owner_name?: string | null;
+  posted_by?: string | null;
   /** Moderation queue assignment (claim/SLA — university moderation only). */
   claimed_by?: string | null;
   claimed_at?: string | null;

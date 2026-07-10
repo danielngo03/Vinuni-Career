@@ -565,12 +565,20 @@ async def _applicant_block_for(session: AsyncSession, *, app: Application) -> di
     An application always exposes the applicant's real identity to a partner who
     passed the base ``applications:read`` gate (owner decision 2026-07-10). Loads
     the user's contact (name/email) + safe avatar URL through the users /
-    student-profile facades so recruitment never imports those ORMs directly.
+    student-profile facades so recruitment never imports those ORMs directly. Also
+    attaches a short ``headline`` ("grad-year · major") derived from the immutable
+    CV snapshot for the drawer's secondary line (``None`` when not derivable).
     """
 
     user = await user_service.get_by_id(session, app.applicant_id)
     avatars = await avatar_facade.avatar_urls_for(session, [app.applicant_id])
-    return presenters.applicant_block(app, user=user, avatar_url=avatars.get(app.applicant_id))
+    headline: str | None = None
+    if app.snapshot_id is not None:
+        headlines = await snapshot_service.snapshot_headlines_for(session, [app.snapshot_id])
+        headline = headlines.get(app.snapshot_id)
+    return presenters.applicant_block(
+        app, user=user, avatar_url=avatars.get(app.applicant_id), headline=headline
+    )
 
 
 async def _cv_block_for(
@@ -633,13 +641,16 @@ async def _partner_view(
         applicant = await _applicant_block_for(session, app=app)
     assignee = await _assignee_block(session, app=app)
     cv = None
+    screening = None
     # LIST rows receive a precomputed ``fit`` (batched ``{score, band}`` — enough
     # for the match ring). DETAIL additionally loads the CV embed + the richer
-    # ``{score, band, reasons}`` fit (unless the caller already passed a fit).
+    # ``{score, band, reasons}`` fit (unless the caller already passed a fit) + the
+    # screening answers labelled with their job question prompts.
     if include_detail:
         cv = await _cv_block_for(session, app=app, principal=principal)
         if fit is None:
             fit = await _fit_block_for(session, app=app, locale=locale)
+        screening = await _screening_block_for(session, app=app, locale=locale)
     return presenters.partner_application(
         app,
         applicant=applicant,
@@ -647,8 +658,37 @@ async def _partner_view(
         fit=fit,
         assignee=assignee,
         stage=stage,
+        screening=screening,
         locale=locale,
     )
+
+
+async def _screening_block_for(
+    session: AsyncSession, *, app: Application, locale: str
+) -> list[dict] | None:
+    """Pair each stored screening answer with its job question prompt (DETAIL only).
+
+    Returns ``[{question_id, question, answer}]`` in the answers' stored order, with
+    ``question`` resolved from the job's screening-question definitions (or ``None``
+    when the job defines no matching prompt — the UI keeps its neutral fallback).
+    ``None`` when the application carries no screening answers at all (nothing to
+    show). Never exposes any owner-only job internal beyond the question prompt.
+    """
+
+    answers = dict(app.screening_answers or {})
+    if not answers:
+        return None
+    prompts = await job_read_facade.screening_questions_for_job(
+        session, app.job_id, locale=locale
+    )
+    return [
+        {
+            "question_id": key,
+            "question": prompts.get(str(key)),
+            "answer": value,
+        }
+        for key, value in answers.items()
+    ]
 
 
 async def _current_stages_for(
@@ -818,10 +858,16 @@ async def list_job_applications(
     fits = await application_fit_service.application_snapshot_fits_for_job(
         session, snapshot_ids=snapshot_ids, job_id=job.id, locale=locale
     )
+    # Short "grad-year · major" headline per row — ONE batched pass over the page's
+    # immutable snapshots (documents facade; never imports the snapshot ORM here).
+    headlines = await snapshot_service.snapshot_headlines_for(session, snapshot_ids)
     items: list[dict] = []
     for a in page.items:
         applicant = presenters.applicant_block(
-            a, user=contacts.get(a.applicant_id), avatar_url=avatars.get(a.applicant_id)
+            a,
+            user=contacts.get(a.applicant_id),
+            avatar_url=avatars.get(a.applicant_id),
+            headline=headlines.get(a.snapshot_id) if a.snapshot_id is not None else None,
         )
         row_fit = fits.get(a.snapshot_id) if a.snapshot_id is not None else None
         items.append(

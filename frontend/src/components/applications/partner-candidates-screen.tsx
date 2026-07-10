@@ -27,6 +27,8 @@ import {
   MoreHorizontal,
   Search,
   ShieldAlert,
+  UserMinus,
+  UserPlus,
   UserRound,
   Users2,
 } from "lucide-react";
@@ -63,10 +65,12 @@ import {
   jobsApi,
   organizationApi,
   resolveDownloadUrl,
+  type CardAssignee,
   type PartnerApplication,
   type RejectionReason,
 } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
+import { useAuthStore } from "@/stores/auth-store";
 import { CandidateDetail } from "./candidates-screen/candidate-detail";
 import { RejectModal } from "./candidates-screen/reject-modal";
 import { MatchRing, matchTierKey, matchTone } from "./candidates-screen/match-ring";
@@ -121,8 +125,9 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     retry: false,
   });
 
-  // Team directory + "me" — drive the assignee filter (read-only; there is no
-  // application-assign endpoint yet, see handoff).
+  // Team directory + "me" — drive the assignee filter AND the "assign to me"
+  // write. `applications:update` gates the assign action; a caller without it
+  // sees no assign button (never a dead 403 control).
   const capsQuery = useQuery({
     queryKey: ["org", "me", "capabilities"],
     queryFn: () => organizationApi.getMyCapabilities(),
@@ -136,12 +141,27 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
     staleTime: 5 * 60_000,
   });
   const myMembershipId = capsQuery.data?.membership_id ?? null;
+  const canAssign = capsQuery.data
+    ? capsQuery.data.is_org_admin ||
+      capsQuery.data.grants.includes("applications:update")
+    : false;
+  // "Assign to me" needs the caller's OWN membership id (a superadmin acting in
+  // an org may hold the capability but no membership row → hide self-assign).
+  const canSelfAssign = canAssign && !!myMembershipId;
+  const authUser = useAuthStore((s) => s.user);
   const members = React.useMemo(
     () =>
       (membersQuery.data?.data ?? [])
         .filter((m) => m.status === "active")
         .map((m) => ({ id: m.id, name: m.full_name || m.user_email })),
     [membersQuery.data],
+  );
+
+  /** True when the row/detail is currently owned by the signed-in recruiter. */
+  const isMine = React.useCallback(
+    (app: PartnerApplication) =>
+      !!myMembershipId && app.assignee?.membership_id === myMembershipId,
+    [myMembershipId],
   );
 
   const forJobKey = React.useMemo(
@@ -359,6 +379,50 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
       toast.show({ tone: "success", title: t("rejectedToast") });
     },
   });
+
+  const assignMutation = useMutation({
+    mutationFn: (vars: { id: string; membershipId: string | null }) =>
+      applicationsApi.assign(vars.id, { assigneeMembershipId: vars.membershipId }),
+    onMutate: async (vars) => {
+      await qc.cancelQueries({ queryKey: forJobKey });
+      const ctx = snapshot(vars.id);
+      // Optimistic owner patch: assigning → me (server truth replaces it on
+      // success); clearing → null. `display_name` is best-effort from the
+      // signed-in identity until the authoritative projection returns.
+      const optimistic: CardAssignee | null =
+        vars.membershipId && myMembershipId
+          ? {
+              membership_id: myMembershipId,
+              user_id: authUser?.id ?? "",
+              display_name: authUser?.name ?? t("assigneeMine"),
+            }
+          : null;
+      patchCaches(vars.id, { assignee: optimistic });
+      return ctx;
+    },
+    onError: (e, _vars, ctx) => {
+      if (ctx) restore(ctx);
+      if (!handleConflict(e)) toast.show({ tone: "error", title: apiError(e) });
+    },
+    onSuccess: (data) => {
+      patchCaches(data.id, data);
+      qc.setQueryData(detailKey(data.id), data);
+      toast.show({
+        tone: "success",
+        title: data.assignee ? t("assignedToast") : t("unassignedToast"),
+      });
+    },
+  });
+
+  function assignToMe(id: string) {
+    if (!myMembershipId || assignMutation.isPending) return;
+    assignMutation.mutate({ id, membershipId: myMembershipId });
+  }
+
+  function unassign(id: string) {
+    if (assignMutation.isPending) return;
+    assignMutation.mutate({ id, membershipId: null });
+  }
 
   const bulkReviewMutation = useMutation({
     mutationFn: (ids: string[]) => applicationsApi.bulkReview(jobId, ids),
@@ -646,6 +710,17 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
                     {t("copyEmail")}
                   </DropdownMenuItem>
                 )}
+                {canAssign && isMine(r) ? (
+                  <DropdownMenuItem onSelect={() => unassign(r.id)}>
+                    <UserMinus aria-hidden strokeWidth={1.8} />
+                    {t("unassign")}
+                  </DropdownMenuItem>
+                ) : canSelfAssign ? (
+                  <DropdownMenuItem onSelect={() => assignToMe(r.id)}>
+                    <UserPlus aria-hidden strokeWidth={1.8} />
+                    {t("assignToMe")}
+                  </DropdownMenuItem>
+                ) : null}
                 {canReject && (
                   <>
                     <DropdownMenuSeparator />
@@ -760,7 +835,8 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
               </DropdownMenuRadioGroup>
             </ToolbarMenu>
 
-            {/* Assignee filter — team triage (read-only; no assign endpoint yet). */}
+            {/* Assignee filter — team triage. Assign/unassign writes live in the
+                row overflow menu + the detail drawer's ownership strip. */}
             <ToolbarMenu icon={UserRound} label={t("assigneeLabel")} value={assigneeLabel}>
               <DropdownMenuLabel>{t("assigneeLabel")}</DropdownMenuLabel>
               <DropdownMenuRadioGroup
@@ -1015,6 +1091,17 @@ export function PartnerCandidatesScreen({ jobId }: { jobId: string }) {
             app={selected}
             downloading={downloading}
             onDownload={handleDownload}
+            owner={{
+              canAssign,
+              canSelfAssign,
+              assignedToMe: isMine(selected),
+              assigneeName: selected.assignee?.display_name ?? null,
+              pending:
+                assignMutation.isPending &&
+                assignMutation.variables?.id === selected.id,
+              onAssignToMe: () => assignToMe(selected.id),
+              onUnassign: () => unassign(selected.id),
+            }}
           />
         )}
       </DetailSheet>

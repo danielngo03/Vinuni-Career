@@ -115,14 +115,15 @@ VinUni red `#c83538`**, **info/AI = sky/indigo**. The v9 blue→gray remap is
 **reverted for CONTENT ONLY** (`--content-*` tokens); the shell ramp is
 untouched, and sponsored/paid disclosure amber is never removed (compliance).
 
-**Gradient hero rule.** Exactly **ONE** restrained **indigo-only** gradient tile
-(`--hero-gradient`, `GradientHeroCard`) per surface, reserved for a top
-forecast/summary (à la Pipeline-OS). A deep indigo wash — indigo-900→indigo-600
-in light, indigo-950→indigo-700 in dark — with **no violet/purple**. Violet
-(`#8b5cf6`) is a **chart-series color ONLY**: never a hero, UI accent, active
-state, or decoration (owner 2026-07-10: "màu tím lạc quẻ" — purple retired from
-chrome/heroes; it survives solely as one categorical data series). Never more
-than one hero per screen, never a page background.
+**Gradient hero rule.** Exactly **ONE** restrained calm **brand-BLUE** gradient
+tile (`--hero-gradient`, `GradientHeroCard`) per surface, reserved for a top
+forecast/summary (à la Pipeline-OS). A deep blue wash — blue-900→blue-600 in
+light, blue-950→blue-700 in dark — with **no purple/violet/indigo** (blue is the
+system's "info" hue). Violet (`#8b5cf6`) AND indigo are **chart-series colors
+ONLY**: never a hero, UI accent, active state, or decoration (owner 2026-07-10:
+"màu tím lạc quẻ" → purple/indigo retired from chrome/heroes to a calm blue hero;
+they survive solely as categorical data series). Never more than one hero per
+screen, never a page background.
 
 **Locked type scale (Plus Jakarta Sans).** Enforce, do not hand-roll ad-hoc
 `text-[..]` sizes. Utility classes in `globals.css`: `.type-display` 30/36/600 ·

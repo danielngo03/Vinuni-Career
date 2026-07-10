@@ -41,9 +41,10 @@ and browser verification.
   only (sky/indigo for info + AI + primary data series); the shell ramp is mono.
 - Colour is for meaning and data density, not decoration. Chart series, KPI
   deltas, status chips, and category tags may be colourful; page chrome may not.
-- Exactly ONE restrained gradient is allowed: the `--hero-gradient` (indigo-only,
-  no violet/purple) forecast/summary hero card, used sparingly (≤1 per surface).
-  Violet is a chart-series colour only, never a hero/UI accent (owner, 2026-07-10).
+- Exactly ONE restrained gradient is allowed: the `--hero-gradient` (calm brand
+  BLUE — NO purple/violet/indigo) forecast/summary hero card, used sparingly
+  (≤1 per surface). Violet is a chart-series colour only, never a hero/UI accent
+  (owner, 2026-07-10).
   No decorative blobs/orbs, no emoji icons, no fake screenshots, no marketing filler.
 - Build on the locked design system: shadcn/ui primitives in `@/components/ui`
   and the shared kit in `@/components/kit` (Card, PageHeader, KpiTile/KpiRow,

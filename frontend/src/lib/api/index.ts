@@ -349,6 +349,7 @@ export type {
   PartnerApplicant,
   PartnerApplication,
   PartnerApplicationCv,
+  CardAssignee,
   CandidateFit,
   CvDownloadInfo,
   StageRequiredAction,

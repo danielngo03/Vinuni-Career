@@ -472,9 +472,10 @@
 
   /* ONE restrained hero gradient — indigo-ONLY deep wash (NO violet/purple),
      used sparingly for a single top forecast/summary tile per surface. Never a
-     full-page background. Violet is a chart-series color only, never a hero
-     (owner 2026-07-10). Dark theme deepens it (see [data-theme="dark"]). */
-  --hero-gradient: linear-gradient(135deg, #312e81 0%, #3730a3 48%, #4f46e5 100%);
+     full-page background. Owner 2026-07-10: NO purple/violet/indigo in the hero —
+     use a calm brand BLUE (blue is the system's "info" hue). Violet stays a
+     chart-series color only. Dark theme deepens it (see [data-theme="dark"]). */
+  --hero-gradient: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 52%, #2563eb 100%);
   --hero-gradient-fg: #ffffff;
 
   /* ── Locked type scale (Plus Jakarta Sans). Metrics use tabular-nums. ── */
@@ -568,10 +569,10 @@
   --class-curated: #ededed;
   --class-strategic: #a1a1a1;
 
-  /* Hero gradient deepens for the near-black shell — indigo-950→indigo-700 so
-     the single hero tile reads as intentional/premium against #0a0a0a instead
-     of glowing. Still indigo-only (no violet). Same token name; value only. */
-  --hero-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 52%, #4338ca 100%);
+  /* Hero gradient deepens for the near-black shell — blue-950→blue-700 so the
+     single hero tile reads as intentional/premium against #0a0a0a instead of
+     glowing. Calm brand blue, no purple/indigo. Same token name; value only. */
+  --hero-gradient: linear-gradient(135deg, #172554 0%, #1e40af 52%, #2563eb 100%);
 
   /* "Blue"/ink ramp flips for dark so old call sites stay legible */
   --blue-950: #fafafa;

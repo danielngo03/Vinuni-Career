@@ -403,7 +403,24 @@ def _owner_fields(job: Job, *, locale: str) -> dict:
     }
 
 
-def owner_job_summary(job: Job, *, locale: str = "vi") -> dict:
+def owner_job_summary(
+    job: Job,
+    *,
+    locale: str = "vi",
+    unreviewed_count: int | None = None,
+    in_pipeline_count: int | None = None,
+    owner_name: str | None = None,
+) -> dict:
+    """Owner (partner) list row for ``GET /jobs/mine``.
+
+    ``unreviewed_count`` (submitted-but-not-yet-reviewed — the "new to screen"
+    number) and ``in_pipeline_count`` (applications in an ACTIVE pipeline stage)
+    are live recruitment funnel signals batched in by the service; they are ``None``
+    when the caller does not supply them (never fabricated to 0). ``owner_name`` is
+    the safe display name of the job's poster (``posted_by``) — the recruiter
+    accountable for the job — and never leaks their email/PII.
+    """
+
     data = _common(job, locale=locale, is_owner=True)
     data.update(
         {
@@ -419,6 +436,13 @@ def owner_job_summary(job: Job, *, locale: str = "vi") -> dict:
             "version": job.version,
             "view_count": job.view_count,
             "application_count": job.application_count,
+            # Live recruiting funnel signals (batched read-model; see
+            # recruitment.job_application_stats_facade). ``None`` = not supplied.
+            "unreviewed_count": unreviewed_count,
+            "in_pipeline_count": in_pipeline_count,
+            # The job's poster identity (safe display name only, never email).
+            "posted_by": str(job.posted_by),
+            "owner_name": owner_name,
             "created_at": _iso(job.created_at),
             "claimed_by": str(job.claimed_by) if job.claimed_by else None,
             "claimed_at": _iso(job.claimed_at),

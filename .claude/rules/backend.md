@@ -94,13 +94,16 @@ backend/app/modules/{domain}/
 - Organization logos/media use safe delivery URLs (`logo_url`/media URL) and
   never expose raw `logo_path`, object keys, local paths, bucket names, or
   document storage keys in public/company/job/dashboard responses.
-- Partner CV VIEW serves the student's ORIGINAL file inline (owner 2026-07-10:
-  no derived/watermarked copy — "use the original CV"), sandboxed + type-allowlisted
-  against stored-XSS. Partner CV DOWNLOAD watermark is UNDER OWNER REVIEW (currently
-  serves the original); either way access stays RBAC-gated (`candidate_access`) and
-  fully audited (`cv_previewed` on inline view, `cv_downloaded` on download). NOTE:
-  `docs/SECURITY_PRIVACY.md` still mandates download watermark — reconcile once the
-  owner confirms.
+- Partner CV VIEW serves the student's ORIGINAL file inline, CLEAN (owner
+  2026-07-10: "use the original CV" — no derived copy in the viewer), sandboxed +
+  type-allowlisted against stored-XSS. Partner CV DOWNLOAD is WATERMARKED (owner
+  2026-07-10 confirmed): stamp the VinUni logo + "VinUni Career" onto the
+  downloaded PDF. Access stays RBAC-gated (`candidate_access`) and fully audited
+  (`cv_previewed` on inline view, `cv_downloaded` on download). Consistent with
+  `docs/SECURITY_PRIVACY.md`.
+- Uploaded IMAGE CVs (png/jpg/webp) are converted to PDF by the backend on
+  ingestion (owner 2026-07-10) so CV view + download are always a PDF (one
+  viewer path, watermarkable download).
 - Applications are always identified (owner decision 2026-07-10): no anonymous
   apply, blind-screening, or identity-reveal flow. Do not add `is_anonymous`
   gating, redacted previews, or a reveal/`candidate_identity` capability.

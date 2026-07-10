@@ -38,13 +38,22 @@ def _iso(value) -> str | None:
     return value.isoformat() if value else None
 
 
-def applicant_block(app: Application, *, user, avatar_url: str | None = None) -> dict:
+def applicant_block(
+    app: Application,
+    *,
+    user,
+    avatar_url: str | None = None,
+    headline: str | None = None,
+) -> dict:
     """The applicant's real identity as a partner sees it (never masked).
 
     ``user`` is a contact-like object carrying ``full_name`` / ``email`` (loaded
     by the service through the users facade); ``avatar_url`` is the safe serve
-    pointer (never a raw storage key). The block is always fully identified — the
-    partner has already passed the CV / candidate RBAC gate to reach it.
+    pointer (never a raw storage key). ``headline`` is an optional pre-composed
+    short descriptor ("grad-year · major", derived from the CV snapshot) for the
+    candidate row/drawer secondary line — ``None`` when nothing is derivable (the
+    UI falls back to email). The block is always fully identified — the partner has
+    already passed the CV / candidate RBAC gate to reach it.
     """
 
     return {
@@ -52,6 +61,7 @@ def applicant_block(app: Application, *, user, avatar_url: str | None = None) ->
         "full_name": (getattr(user, "full_name", None) or "") if user else "",
         "avatar_url": avatar_url,
         "email": (getattr(user, "email", None) or "") if user else "",
+        "headline": headline,
     }
 
 
@@ -104,6 +114,7 @@ def partner_application(
     fit: dict | None = None,
     assignee: dict | None = None,
     stage: dict | None = None,
+    screening: list[dict] | None = None,
     locale: str = "vi",
 ) -> dict:
     """One application as a partner sees it — always fully identified.
@@ -125,6 +136,11 @@ def partner_application(
         "status_label": lifecycle.status_label(app.status, locale=locale),
         "applicant": applicant,
         "screening_answers": dict(app.screening_answers or {}),
+        # DETAIL-only: each stored answer paired with its job screening-question
+        # prompt (``[{question_id, question, answer}]``) so the drawer renders
+        # "Question: … / Answer: …" instead of "Answer N". ``question`` is ``None``
+        # when the job defines no matching prompt. ``None`` on the flat LIST.
+        "screening": screening,
         "cover_letter": app.cover_letter,
         "snapshot_id": str(app.snapshot_id) if app.snapshot_id else None,
         # DETAIL-only: inline view + download URLs for the student's ORIGINAL CV

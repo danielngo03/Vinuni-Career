@@ -127,6 +127,42 @@ async def increment_application_count(session: AsyncSession, job_id: uuid.UUID) 
     job.application_count += 1
 
 
+async def screening_questions_for_job(
+    session: AsyncSession, job_id: uuid.UUID, *, locale: str = "vi"
+) -> dict[str, str]:
+    """Return ``{question_id: prompt}`` for a job's screening questions.
+
+    Screening questions live on the job's ``settings["screening_questions"]`` JSON
+    (a list of ``{"id", "prompt"|"question"|"label", "prompt_en"|"label_en"?}``) so
+    the DETAIL partner view can label each stored ``applications.screening_answers``
+    key with its human question text instead of an opaque id. Returns ``{}`` when the
+    job defines none (the common case today). Only the localized prompt string is
+    exposed — never any other owner-only job internal.
+    """
+
+    settings = (
+        await session.execute(select(Job.settings).where(Job.id == job_id))
+    ).scalar_one_or_none()
+    raw = (settings or {}).get("screening_questions") if isinstance(settings, dict) else None
+    if not isinstance(raw, list):
+        return {}
+    want_en = str(locale or "vi").lower().startswith("en")
+    out: dict[str, str] = {}
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        qid = item.get("id")
+        if qid is None:
+            continue
+        prompt = None
+        if want_en:
+            prompt = item.get("prompt_en") or item.get("label_en")
+        prompt = prompt or item.get("prompt") or item.get("question") or item.get("label")
+        if isinstance(prompt, str) and prompt.strip():
+            out[str(qid)] = prompt.strip()[:500]
+    return out
+
+
 async def get_job_title_and_skills(
     session: AsyncSession, job_id: uuid.UUID
 ) -> tuple[str | None, list[str]]:

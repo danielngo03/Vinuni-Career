@@ -576,5 +576,31 @@ async def list_my_jobs(
             "id": str(j.id),
         },
     )
-    items = [presenters.owner_job_summary(j, locale=locale) for j in page.items]
+
+    # Live recruiting funnel counts (unreviewed / in-pipeline) per job — TWO batched
+    # grouped queries for the whole page (no per-job N+1). Read through the
+    # recruitment facade so this module never imports the Application ORM (lazy
+    # import keeps the opportunities <-> recruitment boundary acyclic).
+    from app.modules.recruitment.application import job_application_stats_facade
+    from app.modules.users.application import user_read_facade
+
+    stats = await job_application_stats_facade.application_stats_for_jobs(
+        session, [j.id for j in page.items]
+    )
+    # Owner (poster) display names — ONE batched users-facade lookup for the page.
+    owner_names = await user_read_facade.get_full_names(
+        session, [j.posted_by for j in page.items]
+    )
+
+    empty_stats = job_application_stats_facade.JobAppStats()
+    items = [
+        presenters.owner_job_summary(
+            j,
+            locale=locale,
+            unreviewed_count=stats.get(j.id, empty_stats).unreviewed,
+            in_pipeline_count=stats.get(j.id, empty_stats).in_pipeline,
+            owner_name=owner_names.get(j.posted_by),
+        )
+        for j in page.items
+    ]
     return items, page.next_cursor, page.limit
