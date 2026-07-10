@@ -8,16 +8,33 @@ endpoint streams Server-Sent Events like the AI chat endpoint.
 from __future__ import annotations
 
 import json
+import logging
 import uuid
 from collections.abc import AsyncGenerator
 
-from fastapi import APIRouter, Depends, File, Query, Response, UploadFile, status
+from fastapi import (
+    APIRouter,
+    Depends,
+    File,
+    Query,
+    Response,
+    UploadFile,
+    WebSocket,
+    WebSocketDisconnect,
+    status,
+)
 from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.ai.gateway.realtime import live_relay
 from app.core.config import get_settings
-from app.core.db import get_db_session
-from app.modules.auth.api.deps import CurrentAuth, get_current_auth
+from app.core.db import get_db_session, get_sessionmaker
+from app.modules.auth.api.deps import (
+    CurrentAuth,
+    get_current_auth,
+    principal_from_access_token,
+)
+from app.modules.auth.application.context import RequestContext
 from app.modules.mock_interview.api.schemas import (
     CreateSessionRequest,
     EndSessionRequest,
@@ -29,6 +46,8 @@ from app.modules.mock_interview.api.schemas import (
 from app.modules.mock_interview.application import progress_service, session_service
 from app.shared.exceptions import AppError, ValidationFailedError
 from app.shared.responses import success
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/mock-interview", tags=["mock-interview"])
 
@@ -279,3 +298,93 @@ async def stt(
         mime_type=mime,
     )
     return success({"transcript": transcript})
+
+
+@router.websocket("/sessions/{session_id}/live")
+async def live_interview(websocket: WebSocket, session_id: uuid.UUID) -> None:
+    """TRUE realtime voice interview — server-mediated Gemini Live relay.
+
+    The browser cannot hold the Google service-account credential, so the server
+    brokers the Live socket and relays audio both ways. The access token is a
+    query param (``?token=``) because browsers cannot set the Authorization
+    header on a WS handshake; owner scoping + the grounded interviewer prompt are
+    resolved in the application layer before any audio flows. Transcript turns
+    are persisted after the session for the coaching report.
+    """
+
+    if not live_relay.live_relay_enabled():
+        await websocket.close(code=1011, reason="unavailable")
+        return
+    token = websocket.query_params.get("token", "")
+    if not token:
+        await websocket.close(code=1008, reason="auth")
+        return
+    await websocket.accept()
+
+    maker = get_sessionmaker()
+    # 1) Authenticate + build the grounded context (short DB session, then release).
+    try:
+        async with maker() as db:
+            principal = await principal_from_access_token(db, token)
+            ctx = await session_service.build_live_relay_context(
+                db, principal=principal, session_id=session_id
+            )
+    except AppError as exc:
+        await websocket.send_json({"type": "error", "reason": exc.code})
+        await websocket.close(code=1008)
+        return
+    except Exception:
+        logger.warning("live_interview.init_failed", exc_info=True)
+        await websocket.send_json({"type": "error", "reason": "init_failed"})
+        await websocket.close(code=1011)
+        return
+
+    # 2) Run the relay — NO DB session held during the (minutes-long) stream.
+    turns: list[dict[str, str]] = []
+    try:
+        await live_relay.run_interview_live(
+            websocket,
+            system_instruction=ctx["system_instruction"],
+            voice=ctx["voice"],
+            turns_sink=turns,
+            max_seconds=int(ctx["max_seconds"]),
+        )
+    except WebSocketDisconnect:
+        pass
+    except live_relay.LiveRelayUnavailable:
+        await _try_send(websocket, {"type": "error", "reason": "unavailable"})
+    except Exception:
+        logger.warning("live_interview.relay_failed", exc_info=True)
+        await _try_send(websocket, {"type": "error", "reason": "relay_failed"})
+
+    # 3) Persist the transcript turns (fresh short DB session; best-effort).
+    if turns:
+        try:
+            async with maker() as db:
+                request_ctx = RequestContext(
+                    ip=websocket.client.host if websocket.client else None,
+                    user_agent=websocket.headers.get("user-agent"),
+                )
+                await session_service.record_turns(
+                    db,
+                    principal=principal,
+                    session_id=session_id,
+                    turns_in=turns,
+                    ctx=request_ctx,
+                )
+        except Exception:
+            logger.warning("live_interview.persist_failed", exc_info=True)
+
+    try:
+        await websocket.close()
+    except Exception:
+        pass
+
+
+async def _try_send(websocket: WebSocket, payload: dict) -> None:
+    """Send a JSON frame, swallowing errors if the socket is already gone."""
+
+    try:
+        await websocket.send_json(payload)
+    except Exception:
+        pass

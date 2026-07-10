@@ -163,6 +163,17 @@ class Settings(BaseSettings):
     google_cloud_location: str = "global"
     google_application_credentials: str = ""
 
+    # --- Mock Interview: TRUE realtime Live relay (server-mediated) --------------
+    # Full-duplex native-audio interview via the Gemini Live model. The browser
+    # cannot hold the Google service-account credential, so the SERVER brokers the
+    # Live socket (ADC), relaying the student's mic audio in and the interviewer's
+    # native-audio out with live transcripts. This is the low-latency "live" tier;
+    # the turn-based STT+TTS tier above is the fallback. Region-pinned because the
+    # Live model is only served from specific Vertex regions (not ``global``).
+    ai_realtime_relay_enabled: bool = False
+    ai_realtime_relay_model: str = "gemini-live-2.5-flash-native-audio"
+    ai_realtime_relay_location: str = "us-central1"
+
     # OCR / extraction (lightweight defaults)
     backend_ai_extras: str = "ai-lite"
     local_ocr_engine: str = "auto"

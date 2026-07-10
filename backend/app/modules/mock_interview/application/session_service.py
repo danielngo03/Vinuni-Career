@@ -883,3 +883,34 @@ async def transcribe_answer_audio(
             "Không nhận dạng được giọng nói lúc này. Bạn có thể gõ câu trả lời.",
             details={"reason": "SPEECH_UNAVAILABLE"},
         ) from exc
+
+
+async def build_live_relay_context(
+    session: AsyncSession, *, principal: Principal, session_id: uuid.UUID
+) -> dict[str, Any]:
+    """Owner-scoped context for the realtime Live relay: the CV+JD-grounded
+    interviewer system prompt, the voice, and the hard duration cap.
+
+    Raises 404 for a non-owner and 409 if the session already ended. The relay
+    itself streams audio; this only authorizes and prepares the grounded prompt
+    so the WS route stays HTTP-thin.
+    """
+
+    _require_student(principal)
+    row = await _load_owned(session, principal=principal, session_id=session_id)
+    if row.status != STATUS_ACTIVE:
+        raise ConflictError(
+            "Buổi phỏng vấn này đã kết thúc.",
+            details={"reason": "SESSION_NOT_ACTIVE"},
+        )
+    grounding = dict(row.grounding_json or {})
+    instruction = prompts.build_conversation_system_prompt(
+        grounding, target_questions=caps.DEFAULT_TARGET_QUESTIONS
+    )
+    voice = getattr(get_settings(), "ai_realtime_voice", "Aoede")
+    return {
+        "system_instruction": instruction,
+        "voice": voice,
+        "max_seconds": caps.MAX_SESSION_SECONDS,
+        "locale": row.locale,
+    }
