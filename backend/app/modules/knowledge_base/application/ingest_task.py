@@ -154,30 +154,28 @@ async def run_ingest(document_id: str, *, session) -> None:
         raise
 
 
-def _read_bytes_file(file_path: str) -> bytes:
-    """Blocking read helper; run via ``asyncio.to_thread`` to avoid blocking the loop."""
-    with open(file_path, "rb") as f:
-        return f.read()
-
-
-def _read_text_file(file_path: str) -> str:
-    """Blocking read helper; run via ``asyncio.to_thread`` to avoid blocking the loop."""
-    with open(file_path, encoding="utf-8", errors="replace") as f:
-        return f.read()
-
-
 async def _extract_text(doc: KnowledgeBaseDocument) -> str:
     """Extract text from the document file using the local-first extraction cascade
     (native text -> layout -> OCR fallback per ``docs/CV_INGESTION_EXTRACTION_SPEC.md``
-    §19). Falls back to a raw plain-text read for ``.txt``/``.md`` files.
+    §19). Falls back to a raw plain-text decode for ``.txt``/``.md`` files.
+
+    ``doc.file_path`` is an internal storage KEY, so bytes are loaded through the
+    shared storage backend (local dir in dev, object storage in production) —
+    never via a raw filesystem ``open()``.
     """
     if not doc.file_path:
+        return ""
+
+    from app.shared.storage import load_bytes
+
+    try:
+        data = await asyncio.to_thread(load_bytes, doc.file_path)
+    except Exception:
         return ""
 
     try:
         from app.ai.extraction.text_extraction import extract_text
 
-        data = await asyncio.to_thread(_read_bytes_file, doc.file_path)
         filename = doc.file_path.rsplit("/", 1)[-1]
         result = await asyncio.to_thread(extract_text, filename, data)
         if result.text:
@@ -188,7 +186,7 @@ async def _extract_text(doc: KnowledgeBaseDocument) -> str:
     # Plain text fallback for .txt and .md files
     if doc.file_path.endswith((".txt", ".md")):
         try:
-            return await asyncio.to_thread(_read_text_file, doc.file_path)
+            return data.decode("utf-8", errors="replace")
         except Exception:
             pass
 

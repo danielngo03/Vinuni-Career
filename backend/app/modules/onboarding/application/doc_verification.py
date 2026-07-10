@@ -64,8 +64,9 @@ async def run_verification(payload: dict) -> None:
             return
 
         try:
-            ocr_result = await _run_ocr(document_path)
-            tamper_score = await _run_tamper_detection(document_path, ocr_result)
+            document_bytes = await _load_document_bytes(document_path)
+            ocr_result = await _run_ocr(document_path, document_bytes)
+            tamper_score = await _run_tamper_detection(document_path, document_bytes)
             gdt_result = await _verify_tax_id(req.tax_id, ocr_result.get("company_name"))
 
             decision = _make_decision(tamper_score=tamper_score, gdt_result=gdt_result)
@@ -103,21 +104,37 @@ async def run_verification(payload: dict) -> None:
 # ── OCR ─────────────────────────────────────────────────────────────────────
 
 
-async def _run_ocr(document_path: str) -> dict:
-    """Extract text from PDF or image. Returns structured fields."""
+async def _load_document_bytes(document_path: str) -> bytes:
+    """Load the stored document via the shared storage backend.
+
+    ``document_path`` is an internal storage KEY (from ``save_upload``), not a
+    filesystem path — raw ``open()`` breaks on both the local backend (key is
+    relative to the storage root, not the cwd) and object storage.
+    """
+    import asyncio
+
+    from app.shared.storage import load_bytes
+
+    return await asyncio.to_thread(load_bytes, document_path)
+
+
+async def _run_ocr(document_path: str, data: bytes) -> dict:
+    """Extract text from PDF or image bytes. Returns structured fields."""
     import asyncio
 
     loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, _run_ocr_sync, document_path)
+    return await loop.run_in_executor(None, _run_ocr_sync, document_path, data)
 
 
-def _run_ocr_sync(document_path: str) -> dict:
+def _run_ocr_sync(document_path: str, data: bytes) -> dict:
     """Synchronous OCR — tries pdfplumber first, falls back to pytesseract."""
+    import io
+
     text = ""
     try:
         import pdfplumber  # type: ignore[import-untyped]
 
-        with pdfplumber.open(document_path) as pdf:
+        with pdfplumber.open(io.BytesIO(data)) as pdf:
             text = "\n".join(p.extract_text() or "" for p in pdf.pages)
     except Exception:  # noqa: BLE001
         pass
@@ -127,7 +144,7 @@ def _run_ocr_sync(document_path: str) -> dict:
             import pytesseract  # type: ignore[import-untyped]
             from PIL import Image  # type: ignore[import-untyped]
 
-            img = Image.open(document_path)
+            img = Image.open(io.BytesIO(data))
             text = pytesseract.image_to_string(img, lang="vie+eng")
         except Exception:  # noqa: BLE001
             pass
@@ -154,30 +171,32 @@ def _extract_field(text: str, labels: list[str]) -> str | None:
 # ── Tamper detection ─────────────────────────────────────────────────────────
 
 
-async def _run_tamper_detection(document_path: str, _ocr_result: dict) -> int:
+async def _run_tamper_detection(document_path: str, data: bytes) -> int:
     """Return tamper score 0–100 (higher = more suspicious)."""
     import asyncio
 
     loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, _run_tamper_sync, document_path)
+    return await loop.run_in_executor(None, _run_tamper_sync, document_path, data)
 
 
-def _run_tamper_sync(document_path: str) -> int:
+def _run_tamper_sync(document_path: str, data: bytes) -> int:
     score = 0
     path_lower = document_path.lower()
     if path_lower.endswith(".pdf"):
-        score += _pdf_tamper_score(document_path)
+        score += _pdf_tamper_score(data)
     else:
-        score += _image_tamper_score(document_path)
+        score += _image_tamper_score(data)
     return min(score, 100)
 
 
-def _pdf_tamper_score(path: str) -> int:
+def _pdf_tamper_score(data: bytes) -> int:
     """Heuristic PDF tamper checks (font consistency, metadata)."""
     try:
+        import io
+
         import pdfplumber  # type: ignore[import-untyped]
 
-        with pdfplumber.open(path) as pdf:
+        with pdfplumber.open(io.BytesIO(data)) as pdf:
             fonts: set[str] = set()
             for page in pdf.pages:
                 chars = page.chars
@@ -192,7 +211,7 @@ def _pdf_tamper_score(path: str) -> int:
     return 0
 
 
-def _image_tamper_score(path: str) -> int:
+def _image_tamper_score(data: bytes) -> int:
     """ELA (Error Level Analysis) heuristic for images."""
     try:
         import io
@@ -200,7 +219,7 @@ def _image_tamper_score(path: str) -> int:
         import numpy as np  # type: ignore[import-untyped]
         from PIL import Image  # type: ignore[import-untyped]
 
-        img = Image.open(path).convert("RGB")
+        img = Image.open(io.BytesIO(data)).convert("RGB")
         # Save at low quality and compare pixel variance
         buf = io.BytesIO()
         img.save(buf, format="JPEG", quality=75)

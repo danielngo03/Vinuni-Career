@@ -48,6 +48,27 @@ async def save_upload(
     return key
 
 
+def save_bytes(key: str, data: bytes) -> None:
+    """Persist raw bytes under an internal storage key via the shared backend.
+
+    For callers that build their own key (e.g. knowledge_base keeps the original
+    filename in the key). The key is never exposed in API responses.
+    """
+    from app.modules.documents.infrastructure.storage import get_storage as get_storage_backend
+
+    get_storage_backend().save(key, data)
+
+
+def load_bytes(key: str) -> bytes:
+    """Load raw bytes for an internal storage key via the shared backend.
+
+    Raises the storage backend's ``StorageError`` when the object is missing.
+    """
+    from app.modules.documents.infrastructure.storage import get_storage as get_storage_backend
+
+    return get_storage_backend().load(key)
+
+
 def _ext_for_mime(mime: str) -> str:
     return {
         "application/pdf": ".pdf",

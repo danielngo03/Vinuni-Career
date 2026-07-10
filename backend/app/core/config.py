@@ -270,8 +270,13 @@ class Settings(BaseSettings):
     cv_stale_after_days: int = 60
 
     # Storage
+    # "local" (LOCAL_STORAGE_DIR on disk) or "gcs" (Google Cloud Storage bucket).
+    # Cloud Run's filesystem is ephemeral, so production must use "gcs" (or mount
+    # a persistent volume) or uploaded CVs/logos vanish on instance recycle.
     storage_backend: str = "local"
     local_storage_dir: str = ".dev/storage"
+    gcs_bucket_name: str = ""
+    gcs_key_prefix: str = ""  # optional folder prefix inside the bucket
     signed_url_ttl_seconds: int = 900
     max_upload_mb: int = 50
     # Organization logo upload cap (docs/API_CONTRACTS.md "Organization Media And

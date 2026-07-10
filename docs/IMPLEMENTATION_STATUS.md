@@ -5,6 +5,44 @@
 
 ---
 
+## GCP Deployment Pack (2026-07-11) — branch `feat/gcp-deploy-pack`
+
+Production-deployability slice for Google Cloud (Cloud Run + Cloud SQL + GCS),
+plus the storage fixes it forced. See `docs/DEPLOYMENT_GCP.md` for the runbook.
+
+- **GCS storage backend — implemented + unit-tested.** `GcsStorageBackend` in
+  `documents/infrastructure/storage.py`; `get_storage()` now honors
+  `STORAGE_BACKEND` (`local`|`gcs`, unknown → explicit `StorageError`); new
+  settings `GCS_BUCKET_NAME`/`GCS_KEY_PREFIX`; dependency `google-cloud-storage`.
+  No schema change (storage keys are already opaque strings).
+  Evidence: `uv run pytest tests/unit/test_storage_backend_selection.py` → 11 passed.
+- **Storage-abstraction bypass fixes (pre-existing bugs).**
+  (1) knowledge_base upload never persisted bytes → ingestion always read a
+  missing file; router now calls shared `save_bytes`. (2) `ingest_task` and
+  onboarding `doc_verification` did raw `open(storage_key)` — broken locally
+  (key ≠ cwd-relative path) and on any cloud backend; both now load via the
+  shared storage facade (`app/shared/storage.py` gained `save_bytes`/`load_bytes`).
+  Evidence: `pytest tests/integration/test_knowledge_base.py
+  tests/integration/test_documents.py tests/integration/test_onboarding_api.py`
+  → 93 passed; `ruff` + `mypy` clean on touched files.
+- **Containerization — implemented + smoke-verified.** `backend/Dockerfile`
+  (uv, non-root, honors Cloud Run `$PORT`, optional `INSTALL_OCR=true` layer
+  with Tesseract vie+eng + poppler), `frontend/Dockerfile` (pnpm, Next 15
+  `output: "standalone"` added to `next.config.ts`), both `.dockerignore`s,
+  root `cloudbuild.yaml` (build → migrate job → deploy api/scheduler/web).
+  Evidence: backend image builds; `docker run -e PORT=8081` →
+  `GET /api/v1/health` HTTP 200. Frontend `pnpm build` green with standalone
+  output (`.next/standalone/server.js` present). NOT yet deployed to a real
+  GCP project (needs owner's project/billing/credentials).
+- **Env example gaps closed.** `CORS_ALLOW_ORIGINS`, `GOOGLE_OAUTH_CLIENT_ID/
+  SECRET`, `OAUTH_REDIRECT_BASE_URL`, GCS vars, required-in-prod Fernet keys
+  documented in `backend/.env.example`; `NEXT_PUBLIC_API_URL` added to
+  `frontend/.env.example` (it was used by `next.config.ts`/SSR but undocumented).
+- **Google OAuth — no code needed (verified).** Backend flow, `oidc_accounts`
+  table (migration 0057), nullable `password_hash`, frontend Google buttons and
+  callback/link-conflict pages already exist; activation is configuration only
+  (client ID/secret + redirect URI per `docs/DEPLOYMENT_GCP.md` §5).
+
 ## Wave 1 (2026-07-10) — IN PROGRESS
 
 Multi-agent Wave 1 batch against `vinuni-main-submission` (UI overhaul worktree).
