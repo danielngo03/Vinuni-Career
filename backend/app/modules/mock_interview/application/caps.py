@@ -32,7 +32,11 @@ REPORT_MAX_TOKENS = 1400  # the whole coaching report
 # The planner runs ONCE at session create on a stronger model and is FROZEN on
 # the session row, so every later turn/tier/report reuses it for free — a single
 # larger call amortized across the whole session.
-PLAN_MAX_TOKENS = 1300  # the frozen interview plan (competencies + question bank)
+PLAN_MAX_TOKENS = 3000  # the frozen interview plan (competencies + question bank).
+# A 6-competency plan with a 3-tier question bank + evidence does not fit in ~1300
+# output tokens: the JSON truncates mid-structure and the strong-model plan silently
+# degrades to the deterministic one. 3000 lets the LLM plan actually land (still one
+# amortized call per session).
 # The analyzer runs ONCE at end on a reasoning model (latency is fine there).
 ANALYSIS_MAX_TOKENS = 1100  # per-competency coverage / STAR / gap analysis
 # The adaptive-difficulty signal is a tiny, best-effort, cheap flash probe.
