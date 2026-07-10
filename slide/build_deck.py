@@ -469,27 +469,46 @@ def s11():
           <div style="display:flex;gap:.9rem;flex-wrap:wrap">{lg}</div>
           <div>{rw}</div>
           <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.2rem">{ch}</div></div>'''
-    arrow = '<div style="display:grid;place-items:center;color:#c9c5bb;font-size:1.4rem;font-weight:800">→</div>'
-    infra = "".join(f'<span style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700">{tlogo(n, 20)}{t}</span>'
+    arrow = '<div style="display:grid;place-items:center;color:#c9c5bb;font-size:1.3rem;font-weight:800">→</div>'
+    infra = "".join(f'<span style="display:flex;align-items:center;gap:.4rem;font-size:.76rem;font-weight:700">{tlogo(n, 19)}{t}</span>'
                     for n, t in [("docker-icon", "Docker"), ("digital-ocean-icon", "DigitalOcean"), ("sentry-icon", "Sentry")])
+    def tier(color, ic, title, rows, chips):
+        rw = "".join(f'''<div style="display:flex;gap:.5rem;align-items:center;margin-top:.38rem">
+            <span style="flex:0 0 auto;display:grid;place-items:center">{icon("check", 15)}</span>
+            <span style="font-size:.8rem;line-height:1.35">{r}</span></div>''' for r in rows)
+        ch = "".join(f'<span class="chip" style="background:{color}12;color:{color};font-size:.68rem;padding:.26em .6em">{c}</span>' for c in chips)
+        return f'''<div class="card" style="flex:1;padding:.9rem 1.05rem;display:flex;flex-direction:column;gap:.35rem;justify-content:center;border-top:3px solid {color}">
+          <div style="display:flex;align-items:center;gap:.6rem">{icbox(ic, color, 36, 20, 10)}
+            <div style="font-weight:800;font-size:.92rem">{title}</div></div>
+          <div>{rw}</div>
+          <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.1rem">{ch}</div></div>'''
     return head(11, "Phần 3 · Kiến trúc", "Kiến trúc hệ thống",
-                "Ba lớp tách bạch, mọi thay đổi đều được ghi vết — sẵn sàng phục vụ nhiều tổ chức.") + f'''
-    <div class="body" style="flex-direction:column;gap:.9rem;justify-content:center">
-      <div style="display:flex;gap:.7rem;align-items:center">
+                "Không chỉ ba lớp — còn tầng AI dùng chung và tầng tự động hoá chạy nền, mọi thao tác đều được ghi vết.") + f'''
+    <div class="body" style="flex-direction:column;gap:.7rem;justify-content:center">
+      <div style="display:flex;gap:.55rem;align-items:stretch">
         {box("Giao diện", [("nextjs-icon", "Next.js 15"), ("react", "React 19"), ("typescript-icon", "TS"), ("tailwindcss-icon", "Tailwind")],
-             ["120 màn hình cho 4 nhóm người dùng", "Song ngữ Việt – Anh", "Giao diện sáng / tối"],
-             ["App Router", "shadcn/ui", "Playwright"], PAL["sky"])}
+             ["120 màn hình · 4 nhóm người dùng", "Song ngữ Việt – Anh, sáng / tối"],
+             ["App Router", "shadcn/ui"], PAL["sky"])}
         {arrow}
         {box("Xử lý nghiệp vụ", [("fastapi-icon", "FastAPI"), ("python", "Python 3.12")],
-             ["34 phân hệ độc lập, ranh giới rõ", "Phân quyền kiểm tra ở tầng dịch vụ", "Mọi thao tác ghi đều có nhật ký"],
-             ["tuyển dụng", "hồ sơ CV", "trợ lý AI", "quy trình", "báo cáo", "+29"], PAL["indigo"])}
+             ["34 phân hệ độc lập, ranh giới rõ", "Phân quyền tầng dịch vụ · nhật ký mọi thao tác"],
+             ["tuyển dụng", "hồ sơ CV", "sự kiện", "kiểm duyệt", "+30"], PAL["indigo"])}
         {arrow}
-        {box("Dữ liệu &amp; AI", [("postgresql", "PostgreSQL 16"), ("redis", "Redis"), ("openai-icon", "Cổng AI")],
-             ["Tìm kiếm ngữ nghĩa (pgvector)", "Xử lý nền bằng hàng đợi Celery", "Nhiều nhà cung cấp AI, tự chuyển dự phòng"],
-             ["read-models", "giám sát Langfuse", "ẩn danh nhà cung cấp"], PAL["teal"])}</div>
-      <div class="card" style="padding:.75rem 1.2rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap">
-        <span style="font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--faint)">Hạ tầng</span>{infra}
-        <span class="chip pill" style="margin-left:auto">{icon("shield", 15)} Thiết kế nhiều tổ chức — thêm trường mới không phải viết lại</span></div>
+        {box("Dữ liệu", [("postgresql", "PostgreSQL 16"), ("redis", "Redis")],
+             ["Tìm kiếm ngữ nghĩa (pgvector)", "Bảng đọc riêng cho báo cáo — dashboard luôn nhanh"],
+             ["98 migration", "read-models", "audit log"], PAL["teal"])}</div>
+      <div style="display:flex;gap:.7rem;align-items:stretch">
+        {tier(PAL["violet"], "ai", "Tầng AI — dùng chung cho mọi phân hệ",
+              ["Cổng AI: nhiều nhà cung cấp, tự chuyển dự phòng, ẩn tên nhà cung cấp với người dùng",
+               "Chấm điểm CV 0–100 · đọc CV · trợ lý ảo · phỏng vấn thử · gợi ý việc làm"],
+              ["đo từng lượt dùng", "hỏi trước khi ghi", "giám sát Langfuse"])}
+        {tier(PAL["orange"], "workflow", "Tầng tự động hoá &amp; xử lý nền",
+              ["Quy trình tự động dạng sơ đồ: Bản nháp → Chạy thử → Kích hoạt — bước hệ trọng cần người duyệt",
+               "Việc nặng chạy nền: đọc CV, gửi email &amp; thông báo, làm mới báo cáo"],
+              ["hàng đợi Celery", "sự kiện outbox", "lịch chạy nền"])}</div>
+      <div class="card" style="padding:.6rem 1.1rem;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap">
+        <span style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--faint)">Hạ tầng</span>{infra}
+        <span class="chip pill" style="margin-left:auto;font-size:.74rem">{icon("shield", 14)} Thiết kế nhiều tổ chức — thêm trường mới không phải viết lại</span></div>
     </div>'''
 
 
@@ -529,11 +548,22 @@ def s12():
           <span style="font-size:.72rem;font-weight:800;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">AI có kiểm soát:</span>{gov}</div>
         <div class="card" style="padding:.85rem 1.05rem">
           <div style="font-weight:800;font-size:.9rem">Khi có sự cố thì sao?</div>{resil}</div></div>
-      <div class="card" style="flex:.95;padding:1.1rem 1.2rem;align-self:center">
-        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem">{icbox("cv", PAL["violet"], 40, 22)}
-          <div style="font-weight:800;font-size:.95rem">Đọc CV tự động — PDF, Word, ảnh scan</div></div>
-        {steps}
-        <div class="sub" style="font-size:.76rem;margin-top:.65rem">Bước rẻ chạy trước, AI chỉ dùng khi thật sự cần. File không phải CV bị từ chối rõ ràng — <b>không bao giờ bịa dữ liệu</b>.</div></div>
+      <div style="flex:.95;display:flex;flex-direction:column;gap:.8rem;justify-content:center">
+        <div class="card" style="padding:1rem 1.15rem">
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.25rem">{icbox("cv", PAL["violet"], 38, 21)}
+            <div style="font-weight:800;font-size:.93rem">Đọc CV tự động — PDF, Word, ảnh scan</div></div>
+          {steps}
+          <div class="sub" style="font-size:.74rem;margin-top:.55rem">Bước rẻ chạy trước, AI chỉ dùng khi thật sự cần. File không phải CV bị từ chối rõ ràng — <b>không bao giờ bịa dữ liệu</b>.</div></div>
+        <div class="card" style="padding:1rem 1.15rem">
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem">{icbox("workflow", PAL["orange"], 38, 21)}
+            <div style="font-weight:800;font-size:.93rem">Tự động hoá quy trình — có kiểm soát</div></div>
+          <div style="display:flex;align-items:center;gap:.45rem">
+            <span class="chip" style="background:#f0efe9;color:var(--mut);flex:1;justify-content:center">Bản nháp</span>
+            <span style="color:#c9c5bb;font-weight:800">→</span>
+            <span class="chip" style="background:{PAL["amber"]}18;color:#b45309;flex:1;justify-content:center">Chạy thử</span>
+            <span style="color:#c9c5bb;font-weight:800">→</span>
+            <span class="chip" style="background:{PAL["emerald"]}14;color:{PAL["emerald"]};flex:1;justify-content:center">Kích hoạt</span></div>
+          <div class="sub" style="font-size:.74rem;margin-top:.55rem">Nhà trường tự vẽ quy trình (duyệt tin, nhắc hạn, gửi thông báo...) — bước hệ trọng luôn cần <b>người xác nhận</b>, bản đang chạy <b>không thể bị sửa lén</b>.</div></div></div>
     </div>'''
 
 

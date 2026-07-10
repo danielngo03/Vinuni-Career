@@ -21,6 +21,7 @@ trình bày trước đông người: mỗi slide một ý chính, kín nội du
 | `02-DECK-SPEC.md` | Spec 15 slide (nội dung + trực quan + bảng nguồn số liệu) |
 | `03-BRAND-DESIGN-SYSTEM.md` | Hệ thiết kế: màu, chữ, card, mockup, quy tắc bố cục |
 | `04-MASTER-PROMPT.md` | Prompt cho Claude Design khi cần tinh chỉnh mà vẫn giữ chuẩn |
+| `05-KICH-BAN-THUYET-TRINH.md` | **Kịch bản nói** khớp từng slide (~9 phút) + hỏi đáp khó + mẹo trình bày |
 
 ## 🗂️ 15 slide (4 phần)
 
