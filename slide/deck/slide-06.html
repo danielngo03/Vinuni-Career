@@ -1,0 +1,79 @@
+<!-- @dsCard group="Pitch Deck" -->
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F8F7F1;--card:#fff;--line:#e9e7e1;--ink:#171717;--mut:#57534e;--faint:#a8a29e;
+ --indigo:#6366f1;--teal:#14b8a6;--amber:#f59e0b;--rose:#f43f5e;--sky:#0ea5e9;--emerald:#10b981;--violet:#8b5cf6;--orange:#f97316;
+ --grad:linear-gradient(135deg,#4f46e5 0%,#6d28d9 55%,#7c3aed 100%)}
+html,body{background:#e3e1d9;font-family:-apple-system,"SF Pro Display","Be Vietnam Pro","Segoe UI",Roboto,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.slide{position:relative;width:100%;aspect-ratio:16/9;background:var(--bg);overflow:hidden;padding:3.6% 4.4% 3.8%;display:flex;flex-direction:column}
+.hd{display:flex;gap:.95rem;align-items:flex-start;margin-bottom:1rem}
+.no{width:38px;height:38px;border-radius:11px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.95rem;flex:0 0 auto;margin-top:.25rem}
+.kick{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--faint)}
+h1.t{font-size:2.15rem;font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin-top:.12rem}
+.st{font-size:.95rem;color:var(--mut);margin-top:.3rem}
+.sub{color:var(--mut);line-height:1.45}
+.body{flex:1;display:flex;min-height:0;gap:1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 26px -16px rgba(23,23,23,.16)}
+.chip{display:inline-flex;align-items:center;gap:.45em;border-radius:999px;padding:.4em .85em;font-size:.8rem;font-weight:700}
+.pill{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.num{font-weight:800;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.foot{position:absolute;left:4.4%;right:4.4%;bottom:2.2%;display:flex;justify-content:space-between;font-size:.74rem;font-weight:700;color:var(--faint)}
+.hero{background:var(--grad);color:#fff;border-radius:18px}
+.laptop .scr{background:#171717;border-radius:12px 12px 3px 3px;padding:7px;box-shadow:0 28px 54px -20px rgba(23,23,23,.45)}
+.laptop .scr img{width:100%;display:block;border-radius:5px}
+.laptop .base{height:12px;width:112%;margin-left:-6%;background:linear-gradient(#eceae4,#cfccc3);border-radius:0 0 11px 11px;position:relative}
+.laptop .base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:15%;height:5px;background:#b8b4aa;border-radius:0 0 6px 6px}
+.brow{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 10px 24px -14px rgba(23,23,23,.2);display:flex;flex-direction:column}
+.brow .bar{height:22px;background:#f5f4ef;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:5px;padding:0 9px;flex:0 0 auto}
+.brow .bar i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.brow .imgwrap{flex:1;overflow:hidden;min-height:0}.brow img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.brow .lb{font-size:.76rem;font-weight:700;color:var(--ink);padding:.42rem .6rem;display:flex;align-items:center;gap:.5em;flex:0 0 auto}
+.deck{max-width:1180px;margin:0 auto}.deck .slide{border-radius:12px;box-shadow:0 12px 44px rgba(0,0,0,.16)}
+.navbar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:50;background:#171717;color:#fff;border-radius:999px;padding:.45rem 1rem;font-size:.82rem;display:flex;gap:1rem;align-items:center}
+.navbar button{background:none;border:none;color:#fff;cursor:pointer;font-size:1.05rem}
+@media print{.navbar{display:none}.deck{max-width:none}.deck .slide{box-shadow:none;border-radius:0;page-break-after:always}}
+</style></head><body><section class="slide"><div class="hd"><span class="no">06</span><div><div class="kick">Phần 1 · Tính năng AI</div><h1 class="t">AI hỗ trợ trong từng bước ứng tuyển</h1><div class="st">Ba ví dụ tiêu biểu — tất cả đều đang chạy trong sản phẩm.</div></div></div>
+    <div class="body" style="gap:1.1rem"><div class="card" style="flex:1;padding:1.15rem;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:.6rem"><span style="display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#f43f5e14;flex:0 0 auto"><svg style="display:block" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#f43f5e" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" opacity=".5"/><path fill="#f43f5e" d="M9.25 12a.75.75 0 0 1 .75-.75h1.25V10a.75.75 0 0 1 1.5 0v1.25H14a.75.75 0 0 1 0 1.5h-1.25V14a.75.75 0 0 1-1.5 0v-1.25H10a.75.75 0 0 1-.75-.75m-7.222.75a10 10 0 0 1 0-1.5H5a.75.75 0 0 1 0 1.5zm10.722 9.222a10 10 0 0 1-1.5 0V19a.75.75 0 0 1 1.5 0zm9.222-10.722a10 10 0 0 1 0 1.5H19a.75.75 0 0 1 0-1.5zM12.75 2.028V5a.75.75 0 0 1-1.5 0V2.028a10 10 0 0 1 1.5 0"/></svg></span>
+        <div style="font-weight:800;font-size:.96rem">Chấm điểm CV theo từng tin tuyển dụng</div></div>
+      <div style="display:flex;align-items:center;gap:1rem;flex:1">
+        <svg viewBox="0 0 140 140" style="width:132px;height:132px">
+      <circle cx="70" cy="70" r="54" fill="none" stroke="#eeece6" stroke-width="14"/>
+      <circle cx="70" cy="70" r="54" fill="none" stroke="#10b981" stroke-width="14" stroke-linecap="round"
+        stroke-dasharray="295.2 339.3" transform="rotate(-90 70 70)"/>
+      <text x="70" y="66" text-anchor="middle" font-size="30" font-weight="800" fill="#171717">87</text>
+      <text x="70" y="88" text-anchor="middle" font-size="10.5" fill="#a8a29e">điểm phù hợp</text></svg>
+        <div style="flex:1"><div style="display:flex;align-items:center;gap:.5rem;margin-top:.4rem">
+        <span style="font-size:.74rem;color:var(--mut);width:86px;flex:0 0 auto">Kỹ năng</span>
+        <div style="flex:1;height:7px;border-radius:99px;background:#eeece6"><div style="width:50%;height:100%;border-radius:99px;background:#6366f1"></div></div>
+        <span style="font-size:.74rem;font-weight:800;width:32px;text-align:right">50%</span></div><div style="display:flex;align-items:center;gap:.5rem;margin-top:.4rem">
+        <span style="font-size:.74rem;color:var(--mut);width:86px;flex:0 0 auto">Kinh nghiệm</span>
+        <div style="flex:1;height:7px;border-radius:99px;background:#eeece6"><div style="width:25%;height:100%;border-radius:99px;background:#14b8a6"></div></div>
+        <span style="font-size:.74rem;font-weight:800;width:32px;text-align:right">25%</span></div><div style="display:flex;align-items:center;gap:.5rem;margin-top:.4rem">
+        <span style="font-size:.74rem;color:var(--mut);width:86px;flex:0 0 auto">Chất lượng CV</span>
+        <div style="flex:1;height:7px;border-radius:99px;background:#eeece6"><div style="width:15%;height:100%;border-radius:99px;background:#f59e0b"></div></div>
+        <span style="font-size:.74rem;font-weight:800;width:32px;text-align:right">15%</span></div><div style="display:flex;align-items:center;gap:.5rem;margin-top:.4rem">
+        <span style="font-size:.74rem;color:var(--mut);width:86px;flex:0 0 auto">Điều kiện</span>
+        <div style="flex:1;height:7px;border-radius:99px;background:#eeece6"><div style="width:10%;height:100%;border-radius:99px;background:#0ea5e9"></div></div>
+        <span style="font-size:.74rem;font-weight:800;width:32px;text-align:right">10%</span></div></div></div>
+      <div class="sub" style="font-size:.78rem">Cùng một CV, cùng một tin — luôn ra cùng một điểm. Chỉ rõ kỹ năng còn thiếu.</div></div><div class="card" style="flex:1;padding:1.15rem;display:flex;flex-direction:column;gap:.55rem">
+      <div style="display:flex;align-items:center;gap:.6rem"><span style="display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#8b5cf614;flex:0 0 auto"><svg style="display:block" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#8b5cf6" d="M3 10c0-3.771 0-5.657 1.172-6.828S7.229 2 11 2h2c3.771 0 5.657 0 6.828 1.172S21 6.229 21 10v4c0 3.771 0 5.657-1.172 6.828S16.771 22 13 22h-2c-3.771 0-5.657 0-6.828-1.172S3 17.771 3 14z" opacity=".5"/><path fill="#8b5cf6" fill-rule="evenodd" d="M7.25 12a.75.75 0 0 1 .75-.75h8a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75m0-4A.75.75 0 0 1 8 7.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 8m0 8a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75" clip-rule="evenodd"/></svg></span>
+        <div style="font-weight:800;font-size:.96rem">Sửa CV bằng câu lệnh tự nhiên</div></div>
+      <div style="background:#faf9f5;border:1px solid var(--line);border-radius:12px;padding:.75rem .85rem;font-size:.8rem;flex:1;display:flex;flex-direction:column;justify-content:center;gap:.4rem">
+        <div style="color:var(--faint);font-style:italic">"Làm nổi bật kinh nghiệm Python của tôi"</div>
+        <div style="background:#fef2f2;border-radius:7px;padding:.35rem .55rem;text-decoration:line-through;color:#b91c1c">Tham gia dự án phần mềm của lớp</div>
+        <div style="background:#ecfdf5;border-radius:7px;padding:.35rem .55rem;color:#047857">Xây dựng REST API bằng Python/FastAPI phục vụ 2.000 người dùng</div></div>
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <span class="chip" style="background:var(--ink);color:#fff">Chấp nhận</span>
+        <span class="chip pill">Từ chối</span>
+        <span class="sub" style="font-size:.74rem;margin-left:auto">Bạn duyệt, AI mới được sửa</span></div></div><div class="card" style="flex:1;padding:1.15rem;display:flex;flex-direction:column;gap:.55rem">
+      <div style="display:flex;align-items:center;gap:.6rem"><span style="display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#0ea5e914;flex:0 0 auto"><svg style="display:block" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#0ea5e9" d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1S1 5.925 1 12c0 1.76.413 3.423 1.148 4.898c.195.392.26.84.147 1.263l-.655 2.448a1.43 1.43 0 0 0 1.75 1.751l2.45-.655a1.8 1.8 0 0 1 1.262.147A10.96 10.96 0 0 0 12 23" opacity=".5"/><path fill="#0ea5e9" d="M10.9 12a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 0 0-2.2 0m-4.4 0a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 0 0-2.2 0m8.8 0a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 0 0-2.2 0"/></svg></span>
+        <div style="font-weight:800;font-size:.96rem">Trợ lý ảo &amp; phỏng vấn thử</div></div>
+      <div style="background:#faf9f5;border:1px solid var(--line);border-radius:12px;padding:.75rem .85rem;font-size:.8rem;flex:1;display:flex;flex-direction:column;justify-content:center;gap:.5rem">
+        <div style="color:var(--faint);font-style:italic">"Tìm 3 việc hợp với CV của tôi rồi nộp việc đầu tiên"</div>
+        <div style="background:#fff;border:1px solid var(--line);border-radius:9px;padding:.55rem .65rem">
+          <b style="font-size:.8rem">Xác nhận nộp đơn?</b>
+          <div class="sub" style="font-size:.75rem">Backend Intern · FPT Software · CV "Nguyễn Minh Anh v3"</div></div></div>
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+        <span class="chip" style="background:#0ea5e914;color:#0ea5e9">Trợ lý 25+ thao tác</span>
+        <span class="chip" style="background:#6366f114;color:#6366f1">Phỏng vấn thử theo đúng tin tuyển</span></div></div></div><div class="foot"><span>C2-Team-037</span><span>06 / 15</span></div></section></body></html>

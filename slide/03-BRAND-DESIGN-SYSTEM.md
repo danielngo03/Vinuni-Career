@@ -1,145 +1,54 @@
-# BRAND & DESIGN SYSTEM — cho bộ slide
+# BRAND & DESIGN SYSTEM — bộ slide 15 trang
 
-Hệ thiết kế slide **bám đúng design system thật của sản phẩm** (v10 "Monochrome Shell + Data-viz Content" —
-`docs/DESIGN.md §1.1.2` + `frontend/src/app/globals.css`). Claude Design phải dùng đúng các token dưới đây.
+Hệ thiết kế của deck (đã cài trong `build_deck.py` — biến CSS `:root`). Bám ngôn ngữ thị giác v10 của chính
+sản phẩm: nền giấy ấm + card trắng + ink làm màu hành động + palette data-viz có nghĩa.
 
----
-
-## 1. Nền & khung tổng (deck-level)
-
-- **Nền slide:** `#F8F7F1` (giấy ấm — lựa chọn của bạn). **Thẻ/card:** trắng tinh `#ffffff`.
-  > Lưu ý: sản phẩm thật dùng canvas `#fafafa` (trắng lạnh). `#F8F7F1` là biến thể "giấy ấm" cố ý cho slide —
-  > **giữ nhất quán toàn deck**, và card luôn `#ffffff` để tương phản với nền.
-- **Khung monochrome (SHELL):** mọi tiêu đề/chữ/viền dùng thang xám; **không** dùng đen tuyền `#000` trên
-  trắng tuyền. Ink hành động: `#171717`.
-- **Bo góc:** card `14px` (rounded-xl); chip/badge/dot bo tròn hoàn toàn (pill); ô icon `10px`.
-- **Viền & bóng:** **viền 1px `#e5e5e5` gánh hình khối**; bóng gần như vô hình
-  (`shadow-sm: 0 1px 3px rgba(0,0,0,.06)`). Triết lý: "công cụ vận hành nghiêm túc — viền sắc nét hơn là glow".
-
----
-
-## 2. Bảng màu chính xác (dán nguyên vào Claude Design)
-
-### 2.1 Thang xám SHELL (monochrome — khung, chữ, viền)
-```
-50 #fafafa · 100 #f5f5f5 · 200 #e5e5e5 · 300 #d4d4d4 · 400 #a3a3a3 · 500 #737373
-600 #525252 · 700 #404040 · 800 #262626 · 900 #171717 · 950 #0a0a0a
-```
-- Nền slide `#F8F7F1` · Card `#ffffff` · Viền `#e5e5e5` · Chữ chính `#171717` · Chữ phụ `#525252` ·
-  Chữ mờ/muted `#8f8f8f` · Kicker/eyebrow `#737373`.
-
-### 2.2 Palette DATA-VIZ (CONTENT — biểu đồ, KPI, chip, trạng thái) — thứ tự khóa, colorblind-safe
-```
-indigo  #6366f1   teal   #14b8a6   amber  #f59e0b   rose   #f43f5e
-sky     #0ea5e9   emerald #10b981  violet #8b5cf6   orange #f97316
-```
-- Mỗi màu có tint `-soft` ~12% để đổ nền chip/tile, ví dụ indigo-soft `rgba(99,102,241,0.12)`.
-- **Chuỗi biểu đồ phân loại** đi theo đúng thứ tự: indigo → teal → amber → rose → sky → emerald → violet → orange.
-
-### 2.3 Màu ngữ nghĩa (dùng ĐÚNG ý nghĩa, không trang trí)
-- **Thành công / tốt:** emerald `#10b981`
-- **Cảnh báo / SPONSORED:** amber `#f59e0b`  ← nhãn `Được tài trợ`/`Quảng cáo` **luôn amber, không gỡ**
-- **Nguy hiểm / thương hiệu VinUni:** đỏ VinUni `#c83538` (RGB 200,53,56)
-- **Thông tin / AI:** sky `#0ea5e9` hoặc indigo `#6366f1`
-
-### 2.4 Gradient hero (ĐIỂM NHẤN — tối đa 1 panel/slide)
-```
-linear-gradient(135deg, #4f46e5 0%, #6d28d9 55%, #7c3aed 100%)   /* chữ trắng */
-```
-- Chỉ dùng cho **1** khối tóm tắt/hero mỗi slide. **Không** dùng làm nền cả slide. **Không** quá 1 lần/slide.
-
-### 2.5 Thương hiệu VinUni
-- Đỏ VinUni `#c83538` (dùng cho logo/điểm nhấn thương hiệu & trạng thái "danger/risk").
-- Xanh VinUni cũ `#2e548a` đã **remap sang xám** trong shell v10 — **không** dùng làm accent nền xanh/navy.
-
----
-
-## 3. Typography
-
-- **Font chính:** **Plus Jakarta Sans** (heading + body). Fallback: Inter / Be Vietnam Pro.
-- **Font số/metric:** **JetBrains Mono** (`tabular-nums`) — dùng cho mọi con số KPI, score, lương, %.
-- **Thang chữ khóa (size / line-height / weight):**
-  ```
-  display  30–56 / 1.15 / 600   (tiêu đề bìa & hero — có thể phóng to cho slide)
-  h1       24 / 32 / 600
-  h2       20 / 28 / 600
-  h3       16 / 24 / 600
-  body     14 / 20 / 400
-  small    13 / 18 / 400
-  caption  12 / 16 / 500
-  metric   30 / 1 / 600  tabular-nums
-  kicker   11 / — / 600  UPPERCASE, letter-spacing 0.12em, màu #737373
-  ```
-- Heading dùng **letter-spacing âm nhẹ** (−0.02em → −0.01em). Weight cho phép: 400/500/600/700.
-
----
-
-## 4. Component pattern (Claude Design tái sử dụng cho mọi slide)
-
-- **KPI tile:** `rounded-xl border bg-white p-4 shadow-sm` · số lớn tabular (JetBrains Mono) · 1 delta pill
-  bo tròn (emerald ↑ / rose ↓) · 1 ô icon `rounded-lg` màu palette-soft.
-- **Chip / status:** pill bo tròn = chấm màu + nền `-soft` + chữ đậm cùng tông. (vd "Strong fit" = emerald).
-- **Card:** trắng, viền 1px `#e5e5e5`, bóng cực nhẹ; hover nâng viền lên `#d4d4d4`.
-- **Flow node:** pill/box bo 14px, icon lucide bên trái, mũi tên nối mảnh; node "AI/ghi" viền sky/amber.
-- **Biểu đồ (Recharts style):** gridline `#e5e5e5`, tooltip bo 10px, area fill gradient nhẹ, chuỗi theo thứ
-  tự palette. Donut/score dùng màu band tương ứng.
-- **Icon:** **chỉ lucide-react** (nét mảnh monochrome). **Heart = yêu thích job** (không nhầm bookmark). Không
-  dùng emoji làm icon UI (emoji trong file spec này chỉ để bạn đọc).
-
----
-
-## 5. Layout grammar cho mỗi slide (khung lặp lại)
+## 1. Màu
 
 ```
-┌────────────────────────────────────────────────────────────┐
-│ KICKER (11px, uppercase, xám)                    ● logo nhỏ │
-│ Tiêu đề slide (h1/display, ink #171717)                     │
-│ ── dòng phụ ngắn (body, #525252) ──                         │
-│                                                             │
-│   [ Vùng nội dung: card trắng / flow / biểu đồ / KPI ]      │
-│   • tối đa 1 panel gradient indigo→violet                   │
-│                                                             │
-│ footer: tên deck • VinUni • 07 / 20  (số trang)             │
-└────────────────────────────────────────────────────────────┘
+Nền slide   #F8F7F1      Card        #ffffff      Viền   #e9e7e1
+Ink (chữ/hành động) #171717   Chữ phụ #57534e   Chữ mờ #a8a29e
+Palette nhấn: indigo #6366f1 · teal #14b8a6 · amber #f59e0b · rose #f43f5e
+              sky #0ea5e9 · emerald #10b981 · violet #8b5cf6 · orange #f97316
+Gradient hero (tối đa 1 panel/slide): linear-gradient(135deg,#4f46e5 0%,#6d28d9 55%,#7c3aed 100%)
 ```
-- **Lưới:** 12 cột, gutter thoáng, lề rộng. Ưu tiên **khoảng trắng** (premium = restraint).
-- **Mật độ:** mỗi slide 1 ý chính; ≤ 3–4 gạch đầu dòng/khối; đừng nhồi chữ.
 
----
+Màu dùng đúng nghĩa: emerald = tốt/đã xong · amber = cảnh báo/"mục tiêu"/"Được tài trợ" · rose = điểm nghẽn/
+thiếu · sky/indigo = thông tin/AI. Persona: sinh viên sky · doanh nghiệp teal · nhà trường amber.
 
-## 6. Cheat-sheet "on-brand" (8 quy tắc Claude Design phải theo)
+## 2. Chữ & khối
 
-1. **Nền `#F8F7F1`, card `#ffffff`** — nhất quán toàn deck; không đen/trắng tuyền.
-2. **Khung xám, nhấn có ý nghĩa** — màu chỉ mang ý nghĩa (emerald=tốt, amber=sponsored/cảnh báo, đỏ VinUni=
-   danger/brand, sky/indigo=info/AI). Dữ liệu phân loại theo thứ tự palette.
-3. **Tối đa 1 gradient indigo→violet mỗi slide** (hero rule). Không blob gradient, không glow.
-4. **Card:** rounded 14px, viền 1px `#e5e5e5`, bóng gần như không. Sắc nét, không bóng bẩy.
-5. **Chữ:** Plus Jakarta Sans; heading tracking âm nhẹ; **mọi số dùng mono tabular**.
-6. **Khoảng trắng rộng, 1 ý/slide.** Năng lượng Linear/Vercel/ops-tool, không marketing filler.
-7. **Colorblind-safe & light+dark:** ưu tiên light cho slide; nếu làm dark, dùng canvas `#0a0a0a`, card
-   `#111111`, viền `#262626`, chữ `#ededed`.
-8. **KHÔNG bao giờ** gỡ nhãn `Được tài trợ`/`Quảng cáo`; **KHÔNG** phơi tên provider/model AI, token, latency.
+- Font hệ thống (SF/Segoe/Be Vietnam Pro fallback) — không phụ thuộc webfont để chạy offline.
+- Header slide: **ô số đen 38px bo 11px** + kicker UPPERCASE (0.72rem, xám, tracking .16em) + tiêu đề 2.15rem
+  weight 800 tracking −.02em + 1 dòng phụ đề 0.95rem xám.
+- Card: bo **18px**, viền 1px `#e9e7e1`, bóng `0 10px 26px -16px rgba(23,23,23,.16)`. Chip: pill bo tròn.
+- Số liệu: weight 800, `tabular-nums`.
+- **Footer mọi slide:** trái `C2-Team-037` · phải `NN / 15` (0.74rem, xám mờ). Không thêm gì khác.
 
----
+## 3. Asset (tất cả trong `slide/assets/`)
 
-## 7. Skeleton CSS gợi ý (để Claude Design khởi tạo nhanh — tùy chọn)
+| Loại | File | Quy tắc |
+|---|---|---|
+| Logo | `logo-dark-480.png` | **Logo duy nhất được dùng** (mark đen, nền trong suốt). Trên panel gradient: thêm `filter:invert(1) brightness(2)`. |
+| Screenshot | `shot-*.png` (7 file) | Ảnh thật từ app — luôn đặt trong laptop/browser mockup, không dán trần. |
+| Ảnh | `campus-small.jpg` | Khuôn viên VinUni — slide kết, có overlay caption. |
+| Icon | `lib/ic-*.svg` (42) | Solar **bold-duotone** đã tô màu palette — đặt trong ô `background:{màu}14` bo 10–12px. Không vẽ icon tay, không emoji. |
+| Logo công nghệ | `lib/logo-*.svg` (13) | Logo thật (Next.js, React, Python, FastAPI, Postgres, Redis…) — chỉ dùng ở slide kiến trúc/công nghệ. |
 
-```css
-:root{
-  --bg:#F8F7F1; --card:#ffffff; --border:#e5e5e5; --ink:#171717; --muted:#525252; --faint:#8f8f8f;
-  --indigo:#6366f1; --teal:#14b8a6; --amber:#f59e0b; --rose:#f43f5e;
-  --sky:#0ea5e9; --emerald:#10b981; --violet:#8b5cf6; --orange:#f97316;
-  --vinuni:#c83538; --radius:14px;
-  --hero:linear-gradient(135deg,#4f46e5 0%,#6d28d9 55%,#7c3aed 100%);
-  --font:"Plus Jakarta Sans",Inter,"Be Vietnam Pro",system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,monospace;
-}
-.slide{aspect-ratio:16/9; background:var(--bg); color:var(--ink); font-family:var(--font);
-  padding:48px 64px; }
-.card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-  box-shadow:0 1px 3px rgba(0,0,0,.06); }
-.kicker{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.12em; color:#737373;}
-.metric{font-family:var(--mono); font-weight:600; font-variant-numeric:tabular-nums;}
-.hero{background:var(--hero); color:#fff; border-radius:var(--radius);}
-@media print{ .slide{ page-break-after:always; } }  /* mỗi slide 1 trang khi in PDF landscape */
-```
+Tải lại/bổ sung asset: `python3 slide/fetch_assets.py` (Iconify API).
+
+## 4. Mockup & chart (helper sẵn trong generator)
+
+- **Laptop**: màn `#171717` bo 12px + đế gradient — cho screenshot chính.
+- **Browser**: thanh 3 chấm macOS + ảnh `object-fit:cover` + nhãn icon — cho screenshot phụ.
+- **Donut** (điểm 0–100), **phễu thanh ngang** (thị trường/mục tiêu), **timeline cột mốc** (lộ trình),
+  **bảng so sánh ✓/△/✕** (cạnh tranh — cột VinUni tô `indigo10`), **card đối thủ** (số + dòng ✕ thiếu).
+
+## 5. Quy tắc bố cục (chống lỗi đã gặp)
+
+1. Mỗi slide **một ý chính** — nhưng canvas phải **kín nội dung có tổ chức**; card ôm nội dung
+   (`justify-content:center`, không kéo rỗng ruột), lưới dùng `align-content:center`.
+2. Tối đa **1 panel gradient**/slide (hiện ở slide 4, 8, 15).
+3. Chữ như người thuyết trình thật — câu ngắn; cấm buzzword; đoạn văn → sơ đồ, bullet dài → chip.
+4. Số thị trường/đối thủ phải kèm dòng "Nguồn:" nhỏ; số mục tiêu phải gắn chip amber "mục tiêu".
+5. Không gỡ nhãn "Được tài trợ"; không lộ tên nhà cung cấp AI.
