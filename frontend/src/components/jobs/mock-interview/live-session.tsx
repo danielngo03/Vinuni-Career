@@ -1,8 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowRight, Keyboard, Microphone, MicrophoneSlash, PhoneDisconnect } from "@phosphor-icons/react";
+import {
+  ArrowRight,
+  CircleNotch,
+  Keyboard,
+  Microphone,
+  MicrophoneSlash,
+  PhoneDisconnect,
+  Stop,
+} from "@phosphor-icons/react";
 import { Button } from "@/components/ui";
 import {
   mockInterviewApi,
@@ -41,7 +49,32 @@ interface Props {
   session: MockInterviewSession;
   mode: AnswerMode;
   locale: string;
+  /**
+   * True when the server-mediated voice tier is available (from prep's
+   * `server_voice`). In voice mode this drives AI narration (TTS) of the
+   * interviewer's lines and spoken answers transcribed server-side (STT).
+   * When false, voice mode uses the browser voice tier / text as before.
+   */
+  serverVoice?: boolean;
   onRequestEnd: (payload: { duration_seconds: number; turns?: RecordTurnInput[] }) => void;
+}
+
+/** Pick the best-supported MediaRecorder container for answer capture. */
+function pickRecorderMime(): string | undefined {
+  if (typeof MediaRecorder === "undefined" || typeof MediaRecorder.isTypeSupported !== "function") {
+    return undefined;
+  }
+  const candidates = [
+    "audio/webm;codecs=opus",
+    "audio/webm",
+    "audio/ogg;codecs=opus",
+    "audio/mp4",
+    "audio/mpeg",
+  ];
+  for (const c of candidates) {
+    if (MediaRecorder.isTypeSupported(c)) return c;
+  }
+  return undefined;
 }
 
 /**
@@ -50,7 +83,7 @@ interface Props {
  * controller (STT → SSE turn → TTS) or a text answer box. Captions are the
  * accessibility layer for the voice conversation.
  */
-export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
+export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }: Props) {
   const t = useTranslations("jobs.mockInterview");
   const reduced = usePrefersReducedMotion();
 
@@ -59,6 +92,20 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
   // Realtime (Tier V2) is active only when the server hands out a descriptor.
   // Its visible countdown never exceeds the hard live-voice duration cap.
   const realtime = session.realtime;
+
+  // Server-mediated voice tier: AI narrates the interviewer (TTS) and answers
+  // are transcribed server-side (STT). Only when there is no realtime descriptor
+  // and the server advertised it via prep. Distinct from the browser voice tier.
+  const serverVoiceActive = !realtime && serverVoice === true;
+  const recorderSupported = useMemo(
+    () =>
+      typeof window !== "undefined" &&
+      typeof MediaRecorder !== "undefined" &&
+      typeof navigator !== "undefined" &&
+      !!navigator.mediaDevices &&
+      typeof navigator.mediaDevices.getUserMedia === "function",
+    [],
+  );
   const initialSeconds =
     realtime && realtime.duration_cap_s > 0
       ? Math.min(session.caps.max_session_seconds, realtime.duration_cap_s)
@@ -78,6 +125,10 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
   // Realtime-only presentation states (unused on the V1/text path).
   const [realtimeConnecting, setRealtimeConnecting] = useState(!!realtime);
   const [realtimeLost, setRealtimeLost] = useState(false);
+  // Server voice tier presentation states.
+  const [recording, setRecording] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
+  const [voiceNotice, setVoiceNotice] = useState<null | "tts" | "stt" | "mic">(null);
 
   const phaseRef = useRef<Phase>(phase);
   const effectiveModeRef = useRef<AnswerMode>(effectiveMode);
@@ -90,6 +141,13 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
   const endedRef = useRef(false);
   const turnsRef = useRef<RecordTurnInput[]>([]);
   const orbRef = useRef<HTMLDivElement>(null);
+  // Server voice tier: TTS playback element + recorder graph.
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUrlRef = useRef<string | null>(null);
+  const playbackDoneRef = useRef<(() => void) | null>(null);
+  const micStreamRef = useRef<MediaStream | null>(null);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const recordChunksRef = useRef<Blob[]>([]);
 
   const setPhaseNow = useCallback((next: Phase) => {
     phaseRef.current = next;
@@ -100,6 +158,198 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
     effectiveModeRef.current = effectiveMode;
   }, [effectiveMode]);
 
+  /* -------------------- server voice tier (TTS + STT) --------------------- */
+  // Stop any in-flight interviewer narration (barge-in / re-speak / teardown).
+  const stopServerAudio = useCallback(() => {
+    const el = audioRef.current;
+    if (el) {
+      try {
+        el.pause();
+      } catch {
+        /* ignore */
+      }
+    }
+    // Resolve the awaiting speak() promise (if any) so the caller advances.
+    const done = playbackDoneRef.current;
+    playbackDoneRef.current = null;
+    done?.();
+    if (audioUrlRef.current) {
+      try {
+        URL.revokeObjectURL(audioUrlRef.current);
+      } catch {
+        /* ignore */
+      }
+      audioUrlRef.current = null;
+    }
+  }, []);
+
+  // Narrate one interviewer line. Resolves when playback ends (or immediately if
+  // TTS is unavailable). Captions are NEVER blocked on audio — on any failure we
+  // set a calm notice and resolve so the caller can move to the student's turn.
+  const speakServer = useCallback(
+    async (text: string): Promise<void> => {
+      if (!text.trim() || endedRef.current || typeof Audio === "undefined") return;
+      stopServerAudio();
+      let blob: Blob;
+      try {
+        blob = await mockInterviewApi.synthesizeSpeech(session.session_id, text);
+      } catch {
+        setVoiceNotice("tts");
+        return;
+      }
+      if (endedRef.current) return;
+      await new Promise<void>((resolve) => {
+        let el = audioRef.current;
+        if (!el) {
+          el = new Audio();
+          audioRef.current = el;
+        }
+        const url = URL.createObjectURL(blob);
+        audioUrlRef.current = url;
+        const finish = () => {
+          if (playbackDoneRef.current === finish) playbackDoneRef.current = null;
+          el!.onended = null;
+          el!.onerror = null;
+          if (audioUrlRef.current === url) {
+            try {
+              URL.revokeObjectURL(url);
+            } catch {
+              /* ignore */
+            }
+            audioUrlRef.current = null;
+          }
+          resolve();
+        };
+        playbackDoneRef.current = finish;
+        el.onended = finish;
+        el.onerror = finish;
+        el.src = url;
+        // Sticky user activation from the Start click permits autoplay; if the
+        // browser still rejects, captions carry and we advance the turn.
+        void el.play().catch(() => {
+          setVoiceNotice("tts");
+          finish();
+        });
+      });
+    },
+    [session.session_id, stopServerAudio],
+  );
+
+  // Send a recorded answer for server-side transcription, then drop the text
+  // into the answer box for the student to REVIEW/edit. Never auto-submits.
+  const transcribe = useCallback(
+    async (blob: Blob): Promise<void> => {
+      if (endedRef.current) return;
+      setTranscribing(true);
+      try {
+        const { transcript } = await mockInterviewApi.transcribeAnswer(
+          session.session_id,
+          blob,
+        );
+        const clean = transcript.trim();
+        if (!clean) {
+          setVoiceNotice("stt");
+        } else if (!endedRef.current) {
+          setTextDraft((prev) => (prev.trim() ? `${prev.trim()} ${clean}` : clean));
+        }
+      } catch {
+        setVoiceNotice("stt");
+      } finally {
+        setTranscribing(false);
+      }
+    },
+    [session.session_id],
+  );
+
+  const startRecording = useCallback(async () => {
+    if (endedRef.current || recorderRef.current || !recorderSupported) return;
+    setVoiceNotice(null);
+    // Barge-in: cut the interviewer's narration the moment the student answers.
+    stopServerAudio();
+
+    let stream = micStreamRef.current;
+    if (!stream) {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({
+          audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+        });
+        micStreamRef.current = stream;
+      } catch {
+        setVoiceNotice("mic");
+        return;
+      }
+    }
+    if (endedRef.current) return;
+
+    const mime = pickRecorderMime();
+    let recorder: MediaRecorder;
+    try {
+      recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+    } catch {
+      setVoiceNotice("mic");
+      return;
+    }
+    recordChunksRef.current = [];
+    recorder.ondataavailable = (e: BlobEvent) => {
+      if (e.data && e.data.size > 0) recordChunksRef.current.push(e.data);
+    };
+    recorder.onstop = () => {
+      const chunks = recordChunksRef.current;
+      recordChunksRef.current = [];
+      recorderRef.current = null;
+      setRecording(false);
+      if (chunks.length === 0 || endedRef.current) return;
+      const blob = new Blob(chunks, { type: mime ?? chunks[0]?.type ?? "audio/webm" });
+      void transcribe(blob);
+    };
+    recorderRef.current = recorder;
+    setPhaseNow("listening");
+    setRecording(true);
+    try {
+      recorder.start();
+    } catch {
+      recorderRef.current = null;
+      setRecording(false);
+      setVoiceNotice("mic");
+    }
+  }, [recorderSupported, stopServerAudio, transcribe, setPhaseNow]);
+
+  const stopRecording = useCallback(() => {
+    const rec = recorderRef.current;
+    if (!rec) return;
+    try {
+      if (rec.state !== "inactive") rec.stop();
+    } catch {
+      recorderRef.current = null;
+      setRecording(false);
+    }
+  }, []);
+
+  const toggleRecord = useCallback(() => {
+    if (recording) stopRecording();
+    else void startRecording();
+  }, [recording, startRecording, stopRecording]);
+
+  // Full teardown of the server voice graph (audio + recorder + mic).
+  const disposeServerVoice = useCallback(() => {
+    stopServerAudio();
+    const rec = recorderRef.current;
+    recorderRef.current = null;
+    if (rec) {
+      rec.ondataavailable = null;
+      rec.onstop = null;
+      try {
+        if (rec.state !== "inactive") rec.stop();
+      } catch {
+        /* ignore */
+      }
+    }
+    recordChunksRef.current = [];
+    const stream = micStreamRef.current;
+    micStreamRef.current = null;
+    if (stream) stream.getTracks().forEach((tr) => tr.stop());
+  }, [stopServerAudio]);
+
   /* ------------------------------ end session ----------------------------- */
   const finalize = useCallback(() => {
     if (endedRef.current) return;
@@ -107,6 +357,7 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
     const duration = Math.round((Date.now() - startedAtRef.current) / 1000);
     abortRef.current?.abort();
     controllerRef.current?.dispose();
+    disposeServerVoice();
     setPhaseNow("ending");
 
     const gemini = geminiRef.current;
@@ -128,7 +379,7 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
         turns: turnsRef.current.length > 0 ? turnsRef.current : undefined,
       });
     }
-  }, [onRequestEnd, setPhaseNow]);
+  }, [onRequestEnd, setPhaseNow, disposeServerVoice]);
 
   /* ------------------------------- one turn ------------------------------- */
   const beginTurn = useCallback(
@@ -167,7 +418,12 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
               finalize();
               return;
             }
-            if (effectiveModeRef.current === "voice" && controllerRef.current) {
+            if (effectiveModeRef.current === "voice" && serverVoiceActive) {
+              setPhaseNow("interviewer_speaking");
+              void speakServer(finalText).then(() => {
+                if (!endedRef.current) setPhaseNow("listening");
+              });
+            } else if (effectiveModeRef.current === "voice" && controllerRef.current) {
               void controllerRef.current.speak(finalText).then(() => {
                 if (!endedRef.current) setPhaseNow("listening");
               });
@@ -184,7 +440,7 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
         ac.signal,
       );
     },
-    [session.session_id, finalize, setPhaseNow],
+    [session.session_id, finalize, setPhaseNow, serverVoiceActive, speakServer],
   );
 
   const beginTurnRef = useRef(beginTurn);
@@ -213,6 +469,9 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
     // Realtime (Tier V2) owns the voice tier when a descriptor is present; the
     // browser STT/TTS controller must not also grab the mic.
     if (realtime && effectiveMode === "voice") return;
+    // Server voice tier owns the mic/narration for voice mode; the browser
+    // SpeechRecognition/synthesis controller must not also run.
+    if (serverVoiceActive && effectiveMode === "voice") return;
     if (effectiveMode !== "voice") {
       // Text tier (chosen or degraded): no mic; wait for a typed answer.
       if (phaseRef.current === "interviewer_speaking") setPhaseNow("listening");
@@ -335,6 +594,25 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtime, effectiveMode]);
+
+  /* --------------------- server voice: opening narration ------------------ */
+  // Narrate the opening line when the server voice tier is engaged. Captions
+  // already show the line; audio is a bonus and never blocks the turn.
+  useEffect(() => {
+    if (!serverVoiceActive || effectiveMode !== "voice") return;
+    let cancelled = false;
+    setPhaseNow("interviewer_speaking");
+    void speakServer(session.opening.text).then(() => {
+      if (!cancelled && !endedRef.current) setPhaseNow("listening");
+    });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverVoiceActive, effectiveMode]);
+
+  // Release the server voice graph (audio + recorder + mic) on unmount.
+  useEffect(() => disposeServerVoice, [disposeServerVoice]);
 
   /* -------------------------------- timer --------------------------------- */
   useEffect(() => {
@@ -572,6 +850,21 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
           )
         )}
 
+        {/* Server voice tier: calm, non-alarming notice when narration or
+            transcription is temporarily unavailable. Captions/text always work. */}
+        {effectiveMode === "voice" && serverVoiceActive && voiceNotice && (
+          <p
+            role="status"
+            className="mx-auto max-w-xl rounded-lg bg-[var(--bg-subtle)] px-3 py-2 text-center text-xs leading-relaxed text-[var(--text-muted)]"
+          >
+            {voiceNotice === "tts"
+              ? t("serverVoiceTtsUnavailable")
+              : voiceNotice === "stt"
+                ? t("serverVoiceSttUnavailable")
+                : t("serverVoiceMicDenied")}
+          </p>
+        )}
+
         {effectiveMode === "text" ? (
           <TextAnswerBar
             value={textDraft}
@@ -581,6 +874,33 @@ export function LiveSession({ session, mode, locale, onRequestEnd }: Props) {
               const v = textDraft.trim();
               if (!v) return;
               setTextDraft("");
+              void beginTurn(v);
+            }}
+          />
+        ) : serverVoiceActive ? (
+          <ServerVoiceAnswerBar
+            value={textDraft}
+            onChange={setTextDraft}
+            recording={recording}
+            transcribing={transcribing}
+            recorderSupported={recorderSupported}
+            onToggleRecord={toggleRecord}
+            recordDisabled={
+              !recording && (phase === "thinking" || phase === "ending" || transcribing)
+            }
+            sendDisabled={
+              phase === "thinking" ||
+              phase === "interviewer_speaking" ||
+              phase === "ending" ||
+              recording ||
+              transcribing
+            }
+            textDisabled={phase === "ending"}
+            onSubmit={() => {
+              const v = textDraft.trim();
+              if (!v) return;
+              setTextDraft("");
+              setVoiceNotice(null);
               void beginTurn(v);
             }}
           />
@@ -651,6 +971,114 @@ function TextAnswerBar({
       >
         <ArrowRight aria-hidden weight="bold" className="size-4" />
       </Button>
+    </div>
+  );
+}
+
+/**
+ * Server voice answer bar: record (MediaRecorder → server STT) OR type. The
+ * transcript lands in the editable textarea for the student to REVIEW before
+ * sending — never auto-submitted. Typing is always available as the a11y floor.
+ */
+function ServerVoiceAnswerBar({
+  value,
+  onChange,
+  onSubmit,
+  recording,
+  transcribing,
+  recorderSupported,
+  onToggleRecord,
+  recordDisabled,
+  sendDisabled,
+  textDisabled,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  onSubmit: () => void;
+  recording: boolean;
+  transcribing: boolean;
+  recorderSupported: boolean;
+  onToggleRecord: () => void;
+  recordDisabled: boolean;
+  sendDisabled: boolean;
+  textDisabled: boolean;
+}) {
+  const t = useTranslations("jobs.mockInterview");
+  return (
+    <div className="mx-auto max-w-xl space-y-2">
+      <div className="flex items-end gap-2 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2 shadow-sm focus-within:border-[var(--field-focus-border)]">
+        {recorderSupported && (
+          <button
+            type="button"
+            onClick={onToggleRecord}
+            disabled={recordDisabled}
+            aria-pressed={recording}
+            aria-label={recording ? t("serverVoiceStop") : t("serverVoiceRecord")}
+            className={cn(
+              "relative flex size-9 shrink-0 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-50",
+              recording
+                ? "bg-[var(--brand-red)] text-white"
+                : "bg-[var(--bg-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-muted)]",
+            )}
+          >
+            {recording && (
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 animate-ping rounded-full bg-[var(--brand-red)]/40"
+              />
+            )}
+            {recording ? (
+              <Stop aria-hidden weight="fill" className="relative size-4" />
+            ) : (
+              <Microphone aria-hidden weight="fill" className="relative size-4" />
+            )}
+          </button>
+        )}
+        <textarea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              if (!sendDisabled && value.trim()) onSubmit();
+            }
+          }}
+          placeholder={t("textAnswerPlaceholder")}
+          aria-label={t("textAnswerPlaceholder")}
+          rows={1}
+          disabled={textDisabled}
+          className="max-h-32 flex-1 resize-none bg-transparent py-1.5 text-sm leading-relaxed text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] disabled:opacity-60"
+        />
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={onSubmit}
+          disabled={sendDisabled || !value.trim()}
+          aria-label={t("sendAnswer")}
+        >
+          <ArrowRight aria-hidden weight="bold" className="size-4" />
+        </Button>
+      </div>
+      <p
+        className="flex items-center justify-center gap-1.5 text-center text-[11px] text-[var(--text-muted)]"
+        aria-live="polite"
+      >
+        {transcribing ? (
+          <>
+            <CircleNotch aria-hidden weight="bold" className="size-3.5 animate-spin" />
+            {t("serverVoiceTranscribing")}
+          </>
+        ) : recording ? (
+          <>
+            <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-[var(--brand-red)]" />
+            {t("serverVoiceRecording")}
+          </>
+        ) : recorderSupported ? (
+          t("serverVoiceHintBar")
+        ) : (
+          t("serverVoiceTypeHint")
+        )}
+      </p>
     </div>
   );
 }

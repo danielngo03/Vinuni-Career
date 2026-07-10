@@ -42,7 +42,7 @@ interface Props {
   locale: string;
   starting: boolean;
   startBlock: StartBlock | null;
-  onStart: (opts: { cvId: string | null; mode: AnswerMode }) => void;
+  onStart: (opts: { cvId: string | null; mode: AnswerMode; serverVoice?: boolean }) => void;
   onOpenSession: (id: string) => void;
   onResumeActive: (sessionId: string | null) => void;
   onDiscardActive: () => void;
@@ -81,11 +81,18 @@ export function PreSessionSetup({
     };
   }, []);
 
+  // The server voice tier only needs a mic (MediaRecorder + audio playback), not
+  // browser SpeechRecognition — so voice mode is usable on browsers without STT
+  // when the server advertises it via prep.
+  const serverVoiceAvailable = prep.data?.server_voice === true;
+  const voiceModeAvailable =
+    support.voiceReady || (support.getUserMedia && serverVoiceAvailable);
+
   const [mode, setMode] = useState<AnswerMode>(support.voiceReady ? "voice" : "text");
   // If the mic is known-denied, default to text (voice is still selectable).
   useEffect(() => {
-    if (support.voiceReady && micPerm === "denied") setMode("text");
-  }, [support.voiceReady, micPerm]);
+    if (voiceModeAvailable && micPerm === "denied") setMode("text");
+  }, [voiceModeAvailable, micPerm]);
 
   const [selectedCvId, setSelectedCvId] = useState<string | null>(null);
   const recommendedId = prep.data?.recommended_cv_id ?? prep.data?.cvs[0]?.cv_id ?? null;
@@ -95,7 +102,7 @@ export function PreSessionSetup({
     );
   }, [prep.data, recommendedId]);
 
-  const voiceNotice: { tone: "amber" | "muted"; text: string } | null = !support.voiceReady
+  const voiceNotice: { tone: "amber" | "muted"; text: string } | null = !voiceModeAvailable
     ? { tone: "amber", text: t("micUnsupportedNotice") }
     : micPerm === "denied"
       ? { tone: "amber", text: t("micDeniedNotice") }
@@ -126,7 +133,7 @@ export function PreSessionSetup({
       {startBlock && (
         <StartBlockPanel
           block={startBlock}
-          onStartText={() => onStart({ cvId: selectedCvId, mode: "text" })}
+          onStartText={() => onStart({ cvId: selectedCvId, mode: "text", serverVoice: false })}
           onResumeActive={onResumeActive}
           onDiscardActive={onDiscardActive}
           discarding={discarding}
@@ -202,7 +209,7 @@ export function PreSessionSetup({
                 label={t("modeVoice")}
                 hint={t("modeVoiceHint")}
                 selected={mode === "voice"}
-                disabled={!support.voiceReady}
+                disabled={!voiceModeAvailable}
                 onSelect={() => setMode("voice")}
               />
               <ModeCard
@@ -228,6 +235,11 @@ export function PreSessionSetup({
                 {voiceNotice.text}
               </p>
             )}
+            {mode === "voice" && serverVoiceAvailable && !voiceNotice && (
+              <p className="mt-3 text-xs leading-relaxed text-[var(--text-muted)]">
+                {t("serverVoiceHint")}
+              </p>
+            )}
           </section>
 
           {/* Start */}
@@ -238,7 +250,7 @@ export function PreSessionSetup({
               fullWidth
               loading={starting}
               disabled={starting || !selectedCvId}
-              onClick={() => onStart({ cvId: selectedCvId, mode })}
+              onClick={() => onStart({ cvId: selectedCvId, mode, serverVoice: serverVoiceAvailable })}
             >
               {starting ? t("startingCta") : t("startCta")}
             </Button>

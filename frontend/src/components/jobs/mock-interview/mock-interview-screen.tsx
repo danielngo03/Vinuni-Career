@@ -26,7 +26,7 @@ import { TranscriptReview } from "./transcript-review";
 type Phase =
   | { name: "setup" }
   | { name: "connecting" }
-  | { name: "live"; session: MockInterviewSession; mode: AnswerMode }
+  | { name: "live"; session: MockInterviewSession; mode: AnswerMode; serverVoice: boolean }
   | { name: "ending" }
   | { name: "report"; detail: MockInterviewSessionDetail }
   | { name: "error" };
@@ -84,7 +84,15 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
   }, [refreshHistory]);
 
   const handleStart = useCallback(
-    async ({ cvId, mode }: { cvId: string | null; mode: AnswerMode }) => {
+    async ({
+      cvId,
+      mode,
+      serverVoice = false,
+    }: {
+      cvId: string | null;
+      mode: AnswerMode;
+      serverVoice?: boolean;
+    }) => {
       setStartBlock(null);
       setPhase({ name: "connecting" });
       try {
@@ -96,7 +104,7 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
         });
         const liveMode: AnswerMode = session.modality === "text" ? "text" : mode;
         refreshHistory();
-        setPhase({ name: "live", session, mode: liveMode });
+        setPhase({ name: "live", session, mode: liveMode, serverVoice });
       } catch (err) {
         if (err instanceof ApiError && err.code !== "NETWORK_ERROR") {
           setStartBlock(toStartBlock(err));
@@ -201,6 +209,7 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
         session={phase.session}
         mode={phase.mode}
         locale={locale}
+        serverVoice={phase.serverVoice}
         onRequestEnd={(payload) => void handleRequestEnd(phase.session, payload)}
       />
     );

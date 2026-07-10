@@ -1,4 +1,6 @@
-import { api, apiFetch } from "./client";
+import { api, apiFetch, apiUpload } from "./client";
+import { ApiError } from "./errors";
+import type { ApiEnvelope } from "./types";
 import { env } from "@/lib/env";
 import { getAccessToken } from "./session";
 
@@ -46,6 +48,14 @@ export interface MockInterviewPrep {
   cvs: MockInterviewPrepCv[];
   recommended_cv_id: string | null;
   signal: MockInterviewFitSignal;
+  /**
+   * True when the server-mediated voice tier is available (the interviewer's
+   * questions are narrated by AI and answers can be spoken and transcribed
+   * server-side). When false, voice mode falls back to the browser voice tier
+   * or text. Wire field is snake_case (`server_voice`); mirrors the rest of the
+   * prep contract. No provider/model identity is ever carried here.
+   */
+  server_voice?: boolean;
 }
 
 /* ------------------------------- sessions --------------------------------- */
@@ -408,6 +418,86 @@ export const mockInterviewApi = {
     }
   },
 
+  /**
+   * Server-mediated TTS for the voice tier. POSTs `{ text, voice? }` and reads
+   * the response as raw `audio/wav` bytes (NOT a JSON envelope — hence a raw
+   * fetch rather than {@link api.post}). Any non-audio response (a JSON error
+   * envelope, e.g. `AIUnavailable`, or a transport failure) is surfaced as an
+   * {@link ApiError} so callers can degrade to captions/text. No provider,
+   * model, or token internals are ever exposed.
+   */
+  async synthesizeSpeech(
+    sessionId: string,
+    text: string,
+    voice?: string,
+  ): Promise<Blob> {
+    const base = env.apiBaseUrl.replace(/\/$/, "");
+    const url = `${base}/mock-interview/sessions/${sessionId}/tts`;
+    const token = getAccessToken();
+
+    let res: Response;
+    try {
+      res = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "audio/wav, application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(voice ? { text, voice } : { text }),
+      });
+    } catch {
+      throw new ApiError({
+        code: "NETWORK_ERROR",
+        message: "Unable to reach the voice service.",
+        status: 0,
+      });
+    }
+
+    const contentType = (res.headers.get("content-type") ?? "").toLowerCase();
+    if (res.ok && contentType.startsWith("audio/")) {
+      return res.blob();
+    }
+
+    // Non-audio → treat as "voice unavailable". Best-effort read the user-safe
+    // message from the JSON error envelope; never leak internal codes.
+    let message = "Voice is temporarily unavailable.";
+    try {
+      const body = (await res.json()) as {
+        error?: { message?: string };
+        message?: string;
+      };
+      message = body?.error?.message ?? body?.message ?? message;
+    } catch {
+      // Non-JSON / empty body — keep the generic message.
+    }
+    throw new ApiError({
+      code: "AI_UNAVAILABLE",
+      message,
+      status: res.status,
+    });
+  },
+
+  /**
+   * Server-mediated STT for the voice tier. Uploads the recorded answer blob as
+   * multipart/form-data (single `audio` field) and returns the transcript for
+   * the student to REVIEW and edit before submitting a turn — never auto-sent.
+   * Failures surface as an {@link ApiError} (e.g. `SPEECH_UNAVAILABLE`).
+   */
+  async transcribeAnswer(
+    sessionId: string,
+    audio: Blob,
+  ): Promise<{ transcript: string }> {
+    const form = new FormData();
+    form.append("audio", audio, recorderFileName(audio.type));
+    const res = await apiUpload<ApiEnvelope<{ transcript: string }>>(
+      `/mock-interview/sessions/${sessionId}/stt`,
+      form,
+    );
+    return res.data;
+  },
+
   /** Flush realtime (V2) turns captured client-side. */
   recordTurns(
     sessionId: string,
@@ -506,6 +596,16 @@ export const mockInterviewApi = {
     );
   },
 };
+
+/** Map a recorded-blob MIME type to a stable multipart filename (cosmetic). */
+function recorderFileName(mime: string): string {
+  const m = mime.toLowerCase();
+  if (m.includes("mp4") || m.includes("m4a")) return "answer.m4a";
+  if (m.includes("mpeg") || m.includes("mp3")) return "answer.mp3";
+  if (m.includes("ogg")) return "answer.ogg";
+  if (m.includes("wav")) return "answer.wav";
+  return "answer.webm";
+}
 
 /** Best available display title for a history row. */
 export function sessionListTitle(item: MockInterviewSessionListItem): string {
