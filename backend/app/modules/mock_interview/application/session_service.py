@@ -567,6 +567,9 @@ async def stream_turn(
         "text": clean_text,
         "question_count": fresh.question_count,
         "ended": reached_end,
+        # Live coverage so the room's topic chips advance per turn (leak-safe
+        # summary — covered/remaining labels only, never ids/weights/scores).
+        "coverage": plan_service.coverage_summary(fresh.coverage_json),
     }
 
 

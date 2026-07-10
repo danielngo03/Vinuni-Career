@@ -149,6 +149,9 @@ export function LiveSession({
   const [interviewerStreaming, setInterviewerStreaming] = useState<string | null>(null);
   const [candidateCaption, setCandidateCaption] = useState("");
   const [questionCount, setQuestionCount] = useState(1);
+  // Live topic coverage: seeded from the plan at session start, then advanced
+  // per turn from each done event's leak-safe coverage summary.
+  const [liveCoverage, setLiveCoverage] = useState(session.coverage ?? null);
   const [timeLeft, setTimeLeft] = useState(initialSeconds);
   const [turnError, setTurnError] = useState(false);
   const [idleHint, setIdleHint] = useState(false);
@@ -461,6 +464,7 @@ export function LiveSession({
             setCurrentQuestion(finalText);
             setQuestionCount(evt.question_count > 0 ? evt.question_count : (c) => c + 1);
             setCandidateCaption("");
+            if (evt.coverage) setLiveCoverage(evt.coverage);
             if (evt.ended) {
               finalize();
               return;
@@ -984,9 +988,9 @@ export function LiveSession({
         )}
       </div>
 
-      {/* Subtle interview-topic coverage (real backend summary) */}
-      {session.coverage ? (
-        <CoverageChips coverage={session.coverage} className="justify-center px-1" />
+      {/* Subtle interview-topic coverage (real backend summary, advances live) */}
+      {liveCoverage ? (
+        <CoverageChips coverage={liveCoverage} className="justify-center px-1" />
       ) : null}
 
       {/* Bottom controls */}

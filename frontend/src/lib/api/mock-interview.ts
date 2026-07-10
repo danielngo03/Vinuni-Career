@@ -334,6 +334,9 @@ export interface TurnDoneEvent {
   text: string;
   question_count: number;
   ended: boolean;
+  /** Live topic coverage after this turn (leak-safe summary), so the room's
+   * coverage chips advance per turn. Absent on early-end/conflict paths. */
+  coverage?: MockInterviewCoverage | null;
 }
 
 export interface TurnErrorEvent {
