@@ -125,7 +125,19 @@ async def upload_document(
     if len(content) > MAX_BYTES:
         raise HTTPException(status_code=413, detail="file_too_large")
 
-    storage_path = f"kb/{kb_id}/{uuid.uuid4()}/{file.filename}"
+    # The on-disk storage key is fully server-generated — the client-supplied
+    # filename NEVER enters the path (path-traversal / cross-key write defense).
+    # The extension is derived from the validated MIME type, not the filename;
+    # the original filename is preserved only as DB metadata (the doc title).
+    _EXT_BY_MIME = {
+        "application/pdf": ".pdf",
+        "application/msword": ".doc",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document": ".docx",
+        "text/plain": ".txt",
+        "text/markdown": ".md",
+    }
+    safe_ext = _EXT_BY_MIME.get(file.content_type or "", "")
+    storage_path = f"kb/{kb_id}/{uuid.uuid4()}/document{safe_ext}"
     save_bytes(storage_path, content)
 
     try:
