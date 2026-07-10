@@ -30,7 +30,7 @@
   - Tên sản phẩm: **VinUni Career Platform**
   - Tagline: *"Hệ điều hành tuyển dụng chính thức của Đại học VinUni — AI-first, sẵn sàng thành nền tảng."*
   - Dòng phụ: *"Một nền tảng · Bốn bề mặt vận hành · Toàn bộ vòng đời sự nghiệp"*
-  - Chân slide: **C2-Team-037** · `[MÔN/CUỘC THI]` · Tháng 7, 2026
+  - Chân slide: **C2-Team-037** · Tháng 7, 2026
 - **Trực quan hóa:** Nền `#F8F7F1` sạch, nhiều khoảng trắng. Một dải "signature" mảnh chạy ngang phía dưới
   tiêu đề gồm 8 chấm tròn nhỏ theo đúng thứ tự palette data-viz (indigo→teal→amber→rose→sky→emerald→violet→
   orange) — ẩn dụ "đa persona, đa module". Góc phải-dưới: 1 khối gradient indigo→violet nhỏ (chấm nhấn duy nhất).
@@ -116,16 +116,20 @@
 ## Slide 05 — Sản phẩm thực tế (Product Showcase)
 
 - **Mục tiêu:** Cho hội đồng "thấy" sản phẩm thật, không chỉ nghe.
-- **Nội dung chữ:** Tiêu đề: **"Sản phẩm đang chạy — v10 'Monochrome Shell + Data-viz Content'"**. Nhãn 4
-  ảnh: *Student Dashboard · CV Studio (canvas A4) · Partner Pipeline (Kanban) · University Analytics*.
-- **Trực quan hóa:** Gallery **4 mock-screen** vẽ theo đúng design system (nếu có screenshot thật → chèn từ
-  `assets/`; nếu không → Claude Design **vẽ lại mock UI** dạng browser frame):
-  - Mock 1: sidebar monochrome + hàng KPI tile + 1 line chart + 1 gradient hero tile.
-  - Mock 2: khung canvas A4 giữa, thanh block bên trái, style inspector bên phải.
-  - Mock 3: Kanban 4–5 cột (Applied → Screening → Interview → Offer) với thẻ ứng viên + vòng fit-score.
-  - Mock 4: lưới biểu đồ (funnel placement + bar salary) — nhớ giữ nhãn `Được tài trợ` nếu có ô quảng cáo.
-- **Số liệu:** Chú thích nhỏ: "120 màn hình · light + dark theme · colorblind-safe palette".
-- **Bố cục & màu:** 4 khung trình duyệt bo góc, đổ bóng cực nhẹ; đây là nơi khoe palette data-viz nhiều màu.
+- **Nội dung chữ:** Tiêu đề: **"Sản phẩm đang chạy — ảnh chụp thật, không phải mock"**. Nhãn 4 ảnh:
+  *Student Dashboard · CV Studio (template marketplace) · Partner Pipeline · University Career Outcomes*.
+- **Trực quan hóa:** Gallery **4 SCREENSHOT THẬT** (đã chụp từ app đang chạy — có sẵn trong `assets/`), đặt
+  trong khung trình duyệt bo góc, đổ bóng nhẹ. Dùng đúng các file này:
+  - **`assets/shot-student-dashboard.png`** — Tổng quan sinh viên (hero monochrome + KPI tiles + phỏng vấn sắp tới).
+  - **`assets/shot-cv-studio.png`** — CV Studio: hero + **marketplace 7 template CV** + "CV đã hoạt động 1/5".
+  - **`assets/shot-partner-pipeline.png`** — Pipeline ứng viên: KPI tiles + donut + card "AI Theo dõi Pipeline" + bảng tiến độ.
+  - **`assets/shot-university-outcomes.png`** — Kết quả nghề nghiệp: banner riêng-tư ("không hiển thị danh tính/lương") + donut + top nhà tuyển dụng.
+  - *Ảnh thay thế nếu cần bố cục khác:* `shot-partner-talent.png` (Talent Pool AI), `shot-partner-dashboard.png`,
+    `shot-university-dashboard.png`.
+- **Cách nhúng:** convert 4 PNG → **data-URI base64** để deck tự chứa (chạy offline). Giữ tỉ lệ, `max-width:100%`.
+- **Số liệu:** chú thích nhỏ: "Ảnh chụp thật · 120 màn hình · light + dark · colorblind-safe palette".
+- **Bố cục & màu:** 4 khung trình duyệt (thanh 3 chấm giả macOS) bo 14px; đây là nơi khoe palette data-viz thật.
+- **✅ Ghi chú:** đây là ảnh THẬT từ app (persona student/partner/university), tăng độ tin cậy mạnh trước hội đồng.
 
 ---
 
@@ -513,8 +517,9 @@
 | Bảng giá (SV Pro 49k · Đối tác 2tr/5tr · license ~150tr/năm) | 7 | ✅ Đã điền (đề xuất, admin cấu hình) |
 | Traction/KPI mục tiêu 12 tháng | 20 | ✅ Đã điền (targets + proof VinUni 32%) |
 | Ask/CTA (thí điểm toàn trường + 20–30 đối tác + budget) | 21 | ✅ Đã điền |
-| `[MÔN/CUỘC THI]` | 1 | ⬜ Bạn điền tên môn/cuộc thi |
-| Logo + screenshot | 1, 5, 21 | ⬜ Copy từ `frontend/public/brand/` (xem `assets/README.md`) |
+| Logo (dark, cho nền sáng) + screenshot | 1, 5, 21 | ✅ Đã có sẵn trong `assets/` (logo-dark + 4 screenshot thật) |
+
+> **Không còn placeholder nào cần điền** — deck đã đầy đủ nội dung + số liệu + logo + screenshot thật.
 
 **Nguồn số liệu thị trường (2024):** Tổng cục Thống kê / Bộ GD&ĐT VN (2,36M SV; 314k cử nhân; 243 trường,
 67 tư); NSO/VietnamNet (>940k doanh nghiệp); imarcgroup/kenresearch (HR-tech VN); VinUni.edu.vn (khóa đầu

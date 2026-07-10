@@ -26,10 +26,11 @@ Tài liệu này giải thích **chính xác** claude.ai/design là gì, và **2
 **Kết quả:** 1 file HTML tự chứa, 16:9, điều hướng bằng phím `←`/`→`, in ra PDF được.
 
 1. Vào **claude.ai** → tạo **Project** mới (ví dụ tên *"VinUni Pitch Deck"*).
-2. Trong Project, **thêm vào Knowledge / upload** 2 file:
-   - `02-DECK-SPEC.md`
-   - `03-BRAND-DESIGN-SYSTEM.md`
-   - (kèm logo VinUni nếu có, xem `assets/README.md`)
+2. Trong Project, **thêm vào Knowledge / upload**:
+   - `02-DECK-SPEC.md` + `03-BRAND-DESIGN-SYSTEM.md`
+   - **`assets/logo-dark.svg`** (logo đen cho nền sáng) — cho slide 1 + 21 + footer.
+   - **4 ảnh thật cho slide 5:** `assets/shot-student-dashboard.png`, `shot-cv-studio.png`,
+     `shot-partner-pipeline.png`, `shot-university-outcomes.png`.
 3. Mở một chat trong Project, **dán toàn bộ nội dung `04-MASTER-PROMPT.md`**.
 4. Claude trả về một **Artifact HTML**. Yêu cầu chỉnh sửa bằng ngôn ngữ tự nhiên, ví dụ:
    - *"Slide 12 vẽ pipeline theo chiều dọc, mỗi tầng 1 hàng, thêm nhãn chi phí Free/Rẻ/Rẻ+"*
@@ -46,28 +47,47 @@ Tài liệu này giải thích **chính xác** claude.ai/design là gì, và **2
 ## 🅱️ Luồng B — claude.ai/design + `/design-sync` (mỗi slide = 1 card)
 
 Dùng khi bạn muốn **21 slide nằm gọn trong 1 design-system project** trên claude.ai/design, xem dạng lưới
-card, chỉnh từng slide độc lập.
+card, chỉnh từng slide độc lập, dùng lại về sau.
 
-**B1. Tạo file slide HTML local (dùng Claude Code + plugin `frontend-design`)**
-- Ở máy, mở Claude Code trong repo. Yêu cầu:
-  *"Đọc `slide/02-DECK-SPEC.md` và `slide/03-BRAND-DESIGN-SYSTEM.md`. Tạo 20 file HTML tự chứa tại
-  `slide/deck/slide-01.html` … `slide-21.html`, mỗi file là 1 slide 16:9 hoàn chỉnh theo đúng spec, dùng
-  chung 1 khối `<style>` design-system. Dòng đầu mỗi file thêm marker `<!-- @dsCard group=\"Pitch Deck\" -->`."*
-- Marker `@dsCard` giúp claude.ai/design tự lập chỉ mục card cho từng slide.
+> **Hiểu đúng để không kẹt:** `/design-sync` **KHÔNG tự vẽ slide**. Nó **đẩy các file HTML có sẵn ở máy →
+> project trên claude.ai/design** (mỗi file thành 1 card). Vậy nên **BƯỚC 1 là phải có file HTML slide ở máy
+> trước** — tạo bằng Claude Code (B1). Sau đó `/design-sync` đưa chúng lên (B2).
 
-**B2. Đồng bộ lên claude.ai/design bằng `/design-sync`**
-- Trong Claude Code, chạy skill: **`/design-sync`**.
-- Skill sẽ: `list_projects` (chọn/ tạo project design-system) → dựng **diff** giữa `slide/deck/*.html`
-  local và project → cho bạn duyệt danh sách file sẽ ghi → `finalize_plan` → `write_files` đẩy từng slide lên.
-- Đồng bộ **tăng dần, từng file** — sửa `slide-07.html` rồi chạy lại `/design-sync` chỉ đẩy slide 7.
+### B1 — Tạo 21 file HTML slide ở máy (Claude Code)
+Mở **Claude Code** ngay trong repo này, dán yêu cầu:
 
-**B3. Trình bày / xuất**
-- Mỗi slide là 1 card trong Design System pane của claude.ai/design. Để trình chiếu liền mạch, vẫn nên có
-  thêm 1 file `deck.html` gộp (Luồng A bước 6) để export PDF.
+> *"Đọc `slide/02-DECK-SPEC.md`, `slide/03-BRAND-DESIGN-SYSTEM.md` và `slide/04-MASTER-PROMPT.md`. Tạo 21 file
+> HTML tự chứa tại `slide/deck/slide-01.html` … `slide-21.html`. Mỗi file = 1 slide 16:9 hoàn chỉnh, ÍT CHỮ
+> (≤ ~40 chữ hiển thị), nhiều biểu đồ/sơ đồ/số to theo đúng spec, dùng chung 1 khối `<style>` design-system.
+> Slide 1 & 21 dùng `slide/assets/logo-dark.svg`; slide 5 nhúng 4 ảnh thật trong `slide/assets/shot-*.png`
+> dạng data-URI. Dòng ĐẦU mỗi file thêm: `<!-- @dsCard group=\"Pitch Deck\" -->`. Tạo thêm `slide/deck/deck.html`
+> gộp cả 21 slide, điều hướng phím ← →, có `@media print` để export PDF landscape."*
 
-> ⚠️ Lưu ý kỹ thuật `/design-sync`: project phải đúng **type `PROJECT_TYPE_DESIGN_SYSTEM`** (tạo mới nếu
-> `list_projects` trống). Tool đọc nội dung file **thẳng từ đĩa** — nội dung không đi qua ngữ cảnh model, nên
-> an toàn cho file lớn. Đây là công cụ *đồng bộ component*, không phải trình tạo slide — bạn vẫn tạo HTML ở B1.
+- Marker `@dsCard` ở dòng đầu giúp claude.ai/design **tự lập chỉ mục card** cho từng slide.
+- Kết quả: `slide/deck/slide-01.html … slide-21.html` (21 card) + `deck.html` (bản trình chiếu/PDF).
+
+### B2 — Đăng nhập & đẩy lên bằng `/design-sync`
+1. Trong **Claude Code**, gõ: **`/design-login`** (nếu chưa) để cấp quyền truy cập claude.ai/design cho phiên.
+2. Gõ: **`/design-sync`**. Skill sẽ tự làm tuần tự (bạn chỉ cần duyệt):
+   - `list_projects` → chọn project design-system có sẵn **hoặc** tạo mới (vd tên *"VinUni Pitch Deck"* — phải
+     đúng loại **design system**, tool sẽ tạo giúp nếu bạn chưa có).
+   - So sánh `slide/deck/*.html` ở máy với project → hiện **danh sách file sẽ đẩy** để bạn duyệt (`finalize_plan`).
+   - Bạn xác nhận → `write_files` đẩy 21 slide + `deck.html` lên. Xong: 21 **card** hiện trong Design System pane.
+3. **Sửa từng slide sau này:** chỉ cần sửa `slide-07.html` ở máy rồi chạy lại **`/design-sync`** — nó chỉ đẩy
+   đúng file đã đổi (đồng bộ tăng dần, không ghi đè toàn bộ).
+
+### B3 — Xem / trình bày / xuất
+- Vào **claude.ai/design** → mở project → xem 21 slide dạng **card lưới**, bấm từng card để xem/sửa/tinh chỉnh.
+- Trình chiếu liền mạch + export PDF: mở `slide/deck/deck.html` (bản gộp) → full-screen → `Cmd/Ctrl+P` → Save
+  as PDF (Landscape, margin None, bật Background graphics).
+
+> ⚠️ Ghi nhớ về `/design-sync`: project phải đúng **type "design system"** (skill tạo giúp nếu `list_projects`
+> trống). Tool đọc file **thẳng từ đĩa** (nội dung không đi qua ngữ cảnh model → an toàn cho file lớn/ảnh). Nó
+> chỉ **đồng bộ**, không tự sinh slide — nên B1 (tạo HTML) là bắt buộc trước.
+
+> 💡 **Ngại 2 bước?** Không sao — **Luồng A (Artifacts) nhanh hơn và không cần `/design-sync`**: dán master
+> prompt vào claude.ai là ra deck ngay. Chỉ dùng Luồng B khi bạn thực sự muốn lưu 21 slide dạng card trong
+> một design-system project để tái sử dụng.
 
 ---
 
@@ -83,8 +103,10 @@ card, chỉnh từng slide độc lập.
 
 ## 📌 Checklist trước khi pitch
 
-- [ ] Logo VinUni đã đặt ở `assets/` và xuất hiện đúng ở slide 1 + 21.
-- [ ] Số liệu đã điền sẵn (team C2-Team-037, thị trường, giá, KPI) — chỉ cần thêm `[MÔN/CUỘC THI]` (slide 1) + logo.
+- [ ] `assets/logo-dark.svg` (mark đen) hiện đúng ở slide 1 + 21 + footer trên nền `#F8F7F1`.
+- [ ] Slide 5 dùng 4 ảnh THẬT `assets/shot-*.png` (student/cv/partner/university) — đã có sẵn.
+- [ ] Số liệu đã điền hết (team C2-Team-037, thị trường, giá, KPI, Ask) — **không còn placeholder**.
+- [ ] Mỗi slide ÍT CHỮ, nhiều hình; slide có số thị trường (2, 3, 20) có dòng "Nguồn:" nhỏ ở chân.
 - [ ] Chỉ **1 panel gradient indigo→violet mỗi slide** (đúng quy tắc v10) — không lạm dụng.
 - [ ] Nhãn `Được tài trợ` / `Quảng cáo` **không bị bỏ** ở business (7), showcase (5), governance (18).
 - [ ] Số liệu quy mô (slide 6) khớp với lệnh đếm trong spec.

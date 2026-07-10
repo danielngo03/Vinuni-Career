@@ -14,9 +14,8 @@ NGUỒN NỘI DUNG (bắt buộc bám sát, không tự bịa):
 - Nội dung + bố cục + "vẽ gì" từng slide: theo file 02-DECK-SPEC.md (21 slide, đã đánh số 01–21).
 - Hệ màu, font, bo góc, component, layout grammar: theo file 03-BRAND-DESIGN-SYSTEM.md.
 Nếu 2 file đã được đính kèm/nhúng ở trên, hãy đọc và tuân thủ tuyệt đối. Không thêm nội dung
-ngoài spec, không tự bịa số. Hầu hết số liệu đã điền sẵn trong spec (quy mô, thị trường, giá,
-KPI mục tiêu) — hãy dùng ĐÚNG các số đó. Chỉ còn "[MÔN/CUỘC THI]" ở slide 1 và logo/screenshot
-là để trống; nếu chưa có thì để nhãn chỗ trống rõ ràng, đừng bịa.
+ngoài spec, không tự bịa số. TẤT CẢ số liệu, tên team (C2-Team-037), giá, KPI, Ask, logo và
+4 ảnh thật đã có sẵn trong spec/assets — hãy dùng ĐÚNG, KHÔNG để chỗ trống, KHÔNG bịa thêm.
 
 NGÔN NGỮ: Tiếng Việt, giữ nguyên thuật ngữ kỹ thuật tiếng Anh (FastAPI, RAG, pgvector, ATS,
 CV–JD matching, ReAct agent, DAG...). Đối tượng: hội đồng/giám khảo capstone → cân bằng
@@ -39,11 +38,24 @@ YÊU CẦU THIẾT KẾ (tuân thủ 03-BRAND-DESIGN-SYSTEM.md):
   bull's-eye thị trường, ma trận 2×2 đối thủ, Kanban, DAG, donut score, timeline roadmap...).
   Ưu tiên SVG/HTML+CSS thuần, KHÔNG phụ thuộc thư viện ngoài. File phải chạy offline.
 
+TRỰC QUAN — ÍT CHỮ (RẤT QUAN TRỌNG):
+- Mỗi slide 1 ý chính, hiển thị TỐI ĐA ~30–45 chữ. KHÔNG dán nguyên đoạn văn từ spec lên slide.
+  Phần "Nội dung chữ" trong spec là NGUỒN Ý để bạn CHẮT LỌC thành: tiêu đề ngắn + 3–4 chip/label
+  + biểu đồ/sơ đồ/icon + số to. Nếu một slide toàn chữ → bạn đang làm SAI, hãy chuyển thành hình.
+- Ưu tiên: số lớn (metric tiles), sơ đồ/flow, biểu đồ (donut/bar/funnel), icon có nhãn, bảng gọn.
+  Câu dài → rút thành cụm từ. Bullet dài → thành chip. Đoạn văn → thành sơ đồ.
+- Slide 5 (Product Showcase): dùng 4 ẢNH CHỤP THẬT trong assets/ (shot-student-dashboard.png,
+  shot-cv-studio.png, shot-partner-pipeline.png, shot-university-outcomes.png) — nhúng data-URI,
+  đặt trong khung "browser frame" bo góc. KHÔNG vẽ lại mock (đã có ảnh thật).
+- NGUỒN SỐ LIỆU: slide nào hiển thị số thị trường (slide 2, 3, 20) phải có 1 dòng "Nguồn: …" cỡ
+  nhỏ (10–11px, xám) ở chân slide — nội dung nguồn đã ghi trong spec, đừng bỏ.
+
 KỸ THUẬT:
 - 1 file HTML, CSS trong <style>, JS nhỏ để chuyển slide (← → , Space, click), hiện số trang.
 - Thêm @media print để mỗi .slide là 1 trang landscape (page-break-after: always), ẩn nút UI.
 - Responsive: khung 16:9 co giãn theo màn hình, nội dung không tràn.
-- Dùng logo VinUni nếu tôi cung cấp (data-URI); nếu chưa có, để chỗ trống có nhãn "VinUni logo".
+- Logo: dùng assets/logo-dark.svg (mark ĐEN cho nền sáng #F8F7F1) ở slide 1 (lớn) + slide 21 +
+  logo nhỏ footer. Nhúng data-URI để chạy offline.
 
 CÁCH LÀM (để chất lượng cao):
 - Dựng LẦN LƯỢT theo cụm: trước tiên slide 01–05 thật kỹ trong 1 artifact và cho tôi xem.

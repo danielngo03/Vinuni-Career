@@ -74,6 +74,7 @@ Mọi số liệu "quy mô" trong deck (34 module, 98 migration, 2.022 test, 120
 từ repo** — xem `02-DECK-SPEC.md` slide 06 (Quy mô) để biết lệnh đếm. Số **thị trường** (2,36M SV · 940k DN ·
 67 trường tư · VinUni 32% offer khóa đầu) là **số thật 2024 có nguồn** (Tổng cục Thống kê VN, NSO, VinUni.edu.vn
 — liệt kê ở cuối `02-DECK-SPEC.md`). **Giá gói & KPI** là **đề xuất/mục tiêu hợp lý** (ghi rõ "đề xuất"/"mục
-tiêu" để không nhầm là số đã đạt). Chỉ còn `[MÔN/CUỘC THI]` và logo là bạn tự thêm. Câu chuyện *nền tảng* (slide
+tiêu" để không nhầm là số đã đạt). Logo (`logo-dark`) + 4 ảnh thật đã có trong `assets/` — **không còn gì phải
+điền**. Câu chuyện *nền tảng* (slide
 3, 8, 19, 21) trình bày là **tầm nhìn + sẵn-sàng-kỹ-thuật**, không phải cam kết V1 "bán cho trường khác" — an
 toàn khi bị hội đồng vặn.
