@@ -15,5 +15,6 @@ export const PUBLIC_PRIMARY_NAV: readonly PublicNavItem[] = [
   { key: "jobs", href: "/jobs", mega: "jobs" },
   { key: "companies", href: "/companies", mega: "companies" },
   { key: "events", href: "/events", mega: "events" },
+  { key: "careerExplore", href: "/career-explore" },
   { key: "createCv", href: "/student/cv" },
 ] as const;

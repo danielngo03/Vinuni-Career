@@ -20,8 +20,9 @@ export default async function EmployersPage() {
 
   const BENEFITS = [
     { icon: Target, gradient: "icon-chip-primary", title: t("benefit1Title"), body: t("benefit1Body") },
-    { icon: UsersThree, gradient: "icon-chip-success", title: t("benefit2Title"), body: t("benefit2Body") },
-    { icon: Megaphone, gradient: "icon-chip-warning", title: t("benefit3Title"), body: t("benefit3Body") },
+    { icon: UsersThree, gradient: "icon-chip-neutral", title: t("benefit2Title"), body: t("benefit2Body") },
+    { icon: Megaphone, gradient: "icon-chip-neutral", title: t("benefit3Title"), body: t("benefit3Body") },
+    // SealCheck keeps the success (green) chip — it denotes verified-partner trust.
     { icon: SealCheck, gradient: "icon-chip-success", title: t("benefit4Title"), body: t("benefit4Body") },
   ] as const;
 
@@ -57,7 +58,7 @@ export default async function EmployersPage() {
           {BENEFITS.map(({ icon: Icon, gradient, title, body }) => (
             <div
               key={title}
-              className="flex items-start gap-4 rounded-2xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface)] p-6 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-md"
+              className="flex items-start gap-4 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
             >
               <span className={`flex size-11 shrink-0 items-center justify-center rounded-xl shadow-sm ${gradient}`}>
                 <Icon aria-hidden weight="duotone" className="size-6 text-white" />
@@ -75,7 +76,7 @@ export default async function EmployersPage() {
         </div>
 
         {/* Closing CTA. */}
-        <div className="mt-8 flex flex-col items-start gap-4 rounded-2xl border border-[var(--glass-border-strong)] bg-[var(--glass-surface-light)] p-6 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col items-start gap-4 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h3 className="text-base font-bold text-[var(--text-primary)]">
               {t("closingTitle")}
@@ -86,7 +87,7 @@ export default async function EmployersPage() {
           </div>
           <Link
             href="/auth/partner-registration"
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-[var(--brand-primary)] px-6 text-sm font-semibold text-white shadow-[var(--shadow-brand)] outline-none transition-colors hover:bg-[var(--blue-700)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
+            className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-[var(--btn-primary-bg)] px-6 text-sm font-semibold text-[var(--btn-primary-fg)] shadow-[var(--shadow-brand)] outline-none transition-colors hover:bg-[var(--btn-primary-hover)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
           >
             {t("ctaRegister")}
             <ArrowRight aria-hidden weight="bold" className="size-4" />

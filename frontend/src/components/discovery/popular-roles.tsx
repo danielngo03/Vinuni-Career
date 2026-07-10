@@ -24,8 +24,8 @@ export function PopularRoles({ roles }: { roles: PopularRole[] }) {
         id="popular-roles-heading"
         className="mb-3 flex items-center gap-2 text-base font-bold tracking-tight text-[var(--text-primary)]"
       >
-        <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-success shadow-sm">
-          <Compass aria-hidden weight="duotone" className="size-3.5 text-white" />
+        <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-primary shadow-sm">
+          <Compass aria-hidden weight="duotone" className="size-3.5" />
         </span>
         {t("popularRolesTitle")}
       </h2>
@@ -40,7 +40,7 @@ export function PopularRoles({ roles }: { roles: PopularRole[] }) {
               <button
                 type="button"
                 onClick={() => router.push(`/jobs?q=${encodeURIComponent(term)}`)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/60 bg-white/75 px-3.5 py-1.5 text-sm font-medium text-[var(--text-secondary)] outline-none backdrop-blur-sm transition-all hover:border-[var(--brand-primary)]/60 hover:bg-white/90 hover:text-[var(--brand-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-3.5 py-1.5 text-sm font-medium text-[var(--text-secondary)] outline-none transition-colors hover:border-[var(--brand-primary)]/60 hover:bg-[var(--bg-subtle)] hover:text-[var(--brand-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
               >
                 {label}
                 <span className="tabular-nums text-xs text-[var(--text-muted)]">

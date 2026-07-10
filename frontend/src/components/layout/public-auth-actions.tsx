@@ -99,13 +99,13 @@ export function PublicAuthActions() {
     <>
       <Link
         href="/auth/login"
-        className="hidden h-9 items-center rounded-full px-3.5 text-sm font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-[var(--brand-navy)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40 min-[1360px]:inline-flex"
+        className="hidden h-9 items-center rounded-full px-3.5 text-sm font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40 min-[1360px]:inline-flex"
       >
         {tNav("login")}
       </Link>
       <Link
         href="/auth/register"
-        className="hidden h-9 items-center rounded-full bg-[var(--brand-primary)] px-5 text-sm font-semibold text-white shadow-[var(--shadow-brand)] outline-none transition-colors hover:bg-[var(--blue-700)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40 min-[1360px]:inline-flex"
+        className="hidden h-9 items-center rounded-full bg-[var(--btn-primary-bg)] px-5 text-sm font-semibold text-[var(--btn-primary-fg)] shadow-[var(--shadow-brand)] outline-none transition-colors hover:bg-[var(--btn-primary-hover)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40 min-[1360px]:inline-flex"
       >
         {tNav("register")}
       </Link>
