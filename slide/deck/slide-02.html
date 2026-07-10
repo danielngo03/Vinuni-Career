@@ -1,66 +1,78 @@
 <!-- @dsCard group="Pitch Deck" -->
 <!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#F8F7F1;--card:#fff;--border:#e5e5e5;--ink:#171717;--muted:#525252;--faint:#8f8f8f;
-  --indigo:#6366f1;--teal:#14b8a6;--amber:#f59e0b;--rose:#f43f5e;--sky:#0ea5e9;
-  --emerald:#10b981;--violet:#8b5cf6;--orange:#f97316;--vinuni:#c83538;--radius:14px;
-  --hero:linear-gradient(135deg,#4f46e5 0%,#6d28d9 55%,#7c3aed 100%);
-}
-html,body{background:#e9e8e2;font-family:"Plus Jakarta Sans",Inter,"Be Vietnam Pro",system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
-.slide{position:relative;width:100%;aspect-ratio:16/9;background:var(--bg);overflow:hidden;
-  display:flex;flex-direction:column;padding:3.2% 3.6% 2.4%;}
-.kicker{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:#737373}
-h1.title{font-size:2.2rem;font-weight:600;letter-spacing:-.02em;line-height:1.12;margin:.35rem 0 .1rem}
-.sub{font-size:1rem;color:var(--muted);max-width:70ch}
-.metric{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;font-weight:600}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.chip{display:inline-flex;align-items:center;gap:.4em;border-radius:999px;padding:.32em .8em;font-size:.8rem;font-weight:600;border:1px solid var(--border);background:#fff}
-.dot{width:.55em;height:.55em;border-radius:999px;display:inline-block}
-.hero{background:var(--hero);color:#fff;border-radius:var(--radius)}
-.body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:1rem;min-height:0}
-.grid{display:grid;gap:1rem}
-.foot{display:flex;align-items:center;justify-content:space-between;font-size:.72rem;color:var(--faint);padding-top:1rem}
-.foot .brand{display:flex;align-items:center;gap:.5em;font-weight:600;color:var(--muted);letter-spacing:.02em}
-.src{font-size:.68rem;color:var(--faint)}
-.kpi{padding:1.1rem 1.2rem}
-.kpi .lab{font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
-.kpi .num{font-size:2.1rem;line-height:1.1;margin-top:.3rem}
-.kpi .num small{font-size:.9rem;color:var(--faint);font-weight:500}
-.icon{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto}
-.pill{display:flex;flex-direction:column;align-items:center;gap:.45rem;text-align:center;flex:1}
-.pill .b{background:#fff;border:1px solid var(--border);border-radius:12px;padding:.7rem .5rem;width:100%;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.arrow{color:#c4c4c4;font-size:1.3rem;flex:0 0 auto;align-self:center}
-.frame{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.07)}
-.frame .bar{height:22px;background:#f5f5f5;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:5px;padding:0 9px}
-.frame .bar i{width:8px;height:8px;border-radius:999px;background:#d4d4d4;display:inline-block}
-.frame img{display:block;width:100%;height:auto}
-.frame .cap{font-size:.72rem;color:var(--muted);padding:.4rem .6rem;border-top:1px solid var(--border);font-weight:600}
-/* deck viewer */
-.deck{max-width:1180px;margin:0 auto}
-.deck .slide{border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.12);margin:0}
-.navbar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:50;background:#111;color:#fff;border-radius:999px;padding:.4rem .9rem;font-size:.8rem;display:flex;gap:.8rem;align-items:center;font-family:system-ui}
-.navbar button{background:none;border:none;color:#fff;cursor:pointer;font-size:1rem}
+:root{--bg:#F8F7F1;--card:#fff;--line:#e7e6e0;--navy:#16386b;--ink:#13233d;--muted:#5b6472;--faint:#9aa1ac;
+  --red:#c8102e;--blue:#2563eb;--green:#16a34a;--amber:#d97706;--purple:#7c3aed;--teal:#0d9488;--indigo:#4f46e5;--sky:#0ea5e9}
+html,body{background:#dedcd4;font-family:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.slide{position:relative;width:100%;aspect-ratio:16/9;background:var(--bg);overflow:hidden;padding:3.8% 4.6% 4%;display:flex;flex-direction:column}
+.eyebrow{display:inline-flex;align-items:center;gap:.5em;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--red)}
+.eyebrow::before{content:"";width:24px;height:3px;border-radius:2px;background:var(--red)}
+h1.t{font-size:2.35rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1.08;margin-top:.45rem}
+.sub{color:var(--muted);line-height:1.4}
+.body{flex:1;display:flex;min-height:0;margin-top:1.4rem;gap:1.3rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 22px -12px rgba(16,40,80,.18)}
+.chip{display:inline-flex;align-items:center;gap:.45em;border-radius:999px;padding:.42em .9em;font-size:.82rem;font-weight:600}
+.num{font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1}
+.foot{position:absolute;left:4.6%;right:4.6%;bottom:2.3%;display:flex;justify-content:space-between;font-size:.75rem;font-weight:600;color:var(--faint)}
+.laptop .scr{background:#0e2748;border-radius:12px 12px 3px 3px;padding:7px;box-shadow:0 26px 50px -18px rgba(14,39,72,.5)}
+.laptop .scr img{width:100%;display:block;border-radius:4px}
+.laptop .base{height:12px;width:113%;margin-left:-6.5%;background:linear-gradient(#e6e8ee,#c4c9d3);border-radius:0 0 11px 11px;position:relative}
+.laptop .base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:15%;height:5px;background:#adb3bf;border-radius:0 0 6px 6px}
+.brow{background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden;box-shadow:0 8px 22px -12px rgba(16,40,80,.22);display:flex;flex-direction:column}
+.brow .bar{height:22px;background:#f3f4f7;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:5px;padding:0 9px;flex:0 0 auto}
+.brow .bar i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.brow .imgwrap{flex:1;overflow:hidden;min-height:0}.brow img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.brow .lb{font-size:.76rem;font-weight:700;color:var(--navy);padding:.4rem .6rem;display:flex;align-items:center;gap:.5em;flex:0 0 auto}
+.deck{max-width:1160px;margin:0 auto}.deck .slide{border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.14)}
+.navbar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:50;background:#0e2748;color:#fff;border-radius:999px;padding:.45rem 1rem;font-size:.82rem;display:flex;gap:1rem;align-items:center}
+.navbar button{background:none;border:none;color:#fff;cursor:pointer;font-size:1.05rem}
 @media print{.navbar{display:none}.deck{max-width:none}.deck .slide{box-shadow:none;border-radius:0;page-break-after:always}}
-</style></head><body><section class="slide">
-    <div><div class="kicker">Thực trạng &amp; Thách thức</div>
-    <h1 class="title">Hướng nghiệp đại học hôm nay: rời rạc và hời hợt</h1></div>
-    <div class="body">
-      <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
-        <div class="card" style="padding:1.1rem 1.2rem;flex:1">
-      <div class="icon" style="background:#6366f11f;color:#6366f1;margin-bottom:.6rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg></div>
-      <div style="font-weight:600;font-size:1rem;margin-bottom:.3rem">Sinh viên</div>
-      <ul style="list-style:none;font-size:.82rem;color:var(--muted);line-height:1.35"><li style="margin:.22rem 0">Không có tín hiệu độ-phù-hợp cá nhân hoá</li><li style="margin:.22rem 0">Không có trợ lý AI viết/soi CV</li><li style="margin:.22rem 0">Không luyện phỏng vấn, mù mờ cạnh tranh</li></ul></div>
-        <div class="card" style="padding:1.1rem 1.2rem;flex:1">
-      <div class="icon" style="background:#14b8a61f;color:#14b8a6;margin-bottom:.6rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></div>
-      <div style="font-weight:600;font-size:1rem;margin-bottom:.3rem">Nhà tuyển dụng</div>
-      <ul style="list-style:none;font-size:.82rem;color:var(--muted);line-height:1.35"><li style="margin:.22rem 0">ATS doanh nghiệp nặng &amp; đắt</li><li style="margin:.22rem 0">Job board: ứng viên chưa xác thực</li><li style="margin:.22rem 0">Thiếu pipeline &amp; talent pool gắn campus</li></ul></div>
-        <div class="card" style="padding:1.1rem 1.2rem;flex:1">
-      <div class="icon" style="background:#f59e0b1f;color:#f59e0b;margin-bottom:.6rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M6 21V9l6-4 6 4v12M9 21v-6h6v6"/></svg></div>
-      <div style="font-weight:600;font-size:1rem;margin-bottom:.3rem">Nhà trường</div>
-      <ul style="list-style:none;font-size:.82rem;color:var(--muted);line-height:1.35"><li style="margin:.22rem 0">Không kiểm duyệt tập trung</li><li style="margin:.22rem 0">Không quản trị đối tác</li><li style="margin:.22rem 0">Không đo được career outcome / kiểm định</li></ul></div>
+</style></head><body><section class="slide"><div><span class="eyebrow">Vấn đề</span><h1 class="t">Công cụ hướng nghiệp đang rời rạc</h1></div>
+    <div class="body" style="flex-direction:column;justify-content:center;gap:1.3rem">
+      <div class="sub" style="font-size:.98rem;margin-top:-.3rem">Sinh viên, doanh nghiệp và nhà trường đều thiếu một công cụ chung — mỗi bên tự xoay xở với công cụ rời rạc.</div>
+      <div style="display:flex;gap:1.3rem">
+        <div class="card" style="flex:1;padding:1.3rem 1.3rem;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:.75rem"><span style="display:grid;place-items:center;width:54px;height:54px;border-radius:14px;background:#2563eb16;flex:0 0 auto"><svg style="display:block" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#2563eb" d="M14.217 3.5a5.17 5.17 0 0 0-4.434 0L5.489 5.512a2.25 2.25 0 0 1 .647 4.306l-1.076.461c-.534.23-.837.362-1.042.467l-.003.05L9.783 13.5a5.17 5.17 0 0 0 4.434 0l6.691-3.137c1.456-.682 1.456-3.044 0-3.726z"/><path fill="#2563eb" d="M5.545 8.44a.75.75 0 0 0-.59-1.38l-1.112.477c-.557.239-1.03.441-1.4.65c-.395.222-.734.482-.989.868c-.254.386-.36.8-.408 1.25C1 10.729 1 11.243 1 11.85v2.901a.75.75 0 0 0 1.5 0v-2.862c0-.656.001-1.088.037-1.421c.034-.315.093-.47.17-.586c.075-.115.195-.231.471-.387c.292-.164.689-.335 1.292-.593z"/><path fill="#2563eb" d="M5 11.258L9.783 13.5a5.17 5.17 0 0 0 4.434 0L19 11.258v5.367c0 1.008-.503 1.952-1.385 2.44C16.146 19.88 13.796 21 12 21s-4.146-1.121-5.615-1.935C5.504 18.577 5 17.633 5 16.625z" opacity=".5"/></svg></span>
+        <div style="font-weight:800;color:var(--navy);font-size:1.15rem">Sinh viên</div></div>
+      <div style="margin:.7rem 0"><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#2563eb;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">Không biết CV nào hợp việc nào</span></div><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#2563eb;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">Không có trợ lý AI &amp; luyện phỏng vấn</span></div><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#2563eb;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">Mù mờ mức độ cạnh tranh</span></div></div>
+      <div style="margin-top:.4rem;border-top:1px dashed var(--line);padding-top:.85rem;display:flex;align-items:center;gap:.5rem">
+        <span style="width:26px;height:26px;border-radius:8px;background:#2563eb16;display:grid;place-items:center;color:#2563eb;font-weight:800;font-size:.9rem;flex:0 0 auto">!</span>
+        <span style="font-size:.86rem;color:#2563eb;font-weight:700">Ứng tuyển thiếu tự tin</span></div></div>
+        <div class="card" style="flex:1;padding:1.3rem 1.3rem;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:.75rem"><span style="display:grid;place-items:center;width:54px;height:54px;border-radius:14px;background:#0d948816;flex:0 0 auto"><svg style="display:block" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><g fill="none"><path fill="#0d9488" fill-rule="evenodd" d="M17.192 6H6.808c-1.688 0-2.531 0-3.175.33A3 3 0 0 0 2.33 7.633C2 8.277 2 9.12 2 10.808c0 .429 0 .643.073.824a1 1 0 0 0 .3.404c.153.122.358.183.77.307L8.5 13.95v1.213c0 .765.46 1.471 1.187 1.767l.56.227a4.65 4.65 0 0 0 3.506 0l.56-.227a1.91 1.91 0 0 0 1.187-1.767V13.95l5.358-1.607c.41-.124.616-.185.768-.307a1 1 0 0 0 .3-.404c.074-.18.074-.395.074-.824c0-1.688 0-2.531-.33-3.175a3 3 0 0 0-1.303-1.303C19.723 6 18.88 6 17.192 6M13.6 13h-3.2c-.22 0-.4.182-.4.406v1.757c0 .166.1.315.251.377l.56.228c.764.31 1.614.31 2.377 0l.56-.228a.41.41 0 0 0 .252-.377v-1.757a.403.403 0 0 0-.4-.406" clip-rule="evenodd"/><path fill="#0d9488" d="m20.958 12.313l-.034.01L15.5 13.95v1.213c0 .765-.46 1.471-1.187 1.767l-.56.227a4.65 4.65 0 0 1-3.506 0l-.56-.227A1.91 1.91 0 0 1 8.5 15.163V13.95L3 12.3c0 3.675.035 7.388 1.318 8.528C5.636 22 7.758 22 12 22s6.364 0 7.682-1.172c1.283-1.14 1.317-4.853 1.318-8.528z" opacity=".5"/><path stroke="#0d9488" stroke-linecap="round" stroke-width="1.5" d="M9.17 4a3.001 3.001 0 0 1 5.66 0" opacity=".5"/></g></svg></span>
+        <div style="font-weight:800;color:var(--navy);font-size:1.15rem">Nhà tuyển dụng</div></div>
+      <div style="margin:.7rem 0"><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#0d9488;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">ATS doanh nghiệp nặng &amp; đắt</span></div><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#0d9488;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">Ứng viên job board chưa xác thực</span></div><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#0d9488;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">Không có pipeline gắn campus</span></div></div>
+      <div style="margin-top:.4rem;border-top:1px dashed var(--line);padding-top:.85rem;display:flex;align-items:center;gap:.5rem">
+        <span style="width:26px;height:26px;border-radius:8px;background:#0d948816;display:grid;place-items:center;color:#0d9488;font-weight:800;font-size:.9rem;flex:0 0 auto">!</span>
+        <span style="font-size:.86rem;color:#0d9488;font-weight:700">Tuyển sai người, tốn thời gian</span></div></div>
+        <div class="card" style="flex:1;padding:1.3rem 1.3rem;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:.75rem"><span style="display:grid;place-items:center;width:54px;height:54px;border-radius:14px;background:#d9770616;flex:0 0 auto"><svg style="display:block" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#d97706" fill-rule="evenodd" d="M10.75 2h2c1.886 0 2.828 0 3.414.586S16.75 4.114 16.75 6v15.25h5a.75.75 0 0 1 0 1.5h-20a.75.75 0 0 1 0-1.5h5V6c0-1.886 0-2.828.586-3.414S8.864 2 10.75 2M9 12a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5h-4A.75.75 0 0 1 9 12m0 3a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5h-4A.75.75 0 0 1 9 15m2.75 3.25a.75.75 0 0 1 .75.75v2.25H11V19a.75.75 0 0 1 .75-.75M9.25 7a2.75 2.75 0 1 1 5.5 0a2.75 2.75 0 0 1-5.5 0" clip-rule="evenodd"/><path fill="#d97706" d="M10.75 7a1.25 1.25 0 1 1 2.5 0a1.25 1.25 0 0 1-2.5 0" opacity=".5"/><path fill="#d97706" d="M20.913 5.889c.337.504.337 1.206.337 2.611v12.75h.5a.75.75 0 0 1 0 1.5h-20a.75.75 0 1 1 0-1.5h.5V8.5c0-1.405 0-2.107.337-2.611a2 2 0 0 1 .552-.552c.441-.295 2.537-.332 3.618-.336q-.005.437-.004.91V7.25H4.25a.75.75 0 1 0 0 1.5h2.503v1.5H4.25a.75.75 0 0 0 0 1.5h2.503v1.5H4.25a.75.75 0 0 0 0 1.5h2.503v6.5h10v-6.5h2.497a.75.75 0 1 0 0-1.5h-2.497v-1.5h2.497a.75.75 0 1 0 0-1.5h-2.497v-1.5h2.497a.75.75 0 0 0 0-1.5h-2.497V5.91q.001-.471-.004-.91c1.081.005 3.17.042 3.612.337a2 2 0 0 1 .552.552" opacity=".5"/></svg></span>
+        <div style="font-weight:800;color:var(--navy);font-size:1.15rem">Nhà trường</div></div>
+      <div style="margin:.7rem 0"><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#d97706;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">Kiểm duyệt &amp; đối tác thủ công</span></div><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#d97706;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">Không đo được career outcome</span></div><div style="display:flex;gap:.55rem;align-items:flex-start;margin-top:.6rem">
+        <span style="color:#d97706;flex:0 0 auto;font-size:.92rem;font-weight:800;line-height:1.4">✕</span>
+        <span style="font-size:.92rem;color:var(--ink);line-height:1.35">Thiếu dữ liệu cho kiểm định</span></div></div>
+      <div style="margin-top:.4rem;border-top:1px dashed var(--line);padding-top:.85rem;display:flex;align-items:center;gap:.5rem">
+        <span style="width:26px;height:26px;border-radius:8px;background:#d9770616;display:grid;place-items:center;color:#d97706;font-weight:800;font-size:.9rem;flex:0 0 auto">!</span>
+        <span style="font-size:.86rem;color:#d97706;font-weight:700">Khó chứng minh chất lượng</span></div></div>
       </div>
-      <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
-        <span style="font-size:.8rem;color:var(--muted);font-weight:600">Vì sao chưa ai giải được:</span><span class="chip" style="border-color:#f0c9b0;background:#fdf2ec;color:#b45309">✕ ATS doanh nghiệp quá nặng</span><span class="chip" style="border-color:#f0c9b0;background:#fdf2ec;color:#b45309">✕ Job board quá nông</span><span class="chip" style="border-color:#f0c9b0;background:#fdf2ec;color:#b45309">✕ Tự xây in-house quá khó</span></div>
-      <div class="src">Mỗi năm VN có ~<b>314.000</b> cử nhân ra trường &amp; ~<b>2,36 triệu</b> SV đang học — công cụ vẫn phân mảnh. Nguồn: Bộ GD&amp;ĐT / Tổng cục Thống kê VN, 2024.</div>
-    </div><div class="foot"><div class="brand"><svg viewBox="0 0 32 26" width="18" height="15" aria-hidden="true"><path d="M2 2 L16 24 L30 2 L23 2 L16 14 L9 2 Z" fill="#171717"/></svg> VinUni Career</div><div>VinUni Career Platform &middot; C2-Team-037 &middot; 02/21</div></div></section></body></html>
+      <div class="card" style="padding:.95rem 1.3rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+        <span style="font-weight:800;color:var(--navy);font-size:.98rem">Vì sao chưa ai giải được?</span>
+        <div style="display:flex;gap:.5rem"><span class="chip" style="background:#fdecec;color:var(--red)">ATS quá nặng</span><span class="chip" style="background:#fdecec;color:var(--red)">Job board quá nông</span><span class="chip" style="background:#fdecec;color:var(--red)">Tự xây quá khó</span></div>
+        <span class="sub" style="font-size:.82rem;margin-left:auto;color:var(--faint)">2,36 triệu SV · 314.000 cử nhân/năm — thị trường lớn nhưng công cụ vẫn phân mảnh</span>
+      </div></div><div class="foot"><span>C2-Team-037</span><span>02 / 21</span></div></section></body></html>
