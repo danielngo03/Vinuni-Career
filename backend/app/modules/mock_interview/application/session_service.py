@@ -117,8 +117,14 @@ async def prep(
     # client falls back to browser-native speech or text. Leak-safe boolean —
     # no provider/model detail is exposed.
     from app.ai.gateway import speech
+    from app.ai.gateway.realtime import live_relay
 
+    # Two independent voice capabilities, both leak-safe booleans:
+    #  - server_voice: turn-based Gemini STT+TTS around the text turn engine.
+    #  - realtime_relay: true full-duplex Live voice over the server WS relay
+    #    (preferred when available; the turn-based tier is the fallback).
     data["server_voice"] = speech.speech_enabled()
+    data["realtime_relay"] = live_relay.live_relay_enabled()
     return data
 
 
