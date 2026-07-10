@@ -37,7 +37,7 @@ from datetime import UTC, datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AICompletion, AIMessage
-from app.modules.ai_assistant.application import guardrails, turn_telemetry
+from app.modules.ai_assistant.application import guardrails, model_router, turn_telemetry
 from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.response_formatter import (
     ai_unavailable_reply,
@@ -343,9 +343,16 @@ async def run_native_turn(
     # results to the FE via the final assistant message — NOT fed to the model.
     artifacts: list[dict] = []
 
+    # Leak-safe phase timeline (frozen vocabulary in ``model_router``): every
+    # turn opens with "understanding" (before the first model call); each tool
+    # dispatch emits its mapped work phase; the final text is preceded by
+    # "composing". A ``status`` event NEVER carries a tool name — the separate
+    # ``tool_call`` event still does, for internal/eval use only, and the FE
+    # renders phases exclusively so the tool identity never reaches the client.
+    yield {"type": "status", "code": model_router.PHASE_UNDERSTANDING}
+
     while iterations < MAX_ITERATIONS:
         iterations += 1
-        yield {"type": "status", "code": "thinking" if iterations == 1 else "synthesizing"}
         try:
             completion = await llm_complete_native(
                 history,
@@ -430,6 +437,10 @@ async def run_native_turn(
                 continue
 
             if spec.permission_class == "confirmation_required":
+                # Sensible terminal phase for the confirmation-card path (e.g.
+                # create_job / move_candidate_stage → "analyzing") — the card is
+                # then streamed as the terminal ``done`` event, no final text.
+                yield {"type": "status", "code": model_router.phase_for_tool(name)}
                 confirm_msg = _confirmation_message(
                     chat.id, spec, name, args, locale, seq=await next_seq(session, chat.id)
                 )
@@ -474,7 +485,10 @@ async def run_native_turn(
                 )
                 continue
 
-            # Read-only tool — dispatch inline.
+            # Read-only tool — dispatch inline. Emit the leak-safe work phase
+            # FIRST (the only signal the FE renders); the ``tool_call`` event
+            # below still carries the raw name for internal/eval consumers only.
+            yield {"type": "status", "code": model_router.phase_for_tool(name)}
             yield {"type": "tool_call", "name": name}
             result = await dispatch_tool(name, args, session=session, principal=principal)
             tool_calls_used += 1
@@ -509,7 +523,21 @@ async def run_native_turn(
             guard_flags.append("scope_refused")
             final_text = guarded
 
-    yield {"type": "status", "code": "responding"}
+    # Ungrounded-number telemetry flag (partner turns only): a model-produced
+    # pure-text answer that used NO tool this turn yet asserts a specific count /
+    # percentage / salary / metric has no source for that number. Flag it for
+    # eval/telemetry ONLY — the user-facing text is never altered (a false
+    # positive must never scrub a legitimate answer). Conservative by design:
+    # ``has_ungrounded_numeric_claim`` ignores years, dates, and list ordinals.
+    if (
+        final_from_model
+        and tool_calls_used == 0
+        and (principal.persona or "").startswith("partner")
+        and guardrails.has_ungrounded_numeric_claim(final_text)
+    ):
+        guard_flags.append("ungrounded_numeric_suspected")
+
+    yield {"type": "status", "code": model_router.PHASE_COMPOSING}
     for chunk in local_stream_chunks(final_text):
         yield {"type": "token", "text": chunk}
 

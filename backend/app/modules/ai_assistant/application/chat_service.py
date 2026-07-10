@@ -44,7 +44,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AIMessage
 from app.ai.prompts.assistant import v1 as assistant_prompt
-from app.ai.prompts.assistant_partner import v2 as partner_prompt_native
+from app.ai.prompts.assistant_partner import v3 as partner_prompt_native
 from app.ai.retrieval.citation_verify import kb_source_titles, verify_citations
 from app.ai.safety.input_guard import sanitize_instruction
 from app.ai.safety.output_guard import enforce_keyword_scope

@@ -398,3 +398,88 @@ def select_specs(specs: list[ToolSpec], decision: RouteDecision) -> list[ToolSpe
         allowed |= TOOL_GROUPS.get(group, frozenset())
     subset = [s for s in specs if s.name in allowed]
     return subset or specs
+
+
+# --------------------------------------------------------------------------- #
+# Leak-safe status phases (FROZEN vocabulary — never a tool/provider/model name)#
+# --------------------------------------------------------------------------- #
+#
+# The native loop streams a ``{"type": "status", "code": <phase>}`` event to the
+# client to describe *what kind of work* is happening. The phase MUST be one of
+# the codes below — it describes the KIND of work (retrieving / analyzing / …)
+# and never reveals WHICH tool ran, so a status event can never leak a tool
+# name, provider, or model id (AI_PRODUCT_SPEC §15 / ai.md privacy rules). The
+# frontend renders these directly and maps any unknown code to a generic label.
+
+PHASE_UNDERSTANDING = "understanding"
+PHASE_RETRIEVING = "retrieving"
+PHASE_ANALYZING = "analyzing"
+PHASE_DRAFTING = "drafting"
+PHASE_VISUALIZING = "visualizing"
+PHASE_EXPORTING = "exporting"
+PHASE_GENERATING_IMAGE = "generating_image"
+PHASE_COMPOSING = "composing"
+
+LEAK_SAFE_PHASES: frozenset[str] = frozenset(
+    {
+        PHASE_UNDERSTANDING,
+        PHASE_RETRIEVING,
+        PHASE_ANALYZING,
+        PHASE_DRAFTING,
+        PHASE_VISUALIZING,
+        PHASE_EXPORTING,
+        PHASE_GENERATING_IMAGE,
+        PHASE_COMPOSING,
+    }
+)
+
+# Per-tool phase overrides, evaluated before the group fallback. Each set groups
+# tools by the *kind* of work they do so the FE label stays meaningful without
+# ever exposing the tool identity.
+_PHASE_VISUALIZING_TOOLS: frozenset[str] = frozenset(
+    {
+        "get_recruitment_analytics_chart",
+        "get_hiring_funnel_diagram",
+        "recruiting_analytics",
+        "pipeline_summary",
+    }
+)
+_PHASE_DRAFTING_TOOLS: frozenset[str] = frozenset(
+    {
+        "draft_job_description",
+        "draft_job_from_text",
+        "draft_job_from_attachment",
+        "rewrite_job_description",
+        "check_jd_bias",
+        "validate_job_draft",
+    }
+)
+_PHASE_ANALYZING_TOOLS: frozenset[str] = frozenset(
+    {
+        "create_job",
+        "move_candidate_stage",
+    }
+)
+
+
+def phase_for_tool(name: str) -> str:
+    """Map a tool NAME to a leak-safe status phase (pure; no I/O, no LLM).
+
+    Precedence: image → ``export_*`` prefix → explicit visualizing / drafting /
+    analyzing overrides → default ``retrieving`` (jobs / pipeline / events /
+    knowledge read tools, ``analyze_attachment``, ``knowledge_base_query``, and
+    anything unrecognised — a safe generic phase that never leaks a capability).
+    The return value is ALWAYS a member of :data:`LEAK_SAFE_PHASES`.
+    """
+    n = name or ""
+    if n == "generate_image":
+        return PHASE_GENERATING_IMAGE
+    if n.startswith("export_"):
+        return PHASE_EXPORTING
+    if n in _PHASE_VISUALIZING_TOOLS:
+        return PHASE_VISUALIZING
+    if n in _PHASE_DRAFTING_TOOLS:
+        return PHASE_DRAFTING
+    if n in _PHASE_ANALYZING_TOOLS:
+        return PHASE_ANALYZING
+    return PHASE_RETRIEVING

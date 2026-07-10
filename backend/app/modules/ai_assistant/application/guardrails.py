@@ -31,6 +31,7 @@ English per ai.md.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 
 from app.ai.safety.output_guard import enforce_keyword_scope
@@ -349,3 +350,56 @@ def partner_scope_guard(text: str, *, used_tool: bool, locale: str = "vi") -> st
         refusal_text=_copy("refuse.partner_off_topic", locale),
         skip=used_tool,
     )
+
+
+# --------------------------------------------------------------------------- #
+# 3. Ungrounded-number detector (telemetry flag only — NEVER scrubs text)      #
+# --------------------------------------------------------------------------- #
+#
+# An LLM judge flagged "invented numbers" as a real accuracy risk on partner
+# answers: a specific candidate count / percentage / salary / metric that did
+# not come from a tool result this turn has no source. This detector powers a
+# conservative deterministic TELEMETRY flag (``ungrounded_numeric_suspected``) —
+# it never edits the user-facing text (a false positive scrubbing a legitimate
+# answer is worse than a missed flag). It matches ONLY numbers bound directly to
+# a recruiting *data* noun (people/record counts, %, salary) and deliberately
+# ignores years, dates, and numbered-list ordinals so plain advice does not fire.
+
+# A number token: an integer with optional decimal/thousands groups. Crucially a
+# trailing bare "." (as in a numbered list marker "1. ") is NOT consumed, so a
+# list ordinal followed by a data noun ("1. Ứng viên nên…") does not match — the
+# non-whitespace "." breaks the required ``\s*<noun>`` bond.
+_NUM = r"\d+(?:[.,]\d+)?"
+
+_DATA_ASSERTION_PATTERNS: tuple[re.Pattern[str], ...] = (
+    # People counts: "12 ứng viên", "3 candidates", "5 applicants".
+    re.compile(rf"{_NUM}\s*(?:ứng\s*viên|candidates?|applicants?)", re.IGNORECASE),
+    # Percentages / rates: "42%", "42 %", "42.5%".
+    re.compile(rf"{_NUM}\s*%"),
+    # Salary / currency figures: "15 triệu", "15tr", "1500 USD", "2 tỷ", "50000 đồng".
+    re.compile(
+        rf"{_NUM}\s*(?:triệu|tỷ|tr\b|nghìn|vnđ|vnd|₫|đồng|đ\b|usd|đô\b|dollars?)",
+        re.IGNORECASE,
+    ),
+    re.compile(rf"[$₫]\s*{_NUM}"),
+    # Record counts bound to a recruiting noun (postings / applications / offers).
+    re.compile(
+        rf"{_NUM}\s*(?:tin\s*tuyển\s*dụng|bài\s*đăng|job\s*postings?|"
+        rf"đơn\s*ứng\s*tuyển|applications?|hồ\s*sơ|offers?|đề\s*nghị)",
+        re.IGNORECASE,
+    ),
+)
+
+
+def has_ungrounded_numeric_claim(text: str) -> bool:
+    """True if ``text`` asserts a specific recruiting number (count/%/salary).
+
+    Conservative + deterministic: only fires on numbers directly bound to a
+    recruiting data noun or a percentage/currency marker. Years, dates, times,
+    and numbered-list ordinals do not match. Callers apply this ONLY to a
+    pure-text answer that used no tool this turn, and use it as a telemetry flag
+    — it must never mutate the user-facing text.
+    """
+    if not text:
+        return False
+    return any(pattern.search(text) for pattern in _DATA_ASSERTION_PATTERNS)
