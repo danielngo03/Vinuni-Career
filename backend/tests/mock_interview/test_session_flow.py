@@ -32,6 +32,11 @@ _INTERNAL_FIELDS = (
     "model_ref",
     "grounding_json",
     "grounding_version",
+    "plan_json",
+    "coverage_json",
+    "plan_version",
+    "question_bank",
+    "competency_map",
     "text_redacted",
     "flagged",
 )
@@ -187,6 +192,7 @@ async def test_presenters_never_leak_internal_fields(db_session) -> None:
         "share_opt_in",
         "transcript",
         "report",
+        "coverage",
     }
     # Direct presenter call on the raw row is also clean (no flagged/model_ref).
     row = await repo.get_session(db_session, session_id=sid, user_id=student.user_id)

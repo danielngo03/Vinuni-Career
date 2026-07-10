@@ -11,6 +11,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
+from app.modules.mock_interview.application import plan_service
 from app.modules.mock_interview.domain.models import (
     MockInterviewSession,
     MockInterviewTurn,
@@ -71,4 +72,7 @@ def session_detail(
     data["share_opt_in"] = bool(row.share_opt_in)
     data["transcript"] = [turn(t) for t in turns]
     data["report"] = row.report_json
+    # Leak-safe interview-plan progress: which competencies are covered / still to
+    # cover (labels + counts only — no weights, question bank, ids, or scores).
+    data["coverage"] = plan_service.coverage_summary(row.coverage_json)
     return data

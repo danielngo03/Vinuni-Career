@@ -1,14 +1,20 @@
 """The interviewer "brain" — a thin adapter over the safe text gateway.
 
-One interviewer turn at a time, grounded on the session's JD+CV grounding. The
-interviewer speaks first (assistant), the candidate replies (user). This module
-does NO persistence and NO RBAC — ``session_service`` owns the transaction, turn
-storage, and permissions. Here we only turn (grounding + prior turns) into the
-next interviewer utterance, with a static fallback when the provider is down.
+One interviewer turn at a time, grounded on the session's JD+CV grounding AND the
+frozen interview plan (a ``plan_slice`` steers the next question toward the planned
+competency at the current difficulty tier). The interviewer speaks first
+(assistant), the candidate replies (user). This module does NO persistence and NO
+RBAC — ``session_service`` owns the transaction, turn storage, and permissions.
+Here we only turn (grounding + plan slice + prior turns) into the next interviewer
+utterance, with a static fallback when the provider is down.
+
+Every gateway call carries a student ``UsageContext`` (feature ``interview_sim``)
+so the billable/energy ledger settles the turn (idempotent per seq).
 """
 
 from __future__ import annotations
 
+import json
 import uuid
 from collections.abc import AsyncGenerator, Iterable
 from typing import Any, Literal
@@ -17,6 +23,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AIMessage
 from app.ai.gateway.task_runner import AiTaskRunner
+from app.ai.observability import billable_usage
 from app.ai.prompts.mock_interview import v1 as prompts
 from app.core.config import get_settings
 from app.modules.mock_interview.application import caps
@@ -31,6 +38,33 @@ _END_MARK = "[END]"
 
 def _alias() -> str:
     return get_settings().ai_interview_model_alias
+
+
+def _usage_ctx(
+    *,
+    user_id: uuid.UUID,
+    session_id: uuid.UUID | None,
+    task_type: str,
+    part: str,
+) -> billable_usage.UsageContext:
+    """Build the student billable context for one interview gateway call."""
+
+    idem = (
+        billable_usage.make_idempotency_key("interview_sim", session_id, part)
+        if session_id is not None
+        else None
+    )
+    return billable_usage.UsageContext(
+        actor_persona=billable_usage.PERSONA_STUDENT,
+        feature_key=billable_usage.FEATURE_INTERVIEW_SIM,
+        task_type=task_type,
+        billing_scope=billable_usage.SCOPE_USER,
+        actor_user_id=user_id,
+        session_id=session_id,
+        resource_type="mock_interview_session",
+        resource_id=session_id,
+        idempotency_key=idem,
+    )
 
 
 def strip_end_marker(text: str) -> tuple[str, bool]:
@@ -78,11 +112,18 @@ async def generate_opening(
     user_id: uuid.UUID,
     grounding: dict[str, Any],
     target_questions: int,
+    session_id: uuid.UUID | None = None,
+    plan_slice: dict[str, Any] | None = None,
 ) -> str:
-    """The interviewer's first utterance (greeting + first question)."""
+    """The interviewer's first utterance (greeting + first question).
+
+    Retained as a metered fallback: the frozen plan normally supplies the opening
+    (built once at create), so ``session_service`` uses ``plan['opening']`` and only
+    reaches here if a caller wants a fresh model-generated opening.
+    """
 
     system = prompts.build_conversation_system_prompt(
-        grounding, target_questions=target_questions
+        grounding, target_questions=target_questions, plan_slice=plan_slice
     )
     messages = [
         AIMessage(role="system", content=system),
@@ -93,6 +134,13 @@ async def generate_opening(
         alias=_alias(),
         task_type=prompts.CONVERSATION_TASK_TYPE,
         user_id=user_id,
+        session_id=session_id,
+        usage_context=_usage_ctx(
+            user_id=user_id,
+            session_id=session_id,
+            task_type=prompts.CONVERSATION_TASK_TYPE,
+            part="opening",
+        ),
     )
     try:
         resp = await runner.complete(
@@ -111,16 +159,20 @@ async def stream_interviewer(
     grounding: dict[str, Any],
     turns: list[MockInterviewTurn],
     target_questions: int,
+    session_id: uuid.UUID | None = None,
+    plan_slice: dict[str, Any] | None = None,
+    turn_seq: int | None = None,
 ) -> AsyncGenerator[str, None]:
     """Stream the next interviewer turn as scrubbed token chunks.
 
     ``turns`` is the full transcript INCLUDING the candidate's just-added answer
     as the final entry (so the model's last message is the candidate's reply).
+    ``plan_slice`` steers the question toward the next planned competency.
     On any provider failure a single static fallback chunk is yielded.
     """
 
     system = prompts.build_conversation_system_prompt(
-        grounding, target_questions=target_questions
+        grounding, target_questions=target_questions, plan_slice=plan_slice
     )
     messages = _history_messages(system, turns)
     runner = AiTaskRunner(
@@ -128,6 +180,13 @@ async def stream_interviewer(
         alias=_alias(),
         task_type=prompts.CONVERSATION_TASK_TYPE,
         user_id=user_id,
+        session_id=session_id,
+        usage_context=_usage_ctx(
+            user_id=user_id,
+            session_id=session_id,
+            task_type=prompts.CONVERSATION_TASK_TYPE,
+            part=f"turn:{turn_seq}" if turn_seq is not None else "turn",
+        ),
     )
     produced = False
     try:
@@ -143,3 +202,105 @@ async def stream_interviewer(
         return
     if not produced:
         yield prompts.fallback_next_turn(grounding)
+
+
+# --------------------------------------------------------------------------- #
+# Adaptive difficulty — a cheap, best-effort answer-depth signal              #
+# --------------------------------------------------------------------------- #
+_TIER_ORDER = list(caps.DIFFICULTY_TIERS)
+
+
+def _step_tier(current: str, direction: int) -> str:
+    """Move one difficulty tier up (+1) / down (-1), clamped."""
+
+    try:
+        idx = _TIER_ORDER.index(current)
+    except ValueError:
+        idx = 1
+    idx = max(0, min(len(_TIER_ORDER) - 1, idx + direction))
+    return _TIER_ORDER[idx]
+
+
+async def answer_signal(
+    db: AsyncSession,
+    *,
+    user_id: uuid.UUID,
+    session_id: uuid.UUID,
+    question: str,
+    answer: str,
+    current_tier: str,
+) -> str:
+    """Pick the NEXT difficulty tier from a cheap depth read of the last answer.
+
+    Best-effort and non-blocking to the interview: OPTIONAL by design. It only runs
+    when a real provider is active (offline/tests stay deterministic), and on ANY
+    failure it returns ``current_tier`` unchanged — the interview never depends on
+    it. A "deep" answer escalates one tier, a "shallow" answer eases one tier.
+    """
+
+    current = current_tier if current_tier in caps.DIFFICULTY_TIERS else "intermediate"
+    ans = (answer or "").strip()
+    if not ans:
+        return current
+    # Avoid a pointless offline round-trip (and needless metering) in tests / when
+    # real calls are off — deterministically keep the same tier.
+    try:
+        from app.ai.gateway.factory import real_provider_active
+
+        if not real_provider_active():
+            return current
+    except Exception:  # noqa: BLE001
+        return current
+
+    runner = AiTaskRunner(
+        db,
+        alias=_alias(),
+        task_type=prompts.ANSWER_SIGNAL_TASK_TYPE,
+        user_id=user_id,
+        session_id=session_id,
+        usage_context=_usage_ctx(
+            user_id=user_id,
+            session_id=session_id,
+            task_type=prompts.ANSWER_SIGNAL_TASK_TYPE,
+            part=None if session_id is None else "signal",
+        ),
+    )
+    try:
+        resp = await runner.complete(
+            [
+                AIMessage(role="system", content=prompts.ANSWER_SIGNAL_SYSTEM_PROMPT),
+                AIMessage(
+                    role="user",
+                    content=prompts.build_answer_signal_user_message(question, ans),
+                ),
+            ],
+            temperature=0.0,
+            max_tokens=caps.ANSWER_SIGNAL_MAX_TOKENS,
+        )
+        depth = _parse_depth(resp.text)
+    except Exception:  # noqa: BLE001 - signal is optional; keep tier on any failure
+        return current
+    if depth == "deep":
+        return _step_tier(current, +1)
+    if depth == "shallow":
+        return _step_tier(current, -1)
+    return current
+
+
+def _parse_depth(text: str | None) -> str | None:
+    raw = (text or "").strip()
+    start, end = raw.find("{"), raw.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        try:
+            obj = json.loads(raw[start : end + 1])
+            if isinstance(obj, dict):
+                depth = str(obj.get("depth") or "").lower()
+                if depth in {"shallow", "solid", "deep"}:
+                    return depth
+        except (ValueError, TypeError):
+            pass
+    low = raw.lower()
+    for depth in ("shallow", "deep", "solid"):
+        if depth in low:
+            return depth
+    return None
