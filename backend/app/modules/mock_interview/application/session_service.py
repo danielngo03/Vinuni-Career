@@ -46,6 +46,7 @@ from app.modules.mock_interview.domain.models import (
 from app.modules.mock_interview.infrastructure import repository as repo
 from app.shared.audit import AuditContext, write_audit
 from app.shared.exceptions import (
+    AIUnavailableError,
     AuthRequiredError,
     ConflictError,
     PermissionDeniedError,
@@ -108,9 +109,17 @@ async def prep(
     locale: str = "vi",
 ) -> dict[str, Any]:
     _require_student(principal)
-    return await grounding_service.build_prep(
+    data = await grounding_service.build_prep(
         session, principal=principal, job_id=job_id, locale=locale
     )
+    # Capability flag for the client: when true, the "voice" mode uses the
+    # server Gemini speech tier (natural TTS + robust STT). When false, the
+    # client falls back to browser-native speech or text. Leak-safe boolean —
+    # no provider/model detail is exposed.
+    from app.ai.gateway import speech
+
+    data["server_voice"] = speech.speech_enabled()
+    return data
 
 
 # --------------------------------------------------------------------------- #
@@ -799,3 +808,78 @@ async def get_session(
         raise ResourceNotFoundError()
     turns = await repo.load_turns(session, session_id=session_id)
     return presenters.session_detail(row, turns)
+
+
+# --------------------------------------------------------------------------- #
+# Voice tier: server-mediated speech (STT + TTS)                              #
+# --------------------------------------------------------------------------- #
+
+
+async def synthesize_turn_audio(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    session_id: uuid.UUID,
+    text: str,
+    voice: str | None = None,
+) -> tuple[bytes, str]:
+    """Synthesize interviewer ``text`` to speech for a session the caller owns.
+
+    Ownership-scoped (404 for a non-owner) and metered. Raises a user-safe
+    ``AIUnavailableError`` when the speech tier is off/unconfigured or the
+    provider call fails, so the client degrades to captions/text.
+    """
+
+    _require_student(principal)
+    await _load_owned(session, principal=principal, session_id=session_id)
+    from app.ai.gateway import speech
+
+    try:
+        return await speech.synthesize(
+            text,
+            voice=voice,
+            session=session,
+            user_id=principal.user_id,
+            session_id=session_id,
+        )
+    except speech.SpeechUnavailableError as exc:
+        raise AIUnavailableError(
+            "Giọng nói tạm thời không khả dụng. Bạn vẫn có thể tiếp tục bằng phụ đề/văn bản.",
+            details={"reason": "SPEECH_UNAVAILABLE"},
+        ) from exc
+
+
+async def transcribe_answer_audio(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    session_id: uuid.UUID,
+    audio: bytes,
+    mime_type: str,
+    locale: str = "vi",
+) -> str:
+    """Transcribe the student's spoken answer for a session they own.
+
+    Ownership-scoped and metered. The transcript is returned to the client to
+    review and submit as the turn answer (never auto-submitted). Raises a
+    user-safe ``AIUnavailableError`` when speech is unavailable.
+    """
+
+    _require_student(principal)
+    await _load_owned(session, principal=principal, session_id=session_id)
+    from app.ai.gateway import speech
+
+    try:
+        return await speech.transcribe(
+            audio,
+            mime_type,
+            locale=locale,
+            session=session,
+            user_id=principal.user_id,
+            session_id=session_id,
+        )
+    except speech.SpeechUnavailableError as exc:
+        raise AIUnavailableError(
+            "Không nhận dạng được giọng nói lúc này. Bạn có thể gõ câu trả lời.",
+            details={"reason": "SPEECH_UNAVAILABLE"},
+        ) from exc

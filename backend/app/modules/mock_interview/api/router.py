@@ -11,10 +11,11 @@ import json
 import uuid
 from collections.abc import AsyncGenerator
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, File, Query, Response, UploadFile, status
 from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import get_settings
 from app.core.db import get_db_session
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.modules.mock_interview.api.schemas import (
@@ -22,10 +23,11 @@ from app.modules.mock_interview.api.schemas import (
     EndSessionRequest,
     RecordTurnsRequest,
     ShareRequest,
+    TtsRequest,
     TurnRequest,
 )
 from app.modules.mock_interview.application import progress_service, session_service
-from app.shared.exceptions import AppError
+from app.shared.exceptions import AppError, ValidationFailedError
 from app.shared.responses import success
 
 router = APIRouter(prefix="/mock-interview", tags=["mock-interview"])
@@ -213,3 +215,67 @@ async def get_session(
         session, principal=auth.principal, session_id=session_id
     )
     return success(data)
+
+
+@router.post(
+    "/sessions/{session_id}/tts",
+    summary="Synthesize interviewer text to speech (server voice tier)",
+)
+async def tts(
+    session_id: uuid.UUID,
+    body: TtsRequest,
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> Response:
+    """Return WAV audio for the interviewer's line. Owner-scoped + metered; the
+    body is bounded and the audio is never persisted."""
+
+    audio, mime = await session_service.synthesize_turn_audio(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        text=body.text,
+        voice=body.voice,
+    )
+    return Response(
+        content=audio,
+        media_type=mime,
+        headers={"Cache-Control": "no-store"},
+    )
+
+
+@router.post(
+    "/sessions/{session_id}/stt",
+    summary="Transcribe the student's spoken answer (server voice tier)",
+)
+async def stt(
+    session_id: uuid.UUID,
+    audio: UploadFile = File(...),
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    """Transcribe uploaded answer audio to text. Owner-scoped + metered; the
+    upload is bounded and never persisted. The transcript is returned for the
+    student to review/submit as the turn answer — never auto-submitted."""
+
+    settings = get_settings()
+    raw = await audio.read()
+    max_bytes = int(getattr(settings, "ai_speech_max_audio_bytes", 8 * 1024 * 1024))
+    if not raw:
+        raise ValidationFailedError(
+            "Không có dữ liệu âm thanh.", details={"reason": "EMPTY_AUDIO"}
+        )
+    if len(raw) > max_bytes:
+        raise ValidationFailedError(
+            "Đoạn ghi âm quá dài. Hãy trả lời ngắn gọn hơn.",
+            details={"reason": "AUDIO_TOO_LARGE"},
+        )
+    mime = audio.content_type or "audio/webm"
+    transcript = await session_service.transcribe_answer_audio(
+        session,
+        principal=auth.principal,
+        session_id=session_id,
+        audio=raw,
+        mime_type=mime,
+    )
+    return success({"transcript": transcript})

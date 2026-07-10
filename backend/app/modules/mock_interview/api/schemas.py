@@ -48,6 +48,13 @@ class ShareRequest(BaseModel):
     opt_in: bool
 
 
+class TtsRequest(BaseModel):
+    """Synthesize interviewer text to speech (server-mediated Gemini voice tier)."""
+
+    text: str = Field(..., min_length=1, max_length=caps.MAX_ANSWER_CHARS)
+    voice: str | None = Field(default=None, max_length=40)
+
+
 # Re-exported for callers that want the accepted text modality without importing
 # domain constants.
 TEXT_MODALITY = MODALITY_TEXT

@@ -135,6 +135,25 @@ class Settings(BaseSettings):
     # Also read from GEMINI_API_KEY / GOOGLE_API_KEY / AI_PROVIDER_GEMINI_LIVE_API_KEY.
     gemini_api_key: str = ""
 
+    # --- Mock Interview: server-mediated Gemini voice tier (STT + TTS) ----------
+    # A turn-based spoken interview that runs on a Google/Vertex GenAI key WITHOUT
+    # the AI-Studio ephemeral-token Live socket: the server transcribes the
+    # student's spoken answer (Gemini audio understanding) and synthesizes the
+    # interviewer's question to natural speech (Gemini TTS), reusing the existing
+    # CV+JD-grounded text turn engine in between. This works on a Vertex *express*
+    # API key (``genai.Client(vertexai=True, api_key=...)``), unlike the native
+    # Live tier which requires an AI-Studio key. Values are leak-safe; no vendor or
+    # model string reaches the student. Disabled by default; enable once a working
+    # Google key + ``AI_REAL_CALLS_ENABLED`` are present.
+    ai_speech_enabled: bool = False
+    ai_speech_use_vertex: bool = True  # express Vertex key path (vertexai=True)
+    ai_speech_tts_model: str = "gemini-2.5-flash-preview-tts"
+    ai_speech_stt_model: str = "gemini-2.5-flash"
+    ai_speech_voice: str = "Aoede"  # Gemini prebuilt voice (Aoede/Puck/Charon/Kore/…)
+    ai_speech_max_tts_chars: int = 1200  # cap synthesized text length per call
+    ai_speech_max_audio_seconds: int = 90  # cap uploaded answer audio length
+    ai_speech_max_audio_bytes: int = 8 * 1024 * 1024  # hard upload ceiling (8 MB)
+
     # OCR / extraction (lightweight defaults)
     backend_ai_extras: str = "ai-lite"
     local_ocr_engine: str = "auto"
