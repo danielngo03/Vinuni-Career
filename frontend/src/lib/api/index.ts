@@ -397,6 +397,21 @@ export type {
   UpdateOfferBody,
   RespondOfferBody,
 } from "./applications";
+export { recruitingApi } from "./recruiting";
+export type {
+  InterviewBoardScope,
+  InterviewBoardMode,
+  InterviewBoardStatus,
+  InterviewBoardAssignee,
+  InterviewBoardRow,
+  InterviewBoardParams,
+  InterviewBoardResult,
+  OfferBoardScope,
+  OfferBoardStatus,
+  OfferBoardRow,
+  OfferBoardParams,
+  OfferBoardResult,
+} from "./recruiting";
 export { interviewPrepApi, coverLetterApi } from "./interview-prep";
 export { mockInterviewApi, sessionListTitle, topJobTitle } from "./mock-interview";
 export type {
