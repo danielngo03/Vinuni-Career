@@ -108,10 +108,34 @@ _FEATURE_BASE_UNITS: dict[str, int] = {
 # as follow-up so wallet spend for orgs stays deterministic and testable.
 _DEFAULT_ORG_WEEKLY_ALLOWANCE_UNITS = 5000
 
+# Per-TASK overrides so masked cost tracks the actual model tier, not just the
+# feature. Keyed by ``UsageContext.task_type``; a task absent here falls back to
+# the feature weight. Calibrated to relative model cost: the interview PLANNER
+# (a strong reasoning model, once per session) and the ANALYZER cost more than a
+# flash conversational turn; the cheap adaptive answer-signal costs less; native
+# realtime audio and TTS/STT bill per their own weight. Keeps the interview's
+# energy accounting honest instead of charging every sub-call a flat rate.
+_TASK_TYPE_BASE_UNITS: dict[str, int] = {
+    "mock_interview_plan": 5,
+    "mock_interview_analysis": 4,
+    "mock_interview_report": 3,
+    "mock_interview_realtime": 3,
+    "mock_interview_turn": 2,
+    "mock_interview_tts": 1,
+    "mock_interview_stt": 1,
+    "mock_interview_answer_signal": 1,
+}
 
-def base_units_for(feature_key: str) -> int:
-    """The masked base unit weight for one successful call of ``feature_key``."""
 
+def base_units_for(feature_key: str, task_type: str | None = None) -> int:
+    """Masked base unit weight for one successful call.
+
+    A per-``task_type`` override wins when present (so cost tracks the actual
+    model tier); otherwise the per-``feature_key`` weight applies.
+    """
+
+    if task_type and task_type in _TASK_TYPE_BASE_UNITS:
+        return _TASK_TYPE_BASE_UNITS[task_type]
     return _FEATURE_BASE_UNITS.get(feature_key, _DEFAULT_BASE_UNITS)
 
 
@@ -203,7 +227,11 @@ async def charge(
     """
 
     try:
-        units = base_units if base_units is not None else base_units_for(ctx.feature_key)
+        units = (
+            base_units
+            if base_units is not None
+            else base_units_for(ctx.feature_key, ctx.task_type)
+        )
 
         # Idempotency short-circuit: a settled key is a COMPLETE no-op — never a
         # second ledger row, never a second wallet decrement.
