@@ -540,16 +540,17 @@ async def run_native_turn(
             guard_flags.append("scope_refused")
             final_text = guarded
 
-    # Ungrounded-number telemetry flag (partner turns only): a model-produced
+    # Ungrounded-number telemetry flag (partner + student turns): a model-produced
     # pure-text answer that used NO tool this turn yet asserts a specific count /
     # percentage / salary / metric has no source for that number. Flag it for
     # eval/telemetry ONLY — the user-facing text is never altered (a false
     # positive must never scrub a legitimate answer). Conservative by design:
     # ``has_ungrounded_numeric_claim`` ignores years, dates, and list ordinals.
+    _persona = principal.persona or ""
     if (
         final_from_model
         and tool_calls_used == 0
-        and (principal.persona or "").startswith("partner")
+        and (_persona.startswith("partner") or _persona == "student")
         and guardrails.has_ungrounded_numeric_claim(final_text)
     ):
         guard_flags.append("ungrounded_numeric_suspected")

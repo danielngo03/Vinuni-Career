@@ -4,12 +4,27 @@ import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   AlertTriangle,
+  ArrowUpRight,
+  Bookmark,
+  BookmarkCheck,
   Briefcase,
+  Building2,
+  CalendarClock,
   Check,
   ChevronDown,
+  Compass,
   Download,
+  FileText,
+  GraduationCap,
+  Lightbulb,
   Loader2,
+  type LucideIcon,
+  MapPin,
   RefreshCw,
+  Star,
+  Target,
+  TrendingUp,
+  Wand2,
 } from "lucide-react";
 import {
   Area,
@@ -30,10 +45,21 @@ import {
 } from "recharts";
 import { cn } from "@/lib/utils";
 import { env } from "@/lib/env";
-import type { ChatMessage } from "@/lib/api";
+import type {
+  ChatMessage,
+  CareerBriefArtifact,
+  CvCardArtifact,
+  CvCompareArtifact,
+  CvPickerArtifact,
+  FitBreakdownArtifact,
+  JobCompareArtifact,
+  JobMatchListArtifact,
+} from "@/lib/api";
 import { getAccessToken } from "@/lib/api/session";
-import { Card, StatusChip } from "@/components/kit";
+import { Card, StatusChip, type ChipTone } from "@/components/kit";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Link } from "@/i18n/navigation";
+import { buildCvSelectionMessage } from "./constants";
 
 /* ------------------------------ Artifact types ----------------------------- */
 
@@ -103,13 +129,22 @@ export type JobDraftArtifactData = {
   ready?: boolean;
 };
 
-/** The full render-artifact union attached to assistant messages. */
+/** The full render-artifact union attached to assistant messages. Partner
+ * surfaces emit download/chart/diagram/image/job_draft; student surfaces emit
+ * the structured CV↔job cards (design §3). All are additive and independent. */
 export type MessageArtifact =
   | DownloadArtifactData
   | ChartArtifactData
   | DiagramArtifactData
   | ImageArtifactData
-  | JobDraftArtifactData;
+  | JobDraftArtifactData
+  | CvCardArtifact
+  | JobMatchListArtifact
+  | JobCompareArtifact
+  | FitBreakdownArtifact
+  | CvCompareArtifact
+  | CvPickerArtifact
+  | CareerBriefArtifact;
 
 /** Read (tolerantly) the artifacts array from a message's tool_result. */
 export function readArtifacts(message: ChatMessage): MessageArtifact[] {
@@ -121,13 +156,17 @@ export function readArtifacts(message: ChatMessage): MessageArtifact[] {
   );
 }
 
-/** Render backend-attached artifacts (download / chart / diagram / image / job draft). */
+/** Render backend-attached artifacts (download / chart / diagram / image / job
+ * draft for partners; CV↔job cards for students). `onSend` re-issues a user
+ * turn — used by the CV picker to resolve a selection and by save actions. */
 export function MessageArtifacts({
   message,
   expanded,
+  onSend,
 }: {
   message: ChatMessage;
   expanded: boolean;
+  onSend?: (text: string) => void;
 }) {
   const artifacts = readArtifacts(message);
   if (artifacts.length === 0) return null;
@@ -145,6 +184,20 @@ export function MessageArtifacts({
             return a.download_path ? <ImageArtifact key={i} artifact={a} /> : null;
           case "job_draft":
             return a.draft ? <JobDraftCard key={i} artifact={a} /> : null;
+          case "cv_card":
+            return <CvCard key={i} artifact={a} />;
+          case "job_match_list":
+            return <JobMatchList key={i} artifact={a} onSend={onSend} />;
+          case "job_compare":
+            return <JobCompareTable key={i} artifact={a} />;
+          case "fit_breakdown":
+            return <FitBreakdown key={i} artifact={a} />;
+          case "cv_compare":
+            return <CvCompare key={i} artifact={a} />;
+          case "cv_picker":
+            return <CvPicker key={i} artifact={a} onSend={onSend} />;
+          case "career_brief":
+            return <CareerBrief key={i} artifact={a} />;
           default:
             return null;
         }
@@ -501,7 +554,7 @@ function ChartArtifact({
           {chart.title}
         </figcaption>
       )}
-      <div className={cn("w-full", expanded ? "h-[360px]" : "h-[280px]")}>
+      <div className={cn("w-full", expanded ? "h-[380px]" : "h-[300px]")}>
         <ResponsiveContainer width="100%" height="100%">
           {body}
         </ResponsiveContainer>
@@ -829,6 +882,775 @@ function JobDraftCard({ artifact }: { artifact: JobDraftArtifactData }) {
               ))}
             </ul>
           </div>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+/* ------------------------- Student CV↔job cards (§3) ------------------------ */
+/* All render on assistant messages for the STUDENT persona. Colorblind-safe fit
+ * bands pair a hue with the numeric ring / a text label, never colour alone. */
+
+/** Map a known band keyword (vi/en) to a representative score for tone/ring. */
+const FIT_BAND_KEYWORD_SCORE: [RegExp, number][] = [
+  [/excellent|outstanding|xuất sắc/i, 90],
+  [/strong|great|mạnh/i, 78],
+  [/good|solid|tốt/i, 68],
+  [/moderate|fair|khá|trung bình/i, 55],
+  [/low|limited|thấp/i, 42],
+  [/weak|poor|mismatch|yếu/i, 25],
+];
+
+function bandToScore(band: string | null): number | null {
+  if (!band) return null;
+  for (const [re, s] of FIT_BAND_KEYWORD_SCORE) if (re.test(band)) return s;
+  return null;
+}
+
+/** Fit chip tone + ring stroke from a score (or an inferred band score). */
+function fitTone(score: number | null, band: string | null): { chip: ChipTone; stroke: string } {
+  const s = score ?? bandToScore(band);
+  if (s == null) return { chip: "neutral", stroke: "var(--text-muted)" };
+  if (s >= 80) return { chip: "emerald", stroke: "var(--viz-emerald)" };
+  if (s >= 65) return { chip: "teal", stroke: "var(--viz-teal)" };
+  if (s >= 50) return { chip: "amber", stroke: "var(--viz-amber)" };
+  if (s >= 35) return { chip: "orange", stroke: "var(--viz-orange)" };
+  return { chip: "rose", stroke: "var(--viz-rose)" };
+}
+
+function importanceTone(imp: "high" | "medium" | "low"): ChipTone {
+  return imp === "high" ? "rose" : imp === "medium" ? "amber" : "neutral";
+}
+
+/** The single-CV route is `/student/cv/{id}`; tolerate a `/student/cvs/` path. */
+function normalizeCvPath(path: string): string {
+  return path.replace(/^\/student\/cvs\//, "/student/cv/");
+}
+
+function fmtCompareValue(v: string | number | null | undefined): string {
+  if (v == null || v === "") return "—";
+  return String(v);
+}
+
+/** Localize a band label when a `fitBands.*` key exists, else show it verbatim. */
+function useBandLabel() {
+  const t = useTranslations("aiAssistant");
+  return (band: string | null): string | null => {
+    if (!band) return null;
+    return t.has(`fitBands.${band}`) ? t(`fitBands.${band}`) : band;
+  };
+}
+
+/** Circular fit gauge: hue + centered number (never colour alone). Falls back to
+ * a band chip when there is no numeric score. */
+function FitRing({
+  score,
+  band,
+  size = 46,
+}: {
+  score: number | null;
+  band: string | null;
+  size?: number;
+}) {
+  const bandLabel = useBandLabel();
+  const { chip, stroke } = fitTone(score, band);
+  const label = bandLabel(band);
+  if (score == null) {
+    return label ? (
+      <StatusChip tone={chip} size="sm" dot>
+        {label}
+      </StatusChip>
+    ) : null;
+  }
+  const strokeW = 4;
+  const r = (size - strokeW) / 2;
+  const circ = 2 * Math.PI * r;
+  const pct = Math.max(0, Math.min(100, score));
+  const filled = (pct / 100) * circ;
+  return (
+    <div
+      className="relative shrink-0"
+      style={{ width: size, height: size }}
+      title={label ?? undefined}
+    >
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--bg-muted)" strokeWidth={strokeW} />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke={stroke}
+          strokeWidth={strokeW}
+          strokeLinecap="round"
+          strokeDasharray={`${filled} ${circ - filled}`}
+        />
+      </svg>
+      <span className="type-small absolute inset-0 flex items-center justify-center font-bold tabular-nums text-[var(--text-primary)]">
+        {pct}
+      </span>
+    </div>
+  );
+}
+
+function CountStat({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
+  return (
+    <span className="type-caption inline-flex items-center gap-1.5 font-normal text-[var(--text-muted)]">
+      <Icon aria-hidden strokeWidth={1.9} className="size-3.5 shrink-0" />
+      {label}
+    </span>
+  );
+}
+
+/** Skill pill with an optional 0-100 proficiency track (level shown as a bar,
+ * not colour alone). */
+function SkillChip({ name, level }: { name: string; level: number | null }) {
+  if (level == null) {
+    return (
+      <StatusChip tone="neutral" size="sm">
+        {name}
+      </StatusChip>
+    );
+  }
+  const pct = Math.max(0, Math.min(100, level));
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--bg-muted)] px-2 py-0.5">
+      <span className="type-caption font-medium text-[var(--text-secondary)]">{name}</span>
+      <span aria-hidden className="h-1 w-8 overflow-hidden rounded-full bg-[var(--border-default)]">
+        <span className="block h-full rounded-full bg-[var(--content-ai)]" style={{ width: `${pct}%` }} />
+      </span>
+    </span>
+  );
+}
+
+/** Prominent "view" link used on card footers. */
+function CardLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="type-small inline-flex w-fit items-center gap-1.5 rounded-lg border border-[var(--content-ai)]/30 bg-[var(--content-ai-soft)] px-3 py-1.5 font-semibold text-[var(--content-ai)] outline-none transition-opacity hover:opacity-85 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+    >
+      {label}
+      <ArrowUpRight aria-hidden strokeWidth={1.9} className="size-3.5 shrink-0" />
+    </Link>
+  );
+}
+
+function BulletList({
+  items,
+  icon: Icon,
+  iconClass,
+}: {
+  items: string[];
+  icon: LucideIcon;
+  iconClass: string;
+}) {
+  return (
+    <ul className="space-y-1">
+      {items.map((it, i) => (
+        <li key={i} className="flex gap-1.5">
+          <Icon aria-hidden strokeWidth={1.9} className={cn("mt-0.5 size-3.5 shrink-0", iconClass)} />
+          <span className="type-small min-w-0 flex-1 font-normal text-[var(--text-secondary)] [overflow-wrap:anywhere]">
+            {it}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function CardSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <p className="type-caption mb-1.5 font-semibold uppercase tracking-[0.06em] text-[var(--text-muted)]">
+        {title}
+      </p>
+      {children}
+    </div>
+  );
+}
+
+/* --------------------------------- cv_card --------------------------------- */
+
+function CvCard({ artifact }: { artifact: CvCardArtifact }) {
+  const t = useTranslations("aiAssistant");
+  const locale = useLocale();
+  const a = artifact;
+  const dateFmt = new Intl.DateTimeFormat(locale === "vi" ? "vi-VN" : "en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+  const updated = a.updated_at ? dateFmt.format(new Date(a.updated_at)) : null;
+  const sourceLabel = t.has(`cards.source.${a.source}`) ? t(`cards.source.${a.source}`) : a.source;
+  return (
+    <Card className="mt-1 w-full min-w-0">
+      <div className="flex items-start gap-2.5 border-b border-[var(--border-subtle)] px-4 py-3">
+        <span
+          aria-hidden
+          className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--content-ai-soft)]"
+        >
+          <FileText strokeWidth={1.9} className="size-4 text-[var(--content-ai)]" />
+        </span>
+        <div className="min-w-0">
+          <p className="type-small truncate font-semibold text-[var(--text-primary)]">
+            {a.title || t("cards.cvUntitled")}
+          </p>
+          <div className="mt-1 flex flex-wrap items-center gap-1.5">
+            <StatusChip tone={a.source === "uploaded" ? "sky" : "indigo"} size="sm">
+              {sourceLabel}
+            </StatusChip>
+            {a.is_default && (
+              <StatusChip tone="success" size="sm" dot>
+                {t("cards.default")}
+              </StatusChip>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="space-y-3 px-4 py-3">
+        {a.summary && (
+          <p className="type-small font-normal leading-relaxed text-[var(--text-secondary)] [overflow-wrap:anywhere]">
+            {a.summary}
+          </p>
+        )}
+        {a.top_skills.length > 0 && (
+          <CardSection title={t("cards.topSkills")}>
+            <div className="flex flex-wrap gap-1.5">
+              {a.top_skills.map((s, i) => (
+                <SkillChip key={i} name={s.name} level={s.level} />
+              ))}
+            </div>
+          </CardSection>
+        )}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <CountStat icon={Briefcase} label={t("cards.experienceCount", { count: a.experience_count })} />
+          <CountStat icon={GraduationCap} label={t("cards.educationCount", { count: a.education_count })} />
+          {updated && <CountStat icon={CalendarClock} label={t("cards.updated", { date: updated })} />}
+        </div>
+        <CardLink href={normalizeCvPath(a.view_path)} label={t("cards.viewCv")} />
+      </div>
+    </Card>
+  );
+}
+
+/* ------------------------------ job_match_list ----------------------------- */
+
+function JobMatchList({
+  artifact,
+  onSend,
+}: {
+  artifact: JobMatchListArtifact;
+  onSend?: (text: string) => void;
+}) {
+  const t = useTranslations("aiAssistant");
+  const a = artifact;
+  if (a.items.length === 0) return null;
+  return (
+    <Card className="mt-1 w-full min-w-0">
+      <div className="flex items-center gap-2.5 border-b border-[var(--border-subtle)] px-4 py-3">
+        <span
+          aria-hidden
+          className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--viz-indigo-soft)]"
+        >
+          <Target strokeWidth={1.9} className="size-4 text-[var(--viz-indigo)]" />
+        </span>
+        <div className="min-w-0">
+          <p className="type-small truncate font-semibold text-[var(--text-primary)]">
+            {t("cards.matchesTitle", { count: a.total })}
+          </p>
+          <p className="type-caption truncate font-normal text-[var(--text-muted)]">
+            {t("cards.matchesForCv", { title: a.cv_title })}
+          </p>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 gap-2.5 px-4 py-3 sm:grid-cols-2">
+        {a.items.map((item) => (
+          <JobMatchCard key={item.job_id} item={item} onSend={onSend} />
+        ))}
+      </div>
+    </Card>
+  );
+}
+
+function JobMatchCard({
+  item,
+  onSend,
+}: {
+  item: JobMatchListArtifact["items"][number];
+  onSend?: (text: string) => void;
+}) {
+  const t = useTranslations("aiAssistant");
+  return (
+    <div className="flex min-w-0 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] p-3">
+      <div className="flex items-start gap-2.5">
+        <FitRing score={item.fit_score} band={item.fit_band} size={44} />
+        <div className="min-w-0 flex-1">
+          <p className="type-small font-semibold text-[var(--text-primary)] [overflow-wrap:anywhere]">
+            {item.title}
+          </p>
+          <div className="mt-0.5 flex flex-col gap-0.5">
+            {item.company_name && (
+              <span className="type-caption inline-flex items-center gap-1 truncate text-[var(--text-muted)]">
+                <Building2 aria-hidden strokeWidth={1.9} className="size-3 shrink-0" />
+                <span className="truncate">{item.company_name}</span>
+              </span>
+            )}
+            {item.location && (
+              <span className="type-caption inline-flex items-center gap-1 truncate text-[var(--text-muted)]">
+                <MapPin aria-hidden strokeWidth={1.9} className="size-3 shrink-0" />
+                <span className="truncate">{item.location}</span>
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+      {item.top_reasons.length > 0 && (
+        <ul className="space-y-1">
+          {item.top_reasons.slice(0, 3).map((r, i) => (
+            <li key={i} className="flex gap-1.5">
+              <Check aria-hidden strokeWidth={2} className="mt-0.5 size-3 shrink-0 text-[var(--content-success)]" />
+              <span className="type-caption min-w-0 flex-1 font-normal text-[var(--text-secondary)] [overflow-wrap:anywhere]">
+                {r}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className="mt-auto flex items-center gap-1.5 pt-1">
+        <Link
+          href={item.view_path}
+          className="type-caption inline-flex flex-1 items-center justify-center gap-1 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-1.5 font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+        >
+          {t("cards.view")}
+          <ArrowUpRight aria-hidden strokeWidth={1.9} className="size-3 shrink-0" />
+        </Link>
+        {item.is_saved ? (
+          <span className="type-caption inline-flex items-center gap-1 rounded-lg bg-[var(--content-success-soft)] px-2.5 py-1.5 font-semibold text-[var(--content-success)]">
+            <BookmarkCheck aria-hidden strokeWidth={1.9} className="size-3.5 shrink-0" />
+            {t("cards.saved")}
+          </span>
+        ) : (
+          <button
+            type="button"
+            onClick={() => onSend?.(t("cards.saveJobRequest", { title: item.title }))}
+            disabled={!onSend}
+            aria-label={t("cards.save")}
+            title={t("cards.save")}
+            className="type-caption inline-flex items-center gap-1 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 py-1.5 font-semibold text-[var(--text-secondary)] outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Bookmark aria-hidden strokeWidth={1.9} className="size-3.5 shrink-0" />
+            {t("cards.save")}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------- job_compare ------------------------------ */
+
+function JobCompareTable({ artifact }: { artifact: JobCompareArtifact }) {
+  const t = useTranslations("aiAssistant");
+  const a = artifact;
+  if (a.jobs.length === 0 || a.rows.length === 0) return null;
+  const rowLabel = (key: string) => (t.has(`compareRows.${key}`) ? t(`compareRows.${key}`) : prettify(key));
+  return (
+    <Card className="mt-1 w-full min-w-0 overflow-hidden">
+      <div className="flex items-center gap-2.5 border-b border-[var(--border-subtle)] px-4 py-3">
+        <span
+          aria-hidden
+          className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--viz-teal-soft)]"
+        >
+          <TrendingUp strokeWidth={1.9} className="size-4 text-[var(--viz-teal)]" />
+        </span>
+        <p className="type-small font-semibold text-[var(--text-primary)]">{t("cards.compareJobsTitle")}</p>
+      </div>
+      <div className="w-full overflow-x-auto overscroll-contain [scrollbar-width:thin]">
+        <table className="type-small w-full min-w-[30rem] border-collapse">
+          <thead>
+            <tr>
+              <th className="sticky left-0 z-[1] w-28 bg-[var(--bg-muted)] px-3 py-2.5 shadow-[inset_-1px_0_0_var(--border-default),inset_0_-1px_0_var(--border-default)]" />
+              {a.jobs.map((j) => (
+                <th
+                  key={j.job_id}
+                  className="min-w-[9rem] bg-[var(--bg-muted)] px-3 py-2.5 text-left align-bottom shadow-[inset_0_-1px_0_var(--border-default)]"
+                >
+                  <Link
+                    href={j.view_path}
+                    className="type-caption inline-flex items-center gap-1 font-semibold text-[var(--content-ai)] outline-none hover:underline focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+                  >
+                    <span className="[overflow-wrap:anywhere]">{j.title}</span>
+                    <ArrowUpRight aria-hidden strokeWidth={1.9} className="size-3 shrink-0" />
+                  </Link>
+                  {j.company_name && (
+                    <span className="type-caption mt-0.5 block font-normal text-[var(--text-muted)]">
+                      {j.company_name}
+                    </span>
+                  )}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {a.rows.map((row, ri) => (
+              <tr key={ri} className="even:bg-[var(--bg-subtle)]">
+                <td className="type-caption sticky left-0 z-[1] whitespace-nowrap border-b border-[var(--border-subtle)] bg-[var(--surface-card)] px-3 py-2 font-medium text-[var(--text-muted)] shadow-[inset_-1px_0_0_var(--border-subtle)]">
+                  {rowLabel(row.label_key)}
+                </td>
+                {a.jobs.map((_, ci) => (
+                  <td
+                    key={ci}
+                    className="border-b border-[var(--border-subtle)] px-3 py-2 align-top font-normal text-[var(--text-secondary)] [overflow-wrap:anywhere]"
+                  >
+                    {fmtCompareValue(row.values[ci])}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Card>
+  );
+}
+
+/* ------------------------------- fit_breakdown ----------------------------- */
+
+function FitBreakdown({ artifact }: { artifact: FitBreakdownArtifact }) {
+  const t = useTranslations("aiAssistant");
+  const bandLabel = useBandLabel();
+  const a = artifact;
+  const { chip } = fitTone(a.fit_score, a.fit_band);
+  const bandTxt = bandLabel(a.fit_band);
+  return (
+    <Card className="mt-1 w-full min-w-0">
+      <div className="flex items-start gap-3 border-b border-[var(--border-subtle)] px-4 py-3">
+        <FitRing score={a.fit_score} band={a.fit_band} size={52} />
+        <div className="min-w-0 flex-1">
+          <p className="type-small font-semibold text-[var(--text-primary)] [overflow-wrap:anywhere]">
+            {a.job_title}
+          </p>
+          {a.company_name && (
+            <p className="type-caption truncate font-normal text-[var(--text-muted)]">{a.company_name}</p>
+          )}
+          <div className="mt-1 flex flex-wrap items-center gap-1.5">
+            {bandTxt && (
+              <StatusChip tone={chip} size="sm" dot>
+                {bandTxt}
+              </StatusChip>
+            )}
+            <StatusChip tone="neutral" size="sm">
+              {t("cards.usingCv", { title: a.cv_title })}
+            </StatusChip>
+          </div>
+        </div>
+      </div>
+      <div className="space-y-3.5 px-4 py-3">
+        {a.matched_skills.length > 0 && (
+          <CardSection title={t("cards.matchedSkills")}>
+            <div className="flex flex-wrap gap-1.5">
+              {a.matched_skills.map((s, i) => (
+                <StatusChip key={i} tone="emerald" size="sm" title={s.evidence ?? undefined}>
+                  {s.name}
+                </StatusChip>
+              ))}
+            </div>
+          </CardSection>
+        )}
+        {a.missing_skills.length > 0 && (
+          <CardSection title={t("cards.missingSkills")}>
+            <div className="flex flex-wrap gap-1.5">
+              {a.missing_skills.map((s, i) => (
+                <StatusChip key={i} tone={importanceTone(s.importance)} size="sm">
+                  {s.name} ·{" "}
+                  {t.has(`cards.importance.${s.importance}`)
+                    ? t(`cards.importance.${s.importance}`)
+                    : s.importance}
+                </StatusChip>
+              ))}
+            </div>
+          </CardSection>
+        )}
+        {a.strengths.length > 0 && (
+          <CardSection title={t("cards.strengths")}>
+            <BulletList items={a.strengths} icon={Star} iconClass="text-[var(--content-ai)]" />
+          </CardSection>
+        )}
+        {a.gaps.length > 0 && (
+          <CardSection title={t("cards.gaps")}>
+            <BulletList items={a.gaps} icon={AlertTriangle} iconClass="text-[var(--content-warning)]" />
+          </CardSection>
+        )}
+        {a.suggestions.length > 0 && (
+          <CardSection title={t("cards.suggestions")}>
+            <div className="flex flex-col gap-1.5">
+              {a.suggestions.map((s, i) =>
+                s.action?.kind === "cv_studio" ? (
+                  <Link
+                    key={i}
+                    href={`/student/cv/${s.action.cv_id}`}
+                    className="inline-flex w-fit items-center gap-1.5 rounded-lg border border-[var(--content-ai)]/30 bg-[var(--content-ai-soft)] px-3 py-1.5 outline-none transition-opacity hover:opacity-85 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+                  >
+                    <Wand2 aria-hidden strokeWidth={1.9} className="size-3.5 shrink-0 text-[var(--content-ai)]" />
+                    <span className="type-small font-medium text-[var(--content-ai)] [overflow-wrap:anywhere]">
+                      {s.text}
+                    </span>
+                    <ArrowUpRight aria-hidden strokeWidth={1.9} className="size-3 shrink-0 text-[var(--content-ai)]" />
+                  </Link>
+                ) : (
+                  <div key={i} className="flex gap-1.5">
+                    <Lightbulb aria-hidden strokeWidth={1.9} className="mt-0.5 size-3.5 shrink-0 text-[var(--content-ai)]" />
+                    <span className="type-small min-w-0 flex-1 font-normal text-[var(--text-secondary)] [overflow-wrap:anywhere]">
+                      {s.text}
+                    </span>
+                  </div>
+                ),
+              )}
+            </div>
+          </CardSection>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+/* -------------------------------- cv_compare ------------------------------- */
+
+function CvCompare({ artifact }: { artifact: CvCompareArtifact }) {
+  const t = useTranslations("aiAssistant");
+  const bandLabel = useBandLabel();
+  const a = artifact;
+  if (a.cvs.length === 0) return null;
+  return (
+    <Card className="mt-1 w-full min-w-0">
+      <div className="flex items-center gap-2.5 border-b border-[var(--border-subtle)] px-4 py-3">
+        <span
+          aria-hidden
+          className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--content-ai-soft)]"
+        >
+          <FileText strokeWidth={1.9} className="size-4 text-[var(--content-ai)]" />
+        </span>
+        <div className="min-w-0">
+          <p className="type-small font-semibold text-[var(--text-primary)]">{t("cards.cvCompareTitle")}</p>
+          {a.job_title && (
+            <p className="type-caption truncate font-normal text-[var(--text-muted)]">
+              {t("cards.forJob", { title: a.job_title })}
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="flex flex-col gap-2 px-4 py-3">
+        {a.cvs.map((cv) => {
+          const recommended = cv.cv_id === a.recommended_cv_id;
+          const { chip } = fitTone(cv.fit_score, cv.fit_band);
+          const bandTxt = bandLabel(cv.fit_band);
+          return (
+            <div
+              key={cv.cv_id}
+              className={cn(
+                "flex items-center gap-3 rounded-xl border p-3",
+                recommended
+                  ? "border-[var(--content-ai)]/40 bg-[var(--content-ai-soft)]/50"
+                  : "border-[var(--border-default)] bg-[var(--surface-card)]",
+              )}
+            >
+              <FitRing score={cv.fit_score} band={cv.fit_band} size={44} />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <p className="type-small truncate font-semibold text-[var(--text-primary)]">{cv.title}</p>
+                  {recommended && (
+                    <StatusChip tone="ai" size="sm" dot>
+                      {t("cards.recommended")}
+                    </StatusChip>
+                  )}
+                </div>
+                {bandTxt && (
+                  <StatusChip tone={chip} size="sm" className="mt-1">
+                    {bandTxt}
+                  </StatusChip>
+                )}
+                {cv.highlight && (
+                  <p className="type-caption mt-1 font-normal text-[var(--text-secondary)] [overflow-wrap:anywhere]">
+                    {cv.highlight}
+                  </p>
+                )}
+              </div>
+              <Link
+                href={normalizeCvPath(cv.view_path)}
+                aria-label={t("cards.viewCv")}
+                title={t("cards.viewCv")}
+                className="shrink-0 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] p-1.5 text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+              >
+                <ArrowUpRight aria-hidden strokeWidth={1.9} className="size-4" />
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    </Card>
+  );
+}
+
+/* --------------------------------- cv_picker ------------------------------- */
+
+function CvPicker({
+  artifact,
+  onSend,
+}: {
+  artifact: CvPickerArtifact;
+  onSend?: (text: string) => void;
+}) {
+  const t = useTranslations("aiAssistant");
+  const locale = useLocale();
+  const a = artifact;
+  const dateFmt = new Intl.DateTimeFormat(locale === "vi" ? "vi-VN" : "en-US", {
+    day: "numeric",
+    month: "short",
+  });
+  const prompt = t.has(a.prompt_key) ? t(a.prompt_key) : t("picker.chooseCvDefault");
+  return (
+    <Card className="mt-1 w-full min-w-0">
+      <div className="flex items-center gap-2.5 border-b border-[var(--border-subtle)] px-4 py-3">
+        <span
+          aria-hidden
+          className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--content-ai-soft)]"
+        >
+          <FileText strokeWidth={1.9} className="size-4 text-[var(--content-ai)]" />
+        </span>
+        <p className="type-small min-w-0 flex-1 font-semibold text-[var(--text-primary)] [overflow-wrap:anywhere]">
+          {prompt}
+        </p>
+      </div>
+      <div className="flex flex-col gap-1.5 px-4 py-3">
+        {a.cvs.map((cv) => {
+          const sourceLabel = t.has(`cards.source.${cv.source}`)
+            ? t(`cards.source.${cv.source}`)
+            : cv.source;
+          const updated = cv.updated_at ? ` · ${dateFmt.format(new Date(cv.updated_at))}` : "";
+          return (
+            <button
+              key={cv.cv_id}
+              type="button"
+              disabled={!onSend}
+              onClick={() => onSend?.(buildCvSelectionMessage(t("picker.useCv", { title: cv.title }), cv.cv_id))}
+              className="group flex items-center gap-2.5 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] px-3 py-2.5 text-left outline-none transition-colors hover:border-[var(--content-ai)]/40 hover:bg-[var(--content-ai-soft)]/50 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <span
+                aria-hidden
+                className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--bg-muted)] transition-colors group-hover:bg-[var(--content-ai-soft)]"
+              >
+                <FileText
+                  strokeWidth={1.9}
+                  className="size-3.5 text-[var(--text-muted)] transition-colors group-hover:text-[var(--content-ai)]"
+                />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="flex flex-wrap items-center gap-1.5">
+                  <span className="type-small truncate font-semibold text-[var(--text-primary)]">{cv.title}</span>
+                  {cv.is_default && (
+                    <StatusChip tone="success" size="sm" dot>
+                      {t("cards.default")}
+                    </StatusChip>
+                  )}
+                </span>
+                <span className="type-caption mt-0.5 block font-normal text-[var(--text-muted)]">
+                  {sourceLabel}
+                  {updated}
+                </span>
+              </span>
+              <ArrowUpRight
+                aria-hidden
+                strokeWidth={1.9}
+                className="size-4 shrink-0 text-[var(--text-muted)] transition-colors group-hover:text-[var(--content-ai)]"
+              />
+            </button>
+          );
+        })}
+      </div>
+    </Card>
+  );
+}
+
+/* -------------------------------- career_brief ----------------------------- */
+
+function CareerBrief({ artifact }: { artifact: CareerBriefArtifact }) {
+  const t = useTranslations("aiAssistant");
+  const bandLabel = useBandLabel();
+  const a = artifact;
+  return (
+    <Card className="mt-1 w-full min-w-0">
+      <div className="flex items-center gap-2.5 border-b border-[var(--border-subtle)] px-4 py-3">
+        <span
+          aria-hidden
+          className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--content-ai-soft)]"
+        >
+          <Compass strokeWidth={1.9} className="size-4 text-[var(--content-ai)]" />
+        </span>
+        <p className="type-small font-semibold text-[var(--text-primary)]">{t("cards.careerBriefTitle")}</p>
+      </div>
+      <div className="space-y-3.5 px-4 py-3">
+        {a.summary && (
+          <p className="type-small font-normal leading-relaxed text-[var(--text-secondary)] [overflow-wrap:anywhere]">
+            {a.summary}
+          </p>
+        )}
+        {a.focus_clusters.length > 0 && (
+          <CardSection title={t("cards.focusClusters")}>
+            <div className="flex flex-col gap-1.5">
+              {a.focus_clusters.map((c, i) => (
+                <div key={i} className="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-3 py-2">
+                  <p className="type-small font-semibold text-[var(--text-primary)] [overflow-wrap:anywhere]">
+                    {c.label}
+                  </p>
+                  <p className="type-caption mt-0.5 font-normal text-[var(--text-secondary)] [overflow-wrap:anywhere]">
+                    {c.why}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </CardSection>
+        )}
+        {a.top_matches.length > 0 && (
+          <CardSection title={t("cards.topMatches")}>
+            <div className="flex flex-col gap-1">
+              {a.top_matches.map((m) => {
+                const { chip } = fitTone(null, m.fit_band);
+                const bandTxt = bandLabel(m.fit_band);
+                return (
+                  <Link
+                    key={m.job_id}
+                    href={`/jobs/${m.job_id}`}
+                    className="flex items-center justify-between gap-2 rounded-lg px-2 py-1.5 outline-none transition-colors hover:bg-[var(--bg-subtle)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+                  >
+                    <span className="type-small min-w-0 flex-1 truncate font-medium text-[var(--text-primary)]">
+                      {m.title}
+                    </span>
+                    {bandTxt && (
+                      <StatusChip tone={chip} size="sm">
+                        {bandTxt}
+                      </StatusChip>
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </CardSection>
+        )}
+        {a.skill_priorities.length > 0 && (
+          <CardSection title={t("cards.skillPriorities")}>
+            <ul className="space-y-1">
+              {a.skill_priorities.map((s, i) => (
+                <li key={i} className="flex gap-1.5">
+                  <TrendingUp aria-hidden strokeWidth={1.9} className="mt-0.5 size-3.5 shrink-0 text-[var(--content-ai)]" />
+                  <span className="type-small min-w-0 flex-1 font-normal text-[var(--text-secondary)] [overflow-wrap:anywhere]">
+                    <strong className="font-semibold text-[var(--text-primary)]">{s.skill}</strong> — {s.impact}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </CardSection>
         )}
       </div>
     </Card>

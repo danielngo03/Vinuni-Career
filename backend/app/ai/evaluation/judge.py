@@ -70,6 +70,29 @@ RUBRICS: dict[str, str] = {
         "is fabrication); and bias-free, inclusive wording with no age/gender/appearance/"
         "marital-status constraints."
     ),
+    "student_chat_answer": (
+        "Score the assistant's reply to a VinUni student about their career/jobs/CV. 5 "
+        "requires: every number, count, fit band, deadline, salary, and job/company name is "
+        "grounded in the provided tool/system data (invented figures or fabricated jobs are "
+        "fabrication — cap at 2 and flag 'fabrication'); it uses ONLY in-platform data and "
+        "never claims to have searched Google/LinkedIn or any external source; no provider/"
+        "model/token/internal detail or another student's PII appears; the reply matches the "
+        "student's language (Vietnamese question gets a Vietnamese answer, English gets "
+        "English); and it is concretely actionable for the student's next step (which CV to "
+        "use, which job to view, what skill to close, how to prepare) rather than generic "
+        "prose. A fit score is a user-facing product band, never a raw similarity/confidence."
+    ),
+    "cv_match_quality": (
+        "Score a CV-to-job match explanation for a student. 5 requires: the match reasons are "
+        "grounded in the student's actual CV skills/experience and the job's stated "
+        "requirements (no invented skills, employers, GPA, certifications, or quantified "
+        "outcomes — fabrication caps at 2 and flags 'fabrication'); matched vs missing skills "
+        "are honest and specific; any fit indication is a user-facing 0-100 product score or "
+        "band with a plain-language reason, never a raw embedding similarity/confidence; "
+        "suggestions are practical and reviewable (e.g. a concrete CV-Studio improvement or a "
+        "skill to learn); and no provider/model/token internal or other candidate's data "
+        "appears."
+    ),
 }
 
 _SYSTEM_PROMPT = """\

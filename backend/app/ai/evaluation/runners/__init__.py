@@ -35,6 +35,10 @@ from app.ai.evaluation.runners import (
     recommend,
     scorecard_suggest,
     screening_brief,
+    student_chat,
+    student_golden,
+    student_rag,
+    student_tool_injection,
     talent_match,
 )
 
@@ -65,6 +69,10 @@ RUN_CASE_BY_FAMILY = {
     "partner_jd_builder": partner_jd_builder.run_case,
     "partner_rag": partner_rag.run_case,
     "partner_tool_injection": partner_tool_injection.run_case,
+    "student_chat": student_chat.run_case,
+    "student_golden": student_golden.run_case,
+    "student_rag": student_rag.run_case,
+    "student_tool_injection": student_tool_injection.run_case,
 }
 
 CHECK_BY_KIND = {
@@ -94,6 +102,10 @@ CHECK_BY_KIND = {
     "partner_jd_builder": partner_jd_builder.check,
     "partner_rag": partner_rag.check,
     "partner_tool_injection": partner_tool_injection.check,
+    "student_chat": student_chat.check,
+    "student_golden": student_golden.check,
+    "student_rag": student_rag.check,
+    "student_tool_injection": student_tool_injection.check,
 }
 
 __all__ = ["RUN_CASE_BY_FAMILY", "CHECK_BY_KIND"]

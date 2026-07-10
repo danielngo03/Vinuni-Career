@@ -25,6 +25,8 @@ from . import (
     partner,
     recruiting,
     student,
+    student_actions,
+    student_match,
     talent,
 )
 from .specs import TOOL_SPECS
@@ -42,6 +44,15 @@ _HANDLERS: dict[
     "export_offers": exports.export_offers,
     "export_events": exports.export_events,
     "generate_image": image.generate_image,
+    # Student CV↔job matching cards (system-data-only render artifacts).
+    "match_cv_to_jobs": student_match.match_cv_to_jobs,
+    "explain_job_fit": student_match.explain_job_fit,
+    "compare_jobs": student_match.compare_jobs,
+    "show_cv": student_match.show_cv,
+    "compare_cvs": student_match.compare_cvs,
+    # Student confirmation-gated writes.
+    "set_job_alert": student_actions.set_job_alert,
+    "register_for_event": student_actions.register_for_event,
 }
 
 SUPPORTED_TOOL_NAMES = frozenset(

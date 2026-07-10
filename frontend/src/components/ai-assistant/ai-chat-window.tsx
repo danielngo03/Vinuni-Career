@@ -51,11 +51,16 @@ function derivePhaseFromTool(name: string): string {
 }
 
 /**
- * AI career assistant chat window. Renders as a floating panel anchored at the
- * bottom-right. Uses SSE streaming when the session is live so partial responses
- * render incrementally. Falls back to a sign-in prompt for guests.
+ * AI career assistant chat window. Three surface variants:
+ *  - `embedded`  — fills a parent column (partner/university workspace shell).
+ *  - `roomy`     — a wide right-docked slide-out drawer with a fullscreen toggle
+ *                  (the student launcher; much wider than the legacy floating box
+ *                  so tables/charts/cards can breathe). No file upload.
+ *  - `floating`  — the legacy compact bottom-right box (kept for back-compat).
  *
- * Provider/model/token internals are never surfaced (AI_PRODUCT_SPEC §9).
+ * Uses SSE streaming when the session is live so partial responses render
+ * incrementally. Falls back to a sign-in prompt for guests. Provider/model/token
+ * internals are never surfaced (AI_PRODUCT_SPEC §9).
  */
 export function AiChatWindow({
   open,
@@ -64,7 +69,7 @@ export function AiChatWindow({
 }: {
   open: boolean;
   onClose: () => void;
-  variant?: "floating" | "embedded";
+  variant?: "floating" | "embedded" | "roomy";
 }) {
   const t = useTranslations("aiAssistant");
   const authStatus = useAuthStore((s) => s.status);
@@ -562,6 +567,10 @@ export function AiChatWindow({
   if (!open) return null;
 
   const embedded = variant === "embedded";
+  const roomy = variant === "roomy";
+  // File upload is a partner/university (workspace) affordance only. The student
+  // roomy surface has NO upload affordance at all (design §6, owner 2026-07-11).
+  const uploadEnabled = embedded;
   const showExpandedLayout = expanded && !embedded;
   const isWorkspaceFullscreen = embedded && expanded;
   const showHistoryPane = historyOpen || showExpandedLayout;
@@ -617,23 +626,36 @@ export function AiChatWindow({
           ? isWorkspaceFullscreen
             ? "fixed inset-x-0 bottom-0 top-[60px] z-[60] h-[calc(100dvh-60px)] w-screen overflow-hidden bg-[var(--surface-card)] animate-in slide-in-from-right-4 duration-200"
             : "h-full w-full overflow-hidden"
-          : cn(
-              "fixed z-50 rounded-2xl border border-[var(--border-default)] shadow-[var(--shadow-xl)]",
-              expanded ? "inset-4 w-auto" : "bottom-20 right-4 w-[min(92vw,400px)]",
-              "bg-[var(--surface-card)] animate-in fade-in slide-in-from-bottom-4 duration-200",
-            ),
+          : roomy
+            ? cn(
+                "fixed z-50 overflow-hidden border border-[var(--border-default)] bg-[var(--surface-card)] shadow-[var(--shadow-xl)]",
+                expanded
+                  ? "inset-3 rounded-2xl animate-in fade-in duration-200"
+                  : // Right-docked slide-out drawer, full viewport height, roomy width.
+                    "inset-y-0 right-0 w-[min(96vw,600px)] rounded-l-2xl border-y-0 border-r-0 animate-in slide-in-from-right-4 duration-200",
+              )
+            : cn(
+                "fixed z-50 rounded-2xl border border-[var(--border-default)] shadow-[var(--shadow-xl)]",
+                expanded ? "inset-4 w-auto" : "bottom-20 right-4 w-[min(92vw,400px)]",
+                "bg-[var(--surface-card)] animate-in fade-in slide-in-from-bottom-4 duration-200",
+              ),
       )}
       style={
-        embedded
+        embedded || roomy
           ? undefined
           : { maxHeight: expanded ? "calc(100vh - 2rem)" : "min(80vh, 640px)" }
       }
     >
-      {/* Header */}
+      {/* Header — roomy clips its own corners via the container's overflow-hidden,
+          so it skips the rounded-t (which would notch the flush right edge). */}
       <div
         className={cn(
           "flex items-center gap-2.5 border-b border-[var(--border-default)] px-4 py-2.5",
-          embedded ? "bg-[var(--surface-card)]" : "rounded-t-2xl bg-[var(--bg-subtle)]",
+          embedded
+            ? "bg-[var(--surface-card)]"
+            : roomy
+              ? "bg-[var(--bg-subtle)]"
+              : "rounded-t-2xl bg-[var(--bg-subtle)]",
         )}
       >
         <span
@@ -773,7 +795,7 @@ export function AiChatWindow({
           <div
             className={cn(
               "flex flex-1 flex-col gap-3 overflow-y-auto p-4",
-              embedded ? "min-h-0" : "min-h-[260px]",
+              embedded || roomy ? "min-h-0" : "min-h-[260px]",
             )}
           >
             {isAuthLoading ? (
@@ -798,6 +820,7 @@ export function AiChatWindow({
                   onEditStart={() => setEditingMessageId(msg.id)}
                   onEditCancel={() => setEditingMessageId(null)}
                   onEditSubmit={(text) => void submitEdit(msg, text)}
+                  onSend={(text) => void send(text)}
                 />
               ))
             )}
@@ -814,7 +837,7 @@ export function AiChatWindow({
           {/* Input */}
           {isAuthed && (
             <div className="border-t border-[var(--border-default)] bg-[var(--surface-card)] px-4 pb-3 pt-3">
-              {attachments.length > 0 && (
+              {uploadEnabled && attachments.length > 0 && (
                 <div className="mb-2 flex flex-wrap gap-1.5">
                   {attachments.map((a) => (
                     <span
@@ -847,23 +870,27 @@ export function AiChatWindow({
                 </div>
               )}
               <div className="flex items-end gap-2">
-                <input
-                  type="file"
-                  multiple
-                  ref={fileInputRef}
-                  accept={ACCEPTED_ATTACHMENT_ACCEPT}
-                  onChange={(e) => void handleFilesPicked(e.target.files)}
-                  className="hidden"
-                />
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  disabled={sending || attachments.length >= MAX_ATTACHMENTS}
-                  aria-label={t("attachButton")}
-                  className="flex size-8 shrink-0 items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  <Paperclip aria-hidden strokeWidth={1.9} className="size-4" />
-                </button>
+                {uploadEnabled && (
+                  <>
+                    <input
+                      type="file"
+                      multiple
+                      ref={fileInputRef}
+                      accept={ACCEPTED_ATTACHMENT_ACCEPT}
+                      onChange={(e) => void handleFilesPicked(e.target.files)}
+                      className="hidden"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={sending || attachments.length >= MAX_ATTACHMENTS}
+                      aria-label={t("attachButton")}
+                      className="flex size-8 shrink-0 items-center justify-center rounded-full text-[var(--text-muted)] outline-none transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <Paperclip aria-hidden strokeWidth={1.9} className="size-4" />
+                    </button>
+                  </>
+                )}
                 <textarea
                   ref={inputRef}
                   value={input}

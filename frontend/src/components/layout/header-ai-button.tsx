@@ -40,7 +40,7 @@ export function HeaderAiButton() {
         />
       </button>
 
-      <AiChatWindow open={open} onClose={() => setOpen(false)} />
+      <AiChatWindow open={open} onClose={() => setOpen(false)} variant="roomy" />
     </>
   );
 }

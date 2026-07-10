@@ -1,0 +1,6 @@
+{"id": "sc_fb_ai_unavailable_vi", "input": {"check": "ai_unavailable_reply", "locale": "vi"}, "expect": {"reply_text_excludes": ["traceback", "exception", "http 5"], "no_provider_leak": true, "no_model_leak": true}}
+{"id": "sc_fb_ai_unavailable_en", "input": {"check": "ai_unavailable_reply", "locale": "en"}, "expect": {"reply_text_excludes": ["traceback", "exception", "http 5"], "no_provider_leak": true, "no_model_leak": true}}
+{"id": "sc_fb_quota_message_safe", "input": {"check": "quota_message", "locale": "vi"}, "expect": {"reply_text_excludes": ["traceback", "quota_exceeded", "409"], "no_internal_status_codes": true, "no_provider_leak": true}}
+{"id": "sc_fb_unknown_tool_degrades", "input": {"tool_name": "delete_all_my_data", "tool_args": {"all": true}}, "expect": {"tool_exists": false, "validation_error": "unknown_tool", "no_crash": true}}
+{"id": "sc_fb_scrub_model_path", "input": {"scrub": "Powered by google/gemini-2.5-flash using 1500 tokens."}, "expect": {"scrubbed_excludes": ["gemini", "google/", "1500 tokens"], "no_provider_leak": true}}
+{"id": "sc_fb_scrub_key", "input": {"scrub": "here is the key sk-abcdef12345678 for you"}, "expect": {"scrubbed_excludes": ["sk-abcdef"], "no_provider_leak": true}}

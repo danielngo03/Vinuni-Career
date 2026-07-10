@@ -4,7 +4,7 @@ import uuid
 
 from app.ai.prompts.assistant import v1 as assistant_prompt
 from app.core.db import get_sessionmaker
-from app.modules.ai_assistant.application import chat_service
+from app.modules.ai_assistant.application import chat_service, model_router
 from app.modules.ai_assistant.application.agentic.planner import build_agent_plan
 from app.modules.ai_assistant.domain.models import ChatMessage, ChatSession
 from app.shared.permissions import Principal
@@ -868,10 +868,15 @@ async def test_chat_salary_intent_uses_tool_without_leaking_tool_json(db_session
 
     final = events[-1]["message"]["content"]
     assert events[-1]["type"] == "done"
+    # Leak-safe streaming: the student SSE surfaces the mapped work PHASE, never
+    # the raw tool name (no tool_call/tool_result event carries a tool identity).
     assert any(
-        event.get("type") == "tool_call" and event.get("name") == "get_salary_benchmark"
+        event.get("type") == "status"
+        and event.get("code") == model_router.phase_for_tool("get_salary_benchmark")
         for event in events
     )
+    assert not any(event.get("type") == "tool_call" for event in events)
+    assert not any(event.get("type") == "tool_result" for event in events)
     assert "Benchmark lương" in final
     assert "tool_call" not in final
     assert "job_title" not in final

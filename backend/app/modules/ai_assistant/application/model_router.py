@@ -50,8 +50,28 @@ _CHEAP_ALIAS = "chat_cheap"
 
 CORE_GROUP = "core"
 
+# Groups are persona-agnostic supersets. ``select_specs`` intersects the matched
+# groups with the CALLER's already grant-filtered spec list, so a group may list
+# both partner and student tools safely — a caller only ever sees the subset they
+# are authorized for, and an empty intersection fails open to their full set. The
+# student read/analysis tools were added here so a routed student turn advertises
+# a complete, relevant subset (never a partial one that silently drops a needed
+# capability).
 TOOL_GROUPS: dict[str, frozenset[str]] = {
-    "jobs": frozenset({"get_partner_jobs", "get_job_detail", "export_jobs"}),
+    "jobs": frozenset(
+        {
+            # partner
+            "get_partner_jobs",
+            "export_jobs",
+            # shared / student
+            "get_job_detail",
+            "search_jobs",
+            "recommend_jobs",
+            "get_saved_jobs",
+            "match_cv_to_jobs",
+            "compare_jobs",
+        }
+    ),
     "pipeline": frozenset(
         {
             "get_partner_pipeline_summary",
@@ -68,6 +88,31 @@ TOOL_GROUPS: dict[str, frozenset[str]] = {
             "export_offers",
         }
     ),
+    # Student CV↔job intelligence: viewing/comparing CVs, matching, fit breakdown,
+    # skill gaps. No partner tools here (partner never has these), so a student
+    # "cv/fit" turn gets exactly this set.
+    "cv": frozenset(
+        {
+            "get_my_cvs",
+            "show_cv",
+            "compare_cvs",
+            "match_cv_to_jobs",
+            "explain_job_fit",
+            "get_skill_gap",
+            "recommend_jobs",
+        }
+    ),
+    # Student application/interview status.
+    "applications": frozenset(
+        {
+            "get_my_applications",
+            "get_upcoming_interviews",
+            "get_job_alerts",
+            "set_job_alert",
+        }
+    ),
+    "interview": frozenset({"start_interview_sim"}),
+    "profile": frozenset({"get_profile_status", "get_job_alerts"}),
     "analytics": frozenset(
         {
             "get_recruitment_analytics_chart",
@@ -92,6 +137,8 @@ TOOL_GROUPS: dict[str, frozenset[str]] = {
             "get_upcoming_partner_events",
             "search_events",
             "get_upcoming_events",
+            "get_my_registered_events",
+            "register_for_event",
             "export_events",
         }
     ),
@@ -123,6 +170,17 @@ _GROUP_SIGNALS: dict[str, tuple[str, ...]] = {
         "posting",
         "job",
         "việc làm",
+        # student job discovery / recommendation
+        "tìm việc",
+        "thực tập",
+        "internship",
+        "intern",
+        "gợi ý việc",
+        "recommend",
+        "việc phù hợp",
+        "vị trí phù hợp",
+        "so sánh job",
+        "so sánh việc",
     ),
     "pipeline": (
         "ứng viên",
@@ -195,6 +253,53 @@ _GROUP_SIGNALS: dict[str, tuple[str, ...]] = {
         "visual",
         "thiết kế",
     ),
+    # Student CV↔job intelligence (view/compare CVs, matching, fit, skill gap).
+    "cv": (
+        "cv",
+        "resume",
+        "hồ sơ",
+        "kỹ năng",
+        "skill",
+        "phù hợp",
+        "fit",
+        "độ phù hợp",
+        "so sánh cv",
+        "cv nào",
+        "match cv",
+        "job fit",
+        "khoảng cách kỹ năng",
+        "skill gap",
+        "cải thiện cv",
+        "review cv",
+        "đánh giá cv",
+    ),
+    # Student application + interview status.
+    "applications": (
+        "ứng tuyển",
+        "đơn ứng tuyển",
+        "đơn của tôi",
+        "application",
+        "đã nộp",
+        "trạng thái đơn",
+        "lịch phỏng vấn",
+        "job alert",
+        "thông báo việc",
+    ),
+    "interview": (
+        "phỏng vấn",
+        "interview",
+        "mock interview",
+        "luyện phỏng vấn",
+        "phỏng vấn thử",
+        "chuẩn bị phỏng vấn",
+    ),
+    "profile": (
+        "profile",
+        "hồ sơ cá nhân",
+        "open to work",
+        "trạng thái hồ sơ",
+        "mức độ hoàn thiện",
+    ),
     "events": (
         "sự kiện",
         "event",
@@ -203,6 +308,8 @@ _GROUP_SIGNALS: dict[str, tuple[str, ...]] = {
         "webinar",
         "workshop",
         "ngày hội",
+        "đăng ký sự kiện",
+        "sự kiện của tôi",
     ),
     "knowledge": (
         "chính sách",
@@ -458,6 +565,13 @@ _PHASE_ANALYZING_TOOLS: frozenset[str] = frozenset(
     {
         "create_job",
         "move_candidate_stage",
+        # Student CV↔job intelligence — matching / fit / comparison is "analysis"
+        # work, not a plain retrieval (still leak-safe: never the tool name).
+        "match_cv_to_jobs",
+        "explain_job_fit",
+        "compare_jobs",
+        "compare_cvs",
+        "get_skill_gap",
     }
 )
 

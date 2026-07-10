@@ -169,7 +169,7 @@ export function FormattedContent({
   const blocks = parseBlocks(content);
   const textCap = constrainText ? "max-w-[72ch]" : undefined;
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       {blocks.map((block, i) => {
         switch (block.kind) {
           case "code":
@@ -184,7 +184,9 @@ export function FormattedContent({
                 key={i}
                 className={cn(
                   block.level <= 2 ? "type-h3" : "type-body font-semibold",
-                  i > 0 && "pt-1",
+                  // Extra breathing room above a heading that follows other
+                  // content, so sections don't visually collide.
+                  i > 0 && "pt-2",
                   textCap,
                 )}
               >
@@ -312,15 +314,17 @@ export function MarkdownTable({
     return cells.filter(isNumericish).length / cells.length >= 0.6;
   });
   return (
-    <div className="my-1 max-h-[420px] w-full overflow-auto overscroll-contain rounded-lg border border-[var(--border-default)] [scrollbar-width:thin]">
-      <table className="type-small w-full border-collapse">
+    // `min-w` lets columns keep real breathing room in a narrow panel (they scroll
+    // horizontally instead of collapsing); the panel is roomy so this rarely triggers.
+    <div className="my-1 max-h-[440px] w-full overflow-auto overscroll-contain rounded-lg border border-[var(--border-default)] [scrollbar-width:thin]">
+      <table className="type-small w-full min-w-[28rem] border-collapse">
         <thead>
           <tr>
             {headers.map((h, i) => (
               <th
                 key={i}
                 className={cn(
-                  "sticky top-0 z-[1] whitespace-nowrap bg-[var(--bg-muted)] px-3 py-2 font-semibold text-[var(--text-primary)] shadow-[inset_0_-1px_0_var(--border-default)]",
+                  "sticky top-0 z-[1] whitespace-nowrap bg-[var(--bg-muted)] px-3.5 py-2.5 font-semibold text-[var(--text-primary)] shadow-[inset_0_-1px_0_var(--border-default)]",
                   numericCols[i] ? "text-right" : "text-left",
                 )}
               >
@@ -336,8 +340,8 @@ export function MarkdownTable({
                 <td
                   key={ci}
                   className={cn(
-                    "border-b border-[var(--border-subtle)] px-3 py-2 align-top font-normal text-[var(--text-secondary)]",
-                    numericCols[ci] && "text-right tabular-nums",
+                    "border-b border-[var(--border-subtle)] px-3.5 py-2.5 align-top font-normal leading-relaxed text-[var(--text-secondary)]",
+                    numericCols[ci] ? "whitespace-nowrap text-right tabular-nums" : "[overflow-wrap:anywhere]",
                   )}
                 >
                   {renderInline(c, isUser)}

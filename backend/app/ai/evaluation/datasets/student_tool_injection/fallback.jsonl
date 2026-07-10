@@ -1,0 +1,3 @@
+{"id": "sti_fb_none_payload", "input": {"payload": null}, "expect": {"neutralized": false, "marker_present": false, "no_crash": true, "no_provider_leak": true}}
+{"id": "sti_fb_empty_dict_payload", "input": {"payload": {}}, "expect": {"neutralized": false, "scalar_keys_preserved": true, "no_crash": true, "no_provider_leak": true}}
+{"id": "sti_fb_non_string_scalars_preserved", "input": {"payload": {"count": 0, "active": true, "ratio": 0.5}}, "expect": {"neutralized": false, "scalar_keys_preserved": true, "output_preserves": ["count", "ratio"], "no_crash": true}}

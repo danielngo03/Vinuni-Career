@@ -31,13 +31,21 @@ def _now() -> datetime:
     return datetime.now(tz=UTC)
 
 
+def _iso(value: datetime | None) -> str | None:
+    return value.isoformat() if value is not None else None
+
+
 async def load_job_for_fit(
-    session: AsyncSession, *, job_id: uuid.UUID, persona: str
+    session: AsyncSession, *, job_id: uuid.UUID, persona: str, locale: str = "vi"
 ) -> dict | None:
     """Return the requirements projection for a job the principal may discover.
 
     ``None`` when the job does not exist or is not visible to ``persona`` (closed,
     unpublished, hidden tier, past deadline) — the caller maps this to 404.
+
+    ``locale`` only controls the friendly employment/work-mode LABELS added to the
+    projection (raw enum codes never reach an end user); the scoring inputs are
+    locale-independent.
     """
 
     levels = lifecycle.visible_levels_for(persona, is_authenticated=True)
@@ -46,7 +54,7 @@ async def load_job_for_fit(
     if job is None:
         return None
 
-    return await _project_requirements(session, job)
+    return await _project_requirements(session, job, locale=locale)
 
 
 async def load_job_requirements(session: AsyncSession, *, job_id: uuid.UUID) -> dict | None:
@@ -66,7 +74,7 @@ async def load_job_requirements(session: AsyncSession, *, job_id: uuid.UUID) -> 
     return await _project_requirements(session, job)
 
 
-async def _project_requirements(session: AsyncSession, job: Job) -> dict:
+async def _project_requirements(session: AsyncSession, job: Job, *, locale: str = "vi") -> dict:
     org = await org_reporting_facade.summary_for(session, job.org_id)
 
     jd_text = " ".join(
@@ -98,4 +106,25 @@ async def _project_requirements(session: AsyncSession, job: Job) -> dict:
         "locations": list(job.locations or []),
         "cv_language_required": getattr(job, "cv_language_required", "any") or "any",
         "jd_text": jd_text,
+        # ---- Leak-safe DISPLAY fields (public job facts) --------------------- #
+        # Added so an in-chat compare/match card can show salary, deadline, and
+        # friendly work-mode/employment labels WITHOUT a second read that would
+        # record a spurious job-view metric. Raw enum codes are localized here so
+        # the caller never surfaces them (.claude/rules/backend.md).
+        "company_name": org.display_name if org else None,
+        "employment_type_label": (
+            lifecycle.employment_type_label(job.employment_type, locale=locale)
+            if job.employment_type
+            else None
+        ),
+        "location_type_label": (
+            lifecycle.location_type_label(job.location_type, locale=locale)
+            if job.location_type
+            else None
+        ),
+        "salary_min": job.salary_min,
+        "salary_max": job.salary_max,
+        "salary_currency": job.salary_currency,
+        "salary_is_disclosed": job.salary_is_disclosed,
+        "application_deadline": _iso(job.application_deadline),
     }

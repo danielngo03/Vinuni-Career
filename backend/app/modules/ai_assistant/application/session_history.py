@@ -183,12 +183,16 @@ async def build_user_context(
     """Build a lightweight user context dict for LLM personalization.
 
     Includes CV count, active application count, and persona so the assistant
-    can give tailored advice without making N+1 service calls. Fails silently —
-    missing context is better than a broken chat path.
+    can give tailored advice without making N+1 service calls. For students it
+    also carries ``default_cv_id`` (the most recently edited ``ready`` CV — the
+    one CV tools default to) and ``saved_job_count`` so entity carryover
+    ("compare with that CV / that job") stays reliable across turns. Fails
+    silently — missing context is better than a broken chat path.
     """
     if not principal.is_authenticated:
         return {}
     context: dict = {"persona": principal.persona or "student"}
+    is_student = (principal.persona or "") == "student"
     nested = None
     try:
         from sqlalchemy import text as sa_text
@@ -201,13 +205,23 @@ async def build_user_context(
                 "   WHERE user_id = :uid AND deleted_at IS NULL) AS cv_count, "
                 "  (SELECT COUNT(*) FROM job_applications "
                 "   WHERE applicant_id = :uid "
-                "   AND status NOT IN ('rejected','withdrawn')) AS app_count"
+                "   AND status NOT IN ('rejected','withdrawn')) AS app_count, "
+                "  (SELECT COUNT(*) FROM saved_jobs WHERE user_id = :uid) AS saved_count, "
+                "  (SELECT id FROM cv_profiles "
+                "   WHERE user_id = :uid AND deleted_at IS NULL AND status = 'ready' "
+                "   ORDER BY last_edited_at DESC, id LIMIT 1) AS default_cv_id"
             ).params(uid=principal.user_id)
         )
         row = result.fetchone()
         if row:
             context["cv_count"] = int(row.cv_count or 0)
             context["active_application_count"] = int(row.app_count or 0)
+            # Student-only carryover signals — kept out of the partner/staff
+            # context message so their user-turn shape is unchanged.
+            if is_student:
+                context["saved_job_count"] = int(row.saved_count or 0)
+                if row.default_cv_id is not None:
+                    context["default_cv_id"] = str(row.default_cv_id)
         await nested.commit()
     except Exception:
         if nested is not None and nested.is_active:

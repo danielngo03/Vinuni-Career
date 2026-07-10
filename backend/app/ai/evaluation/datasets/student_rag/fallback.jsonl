@@ -1,0 +1,3 @@
+{"id": "sr_fb_retrieval_unavailable_vi", "input": {"answer": "Hiện chưa truy xuất được tài liệu, bạn thử lại sau nhé.", "sources": []}, "expect": {"hallucination_risk": false, "cited_count": 0, "clean_answer_contains": "thử lại", "no_provider_leak": true}}
+{"id": "sr_fb_retrieval_unavailable_en", "input": {"answer": "I could not retrieve the knowledge base right now; please try again shortly.", "sources": []}, "expect": {"hallucination_risk": false, "cited_count": 0, "clean_answer_contains": "try again", "no_provider_leak": true, "no_internal_status_codes": true}}
+{"id": "sr_fb_empty_answer_empty_sources", "input": {"answer": "", "sources": []}, "expect": {"hallucination_risk": false, "cited_count": 0, "no_crash": true, "no_provider_leak": true}}

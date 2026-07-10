@@ -26,7 +26,13 @@ def test_every_tool_declares_persona_and_required_permissions():
     from app.modules.ai_assistant.application.tools.specs import TOOL_SPECS
 
     for name, spec in TOOL_SPECS.items():
-        assert spec.persona, f"{name} must declare at least one persona (§7)"
+        if not spec.persona:
+            # Owner 2026-07-11: ``apply_job`` is retired from the chat tool set
+            # ("no apply from chat"). It keeps its spec only so the legacy AI-down
+            # fallback planner + tests stay valid, and an empty persona guarantees
+            # ``available_specs`` never advertises it to any chat persona. This is
+            # the ONLY tool allowed to be persona-less.
+            assert name == "apply_job", f"{name} must declare at least one persona (§7)"
         assert "authenticated" in spec.required_permissions, (
             f"{name} must require authentication (§7)"
         )

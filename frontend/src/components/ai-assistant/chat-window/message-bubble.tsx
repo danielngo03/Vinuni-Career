@@ -47,6 +47,7 @@ export function MessageBubble({
   onEditStart,
   onEditCancel,
   onEditSubmit,
+  onSend,
 }: {
   message: ChatMessage;
   expanded: boolean;
@@ -62,6 +63,8 @@ export function MessageBubble({
   onEditStart?: () => void;
   onEditCancel?: () => void;
   onEditSubmit?: (text: string) => void;
+  /** Re-issue a user turn — used by interactive artifacts (CV picker, save). */
+  onSend?: (text: string) => void;
 }) {
   const t = useTranslations("aiAssistant");
   const isUser = message.role === "user";
@@ -129,7 +132,7 @@ export function MessageBubble({
               constrainText={expanded && wide}
             />
           )}
-          {!isUser && <MessageArtifacts message={message} expanded={expanded} />}
+          {!isUser && <MessageArtifacts message={message} expanded={expanded} onSend={onSend} />}
         </div>
         {isUser && editable && (
           <button

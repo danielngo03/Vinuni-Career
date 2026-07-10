@@ -32,6 +32,187 @@ export interface ChatMessage {
 /** User decision for a pending tool action. */
 export type ToolDecision = "confirm" | "cancel";
 
+/* --------------------- Student render-artifact schemas --------------------- */
+/* FROZEN contracts (student-ai-power design §3). The backend emits these on the
+ * assistant message `tool_result.artifacts[]`; the chat UI renders them as
+ * structured cards. No provider/model/token internals ever ride on an artifact. */
+
+/** One skill with an optional 0-100 proficiency level. */
+export interface CvSkillRef {
+  name: string;
+  level: number | null;
+}
+
+/** `cv_card` — an in-chat summary of one of the student's CVs. */
+export interface CvCardArtifact {
+  kind: "cv_card";
+  cv_id: string;
+  title: string;
+  source: "uploaded" | "template";
+  updated_at: string;
+  is_default: boolean;
+  summary: string | null;
+  top_skills: CvSkillRef[];
+  experience_count: number;
+  education_count: number;
+  /** Deep link to view the CV, e.g. `/student/cv/{cv_id}`. */
+  view_path: string;
+}
+
+/** One matched job in a `job_match_list`. */
+export interface JobMatchItem {
+  job_id: string;
+  title: string;
+  company_name: string | null;
+  location: string | null;
+  fit_score: number | null;
+  /** Band label (never a raw score noun). Localized via `fitBands.*` when known. */
+  fit_band: string | null;
+  top_reasons: string[];
+  deadline: string | null;
+  is_saved: boolean;
+  view_path: string;
+}
+
+/** `job_match_list` — a grid of JD match cards ranked against one CV. */
+export interface JobMatchListArtifact {
+  kind: "job_match_list";
+  cv_id: string;
+  cv_title: string;
+  total: number;
+  items: JobMatchItem[];
+}
+
+/** One job column header in a `job_compare` table. */
+export interface JobCompareColumn {
+  job_id: string;
+  title: string;
+  company_name: string | null;
+  view_path: string;
+}
+
+/** One aligned comparison row: one value per job column. */
+export interface JobCompareRow {
+  label_key: string;
+  values: (string | number | null)[];
+}
+
+/** `job_compare` — side-by-side comparison of 2-4 jobs. */
+export interface JobCompareArtifact {
+  kind: "job_compare";
+  cv_id: string | null;
+  jobs: JobCompareColumn[];
+  rows: JobCompareRow[];
+}
+
+export interface MatchedSkillRef {
+  name: string;
+  evidence: string | null;
+}
+
+export interface MissingSkillRef {
+  name: string;
+  importance: "high" | "medium" | "low";
+}
+
+/** A fit suggestion, optionally deep-linking into CV-Studio for a CV. */
+export interface FitSuggestion {
+  text: string;
+  action: { kind: "cv_studio"; cv_id: string } | null;
+}
+
+/** `fit_breakdown` — deterministic CV↔job fit explanation. */
+export interface FitBreakdownArtifact {
+  kind: "fit_breakdown";
+  job_id: string;
+  job_title: string;
+  company_name: string | null;
+  cv_id: string;
+  cv_title: string;
+  fit_score: number | null;
+  fit_band: string | null;
+  matched_skills: MatchedSkillRef[];
+  missing_skills: MissingSkillRef[];
+  strengths: string[];
+  gaps: string[];
+  suggestions: FitSuggestion[];
+}
+
+/** One CV row in a `cv_compare`. */
+export interface CvCompareItem {
+  cv_id: string;
+  title: string;
+  fit_score: number | null;
+  fit_band: string | null;
+  highlight: string | null;
+  view_path: string;
+}
+
+/** `cv_compare` — which of the student's CVs is strongest (overall or for a job). */
+export interface CvCompareArtifact {
+  kind: "cv_compare";
+  job_id: string | null;
+  job_title: string | null;
+  cvs: CvCompareItem[];
+  recommended_cv_id: string | null;
+}
+
+/** One selectable CV chip in a `cv_picker`. */
+export interface CvPickerOption {
+  cv_id: string;
+  title: string;
+  source: string;
+  updated_at: string;
+  is_default: boolean;
+}
+
+/** `cv_picker` — clarifying CV selection (NOT a mutation confirmation). Clicking
+ * a chip re-issues the pending tool turn with the chosen `cv_id`. */
+export interface CvPickerArtifact {
+  kind: "cv_picker";
+  prompt_key: string;
+  pending_tool: string;
+  pending_args: Record<string, unknown>;
+  cvs: CvPickerOption[];
+}
+
+export interface CareerFocusCluster {
+  label: string;
+  why: string;
+  example_job_ids: string[];
+}
+
+export interface CareerTopMatch {
+  job_id: string;
+  title: string;
+  fit_band: string;
+}
+
+export interface CareerSkillPriority {
+  skill: string;
+  impact: string;
+}
+
+/** `career_brief` — deep multi-signal career narrative (workforce agent output). */
+export interface CareerBriefArtifact {
+  kind: "career_brief";
+  generated_at: string;
+  focus_clusters: CareerFocusCluster[];
+  top_matches: CareerTopMatch[];
+  skill_priorities: CareerSkillPriority[];
+  summary: string;
+}
+
+/** Union of all student render artifacts (§3). */
+export type StudentRenderArtifact =
+  | CvCardArtifact
+  | JobMatchListArtifact
+  | JobCompareArtifact
+  | FitBreakdownArtifact
+  | CvCompareArtifact
+  | CvPickerArtifact
+  | CareerBriefArtifact;
+
 /* --------------------------------- Calls ---------------------------------- */
 
 /** One AI quota window for the sidebar meter. */

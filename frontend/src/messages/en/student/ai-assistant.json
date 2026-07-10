@@ -60,6 +60,8 @@
     "suggestSalary": "Explore salaries",
     "funnelDropOff": "Drop-off vs previous stage",
     "quickPrompts": {
+      "studentCvMatch": "Which jobs best fit my CV?",
+      "studentBestCv": "Which of my CVs is strongest?",
       "studentFindJobs": "Find IT jobs that fit me",
       "studentSkillGap": "Analyse my skill gaps",
       "studentSalary": "Data Scientist salaries in Hanoi?",
@@ -201,6 +203,74 @@
         "salary_max": "Salary max",
         "salary_currency": "Currency"
       }
+    },
+    "cards": {
+      "cvUntitled": "Untitled CV",
+      "default": "Default",
+      "source": {
+        "uploaded": "Uploaded",
+        "template": "From template"
+      },
+      "topSkills": "Top skills",
+      "experienceCount": "{count, plural, one {# role} other {# roles}}",
+      "educationCount": "{count, plural, one {# qualification} other {# qualifications}}",
+      "updated": "Updated {date}",
+      "viewCv": "View CV",
+      "matchesTitle": "{count, plural, one {# matching job} other {# matching jobs}}",
+      "matchesForCv": "Ranked against {title}",
+      "view": "View",
+      "save": "Save",
+      "saved": "Saved",
+      "saveJobRequest": "Save the job {title}",
+      "compareJobsTitle": "Job comparison",
+      "usingCv": "Using {title}",
+      "matchedSkills": "Matched skills",
+      "missingSkills": "Skills to build",
+      "importance": {
+        "high": "high",
+        "medium": "medium",
+        "low": "nice to have"
+      },
+      "strengths": "Strengths",
+      "gaps": "Gaps to close",
+      "suggestions": "Suggestions",
+      "cvCompareTitle": "CV comparison",
+      "forJob": "For {title}",
+      "recommended": "Recommended",
+      "careerBriefTitle": "Career brief",
+      "focusClusters": "Focus areas",
+      "topMatches": "Top matches",
+      "skillPriorities": "Skill priorities"
+    },
+    "compareRows": {
+      "fit": "Fit",
+      "fit_score": "Fit",
+      "salary": "Salary",
+      "location": "Location",
+      "skills_matched": "Skills matched",
+      "seniority": "Seniority",
+      "deadline": "Deadline",
+      "mode": "Work mode",
+      "employment_type": "Employment type",
+      "experience": "Experience",
+      "company": "Company"
+    },
+    "fitBands": {
+      "excellent": "Excellent fit",
+      "strong": "Strong fit",
+      "good": "Good fit",
+      "moderate": "Moderate fit",
+      "fair": "Fair fit",
+      "low": "Low fit",
+      "weak": "Weak fit"
+    },
+    "picker": {
+      "chooseCvDefault": "Which CV should I use?",
+      "chooseCvForMatch": "Which CV should I match against jobs?",
+      "chooseCvForFit": "Which CV should I check this job against?",
+      "chooseCvForCompare": "Which CVs should I compare?",
+      "chooseCvForShow": "Which CV would you like to see?",
+      "useCv": "Use {title}"
     }
   }
 }

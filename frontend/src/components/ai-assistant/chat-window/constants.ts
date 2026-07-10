@@ -59,9 +59,21 @@ export function buildAttachmentRef(filename: string, id: string): string {
   return `\n\n[Tệp đính kèm — dùng analyze_attachment: ${filename} (id: ${id})]`;
 }
 
+// Machine-readable CV-selection marker appended when a student clicks a chip in
+// a `cv_picker` card. The backend pre-processor consumes `[[cv:<id>]]` to re-run
+// the pending CV tool with the chosen CV (design §3); the marker is stripped
+// before the user bubble is displayed, mirroring the attachment-ref pattern.
+const CV_MARKER_RE = /\s*\[\[cv:[^\]]+\]\]/g;
+
+/** Build a user-turn text that carries a chosen CV id for the picker resolution. */
+export function buildCvSelectionMessage(displayText: string, cvId: string): string {
+  return `${displayText.trim()} [[cv:${cvId}]]`;
+}
+
 /**
  * Split a user message into its clean visible text and the attachment
- * filenames referenced by any appended ref lines.
+ * filenames referenced by any appended ref lines. Also strips any
+ * machine-readable `[[cv:...]]` selection marker so it never shows in a bubble.
  */
 export function extractAttachmentRefs(content: string): {
   text: string;
@@ -73,7 +85,10 @@ export function extractAttachmentRefs(content: string): {
     const name = match[1]?.trim();
     if (name) filenames.push(name);
   }
-  const text = content.replace(re, "").trim();
+  const text = content
+    .replace(re, "")
+    .replace(CV_MARKER_RE, "")
+    .trim();
   return { text, filenames };
 }
 
@@ -125,7 +140,8 @@ export const SUGGESTION_ITEMS_BY_PERSONA: Record<ChatPersona, readonly Suggestio
 // Quick prompts are i18n keys under the `aiAssistant` namespace; the welcome
 // screen resolves them with `t(key)` and sends the localized prompt text.
 const STUDENT_QUICK_PROMPT_KEYS: readonly string[] = [
-  "quickPrompts.studentFindJobs",
+  "quickPrompts.studentCvMatch",
+  "quickPrompts.studentBestCv",
   "quickPrompts.studentSkillGap",
   "quickPrompts.studentSalary",
   "quickPrompts.studentEvents",

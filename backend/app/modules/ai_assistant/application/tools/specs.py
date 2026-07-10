@@ -544,6 +544,177 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         ),
         audit_event_type="TOOL_GET_SALARY_BENCHMARK",
     ),
+    "match_cv_to_jobs": ToolSpec(
+        name="match_cv_to_jobs",
+        description=(
+            "Rank the platform's open jobs against ONE of the student's own CVs and "
+            "show them as in-chat match cards (fit band, top reasons, save/view). Use "
+            "this when the student asks 'which jobs fit my CV?', 'find jobs for my CV', "
+            "'CV này hợp việc nào', or wants CV-matched opportunities. Optionally pass a "
+            "query and/or location to narrow the search. If cv_id is omitted and the "
+            "student has more than one CV, the tool returns a CV picker instead of "
+            "guessing. Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "cv_id": {
+                    "type": "string",
+                    "description": (
+                        "Optional CV UUID. Omit to use the student's only CV, or to "
+                        "trigger a CV picker when they have several."
+                    ),
+                },
+                "query": {
+                    "type": "string",
+                    "description": "Optional keywords to narrow the job search",
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Optional location keyword, e.g. 'Hanoi', 'remote'",
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "Maximum matches to return (default 6, max 10)",
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        fallback=(
+            "I couldn't match jobs to your CV right now. Browse jobs at /jobs or check "
+            "your CV library at /student/cvs."
+        ),
+        audit_event_type="TOOL_MATCH_CV_TO_JOBS",
+        timeout_seconds=25,
+    ),
+    "explain_job_fit": ToolSpec(
+        name="explain_job_fit",
+        description=(
+            "Explain how well ONE of the student's CVs fits a specific job: fit band, "
+            "matched skills, missing skills (with importance), strengths, gaps, and "
+            "concrete suggestions (including a CV-Studio hand-off). Use this when the "
+            "student asks 'am I a good fit for this job?', 'vì sao CV của tôi hợp/không "
+            "hợp', 'what am I missing for this role?', or wants a fit breakdown for a job "
+            "they found. Requires job_id. If cv_id is omitted and the student has several "
+            "CVs, a CV picker is returned. Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_id": {
+                    "type": "string",
+                    "description": "Job UUID from a prior search_jobs / match_cv_to_jobs result",
+                },
+                "cv_id": {
+                    "type": "string",
+                    "description": "Optional CV UUID (omit to use the only CV or get a picker)",
+                },
+            },
+            "required": ["job_id"],
+        },
+        permission_class="read_only",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        fallback=(
+            "I couldn't analyse the fit right now. Check the job at /jobs/{job_id} and "
+            "your CVs at /student/cvs."
+        ),
+        audit_event_type="TOOL_EXPLAIN_JOB_FIT",
+        timeout_seconds=25,
+    ),
+    "compare_jobs": ToolSpec(
+        name="compare_jobs",
+        description=(
+            "Compare 2-4 jobs side by side (fit, salary, location, work mode, employment "
+            "type, seniority, deadline, matched skills). Use this when the student asks "
+            "'compare these jobs', 'so sánh các việc này', 'which of these should I "
+            "apply to?', or lists several jobs to weigh up. Requires 2-4 job_ids. If "
+            "cv_id is omitted and the student has several CVs, a CV picker is returned; "
+            "with no CV the comparison still renders without a fit column. Only for "
+            "student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "job_ids": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "2-4 job UUIDs to compare",
+                },
+                "cv_id": {
+                    "type": "string",
+                    "description": "Optional CV UUID to add a personalised fit column",
+                },
+            },
+            "required": ["job_ids"],
+        },
+        permission_class="read_only",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        fallback="I couldn't compare those jobs right now. Open each one at /jobs to review.",
+        audit_event_type="TOOL_COMPARE_JOBS",
+        timeout_seconds=25,
+    ),
+    "show_cv": ToolSpec(
+        name="show_cv",
+        description=(
+            "Show ONE of the student's CVs as an in-chat card (title, source, top skills "
+            "with levels, experience/education counts, summary, and a view link). Use "
+            "this when the student asks 'show my CV', 'xem CV của tôi', 'what's in my "
+            "CV?', or wants a quick look at a CV. If cv_id is omitted and the student has "
+            "several CVs, a CV picker is returned. Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "cv_id": {
+                    "type": "string",
+                    "description": "Optional CV UUID (omit to use the only CV or get a picker)",
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        fallback="I couldn't load that CV right now. Check your CV library at /student/cvs.",
+        audit_event_type="TOOL_SHOW_CV",
+    ),
+    "compare_cvs": ToolSpec(
+        name="compare_cvs",
+        description=(
+            "Compare the student's CVs to say which is strongest overall or for a "
+            "specific job, and recommend one. Use this when the student asks 'which of my "
+            "CVs is best?', 'CV nào của tôi mạnh nhất', 'which CV should I use for this "
+            "job?', or wants to pick between their CVs. Pass job_id to rank them for that "
+            "job; omit it to rank by overall strength. Defaults to all the student's CVs "
+            "when cv_ids is omitted. Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "cv_ids": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Optional subset of CV UUIDs (defaults to all the student's CVs)",  # noqa: E501
+                },
+                "job_id": {
+                    "type": "string",
+                    "description": "Optional job UUID to rank the CVs for a specific role",
+                },
+            },
+            "required": [],
+        },
+        permission_class="read_only",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        fallback="I couldn't compare your CVs right now. Review them at /student/cvs.",
+        audit_event_type="TOOL_COMPARE_CVS",
+        timeout_seconds=25,
+    ),
     "start_interview_sim": ToolSpec(
         name="start_interview_sim",
         description=(
@@ -618,6 +789,89 @@ TOOL_SPECS: dict[str, ToolSpec] = {
         ),
         audit_event_type="TOOL_SAVE_JOB",
     ),
+    "set_job_alert": ToolSpec(
+        name="set_job_alert",
+        description=(
+            "Create a saved job-alert subscription so the student is notified when new "
+            "matching jobs are posted. Use this when the student says 'set a job alert', "
+            "'thông báo cho tôi khi có việc X', 'notify me about [keyword] jobs', or wants "
+            "to save a search. Provide a short name plus optional keywords, employment "
+            "type, work mode, and province. Requires the student to confirm before it is "
+            "created. Only for student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "name": {"type": "string", "description": "Short name for the alert"},
+                "keywords": {
+                    "type": "string",
+                    "description": "Optional search keywords, e.g. 'backend python'",
+                },
+                "employment_type": {
+                    "type": "string",
+                    "description": "Optional: full_time | part_time | internship | contract",
+                },
+                "location_type": {
+                    "type": "string",
+                    "description": "Optional: onsite | remote | hybrid",
+                },
+                "province_code": {
+                    "type": "string",
+                    "description": "Optional province code, e.g. HN for Hanoi",
+                },
+            },
+            "required": ["name"],
+        },
+        permission_class="confirmation_required",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        side_effects=["INSERT job_alerts row"],
+        confirmation_copy=ConfirmationCopy(
+            title="Tạo thông báo việc làm?",
+            body="Bạn sẽ nhận thông báo khi có việc làm mới phù hợp với tiêu chí này.",
+            cta_confirm="Tạo thông báo",
+        ),
+        fallback=(
+            "I couldn't create the job alert right now. You can set one up at "
+            "/student/alerts."
+        ),
+        audit_event_type="TOOL_SET_JOB_ALERT",
+    ),
+    "register_for_event": ToolSpec(
+        name="register_for_event",
+        description=(
+            "Register the student for a career event (workshop, fair, info session). Use "
+            "this when the student says 'register me for this event', 'đăng ký sự kiện "
+            "này', or 'sign me up'. Requires event_id from a prior search_events / "
+            "get_upcoming_events result. A full event places the student on the FIFO "
+            "waitlist. Requires the student to confirm before registering. Only for "
+            "student users."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "event_id": {
+                    "type": "string",
+                    "description": "Event UUID from a prior events result",
+                },
+            },
+            "required": ["event_id"],
+        },
+        permission_class="confirmation_required",
+        persona=[STUDENT],
+        required_permissions=["authenticated", "role:student"],
+        side_effects=["INSERT event_registrations row", "notification to student"],
+        confirmation_copy=ConfirmationCopy(
+            title="Đăng ký sự kiện này?",
+            body="Bạn sẽ được đăng ký tham dự (hoặc vào danh sách chờ nếu sự kiện đã đầy).",
+            cta_confirm="Đăng ký",
+        ),
+        fallback=(
+            "I couldn't register you for the event right now. You can register from the "
+            "event page at /events."
+        ),
+        audit_event_type="TOOL_REGISTER_FOR_EVENT",
+    ),
     "apply_job": ToolSpec(
         name="apply_job",
         description=(
@@ -643,7 +897,14 @@ TOOL_SPECS: dict[str, ToolSpec] = {
             "required": ["job_id"],
         },
         permission_class="confirmation_required",
-        persona=[STUDENT],
+        # Removed from the student chat tool set (owner 2026-07-11: "no apply from
+        # chat"). An empty persona means ``native_loop.available_specs`` never
+        # advertises it to any chat persona, so the modern engine can never apply on
+        # the student's behalf. The spec + dispatch handler are retained so the
+        # legacy deterministic planner (AI-down fallback, owned by ai-engineer) and
+        # its existing tests keep working; ai-engineer prunes apply from that
+        # fallback path separately.
+        persona=[],
         required_permissions=["authenticated", "role:student"],
         side_effects=["INSERT job_applications row", "notification to partner"],
         confirmation_copy=ConfirmationCopy(
@@ -1047,7 +1308,9 @@ TOOL_SPECS: dict[str, ToolSpec] = {
             },
         },
         permission_class="read_only",
-        persona=[STUDENT, PARTNER_USER, UNIVERSITY_STAFF],
+        # Removed from students (owner 2026-07-11: no file upload in the student
+        # chat). Partner + university staff keep attachment analysis.
+        persona=[PARTNER_USER, UNIVERSITY_STAFF],
         required_permissions=["authenticated"],
         fallback=(
             "I couldn't analyse that attachment right now. Make sure you uploaded it "

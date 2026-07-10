@@ -70,7 +70,10 @@ def test_new_tools_registered_with_expected_classes() -> None:
 
 def test_analyze_attachment_is_cross_persona() -> None:
     spec = TOOL_SPECS["analyze_attachment"]
-    assert set(spec.persona) == {"student", "partner_user", "university_staff"}
+    # Students no longer advertise attachment analysis — the student chat has no
+    # file-upload affordance (owner 2026-07-11 frozen contract). It remains a
+    # cross-persona tool for partner + university staff.
+    assert set(spec.persona) == {"partner_user", "university_staff"}
     assert spec.required_permissions == ["authenticated"]
 
 
@@ -99,8 +102,9 @@ async def test_available_specs_rbac_by_grant(db_session) -> None:
     assert "get_hiring_funnel_diagram" in member_tools
     assert "create_job" not in member_tools
     assert "draft_job_from_attachment" not in member_tools
-    # Students never see partner tools, but may analyse their own attachments.
-    assert "analyze_attachment" in student_tools
+    # Students never see partner tools; and with no chat file-upload they no
+    # longer advertise attachment analysis (owner 2026-07-11 frozen contract).
+    assert "analyze_attachment" not in student_tools
     assert "get_recruitment_analytics_chart" not in student_tools
     assert "create_job" not in student_tools
 

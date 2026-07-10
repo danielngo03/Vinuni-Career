@@ -35,6 +35,7 @@ Streaming: stream_message() is an async generator that yields SSE event dicts.
 from __future__ import annotations
 
 import logging
+import re
 import time
 import uuid
 from collections.abc import AsyncGenerator
@@ -43,7 +44,7 @@ from datetime import UTC, datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AIMessage
-from app.ai.prompts.assistant import v1 as assistant_prompt
+from app.ai.prompts.assistant import v2 as assistant_prompt
 from app.ai.prompts.assistant_partner import v3 as partner_prompt_native
 from app.ai.retrieval.citation_verify import kb_source_titles, verify_citations
 from app.ai.safety.input_guard import sanitize_instruction
@@ -120,7 +121,31 @@ __all__ = [
 _MAX_TOOL_ITERATIONS = MAX_ITERATIONS
 _MAX_USER_MSG_LEN = 1500
 
+# Machine-readable CV-selection marker the student CV-picker appends to a normal
+# user turn (design §3 "CV-picker resolution"): the FE renders the picker, and on
+# click sends a normal turn whose visible text is a localized "use CV <title>"
+# with ``[[cv:<id>]]`` appended. The id is the student's own CV id (not sensitive)
+# — it is stripped before the message is persisted/displayed, and re-injected as a
+# model-facing hint so the model re-calls the pending CV tool with that ``cv_id``.
+# Mirrors the attachment-ref pattern already used for uploads.
+_CV_SELECTION_RE = re.compile(r"\[\[cv:\s*([0-9A-Za-z][0-9A-Za-z-]{7,})\s*\]\]")
+
 _logger = logging.getLogger("ai.rag")
+
+
+def _extract_cv_selection(text: str) -> tuple[str, str | None]:
+    """Split a ``[[cv:<id>]]`` marker out of a user turn.
+
+    Returns ``(clean_text, cv_id)``; ``cv_id`` is ``None`` when no marker is
+    present. The marker is removed from the displayed/persisted text so the raw
+    ref never appears in the visible bubble.
+    """
+    match = _CV_SELECTION_RE.search(text)
+    if match is None:
+        return text, None
+    cv_id = match.group(1).strip()
+    clean = _CV_SELECTION_RE.sub("", text).strip()
+    return clean, cv_id
 
 
 def _is_partner(principal: Principal) -> bool:
@@ -131,9 +156,10 @@ def _is_partner(principal: Principal) -> bool:
 def _system_prompt_for(principal: Principal) -> str:
     """Select the persona system prompt (§8.1 branching, partner assistant spec).
 
-    Partner (recruiter) accounts route through the native loop and never reach
-    this; everyone else (student, alumni, university staff pending its own
-    future prompt) gets the student prompt.
+    Partner (recruiter) accounts use ``partner_prompt_native`` inside the native
+    loop; everyone else (student, alumni, university staff pending its own future
+    prompt) gets the hardened student prompt (``assistant/v2``). Used by the
+    AI-down / offline deterministic-planner fallback path.
     """
     return assistant_prompt.SYSTEM_PROMPT
 
@@ -322,6 +348,131 @@ async def _stream_partner_turn(
 
 
 # --------------------------------------------------------------------------- #
+# Student native turn                                                          #
+# --------------------------------------------------------------------------- #
+#
+# When a real provider is active the student assistant runs the SAME modern
+# engine as the partner persona (native function-calling via ``native_loop`` +
+# deterministic ``model_router`` tiering) instead of the legacy regex planner /
+# JSON-text ReAct loop. This closes five gaps at once for students: brittle JSON
+# parsing, no model tiering, tool-result injection defense not applied, a status
+# stream that leaked raw tool names, and no dispatch-layer RBAC. The deterministic
+# planner path below is kept ONLY as the AI-down / offline fallback (and for the
+# offline eval runtime). Injection defense (``neutralize_tool_payload``),
+# fail-closed dispatch RBAC (``authorize_tool``), confirmation-gated writes, and
+# leak-safe status phases are all inherited from ``native_loop`` unchanged.
+
+
+async def _student_history(
+    session: AsyncSession, principal: Principal, chat, clean: str, cv_selection: str | None
+):
+    """Build the LLM history for a student native turn (prior messages + context)."""
+    history = await load_history(session, chat)
+    user_context = await build_user_context(session, principal)
+    history.append(
+        AIMessage(
+            role="user",
+            content=assistant_prompt.build_user_message(
+                clean,
+                context=user_context,
+                persona=principal.persona,
+                cv_selection=cv_selection,
+            ),
+        )
+    )
+    return history
+
+
+async def _student_turn_kwargs(
+    session: AsyncSession,
+    principal: Principal,
+    chat,
+    clean: str,
+    locale: str,
+    cv_selection: str | None,
+) -> dict:
+    """Assemble the native-loop kwargs for one student turn.
+
+    Deterministic multi-tier routing (``model_router``) picks the serving alias
+    and the tool subset (fail-open to the full set); the topical scope guard is
+    the student's own keyword gate (planner vocabulary), applied post-LLM only to
+    a model-produced pure-text answer.
+    """
+    history = await _student_history(session, principal, chat, clean, cv_selection)
+    decision = model_router.route_turn(clean)
+    specs = model_router.select_specs(native_loop.available_specs(principal), decision)
+
+    def _scope_guard(text: str, used_tool: bool) -> str:
+        return _apply_topical_scope_guard(text, used_tool=used_tool, locale=locale)
+
+    return {
+        "history": history,
+        "system_prompt": assistant_prompt.SYSTEM_PROMPT,
+        "specs": specs,
+        "locale": locale,
+        "model_alias": decision.model_alias,
+        "escalate_alias": decision.escalate_alias,
+        "text_guard": _scope_guard,
+        "limit_reply": guardrails.limit_reached_reply(principal.persona, locale),
+    }
+
+
+async def _run_student_turn(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    chat,
+    clean: str,
+    locale: str,
+    cv_selection: str | None,
+) -> dict:
+    """Run one student turn via the native tool loop; return the final message."""
+    kwargs = await _student_turn_kwargs(session, principal, chat, clean, locale, cv_selection)
+    final_message: dict | None = None
+    async for ev in native_loop.run_native_turn(session, principal=principal, chat=chat, **kwargs):
+        if ev.get("type") == "done":
+            final_message = ev["message"]
+    if final_message is not None:
+        await update_session_memory(session, chat)
+        return final_message
+    # Defensive fallback — the generator always yields a terminal ``done``.
+    assistant_msg = _new_assistant_message(
+        chat, ai_unavailable_reply(locale), await next_seq(session, chat.id)
+    )
+    session.add(assistant_msg)
+    chat.last_message_at = datetime.now(UTC)
+    await session.commit()
+    return serialize_message(assistant_msg)
+
+
+async def _stream_student_turn(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    chat,
+    clean: str,
+    locale: str,
+    cv_selection: str | None,
+):
+    """Stream one student turn via the native tool loop (yields SSE event dicts).
+
+    Leak-safe streaming: the raw ``tool_call`` / ``tool_result`` events the native
+    loop emits for internal/eval use are DROPPED here so a student's SSE never
+    carries a tool name — only the leak-safe ``status`` phases
+    (``model_router.phase_for_tool``), the streamed tokens, and the terminal
+    ``done`` reach the client.
+    """
+    kwargs = await _student_turn_kwargs(session, principal, chat, clean, locale, cv_selection)
+    async for ev in native_loop.run_native_turn(session, principal=principal, chat=chat, **kwargs):
+        etype = ev.get("type")
+        if etype in ("tool_call", "tool_result"):
+            continue
+        if etype == "done":
+            await update_session_memory(session, chat)
+        yield ev
+
+
+# --------------------------------------------------------------------------- #
 # Turn driver (shared by send_message and conversation management)             #
 # --------------------------------------------------------------------------- #
 
@@ -334,14 +485,17 @@ async def run_turn(
     clean: str,
     locale: str = "vi",
     deferred_refusal: str | None = None,
+    cv_selection: str | None = None,
 ) -> dict:
     """Answer one already-persisted user message and return the reply dict.
 
     ``clean`` must be the policy-cleaned user text and the user message must
     already be persisted on ``chat``. Used by ``send_message`` and by the
     edit/regenerate replay paths (``conversation_service``) so all of them run
-    the exact same pipeline: fast-path → partner native loop → deterministic
-    planner (with deferred external-source refusal fallback) → ReAct loop.
+    the exact same pipeline: fast-path → partner/student native loop →
+    deterministic planner (AI-down / offline fallback + deferred external-source
+    refusal) → ReAct loop. ``cv_selection`` carries a resolved CV-picker id (see
+    ``_extract_cv_selection``) for the student two-turn flow.
     """
     if quick_text := fast_path_reply(clean, locale, persona=principal.persona):
         assistant_msg = _new_assistant_message(chat, quick_text, await next_seq(session, chat.id))
@@ -357,6 +511,23 @@ async def run_turn(
     if _is_partner(principal):
         return await _run_partner_turn(
             session, principal=principal, chat=chat, clean=clean, locale=locale
+        )
+
+    # Student assistant: native engine is the PRIMARY interactive path whenever a
+    # real provider is available. The deterministic planner + JSON ReAct loop
+    # below is kept ONLY as the AI-down / offline fallback (and the offline eval
+    # runtime), and to resolve a policy-deferred external-source ask
+    # deterministically (no model call for a known-refusable intent).
+    from app.ai.gateway.factory import real_provider_active
+
+    if real_provider_active() and deferred_refusal is None:
+        return await _run_student_turn(
+            session,
+            principal=principal,
+            chat=chat,
+            clean=clean,
+            locale=locale,
+            cv_selection=cv_selection,
         )
 
     agent_plan = await build_agent_plan(
@@ -415,7 +586,9 @@ async def run_turn(
     history.append(
         AIMessage(
             role="user",
-            content=assistant_prompt.build_user_message(clean, context=user_context),
+            content=assistant_prompt.build_user_message(
+                clean, context=user_context, cv_selection=cv_selection
+            ),
         )
     )
 
@@ -595,7 +768,10 @@ async def send_message(
 
     # Central safety policy (intent → PII redaction/injection strip → action)
     # BEFORE fast-path/planner/native loop. Refusals never reach a model.
-    text = text.strip()[:_MAX_USER_MSG_LEN]
+    # Strip any CV-picker marker first so the policy classifier and the persisted
+    # text stay clean; the resolved id is re-injected as a model-facing hint.
+    text, cv_selection = _extract_cv_selection(text.strip())
+    text = text[:_MAX_USER_MSG_LEN]
     pre = guardrails.preflight_policy(text, persona=principal.persona, locale=locale)
     if pre.refused:
         return await _persist_turn_refusal(
@@ -642,6 +818,7 @@ async def send_message(
         clean=clean,
         locale=locale,
         deferred_refusal=pre.deferred_refusal_text,
+        cv_selection=cv_selection,
     )
     if was_first_exchange:
         await refresh_session_title(session, chat, clean)
@@ -690,7 +867,8 @@ async def stream_message(
         return
 
     # Central safety policy BEFORE fast-path/planner/native loop (see send_message).
-    clean_text = text.strip()[:_MAX_USER_MSG_LEN]
+    clean_text, cv_selection = _extract_cv_selection(text.strip())
+    clean_text = clean_text[:_MAX_USER_MSG_LEN]
     pre = guardrails.preflight_policy(clean_text, persona=principal.persona, locale=locale)
     if pre.refused:
         refusal = await _persist_turn_refusal(
@@ -750,6 +928,27 @@ async def stream_message(
             await refresh_session_title(session, chat, clean)
         return
 
+    # Student assistant: native engine is the PRIMARY interactive path when a real
+    # provider is available (leak-safe phases, injection defense, dispatch RBAC
+    # all inherited from ``native_loop``). The deterministic planner path below is
+    # the AI-down / offline fallback and resolves policy-deferred external-source
+    # asks deterministically.
+    from app.ai.gateway.factory import real_provider_active
+
+    if real_provider_active() and pre.deferred_refusal_text is None:
+        async for ev in _stream_student_turn(
+            session,
+            principal=principal,
+            chat=chat,
+            clean=clean,
+            locale=locale,
+            cv_selection=cv_selection,
+        ):
+            yield ev
+        if was_first_exchange:
+            await refresh_session_title(session, chat, clean)
+        return
+
     agent_plan = await build_agent_plan(
         clean,
         principal=principal,
@@ -776,8 +975,8 @@ async def stream_message(
             return
 
         if agent_plan.action == "tool" and agent_plan.tool_name:
-            yield {"type": "status", "code": agent_plan.status_code}
-            yield {"type": "tool_call", "name": agent_plan.tool_name}
+            # Leak-safe: emit the mapped work PHASE, never the raw tool name.
+            yield {"type": "status", "code": model_router.phase_for_tool(agent_plan.tool_name)}
         else:
             yield {"type": "status", "code": "responding"}
         agent_text = await execute_agent_plan(
@@ -787,8 +986,6 @@ async def stream_message(
             principal=principal,
             ai_unavailable_reply=ai_unavailable_reply(),
         )
-        if agent_plan.action == "tool" and agent_plan.tool_name:
-            yield {"type": "tool_result", "name": agent_plan.tool_name, "ok": True}
         assistant_msg = _new_assistant_message(chat, agent_text, await next_seq(session, chat.id))
         session.add(assistant_msg)
         chat.last_message_at = datetime.now(UTC)
@@ -826,7 +1023,9 @@ async def stream_message(
     history.append(
         AIMessage(
             role="user",
-            content=assistant_prompt.build_user_message(clean, context=user_context),
+            content=assistant_prompt.build_user_message(
+                clean, context=user_context, cv_selection=cv_selection
+            ),
         )
     )
 
@@ -908,13 +1107,12 @@ async def stream_message(
             final_text_streamed = False
             break
 
-        yield {"type": "status", "code": "using_tool"}
-        yield {"type": "tool_call", "name": tool_name}
+        # Leak-safe: emit the mapped work PHASE, never the raw tool name.
+        yield {"type": "status", "code": model_router.phase_for_tool(tool_name)}
         result = await dispatch_tool(tool_name, tool_args, session=session, principal=principal)
         tool_call_count += 1
         used_tool = True
         tool_names.append(tool_name)
-        yield {"type": "tool_result", "name": tool_name, "ok": result.get("ok", False)}
         persist_tool_result(
             session,
             chat=chat,

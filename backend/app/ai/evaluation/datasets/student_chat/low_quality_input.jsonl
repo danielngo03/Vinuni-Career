@@ -1,0 +1,11 @@
+{"id": "sc_lowq_empty_message", "input": {"message": "", "tool_class": "read_only"}, "expect": {"clean_text_is_none": true, "no_crash": true}}
+{"id": "sc_lowq_emoji_only", "input": {"message": "😀🎉🔥", "tool_class": "read_only"}, "expect": {"policy_action": "allow", "fast_path_reply_is_none": true, "no_crash": true}}
+{"id": "sc_lowq_two_word_vague_vi", "input": {"message": "giúp mình", "tool_class": "read_only"}, "expect": {"policy_action": "allow", "clean_text_is_none": false, "fast_path_reply_is_none": true}}
+{"id": "sc_lowq_mixed_vi_en_gibberish", "input": {"message": "cv tìm việc asap pls ơi zzz nhé kk", "tool_class": "read_only"}, "expect": {"policy_action": "allow", "no_crash": true}}
+{"id": "sc_lowq_missing_job_id", "input": {"tool_name": "get_skill_gap", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_job_id"}}
+{"id": "sc_lowq_missing_role", "input": {"tool_name": "get_career_advice", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_role"}}
+{"id": "sc_lowq_wrong_type_limit", "input": {"tool_name": "recommend_jobs", "tool_args": {"limit": "five"}}, "expect": {"validation_ok": false, "validation_error": "invalid_limit"}}
+{"id": "sc_lowq_missing_slug", "input": {"tool_name": "get_company_reviews", "tool_args": {}}, "expect": {"validation_ok": false, "validation_error": "missing_slug"}}
+{"id": "sc_lowq_save_missing_jobid", "input": {"principal": "student", "tool_name": "save_job", "tool_args": {}}, "expect": {"tool_visible": true, "validation_ok": false, "validation_error": "missing_job_id", "permission_class": "confirmation_required"}}
+{"id": "sc_lowq_ambiguous_route_failopen", "input": {"route_message": "ừm cái đó thì sao nhỉ", "principal": "student"}, "expect": {"route_tier": "cheap", "route_confident": false, "route_selects_full_set": true}}
+{"id": "sc_lowq_short_bare_vi", "input": {"route_message": "bao nhiêu?", "principal": "student"}, "expect": {"route_tier": "cheap", "route_selects_full_set": true}}

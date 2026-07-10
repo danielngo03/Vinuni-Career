@@ -150,26 +150,51 @@ def build_user_message(
     context: dict | None = None,
     *,
     persona: str | None = None,
+    cv_selection: str | None = None,
 ) -> str:
-    """Build the user message with optional context injection."""
-    if not context:
+    """Build the user message with optional context injection.
+
+    ``cv_selection`` (student CV-picker two-turn flow): when the incoming turn
+    carried a ``[[cv:<id>]]`` marker, the caller strips it from the persisted /
+    displayed text and passes the resolved id here so the model re-calls the
+    pending CV tool with that ``cv_id``. The hint is model-facing only — it never
+    reaches the client (the persisted user message stays marker-free).
+    """
+    if not context and not cv_selection:
         return user_text
     ctx_lines: list[str] = []
     if persona:
         ctx_lines.append(f"User persona: {persona}")
-    if context.get("student_name"):
-        ctx_lines.append(f"Student name: {context['student_name']}")
-    if context.get("cv_count") is not None:
-        ctx_lines.append(f"Number of CVs in library: {context['cv_count']}")
-    active_apps = context.get("active_application_count") or context.get("active_applications")
-    if active_apps is not None:
-        ctx_lines.append(f"Active applications: {active_apps}")
-    if context.get("org_name"):
-        ctx_lines.append(f"Organisation: {context['org_name']}")
+    if context:
+        if context.get("student_name"):
+            ctx_lines.append(f"Student name: {context['student_name']}")
+        if context.get("cv_count") is not None:
+            ctx_lines.append(f"Number of CVs in library: {context['cv_count']}")
+        if context.get("default_cv_id"):
+            ctx_lines.append(f"Default CV id: {context['default_cv_id']}")
+        active_apps = context.get("active_application_count") or context.get("active_applications")
+        if active_apps is not None:
+            ctx_lines.append(f"Active applications: {active_apps}")
+        if context.get("saved_job_count") is not None:
+            ctx_lines.append(f"Saved jobs: {context['saved_job_count']}")
+        if context.get("org_name"):
+            ctx_lines.append(f"Organisation: {context['org_name']}")
+    hint: str | None = None
+    if cv_selection:
+        hint = (
+            f'[CV selection] The user just picked CV id "{cv_selection}". '
+            "Re-call the CV tool that was awaiting a CV choice, passing "
+            f'cv_id="{cv_selection}".'
+        )
+    if not ctx_lines and not hint:
+        return user_text
+    parts: list[str] = []
     if ctx_lines:
-        ctx_block = "\n".join(ctx_lines)
-        return f"[Context]\n{ctx_block}\n\n[Message]\n{user_text}"
-    return user_text
+        parts.append("[Context]\n" + "\n".join(ctx_lines))
+    parts.append(f"[Message]\n{user_text}")
+    if hint:
+        parts.append(hint)
+    return "\n\n".join(parts)
 
 
 def build_tool_result_message(tool_name: str, result: dict) -> str:
