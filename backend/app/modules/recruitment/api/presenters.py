@@ -329,6 +329,50 @@ def interview_view(
     }
 
 
+def interview_board_row(
+    iv: Interview,
+    *,
+    job_id: str,
+    job_title: str,
+    candidate_handle: str,
+    stage_name: str | None,
+    assignees: list[dict],
+    is_attendee: bool,
+    locale: str = "vi",
+) -> dict:
+    """One row of the ORG-WIDE interview board (partner recruiting surface).
+
+    Unlike :func:`interview_view` (per-application, carries the stage evaluation
+    gate) this is a flat cross-job glance: it adds ``job_title`` +
+    ``candidate_handle`` (the applicant is always identified — owner 2026-07-10) and
+    the ``assignees`` list, and omits the partner-internal evaluation gate. The
+    ``meeting_link`` is decrypted ONLY for an attendee of THIS interview (an assigned
+    interviewer); every non-attendee row carries ``None`` (never the board's link).
+    """
+
+    meeting_link = decrypt_meeting_link(iv.meeting_link) if is_attendee else None
+    return {
+        "id": str(iv.id),
+        "application_id": str(iv.application_id),
+        "job_id": job_id,
+        "job_title": job_title,
+        "candidate_handle": candidate_handle,
+        "stage_name": stage_name,
+        "mode": iv.mode,
+        "mode_label": _mode_label(iv.mode, locale=locale),
+        "scheduled_at": _iso(iv.scheduled_at),
+        "duration_minutes": iv.duration_minutes,
+        "status": iv.status,
+        "status_label": interview_domain.status_label(iv.status, locale=locale),
+        "location": iv.location,
+        # Attendee-only; a non-attendee board viewer never receives the link.
+        "meeting_link": meeting_link,
+        "assignees": assignees,
+        "assignee_count": len(assignees),
+        "is_attendee": is_attendee,
+    }
+
+
 def student_interview_card(iv: Interview, *, locale: str = "vi") -> dict:
     """The candidate's OWN upcoming-interview card (identity-safe).
 
@@ -491,6 +535,48 @@ def offer_board_block(offer: Offer, *, locale: str = "vi") -> dict:
         "status_label": _offer_status_label(offer.status, locale=locale),
         "expiry_date": _iso(offer.expiry_date),
         "sent_at": _iso(offer.sent_at),
+    }
+
+
+def offer_board_row(
+    offer: Offer,
+    *,
+    job_id: str,
+    job_title: str,
+    candidate_handle: str,
+    locale: str = "vi",
+) -> dict:
+    """One row of the ORG-WIDE offer board (partner recruiting surface).
+
+    Unlike :func:`offer_board_block` (the lean pipeline-card glance with NO comp)
+    this cross-job board row is a recruiter's own-org management surface, so comp is
+    decrypted here (recruiter + owning student only, DATA_MODEL §17). It adds
+    ``job_title`` + ``candidate_handle`` (the applicant is always identified — owner
+    2026-07-10) and the approval-trail timestamps a recruiter needs to triage. It
+    never carries the approver identity, ``decline_reason``, or any student-internal
+    field.
+    """
+
+    return {
+        "id": str(offer.id),
+        "application_id": str(offer.application_id),
+        "job_id": job_id,
+        "job_title": job_title,
+        "candidate_handle": candidate_handle,
+        "position_title": offer.position_title,
+        "status": offer.status,
+        "status_label": _offer_status_label(offer.status, locale=locale),
+        "is_live": offer.status in offer_domain.LIVE_STATUSES,
+        "expiry_date": _iso(offer.expiry_date),
+        "sent_at": _iso(offer.sent_at),
+        "approved_at": _iso(offer.approved_at),
+        "created_at": _iso(offer.created_at),
+        # Comp is decrypted for the recruiter managing their own org's offers.
+        "salary_amount": _decrypt_amount(offer),
+        "salary_currency": offer.salary_currency,
+        "salary_period": offer.salary_period,
+        "period_label": offer_domain.period_label(offer.salary_period, locale=locale),
+        "start_date": _iso(offer.start_date),
     }
 
 

@@ -29,7 +29,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timedelta
 
-from sqlalchemy import delete, select
+from sqlalchemy import and_, delete, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
@@ -52,11 +52,16 @@ from app.modules.recruitment.application.errors import (
 )
 from app.modules.recruitment.domain import interview as interview_domain
 from app.modules.recruitment.domain import lifecycle, timeline
-from app.modules.recruitment.domain.models import Interview, InterviewAssignee
+from app.modules.recruitment.domain.models import (
+    Application,
+    Interview,
+    InterviewAssignee,
+    PipelineStage,
+)
 from app.modules.recruitment.infrastructure.meeting_link_crypto import (
     encrypt_meeting_link,
 )
-from app.modules.users.application import user_service
+from app.modules.users.application import user_read_facade, user_service
 from app.shared.audit import write_audit
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import Principal, permission_checker
@@ -701,6 +706,189 @@ async def list_interviews(
         await _interview_view(session, iv=iv, principal=principal, locale=locale) for iv in rows
     ]
     return {"application_id": str(app.id), "interviews": items}
+
+
+# --------------------------------------------------------------------------- #
+# Org-wide interview board (partner recruiting surface)                        #
+# --------------------------------------------------------------------------- #
+#
+# A cross-job read: ALL interviews for the caller org's jobs (not one application).
+# ``interviews:read`` at ORG scope; tenant isolation via the denormalized
+# ``interviews.org_id`` (kept in sync with the owning job's org). The board glance
+# still withholds ``meeting_link`` from any non-attendee row (ADR-0006 §5).
+
+
+async def _stage_names(
+    session: AsyncSession, *, stage_ids: set[uuid.UUID]
+) -> dict[uuid.UUID, str]:
+    """Batched ``{stage_id: name}`` for the board (one query, page-size independent)."""
+
+    if not stage_ids:
+        return {}
+    rows = (
+        await session.execute(
+            select(PipelineStage.id, PipelineStage.name).where(PipelineStage.id.in_(stage_ids))
+        )
+    ).all()
+    return {row.id: row.name for row in rows}
+
+
+async def _assignees_for_interviews(
+    session: AsyncSession, *, interview_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, list[uuid.UUID]]:
+    """Batched ``{interview_id: [user_id, ...]}`` (creation order) for the board."""
+
+    if not interview_ids:
+        return {}
+    rows = (
+        await session.execute(
+            select(InterviewAssignee.interview_id, InterviewAssignee.user_id)
+            .where(InterviewAssignee.interview_id.in_(interview_ids))
+            .order_by(InterviewAssignee.created_at)
+        )
+    ).all()
+    out: dict[uuid.UUID, list[uuid.UUID]] = {}
+    for interview_id, user_id in rows:
+        out.setdefault(interview_id, []).append(user_id)
+    return out
+
+
+def _interview_board_conditions(
+    *,
+    scope: str,
+    status: str | None,
+    job_id: uuid.UUID | None,
+    mine: bool,
+    principal: Principal,
+    now: datetime,
+) -> list:
+    """The WHERE clauses for the interview board (shared by count + page queries)."""
+
+    conditions: list = []
+    if scope == "upcoming":
+        conditions.append(
+            and_(
+                Interview.status == interview_domain.STATUS_SCHEDULED,
+                Interview.scheduled_at >= now,
+            )
+        )
+    elif scope == "past":
+        conditions.append(
+            or_(
+                Interview.status.in_(
+                    (
+                        interview_domain.STATUS_COMPLETED,
+                        interview_domain.STATUS_CANCELLED,
+                        interview_domain.STATUS_NO_SHOW,
+                    )
+                ),
+                Interview.scheduled_at < now,
+            )
+        )
+    # scope == "all": no time/status constraint beyond the optional ``status`` filter.
+    if status is not None:
+        conditions.append(Interview.status == status)
+    if job_id is not None:
+        conditions.append(Application.job_id == job_id)
+    if mine and principal.user_id is not None:
+        conditions.append(
+            Interview.id.in_(
+                select(InterviewAssignee.interview_id).where(
+                    InterviewAssignee.user_id == principal.user_id
+                )
+            )
+        )
+    return conditions
+
+
+async def list_org_interviews(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    scope: str = "upcoming",
+    status: str | None = None,
+    job_id: uuid.UUID | None = None,
+    mine: bool = False,
+    limit: int = 50,
+    offset: int = 0,
+    locale: str = "vi",
+) -> dict:
+    """Org-wide interview board: every interview for the caller org's jobs.
+
+    ``interviews:read`` at ORG scope (tenant isolation via ``interviews.org_id``).
+    Returns ``{interviews: [board_row...], total}`` where ``total`` is the full match
+    count BEFORE ``limit``/``offset``. ``upcoming`` is ascending by ``scheduled_at``;
+    ``past``/``all`` descending. ``meeting_link`` is decrypted only for a row the
+    caller is an assignee of.
+    """
+
+    org_id = principal.org_id
+    permission_checker.require(principal, _RESOURCE, _PERM_READ, resource_org_id=org_id)
+    if org_id is None:
+        # Authenticated but no org context (e.g. a superadmin with no org): no board.
+        return {"interviews": [], "total": 0}
+
+    now = _shared.now()
+    conditions = _interview_board_conditions(
+        scope=scope, status=status, job_id=job_id, mine=mine, principal=principal, now=now
+    )
+
+    base = (
+        select(Interview, Application.job_id, Application.applicant_id)
+        .join(Application, Application.id == Interview.application_id)
+        .where(Interview.org_id == org_id, Application.deleted_at.is_(None))
+    )
+    for cond in conditions:
+        base = base.where(cond)
+
+    total = (
+        await session.execute(select(func.count()).select_from(base.subquery()))
+    ).scalar_one()
+
+    if scope == "upcoming":
+        page_stmt = base.order_by(Interview.scheduled_at.asc(), Interview.id.asc())
+    else:
+        page_stmt = base.order_by(Interview.scheduled_at.desc(), Interview.id.desc())
+    page_stmt = page_stmt.limit(limit).offset(offset)
+    rows = (await session.execute(page_stmt)).all()
+
+    interviews = [row[0] for row in rows]
+    job_ids = {row[1] for row in rows}
+    applicant_ids = {row[2] for row in rows}
+    stage_ids = {iv.stage_id for iv in interviews}
+    interview_ids = [iv.id for iv in interviews]
+
+    job_titles = await job_read_facade.get_job_titles(session, job_ids)
+    contacts = await user_read_facade.get_user_contacts(session, applicant_ids)
+    stage_names = await _stage_names(session, stage_ids=stage_ids)
+    assignee_map = await _assignees_for_interviews(session, interview_ids=interview_ids)
+    assignee_uids = {uid for uids in assignee_map.values() for uid in uids}
+    assignee_contacts = await user_read_facade.get_user_contacts(session, assignee_uids)
+
+    items: list[dict] = []
+    for iv, job_id_val, applicant_id_val in rows:
+        assignee_ids = assignee_map.get(iv.id, [])
+        assignee_views = [
+            {
+                "user_id": str(uid),
+                "display_name": _shared.display_name(assignee_contacts.get(uid)),
+            }
+            for uid in assignee_ids
+        ]
+        is_attendee = principal.user_id is not None and principal.user_id in set(assignee_ids)
+        items.append(
+            presenters.interview_board_row(
+                iv,
+                job_id=str(job_id_val),
+                job_title=job_titles.get(job_id_val, ""),
+                candidate_handle=_shared.display_name(contacts.get(applicant_id_val)),
+                stage_name=stage_names.get(iv.stage_id),
+                assignees=assignee_views,
+                is_attendee=is_attendee,
+                locale=locale,
+            )
+        )
+    return {"interviews": items, "total": int(total)}
 
 
 async def student_interview_block(

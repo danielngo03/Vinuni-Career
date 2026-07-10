@@ -50,6 +50,24 @@ INTERVIEW_STATUSES: frozenset[str] = frozenset(
 # The outcomes a partner may set via /complete.
 COMPLETE_OUTCOMES: frozenset[str] = frozenset({STATUS_COMPLETED, STATUS_NO_SHOW})
 
+# Localized status labels (raw codes never reach end users).
+_STATUS_LABELS: dict[str, dict[str, str]] = {
+    STATUS_SCHEDULED: {"vi": "Đã lên lịch", "en": "Scheduled"},
+    STATUS_COMPLETED: {"vi": "Đã hoàn thành", "en": "Completed"},
+    STATUS_CANCELLED: {"vi": "Đã hủy", "en": "Cancelled"},
+    STATUS_NO_SHOW: {"vi": "Vắng mặt", "en": "No-show"},
+    STATUS_RESCHEDULED: {"vi": "Đã đổi lịch", "en": "Rescheduled"},
+}
+
+
+def status_label(code: str, *, locale: str = "vi") -> str:
+    """Localized label for an interview ``status`` (falls back to the raw code)."""
+
+    labels = _STATUS_LABELS.get(code)
+    if labels is None:
+        return code
+    return labels.get(locale, labels["vi"])
+
 # --------------------------------------------------------------------------- #
 # Advance-action token (the average-score gate; ADR-0006 §2 / BUSINESS_LOGIC §3.1)
 # --------------------------------------------------------------------------- #

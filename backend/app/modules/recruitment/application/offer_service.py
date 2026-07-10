@@ -36,7 +36,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timedelta
 
-from sqlalchemy import select
+from sqlalchemy import case, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
@@ -62,7 +62,7 @@ from app.modules.recruitment.domain import lifecycle, pipeline, timeline
 from app.modules.recruitment.domain import offer as offer_domain
 from app.modules.recruitment.domain.models import Application, Offer
 from app.modules.recruitment.infrastructure.offer_salary_crypto import encrypt_salary
-from app.modules.users.application import user_service
+from app.modules.users.application import user_read_facade, user_service
 from app.shared.audit import write_audit
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.models import OutboxEvent
@@ -757,6 +757,109 @@ async def list_offers_partner(
         "application_id": str(app.id),
         "offers": [presenters.partner_offer(o, locale=locale) for o in rows],
     }
+
+
+# --------------------------------------------------------------------------- #
+# Org-wide offer board (partner recruiting surface)                           #
+# --------------------------------------------------------------------------- #
+#
+# A cross-job read: ALL offers for the caller org's jobs (not one application).
+# ``offers:create`` at ORG scope (the same capability that governs the per-
+# application partner offer list); tenant isolation via the denormalized
+# ``offers.org_id``. Comp is decrypted on the row (recruiter own-org management
+# surface, DATA_MODEL §17) — never the approver identity or ``decline_reason``.
+
+_NEEDS_ACTION_STATUSES: tuple[str, ...] = (
+    offer_domain.STATUS_PENDING_APPROVAL,
+    offer_domain.STATUS_APPROVED,
+)
+
+
+def _offer_board_conditions(
+    *, scope: str, status: str | None, job_id: uuid.UUID | None
+) -> list:
+    """The WHERE clauses for the offer board (shared by count + page queries)."""
+
+    conditions: list = []
+    if scope == "live":
+        conditions.append(Offer.status.in_(tuple(offer_domain.LIVE_STATUSES)))
+    elif scope == "terminal":
+        conditions.append(Offer.status.in_(tuple(offer_domain.TERMINAL_STATUSES)))
+    elif scope == "needs_action":
+        conditions.append(Offer.status.in_(_NEEDS_ACTION_STATUSES))
+    # scope == "all": no constraint beyond the optional ``status`` filter.
+    if status is not None:
+        conditions.append(Offer.status == status)
+    if job_id is not None:
+        conditions.append(Application.job_id == job_id)
+    return conditions
+
+
+async def list_org_offers(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    scope: str = "all",
+    status: str | None = None,
+    job_id: uuid.UUID | None = None,
+    limit: int = 50,
+    offset: int = 0,
+    locale: str = "vi",
+) -> dict:
+    """Org-wide offer board: every offer for the caller org's jobs.
+
+    ``offers:create`` at ORG scope (tenant isolation via ``offers.org_id``). Returns
+    ``{offers: [board_row...], total}`` where ``total`` is the full match count BEFORE
+    ``limit``/``offset``. ``all``/``needs_action`` put LIVE offers before TERMINAL
+    ones, then newest first; ``live``/``terminal`` are newest first.
+    """
+
+    org_id = principal.org_id
+    permission_checker.require(principal, _RESOURCE, _PERM_CREATE, resource_org_id=org_id)
+    if org_id is None:
+        # Authenticated but no org context (e.g. a superadmin with no org): no board.
+        return {"offers": [], "total": 0}
+
+    conditions = _offer_board_conditions(scope=scope, status=status, job_id=job_id)
+
+    base = (
+        select(Offer, Application.job_id, Application.applicant_id)
+        .join(Application, Application.id == Offer.application_id)
+        .where(Offer.org_id == org_id, Application.deleted_at.is_(None))
+    )
+    for cond in conditions:
+        base = base.where(cond)
+
+    total = (
+        await session.execute(select(func.count()).select_from(base.subquery()))
+    ).scalar_one()
+
+    if scope in ("all", "needs_action"):
+        live_first = case((Offer.status.in_(tuple(offer_domain.LIVE_STATUSES)), 1), else_=0)
+        page_stmt = base.order_by(
+            live_first.desc(), Offer.created_at.desc(), Offer.id.desc()
+        )
+    else:
+        page_stmt = base.order_by(Offer.created_at.desc(), Offer.id.desc())
+    page_stmt = page_stmt.limit(limit).offset(offset)
+    rows = (await session.execute(page_stmt)).all()
+
+    job_ids = {row[1] for row in rows}
+    applicant_ids = {row[2] for row in rows}
+    job_titles = await job_read_facade.get_job_titles(session, job_ids)
+    contacts = await user_read_facade.get_user_contacts(session, applicant_ids)
+
+    items = [
+        presenters.offer_board_row(
+            offer,
+            job_id=str(job_id_val),
+            job_title=job_titles.get(job_id_val, ""),
+            candidate_handle=_shared.display_name(contacts.get(applicant_id_val)),
+            locale=locale,
+        )
+        for offer, job_id_val, applicant_id_val in rows
+    ]
+    return {"offers": items, "total": int(total)}
 
 
 async def list_offers_student(

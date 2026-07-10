@@ -8,6 +8,7 @@ Routers are HTTP-only: validate, delegate to services (which enforce RBAC + audi
 from __future__ import annotations
 
 import uuid
+from typing import Literal
 
 from fastapi import APIRouter, Depends, Header, Query, status
 from fastapi.responses import Response
@@ -63,6 +64,10 @@ router = APIRouter(tags=["recruitment"])
 applications_router = APIRouter(prefix="/applications")
 job_applications_router = APIRouter(prefix="/jobs")
 offers_router = APIRouter(prefix="/offers")
+# Org-wide partner recruiting boards. A dedicated ``/recruiting`` prefix keeps these
+# cross-job reads clear of the student-owned ``GET /offers`` and the
+# ``/offers/{offer_id}`` path param.
+recruiting_router = APIRouter(prefix="/recruiting")
 
 
 # --------------------------------------------------------------------------- #
@@ -989,8 +994,96 @@ async def respond_invitation(
     return success(data)
 
 
+# --------------------------------------------------------------------------- #
+# Org-wide partner recruiting boards (cross-job reads)                          #
+# --------------------------------------------------------------------------- #
+
+
+@recruiting_router.get(
+    "/interviews",
+    summary="Org-wide interview board: all interviews across the org's jobs (partner)",
+)
+async def list_org_interviews(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    scope: Literal["upcoming", "past", "all"] = Query(default="upcoming"),
+    status: Literal["scheduled", "completed", "cancelled", "no_show"] | None = Query(default=None),
+    job_id: uuid.UUID | None = Query(default=None),
+    mine: bool = Query(default=False, description="Only interviews the caller is an assignee of"),
+    limit: int = Query(default=50, ge=1, le=200),
+    offset: int = Query(default=0, ge=0),
+    accept_language: str | None = Header(default=None),
+) -> dict:
+    """Every interview for the caller org's jobs (``interviews:read`` at org scope).
+
+    ``meeting_link`` is decrypted only on rows the caller is an assignee of. Returns
+    ``{ data: { interviews: [...], total } }`` where ``total`` is the full match count
+    before ``limit``/``offset``.
+    """
+
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
+    data = await interview_service.list_org_interviews(
+        session,
+        principal=auth.principal,
+        scope=scope,
+        status=status,
+        job_id=job_id,
+        mine=mine,
+        limit=limit,
+        offset=offset,
+        locale=locale,
+    )
+    return success(data)
+
+
+@recruiting_router.get(
+    "/offers",
+    summary="Org-wide offer board: all offers across the org's jobs (partner)",
+)
+async def list_org_offers(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+    scope: Literal["live", "terminal", "needs_action", "all"] = Query(default="all"),
+    status: Literal[
+        "draft",
+        "pending_approval",
+        "approved",
+        "sent",
+        "accepted",
+        "declined",
+        "expired",
+        "rescinded",
+    ]
+    | None = Query(default=None),
+    job_id: uuid.UUID | None = Query(default=None),
+    limit: int = Query(default=50, ge=1, le=200),
+    offset: int = Query(default=0, ge=0),
+    accept_language: str | None = Header(default=None),
+) -> dict:
+    """Every offer for the caller org's jobs (``offers:create`` at org scope).
+
+    Comp is decrypted on each row (recruiter own-org management surface). Returns
+    ``{ data: { offers: [...], total } }`` where ``total`` is the full match count
+    before ``limit``/``offset``.
+    """
+
+    locale = (accept_language or "vi").split(",")[0].split("-")[0].strip()
+    data = await offer_service.list_org_offers(
+        session,
+        principal=auth.principal,
+        scope=scope,
+        status=status,
+        job_id=job_id,
+        limit=limit,
+        offset=offset,
+        locale=locale,
+    )
+    return success(data)
+
+
 router.include_router(applications_router)
 router.include_router(job_applications_router)
 router.include_router(offers_router)
+router.include_router(recruiting_router)
 router.include_router(invitations_router)
 router.include_router(student_invitations_router)
