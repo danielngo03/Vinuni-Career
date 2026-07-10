@@ -14,6 +14,7 @@ import { Button, EmptyState, useToast } from "@/components/ui";
 import {
   ApiError,
   mockInterviewApi,
+  type MockInterviewModality,
   type MockInterviewSession,
   type MockInterviewSessionDetail,
   type RecordTurnInput,
@@ -26,7 +27,13 @@ import { TranscriptReview } from "./transcript-review";
 type Phase =
   | { name: "setup" }
   | { name: "connecting" }
-  | { name: "live"; session: MockInterviewSession; mode: AnswerMode; serverVoice: boolean }
+  | {
+      name: "live";
+      session: MockInterviewSession;
+      mode: AnswerMode;
+      serverVoice: boolean;
+      realtimeRelay: boolean;
+    }
   | { name: "ending" }
   | { name: "report"; detail: MockInterviewSessionDetail }
   | { name: "error" };
@@ -88,23 +95,35 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
       cvId,
       mode,
       serverVoice = false,
+      realtimeRelay = false,
     }: {
       cvId: string | null;
       mode: AnswerMode;
       serverVoice?: boolean;
+      realtimeRelay?: boolean;
     }) => {
       setStartBlock(null);
       setPhase({ name: "connecting" });
       try {
+        // Prefer the true full-duplex realtime relay for voice when available;
+        // the server is authoritative and may still downgrade the modality.
+        const requestedModality: MockInterviewModality =
+          mode === "voice" ? (realtimeRelay ? "realtime" : "voice") : "text";
         const session = await mockInterviewApi.createSession({
           job_id: jobId,
           cv_id: cvId,
-          modality: mode === "voice" ? "voice" : "text",
+          modality: requestedModality,
           locale,
         });
         const liveMode: AnswerMode = session.modality === "text" ? "text" : mode;
         refreshHistory();
-        setPhase({ name: "live", session, mode: liveMode, serverVoice });
+        setPhase({
+          name: "live",
+          session,
+          mode: liveMode,
+          serverVoice,
+          realtimeRelay: session.modality === "realtime",
+        });
       } catch (err) {
         if (err instanceof ApiError && err.code !== "NETWORK_ERROR") {
           setStartBlock(toStartBlock(err));
@@ -210,6 +229,7 @@ export function MockInterviewScreen({ jobId }: { jobId: string }) {
         mode={phase.mode}
         locale={locale}
         serverVoice={phase.serverVoice}
+        realtimeRelay={phase.realtimeRelay}
         onRequestEnd={(payload) => void handleRequestEnd(phase.session, payload)}
       />
     );

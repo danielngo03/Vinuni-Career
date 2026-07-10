@@ -1,11 +1,11 @@
 /**
  * Tier V2 — true realtime speech-to-speech client for the AI mock interview.
  *
- * This is the ONLY place the browser talks to the live-voice backend. It is used
- * strictly when {@link MockInterviewSession.realtime} is present (a descriptor
- * the server hands out rarely, behind the `realtime_voice_enabled` flag). When
- * the descriptor is absent the mock interview keeps running the browser-voice
- * (Tier V1) or text tier unchanged — this module is never constructed.
+ * This is the direct-endpoint realtime path (used only when the server hands out
+ * a {@link MockInterviewRealtimeDescriptor}). The newer, preferred realtime path
+ * is the server relay in {@link LiveRelayClient}; both share the SAME audio
+ * machinery via `./live-audio` ({@link MicCapture} + {@link Pcm24Player}) so the
+ * capture/playback code is written once.
  *
  * Transport & safety:
  * - Opens a WebSocket to the descriptor's constrained bidi endpoint using ONLY
@@ -32,6 +32,14 @@ import {
   type MockInterviewSpeaker,
   type RecordTurnInput,
 } from "@/lib/api/mock-interview";
+import {
+  INPUT_SAMPLE_RATE,
+  MicCapture,
+  MicCaptureError,
+  Pcm24Player,
+  float32ToPcm16Base64,
+  pcm16Base64ToFloat32,
+} from "./live-audio";
 
 /* ------------------------------ public types ------------------------------ */
 
@@ -58,147 +66,8 @@ export type GeminiLiveErrorReason =
 
 /* -------------------------------- constants ------------------------------- */
 
-const INPUT_SAMPLE_RATE = 16000; // PCM16 the model expects on the way in.
-const OUTPUT_SAMPLE_RATE = 24000; // PCM16 the model sends on the way out.
-/** Silence gap (ms) after the last chunk before we report the orb as idle. */
-const IDLE_DEBOUNCE_MS = 180;
 /** Periodic transcript flush cadence. */
 const FLUSH_INTERVAL_MS = 15000;
-
-/* ------------------------------ audio helpers ----------------------------- */
-
-function bytesToBase64(bytes: Uint8Array): string {
-  let binary = "";
-  const chunk = 0x4000;
-  for (let i = 0; i < bytes.length; i += chunk) {
-    const slice = bytes.subarray(i, i + chunk);
-    for (let j = 0; j < slice.length; j++) {
-      binary += String.fromCharCode(slice[j]!);
-    }
-  }
-  return btoa(binary);
-}
-
-function base64ToBytes(b64: string): Uint8Array {
-  const binary = atob(b64);
-  const out = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) out[i] = binary.charCodeAt(i);
-  return out;
-}
-
-/** Float32 [-1,1] → PCM16 LE → base64. */
-function float32ToPcm16Base64(input: Float32Array): string {
-  const bytes = new Uint8Array(input.length * 2);
-  const view = new DataView(bytes.buffer);
-  for (let i = 0; i < input.length; i++) {
-    let s = input[i]!;
-    s = s < -1 ? -1 : s > 1 ? 1 : s;
-    view.setInt16(i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true);
-  }
-  return bytesToBase64(bytes);
-}
-
-/** base64 PCM16 LE → Float32 [-1,1]. */
-function pcm16Base64ToFloat32(b64: string): Float32Array {
-  const bytes = base64ToBytes(b64);
-  const sampleCount = bytes.length >> 1;
-  const view = new DataView(bytes.buffer, bytes.byteOffset, sampleCount * 2);
-  const out = new Float32Array(sampleCount);
-  for (let i = 0; i < sampleCount; i++) {
-    out[i] = view.getInt16(i * 2, true) / 32768;
-  }
-  return out;
-}
-
-/**
- * Streaming linear resampler. The mic AudioContext runs at the device rate
- * (usually 48 kHz); the model needs 16 kHz. A one-sample carry preserves
- * continuity across worklet blocks so there is no per-block click.
- */
-class LinearResampler {
-  private readonly ratio: number;
-  private carry = 0;
-  private hasCarry = false;
-  private phase = 0;
-
-  constructor(inputRate: number, outputRate: number) {
-    this.ratio = inputRate / outputRate;
-  }
-
-  process(input: Float32Array): Float32Array {
-    if (input.length === 0) return input;
-    if (Math.abs(this.ratio - 1) < 1e-6) return input;
-
-    const hasCarry = this.hasCarry;
-    const base = hasCarry ? 1 : 0;
-    let work: Float32Array;
-    if (hasCarry) {
-      work = new Float32Array(input.length + 1);
-      work[0] = this.carry;
-      work.set(input, 1);
-    } else {
-      work = input;
-    }
-
-    const out: number[] = [];
-    let pos = base + this.phase;
-    const maxPos = work.length - 1;
-    while (pos <= maxPos) {
-      const i = Math.floor(pos);
-      const frac = pos - i;
-      const a = work[i]!;
-      const b = i + 1 < work.length ? work[i + 1]! : a;
-      out.push(a + (b - a) * frac);
-      pos += this.ratio;
-    }
-
-    this.carry = input[input.length - 1]!;
-    this.hasCarry = true;
-    // Distance the read head overshot the last real input sample; carried into
-    // the next block (which re-seats the last sample at index 0).
-    this.phase = pos - work.length;
-    return Float32Array.from(out);
-  }
-}
-
-/* --------------------------- worklet (inline) ----------------------------- */
-
-/**
- * Mic-capture worklet. Buffers ~40 ms of mono frames then transfers them to the
- * main thread (which resamples + encodes). Kept minimal so it works identically
- * across browsers; a ScriptProcessor path covers engines without AudioWorklet.
- */
-const MIC_WORKLET_SOURCE = `
-class MicCaptureProcessor extends AudioWorkletProcessor {
-  constructor() {
-    super();
-    this._chunks = [];
-    this._count = 0;
-    this._target = 2048;
-  }
-  process(inputs) {
-    const input = inputs[0];
-    const ch = input && input[0];
-    if (ch && ch.length) {
-      this._chunks.push(new Float32Array(ch));
-      this._count += ch.length;
-      if (this._count >= this._target) {
-        const merged = new Float32Array(this._count);
-        let offset = 0;
-        for (let i = 0; i < this._chunks.length; i++) {
-          merged.set(this._chunks[i], offset);
-          offset += this._chunks[i].length;
-        }
-        this.port.postMessage(merged, [merged.buffer]);
-        this._chunks = [];
-        this._count = 0;
-      }
-    }
-    return true;
-  }
-}
-registerProcessor('mic-capture-processor', MicCaptureProcessor);
-`;
 
 /* -------------------------- server message shape -------------------------- */
 
@@ -221,20 +90,6 @@ interface LiveServerMessage {
   error?: { message?: string } | unknown;
 }
 
-/* -------------------------------- window ---------------------------------- */
-
-interface AudioWindow {
-  webkitAudioContext?: typeof AudioContext;
-}
-
-function makeAudioContext(sampleRate?: number): AudioContext {
-  const Ctor = window.AudioContext ?? (window as unknown as AudioWindow).webkitAudioContext;
-  if (!Ctor) throw new Error("AudioContext unsupported");
-  // Requesting a rate is best-effort; we always read back the real rate and
-  // resample as needed, so Safari ignoring the hint is harmless.
-  return sampleRate ? new Ctor({ sampleRate }) : new Ctor();
-}
-
 /* -------------------------------- client ---------------------------------- */
 
 export class GeminiLiveClient {
@@ -253,24 +108,9 @@ export class GeminiLiveClient {
   private receivedContent = false;
   private readyToSend = false;
 
-  /* mic capture graph */
-  private stream: MediaStream | null = null;
-  private inCtx: AudioContext | null = null;
-  private micSource: MediaStreamAudioSourceNode | null = null;
-  private worklet: AudioWorkletNode | null = null;
-  private scriptNode: ScriptProcessorNode | null = null;
-  private muteGain: GainNode | null = null;
-  private analyser: AnalyserNode | null = null;
-  private levelBuf: Uint8Array<ArrayBuffer> | null = null;
-  private resampler: LinearResampler | null = null;
-
-  /* playback graph */
-  private outCtx: AudioContext | null = null;
-  private outGain: GainNode | null = null;
-  private activeSources = new Set<AudioBufferSourceNode>();
-  private nextStartTime = 0;
-  private idleTimer: number | null = null;
-  private speaking = false;
+  /* audio (shared machinery) */
+  private mic: MicCapture | null = null;
+  private player: Pcm24Player | null = null;
 
   /* transcript accumulation */
   private pendingInterviewer = "";
@@ -313,15 +153,7 @@ export class GeminiLiveClient {
 
   /** Current mic amplitude in [0,1] for the presence orb (0 if no analyser). */
   get level(): number {
-    if (!this.analyser || !this.levelBuf) return 0;
-    this.analyser.getByteTimeDomainData(this.levelBuf);
-    let sumSq = 0;
-    for (let i = 0; i < this.levelBuf.length; i++) {
-      const v = (this.levelBuf[i] ?? 128) - 128;
-      sumSq += v * v;
-    }
-    const rms = Math.sqrt(sumSq / this.levelBuf.length) / 128;
-    return Math.min(1, rms * 3.2);
+    return this.mic?.level ?? 0;
   }
 
   /* -------------------------------- start --------------------------------- */
@@ -346,27 +178,35 @@ export class GeminiLiveClient {
     }
 
     // 1) Mic — the permission prompt happens up front, before we connect.
+    const mic = new MicCapture((frames) => this.onFrames(frames));
+    this.mic = mic;
     try {
-      this.stream = await navigator.mediaDevices.getUserMedia({
-        audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true },
-      });
-    } catch {
-      this.emitError("mic_denied");
-      throw new Error("mic denied");
+      await mic.start();
+    } catch (err) {
+      const reason: GeminiLiveErrorReason =
+        err instanceof MicCaptureError && err.reason === "mic_denied"
+          ? "mic_denied"
+          : "unsupported";
+      this.mic = null;
+      this.emitError(reason);
+      throw new Error(reason);
     }
     if (this.ended) {
-      this.stream.getTracks().forEach((t) => t.stop());
+      mic.teardown();
+      this.mic = null;
       return;
     }
 
-    // 2) Audio graph (capture + playback). Non-fatal if it partially fails; the
-    //    orb simply won't animate to mic level.
+    // 2) Playback graph. Fatal if Web Audio output is unavailable.
     try {
-      await this.setupCaptureGraph(this.stream);
-      this.setupPlaybackGraph();
+      const player = new Pcm24Player({
+        onSpeakingChange: (s) => this.audioStateCb?.(s ? "speaking" : "idle"),
+      });
+      player.setup();
+      this.player = player;
     } catch {
-      // If Web Audio itself is unavailable we cannot do speech-to-speech.
-      this.teardownAudio();
+      mic.teardown();
+      this.mic = null;
       this.emitError("unsupported");
       throw new Error("web audio unavailable");
     }
@@ -376,82 +216,6 @@ export class GeminiLiveClient {
 
     // 4) Hard caps from the descriptor.
     this.startTimers();
-  }
-
-  private async setupCaptureGraph(stream: MediaStream): Promise<void> {
-    const ctx = makeAudioContext(INPUT_SAMPLE_RATE);
-    this.inCtx = ctx;
-    try {
-      await ctx.resume();
-    } catch {
-      /* resume is best-effort; a user gesture preceded start(). */
-    }
-    this.resampler = new LinearResampler(ctx.sampleRate, INPUT_SAMPLE_RATE);
-
-    const source = ctx.createMediaStreamSource(stream);
-    this.micSource = source;
-
-    // Level meter for the orb.
-    const analyser = ctx.createAnalyser();
-    analyser.fftSize = 256;
-    source.connect(analyser);
-    this.analyser = analyser;
-    this.levelBuf = new Uint8Array(new ArrayBuffer(analyser.frequencyBinCount));
-
-    // Prefer AudioWorklet; fall back to ScriptProcessor. Both feed onFrames().
-    let usedWorklet = false;
-    if (ctx.audioWorklet && typeof ctx.audioWorklet.addModule === "function") {
-      try {
-        const blob = new Blob([MIC_WORKLET_SOURCE], { type: "application/javascript" });
-        const url = URL.createObjectURL(blob);
-        try {
-          await ctx.audioWorklet.addModule(url);
-        } finally {
-          URL.revokeObjectURL(url);
-        }
-        const node = new AudioWorkletNode(ctx, "mic-capture-processor");
-        node.port.onmessage = (e: MessageEvent) => {
-          if (e.data instanceof Float32Array) this.onFrames(e.data);
-        };
-        source.connect(node);
-        // A worklet with no output still needs to be pulled by the graph.
-        const sink = ctx.createGain();
-        sink.gain.value = 0;
-        node.connect(sink);
-        sink.connect(ctx.destination);
-        this.worklet = node;
-        this.muteGain = sink;
-        usedWorklet = true;
-      } catch {
-        usedWorklet = false;
-      }
-    }
-
-    if (!usedWorklet) {
-      const node = ctx.createScriptProcessor(4096, 1, 1);
-      node.onaudioprocess = (e: AudioProcessingEvent) => {
-        const ch = e.inputBuffer.getChannelData(0);
-        this.onFrames(new Float32Array(ch));
-      };
-      const sink = ctx.createGain();
-      sink.gain.value = 0; // never echo the mic to the speakers.
-      source.connect(node);
-      node.connect(sink);
-      sink.connect(ctx.destination);
-      this.scriptNode = node;
-      this.muteGain = sink;
-    }
-  }
-
-  private setupPlaybackGraph(): void {
-    const ctx = makeAudioContext(OUTPUT_SAMPLE_RATE);
-    this.outCtx = ctx;
-    void ctx.resume().catch(() => undefined);
-    const gain = ctx.createGain();
-    gain.gain.value = 1;
-    gain.connect(ctx.destination);
-    this.outGain = gain;
-    this.nextStartTime = ctx.currentTime;
   }
 
   /* ------------------------------- transport ------------------------------ */
@@ -566,7 +330,7 @@ export class GeminiLiveClient {
   private handleServerContent(content: LiveServerContent): void {
     // Barge-in: the candidate spoke over the interviewer → flush playback now.
     if (content.interrupted) {
-      this.flushPlayback();
+      this.player?.flush();
     }
 
     // Candidate (input) transcription.
@@ -587,7 +351,7 @@ export class GeminiLiveClient {
     if (parts) {
       for (const part of parts) {
         const b64 = part.inlineData?.data;
-        if (b64) this.enqueuePlayback(pcm16Base64ToFloat32(b64));
+        if (b64) this.player?.enqueue(pcm16Base64ToFloat32(b64));
       }
     }
 
@@ -635,81 +399,14 @@ export class GeminiLiveClient {
   /* ------------------------------ mic upload ------------------------------ */
 
   private onFrames(frames: Float32Array): void {
-    if (!this.readyToSend || this.ended) return;
-    const resampled = this.resampler ? this.resampler.process(frames) : frames;
-    if (resampled.length === 0) return;
-    const data = float32ToPcm16Base64(resampled);
+    if (!this.readyToSend || this.ended || frames.length === 0) return;
+    const data = float32ToPcm16Base64(frames);
     const mimeType = `audio/pcm;rate=${INPUT_SAMPLE_RATE}`;
     if (this.sendShape === "audio") {
       this.safeSend({ realtimeInput: { audio: { data, mimeType } } });
     } else {
       this.safeSend({ realtimeInput: { mediaChunks: [{ mimeType, data }] } });
     }
-  }
-
-  /* ------------------------------- playback ------------------------------- */
-
-  private enqueuePlayback(samples: Float32Array): void {
-    const ctx = this.outCtx;
-    const gain = this.outGain;
-    if (!ctx || !gain || samples.length === 0) return;
-    const buffer = ctx.createBuffer(1, samples.length, OUTPUT_SAMPLE_RATE);
-    buffer.getChannelData(0).set(samples);
-    const src = ctx.createBufferSource();
-    src.buffer = buffer;
-    src.connect(gain);
-
-    const now = ctx.currentTime;
-    const startAt = Math.max(now, this.nextStartTime);
-    try {
-      src.start(startAt);
-    } catch {
-      return;
-    }
-    this.nextStartTime = startAt + buffer.duration;
-    this.activeSources.add(src);
-    this.setSpeaking(true);
-    src.onended = () => {
-      this.activeSources.delete(src);
-      if (this.activeSources.size === 0) this.scheduleIdle();
-    };
-  }
-
-  private flushPlayback(): void {
-    for (const src of this.activeSources) {
-      try {
-        src.onended = null;
-        src.stop();
-      } catch {
-        /* already stopped */
-      }
-      try {
-        src.disconnect();
-      } catch {
-        /* ignore */
-      }
-    }
-    this.activeSources.clear();
-    if (this.outCtx) this.nextStartTime = this.outCtx.currentTime;
-    this.setSpeaking(false);
-  }
-
-  private scheduleIdle(): void {
-    if (this.idleTimer !== null) window.clearTimeout(this.idleTimer);
-    this.idleTimer = window.setTimeout(() => {
-      this.idleTimer = null;
-      if (this.activeSources.size === 0) this.setSpeaking(false);
-    }, IDLE_DEBOUNCE_MS);
-  }
-
-  private setSpeaking(next: boolean): void {
-    if (next && this.idleTimer !== null) {
-      window.clearTimeout(this.idleTimer);
-      this.idleTimer = null;
-    }
-    if (this.speaking === next) return;
-    this.speaking = next;
-    this.audioStateCb?.(next ? "speaking" : "idle");
   }
 
   /* -------------------------------- flush --------------------------------- */
@@ -779,17 +476,16 @@ export class GeminiLiveClient {
       window.clearTimeout(this.capTimer);
       this.capTimer = null;
     }
-    if (this.idleTimer !== null) {
-      window.clearTimeout(this.idleTimer);
-      this.idleTimer = null;
-    }
 
     // Fold any in-flight partials into final turns before the last flush.
     this.finalizeCandidateTurn();
     this.finalizeInterviewerTurn();
 
-    this.flushPlayback();
-    this.teardownAudio();
+    this.player?.flush();
+    this.mic?.teardown();
+    this.mic = null;
+    this.player?.teardown();
+    this.player = null;
 
     try {
       this.ws?.close();
@@ -801,74 +497,6 @@ export class GeminiLiveClient {
     // Best-effort final flush; anything still pending is exposed via
     // `pendingTurns` so the caller can hand it to endSession instead.
     await this.flush();
-  }
-
-  private teardownAudio(): void {
-    if (this.worklet) {
-      try {
-        this.worklet.port.onmessage = null;
-        this.worklet.disconnect();
-      } catch {
-        /* ignore */
-      }
-      this.worklet = null;
-    }
-    if (this.scriptNode) {
-      try {
-        this.scriptNode.onaudioprocess = null;
-        this.scriptNode.disconnect();
-      } catch {
-        /* ignore */
-      }
-      this.scriptNode = null;
-    }
-    if (this.muteGain) {
-      try {
-        this.muteGain.disconnect();
-      } catch {
-        /* ignore */
-      }
-      this.muteGain = null;
-    }
-    if (this.micSource) {
-      try {
-        this.micSource.disconnect();
-      } catch {
-        /* ignore */
-      }
-      this.micSource = null;
-    }
-    if (this.analyser) {
-      try {
-        this.analyser.disconnect();
-      } catch {
-        /* ignore */
-      }
-      this.analyser = null;
-    }
-    this.levelBuf = null;
-    if (this.stream) {
-      this.stream.getTracks().forEach((t) => t.stop());
-      this.stream = null;
-    }
-    if (this.inCtx) {
-      try {
-        void this.inCtx.close();
-      } catch {
-        /* ignore */
-      }
-      this.inCtx = null;
-    }
-    if (this.outCtx) {
-      try {
-        void this.outCtx.close();
-      } catch {
-        /* ignore */
-      }
-      this.outCtx = null;
-    }
-    this.outGain = null;
-    this.activeSources.clear();
   }
 
   private emitError(reason: GeminiLiveErrorReason): void {

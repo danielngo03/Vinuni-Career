@@ -49,6 +49,15 @@ export interface MockInterviewPrep {
   recommended_cv_id: string | null;
   signal: MockInterviewFitSignal;
   /**
+   * True when the true full-duplex realtime relay tier is available: the
+   * student's mic audio streams to our server and the interviewer's native
+   * audio streams back in real time (a live spoken conversation). This is the
+   * PREFERRED voice tier — when set, create the session with
+   * `modality: "realtime"` and drive it with the relay WebSocket client. No
+   * provider/model identity is ever carried here.
+   */
+  realtime_relay?: boolean;
+  /**
    * True when the server-mediated voice tier is available (the interviewer's
    * questions are narrated by AI and answers can be spoken and transcribed
    * server-side). When false, voice mode falls back to the browser voice tier

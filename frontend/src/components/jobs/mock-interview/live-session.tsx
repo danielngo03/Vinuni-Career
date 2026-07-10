@@ -19,6 +19,7 @@ import {
 } from "@/lib/api";
 import { VoiceController } from "@/lib/mock-interview/voice-controller";
 import { GeminiLiveClient } from "@/lib/mock-interview/gemini-live-client";
+import { LiveRelayClient } from "@/lib/mock-interview/live-relay-client";
 import { usePrefersReducedMotion } from "@/lib/hooks/use-mount-animation";
 import { cn } from "@/lib/utils";
 import type { AnswerMode } from "./pre-session-setup";
@@ -56,6 +57,13 @@ interface Props {
    * When false, voice mode uses the browser voice tier / text as before.
    */
   serverVoice?: boolean;
+  /**
+   * True when the true full-duplex realtime relay tier is active (the session
+   * was created with `modality: "realtime"`). This is the PREFERRED voice path:
+   * mic audio streams to our server and the interviewer's native audio streams
+   * back in real time. Takes precedence over server voice and browser voice.
+   */
+  realtimeRelay?: boolean;
   onRequestEnd: (payload: { duration_seconds: number; turns?: RecordTurnInput[] }) => void;
 }
 
@@ -83,7 +91,14 @@ function pickRecorderMime(): string | undefined {
  * controller (STT → SSE turn → TTS) or a text answer box. Captions are the
  * accessibility layer for the voice conversation.
  */
-export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }: Props) {
+export function LiveSession({
+  session,
+  mode,
+  locale,
+  serverVoice,
+  realtimeRelay,
+  onRequestEnd,
+}: Props) {
   const t = useTranslations("jobs.mockInterview");
   const reduced = usePrefersReducedMotion();
 
@@ -93,10 +108,6 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
   // Its visible countdown never exceeds the hard live-voice duration cap.
   const realtime = session.realtime;
 
-  // Server-mediated voice tier: AI narrates the interviewer (TTS) and answers
-  // are transcribed server-side (STT). Only when there is no realtime descriptor
-  // and the server advertised it via prep. Distinct from the browser voice tier.
-  const serverVoiceActive = !realtime && serverVoice === true;
   const recorderSupported = useMemo(
     () =>
       typeof window !== "undefined" &&
@@ -113,6 +124,20 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
 
   const [effectiveMode, setEffectiveMode] = useState<AnswerMode>(mode);
   const [degraded, setDegraded] = useState(false);
+  // The relay tier can be disabled at runtime when it fails and we fall back to
+  // the turn-based server-voice tier (see degradeFromRelay).
+  const [relayDisabled, setRelayDisabled] = useState(false);
+
+  // Realtime relay (Tier V3, PREFERRED): true full-duplex live voice over our
+  // server WebSocket. Active when the session is `modality: "realtime"`, no
+  // direct descriptor is present, and it hasn't fallen back. Takes precedence
+  // over server voice and browser voice.
+  const useRelay = realtimeRelay === true && !realtime && !relayDisabled;
+
+  // Server-mediated voice tier: AI narrates the interviewer (TTS) and answers
+  // are transcribed server-side (STT). Only when neither realtime tier is active
+  // and the server advertised it via prep. Distinct from the browser voice tier.
+  const serverVoiceActive = !realtime && !useRelay && serverVoice === true;
   const [phase, setPhase] = useState<Phase>(mode === "voice" ? "interviewer_speaking" : "listening");
   const [currentQuestion, setCurrentQuestion] = useState(session.opening.text);
   const [interviewerStreaming, setInterviewerStreaming] = useState<string | null>(null);
@@ -122,9 +147,14 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
   const [turnError, setTurnError] = useState(false);
   const [idleHint, setIdleHint] = useState(false);
   const [textDraft, setTextDraft] = useState("");
-  // Realtime-only presentation states (unused on the V1/text path).
-  const [realtimeConnecting, setRealtimeConnecting] = useState(!!realtime);
+  // Realtime-only presentation states (unused on the V1/text path). Both the
+  // descriptor tier and the relay tier show the "connecting live voice" state.
+  const [realtimeConnecting, setRealtimeConnecting] = useState(
+    !!realtime || (useRelay && mode === "voice"),
+  );
   const [realtimeLost, setRealtimeLost] = useState(false);
+  // Relay push-to-talk: true while the student holds/toggles the mic to speak.
+  const [relaySpeaking, setRelaySpeaking] = useState(false);
   // Server voice tier presentation states.
   const [recording, setRecording] = useState(false);
   const [transcribing, setTranscribing] = useState(false);
@@ -134,6 +164,10 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
   const effectiveModeRef = useRef<AnswerMode>(effectiveMode);
   const controllerRef = useRef<VoiceController | null>(null);
   const geminiRef = useRef<GeminiLiveClient | null>(null);
+  const relayRef = useRef<LiveRelayClient | null>(null);
+  // Growing per-turn caption buffers for the relay tier (incremental chunks).
+  const relayInBufRef = useRef("");
+  const relayOutBufRef = useRef("");
   const abortRef = useRef<AbortController | null>(null);
   const interviewerBufRef = useRef("");
   const lastAnswerRef = useRef("");
@@ -360,10 +394,18 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
     disposeServerVoice();
     setPhaseNow("ending");
 
+    const relay = relayRef.current;
     const gemini = geminiRef.current;
-    if (gemini) {
-      // Realtime: stop (releases mic, flushes remaining turns) BEFORE ending so
-      // the coaching report sees the full transcript. Turns are already
+    if (relay) {
+      // Relay tier: say bye + release the socket BEFORE ending so the report
+      // sees the full transcript. The relay persists turns server-side, so
+      // there is nothing to hand off to endSession.
+      void relay.end().then(() => {
+        onRequestEnd({ duration_seconds: duration });
+      });
+    } else if (gemini) {
+      // Descriptor realtime: stop (releases mic, flushes remaining turns) BEFORE
+      // ending so the coaching report sees the full transcript. Turns are already
       // persisted via recordTurns; hand over only what a failed final flush left
       // behind so endSession can persist it without double-recording.
       void gemini.stop().then(() => {
@@ -464,11 +506,43 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
     degradeToText();
   }, [degradeToText]);
 
+  /**
+   * Relay failed (not a clean mid-session drop) → prefer the turn-based
+   * server-voice tier when the server advertised it, else fall to text. This
+   * keeps the room alive instead of hard-crashing.
+   */
+  const degradeFromRelay = useCallback(() => {
+    if (serverVoice === true) {
+      setRelayDisabled(true);
+      setRealtimeConnecting(false);
+      setRealtimeLost(false);
+      setRelaySpeaking(false);
+      setPhaseNow("interviewer_speaking");
+    } else {
+      degradeToText();
+    }
+  }, [serverVoice, degradeToText, setPhaseNow]);
+
+  /* --------------------- relay (V3) push-to-talk toggle ------------------- */
+  const toggleRelaySpeak = useCallback(() => {
+    const relay = relayRef.current;
+    if (!relay) return;
+    if (relaySpeaking) {
+      relay.stopSpeaking();
+      setRelaySpeaking(false);
+    } else {
+      // startSpeaking flushes interviewer playback (barge-in) inside the client.
+      relay.startSpeaking();
+      setRelaySpeaking(true);
+    }
+  }, [relaySpeaking]);
+
   /* ---------------------------- voice lifecycle --------------------------- */
   useEffect(() => {
-    // Realtime (Tier V2) owns the voice tier when a descriptor is present; the
-    // browser STT/TTS controller must not also grab the mic.
+    // Realtime tiers (descriptor V2 or relay V3) own the voice tier; the browser
+    // STT/TTS controller must not also grab the mic.
     if (realtime && effectiveMode === "voice") return;
+    if (useRelay && effectiveMode === "voice") return;
     // Server voice tier owns the mic/narration for voice mode; the browser
     // SpeechRecognition/synthesis controller must not also run.
     if (serverVoiceActive && effectiveMode === "voice") return;
@@ -595,6 +669,99 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtime, effectiveMode]);
 
+  /* ------------------- realtime relay (V3) speech-to-speech --------------- */
+  useEffect(() => {
+    if (!useRelay) return; // Not the relay tier.
+    if (effectiveMode !== "voice") return; // Degraded to text → text tier runs.
+
+    let cancelled = false;
+    let connected = false;
+    const markConnected = () => {
+      connected = true;
+    };
+    const client = new LiveRelayClient();
+    relayRef.current = client;
+    relayInBufRef.current = "";
+    relayOutBufRef.current = "";
+
+    // Connect watchdog: a socket that never produces `ready`/audio/transcription
+    // would otherwise leave the student stuck on "Connecting live voice…". Fall
+    // back to the turn-based tier when available, else text.
+    const connectTimer = window.setTimeout(() => {
+      if (!cancelled && !connected) degradeFromRelay();
+    }, REALTIME_CONNECT_TIMEOUT_MS);
+
+    void client
+      .connect(session.session_id, {
+        onReady: () => {
+          if (cancelled) return;
+          markConnected();
+          setRealtimeConnecting(false);
+        },
+        onStateChange: (state) => {
+          if (cancelled) return;
+          markConnected();
+          setRealtimeConnecting(false);
+          // Interviewer took the floor → release the student's push-to-talk so
+          // the mic isn't left streaming behind an idle-looking button.
+          if (state === "speaking") {
+            relayRef.current?.stopSpeaking();
+            setRelaySpeaking(false);
+          }
+          setPhaseNow(state === "speaking" ? "interviewer_speaking" : "listening");
+        },
+        onInputTranscript: (chunk) => {
+          if (cancelled) return;
+          markConnected();
+          relayInBufRef.current += chunk;
+          setCandidateCaption(relayInBufRef.current);
+        },
+        onOutputTranscript: (chunk) => {
+          if (cancelled) return;
+          markConnected();
+          setRealtimeConnecting(false);
+          relayOutBufRef.current += chunk;
+          setInterviewerStreaming(relayOutBufRef.current);
+        },
+        onTurnComplete: () => {
+          if (cancelled) return;
+          const finalText = relayOutBufRef.current.trim();
+          relayOutBufRef.current = "";
+          relayInBufRef.current = "";
+          setInterviewerStreaming(null);
+          if (finalText) setCurrentQuestion(finalText);
+          setCandidateCaption("");
+          setQuestionCount((c) => c + 1);
+        },
+        onError: (reason) => {
+          if (cancelled) return;
+          if (reason === "connection_lost") {
+            // Established then dropped → calm banner offering to continue by text.
+            setRealtimeConnecting(false);
+            setRealtimeLost(true);
+          } else if (reason === "mic_denied") {
+            // Mic unavailable → the turn-based tier needs it too; drop to text.
+            degradeToText();
+          } else {
+            // unsupported / connection_failed / server_error → turn-based tier
+            // when available, else text.
+            degradeFromRelay();
+          }
+        },
+      })
+      .catch(() => {
+        // onError already fired and drove degradation; nothing else to do.
+      });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(connectTimer);
+      void client.end();
+      if (relayRef.current === client) relayRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [useRelay, effectiveMode]);
+
   /* --------------------- server voice: opening narration ------------------ */
   // Narrate the opening line when the server voice tier is engaged. Captions
   // already show the line; audio is a bonus and never blocks the turn.
@@ -653,7 +820,13 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
       let goalTarget = 1;
       const p = phaseRef.current;
       if (effectiveModeRef.current === "voice" && p === "listening") {
-        goalTarget = 1 + (geminiRef.current?.level ?? controllerRef.current?.level ?? 0) * 0.22;
+        goalTarget =
+          1 +
+          (relayRef.current?.level ??
+            geminiRef.current?.level ??
+            controllerRef.current?.level ??
+            0) *
+            0.22;
       } else if (p === "interviewer_speaking") {
         goalTarget = 1.05 + 0.05 * (0.5 + 0.5 * Math.sin(performance.now() / 320));
       } else if (p === "thinking") {
@@ -877,6 +1050,14 @@ export function LiveSession({ session, mode, locale, serverVoice, onRequestEnd }
               void beginTurn(v);
             }}
           />
+        ) : useRelay ? (
+          <RelayAnswerBar
+            speaking={relaySpeaking}
+            connecting={realtimeConnecting}
+            disabled={realtimeConnecting || phase === "ending"}
+            onToggleSpeak={toggleRelaySpeak}
+            onSwitchToText={degradeToText}
+          />
         ) : serverVoiceActive ? (
           <ServerVoiceAnswerBar
             value={textDraft}
@@ -1079,6 +1260,75 @@ function ServerVoiceAnswerBar({
           t("serverVoiceTypeHint")
         )}
       </p>
+    </div>
+  );
+}
+
+/**
+ * Relay (Tier V3) push-to-talk control: one prominent mic button the student
+ * taps to speak and taps again to finish (`aria-pressed` reflects the state).
+ * There is no text answer box in this tier — captions are the a11y floor — but a
+ * "type instead" escape hatch always drops to the text tier.
+ */
+function RelayAnswerBar({
+  speaking,
+  connecting,
+  disabled,
+  onToggleSpeak,
+  onSwitchToText,
+}: {
+  speaking: boolean;
+  connecting: boolean;
+  disabled: boolean;
+  onToggleSpeak: () => void;
+  onSwitchToText: () => void;
+}) {
+  const t = useTranslations("jobs.mockInterview");
+  return (
+    <div className="mx-auto flex max-w-xl flex-col items-center gap-2.5">
+      <button
+        type="button"
+        onClick={onToggleSpeak}
+        disabled={disabled}
+        aria-pressed={speaking}
+        aria-label={speaking ? t("relaySpeakStop") : t("relaySpeakStart")}
+        className={cn(
+          "relative flex size-14 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-50",
+          speaking
+            ? "bg-[var(--brand-red)] text-white"
+            : "bg-[var(--bg-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-muted)]",
+        )}
+      >
+        {speaking && (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 animate-ping rounded-full bg-[var(--brand-red)]/40"
+          />
+        )}
+        {speaking ? (
+          <Stop aria-hidden weight="fill" className="relative size-6" />
+        ) : (
+          <Microphone aria-hidden weight="fill" className="relative size-6" />
+        )}
+      </button>
+      <p
+        className="text-center text-[11px] leading-relaxed text-[var(--text-muted)]"
+        aria-live="polite"
+      >
+        {connecting
+          ? t("realtimeConnectingLabel")
+          : speaking
+            ? t("relayHintSpeaking")
+            : t("relayHintIdle")}
+      </p>
+      <button
+        type="button"
+        onClick={onSwitchToText}
+        className="inline-flex items-center gap-1.5 rounded text-[11px] font-semibold text-[var(--text-muted)] outline-none transition-colors hover:text-[var(--text-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+      >
+        <Keyboard aria-hidden weight="bold" className="size-3.5" />
+        {t("idleSwitchToText")}
+      </button>
     </div>
   );
 }

@@ -42,7 +42,12 @@ interface Props {
   locale: string;
   starting: boolean;
   startBlock: StartBlock | null;
-  onStart: (opts: { cvId: string | null; mode: AnswerMode; serverVoice?: boolean }) => void;
+  onStart: (opts: {
+    cvId: string | null;
+    mode: AnswerMode;
+    serverVoice?: boolean;
+    realtimeRelay?: boolean;
+  }) => void;
   onOpenSession: (id: string) => void;
   onResumeActive: (sessionId: string | null) => void;
   onDiscardActive: () => void;
@@ -81,12 +86,14 @@ export function PreSessionSetup({
     };
   }, []);
 
-  // The server voice tier only needs a mic (MediaRecorder + audio playback), not
-  // browser SpeechRecognition — so voice mode is usable on browsers without STT
-  // when the server advertises it via prep.
+  // Both server-mediated tiers (turn-based server voice, and the true full-duplex
+  // realtime relay) only need a mic — not browser SpeechRecognition — so voice
+  // mode is usable on browsers without STT when the server advertises either.
+  const realtimeRelayAvailable = prep.data?.realtime_relay === true;
   const serverVoiceAvailable = prep.data?.server_voice === true;
   const voiceModeAvailable =
-    support.voiceReady || (support.getUserMedia && serverVoiceAvailable);
+    support.voiceReady ||
+    (support.getUserMedia && (realtimeRelayAvailable || serverVoiceAvailable));
 
   const [mode, setMode] = useState<AnswerMode>(support.voiceReady ? "voice" : "text");
   // If the mic is known-denied, default to text (voice is still selectable).
@@ -133,7 +140,9 @@ export function PreSessionSetup({
       {startBlock && (
         <StartBlockPanel
           block={startBlock}
-          onStartText={() => onStart({ cvId: selectedCvId, mode: "text", serverVoice: false })}
+          onStartText={() =>
+            onStart({ cvId: selectedCvId, mode: "text", serverVoice: false, realtimeRelay: false })
+          }
           onResumeActive={onResumeActive}
           onDiscardActive={onDiscardActive}
           discarding={discarding}
@@ -235,11 +244,15 @@ export function PreSessionSetup({
                 {voiceNotice.text}
               </p>
             )}
-            {mode === "voice" && serverVoiceAvailable && !voiceNotice && (
+            {mode === "voice" && !voiceNotice && realtimeRelayAvailable ? (
+              <p className="mt-3 text-xs leading-relaxed text-[var(--text-muted)]">
+                {t("relaySetupHint")}
+              </p>
+            ) : mode === "voice" && !voiceNotice && serverVoiceAvailable ? (
               <p className="mt-3 text-xs leading-relaxed text-[var(--text-muted)]">
                 {t("serverVoiceHint")}
               </p>
-            )}
+            ) : null}
           </section>
 
           {/* Start */}
@@ -250,7 +263,14 @@ export function PreSessionSetup({
               fullWidth
               loading={starting}
               disabled={starting || !selectedCvId}
-              onClick={() => onStart({ cvId: selectedCvId, mode, serverVoice: serverVoiceAvailable })}
+              onClick={() =>
+                onStart({
+                  cvId: selectedCvId,
+                  mode,
+                  serverVoice: serverVoiceAvailable,
+                  realtimeRelay: realtimeRelayAvailable,
+                })
+              }
             >
               {starting ? t("startingCta") : t("startCta")}
             </Button>
