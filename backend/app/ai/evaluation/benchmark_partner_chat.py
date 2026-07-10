@@ -784,7 +784,6 @@ async def _drive_one_golden_conversation(
     Returns a leak-safe record (scores/flags/leak-free only) — never the text.
     """
     from app.ai.evaluation import judge
-    from app.ai.evaluation.runners.partner_chat import make_principal
     from app.modules.ai_assistant.application.chat_service import send_message
     from app.modules.ai_assistant.application.session_history import create_session
 
@@ -795,11 +794,14 @@ async def _drive_one_golden_conversation(
         "rubric": rubric,
     }
     utterances = _conversation_utterances(case)
-    principal = make_principal(principal_name)
     final_answer = ""
     turns_driven = 0
     try:
         async with session_factory() as session:
+            # Live drive needs a REAL DB principal (a synthetic user_id violates
+            # the chat_sessions -> users FK). Resolve the seeded partner admin;
+            # fall back to the synthetic principal only for offline-shaped stores.
+            principal = await _resolve_live_principal(session, principal_name)
             created = await create_session(session, principal=principal)
             session_id = uuid.UUID(str(created["id"]))
             for text, locale in utterances:
@@ -838,6 +840,41 @@ async def _drive_one_golden_conversation(
     else:
         entry.update({"verdict": "scored", "score": verdict.score, "flags": verdict.flags})
     return entry
+
+
+async def _resolve_live_principal(session: Any, principal_name: str):
+    """Resolve a REAL DB-backed Principal for the live golden drive.
+
+    The offline runners use a synthetic ``make_principal`` (deterministic uuid5
+    user id) which cannot own a persisted chat_session — the FK to ``users``
+    fails. For the real-model drive we look up an ACTUAL seeded partner admin
+    (their real user id + org + wildcard grant) so sessions/messages persist and
+    org-scoped tools resolve real data. Falls back to the synthetic principal if
+    no seeded partner user exists (keeps offline-store shapes working).
+    """
+    from sqlalchemy import text as _sql
+
+    from app.ai.evaluation.runners.partner_chat import make_principal
+    from app.shared.permissions import Principal
+
+    row = (
+        await session.execute(
+            _sql(
+                "SELECT u.id AS uid, m.org_id AS oid "
+                "FROM users u JOIN memberships m ON m.user_id = u.id "
+                "JOIN organizations o ON o.id = m.org_id AND o.org_type = 'partner' "
+                "ORDER BY u.created_at LIMIT 1"
+            )
+        )
+    ).first()
+    if row is None:
+        return make_principal(principal_name)
+    return Principal(
+        user_id=row.uid,
+        persona="partner_member",
+        org_id=row.oid,
+        permissions=frozenset({"*:*"}),
+    )
 
 
 async def run_real_golden_batch(
