@@ -36,6 +36,14 @@ class ChatSession(Base):
     )
     last_message_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     is_archived: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    # Persistent rolling conversation memory (migration 0101). ``memory_summary``
+    # holds a leak-scrubbed summary of the oldest messages; ``memory_message_count``
+    # is how many leading messages (by seq order) the summary already covers, so
+    # each turn only summarizes the delta instead of recomputing from scratch.
+    memory_summary: Mapped[str | None] = mapped_column(Text, nullable=True)
+    memory_message_count: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=0, server_default="0"
+    )
 
     messages: Mapped[list[ChatMessage]] = relationship(
         "ChatMessage", back_populates="session", order_by="ChatMessage.created_at"
@@ -64,6 +72,15 @@ class ChatMessage(Base):
     confirmed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=lambda: datetime.now(UTC)
+    )
+    # Conversation-management columns (migration 0089): monotonic per-session
+    # ordering index, edit marker, and soft-delete flag for truncate-and-replay.
+    # ``seq`` is nullable for pre-0089 rows; readers order by seq with a
+    # created_at fallback. Every read path must exclude ``is_deleted`` rows.
+    seq: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    edited_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    is_deleted: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=False, server_default="false"
     )
 
     session: Mapped[ChatSession] = relationship("ChatSession", back_populates="messages")

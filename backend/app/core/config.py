@@ -163,6 +163,20 @@ class Settings(BaseSettings):
     google_cloud_location: str = "global"
     google_application_credentials: str = ""
 
+    # --- Chat image generation (partner/staff content assist) -------------------
+    # Server-mediated image generation on a native Google GenAI model (same
+    # ``genai.Client`` auth paths as the speech tier: express Vertex API key or
+    # service-account ADC). Used by the assistant's confirmation-free but
+    # RBAC-gated + metered ``generate_image`` tool. All values are leak-safe
+    # internals: no vendor/model string ever reaches end users. Disabled by
+    # default; enable via env once a Google key is configured.
+    ai_image_enabled: bool = False
+    ai_image_use_vertex: bool = True  # express Vertex key path (vertexai=True)
+    ai_image_model: str = "gemini-2.5-flash-image"
+    ai_image_model_alias: str = "image_default"  # leak-safe slot handle
+    ai_image_max_px: int = 1024  # longest output side; keeps cost/storage bounded
+    ai_image_max_prompt_chars: int = 600  # sanitized prompt cap sent to the model
+
     # --- Mock Interview: TRUE realtime Live relay (server-mediated) --------------
     # Full-duplex native-audio interview via the Gemini Live model. The browser
     # cannot hold the Google service-account credential, so the SERVER brokers the
