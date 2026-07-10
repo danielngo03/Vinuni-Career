@@ -1,6 +1,6 @@
 # Slide Pitch — VinUni Career Platform
 
-Bộ tài liệu spec để **Claude Design (claude.ai/design)** dựng trọn bộ **20 slide** pitch cho dự án
+Bộ tài liệu spec để **Claude Design (claude.ai/design)** dựng trọn bộ **21 slide** pitch cho dự án
 *VinUni Career Platform*. Tất cả nội dung ở đây đã được **kiểm chứng trực tiếp từ code + docs của dự án**
 (không phải nội dung bịa) — bạn chỉ cần đưa cho Claude Design là dựng ra slide đúng, đẹp, chuẩn thương hiệu.
 
@@ -14,9 +14,9 @@ Bộ tài liệu spec để **Claude Design (claude.ai/design)** dựng trọn b
 
 | File | Vai trò | Đưa cho Claude Design? |
 |---|---|---|
-| `README.md` | Bạn đang đọc — mục lục + quick start + danh sách 20 slide | Ngữ cảnh |
+| `README.md` | Bạn đang đọc — mục lục + quick start + danh sách 21 slide | Ngữ cảnh |
 | `01-HUONG-DAN-CLAUDE-DESIGN.md` | **Cách kết nối & dùng claude.ai/design** (2 luồng: Artifacts và `/design-sync`), cách export PDF | Đọc để làm theo |
-| `02-DECK-SPEC.md` | **Trái tim của bộ này** — spec đầy đủ 20 slide: nội dung chữ + vẽ gì + số liệu + bố cục | ✅ Bắt buộc |
+| `02-DECK-SPEC.md` | **Trái tim của bộ này** — spec đầy đủ 21 slide: nội dung chữ + vẽ gì + số liệu + bố cục | ✅ Bắt buộc |
 | `03-BRAND-DESIGN-SYSTEM.md` | Hệ thiết kế: bảng màu chính xác, font, bo góc, style biểu đồ, quy tắc layout, do/don't | ✅ Bắt buộc |
 | `04-MASTER-PROMPT.md` | **Prompt copy-paste** để dán vào Claude Design → dựng cả deck | ✅ Dán trực tiếp |
 | `assets/README.md` | Nơi bỏ logo VinUni + screenshot sản phẩm (nếu có) | Tùy chọn |
@@ -31,12 +31,12 @@ Bộ tài liệu spec để **Claude Design (claude.ai/design)** dựng trọn b
    tự chứa (điều hướng bằng phím mũi tên, in ra PDF được). Xem chi tiết + luồng `/design-sync` ở
    `01-HUONG-DAN-CLAUDE-DESIGN.md`.
 
-> 💡 Nếu 20 slide trong 1 lần là quá dài, hãy yêu cầu Claude Design dựng **theo cụm 5 slide** (1–5, 6–10,
-> 11–15, 16–20) rồi ghép — chất lượng từng slide sẽ cao hơn. Master prompt đã hướng dẫn cách này.
+> 💡 Nếu 21 slide trong 1 lần là quá dài, hãy yêu cầu Claude Design dựng **theo cụm 5 slide** (1–5, 6–10,
+> 11–15, 16–21) rồi ghép — chất lượng từng slide sẽ cao hơn. Master prompt đã hướng dẫn cách này.
 
 ---
 
-## 🗂️ Mục lục 20 slide (storyline)
+## 🗂️ Mục lục 21 slide (storyline)
 
 > **Storyline (đã tối ưu cho hội đồng):** front-load *thách thức → tầm nhìn nền tảng → quy mô đã dựng →
 > business*, rồi mới vào chiều sâu sản phẩm/AI, đóng deck bằng *roadmap + đường mở rộng + ask*. Motif xuyên
@@ -63,14 +63,17 @@ Bộ tài liệu spec để **Claude Design (claude.ai/design)** dựng trọn b
 | 17 | **Visual Workflow Builder** | DAG React Flow · DRAFT→TEST→ACTIVE · dry-run · human-confirm node |
 | 18 | **AI Governance, Safety & Trust** | Metering + ledger idempotency · che giấu provider · guardrail |
 | 19 | **Kiến trúc & Công nghệ (platform-ready)** | DDD theo module · read-model/outbox/audit · AI gateway · stack · multi-tenant |
-| 20 | **Roadmap, Đường mở rộng & Kết luận** | 6 phase · 3 chặng mở rộng (GTM) · ask/CTA + logo *(business đóng)* |
+| 20 | **Traction & Mục tiêu 12 tháng** | Mục tiêu 12T + proof VinUni 32% offer + thị trường 2,36M SV *(business)* |
+| 21 | **Roadmap, Đường mở rộng & Kết luận** | 6 phase · 3 chặng mở rộng (GTM) · ask/CTA + logo *(business đóng)* |
 
 ---
 
 ## ✅ Cam kết chính xác
 
 Mọi số liệu "quy mô" trong deck (34 module, 98 migration, 2.022 test, 120 màn hình…) đều được **đếm trực tiếp
-từ repo** — xem `02-DECK-SPEC.md` slide 06 (Quy mô) để biết lệnh đếm. Các con số **thị trường/tài chính** (TAM,
-giá gói) **không có trong docs** → deck để ô placeholder `[ĐIỀN SỐ]` cho bạn tự bổ sung, tránh bịa số trước hội
-đồng. Câu chuyện *nền tảng* (slide 3, 8, 19, 20) trình bày là **tầm nhìn + sẵn-sàng-kỹ-thuật**, không phải cam
-kết V1 "bán cho trường khác" — an toàn khi bị hội đồng vặn.
+từ repo** — xem `02-DECK-SPEC.md` slide 06 (Quy mô) để biết lệnh đếm. Số **thị trường** (2,36M SV · 940k DN ·
+67 trường tư · VinUni 32% offer khóa đầu) là **số thật 2024 có nguồn** (Tổng cục Thống kê VN, NSO, VinUni.edu.vn
+— liệt kê ở cuối `02-DECK-SPEC.md`). **Giá gói & KPI** là **đề xuất/mục tiêu hợp lý** (ghi rõ "đề xuất"/"mục
+tiêu" để không nhầm là số đã đạt). Chỉ còn `[MÔN/CUỘC THI]` và logo là bạn tự thêm. Câu chuyện *nền tảng* (slide
+3, 8, 19, 21) trình bày là **tầm nhìn + sẵn-sàng-kỹ-thuật**, không phải cam kết V1 "bán cho trường khác" — an
+toàn khi bị hội đồng vặn.

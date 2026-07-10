@@ -1,13 +1,13 @@
-# DECK SPEC — 20 slide pitch "VinUni Career Platform"
+# DECK SPEC — 21 slide pitch "VinUni Career Platform"
 
 > **Cách đọc file này:** mỗi slide có 5 phần — **Mục tiêu**, **Nội dung chữ** (đúng để hiển thị, tiếng Việt),
-> **Trực quan hóa** (vẽ gì, bố trí ra sao), **Số liệu** (con số nổi bật), **Bố cục & màu**. Tất cả số liệu
-> quy mô là **code-verified**. Ô `[ĐIỀN SỐ]` là chỗ bạn tự bổ sung (docs không có), **không được bịa**.
+> **Trực quan hóa** (vẽ gì, bố trí ra sao), **Số liệu** (con số nổi bật), **Bố cục & màu**. Số liệu quy mô là
+> **code-verified**; số thị trường là **số thật 2024 có nguồn**; giá & KPI là **đề xuất/mục tiêu** (ghi rõ).
 >
 > **Storyline (đã tối ưu cho hội đồng — front-load business/quy mô/thách thức, đóng bằng business):**
 > Vấn đề → Cơ hội & tầm nhìn nền tảng → Giải pháp → Sản phẩm thật → **Quy mô (bằng chứng đã dựng)** →
 > **Mô hình kinh doanh** → Đối thủ → Người dùng → (7 slide chiều sâu sản phẩm/AI) → Kiến trúc & công nghệ →
-> **Roadmap + Đường mở rộng + Ask**.
+> **Traction & Mục tiêu 12 tháng** → **Roadmap + Đường mở rộng + Ask**.
 >
 > **Motif xuyên suốt — "Ưu tiên VinUni, sẵn sàng thành nền tảng"** (*beachhead → mở rộng*): thắng sâu ở
 > VinUni trước (dữ liệu đã xác thực, vòng lặp khép kín), và **kiến trúc đã sẵn sàng** (multi-tenant RBAC,
@@ -30,7 +30,7 @@
   - Tên sản phẩm: **VinUni Career Platform**
   - Tagline: *"Hệ điều hành tuyển dụng chính thức của Đại học VinUni — AI-first, sẵn sàng thành nền tảng."*
   - Dòng phụ: *"Một nền tảng · Bốn bề mặt vận hành · Toàn bộ vòng đời sự nghiệp"*
-  - Chân slide: `[TÊN TEAM]` · `[MÔN/CUỘC THI]` · Tháng 7, 2026
+  - Chân slide: **C2-Team-037** · `[MÔN/CUỘC THI]` · Tháng 7, 2026
 - **Trực quan hóa:** Nền `#F8F7F1` sạch, nhiều khoảng trắng. Một dải "signature" mảnh chạy ngang phía dưới
   tiêu đề gồm 8 chấm tròn nhỏ theo đúng thứ tự palette data-viz (indigo→teal→amber→rose→sky→emerald→violet→
   orange) — ẩn dụ "đa persona, đa module". Góc phải-dưới: 1 khối gradient indigo→violet nhỏ (chấm nhấn duy nhất).
@@ -55,7 +55,8 @@
 - **Trực quan hóa:** 3 thẻ trắng persona (icon lucide `graduation-cap`, `building-2`, `landmark`) + 3 gạch đầu
   dòng. Bên dưới: dải "3 thách thức" — 3 chip (*Quá nặng · Quá nông · Quá khó tự xây*) với icon rào cản; và
   dải "công cụ rời rạc" (CV Word · Google Form · Email · Excel · Job board) có dấu `×` thể hiện phân mảnh.
-- **Số liệu:** Có thể để 1 dòng insight định tính (không bịa số). Nếu muốn số, dùng `[ĐIỀN SỐ]`.
+- **Số liệu (số thật để nhấn quy mô nỗi đau):** mỗi năm VN có **~314.000** cử nhân ra trường tìm việc và
+  **~2,36 triệu** SV đang học — nhưng công cụ hướng nghiệp vẫn rời rạc. *(Nguồn: Bộ GD&ĐT / Tổng cục Thống kê VN 2024.)*
 - **Bố cục & màu:** Khung monochrome; mỗi cột 1 màu icon-chip (indigo/teal/amber); dải thách thức tông đỏ-cam nhạt.
 
 ---
@@ -74,11 +75,19 @@
     vụ nhiều trường / mọi người, **không phải viết lại**.
   - **Vì sao là bây giờ:** làn sóng LLM khiến bóc tách CV, matching, trợ lý & luyện phỏng vấn *thực sự hữu
     ích* với chi phí thấp — điều 2–3 năm trước chưa khả thi.
-  - **Quy mô thị trường (TAM/SAM):** `[ĐIỀN SỐ — docs không nêu]`.
-- **Trực quan hóa:** **Sơ đồ 3 vòng mở rộng đồng tâm** (ẩn dụ beachhead): lõi = *VinUni (bây giờ)* → vòng 2 =
-  *Alumni + SV ngoài + người đi làm (đã hỗ trợ)* → vòng 3 = *Nền tảng độc lập / đa-trường (sẵn sàng)*. Mỗi
-  vòng 1 nhãn + mốc. Bên phải: thẻ "Vòng lặp dữ liệu khép kín" (4 mũi tên xoay) + 3 chip "động lực thời điểm".
-- **Số liệu:** 3 badge mốc mở rộng; 2 ô TAM/SAM placeholder `[ĐIỀN SỐ]`.
+  - **Quy mô thị trường (số thật 2024, có nguồn):**
+    - **SOM / Beachhead (VinUni):** ~**3.500** SV ở công suất tối đa + **~145** cử nhân/năm khóa đầu (2024,
+      14 ngành) + đối tác tuyển dụng campus. *(VinUni thành lập 2020, hợp tác Cornell & UPenn.)*
+    - **SAM (khối trường tư/quốc tế VN):** **67** trường đại học tư trong tổng **243** trường.
+    - **TAM (toàn Việt Nam):** **~2,36 triệu** sinh viên đại học · **~314.000** cử nhân tốt nghiệp/năm ·
+      **>940.000** doanh nghiệp đang hoạt động. Thị trường **HR-tech VN** được dự báo tiến tới **~US$1 tỷ**.
+- **Trực quan hóa:** **Sơ đồ 3 vòng mở rộng đồng tâm** (ẩn dụ beachhead): lõi = *VinUni (~3.500 SV, bây giờ)*
+  → vòng 2 = *Alumni + SV ngoài + người đi làm (đã hỗ trợ)* → vòng 3 = *Nền tảng độc lập / đa-trường: 67
+  trường tư · 2,36M SV · 940k DN (sẵn sàng)*. Mỗi vòng gắn số ở trên. Bên phải: thẻ "Vòng lặp dữ liệu khép
+  kín" (4 mũi tên xoay) + 3 chip "động lực thời điểm".
+- **Số liệu:** 3 vòng gắn số (3.500 → 67 trường → 2,36M SV / 940k DN); chip "HR-tech VN → ~US$1 tỷ".
+- **Nguồn (ghi chân slide, cỡ nhỏ):** Tổng cục Thống kê / Bộ GD&ĐT VN 2024 (2,36M SV; 314k cử nhân; 243
+  trường); NSO/VietnamNet 2024 (>940k DN); VinUni.edu.vn (khóa đầu 145 cử nhân, 2024).
 - **Bố cục & màu:** 3 vòng dùng indigo→violet nhạt dần (đây có thể là panel gradient hero của slide). Vòng
   "sẵn sàng" vẽ nét đứt để thể hiện *tầm nhìn*, không phải cam kết.
 - **⚠️ Ghi chú trung thực (đừng in lên slide):** docs khung V1 = tập trung VinUni. Trình bày vòng 3 là **tầm
@@ -157,13 +166,23 @@
   - **Kinh tế khi mở rộng nền tảng (beachhead → mở rộng):** cùng bộ máy monetization áp cho tổ chức mới ⇒
     thêm **doanh thu theo tổ chức** (license/SaaS theo chỗ ngồi hoặc theo tính năng) khi mở ra ngoài VinUni —
     biên phí cận biên thấp vì hạ tầng AI dùng chung, metering đã sẵn.
-  - **V1 thanh toán = chuyển khoản/manual**; VNPay/MoMo/ZaloPay là phase sau. **Giá gói:** `[ĐIỀN SỐ — admin
-    cấu hình, không cố định]`.
+  - **Bảng giá đề xuất (rẻ & hợp lý cho thị trường VN — admin cấu hình được):**
+    - 🎓 **Sinh viên** *(SV VinUni: MIỄN PHÍ, trường tài trợ)* — với SV ngoài/người đi làm:
+      **Free 0₫** (duyệt việc, ứng tuyển, 1 CV, AI credit cơ bản) · **Pro 49.000₫/tháng** *(hoặc
+      199.000₫/học kỳ)*: AI credit rộng, full template CV, mock interview, fit score chi tiết, không quảng cáo.
+    - 🏢 **Đối tác tuyển dụng:** **Starter 0₫** (2 tin/tháng) · **Growth 2.000.000₫/tháng** (10 tin, spotlight,
+      pipeline ATS, analytics cơ bản) · **Pro 5.000.000₫/tháng** (tin không giới hạn, featured employer, talent
+      pool, AI screening, full analytics) · **Enterprise: thương lượng**.
+    - 📣 **Quảng cáo:** sponsored job từ **500.000₫/tin/tuần**; banner & email theo chiến dịch.
+    - 🎪 **Sự kiện:** gói tài trợ career fair từ **10.000.000₫**.
+    - 🌐 **Mở rộng (license tổ chức ngoài VinUni):** từ **~150 triệu₫/năm** theo quy mô *(illustrative)*.
+  - **V1 thanh toán = chuyển khoản/manual**; VNPay/MoMo/ZaloPay là phase sau.
 - **Trực quan hóa:** Trái = 4 thẻ doanh thu (icon `package`, `megaphone`, `graduation-cap`, `calendar`), mỗi
-  thẻ ghi rõ **"ai trả"**, hội tụ vào 1 thẻ trung tâm **"AI Credit / Usage Ledger"**. Phải = dải "kinh tế mở
-  rộng": mũi tên *VinUni (4 dòng doanh thu) → Tổ chức mới (+ license/SaaS)*. Chip **`Được tài trợ`** minh họa
-  (không gỡ). Chú thích phân tầng exhaustion: SV/Đối tác → mua/nâng cấp · Trường → yêu cầu admin.
-- **Số liệu:** 4 chip nguồn doanh thu + 1 ô giá `[ĐIỀN SỐ]`.
+  thẻ ghi rõ **"ai trả" + mức giá neo** (vd Đối tác Growth 2tr₫/th, SV Pro 49k₫/th), hội tụ vào 1 thẻ trung
+  tâm **"AI Credit / Usage Ledger"**. Phải = dải "kinh tế mở rộng": mũi tên *VinUni (4 dòng doanh thu) → Tổ
+  chức mới (+ license/SaaS ~150tr₫/năm)*. Chip **`Được tài trợ`** minh họa (không gỡ). Chú thích phân tầng
+  exhaustion: SV/Đối tác → mua/nâng cấp · Trường → yêu cầu admin.
+- **Số liệu:** neo giá SV Pro **49k₫/th** · Đối tác Growth **2tr₫/th** / Pro **5tr₫/th** · license **~150tr₫/năm**.
 - **Bố cục & màu:** Amber cho yếu tố sponsored (đúng semantics); credit/ledger dùng indigo; mũi tên mở rộng violet.
 
 ---
@@ -428,7 +447,36 @@
 
 ---
 
-## Slide 20 — Roadmap, Đường mở rộng & Kết luận
+## Slide 20 — Traction & Mục tiêu 12 tháng
+
+- **Mục tiêu:** Cho hội đồng thấy đích đến đo được + vì sao khả thi (bằng dữ liệu thật). **Trung thực:** sản
+  phẩm mới, chưa có traction thật → đây là **MỤC TIÊU 12 tháng**, KHÔNG phải số đã đạt.
+- **Nội dung chữ:** Tiêu đề: **"Mục tiêu 12 tháng đầu — và vì sao khả thi"**.
+  - **Vì sao khả thi (bằng chứng THẬT):**
+    - VinUni khóa cử nhân đầu (2024): **32%** nhận offer từ **McKinsey, BCG, Google, IBM, Bosch…** *trước*
+      tốt nghiệp; có mức lương tới **$7.500/tháng** ở nước ngoài → nền tảng *khuếch đại & đo lường* thế mạnh này.
+    - Thị trường sẵn: **2,36 triệu** SV · **>940.000** doanh nghiệp · HR-tech VN hướng **~US$1 tỷ**.
+    - Sản phẩm đã dựng (slide 6): 34 module · 120 màn hình · 4 bề mặt — sẵn sàng nhận người dùng ngay.
+  - **Mục tiêu 12 tháng (targets — ghi rõ "mục tiêu", không phải đã đạt):**
+    - **~2.500** SV VinUni active (~70% của 3.500) + alumni onboard.
+    - **3.000+** CV tạo/upload · **5.000+** lượt ứng tuyển.
+    - **60–100** đối tác tuyển dụng · **500+** JD đăng.
+    - **100+** mentor alumni tham gia.
+    - **≥90%** job kiểm duyệt trong SLA · career-outcome dashboard phủ **100%** khóa tốt nghiệp.
+    - Chuyển đổi trả phí: mục tiêu **5–8%** SV ngoài mua Pro · **20–30** đối tác trả phí.
+    - Mở rộng: **1–2** đơn vị/trường thí điểm ngoài VinUni (bàn đạp năm 2).
+- **Trực quan hóa:** Trái = **hàng KPI-target tiles** (mỗi tile: nhãn + số mục tiêu lớn tabular + chip amber
+  "mục tiêu 12T" để phân biệt rõ với số đã-đạt). Phải = **thẻ "Vì sao khả thi"** 3 proof-point (32% offer khóa
+  đầu · thị trường 2,36M SV / 940k DN · sản phẩm đã dựng). Dưới: 1 phễu nhỏ *SV active → CV → ứng tuyển → offer*.
+- **Số liệu:** như trên; badge "Targets · 12 tháng".
+- **Bố cục & màu:** KPI-target tiles gắn chip amber "mục tiêu" (tách khỏi số đã-đạt); proof-point THẬT dùng
+  emerald. Số dùng JetBrains Mono tabular.
+- **⚠️ Ghi chú trung thực:** in rõ chữ **"Mục tiêu 12 tháng"** trên slide; đừng trình bày như traction đã đạt.
+  Proof-point VinUni 32% là số THẬT (nguồn VinUni.edu.vn 2024) — để riêng, không trộn vào phần target.
+
+---
+
+## Slide 21 — Roadmap, Đường mở rộng & Kết luận
 
 - **Mục tiêu:** Chốt bằng lộ trình khả thi + **đường mở rộng (GTM) + business ask** + logo.
 - **Nội dung chữ:** Tiêu đề: **"Lộ trình rõ ràng — và một đường mở rộng có sẵn"**.
@@ -442,8 +490,10 @@
     3. **Nền tảng độc lập / đa-trường** *(sẵn sàng kỹ thuật)* — thêm doanh thu license/SaaS theo tổ chức.
   - **Tầm nhìn:** *"Vòng lặp dữ liệu khép kín Học → Ứng tuyển → Tuyển dụng → Outcome → phản hồi vào chương
     trình học."*
-  - **Ask / CTA:** `[ĐIỀN — vd: xin phê duyệt triển khai thí điểm toàn trường / nguồn lực / đối tác]`.
-  - **Kết:** Logo VinUni + `[TÊN TEAM]` + liên hệ.
+  - **Ask / CTA:** *"Xin phê duyệt **triển khai thí điểm toàn trường VinUni** (Sinh viên + Đối tác + Career
+    Services) trong học kỳ tới; kết nối **20–30 đối tác tuyển dụng** khởi động; cấp **nguồn lực vận hành + AI
+    budget** cho 12 tháng đầu."*
+  - **Kết:** Logo VinUni + **C2-Team-037** + liên hệ.
 - **Trực quan hóa:** Trên = **timeline ngang 6 mốc** (P0→P5) với thanh tiến độ tô phần "đã dựng". Dưới = **3
   chặng mở rộng** dạng bậc thang đi lên (VinUni → Alumni/ngoài → Nền tảng) — chặng 3 nét đứt (*sẵn sàng, chưa
   cam kết*). Góc: logo VinUni + gradient hero khép lại (đối xứng slide 1). 1 dòng CTA nổi bật.
@@ -456,15 +506,20 @@
 
 ## 🔧 Danh sách placeholder cần bạn điền (trước khi pitch)
 
-| Ký hiệu | Ở slide | Nội dung cần điền |
+| Ký hiệu | Ở slide | Trạng thái |
 |---|---|---|
-| `[TÊN TEAM]` | 1, 20 | Tên nhóm / thành viên |
-| `[MÔN/CUỘC THI]` | 1 | Bối cảnh trình bày |
-| `[ĐIỀN SỐ]` (thị trường) | 3 | TAM/SAM, số SV/khóa, số đối tác — docs **không** có |
-| `[ĐIỀN SỐ]` (giá) | 7 | Giá gói đối tác/SV — docs để admin cấu hình |
-| `[ĐIỀN — Ask/CTA]` | 20 | Lời kêu gọi cụ thể (thí điểm, nguồn lực, đối tác) |
-| Logo + screenshot | 1, 5, 20 | Bỏ vào `assets/` (xem `assets/README.md`) |
+| Tên team **C2-Team-037** | 1, 21 | ✅ Đã điền |
+| Thị trường (TAM/SAM: 2,36M SV · 940k DN · 67 trường tư…) | 3 | ✅ Đã điền (số thật 2024, có nguồn) |
+| Bảng giá (SV Pro 49k · Đối tác 2tr/5tr · license ~150tr/năm) | 7 | ✅ Đã điền (đề xuất, admin cấu hình) |
+| Traction/KPI mục tiêu 12 tháng | 20 | ✅ Đã điền (targets + proof VinUni 32%) |
+| Ask/CTA (thí điểm toàn trường + 20–30 đối tác + budget) | 21 | ✅ Đã điền |
+| `[MÔN/CUỘC THI]` | 1 | ⬜ Bạn điền tên môn/cuộc thi |
+| Logo + screenshot | 1, 5, 21 | ⬜ Copy từ `frontend/public/brand/` (xem `assets/README.md`) |
 
-**Nguyên tắc vàng:** phần *quy mô/kỹ thuật* dùng số code-verified (mạnh & an toàn); phần *thị trường/tài chính*
-để placeholder — **thà trống còn hơn bịa số** trước hội đồng. Câu chuyện *nền tảng* trình bày là **tầm nhìn +
-sẵn-sàng-kỹ-thuật**, không phải cam kết V1.
+**Nguồn số liệu thị trường (2024):** Tổng cục Thống kê / Bộ GD&ĐT VN (2,36M SV; 314k cử nhân; 243 trường,
+67 tư); NSO/VietnamNet (>940k doanh nghiệp); imarcgroup/kenresearch (HR-tech VN); VinUni.edu.vn (khóa đầu
+145 cử nhân + 32% offer, 2024). Giá gói là **đề xuất hợp lý cho thị trường VN**, admin cấu hình được.
+
+**Nguyên tắc vàng:** *quy mô/kỹ thuật* dùng số code-verified; *thị trường* dùng số thật có nguồn; *giá & KPI*
+là **đề xuất/mục tiêu** (ghi rõ để không nhầm là số đã đạt). Câu chuyện *nền tảng* = **tầm nhìn + sẵn-sàng-kỹ-
+thuật**, không phải cam kết V1.

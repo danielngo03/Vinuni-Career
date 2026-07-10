@@ -6,15 +6,17 @@
 ---
 
 ```
-Bạn là designer + front-end dev. Hãy dựng một BỘ SLIDE PITCH 20 slide cho dự án
+Bạn là designer + front-end dev. Hãy dựng một BỘ SLIDE PITCH 21 slide cho dự án
 "VinUni Career Platform" thành MỘT FILE HTML TỰ CHỨA (self-contained), tỷ lệ 16:9,
 điều hướng bằng phím ← →, in ra PDF landscape được (mỗi slide = đúng 1 trang).
 
 NGUỒN NỘI DUNG (bắt buộc bám sát, không tự bịa):
-- Nội dung + bố cục + "vẽ gì" từng slide: theo file 02-DECK-SPEC.md (20 slide, đã đánh số 01–20).
+- Nội dung + bố cục + "vẽ gì" từng slide: theo file 02-DECK-SPEC.md (21 slide, đã đánh số 01–21).
 - Hệ màu, font, bo góc, component, layout grammar: theo file 03-BRAND-DESIGN-SYSTEM.md.
 Nếu 2 file đã được đính kèm/nhúng ở trên, hãy đọc và tuân thủ tuyệt đối. Không thêm nội dung
-ngoài spec; chỗ nào spec ghi "[ĐIỀN SỐ]" thì giữ nguyên placeholder rõ ràng (đừng bịa số).
+ngoài spec, không tự bịa số. Hầu hết số liệu đã điền sẵn trong spec (quy mô, thị trường, giá,
+KPI mục tiêu) — hãy dùng ĐÚNG các số đó. Chỉ còn "[MÔN/CUỘC THI]" ở slide 1 và logo/screenshot
+là để trống; nếu chưa có thì để nhãn chỗ trống rõ ràng, đừng bịa.
 
 NGÔN NGỮ: Tiếng Việt, giữ nguyên thuật ngữ kỹ thuật tiếng Anh (FastAPI, RAG, pgvector, ATS,
 CV–JD matching, ReAct agent, DAG...). Đối tượng: hội đồng/giám khảo capstone → cân bằng
@@ -27,7 +29,7 @@ YÊU CẦU THIẾT KẾ (tuân thủ 03-BRAND-DESIGN-SYSTEM.md):
   orange #f97316). Màu chỉ dùng đúng ngữ nghĩa (emerald=tốt, amber=sponsored/cảnh báo,
   đỏ VinUni #c83538=danger/brand, sky/indigo=info/AI).
 - TỐI ĐA 1 panel gradient indigo→violet (linear-gradient(135deg,#4f46e5,#6d28d9 55%,#7c3aed))
-  mỗi slide, dùng cho slide hero/KPI nổi bật (đặc biệt slide 4 và 20).
+  mỗi slide, dùng cho slide hero/KPI nổi bật (đặc biệt slide 4 và 21).
 - Font Plus Jakarta Sans (nhúng qua Google Fonts hoặc system fallback); MỌI số/metric dùng
   JetBrains Mono tabular-nums.
 - Mỗi slide có: kicker (11px uppercase xám) + tiêu đề + logo nhỏ VinUni + số trang ở footer.
@@ -45,7 +47,7 @@ KỸ THUẬT:
 
 CÁCH LÀM (để chất lượng cao):
 - Dựng LẦN LƯỢT theo cụm: trước tiên slide 01–05 thật kỹ trong 1 artifact và cho tôi xem.
-- Sau khi tôi duyệt, dựng tiếp 06–10, 11–15, 16–20 cùng một hệ style/CSS.
+- Sau khi tôi duyệt, dựng tiếp 06–10, 11–15, 16–21 cùng một hệ style/CSS.
 - Cuối cùng gộp tất cả vào 1 file HTML deck duy nhất, giữ nguyên style và thứ tự 01→20.
 
 Bắt đầu bằng slide 01–05.
@@ -64,7 +66,11 @@ Bắt đầu bằng slide 01–05.
   dùng JetBrains Mono cỡ lớn; 1 tile dùng gradient hero cho con số 2.022 test."*
 - *"Slide 07: 4 thẻ doanh thu (ghi rõ 'ai trả') hội tụ vào thẻ AI Credit Ledger; bên phải mũi tên 'VinUni →
   Tổ chức mới (+ license/SaaS)'; giữ 1 chip 'Được tài trợ' màu amber."*
-- *"Slide 03: 3 vòng mở rộng đồng tâm VinUni → Alumni/SV ngoài → Nền tảng độc lập (vòng ngoài nét đứt)."*
+- *"Slide 03: 3 vòng mở rộng đồng tâm VinUni (~3.500 SV) → Alumni/SV ngoài → Nền tảng độc lập (67 trường tư ·
+  2,36M SV · 940k DN, vòng ngoài nét đứt); chip 'HR-tech VN → ~US$1 tỷ'."*
+- *"Slide 20: hàng KPI-target tiles (2.500 SV active · 3.000 CV · 5.000 ứng tuyển · 60–100 đối tác · 100
+  mentor) mỗi tile gắn chip amber 'mục tiêu 12T'; bên phải thẻ 'Vì sao khả thi' 3 proof-point (VinUni 32%
+  offer khóa đầu · 2,36M SV/940k DN · sản phẩm đã dựng); dưới là phễu SV→CV→ứng tuyển→offer."*
 - *"Giảm bớt màu ở slide 10, chỉ node AI (bước 4,5) viền sky; các node còn lại trung tính."*
 - *"Export: thêm CSS print để mỗi slide vừa đúng 1 trang A4 ngang, ẩn thanh điều hướng khi in."*
 
@@ -75,7 +81,7 @@ Bắt đầu bằng slide 01–05.
 Thay câu cuối master prompt bằng:
 
 ```
-Thay vì 1 file gộp, hãy tạo 20 file HTML tự chứa: slide-01.html … slide-20.html trong thư mục
+Thay vì 1 file gộp, hãy tạo 21 file HTML tự chứa: slide-01.html … slide-21.html trong thư mục
 slide/deck/. Mỗi file là 1 slide 16:9 hoàn chỉnh, dùng CHUNG một khối <style> design-system.
 Dòng đầu mỗi file thêm: <!-- @dsCard group="Pitch Deck" --> để claude.ai/design lập card.
 ```
