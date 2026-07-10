@@ -521,6 +521,16 @@ export {
   PRIMARY_CREATIVE_SLOTS,
   CREATIVE_SLOT_SPECS,
   ratioToCss,
+  // Campaign allocation engine (spec §7.0)
+  CAMPAIGN_STATUSES,
+  CAMPAIGN_OBJECTIVES,
+  CAMPAIGN_PACINGS,
+  AD_SURFACES,
+  COARSE_LOCATIONS,
+  COARSE_MAJORS,
+  COARSE_CAREERS,
+  COARSE_WORK_MODES,
+  COARSE_YEAR_COHORTS,
 } from "./advertising";
 export type {
   PlacementStatus,
@@ -537,6 +547,27 @@ export type {
   CreativeAssetRequirements,
   PlacementCreative,
   UploadCreativeBody,
+  // Campaign allocation engine (spec §7.0)
+  CampaignStatus,
+  CampaignObjective,
+  CampaignPacing,
+  AdSurface,
+  DeliveryEventType,
+  AdCampaign,
+  AdCampaignCreative,
+  CampaignTargeting,
+  CampaignDelivery,
+  CampaignPerformance,
+  CampaignSpendSummary,
+  AdSurfaceSlot,
+  AllocationItem,
+  AllocationSlot,
+  AllocationCuratedFallback,
+  SurfaceAllocation,
+  CampaignAllocationRecord,
+  CampaignCreativeInput,
+  CampaignCreateBody,
+  CampaignUpdateBody,
 } from "./advertising";
 export { billingApi, SUBSCRIPTION_STATUSES } from "./billing";
 export type {
@@ -652,6 +683,18 @@ export type {
   TalentSearchResult,
   TalentSearchBody,
 } from "./talent-pool";
+export { companyProfileApi, COMPANY_DOC_KINDS } from "./company-profile";
+export type {
+  CompanyChangeStatus,
+  CompanyDocKind,
+  CompanyDocument,
+  CompanyChangeField,
+  CompanyChangeRequest,
+  CompanyProfile,
+  CompanyProfileUpdateBody,
+  CompanyProfileUpdateResult,
+  CompanyApprovalDecisionResult,
+} from "./company-profile";
 export { adminUsersApi } from "./admin-users";
 export type { AdminUserRow, AdminUsersPage, AdminUsersParams } from "./admin-users";
 export { invitationsApi } from "./invitations";

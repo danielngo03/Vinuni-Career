@@ -2,6 +2,7 @@ import {
   LayoutDashboard,
   LayoutGrid,
   Briefcase,
+  BadgeCheck,
   UsersRound,
   Users,
   Kanban,
@@ -161,6 +162,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
     {
       key: "workspace",
       items: [
+        { key: "companyProfile", href: "/company-profile", icon: Building2 },
         { key: "team", href: "/team", icon: UsersRound },
         { key: "recruitingWorkflows", href: "/workflow", icon: Workflow },
         { key: "security", href: "/security", icon: ShieldCheck },
@@ -183,6 +185,7 @@ export const WORKSPACE_NAV_GROUPS: Record<Persona, NavGroup[]> = {
       items: [
         { key: "moderation", href: "/moderation", icon: FileCheck },
         { key: "partners", href: "/partners", icon: Building2 },
+        { key: "companyApprovals", href: "/company-approvals", icon: BadgeCheck },
         { key: "users", href: "/users", icon: Users },
         { key: "auditLog", href: "/audit-log", icon: ScrollText },
         { key: "workflowBuilder", href: "/workflow", icon: Workflow },

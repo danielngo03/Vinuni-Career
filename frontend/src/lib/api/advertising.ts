@@ -278,6 +278,385 @@ export interface UploadCreativeBody {
   click_target?: string;
 }
 
+/* ========================================================================== */
+/* Campaign allocation engine (spec §7.0, owner decision 2026-07-10)          */
+/* -------------------------------------------------------------------------- */
+/* The CAMPAIGN layer sits ALONGSIDE the target-based placement model above —  */
+/* it never replaces it. A campaign carries a budget + pacing + COARSE         */
+/* targeting and competes for a surface's finite sponsored slots through the   */
+/* allocation engine. Only the `paid_sponsored` disclosure is paid + its       */
+/* non-removable label is never a UI option.                                   */
+/* ========================================================================== */
+
+/** Campaign lifecycle (`ad_campaigns.status`). */
+export type CampaignStatus =
+  | "draft"
+  | "pending_review"
+  | "approved"
+  | "active"
+  | "paused"
+  | "ended"
+  | "rejected";
+
+/** Advertiser goal. Drives the delivery-event the surface reports back. */
+export type CampaignObjective =
+  | "awareness"
+  | "traffic"
+  | "applications"
+  | "event_registration";
+
+/** Budget pacing — spread evenly across the window, or spend as fast as allowed. */
+export type CampaignPacing = "even" | "asap";
+
+/** A public surface that declares finite sponsored slots. */
+export type AdSurface =
+  | "discovery_feed"
+  | "public_job_board"
+  | "company_directory"
+  | "homepage"
+  | "events";
+
+/** Privacy-safe delivery event the surface reports (never PII/GPS/raw IP). */
+export type DeliveryEventType =
+  | "impression"
+  | "click"
+  | "apply_start"
+  | "register_intent";
+
+export const CAMPAIGN_STATUSES: CampaignStatus[] = [
+  "draft",
+  "pending_review",
+  "approved",
+  "active",
+  "paused",
+  "ended",
+  "rejected",
+];
+
+export const CAMPAIGN_OBJECTIVES: CampaignObjective[] = [
+  "awareness",
+  "traffic",
+  "applications",
+  "event_registration",
+];
+
+export const CAMPAIGN_PACINGS: CampaignPacing[] = ["even", "asap"];
+
+export const AD_SURFACES: AdSurface[] = [
+  "discovery_feed",
+  "public_job_board",
+  "company_directory",
+  "homepage",
+  "events",
+];
+
+/* Coarse, privacy-safe targeting vocabularies — MIRROR the backend allowlist
+   (`domain/targeting.py`). These are the ONLY selectable targeting tokens; the
+   builder offers a picker over them (never a free-text GPS/exact-location box).
+   The server re-validates + rejects any forbidden/sensitive dimension. */
+export const COARSE_LOCATIONS = [
+  "hanoi",
+  "ho_chi_minh",
+  "da_nang",
+  "hai_phong",
+  "can_tho",
+  "binh_duong",
+  "dong_nai",
+  "north",
+  "central",
+  "south",
+  "vinuni_campus",
+  "remote",
+  "overseas",
+  "other",
+] as const;
+
+export const COARSE_MAJORS = [
+  "computer_science",
+  "engineering",
+  "business",
+  "economics",
+  "health_sciences",
+  "medicine",
+  "nursing",
+  "arts_sciences",
+  "humanities",
+  "design",
+  "law",
+  "hospitality",
+  "undecided",
+  "other",
+] as const;
+
+export const COARSE_CAREERS = [
+  "software_engineering",
+  "data",
+  "ai_ml",
+  "product",
+  "design",
+  "finance",
+  "banking",
+  "accounting",
+  "marketing",
+  "sales",
+  "operations",
+  "consulting",
+  "research",
+  "healthcare",
+  "hospitality",
+  "education",
+  "legal",
+  "human_resources",
+  "supply_chain",
+  "other",
+] as const;
+
+export const COARSE_WORK_MODES = ["onsite", "remote", "hybrid"] as const;
+
+export const COARSE_YEAR_COHORTS = [
+  "freshman",
+  "sophomore",
+  "junior",
+  "senior",
+  "graduate",
+  "alumni",
+] as const;
+
+/** The public banner fields (never storage keys / internal refs). */
+export interface AdCampaignCreative {
+  headline: string | null;
+  body: string | null;
+  image_ref: string | null;
+  click_target: string | null;
+  /** Server-resolved localized alt (prefers alt_en then alt_vi). */
+  alt: string | null;
+  alt_vi: string | null;
+  alt_en: string | null;
+}
+
+/** Coarse targeting a campaign carries. Empty = BROAD (matches everyone). */
+export interface CampaignTargeting {
+  locations?: string[];
+  majors?: string[];
+  careers?: string[];
+  work_modes?: string[];
+  year_cohorts?: string[];
+  device_classes?: string[];
+}
+
+/**
+ * Honest delivery/pacing state (never a bid, never a raw model score). Lets the
+ * partner + university see a truthfully under-/over-delivering campaign.
+ */
+export interface CampaignDelivery {
+  impression_goal: number;
+  impressions_today: number;
+  daily_cap: number | null;
+  budget_exhausted: boolean;
+  paced_out: boolean;
+  serving_eligible: boolean;
+}
+
+/**
+ * A campaign projection (`campaign_presenters.campaign`). The partner surface
+ * omits `payment_reference` / `created_by` / `approved_by` (admin-only spend
+ * oversight); the admin queue (`admin: true`) includes them plus the moderation
+ * SLA age/overdue fields. Decimal money is a formatted string ("1500000.00").
+ */
+export interface AdCampaign {
+  id: string;
+  org_id: string;
+  name: string;
+  objective: CampaignObjective | string;
+  objective_label: string;
+  surface: AdSurface | string;
+  status: CampaignStatus;
+  status_label: string;
+  pacing: CampaignPacing | string;
+  pacing_label: string;
+  budget_amount: string | null;
+  spent_amount: string | null;
+  currency: string;
+  start_at: string | null;
+  end_at: string | null;
+  targeting: CampaignTargeting;
+  creative: AdCampaignCreative;
+  target_type: AdTargetType | string | null;
+  target_id: string | null;
+  disclosure_class: DisclosureClass | string;
+  disclosure: InventoryDisclosure;
+  disclosure_confirmed: boolean;
+  is_paid: boolean;
+  moderation_note: string | null;
+  delivery: CampaignDelivery;
+  submitted_at: string | null;
+  approved_at: string | null;
+  activated_at: string | null;
+  paused_at: string | null;
+  ended_at: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  version: number;
+  /* Admin-only spend oversight (present on /admin/advertising only). */
+  payment_reference?: string | null;
+  paid_at?: string | null;
+  created_by?: string;
+  approved_by?: string | null;
+  moderation_reason_code?: ModerationReasonCode | string | null;
+  moderation_reason_label?: string | null;
+  /* Moderation-queue SLA fields (admin projection). */
+  due_by?: string | null;
+  age_hours?: number | null;
+  is_overdue?: boolean;
+}
+
+/** Lifetime aggregate performance for one campaign (privacy-safe counts). */
+export interface CampaignPerformance {
+  impressions: number;
+  clicks: number;
+  apply_starts: number;
+  register_intents: number;
+  /** 0..1 ratios (clicks/impressions, apply_starts/impressions). */
+  ctr: number;
+  apply_start_rate: number;
+  spend_amount: string;
+  currency: string;
+}
+
+/** University spend/health roll-up returned alongside the admin campaign queue. */
+export interface CampaignSpendSummary {
+  active_count: number;
+  pending_review_count: number;
+  total_spend_amount: string;
+  currency: string;
+}
+
+/** A finite sponsored slot on a surface (`GET /advertising/surfaces`). */
+export interface AdSurfaceSlot {
+  id: string;
+  code: string;
+  surface: AdSurface | string;
+  name: string;
+  capacity: number;
+  max_sponsored_share: number;
+  is_active: boolean;
+}
+
+/** A single filled sponsored position (public projection — creative + disclosure). */
+export interface AllocationItem {
+  campaign_id: string;
+  slot_code: string;
+  surface: string;
+  position: number;
+  inventory_class: string;
+  /** Always "sponsored" for the paid allocation engine. */
+  source: string;
+  name: string;
+  objective: string;
+  creative: AdCampaignCreative;
+  target_type: string | null;
+  target_id: string | null;
+  /** Mandatory, NON-REMOVABLE paid disclosure — never stripped. */
+  disclosure: InventoryDisclosure;
+  /** Coarse, non-PII reason this item was allocated here. */
+  match_reason: Record<string, unknown>;
+}
+
+/** VinUni-curated fallback for an unfilled slot (labelled curated; never paid). */
+export interface AllocationCuratedFallback {
+  source?: string;
+  disclosure?: InventoryDisclosure;
+  creative?: AdCampaignCreative | Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+export interface AllocationSlot {
+  slot_code: string;
+  slot_name: string;
+  capacity: number;
+  max_sponsored_share: number;
+  filled: number;
+  items: AllocationItem[];
+  fallback: AllocationCuratedFallback | null;
+}
+
+/** The public allocation read for one surface + coarse viewer segment. */
+export interface SurfaceAllocation {
+  surface: string;
+  viewer_segment_key: string;
+  viewer_segment: {
+    locations: string[];
+    majors: string[];
+    careers: string[];
+    work_modes: string[];
+    year_cohorts: string[];
+    device_classes: string[];
+  };
+  generated_at: string;
+  /** Always "paid_sponsored" — organic/recommended come from a separate path. */
+  inventory_class: string;
+  slots: AllocationSlot[];
+}
+
+/** A live allocation-decision record (university oversight). */
+export interface CampaignAllocationRecord {
+  id: string;
+  campaign_id: string;
+  slot_code: string;
+  surface: string;
+  segment_key: string;
+  position: number;
+  match_reason: Record<string, unknown>;
+  pacing_state: Record<string, unknown>;
+  allocated_at: string | null;
+  expires_at: string | null;
+}
+
+/* -------- Campaign write bodies -------- */
+
+/** Creative fields the builder submits (server sets the resolved `alt`). */
+export interface CampaignCreativeInput {
+  headline?: string | null;
+  body?: string | null;
+  image_ref?: string | null;
+  click_target?: string | null;
+  alt_vi?: string | null;
+  alt_en?: string | null;
+}
+
+export interface CampaignCreateBody {
+  name: string;
+  objective: CampaignObjective;
+  surface: AdSurface;
+  /** Decimal string or number; the server parses + freezes it. */
+  budget_amount: string | number;
+  pacing?: CampaignPacing;
+  start_at: string;
+  end_at: string;
+  /** Coarse allowlisted targeting only; empty/omitted = broad (untargeted). */
+  targeting?: CampaignTargeting | null;
+  creative?: CampaignCreativeInput | null;
+  target_type?: AdTargetType | null;
+  target_id?: string | null;
+  disclosure_confirmed?: boolean;
+}
+
+export interface CampaignUpdateBody {
+  name?: string;
+  objective?: CampaignObjective;
+  surface?: AdSurface;
+  budget_amount?: string | number;
+  pacing?: CampaignPacing;
+  start_at?: string;
+  end_at?: string;
+  targeting?: CampaignTargeting | null;
+  creative?: CampaignCreativeInput | null;
+  target_type?: AdTargetType | null;
+  target_id?: string | null;
+  disclosure_confirmed?: boolean;
+  version?: number;
+}
+
 /* --------------------------------- Calls ---------------------------------- */
 
 export const advertisingApi = {
@@ -541,5 +920,286 @@ export const advertisingApi = {
       `/admin/advertising/placements/${placementId}/disclosure-class`,
       { disclosure_class: opts.disclosure_class, version: opts.version },
     );
+  },
+
+  /* ====================================================================== */
+  /* Campaign allocation engine                                             */
+  /* ====================================================================== */
+
+  /* ------------------------- Partner campaigns -------------------------- */
+
+  /** The caller org's campaigns (any status). Cursor-paginated. */
+  listCampaigns(opts?: {
+    cursor?: string | null;
+    limit?: number;
+    status?: string | null;
+  }): Promise<ApiListEnvelope<AdCampaign>> {
+    return api.list<AdCampaign>("/advertising/campaigns", {
+      query: {
+        cursor: opts?.cursor ?? undefined,
+        limit: opts?.limit,
+        status: opts?.status ?? undefined,
+      },
+    });
+  },
+
+  /** Owner-full campaign detail (cross-org / unknown → 404). */
+  getCampaign(campaignId: string): Promise<AdCampaign> {
+    return api.get<AdCampaign>(`/advertising/campaigns/${campaignId}`);
+  },
+
+  /**
+   * Create a draft campaign. Coarse targeting is validated server-side — a
+   * forbidden/sensitive (GPS/exact-location/…) dimension is rejected 422
+   * (`details.field` names the bad key). Empty targeting = broad.
+   */
+  createCampaign(body: CampaignCreateBody): Promise<AdCampaign> {
+    return api.post<AdCampaign>("/advertising/campaigns", body);
+  },
+
+  /** Edit a draft/rejected campaign (optimistic `version`). */
+  updateCampaign(
+    campaignId: string,
+    body: CampaignUpdateBody,
+  ): Promise<AdCampaign> {
+    return api.patch<AdCampaign>(`/advertising/campaigns/${campaignId}`, body);
+  },
+
+  /** Soft-delete a draft/rejected campaign. */
+  deleteCampaign(campaignId: string): Promise<{ status: string }> {
+    return api.delete<{ status: string }>(
+      `/advertising/campaigns/${campaignId}`,
+    );
+  },
+
+  /**
+   * Submit for university review. `disclosure_confirmed` MUST be true or the
+   * server replies 422 (`details.reason === "disclosure_required"`).
+   */
+  submitCampaign(
+    campaignId: string,
+    body?: { disclosure_confirmed?: boolean; version?: number },
+  ): Promise<AdCampaign> {
+    return api.post<AdCampaign>(
+      `/advertising/campaigns/${campaignId}/submit`,
+      body ?? {},
+    );
+  },
+
+  /** Pause my running campaign (active → paused). */
+  pauseCampaign(campaignId: string, version?: number): Promise<AdCampaign> {
+    return api.post<AdCampaign>(`/advertising/campaigns/${campaignId}/pause`, {
+      version,
+    });
+  },
+
+  /** Resume my paused campaign (paused → active). */
+  resumeCampaign(campaignId: string, version?: number): Promise<AdCampaign> {
+    return api.post<AdCampaign>(`/advertising/campaigns/${campaignId}/resume`, {
+      version,
+    });
+  },
+
+  /** End my campaign (approved/active/paused → ended; terminal). */
+  endCampaign(campaignId: string, version?: number): Promise<AdCampaign> {
+    return api.post<AdCampaign>(`/advertising/campaigns/${campaignId}/end`, {
+      version,
+    });
+  },
+
+  /** My campaign's lifetime aggregate performance (privacy-safe counts). */
+  campaignPerformance(campaignId: string): Promise<CampaignPerformance> {
+    return api.get<CampaignPerformance>(
+      `/advertising/campaigns/${campaignId}/performance`,
+    );
+  },
+
+  /* --------------------- Public: surfaces + serving --------------------- */
+
+  /** The sponsored-slot inventory per surface (public; guest-allowed). */
+  async listSurfaces(): Promise<{ slots: AdSurfaceSlot[]; surfaces: string[] }> {
+    const res = await apiFetch<ApiEnvelope<AdSurfaceSlot[]>>(
+      "/advertising/surfaces",
+      { method: "GET", skipAuth: true },
+    );
+    const meta = (res.meta ?? {}) as { surfaces?: string[] };
+    return { slots: res.data, surfaces: meta.surfaces ?? [] };
+  },
+
+  /**
+   * The filled sponsored slots for a surface + coarse viewer segment (public;
+   * guest-allowed). Coarse list params (`location`/`major`/`career`) are sent as
+   * repeated query params. Organic/recommended inventory is NOT returned here.
+   */
+  getAllocation(params: {
+    surface: string;
+    locations?: string[];
+    majors?: string[];
+    careers?: string[];
+    work_mode?: string;
+    cohort?: string;
+    device?: string;
+    session_id?: string;
+    locale?: string;
+  }): Promise<SurfaceAllocation> {
+    const qs = new URLSearchParams();
+    qs.set("surface", params.surface);
+    for (const l of params.locations ?? []) qs.append("location", l);
+    for (const m of params.majors ?? []) qs.append("major", m);
+    for (const c of params.careers ?? []) qs.append("career", c);
+    if (params.work_mode) qs.set("work_mode", params.work_mode);
+    if (params.cohort) qs.set("cohort", params.cohort);
+    if (params.device) qs.set("device", params.device);
+    if (params.session_id) qs.set("session_id", params.session_id);
+    qs.set("locale", params.locale ?? "vi");
+    return api.get<SurfaceAllocation>(
+      `/advertising/allocations?${qs.toString()}`,
+      { skipAuth: true },
+    );
+  },
+
+  /**
+   * Record a privacy-safe delivery event (impression/click/…). Public +
+   * best-effort — carries NO PII/GPS/raw IP, only the coarse target. An
+   * impression also spends against the campaign budget server-side.
+   */
+  recordDeliveryEvent(body: {
+    campaign_id: string;
+    slot_code: string;
+    event_type: DeliveryEventType;
+  }): Promise<{ status: string; event_type: string }> {
+    return api.post<{ status: string; event_type: string }>(
+      "/advertising/events",
+      body,
+      { skipAuth: true },
+    );
+  },
+
+  /* ----------------------- University oversight ------------------------- */
+
+  /**
+   * The campaign review queue + spend roll-up (`meta.spend` / `meta.count`).
+   * University moderators only (permission → 403).
+   */
+  async listCampaignQueue(opts?: {
+    status?: string | null;
+    org_id?: string | null;
+    limit?: number;
+  }): Promise<{
+    items: AdCampaign[];
+    spend: CampaignSpendSummary | null;
+    count: number;
+  }> {
+    const res = await apiFetch<ApiEnvelope<AdCampaign[]>>(
+      "/admin/advertising/campaigns",
+      {
+        method: "GET",
+        query: {
+          status: opts?.status ?? undefined,
+          org_id: opts?.org_id ?? undefined,
+          limit: opts?.limit,
+        },
+      },
+    );
+    const meta = (res.meta ?? {}) as {
+      spend?: CampaignSpendSummary;
+      count?: number;
+    };
+    return {
+      items: res.data,
+      spend: meta.spend ?? null,
+      count: typeof meta.count === "number" ? meta.count : res.data.length,
+    };
+  },
+
+  /** Approve a campaign (disclosure + spend oversight OK). */
+  approveCampaign(
+    campaignId: string,
+    opts?: { note?: string; version?: number },
+  ): Promise<AdCampaign> {
+    return api.post<AdCampaign>(
+      `/admin/advertising/campaigns/${campaignId}/approve`,
+      { note: opts?.note, version: opts?.version },
+    );
+  },
+
+  /** Reject a campaign with a required reason. */
+  rejectCampaign(
+    campaignId: string,
+    reason: string,
+    version?: number,
+    reasonCode?: ModerationReasonCode | string,
+  ): Promise<AdCampaign> {
+    return api.post<AdCampaign>(
+      `/admin/advertising/campaigns/${campaignId}/reject`,
+      { reason, reason_code: reasonCode, version },
+    );
+  },
+
+  /** Record a manual/bank-transfer payment (spend oversight). */
+  markCampaignPaid(
+    campaignId: string,
+    paymentReference: string,
+    version?: number,
+  ): Promise<AdCampaign> {
+    return api.post<AdCampaign>(
+      `/admin/advertising/campaigns/${campaignId}/mark-paid`,
+      { payment_reference: paymentReference, version },
+    );
+  },
+
+  /** Pause any campaign (university override). Reason optional. */
+  adminPauseCampaign(
+    campaignId: string,
+    opts?: { reason?: string; version?: number },
+  ): Promise<AdCampaign> {
+    return api.post<AdCampaign>(
+      `/admin/advertising/campaigns/${campaignId}/pause`,
+      { reason: opts?.reason, version: opts?.version },
+    );
+  },
+
+  /** Disable any campaign immediately (flags OFF). Reason optional. */
+  disableCampaign(
+    campaignId: string,
+    opts?: { reason?: string; version?: number },
+  ): Promise<AdCampaign> {
+    return api.post<AdCampaign>(
+      `/admin/advertising/campaigns/${campaignId}/disable`,
+      { reason: opts?.reason, version: opts?.version },
+    );
+  },
+
+  /**
+   * Relabel a campaign's public inventory class. PAID inventory can never be
+   * relabelled to a non-paid class — the server replies 409
+   * (`details.reason === "paid_disclosure_immutable"`).
+   */
+  setCampaignDisclosureClass(
+    campaignId: string,
+    opts: { disclosure_class: DisclosureClass; version?: number },
+  ): Promise<AdCampaign> {
+    return api.post<AdCampaign>(
+      `/admin/advertising/campaigns/${campaignId}/disclosure-class`,
+      { disclosure_class: opts.disclosure_class, version: opts.version },
+    );
+  },
+
+  /** Recent live allocation-decision records (university oversight). */
+  async listCampaignAllocations(opts?: {
+    surface?: string | null;
+    limit?: number;
+  }): Promise<CampaignAllocationRecord[]> {
+    const res = await apiFetch<ApiEnvelope<CampaignAllocationRecord[]>>(
+      "/admin/advertising/allocations",
+      {
+        method: "GET",
+        query: {
+          surface: opts?.surface ?? undefined,
+          limit: opts?.limit,
+        },
+      },
+    );
+    return res.data;
   },
 };

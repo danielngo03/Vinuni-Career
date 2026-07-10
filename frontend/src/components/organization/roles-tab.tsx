@@ -150,7 +150,7 @@ export function RolesTab({
       enableSorting: false,
       cell: ({ row }) =>
         row.original.permissions.includes("*:*") ? (
-          <StatusChip tone="violet" size="sm">
+          <StatusChip tone="sky" size="sm">
             {t("fullAccess")}
           </StatusChip>
         ) : (
@@ -281,7 +281,7 @@ export function RolesTab({
           {isSystemEdit ? (
             <div>
               <p className="mb-1.5 type-small font-semibold text-foreground">{t("permissions")}</p>
-              <StatusChip tone="violet">{t("fullAccess")}</StatusChip>
+              <StatusChip tone="sky">{t("fullAccess")}</StatusChip>
             </div>
           ) : (
             <PermissionPicker value={perms} onChange={setPerms} effective={effective} holdsWildcard={holdsWildcard} orgType={orgType} />
