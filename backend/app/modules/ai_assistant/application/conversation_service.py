@@ -433,7 +433,17 @@ async def cancel_tool_action(
     # Both marker spellings are persisted for the FE reload path (it reads
     # ``tool_result.canceled`` on GET messages to distinguish canceled cards).
     pending.confirmed_at = datetime.now(UTC)
-    pending.tool_result = {"ok": False, "cancelled": True, "canceled": True}
+    # Merge — keep any preview artifacts attached to the card (e.g. job_draft)
+    # so the cancelled card still renders its context after reload.
+    prior_artifacts = (
+        pending.tool_result.get("artifacts") if isinstance(pending.tool_result, dict) else None
+    )
+    pending.tool_result = {
+        "ok": False,
+        "cancelled": True,
+        "canceled": True,
+        **({"artifacts": prior_artifacts} if prior_artifacts else {}),
+    }
 
     ack = ChatMessage(
         id=uuid.uuid4(),

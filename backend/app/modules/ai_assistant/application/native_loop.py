@@ -37,7 +37,7 @@ from datetime import UTC, datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AICompletion, AIMessage
-from app.modules.ai_assistant.application import turn_telemetry
+from app.modules.ai_assistant.application import guardrails, turn_telemetry
 from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.response_formatter import (
     ai_unavailable_reply,
@@ -433,6 +433,12 @@ async def run_native_turn(
                 confirm_msg = _confirmation_message(
                     chat.id, spec, name, args, locale, seq=await next_seq(session, chat.id)
                 )
+                if artifacts:
+                    # Artifacts collected from read-only tools earlier in this
+                    # turn (e.g. the job_draft preview that preceded a
+                    # create_job proposal) must survive the pending-confirmation
+                    # early return — attach them to the confirmation card.
+                    confirm_msg.tool_result = {"artifacts": artifacts}
                 session.add(confirm_msg)
                 chat.last_message_at = datetime.now(UTC)
                 await session.commit()
@@ -486,6 +492,14 @@ async def run_native_turn(
     if final_text is None:
         final_text = ai_unavailable_reply(locale)
         turn_status = "error" if turn_status == "ok" else turn_status
+
+    # A model that imitates the stored tool-dump format produces an unusable
+    # answer ("[Tool result: X] {json…}") — swap in a localized generic
+    # completion; any collected artifacts still render below it.
+    if final_from_model and final_text.lstrip().startswith("[Tool result"):
+        guard_flags.append("tool_dump_scrubbed")
+        final_text = guardrails.tool_data_reply(locale)
+        final_from_model = False
 
     # Post-LLM deterministic scope guard on a model-produced pure-text answer
     # (a tool-grounded answer is trusted by construction — skip flag inside).

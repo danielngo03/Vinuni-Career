@@ -30,8 +30,13 @@ _MEMORY_KEEP_RECENT = 6  # never fold the N most recent messages into memory
 _MEMORY_MAX_CHARS = 1500  # hard cap on the stored rolling summary
 _TITLE_MAX_CHARS = 60
 
-# Conversation roles that form the LLM-visible history/memory stream.
-_CONVO_ROLES = ("user", "assistant", "tool_result")
+# Conversation roles that form the LLM-visible history/memory stream. Stored
+# ``tool_result`` rows are deliberately EXCLUDED: their persisted
+# "[Tool result: X] {json}" dumps taught the model to imitate that format in
+# its final answers (observed live), and the assistant's own summaries already
+# carry the durable facts. Within-turn tool results still reach the model
+# through the native loop's protocol messages.
+_CONVO_ROLES = ("user", "assistant")
 
 
 # --------------------------------------------------------------------------- #

@@ -30,6 +30,7 @@ from app.ai.prompts.assistant import v1 as assistant_prompt
 from app.modules.ai_assistant.application.agents import AgentPlan, format_tool_result
 from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.session_history import (
+    next_seq,
     require_session,
     serialize_message,
 )
@@ -222,8 +223,17 @@ async def confirm_tool_action(
     tool_args = pending.tool_args or {}
     result = await dispatch_tool(tool_name, tool_args, session=session, principal=principal)
 
-    # Persist result and mark confirmed
-    pending.tool_result = result
+    # Persist result and mark confirmed. A ``render`` block is a FE-only
+    # artifact — surface it on the follow-up message instead of the raw result,
+    # and keep any artifacts already attached to the card (e.g. the job_draft
+    # preview collected before the confirmation pause).
+    render = result.pop("render", None) if isinstance(result, dict) else None
+    prior_artifacts = (
+        pending.tool_result.get("artifacts") if isinstance(pending.tool_result, dict) else None
+    )
+    pending.tool_result = (
+        {**result, "artifacts": prior_artifacts} if prior_artifacts else result
+    )
     pending.confirmed_at = datetime.now(UTC)
     pending.requires_confirmation = False
 
@@ -239,6 +249,8 @@ async def confirm_tool_action(
         session_id=chat.id,
         role="assistant",
         content=summary_text,
+        tool_result={"artifacts": [render]} if isinstance(render, dict) else None,
+        seq=await next_seq(session, chat.id),
         created_at=datetime.now(UTC),
     )
     session.add(follow_up)

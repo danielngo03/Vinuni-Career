@@ -126,6 +126,12 @@ _COPY: dict[str, dict[str, str]] = {
         "vi": "Đã hủy thao tác. Mình chưa thực hiện thay đổi nào.",
         "en": "The action has been cancelled. No changes were made.",
     },
+    # Fallback when the model's final text is unusable (e.g. it parroted an
+    # internal tool-result dump) but tool data/artifacts were produced.
+    "tool.data_ready": {
+        "vi": "Mình đã xử lý xong yêu cầu — kết quả ở bên dưới.",
+        "en": "Done — the results are below.",
+    },
 }
 
 
@@ -138,6 +144,11 @@ def _copy(key: str, locale: str) -> str:
 def cancelled_ack(locale: str = "vi") -> str:
     """User-facing acknowledgement after cancelling a pending tool action."""
     return _copy("confirm.cancelled", locale)
+
+
+def tool_data_reply(locale: str = "vi") -> str:
+    """Generic completion text when the model's own final text is unusable."""
+    return _copy("tool.data_ready", locale)
 
 
 def limit_reached_reply(persona: str | None, locale: str = "vi") -> str:

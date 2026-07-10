@@ -932,10 +932,11 @@ TOOL_SPECS: dict[str, ToolSpec] = {
     "export_applications": ToolSpec(
         name="export_applications",
         description=(
-            "Export the applicants of one of the partner's OWN jobs to a real "
-            "Excel (.xlsx) file the recruiter can download. Use this when the "
-            "recruiter asks to export/download/'xuất file' the applicant or "
-            "application list for a job, optionally filtered by pipeline stage or "
+            "Export the applicants of ONE of the partner's OWN jobs to a real "
+            "Excel (.xlsx) file the recruiter can download. Use this ONLY for an "
+            "applicant/candidate list ('danh sách ứng viên') of a specific job — "
+            "to export the job-postings list itself ('danh sách tin tuyển dụng') "
+            "use export_jobs instead. Optionally filtered by pipeline stage or "
             "status, and optionally with a chosen set of columns. Requires job_id "
             "from a prior get_partner_jobs result. Returns a download link (shown "
             "to the recruiter as a button) plus the row count — never raw file "
