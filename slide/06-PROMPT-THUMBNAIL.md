@@ -6,6 +6,27 @@
 
 ---
 
+## 📎 BƯỚC 1 — Đính kèm file trước khi dán prompt (quan trọng)
+
+Upload các file này vào cùng đoạn chat với prompt (Gemini và ChatGPT đều nhận ảnh đính kèm):
+
+| File | Bắt buộc? | Để làm gì |
+|---|---|---|
+| `slide/assets/logo-dark-480.png` | ✅ Bắt buộc | **Logo chính thức** — model dùng đúng logo này, không tự chế |
+| Ảnh trang 1 của `VinUni-Career-Pitch.pdf` (chụp màn hình trang bìa) | Nên có | Model bắt chước đúng phong cách + hệ màu của deck |
+| `slide/assets/shot-student-dashboard.png` | Tuỳ chọn | Muốn màn hình laptop trong thumbnail giống UI thật |
+
+Sau khi đính kèm, mở đầu tin nhắn bằng câu này rồi mới dán prompt:
+
+```
+I have attached the OFFICIAL logo of this product (a black geometric chevron "V" mark).
+Use the attached logo EXACTLY as-is in the thumbnail — do not redraw, restyle, recolor
+or distort it. Keep it pure black on the cream background, with clear space around it.
+(If a cover slide / dashboard screenshot is also attached, match their visual style.)
+```
+
+---
+
 ## 🎯 Prompt chính (khuyên dùng)
 
 ```
@@ -20,9 +41,9 @@ BACKGROUND: warm paper cream #F8F7F1, perfectly flat.
 
 MAIN COMPOSITION:
 - Left side: big bold headline text "VinUni Career Platform" in near-black ink #171717,
-  modern geometric sans-serif, tight letter spacing. Above the headline sits a small
-  black geometric chevron logo mark (a downward-pointing "V" arrow built from tangram
-  triangles). Under the headline, a thin row of 8 small colored dots: indigo #6366f1,
+  modern geometric sans-serif, tight letter spacing. Above the headline, place the
+  ATTACHED official logo mark exactly as provided (black chevron "V") — do not redraw
+  or restyle it. Under the headline, a thin row of 8 small colored dots: indigo #6366f1,
   teal #14b8a6, amber #f59e0b, rose #f43f5e, sky #0ea5e9, emerald #10b981,
   violet #8b5cf6, orange #f97316.
 - Right side: a sleek laptop mockup (dark #171717 frame) floating slightly, screen
@@ -46,8 +67,9 @@ Text on image: ONLY "VinUni Career Platform". Spell it exactly, no other words.
 
 ```
 Modern flat vector 16:9 SaaS thumbnail, warm cream background #F8F7F1. Bold black
-headline "VinUni Career Platform" (spelled exactly) with a small black tangram-style
-chevron V logo and a row of 8 tiny colored dots (indigo, teal, amber, rose, sky,
+headline "VinUni Career Platform" (spelled exactly) with the ATTACHED official black
+chevron V logo placed above it (use it exactly as provided, do not redraw) and a row
+of 8 tiny colored dots (indigo, teal, amber, rose, sky,
 emerald, violet, orange). Right side: floating dark laptop showing a clean dashboard
 with white rounded cards, a donut chart reading "87", colorful chips. Around it, three
 small white rounded cards with soft shadows: resume with green check, AI chat bubble
@@ -75,6 +97,12 @@ no stock photo people, no watermark, no gibberish text, no extra logos, no clutt
 
 ## 💡 Mẹo
 
+- **Về logo đính kèm:** Gemini và ChatGPT dùng được ảnh đính kèm làm tham chiếu, nhưng đôi khi vẫn vẽ lại
+  logo hơi lệch. Kiểm tra kỹ logo trong ảnh ra; nếu lệch, nhắc lại *"the logo must match the attached file
+  exactly"* và generate lại. Cách chắc chắn 100%: bảo model **chừa trống góc logo** (*"leave the top-left
+  logo area empty"*) rồi tự dán `logo-dark-480.png` vào bằng Canva/Figma — logo nét tuyệt đối.
+- **Midjourney** không "dán" logo được — chỉ nhận ảnh làm cảm hứng style. Nếu dùng Midjourney: tạo nền +
+  bố cục trước, dán logo và chữ sau bằng Canva.
 - **Tỷ lệ:** chọn 16:9 (Midjourney thêm `--ar 16:9`). Cần vuông cho avatar thì đổi thành 1:1 và bảo
   "stack the headline above the laptop".
 - Chữ trên ảnh là điểm yếu của model — nếu "VinUni Career Platform" bị sai chính tả, generate lại 2–3 lần
