@@ -37,6 +37,7 @@ from datetime import UTC, datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.gateway.base import AICompletion, AIMessage
+from app.ai.safety.input_guard import neutralize_tool_payload
 from app.modules.ai_assistant.application import guardrails, model_router, turn_telemetry
 from app.modules.ai_assistant.application.messages import assistant_message
 from app.modules.ai_assistant.application.response_formatter import (
@@ -270,8 +271,22 @@ def _default_chat_alias() -> str:
     return runtime_config.current().chat_model_alias
 
 
-def _tool_result_message(call_id: str, name: str, result: dict) -> AIMessage:
-    payload = json.dumps(result, ensure_ascii=False)[:_MAX_TOOL_RESULT_CHARS]
+def _tool_result_message(
+    call_id: str, name: str, result: dict, *, flags: list[str] | None = None
+) -> AIMessage:
+    """Serialise a tool result back into model context.
+
+    Tool output is UNTRUSTED DATA (a candidate CV, an uploaded attachment, a
+    knowledge-base chunk can smuggle injected instructions). Neutralise
+    injection markers in every string value before the model sees it; record an
+    ``untrusted_data_neutralized`` guard flag (metadata only) when anything was
+    defused. Defense in depth with the system-prompt untrusted-data rule and the
+    RBAC/confirmation gates.
+    """
+    scrubbed, neutralized = neutralize_tool_payload(result)
+    if neutralized and flags is not None:
+        flags.append("untrusted_data_neutralized")
+    payload = json.dumps(scrubbed, ensure_ascii=False)[:_MAX_TOOL_RESULT_CHARS]
     return AIMessage(role="tool", content=payload, tool_call_id=call_id, name=name)
 
 
@@ -500,7 +515,9 @@ async def run_native_turn(
                 artifacts.append(render)
             yield {"type": "tool_result", "name": name, "ok": bool(result.get("ok"))}
             persist_tool_result(session, chat=chat, tool_name=name, tool_args=args, result=result)
-            history.append(_tool_result_message(call_id, name, result))
+            # Untrusted-data injection defense: tool output (CV text, attachment
+            # extraction, KB chunks) is neutralised before re-entering context.
+            history.append(_tool_result_message(call_id, name, result, flags=guard_flags))
         # Loop: model now sees the tool results and either answers or calls more.
 
     if final_text is None:
