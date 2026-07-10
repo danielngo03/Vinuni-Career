@@ -31,7 +31,9 @@ h1.t{font-size:2.15rem;font-weight:800;letter-spacing:-.02em;line-height:1.1;col
 .deck{max-width:1180px;margin:0 auto}.deck .slide{border-radius:12px;box-shadow:0 12px 44px rgba(0,0,0,.16)}
 .navbar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:50;background:#171717;color:#fff;border-radius:999px;padding:.45rem 1rem;font-size:.82rem;display:flex;gap:1rem;align-items:center}
 .navbar button{background:none;border:none;color:#fff;cursor:pointer;font-size:1.05rem}
-@media print{.navbar{display:none}.deck{max-width:none}.deck .slide{box-shadow:none;border-radius:0;page-break-after:always}}
+@page{size:13.333in 7.5in;margin:0}
+@media print{html,body{background:#fff}.navbar{display:none}.deck{max-width:none}
+ .deck .slide{display:flex!important;box-shadow:none;border-radius:0;page-break-after:always;break-inside:avoid;width:13.333in;height:7.5in}}
 </style></head><body><section class="slide"><div class="hd"><span class="no">05</span><div><div class="kick">Phần 1 · Sản phẩm</div><h1 class="t">Giao diện thực tế của sản phẩm</h1><div class="st">Ảnh chụp trực tiếp từ hệ thống đang chạy — không phải bản vẽ minh hoạ.</div></div></div>
     <div class="body" style="flex-direction:column;gap:.9rem">
       <div style="display:flex;align-items:stretch;gap:1.3rem;flex:1;min-height:0">

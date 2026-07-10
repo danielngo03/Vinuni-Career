@@ -88,7 +88,9 @@ h1.t{font-size:2.15rem;font-weight:800;letter-spacing:-.02em;line-height:1.1;col
 .deck{max-width:1180px;margin:0 auto}.deck .slide{border-radius:12px;box-shadow:0 12px 44px rgba(0,0,0,.16)}
 .navbar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:50;background:#171717;color:#fff;border-radius:999px;padding:.45rem 1rem;font-size:.82rem;display:flex;gap:1rem;align-items:center}
 .navbar button{background:none;border:none;color:#fff;cursor:pointer;font-size:1.05rem}
-@media print{.navbar{display:none}.deck{max-width:none}.deck .slide{box-shadow:none;border-radius:0;page-break-after:always}}
+@page{size:13.333in 7.5in;margin:0}
+@media print{html,body{background:#fff}.navbar{display:none}.deck{max-width:none}
+ .deck .slide{display:flex!important;box-shadow:none;border-radius:0;page-break-after:always;break-inside:avoid;width:13.333in;height:7.5in}}
 """
 
 
@@ -645,7 +647,7 @@ def s15():
         <div>{asks}</div>
         <div style="display:flex;gap:.6rem;margin-top:.4rem;align-items:center">
           <span class="chip" style="background:#fff;color:#171717">C2-Team-037</span>
-          <span style="font-size:.85rem;opacity:.85">danielngo0302@gmail.com</span></div></div>
+          <span style="font-size:.85rem;opacity:.85">Trân trọng cảm ơn!</span></div></div>
       <div style="flex:.9;display:flex;flex-direction:column;gap:.8rem">
         <div class="card" style="flex:1;overflow:hidden;position:relative">
           <img src="{CAMPUS}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
