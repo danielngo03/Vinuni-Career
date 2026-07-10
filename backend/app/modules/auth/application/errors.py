@@ -71,12 +71,15 @@ class SessionExpiredError(AppError):
 
 
 class RateLimitedError(AppError):
-    """Anti-enumeration-safe throttle error for resend-verification,
+    """Anti-enumeration-safe throttle error for register, resend-verification,
     forgot-password, and register-resume.
 
-    Fires identically (same status/shape/timing profile) whether or not the
+    For the enumeration-sensitive flows (resend-verification, forgot-password) it
+    fires identically (same status/shape/timing profile) whether or not the
     presented email maps to a real account, since it is evaluated BEFORE any
-    account lookup — a 429 here is not an enumeration leak.
+    account lookup — a 429 there is not an enumeration leak. On register it caps
+    brand-new account creation for a given email (the endpoint already
+    distinguishes new vs. verified-duplicate by design).
     """
 
     code = "RATE_LIMITED"

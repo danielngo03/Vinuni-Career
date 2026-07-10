@@ -32,6 +32,7 @@ from app.modules.auth.application.auth_service import (
     LoginResult,
     _audit_ctx,
     _finalize_login,
+    _greeting_name,
 )
 from app.modules.auth.application.context import RequestContext
 from app.modules.auth.domain.models import OidcAccount
@@ -113,7 +114,7 @@ async def _notify_oauth_linked(session: AsyncSession, *, user, provider: str) ->
         template_key="account.oauth_linked",
         channel="email",
         locale=user.preferred_language,
-        variables={"email": user.email, "name": user.full_name or "", "provider": provider},
+        variables={"email": user.email, "name": _greeting_name(user), "provider": provider},
         dedupe_key=f"oauth_linked:{user.id}:{provider}",
     )
 
@@ -220,7 +221,7 @@ async def handle_callback(
         template_key="account.oauth_conflict",
         channel="email",
         locale=user.preferred_language,
-        variables={"email": user.email, "name": user.full_name or "", "provider": provider},
+        variables={"email": user.email, "name": _greeting_name(user), "provider": provider},
         dedupe_key=f"oauth_conflict:{user.id}:{provider}:{now.isoformat()}",
     )
     await session.commit()

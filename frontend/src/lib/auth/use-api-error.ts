@@ -34,7 +34,8 @@ export function useApiErrorMessage() {
     ) {
       const seconds = error.details?.retry_after_seconds;
       if (typeof seconds === "number") {
-        return tAuth("apiErrors.resendCooldown", { seconds });
+        // `tAuth` is already scoped to `auth.apiErrors`, so the key is relative.
+        return tAuth("resendCooldown", { seconds });
       }
     }
 

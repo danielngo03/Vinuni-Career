@@ -83,6 +83,19 @@ def _frontend_link(*, path: str, locale: str | None, token: str) -> str:
     return f"{base}/{lang}/{path.lstrip('/')}?token={token}"
 
 
+def _greeting_name(user: User) -> str:
+    """A never-empty greeting token for account emails.
+
+    Registration is email/password only — a name belongs to onboarding / profile
+    / CV confirmation and may not exist yet (``CLAUDE.md``). Account-email
+    templates must never render an empty ``Chào ,`` / ``Hi ,`` greeting, so fall
+    back to the account's own email address when no display name is set. The
+    email is always the notification recipient, so echoing it leaks nothing.
+    """
+
+    return (user.full_name or "").strip() or user.email
+
+
 @dataclass(slots=True)
 class AuthTokens:
     access_token: str
@@ -194,7 +207,7 @@ async def _issue_email_verification(
         locale=user.preferred_language,
         variables={
             "email": recipient_email,
-            "name": user.full_name or "",
+            "name": _greeting_name(user),
             "otp_code": otp,
             "token": raw,
             "action_url": _frontend_link(
@@ -362,6 +375,15 @@ async def register(
             full_name=full_name,
             ctx=ctx,
         )
+
+    # Rate-limit brand-new account creation per email (anti-abuse: caps how often
+    # a given address can be signed up + emailed a verification code). The
+    # verified-duplicate (409) and disabled-account branches short-circuit above,
+    # and the pending-resume path has its own ``register_resume`` throttle, so
+    # this guards only genuine first-time registrations. Reuses the shared
+    # enumeration-safe throttle infra (``scope="register"``) rather than adding a
+    # new dependency; a 429 here surfaces the rate-limit state to the UI.
+    await check_and_touch_throttle(session, scope="register", email=normalized)
 
     try:
         user = await create_user(
@@ -558,7 +580,7 @@ async def forgot_password(
             locale=user.preferred_language,
             variables={
                 "email": user.email,
-                "name": user.full_name or "",
+                "name": _greeting_name(user),
                 "token": raw,
                 "otp_code": otp,
                 "ttl_minutes": str(ttl_minutes),
@@ -608,7 +630,7 @@ async def _complete_password_reset(
         template_key="account.password_changed",
         channel="email",
         locale=user.preferred_language,
-        variables={"email": user.email, "name": user.full_name or ""},
+        variables={"email": user.email, "name": _greeting_name(user)},
         dedupe_key=f"pwd_changed:{user.id}:{now.isoformat()}",
     )
     await write_audit(

@@ -934,8 +934,12 @@ DEFAULT_TEMPLATES: list[dict] = [
         "key": "account.password_changed",
         "channel": "email",
         "variables_schema": {
+            # ``name`` is optional: a registered account may not have a display
+            # name yet (register is email/password only), so it must never be a
+            # required render variable. The sender always supplies a non-empty
+            # greeting fallback, but omitting it must not fail dispatch.
             "allowed": ["name", "email"],
-            "required": ["name"],
+            "required": [],
         },
         "locales": {
             "vi": {
@@ -1571,8 +1575,10 @@ DEFAULT_TEMPLATES: list[dict] = [
         "key": "account.student_email_verification",
         "channel": "email",
         "variables_schema": {
+            # ``name`` is optional: student verification can run during onboarding
+            # before any display name / CV exists. Only ``otp_code`` is required.
             "allowed": ["name", "otp_code", "ttl_minutes", "email", "action_url", "token"],
-            "required": ["name", "otp_code"],
+            "required": ["otp_code"],
         },
         "locales": {
             "vi": {
