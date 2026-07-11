@@ -1,0 +1,16 @@
+# Never bake local env/secrets or dev state into the image.
+.env
+.env.*
+!.env.example
+.dev/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+__pycache__/
+*.pyc
+tests/
+htmlcov/
+.coverage
+Dockerfile
+.dockerignore
