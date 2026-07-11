@@ -84,15 +84,21 @@ async def record_event_safe(
     """
 
     try:
-        await record_event(
-            session,
-            event_type=event_type,
-            aggregate_type=aggregate_type,
-            aggregate_id=aggregate_id,
-            actor_id=actor_id,
-            actor_type=actor_type,
-            session_id=session_id,
-            properties=properties,
-        )
+        # SAVEPOINT-isolate the flush: a failed analytics insert must never
+        # abort the caller's transaction (asyncpg leaves it unusable), which
+        # would turn a best-effort telemetry write into a 500 on the primary
+        # operation. On failure the savepoint rolls back and the outer tx stays
+        # usable.
+        async with session.begin_nested():
+            await record_event(
+                session,
+                event_type=event_type,
+                aggregate_type=aggregate_type,
+                aggregate_id=aggregate_id,
+                actor_id=actor_id,
+                actor_type=actor_type,
+                session_id=session_id,
+                properties=properties,
+            )
     except Exception:  # noqa: BLE001 — analytics is best-effort at these sites
         logger.warning("analytics.record_event_failed", extra={"event_type": event_type})

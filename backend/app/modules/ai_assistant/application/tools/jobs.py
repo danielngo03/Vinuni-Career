@@ -198,27 +198,40 @@ async def recommend_jobs(session: AsyncSession, principal: Principal, args: dict
         return {"ok": False, "error": "auth_required"}
     limit = min(int(args.get("limit") or 5), 10)
     try:
+        from app.ai.gateway.factory import real_provider_active
         from app.modules.opportunities.application import job_service
 
         query_text = await _combined_cv_query_text(session, principal, limit=5)
 
-        from app.ai.retrieval.hybrid_search import hybrid_job_search
-        from app.ai.retrieval.rerank import rerank_jobs
+        job_ids: list = []
+        source = "recent"
+        # AI-assisted CV-matched ranking (hybrid dense+BM25 search + cross-encoder
+        # rerank) needs a live provider and job/CV embeddings. Attempt it only when
+        # the provider is up, and isolate it in a SAVEPOINT so an embedding/rerank
+        # failure degrades to the deterministic listing rather than poisoning the
+        # turn transaction (which otherwise surfaced as a 500 on the AI-down path).
+        if query_text.strip() and real_provider_active():
+            from app.ai.retrieval.hybrid_search import hybrid_job_search
+            from app.ai.retrieval.rerank import rerank_jobs
 
-        if query_text.strip():
-            fused = await hybrid_job_search(session, query=query_text, limit=limit * 3)
-            job_docs: dict = {}
-            for jid, _ in fused:
-                try:
-                    d = await job_service.get_job(session, principal=principal, job_id=jid)
-                    skills = ", ".join((d.get("required_skills") or [])[:5])
-                    job_docs[jid] = f"{d.get('title', '')} {skills}"[:200]
-                except Exception:
-                    job_docs[jid] = str(jid)
-            reranked = await rerank_jobs(query_text, job_docs, top_k=limit, db=session)
-            job_ids = [jid for jid, _ in reranked]
-            source = "cv_match_reranked"
-        else:
+            try:
+                async with session.begin_nested():
+                    fused = await hybrid_job_search(session, query=query_text, limit=limit * 3)
+                    job_docs: dict = {}
+                    for jid, _ in fused:
+                        try:
+                            d = await job_service.get_job(session, principal=principal, job_id=jid)
+                            skills = ", ".join((d.get("required_skills") or [])[:5])
+                            job_docs[jid] = f"{d.get('title', '')} {skills}"[:200]
+                        except Exception:
+                            job_docs[jid] = str(jid)
+                    reranked = await rerank_jobs(query_text, job_docs, top_k=limit, db=session)
+                    job_ids = [jid for jid, _ in reranked]
+                    source = "cv_match_reranked"
+            except Exception:
+                job_ids = []  # savepoint rolled back — fall through to deterministic listing
+
+        if not job_ids:
             items, _, _, _ = await job_service.list_public_jobs(
                 session, principal=principal, cursor=None, limit=limit
             )

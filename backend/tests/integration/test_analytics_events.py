@@ -70,6 +70,49 @@ async def test_record_event_safe_never_raises(db_session) -> None:
     assert count == 0
 
 
+async def test_record_event_safe_savepoint_isolates_db_failure(db_session) -> None:
+    """A DB-level flush failure inside best-effort analytics must NOT poison the
+    caller's transaction. Regression for the AI chat turn 500: a failed
+    ``ai.tool.called`` insert previously aborted the asyncpg transaction, so the
+    subsequent tool-result persist raised ``PendingRollbackError``. The savepoint
+    (``begin_nested``) must roll back only the failed analytics insert.
+    """
+    from unittest.mock import patch
+
+    seeded = await ingestion_service.record_event(
+        db_session,
+        event_type="ai.tool.called",
+        aggregate_type="ai_tool",
+        aggregate_id=uuid.uuid4(),
+        actor_type="student",
+        properties={"tool": "match_cv_to_jobs", "ok": True},
+    )
+    # Force a primary-key collision inside record_event_safe → IntegrityError on
+    # flush (a real DB failure, not a pre-flush validation error).
+    with patch.object(ingestion_service.uuid, "uuid4", return_value=seeded.id):
+        await ingestion_service.record_event_safe(
+            db_session,
+            event_type="ai.tool.called",
+            aggregate_type="ai_tool",
+            aggregate_id=uuid.uuid4(),
+            actor_type="student",
+            properties={"tool": "explain_job_fit", "ok": True},
+        )
+
+    # Outer transaction must still be usable after the swallowed failure...
+    await db_session.execute(select(1))
+    # ...and a fresh legitimate analytics write still succeeds.
+    ok = await ingestion_service.record_event(
+        db_session,
+        event_type="ai.tool.called",
+        aggregate_type="ai_tool",
+        aggregate_id=uuid.uuid4(),
+        actor_type="student",
+        properties={"tool": "compare_jobs", "ok": True},
+    )
+    assert ok.id is not None and ok.id != seeded.id
+
+
 async def test_frequency_cap_excludes_placement_after_threshold(db_session) -> None:
     session_id = uuid.uuid4()
     placement_id = uuid.uuid4()
