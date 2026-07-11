@@ -1,61 +1,36 @@
 "use client";
 
-import { useMemo } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { CalendarCheck, CheckCircle2, Clock, Users } from "lucide-react";
+import { Button, useToast } from "@/components/ui";
 import {
-  CalendarCheck,
-  CheckCircle,
-  Hourglass,
-  LightbulbFilament,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
-  UsersThree,
-  WarningCircle,
-} from "@phosphor-icons/react";
-import {
-  Button,
   DataTable,
+  type ColumnDef,
   EmptyState,
-  StatusBadge,
-  useToast,
-  type Column,
-} from "@/components/ui";
-import {
-  useEventLabels,
-  REGISTRATION_STATE_TONE,
-} from "@/lib/events/labels";
+  KpiRow,
+  KpiTile,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
+import { useEventLabels } from "@/lib/events/labels";
 import { formatDateTime } from "@/lib/format";
-import { ApiError, eventsApi, type EventAttendee } from "@/lib/api";
+import { ApiError, eventsApi, type EventAttendee, type RegistrationState } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 
-type AttendeeInsightKey =
-  | "insightCheckInPending"
-  | "insightHighAttendance"
-  | "insightWaitlistPresent"
-  | "insightLowCheckin"
-  | "insightEventComplete";
+const nf = new Intl.NumberFormat();
 
-function deriveAttendeeInsights(
-  total: number,
-  confirmed: number,
-  attended: number,
-  waitlisted: number,
-): AttendeeInsightKey[] {
-  const out: AttendeeInsightKey[] = [];
-  if (total === 0) return out;
-  const attendanceRate = total > 0 ? attended / total : 0;
-  if (attended > 0 && confirmed === 0) out.push("insightEventComplete");
-  else if (confirmed > 0) out.push("insightCheckInPending");
-  if (attendanceRate >= 0.7 && attended > 0) out.push("insightHighAttendance");
-  else if (confirmed > 0 && attended < confirmed * 0.5 && attended > 0) out.push("insightLowCheckin");
-  if (waitlisted > 0) out.push("insightWaitlistPresent");
-  return out.slice(0, 2);
-}
+const REG_CHIP: Record<RegistrationState, ChipTone> = {
+  confirmed: "success",
+  waitlisted: "warning",
+  cancelled: "neutral",
+  attended: "emerald",
+  no_show: "danger",
+};
 
 /**
- * Attendee list + check-in (organizer-only surface, ADR-0008 §3). The organizer
+ * Attendee list + check-in (organizer-only, ADR-0008 §3). The organizer
  * projection carries `email`; the column renders only when at least one row
  * exposes it. Check-in marks `confirmed → attended` (idempotent).
  */
@@ -85,11 +60,8 @@ export function EventAttendees({ eventId }: { eventId: string }) {
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
   });
 
-  const rows = useMemo(() => query.data ?? [], [query.data]);
-  const hasEmail = useMemo(
-    () => rows.some((r) => r.email !== undefined && r.email !== null),
-    [rows],
-  );
+  const rows = React.useMemo(() => query.data ?? [], [query.data]);
+  const hasEmail = React.useMemo(() => rows.some((r) => r.email != null), [rows]);
   const confirmedCount = rows.filter((r) => r.status === "confirmed").length;
   const attendedCount = rows.filter((r) => r.status === "attended").length;
   const waitlistedCount = rows.filter((r) => r.status === "waitlisted").length;
@@ -100,7 +72,6 @@ export function EventAttendees({ eventId }: { eventId: string }) {
       return (
         <EmptyState
           kind={err.isAuthError ? "auth" : "permission"}
-          icon={err.isAuthError ? SignIn : ShieldWarning}
           title={err.isAuthError ? tStates("authTitle") : tStates("permissionTitle")}
           description={err.isAuthError ? tStates("authBody") : t("permissionBody")}
         />
@@ -109,7 +80,6 @@ export function EventAttendees({ eventId }: { eventId: string }) {
     return (
       <EmptyState
         kind="error"
-        icon={WarningCircle}
         title={tStates("errorTitle")}
         description={tStates("errorBody")}
         action={
@@ -121,54 +91,50 @@ export function EventAttendees({ eventId }: { eventId: string }) {
     );
   }
 
-  const columns: Column<EventAttendee>[] = [
+  const columns: ColumnDef<EventAttendee, unknown>[] = [
     {
-      key: "name",
+      accessorKey: "display_name",
       header: t("colName"),
-      cell: (r) => (
-        <span className="font-medium text-[var(--text-primary)]">
-          {r.display_name}
-        </span>
-      ),
+      cell: ({ row }) => <span className="font-medium text-foreground">{row.original.display_name}</span>,
     },
     ...(hasEmail
       ? [
           {
-            key: "email",
+            accessorKey: "email",
             header: t("colEmail"),
-            cell: (r: EventAttendee) => (
-              <span className="text-[var(--text-secondary)]">{r.email || "—"}</span>
-            ),
-          } as Column<EventAttendee>,
+            cell: ({ row }) => <span className="text-muted-foreground">{row.original.email || "—"}</span>,
+          } as ColumnDef<EventAttendee, unknown>,
         ]
       : []),
     {
-      key: "status",
+      accessorKey: "status",
       header: t("colStatus"),
-      cell: (r) => (
-        <StatusBadge tone={REGISTRATION_STATE_TONE[r.status] ?? "info"}>
-          {labels.registrationState(r.status, r.status_label)}
-        </StatusBadge>
+      cell: ({ row }) => (
+        <StatusChip tone={REG_CHIP[row.original.status] ?? "neutral"} dot>
+          {labels.registrationState(row.original.status, row.original.status_label)}
+        </StatusChip>
       ),
     },
     {
-      key: "registered",
+      accessorKey: "registered_at",
       header: t("colRegistered"),
-      cell: (r) => (
-        <span className="text-[var(--text-secondary)]">
-          {formatDateTime(r.registered_at, locale)}
-        </span>
+      cell: ({ row }) => (
+        <span className="type-small text-muted-foreground">{formatDateTime(row.original.registered_at, locale)}</span>
       ),
     },
     {
-      key: "actions",
+      id: "actions",
       header: "",
-      align: "right",
-      cell: (r) => {
+      meta: { align: "right" },
+      cell: ({ row }) => {
+        const r = row.original;
         if (r.status === "attended") {
           return (
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--teal-600)]">
-              <CheckCircle aria-hidden weight="fill" className="size-4" />
+            <span
+              className="inline-flex items-center gap-1 type-small font-medium"
+              style={{ color: "var(--content-success)" }}
+            >
+              <CheckCircle2 className="size-4" strokeWidth={1.9} />
               {t("checkedIn")}
             </span>
           );
@@ -181,12 +147,12 @@ export function EventAttendees({ eventId }: { eventId: string }) {
               loading={checkIn.isPending && checkIn.variables === r.registration_id}
               onClick={() => checkIn.mutate(r.registration_id)}
             >
-              <CheckCircle aria-hidden weight="bold" className="size-4" />
+              <CheckCircle2 className="size-4" strokeWidth={1.8} />
               {t("checkIn")}
             </Button>
           );
         }
-        return <span className="text-sm text-[var(--text-muted)]">—</span>;
+        return <span className="type-small text-muted-foreground">—</span>;
       },
     },
   ];
@@ -194,76 +160,19 @@ export function EventAttendees({ eventId }: { eventId: string }) {
   return (
     <div className="space-y-4">
       {rows.length > 0 && (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <div className="rounded-2xl border border-white/60 bg-white/85 px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
-            <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-              <UsersThree aria-hidden weight="duotone" className="size-4.5 text-white" />
-            </div>
-            <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{rows.length}</p>
-            <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statTotal")}</p>
-          </div>
-          <div className="rounded-2xl border border-white/60 bg-white/85 px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
-            <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-              <CheckCircle aria-hidden weight="duotone" className="size-4.5 text-white" />
-            </div>
-            <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{confirmedCount}</p>
-            <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statConfirmed")}</p>
-          </div>
-          <div className="rounded-2xl border border-white/60 bg-white/85 px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
-            <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-              <CalendarCheck aria-hidden weight="duotone" className="size-4.5 text-white" />
-            </div>
-            <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{attendedCount}</p>
-            <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statAttended")}</p>
-          </div>
-          <div className="rounded-2xl border border-white/60 bg-white/85 px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] backdrop-blur-xl transition-all hover:-translate-y-0.5">
-            <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-warning shadow-sm">
-              <Hourglass aria-hidden weight="duotone" className="size-4.5 text-white" />
-            </div>
-            <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{waitlistedCount}</p>
-            <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statWaitlisted")}</p>
-          </div>
-        </div>
+        <KpiRow cols={4}>
+          <KpiTile label={t("statTotal")} value={nf.format(rows.length)} icon={Users} />
+          <KpiTile label={t("statConfirmed")} value={nf.format(confirmedCount)} icon={CheckCircle2} />
+          <KpiTile label={t("statAttended")} value={nf.format(attendedCount)} icon={CalendarCheck} />
+          <KpiTile label={t("statWaitlisted")} value={nf.format(waitlistedCount)} icon={Clock} />
+        </KpiRow>
       )}
-      {(() => {
-        const insights = !query.isPending && rows.length > 0
-          ? deriveAttendeeInsights(rows.length, confirmedCount, attendedCount, waitlistedCount)
-          : [];
-        if (insights.length === 0) return null;
-        return (
-          <section
-            className="rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 backdrop-blur-xl"
-            aria-label={t("aiInsightsTitle")}
-          >
-            <h2 className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              {t("aiInsightsTitle")}
-            </h2>
-            <ul className="space-y-1.5">
-              {insights.map((key) => (
-                <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                  {t(key)}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })()}
       <DataTable
         columns={columns}
-        rows={rows}
+        data={rows}
         getRowId={(r) => r.registration_id}
         loading={query.isPending}
-        caption={t("title")}
-        empty={{
-          kind: "empty",
-          icon: UsersThree,
-          title: t("emptyTitle"),
-          description: t("emptyBody"),
-        }}
+        empty={<EmptyState kind="empty" title={t("emptyTitle")} description={t("emptyBody")} />}
       />
     </div>
   );

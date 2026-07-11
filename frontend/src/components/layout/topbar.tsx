@@ -1,18 +1,20 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ChevronRight, Menu } from "lucide-react";
-import { Sparkle } from "@phosphor-icons/react";
+import { ChevronRight, Menu, Search, Sparkles } from "lucide-react";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeSwitcher } from "./theme-switcher";
 import { BrandMark } from "./brand-mark";
 import { AccountMenu } from "./account-menu";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { MessagingBell } from "@/components/messaging/messaging-bell";
+import { CommandPalette, type CommandAction } from "@/components/kit";
 import { Link, usePathname } from "@/i18n/navigation";
 import { getRouteTitle } from "@/lib/route-titles";
-import { WORKSPACE_NAV } from "@/config/nav";
+import { WORKSPACE_NAV, WORKSPACE_NAV_GROUPS, SETTINGS_NAV } from "@/config/nav";
 import { useUiStore } from "@/stores/ui-store";
+import { useAuthStore } from "@/stores/auth-store";
 import { cn } from "@/lib/utils";
 import type { Persona } from "@/stores/auth-store";
 
@@ -34,7 +36,46 @@ export function Topbar({
   const locale = useLocale();
   const pathname = usePathname();
   const setMobileNavOpen = useUiStore((s) => s.setMobileNavOpen);
+  const isSuperadmin = useAuthStore((s) => s.user?.isSuperadmin ?? false);
+  const permissions = useAuthStore((s) => s.user?.permissions ?? []);
+  const [cmdOpen, setCmdOpen] = useState(false);
   const base = `/${persona}`;
+
+  // ⌘K command palette — the persona's real nav (RBAC-filtered) + settings.
+  const commandActions = useMemo<CommandAction[]>(() => {
+    const navGroupLabel = t("shell.commandNavGroup");
+    const items: CommandAction[] = [];
+    for (const group of WORKSPACE_NAV_GROUPS[persona]) {
+      for (const item of group.items) {
+        if (item.available === false) continue;
+        if (item.requiresSuperadmin && !isSuperadmin) continue;
+        if (
+          item.requiresPermission &&
+          !isSuperadmin &&
+          !permissions.includes("*") &&
+          !permissions.includes(item.requiresPermission)
+        )
+          continue;
+        const href = item.absolute ? item.href : `${base}${item.href}`;
+        items.push({
+          key: `${group.key ?? "_"}-${item.href}`,
+          label: tNav(item.key),
+          href,
+          icon: item.icon,
+          group: navGroupLabel,
+        });
+      }
+    }
+    items.push({
+      key: "settings",
+      label: tNav("settings"),
+      href: `${base}${SETTINGS_NAV.href}`,
+      icon: SETTINGS_NAV.icon,
+      group: navGroupLabel,
+    });
+    return items;
+  }, [persona, base, isSuperadmin, permissions, t, tNav]);
+
   const currentItem =
     pathname === `${base}/messages` || pathname.startsWith(`${base}/messages/`)
       ? { key: "messages" }
@@ -73,6 +114,7 @@ export function Topbar({
         })();
 
   return (
+    <>
     <header className="sticky top-0 z-30 flex h-[60px] items-center gap-3 bg-[#f7f6f2]/95 px-4 backdrop-blur-sm lg:px-6">
       <button
         type="button"
@@ -135,6 +177,20 @@ export function Topbar({
       </nav>
 
       <div className="ml-auto flex items-center gap-2">
+        {/* ⌘K command palette trigger */}
+        <button
+          type="button"
+          onClick={() => setCmdOpen(true)}
+          aria-label={t("shell.searchTrigger")}
+          aria-haspopup="dialog"
+          className="inline-flex h-9 items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--surface-card)] px-2.5 text-[0.8125rem] font-medium text-[var(--text-muted)] outline-none transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)] sm:px-3"
+        >
+          <Search aria-hidden strokeWidth={1.8} className="size-4" />
+          <span className="hidden lg:inline">{t("shell.searchTrigger")}</span>
+          <kbd className="hidden items-center gap-0.5 rounded border border-[var(--border-default)] bg-[var(--bg-subtle)] px-1.5 py-0.5 font-sans text-[0.625rem] font-semibold text-[var(--text-muted)] lg:inline-flex">
+            ⌘K
+          </kbd>
+        </button>
         <LanguageSwitcher compact />
         <ThemeSwitcher />
         <NotificationBell variant="labeled" href={`/${persona}/notifications`} />
@@ -148,21 +204,36 @@ export function Topbar({
             title={tNav("aiAssistant")}
             onClick={onAiClick}
             className={cn(
-              "relative inline-flex size-9 items-center justify-center rounded-lg border outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--ai-accent)]/50",
+              "inline-flex h-9 cursor-pointer items-center gap-2 rounded-full border px-3.5 text-[0.8125rem] font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40",
               aiActive
-                ? "border-[var(--ai-accent)] bg-[var(--ai-accent)] text-white shadow-[var(--shadow-teal)] hover:bg-[var(--ai-accent-strong)]"
-                : "border-[var(--ai-accent-ring)] bg-[var(--ai-accent-surface)] text-[var(--ai-accent-strong)] shadow-[var(--ai-chip-shadow)] hover:border-[var(--ai-accent)] hover:bg-[var(--ai-accent-surface-hover)]",
+                ? "border-[var(--text-primary)] bg-[var(--text-primary)] text-white shadow-[0_8px_18px_rgba(0,0,0,0.12)] hover:bg-black"
+                : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-primary)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-subtle)]",
             )}
           >
-            <Sparkle
+            <Sparkles
               aria-hidden
-              weight="fill"
-              className={cn("size-5", aiActive ? "text-white" : "text-[var(--ai-accent-strong)]")}
+              strokeWidth={1.8}
+              className={cn("size-4", aiActive ? "text-white" : "text-[var(--text-secondary)]")}
             />
+            <span className="hidden lg:inline">AI</span>
           </button>
         )}
-        <AccountMenu settingsHref={`/${persona}/settings`} showName />
+        <AccountMenu
+          settingsHref={`/${persona}/settings`}
+          showName
+          showHelpSupport
+        />
       </div>
     </header>
+    <CommandPalette
+      open={cmdOpen}
+      onOpenChange={setCmdOpen}
+      actions={commandActions}
+      title={t("shell.commandTitle")}
+      description={t("shell.commandDescription")}
+      placeholder={t("shell.commandPlaceholder")}
+      emptyLabel={t("shell.commandEmpty")}
+    />
+    </>
   );
 }

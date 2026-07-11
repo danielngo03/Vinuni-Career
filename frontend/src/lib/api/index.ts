@@ -32,6 +32,7 @@ export type {
   PermissionInput,
   OrganizationPatch,
   PermissionPreview,
+  MyCapabilities,
   OwnershipInfo,
   AuditLogEntry,
   ProfileQualityCheck,
@@ -172,7 +173,6 @@ export type {
   StudentDashboard,
   StudentDashboardMetrics,
   StudentRecentApplication,
-  StudentRevealRequestItem,
   StudentUpcomingEvent,
   PartnerDashboard,
   PartnerDashboardMetrics,
@@ -191,6 +191,9 @@ export type {
   UniversityPlatformKpis,
   UniversityMonthlyPoint,
   UniversityPlatformStats,
+  MarketEmploymentType,
+  MarketSkill,
+  UniversityMarketIntelligence,
   PartnerOpsTodo,
   PartnerEngagementTotals,
   PartnerEngagementWidget,
@@ -205,6 +208,15 @@ export type {
   PartnerRbacSummary,
   PartnerAiRecommendation,
   PartnerDashboardOps,
+  RecruitingFunnelStage,
+  RecruitingStageOutcome,
+  TimeBucket,
+  TimeToHire,
+  TimeInStageItem,
+  PartnerRecruitingFunnel,
+  AdvertisingCampaignRow,
+  AdvertisingPerformanceTotals,
+  PartnerAdvertisingPerformance,
 } from "./dashboards";
 export { analyticsApi } from "./analytics";
 export type {
@@ -330,15 +342,15 @@ export type {
   RejectBody,
   CvSelectionType,
   CvSelectionInput,
-  RevealStatus,
-  RevealDecision,
   ScreeningAnswers,
   ApplyBody,
-  RevealRequest,
   WithdrawBody,
   StudentApplication,
   PartnerApplicant,
   PartnerApplication,
+  PartnerApplicationCv,
+  CardAssignee,
+  CandidateFit,
   CvDownloadInfo,
   StageRequiredAction,
   PipelineEvaluation,
@@ -385,7 +397,72 @@ export type {
   UpdateOfferBody,
   RespondOfferBody,
 } from "./applications";
+export { recruitingApi } from "./recruiting";
+export type {
+  InterviewBoardScope,
+  InterviewBoardMode,
+  InterviewBoardStatus,
+  InterviewBoardAssignee,
+  InterviewBoardRow,
+  InterviewBoardParams,
+  InterviewBoardResult,
+  OfferBoardScope,
+  OfferBoardStatus,
+  OfferBoardRow,
+  OfferBoardParams,
+  OfferBoardResult,
+} from "./recruiting";
 export { interviewPrepApi, coverLetterApi } from "./interview-prep";
+export {
+  mockInterviewApi,
+  sessionListTitle,
+  topJobTitle,
+  normalizeGap,
+  deriveRoundPlan,
+} from "./mock-interview";
+export type {
+  MockInterviewModality,
+  MockInterviewSpeaker,
+  MockInterviewStatus,
+  MockInterviewFitSignal,
+  MockInterviewJobRef,
+  MockInterviewPrepCv,
+  MockInterviewPrep,
+  MockInterviewOpening,
+  MockInterviewCaps,
+  MockInterviewRealtimeDescriptor,
+  MockInterviewCoverage,
+  MockInterviewRoundStatus,
+  MockInterviewRound,
+  RoundPlan,
+  MockInterviewSession,
+  MockInterviewTranscriptTurn,
+  CoachingReportQuestion,
+  MockInterviewLearningSuggestion,
+  CoachingReportGap,
+  NormalizedGap,
+  CoachingReport,
+  MockInterviewSessionDetail,
+  MockInterviewSessionListItem,
+  MockInterviewProgressTheme,
+  MockInterviewProgress,
+  MockInterviewTrendPoint,
+  MockInterviewTopJob,
+  MockInterviewAdminStats,
+  MockInterviewAdminConfig,
+  MockInterviewFlaggedItem,
+  MockInterviewAdminTranscriptMode,
+  MockInterviewAdminTranscript,
+  CreateMockInterviewBody,
+  RecordTurnInput,
+  RecordTurnsResult,
+  EndSessionBody,
+  TurnTokenEvent,
+  TurnDoneEvent,
+  TurnErrorEvent,
+  TurnStreamEvent,
+  StreamTurnHandlers,
+} from "./mock-interview";
 export { jobAlertsApi } from "./job-alerts";
 export type { JobAlert, CreateJobAlertBody } from "./job-alerts";
 export { aiAssistantApi } from "./ai-assistant";
@@ -472,6 +549,16 @@ export {
   PRIMARY_CREATIVE_SLOTS,
   CREATIVE_SLOT_SPECS,
   ratioToCss,
+  // Campaign allocation engine (spec §7.0)
+  CAMPAIGN_STATUSES,
+  CAMPAIGN_OBJECTIVES,
+  CAMPAIGN_PACINGS,
+  AD_SURFACES,
+  COARSE_LOCATIONS,
+  COARSE_MAJORS,
+  COARSE_CAREERS,
+  COARSE_WORK_MODES,
+  COARSE_YEAR_COHORTS,
 } from "./advertising";
 export type {
   PlacementStatus,
@@ -488,6 +575,27 @@ export type {
   CreativeAssetRequirements,
   PlacementCreative,
   UploadCreativeBody,
+  // Campaign allocation engine (spec §7.0)
+  CampaignStatus,
+  CampaignObjective,
+  CampaignPacing,
+  AdSurface,
+  DeliveryEventType,
+  AdCampaign,
+  AdCampaignCreative,
+  CampaignTargeting,
+  CampaignDelivery,
+  CampaignPerformance,
+  CampaignSpendSummary,
+  AdSurfaceSlot,
+  AllocationItem,
+  AllocationSlot,
+  AllocationCuratedFallback,
+  SurfaceAllocation,
+  CampaignAllocationRecord,
+  CampaignCreativeInput,
+  CampaignCreateBody,
+  CampaignUpdateBody,
 } from "./advertising";
 export { billingApi, SUBSCRIPTION_STATUSES } from "./billing";
 export type {
@@ -595,7 +703,26 @@ export { locationsApi } from "./locations";
 export type { Province, Ward } from "./locations";
 export type { JobLocationItem } from "./jobs";
 export { talentPoolApi } from "./talent-pool";
-export type { TalentCard, TalentPage, TalentSearchParams } from "./talent-pool";
+export type {
+  MatchTier,
+  TalentSearchSource,
+  TalentMatch,
+  TalentSearchPage,
+  TalentSearchResult,
+  TalentSearchBody,
+} from "./talent-pool";
+export { companyProfileApi, COMPANY_DOC_KINDS } from "./company-profile";
+export type {
+  CompanyChangeStatus,
+  CompanyDocKind,
+  CompanyDocument,
+  CompanyChangeField,
+  CompanyChangeRequest,
+  CompanyProfile,
+  CompanyProfileUpdateBody,
+  CompanyProfileUpdateResult,
+  CompanyApprovalDecisionResult,
+} from "./company-profile";
 export { adminUsersApi } from "./admin-users";
 export type { AdminUserRow, AdminUsersPage, AdminUsersParams } from "./admin-users";
 export { invitationsApi } from "./invitations";
@@ -607,7 +734,13 @@ export type {
 } from "./invitations";
 export { feedbackApi } from "./feedback";
 export type { FeedbackBody, FeedbackResult } from "./feedback";
-export { workflowsApi, SIDE_EFFECTING_NODE_TYPES, ADVISORY_NODE_TYPES } from "./workflows";
+export {
+  workflowsApi,
+  SIDE_EFFECTING_NODE_TYPES,
+  ADVISORY_NODE_TYPES,
+  CONSEQUENTIAL_NODE_TYPES,
+  HUMAN_CONFIRM_NODE_TYPES,
+} from "./workflows";
 export type {
   WorkflowNodeType,
   WorkflowOwnerType,

@@ -3,9 +3,10 @@
 import { useEffect, useId, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ClipboardText, ShieldWarning, WarningCircle } from "@phosphor-icons/react";
+import { ClipboardList, ShieldAlert, AlertCircle } from "lucide-react";
 import { ScorecardAiSuggestButton } from "./scorecard-ai-suggest-button";
-import { Button, Modal, StatusBadge, Textarea, useToast } from "@/components/ui";
+import { Button, Modal, Textarea, useToast } from "@/components/ui";
+import { StatusChip } from "@/components/kit";
 import { useScorecardLabels } from "@/lib/applications/labels";
 import {
   ApiError,
@@ -35,11 +36,18 @@ export function PartnerScorecardPanel({
   applicationId,
   canSubmit,
   jobTitle,
+  hideHeader = false,
 }: {
   applicationId: string;
   /** Submitting/editing is only possible while the candidate is under review. */
   canSubmit: boolean;
   jobTitle?: string;
+  /**
+   * Suppress the panel's own section header — used when the panel is embedded in
+   * a surface (e.g. the pipeline-board scorecard modal) that already provides the
+   * title/context, so the heading is not rendered twice.
+   */
+  hideHeader?: boolean;
 }) {
   const t = useTranslations("scorecards");
   const tc = useTranslations("common");
@@ -159,14 +167,15 @@ export function PartnerScorecardPanel({
   }
 
   /* -------------------------------- header ------------------------------- */
-  const header = (
+  const header = hideHeader ? null : (
     <div className="flex items-center gap-2">
-      <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-        <ClipboardText aria-hidden weight="duotone" className="size-4 text-white" />
+      <span
+        className="flex size-7 shrink-0 items-center justify-center rounded-lg"
+        style={{ background: "var(--content-info-soft)" }}
+      >
+        <ClipboardList aria-hidden className="size-4" strokeWidth={1.8} style={{ color: "var(--content-info)" }} />
       </span>
-      <h3 className="text-base font-bold text-[var(--text-primary)]">
-        {t("panelTitle")}
-      </h3>
+      <h3 className="type-h3 text-foreground">{t("panelTitle")}</h3>
     </div>
   );
 
@@ -175,10 +184,7 @@ export function PartnerScorecardPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div
-          className="h-28 animate-pulse rounded-xl bg-[var(--bg-muted)]"
-          aria-hidden
-        />
+        <div className="h-28 animate-skeleton rounded-xl bg-[var(--bg-muted)]" aria-hidden />
       </section>
     );
   }
@@ -187,21 +193,12 @@ export function PartnerScorecardPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
-          <p className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-            <WarningCircle
-              aria-hidden
-              weight="duotone"
-              className="size-4 text-[var(--text-muted)]"
-            />
+        <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
+          <p className="flex items-center gap-2 type-small text-muted-foreground">
+            <AlertCircle aria-hidden className="size-4 text-muted-foreground" strokeWidth={1.8} />
             {t("loadError")}
           </p>
-          <Button
-            variant="secondary"
-            size="sm"
-            className="mt-2"
-            onClick={() => query.refetch()}
-          >
+          <Button variant="secondary" size="sm" className="mt-2" onClick={() => query.refetch()}>
             {tc("retry")}
           </Button>
         </div>
@@ -214,10 +211,8 @@ export function PartnerScorecardPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
-          <p className="text-sm text-[var(--text-secondary)]">
-            {t("notInStageBody")}
-          </p>
+        <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
+          <p className="type-small text-muted-foreground">{t("notInStageBody")}</p>
         </div>
       </section>
     );
@@ -232,42 +227,35 @@ export function PartnerScorecardPanel({
     <section aria-label={t("panelTitle")} className="space-y-3">
       <div className="flex items-center justify-between gap-2">
         {header}
-        <span className="text-xs font-medium text-[var(--text-muted)]">
-          {t("partnerOnly")}
-        </span>
+        <span className="type-caption text-muted-foreground">{t("partnerOnly")}</span>
       </div>
 
       {/* Round progress + gate state (always visible; anchoring-safe). */}
-      <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5">
+      <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-sm font-semibold text-[var(--text-primary)]">
+          <p className="type-small font-semibold text-foreground">
             {t("progress", { count: submitted })}
           </p>
           {gateApplies &&
             (agg.gate_met ? (
-              <StatusBadge tone="accepted">{t("gateMet")}</StatusBadge>
+              <StatusChip tone="success">{t("gateMet")}</StatusChip>
             ) : (
-              <StatusBadge tone="pending">{t("gateRequired")}</StatusBadge>
+              <StatusChip tone="warning">{t("gateRequired")}</StatusChip>
             ))}
         </div>
         {gateApplies && !agg.gate_met && (
-          <p className="mt-1.5 flex items-start gap-1.5 text-xs text-[var(--amber-700)]">
-            <WarningCircle
-              aria-hidden
-              weight="duotone"
-              className="mt-0.5 size-3.5 shrink-0"
-            />
+          <p
+            className="mt-1.5 flex items-start gap-1.5 type-caption"
+            style={{ color: "var(--content-warning)" }}
+          >
+            <AlertCircle aria-hidden className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.8} />
             {t("gateHint")}
           </p>
         )}
         {/* Anchoring notice — only while peers' scores are still hidden. */}
         {mine === null && submitted > 0 && (
-          <p className="mt-1.5 flex items-start gap-1.5 text-xs text-[var(--text-muted)]">
-            <ShieldWarning
-              aria-hidden
-              weight="duotone"
-              className="mt-0.5 size-3.5 shrink-0"
-            />
+          <p className="mt-1.5 flex items-start gap-1.5 type-caption text-muted-foreground">
+            <ShieldAlert aria-hidden className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.8} />
             {t("anchoringNote")}
           </p>
         )}
@@ -285,9 +273,9 @@ export function PartnerScorecardPanel({
 
       {/* Submit / edit form. */}
       {showForm && (
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5">
+        <div className="rounded-lg border border-border bg-card p-3.5">
           <div className="mb-3 flex items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-[var(--text-primary)]">
+            <p className="type-small font-semibold text-foreground">
               {mine ? t("editTitle") : t("formTitle")}
             </p>
             <ScorecardAiSuggestButton

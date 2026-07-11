@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Handshake, WarningCircle } from "@phosphor-icons/react";
+import { Handshake, AlertCircle } from "lucide-react";
 import { Button, Modal, useToast } from "@/components/ui";
 import { ApiError, applicationsApi, type PartnerOffer } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
@@ -17,26 +17,17 @@ import { isLive } from "./offer-panel/utils";
  * rendered on any student surface — the student sees only their own offer card.
  *
  * Lifecycle: draft → submit → approve → send → accepted | declined | expired |
- * rescinded. Editable only while `draft`. Sending an offer to an anonymous
- * applicant requires an already-accepted reveal (`409 reveal_required`),
- * reusing the same reveal deep-link as interview scheduling.
+ * rescinded. Editable only while `draft`. Sending an offer is subject only to
+ * normal RBAC (the identity-reveal precondition was removed, owner decision
+ * 2026-07-10).
  */
 export function PartnerOfferPanel({
   applicationId,
   canCreate,
-  anonUnrevealed,
-  revealPending,
-  onRequestReveal,
 }: {
   applicationId: string;
   /** Offer creation is only valid while the candidate is actively under review. */
   canCreate: boolean;
-  /** True while the applicant is anonymous and the reveal is not yet accepted. */
-  anonUnrevealed: boolean;
-  /** True when a reveal request is already pending the student's response. */
-  revealPending: boolean;
-  /** Opens the existing reveal-request flow (deep-link from the blocked state). */
-  onRequestReveal: () => void;
 }) {
   const t = useTranslations("offers");
   const tc = useTranslations("common");
@@ -81,8 +72,6 @@ export function PartnerOfferPanel({
       const reason = e.details?.reason;
       if (reason === "offer_not_approved") {
         toast.show({ tone: "warning", title: t("notApprovedToast") });
-      } else if (reason === "reveal_required") {
-        toast.show({ tone: "warning", title: t("revealRequiredToast") });
       } else if (reason === "offer_exists") {
         toast.show({ tone: "warning", title: t("offerExistsToast") });
       } else if (reason === "offer_not_editable") {
@@ -148,16 +137,15 @@ export function PartnerOfferPanel({
   const header = (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-2">
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-success shadow-sm">
-          <Handshake aria-hidden weight="duotone" className="size-4 text-white" />
+        <span
+          className="flex size-7 shrink-0 items-center justify-center rounded-lg"
+          style={{ background: "var(--content-success-soft)" }}
+        >
+          <Handshake aria-hidden className="size-4" strokeWidth={1.8} style={{ color: "var(--content-success)" }} />
         </span>
-        <h3 className="text-base font-bold text-[var(--text-primary)]">
-          {t("panelTitle")}
-        </h3>
+        <h3 className="type-h3 text-foreground">{t("panelTitle")}</h3>
       </div>
-      <span className="text-xs font-medium text-[var(--text-muted)]">
-        {t("partnerOnly")}
-      </span>
+      <span className="type-caption text-muted-foreground">{t("partnerOnly")}</span>
     </div>
   );
 
@@ -165,10 +153,7 @@ export function PartnerOfferPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div
-          className="h-24 animate-pulse rounded-xl bg-[var(--bg-muted)]"
-          aria-hidden
-        />
+        <div className="h-24 animate-skeleton rounded-xl bg-[var(--bg-muted)]" aria-hidden />
       </section>
     );
   }
@@ -179,22 +164,13 @@ export function PartnerOfferPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
-          <p className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-            <WarningCircle
-              aria-hidden
-              weight="duotone"
-              className="size-4 text-[var(--text-muted)]"
-            />
+        <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
+          <p className="flex items-center gap-2 type-small text-muted-foreground">
+            <AlertCircle aria-hidden className="size-4 text-muted-foreground" strokeWidth={1.8} />
             {permission ? t("noPermission") : t("loadError")}
           </p>
           {!permission && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="mt-2"
-              onClick={() => query.refetch()}
-            >
+            <Button variant="secondary" size="sm" className="mt-2" onClick={() => query.refetch()}>
               {tc("retry")}
             </Button>
           )}
@@ -217,9 +193,6 @@ export function PartnerOfferPanel({
           offer={current}
           locale={locale}
           busy={busy}
-          anonUnrevealed={anonUnrevealed}
-          revealPending={revealPending}
-          onRequestReveal={onRequestReveal}
           onEdit={() => setEditTarget(current)}
           onSubmit={() => submitMutation.mutate(current)}
           onApprove={() =>
@@ -232,8 +205,8 @@ export function PartnerOfferPanel({
           onRescind={() => setRescindTarget(current)}
         />
       ) : (
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
-          <p className="text-sm text-[var(--text-secondary)]">
+        <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
+          <p className="type-small text-muted-foreground">
             {canCreate ? t("emptyBody") : t("emptyBlocked")}
           </p>
         </div>
@@ -242,7 +215,7 @@ export function PartnerOfferPanel({
       {/* Create CTA — only when there is no LIVE offer and the app is active. */}
       {canCreate && !liveOffer && (
         <Button variant="primary" size="sm" onClick={() => setFormOpen(true)}>
-          <Handshake aria-hidden weight="bold" className="size-4" />
+          <Handshake aria-hidden className="size-4" strokeWidth={1.8} />
           {current ? t("createAnotherCta") : t("createCta")}
         </Button>
       )}

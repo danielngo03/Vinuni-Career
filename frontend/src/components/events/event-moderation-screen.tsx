@@ -1,51 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  CalendarBlank,
-  CheckCircle,
+  CalendarX,
+  Check,
+  Clock,
   Flag,
-  LightbulbFilament,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
   UserCheck,
-  WarningCircle,
-  XCircle,
-} from "@phosphor-icons/react";
+  X,
+} from "lucide-react";
+import { Button, Modal, useToast } from "@/components/ui";
 import {
-  Button,
   DataTable,
+  DetailSheet,
+  DetailSheetSection,
   EmptyState,
-  Modal,
-  Sheet,
-  StatusBadge,
-  useToast,
-  type Column,
-} from "@/components/ui";
-import { cn } from "@/lib/utils";
+  FilterBar,
+  StatusChip,
+  type ChipTone,
+  type ColumnDef,
+} from "@/components/kit";
 import { PageHeader } from "@/components/layout/page-header";
+import { cn } from "@/lib/utils";
 import { ModerationTabs } from "@/components/moderation/moderation-tabs";
-import {
-  BulkResultList,
-  ClaimBadge,
-  ReasonCodeSelect,
-  RowSelectCheckbox,
-  SlaBadge,
-} from "@/components/moderation/queue-controls";
+import { BulkResultList, ReasonCodeSelect } from "@/components/moderation/queue-controls";
 import { useAuthStore } from "@/stores/auth-store";
-import {
-  useEventLabels,
-  EVENT_STATUS_TONE,
-  EVENT_MODERATION_TONE,
-} from "@/lib/events/labels";
+import { useEventLabels } from "@/lib/events/labels";
 import { formatEventWhen } from "@/lib/events/format";
 import {
   ApiError,
   eventsApi,
   type BulkModerationResultItem,
+  type EventModerationStatus,
+  type EventStatus,
   type ModerationReasonCode,
   type OwnerEventSummary,
 } from "@/lib/api";
@@ -53,7 +42,57 @@ import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 
 const STATUS_FILTERS = ["pending_review", "published", "rejected", "cancelled"] as const;
 
+const EVENT_STATUS_CHIP: Record<EventStatus, ChipTone> = {
+  draft: "neutral",
+  pending_review: "warning",
+  published: "success",
+  cancelled: "neutral",
+  completed: "success",
+  rejected: "danger",
+};
+
+const EVENT_MODERATION_CHIP: Record<EventModerationStatus, ChipTone> = {
+  pending: "warning",
+  approved: "success",
+  rejected: "danger",
+  flagged: "info",
+};
+
 type BulkKind = "approve" | "reject" | null;
+
+/* SLA / claim chips (v10, StatusChip-based). */
+function SlaChip({
+  dueBy,
+  ageHours,
+  isOverdue,
+}: {
+  dueBy?: string | null;
+  ageHours?: number | null;
+  isOverdue?: boolean;
+}) {
+  const t = useTranslations("common");
+  if (dueBy == null && ageHours == null) return null;
+  const label = isOverdue
+    ? t("moderationQueue.slaOverdue", { hours: Math.round(ageHours ?? 0) })
+    : t("moderationQueue.slaAge", { hours: Math.round(ageHours ?? 0) });
+  return (
+    <StatusChip tone={isOverdue ? "danger" : "warning"} size="sm">
+      <Clock aria-hidden className="size-3" strokeWidth={2} />
+      {label}
+    </StatusChip>
+  );
+}
+
+function ClaimChip({ claimedBy, isMine }: { claimedBy?: string | null; isMine: boolean }) {
+  const t = useTranslations("common");
+  if (!claimedBy) return null;
+  return (
+    <StatusChip tone="info" size="sm">
+      <UserCheck aria-hidden className="size-3" strokeWidth={2} />
+      {isMine ? t("moderationQueue.claimedByMe") : t("moderationQueue.claimedByOther")}
+    </StatusChip>
+  );
+}
 
 export function EventModerationScreen() {
   const t = useTranslations("eventsModeration");
@@ -68,21 +107,22 @@ export function EventModerationScreen() {
   const getMessage = useApiErrorMessage();
   const userId = useAuthStore((s) => s.user?.id);
 
-  const [statusFilter, setStatusFilter] = useState<string>("pending_review");
-  const [selected, setSelected] = useState<OwnerEventSummary | null>(null);
-  const [approveOpen, setApproveOpen] = useState(false);
-  const [rejectOpen, setRejectOpen] = useState(false);
-  const [escalateOpen, setEscalateOpen] = useState(false);
-  const [reason, setReason] = useState("");
-  const [reasonCode, setReasonCode] = useState<ModerationReasonCode | string>("other");
-  const [reasonError, setReasonError] = useState<string | null>(null);
-  const [escalateNote, setEscalateNote] = useState("");
+  const [statusFilter, setStatusFilter] = React.useState<string>("pending_review");
+  const [selected, setSelected] = React.useState<OwnerEventSummary | null>(null);
+  const [approveOpen, setApproveOpen] = React.useState(false);
+  const [rejectOpen, setRejectOpen] = React.useState(false);
+  const [escalateOpen, setEscalateOpen] = React.useState(false);
+  const [reason, setReason] = React.useState("");
+  const [reasonCode, setReasonCode] = React.useState<ModerationReasonCode | string>("other");
+  const [reasonError, setReasonError] = React.useState<string | null>(null);
+  const [escalateNote, setEscalateNote] = React.useState("");
   const [escalateReasonCode, setEscalateReasonCode] =
-    useState<ModerationReasonCode | string>("policy_violation");
+    React.useState<ModerationReasonCode | string>("policy_violation");
 
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [bulkKind, setBulkKind] = useState<BulkKind>(null);
-  const [bulkResults, setBulkResults] = useState<BulkModerationResultItem[] | null>(null);
+  const [bulkKind, setBulkKind] = React.useState<BulkKind>(null);
+  const [bulkIds, setBulkIds] = React.useState<string[]>([]);
+  const bulkClearRef = React.useRef<() => void>(() => {});
+  const [bulkResults, setBulkResults] = React.useState<BulkModerationResultItem[] | null>(null);
 
   const query = useQuery({
     queryKey: ["admin", "events", statusFilter],
@@ -90,7 +130,6 @@ export function EventModerationScreen() {
     retry: false,
   });
 
-  // Full detail for the review drawer (404 when the moderator cannot read it).
   const detailQuery = useQuery({
     queryKey: ["admin", "events", "detail", selected?.id],
     queryFn: () => eventsApi.getOwned(selected!.id),
@@ -104,9 +143,7 @@ export function EventModerationScreen() {
 
   function handleError(e: unknown) {
     const reason_ =
-      e instanceof ApiError && typeof e.details?.reason === "string"
-        ? e.details.reason
-        : undefined;
+      e instanceof ApiError && typeof e.details?.reason === "string" ? e.details.reason : undefined;
     if (reason_ === "version_conflict" || (e instanceof ApiError && e.code === "CONFLICT")) {
       toast.show({ tone: "error", title: t("conflictToast"), description: t("conflictBody") });
       setApproveOpen(false);
@@ -130,8 +167,7 @@ export function EventModerationScreen() {
   });
 
   const reject = useMutation({
-    mutationFn: (ev: OwnerEventSummary) =>
-      eventsApi.reject(ev.id, reason, ev.version, reasonCode),
+    mutationFn: (ev: OwnerEventSummary) => eventsApi.reject(ev.id, reason, ev.version, reasonCode),
     onSuccess: () => {
       setRejectOpen(false);
       setSelected(null);
@@ -182,7 +218,7 @@ export function EventModerationScreen() {
     onSuccess: (results) => {
       setBulkKind(null);
       setBulkResults(results);
-      setSelectedIds(new Set());
+      bulkClearRef.current();
       refresh();
     },
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
@@ -194,113 +230,76 @@ export function EventModerationScreen() {
     onSuccess: (results) => {
       setBulkKind(null);
       setBulkResults(results);
-      setSelectedIds(new Set());
+      bulkClearRef.current();
       setReason("");
       refresh();
     },
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
   });
 
-  /* ---- Permission / auth states ---- */
-  if (query.isError && query.error instanceof ApiError) {
-    const err = query.error;
-    if (err.isPermissionError || err.isAuthError) {
-      return (
-        <>
-          <PageHeader title={t("title")} description={t("subtitle")} />
-          <ModerationTabs />
-          <EmptyState
-            kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
-            title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
-            description={err.isPermissionError ? t("permissionBody") : tStates("authBody")}
-          />
-        </>
-      );
-    }
-  }
+  const isPermissionError =
+    query.isError &&
+    query.error instanceof ApiError &&
+    (query.error.isPermissionError || query.error.isAuthError);
 
   const rows = query.data ?? [];
   const detail = detailQuery.data;
   const isPending = selected?.status === "pending_review";
-  const canClaim = isPending && selected && !selected.claimed_by;
-  const canEscalate = isPending;
+  const canClaim = isPending && selected != null && !selected.claimed_by;
+  const sheetOpen = selected !== null && !approveOpen && !rejectOpen && !escalateOpen;
 
-  function toggleRow(id: string, checked: boolean) {
-    setSelectedIds((prev) => {
-      const next = new Set(prev);
-      if (checked) next.add(id);
-      else next.delete(id);
-      return next;
-    });
-  }
-
-  const pendingRows = rows.filter((r) => r.status === "pending_review");
-  const allPendingSelected =
-    pendingRows.length > 0 && pendingRows.every((r) => selectedIds.has(r.id));
-
-  const columns: Column<OwnerEventSummary>[] = [
+  const columns: ColumnDef<OwnerEventSummary, unknown>[] = [
     {
-      key: "select",
-      header: "",
-      className: "w-10",
-      cell: (r) =>
-        r.status === "pending_review" ? (
-          <RowSelectCheckbox
-            checked={selectedIds.has(r.id)}
-            onChange={(checked) => toggleRow(r.id, checked)}
-            label={t("selectRow", { title: r.title })}
-          />
-        ) : null,
-    },
-    {
-      key: "title",
+      accessorKey: "title",
       header: t("colEvent"),
-      cell: (r) => (
+      cell: ({ row }) => (
         <div className="min-w-0">
-          <p className="truncate font-semibold text-[var(--text-primary)]">{r.title}</p>
-          <p className="truncate text-xs text-[var(--text-secondary)]">
-            {labels.eventType(r.event_type, r.event_type_label)}
+          <p className="truncate font-semibold text-foreground">{row.original.title}</p>
+          <p className="truncate type-caption text-muted-foreground">
+            {labels.eventType(row.original.event_type, row.original.event_type_label)}
             {" · "}
-            {labels.format(r.format, r.format_label)}
+            {labels.format(row.original.format, row.original.format_label)}
           </p>
         </div>
       ),
     },
     {
-      key: "when",
+      id: "when",
       header: t("colWhen"),
-      cell: (r) => (
-        <span className="text-[var(--text-secondary)]">
-          {formatEventWhen(r.starts_at, r.ends_at, locale)}
+      enableSorting: false,
+      cell: ({ row }) => (
+        <span className="type-small text-muted-foreground">
+          {formatEventWhen(row.original.starts_at, row.original.ends_at, locale)}
         </span>
       ),
     },
     {
-      key: "sla",
+      id: "sla",
       header: t("colSla"),
-      cell: (r) => (
+      enableSorting: false,
+      cell: ({ row }) => (
         <div className="flex flex-col items-start gap-1">
-          <SlaBadge dueBy={r.due_by} ageHours={r.age_hours} isOverdue={r.is_overdue} />
-          <ClaimBadge claimedBy={r.claimed_by} isMine={r.claimed_by === userId} />
+          <SlaChip dueBy={row.original.due_by} ageHours={row.original.age_hours} isOverdue={row.original.is_overdue} />
+          <ClaimChip claimedBy={row.original.claimed_by} isMine={row.original.claimed_by === userId} />
         </div>
       ),
     },
     {
-      key: "status",
+      accessorKey: "status",
       header: t("colStatus"),
-      cell: (r) => (
-        <StatusBadge tone={EVENT_STATUS_TONE[r.status] ?? "info"}>
-          {labels.status(r.status, r.status_label)}
-        </StatusBadge>
+      cell: ({ row }) => (
+        <StatusChip tone={EVENT_STATUS_CHIP[row.original.status] ?? "neutral"}>
+          {labels.status(row.original.status, row.original.status_label)}
+        </StatusChip>
       ),
     },
     {
-      key: "actions",
+      id: "actions",
       header: "",
-      align: "right",
-      cell: (r) => (
-        <Button variant="ghost" size="sm" onClick={() => setSelected(r)}>
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <Button variant="ghost" size="sm" onClick={() => setSelected(row.original)}>
           {t("review")}
         </Button>
       ),
@@ -312,235 +311,198 @@ export function EventModerationScreen() {
       <PageHeader title={t("title")} description={t("subtitle")} />
       <ModerationTabs />
 
-      {/* ── AI Moderation Queue ── */}
-      {!query.isPending && (() => {
-        type EventModerationInsightKey = "insightManyPending" | "insightOnePending" | "insightQueueClear" | "insightRejectedReview";
-        const insights: EventModerationInsightKey[] = [];
-        if (statusFilter === "pending_review") {
-          if (rows.length > 3) insights.push("insightManyPending");
-          else if (rows.length === 1) insights.push("insightOnePending");
-          else if (rows.length === 0) insights.push("insightQueueClear");
-        } else if (statusFilter === "rejected" && rows.length > 0) {
-          insights.push("insightRejectedReview");
-        }
-        if (!insights.length) return null;
-        return (
-          <section
-            aria-label={t("aiInsightsTitle")}
-            className="mb-4 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 "
-          >
-            <div className="mb-3 flex items-center gap-2">
-              <span className="flex size-6 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              <p className="text-sm font-semibold text-[var(--text-primary)]">{t("aiInsightsTitle")}</p>
-            </div>
-            <ul className="space-y-1.5">
-              {insights.map((key) => (
-                <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                  {t(key)}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })()}
-
-      {/* Status filter tab chips */}
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex flex-wrap gap-2" role="group" aria-label={t("filterLabel")}>
-          {STATUS_FILTERS.map((s) => (
-            <button
-              key={s}
-              onClick={() => setStatusFilter(s)}
-              aria-pressed={statusFilter === s}
-              className={cn(
-                "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
-                statusFilter === s
-                  ? s === "pending_review"
-                    ? "border-[var(--amber-500)]/30 bg-[var(--amber-600)] text-white shadow-sm"
-                    : s === "published"
-                      ? "border-[var(--teal-500)]/30 bg-[var(--teal-600)] text-white shadow-sm"
-                      : s === "rejected"
-                        ? "border-[var(--red-500)]/30 bg-[var(--red-600)] text-white shadow-sm"
-                        : "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
-              )}
-            >
-              {labels.status(s)}
-            </button>
-          ))}
-        </div>
-        {pendingRows.length > 0 && statusFilter === "pending_review" && (
-          <label className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)]">
-            <input
-              type="checkbox"
-              checked={allPendingSelected}
-              onChange={(e) =>
-                setSelectedIds(
-                  e.target.checked ? new Set(pendingRows.map((r) => r.id)) : new Set(),
-                )
-              }
-              className="size-4 cursor-pointer rounded border-[var(--border-default)] accent-[var(--brand-primary)]"
-            />
-            {tm("moderationQueue.selectAll")}
-          </label>
-        )}
-      </div>
-
-      {/* Bulk action bar */}
-      {selectedIds.size > 0 && (
-        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-[var(--border-default)] bg-white px-4 py-2.5">
-          <span className="text-sm font-semibold text-[var(--text-primary)]">
-            {tm("moderationQueue.selectedCount", { count: selectedIds.size })}
-          </span>
-          <div className="ml-auto flex flex-wrap gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setSelectedIds(new Set())}>
-              {tm("moderationQueue.clearSelection")}
-            </Button>
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={() => {
-                setReason("");
-                setReasonError(null);
-                setBulkKind("reject");
-              }}
-            >
-              <XCircle aria-hidden weight="bold" className="size-4" />
-              {tm("moderationQueue.bulkReject")}
-            </Button>
-            <Button variant="primary" size="sm" onClick={() => setBulkKind("approve")}>
-              <CheckCircle aria-hidden weight="bold" className="size-4" />
-              {tm("moderationQueue.bulkApprove")}
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {query.isError &&
-      !(query.error instanceof ApiError && (query.error.isPermissionError || query.error.isAuthError)) ? (
+      {isPermissionError ? (
         <EmptyState
-          kind="error"
-          icon={WarningCircle}
-          title={tStates("errorTitle")}
-          description={tStates("errorBody")}
-          action={
-            <Button variant="secondary" onClick={() => query.refetch()}>
-              {tc("retry")}
-            </Button>
+          kind={query.error instanceof ApiError && query.error.isPermissionError ? "permission" : "auth"}
+          title={
+            query.error instanceof ApiError && query.error.isPermissionError
+              ? tStates("permissionTitle")
+              : tStates("authTitle")
+          }
+          description={
+            query.error instanceof ApiError && query.error.isPermissionError
+              ? t("permissionBody")
+              : tStates("authBody")
           }
         />
       ) : (
-        <DataTable
-          columns={columns}
-          rows={rows}
-          getRowId={(r) => r.id}
-          loading={query.isPending}
-          caption={t("title")}
-          empty={{
-            kind: "empty",
-            icon: CalendarBlank,
-            title: t("empty"),
-            description: t("emptyBody"),
-          }}
-        />
+        <div className="space-y-4">
+          <FilterBar>
+            <div className="flex flex-wrap gap-1.5" role="group" aria-label={t("filterLabel")}>
+              {STATUS_FILTERS.map((s) => {
+                const active = statusFilter === s;
+                return (
+                  <button
+                    key={s}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setStatusFilter(s)}
+                    className={cn(
+                      "inline-flex items-center rounded-full border px-3 py-1 text-[0.8125rem] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+                      active
+                        ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                        : "border-border bg-card text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {labels.status(s)}
+                  </button>
+                );
+              })}
+            </div>
+          </FilterBar>
+
+          {query.isError && !isPermissionError ? (
+            <EmptyState
+              kind="error"
+              title={tStates("errorTitle")}
+              description={tStates("errorBody")}
+              action={
+                <Button variant="secondary" onClick={() => query.refetch()}>
+                  {tc("retry")}
+                </Button>
+              }
+            />
+          ) : (
+            <DataTable
+              columns={columns}
+              data={rows}
+              getRowId={(r) => r.id}
+              loading={query.isPending}
+              onRowClick={(r) => setSelected(r)}
+              activeRowId={selected?.id ?? undefined}
+              enableSelection={statusFilter === "pending_review"}
+              bulkActions={(selectedRows, clear) => (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setBulkIds(selectedRows.map((r) => r.id));
+                      bulkClearRef.current = clear;
+                      setReason("");
+                      setReasonCode("other");
+                      setReasonError(null);
+                      setBulkKind("reject");
+                    }}
+                  >
+                    <X className="size-4" strokeWidth={1.9} />
+                    {tm("moderationQueue.bulkReject")}
+                  </Button>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => {
+                      setBulkIds(selectedRows.map((r) => r.id));
+                      bulkClearRef.current = clear;
+                      setBulkKind("approve");
+                    }}
+                  >
+                    <Check className="size-4" strokeWidth={1.9} />
+                    {tm("moderationQueue.bulkApprove")}
+                  </Button>
+                </>
+              )}
+              empty={<EmptyState kind="empty" icon={CalendarX} title={t("empty")} description={t("emptyBody")} />}
+            />
+          )}
+        </div>
       )}
 
       {/* Review drawer */}
-      <Sheet
-        open={selected !== null && !approveOpen && !rejectOpen && !escalateOpen}
+      <DetailSheet
+        open={sheetOpen}
         onClose={() => setSelected(null)}
-        title={t("reviewTitle")}
+        title={selected?.title ?? t("reviewTitle")}
+        subtitle={
+          selected
+            ? `${labels.eventType(selected.event_type, selected.event_type_label)} · ${labels.format(selected.format, selected.format_label)}`
+            : undefined
+        }
+        status={
+          selected ? (
+            <>
+              <StatusChip tone={EVENT_STATUS_CHIP[selected.status] ?? "neutral"}>
+                {labels.status(selected.status, selected.status_label)}
+              </StatusChip>
+              <StatusChip tone={EVENT_MODERATION_CHIP[selected.moderation_status] ?? "neutral"}>
+                {labels.moderation(selected.moderation_status, selected.moderation_status_label)}
+              </StatusChip>
+              <SlaChip dueBy={selected.due_by} ageHours={selected.age_hours} isOverdue={selected.is_overdue} />
+              <ClaimChip claimedBy={selected.claimed_by} isMine={selected.claimed_by === userId} />
+            </>
+          ) : undefined
+        }
+        width="lg"
         closeLabel={tc("close")}
       >
         {selected && (
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-base font-bold text-[var(--text-primary)]">
-                {selected.title}
-              </h3>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                <StatusBadge tone={EVENT_STATUS_TONE[selected.status] ?? "info"}>
-                  {labels.status(selected.status, selected.status_label)}
-                </StatusBadge>
-                <StatusBadge tone={EVENT_MODERATION_TONE[selected.moderation_status] ?? "info"}>
-                  {labels.moderation(selected.moderation_status, selected.moderation_status_label)}
-                </StatusBadge>
-                <SlaBadge
-                  dueBy={selected.due_by}
-                  ageHours={selected.age_hours}
-                  isOverdue={selected.is_overdue}
-                />
-                <ClaimBadge claimedBy={selected.claimed_by} isMine={selected.claimed_by === userId} />
-              </div>
-            </div>
-
-            <Field label={te("type")}>
-              {labels.eventType(selected.event_type, selected.event_type_label)}
-              {" · "}
-              {labels.format(selected.format, selected.format_label)}
-            </Field>
-            <Field label={te("when")}>
-              {formatEventWhen(selected.starts_at, selected.ends_at, locale)}
-            </Field>
-            <Field label={te("where")}>
-              {selected.format === "online"
-                ? te("onlineEvent")
-                : selected.venue
-                  ? [selected.venue.name, selected.venue.address].filter(Boolean).join(" · ") || "—"
-                  : "—"}
-            </Field>
-            <Field label={te("capacity")}>
-              {selected.capacity != null ? selected.capacity : te("unlimited")}
-            </Field>
-            <Field label={te("visibilityLabel")}>{labels.visibility(selected.visibility)}</Field>
-
-            {/* Full detail (when the moderator can read it). */}
-            {detailQuery.isPending ? (
-              <p className="text-sm text-[var(--text-muted)]">{tc("loading")}</p>
-            ) : detail ? (
-              <Field label={te("about")}>
-                <span className="whitespace-pre-wrap">{detail.description}</span>
-              </Field>
-            ) : (
-              <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-xs text-[var(--text-muted)] ">
-                {t("detailUnavailable")}
+          <>
+            <DetailSheetSection title={te("type")}>
+              <p className="text-sm text-foreground">
+                {labels.eventType(selected.event_type, selected.event_type_label)}
+                {" · "}
+                {labels.format(selected.format, selected.format_label)}
               </p>
-            )}
+            </DetailSheetSection>
+            <DetailSheetSection title={te("when")}>
+              <p className="text-sm text-foreground">
+                {formatEventWhen(selected.starts_at, selected.ends_at, locale)}
+              </p>
+            </DetailSheetSection>
+            <DetailSheetSection title={te("where")}>
+              <p className="text-sm text-foreground">
+                {selected.format === "online"
+                  ? te("onlineEvent")
+                  : selected.venue
+                    ? [selected.venue.name, selected.venue.address].filter(Boolean).join(" · ") || "—"
+                    : "—"}
+              </p>
+            </DetailSheetSection>
+            <DetailSheetSection title={te("capacity")}>
+              <p className="text-sm text-foreground">
+                {selected.capacity != null ? selected.capacity : te("unlimited")}
+              </p>
+            </DetailSheetSection>
+            <DetailSheetSection title={te("visibilityLabel")}>
+              <p className="text-sm text-foreground">{labels.visibility(selected.visibility)}</p>
+            </DetailSheetSection>
 
-            {isPending ? (
-              <div className="flex flex-col gap-2 pt-2">
-                {canClaim && (
-                  <Button
-                    variant="secondary"
-                    fullWidth
-                    loading={claim.isPending}
-                    onClick={() => claim.mutate(selected)}
-                  >
-                    <UserCheck aria-hidden weight="bold" className="size-4" />
-                    {tm("moderationQueue.claim")}
+            <DetailSheetSection title={te("about")}>
+              {detailQuery.isPending ? (
+                <div className="h-16 animate-skeleton rounded-lg bg-[var(--bg-muted)]" />
+              ) : detail ? (
+                <p className="whitespace-pre-wrap text-sm text-foreground">{detail.description}</p>
+              ) : (
+                <p className="type-small text-muted-foreground">{t("detailUnavailable")}</p>
+              )}
+            </DetailSheetSection>
+
+            <DetailSheetSection>
+              {isPending ? (
+                <div className="flex flex-col gap-2">
+                  {canClaim && (
+                    <Button variant="secondary" fullWidth loading={claim.isPending} onClick={() => claim.mutate(selected)}>
+                      <UserCheck className="size-4" strokeWidth={1.9} />
+                      {tm("moderationQueue.claim")}
+                    </Button>
+                  )}
+                  <Button variant="primary" fullWidth onClick={() => setApproveOpen(true)}>
+                    <Check className="size-4" strokeWidth={1.9} />
+                    {t("approve")}
                   </Button>
-                )}
-                <Button variant="primary" fullWidth onClick={() => setApproveOpen(true)}>
-                  <CheckCircle aria-hidden weight="bold" className="size-4" />
-                  {t("approve")}
-                </Button>
-                <Button
-                  variant="danger"
-                  fullWidth
-                  onClick={() => {
-                    setReason("");
-                    setReasonCode("other");
-                    setReasonError(null);
-                    setRejectOpen(true);
-                  }}
-                >
-                  <XCircle aria-hidden weight="bold" className="size-4" />
-                  {t("reject")}
-                </Button>
-                {canEscalate && (
+                  <Button
+                    variant="danger"
+                    fullWidth
+                    onClick={() => {
+                      setReason("");
+                      setReasonCode("other");
+                      setReasonError(null);
+                      setRejectOpen(true);
+                    }}
+                  >
+                    <X className="size-4" strokeWidth={1.9} />
+                    {t("reject")}
+                  </Button>
                   <Button
                     variant="ghost"
                     fullWidth
@@ -550,19 +512,17 @@ export function EventModerationScreen() {
                       setEscalateOpen(true);
                     }}
                   >
-                    <Flag aria-hidden weight="bold" className="size-4" />
+                    <Flag className="size-4" strokeWidth={1.9} />
                     {tm("moderationQueue.escalate")}
                   </Button>
-                )}
-              </div>
-            ) : (
-              <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-secondary)] ">
-                {t("notPending")}
-              </p>
-            )}
-          </div>
+                </div>
+              ) : (
+                <p className="type-small text-muted-foreground">{t("notPending")}</p>
+              )}
+            </DetailSheetSection>
+          </>
         )}
-      </Sheet>
+      </DetailSheet>
 
       {/* Approve modal */}
       <Modal
@@ -577,17 +537,13 @@ export function EventModerationScreen() {
             <Button variant="ghost" onClick={() => setApproveOpen(false)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={approve.isPending}
-              onClick={() => selected && approve.mutate(selected)}
-            >
+            <Button variant="primary" loading={approve.isPending} onClick={() => selected && approve.mutate(selected)}>
               {t("approveConfirm")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("approveNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("approveNote")}</p>
       </Modal>
 
       {/* Reject modal */}
@@ -620,40 +576,18 @@ export function EventModerationScreen() {
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="event-reject-reason-code"
-            value={reasonCode}
-            onChange={setReasonCode}
+          <ReasonCodeSelect id="event-reject-reason-code" value={reasonCode} onChange={setReasonCode} />
+          <RejectReasonField
+            id="event-reject-reason"
+            label={t("reasonLabel")}
+            hint={t("reasonHint")}
+            value={reason}
+            error={reasonError}
+            onChange={(v) => {
+              setReason(v);
+              if (reasonError) setReasonError(null);
+            }}
           />
-          <div>
-            <label
-              htmlFor="event-reject-reason"
-              className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
-            >
-              {t("reasonLabel")}
-              <span className="ml-0.5 text-[var(--brand-red)]" aria-hidden>
-                *
-              </span>
-            </label>
-            <textarea
-              id="event-reject-reason"
-              rows={3}
-              value={reason}
-              onChange={(e) => {
-                setReason(e.target.value);
-                if (reasonError) setReasonError(null);
-              }}
-              aria-invalid={reasonError ? true : undefined}
-              aria-describedby={reasonError ? "event-reject-reason-error" : undefined}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
-            />
-            {reasonError && (
-              <p id="event-reject-reason-error" className="mt-1 text-xs font-medium text-[var(--brand-red)]">
-                {reasonError}
-              </p>
-            )}
-            <p className="mt-2 text-xs text-[var(--text-muted)]">{t("reasonHint")}</p>
-          </div>
         </div>
       </Modal>
 
@@ -670,37 +604,20 @@ export function EventModerationScreen() {
             <Button variant="ghost" onClick={() => setEscalateOpen(false)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={escalate.isPending}
-              onClick={() => selected && escalate.mutate(selected)}
-            >
+            <Button variant="primary" loading={escalate.isPending} onClick={() => selected && escalate.mutate(selected)}>
               {tm("moderationQueue.escalateConfirm")}
             </Button>
           </>
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="event-escalate-reason-code"
-            value={escalateReasonCode}
-            onChange={setEscalateReasonCode}
+          <ReasonCodeSelect id="event-escalate-reason-code" value={escalateReasonCode} onChange={setEscalateReasonCode} />
+          <RejectReasonField
+            id="event-escalate-note"
+            label={tm("moderationQueue.otherNoteLabel")}
+            value={escalateNote}
+            onChange={setEscalateNote}
           />
-          <div>
-            <label
-              htmlFor="event-escalate-note"
-              className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
-            >
-              {tm("moderationQueue.otherNoteLabel")}
-            </label>
-            <textarea
-              id="event-escalate-note"
-              rows={3}
-              value={escalateNote}
-              onChange={(e) => setEscalateNote(e.target.value)}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
-            />
-          </div>
         </div>
       </Modal>
 
@@ -708,7 +625,7 @@ export function EventModerationScreen() {
       <Modal
         open={bulkKind === "approve"}
         onClose={() => setBulkKind(null)}
-        title={tm("moderationQueue.bulkApproveTitle", { count: selectedIds.size })}
+        title={tm("moderationQueue.bulkApproveTitle", { count: bulkIds.length })}
         description={tm("moderationQueue.bulkApproveBody")}
         size="sm"
         closeLabel={tc("close")}
@@ -717,24 +634,20 @@ export function EventModerationScreen() {
             <Button variant="ghost" onClick={() => setBulkKind(null)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={bulkApprove.isPending}
-              onClick={() => bulkApprove.mutate(Array.from(selectedIds))}
-            >
+            <Button variant="primary" loading={bulkApprove.isPending} onClick={() => bulkApprove.mutate(bulkIds)}>
               {tm("moderationQueue.bulkApproveConfirm")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("approveNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("approveNote")}</p>
       </Modal>
 
       {/* Bulk reject confirm */}
       <Modal
         open={bulkKind === "reject"}
         onClose={() => setBulkKind(null)}
-        title={tm("moderationQueue.bulkRejectTitle", { count: selectedIds.size })}
+        title={tm("moderationQueue.bulkRejectTitle", { count: bulkIds.length })}
         description={tm("moderationQueue.bulkRejectBody")}
         size="sm"
         closeLabel={tc("close")}
@@ -751,7 +664,7 @@ export function EventModerationScreen() {
                   setReasonError(t("reasonRequired"));
                   return;
                 }
-                bulkReject.mutate(Array.from(selectedIds));
+                bulkReject.mutate(bulkIds);
               }}
             >
               {tm("moderationQueue.bulkRejectConfirm")}
@@ -760,40 +673,21 @@ export function EventModerationScreen() {
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="event-bulk-reject-reason-code"
-            value={reasonCode}
-            onChange={setReasonCode}
+          <ReasonCodeSelect id="event-bulk-reject-reason-code" value={reasonCode} onChange={setReasonCode} />
+          <RejectReasonField
+            id="event-bulk-reject-reason"
+            label={t("reasonLabel")}
+            value={reason}
+            error={reasonError}
+            onChange={(v) => {
+              setReason(v);
+              if (reasonError) setReasonError(null);
+            }}
           />
-          <div>
-            <label
-              htmlFor="event-bulk-reject-reason"
-              className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
-            >
-              {t("reasonLabel")}
-              <span className="ml-0.5 text-[var(--brand-red)]" aria-hidden>
-                *
-              </span>
-            </label>
-            <textarea
-              id="event-bulk-reject-reason"
-              rows={3}
-              value={reason}
-              onChange={(e) => {
-                setReason(e.target.value);
-                if (reasonError) setReasonError(null);
-              }}
-              aria-invalid={reasonError ? true : undefined}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
-            />
-            {reasonError && (
-              <p className="mt-1 text-xs font-medium text-[var(--brand-red)]">{reasonError}</p>
-            )}
-          </div>
         </div>
       </Modal>
 
-      {/* Bulk result (partial success is normal) */}
+      {/* Bulk result */}
       <Modal
         open={bulkResults !== null}
         onClose={() => setBulkResults(null)}
@@ -807,23 +701,53 @@ export function EventModerationScreen() {
         }
       >
         {bulkResults && (
-          <BulkResultList
-            results={bulkResults}
-            getLabel={(id) => rows.find((r) => r.id === id)?.title ?? id}
-          />
+          <BulkResultList results={bulkResults} getLabel={(id) => rows.find((r) => r.id === id)?.title ?? id} />
         )}
       </Modal>
     </>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+/* -------------------------------------------------------------------------- */
+/* Shared reason textarea (v10 field treatment)                                */
+/* -------------------------------------------------------------------------- */
+
+function RejectReasonField({
+  id,
+  label,
+  value,
+  onChange,
+  error,
+  hint,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  error?: string | null;
+  hint?: string;
+}) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-foreground">
         {label}
-      </p>
-      <div className="mt-0.5 text-sm text-[var(--text-primary)]">{children}</div>
+      </label>
+      <textarea
+        id={id}
+        rows={3}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
+        className="w-full rounded-lg border border-border bg-card px-3.5 py-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus-visible:border-[var(--field-focus-border)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]/30"
+      />
+      {error ? (
+        <p id={`${id}-error`} className="mt-1 type-caption font-medium text-[var(--content-danger)]">
+          {error}
+        </p>
+      ) : hint ? (
+        <p className="mt-1 type-caption text-muted-foreground">{hint}</p>
+      ) : null}
     </div>
   );
 }

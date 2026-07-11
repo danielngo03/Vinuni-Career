@@ -128,7 +128,7 @@ export function JobCard({ job }: { job: JobSummary }) {
 
         {/* Salary — monospace numeric pill when disclosed */}
         {salary ? (
-          <p className="mt-2.5 flex items-center gap-1.5 rounded-lg border border-[var(--teal-100)] bg-[var(--teal-50)] px-2.5 py-1.5 text-xs text-[var(--teal-700)]">
+          <p className="mt-2.5 flex items-center gap-1.5 rounded-lg border border-[var(--border-default)] bg-[var(--bg-muted)] px-2.5 py-1.5 text-xs text-[var(--text-secondary)]">
             <CurrencyCircleDollar aria-hidden weight="duotone" className="size-3.5 shrink-0" />
             <span className="font-data font-semibold tabular-nums">{salary}</span>
           </p>

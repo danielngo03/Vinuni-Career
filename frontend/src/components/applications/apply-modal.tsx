@@ -7,7 +7,6 @@ import {
   CheckCircle,
   FileText,
   Info,
-  ShieldCheck,
   Sparkle,
   Warning,
   WarningCircle,
@@ -19,7 +18,6 @@ import {
   Modal,
   Select,
   Skeleton,
-  Switch,
   useToast,
 } from "@/components/ui";
 import {
@@ -71,7 +69,6 @@ export function ApplyModal({
   const [coverLetter, setCoverLetter] = useState("");
   const [coverLetterAiLoading, setCoverLetterAiLoading] = useState(false);
   const [coverLetterAiFallback, setCoverLetterAiFallback] = useState(false);
-  const [anonymous, setAnonymous] = useState(false);
   const [idempotencyKey, setIdempotencyKey] = useState("");
 
   // Fresh idempotency key + clean form each time the modal opens.
@@ -81,7 +78,6 @@ export function ApplyModal({
       setPhase("form");
       setCoverLetter("");
       setCoverLetterAiFallback(false);
-      setAnonymous(false);
     }
   }, [open]);
 
@@ -180,7 +176,6 @@ export function ApplyModal({
           cv_version_id: versionId,
         },
         cover_letter: coverLetter.trim() || null,
-        is_anonymous: anonymous,
         idempotency_key: idempotencyKey,
       });
       setPhase("success");
@@ -423,24 +418,6 @@ export function ApplyModal({
                 {coverLetterAiFallback ? t("coverLetterAiDisclaimerFallback") : t("coverLetterAiDisclaimer")}
               </p>
             )}
-          </div>
-
-          {/* Anonymous toggle */}
-          <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface-light)] p-3.5 backdrop-blur-sm">
-            <Switch
-              id="apply-anonymous"
-              checked={anonymous}
-              onCheckedChange={setAnonymous}
-              label={t("anonymousLabel")}
-            />
-            <p className="mt-2 flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-              <ShieldCheck
-                aria-hidden
-                weight="duotone"
-                className="mt-0.5 size-4 shrink-0 text-[var(--brand-primary)]"
-              />
-              {t("anonymousHint")}
-            </p>
           </div>
 
           <p className="flex items-start gap-2 text-xs text-[var(--text-muted)]">

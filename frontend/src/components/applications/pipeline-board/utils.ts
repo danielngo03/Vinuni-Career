@@ -1,4 +1,29 @@
 import type { PipelineCard } from "@/lib/api";
+import type { ChipTone } from "@/components/kit";
+
+/** The synthetic droppable id for the pre-pipeline "new" bucket (stage_id null). */
+export const NEW_COLUMN_ID = "__new__";
+
+/** Application lifecycle status → soft StatusChip tone (color = meaning). */
+export const APPLICATION_CHIP_TONE: Record<string, ChipTone> = {
+  submitted: "sky",
+  under_review: "amber",
+  rejected: "danger",
+  withdrawn: "neutral",
+  hired: "success",
+};
+
+/** Offer status → soft StatusChip tone. Falls back to neutral for unknowns. */
+export const OFFER_CHIP_TONE: Record<string, ChipTone> = {
+  draft: "neutral",
+  pending_approval: "amber",
+  approved: "amber",
+  sent: "sky",
+  accepted: "success",
+  declined: "danger",
+  withdrawn: "neutral",
+  expired: "neutral",
+};
 
 /** A card is flagged "stale" once it has sat in a column past this threshold. */
 export const STALE_DAYS = 7;
@@ -15,10 +40,7 @@ export function daysInStage(enteredAt: string | null | undefined): number | null
   return Math.floor((Date.now() - t) / 86_400_000);
 }
 
-/** Anonymity-safe display handle. Prefers the revealed name, else UV-xxxx. */
+/** The candidate's display name (identity is always present on the card). */
 export function cardHandle(card: PipelineCard): string {
-  if (card.is_anonymous && card.applicant.anonymous_id) {
-    return card.applicant.anonymous_id;
-  }
-  return card.applicant.display_name ?? card.applicant.anonymous_id ?? "—";
+  return card.applicant.full_name || "—";
 }

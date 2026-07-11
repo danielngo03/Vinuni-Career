@@ -22,7 +22,13 @@ export type WorkflowNodeType =
   | "move_candidate"
   | "request_approval"
   | "ai_suggestion"
-  | "webhook";
+  | "webhook"
+  // Recruiting-automation node types (Wave 2B). Mirrored from
+  // backend/app/modules/workflow/domain/graph.py `NodeType`.
+  | "ai_screen_application"
+  | "auto_advance_on_gate"
+  | "notify"
+  | "jd_pdf_to_draft";
 
 /** Node types whose real (non-simulated) execution can perform a side effect. */
 export const SIDE_EFFECTING_NODE_TYPES: ReadonlySet<WorkflowNodeType> = new Set([
@@ -35,13 +41,39 @@ export const SIDE_EFFECTING_NODE_TYPES: ReadonlySet<WorkflowNodeType> = new Set(
   "human_review",
   "ai_suggestion",
   "webhook",
+  "ai_screen_application",
+  "auto_advance_on_gate",
+  "notify",
+  "jd_pdf_to_draft",
 ]);
 
-/** Consequential/AI nodes that are always advisory + confirmation-required. */
+/** AI/advisory nodes that always pause for a human to confirm before acting. */
 export const ADVISORY_NODE_TYPES: ReadonlySet<WorkflowNodeType> = new Set([
   "ai_suggestion",
   "human_review",
   "request_approval",
+]);
+
+/**
+ * Consequential write/AI nodes that run AUTONOMOUSLY once the flow is activated
+ * (never before). The builder marks them so an author understands they are not
+ * advisory: activation is RBAC-gated and each performs a real read/meter/write.
+ * `ai_screen_application` also spends AI credits when its `mode` is `llm`.
+ */
+export const CONSEQUENTIAL_NODE_TYPES: ReadonlySet<WorkflowNodeType> = new Set([
+  "ai_screen_application",
+  "auto_advance_on_gate",
+  "notify",
+]);
+
+/**
+ * Nodes that always PAUSE for explicit human confirm-create and never publish on
+ * their own — surfaced distinctly from AI-advisory. `jd_pdf_to_draft` prepares a
+ * job DRAFT proposal (`awaiting_human_review`) that a person confirms via the
+ * existing job-draft flow.
+ */
+export const HUMAN_CONFIRM_NODE_TYPES: ReadonlySet<WorkflowNodeType> = new Set([
+  "jd_pdf_to_draft",
 ]);
 
 export interface FlowNode {

@@ -22,6 +22,7 @@ export function OtpInput({
   onChange: (v: string) => void;
   disabled?: boolean;
 }) {
+  const t = useTranslations("auth");
   const inputs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleKey = (i: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -66,7 +67,7 @@ export function OtpInput({
           onKeyDown={(e) => handleKey(i, e)}
           onClick={(e) => (e.target as HTMLInputElement).select()}
           className="h-12 w-10 rounded-xl border border-[var(--border-default)] bg-[var(--surface-card)] text-center text-lg font-bold text-[var(--text-primary)] outline-none transition-[border-color,box-shadow,background-color] duration-150 focus:border-[var(--field-focus-border)] focus:shadow-[0_0_0_4px_var(--field-focus-ring)] focus:ring-0 disabled:bg-[var(--bg-muted)] disabled:text-[var(--text-muted)]"
-          aria-label={`Chữ số ${i + 1}`}
+          aria-label={t("otpDigitLabel", { index: i + 1 })}
         />
       ))}
     </div>
@@ -134,7 +135,7 @@ export function VerifyEmailView({
 
   const loginFooter = (
     <Link href="/auth/login" className="font-semibold text-[var(--ink)] hover:underline">
-      Quay lại đăng nhập
+      {tAuth("backToLogin")}
     </Link>
   );
   const backControl = onBack ? (
@@ -144,7 +145,7 @@ export function VerifyEmailView({
       className="inline-flex items-center gap-2 rounded-full px-1 text-sm font-semibold text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--field-focus-ring)]"
     >
       <ArrowLeft aria-hidden className="size-4" />
-      Quay lại
+      {tAuth("back")}
     </button>
   ) : null;
 
@@ -152,19 +153,19 @@ export function VerifyEmailView({
   const isSuccess = verifyLink.isSuccess || verifyOtp.isSuccess;
   if (isSuccess) {
     return (
-      <AuthShell title="Email đã được xác minh!" footer={loginFooter}>
+      <AuthShell title={tAuth("verifiedTitle")} footer={loginFooter}>
         <div className="space-y-5 text-center">
           <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-gray-900 shadow-lg">
             <CheckCircle aria-hidden weight="fill" className="size-7 text-white" />
           </span>
           <p className="text-sm text-[var(--text-secondary)]">
-            Địa chỉ email của bạn đã được xác minh thành công. Bây giờ hãy hoàn thiện hồ sơ.
+            {tAuth("verifiedOnboardingBody")}
           </p>
           <Link
             href="/onboarding/role"
             className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-[var(--ink)] px-5 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
           >
-            Tiếp tục thiết lập hồ sơ →
+            {tAuth("verifyContinueSetup")}
           </Link>
         </div>
       </AuthShell>
@@ -174,10 +175,10 @@ export function VerifyEmailView({
   // ── Magic-link verifying ───────────────────────────────────────────────────
   if (token && mode === "link" && (verifyLink.isPending || verifyLink.isIdle)) {
     return (
-      <AuthShell title="Đang xác minh...">
+      <AuthShell title={tAuth("verifyingTitle")}>
         <div className="flex flex-col items-center gap-3 py-4 text-center">
           <CircleNotch aria-hidden className="size-8 animate-spin text-[var(--ink)]" />
-          <p className="text-sm text-[var(--text-secondary)]">Đang xác minh liên kết của bạn...</p>
+          <p className="text-sm text-[var(--text-secondary)]">{tAuth("verifyingLink")}</p>
         </div>
       </AuthShell>
     );
@@ -187,30 +188,30 @@ export function VerifyEmailView({
   const otpError = verifyOtp.isError
     ? getMessage(verifyOtp.error)
     : verifyLink.isError && mode === "link"
-    ? "Liên kết không hợp lệ hoặc đã hết hạn."
+    ? tAuth("verifyLinkInvalid")
     : null;
 
   return (
     <AuthShell
-      title="Xác minh email"
+      title={tAuth("verifyOtpTitle")}
       subtitle={
         email
-          ? `Nhập mã 6 số đã gửi đến ${email}`
-          : "Nhập mã xác minh từ email của bạn"
+          ? tAuth("verifyOtpSubtitle", { email })
+          : tAuth("verifyOtpSubtitleNoEmail")
       }
       beforeTitle={backControl}
       footer={onBack ? undefined : loginFooter}
     >
       <div className="space-y-5">
         {otpError && (
-          <FormBanner title="Xác minh thất bại">
+          <FormBanner title={tAuth("verifyFailedTitle")}>
             {otpError}
           </FormBanner>
         )}
 
         {resent && (
           <FormBanner tone="success">
-            Đã gửi lại mã xác minh. Vui lòng kiểm tra email.
+            {tAuth("verifyOtpResent")}
           </FormBanner>
         )}
 
@@ -247,11 +248,11 @@ export function VerifyEmailView({
           >
             {cooldown.active
               ? `${tAuth("forgotResend")} (${cooldown.seconds}s)`
-              : "Gửi lại mã xác minh"}
+              : tAuth("verifyResendCode")}
           </Button>
         ) : (
           <p className="text-center text-sm text-[var(--text-secondary)]">
-            Vui lòng kiểm tra hộp thư của bạn và nhập mã bên trên.
+            {tAuth("verifyNoEmailHint")}
           </p>
         )}
 
@@ -268,7 +269,7 @@ export function VerifyEmailView({
               }
             }}
           >
-            Xác minh tự động bằng liên kết trong email →
+            {tAuth("verifyUseLink")}
           </button>
         )}
       </div>

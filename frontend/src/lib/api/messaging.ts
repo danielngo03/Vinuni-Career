@@ -7,9 +7,8 @@ import type { ApiListEnvelope } from "./types";
 export type ThreadKind = "direct" | "announcement";
 
 /**
- * Thread context. Drives masking + initiation rules server-side:
- * - `application` — partner↔candidate, bound to an application (anonymity-masked
- *   until reveal).
+ * Thread context. Drives initiation rules server-side:
+ * - `application` — partner↔candidate, bound to an application (fully identified).
  * - `support` — student/alumni → university.
  * - `team` — same-org partner members.
  * Kept as a string-open union so an unknown server value never breaks rendering.
@@ -27,10 +26,9 @@ export type ThreadStatus = "active" | "archived" | "closed" | (string & {});
 
 /**
  * A thread row in the inbox. Every identity field is a SERVER-rendered label
- * (`counterpart_label`, participant `label`, message `sender_label`) — the
- * anonymity decision lives in the backend `thread_view` projection. The UI must
- * NEVER reconstruct, store, or display a student's name/email; it renders the
- * server label verbatim (an anonymous handle for the partner side until reveal).
+ * (`counterpart_label`, participant `label`, message `sender_label`) rendered
+ * verbatim. `is_anonymous` is a residual backend field that is always `false`
+ * (the identity-reveal flow was removed) — the UI never renders masking.
  */
 export interface ThreadSummary {
   id: string;
@@ -39,10 +37,11 @@ export interface ThreadSummary {
   context_type: ThreadContextType | null;
   context_label: string | null;
   subject: string | null;
-  /** Masked-or-real label for the OTHER side (server-decided). */
+  /** Real label for the OTHER side (server-rendered). */
   counterpart_label: string;
   status: ThreadStatus;
   status_label: string;
+  /** Residual backend field, always `false`; never drives masking in the UI. */
   is_anonymous: boolean;
   unread: number;
   can_reply: boolean;
@@ -50,7 +49,7 @@ export interface ThreadSummary {
   last_message_at: string | null;
 }
 
-/** One rendered participant (label is masked-or-real per the server). */
+/** One rendered participant (label is the server-rendered real name). */
 export interface ThreadParticipant {
   label: string;
   can_reply: boolean;
@@ -65,7 +64,7 @@ export interface ThreadDetail extends ThreadSummary {
 /**
  * A single message. `body` is markdown-lite and MUST be rendered through the
  * sanitizing renderer (never `dangerouslySetInnerHTML`). `sender_label` is the
- * masked-or-real server label; for system/announcement rows it is the system
+ * server-rendered real name; for system/announcement rows it is the system
  * label. A soft-deleted row arrives with `is_deleted=true` and a neutral body.
  */
 export interface Message {

@@ -10,7 +10,6 @@ import {
   Hourglass,
   Users,
   UsersThree,
-  Eye,
   ClockCounterClockwise,
   UserCircle,
   Sparkle,
@@ -61,12 +60,10 @@ function PipelineHealthMini({
   metrics,
   pipelineTitle,
   activeJobsLabel,
-  revealsLabel,
 }: {
   metrics: PartnerDashboardMetrics;
   pipelineTitle: string;
   activeJobsLabel: string;
-  revealsLabel: string;
 }) {
   const totalJobSlots =
     metrics.jobs_active + metrics.jobs_draft + metrics.jobs_pending_review;
@@ -74,8 +71,6 @@ function PipelineHealthMini({
     totalJobSlots > 0
       ? Math.round((metrics.jobs_active / totalJobSlots) * 100)
       : 0;
-
-  const revealsHot = metrics.reveals_pending_response > 0;
 
   return (
     <div className="marketplace-card rounded-[12px] p-4">
@@ -118,48 +113,6 @@ function PipelineHealthMini({
             />
           </div>
         </li>
-
-        {/* Pending reveals indicator */}
-        <li>
-          <div className="mb-1.5 flex items-center justify-between gap-2">
-            <span className="text-xs font-medium text-[var(--text-secondary)]">
-              {revealsLabel}
-            </span>
-            <span
-              className={cn(
-                "font-mono text-xs font-bold tabular-nums",
-                revealsHot
-                  ? "text-[var(--amber-700)]"
-                  : "text-[var(--teal-600)]",
-              )}
-            >
-              {metrics.reveals_pending_response}
-            </span>
-          </div>
-          <div
-            role="meter"
-            aria-valuenow={revealsHot ? 1 : 0}
-            aria-valuemin={0}
-            aria-valuemax={1}
-            aria-label={revealsLabel}
-            className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]"
-          >
-            {revealsHot && (
-              <div
-                className="h-full rounded-full bg-[var(--amber-600)] transition-[width] duration-700 motion-reduce:transition-none"
-                style={{
-                  width: `${Math.min(
-                    100,
-                    Math.max(
-                      8,
-                      metrics.reveals_pending_response * 12,
-                    ),
-                  )}%`,
-                }}
-              />
-            )}
-          </div>
-        </li>
       </ul>
     </div>
   );
@@ -188,9 +141,6 @@ function deriveHiringInsights(m: PartnerDashboardMetrics): HiringInsightEntry[] 
 
   if (m.jobs_draft > 0)
     insights.push({ key: "aiInsightDraftJobs", values: { count: m.jobs_draft } });
-
-  if (m.reveals_pending_response > 0)
-    insights.push({ key: "aiInsightRevealsPending", values: { count: m.reveals_pending_response } });
 
   if (totalJobs > 0 && m.jobs_active === 0)
     insights.push({ key: "aiInsightNoActive" });
@@ -230,7 +180,6 @@ function derivePartnerTodos(
     });
   };
 
-  pushAction("respond_reveals", Eye, true);
   pushAction("jobs_pending_review", Hourglass, metrics.jobs_pending_review > 0);
   pushAction("jobs_in_draft", NotePencil, metrics.jobs_draft > 0);
 
@@ -324,7 +273,7 @@ function OperationsHealthCard({
   applicationsPerActiveJob: number;
 }) {
   const tp = useTranslations("dashboard.partner");
-  const queueCount = metrics.jobs_draft + metrics.jobs_pending_review + metrics.reveals_pending_response;
+  const queueCount = metrics.jobs_draft + metrics.jobs_pending_review;
   const rows = [
     {
       key: "candidateDemand",
@@ -337,12 +286,6 @@ function OperationsHealthCard({
       label: tp("health.publishingQueue"),
       value: tp("health.itemsWaiting", { count: metrics.jobs_draft + metrics.jobs_pending_review }),
       tone: metrics.jobs_draft + metrics.jobs_pending_review === 0 ? "good" : "watch",
-    },
-    {
-      key: "privacyQueue",
-      label: tp("health.privacyQueue"),
-      value: tp("health.itemsWaiting", { count: metrics.reveals_pending_response }),
-      tone: metrics.reveals_pending_response === 0 ? "good" : "watch",
     },
   ];
 
@@ -551,7 +494,7 @@ export function PartnerDashboard() {
       {!authed ? (
         <DashboardGuestGate persona="partner" />
       ) : query.isPending ? (
-        <DashboardSkeleton tileCount={5} tileCols={5} />
+        <DashboardSkeleton tileCount={4} tileCols={4} />
       ) : query.isError ? (
         <DashboardErrorState error={query.error} onRetry={() => query.refetch()} />
       ) : (
@@ -592,17 +535,6 @@ export function PartnerDashboard() {
               tone: "info",
               href: "/partner/candidates",
             },
-            {
-              key: "reveals_pending_response",
-              label: tp("metric.revealsPending"),
-              value: data.metrics.reveals_pending_response,
-              icon: Eye,
-              emphasize: true,
-              href: "/partner/candidates",
-              hotNote: tp("metric.revealsPendingHotNote", {
-                count: data.metrics.reveals_pending_response,
-              }),
-            },
           ];
 
           const hiringInsights = deriveHiringInsights(data.metrics);
@@ -614,7 +546,7 @@ export function PartnerDashboard() {
 
           return (
             <div className="space-y-6">
-              <MetricTiles items={metrics} cols={5} />
+              <MetricTiles items={metrics} cols={4} />
 
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
                 <div className="space-y-6 lg:col-span-2">
@@ -697,7 +629,7 @@ export function PartnerDashboard() {
                                 {app.job_title ?? tp("untitledJob")}
                               </p>
                               <p className="mt-0.5 truncate text-[10px] text-[var(--text-muted)]">
-                                {app.candidate_handle}
+                                {app.candidate_name}
                                 {" · "}
                                 {formatRelativeTime(app.submitted_at, locale)}
                               </p>
@@ -720,7 +652,6 @@ export function PartnerDashboard() {
                     metrics={data.metrics}
                     pipelineTitle={tp("pipelineHealthTitle")}
                     activeJobsLabel={tp("metric.jobsActive")}
-                    revealsLabel={tp("metric.revealsPending")}
                   />
                 </div>
               </div>

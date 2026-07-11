@@ -43,6 +43,9 @@ const backendOrigin = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Self-contained server bundle (.next/standalone) so the Docker image ships
+  // without node_modules; required by frontend/Dockerfile. No effect on `next dev`.
+  output: "standalone",
   images: {
     remotePatterns: imageRemotePatterns(),
   },

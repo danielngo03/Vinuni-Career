@@ -3,32 +3,37 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
+  AlertCircle,
   ArrowRight,
-  ArrowSquareOut,
-  ArrowUDownLeft,
   CheckSquare,
-  ClockCounterClockwise,
-  DownloadSimple,
+  ClipboardCheck,
+  Clock,
+  Download,
+  ExternalLink,
   Handshake,
+  History,
   Square,
-  UserFocus,
-  WarningCircle,
-} from "@phosphor-icons/react";
+  Undo2,
+  UserRound,
+} from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { Button, StatusBadge, useToast } from "@/components/ui";
+import { Button, useToast } from "@/components/ui";
+import { KanbanCard, StatusChip, type ChipTone } from "@/components/kit";
 import { formatDateTime } from "@/lib/format";
-import { OFFER_STATUS_TONE, useOfferLabels } from "@/lib/applications/labels";
+import { useOfferLabels } from "@/lib/applications/labels";
 import { applicationsApi, resolveDownloadUrl, type PipelineCard } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
-import { cardHandle, daysInStage, STALE_DAYS } from "./utils";
+import { cardHandle, daysInStage, OFFER_CHIP_TONE, STALE_DAYS } from "./utils";
 
 export function PipelineCardView({
   card,
+  columnId,
   isNewBucket,
   canAdvance,
   jobId,
   requiredAction,
   canRollback,
+  canScore,
   locale,
   statusTone,
   statusLabel,
@@ -37,22 +42,33 @@ export function PipelineCardView({
   onToggleSelect,
   onAdvance,
   onRollback,
+  onScorecard,
   t,
 }: {
   card: PipelineCard;
+  /** Droppable column id this card belongs to (stage_id ?? "__new__"). */
+  columnId: string;
   isNewBucket: boolean;
   canAdvance: boolean;
   jobId: string;
   requiredAction: string | null;
   canRollback: boolean;
+  /**
+   * Whether the caller may read scorecards (holds `scorecards:read` / org admin).
+   * Gates the "score candidate" affordance on a scorecard-gated stage — the
+   * server stays the final authority; this only hides a dead button.
+   */
+  canScore: boolean;
   locale: string;
-  statusTone: (status: string) => Parameters<typeof StatusBadge>[0]["tone"];
+  statusTone: (status: string) => ChipTone;
   statusLabel: (status: string, label?: string | null) => string;
   advancePending: boolean;
   isSelected: boolean;
   onToggleSelect: () => void;
   onAdvance: () => void;
   onRollback: () => void;
+  /** Open the focused scorecard modal for this card's current stage. */
+  onScorecard: () => void;
   t: ReturnType<typeof useTranslations>;
 }) {
   const toast = useToast();
@@ -60,18 +76,20 @@ export function PipelineCardView({
   const offerLabels = useOfferLabels();
   const [downloading, setDownloading] = useState(false);
   const handle = cardHandle(card);
-  const anon = card.is_anonymous && !card.applicant.display_name;
   const days = daysInStage(card.entered_at);
   const stale = days !== null && days >= STALE_DAYS;
-  // `scorecard` / `score_threshold` stages block advance until the gate is met;
-  // the server enforces it (409), but we surface the gate state up front on the
-  // card. `score_threshold` also requires the average score to reach the
-  // threshold (the board glance shows counts + avg; the precise 409 is a toast).
-  const evalGated =
-    requiredAction === "scorecard" || requiredAction === "score_threshold";
+
+  const evalGated = requiredAction === "scorecard" || requiredAction === "score_threshold";
   const ev = card.evaluation ?? null;
   const showGate = evalGated && ev != null && ev.required > 0;
   const gateBlocked = showGate && ev!.gate_met === false;
+  // A card in a scorecard-gated stage can be scored here (the re-homed workflow),
+  // as long as the caller can read scorecards. When the gate blocks advancing,
+  // scoring is the candidate's real next action and takes the primary CTA.
+  const showScorecard = evalGated && canScore;
+
+  // A card is draggable when it has somewhere to go (forward or backward).
+  const draggable = canAdvance || canRollback;
 
   async function handleDownload() {
     setDownloading(true);
@@ -87,173 +105,165 @@ export function PipelineCardView({
   }
 
   return (
-    <article
-      className={`rounded-xl border p-3 shadow-[0_1px_8px_rgba(11,34,57,0.06)] transition-colors ${
-        isSelected
-          ? "border-[var(--brand-primary)]/60 bg-[var(--brand-primary)]/8"
-          : "border-[var(--border-default)] bg-white"
-      }`}
+    <KanbanCard
+      id={card.application_id}
+      columnId={columnId}
+      disabled={!draggable}
+      selected={isSelected}
+      dragLabel={t("dragCardAria", { handle })}
     >
-      <div className="flex items-center justify-between gap-2">
+      {/* Header: select toggle + external link + rollback badge */}
+      <div className="flex items-start justify-between gap-2">
         <button
           type="button"
           aria-label={isSelected ? t("deselectCard") : t("selectCard")}
           aria-pressed={isSelected}
           onClick={onToggleSelect}
-          className="inline-flex min-w-0 items-center gap-1.5 text-sm font-semibold text-[var(--text-primary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 rounded"
+          className="inline-flex min-w-0 items-center gap-1.5 rounded text-[0.8125rem] font-semibold text-foreground outline-none focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
         >
           {isSelected ? (
-            <CheckSquare
-              aria-hidden
-              weight="fill"
-              className="size-4 shrink-0 text-[var(--brand-primary)]"
-            />
-          ) : anon ? (
-            <UserFocus
-              aria-hidden
-              weight="duotone"
-              className="size-4 shrink-0 text-[var(--text-muted)]"
-            />
+            <CheckSquare aria-hidden className="size-4 shrink-0 text-[var(--brand-primary)]" strokeWidth={2} />
           ) : (
-            <Square
-              aria-hidden
-              weight="regular"
-              className="size-4 shrink-0 text-[var(--text-muted)]"
-            />
+            <Square aria-hidden className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.8} />
           )}
           <span className="truncate">{handle}</span>
         </button>
         <div className="flex shrink-0 items-center gap-1">
           <Link
             href={`/partner/jobs/${jobId}/applications?selected=${card.application_id}`}
-            className="inline-flex items-center rounded p-0.5 text-[var(--text-muted)] outline-none hover:text-[var(--brand-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+            className="inline-flex items-center rounded p-0.5 text-muted-foreground outline-none hover:text-[var(--brand-primary)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
             title={t("viewCandidate")}
             aria-label={t("viewCandidate")}
           >
-            <ArrowSquareOut aria-hidden weight="bold" className="size-3.5" />
+            <ExternalLink aria-hidden className="size-3.5" strokeWidth={1.8} />
           </Link>
           {card.rollback_count > 0 && (
-            <span
-              className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[var(--amber-100)] px-2 py-0.5 text-[11px] font-semibold text-[var(--amber-700)]"
-              title={t("rollbackBadgeTitle", { count: card.rollback_count })}
-            >
-              <ClockCounterClockwise aria-hidden weight="bold" className="size-3" />
+            <StatusChip tone="amber" size="sm" title={t("rollbackBadgeTitle", { count: card.rollback_count })}>
+              <History aria-hidden className="size-3" strokeWidth={2} />
               {card.rollback_count}
-            </span>
+            </StatusChip>
           )}
         </div>
       </div>
 
+      {/* Status + position */}
       <div className="mt-2 flex flex-wrap items-center gap-1.5">
-        <StatusBadge tone={statusTone(card.status)}>
+        <StatusChip tone={statusTone(card.status)} size="sm">
           {statusLabel(card.status, card.status_label)}
-        </StatusBadge>
+        </StatusChip>
         {card.position != null && (
-          <span className="text-[11px] text-[var(--text-muted)]">
-            {t("positionLabel", { n: card.position })}
-          </span>
+          <span className="type-caption text-muted-foreground">{t("positionLabel", { n: card.position })}</span>
         )}
       </div>
 
-      {/* Stage freshness only applies once a card has a stage row; the "new"
-          pre-pipeline bucket has a null entered_at, so show the applied date. */}
+      {/* SLA aging / applied date */}
       {days !== null && card.entered_at ? (
         <p
           className={
             stale
-              ? "mt-2 text-[11px] font-medium text-[var(--amber-700)]"
-              : "mt-2 text-[11px] text-[var(--text-muted)]"
+              ? "mt-2 inline-flex items-center gap-1 text-[0.6875rem] font-medium text-[var(--content-warning)]"
+              : "mt-2 inline-flex items-center gap-1 text-[0.6875rem] text-muted-foreground"
           }
         >
+          <Clock aria-hidden className="size-3" strokeWidth={1.9} />
           {days <= 0 ? t("enteredToday") : t("inStageDays", { count: days })}
           {" · "}
           {formatDateTime(card.entered_at, locale)}
         </p>
       ) : (
-        <p className="mt-2 text-[11px] text-[var(--text-muted)]">
+        <p className="mt-2 type-caption text-muted-foreground">
           {t("appliedAt", { date: formatDateTime(card.applied_at, locale) })}
         </p>
       )}
 
-      {/* Extended gate state (ADR-0006): submitted/required scorecards + average
-          when present, plus the advance-blocked badge. */}
+      {/* Candidate owner (partner-staff identity; safe on anonymous cards) */}
+      <p
+        className={
+          card.assignee
+            ? "mt-1.5 inline-flex max-w-full items-center gap-1 text-[0.6875rem] font-medium text-muted-foreground"
+            : "mt-1.5 inline-flex items-center gap-1 text-[0.6875rem] text-muted-foreground/70"
+        }
+        title={card.assignee ? t("assignedTo", { name: card.assignee.display_name }) : t("unassigned")}
+      >
+        <UserRound aria-hidden className="size-3 shrink-0" strokeWidth={1.9} />
+        <span className="truncate">
+          {card.assignee ? t("assignedTo", { name: card.assignee.display_name }) : t("unassigned")}
+        </span>
+      </p>
+
+      {/* Evaluation gate */}
       {showGate && (
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
-          <span className="text-[11px] font-medium text-[var(--text-secondary)]">
-            {t("gateScorecards", {
-              submitted: ev!.submitted_count,
-              required: ev!.required,
-            })}
+          <span className="type-caption font-medium text-muted-foreground">
+            {t("gateScorecards", { submitted: ev!.submitted_count, required: ev!.required })}
           </span>
           {ev!.avg_overall != null && (
-            <span className="text-[11px] font-medium text-[var(--text-secondary)]">
+            <span className="type-caption font-medium text-muted-foreground">
               {t("gateAvg", { avg: ev!.avg_overall.toFixed(1) })}
             </span>
           )}
           {gateBlocked && (
-            <span
-              role="status"
-              className="inline-flex items-center gap-1 rounded-full bg-[var(--amber-100)] px-2 py-0.5 text-[11px] font-semibold text-[var(--amber-700)]"
-              title={t("scorecardRequiredHint")}
-            >
-              <WarningCircle aria-hidden weight="duotone" className="size-3" />
-              {requiredAction === "score_threshold"
-                ? t("scoreGateBlocked")
-                : t("scorecardRequired")}
-            </span>
+            <StatusChip tone="warning" size="sm" title={t("scorecardRequiredHint")}>
+              <AlertCircle aria-hidden className="size-3" strokeWidth={1.9} />
+              {requiredAction === "score_threshold" ? t("scoreGateBlocked") : t("scorecardRequired")}
+            </StatusChip>
           )}
         </div>
       )}
 
-      {/* Offer glance (ADR-0007 §8): status + deadline ONLY — NO salary on the
-          board (open the candidate detail to see comp). Rendered only when the
-          card's current stage carries an offer. */}
+      {/* Offer glance (status + deadline only — never salary on the board) */}
       {card.offer && (
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
-          <StatusBadge tone={OFFER_STATUS_TONE[card.offer.status] ?? "info"}>
-            <Handshake aria-hidden weight="duotone" className="size-3" />
+          <StatusChip tone={OFFER_CHIP_TONE[card.offer.status] ?? "neutral"} size="sm">
+            <Handshake aria-hidden className="size-3" strokeWidth={1.9} />
             {offerLabels.status(card.offer.status, card.offer.status_label)}
-          </StatusBadge>
+          </StatusChip>
           {card.offer.expiry_date && (
-            <span className="text-[11px] text-[var(--text-muted)]">
-              {t("offerExpires", {
-                date: formatDateTime(card.offer.expiry_date, locale),
-              })}
+            <span className="type-caption text-muted-foreground">
+              {t("offerExpires", { date: formatDateTime(card.offer.expiry_date, locale) })}
             </span>
           )}
         </div>
       )}
 
+      {/* Actions */}
       <div className="mt-3 flex flex-wrap items-center gap-1.5">
+        {/* Gate blocked → scoring is the real next action (primary, leads). */}
+        {showScorecard && gateBlocked && (
+          <Button variant="primary" size="sm" onClick={onScorecard}>
+            <ClipboardCheck aria-hidden className="size-4" strokeWidth={2} />
+            {t("scorecardAction")}
+          </Button>
+        )}
         {canAdvance && (
           <Button
-            variant="primary"
+            variant={showScorecard && gateBlocked ? "secondary" : "primary"}
             size="sm"
             loading={advancePending}
             onClick={onAdvance}
           >
-            <ArrowRight aria-hidden weight="bold" className="size-4" />
+            <ArrowRight aria-hidden className="size-4" strokeWidth={2} />
             {isNewBucket ? t("startStage") : t("advance")}
+          </Button>
+        )}
+        {/* Gate met / already scoreable → scoring stays available (secondary). */}
+        {showScorecard && !gateBlocked && (
+          <Button variant="secondary" size="sm" onClick={onScorecard}>
+            <ClipboardCheck aria-hidden className="size-4" strokeWidth={2} />
+            {t("scorecardAction")}
           </Button>
         )}
         {canRollback && (
           <Button variant="ghost" size="sm" onClick={onRollback}>
-            <ArrowUDownLeft aria-hidden weight="bold" className="size-4" />
+            <Undo2 aria-hidden className="size-4" strokeWidth={2} />
             {t("rollback")}
           </Button>
         )}
-        {card.cv_download_available && (
-          <Button
-            variant="ghost"
-            size="sm"
-            loading={downloading}
-            onClick={handleDownload}
-          >
-            <DownloadSimple aria-hidden weight="duotone" className="size-4" />
-            {t("cv")}
-          </Button>
-        )}
+        <Button variant="ghost" size="sm" loading={downloading} onClick={handleDownload}>
+          <Download aria-hidden className="size-4" strokeWidth={1.8} />
+          {t("cv")}
+        </Button>
       </div>
-    </article>
+    </KanbanCard>
   );
 }

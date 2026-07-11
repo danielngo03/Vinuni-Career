@@ -13,6 +13,7 @@ import { useRejectionReasonLabel } from "@/lib/applications/labels";
 
 export function RejectModal({
   open,
+  count = 1,
   onClose,
   reason,
   onReasonChange,
@@ -23,6 +24,8 @@ export function RejectModal({
   onSubmit,
 }: {
   open: boolean;
+  /** Number of candidates targeted (>1 = bulk reject). */
+  count?: number;
   onClose: () => void;
   reason: RejectionReason | "";
   onReasonChange: (v: RejectionReason | "") => void;
@@ -35,6 +38,7 @@ export function RejectModal({
   const t = useTranslations("candidates");
   const tc = useTranslations("common");
   const reasonLabel = useRejectionReasonLabel();
+  const bulk = count > 1;
 
   const options: SelectOption[] = [
     { value: "", label: t("rejectReasonPlaceholder") },
@@ -48,7 +52,7 @@ export function RejectModal({
     <Modal
       open={open}
       onClose={loading ? () => {} : onClose}
-      title={t("rejectTitle")}
+      title={bulk ? t("bulkRejectTitle", { count }) : t("rejectTitle")}
       description={t("rejectDescription")}
       size="sm"
       closeLabel={tc("close")}
@@ -63,7 +67,7 @@ export function RejectModal({
             disabled={!reason || loading}
             onClick={onSubmit}
           >
-            {t("rejectSubmit")}
+            {bulk ? t("bulkRejectSubmit", { count }) : t("rejectSubmit")}
           </Button>
         </>
       }

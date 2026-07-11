@@ -362,7 +362,6 @@ export function StudentApplicationsScreen() {
                         {t("appliedOn", {
                           date: formatDateTime(app.applied_at, locale),
                         })}
-                        {app.is_anonymous ? ` · ${t("anonymousBadge")}` : ""}
                       </p>
 
                       {/* Progress bar for active applications */}

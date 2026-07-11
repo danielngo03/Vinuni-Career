@@ -9,7 +9,6 @@ import {
   CaretRight,
   IdentificationCard,
   ReadCvLogo,
-  Eye,
   NotePencil,
   Hourglass,
   PlusCircle,
@@ -265,10 +264,8 @@ const ACTION_ICONS: Record<string, Icon> = {
   // student
   complete_profile: IdentificationCard,
   build_cv: ReadCvLogo,
-  respond_reveal: Eye,
   create_alert: Bell,
   // partner
-  respond_reveals: Eye,
   jobs_in_draft: NotePencil,
   jobs_pending_review: Hourglass,
   post_job: PlusCircle,

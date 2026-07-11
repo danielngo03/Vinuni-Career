@@ -2,17 +2,19 @@
 
 import { useTranslations } from "next-intl";
 import {
-  CheckCircle,
+  CheckCircle2,
   MapPin,
-  PencilSimple,
-  Prohibit,
-  UserFocus,
+  Pencil,
+  Ban,
+  UserRound,
   Users,
-  VideoCamera,
-} from "@phosphor-icons/react";
-import { Button, StatusBadge } from "@/components/ui";
+  Video,
+} from "lucide-react";
+import { Button } from "@/components/ui";
+import { StatusChip } from "@/components/kit";
 import { formatDateTime } from "@/lib/format";
-import { INTERVIEW_STATUS_TONE, useInterviewLabels } from "@/lib/applications/labels";
+import { useInterviewLabels } from "@/lib/applications/labels";
+import { INTERVIEW_STATUS_CHIP } from "../chip-tones";
 import type { Interview } from "@/lib/api";
 
 export function InterviewCard({
@@ -38,68 +40,51 @@ export function InterviewCard({
   const ev = interview.evaluation;
 
   const ModeIcon =
-    interview.mode === "online"
-      ? VideoCamera
-      : interview.mode === "onsite"
-        ? MapPin
-        : Users;
+    interview.mode === "online" ? Video : interview.mode === "onsite" ? MapPin : Users;
 
   return (
-    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-md p-3.5">
+    <div className="rounded-lg border border-border bg-card p-3.5">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--text-primary)]">
-          <ModeIcon
-            aria-hidden
-            weight="duotone"
-            className="size-4 text-[var(--brand-primary)]"
-          />
+        <span className="inline-flex items-center gap-1.5 type-small font-semibold text-foreground">
+          <ModeIcon aria-hidden className="size-4 text-muted-foreground" strokeWidth={1.8} />
           {labels.mode(interview.mode, interview.mode_label)}
         </span>
-        <StatusBadge tone={INTERVIEW_STATUS_TONE[interview.status] ?? "info"}>
+        <StatusChip tone={INTERVIEW_STATUS_CHIP[interview.status] ?? "neutral"}>
           {labels.status(interview.status)}
-        </StatusBadge>
+        </StatusChip>
       </div>
 
       {interview.title && (
-        <p className="mt-1.5 text-sm font-medium text-[var(--text-primary)]">
-          {interview.title}
-        </p>
+        <p className="mt-1.5 type-small font-medium text-foreground">{interview.title}</p>
       )}
 
-      <dl className="mt-2 space-y-1 text-sm">
+      <dl className="mt-2 space-y-1 type-small">
         <div className="flex flex-wrap items-baseline gap-x-2">
-          <dt className="text-xs font-medium text-[var(--text-muted)]">
-            {t("whenLabel")}
-          </dt>
-          <dd className="text-[var(--text-primary)]">
+          <dt className="type-caption text-muted-foreground">{t("whenLabel")}</dt>
+          <dd className="text-foreground">
             {formatDateTime(interview.scheduled_at, locale)}
             {" · "}
             {t("durationValue", { minutes: interview.duration_minutes })}
           </dd>
         </div>
 
-        {/* Location is shown for onsite. */}
         {interview.location && (
           <div className="flex flex-wrap items-baseline gap-x-2">
-            <dt className="text-xs font-medium text-[var(--text-muted)]">
-              {t("locationLabel")}
-            </dt>
-            <dd className="text-[var(--text-secondary)]">{interview.location}</dd>
+            <dt className="type-caption text-muted-foreground">{t("locationLabel")}</dt>
+            <dd className="text-muted-foreground">{interview.location}</dd>
           </div>
         )}
 
         {/* meeting_link is ATTENDEE-ONLY: render only when the API returns it. */}
         {interview.meeting_link && (
           <div className="flex flex-wrap items-baseline gap-x-2">
-            <dt className="text-xs font-medium text-[var(--text-muted)]">
-              {t("linkLabel")}
-            </dt>
+            <dt className="type-caption text-muted-foreground">{t("linkLabel")}</dt>
             <dd className="min-w-0 break-all">
               <a
                 href={interview.meeting_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded text-[var(--brand-primary)] underline outline-none hover:opacity-80 focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+                className="rounded text-[var(--brand-primary)] underline outline-none hover:opacity-80 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
               >
                 {interview.meeting_link}
               </a>
@@ -110,21 +95,17 @@ export function InterviewCard({
 
       {/* Assignees (partner-org members; never the student). */}
       <div className="mt-2.5">
-        <p className="text-xs font-medium text-[var(--text-muted)]">
-          {t("assigneesLabel")}
-        </p>
+        <p className="type-caption text-muted-foreground">{t("assigneesLabel")}</p>
         {interview.assignees.length === 0 ? (
-          <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
-            {t("noAssignees")}
-          </p>
+          <p className="mt-0.5 type-caption text-muted-foreground">{t("noAssignees")}</p>
         ) : (
           <ul className="mt-1 flex flex-wrap gap-1.5">
             {interview.assignees.map((a) => (
               <li
                 key={a.user_id}
-                className="inline-flex items-center gap-1 rounded-full border border-[var(--glass-border)] bg-[var(--glass-surface)] px-2 py-0.5 text-[11px] font-semibold text-[var(--text-secondary)] backdrop-blur-sm"
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-[var(--bg-subtle)] px-2 py-0.5 type-caption font-medium text-muted-foreground"
               >
-                <UserFocus aria-hidden weight="duotone" className="size-3" />
+                <UserRound aria-hidden className="size-3" strokeWidth={1.8} />
                 {a.name?.trim() || t("assigneeFallback")}
               </li>
             ))}
@@ -134,15 +115,12 @@ export function InterviewCard({
 
       {/* Extended gate state for the interview's stage (partner-only). */}
       {ev && ev.required > 0 && (
-        <div className="mt-2.5 flex flex-wrap items-center gap-2 border-t border-[var(--glass-border)] pt-2.5">
-          <span className="text-xs font-medium text-[var(--text-secondary)]">
-            {t("gateScorecards", {
-              submitted: ev.submitted_count,
-              required: ev.required,
-            })}
+        <div className="mt-2.5 flex flex-wrap items-center gap-2 border-t border-border pt-2.5">
+          <span className="type-caption font-medium text-muted-foreground">
+            {t("gateScorecards", { submitted: ev.submitted_count, required: ev.required })}
           </span>
           {ev.avg_overall != null && (
-            <span className="text-xs font-medium text-[var(--text-secondary)]">
+            <span className="type-caption font-medium text-muted-foreground">
               {ev.threshold != null
                 ? t("gateAvgThreshold", {
                     avg: ev.avg_overall.toFixed(1),
@@ -151,9 +129,9 @@ export function InterviewCard({
                 : t("gateAvg", { avg: ev.avg_overall.toFixed(1) })}
             </span>
           )}
-          <StatusBadge tone={ev.gate_met ? "accepted" : "pending"}>
+          <StatusChip tone={ev.gate_met ? "success" : "warning"}>
             {ev.gate_met ? t("gateMet") : t("gateBlocked")}
-          </StatusBadge>
+          </StatusChip>
         </div>
       )}
 
@@ -161,19 +139,19 @@ export function InterviewCard({
       {canManage && isOpen && (
         <div className="mt-3 flex flex-wrap gap-1.5">
           <Button variant="secondary" size="sm" onClick={onEdit}>
-            <PencilSimple aria-hidden weight="bold" className="size-4" />
+            <Pencil aria-hidden className="size-4" strokeWidth={1.8} />
             {t("reschedule")}
           </Button>
           <Button variant="ghost" size="sm" onClick={onAssignees}>
-            <Users aria-hidden weight="bold" className="size-4" />
+            <Users aria-hidden className="size-4" strokeWidth={1.8} />
             {t("editAssignees")}
           </Button>
           <Button variant="ghost" size="sm" onClick={onComplete}>
-            <CheckCircle aria-hidden weight="bold" className="size-4" />
+            <CheckCircle2 aria-hidden className="size-4" strokeWidth={1.8} />
             {t("complete")}
           </Button>
           <Button variant="ghost" size="sm" onClick={onCancel}>
-            <Prohibit aria-hidden weight="bold" className="size-4" />
+            <Ban aria-hidden className="size-4" strokeWidth={1.8} />
             {t("cancel")}
           </Button>
         </div>

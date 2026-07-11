@@ -1,50 +1,68 @@
 "use client";
 
+import * as React from "react";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  AlertCircle,
   ArrowLeft,
-  PaperPlaneTilt,
-  PencilSimple,
-  Trash,
-  LockSimpleOpen,
-  XCircle,
-  WarningCircle,
-  ShieldWarning,
-  SignIn,
-  MagnifyingGlass,
   Eye,
-  Users,
   Kanban,
-  Sparkle,
-  LightbulbFilament,
-} from "@phosphor-icons/react";
-import { cn } from "@/lib/utils";
+  Lightbulb,
+  ListChecks,
+  LogIn,
+  Pencil,
+  Search,
+  Send,
+  ShieldAlert,
+  Sparkles,
+  Trash2,
+  Unlock,
+  Users,
+  XCircle,
+} from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
+import { Button, EmptyState, Modal, Skeleton, useToast } from "@/components/ui";
 import {
-  Button,
-  EmptyState,
-  Modal,
-  Skeleton,
-  StatusBadge,
-  SponsoredLabel,
-  useToast,
-} from "@/components/ui";
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  KpiRow,
+  KpiTile,
+  SectionLabel,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import { PageHeader } from "@/components/layout/page-header";
 import { CompetitionBadge } from "./competition-badge";
 import { JobForm } from "./job-form";
 import { JdQualityPanel } from "./jd-quality-panel";
 import { JobPreviewButtons } from "./job-preview-modal";
-import {
-  useJobLabels,
-  JOB_STATUS_TONE,
-  MODERATION_TONE,
-} from "@/lib/jobs/labels";
+import { useJobLabels } from "@/lib/jobs/labels";
 import { formatSalary, formatLocation } from "@/lib/jobs/format";
 import { formatDateTime } from "@/lib/format";
-import { ApiError, jobsApi } from "@/lib/api";
+import { ApiError, jobsApi, type JobStatus, type ModerationStatus } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
+
+const nf = new Intl.NumberFormat();
+
+const STATUS_TONE: Record<JobStatus, ChipTone> = {
+  draft: "neutral",
+  pending_review: "warning",
+  active: "success",
+  rejected: "danger",
+  closed: "neutral",
+  expired: "neutral",
+};
+
+const MODERATION_CHIP: Record<ModerationStatus, ChipTone> = {
+  pending: "warning",
+  approved: "success",
+  rejected: "danger",
+  flagged: "warning",
+};
 
 type ConfirmKind = "submit" | "delete" | "close" | "reopen" | null;
 
@@ -71,9 +89,6 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
   const job = query.data;
   const canSubmitStatus = job?.status === "draft" || job?.status === "rejected";
 
-  // JD quality-check rubric (B-552) — only meaningful before submit; fetched
-  // whenever the job is in a submittable state so the finding list is visible
-  // inline on the page, not just inside the submit confirmation.
   const qualityQuery = useQuery({
     queryKey: ["jobs", "quality-check", jobId],
     queryFn: () => jobsApi.qualityCheck(jobId),
@@ -88,9 +103,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
 
   function handleError(e: unknown) {
     const reason =
-      e instanceof ApiError && typeof e.details?.reason === "string"
-        ? e.details.reason
-        : undefined;
+      e instanceof ApiError && typeof e.details?.reason === "string" ? e.details.reason : undefined;
     if (reason === "version_conflict" || (e instanceof ApiError && e.code === "CONFLICT")) {
       toast.show({ tone: "error", title: t("conflictToast"), description: t("conflictBody") });
       refresh();
@@ -102,9 +115,6 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
       return;
     }
     if (reason === "jd_quality_check_failed") {
-      // Defensive: the inline quality panel should already have blocked this,
-      // but the JD may have been edited elsewhere between page load and
-      // submit — refetch so the (now stale) findings are current.
       toast.show({ tone: "error", title: t("quality.blockedToast") });
       void qc.invalidateQueries({ queryKey: ["jobs", "quality-check", jobId] });
       return;
@@ -156,9 +166,9 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
   const backLink = (
     <Link
       href="/partner/jobs"
-      className="mb-4 inline-flex items-center gap-1.5 rounded-lg text-sm font-medium text-[var(--text-secondary)] outline-none hover:text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+      className="mb-4 inline-flex items-center gap-1.5 rounded-lg text-sm font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
     >
-      <ArrowLeft aria-hidden weight="bold" className="size-4" />
+      <ArrowLeft aria-hidden className="size-4" strokeWidth={1.8} />
       {t("backToJobs")}
     </Link>
   );
@@ -172,7 +182,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
           {backLink}
           <EmptyState
             kind="empty"
-            icon={MagnifyingGlass}
+            icon={Search}
             title={t("notFoundTitle")}
             description={t("ownerNotFoundBody")}
             action={
@@ -190,7 +200,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
           {backLink}
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
+            icon={err.isPermissionError ? ShieldAlert : LogIn}
             title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
             description={err.isPermissionError ? t("permissionBody") : tStates("authBody")}
           />
@@ -202,7 +212,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
         {backLink}
         <EmptyState
           kind="error"
-          icon={WarningCircle}
+          icon={AlertCircle}
           title={tStates("errorTitle")}
           description={tStates("errorBody")}
           action={
@@ -232,13 +242,17 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
   const canReopen = job.status === "closed";
   const canDelete = ["draft", "rejected", "closed", "expired"].includes(job.status);
   const salary = formatSalary(job.salary, locale);
+  const applyRate =
+    job.application_count > 0 && job.view_count > 0
+      ? Math.round((job.application_count / job.view_count) * 100)
+      : null;
 
   if (editing) {
     return (
       <>
         {backLink}
         <PageHeader title={t("editTitle")} description={t("editSubtitle")} />
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white p-6">
+        <Card padded>
           <JobForm
             mode="edit"
             job={job}
@@ -250,7 +264,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
             }}
             onCancel={() => setEditing(false)}
           />
-        </div>
+        </Card>
       </>
     );
   }
@@ -260,7 +274,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
       {job.status === "active" && (
         <Link href={`/jobs/${job.id}`} target="_blank">
           <Button variant="ghost" size="sm">
-            <Eye aria-hidden weight="duotone" className="size-4" />
+            <Eye aria-hidden className="size-4" strokeWidth={1.8} />
             {t("viewLive")}
           </Button>
         </Link>
@@ -268,43 +282,43 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
       <JobPreviewButtons jobId={job.id} />
       <Link href={`/partner/jobs/${job.id}/applications`}>
         <Button variant="secondary" size="sm">
-          <Users aria-hidden weight="duotone" className="size-4" />
+          <Users aria-hidden className="size-4" strokeWidth={1.8} />
           {t("viewCandidates")}
         </Button>
       </Link>
       <Link href={`/partner/jobs/${job.id}/pipeline`}>
         <Button variant="secondary" size="sm">
-          <Kanban aria-hidden weight="duotone" className="size-4" />
+          <Kanban aria-hidden className="size-4" strokeWidth={1.8} />
           {t("viewPipeline")}
         </Button>
       </Link>
       {canEdit && (
         <Button variant="secondary" size="sm" onClick={() => setEditing(true)}>
-          <PencilSimple aria-hidden weight="bold" className="size-4" />
+          <Pencil aria-hidden className="size-4" strokeWidth={1.8} />
           {tc("edit")}
         </Button>
       )}
       {canSubmit && (
         <Button variant="primary" size="sm" onClick={() => setConfirm("submit")}>
-          <PaperPlaneTilt aria-hidden weight="bold" className="size-4" />
+          <Send aria-hidden className="size-4" strokeWidth={1.8} />
           {t("submitForReview")}
         </Button>
       )}
       {canClose && (
         <Button variant="secondary" size="sm" onClick={() => setConfirm("close")}>
-          <XCircle aria-hidden weight="bold" className="size-4" />
+          <XCircle aria-hidden className="size-4" strokeWidth={1.8} />
           {t("closeJob")}
         </Button>
       )}
       {canReopen && (
         <Button variant="secondary" size="sm" onClick={() => setConfirm("reopen")}>
-          <LockSimpleOpen aria-hidden weight="bold" className="size-4" />
+          <Unlock aria-hidden className="size-4" strokeWidth={1.8} />
           {t("reopenJob")}
         </Button>
       )}
       {canDelete && (
         <Button variant="danger" size="sm" onClick={() => setConfirm("delete")}>
-          <Trash aria-hidden weight="bold" className="size-4" />
+          <Trash2 aria-hidden className="size-4" strokeWidth={1.8} />
           {tc("delete")}
         </Button>
       )}
@@ -316,105 +330,71 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
       {backLink}
       <PageHeader title={job.title} actions={actions} />
 
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <StatusBadge tone={JOB_STATUS_TONE[job.status] ?? "info"}>
+      <div className="mb-4 flex flex-wrap items-center gap-1.5">
+        <StatusChip tone={STATUS_TONE[job.status] ?? "neutral"} dot>
           {labels.status(job.status, job.status_label)}
-        </StatusBadge>
-        <StatusBadge tone={MODERATION_TONE[job.moderation_status] ?? "info"}>
+        </StatusChip>
+        <StatusChip tone={MODERATION_CHIP[job.moderation_status] ?? "neutral"}>
           {t("moderationLabel")}: {labels.moderation(job.moderation_status, job.moderation_status_label)}
-        </StatusBadge>
-        <StatusBadge tone="info">
+        </StatusChip>
+        <StatusChip tone="info">
           {t("visibilityLabel")}: {labels.visibility(job.visibility)}
-        </StatusBadge>
-        {job.is_sponsored && <SponsoredLabel label={t("sponsored")} />}
+        </StatusChip>
+        {job.is_sponsored && <StatusChip tone="amber">{t("sponsored")}</StatusChip>}
       </div>
 
-      {/* Job key-metric tiles */}
-      <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
-          <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-            <Users aria-hidden weight="duotone" className="size-4.5 text-white" />
-          </div>
-          <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{job.application_count}</p>
-          <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("applications")}</p>
-        </div>
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
-          <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-            <Eye aria-hidden weight="duotone" className="size-4.5 text-white" />
-          </div>
-          <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{job.view_count}</p>
-          <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("views")}</p>
-        </div>
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5">
-          <div className="mb-2.5 flex size-9 items-center justify-center rounded-xl icon-chip-info shadow-sm">
-            <Kanban aria-hidden weight="duotone" className="size-4.5 text-white" />
-          </div>
-          <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-            {job.application_count > 0 && job.view_count > 0
-              ? `${Math.round((job.application_count / job.view_count) * 100)}%`
-              : "—"}
-          </p>
-          <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{t("statApplyRate")}</p>
-        </div>
-      </div>
+      {/* Key-metric tiles */}
+      <KpiRow cols={3} className="mb-4">
+        <KpiTile label={t("applications")} value={nf.format(job.application_count)} icon={Users} />
+        <KpiTile label={t("views")} value={nf.format(job.view_count)} icon={Eye} />
+        <KpiTile label={t("statApplyRate")} value={applyRate != null ? `${applyRate}%` : "—"} icon={ListChecks} />
+      </KpiRow>
 
-      {/* AI Job Performance Insights */}
+      {/* AI job performance insights */}
       {(() => {
         const insights: string[] = [];
-        const applyRate = job.application_count > 0 && job.view_count > 0
-          ? Math.round((job.application_count / job.view_count) * 100)
-          : null;
         const daysLeft = job.application_deadline
           ? Math.ceil((new Date(job.application_deadline).getTime() - Date.now()) / 86_400_000)
           : null;
-
         if (job.status === "active") {
-          if (job.application_count >= 50) {
-            insights.push(t("detailInsightHighInterest", { count: job.application_count }));
-          } else if (job.application_count === 0) {
-            insights.push(t("detailInsightNoApplicants"));
-          } else if (job.application_count > 0) {
-            insights.push(t("detailInsightActive", { count: job.application_count }));
-          }
-          if (applyRate !== null) {
-            insights.push(t("detailInsightApplyRate", { rate: applyRate }));
-          }
-          if (daysLeft !== null && daysLeft >= 0 && daysLeft <= 5) {
-            insights.push(t("detailInsightDeadlineSoon", { days: daysLeft }));
-          }
+          if (job.application_count >= 50) insights.push(t("detailInsightHighInterest", { count: job.application_count }));
+          else if (job.application_count === 0) insights.push(t("detailInsightNoApplicants"));
+          else if (job.application_count > 0) insights.push(t("detailInsightActive", { count: job.application_count }));
+          if (applyRate !== null) insights.push(t("detailInsightApplyRate", { rate: applyRate }));
+          if (daysLeft !== null && daysLeft >= 0 && daysLeft <= 5) insights.push(t("detailInsightDeadlineSoon", { days: daysLeft }));
         }
-
         if (insights.length === 0) return null;
         return (
-          <div className={cn(
-            "mb-6 rounded-2xl border p-4",
-            "border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 ",
-          )}>
-            <p className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              {t("aiPerformanceTitle")}
-            </p>
-            <ul className="space-y-1.5">
-              {insights.map((s, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]" />
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Card className="mb-4 border-l-[3px]" style={{ borderLeftColor: "var(--content-ai)" }}>
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <span
+                  className="flex size-7 items-center justify-center rounded-lg"
+                  style={{ background: "var(--content-ai-soft)" }}
+                >
+                  <Sparkles className="size-4" strokeWidth={1.9} style={{ color: "var(--content-ai)" }} />
+                </span>
+                <CardTitle>{t("aiPerformanceTitle")}</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2">
+                {insights.map((s, i) => (
+                  <li key={i} className="flex items-start gap-2 text-[0.8125rem] text-foreground">
+                    <Lightbulb aria-hidden className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.9} style={{ color: "var(--content-ai)" }} />
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
         );
       })()}
 
-      {/* JD quality-check rubric (B-552) — visible inline before the partner
-          even opens the submit confirmation, not just as a toast. */}
+      {/* JD quality gate — inline before submit */}
       {canSubmit && (
-        <div className="mb-6">
-          <h2 className="mb-2 text-sm font-bold tracking-tight text-[var(--text-primary)]">
-            {t("quality.sectionTitle")}
-          </h2>
+        <div className="mb-4">
+          <SectionLabel className="mb-2">{t("quality.sectionTitle")}</SectionLabel>
           <JdQualityPanel
             issues={qualityQuery.data?.issues ?? []}
             passed={qualityQuery.data?.passed}
@@ -427,62 +407,49 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
       {job.status === "rejected" && job.moderation_note && (
         <div
           role="alert"
-          className="mb-6 rounded-2xl border border-[var(--red-400)]/40 bg-[var(--red-50)] p-4"
+          className="mb-4 rounded-xl p-4"
+          style={{ background: "var(--content-danger-soft)" }}
         >
-          <p className="text-sm font-semibold text-[var(--brand-red)]">
+          <p className="text-sm font-semibold" style={{ color: "var(--content-danger)" }}>
             {t("rejectionReasonTitle")}
           </p>
-          <p className="mt-1 whitespace-pre-wrap text-sm text-[var(--text-secondary)]">
-            {job.moderation_note}
-          </p>
-          <p className="mt-2 text-xs text-[var(--text-muted)]">{t("rejectionHint")}</p>
+          <p className="mt-1 whitespace-pre-wrap text-sm text-foreground">{job.moderation_note}</p>
+          <p className="mt-2 type-caption text-muted-foreground">{t("rejectionHint")}</p>
         </div>
       )}
 
       {job.status === "pending_review" && (
         <div
           role="status"
-          className="mb-6 rounded-2xl border border-[var(--amber-600)]/40 bg-[var(--amber-100)] p-4 text-sm text-[var(--amber-700)]"
+          className="mb-4 rounded-xl p-4 text-sm"
+          style={{ background: "var(--content-warning-soft)", color: "var(--content-warning)" }}
         >
           {t("pendingReviewHint")}
         </div>
       )}
 
-      {/* Meta grid */}
-      <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <Meta label={t("employmentType")}>
-          {labels.employmentType(job.employment_type, job.employment_type_label)}
-        </Meta>
-        <Meta label={t("locationMode")}>
-          {labels.locationType(job.location_type, job.location_type_label)}
-        </Meta>
-        <Meta label={t("location")}>
-          {formatLocation(job.location_city, job.location_country)}
-        </Meta>
-        <Meta label={t("salary")}>{salary ?? t("salaryUndisclosed")}</Meta>
-        <Meta label={t("headcount")}>{job.headcount}</Meta>
-        <Meta label={t("applications")}>{job.application_count}</Meta>
-        <Meta label={t("deadline")}>
-          {job.application_deadline
-            ? formatDateTime(job.application_deadline, locale)
-            : t("noDeadline")}
-        </Meta>
-        <Meta label={t("created")}>{formatDateTime(job.created_at, locale)}</Meta>
-        <Meta label={t("views")}>{job.view_count}</Meta>
-      </dl>
+      {/* Meta + content */}
+      <Card padded className="mb-4">
+        <dl className="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+          <Meta label={t("employmentType")}>{labels.employmentType(job.employment_type, job.employment_type_label)}</Meta>
+          <Meta label={t("locationMode")}>{labels.locationType(job.location_type, job.location_type_label)}</Meta>
+          <Meta label={t("location")}>{formatLocation(job.location_city, job.location_country)}</Meta>
+          <Meta label={t("salary")}>{salary ?? t("salaryUndisclosed")}</Meta>
+          <Meta label={t("headcount")}>{job.headcount}</Meta>
+          <Meta label={t("deadline")}>
+            {job.application_deadline ? formatDateTime(job.application_deadline, locale) : t("noDeadline")}
+          </Meta>
+          <Meta label={t("created")}>{formatDateTime(job.created_at, locale)}</Meta>
+        </dl>
+      </Card>
 
       <Section title={t("description")}>{job.description}</Section>
       {job.requirements && <Section title={t("requirements")}>{job.requirements}</Section>}
       {job.benefits && <Section title={t("benefits")}>{job.benefits}</Section>}
 
-      {job.required_skills.length > 0 && (
-        <SkillBlock title={t("requiredSkills")} skills={job.required_skills} />
-      )}
-      {job.preferred_skills.length > 0 && (
-        <SkillBlock title={t("preferredSkills")} skills={job.preferred_skills} />
-      )}
+      {job.required_skills.length > 0 && <SkillBlock title={t("requiredSkills")} skills={job.required_skills} />}
+      {job.preferred_skills.length > 0 && <SkillBlock title={t("preferredSkills")} skills={job.preferred_skills} />}
 
-      {/* Competition signal — shown only when job is active/published */}
       {job.status === "active" && (
         <div className="mt-6">
           <CompetitionBadge jobId={job.id} />
@@ -499,9 +466,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
         closeLabel={tc("close")}
         footer={
           <>
-            <Button variant="ghost" onClick={() => setConfirm(null)}>
-              {tc("cancel")}
-            </Button>
+            <Button variant="ghost" onClick={() => setConfirm(null)}>{tc("cancel")}</Button>
             <Button
               variant="primary"
               loading={submit.isPending}
@@ -514,7 +479,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
         }
       >
         <div className="space-y-3">
-          <p className="text-sm text-[var(--text-secondary)]">{t("submitConfirmNote")}</p>
+          <p className="text-sm text-muted-foreground">{t("submitConfirmNote")}</p>
           <JdQualityPanel
             issues={qualityQuery.data?.issues ?? []}
             passed={qualityQuery.data?.passed}
@@ -522,7 +487,7 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
             compact
           />
           {qualityQuery.data?.passed === false && (
-            <p className="text-xs font-medium text-[var(--brand-red)]">
+            <p className="type-caption font-medium" style={{ color: "var(--content-danger)" }}>
               {t("quality.fixBeforeSubmit")}
             </p>
           )}
@@ -538,16 +503,12 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
         closeLabel={tc("close")}
         footer={
           <>
-            <Button variant="ghost" onClick={() => setConfirm(null)}>
-              {tc("cancel")}
-            </Button>
-            <Button variant="primary" loading={close.isPending} onClick={() => close.mutate()}>
-              {t("closeJob")}
-            </Button>
+            <Button variant="ghost" onClick={() => setConfirm(null)}>{tc("cancel")}</Button>
+            <Button variant="primary" loading={close.isPending} onClick={() => close.mutate()}>{t("closeJob")}</Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("closeConfirmNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("closeConfirmNote")}</p>
       </Modal>
 
       <Modal
@@ -559,16 +520,12 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
         closeLabel={tc("close")}
         footer={
           <>
-            <Button variant="ghost" onClick={() => setConfirm(null)}>
-              {tc("cancel")}
-            </Button>
-            <Button variant="primary" loading={reopen.isPending} onClick={() => reopen.mutate()}>
-              {t("reopenJob")}
-            </Button>
+            <Button variant="ghost" onClick={() => setConfirm(null)}>{tc("cancel")}</Button>
+            <Button variant="primary" loading={reopen.isPending} onClick={() => reopen.mutate()}>{t("reopenJob")}</Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("reopenConfirmNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("reopenConfirmNote")}</p>
       </Modal>
 
       <Modal
@@ -580,16 +537,12 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
         closeLabel={tc("close")}
         footer={
           <>
-            <Button variant="ghost" onClick={() => setConfirm(null)}>
-              {tc("cancel")}
-            </Button>
-            <Button variant="danger" loading={remove.isPending} onClick={() => remove.mutate()}>
-              {tc("delete")}
-            </Button>
+            <Button variant="ghost" onClick={() => setConfirm(null)}>{tc("cancel")}</Button>
+            <Button variant="danger" loading={remove.isPending} onClick={() => remove.mutate()}>{tc("delete")}</Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("deleteConfirmNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("deleteConfirmNote")}</p>
       </Modal>
     </>
   );
@@ -597,40 +550,33 @@ export function PartnerJobDetailScreen({ jobId }: { jobId: string }) {
 
 function Meta({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 ">
-      <dt className="text-xs font-medium text-[var(--text-muted)]">{label}</dt>
-      <dd className="mt-0.5 text-sm font-semibold text-[var(--text-primary)]">{children}</dd>
+    <div>
+      <dt className="type-caption text-muted-foreground">{label}</dt>
+      <dd className="mt-0.5 text-[0.8125rem] font-semibold text-foreground">{children}</dd>
     </div>
   );
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-6">
-      <h2 className="mb-2 text-lg font-bold tracking-tight text-[var(--text-primary)]">
-        {title}
-      </h2>
-      <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-secondary)]">
-        {children}
-      </p>
-    </section>
+    <Card padded className="mt-4">
+      <h2 className="type-h3 mb-2 text-foreground">{title}</h2>
+      <p className="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">{children}</p>
+    </Card>
   );
 }
 
 function SkillBlock({ title, skills }: { title: string; skills: string[] }) {
   return (
-    <section className="mt-6">
-      <h2 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">{title}</h2>
+    <Card padded className="mt-4">
+      <SectionLabel className="mb-2">{title}</SectionLabel>
       <ul className="flex flex-wrap gap-1.5">
         {skills.map((s) => (
-          <li
-            key={s}
-            className="rounded-full bg-[var(--bg-subtle)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]"
-          >
-            {s}
+          <li key={s}>
+            <StatusChip tone="neutral">{s}</StatusChip>
           </li>
         ))}
       </ul>
-    </section>
+    </Card>
   );
 }

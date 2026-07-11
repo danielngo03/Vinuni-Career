@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import type { StatusTone } from "@/components/ui";
-import type { ApplicationStatus, RevealStatus } from "@/lib/api";
+import type { ApplicationStatus } from "@/lib/api";
 
 /**
  * Map an application status to a StatusBadge tone. Color is always paired with
@@ -33,14 +33,6 @@ export const OFFER_STATUS_TONE: Record<string, StatusTone> = {
   rescinded: "closed",
 };
 
-export const REVEAL_STATUS_TONE: Record<string, StatusTone> = {
-  none: "draft",
-  pending: "pending",
-  accepted: "accepted",
-  declined: "rejected",
-  expired: "closed",
-};
-
 /**
  * Localized status labels for applications. Backend pairs each status with a
  * vi-only `status_label`; we map the stable enum CODE through next-intl for
@@ -48,7 +40,6 @@ export const REVEAL_STATUS_TONE: Record<string, StatusTone> = {
  */
 export function useApplicationLabels() {
   const t = useTranslations("applications.status");
-  const tr = useTranslations("applications.revealStatus");
 
   return {
     status(
@@ -57,14 +48,6 @@ export function useApplicationLabels() {
     ): string {
       if (!code) return serverLabel || "—";
       if (t.has(code)) return t(code);
-      return serverLabel || code;
-    },
-    reveal(
-      code: RevealStatus | string | null | undefined,
-      serverLabel?: string | null,
-    ): string {
-      if (!code) return serverLabel || "—";
-      if (tr.has(code)) return tr(code);
       return serverLabel || code;
     },
   };

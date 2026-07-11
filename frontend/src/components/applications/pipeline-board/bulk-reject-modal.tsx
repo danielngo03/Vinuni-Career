@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Prohibit } from "@phosphor-icons/react";
+import { Ban } from "lucide-react";
 import {
   Button,
   Modal,
@@ -56,7 +56,7 @@ export function BulkRejectModal({
             {tc("cancel")}
           </Button>
           <Button variant="danger" loading={loading} onClick={onSubmit}>
-            <Prohibit aria-hidden weight="bold" className="size-4" />
+            <Ban aria-hidden className="size-4" strokeWidth={2} />
             {t("bulkRejectSubmit", { count })}
           </Button>
         </>

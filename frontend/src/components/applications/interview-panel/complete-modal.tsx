@@ -70,7 +70,7 @@ export function CompleteModal({
       }
     >
       <fieldset className="space-y-2" disabled={run.isPending}>
-        <legend className="mb-1 text-sm font-semibold text-[var(--text-primary)]">
+        <legend className="mb-1 type-small font-semibold text-foreground">
           {t("outcomeLabel")}
         </legend>
         <div role="radiogroup" aria-label={t("outcomeLabel")} className="space-y-2">
@@ -80,7 +80,7 @@ export function CompleteModal({
               <label
                 key={o.value}
                 htmlFor={id}
-                className="flex cursor-pointer items-center gap-2.5 rounded-lg border border-[var(--border-default)] bg-[var(--bg-subtle)] px-3 py-2 text-sm has-[:checked]:border-[var(--brand-primary)] has-[:checked]:bg-[var(--brand-primary)]/10 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--brand-primary)]/40"
+                className="flex cursor-pointer items-center gap-2.5 rounded-lg border border-border bg-[var(--bg-subtle)] px-3 py-2 type-small has-[:checked]:border-[var(--brand-primary)] has-[:checked]:bg-[var(--brand-primary)]/10 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--field-focus-border)]"
               >
                 <input
                   id={id}
@@ -91,7 +91,7 @@ export function CompleteModal({
                   onChange={() => setOutcome(o.value)}
                   className="size-4 accent-[var(--brand-primary)]"
                 />
-                <span className="text-[var(--text-primary)]">{o.label}</span>
+                <span className="text-foreground">{o.label}</span>
               </label>
             );
           })}

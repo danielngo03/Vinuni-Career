@@ -6,8 +6,6 @@
       "complete_profile": "Complete your profile",
       "build_cv": "Build a CV",
       "create_alert": "Create job alert",
-      "respond_reveal": "Respond to identity reveal",
-      "respond_reveals": "Respond to identity reveals",
       "jobs_in_draft": "Finish draft jobs",
       "jobs_pending_review": "Jobs awaiting review",
       "post_job": "Post a job",
@@ -29,11 +27,8 @@
       "viewInterview": "View details",
       "upcomingEventsTitle": "Your upcoming events",
       "viewEvent": "View event",
-      "revealsTitle": "Identity reveal requests",
       "untitledJob": "Untitled role",
       "unknownCompany": "Anonymous employer",
-      "requestedOn": "Requested {date}",
-      "respondCta": "Respond",
       "recentApplicationsTitle": "Recent applications",
       "noApplicationsTitle": "No applications yet",
       "noApplicationsBody": "Browse jobs and submit your first application.",
@@ -53,9 +48,7 @@
         "jobsDraft": "Draft jobs",
         "jobsPendingReview": "Pending review",
         "jobsPendingReviewHotNote": "{count, plural, one {# job needs review} other {# jobs need review}}",
-        "applicationsTotal": "Total applications",
-        "revealsPending": "Reveals pending",
-        "revealsPendingHotNote": "{count, plural, one {# profile needs a reply} other {# profiles need a reply}}"
+        "applicationsTotal": "Total applications"
       },
       "actionsEmptyTitle": "Nothing needs action",
       "actionsEmptyBody": "All your jobs and applications are handled.",
@@ -73,14 +66,9 @@
       "aiInsightStrongDemand": "Strong demand — {count} applications per active job on average.",
       "aiInsightLowVolume": "Low application volume ({count} per job) — consider boosting job visibility.",
       "aiInsightDraftJobs": "{count, plural, one {# draft job} other {# draft jobs}} not yet published — publish to attract candidates.",
-      "aiInsightRevealsPending": "{count, plural, one {# reveal request} other {# reveal requests}} awaiting response — quick replies improve candidate experience.",
       "aiInsightNoActive": "No active jobs right now — activate a draft to resume hiring.",
       "todoTitle": "Today's to-do list",
       "todo": {
-        "respond_reveals": {
-          "title": "Respond to identity reveal requests",
-          "body": "{count, plural, one {# profile is waiting for the hiring team's decision} other {# profiles are waiting for the hiring team's decision}}"
-        },
         "jobs_pending_review": {
           "title": "Track jobs awaiting review",
           "body": "{count, plural, one {# job is in the university moderation queue} other {# jobs are in the university moderation queue}}"
@@ -163,7 +151,10 @@
         "low": "Low"
       },
       "todoLabel": {
-        "respond_reveals": "Respond to identity-reveal requests",
+        "applications_to_review": "Applications to review",
+        "offers_to_approve": "Offers pending approval",
+        "offers_to_send": "Offers to send",
+        "unread_messages": "Unread messages",
         "jobs_pending_review": "Track jobs pending review",
         "jobs_in_draft": "Finish draft jobs",
         "review_access_alerts": "Review candidate access alerts",
@@ -206,7 +197,7 @@
       "accessAlertsLockedTitle": "Access-log grant required",
       "accessAlertsLockedBody": "You have not been granted access to candidate access alerts.",
       "accessAlertsEmptyTitle": "No alerts",
-      "accessAlertsEmptyBody": "No unusual CV downloads or reveal requests detected in the last 24 hours.",
+      "accessAlertsEmptyBody": "No unusual CV views or downloads in the last 24 hours.",
       "alertWindow": "{count} in the last {hours}h",
       "viewAccessLog": "View access log",
       "aiRecommendationsTitle": "Operating suggestions (advisory only)",
@@ -214,7 +205,74 @@
       "rbacTitle": "Your permission scope",
       "rbacAdminBody": "You hold full admin control of this partner organization — every widget is fully visible.",
       "rbacMemberBody": "Some widgets are hidden or locked because of missing grants. Contact your partner admin for access.",
-      "hiddenWidgetsCount": "{count, plural, one {# widget locked} other {# widgets locked}}"
+      "hiddenWidgetsCount": "{count, plural, one {# widget locked} other {# widgets locked}}",
+      "flagship": {
+        "title": "Overview",
+        "subtitle": "Live pipeline, job performance, and everything that needs your attention — in one place.",
+        "postJob": "Post a job",
+        "viewAnalytics": "View analytics",
+        "retry": "Retry",
+        "errorTitle": "Couldn't load your command center",
+        "errorBody": "Something went wrong loading your recruiting data. Try again.",
+        "offlineTitle": "You're offline",
+        "offlineBody": "Reconnect to load your live recruiting data.",
+        "heroEyebrow": "Pipeline",
+        "heroTitle": "Candidates in play",
+        "heroCaption": "Across {roles} active roles and {apps} total applications.",
+        "heroConversion": "{value} apply conversion",
+        "heroTopRoles": "Busiest roles",
+        "greeting": "Hi, {name}",
+        "kpi": {
+          "openJobs": "Open jobs",
+          "applications": "Applications",
+          "pendingReview": "Pending review",
+          "pendingReviewHint": "Awaiting university approval",
+          "drafts": "Draft jobs",
+          "conversion": "Conversion"
+        },
+        "funnelTitle": "Application funnel",
+        "funnelSubtitle": "Candidates by stage",
+        "funnelOfPrevious": "of previous",
+        "funnelEmptyTitle": "No funnel data yet",
+        "funnelEmptyBody": "Stages appear here once applications start flowing in.",
+        "trendTitle": "Applications over time",
+        "trendSeries": "Applications",
+        "trendEmptyTitle": "No trend data yet",
+        "trendEmptyBody": "Monthly application volume will appear here.",
+        "pipelineHealthTitle": "Pipeline health",
+        "pipelineActive": "Active",
+        "pipelineRejected": "Rejected",
+        "pipelineWithdrawn": "Withdrawn",
+        "pipelineCenter": "active",
+        "pipelineEmptyTitle": "No pipeline yet",
+        "pipelineEmptyBody": "Candidate outcomes will show here once you receive applications.",
+        "channelTitle": "Source mix",
+        "attentionTitle": "Needs your attention",
+        "stage": {
+          "draft": "Draft",
+          "submitted": "Applied",
+          "applied": "Applied",
+          "under_review": "Under review",
+          "screening": "Screening",
+          "shortlisted": "Shortlisted",
+          "interview": "Interview",
+          "interviewing": "Interviewing",
+          "offer": "Offer",
+          "offered": "Offer",
+          "hired": "Hired",
+          "accepted": "Accepted",
+          "rejected": "Rejected",
+          "withdrawn": "Withdrawn"
+        },
+        "source": {
+          "organic": "Organic",
+          "search": "Search",
+          "recommendation": "Recommended",
+          "sponsored": "Sponsored",
+          "invitation": "Invitation",
+          "direct": "Direct"
+        }
+      }
     },
     "partnerAccessLog": {
       "title": "Candidate access log",
@@ -223,7 +281,7 @@
       "lockedTitle": "Access-log grant required",
       "lockedBody": "You need CV view/download or click-analytics access to view this log.",
       "emptyTitle": "No access events yet",
-      "emptyBody": "Application opens, CV previews/downloads, and identity-reveal requests will be recorded here.",
+      "emptyBody": "Application opens and CV previews/downloads will be recorded here.",
       "table": {
         "event": "Event",
         "job": "Job",
@@ -239,7 +297,13 @@
         "cv_downloaded": "CV downloaded",
         "identity_reveal_requested": "Identity reveal requested",
         "identity_revealed_viewed": "Revealed identity viewed"
-      }
+      },
+      "errorTitle": "Couldn't load the access log",
+      "errorBody": "Something went wrong loading candidate access events. Try again.",
+      "spikeTitle": "Access spikes",
+      "spikeNote": "Members with an unusual volume of CV views or downloads in this window. Review their access if it looks off.",
+      "spikeItem": "{actor} · {count} sensitive accesses",
+      "reviewAccess": "Review access"
     },
     "university": {
       "title": "Operations center",

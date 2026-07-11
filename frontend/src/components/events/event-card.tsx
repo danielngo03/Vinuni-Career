@@ -113,7 +113,7 @@ export function EventCard({ event }: { event: EventSummary }) {
         {/* Urgency — bottom-right */}
         {urgentSeats && (
           <div className="absolute bottom-2 right-2">
-            <span className="inline-flex items-center gap-1 rounded-full bg-[var(--red-600)]/90 px-2.5 py-1 text-xs font-semibold text-white shadow-[0_2px_8px_rgba(200,53,56,0.35)] backdrop-blur-sm">
+            <span className="inline-flex items-center gap-1 rounded-full bg-[var(--amber-600)]/95 px-2.5 py-1 text-xs font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.20)] backdrop-blur-sm">
               <Fire aria-hidden weight="fill" className="size-3.5" />
               {t("spotsLeft", { count: event.seats_remaining ?? 0 })}
             </span>

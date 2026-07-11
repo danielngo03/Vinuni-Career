@@ -45,12 +45,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-invalid={error ? true : undefined}
           aria-describedby={cn(error && errorId, help && helpId) || undefined}
           className={cn(
-            "w-full resize-y rounded-xl border bg-white/80 px-3.5 py-2.5 text-sm font-medium text-[var(--text-primary)]",
-            "placeholder:text-[var(--text-muted)] outline-none transition-all duration-150",
-            "focus:border-[var(--brand-primary)] focus:bg-white/95 focus:ring-2 focus:ring-[var(--brand-primary)]/20",
+            "w-full resize-y rounded-xl border bg-transparent px-3.5 py-2.5 text-sm font-medium text-[var(--text-primary)]",
+            "placeholder:text-[var(--text-muted)] outline-none transition-[border-color,box-shadow,background-color] duration-150",
+            "focus:border-[var(--field-focus-border)] focus:bg-[var(--surface-card)] focus:shadow-[0_0_0_4px_var(--field-focus-ring)] focus:ring-0 focus-visible:outline-none",
             error
-              ? "border-[var(--brand-red)] focus:border-[var(--brand-red)] focus:ring-[var(--brand-red)]/15"
-              : "border-white/60 hover:border-[var(--border-default)]",
+              ? "border-[var(--brand-red)] focus:border-[var(--brand-red)] focus:shadow-[0_0_0_4px_rgba(200,53,56,0.10)]"
+              : "border-[var(--border-default)] hover:border-[var(--border-strong)]",
             "disabled:cursor-not-allowed disabled:opacity-60",
             className,
           )}

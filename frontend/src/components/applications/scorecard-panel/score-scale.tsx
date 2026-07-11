@@ -18,9 +18,7 @@ export function ScoreScale({
   return (
     <fieldset disabled={disabled} className="min-w-0">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <legend className="text-sm font-medium text-[var(--text-primary)]">
-          {legend}
-        </legend>
+        <legend className="type-small font-medium text-foreground">{legend}</legend>
         <div role="radiogroup" aria-label={legend} className="flex gap-1.5">
           {SCORE_VALUES.map((n) => {
             const id = `${name}-${n}`;
@@ -36,7 +34,7 @@ export function ScoreScale({
                   onChange={() => onChange(n)}
                   className="peer sr-only"
                 />
-                <span className="flex size-9 items-center justify-center rounded-lg border border-[var(--border-default)] bg-[var(--bg-subtle)] text-sm font-semibold text-[var(--text-secondary)] transition-colors peer-checked:border-[var(--brand-primary)] peer-checked:bg-[var(--brand-primary)] peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--brand-primary)]/40">
+                <span className="flex size-9 items-center justify-center rounded-lg border border-border bg-[var(--bg-subtle)] text-sm font-semibold tabular-nums text-muted-foreground transition-colors peer-checked:border-[var(--brand-primary)] peer-checked:bg-[var(--brand-primary)] peer-checked:text-[var(--brand-on-primary,#fff)] peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--field-focus-border)]">
                   {n}
                 </span>
               </label>

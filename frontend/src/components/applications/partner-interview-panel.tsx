@@ -3,11 +3,10 @@
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarPlus, WarningCircle } from "@phosphor-icons/react";
+import { CalendarPlus, AlertCircle } from "lucide-react";
 import { Button, useToast } from "@/components/ui";
 import { ApiError, applicationsApi, type Interview } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
-import { RevealBlocked } from "./interview-panel/reveal-blocked";
 import { InterviewCard } from "./interview-panel/interview-card";
 import { InterviewFormModal } from "./interview-panel/interview-form-modal";
 import { AssigneesModal } from "./interview-panel/assignees-modal";
@@ -19,27 +18,17 @@ import { ActionModal } from "./interview-panel/action-modal";
  * partner candidate detail Sheet (alongside the scorecard panel). NEVER rendered
  * on any student surface — the student sees only their own upcoming-interview card.
  *
- * Reveal precondition (ADR-0006 §3): scheduling an interview on an anonymous
- * application requires an already-accepted reveal. When the candidate is still
- * anonymous + unrevealed the form is replaced by a blocked state that deep-links
- * the reveal flow; a `409 reveal_required` from the API is handled the same way.
+ * Scheduling is subject only to normal RBAC + the `canSchedule` state (candidate
+ * actively under review); there is no identity-reveal precondition (that flow was
+ * removed, owner decision 2026-07-10).
  */
 export function PartnerInterviewPanel({
   applicationId,
   canSchedule,
-  anonUnrevealed,
-  revealPending,
-  onRequestReveal,
 }: {
   applicationId: string;
   /** Scheduling is only valid while the candidate is actively under review. */
   canSchedule: boolean;
-  /** True while the applicant is anonymous and the reveal is not yet accepted. */
-  anonUnrevealed: boolean;
-  /** True when a reveal request is already pending the student's response. */
-  revealPending: boolean;
-  /** Opens the existing reveal-request flow (deep-link from the blocked state). */
-  onRequestReveal: () => void;
 }) {
   const t = useTranslations("interviews");
   const tc = useTranslations("common");
@@ -81,16 +70,15 @@ export function PartnerInterviewPanel({
   const header = (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-2">
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-lg icon-chip-success shadow-sm">
-          <CalendarPlus aria-hidden weight="duotone" className="size-4 text-white" />
+        <span
+          className="flex size-7 shrink-0 items-center justify-center rounded-lg"
+          style={{ background: "var(--content-success-soft)" }}
+        >
+          <CalendarPlus aria-hidden className="size-4" strokeWidth={1.8} style={{ color: "var(--content-success)" }} />
         </span>
-        <h3 className="text-base font-bold text-[var(--text-primary)]">
-          {t("panelTitle")}
-        </h3>
+        <h3 className="type-h3 text-foreground">{t("panelTitle")}</h3>
       </div>
-      <span className="text-xs font-medium text-[var(--text-muted)]">
-        {t("partnerOnly")}
-      </span>
+      <span className="type-caption text-muted-foreground">{t("partnerOnly")}</span>
     </div>
   );
 
@@ -98,10 +86,7 @@ export function PartnerInterviewPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div
-          className="h-24 animate-pulse rounded-xl bg-[var(--bg-muted)]"
-          aria-hidden
-        />
+        <div className="h-24 animate-skeleton rounded-xl bg-[var(--bg-muted)]" aria-hidden />
       </section>
     );
   }
@@ -112,22 +97,13 @@ export function PartnerInterviewPanel({
     return (
       <section aria-label={t("panelTitle")} className="space-y-3">
         {header}
-        <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
-          <p className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-            <WarningCircle
-              aria-hidden
-              weight="duotone"
-              className="size-4 text-[var(--text-muted)]"
-            />
+        <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
+          <p className="flex items-center gap-2 type-small text-muted-foreground">
+            <AlertCircle aria-hidden className="size-4 text-muted-foreground" strokeWidth={1.8} />
             {permission ? t("noPermission") : t("loadError")}
           </p>
           {!permission && (
-            <Button
-              variant="secondary"
-              size="sm"
-              className="mt-2"
-              onClick={() => query.refetch()}
-            >
+            <Button variant="secondary" size="sm" className="mt-2" onClick={() => query.refetch()}>
               {tc("retry")}
             </Button>
           )}
@@ -142,23 +118,11 @@ export function PartnerInterviewPanel({
     <section aria-label={t("panelTitle")} className="space-y-3">
       {header}
 
-      {/* Reveal precondition: scheduling needs an accepted reveal first. */}
-      {anonUnrevealed ? (
-        <RevealBlocked
-          pending={revealPending}
-          onRequestReveal={onRequestReveal}
-        />
-      ) : null}
-
       {/* Existing interviews. */}
       {interviews.length === 0 ? (
-        !anonUnrevealed && (
-          <div className="rounded-xl border border-[var(--border-default)] bg-white p-3.5 ">
-            <p className="text-sm text-[var(--text-secondary)]">
-              {t("emptyBody")}
-            </p>
-          </div>
-        )
+        <div className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3.5">
+          <p className="type-small text-muted-foreground">{t("emptyBody")}</p>
+        </div>
       ) : (
         <ul className="space-y-2.5">
           {interviews.map((iv) => (
@@ -177,19 +141,15 @@ export function PartnerInterviewPanel({
         </ul>
       )}
 
-      {/* Schedule trigger (hidden while a reveal is required or one is open). */}
-      {showScheduleButton && !anonUnrevealed && (
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => setScheduleOpen(true)}
-        >
-          <CalendarPlus aria-hidden weight="bold" className="size-4" />
+      {/* Schedule trigger (hidden while an open interview already exists). */}
+      {showScheduleButton && (
+        <Button variant="primary" size="sm" onClick={() => setScheduleOpen(true)}>
+          <CalendarPlus aria-hidden className="size-4" strokeWidth={1.8} />
           {t("scheduleCta")}
         </Button>
       )}
       {canSchedule && hasOpen && (
-        <p className="text-xs text-[var(--text-muted)]">{t("openExistsHint")}</p>
+        <p className="type-caption text-muted-foreground">{t("openExistsHint")}</p>
       )}
 
       {/* Schedule modal */}
@@ -202,11 +162,6 @@ export function PartnerInterviewPanel({
           setScheduleOpen(false);
           invalidate();
           toast.show({ tone: "success", title: t("scheduledToast") });
-        }}
-        onRevealRequired={() => {
-          setScheduleOpen(false);
-          invalidate();
-          toast.show({ tone: "warning", title: t("revealRequiredToast") });
         }}
         onInterviewExists={() => {
           setScheduleOpen(false);
@@ -227,7 +182,6 @@ export function PartnerInterviewPanel({
           invalidate();
           toast.show({ tone: "success", title: t("rescheduledToast") });
         }}
-        onRevealRequired={() => setEditTarget(null)}
         onInterviewExists={() => setEditTarget(null)}
       />
 

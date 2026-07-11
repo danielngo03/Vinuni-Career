@@ -35,7 +35,7 @@ import { ApiError, jobsApi, type JobTranslation } from "@/lib/api";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { ApplyModal } from "@/components/applications/apply-modal";
 import { SaveJobButton } from "@/components/jobs/save-job-button";
-import { InterviewPrepPanel } from "@/components/jobs/interview-prep-panel";
+import { MockInterviewEntryCard } from "@/components/jobs/mock-interview/mock-interview-entry-card";
 import { CompetitionBadge } from "@/components/jobs/competition-badge";
 import { StudentJobIntelligencePanel } from "@/components/jobs/student-job-intelligence-panel";
 import { SimilarJobsRail } from "@/components/discovery/similar-jobs-rail";
@@ -405,7 +405,7 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
                 <StudentJobIntelligencePanel jobId={job.id} />
               </TrackedItem>
             )}
-            {isStudent && <InterviewPrepPanel jobId={job.id} />}
+            {isStudent && <MockInterviewEntryCard jobId={job.id} />}
           </aside>
         </div>
 

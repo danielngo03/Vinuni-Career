@@ -1,20 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarCheck, PlusCircle } from "@phosphor-icons/react";
+import { CalendarCheck, Plus } from "lucide-react";
+import { Button, Input, Modal, Select, Textarea, useToast } from "@/components/ui";
 import {
-  Button,
   DataTable,
-  Input,
-  Modal,
-  Select,
-  StatusBadge,
-  Textarea,
-  useToast,
-  type Column,
-} from "@/components/ui";
+  EmptyState,
+  FilterBar,
+  StatusChip,
+  type ChipTone,
+  type ColumnDef,
+} from "@/components/kit";
+import { cn } from "@/lib/utils";
 import { CareerServicesShell } from "./career-services-shell";
 import { CareerServicesPermissionGate } from "./permission-gate";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
@@ -28,12 +27,12 @@ import {
 } from "@/lib/api";
 import { formatDateTime } from "@/lib/format";
 
-const STATUS_TONE: Record<AppointmentStatus, "pending" | "active" | "accepted" | "closed" | "rejected"> = {
-  requested: "pending",
-  confirmed: "active",
-  completed: "accepted",
-  cancelled: "closed",
-  no_show: "rejected",
+const STATUS_TONE: Record<AppointmentStatus, ChipTone> = {
+  requested: "warning",
+  confirmed: "info",
+  completed: "success",
+  cancelled: "neutral",
+  no_show: "danger",
 };
 
 const NEXT_STATUS: Record<AppointmentStatus, AppointmentStatus[]> = {
@@ -44,6 +43,15 @@ const NEXT_STATUS: Record<AppointmentStatus, AppointmentStatus[]> = {
   no_show: [],
 };
 
+const STATUS_FILTERS: (AppointmentStatus | "")[] = [
+  "",
+  "requested",
+  "confirmed",
+  "completed",
+  "cancelled",
+  "no_show",
+];
+
 export function AppointmentsScreen() {
   const t = useTranslations("careerServices");
   const locale = useLocale();
@@ -51,22 +59,22 @@ export function AppointmentsScreen() {
   const getErrorMessage = useApiErrorMessage();
   const qc = useQueryClient();
 
-  const [statusFilter, setStatusFilter] = useState<AppointmentStatus | "">("");
-  const [createOpen, setCreateOpen] = useState(false);
-  const [studentId, setStudentId] = useState("");
-  const [counselorId, setCounselorId] = useState("");
-  const [scheduledAt, setScheduledAt] = useState("");
-  const [duration, setDuration] = useState(30);
-  const [mode, setMode] = useState<AppointmentMode>("in_person");
-  const [location, setLocation] = useState("");
-  const [notes, setNotes] = useState("");
-  const [bookingConflict, setBookingConflict] = useState(false);
+  const [statusFilter, setStatusFilter] = React.useState<AppointmentStatus | "">("");
+  const [createOpen, setCreateOpen] = React.useState(false);
+  const [studentId, setStudentId] = React.useState("");
+  const [counselorId, setCounselorId] = React.useState("");
+  const [scheduledAt, setScheduledAt] = React.useState("");
+  const [duration, setDuration] = React.useState(30);
+  const [mode, setMode] = React.useState<AppointmentMode>("in_person");
+  const [location, setLocation] = React.useState("");
+  const [notes, setNotes] = React.useState("");
+  const [bookingConflict, setBookingConflict] = React.useState(false);
 
-  const [statusTarget, setStatusTarget] = useState<{
+  const [statusTarget, setStatusTarget] = React.useState<{
     item: CareerServicesAppointment;
     next: AppointmentStatus;
   } | null>(null);
-  const [cancelReason, setCancelReason] = useState("");
+  const [cancelReason, setCancelReason] = React.useState("");
 
   const query = useQuery({
     queryKey: ["career-services", "appointments", locale, statusFilter],
@@ -140,60 +148,69 @@ export function AppointmentsScreen() {
     },
   });
 
-  const appointments = useMemo(() => query.data ?? [], [query.data]);
+  const appointments = query.data ?? [];
   const permissionState =
     query.isError && query.error instanceof ApiError ? (
       <CareerServicesPermissionGate error={query.error} bodyOverride={t("appointments.permissionBody")} />
     ) : null;
 
-  const columns: Column<CareerServicesAppointment>[] = [
+  const bookButton = (
+    <Button onClick={() => setCreateOpen(true)} size="sm">
+      <Plus className="size-4" strokeWidth={2} />
+      {t("appointments.book")}
+    </Button>
+  );
+
+  const columns: ColumnDef<CareerServicesAppointment, unknown>[] = [
     {
-      key: "when",
+      id: "when",
       header: t("appointments.colWhen"),
-      cell: (r) => (
-        <div>
-          <p className="font-semibold">{formatDateTime(r.scheduled_at, locale)}</p>
-          <p className="text-xs text-[var(--text-muted)]">
-            {t("appointments.durationMinutes", { count: r.duration_minutes })} · {r.mode_label}
+      cell: ({ row }) => (
+        <div className="min-w-0">
+          <p className="font-semibold text-foreground">{formatDateTime(row.original.scheduled_at, locale)}</p>
+          <p className="type-caption text-muted-foreground">
+            {t("appointments.durationMinutes", { count: row.original.duration_minutes })} · {row.original.mode_label}
           </p>
         </div>
       ),
     },
     {
-      key: "student",
+      accessorKey: "student_id",
       header: t("appointments.colStudent"),
-      cell: (r) => <span className="font-mono text-xs">{r.student_id}</span>,
+      cell: ({ row }) => <span className="font-mono text-xs text-foreground">{row.original.student_id}</span>,
     },
     {
-      key: "counselor",
+      accessorKey: "counselor_id",
       header: t("appointments.colCounselor"),
-      cell: (r) => <span className="font-mono text-xs">{r.counselor_id}</span>,
+      cell: ({ row }) => <span className="font-mono text-xs text-foreground">{row.original.counselor_id}</span>,
     },
     {
-      key: "status",
+      accessorKey: "status",
       header: t("appointments.colStatus"),
-      cell: (r) => (
-        <div>
-          <StatusBadge tone={STATUS_TONE[r.status]}>{r.status_label}</StatusBadge>
-          {r.cancel_reason && (
-            <p className="mt-1 max-w-[200px] truncate text-xs text-[var(--text-muted)]">
-              {r.cancel_reason}
+      cell: ({ row }) => (
+        <div className="min-w-0">
+          <StatusChip tone={STATUS_TONE[row.original.status]}>{row.original.status_label}</StatusChip>
+          {row.original.cancel_reason && (
+            <p className="mt-1 max-w-[200px] truncate type-caption text-muted-foreground">
+              {row.original.cancel_reason}
             </p>
           )}
         </div>
       ),
     },
     {
-      key: "actions",
-      header: t("appointments.colActions"),
-      cell: (r) => (
-        <div className="flex flex-wrap gap-1.5">
-          {NEXT_STATUS[r.status].map((next) => (
+      id: "actions",
+      header: "",
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <div className="flex flex-wrap items-center justify-end gap-1">
+          {NEXT_STATUS[row.original.status].map((next) => (
             <Button
               key={next}
               variant="ghost"
-              size="xs"
-              onClick={() => setStatusTarget({ item: r, next })}
+              size="sm"
+              onClick={() => setStatusTarget({ item: row.original, next })}
             >
               {t(`appointmentStatus.${next}`)}
             </Button>
@@ -207,46 +224,52 @@ export function AppointmentsScreen() {
     <CareerServicesShell
       title={t("appointments.title")}
       description={t("appointments.subtitle")}
-      actions={
-        !permissionState && (
-          <div className="flex items-center gap-2">
-            <Select
-              aria-label={t("appointments.filterStatus")}
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value as AppointmentStatus | "")}
-              options={[
-                { value: "", label: t("appointments.allStatuses") },
-                { value: "requested", label: t("appointmentStatus.requested") },
-                { value: "confirmed", label: t("appointmentStatus.confirmed") },
-                { value: "completed", label: t("appointmentStatus.completed") },
-                { value: "cancelled", label: t("appointmentStatus.cancelled") },
-                { value: "no_show", label: t("appointmentStatus.no_show") },
-              ]}
-            />
-            <Button onClick={() => setCreateOpen(true)}>
-              <PlusCircle aria-hidden weight="bold" className="size-4" />
-              {t("appointments.book")}
-            </Button>
-          </div>
-        )
-      }
+      actions={!permissionState ? bookButton : undefined}
     >
       {permissionState ?? (
-        <DataTable
-          columns={columns}
-          rows={appointments}
-          getRowId={(r) => r.id}
-          loading={query.isLoading}
-          caption={t("appointments.title")}
-          empty={{
-            kind: "empty",
-            icon: CalendarCheck,
-            title: t("appointments.emptyTitle"),
-            description: t("appointments.emptyBody"),
-          }}
-        />
+        <div className="space-y-4">
+          <FilterBar>
+            <div className="flex flex-wrap gap-1.5" role="group" aria-label={t("appointments.filterStatus")}>
+              {STATUS_FILTERS.map((s) => {
+                const active = statusFilter === s;
+                return (
+                  <button
+                    key={s || "all"}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setStatusFilter(s)}
+                    className={cn(
+                      "inline-flex items-center rounded-full border px-3 py-1 text-[0.8125rem] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+                      active
+                        ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                        : "border-border bg-card text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {s === "" ? t("appointments.allStatuses") : t(`appointmentStatus.${s}`)}
+                  </button>
+                );
+              })}
+            </div>
+          </FilterBar>
+
+          <DataTable
+            columns={columns}
+            data={appointments}
+            getRowId={(r) => r.id}
+            loading={query.isPending}
+            empty={
+              <EmptyState
+                kind="empty"
+                icon={CalendarCheck}
+                title={t("appointments.emptyTitle")}
+                description={t("appointments.emptyBody")}
+              />
+            }
+          />
+        </div>
       )}
 
+      {/* Book appointment */}
       <Modal
         open={createOpen}
         onClose={closeCreate}
@@ -274,7 +297,8 @@ export function AppointmentsScreen() {
           {bookingConflict && (
             <p
               role="alert"
-              className="rounded-lg border border-[var(--brand-red)]/30 bg-[var(--red-50)] px-3.5 py-2.5 text-sm font-medium text-[var(--brand-red)]"
+              className="rounded-lg px-3.5 py-2.5 text-sm font-medium"
+              style={{ background: "var(--content-danger-soft)", color: "var(--content-danger)" }}
             >
               {t("appointments.slotTakenError")}
             </p>
@@ -339,6 +363,7 @@ export function AppointmentsScreen() {
         </div>
       </Modal>
 
+      {/* Status change */}
       <Modal
         open={!!statusTarget}
         onClose={() => setStatusTarget(null)}
@@ -369,7 +394,7 @@ export function AppointmentsScreen() {
             rows={3}
           />
         ) : (
-          <p className="text-sm text-[var(--text-secondary)]">
+          <p className="text-sm text-muted-foreground">
             {t("appointments.confirmStatusChange", {
               status: statusTarget ? t(`appointmentStatus.${statusTarget.next}`) : "",
             })}

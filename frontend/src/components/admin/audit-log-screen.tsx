@@ -1,24 +1,37 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import * as React from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
-import { ClipboardText, WarningCircle, DownloadSimple } from "@phosphor-icons/react";
+import { Download } from "lucide-react";
+import { Button, useToast } from "@/components/ui";
 import {
-  Sheet,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  DataTable,
+  type ColumnDef,
+  DetailSheet,
+  DetailSheetSection,
+  DetailRow,
   EmptyState,
-  Skeleton,
-  Button,
-  Input,
-  useToast,
-} from "@/components/ui";
+} from "@/components/kit";
+import { PageHeader } from "@/components/layout/page-header";
 import { auditLogApi, type AuditRow, type AuditLogParams } from "@/lib/api/audit-log";
 import { formatDateTime } from "@/lib/format";
-import { cn } from "@/lib/utils";
+
+const MONO = "font-mono text-[0.7rem]";
+const MONO_STYLE: React.CSSProperties = { fontFamily: "'JetBrains Mono', ui-monospace, monospace" };
 
 /* -------------------------------------------------------------------------- */
-/* Before / After diff renderer                                                */
+/* Diff renderers                                                              */
 /* -------------------------------------------------------------------------- */
+
+function renderValue(v: unknown): string {
+  if (v === null || v === undefined) return "null";
+  return typeof v === "object" ? JSON.stringify(v) : String(v);
+}
 
 function DiffSection({
   label,
@@ -32,37 +45,22 @@ function DiffSection({
   if (!data || Object.keys(data).length === 0) {
     return (
       <div>
-        <p className="mb-1 text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-          {label}
-        </p>
-        <p className="text-sm text-[var(--text-secondary)]">{nullLabel}</p>
+        <p className="mb-1 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">{label}</p>
+        <p className="type-small text-muted-foreground">{nullLabel}</p>
       </div>
     );
   }
-
   return (
     <div>
-      <p className="mb-1.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-        {label}
-      </p>
-      <dl className="space-y-1 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-3">
+      <p className="mb-1.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">{label}</p>
+      <dl className="space-y-1 rounded-lg border border-border bg-[var(--bg-subtle)] p-3">
         {Object.entries(data).map(([key, value]) => (
           <div key={key} className="flex flex-wrap gap-x-2">
-            <dt
-              className="font-mono text-[0.65rem] font-semibold text-[var(--text-secondary)]"
-              style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-            >
+            <dt className={`${MONO} font-semibold text-muted-foreground`} style={MONO_STYLE}>
               {key}:
             </dt>
-            <dd
-              className="break-all font-mono text-[0.65rem] text-[var(--text-primary)]"
-              style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-            >
-              {value === null || value === undefined
-                ? "null"
-                : typeof value === "object"
-                  ? JSON.stringify(value)
-                  : String(value)}
+            <dd className={`${MONO} break-all text-foreground`} style={MONO_STYLE}>
+              {renderValue(value)}
             </dd>
           </div>
         ))}
@@ -70,10 +68,6 @@ function DiffSection({
     </div>
   );
 }
-
-/* -------------------------------------------------------------------------- */
-/* Changed-keys highlight                                                     */
-/* -------------------------------------------------------------------------- */
 
 function DiffHighlight({
   before,
@@ -84,228 +78,139 @@ function DiffHighlight({
   after: Record<string, unknown> | null;
   noDiffLabel: string;
 }) {
-  const allKeys = new Set([
-    ...Object.keys(before ?? {}),
-    ...Object.keys(after ?? {}),
-  ]);
-
-  const changed = [...allKeys].filter((k) => {
-    const bv = JSON.stringify((before ?? {})[k] ?? null);
-    const av = JSON.stringify((after ?? {})[k] ?? null);
-    return bv !== av;
-  });
-
-  if (changed.length === 0) {
-    return (
-      <p className="text-sm text-[var(--text-secondary)]">{noDiffLabel}</p>
-    );
-  }
-
+  const allKeys = new Set([...Object.keys(before ?? {}), ...Object.keys(after ?? {})]);
+  const changed = [...allKeys].filter(
+    (k) => JSON.stringify((before ?? {})[k] ?? null) !== JSON.stringify((after ?? {})[k] ?? null),
+  );
+  if (changed.length === 0) return <p className="type-small text-muted-foreground">{noDiffLabel}</p>;
   return (
-    <dl className="space-y-1.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-3">
-      {changed.map((key) => {
-        const bv = (before ?? {})[key];
-        const av = (after ?? {})[key];
-        return (
-          <div key={key} className="grid grid-cols-[auto_1fr_1fr] gap-x-2">
-            <dt
-              className="col-span-1 font-mono text-[0.65rem] font-semibold text-[var(--text-secondary)]"
-              style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-            >
-              {key}
-            </dt>
-            <dd
-              className="break-all font-mono text-[0.65rem] text-[var(--brand-red)] line-through opacity-70"
-              style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-              title="Before"
-            >
-              {bv === null || bv === undefined
-                ? "null"
-                : typeof bv === "object"
-                  ? JSON.stringify(bv)
-                  : String(bv)}
-            </dd>
-            <dd
-              className="break-all font-mono text-[0.65rem] text-[var(--color-success)]"
-              style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-              title="After"
-            >
-              {av === null || av === undefined
-                ? "null"
-                : typeof av === "object"
-                  ? JSON.stringify(av)
-                  : String(av)}
-            </dd>
-          </div>
-        );
-      })}
+    <dl className="space-y-1.5 rounded-lg border border-border bg-[var(--bg-subtle)] p-3">
+      {changed.map((key) => (
+        <div key={key} className="grid grid-cols-[auto_1fr_1fr] gap-x-2">
+          <dt className={`${MONO} font-semibold text-muted-foreground`} style={MONO_STYLE}>
+            {key}
+          </dt>
+          <dd
+            className={`${MONO} break-all line-through opacity-70`}
+            style={{ ...MONO_STYLE, color: "var(--content-danger)" }}
+          >
+            {renderValue((before ?? {})[key])}
+          </dd>
+          <dd className={`${MONO} break-all`} style={{ ...MONO_STYLE, color: "var(--content-success)" }}>
+            {renderValue((after ?? {})[key])}
+          </dd>
+        </div>
+      ))}
     </dl>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* Detail row helper                                                           */
+/* Detail drawer                                                               */
 /* -------------------------------------------------------------------------- */
 
-function DetailRow({
+function AuditDetailSheet({ row, onClose }: { row: AuditRow | null; onClose: () => void }) {
+  const t = useTranslations("adminConsole.audit.sheet");
+  const locale = useLocale();
+  const hasBoth = Boolean(row && row.before !== null && row.after !== null);
+
+  return (
+    <DetailSheet
+      open={row !== null}
+      onClose={onClose}
+      title={row?.action ?? t("title")}
+      subtitle={row ? row.resource_type : undefined}
+      closeLabel={t("closeLabel")}
+      width="lg"
+    >
+      {row && (
+        <>
+          <DetailSheetSection title={t("title")}>
+            <dl className="space-y-0.5">
+              <DetailRow label={t("labelId")}>
+                <span className={MONO} style={MONO_STYLE}>
+                  {row.id}
+                </span>
+              </DetailRow>
+              <DetailRow label={t("labelOccurredAt")}>{formatDateTime(row.occurred_at, locale)}</DetailRow>
+              <DetailRow label={t("labelAction")}>
+                <span className={MONO} style={MONO_STYLE}>
+                  {row.action}
+                </span>
+              </DetailRow>
+              <DetailRow label={t("labelResourceType")}>{row.resource_type}</DetailRow>
+              <DetailRow label={t("labelResourceId")}>
+                <span className={MONO} style={MONO_STYLE}>
+                  {row.resource_id ?? t("nullValue")}
+                </span>
+              </DetailRow>
+              {row.actor_email && <DetailRow label={t("labelActorEmail")}>{row.actor_email}</DetailRow>}
+              <DetailRow label={t("labelActorId")}>
+                <span className={MONO} style={MONO_STYLE}>
+                  {row.actor_id ?? t("nullValue")}
+                </span>
+              </DetailRow>
+              {row.actor_org_id && (
+                <DetailRow label={t("labelActorOrgId")}>
+                  <span className={MONO} style={MONO_STYLE}>
+                    {row.actor_org_id}
+                  </span>
+                </DetailRow>
+              )}
+            </dl>
+          </DetailSheetSection>
+
+          <DetailSheetSection title={t("labelBefore") + " / " + t("labelAfter")}>
+            <div className="space-y-4">
+              {hasBoth && <DiffHighlight before={row.before} after={row.after} noDiffLabel={t("noDiff")} />}
+              <DiffSection label={t("labelBefore")} data={row.before} nullLabel={t("nullValue")} />
+              <DiffSection label={t("labelAfter")} data={row.after} nullLabel={t("nullValue")} />
+            </div>
+          </DetailSheetSection>
+        </>
+      )}
+    </DetailSheet>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Filter input                                                                */
+/* -------------------------------------------------------------------------- */
+
+function FilterField({
+  id,
   label,
-  children,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
 }: {
+  id: string;
   label: string;
-  children: React.ReactNode;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  type?: string;
 }) {
   return (
-    <div className="flex flex-col gap-0.5 py-2.5 border-b border-[var(--border-subtle)] last:border-0">
-      <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+    <div>
+      <label htmlFor={id} className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
         {label}
-      </span>
-      <span className="text-sm text-[var(--text-primary)] break-all">
-        {children}
-      </span>
+      </label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="h-9 w-full rounded-lg border border-border bg-card px-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+      />
     </div>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* Detail sheet                                                                */
-/* -------------------------------------------------------------------------- */
-
-function AuditDetailSheet({
-  row,
-  onClose,
-}: {
-  row: AuditRow | null;
-  onClose: () => void;
-}) {
-  const t = useTranslations("adminConsole.audit.sheet");
-  const locale = useLocale();
-
-  if (!row) return null;
-
-  const hasBoth = row.before !== null && row.after !== null;
-
-  return (
-    <Sheet
-      open={row !== null}
-      onClose={onClose}
-      title={t("title")}
-      closeLabel={t("closeLabel")}
-    >
-      <div className="space-y-0">
-        <DetailRow label={t("labelId")}>
-          <span
-            className="font-mono text-xs"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {row.id}
-          </span>
-        </DetailRow>
-
-        <DetailRow label={t("labelOccurredAt")}>
-          {formatDateTime(row.occurred_at, locale)}
-        </DetailRow>
-
-        <DetailRow label={t("labelAction")}>
-          <span
-            className="font-mono text-xs"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {row.action}
-          </span>
-        </DetailRow>
-
-        <DetailRow label={t("labelResourceType")}>
-          {row.resource_type}
-        </DetailRow>
-
-        <DetailRow label={t("labelResourceId")}>
-          <span
-            className="font-mono text-xs"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {row.resource_id ?? t("nullValue")}
-          </span>
-        </DetailRow>
-
-        {row.actor_email && (
-          <DetailRow label={t("labelActorEmail")}>
-            {row.actor_email}
-          </DetailRow>
-        )}
-
-        <DetailRow label={t("labelActorId")}>
-          <span
-            className="font-mono text-xs"
-            style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-          >
-            {row.actor_id ?? t("nullValue")}
-          </span>
-        </DetailRow>
-
-        {row.actor_org_id && (
-          <DetailRow label={t("labelActorOrgId")}>
-            <span
-              className="font-mono text-xs"
-              style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-            >
-              {row.actor_org_id}
-            </span>
-          </DetailRow>
-        )}
-      </div>
-
-      {/* Diff section */}
-      <div className="mt-5 space-y-4">
-        {hasBoth ? (
-          <>
-            <DiffHighlight
-              before={row.before}
-              after={row.after}
-              noDiffLabel={t("noDiff")}
-            />
-            <DiffSection
-              label={t("labelBefore")}
-              data={row.before}
-              nullLabel={t("nullValue")}
-            />
-            <DiffSection
-              label={t("labelAfter")}
-              data={row.after}
-              nullLabel={t("nullValue")}
-            />
-          </>
-        ) : (
-          <>
-            <DiffSection
-              label={t("labelBefore")}
-              data={row.before}
-              nullLabel={t("nullValue")}
-            />
-            <DiffSection
-              label={t("labelAfter")}
-              data={row.after}
-              nullLabel={t("nullValue")}
-            />
-          </>
-        )}
-      </div>
-    </Sheet>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/* Table columns type                                                          */
-/* -------------------------------------------------------------------------- */
-
-interface Column<T> {
-  key: string;
-  header: string;
-  align?: "left" | "right";
-  cell: (row: T) => React.ReactNode;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Main screen                                                                 */
+/* Screen                                                                      */
 /* -------------------------------------------------------------------------- */
 
 export function AuditLogScreen() {
@@ -313,112 +218,39 @@ export function AuditLogScreen() {
   const locale = useLocale();
   const { show: showToast } = useToast();
 
-  /* ---- filter state ---- */
-  const [action, setAction] = useState("");
-  const [resourceType, setResourceType] = useState("");
-  const [actorId, setActorId] = useState("");
-  const [since, setSince] = useState("");
-  const [until, setUntil] = useState("");
+  const [action, setAction] = React.useState("");
+  const [resourceType, setResourceType] = React.useState("");
+  const [actorId, setActorId] = React.useState("");
+  const [since, setSince] = React.useState("");
+  const [until, setUntil] = React.useState("");
 
-  /* ---- debounced filter ---- */
-  const [debouncedFilters, setDebouncedFilters] = useState<AuditLogParams>({});
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [debouncedFilters, setDebouncedFilters] = React.useState<AuditLogParams>({});
+  const [cursor, setCursor] = React.useState<string | undefined>(undefined);
+  const [allRows, setAllRows] = React.useState<AuditRow[]>([]);
+  const [selectedRow, setSelectedRow] = React.useState<AuditRow | null>(null);
+  const [exporting, setExporting] = React.useState(false);
 
-  const applyFilters = useCallback(
-    (next: AuditLogParams) => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-      debounceRef.current = setTimeout(() => {
-        setDebouncedFilters(next);
-        setCursor(undefined);
-        setAllRows([]);
-      }, 250);
-    },
-    [],
+  const filters = React.useMemo<AuditLogParams>(
+    () => ({
+      action: action || undefined,
+      resource_type: resourceType || undefined,
+      actor_id: actorId || undefined,
+      since: since || undefined,
+      until: until || undefined,
+    }),
+    [action, resourceType, actorId, since, until],
   );
 
-  /* Handler that updates one field and schedules a debounce */
-  const handleActionChange = useCallback(
-    (v: string) => {
-      setAction(v);
-      applyFilters({
-        action: v || undefined,
-        resource_type: resourceType || undefined,
-        actor_id: actorId || undefined,
-        since: since || undefined,
-        until: until || undefined,
-      });
-    },
-    [resourceType, actorId, since, until, applyFilters],
-  );
-
-  const handleResourceTypeChange = useCallback(
-    (v: string) => {
-      setResourceType(v);
-      applyFilters({
-        action: action || undefined,
-        resource_type: v || undefined,
-        actor_id: actorId || undefined,
-        since: since || undefined,
-        until: until || undefined,
-      });
-    },
-    [action, actorId, since, until, applyFilters],
-  );
-
-  const handleActorIdChange = useCallback(
-    (v: string) => {
-      setActorId(v);
-      applyFilters({
-        action: action || undefined,
-        resource_type: resourceType || undefined,
-        actor_id: v || undefined,
-        since: since || undefined,
-        until: until || undefined,
-      });
-    },
-    [action, resourceType, since, until, applyFilters],
-  );
-
-  /* Date inputs apply immediately (no debounce — user intent is clear on blur) */
-  const handleSinceChange = useCallback(
-    (v: string) => {
-      setSince(v);
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-      setDebouncedFilters({
-        action: action || undefined,
-        resource_type: resourceType || undefined,
-        actor_id: actorId || undefined,
-        since: v || undefined,
-        until: until || undefined,
-      });
+  // Debounce filter changes; reset the cursor/accumulator on a new filter set.
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedFilters(filters);
       setCursor(undefined);
       setAllRows([]);
-    },
-    [action, resourceType, actorId, until],
-  );
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [filters]);
 
-  const handleUntilChange = useCallback(
-    (v: string) => {
-      setUntil(v);
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-      setDebouncedFilters({
-        action: action || undefined,
-        resource_type: resourceType || undefined,
-        actor_id: actorId || undefined,
-        since: since || undefined,
-        until: v || undefined,
-      });
-      setCursor(undefined);
-      setAllRows([]);
-    },
-    [action, resourceType, actorId, since],
-  );
-
-  /* ---- cursor / accumulator ---- */
-  const [cursor, setCursor] = useState<string | undefined>(undefined);
-  const [allRows, setAllRows] = useState<AuditRow[]>([]);
-
-  /* ---- query ---- */
   const query = useQuery({
     queryKey: ["audit-log", debouncedFilters, cursor] as const,
     queryFn: () => auditLogApi.list({ ...debouncedFilters, cursor, limit: 50 }),
@@ -426,43 +258,29 @@ export function AuditLogScreen() {
     retry: 1,
   });
 
-  /* Merge new page with accumulator (dedup by id) */
-  const rowsToShow: AuditRow[] = (() => {
+  const rowsToShow: AuditRow[] = React.useMemo(() => {
     if (!query.data) return allRows;
     if (!cursor) return query.data.items;
     const existing = new Set(allRows.map((r) => r.id));
-    const fresh = query.data.items.filter((r) => !existing.has(r.id));
-    return [...allRows, ...fresh];
-  })();
+    return [...allRows, ...query.data.items.filter((r) => !existing.has(r.id))];
+  }, [query.data, cursor, allRows]);
 
-  const handleLoadMore = useCallback(() => {
+  const handleLoadMore = React.useCallback(() => {
     if (query.data?.next_cursor) {
       setAllRows(rowsToShow);
       setCursor(query.data.next_cursor);
     }
   }, [query.data?.next_cursor, rowsToShow]);
 
-  const handleRetry = useCallback(() => {
+  const handleRetry = React.useCallback(() => {
     setCursor(undefined);
     setAllRows([]);
   }, []);
 
-  /* ---- selected row ---- */
-  const [selectedRow, setSelectedRow] = useState<AuditRow | null>(null);
-
-  /* ---- CSV export ---- */
-  const [exporting, setExporting] = useState(false);
-
-  const handleExport = useCallback(async () => {
+  const handleExport = React.useCallback(async () => {
     setExporting(true);
     try {
-      const blob = await auditLogApi.exportCsv({
-        action: action || undefined,
-        resource_type: resourceType || undefined,
-        actor_id: actorId || undefined,
-        since: since || undefined,
-        until: until || undefined,
-      });
+      const blob = await auditLogApi.exportCsv(filters);
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -477,304 +295,148 @@ export function AuditLogScreen() {
     } finally {
       setExporting(false);
     }
-  }, [action, resourceType, actorId, since, until, showToast, t]);
+  }, [filters, showToast, t]);
 
-  /* ---- table columns ---- */
-  const columns: Column<AuditRow>[] = [
+  const columns: ColumnDef<AuditRow, unknown>[] = [
     {
-      key: "occurred_at",
+      accessorKey: "occurred_at",
       header: t("col.time"),
-      cell: (row) => (
-        <span className="whitespace-nowrap text-xs text-[var(--text-secondary)]">
-          {formatDateTime(row.occurred_at, locale)}
+      cell: ({ row }) => (
+        <span className="whitespace-nowrap type-small text-muted-foreground">
+          {formatDateTime(row.original.occurred_at, locale)}
         </span>
       ),
     },
     {
-      key: "actor",
+      accessorKey: "actor_email",
       header: t("col.actor"),
-      cell: (row) => (
-        <span className="text-xs text-[var(--text-primary)]">
-          {row.actor_email ?? row.actor_id ?? "—"}
-        </span>
+      cell: ({ row }) => (
+        <span className="text-[0.8125rem] text-foreground">{row.original.actor_email ?? row.original.actor_id ?? "—"}</span>
       ),
     },
     {
-      key: "action",
+      accessorKey: "action",
       header: t("col.action"),
-      cell: (row) => (
-        <span
-          className="font-mono text-xs font-semibold text-[var(--text-primary)]"
-          style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-        >
-          {row.action}
+      cell: ({ row }) => (
+        <span className={`${MONO} font-semibold text-foreground`} style={MONO_STYLE}>
+          {row.original.action}
         </span>
       ),
     },
     {
-      key: "resource",
+      accessorKey: "resource_type",
       header: t("col.resource"),
-      cell: (row) => (
-        <div className="flex flex-col gap-0.5">
-          <span className="text-xs font-semibold text-[var(--text-primary)]">
-            {row.resource_type}
-          </span>
-          {row.resource_id && (
-            <span
-              className="font-mono text-[0.65rem] text-[var(--text-muted)]"
-              style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
-            >
-              {row.resource_id.length > 20
-                ? `${row.resource_id.slice(0, 8)}…${row.resource_id.slice(-4)}`
-                : row.resource_id}
-            </span>
-          )}
-        </div>
-      ),
+      enableSorting: false,
+      cell: ({ row }) => {
+        const r = row.original;
+        return (
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[0.8125rem] font-semibold text-foreground">{r.resource_type}</span>
+            {r.resource_id && (
+              <span className={`${MONO} text-muted-foreground`} style={MONO_STYLE}>
+                {r.resource_id.length > 20 ? `${r.resource_id.slice(0, 8)}…${r.resource_id.slice(-4)}` : r.resource_id}
+              </span>
+            )}
+          </div>
+        );
+      },
     },
   ];
 
-  /* ---- render ---- */
-
-  if (query.isPending && rowsToShow.length === 0) {
-    return (
-      <div className="marketplace-card rounded-[12px] p-5">
-        <h1 className="mb-1 text-lg font-bold tracking-tight text-[var(--text-primary)]">
-          {t("pageTitle")}
-        </h1>
-        <p className="mb-5 text-sm text-[var(--text-secondary)]">
-          {t("pageSubtitle")}
-        </p>
-        <Skeleton className="h-64 w-full" />
-      </div>
-    );
-  }
+  const header = (
+    <PageHeader
+      title={t("pageTitle")}
+      subtitle={t("pageSubtitle")}
+      actions={
+        <Button variant="secondary" size="sm" onClick={() => void handleExport()} loading={exporting}>
+          <Download className="size-4" strokeWidth={1.8} />
+          {t("exportCsv")}
+        </Button>
+      }
+    />
+  );
 
   if (query.isError && rowsToShow.length === 0) {
     return (
-      <div className="marketplace-card rounded-[12px] p-5">
-        <h1 className="mb-1 text-lg font-bold tracking-tight text-[var(--text-primary)]">
-          {t("pageTitle")}
-        </h1>
-        <p className="mb-5 text-sm text-[var(--text-secondary)]">
-          {t("pageSubtitle")}
-        </p>
+      <>
+        {header}
         <EmptyState
           kind="error"
-          icon={WarningCircle}
           title={t("errorTitle")}
           description={t("errorBody")}
           action={
-            <button
-              type="button"
-              onClick={handleRetry}
-              className="text-xs font-semibold text-[var(--brand-primary)] underline-offset-2 hover:underline"
-            >
+            <Button variant="secondary" onClick={handleRetry}>
               {t("retry")}
-            </button>
+            </Button>
           }
         />
-      </div>
+      </>
     );
   }
 
   return (
     <>
-      <div className="marketplace-card rounded-[12px] p-5">
-        {/* Header */}
-        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <h1 className="flex items-center gap-2 text-lg font-bold tracking-tight text-[var(--text-primary)]">
-              <span className="icon-chip-primary flex size-7 shrink-0 items-center justify-center rounded-lg shadow-sm">
-                <ClipboardText aria-hidden weight="duotone" className="size-4" />
-              </span>
-              {t("pageTitle")}
-            </h1>
-            <p className="mt-1 text-sm text-[var(--text-secondary)]">
-              {t("pageSubtitle")}
-            </p>
-          </div>
-          <Button
-            variant="secondary"
-            onClick={() => void handleExport()}
-            loading={exporting}
-            className="shrink-0"
-          >
-            <DownloadSimple aria-hidden weight="bold" className="size-4" />
-            {t("exportCsv")}
-          </Button>
-        </div>
+      {header}
 
-        {/* Filter bar */}
-        <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <Card>
+        <CardHeader>
           <div>
-            <label
-              htmlFor="audit-filter-action"
-              className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]"
-            >
-              {t("filter.action")}
-            </label>
-            <Input
+            <CardTitle>{t("pageTitle")}</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* Filter grid */}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <FilterField
               id="audit-filter-action"
+              label={t("filter.action")}
               value={action}
-              onChange={(e) => handleActionChange(e.target.value)}
+              onChange={setAction}
               placeholder={t("filter.actionPlaceholder")}
             />
-          </div>
-          <div>
-            <label
-              htmlFor="audit-filter-resource-type"
-              className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]"
-            >
-              {t("filter.resourceType")}
-            </label>
-            <Input
+            <FilterField
               id="audit-filter-resource-type"
+              label={t("filter.resourceType")}
               value={resourceType}
-              onChange={(e) => handleResourceTypeChange(e.target.value)}
+              onChange={setResourceType}
               placeholder={t("filter.resourceTypePlaceholder")}
             />
-          </div>
-          <div>
-            <label
-              htmlFor="audit-filter-actor-id"
-              className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]"
-            >
-              {t("filter.actorId")}
-            </label>
-            <Input
+            <FilterField
               id="audit-filter-actor-id"
+              label={t("filter.actorId")}
               value={actorId}
-              onChange={(e) => handleActorIdChange(e.target.value)}
+              onChange={setActorId}
               placeholder={t("filter.actorIdPlaceholder")}
             />
-          </div>
-          <div className="flex gap-2">
-            <div className="flex-1">
-              <label
-                htmlFor="audit-filter-since"
-                className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]"
-              >
-                {t("filter.since")}
-              </label>
-              <Input
-                id="audit-filter-since"
-                type="date"
-                value={since}
-                onChange={(e) => handleSinceChange(e.target.value)}
-              />
-            </div>
-            <div className="flex-1">
-              <label
-                htmlFor="audit-filter-until"
-                className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--text-muted)]"
-              >
-                {t("filter.until")}
-              </label>
-              <Input
-                id="audit-filter-until"
-                type="date"
-                value={until}
-                onChange={(e) => handleUntilChange(e.target.value)}
-              />
+            <div className="flex gap-2">
+              <div className="flex-1">
+                <FilterField id="audit-filter-since" label={t("filter.since")} value={since} onChange={setSince} type="date" />
+              </div>
+              <div className="flex-1">
+                <FilterField id="audit-filter-until" label={t("filter.until")} value={until} onChange={setUntil} type="date" />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Table */}
-        <div
-          className={cn(
-            "overflow-x-auto rounded-xl border border-white/60 bg-white/82 backdrop-blur-md",
+          <DataTable
+            columns={columns}
+            data={rowsToShow}
+            getRowId={(r) => String(r.id)}
+            loading={query.isPending && rowsToShow.length === 0}
+            onRowClick={(r) => setSelectedRow(r)}
+            activeRowId={selectedRow ? String(selectedRow.id) : undefined}
+            empty={<EmptyState kind="empty" title={t("emptyTitle")} description={t("emptyBody")} />}
+          />
+
+          {query.data?.next_cursor && (
+            <div className="flex justify-center">
+              <Button variant="secondary" onClick={handleLoadMore} loading={query.isFetching}>
+                {t("loadMore")}
+              </Button>
+            </div>
           )}
-          role="region"
-          aria-label={t("pageTitle")}
-        >
-          <table className="w-full border-collapse text-sm">
-            <caption className="sr-only">{t("pageTitle")}</caption>
-            <thead>
-              <tr className="border-b border-white/40 bg-white/60">
-                {columns.map((col) => (
-                  <th
-                    key={col.key}
-                    scope="col"
-                    className={cn(
-                      "px-3.5 py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]",
-                      col.align === "right" ? "text-right" : "text-left",
-                    )}
-                  >
-                    {col.header}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rowsToShow.length === 0 && !query.isPending ? (
-                <tr>
-                  <td
-                    colSpan={columns.length}
-                    className="px-3.5 py-10 text-center"
-                  >
-                    <EmptyState
-                      kind="empty"
-                      icon={ClipboardText}
-                      title={t("emptyTitle")}
-                      description={t("emptyBody")}
-                    />
-                  </td>
-                </tr>
-              ) : null}
-              {rowsToShow.map((row) => (
-                <tr
-                  key={row.id}
-                  className="cursor-pointer border-b border-white/40 align-middle transition-colors last:border-0 hover:bg-white/60 focus-within:bg-white/60"
-                  onClick={() => setSelectedRow(row)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setSelectedRow(row);
-                    }
-                  }}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`${row.action} — ${row.resource_type}`}
-                >
-                  {columns.map((col) => (
-                    <td
-                      key={col.key}
-                      className={cn(
-                        "px-3.5 py-2.5 text-[var(--text-primary)]",
-                        col.align === "right" ? "text-right" : "text-left",
-                      )}
-                    >
-                      {col.cell(row)}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-              {query.isPending && rowsToShow.length > 0 && (
-                <tr>
-                  <td colSpan={columns.length} className="px-3.5 py-2.5">
-                    <Skeleton className="h-4 w-full" />
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Load more */}
-        {query.data?.next_cursor && (
-          <div className="mt-4 flex justify-center">
-            <Button
-              variant="secondary"
-              onClick={handleLoadMore}
-              loading={query.isFetching}
-            >
-              {t("loadMore")}
-            </Button>
-          </div>
-        )}
-      </div>
+        </CardContent>
+      </Card>
 
       <AuditDetailSheet row={selectedRow} onClose={() => setSelectedRow(null)} />
     </>

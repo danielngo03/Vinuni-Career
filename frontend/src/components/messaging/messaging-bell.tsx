@@ -68,7 +68,7 @@ export function MessagingBell({
       : "border-[var(--border-default)] bg-[var(--surface-card)] text-[var(--text-primary)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-subtle)]",
   );
   const iconClassName = cn(
-    "relative rounded-lg p-2 outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--brand-mid-blue)]",
+    "relative rounded-lg p-2 outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
     active
       ? "bg-[var(--text-primary)] text-white"
       : "text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)]",
@@ -98,7 +98,7 @@ export function MessagingBell({
                     ? "bg-white text-[var(--text-primary)]"
                     : "bg-[var(--text-primary)] text-[var(--text-inverted)]",
                 )
-              : "absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--brand-red)] px-1 text-[10px] font-bold leading-none text-white"
+              : "absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--content-danger)] px-1 text-[10px] font-bold leading-none text-white"
           }
         >
           {display}

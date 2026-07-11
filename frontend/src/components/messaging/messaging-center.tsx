@@ -3,18 +3,15 @@
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import {
-  ChatsCircle,
-  Megaphone,
-  BellSlash,
-  WifiSlash,
-} from "@phosphor-icons/react";
-import { Button, EmptyState, Sheet, Skeleton } from "@/components/ui";
+import { BellOff, MessagesSquare, WifiOff } from "lucide-react";
+import { Button, Sheet, Skeleton } from "@/components/ui";
+import { EmptyState, StatusChip } from "@/components/kit";
 import { cn } from "@/lib/utils";
 import { relativeTime } from "@/lib/notifications/grouping";
 import { messagingApi, type ThreadSummary } from "@/lib/api";
 import { MESSAGING_THREADS_KEY } from "./query-keys";
 import { ThreadPanel } from "./thread-panel";
+import { ThreadAvatar } from "./thread-bits";
 
 export interface MessagingCenterProps {
   open: boolean;
@@ -24,11 +21,11 @@ export interface MessagingCenterProps {
 }
 
 /**
- * Slide-in messaging center. Master view = the inbox (my threads, masked
- * counterpart labels, unread dots, announcement markers); detail view = one
+ * Slide-in messaging center. Master view = the inbox (my threads, server-provided
+ * counterpart labels, unread chips, announcement markers); detail view = one
  * open thread (transcript + composer). Polls the thread list while open so a new
- * institutional message surfaces without a refresh. Identity is the server label
- * only — the partner side renders an anonymous handle until reveal.
+ * institutional message surfaces without a refresh. Counterpart identity is always
+ * the server-supplied label.
  */
 export function MessagingCenter({
   open,
@@ -94,10 +91,13 @@ export function MessagingCenter({
           />
         </div>
       ) : (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-0.5">
           {isStale && (
-            <p className="mb-1 flex items-center gap-1.5 rounded-lg bg-[var(--amber-100)] px-3 py-1.5 text-xs font-medium text-[var(--amber-700)]">
-              <WifiSlash aria-hidden weight="bold" className="size-3.5" />
+            <p
+              className="mb-1 flex items-center gap-1.5 rounded-lg px-3 py-1.5 type-caption font-medium"
+              style={{ background: "var(--content-warning-soft)", color: "var(--content-warning)" }}
+            >
+              <WifiOff aria-hidden strokeWidth={2} className="size-3.5" />
               {t("staleReload")}
             </p>
           )}
@@ -107,7 +107,7 @@ export function MessagingCenter({
           {isError && (
             <EmptyState
               kind="offline"
-              icon={WifiSlash}
+              icon={WifiOff}
               title={tStates("offlineTitle")}
               description={t("offlineRetry")}
               action={
@@ -125,14 +125,14 @@ export function MessagingCenter({
           {isEmpty && (
             <EmptyState
               kind="empty"
-              icon={ChatsCircle}
+              icon={MessagesSquare}
               title={t("emptyTitle")}
               description={t("emptyBody")}
             />
           )}
 
           {!isLoading && !isError && threads.length > 0 && (
-            <ul className="-mx-1 flex flex-col">
+            <ul className="-mx-1 flex flex-col gap-0.5">
               {threads.map((th) => (
                 <li key={th.id}>
                   <ThreadRow
@@ -186,53 +186,31 @@ function ThreadRow({
     <button
       type="button"
       onClick={onOpen}
-      className={cn(
-        "flex w-full items-start gap-3 rounded-xl px-2 py-3 text-left outline-none transition-colors hover:bg-[var(--bg-subtle)] focus-visible:bg-[var(--bg-subtle)]",
-        unread && "bg-[var(--blue-50)]/40",
-      )}
+      className="flex w-full items-start gap-3 rounded-[10px] px-2.5 py-2.5 text-left outline-none transition-colors duration-150 hover:bg-[var(--bg-subtle)] focus-visible:bg-[var(--bg-subtle)] focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
     >
-      <span
-        className={cn(
-          "mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl shadow-sm",
-          isAnnouncement
-            ? "icon-chip-warning"
-            : "icon-chip-primary",
-        )}
-      >
-        {isAnnouncement ? (
-          <Megaphone aria-hidden weight="duotone" className="size-5 text-white" />
-        ) : (
-          <ChatsCircle aria-hidden weight="duotone" className="size-5 text-white" />
-        )}
-      </span>
+      <ThreadAvatar label={thread.counterpart_label} announcement={isAnnouncement} size="sm" />
 
       <span className="min-w-0 flex-1">
         <span className="flex items-center gap-1.5">
-          {unread && (
-            <span
-              aria-hidden
-              className="size-2 shrink-0 rounded-full bg-[var(--brand-primary)]"
-            />
-          )}
           <span
             className={cn(
-              "min-w-0 flex-1 truncate text-sm text-[var(--text-primary)]",
-              unread ? "font-bold" : "font-semibold",
+              "min-w-0 flex-1 truncate type-body text-foreground",
+              unread ? "font-semibold" : "font-medium",
             )}
           >
             {thread.counterpart_label}
           </span>
           {thread.muted && (
-            <BellSlash
+            <BellOff
               aria-label="muted"
-              weight="bold"
-              className="size-3.5 shrink-0 text-[var(--text-muted)]"
+              strokeWidth={1.8}
+              className="size-3.5 shrink-0 text-muted-foreground"
             />
           )}
           {ts && (
             <time
               dateTime={thread.last_message_at ?? undefined}
-              className="shrink-0 text-[10px] text-[var(--text-muted)]"
+              className="shrink-0 type-caption tabular-nums text-muted-foreground"
             >
               {ts}
             </time>
@@ -240,17 +218,17 @@ function ThreadRow({
         </span>
         <span className="mt-0.5 flex items-center gap-1.5">
           {isAnnouncement && (
-            <span className="shrink-0 rounded-full bg-[var(--blue-50)] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--brand-primary)]">
+            <StatusChip tone="amber" size="sm">
               {announcementLabel}
-            </span>
+            </StatusChip>
           )}
-          <span className="min-w-0 flex-1 truncate text-xs text-[var(--text-secondary)]">
+          <span className="min-w-0 flex-1 truncate type-small text-muted-foreground">
             {secondary}
           </span>
           {unread && (
-            <span className="shrink-0 rounded-full bg-[var(--brand-primary)] px-1.5 text-[10px] font-bold leading-4 text-white">
+            <StatusChip tone="indigo" size="sm" className="tabular-nums">
               {thread.unread > 99 ? "99+" : thread.unread}
-            </span>
+            </StatusChip>
           )}
         </span>
       </span>

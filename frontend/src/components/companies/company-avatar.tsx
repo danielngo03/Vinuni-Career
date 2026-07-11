@@ -18,7 +18,7 @@ function initials(name: string): string {
 const GRADIENT_PALETTE = [
   "linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)", // blue
   "linear-gradient(135deg, #0D9488 0%, #0F766E 100%)", // teal
-  "linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)", // violet
+  "linear-gradient(135deg, #0EA5E9 0%, #0369A1 100%)", // sky (was violet — owner: no purple)
   "linear-gradient(135deg, #DC2626 0%, #991B1B 100%)", // red
   "linear-gradient(135deg, #D97706 0%, #B45309 100%)", // amber
   "linear-gradient(135deg, #059669 0%, #065F46 100%)", // emerald

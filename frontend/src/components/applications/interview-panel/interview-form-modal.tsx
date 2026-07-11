@@ -37,7 +37,6 @@ export function InterviewFormModal({
   interview,
   onClose,
   onSuccess,
-  onRevealRequired,
   onInterviewExists,
 }: {
   open: boolean;
@@ -46,7 +45,6 @@ export function InterviewFormModal({
   interview?: Interview;
   onClose: () => void;
   onSuccess: () => void;
-  onRevealRequired: () => void;
   onInterviewExists: () => void;
 }) {
   const t = useTranslations("interviews");
@@ -140,7 +138,6 @@ export function InterviewFormModal({
         }
         if (e.isConflict) {
           const reason = e.details?.reason;
-          if (reason === "reveal_required") return onRevealRequired();
           if (reason === "interview_exists") return onInterviewExists();
           if (reason === "version_conflict") {
             toast.show({ tone: "warning", title: t("conflictToast") });

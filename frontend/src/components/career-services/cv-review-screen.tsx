@@ -1,20 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { FileMagnifyingGlass, PlusCircle, UserPlus } from "@phosphor-icons/react";
+import { FileSearch, Plus, UserPlus } from "lucide-react";
+import { Button, Input, Modal, Select, Textarea, useToast } from "@/components/ui";
 import {
-  Button,
   DataTable,
-  Input,
-  Modal,
-  Select,
-  StatusBadge,
-  Textarea,
-  useToast,
-  type Column,
-} from "@/components/ui";
+  EmptyState,
+  FilterBar,
+  StatusChip,
+  type ChipTone,
+  type ColumnDef,
+} from "@/components/kit";
+import { cn } from "@/lib/utils";
 import { CareerServicesShell } from "./career-services-shell";
 import { CareerServicesPermissionGate } from "./permission-gate";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
@@ -28,19 +27,19 @@ import {
 } from "@/lib/api";
 import { formatDateTime } from "@/lib/format";
 
-const PRIORITY_TONE: Record<CvReviewPriority, "closed" | "pending" | "active" | "rejected"> = {
-  low: "closed",
-  normal: "pending",
-  high: "active",
-  urgent: "rejected",
+const PRIORITY_TONE: Record<CvReviewPriority, ChipTone> = {
+  low: "neutral",
+  normal: "info",
+  high: "amber",
+  urgent: "danger",
 };
 
-const STATUS_TONE: Record<CvReviewStatus, "pending" | "active" | "rejected" | "accepted" | "closed"> = {
-  queued: "pending",
-  in_review: "active",
-  changes_requested: "rejected",
-  approved: "accepted",
-  closed: "closed",
+const STATUS_TONE: Record<CvReviewStatus, ChipTone> = {
+  queued: "warning",
+  in_review: "info",
+  changes_requested: "rose",
+  approved: "success",
+  closed: "neutral",
 };
 
 const NEXT_STATUS: Record<CvReviewStatus, CvReviewStatus[]> = {
@@ -51,6 +50,15 @@ const NEXT_STATUS: Record<CvReviewStatus, CvReviewStatus[]> = {
   closed: [],
 };
 
+const STATUS_FILTERS: (CvReviewStatus | "")[] = [
+  "",
+  "queued",
+  "in_review",
+  "changes_requested",
+  "approved",
+  "closed",
+];
+
 export function CvReviewScreen() {
   const t = useTranslations("careerServices");
   const locale = useLocale();
@@ -58,19 +66,19 @@ export function CvReviewScreen() {
   const getErrorMessage = useApiErrorMessage();
   const qc = useQueryClient();
 
-  const [statusFilter, setStatusFilter] = useState<CvReviewStatus | "">("");
-  const [createOpen, setCreateOpen] = useState(false);
-  const [studentId, setStudentId] = useState("");
-  const [cvId, setCvId] = useState("");
-  const [priority, setPriority] = useState<CvReviewPriority>("normal");
+  const [statusFilter, setStatusFilter] = React.useState<CvReviewStatus | "">("");
+  const [createOpen, setCreateOpen] = React.useState(false);
+  const [studentId, setStudentId] = React.useState("");
+  const [cvId, setCvId] = React.useState("");
+  const [priority, setPriority] = React.useState<CvReviewPriority>("normal");
 
-  const [assignTarget, setAssignTarget] = useState<CvReviewItem | null>(null);
-  const [counselorId, setCounselorId] = useState("");
+  const [assignTarget, setAssignTarget] = React.useState<CvReviewItem | null>(null);
+  const [counselorId, setCounselorId] = React.useState("");
 
-  const [statusTarget, setStatusTarget] = useState<{ item: CvReviewItem; next: CvReviewStatus } | null>(
+  const [statusTarget, setStatusTarget] = React.useState<{ item: CvReviewItem; next: CvReviewStatus } | null>(
     null,
   );
-  const [feedback, setFeedback] = useState("");
+  const [feedback, setFeedback] = React.useState("");
 
   const query = useQuery({
     queryKey: ["career-services", "cv-review-items", locale, statusFilter],
@@ -124,64 +132,82 @@ export function CvReviewScreen() {
     onError: (error) => toast.show({ tone: "error", title: getErrorMessage(error) }),
   });
 
-  const items = useMemo(() => query.data ?? [], [query.data]);
+  const items = query.data ?? [];
   const permissionState =
     query.isError && query.error instanceof ApiError ? (
       <CareerServicesPermissionGate error={query.error} bodyOverride={t("cvReview.permissionBody")} />
     ) : null;
 
-  const columns: Column<CvReviewItem>[] = [
+  const createButton = (
+    <Button onClick={() => setCreateOpen(true)} size="sm">
+      <Plus className="size-4" strokeWidth={2} />
+      {t("cvReview.queueCv")}
+    </Button>
+  );
+
+  const columns: ColumnDef<CvReviewItem, unknown>[] = [
     {
-      key: "student",
+      accessorKey: "student_id",
       header: t("cvReview.colStudent"),
-      cell: (r) => <span className="font-mono text-xs">{r.student_id}</span>,
+      cell: ({ row }) => <span className="font-mono text-xs text-foreground">{row.original.student_id}</span>,
     },
     {
-      key: "priority",
+      accessorKey: "priority",
       header: t("cvReview.colPriority"),
-      cell: (r) => <StatusBadge tone={PRIORITY_TONE[r.priority]}>{r.priority_label}</StatusBadge>,
+      cell: ({ row }) => (
+        <StatusChip tone={PRIORITY_TONE[row.original.priority]} dot>
+          {row.original.priority_label}
+        </StatusChip>
+      ),
     },
     {
-      key: "status",
+      accessorKey: "status",
       header: t("cvReview.colStatus"),
-      cell: (r) => <StatusBadge tone={STATUS_TONE[r.status]}>{r.status_label}</StatusBadge>,
+      cell: ({ row }) => (
+        <StatusChip tone={STATUS_TONE[row.original.status]}>{row.original.status_label}</StatusChip>
+      ),
     },
     {
-      key: "counselor",
+      id: "counselor",
       header: t("cvReview.colCounselor"),
-      cell: (r) =>
-        r.assigned_counselor_id ? (
-          <span className="font-mono text-xs">{r.assigned_counselor_id}</span>
+      cell: ({ row }) =>
+        row.original.assigned_counselor_id ? (
+          <span className="font-mono text-xs text-foreground">{row.original.assigned_counselor_id}</span>
         ) : (
-          <span className="text-xs text-[var(--text-muted)]">{t("cvReview.unassigned")}</span>
+          <span className="type-small text-muted-foreground">{t("cvReview.unassigned")}</span>
         ),
     },
     {
-      key: "created",
+      id: "created",
       header: t("cvReview.colCreated"),
-      cell: (r) => <span className="text-xs text-[var(--text-secondary)]">{formatDateTime(r.created_at, locale)}</span>,
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <span className="type-small tabular-nums text-muted-foreground">
+          {formatDateTime(row.original.created_at, locale)}
+        </span>
+      ),
     },
     {
-      key: "actions",
-      header: t("cvReview.colActions"),
-      cell: (r) => (
-        <div className="flex flex-wrap gap-1.5">
-          <Button variant="ghost" size="xs" onClick={() => setAssignTarget(r)}>
-            <UserPlus aria-hidden weight="bold" className="size-4" />
-            {t("cvReview.assign")}
-          </Button>
-          {NEXT_STATUS[r.status].map((next) => (
-            <Button
-              key={next}
-              variant="ghost"
-              size="xs"
-              onClick={() => setStatusTarget({ item: r, next })}
-            >
-              {t(`cvReviewStatus.${next}`)}
+      id: "actions",
+      header: "",
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => {
+        const r = row.original;
+        return (
+          <div className="flex flex-wrap items-center justify-end gap-1">
+            <Button variant="ghost" size="sm" onClick={() => setAssignTarget(r)}>
+              <UserPlus className="size-4" strokeWidth={1.8} />
+              {t("cvReview.assign")}
             </Button>
-          ))}
-        </div>
-      ),
+            {NEXT_STATUS[r.status].map((next) => (
+              <Button key={next} variant="ghost" size="sm" onClick={() => setStatusTarget({ item: r, next })}>
+                {t(`cvReviewStatus.${next}`)}
+              </Button>
+            ))}
+          </div>
+        );
+      },
     },
   ];
 
@@ -189,46 +215,52 @@ export function CvReviewScreen() {
     <CareerServicesShell
       title={t("cvReview.title")}
       description={t("cvReview.subtitle")}
-      actions={
-        !permissionState && (
-          <div className="flex items-center gap-2">
-            <Select
-              aria-label={t("cvReview.filterStatus")}
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value as CvReviewStatus | "")}
-              options={[
-                { value: "", label: t("cvReview.allStatuses") },
-                { value: "queued", label: t("cvReviewStatus.queued") },
-                { value: "in_review", label: t("cvReviewStatus.in_review") },
-                { value: "changes_requested", label: t("cvReviewStatus.changes_requested") },
-                { value: "approved", label: t("cvReviewStatus.approved") },
-                { value: "closed", label: t("cvReviewStatus.closed") },
-              ]}
-            />
-            <Button onClick={() => setCreateOpen(true)}>
-              <PlusCircle aria-hidden weight="bold" className="size-4" />
-              {t("cvReview.queueCv")}
-            </Button>
-          </div>
-        )
-      }
+      actions={!permissionState ? createButton : undefined}
     >
       {permissionState ?? (
-        <DataTable
-          columns={columns}
-          rows={items}
-          getRowId={(r) => r.id}
-          loading={query.isLoading}
-          caption={t("cvReview.title")}
-          empty={{
-            kind: "empty",
-            icon: FileMagnifyingGlass,
-            title: t("cvReview.emptyTitle"),
-            description: t("cvReview.emptyBody"),
-          }}
-        />
+        <div className="space-y-4">
+          <FilterBar>
+            <div className="flex flex-wrap gap-1.5" role="group" aria-label={t("cvReview.filterStatus")}>
+              {STATUS_FILTERS.map((s) => {
+                const active = statusFilter === s;
+                return (
+                  <button
+                    key={s || "all"}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setStatusFilter(s)}
+                    className={cn(
+                      "inline-flex items-center rounded-full border px-3 py-1 text-[0.8125rem] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+                      active
+                        ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                        : "border-border bg-card text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {s === "" ? t("cvReview.allStatuses") : t(`cvReviewStatus.${s}`)}
+                  </button>
+                );
+              })}
+            </div>
+          </FilterBar>
+
+          <DataTable
+            columns={columns}
+            data={items}
+            getRowId={(r) => r.id}
+            loading={query.isPending}
+            empty={
+              <EmptyState
+                kind="empty"
+                icon={FileSearch}
+                title={t("cvReview.emptyTitle")}
+                description={t("cvReview.emptyBody")}
+              />
+            }
+          />
+        </div>
       )}
 
+      {/* Queue a CV */}
       <Modal
         open={createOpen}
         onClose={() => setCreateOpen(false)}
@@ -269,6 +301,7 @@ export function CvReviewScreen() {
         </div>
       </Modal>
 
+      {/* Assign counselor */}
       <Modal
         open={!!assignTarget}
         onClose={() => setAssignTarget(null)}
@@ -294,6 +327,7 @@ export function CvReviewScreen() {
         />
       </Modal>
 
+      {/* Status change + feedback */}
       <Modal
         open={!!statusTarget}
         onClose={() => setStatusTarget(null)}

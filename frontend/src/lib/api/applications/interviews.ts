@@ -138,12 +138,10 @@ export interface StudentInterviewCard {
 export const interviewsApi = {
   /**
    * Partner: schedule the candidate's interview for their current ACTIVE stage.
-   * 409 `reveal_required` when the application is anonymous and the reveal has
-   * not been accepted (schedule is blocked until consent — surface the reveal
-   * deep-link, do not just error). 409 `interview_exists` when an open interview
-   * already exists for the stage. 422 (field-scoped) when `online` lacks a
-   * `meeting_link` / `onsite` lacks a `location` / an assignee is not an org
-   * member. 404 cross-org. Returns the partner interview view.
+   * 409 `interview_exists` when an open interview already exists for the stage.
+   * 422 (field-scoped) when `online` lacks a `meeting_link` / `onsite` lacks a
+   * `location` / an assignee is not an org member. 404 cross-org. Returns the
+   * partner interview view.
    */
   scheduleInterview(id: string, body: ScheduleInterviewBody): Promise<Interview> {
     return api.post<Interview>(`/applications/${id}/interviews`, body);

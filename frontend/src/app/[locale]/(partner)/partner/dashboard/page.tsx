@@ -1,5 +1,5 @@
-import { PartnerDashboard } from "@/components/dashboards/partner-dashboard";
+import { PartnerCommandCenter } from "@/components/dashboards/partner-command-center";
 
 export default function PartnerDashboardPage() {
-  return <PartnerDashboard />;
+  return <PartnerCommandCenter />;
 }

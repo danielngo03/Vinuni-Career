@@ -1,57 +1,63 @@
 "use client";
 
-import { useMemo } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import {
   Briefcase,
-  LightbulbFilament,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
+  CheckCircle2,
+  Clock,
+  FileText,
+  ShieldAlert,
+  LogIn,
   Users,
-  WarningCircle,
-} from "@phosphor-icons/react";
-import { Link } from "@/i18n/navigation";
+  Users2,
+} from "lucide-react";
+import { Link, useRouter } from "@/i18n/navigation";
+import { Button } from "@/components/ui";
 import {
-  Button,
   DataTable,
+  type ColumnDef,
   EmptyState,
-  StatusBadge,
-  type Column,
-} from "@/components/ui";
-import { PageHeader } from "@/components/layout/page-header";
-import { useJobLabels, JOB_STATUS_TONE } from "@/lib/jobs/labels";
+  FilterBar,
+  KpiRow,
+  KpiTile,
+  PageHeader,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
+import { useJobLabels } from "@/lib/jobs/labels";
 import { formatLocation } from "@/lib/jobs/format";
 import { ApiError, jobsApi, type OwnerJobSummary } from "@/lib/api";
 
-function deriveIndexInsights(rows: OwnerJobSummary[], t: (key: string, values?: Record<string, unknown>) => string): string[] {
-  const insights: string[] = [];
-  const activeJobs = rows.filter((r) => r.status === "active");
-  const pendingModeration = rows.filter((r) => r.moderation_status === "pending");
-  const now = Date.now();
-  const in7Days = now + 7 * 24 * 60 * 60 * 1000;
-  const deadlineSoon = activeJobs.filter((r) => {
-    if (!r.application_deadline) return false;
-    const dl = new Date(r.application_deadline).getTime();
-    return dl > now && dl < in7Days;
-  });
-  const draftJobs = rows.filter((r) => r.status === "draft");
+const JOB_STATUS_CHIP: Record<string, ChipTone> = {
+  draft: "neutral",
+  pending_review: "warning",
+  active: "success",
+  rejected: "danger",
+  closed: "neutral",
+  expired: "neutral",
+};
 
-  if (activeJobs.length > 0) insights.push(t("indexInsightActiveJobs", { count: activeJobs.length }));
-  if (deadlineSoon.length > 0) insights.push(t("indexInsightDeadlineSoon", { count: deadlineSoon.length }));
-  if (pendingModeration.length > 0) insights.push(t("indexInsightPendingApproval", { count: pendingModeration.length }));
-  if (draftJobs.length > 0 && activeJobs.length === 0) insights.push(t("indexInsightDrafts", { count: draftJobs.length }));
-  if (insights.length === 0) insights.push(t("indexInsightAllGood"));
-  return insights.slice(0, 3);
-}
+const nf = new Intl.NumberFormat();
 
+/**
+ * Partner Candidates index (v10). A job picker: the recruiter chooses a posting
+ * to open its applicant workspace. Real `GET /jobs/mine` data feeds honest
+ * job-posting KPIs, a searchable/status-filterable DataTable, and per-row deep
+ * links into `/partner/jobs/{id}/applications`. No fabricated applicant counts
+ * (the list projection does not carry them).
+ */
 export function PartnerCandidatesIndex() {
   const t = useTranslations("candidates");
   const tJobs = useTranslations("jobs");
   const tStates = useTranslations("states");
   const tc = useTranslations("common");
   const labels = useJobLabels();
+  const router = useRouter();
+
+  const [search, setSearch] = React.useState("");
+  const [statusFilter, setStatusFilter] = React.useState<string>("all");
 
   const query = useInfiniteQuery({
     queryKey: ["jobs", "mine", "candidates"],
@@ -61,105 +67,72 @@ export function PartnerCandidatesIndex() {
     retry: false,
   });
 
-  const rows: OwnerJobSummary[] = useMemo(
+  // Auto-load the full set (bounded) so KPI counts + filtering are honest.
+  const pageCount = query.data?.pages.length ?? 0;
+  React.useEffect(() => {
+    if (query.hasNextPage && !query.isFetchingNextPage && pageCount < 40) {
+      void query.fetchNextPage();
+    }
+  }, [query.hasNextPage, query.isFetchingNextPage, pageCount, query]);
+
+  const rows: OwnerJobSummary[] = React.useMemo(
     () => query.data?.pages.flatMap((p) => p.data) ?? [],
     [query.data],
   );
 
+  const allLoaded = !query.hasNextPage || pageCount >= 40;
+
+  const metrics = React.useMemo(() => {
+    const active = rows.filter((r) => r.status === "active").length;
+    const pending = rows.filter(
+      (r) => r.status === "pending_review" || r.moderation_status === "pending",
+    ).length;
+    const drafts = rows.filter((r) => r.status === "draft").length;
+    return { total: rows.length, active, pending, drafts };
+  }, [rows]);
+
+  const filteredRows = React.useMemo(
+    () =>
+      statusFilter === "all" ? rows : rows.filter((r) => r.status === statusFilter),
+    [rows, statusFilter],
+  );
+
+  const header = (
+    <PageHeader
+      title={t("indexTitle")}
+      subtitle={t("indexSubtitle")}
+      actions={
+        <Link href="/partner/jobs">
+          <Button variant="secondary" size="sm">
+            <Briefcase className="size-4" strokeWidth={1.8} />
+            {t("goToJobs")}
+          </Button>
+        </Link>
+      }
+    />
+  );
+
+  /* ---- Permission / auth gates ---- */
   if (query.isError && query.error instanceof ApiError) {
     const err = query.error;
     if (err.isPermissionError || err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("indexTitle")} description={t("indexSubtitle")} />
+          {header}
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
-            title={
-              err.isPermissionError
-                ? tStates("permissionTitle")
-                : tStates("authTitle")
-            }
-            description={
-              err.isPermissionError
-                ? tStates("permissionBody")
-                : tStates("authBody")
-            }
+            icon={err.isPermissionError ? ShieldAlert : LogIn}
+            title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
+            description={err.isPermissionError ? tStates("permissionBody") : tStates("authBody")}
           />
         </>
       );
     }
-  }
-
-  const columns: Column<OwnerJobSummary>[] = [
-    {
-      key: "title",
-      header: tJobs("colTitle"),
-      cell: (job) => (
-        <Link
-          href={`/partner/jobs/${job.id}/applications`}
-          className="font-semibold text-[var(--text-primary)] outline-none hover:text-[var(--brand-primary)] focus-visible:underline"
-        >
-          {job.title}
-        </Link>
-      ),
-    },
-    {
-      key: "type",
-      header: tJobs("colType"),
-      cell: (job) => (
-        <span className="text-[var(--text-secondary)]">
-          {labels.employmentType(job.employment_type, job.employment_type_label)}
-          {" · "}
-          {labels.locationType(job.location_type, job.location_type_label)}
-        </span>
-      ),
-    },
-    {
-      key: "location",
-      header: tJobs("location"),
-      cell: (job) => (
-        <span className="text-[var(--text-secondary)]">
-          {formatLocation(job.location_city, job.location_country)}
-        </span>
-      ),
-    },
-    {
-      key: "status",
-      header: tJobs("colStatus"),
-      cell: (job) => (
-        <StatusBadge tone={JOB_STATUS_TONE[job.status] ?? "info"}>
-          {labels.status(job.status, job.status_label)}
-        </StatusBadge>
-      ),
-    },
-    {
-      key: "actions",
-      header: "",
-      align: "right",
-      cell: (job) => (
-        <Link href={`/partner/jobs/${job.id}/applications`}>
-          <Button variant="ghost" size="sm">
-            <Users aria-hidden weight="duotone" className="size-4" />
-            {tJobs("viewCandidates")}
-          </Button>
-        </Link>
-      ),
-    },
-  ];
-
-  return (
-    <>
-      <PageHeader title={t("indexTitle")} description={t("indexSubtitle")} />
-
-      {query.isError &&
-      !(
-        query.error instanceof ApiError &&
-        (query.error.isPermissionError || query.error.isAuthError)
-      ) ? (
+    return (
+      <>
+        {header}
         <EmptyState
           kind="error"
-          icon={WarningCircle}
           title={tStates("errorTitle")}
           description={tStates("errorBody")}
           action={
@@ -168,63 +141,149 @@ export function PartnerCandidatesIndex() {
             </Button>
           }
         />
-      ) : (
-        <>
-          {rows.length > 0 && (() => {
-            const insights = deriveIndexInsights(rows, t as (key: string, values?: Record<string, unknown>) => string);
-            return (
-              <div className="mb-5 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 ">
-                <div className="mb-2.5 flex items-center gap-2">
-                  <span className="flex size-5 shrink-0 items-center justify-center rounded-md icon-chip-info shadow-sm">
-                    <Sparkle aria-hidden weight="duotone" className="size-3 text-white" />
-                  </span>
-                  <span className="text-xs font-bold uppercase tracking-wide text-[var(--ai-accent)]">
-                    {t("indexAiInsightsTitle")}
-                  </span>
-                </div>
-                <ul className="space-y-1.5">
-                  {insights.map((insight, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                      <LightbulbFilament aria-hidden weight="duotone" className="mt-px size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                      {insight}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })()}
-          <DataTable
-            columns={columns}
-            rows={rows}
-            getRowId={(job) => job.id}
-            loading={query.isPending}
-            caption={t("indexTitle")}
-            empty={{
-              kind: "empty",
-              icon: Briefcase,
-              title: t("indexEmptyTitle"),
-              description: t("indexEmptyBody"),
-              action: (
-                <Link href="/partner/jobs">
-                  <Button variant="primary">{t("goToJobs")}</Button>
-                </Link>
-              ),
-            }}
-          />
+      </>
+    );
+  }
 
-          {query.hasNextPage && (
-            <div className="mt-6 flex justify-center">
-              <Button
-                variant="secondary"
-                loading={query.isFetchingNextPage}
-                onClick={() => query.fetchNextPage()}
-              >
-                {tc("loadMore")}
-              </Button>
-            </div>
-          )}
-        </>
-      )}
+  const columns: ColumnDef<OwnerJobSummary, unknown>[] = [
+    {
+      id: "title",
+      accessorFn: (r) => r.title,
+      header: tJobs("colTitle"),
+      cell: ({ row }) => (
+        <Link
+          href={`/partner/jobs/${row.original.id}/applications`}
+          onClick={(e) => e.stopPropagation()}
+          className="font-semibold text-foreground outline-none hover:text-[var(--brand-primary)] focus-visible:underline"
+        >
+          {row.original.title}
+        </Link>
+      ),
+    },
+    {
+      id: "type",
+      enableSorting: false,
+      header: tJobs("colType"),
+      cell: ({ row }) => (
+        <span className="type-small text-muted-foreground">
+          {labels.employmentType(row.original.employment_type, row.original.employment_type_label)}
+          {" · "}
+          {labels.locationType(row.original.location_type, row.original.location_type_label)}
+        </span>
+      ),
+    },
+    {
+      id: "location",
+      enableSorting: false,
+      header: tJobs("location"),
+      cell: ({ row }) => (
+        <span className="type-small text-muted-foreground">
+          {formatLocation(row.original.location_city, row.original.location_country)}
+        </span>
+      ),
+    },
+    {
+      id: "status",
+      accessorFn: (r) => r.status,
+      header: tJobs("colStatus"),
+      cell: ({ row }) => (
+        <StatusChip tone={JOB_STATUS_CHIP[row.original.status] ?? "neutral"}>
+          {labels.status(row.original.status, row.original.status_label)}
+        </StatusChip>
+      ),
+    },
+    {
+      id: "actions",
+      enableSorting: false,
+      meta: { align: "right" },
+      header: "",
+      cell: ({ row }) => (
+        <Link
+          href={`/partner/jobs/${row.original.id}/applications`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Button variant="ghost" size="sm">
+            <Users2 aria-hidden className="size-4" strokeWidth={1.8} />
+            {tJobs("viewCandidates")}
+          </Button>
+        </Link>
+      ),
+    },
+  ];
+
+  const statusOptions = ["all", "active", "pending_review", "draft", "closed"] as const;
+
+  return (
+    <>
+      {header}
+      <div className="space-y-4">
+        <KpiRow cols={4}>
+          <KpiTile label={t("indexKpiTotal")} value={nf.format(metrics.total)} icon={Briefcase} />
+          <KpiTile label={t("indexKpiActive")} value={nf.format(metrics.active)} icon={CheckCircle2} />
+          <KpiTile
+            label={t("indexKpiPending")}
+            value={nf.format(metrics.pending)}
+            icon={Clock}
+            hint={metrics.pending > 0 ? t("indexKpiPendingHint") : undefined}
+          />
+          <KpiTile label={t("indexKpiDrafts")} value={nf.format(metrics.drafts)} icon={FileText} />
+        </KpiRow>
+
+        <FilterBar
+          search={{
+            value: search,
+            onChange: setSearch,
+            placeholder: t("indexSearchPlaceholder"),
+            ariaLabel: t("indexSearchPlaceholder"),
+          }}
+        >
+          <div className="flex flex-wrap gap-1.5" role="group" aria-label={tJobs("colStatus")}>
+            {statusOptions.map((s) => {
+              const activeChip = statusFilter === s;
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setStatusFilter(s)}
+                  aria-pressed={activeChip}
+                  className={
+                    activeChip
+                      ? "rounded-lg border border-transparent bg-foreground px-3 py-1.5 text-[0.8125rem] font-semibold text-background"
+                      : "rounded-lg border border-border bg-card px-3 py-1.5 text-[0.8125rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  }
+                >
+                  {s === "all" ? t("filterAllStatuses") : labels.status(s)}
+                </button>
+              );
+            })}
+          </div>
+        </FilterBar>
+
+        <DataTable
+          columns={columns}
+          data={filteredRows}
+          getRowId={(job) => job.id}
+          loading={query.isPending || !allLoaded}
+          globalFilter={search}
+          pageSize={12}
+          onRowClick={(job) => router.push(`/partner/jobs/${job.id}/applications`)}
+          empty={
+            <EmptyState
+              kind="empty"
+              icon={Users}
+              title={rows.length === 0 ? t("indexEmptyTitle") : t("noMatchTitle")}
+              description={rows.length === 0 ? t("indexEmptyBody") : t("noMatchBody")}
+              action={
+                rows.length === 0 ? (
+                  <Link href="/partner/jobs">
+                    <Button variant="primary">{t("goToJobs")}</Button>
+                  </Link>
+                ) : undefined
+              }
+            />
+          }
+        />
+      </div>
     </>
   );
 }

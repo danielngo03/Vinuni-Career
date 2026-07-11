@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Sparkle } from "@phosphor-icons/react";
+import { Sparkles } from "lucide-react";
 import { AiChatWindow } from "@/components/ai-assistant/ai-chat-window";
 import { cn } from "@/lib/utils";
 
@@ -33,9 +33,9 @@ export function HeaderAiButton() {
             : "border-[var(--ai-accent-ring)] bg-[var(--ai-accent-surface)] text-[var(--ai-accent-strong)] shadow-[var(--ai-chip-shadow)] hover:border-[var(--ai-accent)] hover:bg-[var(--ai-accent-surface-hover)]",
         )}
       >
-        <Sparkle
+        <Sparkles
           aria-hidden
-          weight="fill"
+          strokeWidth={1.8}
           className={cn("size-5", open ? "text-white" : "text-[var(--ai-accent-strong)]")}
         />
       </button>

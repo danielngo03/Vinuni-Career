@@ -1,236 +1,295 @@
 "use client";
 
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import {
-  DownloadSimple,
-  MagnifyingGlass,
-  Prohibit,
-  ShieldWarning,
-  UserFocus,
-} from "@phosphor-icons/react";
-import { Button, StatusBadge } from "@/components/ui";
-import {
-  APPLICATION_STATUS_TONE,
-  REVEAL_STATUS_TONE,
-  useApplicationLabels,
-  useRejectionReasonLabel,
-} from "@/lib/applications/labels";
-import type { PartnerApplication } from "@/lib/api";
-import { PartnerScorecardPanel } from "../partner-scorecard-panel";
-import { PartnerInterviewPanel } from "../partner-interview-panel";
-import { PartnerOfferPanel } from "../partner-offer-panel";
-import { MessageCandidateButton } from "@/components/messaging/message-candidate-button";
-import { AiScreeningBrief } from "../ai-screening-brief";
+  ClipboardList,
+  Download,
+  FileText,
+  MessageSquareText,
+  ShieldCheck,
+  Sparkles,
+  UserMinus,
+  UserPlus,
+  UserRound,
+} from "lucide-react";
+import { Button } from "@/components/ui";
+import { EmptyState } from "@/components/kit";
+import { cn } from "@/lib/utils";
+import { useRejectionReasonLabel } from "@/lib/applications/labels";
+import { resolveDownloadUrl, type PartnerApplication } from "@/lib/api";
+import { CvEvaluationPanel } from "./cv-evaluation-panel";
+import { isOpaqueQuestionKey } from "./utils";
 
+type DetailTab = "cv" | "application" | "evaluate";
+
+/**
+ * Candidate ownership control for the detail drawer header. The parent owns the
+ * assign mutation + RBAC gate; this component only renders the current owner and
+ * the "assign to me" / "unassign" affordance. `canSelfAssign` is false when the
+ * caller can assign but has no membership id (e.g. a superadmin acting in-org).
+ */
+export interface CandidateOwnerControl {
+  canAssign: boolean;
+  canSelfAssign: boolean;
+  assignedToMe: boolean;
+  assigneeName: string | null;
+  pending: boolean;
+  onAssignToMe: () => void;
+  onUnassign: () => void;
+}
+
+/**
+ * Candidate detail BODY — a CV-first, tabbed recruiter surface:
+ *  - CV: the candidate's ORIGINAL CV, rendered inline (clean, not a derived
+ *    doc) so a recruiter reviews the real résumé; a Download button pulls the
+ *    original file. CV access is audit-logged.
+ *  - Application: the cover letter + screening answers the candidate actually
+ *    submitted — read before deciding.
+ *  - Evaluate: the on-demand, recruiter-style AI CV evaluation (explicit click).
+ *
+ * Identity, the match ring, prev/next, and the review/reject decision live in
+ * the sheet header + footer. No auto "why this match" reasons text.
+ */
 export function CandidateDetail({
   app,
-  jobTitle,
   downloading,
-  reviewPending,
-  rejectPending,
   onDownload,
-  onOpenReveal,
-  onStartReview,
-  onOpenReject,
+  owner,
 }: {
   app: PartnerApplication;
-  jobTitle?: string;
   downloading: boolean;
-  reviewPending: boolean;
-  rejectPending: boolean;
   onDownload: () => void;
-  onOpenReveal: () => void;
-  onStartReview: () => void;
-  onOpenReject: () => void;
+  owner?: CandidateOwnerControl;
 }) {
   const t = useTranslations("candidates");
-  const labels = useApplicationLabels();
   const reasonLabel = useRejectionReasonLabel();
-  const anonUnrevealed = app.applicant.is_anonymous && !app.applicant.revealed;
-  const canReview = app.status === "submitted";
-  const canReject = app.status === "submitted" || app.status === "under_review";
+  const [tab, setTab] = React.useState<DetailTab>("cv");
+
+  const cv = app.cv ?? null;
+  // Prefer the resolved `screening` block (carries the real question prompt);
+  // fall back to the flat `screening_answers` map (opaque keys → "Answer N").
+  const answers = React.useMemo(() => {
+    if (app.screening && app.screening.length > 0) {
+      return app.screening.map((s) => ({
+        key: s.question_id,
+        label: s.question,
+        value: s.answer,
+      }));
+    }
+    return Object.entries(app.screening_answers ?? {}).map(([key, value]) => ({
+      key,
+      label: isOpaqueQuestionKey(key) ? null : key,
+      value,
+    }));
+  }, [app.screening, app.screening_answers]);
+  const answerCount = answers.length + (app.cover_letter ? 1 : 0);
+
+  const tabs: { id: DetailTab; label: string; icon: typeof FileText; badge?: number }[] = [
+    { id: "cv", label: t("cvTabDocument"), icon: FileText },
+    {
+      id: "application",
+      label: t("cvTabApplication"),
+      icon: ClipboardList,
+      badge: answerCount || undefined,
+    },
+    { id: "evaluate", label: t("cvTabEvaluation"), icon: Sparkles },
+  ];
 
   return (
-    <div className="space-y-5">
-      {/* Identity */}
-      <div>
-        <p className="text-base font-bold text-[var(--text-primary)]">
-          {anonUnrevealed
-            ? app.applicant.anonymous_id ?? app.applicant.display_name
-            : app.applicant.display_name}
-        </p>
-        {!anonUnrevealed && app.applicant.email && (
-          <p className="text-sm text-[var(--text-secondary)]">
-            {app.applicant.email}
-          </p>
-        )}
-        <div className="mt-2 flex flex-wrap items-center gap-2">
-          <StatusBadge tone={APPLICATION_STATUS_TONE[app.status] ?? "info"}>
-            {labels.status(app.status, app.status_label)}
-          </StatusBadge>
-          {app.applicant.is_anonymous && (
-            <StatusBadge tone={REVEAL_STATUS_TONE[app.reveal_status] ?? "draft"}>
-              {labels.reveal(app.reveal_status, app.reveal_status_label)}
-            </StatusBadge>
-          )}
-        </div>
-        <div className="mt-3">
-          <MessageCandidateButton applicationId={app.id} />
-        </div>
-      </div>
-
-      {/* Decision actions */}
-      {(canReview || canReject) && (
-        <div className="flex flex-wrap gap-2 border-y border-[var(--border-subtle)] py-4">
-          {canReview && (
-            <Button
-              variant="primary"
-              size="sm"
-              loading={reviewPending}
-              disabled={rejectPending}
-              onClick={onStartReview}
-            >
-              <MagnifyingGlass aria-hidden weight="bold" className="size-4" />
-              {t("startReview")}
-            </Button>
-          )}
-          {canReject && (
-            <Button
-              variant="danger"
-              size="sm"
-              disabled={reviewPending || rejectPending}
-              onClick={onOpenReject}
-            >
-              <Prohibit aria-hidden weight="bold" className="size-4" />
-              {t("reject")}
-            </Button>
-          )}
+    <div className={cn("flex min-h-0 flex-col", tab === "cv" && "h-full")}>
+      {/* Ownership strip — who owns this candidate + claim/release affordance. */}
+      {owner && (
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-5 py-2.5">
+          <span className="inline-flex min-w-0 items-center gap-1.5 type-small text-muted-foreground">
+            <UserRound aria-hidden className="size-4 shrink-0" strokeWidth={1.8} />
+            <span className="shrink-0">{t("colOwner")}:</span>
+            <span className="truncate font-medium text-foreground">
+              {owner.assigneeName ?? t("unassigned")}
+            </span>
+          </span>
+          {owner.canAssign &&
+            (owner.assignedToMe ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                loading={owner.pending}
+                onClick={owner.onUnassign}
+              >
+                <UserMinus aria-hidden className="size-4" strokeWidth={1.8} />
+                {t("unassign")}
+              </Button>
+            ) : owner.canSelfAssign ? (
+              <Button
+                variant="secondary"
+                size="sm"
+                loading={owner.pending}
+                onClick={owner.onAssignToMe}
+              >
+                <UserPlus aria-hidden className="size-4" strokeWidth={1.8} />
+                {t("assignToMe")}
+              </Button>
+            ) : null)}
         </div>
       )}
 
-      {/* Rejection outcome (partner-only reason + note) */}
+      {/* Rejection outcome (partner-only reason + note) — read-only context. */}
       {app.status === "rejected" && app.rejection_reason && (
-        <section className="rounded-xl border border-[var(--red-400)]/40 bg-[var(--red-50)] p-3.5">
-          <h3 className="text-sm font-bold text-[var(--brand-red)]">
-            {t("rejectionLabel")}
-          </h3>
-          <p className="mt-1 text-sm font-medium text-[var(--text-primary)]">
-            {reasonLabel(app.rejection_reason)}
-          </p>
-          {app.rejection_note && (
-            <>
-              <p className="mt-3 text-xs font-medium text-[var(--text-muted)]">
-                {t("rejectionNoteLabel")}
-              </p>
-              <p className="mt-0.5 whitespace-pre-wrap text-sm text-[var(--text-secondary)]">
+        <div className="shrink-0 border-b border-border px-5 py-3">
+          <div className="rounded-lg p-3" style={{ background: "var(--content-danger-soft)" }}>
+            <p
+              className="text-[0.8125rem] font-semibold"
+              style={{ color: "var(--content-danger)" }}
+            >
+              {reasonLabel(app.rejection_reason)}
+            </p>
+            {app.rejection_note && (
+              <p className="mt-1.5 whitespace-pre-wrap type-small text-muted-foreground">
                 {app.rejection_note}
               </p>
-            </>
-          )}
-          <p className="mt-2 text-xs text-[var(--text-muted)]">
-            {t("partnerOnlyNote")}
-          </p>
-        </section>
-      )}
-
-      {anonUnrevealed && (
-        <div className="rounded-xl border border-white/60 bg-white/72 p-3.5 backdrop-blur-sm">
-          <p className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-            <span className="flex size-5 shrink-0 items-center justify-center rounded-md icon-chip-warning shadow-sm">
-              <ShieldWarning aria-hidden weight="duotone" className="size-3 text-white" />
-            </span>
-            {t("anonymousNotice")}
-          </p>
+            )}
+          </div>
+          <p className="mt-1.5 type-caption text-muted-foreground">{t("partnerOnlyNote")}</p>
         </div>
       )}
 
-      {/* AI Screening Brief */}
-      <div>
-        <AiScreeningBrief applicationId={app.id} />
+      {/* Segmented tab bar */}
+      <div
+        role="tablist"
+        aria-label={t("detailTabsLabel")}
+        className="sticky top-0 z-10 flex shrink-0 items-center gap-1 border-b border-border bg-card px-3"
+      >
+        {tabs.map(({ id, label, icon: Icon, badge }) => {
+          const active = tab === id;
+          return (
+            <button
+              key={id}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => setTab(id)}
+              className={cn(
+                "-mb-px inline-flex items-center gap-1.5 border-b-2 px-3 py-2.5 type-small font-medium outline-none transition-colors focus-visible:text-foreground",
+                active
+                  ? "border-[var(--text-primary)] text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground",
+              )}
+            >
+              <Icon aria-hidden className="size-4" strokeWidth={1.8} />
+              {label}
+              {badge != null && (
+                <span className="ml-0.5 inline-flex min-w-[1.15rem] items-center justify-center rounded-full bg-[var(--bg-muted)] px-1 text-[0.625rem] font-semibold tabular-nums text-muted-foreground">
+                  {badge}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Cover letter */}
-      {app.cover_letter ? (
-        <section>
-          <h3 className="mb-1.5 text-sm font-bold text-[var(--text-primary)]">
-            {t("coverLetter")}
-          </h3>
-          <p className="whitespace-pre-wrap rounded-xl border border-white/60 bg-white/82 backdrop-blur-md p-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-            {app.cover_letter}
-          </p>
-        </section>
-      ) : anonUnrevealed ? (
-        <p className="text-sm text-[var(--text-muted)]">{t("hiddenUntilReveal")}</p>
-      ) : null}
+      {/* ------------------------------ CV tab ------------------------------ */}
+      {tab === "cv" &&
+        (cv ? (
+          <div className="flex min-h-0 flex-1 flex-col">
+            <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-5 py-2.5">
+              <span className="inline-flex min-w-0 items-center gap-1.5 type-small font-medium text-foreground">
+                <FileText
+                  aria-hidden
+                  className="size-4 shrink-0 text-muted-foreground"
+                  strokeWidth={1.8}
+                />
+                <span className="truncate">{cv.filename || t("cvFilenameFallback")}</span>
+              </span>
+              <Button variant="secondary" size="sm" loading={downloading} onClick={onDownload}>
+                <Download aria-hidden className="size-4" strokeWidth={1.8} />
+                {t("downloadCv")}
+              </Button>
+            </div>
+            {/* `#toolbar=0&navpanes=0` strips the browser PDF chrome (print,
+                download, save-to-Drive, page thumbnails) so only the document
+                shows — the recruiter uses our own Download button above. */}
+            <iframe
+              title={t("cvViewerTitle")}
+              src={`${resolveDownloadUrl(cv.view_url)}#toolbar=0&navpanes=0&view=FitH`}
+              className="min-h-[60vh] w-full flex-1 border-0 bg-[var(--bg-muted)]"
+            />
+            <p className="flex shrink-0 items-start gap-1.5 border-t border-border px-5 py-2 type-caption text-muted-foreground">
+              <ShieldCheck aria-hidden className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.8} />
+              {t("cvAccessNote")}
+            </p>
+          </div>
+        ) : (
+          <div className="flex min-h-[50vh] flex-1 items-center justify-center p-5">
+            <EmptyState
+              kind="empty"
+              icon={FileText}
+              title={t("cvNotReadyTitle")}
+              description={t("cvNotReadyBody")}
+            />
+          </div>
+        ))}
 
-      {/* Scorecard (partner-internal evaluation; never shown to the student). */}
-      <div className="border-t border-white/40 pt-4">
-        <PartnerScorecardPanel
-          applicationId={app.id}
-          canSubmit={app.status === "under_review"}
-          jobTitle={jobTitle}
-        />
-      </div>
+      {/* -------------------------- Application tab ------------------------- */}
+      {tab === "application" &&
+        (app.cover_letter || answers.length > 0 ? (
+          <div>
+            {app.cover_letter && (
+              <section className="border-b border-border px-5 py-4">
+                <h4 className="mb-2 flex items-center gap-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                  <MessageSquareText aria-hidden className="size-3.5" strokeWidth={1.9} />
+                  {t("coverLetterTitle")}
+                </h4>
+                <p className="whitespace-pre-wrap type-small leading-relaxed text-foreground">
+                  {app.cover_letter}
+                </p>
+              </section>
+            )}
+            {answers.length > 0 && (
+              <section className="px-5 py-4">
+                <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                  <ClipboardList aria-hidden className="size-3.5" strokeWidth={1.9} />
+                  {t("screeningAnswersTitle")}
+                </h4>
+                <dl className="space-y-3">
+                  {answers.map((item, i) => (
+                    <div key={item.key} className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3">
+                      <dt className="type-caption font-semibold text-muted-foreground">
+                        {item.label ?? t("screeningAnswerN", { n: i + 1 })}
+                      </dt>
+                      <dd className="mt-1 whitespace-pre-wrap type-small text-foreground">
+                        {Array.isArray(item.value) ? item.value.join(", ") : item.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
+            )}
+          </div>
+        ) : (
+          <div className="flex min-h-[40vh] items-center justify-center p-5">
+            <EmptyState
+              kind="empty"
+              icon={ClipboardList}
+              title={t("applicationEmptyTitle")}
+              description={t("applicationEmptyBody")}
+            />
+          </div>
+        ))}
 
-      {/* Interviews (partner-internal scheduling; ADR-0006). The student sees only
-          their own upcoming-interview card on the student application detail. */}
-      <div className="border-t border-white/40 pt-4">
-        <PartnerInterviewPanel
-          applicationId={app.id}
-          canSchedule={app.status === "under_review"}
-          anonUnrevealed={anonUnrevealed}
-          revealPending={app.reveal_status === "pending"}
-          onRequestReveal={onOpenReveal}
-        />
-      </div>
-
-      {/* Offers (ADR-0007). Partner-internal create→approve→send flow; the comp is
-          recruiter-visible here but NEVER on the board glance. The student sees only
-          their own offer card on the student application detail. */}
-      <div className="border-t border-white/40 pt-4">
-        <PartnerOfferPanel
-          applicationId={app.id}
-          canCreate={app.status === "under_review"}
-          anonUnrevealed={anonUnrevealed}
-          revealPending={app.reveal_status === "pending"}
-          onRequestReveal={onOpenReveal}
-        />
-      </div>
-
-      {/* Actions */}
-      <div className="flex flex-col gap-2 border-t border-white/40 pt-4">
-        <Button
-          variant="primary"
-          fullWidth
-          loading={downloading}
-          disabled={!app.cv_download_available}
-          onClick={onDownload}
-        >
-          <DownloadSimple aria-hidden weight="bold" className="size-4" />
-          {t("downloadCv")}
-        </Button>
-        {!app.cv_download_available && (
-          <p className="text-xs text-[var(--text-muted)]">
-            {t("downloadBlocked")}
-          </p>
-        )}
-        <p className="flex items-start gap-1.5 text-xs text-[var(--text-muted)]">
-          <ShieldWarning aria-hidden weight="duotone" className="mt-0.5 size-3.5 shrink-0" />
-          {t("watermarkNote")}
-        </p>
-
-        {anonUnrevealed && app.reveal_status !== "pending" && (
-          <Button variant="secondary" fullWidth onClick={onOpenReveal}>
-            <UserFocus aria-hidden weight="bold" className="size-4" />
-            {t("requestReveal")}
-          </Button>
-        )}
-        {anonUnrevealed && app.reveal_status === "pending" && (
-          <p className="text-xs text-[var(--amber-700)]">
-            {t("revealPending")}
-          </p>
-        )}
-      </div>
+      {/* --------------------------- Evaluate tab -------------------------- */}
+      {tab === "evaluate" &&
+        (cv ? (
+          <CvEvaluationPanel applicationId={app.id} />
+        ) : (
+          <div className="flex min-h-[40vh] items-center justify-center p-5">
+            <EmptyState
+              kind="empty"
+              icon={Sparkles}
+              title={t("evaluateNoCvTitle")}
+              description={t("evaluateNoCvBody")}
+            />
+          </div>
+        ))}
     </div>
   );
 }

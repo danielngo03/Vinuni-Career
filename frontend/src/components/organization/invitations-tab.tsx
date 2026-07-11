@@ -1,23 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { EnvelopeSimple, ShieldWarning, Plus, Eye } from "@phosphor-icons/react";
+import { Plus, Eye, RotateCcw } from "lucide-react";
+import { Button, EmptyState, Input, Modal, Select, useToast } from "@/components/ui";
 import {
-  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardToolbar,
   DataTable,
-  EmptyState,
-  Input,
-  Modal,
-  Select,
-  StatusBadge,
-  useToast,
-  type Column,
-  type StatusTone,
-} from "@/components/ui";
-import { SectionCard } from "@/components/settings/section-card";
+  type ColumnDef,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import { ApiError, organizationApi, type OrgInvitation, type OrgRole, type PermissionPreview } from "@/lib/api";
 import { useApiErrorMessage, applyFieldErrors } from "@/lib/auth/use-api-error";
 import { zodResolver } from "@/lib/validation/resolver";
@@ -25,11 +25,11 @@ import { grants, invitationSchema, type InvitationValues } from "@/lib/validatio
 import { formatDateTime } from "@/lib/format";
 import { PermissionPreviewModal } from "./permission-preview-panel";
 
-const STATUS_TONE: Record<string, StatusTone> = {
-  pending: "pending",
-  accepted: "accepted",
-  revoked: "closed",
-  expired: "closed",
+const STATUS_TONE: Record<string, ChipTone> = {
+  pending: "warning",
+  accepted: "success",
+  revoked: "neutral",
+  expired: "neutral",
 };
 
 const STATUS_LABEL_KEY: Record<string, string> = {
@@ -39,11 +39,7 @@ const STATUS_LABEL_KEY: Record<string, string> = {
   expired: "statusExpired",
 };
 
-function canAssignRole(
-  role: OrgRole,
-  effective: ReadonlySet<string>,
-  holdsWildcard: boolean,
-): boolean {
+function canAssignRole(role: OrgRole, effective: ReadonlySet<string>, holdsWildcard: boolean): boolean {
   if (holdsWildcard) return true;
   return role.permissions.every((perm) => {
     if (perm === "*:*") return false;
@@ -69,21 +65,13 @@ export function InvitationsTab({
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
 
-  const [createOpen, setCreateOpen] = useState(false);
-  const [revoking, setRevoking] = useState<OrgInvitation | null>(null);
-  const [formError, setFormError] = useState<string | null>(null);
-  const [previewOpen, setPreviewOpen] = useState(false);
+  const [createOpen, setCreateOpen] = React.useState(false);
+  const [revoking, setRevoking] = React.useState<OrgInvitation | null>(null);
+  const [formError, setFormError] = React.useState<string | null>(null);
+  const [previewOpen, setPreviewOpen] = React.useState(false);
 
-  const query = useQuery({
-    queryKey: ["org", "invitations"],
-    queryFn: () => organizationApi.listInvitations(),
-    retry: false,
-  });
-  const rolesQuery = useQuery({
-    queryKey: ["org", "roles"],
-    queryFn: () => organizationApi.listRoles(),
-    retry: false,
-  });
+  const query = useQuery({ queryKey: ["org", "invitations"], queryFn: () => organizationApi.listInvitations(), retry: false });
+  const rolesQuery = useQuery({ queryKey: ["org", "roles"], queryFn: () => organizationApi.listRoles(), retry: false });
   const deptsQuery = useQuery({
     queryKey: ["org", "departments"],
     queryFn: () => organizationApi.listDepartments(),
@@ -120,6 +108,16 @@ export function InvitationsTab({
     void qc.invalidateQueries({ queryKey: ["org", "invitations"] });
   }
 
+  function openCreate(prefill?: OrgInvitation) {
+    setFormError(null);
+    reset({
+      email: prefill?.email ?? "",
+      role_id: prefill?.role_id ?? "",
+      department_id: prefill?.department_id ?? "",
+    });
+    setCreateOpen(true);
+  }
+
   const create = useMutation({
     mutationFn: (values: InvitationValues) =>
       organizationApi.createInvitation({
@@ -137,11 +135,7 @@ export function InvitationsTab({
       if (applyFieldErrors(e, setError)) return;
       if (e instanceof ApiError && e.code === "CONFLICT") {
         const reason = e.details?.reason;
-        if (reason === "seat_limit_reached") {
-          setFormError(t("seatLimitError"));
-        } else {
-          setFormError(t("duplicateError"));
-        }
+        setFormError(reason === "seat_limit_reached" ? t("seatLimitError") : t("duplicateError"));
         return;
       }
       setFormError(getMessage(e));
@@ -161,109 +155,102 @@ export function InvitationsTab({
     },
   });
 
-  if (query.isError && query.error instanceof ApiError) {
-    const err = query.error;
-    return (
-      <SectionCard
-        title={t("title")}
-        description={t("intro")}
-        icon={EnvelopeSimple}
-        iconGradient="icon-chip-warning"
-      >
-        <EmptyState
-          kind={err.isPermissionError ? "permission" : err.isAuthError ? "auth" : "error"}
-          icon={ShieldWarning}
-          title={
-            err.isPermissionError
-              ? tStates("permissionTitle")
-              : err.isAuthError
-                ? tStates("authTitle")
-                : tStates("errorTitle")
-          }
-          description={
-            err.isPermissionError
-              ? tStates("permissionBody")
-              : err.isAuthError
-                ? tStates("authBody")
-                : tStates("errorBody")
-          }
-        />
-      </SectionCard>
-    );
-  }
-
-  const rows = query.data ?? [];
   const roles = rolesQuery.data ?? [];
   const depts = deptsQuery.data ?? [];
   const roleName = (id?: string | null) => (id ? (roles.find((r) => r.id === id)?.name ?? "—") : "—");
 
-  const columns: Column<OrgInvitation>[] = [
+  const columns: ColumnDef<OrgInvitation, unknown>[] = [
     {
-      key: "email",
+      accessorKey: "email",
       header: t("email"),
-      cell: (i) => <span className="font-medium text-[var(--text-primary)]">{i.email}</span>,
+      cell: ({ row }) => <span className="font-medium text-foreground">{row.original.email}</span>,
     },
     {
-      key: "role",
+      accessorKey: "role_id",
       header: t("role"),
-      cell: (i) => roleName(i.role_id),
+      enableSorting: false,
+      cell: ({ row }) => <span className="text-muted-foreground">{roleName(row.original.role_id)}</span>,
     },
     {
-      key: "expires",
+      accessorKey: "expires_at",
       header: t("expires"),
-      cell: (i) => formatDateTime(i.expires_at, locale),
-    },
-    {
-      key: "status",
-      header: t("status"),
-      cell: (i) => (
-        <StatusBadge tone={STATUS_TONE[i.status] ?? "info"}>
-          {STATUS_LABEL_KEY[i.status] ? t(STATUS_LABEL_KEY[i.status]!) : i.status_label}
-        </StatusBadge>
+      cell: ({ row }) => (
+        <span className="whitespace-nowrap tabular-nums text-muted-foreground">
+          {formatDateTime(row.original.expires_at, locale)}
+        </span>
       ),
     },
     {
-      key: "actions",
+      accessorKey: "status",
+      header: t("status"),
+      cell: ({ row }) => (
+        <StatusChip tone={STATUS_TONE[row.original.status] ?? "info"} dot>
+          {STATUS_LABEL_KEY[row.original.status] ? t(STATUS_LABEL_KEY[row.original.status]!) : row.original.status_label}
+        </StatusChip>
+      ),
+    },
+    {
+      id: "actions",
       header: "",
-      align: "right",
-      cell: (i) =>
-        i.status === "pending" ? (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-[var(--brand-red)]"
-            onClick={() => setRevoking(i)}
-          >
+      meta: { align: "right" },
+      enableSorting: false,
+      cell: ({ row }) =>
+        row.original.status === "pending" ? (
+          <Button variant="ghost" size="sm" className="text-[var(--content-danger)]" onClick={() => setRevoking(row.original)}>
             {t("revoke")}
+          </Button>
+        ) : row.original.status === "expired" || row.original.status === "revoked" ? (
+          <Button variant="ghost" size="sm" onClick={() => openCreate(row.original)}>
+            <RotateCcw className="size-3.5" strokeWidth={1.8} />
+            {t("resend")}
           </Button>
         ) : null,
     },
   ];
 
   return (
-    <SectionCard title={t("title")} description={t("intro")}>
-      <div className="mb-4 flex justify-end">
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => {
-            setFormError(null);
-            reset();
-            setCreateOpen(true);
-          }}
-        >
-          <Plus aria-hidden weight="bold" className="size-4" />
-          {t("invite")}
-        </Button>
-      </div>
-      <DataTable
-        columns={columns}
-        rows={rows}
-        getRowId={(i) => i.id}
-        loading={query.isPending}
-        caption={t("title")}
-        empty={{ kind: "empty", icon: EnvelopeSimple, title: t("empty"), description: t("emptyBody") }}
-      />
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("title")}</CardTitle>
+          <CardDescription>{t("intro")}</CardDescription>
+        </div>
+        <CardToolbar>
+          <Button variant="primary" size="sm" onClick={() => openCreate()}>
+            <Plus className="size-4" strokeWidth={2} />
+            {t("invite")}
+          </Button>
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {query.isError && query.error instanceof ApiError ? (
+          <EmptyState
+            kind={query.error.isPermissionError ? "permission" : query.error.isAuthError ? "auth" : "error"}
+            title={
+              query.error.isPermissionError
+                ? tStates("permissionTitle")
+                : query.error.isAuthError
+                  ? tStates("authTitle")
+                  : tStates("errorTitle")
+            }
+            description={
+              query.error.isPermissionError
+                ? tStates("permissionBody")
+                : query.error.isAuthError
+                  ? tStates("authBody")
+                  : tStates("errorBody")
+            }
+          />
+        ) : (
+          <DataTable
+            columns={columns}
+            data={query.data ?? []}
+            getRowId={(i) => i.id}
+            loading={query.isPending}
+            empty={<EmptyState kind="empty" title={t("empty")} description={t("emptyBody")} />}
+          />
+        )}
+      </CardContent>
 
       <Modal
         open={createOpen}
@@ -277,73 +264,42 @@ export function InvitationsTab({
             <Button variant="ghost" onClick={() => setCreateOpen(false)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={isSubmitting || create.isPending}
-              onClick={handleSubmit((v) => create.mutate(v))}
-            >
+            <Button variant="primary" loading={isSubmitting || create.isPending} onClick={handleSubmit((v) => create.mutate(v))}>
               {t("sendInvite")}
             </Button>
           </>
         }
       >
-        <form
-          className="space-y-4"
-          onSubmit={handleSubmit((v) => create.mutate(v))}
-          noValidate
-        >
+        <form className="space-y-4" onSubmit={handleSubmit((v) => create.mutate(v))} noValidate>
           {formError && (
             <p
               role="alert"
-              className="rounded-xl border border-[var(--red-400)]/40 bg-[var(--red-50)] px-3 py-2 text-sm font-medium text-[var(--brand-red)]"
+              className="rounded-xl px-3 py-2 text-[0.8125rem] font-medium"
+              style={{ background: "var(--content-danger-soft)", color: "var(--content-danger)" }}
             >
               {formError}
             </p>
           )}
-          <Input
-            type="email"
-            label={t("email")}
-            required
-            autoComplete="off"
-            error={errors.email?.message}
-            {...register("email")}
-          />
+          <Input type="email" label={t("email")} required autoComplete="off" error={errors.email?.message} {...register("email")} />
           <Select
             label={t("role")}
             help={t("roleHelp")}
             options={[
               { value: "", label: t("noRole") },
-              ...roles.map((r) => ({
-                value: r.id,
-                label: r.name,
-                disabled: !canAssignRole(r, effective, holdsWildcard),
-              })),
+              ...roles.map((r) => ({ value: r.id, label: r.name, disabled: !canAssignRole(r, effective, holdsWildcard) })),
             ]}
             {...register("role_id")}
           />
           <Select
             label={t("department")}
-            options={[
-              { value: "", label: t("noDept") },
-              ...depts.map((d) => ({ value: d.id, label: d.name })),
-            ]}
+            options={[{ value: "", label: t("noDept") }, ...depts.map((d) => ({ value: d.id, label: d.name }))]}
             {...register("department_id")}
           />
-          <Button
-            type="button"
-            variant="secondary"
-            size="sm"
-            disabled={!watchedRoleId}
-            onClick={() => setPreviewOpen(true)}
-          >
-            <Eye aria-hidden weight="duotone" className="size-4" />
+          <Button type="button" variant="secondary" size="sm" disabled={!watchedRoleId} onClick={() => setPreviewOpen(true)}>
+            <Eye className="size-4" strokeWidth={1.8} />
             {tPreview("hypotheticalTitle")}
           </Button>
-          {!watchedRoleId && (
-            <p className="text-xs text-[var(--text-muted)]">
-              {tPreview("hypotheticalEmpty")}
-            </p>
-          )}
+          {!watchedRoleId && <p className="type-caption text-muted-foreground">{tPreview("hypotheticalEmpty")}</p>}
         </form>
       </Modal>
 
@@ -368,18 +324,14 @@ export function InvitationsTab({
             <Button variant="ghost" onClick={() => setRevoking(null)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="danger"
-              loading={revoke.isPending}
-              onClick={() => revoking && revoke.mutate(revoking)}
-            >
+            <Button variant="danger" loading={revoke.isPending} onClick={() => revoking && revoke.mutate(revoking)}>
               {t("revokeConfirm")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("revokeNote")}</p>
+        <p className="type-small text-muted-foreground">{t("revokeNote")}</p>
       </Modal>
-    </SectionCard>
+    </Card>
   );
 }

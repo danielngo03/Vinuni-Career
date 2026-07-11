@@ -25,6 +25,8 @@
     "enteredToday": "Entered today",
     "appliedAt": "Applied {date}",
     "inStageDays": "{count, plural, one {# day in stage} other {# days in stage}}",
+    "assignedTo": "Owner: {name}",
+    "unassigned": "Unassigned",
     "rollbackBadgeTitle": "Rolled back {count, plural, one {# time} other {# times}}",
     "viewCandidate": "View candidate profile",
     "startStage": "Move to first stage",
@@ -55,6 +57,9 @@
     "gateScorecards": "{submitted}/{required} scorecards",
     "gateAvg": "avg {avg}",
     "scoreGateBlocked": "Score below threshold",
+    "scorecardAction": "Score candidate",
+    "scorecardModalTitle": "Candidate scorecard",
+    "scorecardModalContext": "{handle} · {stage} stage",
     "offerExpires": "Offer · due {date}",
     "selectCard": "Select candidate",
     "deselectCard": "Deselect candidate",
@@ -76,6 +81,8 @@
     "aiInsightStale": "{count, plural, one {# candidate} other {# candidates}} waiting over 7 days — consider moving or deciding",
     "aiInsightGateBlocked": "{count, plural, one {# candidate} other {# candidates}} blocked by scorecard gate — reviews needed to advance",
     "aiInsightBusiestStage": "\"{stage}\" has the most candidates ({count}) — this stage may need attention",
-    "aiInsightFlowing": "Pipeline is flowing well — no stale or gate-blocked candidates"
+    "aiInsightFlowing": "Pipeline is flowing well — no stale or gate-blocked candidates",
+    "dragCardAria": "Drag {handle} to another stage",
+    "rollbackNeedsStage": "Drop onto a previous stage to move a candidate back"
   }
 }

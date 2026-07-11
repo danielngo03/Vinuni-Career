@@ -12,14 +12,9 @@ import { Skeleton } from "@/components/ui";
 const AUTO_INTERVAL = 5500;
 const SWIPE_THRESHOLD = 50;
 
-// One dark base + per-slide accent only in top-left quadrant (never bleeds right)
-const BASE = "from-[#0e2040] to-[#091428]";
-const ACCENTS = [
-  "from-[#1a3d80]/48 to-transparent",
-  "from-[#0d4840]/48 to-transparent",
-  "from-[#200e60]/48 to-transparent",
-  "from-[#0a3a50]/48 to-transparent",
-] as const;
+// Neutral ink base for the editorial employer spotlight. Monochrome by design —
+// the campus photo and company logo carry the visual interest, not color.
+const BASE = "from-[var(--gray-900)] to-[var(--gray-950)]";
 
 export function PartnerBannerSlider() {
   const t = useTranslations("marketplace.partnerBanner");
@@ -62,7 +57,7 @@ export function PartnerBannerSlider() {
   /* ── Loading ── */
   if (isPending) {
     return (
-      <div className={`relative h-[420px] overflow-hidden rounded-[24px] border-t-[3px] border-[var(--brand-red)] bg-gradient-to-b ${BASE}`}>
+      <div className={`relative h-[420px] overflow-hidden rounded-[24px] bg-gradient-to-b ${BASE}`}>
         <Image
           src="/images/vinuni-campus.png"
           alt=""
@@ -84,7 +79,7 @@ export function PartnerBannerSlider() {
   /* ── Empty ── */
   if (n === 0) {
     return (
-      <div className={`relative h-[420px] overflow-hidden rounded-[24px] border-t-[3px] border-[var(--brand-red)] bg-gradient-to-b ${BASE}`}>
+      <div className={`relative h-[420px] overflow-hidden rounded-[24px] bg-gradient-to-b ${BASE}`}>
         <Image
           src="/images/vinuni-campus.png"
           alt=""
@@ -93,10 +88,9 @@ export function PartnerBannerSlider() {
           className="pointer-events-none object-cover opacity-25"
           priority
         />
-        <DotTexture />
         <div className="relative flex h-full flex-col justify-center px-8 lg:px-10">
-          <span className="mb-3 text-[0.65rem] font-bold uppercase tracking-widest text-[var(--brand-red)]">
-            VinUniversity Career Center
+          <span className="mb-3 text-[0.65rem] font-bold uppercase tracking-widest text-white/60">
+            {t("centerLabel")}
           </span>
           <h2 className="text-[2.2rem] font-black leading-tight text-white">
             {t("emptyHeadline")}
@@ -119,7 +113,7 @@ export function PartnerBannerSlider() {
 
   return (
     <div
-      className="group relative h-[420px] select-none overflow-hidden rounded-[24px] border-t-[3px] border-[var(--brand-red)]"
+      className="group relative h-[420px] select-none overflow-hidden rounded-[24px]"
       style={{ boxShadow: "0 16px 56px -4px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.10)" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -139,15 +133,6 @@ export function PartnerBannerSlider() {
         priority
       />
 
-      {/* All accent layers rendered; only the active one is visible */}
-      {ACCENTS.map((a, i) => (
-        <div
-          key={i}
-          className={`absolute inset-0 bg-gradient-to-br ${a} transition-opacity duration-700`}
-          style={{ opacity: i === idx % ACCENTS.length ? 1 : 0 }}
-        />
-      ))}
-
       {/* Logo watermarks — crossfade between companies */}
       {companies.map((c, i) =>
         c.logo_url ? (
@@ -165,8 +150,6 @@ export function PartnerBannerSlider() {
           </div>
         ) : null
       )}
-
-      <DotTexture />
 
       {/* ── Content — key change resets stagger animation ── */}
       <div
@@ -272,18 +255,5 @@ export function PartnerBannerSlider() {
         }
       `}</style>
     </div>
-  );
-}
-
-function DotTexture() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 opacity-[0.025]"
-      style={{
-        backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)",
-        backgroundSize: "24px 24px",
-      }}
-    />
   );
 }

@@ -60,7 +60,7 @@ export function ActionModal({
         </>
       }
     >
-      <p className="text-sm text-[var(--text-secondary)]">{description}</p>
+      <p className="type-small text-muted-foreground">{description}</p>
     </Modal>
   );
 }

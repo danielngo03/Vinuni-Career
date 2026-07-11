@@ -300,12 +300,12 @@ function EventDetailBody({
 
           {eventInsights.length > 0 && (
             <section
-              className="mt-6 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-[var(--glass-surface-light)] p-5 backdrop-blur-xl"
+              className="mt-6 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-5"
               aria-label={t("aiEventInsightsTitle")}
             >
               <h2 className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-xl icon-chip-info shadow-sm">
-                  <Sparkle aria-hidden weight="duotone" className="size-4 text-white" />
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-xl icon-chip-neutral shadow-sm">
+                  <Sparkle aria-hidden weight="duotone" className="size-4" />
                 </span>
                 {t("aiEventInsightsTitle")}
               </h2>
@@ -318,7 +318,7 @@ function EventDetailBody({
                     <LightbulbFilament
                       aria-hidden
                       weight="duotone"
-                      className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]"
+                      className="mt-0.5 size-4 shrink-0 text-[var(--text-muted)]"
                     />
                     {insight.values
                       ? t(insight.key, insight.values as Record<string, string>)

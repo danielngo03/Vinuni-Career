@@ -28,7 +28,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-dvh flex-col bg-[var(--bg-base)]">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-lg focus:bg-[var(--brand-primary)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-lg focus:bg-[var(--btn-primary-bg)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-[var(--btn-primary-fg)]"
       >
         {t("common.skipToContent")}
       </a>

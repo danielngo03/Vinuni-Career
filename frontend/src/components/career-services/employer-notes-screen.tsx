@@ -1,19 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Buildings, PencilSimple, PlusCircle } from "@phosphor-icons/react";
-import {
-  Button,
-  EmptyState,
-  Modal,
-  Select,
-  SkeletonCard,
-  StatusBadge,
-  Textarea,
-  useToast,
-} from "@/components/ui";
+import { Building2, Pencil, Plus } from "lucide-react";
+import { Button, Modal, Select, Textarea, useToast } from "@/components/ui";
+import { Card, EmptyState, StatusChip, type ChipTone } from "@/components/kit";
 import { CareerServicesShell } from "./career-services-shell";
 import { CareerServicesPermissionGate } from "./permission-gate";
 import { EmployerPicker } from "./employer-picker";
@@ -29,12 +21,12 @@ import {
 } from "@/lib/api";
 import { formatDateTime } from "@/lib/format";
 
-const CATEGORY_TONE: Record<NoteCategory, "info" | "active" | "pending" | "accepted" | "rejected"> = {
-  general: "info",
-  partnership: "active",
-  hiring_event: "accepted",
-  feedback: "pending",
-  escalation: "rejected",
+const CATEGORY_TONE: Record<NoteCategory, ChipTone> = {
+  general: "neutral",
+  partnership: "indigo",
+  hiring_event: "teal",
+  feedback: "amber",
+  escalation: "danger",
 };
 
 export function EmployerNotesScreen() {
@@ -44,15 +36,15 @@ export function EmployerNotesScreen() {
   const getErrorMessage = useApiErrorMessage();
   const qc = useQueryClient();
 
-  const [employerFilter, setEmployerFilter] = useState<{ id: string; label: string } | null>(null);
-  const [createOpen, setCreateOpen] = useState(false);
-  const [employer, setEmployer] = useState<{ id: string; label: string } | null>(null);
-  const [category, setCategory] = useState<NoteCategory>("general");
-  const [visibility, setVisibility] = useState<NoteVisibility>("all_staff");
-  const [noteText, setNoteText] = useState("");
+  const [employerFilter, setEmployerFilter] = React.useState<{ id: string; label: string } | null>(null);
+  const [createOpen, setCreateOpen] = React.useState(false);
+  const [employer, setEmployer] = React.useState<{ id: string; label: string } | null>(null);
+  const [category, setCategory] = React.useState<NoteCategory>("general");
+  const [visibility, setVisibility] = React.useState<NoteVisibility>("all_staff");
+  const [noteText, setNoteText] = React.useState("");
 
-  const [editTarget, setEditTarget] = useState<EmployerRelationshipNote | null>(null);
-  const [editText, setEditText] = useState("");
+  const [editTarget, setEditTarget] = React.useState<EmployerRelationshipNote | null>(null);
+  const [editText, setEditText] = React.useState("");
 
   const query = useQuery({
     queryKey: ["career-services", "employer-notes", locale, employerFilter?.id],
@@ -99,92 +91,83 @@ export function EmployerNotesScreen() {
     onError: (error) => toast.show({ tone: "error", title: getErrorMessage(error) }),
   });
 
-  const notes = useMemo(() => query.data ?? [], [query.data]);
+  const notes = query.data ?? [];
   const permissionState =
     query.isError && query.error instanceof ApiError ? (
       <CareerServicesPermissionGate error={query.error} bodyOverride={t("employerNotes.permissionBody")} />
     ) : null;
 
+  const addButton = (
+    <Button onClick={() => setCreateOpen(true)} size="sm">
+      <Plus className="size-4" strokeWidth={2} />
+      {t("employerNotes.addNote")}
+    </Button>
+  );
+
   return (
     <CareerServicesShell
       title={t("employerNotes.title")}
       description={t("employerNotes.subtitle")}
-      actions={
-        !permissionState && (
-          <Button onClick={() => setCreateOpen(true)}>
-            <PlusCircle aria-hidden weight="bold" className="size-4" />
-            {t("employerNotes.addNote")}
-          </Button>
-        )
-      }
+      actions={!permissionState ? addButton : undefined}
     >
       {permissionState ?? (
-        <>
-          <div className="mb-4 max-w-sm">
+        <div className="space-y-4">
+          <div className="max-w-sm">
             <EmployerPicker value={employerFilter} onChange={setEmployerFilter} />
           </div>
 
-          {query.isLoading ? (
-            <div className="grid gap-4 md:grid-cols-2">
-              <SkeletonCard />
-              <SkeletonCard />
+          {query.isPending ? (
+            <div className="space-y-3">
+              <div className="h-24 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
+              <div className="h-24 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
             </div>
           ) : query.isError ? (
-            <EmptyState
-              kind="error"
-              title={t("employerNotes.loadFailed")}
-              description={getErrorMessage(query.error)}
-            />
+            <EmptyState kind="error" title={t("employerNotes.loadFailed")} description={getErrorMessage(query.error)} />
           ) : notes.length === 0 ? (
             <EmptyState
               kind="empty"
-              icon={Buildings}
+              icon={Building2}
               title={t("employerNotes.emptyTitle")}
               description={t("employerNotes.emptyBody")}
-              action={
-                <Button onClick={() => setCreateOpen(true)}>
-                  <PlusCircle aria-hidden weight="bold" className="size-4" />
-                  {t("employerNotes.addNote")}
-                </Button>
-              }
+              action={addButton}
             />
           ) : (
             <div className="space-y-3">
               {notes.map((note) => (
-                <article
-                  key={note.id}
-                  className="rounded-xl border border-white/70 bg-white/85 p-4 shadow-sm backdrop-blur"
-                >
+                <Card key={note.id} padded>
                   <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                     <div className="flex flex-wrap items-center gap-2">
-                      <StatusBadge tone={CATEGORY_TONE[note.category]}>{note.category_label}</StatusBadge>
-                      <span className="text-xs text-[var(--text-muted)]">{note.visibility_label}</span>
+                      <StatusChip tone={CATEGORY_TONE[note.category]} dot>
+                        {note.category_label}
+                      </StatusChip>
+                      <span className="type-caption text-muted-foreground">{note.visibility_label}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-[var(--text-muted)]">
+                      <span className="type-caption tabular-nums text-muted-foreground">
                         {formatDateTime(note.created_at, locale)}
                       </span>
                       <Button
                         variant="ghost"
-                        size="xs"
+                        size="sm"
                         onClick={() => {
                           setEditTarget(note);
                           setEditText(note.note_text);
                         }}
                       >
-                        <PencilSimple aria-hidden weight="bold" className="size-4" />
+                        <Pencil className="size-4" strokeWidth={1.8} />
                         {t("employerNotes.edit")}
                       </Button>
                     </div>
                   </div>
-                  <p className="whitespace-pre-wrap text-sm text-[var(--text-primary)]">{note.note_text}</p>
-                </article>
+                  <p className="whitespace-pre-wrap text-sm text-foreground">{note.note_text}</p>
+                </Card>
               ))}
             </div>
           )}
-        </>
+        </div>
       )}
 
+      {/* Add note */}
       <Modal
         open={createOpen}
         onClose={closeCreate}
@@ -231,6 +214,7 @@ export function EmployerNotesScreen() {
         </div>
       </Modal>
 
+      {/* Edit note */}
       <Modal
         open={!!editTarget}
         onClose={() => setEditTarget(null)}

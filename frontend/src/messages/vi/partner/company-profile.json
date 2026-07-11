@@ -1,27 +1,89 @@
 {
   "companyProfile": {
-    "title": "Hồ sơ công ty",
-    "subtitle": "Thông tin công ty hiển thị công khai của bạn.",
-    "permissionBody": "Bạn không có quyền chỉnh sửa hồ sơ công ty.",
-    "sectionTitle": "Thông tin công ty",
-    "sectionIntro": "Giữ thông tin cập nhật — sinh viên thấy thông tin này trên tin tuyển dụng và hồ sơ của bạn.",
+    "title": "Hồ sơ doanh nghiệp",
+    "subtitle": "Cập nhật thông tin công khai và thông tin pháp lý của doanh nghiệp. Thông tin công khai được áp dụng ngay; thông tin pháp lý và tài liệu cần nhà trường xét duyệt.",
+    "permissionBody": "Bạn không có quyền xem hồ sơ doanh nghiệp này.",
+    "readOnlyBanner": "Bạn chỉ có quyền xem hồ sơ doanh nghiệp. Liên hệ quản trị viên tổ chức để được cấp quyền chỉnh sửa.",
     "verified": "Đã xác minh",
     "companyName": "Tên công ty",
     "website": "Website",
     "industry": "Ngành nghề",
     "companySize": "Quy mô công ty",
     "city": "Thành phố trụ sở",
+    "country": "Quốc gia trụ sở",
     "founded": "Năm thành lập",
     "description": "Giới thiệu",
     "selectPlaceholder": "Chọn…",
     "slugNote": "Đường dẫn hồ sơ: /{slug}",
     "savedToast": "Đã lưu hồ sơ.",
+    "noChangesToast": "Không có thay đổi để lưu.",
+    "foundedError": "Năm thành lập không hợp lệ.",
+    "valueEmpty": "(trống)",
     "conflictToast": "Đã được cập nhật",
     "conflictBody": "Hồ sơ này vừa được thay đổi ở nơi khác. Chúng tôi đã tải lại phiên bản mới nhất.",
-    "logoTitle": "Logo công ty",
+    "public": {
+      "title": "Thông tin công khai",
+      "intro": "Sinh viên thấy thông tin này trên tin tuyển dụng và trang doanh nghiệp của bạn.",
+      "immediateHint": "Áp dụng ngay"
+    },
+    "legal": {
+      "title": "Thông tin pháp lý",
+      "reviewHint": "Thay đổi thông tin định danh pháp lý cần nhà trường xét duyệt trước khi có hiệu lực.",
+      "gated": "Cần xét duyệt",
+      "legalName": "Tên pháp lý",
+      "taxCode": "Mã số thuế",
+      "regNumber": "Số đăng ký kinh doanh",
+      "submit": "Gửi để trường duyệt",
+      "submittedToast": "Đã gửi yêu cầu — đang chờ nhà trường xét duyệt.",
+      "lockedTitle": "Đang chờ xét duyệt",
+      "lockedBody": "Không thể chỉnh sửa thông tin pháp lý cho đến khi nhà trường xử lý yêu cầu hiện tại. Bạn có thể thu hồi yêu cầu để chỉnh sửa lại."
+    },
+    "pending": {
+      "title": "Đang chờ trường xét duyệt",
+      "body": "Các thay đổi nhạy cảm sau đang chờ nhà trường phê duyệt.",
+      "submittedAt": "Đã gửi {date}",
+      "changesTitle": "Thay đổi đề xuất",
+      "docsTitle": "Tài liệu đính kèm",
+      "noChanges": "Yêu cầu chỉ đính kèm tài liệu.",
+      "withdraw": "Thu hồi yêu cầu",
+      "withdrawConfirmTitle": "Thu hồi yêu cầu xét duyệt?",
+      "withdrawConfirmBody": "Yêu cầu đang chờ sẽ bị hủy và các thay đổi đề xuất sẽ không được áp dụng. Bạn có thể gửi lại sau.",
+      "withdrawConfirm": "Thu hồi",
+      "withdrawnToast": "Đã thu hồi yêu cầu."
+    },
+    "docs": {
+      "title": "Tài liệu xác minh",
+      "intro": "Tải lên giấy phép kinh doanh, chứng nhận thuế hoặc tài liệu pháp lý. Mọi tài liệu đều cần nhà trường xét duyệt.",
+      "approvedTitle": "Đã duyệt",
+      "pendingTitle": "Đang chờ duyệt",
+      "empty": "Chưa có tài liệu nào được duyệt.",
+      "pendingEmpty": "Không có tài liệu.",
+      "kindLabel": "Loại tài liệu",
+      "fileLabel": "Tệp",
+      "fileHint": "PDF, PNG, JPEG hoặc WebP, tối đa 10 MB.",
+      "upload": "Tải lên & gửi duyệt",
+      "uploadedToast": "Đã tải lên — đang chờ nhà trường xét duyệt.",
+      "view": "Xem",
+      "errTooLarge": "Tệp quá lớn. Vui lòng chọn tệp dưới 10 MB.",
+      "errUnsupported": "Định dạng không được hỗ trợ. Dùng PDF, PNG, JPEG hoặc WebP.",
+      "errEmpty": "Tệp rỗng. Vui lòng chọn một tệp hợp lệ.",
+      "kind": {
+        "business_license": "Giấy phép kinh doanh",
+        "tax_certificate": "Chứng nhận đăng ký thuế",
+        "legal_document": "Tài liệu pháp lý",
+        "other": "Tài liệu khác"
+      }
+    },
+    "history": {
+      "title": "Lịch sử yêu cầu",
+      "reviewNote": "Ghi chú của nhà trường",
+      "decidedAt": "Xử lý {date}"
+    },
+    "logoTitle": "Logo & nhận diện",
     "logoIntro": "Logo hiển thị trên tin tuyển dụng, trang công ty và kết quả tìm kiếm.",
     "logoFileLabel": "Tệp ảnh logo",
     "logoHint": "PNG, JPEG hoặc WebP, dung lượng tối đa khoảng 3 MB.",
+    "logoReadOnly": "Bạn không có quyền thay đổi logo.",
     "logoCurrent": "Logo hiện tại",
     "logoPreview": "Xem trước",
     "logoUploadBtn": "Tải logo lên",
@@ -40,33 +102,6 @@
       "conflict": "Hồ sơ vừa được thay đổi ở nơi khác. Chúng tôi đã tải lại phiên bản mới nhất — vui lòng thử lại.",
       "network": "Không thể kết nối máy chủ. Vui lòng kiểm tra kết nối mạng và thử lại.",
       "generic": "Không thể cập nhật logo. Vui lòng thử lại."
-    },
-    "aiInsightsTitle": "Sức mạnh hồ sơ doanh nghiệp",
-    "aiInsightNoLogo": "Tải lên logo doanh nghiệp — hồ sơ có logo nhận được nhiều lượt xem ứng viên hơn đáng kể",
-    "aiInsightNoDescription": "Thêm phần Giới thiệu — sinh viên tìm hiểu văn hóa và giá trị công ty trước khi ứng tuyển",
-    "aiInsightNoWebsite": "Thêm URL website — ứng viên muốn tìm hiểu thêm về công ty của bạn",
-    "aiInsightNoIndustry": "Chọn ngành nghề — giúp sinh viên tìm thấy bạn qua bộ lọc ngành",
-    "aiInsightComplete": "Hồ sơ doanh nghiệp của bạn đã hoàn chỉnh! Hãy cập nhật thường xuyên để thu hút ứng viên hàng đầu.",
-    "profileQuality": {
-      "title": "Chất lượng hồ sơ",
-      "score": "{score}/100 điểm",
-      "missingTitle": "Còn thiếu để hoàn thiện",
-      "check": {
-        "logo": "Logo công ty",
-        "description": "Mô tả công ty (tối thiểu 50 ký tự)",
-        "verified": "Đã xác minh",
-        "industry": "Ngành nghề",
-        "company_size": "Quy mô công ty",
-        "website": "Website",
-        "has_active_recruiter": "Có nhà tuyển dụng đang hoạt động",
-        "recent_activity": "Có hoạt động tuyển dụng gần đây"
-      }
-    },
-    "seats": {
-      "title": "Chỗ dùng cho đội ngũ",
-      "usage": "{used}/{max} chỗ đang dùng",
-      "unlimited": "{used} thành viên (không giới hạn)",
-      "atCapacity": "Đã đạt giới hạn gói hiện tại"
     }
   }
 }

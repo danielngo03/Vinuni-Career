@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useId } from "react";
-import { CaretDown } from "@phosphor-icons/react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface SelectOption {
@@ -52,12 +52,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
           aria-invalid={error ? true : undefined}
           aria-describedby={cn(error && errorId, help && helpId) || undefined}
           className={cn(
-            "w-full appearance-none rounded-xl border bg-white/80 px-3.5 py-2.5 pr-10 text-sm font-medium text-[var(--text-primary)]",
-            "outline-none transition-all duration-150",
-            "focus:border-[var(--brand-primary)] focus:bg-white/95 focus:ring-2 focus:ring-[var(--brand-primary)]/20",
+            "w-full appearance-none rounded-xl border bg-transparent px-3.5 py-2.5 pr-10 text-sm font-medium text-[var(--text-primary)]",
+            "outline-none transition-[border-color,box-shadow,background-color] duration-150",
+            "focus:border-[var(--field-focus-border)] focus:bg-[var(--surface-card)] focus:shadow-[0_0_0_4px_var(--field-focus-ring)] focus:ring-0 focus-visible:outline-none",
             error
-              ? "border-[var(--brand-red)]"
-              : "border-white/60 hover:border-[var(--border-default)]",
+              ? "border-[var(--brand-red)] focus:border-[var(--brand-red)] focus:shadow-[0_0_0_4px_rgba(200,53,56,0.10)]"
+              : "border-[var(--border-default)] hover:border-[var(--border-strong)]",
             "disabled:cursor-not-allowed disabled:opacity-60",
             className,
           )}
@@ -69,9 +69,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
             </option>
           ))}
         </select>
-        <CaretDown
+        <ChevronDown
           aria-hidden
-          weight="bold"
+          strokeWidth={2.2}
           className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-[var(--text-muted)]"
         />
       </div>

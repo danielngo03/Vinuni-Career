@@ -32,6 +32,7 @@ import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { VerifiedBadge } from "@/components/ui/verified-badge";
 import { RecommendationRail } from "@/components/discovery/recommendation-rail";
 import { MarketplaceBannerCard } from "@/components/discovery/marketplace-banner-card";
+import { SponsoredSlotRail } from "@/components/advertising/sponsored-slot-rail";
 import { TrackedItem } from "@/components/discovery/tracked-item";
 import { PopularRoles } from "@/components/discovery/popular-roles";
 import { TrustModules } from "@/components/discovery/trust-modules";
@@ -245,6 +246,11 @@ export function MarketplaceOverview() {
                   <DiscoveryPrivacyNote />
                 </div>
               )}
+
+              {/* Allocation-engine sponsored slots (spec §7.0) — a DISTINCT,
+                  non-removable-disclosure rail. Self-hides when no paid slot is
+                  filled; never fabricates an ad. */}
+              <SponsoredSlotRail surface="discovery_feed" className="mt-6" />
 
               {/* Flag-based sponsored inventory — labelled; hidden when empty. */}
               {sponsored_jobs.length > 0 && (

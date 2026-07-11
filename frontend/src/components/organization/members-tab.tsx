@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import {
   useInfiniteQuery,
@@ -8,17 +8,22 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { UsersThree, ShieldWarning, Eye, PauseCircle, PlayCircle } from "@phosphor-icons/react";
+import { PauseCircle, PlayCircle, Trash2, Check } from "lucide-react";
+import { Button, EmptyState, useToast } from "@/components/ui";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
-  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
   DataTable,
-  EmptyState,
-  Modal,
-  StatusBadge,
-  useToast,
-  type Column,
-} from "@/components/ui";
-import { SectionCard } from "@/components/settings/section-card";
+  type ColumnDef,
+  DetailSheet,
+  DetailSheetSection,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import {
   ApiError,
   organizationApi,
@@ -28,7 +33,7 @@ import {
 } from "@/lib/api";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { grants } from "@/lib/validation/organization";
-import { PermissionPreviewModal } from "./permission-preview-panel";
+import { PermissionPreviewBody } from "./permission-preview-panel";
 
 function sameSet(a: string[], b: string[]): boolean {
   if (a.length !== b.length) return false;
@@ -36,11 +41,7 @@ function sameSet(a: string[], b: string[]): boolean {
   return a.every((item) => right.has(item));
 }
 
-function canAssignRole(
-  role: OrgRole,
-  effective: ReadonlySet<string>,
-  holdsWildcard: boolean,
-): boolean {
+function canAssignRole(role: OrgRole, effective: ReadonlySet<string>, holdsWildcard: boolean): boolean {
   if (holdsWildcard) return true;
   return role.permissions.every((perm) => {
     if (perm === "*:*") return false;
@@ -48,6 +49,19 @@ function canAssignRole(
     return Boolean(resource && action && grants(effective, resource, action));
   });
 }
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
+  return (parts[0]![0]! + parts[parts.length - 1]![0]!).toUpperCase();
+}
+
+const STATUS_TONE: Record<string, ChipTone> = {
+  active: "success",
+  suspended: "warning",
+  left: "neutral",
+};
 
 export function MembersTab({
   effective,
@@ -71,32 +85,20 @@ export function MembersTab({
   const canRemove = holdsWildcard || effective.has("members:remove") || effective.has("members:*");
   const canPreview = holdsWildcard || effective.has("members:read") || effective.has("members:*");
 
-  const [editing, setEditing] = useState<OrgMember | null>(null);
-  const [removing, setRemoving] = useState<OrgMember | null>(null);
-  const [deactivating, setDeactivating] = useState<OrgMember | null>(null);
-  const [previewing, setPreviewing] = useState<OrgMember | null>(null);
-  const [roleIds, setRoleIds] = useState<string[]>([]);
-  const [deptIds, setDeptIds] = useState<string[]>([]);
+  const [selected, setSelected] = React.useState<OrgMember | null>(null);
+  const [roleIds, setRoleIds] = React.useState<string[]>([]);
+  const [deptIds, setDeptIds] = React.useState<string[]>([]);
+  const [confirmRemove, setConfirmRemove] = React.useState(false);
 
-  const rolesQuery = useQuery({
-    queryKey: ["org", "roles"],
-    queryFn: () => organizationApi.listRoles(),
-    retry: false,
-  });
+  const rolesQuery = useQuery({ queryKey: ["org", "roles"], queryFn: () => organizationApi.listRoles(), retry: false });
   const deptsQuery = useQuery({
     queryKey: ["org", "departments"],
     queryFn: () => organizationApi.listDepartments(),
     retry: false,
   });
 
-  // Distinct, more-specific key than the plain (non-paginated) ["org","members"]
-  // queries used elsewhere (team-screen.tsx summary counts, ownership-tab.tsx
-  // owner lookup) to avoid a react-query cache collision: mixing useQuery and
-  // useInfiniteQuery on the exact same key corrupts the cache entry's shape
-  // ({pages,pageParams} vs {data,page}) for whichever consumer reads it second,
-  // crashing with "Cannot read properties of undefined (reading 'filter')".
-  // invalidateQueries({queryKey:["org","members"]}) elsewhere still matches
-  // this key via react-query's default prefix matching.
+  // Distinct key from the plain ["org","members"] queries used elsewhere to
+  // avoid a react-query cache-shape collision (useQuery vs useInfiniteQuery).
   const members = useInfiniteQuery({
     queryKey: ["org", "members", "paginated"],
     queryFn: ({ pageParam }) => organizationApi.listMembers(pageParam),
@@ -105,30 +107,31 @@ export function MembersTab({
     retry: false,
   });
 
-  useEffect(() => {
-    if (editing) {
-      setRoleIds(editing.role_ids);
-      setDeptIds(editing.department_ids);
+  // Sync edit buffers when the selected member changes.
+  React.useEffect(() => {
+    if (selected) {
+      setRoleIds(selected.role_ids);
+      setDeptIds(selected.department_ids);
+      setConfirmRemove(false);
     }
-  }, [editing]);
+  }, [selected]);
 
   function refresh() {
     void qc.invalidateQueries({ queryKey: ["org", "members"] });
   }
+  function closeSheet() {
+    setSelected(null);
+  }
 
   const save = useMutation({
     mutationFn: (m: OrgMember) => {
-      const body: {
-        role_ids?: string[];
-        department_ids?: string[];
-        version: number;
-      } = { version: m.version };
+      const body: { role_ids?: string[]; department_ids?: string[]; version: number } = { version: m.version };
       if (!sameSet(roleIds, m.role_ids)) body.role_ids = roleIds;
       if (!sameSet(deptIds, m.department_ids)) body.department_ids = deptIds;
       return organizationApi.updateMember(m.id, body);
     },
     onSuccess: () => {
-      setEditing(null);
+      closeSheet();
       toast.show({ tone: "success", title: t("savedToast") });
       refresh();
     },
@@ -138,7 +141,7 @@ export function MembersTab({
   const remove = useMutation({
     mutationFn: (m: OrgMember) => organizationApi.removeMember(m.id),
     onSuccess: () => {
-      setRemoving(null);
+      closeSheet();
       toast.show({ tone: "success", title: t("removedToast") });
       refresh();
     },
@@ -147,17 +150,18 @@ export function MembersTab({
 
   const deactivate = useMutation({
     mutationFn: (m: OrgMember) => organizationApi.deactivateMember(m.id),
-    onSuccess: () => {
-      setDeactivating(null);
+    onSuccess: (updated) => {
+      setSelected(updated);
       toast.show({ tone: "success", title: tMember("deactivatedToast") });
       refresh();
     },
-    onError: (e) => handleError(e, { closeDeactivate: true }),
+    onError: (e) => handleError(e),
   });
 
   const reactivate = useMutation({
     mutationFn: (m: OrgMember) => organizationApi.reactivateMember(m.id),
-    onSuccess: () => {
+    onSuccess: (updated) => {
+      setSelected(updated);
       toast.show({ tone: "success", title: tMember("reactivatedToast") });
       refresh();
     },
@@ -165,32 +169,27 @@ export function MembersTab({
   });
 
   const preview = useQuery({
-    queryKey: ["org", "members", previewing?.id, "permission-preview"],
-    queryFn: () => organizationApi.previewMemberPermissions(previewing!.id),
-    enabled: previewing !== null,
+    queryKey: ["org", "members", selected?.id, "permission-preview"],
+    queryFn: () => organizationApi.previewMemberPermissions(selected!.id),
+    enabled: selected !== null && canPreview,
     retry: false,
   });
 
-  function handleError(e: unknown, opts?: { closeDeactivate?: boolean }) {
-    const reason =
-      e instanceof ApiError && typeof e.details?.reason === "string"
-        ? e.details.reason
-        : undefined;
+  function handleError(e: unknown) {
+    const reason = e instanceof ApiError && typeof e.details?.reason === "string" ? e.details.reason : undefined;
     if (reason === "version_conflict") {
       toast.show({ tone: "error", title: t("conflictToast"), description: t("conflictBody") });
-      setEditing(null);
+      closeSheet();
       refresh();
       return;
     }
     if (reason === "last_admin") {
       toast.show({ tone: "error", title: t("lastAdminToast"), description: t("lastAdminBody") });
-      setRemoving(null);
-      if (opts?.closeDeactivate) setDeactivating(null);
+      setConfirmRemove(false);
       return;
     }
     if (reason === "member_left") {
       toast.show({ tone: "error", title: tMember("memberLeftError") });
-      if (opts?.closeDeactivate) setDeactivating(null);
       return;
     }
     toast.show({ tone: "error", title: getMessage(e) });
@@ -200,38 +199,28 @@ export function MembersTab({
     const err = members.error;
     const isAuth = err.isAuthError;
     return (
-      <SectionCard
-        title={t("title")}
-        description={t("intro")}
-        icon={UsersThree}
-        iconGradient="icon-chip-primary"
-      >
-        <EmptyState
-          kind={isAuth ? "auth" : err.isPermissionError ? "permission" : "error"}
-          icon={ShieldWarning}
-          title={
-            isAuth
-              ? tStates("authTitle")
-              : err.isPermissionError
-                ? tStates("permissionTitle")
-                : tStates("errorTitle")
-          }
-          description={
-            isAuth
-              ? tStates("authBody")
-              : err.isPermissionError
-                ? tStates("permissionBody")
-                : tStates("errorBody")
-          }
-          action={
-            !isAuth && !err.isPermissionError ? (
-              <Button variant="secondary" onClick={() => members.refetch()}>
-                {tc("retry")}
-              </Button>
-            ) : undefined
-          }
-        />
-      </SectionCard>
+      <Card>
+        <CardHeader>
+          <div>
+            <CardTitle>{t("title")}</CardTitle>
+            <CardDescription>{t("intro")}</CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <EmptyState
+            kind={isAuth ? "auth" : err.isPermissionError ? "permission" : "error"}
+            title={isAuth ? tStates("authTitle") : err.isPermissionError ? tStates("permissionTitle") : tStates("errorTitle")}
+            description={isAuth ? tStates("authBody") : err.isPermissionError ? tStates("permissionBody") : tStates("errorBody")}
+            action={
+              !isAuth && !err.isPermissionError ? (
+                <Button variant="secondary" onClick={() => members.refetch()}>
+                  {tc("retry")}
+                </Button>
+              ) : undefined
+            }
+          />
+        </CardContent>
+      </Card>
     );
   }
 
@@ -241,308 +230,285 @@ export function MembersTab({
   const deptName = (id: string) => depts.find((d) => d.id === id)?.name ?? id.slice(0, 8);
   const rows = members.data?.pages.flatMap((p) => p.data) ?? [];
 
-  const columns: Column<OrgMember>[] = [
+  const columns: ColumnDef<OrgMember, unknown>[] = [
     {
-      key: "member",
+      accessorKey: "full_name",
       header: t("member"),
-      cell: (m) => (
-        <div className="min-w-0">
-          <p className="flex items-center gap-2 truncate font-semibold text-[var(--text-primary)]">
-            {m.full_name || m.user_email}
-            {m.user_email.toLowerCase() === currentEmail.toLowerCase() && (
-              <StatusBadge tone="info">{t("you")}</StatusBadge>
-            )}
-          </p>
-          <p className="truncate text-xs text-[var(--text-secondary)]">{m.user_email}</p>
-        </div>
-      ),
+      cell: ({ row }) => {
+        const m = row.original;
+        const name = m.full_name || m.user_email;
+        const isYou = m.user_email.toLowerCase() === currentEmail.toLowerCase();
+        return (
+          <div className="flex items-center gap-3">
+            <Avatar size="sm" className="size-8">
+              <AvatarFallback className="bg-[var(--viz-indigo-soft)] text-[0.6875rem] font-semibold text-[var(--viz-indigo)]">
+                {initials(name)}
+              </AvatarFallback>
+            </Avatar>
+            <div className="min-w-0">
+              <p className="flex items-center gap-1.5 truncate font-semibold text-foreground">
+                {name}
+                {isYou && (
+                  <StatusChip tone="info" size="sm">
+                    {t("you")}
+                  </StatusChip>
+                )}
+              </p>
+              <p className="truncate type-caption text-muted-foreground">{m.user_email}</p>
+            </div>
+          </div>
+        );
+      },
     },
     {
-      key: "roles",
+      accessorKey: "role_ids",
       header: t("roles"),
-      cell: (m) =>
-        m.role_ids.length ? (
+      enableSorting: false,
+      cell: ({ row }) =>
+        row.original.role_ids.length ? (
           <div className="flex flex-wrap gap-1">
-            {m.role_ids.map((id) => (
-              <span
-                key={id}
-                className="rounded-md bg-[var(--bg-subtle)] px-2 py-0.5 text-xs font-medium text-[var(--text-secondary)]"
-              >
+            {row.original.role_ids.map((id) => (
+              <StatusChip key={id} tone="neutral" size="sm">
                 {roleName(id)}
-              </span>
+              </StatusChip>
             ))}
           </div>
         ) : (
-          <span className="text-[var(--text-muted)]">—</span>
+          <span className="text-muted-foreground">—</span>
         ),
     },
     {
-      key: "departments",
+      accessorKey: "department_ids",
       header: t("departments"),
-      cell: (m) =>
-        m.department_ids.length
-          ? m.department_ids.map(deptName).join(", ")
-          : "—",
+      enableSorting: false,
+      cell: ({ row }) =>
+        row.original.department_ids.length ? (
+          <span className="text-[0.8125rem]">{row.original.department_ids.map(deptName).join(", ")}</span>
+        ) : (
+          <span className="text-muted-foreground">—</span>
+        ),
     },
     {
-      key: "status",
+      accessorKey: "status",
       header: t("status"),
-      cell: (m) => (
-        <StatusBadge tone={m.status === "suspended" ? "closed" : "active"}>
-          {m.status === "suspended" ? tMember("inactiveBadge") : m.status_label}
-        </StatusBadge>
-      ),
-    },
-    {
-      key: "actions",
-      header: "",
-      align: "right",
-      cell: (m) => (
-        <div className="flex flex-wrap justify-end gap-1">
-          {canPreview && m.status !== "left" && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setPreviewing(m)}
-              aria-label={tPreview("action")}
-            >
-              <Eye aria-hidden weight="duotone" className="size-4" />
-              {tPreview("action")}
-            </Button>
-          )}
-          {canManage && m.status !== "left" && (
-            <Button variant="ghost" size="sm" onClick={() => setEditing(m)}>
-              {tc("edit")}
-            </Button>
-          )}
-          {canManage && m.status === "active" && (
-            <Button variant="ghost" size="sm" onClick={() => setDeactivating(m)}>
-              <PauseCircle aria-hidden weight="duotone" className="size-4" />
-              {tMember("deactivate")}
-            </Button>
-          )}
-          {canManage && m.status === "suspended" && (
-            <Button
-              variant="ghost"
-              size="sm"
-              loading={reactivate.isPending && reactivate.variables?.id === m.id}
-              onClick={() => reactivate.mutate(m)}
-            >
-              <PlayCircle aria-hidden weight="duotone" className="size-4" />
-              {tMember("reactivate")}
-            </Button>
-          )}
-          {canRemove && m.status !== "left" && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-[var(--brand-red)]"
-              onClick={() => setRemoving(m)}
-            >
-              {t("remove")}
-            </Button>
-          )}
-        </div>
+      cell: ({ row }) => (
+        <StatusChip tone={STATUS_TONE[row.original.status] ?? "neutral"} dot>
+          {row.original.status === "suspended" ? tMember("inactiveBadge") : row.original.status_label}
+        </StatusChip>
       ),
     },
   ];
 
+  const changed = selected ? !sameSet(roleIds, selected.role_ids) || !sameSet(deptIds, selected.department_ids) : false;
+  const busy = save.isPending || remove.isPending || deactivate.isPending || reactivate.isPending;
+
   return (
-    <SectionCard title={t("title")} description={t("intro")}>
-      <DataTable
-        columns={columns}
-        rows={rows}
-        getRowId={(m) => m.id}
-        loading={members.isPending}
-        caption={t("title")}
-        empty={{ kind: "empty", icon: UsersThree, title: t("empty") }}
-      />
-      {members.hasNextPage && (
-        <div className="mt-4 flex justify-center">
-          <Button
-            variant="secondary"
-            loading={members.isFetchingNextPage}
-            onClick={() => members.fetchNextPage()}
-          >
-            {tc("loadMore")}
-          </Button>
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("title")}</CardTitle>
+          <CardDescription>{t("intro")}</CardDescription>
         </div>
-      )}
+      </CardHeader>
+      <CardContent>
+        <DataTable
+          columns={columns}
+          data={rows}
+          getRowId={(m) => m.id}
+          loading={members.isPending}
+          onRowClick={(m) => setSelected(m)}
+          activeRowId={selected?.id}
+          empty={<EmptyState kind="empty" title={t("empty")} />}
+        />
+        {members.hasNextPage && (
+          <div className="mt-4 flex justify-center">
+            <Button variant="secondary" loading={members.isFetchingNextPage} onClick={() => members.fetchNextPage()}>
+              {tc("loadMore")}
+            </Button>
+          </div>
+        )}
+      </CardContent>
 
-      {/* Edit roles/departments */}
-      <Modal
-        open={editing !== null}
-        onClose={() => setEditing(null)}
-        title={t("editTitle")}
-        description={editing?.full_name || editing?.user_email}
-        size="sm"
+      {/* Member detail / edit drawer */}
+      <DetailSheet
+        open={selected !== null}
+        onClose={closeSheet}
+        title={selected?.full_name || selected?.user_email || ""}
+        subtitle={selected?.user_email}
         closeLabel={tc("close")}
+        avatar={
+          <Avatar size="lg" className="size-10">
+            <AvatarFallback className="bg-[var(--viz-indigo-soft)] text-sm font-semibold text-[var(--viz-indigo)]">
+              {initials(selected?.full_name || selected?.user_email || "?")}
+            </AvatarFallback>
+          </Avatar>
+        }
+        status={
+          selected ? (
+            <StatusChip tone={STATUS_TONE[selected.status] ?? "neutral"} dot>
+              {selected.status === "suspended" ? tMember("inactiveBadge") : selected.status_label}
+            </StatusChip>
+          ) : undefined
+        }
         footer={
-          <>
-            <Button variant="ghost" onClick={() => setEditing(null)}>
-              {tc("cancel")}
-            </Button>
-            <Button
-              variant="primary"
-              loading={save.isPending}
-              onClick={() => editing && save.mutate(editing)}
-            >
-              {tc("save")}
-            </Button>
-          </>
+          selected && selected.status !== "left" ? (
+            confirmRemove ? (
+              <>
+                <span className="mr-auto type-small text-muted-foreground">{t("removeBody", { name: selected.full_name || selected.user_email })}</span>
+                <Button variant="ghost" onClick={() => setConfirmRemove(false)} disabled={busy}>
+                  {tc("cancel")}
+                </Button>
+                <Button variant="danger" loading={remove.isPending} onClick={() => remove.mutate(selected)}>
+                  {t("removeConfirm")}
+                </Button>
+              </>
+            ) : (
+              <>
+                {canManage && selected.status === "active" && (
+                  <Button
+                    variant="ghost"
+                    onClick={() => deactivate.mutate(selected)}
+                    loading={deactivate.isPending}
+                  >
+                    <PauseCircle className="size-4" strokeWidth={1.8} />
+                    {tMember("deactivate")}
+                  </Button>
+                )}
+                {canManage && selected.status === "suspended" && (
+                  <Button
+                    variant="ghost"
+                    onClick={() => reactivate.mutate(selected)}
+                    loading={reactivate.isPending}
+                  >
+                    <PlayCircle className="size-4" strokeWidth={1.8} />
+                    {tMember("reactivate")}
+                  </Button>
+                )}
+                {canRemove && (
+                  <Button variant="ghost" className="text-[var(--content-danger)]" onClick={() => setConfirmRemove(true)}>
+                    <Trash2 className="size-4" strokeWidth={1.8} />
+                    {t("remove")}
+                  </Button>
+                )}
+                {canManage && changed && (
+                  <Button variant="primary" loading={save.isPending} onClick={() => save.mutate(selected)}>
+                    <Check className="size-4" strokeWidth={2} />
+                    {tc("save")}
+                  </Button>
+                )}
+              </>
+            )
+          ) : undefined
         }
       >
-        <div className="space-y-5">
-          <CheckGroup
-            legend={t("roles")}
-            empty={t("noRoles")}
-            options={roles.map((r) => ({
-              id: r.id,
-              label: r.name,
-              disabled: !canAssignRole(r, effective, holdsWildcard),
-            }))}
-            selected={roleIds}
-            onToggle={(id) =>
-              setRoleIds((prev) =>
-                prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
-              )
-            }
-          />
-          <CheckGroup
-            legend={t("departments")}
-            empty={t("noDepts")}
-            options={depts.map((d) => ({ id: d.id, label: d.name }))}
-            selected={deptIds}
-            onToggle={(id) =>
-              setDeptIds((prev) =>
-                prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
-              )
-            }
-          />
-        </div>
-      </Modal>
-
-      {/* Remove */}
-      <Modal
-        open={removing !== null}
-        onClose={() => setRemoving(null)}
-        title={t("removeTitle")}
-        description={t("removeBody", {
-          name: removing?.full_name || removing?.user_email || "",
-        })}
-        size="sm"
-        closeLabel={tc("close")}
-        footer={
+        {selected && (
           <>
-            <Button variant="ghost" onClick={() => setRemoving(null)}>
-              {tc("cancel")}
-            </Button>
-            <Button
-              variant="danger"
-              loading={remove.isPending}
-              onClick={() => removing && remove.mutate(removing)}
-            >
-              {t("removeConfirm")}
-            </Button>
-          </>
-        }
-      >
-        <p className="text-sm text-[var(--text-secondary)]">{t("removeNote")}</p>
-      </Modal>
+            <DetailSheetSection title={t("roles")}>
+              {roles.length === 0 ? (
+                <p className="type-small text-muted-foreground">{t("noRoles")}</p>
+              ) : canManage && selected.status !== "left" ? (
+                <ChipToggleGroup
+                  options={roles.map((r) => ({
+                    id: r.id,
+                    label: r.name,
+                    disabled: !canAssignRole(r, effective, holdsWildcard),
+                  }))}
+                  selected={roleIds}
+                  onToggle={(id) => setRoleIds((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]))}
+                />
+              ) : (
+                <ReadonlyChips ids={selected.role_ids} label={roleName} empty="—" />
+              )}
+            </DetailSheetSection>
 
-      {/* Deactivate (reversible, distinct from remove) */}
-      <Modal
-        open={deactivating !== null}
-        onClose={() => setDeactivating(null)}
-        title={tMember("deactivateTitle")}
-        description={tMember("deactivateBody", {
-          name: deactivating?.full_name || deactivating?.user_email || "",
-        })}
-        size="sm"
-        closeLabel={tc("close")}
-        footer={
-          <>
-            <Button variant="ghost" onClick={() => setDeactivating(null)}>
-              {tc("cancel")}
-            </Button>
-            <Button
-              variant="danger"
-              loading={deactivate.isPending}
-              onClick={() => deactivating && deactivate.mutate(deactivating)}
-            >
-              {tMember("deactivateConfirm")}
-            </Button>
-          </>
-        }
-      >
-        <p className="text-sm text-[var(--text-secondary)]">{t("removeNote")}</p>
-      </Modal>
+            <DetailSheetSection title={t("departments")}>
+              {depts.length === 0 ? (
+                <p className="type-small text-muted-foreground">{t("noDepts")}</p>
+              ) : canManage && selected.status !== "left" ? (
+                <ChipToggleGroup
+                  options={depts.map((d) => ({ id: d.id, label: d.name }))}
+                  selected={deptIds}
+                  onToggle={(id) => setDeptIds((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]))}
+                />
+              ) : (
+                <ReadonlyChips ids={selected.department_ids} label={deptName} empty="—" />
+              )}
+            </DetailSheetSection>
 
-      {/* Permission preview */}
-      <PermissionPreviewModal
-        open={previewing !== null}
-        onClose={() => setPreviewing(null)}
-        title={tPreview("title", {
-          name: previewing?.full_name || previewing?.user_email || "",
-        })}
-        preview={preview.data as PermissionPreview | undefined}
-        loading={preview.isPending}
-        error={preview.isError}
-      />
-    </SectionCard>
+            {canPreview && (
+              <DetailSheetSection title={tPreview("action")}>
+                <PermissionPreviewBody
+                  preview={preview.data as PermissionPreview | undefined}
+                  loading={preview.isPending}
+                  error={preview.isError}
+                />
+              </DetailSheetSection>
+            )}
+          </>
+        )}
+      </DetailSheet>
+    </Card>
   );
 }
 
-function CheckGroup({
-  legend,
+function ReadonlyChips({
+  ids,
+  label,
   empty,
+}: {
+  ids: string[];
+  label: (id: string) => string;
+  empty: string;
+}) {
+  if (ids.length === 0) return <p className="type-small text-muted-foreground">{empty}</p>;
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {ids.map((id) => (
+        <StatusChip key={id} tone="neutral" size="sm">
+          {label(id)}
+        </StatusChip>
+      ))}
+    </div>
+  );
+}
+
+function ChipToggleGroup({
   options,
   selected,
   onToggle,
 }: {
-  legend: string;
-  empty: string;
   options: { id: string; label: string; disabled?: boolean }[];
   selected: string[];
   onToggle: (id: string) => void;
 }) {
   return (
-    <fieldset>
-      <legend className="mb-1.5 text-sm font-semibold text-[var(--text-primary)]">
-        {legend}
-      </legend>
-      {options.length === 0 ? (
-        <p className="text-sm text-[var(--text-muted)]">{empty}</p>
-      ) : (
-        <div className="flex flex-wrap gap-2">
-          {options.map((o) => {
-            const checked = selected.includes(o.id);
-            return (
-              <label
-                key={o.id}
-                className={
-                  "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors " +
-                  (o.disabled
-                    ? "cursor-not-allowed border-dashed border-[var(--border-default)] opacity-55"
-                    : "cursor-pointer ") +
-                  (checked && !o.disabled
-                    ? "border-[var(--brand-primary)] bg-[var(--blue-50)] text-[var(--brand-primary)]"
-                    : "border-[var(--border-default)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)]")
-                }
-              >
-                <input
-                  type="checkbox"
-                  className="size-3.5 rounded border-[var(--border-default)] text-[var(--brand-primary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/40"
-                  checked={checked}
-                  disabled={o.disabled}
-                  onChange={() => onToggle(o.id)}
-                />
-                {o.label}
-              </label>
-            );
-          })}
-        </div>
-      )}
-    </fieldset>
+    <div className="flex flex-wrap gap-2">
+      {options.map((o) => {
+        const checked = selected.includes(o.id);
+        return (
+          <label
+            key={o.id}
+            className={
+              "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors " +
+              (o.disabled
+                ? "cursor-not-allowed border-dashed border-border opacity-55"
+                : "cursor-pointer ") +
+              (checked && !o.disabled
+                ? "border-[var(--brand-primary)] bg-[var(--content-info-soft)] text-[var(--brand-primary)]"
+                : "border-border text-muted-foreground hover:border-border-strong")
+            }
+          >
+            <input
+              type="checkbox"
+              className="size-3.5 rounded border-border text-[var(--brand-primary)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+              checked={checked}
+              disabled={o.disabled}
+              onChange={() => onToggle(o.id)}
+            />
+            {o.label}
+          </label>
+        );
+      })}
+    </div>
   );
 }

@@ -1,10 +1,12 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useTranslations } from "next-intl";
-import { WarningCircle } from "@phosphor-icons/react";
+import { useLocale, useTranslations } from "next-intl";
+import { AlertTriangle } from "lucide-react";
 
-import { Button, EmptyState, useToast } from "@/components/ui";
+import { Button, useToast } from "@/components/ui";
+import { EmptyState, StatusChip } from "@/components/kit";
+import { formatRelativeTime } from "@/lib/format";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 import { ApiError, workflowsApi, type FailedNodeTask } from "@/lib/api";
 
@@ -17,6 +19,7 @@ import { ApiError, workflowsApi, type FailedNodeTask } from "@/lib/api";
  */
 export function FailedNodeTasksPanel({ flowId }: { flowId: string | null }) {
   const t = useTranslations("workflowBuilder");
+  const locale = useLocale();
   const toast = useToast();
   const getMessage = useApiErrorMessage();
   const queryClient = useQueryClient();
@@ -66,21 +69,35 @@ export function FailedNodeTasksPanel({ flowId }: { flowId: string | null }) {
   }
 
   return (
-    <ul className="space-y-2" data-testid="failed-node-tasks">
+    <ul className="space-y-2.5" data-testid="failed-node-tasks">
       {tasks.map((task: FailedNodeTask) => (
         <li
           key={task.id}
-          className="flex items-start gap-3 rounded-xl border border-[var(--brand-red)]/25 bg-[var(--red-50)] px-4 py-3"
+          className="flex items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-sm)]"
           data-testid={`failed-task-${task.id}`}
         >
-          <WarningCircle aria-hidden weight="fill" className="mt-0.5 size-4 shrink-0 text-[var(--brand-red)]" />
+          <span
+            aria-hidden
+            className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg"
+            style={{ background: "var(--content-danger-soft)", color: "var(--content-danger)" }}
+          >
+            <AlertTriangle className="size-4" strokeWidth={1.9} />
+          </span>
           <div className="min-w-0 flex-1 space-y-1">
-            <p className="text-sm font-semibold text-[var(--text-primary)]">
+            <div className="flex flex-wrap items-center gap-2">
+              <StatusChip tone="danger" size="sm">
+                {t("dryRunStepStatus.failed")}
+              </StatusChip>
+              <span className="type-caption text-muted-foreground">
+                {formatRelativeTime(task.created_at, locale)}
+              </span>
+            </div>
+            <p className="type-small font-semibold text-foreground">
               {t("failedNodeLabel", { node: task.node_id })}
             </p>
-            <p className="text-sm text-[var(--text-secondary)]">{task.user_safe_error}</p>
+            <p className="type-small text-muted-foreground">{task.user_safe_error}</p>
           </div>
-          <div className="flex shrink-0 gap-1.5">
+          <div className="flex shrink-0 flex-col gap-1.5 sm:flex-row">
             <Button
               variant="secondary"
               size="sm"

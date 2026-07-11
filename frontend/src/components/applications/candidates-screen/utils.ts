@@ -1,8 +1,6 @@
 import type { ApiListEnvelope, PartnerApplication } from "@/lib/api";
 import type { InfiniteData } from "@tanstack/react-query";
 
-export const MIN_REASON = 20;
-
 /**
  * Client-side refine of the loaded candidate list (ATS-style stage filter),
  * matching the REAL `application.status` vocabulary. `shortlisted` /
@@ -19,46 +17,107 @@ export const STAGE_FILTERS = [
   "hired",
 ] as const;
 
-export const STAGE_CHIP_ACTIVE: Record<string, string> = {
-  all: "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20",
-  submitted: "border-blue-400/30 bg-blue-500 text-white shadow-sm",
-  under_review: "border-amber-400/30 bg-amber-500 text-white shadow-sm",
-  rejected: "border-red-500/30 bg-red-600 text-white shadow-sm",
-  withdrawn: "border-slate-400/30 bg-slate-600 text-white shadow-sm",
-  // v9 Monochrome reserves green for verified/success states.
-  hired: "border-emerald-500/30 bg-emerald-600 text-white shadow-sm",
-};
-
 export type ForJobData = InfiniteData<ApiListEnvelope<PartnerApplication>>;
-
-/**
- * `insightInterviewsActive` / `insightOfferSent` / `insightStrongPipeline`
- * were previously derived from `status === "interview"|"offer"|"shortlisted"`
- * — statuses the backend never emits on `application.status`, so those counts
- * were always zero (dead code). Interview/offer progress isn't present on this
- * list projection (`pipeline.offer` is detail-only), so those insights are
- * retired here rather than faked from unavailable data.
- */
-export type CandidateInsightKey =
-  | "insightReviewPending"
-  | "insightAnonymousPending"
-  | "insightHiresMade";
-
-export function deriveCandidateInsights(
-  rows: PartnerApplication[],
-): CandidateInsightKey[] {
-  const out: CandidateInsightKey[] = [];
-  const submitted = rows.filter((r) => r.status === "submitted").length;
-  const hired = rows.filter((r) => r.status === "hired").length;
-  const anonymous = rows.filter(
-    (r) => r.is_anonymous && r.reveal_status === "none",
-  ).length;
-  if (submitted > 2) out.push("insightReviewPending");
-  if (hired > 0) out.push("insightHiresMade");
-  if (anonymous > 0 && out.length < 2) out.push("insightAnonymousPending");
-  return out.slice(0, 3);
-}
 
 export function nowIso() {
   return new Date().toISOString();
+}
+
+/* --------------------------------- Sorting -------------------------------- */
+
+/**
+ * Triage sort keys. DEFAULT is `needs_action` (NOT best match): sorting a queue
+ * by fit buries fresh/unreviewed candidates and breaks review SLA + fairness.
+ * `best_match` is a SECONDARY sort a recruiter switches to for shortlisting.
+ */
+export const SORT_KEYS = [
+  "needs_action",
+  "newest",
+  "oldest",
+  "best_match",
+  "status",
+] as const;
+
+export type SortKey = (typeof SORT_KEYS)[number];
+
+/** Needs-action bucket: submitted first, then under_review, then decided. */
+function actionBucket(status: string): number {
+  if (status === "submitted") return 0;
+  if (status === "under_review") return 1;
+  return 2; // rejected / withdrawn / hired — decided
+}
+
+/** Stable status grouping order for the "by status" sort. */
+const STATUS_ORDER: Record<string, number> = {
+  submitted: 0,
+  under_review: 1,
+  hired: 2,
+  rejected: 3,
+  withdrawn: 4,
+};
+
+function appliedTime(r: PartnerApplication): number {
+  return new Date(r.applied_at).getTime() || 0;
+}
+
+/** Freshness of the last transition (falls back to applied). */
+function activityTime(r: PartnerApplication): number {
+  return new Date(r.last_status_at ?? r.applied_at).getTime() || 0;
+}
+
+/**
+ * Pure, stable sort of the loaded rows for the given key. Never mutates input.
+ * The returned order is the single source of truth for both the table AND the
+ * drawer's prev/next navigation snapshot.
+ */
+export function sortRows(
+  rows: readonly PartnerApplication[],
+  key: SortKey,
+): PartnerApplication[] {
+  const withIndex = rows.map((row, index) => ({ row, index }));
+  const cmp = (a: PartnerApplication, b: PartnerApplication): number => {
+    switch (key) {
+      case "needs_action": {
+        const ba = actionBucket(a.status);
+        const bb = actionBucket(b.status);
+        if (ba !== bb) return ba - bb;
+        // submitted/under_review: oldest first (protect SLA);
+        // decided: most-recent first.
+        return ba === 2
+          ? activityTime(b) - activityTime(a)
+          : activityTime(a) - activityTime(b);
+      }
+      case "newest":
+        return appliedTime(b) - appliedTime(a);
+      case "oldest":
+        return appliedTime(a) - appliedTime(b);
+      case "best_match": {
+        const sa = a.fit?.score ?? -1;
+        const sb = b.fit?.score ?? -1;
+        if (sb !== sa) return sb - sa; // highest fit first; unscored last
+        return appliedTime(a) - appliedTime(b); // tie-break: oldest first
+      }
+      case "status": {
+        const oa = STATUS_ORDER[a.status] ?? 99;
+        const ob = STATUS_ORDER[b.status] ?? 99;
+        if (oa !== ob) return oa - ob;
+        return appliedTime(b) - appliedTime(a);
+      }
+      default:
+        return 0;
+    }
+  };
+  return withIndex
+    .sort((x, y) => cmp(x.row, y.row) || x.index - y.index)
+    .map((x) => x.row);
+}
+
+/* ---------------------------- Screening answers --------------------------- */
+
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** True when a screening-answer key is an opaque id (no question text to show). */
+export function isOpaqueQuestionKey(key: string): boolean {
+  return UUID_RE.test(key) || /^q?_?\d+$/i.test(key);
 }

@@ -8,7 +8,7 @@ const COL_PLATFORM_LINKS = [
   { key: "jobs" as const, href: "/jobs" },
   { key: "companies" as const, href: "/companies" },
   { key: "events" as const, href: "/events" },
-  { key: "careerExplore" as const, href: "/careers" },
+  { key: "careerExplore" as const, href: "/career-explore" },
 ] as const;
 
 const COL_STUDENT_LINKS = [

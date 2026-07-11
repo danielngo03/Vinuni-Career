@@ -42,20 +42,17 @@ export function MemberMultiSelect({
 
   return (
     <fieldset>
-      <legend className="mb-1.5 text-sm font-semibold text-[var(--text-primary)]">
+      <legend className="mb-1.5 type-small font-semibold text-foreground">
         {t("assigneesLabel")}
       </legend>
       {query.isPending ? (
-        <div
-          className="h-16 animate-pulse rounded-xl bg-[var(--bg-muted)]"
-          aria-hidden
-        />
+        <div className="h-16 animate-skeleton rounded-lg bg-[var(--bg-muted)]" aria-hidden />
       ) : query.isError || members.length === 0 ? (
-        <p className="rounded-lg border border-white/50 bg-white/70 px-3 py-2 text-xs text-[var(--text-secondary)] backdrop-blur-sm">
+        <p className="rounded-lg border border-border bg-[var(--bg-subtle)] px-3 py-2 type-caption text-muted-foreground">
           {t("noAssignableMembers")}
         </p>
       ) : (
-        <ul className="max-h-44 space-y-1 overflow-y-auto rounded-xl border border-white/60 bg-white/72 p-1.5">
+        <ul className="max-h-44 space-y-1 overflow-y-auto rounded-lg border border-border bg-[var(--bg-subtle)] p-1.5">
           {members.map((m) => {
             const id = `${idBase}-asg-${m.user_id}`;
             const checked = selected.includes(m.user_id as string);
@@ -63,7 +60,7 @@ export function MemberMultiSelect({
               <li key={m.id}>
                 <label
                   htmlFor={id}
-                  className="flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm hover:bg-white/80 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--brand-primary)]/40"
+                  className="flex cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-1.5 type-small hover:bg-card has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--field-focus-border)]"
                 >
                   <input
                     id={id}
@@ -72,7 +69,7 @@ export function MemberMultiSelect({
                     onChange={() => toggle(m.user_id as string)}
                     className="size-4 accent-[var(--brand-primary)]"
                   />
-                  <span className="min-w-0 truncate text-[var(--text-primary)]">
+                  <span className="min-w-0 truncate text-foreground">
                     {m.full_name?.trim() || m.user_email}
                   </span>
                 </label>
@@ -81,9 +78,7 @@ export function MemberMultiSelect({
           })}
         </ul>
       )}
-      <p className="mt-1 text-xs text-[var(--text-muted)]">
-        {t("assigneesHelp")}
-      </p>
+      <p className="mt-1 type-caption text-muted-foreground">{t("assigneesHelp")}</p>
     </fieldset>
   );
 }

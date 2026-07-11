@@ -1,70 +1,82 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { useTranslations } from "next-intl";
+import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  CheckCircle,
-  LightbulbFilament,
-  MagnifyingGlass,
-  ProhibitInset,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
-  Student,
-  UserCircle,
-  UserGear,
-  WarningCircle,
-  XCircle,
-} from "@phosphor-icons/react";
-import {
-  Button,
-  EmptyState,
-  Input,
-  Skeleton,
-  useToast,
-} from "@/components/ui";
+  Ban,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  ShieldCheck,
+  UserCog,
+  Users,
+} from "lucide-react";
+import { Button, useToast, SegmentedControl } from "@/components/ui";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { PageHeader } from "@/components/layout/page-header";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  DataTable,
+  type ColumnDef,
+  DetailSheet,
+  DetailSheetSection,
+  DetailRow,
+  EmptyState,
+  FilterBar,
+  KpiRow,
+  KpiTile,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import { ApiError, adminUsersApi } from "@/lib/api";
 import type { AdminUserRow } from "@/lib/api/admin-users";
-import { cn } from "@/lib/utils";
+import { formatDateTime } from "@/lib/format";
 
 const PAGE_SIZE = 30;
 
-const PERSONA_ICONS: Record<string, React.ElementType> = {
-  student: Student,
-  partner_member: UserGear,
-  university_staff: UserCircle,
+const PERSONA_CHIP: Record<string, ChipTone> = {
+  student: "indigo",
+  partner_member: "violet",
+  university_staff: "teal",
 };
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
+  return (parts[0]![0]! + parts[parts.length - 1]![0]!).toUpperCase();
+}
 
 export function UniversityUsersScreen() {
   const t = useTranslations("universityUsers");
   const tc = useTranslations("common");
   const tStates = useTranslations("states");
+  const locale = useLocale();
   const toast = useToast();
   const qc = useQueryClient();
 
-  const [persona, setPersona] = useState<string>("");
-  const [q, setQ] = useState("");
-  const [debouncedQ, setDebouncedQ] = useState("");
-  const [page, setPage] = useState(1);
+  const [persona, setPersona] = React.useState<string>("");
+  const [q, setQ] = React.useState("");
+  const [debouncedQ, setDebouncedQ] = React.useState("");
+  const [page, setPage] = React.useState(1);
+  const [selected, setSelected] = React.useState<AdminUserRow | null>(null);
 
-  const handleSearchChange = useCallback(
-    (val: string) => {
-      setQ(val);
-      const timer = setTimeout(() => {
-        setDebouncedQ(val);
-        setPage(1);
-      }, 400);
-      return () => clearTimeout(timer);
-    },
-    []
-  );
-
-  const queryKey = ["admin", "users", { persona, q: debouncedQ, page }] as const;
+  // Debounce the search box; reset to page 1 on new term.
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQ(q);
+      setPage(1);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [q]);
 
   const query = useQuery({
-    queryKey,
+    queryKey: ["admin", "users", { persona, q: debouncedQ, page }] as const,
     queryFn: () =>
       adminUsersApi.listUsers({
         persona: persona || undefined,
@@ -78,8 +90,9 @@ export function UniversityUsersScreen() {
 
   const suspendMut = useMutation({
     mutationFn: (userId: string) => adminUsersApi.suspendUser(userId),
-    onSuccess: () => {
+    onSuccess: (updated) => {
       void qc.invalidateQueries({ queryKey: ["admin", "users"] });
+      setSelected((cur) => (cur && cur.id === updated.id ? { ...cur, is_active: updated.is_active } : cur));
       toast.show({ tone: "success", title: t("suspendSuccess") });
     },
     onError: () => toast.show({ tone: "error", title: t("suspendError") }),
@@ -87,320 +100,295 @@ export function UniversityUsersScreen() {
 
   const unsuspendMut = useMutation({
     mutationFn: (userId: string) => adminUsersApi.unsuspendUser(userId),
-    onSuccess: () => {
+    onSuccess: (updated) => {
       void qc.invalidateQueries({ queryKey: ["admin", "users"] });
+      setSelected((cur) => (cur && cur.id === updated.id ? { ...cur, is_active: updated.is_active } : cur));
       toast.show({ tone: "success", title: t("unsuspendSuccess") });
     },
     onError: () => toast.show({ tone: "error", title: t("unsuspendError") }),
   });
+
+  const personaLabel = React.useCallback(
+    (p: string) =>
+      p === "student"
+        ? t("personaStudent")
+        : p === "partner_member"
+          ? t("personaPartner")
+          : p === "university_staff"
+            ? t("personaStaff")
+            : p,
+    [t],
+  );
+
+  const data = query.data;
+  const items = data?.items ?? [];
+  const totalPages = data?.total_pages ?? 1;
+  const total = data?.total ?? 0;
+  const busy = suspendMut.isPending || unsuspendMut.isPending;
+
+  const pageActive = items.filter((u) => u.is_active).length;
+  const pageSuspended = items.filter((u) => !u.is_active).length;
+  const pageUnverified = items.filter((u) => !u.email_verified).length;
+
+  const columns: ColumnDef<AdminUserRow, unknown>[] = [
+    {
+      accessorKey: "full_name",
+      header: t("colUser"),
+      cell: ({ row }) => {
+        const u = row.original;
+        const name = u.full_name || u.email;
+        return (
+          <div className="flex min-w-0 items-center gap-3">
+            <Avatar size="sm" className="size-8">
+              <AvatarFallback className="bg-[var(--viz-indigo-soft)] text-[0.6875rem] font-semibold text-[var(--viz-indigo)]">
+                {initials(name)}
+              </AvatarFallback>
+            </Avatar>
+            <div className="min-w-0">
+              <p className="truncate font-semibold text-foreground">{name}</p>
+              <p className="truncate type-caption text-muted-foreground">{u.email}</p>
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "persona",
+      header: t("colPersona"),
+      cell: ({ row }) => (
+        <StatusChip tone={PERSONA_CHIP[row.original.persona] ?? "neutral"}>
+          {personaLabel(row.original.persona)}
+        </StatusChip>
+      ),
+    },
+    {
+      accessorKey: "is_active",
+      header: t("colStatus"),
+      cell: ({ row }) => {
+        const u = row.original;
+        return (
+          <div className="flex flex-wrap items-center gap-1.5">
+            <StatusChip tone={u.is_active ? "success" : "danger"} dot>
+              {u.is_active ? t("active") : t("suspended")}
+            </StatusChip>
+            {u.email_verified && (
+              <StatusChip tone="neutral" size="sm">
+                <ShieldCheck className="size-3" strokeWidth={2} />
+                {t("verified")}
+              </StatusChip>
+            )}
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "created_at",
+      header: t("colJoined"),
+      cell: ({ row }) => (
+        <span className="whitespace-nowrap type-small text-muted-foreground">
+          {row.original.created_at ? formatDateTime(row.original.created_at, locale) : "—"}
+        </span>
+      ),
+    },
+  ];
+
+  const header = <PageHeader title={t("title")} subtitle={t("subtitle")} />;
 
   if (query.isError && query.error instanceof ApiError) {
     const err = query.error;
     if (err.isPermissionError || err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("title")} description={t("subtitle")} />
+          {header}
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
             title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
             description={err.isPermissionError ? tStates("permissionBody") : tStates("authBody")}
           />
         </>
       );
     }
-    return (
-      <>
-        <PageHeader title={t("title")} description={t("subtitle")} />
-        <EmptyState
-          kind="error"
-          icon={WarningCircle}
-          title={tStates("errorTitle")}
-          description={tStates("errorBody")}
-          action={
-            <Button variant="secondary" onClick={() => void query.refetch()}>
-              {tc("retry")}
-            </Button>
-          }
-        />
-      </>
-    );
   }
 
-  const data = query.data;
-  const items = data?.items ?? [];
-  const totalPages = data?.total_pages ?? 1;
-  const total = data?.total ?? 0;
+  const isHardError =
+    query.isError &&
+    !(query.error instanceof ApiError && (query.error.isPermissionError || query.error.isAuthError));
 
   return (
-    <div className="flex flex-col gap-6">
-      <PageHeader title={t("title")} description={t("subtitle")} />
+    <>
+      {header}
 
-      {/* ── Filters ── */}
-      <div className="rounded-2xl border border-[var(--border-default)] bg-white p-4 shadow-[0_2px_12px_rgba(11,34,57,0.05)] ">
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="relative flex-1 min-w-48">
-            <MagnifyingGlass
-              aria-hidden
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-[var(--text-muted)]"
-            />
-            <Input
-              value={q}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              placeholder={t("searchPlaceholder")}
-              className="pl-9"
-              aria-label={t("searchPlaceholder")}
-            />
-          </div>
-          {[
-            { value: "", label: t("allPersonas"), active: "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20" },
-            { value: "student", label: t("personaStudent"), active: "border-teal-500/30 bg-teal-600 text-white shadow-sm" },
-            { value: "partner_member", label: t("personaPartner"), active: "border-violet-500/30 bg-violet-600 text-white shadow-sm" },
-            { value: "university_staff", label: t("personaStaff"), active: "border-[var(--amber-500)]/30 bg-[var(--amber-600)] text-white shadow-sm" },
-          ].map(({ value, label, active }) => (
-            <button
-              key={value}
-              onClick={() => { setPersona(value); setPage(1); }}
-              aria-pressed={persona === value}
-              className={cn(
-                "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
-                persona === value
-                  ? active
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
-              )}
-            >
-              {label}
-            </button>
-          ))}
-          {!query.isPending && (
-            <span className="ml-auto shrink-0 rounded-full bg-[var(--brand-primary)]/10 px-3 py-1 text-xs font-semibold text-[var(--brand-primary)]">
-              {t("totalCount", { count: total })}
-            </span>
-          )}
-        </div>
-      </div>
+      <div className="space-y-4">
+        <KpiRow cols={4}>
+          <KpiTile label={t("kpiTotal")} value={query.isPending ? "—" : String(total)} icon={Users} />
+          <KpiTile
+            label={t("kpiActive")}
+            value={query.isPending ? "—" : String(pageActive)}
+            icon={CheckCircle2}
+            hint={t("kpiPageHint")}
+          />
+          <KpiTile
+            label={t("kpiSuspended")}
+            value={query.isPending ? "—" : String(pageSuspended)}
+            icon={Ban}
+            hint={t("kpiPageHint")}
+          />
+          <KpiTile
+            label={t("kpiUnverified")}
+            value={query.isPending ? "—" : String(pageUnverified)}
+            icon={UserCog}
+            hint={t("kpiPageHint")}
+          />
+        </KpiRow>
 
-      {/* ── AI Platform Overview panel ── */}
-      {!query.isPending && items.length > 0 && (() => {
-        const suspendedCount = items.filter((u) => !u.is_active).length;
-        const unverifiedCount = items.filter((u) => !u.email_verified).length;
-        const insights: string[] = [];
-        insights.push(t("aiInsightTotal", { count: total }));
-        if (suspendedCount > 0) insights.push(t("aiInsightSuspended", { count: suspendedCount }));
-        if (unverifiedCount > 0) insights.push(t("aiInsightUnverified", { count: unverifiedCount }));
-        if (suspendedCount === 0 && unverifiedCount === 0) insights.push(t("aiInsightAllClear"));
-        return (
-          <div className={cn(
-            "rounded-2xl border p-4",
-            "border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 ",
-          )}>
-            <p className="mb-2.5 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              {t("aiInsightsTitle")}
-            </p>
-            <ul className="space-y-1.5">
-              {insights.map((text, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden weight="duotone" className="mt-px size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                  {text}
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })()}
+        <Card>
+          <CardHeader>
+            <div>
+              <CardTitle>{t("title")}</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <FilterBar search={{ value: q, onChange: setQ, placeholder: t("searchPlaceholder") }}>
+              <SegmentedControl
+                ariaLabel={t("personaFilter")}
+                value={persona}
+                onValueChange={(v) => {
+                  setPersona(v);
+                  setPage(1);
+                }}
+                size="sm"
+                options={[
+                  { value: "", label: t("allPersonas") },
+                  { value: "student", label: t("personaStudent") },
+                  { value: "partner_member", label: t("personaPartner") },
+                  { value: "university_staff", label: t("personaStaff") },
+                ]}
+              />
+            </FilterBar>
 
-      {/* ── User list ── */}
-      <div className="flex flex-col gap-2">
-        {query.isPending
-          ? Array.from({ length: 8 }).map((_, i) => (
-              <Skeleton key={i} className="h-16 w-full rounded-xl" />
-            ))
-          : items.length === 0
-            ? (
+            {isHardError ? (
               <EmptyState
-                kind="empty"
-                icon={UserCircle}
-                title={t("emptyTitle")}
-                description={t("emptyBody")}
+                kind="error"
+                title={tStates("errorTitle")}
+                description={tStates("errorBody")}
+                action={
+                  <Button variant="secondary" onClick={() => void query.refetch()}>
+                    {tc("retry")}
+                  </Button>
+                }
               />
+            ) : (
+              <>
+                <DataTable
+                  columns={columns}
+                  data={items}
+                  getRowId={(u) => u.id}
+                  loading={query.isPending}
+                  onRowClick={(u) => setSelected(u)}
+                  activeRowId={selected?.id}
+                  empty={<EmptyState kind="empty" title={t("emptyTitle")} description={t("emptyBody")} />}
+                />
+
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      disabled={page <= 1}
+                      onClick={() => setPage((p) => p - 1)}
+                      aria-label={tc("tablePrev")}
+                      className="inline-flex size-8 items-center justify-center rounded-lg border border-border text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+                    >
+                      <ChevronLeft className="size-4" strokeWidth={1.8} />
+                    </button>
+                    <span className="type-small tabular-nums text-muted-foreground">
+                      {t("pageOf", { page, totalPages })}
+                    </span>
+                    <button
+                      type="button"
+                      disabled={page >= totalPages}
+                      onClick={() => setPage((p) => p + 1)}
+                      aria-label={tc("tableNext")}
+                      className="inline-flex size-8 items-center justify-center rounded-lg border border-border text-muted-foreground outline-none transition-colors hover:bg-[var(--bg-subtle)] hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40 focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]"
+                    >
+                      <ChevronRight className="size-4" strokeWidth={1.8} />
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* User detail drawer */}
+      <DetailSheet
+        open={selected !== null}
+        onClose={() => setSelected(null)}
+        title={selected?.full_name || selected?.email || ""}
+        subtitle={selected?.full_name ? selected.email : undefined}
+        closeLabel={tc("close")}
+        avatar={
+          <Avatar size="lg" className="size-10">
+            <AvatarFallback className="bg-[var(--viz-indigo-soft)] text-sm font-semibold text-[var(--viz-indigo)]">
+              {initials(selected?.full_name || selected?.email || "?")}
+            </AvatarFallback>
+          </Avatar>
+        }
+        status={
+          selected ? (
+            <>
+              <StatusChip tone={selected.is_active ? "success" : "danger"} dot>
+                {selected.is_active ? t("active") : t("suspended")}
+              </StatusChip>
+              <StatusChip tone={PERSONA_CHIP[selected.persona] ?? "neutral"}>
+                {personaLabel(selected.persona)}
+              </StatusChip>
+            </>
+          ) : undefined
+        }
+        footer={
+          selected ? (
+            selected.is_active ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-[var(--content-danger)]"
+                loading={suspendMut.isPending}
+                disabled={busy}
+                onClick={() => suspendMut.mutate(selected.id)}
+              >
+                <Ban className="size-4" strokeWidth={1.8} />
+                {t("suspend")}
+              </Button>
+            ) : (
+              <Button
+                variant="primary"
+                size="sm"
+                loading={unsuspendMut.isPending}
+                disabled={busy}
+                onClick={() => unsuspendMut.mutate(selected.id)}
+              >
+                <RotateCcw className="size-4" strokeWidth={1.8} />
+                {t("unsuspend")}
+              </Button>
             )
-            : items.map((user) => (
-              <UserRow
-                key={user.id}
-                user={user}
-                onSuspend={() => suspendMut.mutate(user.id)}
-                onUnsuspend={() => unsuspendMut.mutate(user.id)}
-                busy={suspendMut.isPending || unsuspendMut.isPending}
-                t={t}
-              />
-            ))}
-      </div>
-
-      {/* ── Pagination ── */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-3 pt-2">
-          <Button
-            variant="secondary"
-            size="sm"
-            disabled={page <= 1}
-            onClick={() => setPage((p) => p - 1)}
-          >
-            {tc("previous")}
-          </Button>
-          <span className="text-xs text-[var(--text-muted)]">
-            {t("pageOf", { page, totalPages })}
-          </span>
-          <Button
-            variant="secondary"
-            size="sm"
-            disabled={page >= totalPages}
-            onClick={() => setPage((p) => p + 1)}
-          >
-            {tc("next")}
-          </Button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* ─── User row ──────────────────────────────────────────────────────────── */
-
-function UserRow({
-  user,
-  onSuspend,
-  onUnsuspend,
-  busy,
-  t,
-}: {
-  user: AdminUserRow;
-  onSuspend: () => void;
-  onUnsuspend: () => void;
-  busy: boolean;
-  t: ReturnType<typeof useTranslations>;
-}) {
-  const PersonaIcon = PERSONA_ICONS[user.persona] ?? UserCircle;
-
-  return (
-    <div
-      className={cn(
-        "flex items-center gap-3 rounded-xl border px-4 py-3 transition-all",
-        user.is_active
-          ? "border-[var(--border-default)] bg-white"
-          : "border-red-200/60 bg-red-50/40"
-      )}
-    >
-      <PersonaIcon
-        aria-hidden
-        weight="duotone"
-        className={cn(
-          "size-9 shrink-0 rounded-full p-1.5",
-          user.is_active
-            ? "bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]"
-            : "bg-red-100 text-red-400"
+          ) : undefined
+        }
+      >
+        {selected && (
+          <DetailSheetSection title={t("detailTitle")}>
+            <dl className="space-y-0.5">
+              <DetailRow label={t("labelEmail")}>{selected.email}</DetailRow>
+              <DetailRow label={t("labelPersona")}>{personaLabel(selected.persona)}</DetailRow>
+              <DetailRow label={t("labelOrg")}>{selected.org_id ?? t("noOrg")}</DetailRow>
+              <DetailRow label={t("labelJoined")}>
+                {selected.created_at ? formatDateTime(selected.created_at, locale) : "—"}
+              </DetailRow>
+              <DetailRow label={t("labelVerified")}>{selected.email_verified ? t("yes") : t("no")}</DetailRow>
+            </dl>
+          </DetailSheetSection>
         )}
-      />
-
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="truncate font-semibold text-sm text-[var(--text-primary)]">
-            {user.full_name || user.email}
-          </span>
-          {user.full_name && (
-            <span className="truncate text-xs text-[var(--text-muted)]">
-              {user.email}
-            </span>
-          )}
-          {/* Active / Suspended badge */}
-          {user.is_active ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-green-100/80 px-2 py-0.5 text-[10px] font-semibold text-green-700">
-              <CheckCircle aria-hidden weight="fill" className="size-3" />
-              {t("active")}
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1 rounded-full bg-red-100/80 px-2 py-0.5 text-[10px] font-semibold text-red-700">
-              <XCircle aria-hidden weight="fill" className="size-3" />
-              {t("suspended")}
-            </span>
-          )}
-          {/* Verified badge */}
-          {user.email_verified && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-blue-100/60 px-2 py-0.5 text-[10px] font-medium text-blue-700">
-              {t("verified")}
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-2 mt-0.5">
-          <PersonaBadge persona={user.persona} t={t} />
-          {user.created_at && (
-            <span className="text-[10px] text-[var(--text-muted)]">
-              {new Date(user.created_at).toLocaleDateString()}
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Action */}
-      <div className="shrink-0">
-        {user.is_active ? (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onSuspend}
-            disabled={busy}
-            aria-label={t("suspendAria", { email: user.email })}
-            className="text-red-600 hover:bg-red-50"
-          >
-            <ProhibitInset aria-hidden weight="duotone" className="size-4 mr-1" />
-            {t("suspend")}
-          </Button>
-        ) : (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onUnsuspend}
-            disabled={busy}
-            aria-label={t("unsuspendAria", { email: user.email })}
-            className="text-green-700 hover:bg-green-50"
-          >
-            <CheckCircle aria-hidden weight="duotone" className="size-4 mr-1" />
-            {t("unsuspend")}
-          </Button>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function PersonaBadge({
-  persona,
-  t,
-}: {
-  persona: string;
-  t: ReturnType<typeof useTranslations>;
-}) {
-  const label =
-    persona === "student"
-      ? t("personaStudent")
-      : persona === "partner_member"
-        ? t("personaPartner")
-        : persona === "university_staff"
-          ? t("personaStaff")
-          : persona;
-
-  const cls =
-    persona === "student"
-      ? "bg-purple-100/60 text-purple-700"
-      : persona === "partner_member"
-        ? "bg-blue-100/60 text-blue-700"
-        : "bg-teal-100/60 text-teal-700";
-
-  return (
-    <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-medium ${cls}`}>
-      {label}
-    </span>
+      </DetailSheet>
+    </>
   );
 }

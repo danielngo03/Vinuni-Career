@@ -314,20 +314,17 @@ export function PublicEventBoard() {
             if (featuredCount > 0) insights.push(t("aiInsightFeatured", { count: featuredCount }));
             if (insights.length === 0) return null;
             return (
-              <div className={cn(
-                "mb-6 rounded-[14px] border p-4",
-                "border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white",
-              )}>
+              <div className="mb-6 rounded-[14px] border border-[var(--border-default)] bg-[var(--surface-secondary)] p-4">
                 <p className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                    <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg icon-chip-neutral shadow-sm">
+                    <Sparkle aria-hidden weight="duotone" className="size-3.5" />
                   </span>
                   {t("aiBoardInsightsTitle")}
                 </p>
                 <ul className="space-y-1.5">
                   {insights.map((s, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                      <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]" />
+                      <LightbulbFilament aria-hidden weight="duotone" className="mt-0.5 size-4 shrink-0 text-[var(--text-muted)]" />
                       {s}
                     </li>
                   ))}

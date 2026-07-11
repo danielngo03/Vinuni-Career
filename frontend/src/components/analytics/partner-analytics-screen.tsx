@@ -1,140 +1,115 @@
 "use client";
 
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import {
-  ArrowClockwise,
-  Briefcase,
-  ChartBar,
-  ChartLine,
-  Trophy,
-  WarningCircle,
-  Users,
-  TrendUp,
-  TrendDown,
-  Sparkle,
-  SealCheck,
-  LightbulbFilament,
-} from "@phosphor-icons/react";
+  Activity,
+  Award,
+  BarChart3,
+  CalendarRange,
+  Clock,
+  Download,
+  Layers,
+  ListChecks,
+  MessagesSquare,
+  Target,
+} from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { Button, EmptyState, Skeleton } from "@/components/ui";
-import { PageHeader } from "@/components/layout/page-header";
-import { dashboardsApi, type AnalyticsMonthlyPoint, type PartnerAnalytics } from "@/lib/api";
+import { Button } from "@/components/ui";
+import {
+  AreaChart,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+  DataTable,
+  type ColumnDef,
+  EmptyState,
+  FunnelChart,
+  HorizontalBars,
+  type HorizontalBarDatum,
+  KpiRow,
+  KpiTile,
+  type KpiDelta,
+  PageHeader,
+} from "@/components/kit";
+import { dashboardsApi, ApiError } from "@/lib/api";
+import type {
+  AnalyticsMonthlyPoint,
+  AnalyticsTopJob,
+  PartnerAnalytics,
+  PartnerRecruitingFunnel,
+  RecruitingStageOutcome,
+} from "@/lib/api/dashboards";
 
-const ANALYTICS_KEY = ["dashboards", "partner", "analytics"] as const;
+const nf = new Intl.NumberFormat();
 
-/** Funnel stage color map using design tokens. */
-const FUNNEL_COLOR: Record<string, string> = {
-  submitted: "bg-[var(--brand-primary)]",
-  under_review: "bg-[var(--brand-primary)]/80",
-  shortlisted: "bg-[var(--teal-600)]",
-  interview: "bg-emerald-500",
-  offer: "bg-emerald-600",
-  hired: "bg-emerald-700",
-  rejected: "bg-[var(--brand-red)]/70",
-  withdrawn: "bg-[var(--text-muted)]/50",
-};
+type RangeKey = "30" | "90" | "180" | "365" | "all";
+const RANGES: RangeKey[] = ["30", "90", "180", "365", "all"];
 
-function formatMonth(iso: string): string {
-  if (!iso || iso.length < 7) return iso;
-  const [year, month] = iso.split("-");
-  const d = new Date(Number(year), Number(month) - 1, 1);
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+function rangeToParams(range: RangeKey): { from?: string; to?: string } {
+  if (range === "all") return {};
+  const days = Number(range);
+  const to = new Date();
+  const from = new Date();
+  from.setDate(from.getDate() - days);
+  return { from: from.toISOString().slice(0, 10), to: to.toISOString().slice(0, 10) };
 }
 
-interface InsightEntry {
-  key: string;
-  values?: Record<string, string | number>;
+function trendDelta(points: AnalyticsMonthlyPoint[]): KpiDelta | undefined {
+  if (points.length < 2) return undefined;
+  const last = points[points.length - 1]!.count;
+  const prev = points[points.length - 2]!.count;
+  if (prev === 0) return undefined;
+  const pct = Math.round(((last - prev) / prev) * 100);
+  return {
+    value: `${pct > 0 ? "+" : ""}${pct}%`,
+    direction: pct > 0 ? "up" : pct < 0 ? "down" : "flat",
+    good: pct >= 0,
+  };
 }
 
-/** Derive structured hiring insights from funnel and trend data. */
-function deriveInsights(data: PartnerAnalytics): InsightEntry[] {
-  const insights: InsightEntry[] = [];
-  const byStatus = Object.fromEntries(data.funnel.map((f) => [f.status, f.count]));
-  const submitted = byStatus.submitted ?? 0;
-  const shortlisted = byStatus.shortlisted ?? 0;
-  const hired = byStatus.hired ?? 0;
-  const rejected = byStatus.rejected ?? 0;
-  const trend = data.monthly_trend;
+/* -------------------------------------------------------------------------- */
+/* Screen                                                                      */
+/* -------------------------------------------------------------------------- */
 
-  if (submitted > 0) {
-    const shortlistRate = shortlisted / submitted;
-    if (shortlistRate < 0.15) {
-      insights.push({ key: "insightLowShortlist" });
-    } else if (shortlistRate > 0.5) {
-      insights.push({ key: "insightHighShortlist" });
-    }
-  }
-
-  if (submitted > 0 && hired > 0) {
-    const hireRate = Math.round((hired / submitted) * 1000) / 10;
-    insights.push({
-      key: hireRate < 5 ? "insightConversionLow" : "insightConversionHigh",
-      values: { rate: hireRate },
-    });
-  }
-
-  if (rejected > 0 && submitted > 0 && rejected / submitted > 0.6) {
-    insights.push({ key: "insightHighRejection" });
-  }
-
-  if (trend.length >= 2) {
-    const last = trend[trend.length - 1]?.count ?? 0;
-    const prev = trend[trend.length - 2]?.count ?? 0;
-    if (last > prev * 1.3) {
-      insights.push({ key: "insightTrendUp" });
-    } else if (last < prev * 0.7) {
-      insights.push({ key: "insightTrendDown" });
-    }
-  }
-
-  const topJob = data.top_jobs[0];
-  if (topJob && topJob.application_count > 20) {
-    insights.push({ key: "insightTopJob", values: { title: topJob.title, count: topJob.application_count } });
-  }
-
-  if (insights.length === 0) {
-    insights.push({ key: "insightNoData" });
-  }
-
-  return insights.slice(0, 3);
-}
-
+/**
+ * Partner recruiting analytics (v10). Wires the real analytics projections into
+ * the locked kit: KPI row, recruiting funnel (with step conversion), per-stage
+ * outcomes, time-to-hire, applications trend, source attribution and a top-jobs
+ * table. The richer funnel/stage/time metrics come from the §6 recruiting-funnel
+ * read; if that read is unavailable the funnel degrades to the base application
+ * funnel and the time-based metrics show an honest "not enough data" — never a
+ * fabricated number. Charts carry text/table alternatives for screen readers.
+ */
 export function PartnerAnalyticsScreen() {
   const t = useTranslations("analytics");
-  const tc = useTranslations("common");
   const tStates = useTranslations("states");
+  const [range, setRange] = React.useState<RangeKey>("90");
 
-  const query = useQuery({
-    queryKey: ANALYTICS_KEY,
+  const baseQ = useQuery({
+    queryKey: ["dashboard", "partner", "analytics"],
     queryFn: () => dashboardsApi.partnerAnalytics(),
     staleTime: 2 * 60 * 1000,
     retry: false,
   });
 
-  const data = query.data;
+  const funnelQ = useQuery({
+    queryKey: ["dashboard", "partner", "recruiting-funnel", range],
+    queryFn: () => dashboardsApi.partnerRecruitingFunnel(rangeToParams(range)),
+    staleTime: 2 * 60 * 1000,
+    retry: false,
+  });
 
-  const maxFunnel = data
-    ? Math.max(...data.funnel.map((f) => f.count), 1)
-    : 1;
-  const maxMonthly = data
-    ? Math.max(...data.monthly_trend.map((m) => m.count), 1)
-    : 1;
-
-  // Summary stats derived from funnel data
-  const totalApplications = data
-    ? data.funnel.find((f) => f.status === "submitted")?.count ?? data.funnel.reduce((s, f) => s + f.count, 0)
-    : undefined;
-  const hiredCount = data?.funnel.find((f) => f.status === "hired")?.count;
-  const shortlistedCount = data?.funnel.find((f) => f.status === "shortlisted")?.count;
-  const trendPeak = data?.monthly_trend.length
-    ? Math.max(...data.monthly_trend.map((m) => m.count))
-    : undefined;
-  const trendLast = data?.monthly_trend.at(-1)?.count;
-  const trendPrev = data?.monthly_trend.at(-2)?.count;
-  const isTrendUp = trendLast !== undefined && trendPrev !== undefined && trendLast > trendPrev;
-
-  const insights = data ? deriveInsights(data) : [];
+  const opsQ = useQuery({
+    queryKey: ["dashboard", "partner", "ops"],
+    queryFn: () => dashboardsApi.partnerOps(),
+    staleTime: 2 * 60 * 1000,
+    retry: false,
+  });
 
   const STATUS_LABELS: Record<string, string> = {
     submitted: t("statusLabels.submitted"),
@@ -147,341 +122,636 @@ export function PartnerAnalyticsScreen() {
     withdrawn: t("statusLabels.withdrawn"),
   };
 
-  return (
-    <>
-      <PageHeader title={t("title")} description={t("subtitle")} />
+  const header = (
+    <PageHeaderRow
+      title={t("title")}
+      subtitle={t("subtitle")}
+      range={range}
+      onRange={setRange}
+      onExport={() => exportCsv(baseQ.data, t("exportFilename"))}
+      canExport={!!baseQ.data}
+      rangeLabel={t("range.label")}
+      rangeText={(r) => t(`range.${r === "all" ? "all" : `d${r}`}`)}
+      exportLabel={t("export")}
+    />
+  );
 
-      {query.isPending && <AnalyticsSkeleton />}
+  /* ---- Permission / auth / error on the base read ---- */
+  if (baseQ.isError && baseQ.error instanceof ApiError) {
+    const err = baseQ.error;
+    if (err.isPermissionError || err.isAuthError) {
+      return (
+        <>
+          {header}
+          <EmptyState
+            kind={err.isPermissionError ? "permission" : "auth"}
+            title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
+            description={err.isPermissionError ? tStates("permissionBody") : tStates("authBody")}
+          />
+        </>
+      );
+    }
+  }
 
-      {query.isError && (
+  if (baseQ.isPending) {
+    return (
+      <>
+        {header}
+        <AnalyticsSkeleton />
+      </>
+    );
+  }
+
+  if (baseQ.isError || !baseQ.data) {
+    return (
+      <>
+        {header}
         <EmptyState
           kind="error"
-          icon={WarningCircle}
           title={tStates("errorTitle")}
           description={tStates("errorBody")}
           action={
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => void query.refetch()}
-            >
-              <ArrowClockwise aria-hidden weight="bold" className="size-4" />
-              {tc("retry")}
+            <Button variant="secondary" onClick={() => void baseQ.refetch()}>
+              {t("retry")}
             </Button>
           }
         />
-      )}
+      </>
+    );
+  }
 
-      {data && (
-        <div className="space-y-8">
-          {/* Summary stat tiles */}
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <StatTile
-              label={t("statTotalApplications")}
-              value={totalApplications}
-              icon={<Users aria-hidden weight="duotone" className="size-5 text-white" />}
-              iconBg="icon-chip-primary"
-            />
-            <StatTile
-              label={t("statShortlisted")}
-              value={shortlistedCount}
-              icon={<SealCheck aria-hidden weight="duotone" className="size-5 text-white" />}
-              iconBg="icon-chip-success"
-            />
-            <StatTile
-              label={t("statHired")}
-              value={hiredCount}
-              icon={<Trophy aria-hidden weight="duotone" className="size-5 text-white" />}
-              iconBg="icon-chip-success"
-            />
-            <StatTile
-              label={t("statMonthlyPeak")}
-              value={trendPeak}
-              icon={
-                isTrendUp
-                  ? <TrendUp aria-hidden weight="duotone" className="size-5 text-white" />
-                  : <TrendDown aria-hidden weight="duotone" className="size-5 text-white" />
-              }
-              iconBg={isTrendUp ? "icon-chip-info" : "icon-chip-warning"}
-            />
-          </div>
+  const base = baseQ.data;
+  const byStatus = Object.fromEntries(base.funnel.map((f) => [f.status, f.count]));
+  const applications = byStatus.submitted ?? base.funnel.reduce((s, f) => s + f.count, 0);
+  const interview = byStatus.interview ?? 0;
+  const offer = byStatus.offer ?? 0;
+  const hired = byStatus.hired ?? 0;
+  const interviewRate = applications > 0 ? Math.round((interview / applications) * 100) : null;
+  const offerRate = applications > 0 ? Math.round((offer / applications) * 100) : null;
 
-          {/* AI Hiring Insights */}
-          <section
-            aria-labelledby="ai-insights-heading"
-            className="rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-5 shadow-[0_2px_16px_rgba(11,34,57,0.06)] "
-          >
-            <h2
-              id="ai-insights-heading"
-              className="mb-4 flex items-center gap-2 text-base font-bold text-[var(--text-primary)]"
-            >
-              <span className="icon-chip-success flex size-8 shrink-0 items-center justify-center rounded-xl shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-4.5 text-white" />
-              </span>
-              {t("aiInsightsTitle")}
-              <span className="ml-auto rounded-full border border-[var(--ai-accent)]/30 bg-[var(--ai-accent-soft)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--ai-accent)]">
-                AI
-              </span>
-            </h2>
-            <ul className="space-y-3">
-              {insights.map((insight, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full icon-chip-info shadow-sm">
-                    <LightbulbFilament aria-hidden weight="duotone" className="size-3 text-white" />
-                  </span>
-                  <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{t(insight.key, insight.values)}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
+  const tth = funnelQ.data?.time_to_hire;
+  const tthAvailable = !!tth && !tth.low_signal && tth.median_days != null;
 
-          {/* Application Funnel */}
-          <section
-            aria-labelledby="funnel-heading"
-            className="rounded-2xl border border-[var(--border-default)] bg-white p-5 "
-          >
-            <h2
-              id="funnel-heading"
-              className="mb-4 flex items-center gap-2 text-base font-bold text-[var(--text-primary)]"
-            >
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-xl icon-chip-primary shadow-sm">
-                <ChartBar
-                  aria-hidden
-                  weight="duotone"
-                  className="size-4.5 text-white"
-                />
-              </span>
-              {t("funnelTitle")}
-            </h2>
+  return (
+    <>
+      {header}
+      <div className="space-y-4">
+        {/* KPI row */}
+        <KpiRow cols={5}>
+          <KpiTile
+            label={t("kpi.applications")}
+            value={nf.format(applications)}
+            icon={ListChecks}
+            spark={base.monthly_trend.length > 1 ? base.monthly_trend.map((p) => p.count) : undefined}
+            delta={trendDelta(base.monthly_trend)}
+          />
+          <KpiTile
+            label={t("kpi.interviewRate")}
+            value={interviewRate != null ? `${interviewRate}%` : "—"}
+            icon={MessagesSquare}
+            hint={interviewRate != null ? t("kpi.interviewRateHint") : undefined}
+          />
+          <KpiTile
+            label={t("kpi.offerRate")}
+            value={offerRate != null ? `${offerRate}%` : "—"}
+            icon={Target}
+            hint={offerRate != null ? t("kpi.offerRateHint") : undefined}
+          />
+          <KpiTile label={t("kpi.hires")} value={nf.format(hired)} icon={Award} />
+          <KpiTile
+            label={t("kpi.timeToHire")}
+            value={tthAvailable ? nf.format(tth!.median_days!) : "—"}
+            icon={Clock}
+            hint={tthAvailable ? t("kpi.timeToHireHint") : t("notEnoughData")}
+          />
+        </KpiRow>
 
-            {data.funnel.length === 0 ? (
-              <EmptyState
-                kind="empty"
-                icon={Briefcase}
-                title={t("funnelEmpty")}
-                description={t("funnelEmptyBody")}
-              />
-            ) : (
-              <ul className="space-y-2.5" role="list">
-                {data.funnel.map((item) => {
-                  const pct = Math.max(2, (item.count / maxFunnel) * 100);
-                  const barColor = FUNNEL_COLOR[item.status] ?? "bg-[var(--brand-primary)]";
-                  return (
-                    <li key={item.status}>
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <span className="text-xs font-semibold text-[var(--text-secondary)]">
-                          {STATUS_LABELS[item.status] ?? item.status}
-                        </span>
-                        <span className="text-xs font-bold tabular-nums text-[var(--text-primary)]">
-                          {item.count}
-                        </span>
-                      </div>
-                      <div
-                        role="meter"
-                        aria-valuenow={item.count}
-                        aria-valuemin={0}
-                        aria-valuemax={maxFunnel}
-                        aria-label={STATUS_LABELS[item.status] ?? item.status}
-                        className="h-3 w-full overflow-hidden rounded-full bg-[var(--bg-muted)]"
-                      >
-                        <div
-                          className={`h-full rounded-full transition-[width] duration-700 motion-reduce:transition-none ${barColor}`}
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </section>
-
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {/* Monthly Trend */}
-            <section
-              aria-labelledby="trend-heading"
-              className="rounded-2xl border border-[var(--border-default)] bg-white p-5 "
-            >
-              <h2
-                id="trend-heading"
-                className="mb-4 flex items-center gap-2 text-base font-bold text-[var(--text-primary)]"
-              >
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-xl icon-chip-success shadow-sm">
-                  <ChartLine
-                    aria-hidden
-                    weight="duotone"
-                    className="size-4.5 text-white"
-                  />
-                </span>
-                {t("trendTitle")}
-              </h2>
-
-              {data.monthly_trend.length === 0 ? (
-                <p className="text-sm text-[var(--text-muted)]">{t("trendEmpty")}</p>
-              ) : (
-                <MonthlyBars points={data.monthly_trend} maxValue={maxMonthly} />
-              )}
-            </section>
-
-            {/* Top Jobs */}
-            <section
-              aria-labelledby="topjobs-heading"
-              className="rounded-2xl border border-[var(--border-default)] bg-white p-5 "
-            >
-              <h2
-                id="topjobs-heading"
-                className="mb-4 flex items-center gap-2 text-base font-bold text-[var(--text-primary)]"
-              >
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-xl icon-chip-warning shadow-sm">
-                  <Trophy
-                    aria-hidden
-                    weight="duotone"
-                    className="size-4.5 text-white"
-                  />
-                </span>
-                {t("topJobsTitle")}
-              </h2>
-
-              {data.top_jobs.length === 0 ? (
-                <p className="text-sm text-[var(--text-muted)]">{t("topJobsEmpty")}</p>
-              ) : (
-                <ol className="space-y-2" role="list">
-                  {data.top_jobs.map((job, i) => (
-                    <li key={job.job_id}>
-                      <Link
-                        href={`/partner/jobs/${job.job_id}/applications`}
-                        className="flex items-center gap-3 rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 outline-none transition-colors hover:bg-white focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
-                      >
-                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full icon-chip-primary text-[11px] font-bold text-white shadow-sm">
-                          {i + 1}
-                        </span>
-                        <span className="min-w-0 flex-1 truncate text-sm font-semibold text-[var(--text-primary)]">
-                          {job.title}
-                        </span>
-                        <span className="shrink-0 rounded-full border border-[var(--border-default)] bg-white px-2 py-0.5 text-xs font-bold text-[var(--text-secondary)]">
-                          {job.application_count}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </section>
-          </div>
+        {/* Funnel + time-to-hire */}
+        <div className="grid gap-4 lg:grid-cols-3">
+          <FunnelCard
+            recruiting={funnelQ.data}
+            base={base}
+            statusLabels={STATUS_LABELS}
+            ofPrev={t("funnelOfPrev")}
+            title={t("funnelTitle")}
+            subtitle={t("funnelSubtitle")}
+            emptyTitle={t("funnelEmpty")}
+            emptyBody={t("funnelEmptyBody")}
+            srCaption={t("chartTableSr")}
+            colStage={t("table.stage")}
+            colCandidates={t("table.candidates")}
+            className="lg:col-span-2"
+          />
+          <TimeToHireCard data={funnelQ.data} />
         </div>
-      )}
+
+        {/* Stage outcomes + source attribution */}
+        <div className="grid gap-4 lg:grid-cols-2">
+          <StageOutcomesCard data={funnelQ.data} />
+          <SourceAttributionCard ops={opsQ.data} loading={opsQ.isPending} />
+        </div>
+
+        {/* Trend + top jobs */}
+        <div className="grid gap-4 lg:grid-cols-2">
+          <TrendCard monthly={base.monthly_trend} />
+          <TopJobsCard jobs={base.top_jobs} />
+        </div>
+      </div>
     </>
   );
 }
 
-function StatTile({
-  label,
-  value,
-  icon,
-  iconBg = "icon-chip-primary",
+/* -------------------------------------------------------------------------- */
+/* Header row (title + range + export)                                         */
+/* -------------------------------------------------------------------------- */
+
+function PageHeaderRow({
+  title,
+  subtitle,
+  range,
+  onRange,
+  onExport,
+  canExport,
+  rangeLabel,
+  rangeText,
+  exportLabel,
 }: {
-  label: string;
-  value?: number;
-  icon: React.ReactNode;
-  iconBg?: string;
+  title: string;
+  subtitle: string;
+  range: RangeKey;
+  onRange: (r: RangeKey) => void;
+  onExport: () => void;
+  canExport: boolean;
+  rangeLabel: string;
+  rangeText: (r: RangeKey) => string;
+  exportLabel: string;
 }) {
   return (
-    <div className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-4 shadow-[0_2px_16px_rgba(11,34,57,0.06)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(11,34,57,0.10)]">
-      <div className={`mb-3 flex size-10 items-center justify-center rounded-xl shadow-sm ${iconBg}`}>
-        {icon}
-      </div>
-      <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
-        {value ?? "—"}
-      </p>
-      <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{label}</p>
-    </div>
+    <PageHeader
+      title={title}
+      subtitle={subtitle}
+      actions={
+        <>
+          <div
+            className="inline-flex items-center rounded-lg border border-border bg-card p-0.5"
+            role="group"
+            aria-label={rangeLabel}
+          >
+            <CalendarRange
+              aria-hidden
+              className="ml-1.5 mr-0.5 size-4 text-muted-foreground"
+              strokeWidth={1.8}
+            />
+            {RANGES.map((r) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => onRange(r)}
+                aria-pressed={range === r}
+                className={
+                  "rounded-md px-2.5 py-1 text-[0.8125rem] font-medium transition-colors " +
+                  (range === r
+                    ? "bg-[var(--bg-subtle)] text-foreground"
+                    : "text-muted-foreground hover:text-foreground")
+                }
+              >
+                {rangeText(r)}
+              </button>
+            ))}
+          </div>
+          <Button variant="secondary" size="sm" onClick={onExport} disabled={!canExport}>
+            <Download className="size-4" strokeWidth={1.8} />
+            {exportLabel}
+          </Button>
+        </>
+      }
+    />
   );
 }
 
-function MonthlyBars({
-  points,
-  maxValue,
+/* -------------------------------------------------------------------------- */
+/* Funnel                                                                      */
+/* -------------------------------------------------------------------------- */
+
+function FunnelCard({
+  recruiting,
+  base,
+  statusLabels,
+  ofPrev,
+  title,
+  subtitle,
+  emptyTitle,
+  emptyBody,
+  srCaption,
+  colStage,
+  colCandidates,
+  className,
 }: {
-  points: AnalyticsMonthlyPoint[];
-  maxValue: number;
+  recruiting: PartnerRecruitingFunnel | undefined;
+  base: PartnerAnalytics;
+  statusLabels: Record<string, string>;
+  ofPrev: string;
+  title: string;
+  subtitle: string;
+  emptyTitle: string;
+  emptyBody: string;
+  srCaption: string;
+  colStage: string;
+  colCandidates: string;
+  className?: string;
 }) {
+  const stages =
+    recruiting && recruiting.funnel.length > 0
+      ? recruiting.funnel.map((s) => ({ label: s.label || statusLabels[s.stage] || s.stage, value: s.count }))
+      : base.funnel.map((f) => ({ label: statusLabels[f.status] ?? f.status, value: f.count }));
+
   return (
-    <div className="flex h-32 items-end gap-1.5" aria-hidden>
-      {points.map((pt) => {
-        const heightPct = Math.max(4, (pt.count / maxValue) * 100);
-        return (
-          <div
-            key={pt.month}
-            className="flex flex-1 flex-col items-center gap-1"
-            title={`${formatMonth(pt.month)}: ${pt.count}`}
-          >
-            <span className="text-[9px] font-semibold tabular-nums text-[var(--text-muted)]">
-              {pt.count}
-            </span>
-            <div
-              className="w-full rounded-t-md bg-[var(--brand-primary)] transition-[height] duration-700 motion-reduce:transition-none"
-              style={{ height: `${heightPct}%` }}
+    <Card className={className}>
+      <CardHeader>
+        <div>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{subtitle}</CardDescription>
+        </div>
+        <CardToolbar>
+          <Target className="size-4 text-muted-foreground" strokeWidth={1.8} />
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {stages.length === 0 || stages.every((s) => s.value === 0) ? (
+          <EmptyState kind="empty" title={emptyTitle} description={emptyBody} />
+        ) : (
+          <>
+            <FunnelChart
+              stages={stages}
+              conversionLabel={ofPrev}
+              formatValue={(v) => nf.format(v)}
             />
-            <span className="truncate text-[9px] text-[var(--text-muted)]">
-              {formatMonth(pt.month).split(" ")[0]}
-            </span>
-          </div>
-        );
-      })}
-    </div>
+            <table className="sr-only">
+              <caption>{srCaption}</caption>
+              <thead>
+                <tr>
+                  <th>{colStage}</th>
+                  <th>{colCandidates}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stages.map((s) => (
+                  <tr key={s.label}>
+                    <td>{s.label}</td>
+                    <td>{s.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
+      </CardContent>
+    </Card>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Time-to-hire                                                                */
+/* -------------------------------------------------------------------------- */
+
+function TimeToHireCard({ data }: { data: PartnerRecruitingFunnel | undefined }) {
+  const t = useTranslations("analytics");
+  const tth = data?.time_to_hire;
+  const available = !!tth && !tth.low_signal && tth.median_days != null;
+
+  return (
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("timeToHire.title")}</CardTitle>
+          <CardDescription>{t("timeToHire.subtitle")}</CardDescription>
+        </div>
+        <CardToolbar>
+          <Clock className="size-4 text-muted-foreground" strokeWidth={1.8} />
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {!available ? (
+          <EmptyState kind="empty" title={t("timeToHire.empty")} description={t("timeToHire.emptyBody")} />
+        ) : (
+          <div className="space-y-4">
+            <div>
+              <div className="flex items-baseline gap-2">
+                <span className="type-metric text-foreground">{nf.format(tth!.median_days!)}</span>
+                <span className="type-small text-muted-foreground">{t("timeToHire.days")}</span>
+              </div>
+              <p className="type-caption mt-0.5 text-muted-foreground">
+                {t("timeToHire.median")} · {t("timeToHire.sample", { count: tth!.sample_size })}
+              </p>
+            </div>
+            {tth!.buckets.length > 0 && (
+              <div>
+                <p className="type-caption mb-2 font-semibold uppercase tracking-[0.06em] text-muted-foreground">
+                  {t("timeToHire.distribution")}
+                </p>
+                <HorizontalBars
+                  data={tth!.buckets.map((b) => ({ label: b.label, value: b.count }))}
+                  formatValue={(v) => nf.format(v)}
+                  ariaLabel={t("timeToHire.distribution")}
+                />
+              </div>
+            )}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Stage outcomes                                                              */
+/* -------------------------------------------------------------------------- */
+
+interface StageRow extends RecruitingStageOutcome {
+  median_days: number | null;
+}
+
+function StageOutcomesCard({ data }: { data: PartnerRecruitingFunnel | undefined }) {
+  const t = useTranslations("analytics");
+  const rows: StageRow[] = React.useMemo(() => {
+    if (!data) return [];
+    const medianByStage = new Map(data.time_in_stage.map((s) => [s.stage_type, s.low_signal ? null : s.median_days]));
+    return data.stage_outcomes.map((s) => ({ ...s, median_days: medianByStage.get(s.stage_type) ?? null }));
+  }, [data]);
+
+  const cols: ColumnDef<StageRow, unknown>[] = [
+    {
+      accessorKey: "label",
+      header: t("stageOutcomes.colStage"),
+      cell: ({ row }) => <span className="font-medium text-foreground">{row.original.label}</span>,
+    },
+    {
+      accessorKey: "entered",
+      header: t("stageOutcomes.colEntered"),
+      meta: { align: "right" },
+      cell: ({ row }) => <span className="tabular-nums">{nf.format(row.original.entered)}</span>,
+    },
+    {
+      accessorKey: "advanced",
+      header: t("stageOutcomes.colAdvanced"),
+      meta: { align: "right" },
+      cell: ({ row }) => <span className="tabular-nums">{nf.format(row.original.advanced)}</span>,
+    },
+    {
+      accessorKey: "pass_rate_pct",
+      header: t("stageOutcomes.passRate"),
+      meta: { align: "right" },
+      cell: ({ row }) => <PassRateCell pct={row.original.pass_rate_pct} />,
+    },
+    {
+      accessorKey: "median_days",
+      header: t("timeInStage.title"),
+      meta: { align: "right" },
+      cell: ({ row }) =>
+        row.original.median_days != null ? (
+          <span className="tabular-nums">{t("timeInStage.days", { count: row.original.median_days })}</span>
+        ) : (
+          <span className="text-muted-foreground">—</span>
+        ),
+    },
+  ];
+
+  return (
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("stageOutcomes.title")}</CardTitle>
+          <CardDescription>{t("stageOutcomes.subtitle")}</CardDescription>
+        </div>
+        <CardToolbar>
+          <Layers className="size-4 text-muted-foreground" strokeWidth={1.8} />
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {rows.length === 0 ? (
+          <EmptyState kind="empty" title={t("stageOutcomes.empty")} description={t("stageOutcomes.emptyBody")} />
+        ) : (
+          <DataTable columns={cols} data={rows} getRowId={(r) => r.stage_type} />
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function PassRateCell({ pct }: { pct: number | null }) {
+  if (pct == null) return <span className="text-muted-foreground">—</span>;
+  const width = Math.max(2, Math.min(100, pct));
+  const tone = pct >= 60 ? "var(--viz-emerald)" : pct >= 30 ? "var(--viz-amber)" : "var(--viz-rose)";
+  return (
+    <span className="inline-flex items-center justify-end gap-2">
+      <span className="h-1.5 w-14 overflow-hidden rounded-full bg-[var(--bg-muted)]">
+        <span className="block h-full rounded-full" style={{ width: `${width}%`, background: tone }} />
+      </span>
+      <span className="w-9 text-right font-semibold tabular-nums text-foreground">{pct}%</span>
+    </span>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Source attribution                                                          */
+/* -------------------------------------------------------------------------- */
+
+function SourceAttributionCard({
+  ops,
+  loading,
+}: {
+  ops: import("@/lib/api/dashboards").PartnerDashboardOps | undefined;
+  loading: boolean;
+}) {
+  const t = useTranslations("analytics");
+  const mix = React.useMemo<HorizontalBarDatum[] | null>(() => {
+    const widget = ops?.job_performance;
+    if (!widget || widget.locked || widget.basis !== "job_metrics_daily") return null;
+    const totals = { organic: 0, search: 0, recommendation: 0, sponsored: 0, invitation: 0, direct: 0 };
+    for (const row of widget.items) {
+      totals.organic += row.source_mix.organic;
+      totals.search += row.source_mix.search;
+      totals.recommendation += row.source_mix.recommendation;
+      totals.sponsored += row.source_mix.sponsored;
+      totals.invitation += row.source_mix.invitation;
+      totals.direct += row.source_mix.direct;
+    }
+    const entries = Object.entries(totals).filter(([, v]) => v > 0);
+    if (entries.length === 0) return null;
+    return entries.map(([k, v]) => ({ label: t(`source.${k}`), value: v }));
+  }, [ops, t]);
+
+  return (
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("source.title")}</CardTitle>
+          <CardDescription>{t("source.subtitle")}</CardDescription>
+        </div>
+        <CardToolbar>
+          <Layers className="size-4 text-muted-foreground" strokeWidth={1.8} />
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {loading ? (
+          <div className="h-24 animate-skeleton rounded-lg bg-[var(--bg-muted)]" />
+        ) : !mix ? (
+          <EmptyState kind="empty" title={t("source.empty")} description={t("source.emptyBody")} />
+        ) : (
+          <HorizontalBars data={mix} formatValue={(v) => nf.format(v)} ariaLabel={t("source.title")} />
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Trend                                                                       */
+/* -------------------------------------------------------------------------- */
+
+function TrendCard({ monthly }: { monthly: AnalyticsMonthlyPoint[] }) {
+  const t = useTranslations("analytics");
+  return (
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("trendTitle")}</CardTitle>
+          <CardDescription>{t("trendSubtitle")}</CardDescription>
+        </div>
+        <CardToolbar>
+          <Activity className="size-4 text-muted-foreground" strokeWidth={1.8} />
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        {monthly.length === 0 ? (
+          <p className="type-small text-muted-foreground">{t("trendEmpty")}</p>
+        ) : (
+          <>
+            <AreaChart
+              data={monthly.map((p) => ({ month: p.month, count: p.count }))}
+              xKey="month"
+              series={[{ key: "count", label: t("trendSeries"), color: "var(--viz-indigo)" }]}
+              height={220}
+              formatValue={(v) => nf.format(v)}
+              ariaLabel={t("trendTitle")}
+            />
+            <table className="sr-only">
+              <caption>{t("chartTableSr")}</caption>
+              <thead>
+                <tr>
+                  <th>{t("table.month")}</th>
+                  <th>{t("table.applications")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {monthly.map((p) => (
+                  <tr key={p.month}>
+                    <td>{p.month}</td>
+                    <td>{p.count}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Top jobs                                                                     */
+/* -------------------------------------------------------------------------- */
+
+function TopJobsCard({ jobs }: { jobs: AnalyticsTopJob[] }) {
+  const t = useTranslations("analytics");
+  const cols: ColumnDef<AnalyticsTopJob, unknown>[] = [
+    {
+      accessorKey: "title",
+      header: t("table.job"),
+      cell: ({ row }) => (
+        <Link
+          href={`/partner/jobs/${row.original.job_id}/applications`}
+          className="font-semibold text-foreground hover:text-[var(--brand-primary)]"
+        >
+          {row.original.title}
+        </Link>
+      ),
+    },
+    {
+      accessorKey: "application_count",
+      header: t("table.applications"),
+      meta: { align: "right" },
+      cell: ({ row }) => <span className="tabular-nums">{nf.format(row.original.application_count)}</span>,
+    },
+  ];
+
+  return (
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>{t("topJobsTitle")}</CardTitle>
+          <CardDescription>{t("topJobsSubtitle")}</CardDescription>
+        </div>
+        <CardToolbar>
+          <BarChart3 className="size-4 text-muted-foreground" strokeWidth={1.8} />
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
+        <DataTable
+          columns={cols}
+          data={jobs}
+          getRowId={(r) => r.job_id}
+          pageSize={8}
+          empty={<EmptyState kind="empty" title={t("topJobsEmpty")} description={t("topJobsSubtitle")} />}
+        />
+      </CardContent>
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* CSV export                                                                   */
+/* -------------------------------------------------------------------------- */
+
+function exportCsv(data: PartnerAnalytics | undefined, filename: string) {
+  if (!data) return;
+  const lines: string[] = [];
+  const esc = (v: string | number) => `"${String(v).replace(/"/g, '""')}"`;
+  lines.push("section,label,value");
+  for (const f of data.funnel) lines.push(["funnel", f.status, f.count].map(esc).join(","));
+  for (const m of data.monthly_trend) lines.push(["monthly", m.month, m.count].map(esc).join(","));
+  for (const j of data.top_jobs) lines.push(["top_job", j.title, j.application_count].map(esc).join(","));
+  const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${filename}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Skeleton                                                                     */
+/* -------------------------------------------------------------------------- */
 
 function AnalyticsSkeleton() {
   return (
-    <div className="space-y-8">
-      {/* Stat tile skeletons */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="rounded-2xl border border-[var(--border-default)] bg-white px-4 py-4 ">
-            <Skeleton className="mb-3 size-10 rounded-xl" />
-            <Skeleton className="mb-1 h-7 w-16" />
-            <Skeleton className="h-3 w-24" />
-          </div>
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="h-[86px] animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
         ))}
       </div>
-      {/* Insights skeleton */}
-      <div className="rounded-2xl border border-[var(--border-default)] bg-white p-5 ">
-        <Skeleton className="mb-4 h-6 w-1/3" />
-        <div className="space-y-3">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <Skeleton key={i} className="h-4 w-full" />
-          ))}
-        </div>
+      <div className="grid gap-4 lg:grid-cols-3">
+        <div className="h-72 animate-skeleton rounded-xl bg-[var(--bg-muted)] lg:col-span-2" />
+        <div className="h-72 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
       </div>
-      {/* Funnel skeleton */}
-      <div className="rounded-2xl border border-[var(--border-default)] bg-white p-5 ">
-        <Skeleton className="mb-4 h-6 w-1/3" />
-        <div className="space-y-3">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i}>
-              <div className="mb-1 flex justify-between">
-                <Skeleton className="h-3 w-24" />
-                <Skeleton className="h-3 w-8" />
-              </div>
-              <Skeleton className="h-3 w-full" />
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white p-5 ">
-          <Skeleton className="mb-4 h-6 w-1/3" />
-          <Skeleton className="h-32 w-full" />
-        </div>
-        <div className="rounded-2xl border border-[var(--border-default)] bg-white p-5 ">
-          <Skeleton className="mb-4 h-6 w-1/3" />
-          <div className="space-y-2">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <Skeleton key={i} className="h-10 w-full" />
-            ))}
-          </div>
-        </div>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <div className="h-64 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
+        <div className="h-64 animate-skeleton rounded-xl bg-[var(--bg-muted)]" />
       </div>
     </div>
   );

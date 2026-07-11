@@ -1,21 +1,87 @@
 {
   "universityReports": {
     "title": "Báo cáo nền tảng",
-    "subtitle": "Chỉ số tổng quan toàn nền tảng phục vụ quản trị và giám sát.",
+    "subtitle": "Chỉ số toàn nền tảng, thông tin thị trường tuyển dụng và kết quả nghề nghiệp.",
+    "metaUpdated": "Dữ liệu thị trường tính đến {time}",
+    "metaStale": "Đang hiển thị ảnh chụp đã lưu gần nhất",
+    "export": "Xuất CSV",
+    "exportFilename": "vinuni-bao-cao-nen-tang",
     "kpisLabel": "Chỉ số KPI nền tảng",
     "kpiStudents": "Sinh viên",
     "kpiPartners": "Thành viên doanh nghiệp",
     "kpiJobs": "Tin tuyển dụng (tổng)",
     "kpiApplications": "Hồ sơ ứng tuyển",
     "kpiEvents": "Sự kiện đã đăng",
-    "monthlyLabel": "Ứng tuyển theo tháng (6 tháng gần nhất)",
-    "monthlyEmpty": "Chưa có dữ liệu ứng tuyển.",
-    "aiInsightStrongDemand": "Nhu cầu cao: trung bình {count} ứng tuyển cho mỗi tin đăng.",
-    "aiInsightLowVolume": "Lượng ứng tuyển thấp: {count} mỗi tin — hãy thúc đẩy quảng bá các vị trí tuyển dụng.",
-    "aiInsightTrendUp": "Ứng tuyển tăng {pct}% so với tháng trước — động lực tuyển dụng tốt.",
-    "aiInsightTrendDown": "Ứng tuyển giảm {pct}% so với tháng trước — kiểm tra xem có yếu tố mùa vụ không.",
-    "aiInsightEvents": "{count} sự kiện đang hoạt động — sự kiện giúp tăng mức độ tương tác của ứng viên.",
-    "aiInsightActivePartners": "Đối tác đang hoạt động tích cực: trung bình {count} tin tuyển dụng mỗi thành viên.",
-    "aiInsightsTitle": "Thông tin nền tảng"
+    "trend": {
+      "title": "Ứng tuyển theo thời gian",
+      "subtitle": "Toàn nền tảng, 6 tháng gần nhất",
+      "series": "Ứng tuyển",
+      "empty": "Chưa có dữ liệu ứng tuyển.",
+      "srCaption": "Số ứng tuyển theo tháng",
+      "colMonth": "Tháng",
+      "colApplications": "Ứng tuyển"
+    },
+    "market": {
+      "title": "Thị trường tuyển dụng",
+      "subtitle": "Tin đang tuyển và đà tăng trong 30 ngày",
+      "activeJobs": "Tin đang tuyển",
+      "posted30d": "Đăng (30 ngày)",
+      "posted30dHint": "so với {count} của 30 ngày trước",
+      "trendUp": "Tăng",
+      "trendDown": "Giảm",
+      "trendFlat": "Ổn định",
+      "salaryDisclosure": "Công khai lương",
+      "salaryDisclosureHint": "trong số tin đang tuyển có ghi lương",
+      "lowSignal": "Chưa đủ tin đăng để đánh giá thị trường một cách đáng tin.",
+      "empty": "Chưa có tin đang tuyển.",
+      "aiSummaryTitle": "Tóm tắt thị trường",
+      "aiSummaryDisclaimer": "Do AI tạo từ dữ liệu tổng hợp của nền tảng. Chỉ mang tính tham khảo — hãy kiểm chứng trước khi hành động."
+    },
+    "skills": {
+      "title": "Kỹ năng được săn đón nhất",
+      "subtitle": "Trên các tin đang tuyển",
+      "empty": "Chưa có dữ liệu nhu cầu kỹ năng."
+    },
+    "employmentTypes": {
+      "title": "Cơ cấu loại hình việc làm",
+      "subtitle": "Tỷ lệ tin đang tuyển theo loại hình",
+      "center": "Tin",
+      "empty": "Chưa có dữ liệu loại hình việc làm."
+    },
+    "empType": {
+      "full_time": "Toàn thời gian",
+      "part_time": "Bán thời gian",
+      "internship": "Thực tập",
+      "contract": "Hợp đồng",
+      "temporary": "Thời vụ",
+      "freelance": "Tự do",
+      "volunteer": "Tình nguyện",
+      "other": "Khác"
+    },
+    "outcomes": {
+      "sectionTitle": "Kết quả nghề nghiệp",
+      "byTrustTitle": "Kết quả theo mức xác minh",
+      "byTrustSubtitle": "Kết quả nghề nghiệp đã ghi nhận theo mức độ tin cậy",
+      "byTrustCenter": "Kết quả",
+      "byTrustEmpty": "Chưa có kết quả nào được ghi nhận.",
+      "employersTitle": "Nhà tuyển dụng hàng đầu",
+      "employersSubtitle": "Theo kết quả nghề nghiệp đã ghi nhận",
+      "employersEmpty": "Chưa có kết quả theo nhà tuyển dụng.",
+      "recordsTitle": "Kết quả gần đây",
+      "recordsSubtitle": "An toàn quyền riêng tư — không có danh tính sinh viên.",
+      "colPosition": "Vị trí",
+      "colEmployer": "Nhà tuyển dụng",
+      "colStart": "Bắt đầu",
+      "colOutcome": "Kết quả",
+      "colTrust": "Xác minh",
+      "colRecorded": "Ghi nhận",
+      "unknownPosition": "—",
+      "filterLabel": "Xác minh",
+      "filterAll": "Tất cả mức",
+      "recordsEmpty": "Chưa có kết quả nào được ghi nhận.",
+      "recordsEmptyBody": "Kết quả nghề nghiệp đã xác minh sẽ xuất hiện khi được ghi nhận.",
+      "lockedTitle": "Bị hạn chế truy cập kết quả nghề nghiệp",
+      "lockedBody": "Bạn không có quyền xem báo cáo kết quả nghề nghiệp."
+    }
   }
 }

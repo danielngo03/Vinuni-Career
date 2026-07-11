@@ -1,52 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  Briefcase,
-  CheckCircle,
+  AlertTriangle,
+  Check,
+  Clock,
   Flag,
-  LightbulbFilament,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
+  ListChecks,
   UserCheck,
-  WarningCircle,
-  XCircle,
-} from "@phosphor-icons/react";
-import {
-  Button,
-  DataTable,
-  EmptyState,
-  Modal,
-  Sheet,
-  StatusBadge,
-  useToast,
-  type Column,
-} from "@/components/ui";
-import { cn } from "@/lib/utils";
+  UserPlus,
+  X,
+} from "lucide-react";
+import { Button, Modal, Textarea, useToast, SegmentedControl } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  DataTable,
+  type ColumnDef,
+  DetailSheet,
+  DetailSheetSection,
+  EmptyState,
+  FilterBar,
+  KpiRow,
+  KpiTile,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import { ModerationTabs } from "@/components/moderation/moderation-tabs";
-import {
-  BulkResultList,
-  ClaimBadge,
-  ReasonCodeSelect,
-  RowSelectCheckbox,
-  SlaBadge,
-} from "@/components/moderation/queue-controls";
+import { ReasonCodeSelect } from "@/components/moderation/queue-controls";
 import { useAuthStore } from "@/stores/auth-store";
-import {
-  useJobLabels,
-  JOB_STATUS_TONE,
-  MODERATION_TONE,
-} from "@/lib/jobs/labels";
+import { useJobLabels } from "@/lib/jobs/labels";
 import { formatSalary, formatLocation } from "@/lib/jobs/format";
 import { formatDateTime } from "@/lib/format";
 import {
   ApiError,
   jobsApi,
   type BulkModerationResultItem,
+  type JobStatus,
+  type ModerationStatus,
   type ModerationReasonCode,
   type OwnerJobSummary,
 } from "@/lib/api";
@@ -54,7 +50,59 @@ import { useApiErrorMessage } from "@/lib/auth/use-api-error";
 
 const STATUS_FILTERS = ["pending_review", "active", "rejected", "closed"] as const;
 
+const JOB_STATUS_CHIP: Record<JobStatus, ChipTone> = {
+  draft: "neutral",
+  pending_review: "warning",
+  active: "success",
+  rejected: "danger",
+  closed: "neutral",
+  expired: "neutral",
+};
+
+const MODERATION_CHIP: Record<ModerationStatus, ChipTone> = {
+  pending: "warning",
+  approved: "success",
+  rejected: "danger",
+  flagged: "amber",
+};
+
 type BulkKind = "approve" | "reject" | null;
+type BulkSelection = { ids: string[]; clear: () => void };
+
+/* -------------------------------------------------------------------------- */
+/* Small chips                                                                 */
+/* -------------------------------------------------------------------------- */
+
+function SlaChip({ job }: { job: OwnerJobSummary }) {
+  const t = useTranslations("common");
+  if (job.due_by == null && job.age_hours == null) return null;
+  const hours = Math.round(job.age_hours ?? 0);
+  return (
+    <StatusChip tone={job.is_overdue ? "danger" : "warning"} size="sm">
+      <Clock aria-hidden className="size-3" strokeWidth={2} />
+      {job.is_overdue
+        ? t("moderationQueue.slaOverdue", { hours })
+        : t("moderationQueue.slaAge", { hours })}
+    </StatusChip>
+  );
+}
+
+function ClaimChip({ job, userId }: { job: OwnerJobSummary; userId?: string }) {
+  const t = useTranslations("common");
+  if (!job.claimed_by) return null;
+  return (
+    <StatusChip tone="info" size="sm">
+      <UserCheck aria-hidden className="size-3" strokeWidth={2} />
+      {job.claimed_by === userId
+        ? t("moderationQueue.claimedByMe")
+        : t("moderationQueue.claimedByOther")}
+    </StatusChip>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Screen                                                                      */
+/* -------------------------------------------------------------------------- */
 
 export function JobModerationScreen() {
   const t = useTranslations("jobsModeration");
@@ -69,26 +117,35 @@ export function JobModerationScreen() {
   const getMessage = useApiErrorMessage();
   const userId = useAuthStore((s) => s.user?.id);
 
-  const [statusFilter, setStatusFilter] = useState<string>("pending_review");
-  const [selected, setSelected] = useState<OwnerJobSummary | null>(null);
-  const [approveOpen, setApproveOpen] = useState(false);
-  const [rejectOpen, setRejectOpen] = useState(false);
-  const [escalateOpen, setEscalateOpen] = useState(false);
-  const [reason, setReason] = useState("");
-  const [reasonCode, setReasonCode] = useState<ModerationReasonCode | string>("other");
-  const [reasonError, setReasonError] = useState<string | null>(null);
-  const [escalateNote, setEscalateNote] = useState("");
+  const [statusFilter, setStatusFilter] = React.useState<string>("pending_review");
+  const [search, setSearch] = React.useState("");
+  const [selected, setSelected] = React.useState<OwnerJobSummary | null>(null);
+  const [approveOpen, setApproveOpen] = React.useState(false);
+  const [rejectOpen, setRejectOpen] = React.useState(false);
+  const [escalateOpen, setEscalateOpen] = React.useState(false);
+  const [reason, setReason] = React.useState("");
+  const [reasonCode, setReasonCode] = React.useState<ModerationReasonCode | string>("other");
+  const [reasonError, setReasonError] = React.useState<string | null>(null);
+  const [escalateNote, setEscalateNote] = React.useState("");
   const [escalateReasonCode, setEscalateReasonCode] =
-    useState<ModerationReasonCode | string>("policy_violation");
+    React.useState<ModerationReasonCode | string>("policy_violation");
 
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [bulkKind, setBulkKind] = useState<BulkKind>(null);
-  const [bulkResults, setBulkResults] = useState<BulkModerationResultItem[] | null>(null);
+  const [bulkKind, setBulkKind] = React.useState<BulkKind>(null);
+  const [bulkSelection, setBulkSelection] = React.useState<BulkSelection | null>(null);
+  const [bulkResults, setBulkResults] = React.useState<BulkModerationResultItem[] | null>(null);
 
   const query = useQuery({
     queryKey: ["admin", "jobs", statusFilter],
     queryFn: () => jobsApi.listModeration(statusFilter),
     retry: false,
+  });
+
+  // Dedicated pending read powers the KPI strip regardless of the active filter.
+  const pendingQuery = useQuery({
+    queryKey: ["admin", "jobs", "pending_review", "kpi"],
+    queryFn: () => jobsApi.listModeration("pending_review"),
+    retry: false,
+    staleTime: 30_000,
   });
 
   // Full detail for the review drawer (superadmin/owner only; 404 otherwise).
@@ -99,25 +156,26 @@ export function JobModerationScreen() {
     retry: false,
   });
 
-  function refresh() {
+  const refresh = React.useCallback(() => {
     void qc.invalidateQueries({ queryKey: ["admin", "jobs"] });
-  }
+  }, [qc]);
 
-  function handleError(e: unknown) {
-    const reason_ =
-      e instanceof ApiError && typeof e.details?.reason === "string"
-        ? e.details.reason
-        : undefined;
-    if (reason_ === "version_conflict" || (e instanceof ApiError && e.code === "CONFLICT")) {
-      toast.show({ tone: "error", title: t("conflictToast"), description: t("conflictBody") });
-      setApproveOpen(false);
-      setRejectOpen(false);
-      setSelected(null);
-      refresh();
-      return;
-    }
-    toast.show({ tone: "error", title: getMessage(e) });
-  }
+  const handleError = React.useCallback(
+    (e: unknown) => {
+      const reason_ =
+        e instanceof ApiError && typeof e.details?.reason === "string" ? e.details.reason : undefined;
+      if (reason_ === "version_conflict" || (e instanceof ApiError && e.code === "CONFLICT")) {
+        toast.show({ tone: "error", title: t("conflictToast"), description: t("conflictBody") });
+        setApproveOpen(false);
+        setRejectOpen(false);
+        setSelected(null);
+        refresh();
+        return;
+      }
+      toast.show({ tone: "error", title: getMessage(e) });
+    },
+    [getMessage, refresh, t, toast],
+  );
 
   const approve = useMutation({
     mutationFn: (job: OwnerJobSummary) => jobsApi.approve(job.id),
@@ -131,8 +189,7 @@ export function JobModerationScreen() {
   });
 
   const reject = useMutation({
-    mutationFn: (job: OwnerJobSummary) =>
-      jobsApi.reject(job.id, reason, job.version, reasonCode),
+    mutationFn: (job: OwnerJobSummary) => jobsApi.reject(job.id, reason, job.version, reasonCode),
     onSuccess: () => {
       setRejectOpen(false);
       setSelected(null);
@@ -165,7 +222,10 @@ export function JobModerationScreen() {
 
   const escalate = useMutation({
     mutationFn: (job: OwnerJobSummary) =>
-      jobsApi.escalate(job.id, { reason_code: escalateReasonCode, note: escalateNote.trim() || undefined }),
+      jobsApi.escalate(job.id, {
+        reason_code: escalateReasonCode,
+        note: escalateNote.trim() || undefined,
+      }),
     onSuccess: () => {
       setEscalateOpen(false);
       setSelected(null);
@@ -180,7 +240,8 @@ export function JobModerationScreen() {
     onSuccess: (results) => {
       setBulkKind(null);
       setBulkResults(results);
-      setSelectedIds(new Set());
+      bulkSelection?.clear();
+      setBulkSelection(null);
       refresh();
     },
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
@@ -188,30 +249,98 @@ export function JobModerationScreen() {
 
   const bulkReject = useMutation({
     mutationFn: (ids: string[]) =>
-      jobsApi.bulkReject(
-        ids.map((id) => ({ id, reason, reason_code: reasonCode })),
-      ),
+      jobsApi.bulkReject(ids.map((id) => ({ id, reason, reason_code: reasonCode }))),
     onSuccess: (results) => {
       setBulkKind(null);
       setBulkResults(results);
-      setSelectedIds(new Set());
       setReason("");
+      bulkSelection?.clear();
+      setBulkSelection(null);
       refresh();
     },
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
   });
 
-  /* ---- Permission / auth states ---- */
+  // Sync buffers when the selected job changes.
+  React.useEffect(() => {
+    setReasonError(null);
+  }, [selected]);
+
+  const rows = query.data ?? [];
+  const detail = detailQuery.data;
+  const isPending = selected?.status === "pending_review";
+  const canClaim = Boolean(isPending && selected && !selected.claimed_by);
+
+  const pending = pendingQuery.data ?? [];
+  const overdue = pending.filter((r) => r.is_overdue).length;
+  const unclaimed = pending.filter((r) => !r.claimed_by).length;
+  const mine = pending.filter((r) => r.claimed_by === userId).length;
+
+  const selectionEnabled = statusFilter === "pending_review";
+
+  const columns: ColumnDef<OwnerJobSummary, unknown>[] = [
+    {
+      accessorKey: "title",
+      header: t("colJob"),
+      cell: ({ row }) => {
+        const r = row.original;
+        return (
+          <div className="min-w-0">
+            <p className="truncate font-semibold text-foreground">{r.title}</p>
+            <p className="truncate type-caption text-muted-foreground">
+              {labels.employmentType(r.employment_type, r.employment_type_label)}
+              {" · "}
+              {formatLocation(r.location_city, r.location_country)}
+            </p>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "created_at",
+      header: t("colSubmitted"),
+      cell: ({ row }) => (
+        <span className="whitespace-nowrap type-small text-muted-foreground">
+          {formatDateTime(row.original.created_at, locale)}
+        </span>
+      ),
+    },
+    {
+      id: "sla",
+      header: t("colSla"),
+      enableSorting: false,
+      cell: ({ row }) => (
+        <div className="flex flex-col items-start gap-1">
+          <SlaChip job={row.original} />
+          <ClaimChip job={row.original} userId={userId} />
+        </div>
+      ),
+    },
+    {
+      accessorKey: "status",
+      header: t("colStatus"),
+      cell: ({ row }) => (
+        <StatusChip tone={JOB_STATUS_CHIP[row.original.status] ?? "neutral"} dot>
+          {labels.status(row.original.status, row.original.status_label)}
+        </StatusChip>
+      ),
+    },
+  ];
+
+  const header = (
+    <PageHeader title={t("title")} subtitle={t("subtitle")} />
+  );
+
+  /* ---- Permission / auth states (after hooks) ---- */
   if (query.isError && query.error instanceof ApiError) {
     const err = query.error;
     if (err.isPermissionError || err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("title")} description={t("subtitle")} />
+          {header}
           <ModerationTabs />
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
             title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
             description={err.isPermissionError ? t("permissionBody") : tStates("authBody")}
           />
@@ -220,354 +349,229 @@ export function JobModerationScreen() {
     }
   }
 
-  const rows = query.data ?? [];
-  const detail = detailQuery.data;
-  const isPending = selected?.status === "pending_review";
-  const canClaim = isPending && selected && !selected.claimed_by;
-  const canEscalate = isPending;
-
-  function toggleRow(id: string, checked: boolean) {
-    setSelectedIds((prev) => {
-      const next = new Set(prev);
-      if (checked) next.add(id);
-      else next.delete(id);
-      return next;
-    });
-  }
-
-  const pendingRows = rows.filter((r) => r.status === "pending_review");
-  const allPendingSelected =
-    pendingRows.length > 0 && pendingRows.every((r) => selectedIds.has(r.id));
-
-  const columns: Column<OwnerJobSummary>[] = [
-    {
-      key: "select",
-      header: "",
-      className: "w-10",
-      cell: (r) =>
-        r.status === "pending_review" ? (
-          <RowSelectCheckbox
-            checked={selectedIds.has(r.id)}
-            onChange={(checked) => toggleRow(r.id, checked)}
-            label={t("selectRow", { title: r.title })}
-          />
-        ) : null,
-    },
-    {
-      key: "title",
-      header: t("colJob"),
-      cell: (r) => (
-        <div className="min-w-0">
-          <p className="truncate font-semibold text-[var(--text-primary)]">{r.title}</p>
-          <p className="truncate text-xs text-[var(--text-secondary)]">
-            {labels.employmentType(r.employment_type, r.employment_type_label)}
-            {" · "}
-            {formatLocation(r.location_city, r.location_country)}
-          </p>
-        </div>
-      ),
-    },
-    {
-      key: "submitted",
-      header: t("colSubmitted"),
-      cell: (r) => (
-        <span className="text-[var(--text-secondary)]">
-          {formatDateTime(r.created_at, locale)}
-        </span>
-      ),
-    },
-    {
-      key: "sla",
-      header: t("colSla"),
-      cell: (r) => (
-        <div className="flex flex-col items-start gap-1">
-          <SlaBadge dueBy={r.due_by} ageHours={r.age_hours} isOverdue={r.is_overdue} />
-          <ClaimBadge claimedBy={r.claimed_by} isMine={r.claimed_by === userId} />
-        </div>
-      ),
-    },
-    {
-      key: "status",
-      header: t("colStatus"),
-      cell: (r) => (
-        <StatusBadge tone={JOB_STATUS_TONE[r.status] ?? "info"}>
-          {labels.status(r.status, r.status_label)}
-        </StatusBadge>
-      ),
-    },
-    {
-      key: "actions",
-      header: "",
-      align: "right",
-      cell: (r) => (
-        <Button variant="ghost" size="sm" onClick={() => setSelected(r)}>
-          {t("review")}
-        </Button>
-      ),
-    },
-  ];
+  const isHardError =
+    query.isError &&
+    !(query.error instanceof ApiError && (query.error.isPermissionError || query.error.isAuthError));
 
   return (
     <>
-      <PageHeader title={t("title")} description={t("subtitle")} />
+      {header}
       <ModerationTabs />
 
-      {/* ── AI Moderation Queue ── */}
-      {!query.isPending && (() => {
-        type JobModerationInsightKey = "insightManyPending" | "insightOnePending" | "insightQueueClear" | "insightRejectedReview";
-        const insights: JobModerationInsightKey[] = [];
-        if (statusFilter === "pending_review") {
-          if (rows.length > 3) insights.push("insightManyPending");
-          else if (rows.length === 1) insights.push("insightOnePending");
-          else if (rows.length === 0) insights.push("insightQueueClear");
-        } else if (statusFilter === "rejected" && rows.length > 0) {
-          insights.push("insightRejectedReview");
-        }
-        if (!insights.length) return null;
-        return (
-          <section
-            aria-label={t("aiInsightsTitle")}
-            className="mb-4 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 "
-          >
-            <div className="mb-3 flex items-center gap-2">
-              <span className="flex size-6 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              <p className="text-sm font-semibold text-[var(--text-primary)]">{t("aiInsightsTitle")}</p>
+      <div className="space-y-4">
+        <KpiRow cols={4}>
+          <KpiTile label={t("kpiPending")} value={pendingQuery.isPending ? "—" : String(pending.length)} icon={ListChecks} />
+          <KpiTile
+            label={t("kpiOverdue")}
+            value={pendingQuery.isPending ? "—" : String(overdue)}
+            icon={AlertTriangle}
+            hint={overdue > 0 ? t("overdueHint") : undefined}
+          />
+          <KpiTile label={t("kpiUnclaimed")} value={pendingQuery.isPending ? "—" : String(unclaimed)} icon={UserPlus} />
+          <KpiTile label={t("kpiClaimedByMe")} value={pendingQuery.isPending ? "—" : String(mine)} icon={UserCheck} />
+        </KpiRow>
+
+        <Card>
+          <CardHeader>
+            <div>
+              <CardTitle>{t("title")}</CardTitle>
             </div>
-            <ul className="space-y-1.5">
-              {insights.map((key) => (
-                <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                  {t(key)}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })()}
-
-      {/* Status filter tab chips */}
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex flex-wrap gap-2" role="group" aria-label={t("filterLabel")}>
-          {STATUS_FILTERS.map((s) => (
-            <button
-              key={s}
-              onClick={() => setStatusFilter(s)}
-              aria-pressed={statusFilter === s}
-              className={cn(
-                "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
-                statusFilter === s
-                  ? s === "pending_review"
-                    ? "border-[var(--amber-500)]/30 bg-[var(--amber-600)] text-white shadow-sm"
-                    : s === "active"
-                      ? "border-[var(--teal-500)]/30 bg-[var(--teal-600)] text-white shadow-sm"
-                      : s === "rejected"
-                        ? "border-[var(--red-500)]/30 bg-[var(--red-600)] text-white shadow-sm"
-                        : "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm"
-                  : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
-              )}
-            >
-              {tj(`enums.status.${s}`)}
-            </button>
-          ))}
-        </div>
-        {pendingRows.length > 0 && statusFilter === "pending_review" && (
-          <label className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)]">
-            <input
-              type="checkbox"
-              checked={allPendingSelected}
-              onChange={(e) =>
-                setSelectedIds(
-                  e.target.checked ? new Set(pendingRows.map((r) => r.id)) : new Set(),
-                )
-              }
-              className="size-4 cursor-pointer rounded border-[var(--border-default)] accent-[var(--brand-primary)]"
-            />
-            {tm("moderationQueue.selectAll")}
-          </label>
-        )}
-      </div>
-
-      {/* Bulk action bar */}
-      {selectedIds.size > 0 && (
-        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-[var(--border-default)] bg-white px-4 py-2.5">
-          <span className="text-sm font-semibold text-[var(--text-primary)]">
-            {tm("moderationQueue.selectedCount", { count: selectedIds.size })}
-          </span>
-          <div className="ml-auto flex flex-wrap gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setSelectedIds(new Set())}>
-              {tm("moderationQueue.clearSelection")}
-            </Button>
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={() => {
-                setReason("");
-                setReasonError(null);
-                setBulkKind("reject");
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <FilterBar
+              search={{
+                value: search,
+                onChange: setSearch,
+                placeholder: t("searchPlaceholder"),
               }}
             >
-              <XCircle aria-hidden weight="bold" className="size-4" />
-              {tm("moderationQueue.bulkReject")}
-            </Button>
-            <Button variant="primary" size="sm" onClick={() => setBulkKind("approve")}>
-              <CheckCircle aria-hidden weight="bold" className="size-4" />
-              {tm("moderationQueue.bulkApprove")}
-            </Button>
-          </div>
-        </div>
-      )}
+              <SegmentedControl
+                ariaLabel={t("filterLabel")}
+                value={statusFilter}
+                onValueChange={setStatusFilter}
+                size="sm"
+                options={STATUS_FILTERS.map((s) => ({ value: s, label: tj(`enums.status.${s}`) }))}
+              />
+            </FilterBar>
 
-      {query.isError &&
-      !(query.error instanceof ApiError && (query.error.isPermissionError || query.error.isAuthError)) ? (
-        <EmptyState
-          kind="error"
-          icon={WarningCircle}
-          title={tStates("errorTitle")}
-          description={tStates("errorBody")}
-          action={
-            <Button variant="secondary" onClick={() => query.refetch()}>
-              {tc("retry")}
-            </Button>
-          }
-        />
-      ) : (
-        <DataTable
-          columns={columns}
-          rows={rows}
-          getRowId={(r) => r.id}
-          loading={query.isPending}
-          caption={t("title")}
-          empty={{
-            kind: "empty",
-            icon: Briefcase,
-            title: t("empty"),
-            description: t("emptyBody"),
-          }}
-        />
-      )}
+            {isHardError ? (
+              <EmptyState
+                kind="error"
+                title={tStates("errorTitle")}
+                description={tStates("errorBody")}
+                action={
+                  <Button variant="secondary" onClick={() => query.refetch()}>
+                    {tc("retry")}
+                  </Button>
+                }
+              />
+            ) : (
+              <DataTable
+                columns={columns}
+                data={rows}
+                getRowId={(r) => r.id}
+                loading={query.isPending}
+                globalFilter={search}
+                onRowClick={(r) => setSelected(r)}
+                activeRowId={selected?.id}
+                enableSelection={selectionEnabled}
+                bulkActions={(sel, clear) => (
+                  <>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => {
+                        setReason("");
+                        setReasonCode("other");
+                        setReasonError(null);
+                        setBulkSelection({ ids: sel.map((r) => r.id), clear });
+                        setBulkKind("reject");
+                      }}
+                    >
+                      <X className="size-4" strokeWidth={2} />
+                      {tm("moderationQueue.bulkReject")}
+                    </Button>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => {
+                        setBulkSelection({ ids: sel.map((r) => r.id), clear });
+                        setBulkKind("approve");
+                      }}
+                    >
+                      <Check className="size-4" strokeWidth={2} />
+                      {tm("moderationQueue.bulkApprove")}
+                    </Button>
+                  </>
+                )}
+                empty={<EmptyState kind="empty" title={t("empty")} description={t("emptyBody")} />}
+              />
+            )}
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Review drawer */}
-      <Sheet
+      <DetailSheet
         open={selected !== null && !approveOpen && !rejectOpen && !escalateOpen}
         onClose={() => setSelected(null)}
-        title={t("reviewTitle")}
+        title={selected?.title ?? ""}
+        subtitle={
+          selected
+            ? `${labels.employmentType(selected.employment_type, selected.employment_type_label)} · ${labels.locationType(selected.location_type, selected.location_type_label)}`
+            : undefined
+        }
         closeLabel={tc("close")}
+        width="lg"
+        status={
+          selected ? (
+            <>
+              <StatusChip tone={JOB_STATUS_CHIP[selected.status] ?? "neutral"} dot>
+                {labels.status(selected.status, selected.status_label)}
+              </StatusChip>
+              <StatusChip tone={MODERATION_CHIP[selected.moderation_status] ?? "neutral"} dot>
+                {labels.moderation(selected.moderation_status, selected.moderation_status_label)}
+              </StatusChip>
+              <SlaChip job={selected} />
+              <ClaimChip job={selected} userId={userId} />
+            </>
+          ) : undefined
+        }
+        footer={
+          selected && isPending ? (
+            <>
+              {canClaim && (
+                <Button variant="secondary" size="sm" loading={claim.isPending} onClick={() => claim.mutate(selected)}>
+                  <UserCheck className="size-4" strokeWidth={1.8} />
+                  {tm("moderationQueue.claim")}
+                </Button>
+              )}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setEscalateNote("");
+                  setEscalateReasonCode("policy_violation");
+                  setEscalateOpen(true);
+                }}
+              >
+                <Flag className="size-4" strokeWidth={1.8} />
+                {tm("moderationQueue.escalate")}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-[var(--content-danger)]"
+                onClick={() => {
+                  setReason("");
+                  setReasonCode("other");
+                  setReasonError(null);
+                  setRejectOpen(true);
+                }}
+              >
+                <X className="size-4" strokeWidth={1.8} />
+                {t("reject")}
+              </Button>
+              <Button variant="primary" size="sm" onClick={() => setApproveOpen(true)}>
+                <Check className="size-4" strokeWidth={2} />
+                {t("approve")}
+              </Button>
+            </>
+          ) : undefined
+        }
       >
         {selected && (
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-base font-bold text-[var(--text-primary)]">
-                {selected.title}
-              </h3>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                <StatusBadge tone={JOB_STATUS_TONE[selected.status] ?? "info"}>
-                  {labels.status(selected.status, selected.status_label)}
-                </StatusBadge>
-                <StatusBadge tone={MODERATION_TONE[selected.moderation_status] ?? "info"}>
-                  {labels.moderation(selected.moderation_status, selected.moderation_status_label)}
-                </StatusBadge>
-                <SlaBadge
-                  dueBy={selected.due_by}
-                  ageHours={selected.age_hours}
-                  isOverdue={selected.is_overdue}
-                />
-                <ClaimBadge claimedBy={selected.claimed_by} isMine={selected.claimed_by === userId} />
-              </div>
-            </div>
+          <>
+            <DetailSheetSection title={t("sectionDetails")}>
+              <dl className="space-y-2.5">
+                <SheetField label={tj("salary")}>
+                  {formatSalary(selected.salary, locale) ?? tj("salaryUndisclosed")}
+                </SheetField>
+                <SheetField label={tj("location")}>
+                  {formatLocation(selected.location_city, selected.location_country)}
+                </SheetField>
+                <SheetField label={tj("visibilityLabel")}>{labels.visibility(selected.visibility)}</SheetField>
+                <SheetField label={t("colSubmitted")}>{formatDateTime(selected.created_at, locale)}</SheetField>
+              </dl>
+            </DetailSheetSection>
 
-            <Field label={tj("employmentType")}>
-              {labels.employmentType(selected.employment_type, selected.employment_type_label)}
-              {" · "}
-              {labels.locationType(selected.location_type, selected.location_type_label)}
-            </Field>
-            <Field label={tj("location")}>
-              {formatLocation(selected.location_city, selected.location_country)}
-            </Field>
-            <Field label={tj("salary")}>
-              {formatSalary(selected.salary, locale) ?? tj("salaryUndisclosed")}
-            </Field>
-            <Field label={tj("visibilityLabel")}>{labels.visibility(selected.visibility)}</Field>
+            <DetailSheetSection title={t("sectionContent")}>
+              {detailQuery.isPending ? (
+                <div className="h-24 animate-skeleton rounded-lg bg-[var(--bg-muted)]" />
+              ) : detail ? (
+                <div className="space-y-3 text-[0.8125rem] text-foreground">
+                  <p className="whitespace-pre-wrap">{detail.description}</p>
+                  {detail.requirements && (
+                    <div>
+                      <p className="mb-1 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+                        {tj("requirements")}
+                      </p>
+                      <p className="whitespace-pre-wrap">{detail.requirements}</p>
+                    </div>
+                  )}
+                  {detail.required_skills.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {detail.required_skills.map((s) => (
+                        <StatusChip key={s} tone="neutral" size="sm">
+                          {s}
+                        </StatusChip>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="type-small text-muted-foreground">{t("detailUnavailable")}</p>
+              )}
+            </DetailSheetSection>
 
-            {/* Full detail (when the moderator can read it). */}
-            {detailQuery.isPending ? (
-              <p className="text-sm text-[var(--text-muted)]">{tc("loading")}</p>
-            ) : detail ? (
-              <>
-                <Field label={tj("description")}>
-                  <span className="whitespace-pre-wrap">{detail.description}</span>
-                </Field>
-                {detail.requirements && (
-                  <Field label={tj("requirements")}>
-                    <span className="whitespace-pre-wrap">{detail.requirements}</span>
-                  </Field>
-                )}
-                {detail.required_skills.length > 0 && (
-                  <Field label={tj("requiredSkills")}>
-                    {detail.required_skills.join(", ")}
-                  </Field>
-                )}
-              </>
-            ) : (
-              <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-xs text-[var(--text-muted)] ">
-                {t("detailUnavailable")}
-              </p>
+            {!isPending && (
+              <DetailSheetSection>
+                <p className="type-small text-muted-foreground">{t("notPending")}</p>
+              </DetailSheetSection>
             )}
-
-            {isPending ? (
-              <div className="flex flex-col gap-2 pt-2">
-                {canClaim && (
-                  <Button
-                    variant="secondary"
-                    fullWidth
-                    loading={claim.isPending}
-                    onClick={() => claim.mutate(selected)}
-                  >
-                    <UserCheck aria-hidden weight="bold" className="size-4" />
-                    {tm("moderationQueue.claim")}
-                  </Button>
-                )}
-                <Button variant="primary" fullWidth onClick={() => setApproveOpen(true)}>
-                  <CheckCircle aria-hidden weight="bold" className="size-4" />
-                  {t("approve")}
-                </Button>
-                <Button
-                  variant="danger"
-                  fullWidth
-                  onClick={() => {
-                    setReason("");
-                    setReasonCode("other");
-                    setReasonError(null);
-                    setRejectOpen(true);
-                  }}
-                >
-                  <XCircle aria-hidden weight="bold" className="size-4" />
-                  {t("reject")}
-                </Button>
-                {canEscalate && (
-                  <Button
-                    variant="ghost"
-                    fullWidth
-                    onClick={() => {
-                      setEscalateNote("");
-                      setEscalateReasonCode("policy_violation");
-                      setEscalateOpen(true);
-                    }}
-                  >
-                    <Flag aria-hidden weight="bold" className="size-4" />
-                    {tm("moderationQueue.escalate")}
-                  </Button>
-                )}
-              </div>
-            ) : (
-              <p className="rounded-xl border border-[var(--border-default)] bg-white px-3 py-2 text-sm text-[var(--text-secondary)] ">
-                {t("notPending")}
-              </p>
-            )}
-          </div>
+          </>
         )}
-      </Sheet>
+      </DetailSheet>
 
       {/* Approve modal */}
       <Modal
@@ -582,17 +586,13 @@ export function JobModerationScreen() {
             <Button variant="ghost" onClick={() => setApproveOpen(false)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={approve.isPending}
-              onClick={() => selected && approve.mutate(selected)}
-            >
+            <Button variant="primary" loading={approve.isPending} onClick={() => selected && approve.mutate(selected)}>
               {t("approveConfirm")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("approveNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("approveNote")}</p>
       </Modal>
 
       {/* Reject modal */}
@@ -625,40 +625,19 @@ export function JobModerationScreen() {
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="reject-reason-code"
-            value={reasonCode}
-            onChange={setReasonCode}
+          <ReasonCodeSelect id="reject-reason-code" value={reasonCode} onChange={setReasonCode} />
+          <Textarea
+            label={t("reasonLabel")}
+            required
+            rows={3}
+            value={reason}
+            error={reasonError ?? undefined}
+            help={t("reasonHint")}
+            onChange={(e) => {
+              setReason(e.target.value);
+              if (reasonError) setReasonError(null);
+            }}
           />
-          <div>
-            <label
-              htmlFor="reject-reason"
-              className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
-            >
-              {t("reasonLabel")}
-              <span className="ml-0.5 text-[var(--brand-red)]" aria-hidden>
-                *
-              </span>
-            </label>
-            <textarea
-              id="reject-reason"
-              rows={3}
-              value={reason}
-              onChange={(e) => {
-                setReason(e.target.value);
-                if (reasonError) setReasonError(null);
-              }}
-              aria-invalid={reasonError ? true : undefined}
-              aria-describedby={reasonError ? "reject-reason-error" : undefined}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
-            />
-            {reasonError && (
-              <p id="reject-reason-error" className="mt-1 text-xs font-medium text-[var(--brand-red)]">
-                {reasonError}
-              </p>
-            )}
-            <p className="mt-2 text-xs text-[var(--text-muted)]">{t("reasonHint")}</p>
-          </div>
         </div>
       </Modal>
 
@@ -675,37 +654,20 @@ export function JobModerationScreen() {
             <Button variant="ghost" onClick={() => setEscalateOpen(false)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={escalate.isPending}
-              onClick={() => selected && escalate.mutate(selected)}
-            >
+            <Button variant="primary" loading={escalate.isPending} onClick={() => selected && escalate.mutate(selected)}>
               {tm("moderationQueue.escalateConfirm")}
             </Button>
           </>
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="escalate-reason-code"
-            value={escalateReasonCode}
-            onChange={setEscalateReasonCode}
+          <ReasonCodeSelect id="escalate-reason-code" value={escalateReasonCode} onChange={setEscalateReasonCode} />
+          <Textarea
+            label={tm("moderationQueue.otherNoteLabel")}
+            rows={3}
+            value={escalateNote}
+            onChange={(e) => setEscalateNote(e.target.value)}
           />
-          <div>
-            <label
-              htmlFor="escalate-note"
-              className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
-            >
-              {tm("moderationQueue.otherNoteLabel")}
-            </label>
-            <textarea
-              id="escalate-note"
-              rows={3}
-              value={escalateNote}
-              onChange={(e) => setEscalateNote(e.target.value)}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
-            />
-          </div>
         </div>
       </Modal>
 
@@ -713,7 +675,7 @@ export function JobModerationScreen() {
       <Modal
         open={bulkKind === "approve"}
         onClose={() => setBulkKind(null)}
-        title={tm("moderationQueue.bulkApproveTitle", { count: selectedIds.size })}
+        title={tm("moderationQueue.bulkApproveTitle", { count: bulkSelection?.ids.length ?? 0 })}
         description={tm("moderationQueue.bulkApproveBody")}
         size="sm"
         closeLabel={tc("close")}
@@ -725,21 +687,21 @@ export function JobModerationScreen() {
             <Button
               variant="primary"
               loading={bulkApprove.isPending}
-              onClick={() => bulkApprove.mutate(Array.from(selectedIds))}
+              onClick={() => bulkSelection && bulkApprove.mutate(bulkSelection.ids)}
             >
               {tm("moderationQueue.bulkApproveConfirm")}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-[var(--text-secondary)]">{t("approveNote")}</p>
+        <p className="text-sm text-muted-foreground">{t("approveNote")}</p>
       </Modal>
 
       {/* Bulk reject confirm */}
       <Modal
         open={bulkKind === "reject"}
         onClose={() => setBulkKind(null)}
-        title={tm("moderationQueue.bulkRejectTitle", { count: selectedIds.size })}
+        title={tm("moderationQueue.bulkRejectTitle", { count: bulkSelection?.ids.length ?? 0 })}
         description={tm("moderationQueue.bulkRejectBody")}
         size="sm"
         closeLabel={tc("close")}
@@ -756,7 +718,7 @@ export function JobModerationScreen() {
                   setReasonError(t("reasonRequired"));
                   return;
                 }
-                bulkReject.mutate(Array.from(selectedIds));
+                if (bulkSelection) bulkReject.mutate(bulkSelection.ids);
               }}
             >
               {tm("moderationQueue.bulkRejectConfirm")}
@@ -765,36 +727,18 @@ export function JobModerationScreen() {
         }
       >
         <div className="space-y-3">
-          <ReasonCodeSelect
-            id="bulk-reject-reason-code"
-            value={reasonCode}
-            onChange={setReasonCode}
+          <ReasonCodeSelect id="bulk-reject-reason-code" value={reasonCode} onChange={setReasonCode} />
+          <Textarea
+            label={t("reasonLabel")}
+            required
+            rows={3}
+            value={reason}
+            error={reasonError ?? undefined}
+            onChange={(e) => {
+              setReason(e.target.value);
+              if (reasonError) setReasonError(null);
+            }}
           />
-          <div>
-            <label
-              htmlFor="bulk-reject-reason"
-              className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]"
-            >
-              {t("reasonLabel")}
-              <span className="ml-0.5 text-[var(--brand-red)]" aria-hidden>
-                *
-              </span>
-            </label>
-            <textarea
-              id="bulk-reject-reason"
-              rows={3}
-              value={reason}
-              onChange={(e) => {
-                setReason(e.target.value);
-                if (reasonError) setReasonError(null);
-              }}
-              aria-invalid={reasonError ? true : undefined}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:bg-white focus:ring-2 focus:ring-[var(--brand-primary)]/30"
-            />
-            {reasonError && (
-              <p className="mt-1 text-xs font-medium text-[var(--brand-red)]">{reasonError}</p>
-            )}
-          </div>
         </div>
       </Modal>
 
@@ -811,24 +755,50 @@ export function JobModerationScreen() {
           </Button>
         }
       >
-        {bulkResults && (
-          <BulkResultList
-            results={bulkResults}
-            getLabel={(id) => rows.find((r) => r.id === id)?.title ?? id}
-          />
-        )}
+        {bulkResults && <BulkResult results={bulkResults} rows={rows} />}
       </Modal>
     </>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function SheetField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div>
-      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-        {label}
+    <div className="flex items-baseline justify-between gap-4">
+      <dt className="type-small shrink-0 text-muted-foreground">{label}</dt>
+      <dd className="min-w-0 text-right text-[0.8125rem] font-medium text-foreground">{children}</dd>
+    </div>
+  );
+}
+
+function BulkResult({
+  results,
+  rows,
+}: {
+  results: BulkModerationResultItem[];
+  rows: OwnerJobSummary[];
+}) {
+  const t = useTranslations("common");
+  const failed = results.filter((r) => !r.success);
+  const succeeded = results.filter((r) => r.success);
+  const label = (id: string) => rows.find((r) => r.id === id)?.title ?? id;
+  return (
+    <div className="space-y-3">
+      <p className="text-sm font-semibold text-foreground">
+        {t("moderationQueue.bulkResultSummary", { success: succeeded.length, failed: failed.length })}
       </p>
-      <div className="mt-0.5 text-sm text-[var(--text-primary)]">{children}</div>
+      {failed.length > 0 && (
+        <ul
+          className="space-y-1.5 rounded-xl border p-3"
+          style={{ borderColor: "var(--content-danger)", background: "var(--content-danger-soft)" }}
+        >
+          {failed.map((r) => (
+            <li key={r.id} className="text-xs" style={{ color: "var(--content-danger)" }}>
+              <span className="font-semibold">{label(r.id)}</span>
+              {r.message ? `: ${r.message}` : ""}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

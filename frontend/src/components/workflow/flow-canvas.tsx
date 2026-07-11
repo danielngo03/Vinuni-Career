@@ -4,11 +4,14 @@ import { useCallback, useMemo } from "react";
 import {
   addEdge,
   Background,
+  BackgroundVariant,
   Controls,
+  MarkerType,
   ReactFlow,
   useEdgesState,
   useNodesState,
   type Connection,
+  type DefaultEdgeOptions,
   type Edge,
   type Node,
 } from "@xyflow/react";
@@ -16,6 +19,13 @@ import "@xyflow/react/dist/style.css";
 
 import type { FlowEdge, FlowGraph, FlowNode, WorkflowNodeType } from "@/lib/api/workflows";
 import { REACT_FLOW_NODE_TYPES } from "./node-types";
+
+/** Mono, subtly-arrowed default edges — the SHELL stays monochrome. */
+const DEFAULT_EDGE_OPTIONS: DefaultEdgeOptions = {
+  type: "smoothstep",
+  style: { stroke: "var(--border-strong)", strokeWidth: 1.5 },
+  markerEnd: { type: MarkerType.ArrowClosed, color: "var(--border-strong)", width: 16, height: 16 },
+};
 
 export interface NodeTypeDef {
   type: WorkflowNodeType;
@@ -112,7 +122,7 @@ export function FlowCanvas({
 
   return (
     <div
-      className="h-[560px] w-full rounded-2xl border border-[var(--border-subtle)]"
+      className="h-[560px] min-h-[560px] w-full overflow-hidden rounded-xl border border-border bg-[var(--bg-subtle)]"
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleDrop}
       data-testid="flow-canvas"
@@ -121,6 +131,7 @@ export function FlowCanvas({
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
+        defaultEdgeOptions={DEFAULT_EDGE_OPTIONS}
         onNodesChange={readOnly ? undefined : onNodesChange}
         onEdgesChange={readOnly ? undefined : onEdgesChange}
         onConnect={readOnly ? undefined : handleConnect}
@@ -129,8 +140,11 @@ export function FlowCanvas({
         nodesConnectable={!readOnly}
         fitView
       >
-        <Background />
-        <Controls />
+        <Background variant={BackgroundVariant.Dots} gap={18} size={1} color="var(--border-default)" />
+        <Controls
+          showInteractive={false}
+          className="!rounded-lg !border !border-border !bg-card !shadow-[var(--shadow-sm)]"
+        />
       </ReactFlow>
     </div>
   );

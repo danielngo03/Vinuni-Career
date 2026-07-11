@@ -1,39 +1,46 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  Activity,
   ArrowLeft,
-  Buildings,
-  ShieldWarning,
-  SignIn,
+  Check,
   Flag,
-  NotePencil,
-  ChartLineUp,
-  UserCircle,
-  CheckCircle,
+  Gauge,
   Plus,
-} from "@phosphor-icons/react";
+  StickyNote,
+  UserCircle,
+} from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import {
   Button,
-  DataTable,
-  EmptyState,
+  Input,
   Modal,
   Select,
-  Skeleton,
-  StatusBadge,
+  Textarea,
   Tabs,
   TabPanel,
-  Textarea,
   useToast,
-  type Column,
-  type StatusTone,
   type TabItem,
 } from "@/components/ui";
 import { PageHeader } from "@/components/layout/page-header";
-import { SectionCard } from "@/components/settings/section-card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardToolbar,
+  DataTable,
+  type ColumnDef,
+  EmptyState,
+  KpiRow,
+  KpiTile,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import {
   ApiError,
   organizationApi,
@@ -47,10 +54,10 @@ import { formatDateTime } from "@/lib/format";
 
 const TABS_ID = "partner-detail";
 
-const SEVERITY_TONE: Record<RiskFlagSeverity, StatusTone> = {
+const SEVERITY_CHIP: Record<RiskFlagSeverity, ChipTone> = {
   low: "info",
-  medium: "pending",
-  high: "rejected",
+  medium: "warning",
+  high: "danger",
 };
 
 const SEVERITY_LABEL_KEY: Record<RiskFlagSeverity, string> = {
@@ -68,20 +75,18 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
   const qc = useQueryClient();
   const getMessage = useApiErrorMessage();
 
-  const [tab, setTab] = useState("overview");
-  const [ownerDraft, setOwnerDraft] = useState<string>("");
-  const [ownerEditing, setOwnerEditing] = useState(false);
-  const [raiseOpen, setRaiseOpen] = useState(false);
-  const [flagType, setFlagType] = useState("");
-  const [flagSeverity, setFlagSeverity] = useState<RiskFlagSeverity>("medium");
-  const [flagNote, setFlagNote] = useState("");
-  const [resolving, setResolving] = useState<OrgRiskFlag | null>(null);
-  const [resolutionNote, setResolutionNote] = useState("");
-  const [noteDraft, setNoteDraft] = useState("");
-  const [noteError, setNoteError] = useState<string | null>(null);
+  const [tab, setTab] = React.useState("overview");
+  const [ownerDraft, setOwnerDraft] = React.useState<string>("");
+  const [ownerEditing, setOwnerEditing] = React.useState(false);
+  const [raiseOpen, setRaiseOpen] = React.useState(false);
+  const [flagType, setFlagType] = React.useState("");
+  const [flagSeverity, setFlagSeverity] = React.useState<RiskFlagSeverity>("medium");
+  const [flagNote, setFlagNote] = React.useState("");
+  const [resolving, setResolving] = React.useState<OrgRiskFlag | null>(null);
+  const [resolutionNote, setResolutionNote] = React.useState("");
+  const [noteDraft, setNoteDraft] = React.useState("");
+  const [noteError, setNoteError] = React.useState<string | null>(null);
 
-  // Company display name: best-effort from the registration list (CRM detail
-  // has no dedicated "get org by id" read for an arbitrary partner org).
   const registrationsQuery = useQuery({
     queryKey: ["admin", "partners", "all"],
     queryFn: () => partnerApi.listRegistrations(),
@@ -105,7 +110,6 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
     queryFn: () => organizationApi.getCampusOwner(orgId),
     retry: false,
   });
-  // University staff directory (own org's members) for the owner picker.
   const staffQuery = useQuery({
     queryKey: ["org", "members"],
     queryFn: () => organizationApi.listMembers(),
@@ -134,8 +138,7 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
   });
 
   const setOwner = useMutation({
-    mutationFn: (ownerUserId: string | null) =>
-      organizationApi.setCampusOwner(orgId, ownerUserId),
+    mutationFn: (ownerUserId: string | null) => organizationApi.setCampusOwner(orgId, ownerUserId),
     onSuccess: () => {
       setOwnerEditing(false);
       toast.show({ tone: "success", title: t("campusOwner.savedToast") });
@@ -184,15 +187,85 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
     onError: (e) => toast.show({ tone: "error", title: getMessage(e) }),
   });
 
-  // Gate on the profile-quality query as the representative "can I view this
-  // partner's CRM record" check (403 → permission state, 404 → not-found state).
+  const staffMembers = staffQuery.data?.data ?? [];
+  const owner = campusOwnerQuery.data?.campus_relationship_owner_id;
+
+  const items: TabItem[] = [
+    { value: "overview", label: t("tabs.overview"), icon: <Gauge aria-hidden className="size-4" strokeWidth={1.8} /> },
+    { value: "riskFlags", label: t("tabs.riskFlags"), icon: <Flag aria-hidden className="size-4" strokeWidth={1.8} /> },
+    { value: "notes", label: t("tabs.notes"), icon: <StickyNote aria-hidden className="size-4" strokeWidth={1.8} /> },
+    { value: "activity", label: t("tabs.activity"), icon: <Activity aria-hidden className="size-4" strokeWidth={1.8} /> },
+  ];
+
+  const riskFlagColumns: ColumnDef<OrgRiskFlag, unknown>[] = [
+    {
+      accessorKey: "flag_type",
+      header: t("riskFlags.type"),
+      cell: ({ row }) => <span className="font-semibold text-foreground">{row.original.flag_type}</span>,
+    },
+    {
+      accessorKey: "severity",
+      header: t("riskFlags.severity"),
+      cell: ({ row }) => (
+        <StatusChip tone={SEVERITY_CHIP[row.original.severity]} dot>
+          {t(SEVERITY_LABEL_KEY[row.original.severity] as never)}
+        </StatusChip>
+      ),
+    },
+    {
+      accessorKey: "is_resolved",
+      header: t("riskFlags.status"),
+      cell: ({ row }) => (
+        <StatusChip tone={row.original.is_resolved ? "success" : "warning"} dot>
+          {row.original.is_resolved ? t("riskFlags.resolved") : t("riskFlags.open")}
+        </StatusChip>
+      ),
+    },
+    {
+      accessorKey: "raised_at",
+      header: t("riskFlags.raisedAt"),
+      cell: ({ row }) => (
+        <span className="whitespace-nowrap type-small text-muted-foreground">
+          {formatDateTime(row.original.raised_at, locale)}
+        </span>
+      ),
+    },
+    {
+      id: "actions",
+      header: "",
+      meta: { align: "right" },
+      enableSorting: false,
+      cell: ({ row }) =>
+        !row.original.is_resolved ? (
+          <Button variant="ghost" size="sm" onClick={() => setResolving(row.original)}>
+            {t("riskFlags.resolve")}
+          </Button>
+        ) : null,
+    },
+  ];
+
+  const header = (
+    <PageHeader
+      title={registration?.company_name ?? t("title")}
+      actions={
+        <Link href="/university/partners">
+          <Button variant="secondary" size="sm">
+            <ArrowLeft className="size-4" strokeWidth={1.8} />
+            {t("backToList")}
+          </Button>
+        </Link>
+      }
+    />
+  );
+
+  // Gate on the profile-quality query (403 → permission, 401 → auth, 404 → not found).
   if (qualityQuery.isError && qualityQuery.error instanceof ApiError) {
     const err = qualityQuery.error;
     if (err.isPermissionError) {
       return (
         <>
           <PageHeader title={t("title")} />
-          <EmptyState kind="permission" icon={ShieldWarning} title={t("permissionTitle")} description={t("permissionBody")} />
+          <EmptyState kind="permission" title={t("permissionTitle")} description={t("permissionBody")} />
         </>
       );
     }
@@ -200,7 +273,7 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
       return (
         <>
           <PageHeader title={t("title")} />
-          <EmptyState kind="auth" icon={SignIn} title={tStates("authTitle")} description={tStates("authBody")} />
+          <EmptyState kind="auth" title={tStates("authTitle")} description={tStates("authBody")} />
         </>
       );
     }
@@ -208,291 +281,276 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
       return (
         <>
           <PageHeader title={t("title")} />
-          <EmptyState kind="empty" icon={Buildings} title={t("notFoundTitle")} description={t("notFoundBody")} />
+          <EmptyState kind="empty" title={t("notFoundTitle")} description={t("notFoundBody")} />
         </>
       );
     }
   }
 
-  const staffMembers = staffQuery.data?.data ?? [];
-  const owner = campusOwnerQuery.data?.campus_relationship_owner_id;
-
-  const items: TabItem[] = [
-    { value: "overview", label: t("tabs.overview"), icon: <ChartLineUp aria-hidden weight="duotone" className="size-4" /> },
-    { value: "riskFlags", label: t("tabs.riskFlags"), icon: <Flag aria-hidden weight="duotone" className="size-4" /> },
-    { value: "notes", label: t("tabs.notes"), icon: <NotePencil aria-hidden weight="duotone" className="size-4" /> },
-    { value: "activity", label: t("tabs.activity"), icon: <UserCircle aria-hidden weight="duotone" className="size-4" /> },
-  ];
-
-  const riskFlagColumns: Column<OrgRiskFlag>[] = [
-    {
-      key: "type",
-      header: t("riskFlags.type"),
-      cell: (f) => <span className="font-medium text-[var(--text-primary)]">{f.flag_type}</span>,
-    },
-    {
-      key: "severity",
-      header: t("riskFlags.severity"),
-      cell: (f) => (
-        <StatusBadge tone={SEVERITY_TONE[f.severity]}>
-          {t(SEVERITY_LABEL_KEY[f.severity] as never)}
-        </StatusBadge>
-      ),
-    },
-    {
-      key: "status",
-      header: t("riskFlags.status"),
-      cell: (f) => (
-        <StatusBadge tone={f.is_resolved ? "active" : "pending"}>
-          {f.is_resolved ? t("riskFlags.resolved") : t("riskFlags.open")}
-        </StatusBadge>
-      ),
-    },
-    {
-      key: "raised_at",
-      header: t("riskFlags.raisedAt"),
-      cell: (f) => formatDateTime(f.raised_at, locale),
-    },
-    {
-      key: "actions",
-      header: "",
-      align: "right",
-      cell: (f) =>
-        !f.is_resolved ? (
-          <Button variant="ghost" size="sm" onClick={() => setResolving(f)}>
-            {t("riskFlags.resolve")}
-          </Button>
-        ) : null,
-    },
-  ];
-
   return (
     <>
-      <PageHeader
-        title={registration?.company_name ?? t("title")}
-        actions={
-          <Link
-            href="/university/partners"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-          >
-            <ArrowLeft aria-hidden weight="bold" className="size-4" />
-            {t("backToList")}
-          </Link>
-        }
-      />
+      {header}
 
       <Tabs items={items} value={tab} onValueChange={setTab} ariaLabel={t("title")} idBase={TABS_ID} className="mb-6" />
 
+      {/* Overview */}
       <TabPanel tabsId={TABS_ID} value="overview" active={tab === "overview"}>
-        <div className="grid gap-5 lg:grid-cols-2">
-          <SectionCard title={t("profileQuality.title")} icon={ChartLineUp} iconGradient="icon-chip-primary">
-            {qualityQuery.isPending ? (
-              <Skeleton className="h-24 w-full" />
-            ) : qualityQuery.data ? (
-              <div className="space-y-3">
-                <p className="text-2xl font-black text-[var(--text-primary)]">
-                  {t("profileQuality.score", { score: qualityQuery.data.score })}
-                </p>
-                {qualityQuery.data.missing.length > 0 && (
-                  <div>
-                    <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                      {t("profileQuality.missingTitle")}
-                    </p>
-                    <ul className="flex flex-wrap gap-1.5">
-                      {qualityQuery.data.missing.map((check) => (
-                        <li
-                          key={check}
-                          className="rounded-md bg-[var(--amber-100)] px-2 py-1 text-xs font-medium text-[var(--amber-800)]"
-                        >
-                          {t.has(`profileQuality.check.${check}`)
-                            ? t(`profileQuality.check.${check}` as never)
-                            : check}
-                        </li>
-                      ))}
-                    </ul>
+        <div className="space-y-4">
+          <KpiRow cols={3}>
+            <KpiTile
+              label={t("profileQuality.title")}
+              value={qualityQuery.data ? t("profileQuality.score", { score: qualityQuery.data.score }) : "—"}
+              icon={Gauge}
+            />
+            <KpiTile
+              label={t("seats.title")}
+              value={
+                seatsQuery.data
+                  ? seatsQuery.data.unlimited
+                    ? String(seatsQuery.data.used)
+                    : `${seatsQuery.data.used}/${seatsQuery.data.limit ?? 0}`
+                  : "—"
+              }
+              icon={UserCircle}
+              hint={seatsQuery.data?.at_capacity ? t("seats.atCapacity") : undefined}
+            />
+            <KpiTile
+              label={t("riskFlags.title")}
+              value={riskFlagsQuery.data ? String(riskFlagsQuery.data.filter((f) => !f.is_resolved).length) : "—"}
+              icon={Flag}
+            />
+          </KpiRow>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <div>
+                  <CardTitle>{t("profileQuality.title")}</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {qualityQuery.isPending ? (
+                  <div className="h-24 animate-skeleton rounded-lg bg-[var(--bg-muted)]" />
+                ) : qualityQuery.data ? (
+                  <div className="space-y-3">
+                    <p className="type-metric text-foreground">{t("profileQuality.score", { score: qualityQuery.data.score })}</p>
+                    {qualityQuery.data.missing.length > 0 && (
+                      <div>
+                        <p className="mb-1.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+                          {t("profileQuality.missingTitle")}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {qualityQuery.data.missing.map((check) => (
+                            <StatusChip key={check} tone="warning" size="sm">
+                              {t.has(`profileQuality.check.${check}`)
+                                ? t(`profileQuality.check.${check}` as never)
+                                : check}
+                            </StatusChip>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : null}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div>
+                  <CardTitle>{t("campusOwner.title")}</CardTitle>
+                  <CardDescription>{t("campusOwner.intro")}</CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {campusOwnerQuery.isPending ? (
+                  <div className="h-10 animate-skeleton rounded-lg bg-[var(--bg-muted)]" />
+                ) : ownerEditing ? (
+                  <div className="flex flex-col gap-3">
+                    <Select
+                      label={t("campusOwner.assign")}
+                      value={ownerDraft}
+                      onChange={(e) => setOwnerDraft(e.target.value)}
+                      options={[
+                        { value: "", label: t("campusOwner.selectPlaceholder") },
+                        ...staffMembers
+                          .filter((m) => m.user_id)
+                          .map((m) => ({ value: m.user_id as string, label: m.full_name || m.user_email })),
+                      ]}
+                    />
+                    <div className="flex justify-end gap-2">
+                      <Button variant="ghost" size="sm" onClick={() => setOwnerEditing(false)}>
+                        {tc("cancel")}
+                      </Button>
+                      <Button variant="primary" size="sm" loading={setOwner.isPending} onClick={() => setOwner.mutate(ownerDraft || null)}>
+                        {t("campusOwner.save")}
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+                        {t("campusOwner.current")}
+                      </p>
+                      <p className="mt-0.5 truncate text-[0.8125rem] font-semibold text-foreground">
+                        {owner ? staffMembers.find((m) => m.user_id === owner)?.full_name ?? owner : t("campusOwner.none")}
+                      </p>
+                    </div>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => {
+                        setOwnerDraft(owner ?? "");
+                        setOwnerEditing(true);
+                      }}
+                    >
+                      {t("campusOwner.assign")}
+                    </Button>
                   </div>
                 )}
-              </div>
-            ) : null}
-          </SectionCard>
-
-          <SectionCard title={t("seats.title")} icon={UserCircle} iconGradient="icon-chip-info">
-            {seatsQuery.isPending ? (
-              <Skeleton className="h-10 w-full" />
-            ) : seatsQuery.data ? (
-              <div>
-                <p className="text-sm font-semibold text-[var(--text-primary)]">
-                  {seatsQuery.data.unlimited
-                    ? t("seats.unlimited", { used: seatsQuery.data.used })
-                    : t("seats.usage", { used: seatsQuery.data.used, max: seatsQuery.data.limit ?? 0 })}
-                </p>
-                {seatsQuery.data.at_capacity && (
-                  <p className="mt-1 text-xs font-medium text-[var(--amber-700)]">{t("seats.atCapacity")}</p>
-                )}
-              </div>
-            ) : null}
-          </SectionCard>
-
-          <SectionCard title={t("campusOwner.title")} description={t("campusOwner.intro")} icon={UserCircle} iconGradient="icon-chip-neutral" className="lg:col-span-2">
-            {campusOwnerQuery.isPending ? (
-              <Skeleton className="h-10 w-full" />
-            ) : ownerEditing ? (
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-                <div className="flex-1">
-                  <Select
-                    label={t("campusOwner.assign")}
-                    value={ownerDraft}
-                    onChange={(e) => setOwnerDraft(e.target.value)}
-                    options={[
-                      { value: "", label: t("campusOwner.selectPlaceholder") },
-                      ...staffMembers
-                        .filter((m) => m.user_id)
-                        .map((m) => ({ value: m.user_id as string, label: m.full_name || m.user_email })),
-                    ]}
-                  />
-                </div>
-                <div className="flex gap-2">
-                  <Button variant="ghost" onClick={() => setOwnerEditing(false)}>
-                    {tc("cancel")}
-                  </Button>
-                  <Button
-                    variant="primary"
-                    loading={setOwner.isPending}
-                    onClick={() => setOwner.mutate(ownerDraft || null)}
-                  >
-                    {t("campusOwner.save")}
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                    {t("campusOwner.current")}
-                  </p>
-                  <p className="mt-0.5 text-sm font-semibold text-[var(--text-primary)]">
-                    {owner
-                      ? staffMembers.find((m) => m.user_id === owner)?.full_name ?? owner
-                      : t("campusOwner.none")}
-                  </p>
-                </div>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => {
-                    setOwnerDraft(owner ?? "");
-                    setOwnerEditing(true);
-                  }}
-                >
-                  {t("campusOwner.assign")}
-                </Button>
-              </div>
-            )}
-          </SectionCard>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </TabPanel>
 
+      {/* Risk flags */}
       <TabPanel tabsId={TABS_ID} value="riskFlags" active={tab === "riskFlags"}>
-        <SectionCard title={t("riskFlags.title")} description={t("riskFlags.intro")}>
-          <div className="mb-4 flex justify-end">
-            <Button variant="primary" size="sm" onClick={() => setRaiseOpen(true)}>
-              <Plus aria-hidden weight="bold" className="size-4" />
-              {t("riskFlags.raise")}
-            </Button>
-          </div>
-          <DataTable
-            columns={riskFlagColumns}
-            rows={riskFlagsQuery.data ?? []}
-            getRowId={(f) => f.id}
-            loading={riskFlagsQuery.isPending}
-            caption={t("riskFlags.title")}
-            empty={{ kind: "empty", icon: Flag, title: t("riskFlags.empty") }}
-          />
-        </SectionCard>
-      </TabPanel>
-
-      <TabPanel tabsId={TABS_ID} value="notes" active={tab === "notes"}>
-        <SectionCard title={t("notes.title")} description={t("notes.intro")}>
-          <div className="mb-5 space-y-2">
-            <Textarea
-              label={t("notes.add")}
-              placeholder={t("notes.placeholder")}
-              rows={3}
-              value={noteDraft}
-              onChange={(e) => {
-                setNoteDraft(e.target.value);
-                if (noteError) setNoteError(null);
-              }}
-              error={noteError ?? undefined}
-            />
-            <div className="flex justify-end">
-              <Button
-                variant="primary"
-                size="sm"
-                loading={addNote.isPending}
-                onClick={() => {
-                  if (!noteDraft.trim()) {
-                    setNoteError(t("notes.emptyError"));
-                    return;
-                  }
-                  addNote.mutate();
-                }}
-              >
-                {t("notes.save")}
-              </Button>
+        <Card>
+          <CardHeader>
+            <div>
+              <CardTitle>{t("riskFlags.title")}</CardTitle>
+              <CardDescription>{t("riskFlags.intro")}</CardDescription>
             </div>
-          </div>
-          {notesQuery.isPending ? (
-            <Skeleton className="h-20 w-full" />
-          ) : (notesQuery.data ?? []).length === 0 ? (
-            <EmptyState kind="empty" icon={NotePencil} title={t("notes.empty")} />
-          ) : (
-            <ul className="space-y-3">
-              {(notesQuery.data ?? []).map((note: OrgNote) => (
-                <li key={note.id} className="rounded-xl border border-[var(--border-default)] bg-white p-4">
-                  <p className="text-sm text-[var(--text-primary)]">{note.body}</p>
-                  <p className="mt-1.5 text-xs text-[var(--text-muted)]">
-                    {formatDateTime(note.created_at, locale)}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </SectionCard>
+            <CardToolbar>
+              <Button variant="primary" size="sm" onClick={() => setRaiseOpen(true)}>
+                <Plus className="size-4" strokeWidth={2} />
+                {t("riskFlags.raise")}
+              </Button>
+            </CardToolbar>
+          </CardHeader>
+          <CardContent>
+            <DataTable
+              columns={riskFlagColumns}
+              data={riskFlagsQuery.data ?? []}
+              getRowId={(f) => f.id}
+              loading={riskFlagsQuery.isPending}
+              empty={<EmptyState kind="empty" title={t("riskFlags.empty")} />}
+            />
+          </CardContent>
+        </Card>
       </TabPanel>
 
-      <TabPanel tabsId={TABS_ID} value="activity" active={tab === "activity"}>
-        <div className="grid gap-5 lg:grid-cols-2">
-          <SectionCard title={t("activity.eventsTitle")}>
-            {activityQuery.isPending ? (
-              <Skeleton className="h-16 w-full" />
-            ) : activityQuery.data ? (
-              <p className="text-sm text-[var(--text-secondary)]">
-                {t("activity.total", { count: activityQuery.data.events.total })}
-              </p>
-            ) : null}
-          </SectionCard>
-          <SectionCard title={t("activity.campaignsTitle")}>
-            {activityQuery.isPending ? (
-              <Skeleton className="h-16 w-full" />
-            ) : activityQuery.data ? (
-              <p className="text-sm text-[var(--text-secondary)]">
-                {t("activity.total", { count: activityQuery.data.campaigns.total })}
-              </p>
-            ) : null}
-          </SectionCard>
-          <SectionCard title={t("activity.hiringTitle", { months: hiringQuery.data?.window_months ?? 12 })} className="lg:col-span-2">
-            {hiringQuery.isPending ? (
-              <Skeleton className="h-20 w-full" />
-            ) : hiringQuery.data ? (
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                <Stat label={t("activity.totalApplications")} value={hiringQuery.data.total_applications} />
-                <Stat label={t("activity.hired")} value={hiringQuery.data.hired} />
-                <Stat label={t("activity.offersAccepted")} value={hiringQuery.data.offers_accepted} />
-                <Stat label={t("activity.recentApplications")} value={hiringQuery.data.recent_applications} />
+      {/* Notes */}
+      <TabPanel tabsId={TABS_ID} value="notes" active={tab === "notes"}>
+        <Card>
+          <CardHeader>
+            <div>
+              <CardTitle>{t("notes.title")}</CardTitle>
+              <CardDescription>{t("notes.intro")}</CardDescription>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            <div className="space-y-2">
+              <Textarea
+                label={t("notes.add")}
+                placeholder={t("notes.placeholder")}
+                rows={3}
+                value={noteDraft}
+                error={noteError ?? undefined}
+                onChange={(e) => {
+                  setNoteDraft(e.target.value);
+                  if (noteError) setNoteError(null);
+                }}
+              />
+              <div className="flex justify-end">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  loading={addNote.isPending}
+                  onClick={() => {
+                    if (!noteDraft.trim()) {
+                      setNoteError(t("notes.emptyError"));
+                      return;
+                    }
+                    addNote.mutate();
+                  }}
+                >
+                  {t("notes.save")}
+                </Button>
               </div>
-            ) : null}
-          </SectionCard>
+            </div>
+            {notesQuery.isPending ? (
+              <div className="h-20 animate-skeleton rounded-lg bg-[var(--bg-muted)]" />
+            ) : (notesQuery.data ?? []).length === 0 ? (
+              <EmptyState kind="empty" title={t("notes.empty")} />
+            ) : (
+              <ul className="space-y-2.5">
+                {(notesQuery.data ?? []).map((note: OrgNote) => (
+                  <li key={note.id} className="rounded-xl border border-border bg-[var(--bg-subtle)] p-4">
+                    <p className="text-[0.8125rem] text-foreground">{note.body}</p>
+                    <p className="mt-1.5 type-caption text-muted-foreground">{formatDateTime(note.created_at, locale)}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </CardContent>
+        </Card>
+      </TabPanel>
+
+      {/* Activity */}
+      <TabPanel tabsId={TABS_ID} value="activity" active={tab === "activity"}>
+        <div className="space-y-4">
+          <KpiRow cols={4}>
+            <KpiTile
+              label={t("activity.totalApplications")}
+              value={hiringQuery.data ? String(hiringQuery.data.total_applications) : "—"}
+              icon={Activity}
+            />
+            <KpiTile label={t("activity.hired")} value={hiringQuery.data ? String(hiringQuery.data.hired) : "—"} icon={Check} />
+            <KpiTile
+              label={t("activity.offersAccepted")}
+              value={hiringQuery.data ? String(hiringQuery.data.offers_accepted) : "—"}
+              icon={Check}
+            />
+            <KpiTile
+              label={t("activity.recentApplications")}
+              value={hiringQuery.data ? String(hiringQuery.data.recent_applications) : "—"}
+              icon={Activity}
+            />
+          </KpiRow>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <div>
+                  <CardTitle>{t("activity.eventsTitle")}</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {activityQuery.isPending ? (
+                  <div className="h-6 animate-skeleton rounded bg-[var(--bg-muted)]" />
+                ) : activityQuery.data ? (
+                  <p className="type-metric text-foreground">{activityQuery.data.events.total}</p>
+                ) : null}
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div>
+                  <CardTitle>{t("activity.campaignsTitle")}</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {activityQuery.isPending ? (
+                  <div className="h-6 animate-skeleton rounded bg-[var(--bg-muted)]" />
+                ) : activityQuery.data ? (
+                  <p className="type-metric text-foreground">{activityQuery.data.campaigns.total}</p>
+                ) : null}
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </TabPanel>
 
@@ -508,29 +566,19 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
             <Button variant="ghost" onClick={() => setRaiseOpen(false)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="danger"
-              disabled={!flagType.trim()}
-              loading={raiseFlag.isPending}
-              onClick={() => raiseFlag.mutate()}
-            >
+            <Button variant="danger" disabled={!flagType.trim()} loading={raiseFlag.isPending} onClick={() => raiseFlag.mutate()}>
               {t("riskFlags.raiseConfirm")}
             </Button>
           </>
         }
       >
         <div className="space-y-4">
-          <div>
-            <label className="mb-1.5 block text-sm font-semibold text-[var(--text-primary)]">
-              {t("riskFlags.type")}
-            </label>
-            <input
-              value={flagType}
-              onChange={(e) => setFlagType(e.target.value)}
-              placeholder={t("riskFlags.typePlaceholder")}
-              className="w-full rounded-xl border border-[var(--border-default)] bg-white px-3.5 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--brand-primary)]/50 focus:ring-2 focus:ring-[var(--brand-primary)]/30"
-            />
-          </div>
+          <Input
+            label={t("riskFlags.type")}
+            placeholder={t("riskFlags.typePlaceholder")}
+            value={flagType}
+            onChange={(e) => setFlagType(e.target.value)}
+          />
           <Select
             label={t("riskFlags.severity")}
             value={flagSeverity}
@@ -541,12 +589,7 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
               { value: "high", label: t("riskFlags.severityHigh") },
             ]}
           />
-          <Textarea
-            label={t("riskFlags.note")}
-            rows={3}
-            value={flagNote}
-            onChange={(e) => setFlagNote(e.target.value)}
-          />
+          <Textarea label={t("riskFlags.note")} rows={3} value={flagNote} onChange={(e) => setFlagNote(e.target.value)} />
         </div>
       </Modal>
 
@@ -562,12 +605,8 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
             <Button variant="ghost" onClick={() => setResolving(null)}>
               {tc("cancel")}
             </Button>
-            <Button
-              variant="primary"
-              loading={resolveFlag.isPending}
-              onClick={() => resolving && resolveFlag.mutate(resolving)}
-            >
-              <CheckCircle aria-hidden weight="bold" className="size-4" />
+            <Button variant="primary" loading={resolveFlag.isPending} onClick={() => resolving && resolveFlag.mutate(resolving)}>
+              <Check className="size-4" strokeWidth={2} />
               {t("riskFlags.resolveConfirm")}
             </Button>
           </>
@@ -581,14 +620,5 @@ export function PartnerDetailScreen({ orgId }: { orgId: string }) {
         />
       </Modal>
     </>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: number }) {
-  return (
-    <div>
-      <p className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{value}</p>
-      <p className="mt-0.5 text-xs font-medium text-[var(--text-secondary)]">{label}</p>
-    </div>
   );
 }

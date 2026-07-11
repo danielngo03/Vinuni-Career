@@ -1,0 +1,112 @@
+{
+  "universityDashboard": {
+    "title": "University command center",
+    "subtitle": "Moderation, partner governance, and career-services health across the platform.",
+    "viewReports": "View reports",
+    "metaUpdated": "Market data updated {time}",
+    "kpi": {
+      "pendingApprovals": "Partner approvals",
+      "pendingApprovalsHint": "{count, plural, one {# awaiting review} other {# awaiting review}}",
+      "moderationQueue": "Moderation queue",
+      "moderationQueueHint": "{count, plural, one {# job to review} other {# jobs to review}}",
+      "atRisk": "At-risk students",
+      "atRiskHint": "Open flags to follow up",
+      "atRiskLocked": "Access restricted",
+      "activePartners": "Active partners",
+      "activeJobs": "Active jobs"
+    },
+    "hero": {
+      "eyebrow": "Governance load",
+      "title": "Open items needing university action",
+      "caption": "{moderation} to moderate · {partners} partner approvals",
+      "captionWithCare": "{moderation} to moderate · {partners} approvals · {care} student care",
+      "statusOnTrack": "On track",
+      "statusBuilding": "Building up",
+      "statusOverloaded": "Needs attention",
+      "chipModeration": "{count} moderation",
+      "chipPartners": "{count} approvals",
+      "chipCare": "{count} student care"
+    },
+    "reviewLoad": {
+      "title": "Review load by type",
+      "center": "Open",
+      "moderation": "Job moderation",
+      "partners": "Partner approvals",
+      "cvReviews": "CV reviews",
+      "atRisk": "At-risk flags",
+      "emptyTitle": "Nothing to review",
+      "emptyBody": "Queues are clear across moderation, partners, and career services."
+    },
+    "trend": {
+      "title": "Applications over time",
+      "subtitle": "Platform-wide, last 6 months",
+      "series": "Applications",
+      "emptyTitle": "No application data yet",
+      "emptyBody": "Application volume will appear here once students start applying."
+    },
+    "market": {
+      "title": "Hiring market",
+      "subtitle": "Active postings and 30-day momentum",
+      "activeJobs": "Active jobs",
+      "trend30d": "{count} posted in last 30 days",
+      "trendUp": "Up vs prior 30 days",
+      "trendDown": "Down vs prior 30 days",
+      "trendFlat": "Flat vs prior 30 days",
+      "topSkills": "Most in-demand skills",
+      "lowSignal": "Not enough active postings yet to read the market.",
+      "emptyTitle": "No market data yet",
+      "emptyBody": "Aggregate hiring signals appear once partners publish jobs.",
+      "viewReports": "Full market report"
+    },
+    "moderationQueue": {
+      "title": "Job moderation queue",
+      "openQueue": "Open queue",
+      "colJob": "Job",
+      "colEmployer": "Employer",
+      "colSubmitted": "Submitted",
+      "unknownCompany": "Anonymous employer",
+      "emptyTitle": "No jobs awaiting review",
+      "emptyBody": "Newly submitted jobs appear here for moderation."
+    },
+    "partnerRequests": {
+      "title": "Partner registration requests",
+      "openPartners": "Review partners",
+      "requestedOn": "Submitted {date}",
+      "unknownCompany": "Anonymous employer",
+      "emptyTitle": "No partner requests",
+      "emptyBody": "New partner registration requests appear here."
+    },
+    "attention": {
+      "title": "Needs review",
+      "moderation": "Jobs awaiting moderation",
+      "partners": "Partner approvals pending",
+      "atRisk": "At-risk students to follow up",
+      "cvReviews": "CV reviews in queue",
+      "emptyTitle": "You're all caught up",
+      "emptyBody": "No items are waiting on university action right now.",
+      "priorityHigh": "High",
+      "priorityMedium": "Medium",
+      "priorityLow": "Low"
+    },
+    "careerServices": {
+      "title": "Career-services health",
+      "subtitle": "Counselor workload snapshot",
+      "atRiskOpen": "Open at-risk flags",
+      "cvReviewsOpen": "Open CV reviews",
+      "activeCohorts": "Active cohorts",
+      "bySeverity": "At-risk by severity",
+      "open": "Open",
+      "lockedTitle": "Career-services access restricted",
+      "lockedBody": "You do not have permission to view career-services reporting.",
+      "emptyTitle": "No career-services activity",
+      "emptyBody": "At-risk flags and CV reviews appear here once counselors log them."
+    },
+    "activity": {
+      "title": "Recent submissions",
+      "moderationEvent": "Job submitted for moderation",
+      "partnerEvent": "Partner registration submitted",
+      "emptyTitle": "No recent submissions",
+      "emptyBody": "Recent jobs and partner requests appear here."
+    }
+  }
+}

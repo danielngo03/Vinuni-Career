@@ -10,9 +10,8 @@ import {
   UsersThree,
   CalendarBlank,
   Globe,
-  Briefcase,
   SealCheck,
-  Sparkle,
+  Briefcase,
   WarningCircle,
   Star,
 } from "@phosphor-icons/react";
@@ -155,7 +154,7 @@ export function CompanyDetailScreen({ slug }: { slug: string }) {
         </div>
       ) : company ? (
         <>
-          <header className="rounded-2xl border border-white/60 bg-white/82 p-5 shadow-[0_2px_16px_rgba(11,34,57,0.06)] backdrop-blur-md sm:p-6">
+          <header className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-card)] p-5 shadow-[0_1px_3px_rgba(0,0,0,0.05)] sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
               <CompanyAvatar
                 name={company.display_name}
@@ -210,7 +209,7 @@ export function CompanyDetailScreen({ slug }: { slug: string }) {
                   )}
                   {company.rating && company.rating.overall_avg != null && (
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--text-secondary)]">
-                      <Star aria-hidden weight="fill" className="size-4 text-[var(--brand-amber,#d97706)]" />
+                      <Star aria-hidden weight="fill" className="size-4 text-[var(--brand-amber)]" />
                       {company.rating.overall_avg.toFixed(1)}
                       <span className="font-normal text-[var(--text-muted)]">
                         ({t("reviewCount", { count: company.rating.review_count })})
@@ -250,25 +249,25 @@ export function CompanyDetailScreen({ slug }: { slug: string }) {
             </section>
           )}
 
-          {/* AI Career Intelligence panel */}
+          {/* At-a-glance company signals — deterministic highlights derived from
+              open roles, rating, and size. Not model output; no AI claim. */}
           {careerInsights.length > 0 && (
             <section
-              className="mt-6 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-5 backdrop-blur-xl"
-              aria-label={t("aiCareerInsightsTitle")}
+              className="mt-6 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-5"
+              aria-label={t("atAGlanceTitle")}
             >
               <h2 className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--text-primary)]">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-xl icon-chip-info shadow-sm">
-                  <Sparkle aria-hidden weight="duotone" className="size-4 text-white" />
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-xl icon-chip-neutral shadow-sm">
+                  <LightbulbFilament aria-hidden weight="duotone" className="size-4" />
                 </span>
-                {t("aiCareerInsightsTitle")}
+                {t("atAGlanceTitle")}
               </h2>
               <ul className="space-y-2">
                 {careerInsights.map((insight) => (
                   <li key={insight.key} className="flex items-start gap-2.5 text-sm text-[var(--text-secondary)]">
-                    <LightbulbFilament
+                    <span
                       aria-hidden
-                      weight="duotone"
-                      className="mt-0.5 size-4 shrink-0 text-[var(--ai-accent)]"
+                      className="mt-[7px] size-1.5 shrink-0 rounded-full bg-[var(--text-muted)]"
                     />
                     {insight.values ? t(insight.key, insight.values as Record<string, string>) : t(insight.key)}
                   </li>
@@ -280,7 +279,7 @@ export function CompanyDetailScreen({ slug }: { slug: string }) {
           <section className="mt-8">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold tracking-tight text-[var(--text-primary)]">
               {t("openRoles")}
-              <span className="rounded-full bg-white/70 px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)] ring-1 ring-white/50">
+              <span className="rounded-full bg-[var(--bg-muted)] px-2 py-0.5 text-xs font-semibold text-[var(--text-secondary)] ring-1 ring-[var(--border-default)]">
                 {company.active_job_count}
               </span>
             </h2>

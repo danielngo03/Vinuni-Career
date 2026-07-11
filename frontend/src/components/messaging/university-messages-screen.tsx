@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { PaperPlaneTilt, Megaphone } from "@phosphor-icons/react";
+import { Megaphone, Send } from "lucide-react";
 import { Button, Input, Modal, Textarea, useToast } from "@/components/ui";
 import { MessagingScreen } from "./messaging-screen";
 import { messagingApi } from "@/lib/api";
@@ -21,28 +21,23 @@ export function UniversityMessagesScreen() {
   const [composeOpen, setComposeOpen] = useState(false);
 
   return (
-    <div className="flex h-full flex-col gap-4">
-      <div className="flex items-center justify-between">
-        <div />
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => setComposeOpen(true)}
-        >
-          <Megaphone aria-hidden weight="duotone" className="size-4" />
-          {t("newAnnouncement")}
-        </Button>
-      </div>
-
-      <div className="flex-1">
-        <MessagingScreen />
-      </div>
-
-      <AnnounceModal
-        open={composeOpen}
-        onClose={() => setComposeOpen(false)}
+    <>
+      <MessagingScreen
+        persona="university"
+        headerActions={
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setComposeOpen(true)}
+          >
+            <Megaphone aria-hidden strokeWidth={1.9} className="size-4" />
+            {t("newAnnouncement")}
+          </Button>
+        }
       />
-    </div>
+
+      <AnnounceModal open={composeOpen} onClose={() => setComposeOpen(false)} />
+    </>
   );
 }
 
@@ -105,7 +100,7 @@ function AnnounceModal({
             loading={mutation.isPending}
             disabled={bodyEmpty}
           >
-            <PaperPlaneTilt aria-hidden weight="duotone" className="size-4" />
+            <Send aria-hidden strokeWidth={2} className="size-4" />
             {t("send")}
           </Button>
         </>
@@ -128,7 +123,7 @@ function AnnounceModal({
             maxLength={BODY_MAX}
             required
           />
-          <p aria-hidden className="mt-1 text-right text-xs text-[var(--text-muted)]">
+          <p aria-hidden className="mt-1 text-right type-caption tabular-nums text-muted-foreground">
             {body.length}/{BODY_MAX}
           </p>
         </div>

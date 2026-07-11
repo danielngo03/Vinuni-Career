@@ -1,20 +1,22 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CheckCircle, Flag, PlusCircle, XCircle } from "@phosphor-icons/react";
+import { AlertTriangle, CheckCircle2, Plus, XCircle } from "lucide-react";
+import { Button, Input, Modal, Select, Textarea, useToast } from "@/components/ui";
 import {
-  Button,
   DataTable,
-  Input,
-  Modal,
-  Select,
-  StatusBadge,
-  Textarea,
-  useToast,
-  type Column,
-} from "@/components/ui";
+  DetailSheet,
+  DetailSheetSection,
+  DetailRow,
+  EmptyState,
+  FilterBar,
+  StatusChip,
+  type ChipTone,
+  type ColumnDef,
+} from "@/components/kit";
+import { cn } from "@/lib/utils";
 import { CareerServicesShell } from "./career-services-shell";
 import { CareerServicesPermissionGate } from "./permission-gate";
 import { useApiErrorMessage } from "@/lib/auth/use-api-error";
@@ -30,18 +32,20 @@ import {
 } from "@/lib/api";
 import { formatDateTime } from "@/lib/format";
 
-const SEVERITY_TONE: Record<RiskSeverity, "closed" | "pending" | "rejected"> = {
-  low: "closed",
-  medium: "pending",
-  high: "rejected",
+const SEVERITY_TONE: Record<RiskSeverity, ChipTone> = {
+  low: "emerald",
+  medium: "amber",
+  high: "rose",
 };
 
-const STATUS_TONE: Record<RiskStatus, "pending" | "active" | "accepted" | "closed"> = {
-  open: "pending",
-  in_progress: "active",
-  resolved: "accepted",
-  dismissed: "closed",
+const STATUS_TONE: Record<RiskStatus, ChipTone> = {
+  open: "warning",
+  in_progress: "info",
+  resolved: "success",
+  dismissed: "neutral",
 };
+
+const STATUS_FILTERS: (RiskStatus | "")[] = ["", "open", "in_progress", "resolved", "dismissed"];
 
 export function AtRiskScreen() {
   const t = useTranslations("careerServices");
@@ -50,16 +54,18 @@ export function AtRiskScreen() {
   const getErrorMessage = useApiErrorMessage();
   const qc = useQueryClient();
 
-  const [statusFilter, setStatusFilter] = useState<RiskStatus | "">("");
-  const [createOpen, setCreateOpen] = useState(false);
-  const [studentId, setStudentId] = useState("");
-  const [reason, setReason] = useState<RiskReason>("academic_performance");
-  const [severity, setSeverity] = useState<RiskSeverity>("medium");
-  const [notes, setNotes] = useState("");
+  const [statusFilter, setStatusFilter] = React.useState<RiskStatus | "">("");
+  const [createOpen, setCreateOpen] = React.useState(false);
+  const [studentId, setStudentId] = React.useState("");
+  const [reason, setReason] = React.useState<RiskReason>("academic_performance");
+  const [severity, setSeverity] = React.useState<RiskSeverity>("medium");
+  const [notes, setNotes] = React.useState("");
 
-  const [resolveTarget, setResolveTarget] = useState<AtRiskFlag | null>(null);
-  const [resolveStatus, setResolveStatus] = useState<"resolved" | "dismissed">("resolved");
-  const [resolutionNotes, setResolutionNotes] = useState("");
+  const [resolveTarget, setResolveTarget] = React.useState<AtRiskFlag | null>(null);
+  const [resolveStatus, setResolveStatus] = React.useState<"resolved" | "dismissed">("resolved");
+  const [resolutionNotes, setResolutionNotes] = React.useState("");
+
+  const [openFlag, setOpenFlag] = React.useState<AtRiskFlag | null>(null);
 
   const query = useQuery({
     queryKey: ["career-services", "at-risk-flags", locale, statusFilter],
@@ -97,6 +103,7 @@ export function AtRiskScreen() {
       toast.show({ tone: "success", title: t("atRisk.resolvedToast") });
       setResolveTarget(null);
       setResolutionNotes("");
+      setOpenFlag(null);
       refresh();
     },
     onError: (error) => toast.show({ tone: "error", title: getErrorMessage(error) }),
@@ -112,75 +119,103 @@ export function AtRiskScreen() {
     onError: (error) => toast.show({ tone: "error", title: getErrorMessage(error) }),
   });
 
-  const flags = useMemo(() => query.data ?? [], [query.data]);
+  const flags = query.data ?? [];
   const permissionState =
     query.isError && query.error instanceof ApiError ? (
       <CareerServicesPermissionGate error={query.error} bodyOverride={t("atRisk.permissionBody")} />
     ) : null;
 
-  const columns: Column<AtRiskFlag>[] = [
+  const createButton = (
+    <Button onClick={() => setCreateOpen(true)} size="sm">
+      <Plus className="size-4" strokeWidth={2} />
+      {t("atRisk.flagStudent")}
+    </Button>
+  );
+
+  const columns: ColumnDef<AtRiskFlag, unknown>[] = [
     {
-      key: "student",
+      accessorKey: "student_id",
       header: t("atRisk.colStudent"),
-      cell: (r) => <span className="font-mono text-xs">{r.student_id}</span>,
+      cell: ({ row }) => <span className="font-mono text-xs text-foreground">{row.original.student_id}</span>,
     },
     {
-      key: "reason",
+      accessorKey: "reason_label",
       header: t("atRisk.colReason"),
-      cell: (r) => <span>{r.reason_label}</span>,
+      cell: ({ row }) => <span className="text-foreground">{row.original.reason_label}</span>,
     },
     {
-      key: "severity",
+      accessorKey: "severity",
       header: t("atRisk.colSeverity"),
-      cell: (r) => <StatusBadge tone={SEVERITY_TONE[r.severity]}>{r.severity_label}</StatusBadge>,
+      cell: ({ row }) => (
+        <StatusChip tone={SEVERITY_TONE[row.original.severity]} dot>
+          {row.original.severity_label}
+        </StatusChip>
+      ),
     },
     {
-      key: "status",
+      accessorKey: "status",
       header: t("atRisk.colStatus"),
-      cell: (r) => <StatusBadge tone={STATUS_TONE[r.status]}>{r.status_label}</StatusBadge>,
+      cell: ({ row }) => (
+        <StatusChip tone={STATUS_TONE[row.original.status]}>{row.original.status_label}</StatusChip>
+      ),
     },
     {
-      key: "created",
+      id: "created",
       header: t("atRisk.colFlagged"),
-      cell: (r) => <span className="text-xs text-[var(--text-secondary)]">{formatDateTime(r.created_at, locale)}</span>,
+      meta: { align: "right" },
+      cell: ({ row }) => (
+        <span className="type-small tabular-nums text-muted-foreground">
+          {formatDateTime(row.original.created_at, locale)}
+        </span>
+      ),
     },
     {
-      key: "actions",
-      header: t("atRisk.colActions"),
-      cell: (r) =>
-        r.status === "resolved" || r.status === "dismissed" ? (
-          <span className="text-xs text-[var(--text-muted)]">{r.resolution_notes}</span>
-        ) : (
-          <div className="flex gap-1.5">
-            {r.status === "open" && (
-              <Button variant="ghost" size="xs" onClick={() => markInProgress.mutate(r)}>
+      id: "actions",
+      header: "",
+      enableSorting: false,
+      meta: { align: "right" },
+      cell: ({ row }) => {
+        const r = row.original;
+        const resolved = r.status === "resolved" || r.status === "dismissed";
+        return (
+          <div className="flex items-center justify-end gap-1" onClick={(e) => e.stopPropagation()}>
+            {!resolved && r.status === "open" && (
+              <Button variant="ghost" size="sm" onClick={() => markInProgress.mutate(r)}>
                 {t("atRisk.startWork")}
               </Button>
             )}
-            <Button
-              variant="ghost"
-              size="xs"
-              onClick={() => {
-                setResolveTarget(r);
-                setResolveStatus("resolved");
-              }}
-            >
-              <CheckCircle aria-hidden weight="bold" className="size-4 text-[var(--color-success)]" />
-              {t("atRisk.resolve")}
-            </Button>
-            <Button
-              variant="ghost"
-              size="xs"
-              onClick={() => {
-                setResolveTarget(r);
-                setResolveStatus("dismissed");
-              }}
-            >
-              <XCircle aria-hidden weight="bold" className="size-4 text-[var(--text-muted)]" />
-              {t("atRisk.dismiss")}
+            {!resolved && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setResolveTarget(r);
+                    setResolveStatus("resolved");
+                  }}
+                >
+                  <CheckCircle2 className="size-4 text-[var(--content-success)]" strokeWidth={1.9} />
+                  {t("atRisk.resolve")}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setResolveTarget(r);
+                    setResolveStatus("dismissed");
+                  }}
+                >
+                  <XCircle className="size-4 text-muted-foreground" strokeWidth={1.9} />
+                  {t("atRisk.dismiss")}
+                </Button>
+              </>
+            )}
+            <Button variant="ghost" size="sm" onClick={() => setOpenFlag(r)}>
+              {t("atRisk.viewDetail")}
             </Button>
           </div>
-        ),
+        );
+      },
     },
   ];
 
@@ -188,45 +223,54 @@ export function AtRiskScreen() {
     <CareerServicesShell
       title={t("atRisk.title")}
       description={t("atRisk.subtitle")}
-      actions={
-        !permissionState && (
-          <div className="flex items-center gap-2">
-            <Select
-              aria-label={t("atRisk.filterStatus")}
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value as RiskStatus | "")}
-              options={[
-                { value: "", label: t("atRisk.allStatuses") },
-                { value: "open", label: t("riskStatus.open") },
-                { value: "in_progress", label: t("riskStatus.in_progress") },
-                { value: "resolved", label: t("riskStatus.resolved") },
-                { value: "dismissed", label: t("riskStatus.dismissed") },
-              ]}
-            />
-            <Button onClick={() => setCreateOpen(true)}>
-              <PlusCircle aria-hidden weight="bold" className="size-4" />
-              {t("atRisk.flagStudent")}
-            </Button>
-          </div>
-        )
-      }
+      actions={!permissionState ? createButton : undefined}
     >
       {permissionState ?? (
-        <DataTable
-          columns={columns}
-          rows={flags}
-          getRowId={(r) => r.id}
-          loading={query.isLoading}
-          caption={t("atRisk.title")}
-          empty={{
-            kind: "empty",
-            icon: Flag,
-            title: t("atRisk.emptyTitle"),
-            description: t("atRisk.emptyBody"),
-          }}
-        />
+        <div className="space-y-4">
+          <FilterBar>
+            <div className="flex flex-wrap gap-1.5" role="group" aria-label={t("atRisk.filterStatus")}>
+              {STATUS_FILTERS.map((s) => {
+                const active = statusFilter === s;
+                return (
+                  <button
+                    key={s || "all"}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setStatusFilter(s)}
+                    className={cn(
+                      "inline-flex items-center rounded-full border px-3 py-1 text-[0.8125rem] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+                      active
+                        ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                        : "border-border bg-card text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {s === "" ? t("atRisk.allStatuses") : t(`riskStatus.${s}`)}
+                  </button>
+                );
+              })}
+            </div>
+          </FilterBar>
+
+          <DataTable
+            columns={columns}
+            data={flags}
+            getRowId={(r) => r.id}
+            loading={query.isPending}
+            onRowClick={(r) => setOpenFlag(r)}
+            activeRowId={openFlag?.id ?? undefined}
+            empty={
+              <EmptyState
+                kind="empty"
+                icon={AlertTriangle}
+                title={t("atRisk.emptyTitle")}
+                description={t("atRisk.emptyBody")}
+              />
+            }
+          />
+        </div>
       )}
 
+      {/* Create flag */}
       <Modal
         open={createOpen}
         onClose={() => setCreateOpen(false)}
@@ -237,11 +281,7 @@ export function AtRiskScreen() {
             <Button variant="ghost" onClick={() => setCreateOpen(false)} disabled={create.isPending}>
               {t("cancel")}
             </Button>
-            <Button
-              loading={create.isPending}
-              disabled={!studentId.trim()}
-              onClick={() => create.mutate()}
-            >
+            <Button loading={create.isPending} disabled={!studentId.trim()} onClick={() => create.mutate()}>
               {t("save")}
             </Button>
           </>
@@ -278,6 +318,7 @@ export function AtRiskScreen() {
         </div>
       </Modal>
 
+      {/* Resolve / dismiss */}
       <Modal
         open={!!resolveTarget}
         onClose={() => setResolveTarget(null)}
@@ -288,11 +329,7 @@ export function AtRiskScreen() {
             <Button variant="ghost" onClick={() => setResolveTarget(null)} disabled={resolve.isPending}>
               {t("cancel")}
             </Button>
-            <Button
-              loading={resolve.isPending}
-              disabled={!resolutionNotes.trim()}
-              onClick={() => resolve.mutate()}
-            >
+            <Button loading={resolve.isPending} disabled={!resolutionNotes.trim()} onClick={() => resolve.mutate()}>
               {t("save")}
             </Button>
           </>
@@ -307,6 +344,107 @@ export function AtRiskScreen() {
           rows={4}
         />
       </Modal>
+
+      <AtRiskDetailSheet flag={openFlag} onClose={() => setOpenFlag(null)} />
     </CareerServicesShell>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Student / flag detail sheet                                                 */
+/* -------------------------------------------------------------------------- */
+
+function AtRiskDetailSheet({ flag, onClose }: { flag: AtRiskFlag | null; onClose: () => void }) {
+  const t = useTranslations("careerServices");
+  const tc = useTranslations("common");
+  const locale = useLocale();
+  const open = flag != null;
+
+  const interventionsQ = useQuery({
+    queryKey: ["career-services", "interventions", "for-student", flag?.student_id],
+    queryFn: () => careerServicesApi.listInterventions(locale, flag!.student_id),
+    enabled: open,
+    retry: false,
+  });
+
+  const interventions = interventionsQ.data ?? [];
+
+  return (
+    <DetailSheet
+      open={open}
+      onClose={onClose}
+      title={t("atRisk.detailTitle")}
+      subtitle={flag ? flag.student_id : undefined}
+      status={
+        flag ? (
+          <>
+            <StatusChip tone={STATUS_TONE[flag.status]}>{flag.status_label}</StatusChip>
+            <StatusChip tone={SEVERITY_TONE[flag.severity]} dot>
+              {flag.severity_label}
+            </StatusChip>
+          </>
+        ) : undefined
+      }
+      width="md"
+      closeLabel={tc("close")}
+    >
+      {flag && (
+        <>
+          <DetailSheetSection title={t("atRisk.detailFlagLabel")}>
+            <dl>
+              <DetailRow label={t("atRisk.colReason")}>{flag.reason_label}</DetailRow>
+              <DetailRow label={t("atRisk.colSeverity")}>{flag.severity_label}</DetailRow>
+              <DetailRow label={t("atRisk.colStatus")}>{flag.status_label}</DetailRow>
+              <DetailRow label={t("atRisk.colFlagged")}>{formatDateTime(flag.created_at, locale)}</DetailRow>
+            </dl>
+            {flag.notes && (
+              <div className="mt-3">
+                <p className="type-caption font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t("atRisk.notesLabel")}
+                </p>
+                <p className="mt-1 whitespace-pre-wrap text-[0.8125rem] text-foreground">{flag.notes}</p>
+              </div>
+            )}
+            {flag.resolution_notes && (
+              <div className="mt-3">
+                <p className="type-caption font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t("atRisk.detailResolutionLabel")}
+                </p>
+                <p className="mt-1 whitespace-pre-wrap text-[0.8125rem] text-foreground">
+                  {flag.resolution_notes}
+                </p>
+              </div>
+            )}
+          </DetailSheetSection>
+
+          <DetailSheetSection title={t("atRisk.detailInterventionsTitle")}>
+            {interventionsQ.isPending ? (
+              <div className="h-16 animate-skeleton rounded-lg bg-[var(--bg-muted)]" />
+            ) : interventions.length === 0 ? (
+              <p className="type-small text-muted-foreground">{t("atRisk.detailNoInterventions")}</p>
+            ) : (
+              <ul className="space-y-2.5">
+                {interventions.slice(0, 8).map((iv) => (
+                  <li key={iv.id} className="rounded-lg border border-border bg-[var(--bg-subtle)] p-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[0.8125rem] font-semibold text-foreground">
+                        {iv.intervention_type_label}
+                      </span>
+                      <StatusChip tone="neutral" size="sm">
+                        {iv.outcome_label}
+                      </StatusChip>
+                    </div>
+                    <p className="mt-1 line-clamp-3 type-small text-muted-foreground">{iv.description}</p>
+                    <p className="mt-1 type-caption tabular-nums text-muted-foreground">
+                      {formatDateTime(iv.created_at, locale)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </DetailSheetSection>
+        </>
+      )}
+    </DetailSheet>
   );
 }

@@ -34,13 +34,6 @@ export interface StudentRecentApplication {
   submitted_at: string;
 }
 
-export interface StudentRevealRequestItem {
-  application_id: string;
-  job_title: string | null;
-  company_name: string | null;
-  requested_at: string;
-}
-
 export interface StudentUpcomingInterview {
   id: string;
   application_id: string;
@@ -79,7 +72,6 @@ export interface StudentDashboard {
   completion_sections: CompletionSection[];
   next_actions: DashboardNextAction[];
   applications_recent: StudentRecentApplication[];
-  reveal_requests_pending: StudentRevealRequestItem[];
   upcoming_interviews: StudentUpcomingInterview[];
   upcoming_events: StudentUpcomingEvent[];
   /**
@@ -97,7 +89,6 @@ export interface PartnerDashboardMetrics {
   jobs_draft: number;
   jobs_pending_review: number;
   applications_total: number;
-  reveals_pending_response: number;
 }
 
 export interface PartnerJobAttentionItem {
@@ -111,8 +102,8 @@ export interface PartnerJobAttentionItem {
 export interface PartnerRecentApplication {
   id: string;
   job_title: string | null;
-  /** Anonymous handle, e.g. "UV-60ADB170". Never a real candidate name. */
-  candidate_handle: string;
+  /** The applicant's real name (identity is always present). */
+  candidate_name: string;
   status: string;
   status_label: string;
   submitted_at: string;
@@ -166,7 +157,6 @@ export interface PartnerOpsMetrics {
   jobs_draft: number;
   jobs_pending_review: number;
   applications_total: number;
-  reveals_pending_response: number;
   engagement: PartnerEngagementWidget;
 }
 
@@ -307,6 +297,101 @@ export interface PartnerAnalytics {
   monthly_trend: AnalyticsMonthlyPoint[];
 }
 
+/* ------------------- Recruiting funnel analytics (§6, NEW) ---------------- */
+
+/**
+ * Recruiting-funnel analytics read (`GET /dashboards/partner/analytics/
+ * recruiting-funnel`, design-spec §6). Extends the thin {@link PartnerAnalytics}
+ * funnel with step-over-step conversion, per-stage outcomes, and time-to-hire /
+ * time-in-stage medians. Every metric degrades honestly: `low_signal` and
+ * `median_days: null` mean "not enough data" — the UI renders an em dash / an
+ * honest note, never a fabricated number.
+ */
+export interface RecruitingFunnelStage {
+  stage: string;
+  label: string;
+  count: number;
+  /** Conversion vs the previous stage (0–100); null for the first stage. */
+  conversion_from_prev_pct: number | null;
+}
+
+export interface RecruitingStageOutcome {
+  stage_type: string;
+  label: string;
+  entered: number;
+  advanced: number;
+  rejected: number;
+  rolled_back: number;
+  active: number;
+  pass_rate_pct: number | null;
+}
+
+export interface TimeBucket {
+  label: string;
+  count: number;
+}
+
+export interface TimeToHire {
+  sample_size: number;
+  median_days: number | null;
+  low_signal: boolean;
+  buckets: TimeBucket[];
+}
+
+export interface TimeInStageItem {
+  stage_type: string;
+  label: string;
+  median_days: number | null;
+  sample_size: number;
+  low_signal: boolean;
+}
+
+export interface PartnerRecruitingFunnel {
+  funnel: RecruitingFunnelStage[];
+  stage_outcomes: RecruitingStageOutcome[];
+  time_to_hire: TimeToHire;
+  time_in_stage: TimeInStageItem[];
+}
+
+/* --------------------- Advertising performance (§6, NEW) ------------------ */
+
+/**
+ * Ad delivery read (`GET /dashboards/partner/analytics/advertising`, design-spec
+ * §6). Delivery counters (`impressions`/`clicks`/`apply_starts`) come from the
+ * real ad-event projection; `ctr_pct` is null until there is enough delivery to
+ * compute honestly (render "—", never 0-as-a-rate). `spend` is a frozen decimal
+ * string. `disclosure_class` drives the non-removable public sponsored label.
+ */
+export interface AdvertisingCampaignRow {
+  placement_id: string;
+  target_title: string | null;
+  placement_type_label: string;
+  status_label: string;
+  disclosure_class: string;
+  impressions: number;
+  clicks: number;
+  apply_starts: number;
+  ctr_pct: number | null;
+  spend: string | number | null;
+  currency: string;
+}
+
+export interface AdvertisingPerformanceTotals {
+  impressions: number;
+  clicks: number;
+  apply_starts: number;
+  ctr_pct: number | null;
+  spend: string | number | null;
+  currency: string;
+  active_count?: number;
+  campaigns?: number;
+}
+
+export interface PartnerAdvertisingPerformance {
+  campaigns: AdvertisingCampaignRow[];
+  totals: AdvertisingPerformanceTotals;
+}
+
 /* ---------------------- University reports/KPIs --------------------------- */
 
 export interface UniversityPlatformKpis {
@@ -326,6 +411,45 @@ export interface UniversityMonthlyPoint {
 export interface UniversityPlatformStats {
   kpis: UniversityPlatformKpis;
   monthly_applications: UniversityMonthlyPoint[];
+}
+
+/* ------------------ University market intelligence (read) ----------------- */
+
+export interface MarketEmploymentType {
+  type: string;
+  count: number;
+}
+
+export interface MarketSkill {
+  skill: string;
+  count: number;
+}
+
+/**
+ * Aggregate hiring-market intelligence read
+ * (`GET /dashboards/university/market-intelligence`, AI_PRODUCT_SPEC §3).
+ * University-staff-only. Deterministic aggregates only — no student /
+ * application / per-partner PII. `low_signal` (active_jobs < 5) means the
+ * numbers are too sparse to draw conclusions; the UI renders an honest note.
+ * The optional `ai_narrative` is a plain-text advisory briefing (no provider /
+ * model / token internals ever); `null` when the AI gateway is unavailable.
+ */
+export interface UniversityMarketIntelligence {
+  active_jobs: number;
+  jobs_last_30d: number;
+  jobs_prev_30d: number;
+  trend: "up" | "down" | "flat";
+  employment_types: MarketEmploymentType[];
+  top_skills: MarketSkill[];
+  /** Share of active jobs disclosing salary (0–100). */
+  salary_disclosure_rate: number;
+  low_signal: boolean;
+  /** ISO timestamp the snapshot was computed. */
+  computed_at: string;
+  /** True when serving a stale snapshot (live recompute failed). */
+  stale: boolean;
+  ai_narrative: string | null;
+  ai_narrative_available: boolean;
 }
 
 /* --------------------------- Pipeline overview ----------------------------- */
@@ -378,6 +502,27 @@ export const dashboardsApi = {
     return api.get<PartnerAnalytics>("/dashboards/partner/analytics");
   },
 
+  /**
+   * Recruiting-funnel analytics (§6) — step conversion, per-stage outcomes,
+   * time-to-hire / time-in-stage. Optional trailing-window range (ISO dates).
+   */
+  partnerRecruitingFunnel(params?: {
+    from?: string;
+    to?: string;
+  }): Promise<PartnerRecruitingFunnel> {
+    return api.get<PartnerRecruitingFunnel>(
+      "/dashboards/partner/analytics/recruiting-funnel",
+      { query: { from: params?.from, to: params?.to } },
+    );
+  },
+
+  /** Advertising delivery read (§6) — per-campaign impressions/clicks/CTR/spend. */
+  partnerAdvertisingPerformance(): Promise<PartnerAdvertisingPerformance> {
+    return api.get<PartnerAdvertisingPerformance>(
+      "/dashboards/partner/analytics/advertising",
+    );
+  },
+
   /** Partner pipeline overview — per-job candidate counts. */
   partnerPipelineOverview(): Promise<PartnerPipelineOverview> {
     return api.get<PartnerPipelineOverview>("/dashboards/partner/pipeline-overview");
@@ -386,5 +531,15 @@ export const dashboardsApi = {
   /** University platform KPI reports. */
   universityReports(): Promise<UniversityPlatformStats> {
     return api.get<UniversityPlatformStats>("/dashboards/university/reports");
+  },
+
+  /**
+   * Aggregate hiring-market intelligence (university staff only). Deterministic
+   * aggregates + optional masked AI narrative; never PII, never provider/model.
+   */
+  marketIntelligence(): Promise<UniversityMarketIntelligence> {
+    return api.get<UniversityMarketIntelligence>(
+      "/dashboards/university/market-intelligence",
+    );
   },
 };

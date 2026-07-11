@@ -1,34 +1,31 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import {
-  CalendarBlank,
-  LightbulbFilament,
-  Plus,
-  ShieldWarning,
-  SignIn,
-  Sparkle,
-  WarningCircle,
-} from "@phosphor-icons/react";
+import { CalendarClock, ClipboardCheck, ExternalLink, Plus, Ticket, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { Button } from "@/components/ui";
 import {
-  Button,
   DataTable,
+  type ColumnDef,
+  DetailRow,
+  DetailSheet,
+  DetailSheetSection,
   EmptyState,
-  StatusBadge,
-  type Column,
-} from "@/components/ui";
+  FilterBar,
+  KpiRow,
+  KpiTile,
+  PageHeader,
+  StatusChip,
+  type ChipTone,
+} from "@/components/kit";
 import { cn } from "@/lib/utils";
-import { PageHeader } from "@/components/layout/page-header";
-import {
-  useEventLabels,
-  EVENT_STATUS_TONE,
-  EVENT_MODERATION_TONE,
-} from "@/lib/events/labels";
+import { useEventLabels } from "@/lib/events/labels";
 import { formatEventWhen } from "@/lib/events/format";
-import { ApiError, eventsApi, type OwnerEventSummary } from "@/lib/api";
+import { ApiError, eventsApi, type EventStatus, type OwnerEventSummary } from "@/lib/api";
+
+const nf = new Intl.NumberFormat();
 
 const STATUS_FILTERS = [
   "all",
@@ -40,28 +37,18 @@ const STATUS_FILTERS = [
   "completed",
 ] as const;
 
-type PartnerEventInsightKey =
-  | "insightPendingEvents"
-  | "insightFillingUp"
-  | "insightPublishedActive"
-  | "insightNoRegistrations";
+const EVENT_STATUS_CHIP: Record<EventStatus, ChipTone> = {
+  draft: "neutral",
+  pending_review: "warning",
+  published: "success",
+  cancelled: "neutral",
+  completed: "sky",
+  rejected: "danger",
+};
 
-function derivePartnerEventInsights(rows: OwnerEventSummary[]): PartnerEventInsightKey[] {
-  const out: PartnerEventInsightKey[] = [];
-  if (rows.length === 0) return out;
-  const pendingCount = rows.filter((r) => r.status === "pending_review").length;
-  const publishedCount = rows.filter((r) => r.status === "published").length;
-  const fillingUp = rows.some(
-    (r) => r.capacity != null && r.capacity > 0 && r.registration_count / r.capacity >= 0.8,
-  );
-  const noRegistrations = rows.some(
-    (r) => r.status === "published" && r.registration_count === 0,
-  );
-  if (pendingCount > 0) out.push("insightPendingEvents");
-  if (fillingUp) out.push("insightFillingUp");
-  if (publishedCount > 0 && !fillingUp) out.push("insightPublishedActive");
-  if (noRegistrations) out.push("insightNoRegistrations");
-  return out.slice(0, 3);
+function fillPct(r: OwnerEventSummary): number | null {
+  if (r.capacity == null || r.capacity <= 0) return null;
+  return Math.min(100, Math.round((r.registration_count / r.capacity) * 100));
 }
 
 export function PartnerEventsScreen() {
@@ -71,7 +58,9 @@ export function PartnerEventsScreen() {
   const locale = useLocale();
   const labels = useEventLabels();
 
-  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = React.useState<string>("all");
+  const [search, setSearch] = React.useState("");
+  const [detailId, setDetailId] = React.useState<string | null>(null);
 
   const query = useInfiniteQuery({
     queryKey: ["events", "mine", statusFilter],
@@ -86,189 +75,134 @@ export function PartnerEventsScreen() {
     retry: false,
   });
 
-  const rows: OwnerEventSummary[] = useMemo(
+  const rows: OwnerEventSummary[] = React.useMemo(
     () => query.data?.pages.flatMap((p) => p.data) ?? [],
     [query.data],
   );
 
+  const detailEvent = detailId ? (rows.find((r) => r.id === detailId) ?? null) : null;
+
+  const kpi = React.useMemo(() => {
+    let published = 0;
+    let pending = 0;
+    let regs = 0;
+    for (const r of rows) {
+      if (r.status === "published") published += 1;
+      if (r.status === "pending_review") pending += 1;
+      regs += r.registration_count;
+    }
+    return { total: rows.length, published, pending, regs };
+  }, [rows]);
+
   const newButton = (
     <Link href="/partner/events/new">
-      <Button variant="primary">
-        <Plus aria-hidden weight="bold" className="size-4" />
+      <Button variant="primary" size="sm">
+        <Plus className="size-4" strokeWidth={2} />
         {t("newEvent")}
       </Button>
     </Link>
   );
+
+  const header = <PageHeader title={t("manageTitle")} subtitle={t("manageSubtitle")} actions={newButton} />;
 
   if (query.isError && query.error instanceof ApiError) {
     const err = query.error;
     if (err.isPermissionError || err.isAuthError) {
       return (
         <>
-          <PageHeader title={t("manageTitle")} description={t("manageSubtitle")} />
+          {header}
           <EmptyState
             kind={err.isPermissionError ? "permission" : "auth"}
-            icon={err.isPermissionError ? ShieldWarning : SignIn}
-            title={
-              err.isPermissionError
-                ? tStates("permissionTitle")
-                : tStates("authTitle")
-            }
-            description={
-              err.isPermissionError ? t("permissionBody") : tStates("authBody")
-            }
+            title={err.isPermissionError ? tStates("permissionTitle") : tStates("authTitle")}
+            description={err.isPermissionError ? t("permissionBody") : tStates("authBody")}
           />
         </>
       );
     }
   }
 
-  const columns: Column<OwnerEventSummary>[] = [
+  const columns: ColumnDef<OwnerEventSummary, unknown>[] = [
     {
-      key: "title",
+      accessorKey: "title",
       header: t("colTitle"),
-      cell: (r) => (
-        <Link
-          href={`/partner/events/${r.id}`}
-          className="font-semibold text-[var(--text-primary)] outline-none hover:text-[var(--brand-primary)] focus-visible:underline"
-        >
-          {r.title}
-        </Link>
-      ),
+      cell: ({ row }) => <span className="font-semibold text-foreground">{row.original.title}</span>,
     },
     {
-      key: "type",
+      id: "type",
       header: t("colType"),
-      cell: (r) => (
-        <span className="text-[var(--text-secondary)]">
-          {labels.eventType(r.event_type, r.event_type_label)}
+      cell: ({ row }) => (
+        <span className="type-small text-muted-foreground">
+          {labels.eventType(row.original.event_type, row.original.event_type_label)}
           {" · "}
-          {labels.format(r.format, r.format_label)}
+          {labels.format(row.original.format, row.original.format_label)}
         </span>
       ),
     },
     {
-      key: "when",
+      id: "when",
       header: t("colWhen"),
-      cell: (r) => (
-        <span className="text-[var(--text-secondary)]">
-          {formatEventWhen(r.starts_at, r.ends_at, locale)}
+      cell: ({ row }) => (
+        <span className="type-small text-muted-foreground">
+          {formatEventWhen(row.original.starts_at, row.original.ends_at, locale)}
         </span>
       ),
     },
     {
-      key: "registrations",
+      accessorKey: "registration_count",
       header: t("colRegistrations"),
-      cell: (r) => (
-        <span className="text-[var(--text-secondary)]">
-          {r.capacity != null
-            ? `${r.registration_count}/${r.capacity}`
-            : r.registration_count}
-        </span>
-      ),
+      meta: { align: "right" },
+      cell: ({ row }) => <RegistrationCell row={row.original} />,
     },
     {
-      key: "status",
+      accessorKey: "status",
       header: t("colStatus"),
-      cell: (r) => (
-        <div className="flex flex-col items-start gap-1">
-          <StatusBadge tone={EVENT_STATUS_TONE[r.status] ?? "info"}>
-            {labels.status(r.status, r.status_label)}
-          </StatusBadge>
-          {r.status === "pending_review" && (
-            <StatusBadge tone={EVENT_MODERATION_TONE[r.moderation_status] ?? "info"}>
-              {labels.moderation(r.moderation_status, r.moderation_status_label)}
-            </StatusBadge>
-          )}
-        </div>
-      ),
-    },
-    {
-      key: "actions",
-      header: "",
-      align: "right",
-      cell: (r) => (
-        <Link href={`/partner/events/${r.id}`}>
-          <Button variant="ghost" size="sm">
-            {t("manage")}
-          </Button>
-        </Link>
+      cell: ({ row }) => (
+        <StatusChip tone={EVENT_STATUS_CHIP[row.original.status] ?? "neutral"} dot>
+          {labels.status(row.original.status, row.original.status_label)}
+        </StatusChip>
       ),
     },
   ];
 
   return (
     <>
-      <PageHeader
-        title={t("manageTitle")}
-        description={t("manageSubtitle")}
-        actions={newButton}
-      />
+      {header}
 
-      {/* ── AI Events Overview ── */}
-      {!query.isPending && statusFilter === "all" && (() => {
-        const insights = derivePartnerEventInsights(rows);
-        if (!insights.length) return null;
-        return (
-          <section
-            aria-label={t("aiInsightsTitle")}
-            className="mb-4 rounded-2xl border border-[var(--ai-accent)]/25 bg-gradient-to-br from-[var(--ai-accent-soft)] to-white/60 p-4 "
-          >
-            <div className="mb-3 flex items-center gap-2">
-              <span className="flex size-6 items-center justify-center rounded-lg icon-chip-info shadow-sm">
-                <Sparkle aria-hidden weight="duotone" className="size-3.5 text-white" />
-              </span>
-              <p className="text-sm font-semibold text-[var(--text-primary)]">{t("aiInsightsTitle")}</p>
-            </div>
-            <ul className="space-y-1.5">
-              {insights.map((key) => (
-                <li key={key} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                  <LightbulbFilament aria-hidden className="mt-0.5 size-3.5 shrink-0 text-[var(--ai-accent)]" />
-                  {t(key)}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })()}
+      {rows.length > 0 && (
+        <KpiRow cols={4} className="mb-4">
+          <KpiTile label={t("kpi.total")} value={nf.format(kpi.total)} icon={CalendarClock} />
+          <KpiTile label={t("kpi.published")} value={nf.format(kpi.published)} icon={ClipboardCheck} />
+          <KpiTile label={t("kpi.pending")} value={nf.format(kpi.pending)} icon={CalendarClock} />
+          <KpiTile label={t("kpi.registrations")} value={nf.format(kpi.regs)} icon={Users} />
+        </KpiRow>
+      )}
 
-      {/* Status filter tab chips */}
-      {(() => {
-        const CHIP_ACTIVE: Record<string, string> = {
-          all: "border-[var(--brand-primary)]/30 bg-[var(--brand-primary)] text-white shadow-sm shadow-[var(--brand-primary)]/20",
-          draft: "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm",
-          pending_review: "border-[var(--amber-500)]/30 bg-[var(--amber-600)] text-white shadow-sm",
-          published: "border-[var(--teal-500)]/30 bg-[var(--teal-600)] text-white shadow-sm",
-          rejected: "border-[var(--red-500)]/30 bg-[var(--red-600)] text-white shadow-sm",
-          cancelled: "border-[var(--gray-500)]/30 bg-[var(--gray-600)] text-white shadow-sm",
-          completed: "border-teal-500/30 bg-teal-600 text-white shadow-sm",
-        };
-        return (
-          <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t("filterStatusLabel")}>
-            {STATUS_FILTERS.map((s) => (
-              <button
-                key={s}
-                onClick={() => setStatusFilter(s)}
-                aria-pressed={statusFilter === s}
-                className={cn(
-                  "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-primary)]",
-                  statusFilter === s
-                    ? CHIP_ACTIVE[s] ?? CHIP_ACTIVE.all
-                    : "border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:bg-white hover:text-[var(--text-primary)]",
-                )}
-              >
-                {s === "all" ? t("filterAllStatuses") : labels.status(s)}
-              </button>
-            ))}
-          </div>
-        );
-      })()}
+      <FilterBar
+        className="mb-4"
+        search={{ value: search, onChange: setSearch, placeholder: t("searchPlaceholder") }}
+      >
+        <div className="flex flex-wrap gap-1.5" role="group" aria-label={t("filterStatusLabel")}>
+          {STATUS_FILTERS.map((s) => (
+            <button
+              key={s}
+              onClick={() => setStatusFilter(s)}
+              aria-pressed={statusFilter === s}
+              className={cn(
+                "inline-flex items-center rounded-full border px-3 py-1 text-[0.8125rem] font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--field-focus-border)]",
+                statusFilter === s
+                  ? "border-transparent bg-foreground text-[var(--surface-card)]"
+                  : "border-border bg-card text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {s === "all" ? t("filterAllStatuses") : labels.status(s)}
+            </button>
+          ))}
+        </div>
+      </FilterBar>
 
-      {query.isError &&
-      !(query.error instanceof ApiError && (query.error.isPermissionError || query.error.isAuthError)) ? (
+      {query.isError && !(query.error instanceof ApiError && (query.error.isPermissionError || query.error.isAuthError)) ? (
         <EmptyState
           kind="error"
-          icon={WarningCircle}
           title={tStates("errorTitle")}
           description={tStates("errorBody")}
           action={
@@ -281,31 +215,144 @@ export function PartnerEventsScreen() {
         <>
           <DataTable
             columns={columns}
-            rows={rows}
+            data={rows}
             getRowId={(r) => r.id}
+            globalFilter={search}
             loading={query.isPending}
-            caption={t("manageTitle")}
-            empty={{
-              kind: "empty",
-              icon: CalendarBlank,
-              title: statusFilter === "all" ? t("noEventsTitle") : t("noEventsFilterTitle"),
-              description: statusFilter === "all" ? t("noEventsBody") : t("noEventsFilterBody"),
-              action: statusFilter === "all" ? newButton : undefined,
-            }}
+            onRowClick={(r) => setDetailId(r.id)}
+            activeRowId={detailId ?? undefined}
+            empty={
+              <EmptyState
+                kind="empty"
+                title={statusFilter === "all" ? t("noEventsTitle") : t("noEventsFilterTitle")}
+                description={statusFilter === "all" ? t("noEventsBody") : t("noEventsFilterBody")}
+                action={statusFilter === "all" ? newButton : undefined}
+              />
+            }
           />
           {query.hasNextPage && (
-            <div className="mt-6 flex justify-center">
-              <Button
-                variant="secondary"
-                loading={query.isFetchingNextPage}
-                onClick={() => query.fetchNextPage()}
-              >
-                {tc("loadMore")}
+            <div className="mt-4 flex justify-center">
+              <Button variant="secondary" loading={query.isFetchingNextPage} onClick={() => query.fetchNextPage()}>
+                {t("loadMore")}
               </Button>
             </div>
           )}
         </>
       )}
+
+      <EventQuickSheet event={detailEvent} onClose={() => setDetailId(null)} />
     </>
+  );
+}
+
+function RegistrationCell({ row }: { row: OwnerEventSummary }) {
+  const pct = fillPct(row);
+  return (
+    <div className="inline-flex flex-col items-end gap-1">
+      <span className="font-semibold tabular-nums text-foreground">
+        {row.capacity != null ? `${nf.format(row.registration_count)} / ${nf.format(row.capacity)}` : nf.format(row.registration_count)}
+      </span>
+      {pct != null && (
+        <span className="h-1.5 w-16 overflow-hidden rounded-full bg-[var(--bg-muted)]">
+          <span
+            className="block h-full rounded-full"
+            style={{ width: `${Math.max(pct, row.registration_count > 0 ? 4 : 0)}%`, background: "var(--viz-indigo)" }}
+          />
+        </span>
+      )}
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Quick-view sheet                                                             */
+/* -------------------------------------------------------------------------- */
+
+function EventQuickSheet({ event, onClose }: { event: OwnerEventSummary | null; onClose: () => void }) {
+  const t = useTranslations("eventsManage");
+  const tc = useTranslations("common");
+  const locale = useLocale();
+  const labels = useEventLabels();
+
+  if (!event) return null;
+  const e = event;
+  const pct = fillPct(e);
+  const where =
+    e.format === "online"
+      ? t("sheet.online")
+      : e.venue
+        ? [e.venue.name, e.venue.address].filter(Boolean).join(" · ") || "—"
+        : "—";
+
+  return (
+    <DetailSheet
+      open={!!event}
+      onClose={onClose}
+      title={e.title}
+      subtitle={`${labels.eventType(e.event_type, e.event_type_label)} · ${labels.format(e.format, e.format_label)}`}
+      closeLabel={tc("close")}
+      status={
+        <StatusChip tone={EVENT_STATUS_CHIP[e.status] ?? "neutral"} dot>
+          {labels.status(e.status, e.status_label)}
+        </StatusChip>
+      }
+      footer={
+        <>
+          {e.status === "published" && (
+            <Link href={`/events/${e.slug}`} target="_blank">
+              <Button variant="ghost" size="sm">
+                <ExternalLink className="size-4" strokeWidth={1.8} />
+                {t("sheet.preview")}
+              </Button>
+            </Link>
+          )}
+          <Link href={`/partner/events/${e.id}`}>
+            <Button variant="primary" size="sm">
+              {t("sheet.openManage")}
+            </Button>
+          </Link>
+        </>
+      }
+    >
+      <DetailSheetSection title={t("sheet.registrations")}>
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="type-metric text-foreground">{nf.format(e.registration_count)}</span>
+              {e.capacity != null && (
+                <span className="type-small text-muted-foreground">/ {nf.format(e.capacity)}</span>
+              )}
+            </div>
+            <p className="type-caption mt-0.5 text-muted-foreground">
+              {e.capacity != null ? `${pct}% ${t("sheet.fillRate").toLowerCase()}` : t("sheet.unlimited")}
+            </p>
+          </div>
+          <Ticket className="size-8 text-muted-foreground" strokeWidth={1.4} />
+        </div>
+        {pct != null && (
+          <span className="mt-3 block h-2 overflow-hidden rounded-full bg-[var(--bg-muted)]">
+            <span
+              className="block h-full rounded-full"
+              style={{ width: `${Math.max(pct, e.registration_count > 0 ? 4 : 0)}%`, background: "var(--viz-indigo)" }}
+            />
+          </span>
+        )}
+      </DetailSheetSection>
+
+      <DetailSheetSection title={t("sheet.title")}>
+        <dl>
+          <DetailRow label={t("sheet.when")}>{formatEventWhen(e.starts_at, e.ends_at, locale)}</DetailRow>
+          <DetailRow label={t("sheet.where")}>{where}</DetailRow>
+          <DetailRow label={t("sheet.capacity")}>
+            {e.capacity != null ? nf.format(e.capacity) : t("sheet.unlimited")}
+          </DetailRow>
+          <DetailRow label={t("sheet.publishState")}>
+            <StatusChip tone={EVENT_STATUS_CHIP[e.status] ?? "neutral"} size="sm">
+              {labels.status(e.status, e.status_label)}
+            </StatusChip>
+          </DetailRow>
+        </dl>
+      </DetailSheetSection>
+    </DetailSheet>
   );
 }
