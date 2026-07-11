@@ -397,79 +397,38 @@ Rate limit: max 200 bulk actions per partner per day
 
 ---
 
-## 4. Anonymous Apply — Deep Logic
+## 4. Application Identity — Deep Logic
 
-### 4.1 What Gets Hidden
+> **Owner decision 2026-07-10:** anonymous apply, blind-screening, and the
+> identity-reveal handshake are **removed product-wide**. Applications are
+> **always identified**. The prior `AnonymousApplyConfig`, PII-stripping preview,
+> 72h reveal-request flow, and anti-gaming inference rules are retired. The
+> access controls that used to sit behind the reveal are unchanged — they now
+> apply directly to the identified candidate.
 
-```python
-# University admin configures globally (can be overridden per job level)
-class AnonymousApplyConfig(Base):
-    # Fields that CAN be configured as hidden
-    hide_full_name: bool = True
-    hide_email: bool = True
-    hide_phone: bool = True
-    hide_student_id: bool = True
-    hide_photo: bool = True
-    hide_date_of_birth: bool = False    # Usually keep for eligibility
-    hide_address: bool = False
-    hide_gender: bool = True
-    hide_id_number: bool = True         # CCCD
+### 4.1 What A Recruiter Sees
 
-# Fields that can NEVER be hidden (system-enforced)
-ALWAYS_VISIBLE = [
-    "skills",
-    "education_level",
-    "work_experience_summary",  # anonymized text
-    "cv_content",               # full CV text MINUS PII
-    "application_answers",      # custom questions
-]
-```
+- An authorized recruiter opens an application and sees the identified
+  candidate: name, contact, CV, screening answers, and pipeline state.
+- Access is gated by the `candidate_access` capability (see
+  `docs/PARTNER_RBAC_ANALYTICS_SPEC.md`) scoped by user/role/department. A member
+  without the grant cannot open the application, preview, or download the CV.
 
-### 4.2 CV PII Stripping
+### 4.2 CV Access Controls (unchanged by de-anon)
 
-```
-Khi anonymous apply, trước khi partner xem CV:
-  1. Extract CV text
-  2. AI PII detection → identify name, phone, email, address, social links
-  3. Replace with [REDACTED] or generalized text
-  4. Partner sees: redacted CV preview (PDF view unavailable until reveal accepted)
-  5. Partner can see: full-text CV content (stripped of PII)
-```
+- Partner CV views render from the **immutable application snapshot**, not the
+  student's current live CV.
+- CV **downloads are watermarked** with partner identity + timestamp and use
+  short-expiry signed URLs (no raw storage paths).
+- Every sensitive access — application open, contact view, CV preview, CV
+  download — writes a `partner_candidate_access_events` audit row for the
+  "who viewed which CV" security review.
 
-### 4.3 Reveal Request Flow
+### 4.3 Exports
 
-```
-Partner → click "Yêu cầu xem thông tin" → form:
-  - Reason (required, min 20 chars)
-  - [Gửi yêu cầu]
-
-Student receives:
-  Notification: "Công ty [X] muốn xem thông tin đầy đủ của bạn"
-  Detail: show reason from partner
-  Action: [Chấp nhận] [Từ chối]
-  Deadline: student has 72h to respond
-    → No response after 72h = auto-declined
-
-On acceptance:
-  - Partner sees full profile + can download CV (with watermark)
-  - Student notified: "Bạn đã chấp nhận yêu cầu từ [Company X]"
-  - Audit log: request_id, partner_id, student_id, reason, decision, timestamp
-
-Rules:
-  - Partner can only send 1 reveal request per application
-  - Student cannot undo acceptance (design: show clear consequences before confirming)
-  - Reveal is for THIS application only — not blanket across all jobs from that partner
-```
-
-### 4.4 Anti-gaming Rules
-
-```
-- Partner cannot filter applications by "anonymous" vs "named" in search
-  (would defeat the purpose)
-- Partner cannot see application timestamp distribution patterns to infer identity
-- If only 1 application to a job → anonymous still preserved (no inference attack)
-- Export: anonymous fields export as "[Ẩn danh]" (not blank — blank could be inferred)
-```
+- Exports are field-level RBAC gated and audited. Recruiters never receive
+  candidate/CV fields outside their role/department scope. There is no
+  "[Ẩn danh]" masked export value anymore, because there is no anonymity gate.
 
 ---
 
@@ -524,9 +483,8 @@ On meaningful CV save:
 
 On application submit:
   1. Resolve selected uploaded CV or builder CV version.
-  2. Create Application.
-  3. Create application_cv_snapshots.
-  4. Run anonymous redaction if needed.
+  2. Create Application (always identified).
+  3. Create application_cv_snapshots (immutable).
 ```
 
 Rules:
@@ -893,7 +851,16 @@ Review cannot be removed for:
 
 ---
 
-## 8. Passive Talent Search — Anti-spam & Privacy
+## 8. Talent Pool — AI Semantic Search, Anti-spam & Privacy
+
+> **Owner decision 2026-07-10:** Talent Pool is AI semantic search (pgvector
+> embeddings over consented candidate CVs + skill/experience filters + LLM
+> rerank returning human-readable match reasons + external-JD search). It is NOT
+> a masked/anonymized card wall. Authorized recruiters see identified candidates;
+> the reveal/anonymization mechanic below is retired and replaced by a consent +
+> RBAC + audit model. Full contract:
+> `docs/PARTNER_RBAC_ANALYTICS_SPEC.md` → "Talent Pool — AI Semantic Candidate
+> Search Contract".
 
 ### 8.1 Quota & Rate Limiting
 
@@ -922,37 +889,30 @@ def can_send_contact_request(partner_id: UUID) -> QuotaCheck:
     )
 ```
 
-### 8.2 Anonymization Spec
+### 8.2 Consent & Visibility Spec
 
 ```python
-def anonymize_profile(profile: StudentProfile, partner_id: UUID) -> AnonymizedProfile:
-    # Check if contact request was accepted for this partner-student pair
-    is_revealed = check_reveal_accepted(partner_id, profile.student_id)
+def talent_pool_visible(profile: StudentProfile) -> bool:
+    # Candidates appear in talent-pool search ONLY when they have opted in to
+    # passive discoverability. Opting out removes them from the pgvector index
+    # entirely — it does NOT mask them into an anonymous card.
+    return profile.passive_search_opt_in is True
 
-    if is_revealed:
-        return profile  # full profile
-
-    return AnonymizedProfile(
-        display_name=f"Sinh viên #{generate_anonymous_id(profile.student_id, partner_id)}",
-        # Deterministic but unguessable — same partner always sees same ID for same student
-        photo=AVATAR_PLACEHOLDER,
-        email=None,
-        phone=None,
-        student_id=None,
-        education=[{
-            "institution": profile.education[0].institution,  # keep school name
-            "degree": profile.education[0].degree,
-            "major": profile.education[0].major,
-            "graduation_year": profile.education[0].graduation_year,
-            # No GPA unless partner package includes it
-        }],
-        skills=profile.skills,        # skills always visible (purpose of search)
-        experience_summary=profile.experience_summary,  # anonymized: no company names
-        availability=profile.availability,
-    )
+# When visible, the recruiter sees the IDENTIFIED candidate directly, gated by
+# the `candidate_access` capability. CV preview/download from a talent-pool
+# result uses the same RBAC + watermark + audit rules as application CV access.
 ```
 
-**Note:** Cùng 1 student sẽ có cùng anonymous ID với cùng partner (deterministic hash), nhưng khác partner thì khác ID. Điều này prevent cross-partner identity linking.
+**Rules:**
+
+- Discoverability is consent-first: no opt-in ⇒ not indexed ⇒ not searchable.
+- There is no anonymized display name, deterministic anonymous ID, or
+  reveal handshake. Cross-partner identity linking is moot because there is no
+  per-partner masking to link.
+- The purpose of search is to surface fit; ranking uses semantic similarity +
+  structured filters + LLM match reasons, never a raw similarity score exposed
+  to the recruiter.
+- Contact/outreach is still throttled by the §8.1 quota to prevent spam.
 
 ---
 

@@ -46,6 +46,8 @@
 | CV per job advice | Student | CV, JD, skills taxonomy | `analyze_cv_for_job` | `read_only` | CV-JD pairs | deterministic skill diff | disable detailed explanation |
 | Semantic job search | Student | jobs, profile, search query | `search_jobs` | `read_only` | query relevance set | keyword search | switch ranking to keyword |
 | Match explanation | Student/Partner | CV, JD, match score inputs | `get_match_explanation` | `read_only` | labeled explanations | show deterministic skill overlap | hide explanation |
+| Talent pool semantic search | Partner | consented candidate CV embeddings (pgvector), skill/experience filters, posted job OR pasted/uploaded external JD | `talent_pool_search` | `read_only` + `talent_pool:search` | candidate↔JD ranking + external-JD fixtures + privacy set | deterministic keyword + structured-filter search | disable semantic rank, keep filters |
+| Talent pool match reasons | Partner | top-ranked candidates, JD/brief, skills taxonomy | `talent_pool_rerank_reasons` | `read_only` + `talent_pool:search` | match-reason quality + no-leak set | hide reasons, keep ranked list | disable LLM rerank |
 | Student job competition intelligence | Student | target job, hiring target/seats, deadline, application volume buckets, source mix, aggregate applicant quality distribution, student's selected CV fit | `student_job_competition_intelligence` | `read_only` | privacy-safe job pool scenarios | hide competition widget, keep CV fit | disable AI narrative, keep deterministic buckets |
 | JD writer | Partner | partner inputs, templates | `jd_generation` | `confirmation_required` | JD quality set | template builder | disable generation |
 | JD bias checker | Partner/University | JD text, policy rules | `bias_detection` | `human_review` | bias phrase set (28 cases, 5 categories, implemented) | deterministic policy scanner | require manual review |
@@ -156,6 +158,32 @@ Rules:
 - AI may explain the deterministic signal in student-friendly language, but the
   deterministic service owns the core score/buckets.
 - The UI must phrase this as guidance, never as a hiring probability guarantee.
+
+### 3.3 Talent Pool Semantic Search Rules (owner decision 2026-07-10)
+
+Talent Pool is AI semantic candidate search, not a masked "blind-search" card
+wall. Full RBAC/audit/consent contract lives in
+`docs/PARTNER_RBAC_ANALYTICS_SPEC.md`; the AI-specific rules are:
+
+- Retrieval = pgvector dense search over **consented** candidate CV embeddings,
+  intersected with deterministic structured filters (skills, experience,
+  major/faculty, cohort, location/work-mode, availability, tier). Filters run
+  before and after semantic ranking.
+- The query may be a recruiter brief, an existing posted job, OR a pasted /
+  uploaded **external JD that is not yet a posted job**. External JDs run through
+  the same extraction/embedding path as posted jobs.
+- An LLM rerank pass returns **human-readable match reasons** and evidence gaps
+  per candidate. It never returns or surfaces a raw similarity/confidence number.
+- Candidates are shown **identified** to authorized recruiters. There is no
+  anonymized display, deterministic anonymous id, or reveal step (that flow is
+  removed product-wide, owner decision 2026-07-10).
+- Never expose provider/model names, embedding vectors, similarity scores,
+  chunk ids, token counts, prompts, or any AI internals to partners.
+- Fallback when the gateway/embeddings are unavailable: deterministic keyword +
+  structured-filter search with an honest "AI ranking unavailable" state; never
+  fabricated candidates, matches, or reasons.
+- External-JD searches are quota-metered like other AI recruiting actions and
+  audited (actor, org/department, JD reference/hash, result count).
 
 ---
 

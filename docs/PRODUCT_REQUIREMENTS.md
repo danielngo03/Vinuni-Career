@@ -402,7 +402,7 @@ Partner dashboard acceptance:
 - Recruiter can jump directly into pipeline, candidate review, job edit,
   team/RBAC, advertising, or event management.
 - Recent applications must show enough context to act without opening every
-  record: job, stage, freshness, missing CV/reveal state, owner/recruiter.
+  record: job, stage, freshness, missing CV state, owner/recruiter.
 - Empty state guides partner to complete company profile, invite team, create
   job, submit campaign, or request university support.
 
@@ -594,8 +594,9 @@ education/experience trong profile nếu CV Studio đã xử lý được.
 Ngành quan tâm, loại hình (full-time/part-time/intern/remote/hybrid), địa điểm, lương kỳ vọng (private).
 
 #### 3.7 Privacy Controls
-- Default: ẩn tên, ảnh, điện thoại với partner
-- Reveal chỉ khi student apply hoặc opt-in passive search
+- Passive talent search: mặc định hồ sơ KHÔNG hiển thị với partner cho tới khi
+  student bật passive visibility. (Chỉ áp dụng talent-pool search; KHÔNG áp dụng
+  cho application — apply luôn định danh, owner decision 2026-07-10.)
 - Blacklist companies: "Ẩn hồ sơ với công ty X"
 - Xem ai đã xem profile (theo công ty)
 
@@ -743,30 +744,32 @@ Benchmark lương theo vị trí + ngành + địa điểm + kinh nghiệm. "Vin
 #### 6.1 Apply Flow
 1. "Ứng tuyển" → chọn CV (hoặc dùng primary)
 2. Viết cover letter (optional, AI assist)
-3. **Nếu job bật Anonymous Apply:** student chọn "Ẩn danh" hoặc "Không ẩn danh"
-   - Ẩn danh: partner thấy nội dung CV nhưng KHÔNG thấy: tên, ảnh, điện thoại, email, tên trường, năm tốt nghiệp
-   - Mức độ ẩn danh do university admin cấu hình
-4. Trả lời screening questions của employer
-5. Nhập referral code (nếu có)
-6. **Auto-save draft:** Nếu user thoát giữa chừng, draft được lưu 48h
-7. Review trước khi submit
-8. **Confirm dialog:** Rõ ràng với tóm tắt job + CV được dùng
-9. Submit → tạo immutable CV snapshot từ uploaded CV hoặc builder CV version đã chọn
-10. **Application Receipt Email** với reference number (VCP-2026-XXXXX)
+3. Trả lời screening questions của employer
+4. Nhập referral code (nếu có)
+5. **Auto-save draft:** Nếu user thoát giữa chừng, draft được lưu 48h
+6. Review trước khi submit
+7. **Confirm dialog:** Rõ ràng với tóm tắt job + CV được dùng
+8. Submit → tạo immutable CV snapshot từ uploaded CV hoặc builder CV version đã chọn
+9. **Application Receipt Email** với reference number (VCP-2026-XXXXX)
 
 #### 6.2 Mass Apply
 Chọn nhiều jobs → apply cùng lúc với primary CV. Premium feature.
 
-#### 6.3 Anonymous Application — Chi tiết
+#### 6.3 Application Identity — Chi tiết
 
-**Partner side khi nhận anonymous application:**
-- Thấy: skills, experience, education (masked — "Đại học tại Hà Nội"), projects
-- Không thấy: tên, ảnh, phone, email, tên trường chính xác, GPA
-- Có nút "Yêu cầu reveal danh tính" → student nhận notification → decide accept/decline
-- Nếu student accept reveal → partner thấy full info
-- Nếu partner shortlist anonymous candidate → student tự quyết định có reveal không
+> **Owner decision 2026-07-10:** anonymous apply / blind-screening / identity
+> reveal is **removed product-wide**. Applications are **always identified** —
+> there is no "Ẩn danh" choice at apply time, no `AnonymousApplyConfig`, and no
+> reveal handshake.
 
-**University policy:** Admin cấu hình chính xác những field nào bị ẩn trong anonymous mode.
+**Partner side khi nhận application:**
+- Recruiter được cấp quyền (`candidate_access`) mở application và thấy ứng viên
+  đã định danh: tên, liên hệ, CV, câu trả lời sàng lọc, trạng thái pipeline.
+- CV preview render từ immutable snapshot; **download có watermark** (định danh
+  partner + timestamp) qua signed URL ngắn hạn.
+- Mọi lần mở application / xem-tải CV đều được **audit** (who viewed which CV).
+- Quyền xem/tải CV được **gate theo user/role/department** — thành viên không có
+  quyền thì không mở/tải được.
 
 #### 6.4 Application Tracking
 - Timeline per application
@@ -920,7 +923,7 @@ Mỗi stage có scorecard riêng, partner cấu hình:
 
 **Kanban view:**
 - Mỗi column = 1 vòng trong pipeline
-- Card per candidate: avatar (nếu không ẩn danh), tên, match score, ngày apply, tags
+- Card per candidate: avatar, tên, match score, ngày apply, tags
 - Drag-drop để move (với confirmation + required action check)
 - Màu card theo status: active / SLA at risk (vàng) / SLA overdue (đỏ) / blocked (cần action)
 
@@ -955,7 +958,6 @@ Mỗi stage có scorecard riêng, partner cấu hình:
 | Setting | Mô tả |
 |---------|-------|
 | Visibility | Public / Authenticated / Students Only / VinUni Only / Invitation |
-| Allow anonymous apply | On/Off |
 | Application deadline | Date/time hoặc "Khi đủ vị trí" |
 | Number of positions | VD: 3 → hiện "3 vị trí còn trống" |
 | Show position count | Hiện/ẩn số vị trí với ứng viên |
@@ -965,7 +967,6 @@ Mỗi stage có scorecard riêng, partner cấu hình:
 | Auto-close | Tự đóng khi đủ số vị trí |
 | Referral enabled | Cho phép referral code cho job này |
 | Pipeline configuration | Chọn hoặc tạo pipeline (xem Module 7) |
-| Anonymous apply fields | Nếu bật, student có thể ẩn những gì |
 | Stage visibility | Hiện tên vòng cho candidate không |
 
 **Screening questions:** Text, MCQ, Yes/No, Rating 1-5, File upload.
@@ -1144,19 +1145,33 @@ Khi candidate move stage → notify: candidate (nếu applicable) + assignee vò
 
 ---
 
-### MODULE 12: Passive Talent Discovery (Partner)
+### MODULE 12: Talent Pool — AI Semantic Candidate Discovery (Partner)
 
-#### 12.1 Profile Search
-- Tìm theo: ngành, năm học, skills, location, trạng thái tìm việc, tier
-- AI suggest: "Cho job Data Engineer này, đây là 10 sinh viên phù hợp nhất"
-- Consent-first: chỉ hiện profile students bật passive visibility
-- Anonymized: tên ẩn đến khi contact accepted
-- Quota: per package (prevent spam)
+> **Owner decision 2026-07-10:** Talent Pool is **AI semantic search**, not a
+> masked "blind-search" card wall. Full contract:
+> `docs/PARTNER_RBAC_ANALYTICS_SPEC.md` → "Talent Pool — AI Semantic Candidate
+> Search Contract" and `docs/AI_PRODUCT_SPEC.md` §3.3.
+
+#### 12.1 Semantic Candidate Search
+- Retrieval: pgvector embeddings over **consented** candidate CVs + LLM rerank
+  trả về **lý do khớp dễ đọc** (không lộ điểm similarity thô).
+- Filters: ngành/khoa, năm học, skills, số năm kinh nghiệm, location/work-mode,
+  trạng thái tìm việc, tier — deterministic, chạy trước và sau semantic ranking.
+- **External-JD search:** recruiter dán/upload một JD **chưa đăng tin** → hệ
+  thống tìm ứng viên phù hợp trong pool (cùng đường extraction/embedding như job
+  đã đăng).
+- Consent-first: chỉ index/hiện ứng viên bật passive visibility (opt-out ⇒ rời
+  index, KHÔNG bị mask thành card ẩn danh).
+- Ứng viên hiển thị **đã định danh** cho recruiter có quyền; xem/tải CV theo
+  `candidate_access` RBAC + watermark + audit như CV của application.
+- Quota: per package (prevent spam); external-JD search được metered như các
+  hành động AI recruiting khác.
+- Fallback khi AI/embeddings không khả dụng: keyword + structured-filter search
+  với trạng thái "AI ranking unavailable" trung thực, không bịa match/lý do.
 
 #### 12.2 Contact Request
 - Send message + job suggestion → student notification
 - Student: view partner profile → Accept / Decline
-- Accept → partner thấy full contact info
 - Anti-spam: nhiều Decline liên tiếp → giảm quota partner
 
 #### 12.3 Student Controls
@@ -1169,12 +1184,23 @@ Khi candidate move stage → notify: candidate (nếu applicable) + assignee vò
 
 ### MODULE 13: Advertising System
 
+> **Owner decision 2026-07-10:** advertising là một **engine phân bổ/allocation
+> thực sự**, không phải "upload banner rồi hiện khắp nơi". Slot inventory hữu
+> hạn; engine lọc eligibility → match targeting → phân bổ campaign giá trị cao
+> nhất vào từng slot với budget pacing + frequency cap. Organic / recommended /
+> sponsored / university-curated tách biệt tuyệt đối. Full contract:
+> `docs/DISCOVERY_RECOMMENDATION_ADS_SPEC.md` §7.
+
 #### 13.1 Loại quảng cáo
 Sponsored Job, Banner Ad, Video Ad (15-30s), Featured Employer, Email Blast, Event Sponsorship.
 
 #### 13.2 Targeting
-Ngành học, năm học, khu vực, trạng thái tìm việc, tier user, behavior signals anonymized.  
-**KHÔNG:** PII, sức khỏe, tôn giáo, chính trị, giới tính, dân tộc.
+Chỉ dùng dimension **coarse, non-sensitive**: **LOCATION** (thành phố/khu
+vực/campus + work-mode, không GPS chính xác), **student MAJOR/khoa + CAREER
+interest/role-family**, năm học/cohort, trạng thái tìm việc, tier user,
+behavior signals coarse.  
+**KHÔNG:** PII, GPS chính xác, sức khỏe, tôn giáo, chính trị, giới tính, dân tộc,
+tình trạng tài chính nhạy cảm.
 
 #### 13.3 Campaign Flow
 Chọn loại → Targeting → Upload creative → Budget (daily cap + total) → Duration → Bid (CPM/CPC) → Preview → Submit.
@@ -1736,7 +1762,8 @@ AI phải: giải quyết pain point thực sự, output actionable, không tạ
 
 ### 7.7 Privacy
 - Data minimization
-- CV anonymization per policy
+- CV access is RBAC-gated, watermarked on download, and audited (no application
+  anonymization — applications are always identified, owner decision 2026-07-10)
 - Behavior tracking: consent-based
 - Ad targeting: không PII, không sensitive categories
 - Right to erasure

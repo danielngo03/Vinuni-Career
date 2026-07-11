@@ -1,7 +1,143 @@
 # Implementation Status — VinUni Career Platform
 
-> Phiên bản: 15.4 | Cập nhật: 04/07/2026  
+> Phiên bản: 15.5 | Cập nhật: 10/07/2026  
 > Purpose: verified status for the clean greenfield rebuild. This file records facts, not wishes.
+
+---
+
+## GCP Deployment Pack (2026-07-11) — branch `feat/gcp-deploy-pack`
+
+Production-deployability slice for Google Cloud (Cloud Run + Cloud SQL + GCS),
+plus the storage fixes it forced. See `docs/DEPLOYMENT_GCP.md` for the runbook.
+
+- **GCS storage backend — implemented + unit-tested.** `GcsStorageBackend` in
+  `documents/infrastructure/storage.py`; `get_storage()` now honors
+  `STORAGE_BACKEND` (`local`|`gcs`, unknown → explicit `StorageError`); new
+  settings `GCS_BUCKET_NAME`/`GCS_KEY_PREFIX`; dependency `google-cloud-storage`.
+  No schema change (storage keys are already opaque strings).
+  Evidence: `uv run pytest tests/unit/test_storage_backend_selection.py` → 11 passed.
+- **Storage-abstraction bypass fixes (pre-existing bugs).**
+  (1) knowledge_base upload never persisted bytes → ingestion always read a
+  missing file; router now calls shared `save_bytes`. (2) `ingest_task` and
+  onboarding `doc_verification` did raw `open(storage_key)` — broken locally
+  (key ≠ cwd-relative path) and on any cloud backend; both now load via the
+  shared storage facade (`app/shared/storage.py` gained `save_bytes`/`load_bytes`).
+  Evidence: `pytest tests/integration/test_knowledge_base.py
+  tests/integration/test_documents.py tests/integration/test_onboarding_api.py`
+  → 93 passed; `ruff` + `mypy` clean on touched files.
+- **Containerization — implemented + smoke-verified.** `backend/Dockerfile`
+  (uv, non-root, honors Cloud Run `$PORT`, optional `INSTALL_OCR=true` layer
+  with Tesseract vie+eng + poppler), `frontend/Dockerfile` (pnpm, Next 15
+  `output: "standalone"` added to `next.config.ts`), both `.dockerignore`s,
+  root `cloudbuild.yaml` (build → migrate job → deploy api/scheduler/web).
+  Evidence: backend image builds; `docker run -e PORT=8081` →
+  `GET /api/v1/health` HTTP 200. Frontend `pnpm build` green with standalone
+  output (`.next/standalone/server.js` present). NOT yet deployed to a real
+  GCP project (needs owner's project/billing/credentials).
+- **Env example gaps closed.** `CORS_ALLOW_ORIGINS`, `GOOGLE_OAUTH_CLIENT_ID/
+  SECRET`, `OAUTH_REDIRECT_BASE_URL`, GCS vars, required-in-prod Fernet keys
+  documented in `backend/.env.example`; `NEXT_PUBLIC_API_URL` added to
+  `frontend/.env.example` (it was used by `next.config.ts`/SSR but undocumented).
+- **Google OAuth — no code needed (verified).** Backend flow, `oidc_accounts`
+  table (migration 0057), nullable `password_hash`, frontend Google buttons and
+  callback/link-conflict pages already exist; activation is configuration only
+  (client ID/secret + redirect URI per `docs/DEPLOYMENT_GCP.md` §5).
+
+## Wave 1 (2026-07-10) — IN PROGRESS
+
+Multi-agent Wave 1 batch against `vinuni-main-submission` (UI overhaul worktree).
+Status is honest: several items are **in progress / API-wired only**. Nothing in
+this entry is browser-verified or E2E-verified yet.
+
+- **De-anon removal (product decision, owner 2026-07-10).** Anonymous apply,
+  blind-screening, and the identity-reveal handshake are removed product-wide;
+  applications are always identified. Partner CV access stays RBAC-gated
+  (`candidate_access`), watermarked on download, and audited.
+  - **Docs — updated (this agent):** CLAUDE.md owner-decisions block;
+    `SECURITY_PRIVACY.md`, `PARTNER_RBAC_ANALYTICS_SPEC.md`, `BUSINESS_LOGIC.md`
+    §4/§8, `PRODUCT_REQUIREMENTS.md` (6.1/6.3/12/13, settings), `ROADMAP.md`,
+    `BACKLOG.md`, `DISCOVERY_RECOMMENDATION_ADS_SPEC.md`, `AI_PRODUCT_SPEC.md`,
+    `ARCHITECTURE.md` (de-anon note + module comments), `SCREEN_SPECS.md`,
+    `UI_QUALITY_BAR.md`, `CV_STUDIO_SPEC.md`, `TEST_STRATEGY.md`,
+    `EDGE_CASES_FAILURE_MODES.md`, `TASK_ROUTING.md`,
+    `AGENT_PARALLEL_EXECUTION_PLAN.md`. `API_CONTRACTS.md` + `DATA_MODEL.md` carry
+    SUPERSEDED/DEPRECATED banners; ADR-0003/0006/0007/0012 still need a formal
+    `system-architect` amendment (flagged, not yet done).
+  - **Backend/frontend code — NOT done in this docs pass.** The
+    `is_anonymous`/reveal columns, `_redact_snapshot`, reveal endpoints/services,
+    and anonymized talent cards still exist in code and must be removed by
+    backend/frontend agents (see BACKLOG B-603, B-086..B-089, B-156).
+- **Talent Pool → AI semantic search (product decision).** Contract written
+  (`PARTNER_RBAC_ANALYTICS_SPEC.md` + `AI_PRODUCT_SPEC.md` §3.3): pgvector
+  embeddings over consented CVs + structured filters + LLM rerank match reasons +
+  external-JD search + deterministic fallback. **Spec only — not implemented.**
+- **Advertising → allocation engine (product decision).** Contract written
+  (`DISCOVERY_RECOMMENDATION_ADS_SPEC.md` §7.0): slot inventory, auto-allocation
+  + pacing, coarse location + major/career targeting, strict organic/recommended/
+  sponsored/university-curated separation. **Spec only — not implemented.**
+- **Partner candidate PDF-modal + CV-JD match score** — sibling agents; status
+  **in progress / API-wired** (not browser-verified here).
+- **AI quota %/reset display** — sibling agents; status **in progress /
+  API-wired** (not browser-verified here).
+- **Notifications + messages polish** — sibling agents; status **in progress**
+  (not browser-verified here).
+
+Verification note: this docs agent did not run backend/frontend gates. Treat all
+Wave 1 code items as unverified until `tester-qa` records commands + evidence.
+
+---
+
+## AI Mock Interview (2026-07-09) — new module `mock_interview`
+
+Student-facing, JD+CV-grounded AI mock interview on a dedicated page
+`/[locale]/jobs/[id]/interview`. HR-style interviewer grounded on the real JD +
+chosen CV (matched skills / gaps from deterministic CV-JD fit), natural
+follow-ups, **no scoring** — coaching report only. Voice-first (browser STT/TTS
+driving the text brain, Tier V1) with a text floor and a provider-agnostic,
+superadmin-activatable true-realtime tier (V2, disabled by default). See
+**ADR-0016**.
+
+Verification levels (per `docs/SYSTEM_ACCEPTANCE_BAR.md`):
+
+- **Backend — verified (offline gates green + real smoke).**
+  - `pytest tests/mock_interview` → **72 passed** (units, session lifecycle,
+    RBAC/isolation, quota/caps, no-score/no-leak, migration `0084` round-trip,
+    HTTP envelopes, university governance + AI-ops privacy boundary).
+  - `ruff check app/modules/mock_interview app/ai/gateway/realtime
+    app/ai/prompts/mock_interview` → clean; `mypy app/modules/mock_interview`
+    → clean.
+  - Offline eval `mock_interview_report` (5 categories, ≥ minimums) →
+    privacy-boundary 100%, happy ≥ 80%, **no-score invariant holds in all
+    categories**; registered in the eval-gate registry.
+  - **Real-call smoke (OpenRouter, 2 small calls, `google/gemini-2.5-flash`):**
+    opening turn + coaching report generated in Vietnamese, grounded on JD+CV,
+    `is_fallback=false`, invariants OK (no score key, no provider/model leak).
+- **Frontend — API wired + build verified (not yet browser/E2E verified).**
+  - `pnpm tsc --noEmit` clean; `check-message-parity` OK (52 files, vi/en
+    parity); `pnpm build` exit 0, route `/[locale]/jobs/[jobId]/interview`
+    emitted, 0 lint errors in new files.
+  - Browser/E2E (mic grant/deny, quota/conflict/no-CV states, keyboard +
+    reduced-motion + dark theme) — **pending**.
+
+Governance/observability: university reads aggregate stats + safety-flag counts
+(`/api/v1/admin/mock-interview/stats|config`), never named transcripts;
+superadmin AI-ops reads flagged metadata + audited transcript
+(`/flagged`, `/sessions/{id}/transcript`) — redacted by default, full only with
+the `view_provider_identity` grant AND student opt-in, every open audited.
+Partners have no access.
+
+Config/env: `AI_INTERVIEW_MODEL` (alias `interview_default`, default
+`google/gemini-2.5-flash` on OpenRouter) + `AI_REALTIME_*` (off by default) added
+to `backend/.env(.example)` and `config.py`; the realtime tier is
+provider-agnostic (superadmin registry) and never returns a raw provider key.
+
+> Incidental fix (pre-existing blocker on this branch): `app/core/metadata.py`
+> imported a non-existent `billing.domain.energy_models`, which broke ALL backend
+> imports (partial energy-metering merge). Removed the dangling import to restore
+> importability; the energy-metering subsystem itself is unrelated and still
+> absent on this branch (flag for separate attention). Also unrelated + still
+> open: the `jd_extraction` eval family fails on this branch independent of this
+> work (`'list' object has no attribute 'get'`).
 
 ---
 

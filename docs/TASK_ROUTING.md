@@ -223,7 +223,7 @@ polish as complete when the underlying real workflow is absent.
 1. `data-engineer`: entity field catalog and field-level RBAC.
 2. `backend-developer`: export service, presets, async threshold, download links.
 3. `frontend-developer`: export modal and async notification UX.
-4. `tester-qa`: permission filtering, anonymous redaction, sync/async paths.
+4. `tester-qa`: permission filtering, field-level RBAC scoping, sync/async paths.
 
 ### Document Knowledge Base / RAG (M33)
 

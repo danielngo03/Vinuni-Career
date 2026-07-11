@@ -49,14 +49,23 @@ design plan:
      `docs/PRODUCT_INTERACTION_VISUAL_REALISM_SPEC.md`?
 
 3. **Compact token system**
-   - Follow v9 Monochrome (`docs/DESIGN.md` §1.1.2): a full gray ramp carries
-     hierarchy and ink is the only action color. No blue/navy accent surfaces.
-   - 4-6 named tokens: near-black/near-white plus grays for surfaces/text/border,
+   - Follow v10 "Monochrome Shell + Data-viz Content" (`docs/DESIGN.md` §1.1.2).
+     The SHELL (header/sidebar/nav) stays monochrome: a full gray ramp carries
+     hierarchy and ink is the only shell action color; no blue/navy accent
+     surfaces in the shell.
+   - Shell tokens: near-black/near-white plus grays for surfaces/text/border,
      with ink as the primary action token.
-   - Reserve color for meaning only: green = verified/success (the AI/success
-     accent token), VinUni red = destructive/brand detail, amber =
-     sponsored/paid disclosure. These are small chips/labels, not surfaces.
-   - Define light, dark, and system-theme semantics, not only raw colors.
+   - CONTENT (charts, KPI tiles, category chips, status) uses the locked
+     data-viz palette (`--viz-*`: indigo/teal/amber/rose/sky/emerald/violet/
+     orange + `-soft` tints). Semantics: success = emerald, warning/sponsored =
+     amber, danger = VinUni red, info/AI = sky/indigo (`--content-*`). Exactly
+     one restrained indigo→violet gradient hero tile per surface.
+   - Do not hand-roll token drift: reuse `globals.css` tokens and the v10
+     primitive kit (`@/components/kit`) + shadcn/ui (`@/components/ui`). Icons
+     are lucide-react only.
+   - Define light, dark, and system-theme semantics, not only raw colors (the
+     shadcn tokens are aliased to our ramp and flip automatically via
+     `[data-theme]`).
 
 4. **Typography roles**
    - Body/UI: Plus Jakarta Sans unless a route-specific design plan justifies a
@@ -109,18 +118,22 @@ Before changing global tokens, audit:
 - whether dark mode feels intentionally designed, not a direct inversion;
 - whether all major colors meet WCAG contrast for text and controls.
 
-The palette should feel like a modern institutional recruiting product, and
-follow v9 Monochrome (`docs/DESIGN.md` §1.1.2) — no navy/blue accent surfaces:
+The palette should feel like a modern SaaS admin/recruiting product
+(Linear/Vercel/Pipeline-OS), and follow v10 (`docs/DESIGN.md` §1.1.2) — a
+monochrome shell wrapping colorful, meaningful content:
 
-- **Ink (near-black light / near-white dark)** for primary actions and links —
-  the only action color.
-- **Full gray ramp + clean neutrals** carry all hierarchy and let content,
-  logos, and banners breathe (never flat `#000`/`#fff`).
-- **Green** for verified, success, and AI/optimistic guidance (the success
-  accent token), as small chips/labels.
-- **Restrained VinUni red** for destructive actions and small brand detail, not
-  broad backgrounds.
-- **Warm amber** for disclosure, warning, sponsored, or time-sensitive status.
+- **Ink (near-black light / near-white dark)** is the only SHELL action color;
+  the shell (header/sidebar/nav) has no navy/blue accent surfaces.
+- **Full gray ramp + clean neutrals** carry shell hierarchy (never flat
+  `#000`/`#fff`); the sidebar active state is a subtle pill.
+- **Content data-viz palette** (`--viz-*`): indigo/teal/amber/rose/sky/emerald/
+  violet/orange (+ `-soft` tints) for charts, KPI tiles, and category chips.
+- **Emerald = success/healthy**, **amber = warning/sponsored/time-sensitive**,
+  **VinUni red = danger/destructive + small brand detail**, **sky/indigo =
+  info/AI**. Reserve color for meaning; keep it as chips/tiles/series, not broad
+  shell backgrounds.
+- **One restrained indigo→violet gradient hero tile** per surface (forecast/
+  summary), never a page background.
 
 ## How To Prompt Claude Code
 

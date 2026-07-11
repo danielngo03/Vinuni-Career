@@ -115,8 +115,7 @@
 
 ### Exports
 
-- Field-level RBAC.
-- Anonymous redaction.
+- Field-level RBAC (exports omit fields outside the actor's role/department scope).
 - Sync export under threshold.
 - Async export above threshold.
 - Expiring download link.
@@ -152,8 +151,8 @@
 ### Phase 2 — Advanced Hiring
 
 - Pipeline transitions and invariants.
-- Anonymous apply.
-- Passive search consent.
+- Talent-pool AI semantic search: consent/opt-out indexing, RBAC-gated CV access,
+  external-JD search, and deterministic keyword+filter fallback.
 - Company reviews moderation.
 - Excel export.
 

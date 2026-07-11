@@ -87,37 +87,70 @@ not be reintroduced on Student/Public surfaces either):
   `backdrop-blur` + `ring` + inset-shadow + gradient layered together. See
   §5.4.
 
-### 1.1.2 Token Drift Notice — v9 "Monochrome" (2026-07-02, current direction)
+### 1.1.2 Current Direction — v10 "Monochrome Shell + Data-viz Content" (2026-07-09)
 
-The active design system is **v9 "Monochrome"**: a minimalist, premium
-black/white system in the Vercel tradition, implemented in
-`frontend/src/app/globals.css`. Key rules:
+The active design system is **v10**, implemented in
+`frontend/src/app/globals.css` and the primitive kit at
+`frontend/src/components/kit/`. v10 keeps v9's premium monochrome **shell** but
+introduces a real, colorblind-safe **data-viz palette for content** so
+partner/university admin & recruiting surfaces read like a modern SaaS product
+(Linear/Vercel/Pipeline-OS), not a flat gray wall. Rule of thumb: **the shell is
+monochrome; the content is colorful — but color always carries meaning.**
 
-- **Neutral-first.** A full gray ramp (`#fafafa → #0a0a0a`, never flat
-  `#000`-on-`#fff`) carries all hierarchy: canvas `#fafafa`, cards `#ffffff`,
-  borders `#e5e5e5`, ink text `#171717` in light; canvas `#0a0a0a`, cards
-  `#111111`, borders `#262626`, text `#ededed` in dark. Dark is a designed
-  near-black theme, not an inversion.
-- **The single action color is ink** (`--brand-primary` = `#171717` light /
-  `#ededed` dark). Primary buttons use `--btn-primary-bg/fg/hover` (black
-  button in light theme, white button in dark theme). The old blue accent is
-  retired; the `--blue-*` variables are remapped to the ink ramp so legacy
-  call sites collapse into monochrome.
-- **Color only where it carries meaning:** green `#059669` for
-  verified/success/AI signal, VinUni red `#c83538` for destructive actions
-  and small brand details, amber `#d97706` for sponsored/paid disclosure
-  (compliance — never removed). These appear as small chips/labels/badges,
-  never as large surfaces.
-- **Brand lockup:** the V mark (`public/brand/logo-dark.png` for light
-  surfaces, `logo-light.png` for dark, swapped in CSS via
-  `.theme-logo-light/.theme-logo-dark`) + hairline divider + "VINUNI CAREER"
-  wordmark. No "Career Platform" tagline text.
+**Shell (unchanged, mono).** Header, sidebar, and nav use the full gray ramp
+(`#fafafa → #0a0a0a`, never flat `#000`-on-`#fff`): canvas `#fafafa`, cards
+`#ffffff`, borders `#e5e5e5`, ink text `#171717` in light; canvas `#0a0a0a`,
+cards `#111111`, borders `#262626`, text `#ededed` in dark. Dark is a designed
+near-black, not an inversion. Ink (`--brand-primary`) is the single shell action
+color; the sidebar active state is a **subtle pill** (soft fill + ink text +
+hairline ring), not a heavy inverted button.
+
+**Content data-viz palette (NEW).** Inside the content area (charts, KPI tiles,
+category chips, status), use the categorical ramp — in this locked, colorblind-
+safe order: `indigo #6366f1`, `teal #14b8a6`, `amber #f59e0b`, `rose #f43f5e`,
+`sky #0ea5e9`, `emerald #10b981`, `violet #8b5cf6`, `orange #f97316`. Each has a
+`~12%` alpha `-soft` tint for chip/tile fills (`--viz-*` / `--viz-*-soft`).
+Semantics: **success = emerald**, **warning/sponsored = amber**, **danger =
+VinUni red `#c83538`**, **info/AI = sky/indigo**. The v9 blue→gray remap is
+**reverted for CONTENT ONLY** (`--content-*` tokens); the shell ramp is
+untouched, and sponsored/paid disclosure amber is never removed (compliance).
+
+**Gradient hero rule.** Exactly **ONE** restrained calm **brand-BLUE** gradient
+tile (`--hero-gradient`, `GradientHeroCard`) per surface, reserved for a top
+forecast/summary (à la Pipeline-OS). A deep blue wash — blue-900→blue-600 in
+light, blue-950→blue-700 in dark — with **no purple/violet/indigo** (blue is the
+system's "info" hue). Violet (`#8b5cf6`) AND indigo are **chart-series colors
+ONLY**: never a hero, UI accent, active state, or decoration (owner 2026-07-10:
+"màu tím lạc quẻ" → purple/indigo retired from chrome/heroes to a calm blue hero;
+they survive solely as categorical data series). Never more than one hero per
+screen, never a page background.
+
+**Locked type scale (Plus Jakarta Sans).** Enforce, do not hand-roll ad-hoc
+`text-[..]` sizes. Utility classes in `globals.css`: `.type-display` 30/36/600 ·
+`.type-h1` 24/32/600 · `.type-h2` 20/28/600 · `.type-h3` 16/24/600 ·
+`.type-body` 14/20/400 · `.type-small` 13/18/400 · `.type-caption` 12/16/500 ·
+`.type-metric` 30/1/600 tabular. Weights 400/500/600/700. Metrics use
+`tabular-nums`.
+
+**Stack.** shadcn/ui (new-york, neutral base) on Tailwind v4 + Radix lives in
+`@/components/ui` (its tokens are aliased to our ramp so it themes light/dark
+automatically via `[data-theme]`); the composite v10 primitives (Card, PageHeader,
+KpiTile/KpiRow, StatCard, GradientHeroCard, StatusChip, AttentionPanel,
+ActivityFeed, FilterBar, DetailSheet, DataTable, CommandPalette, and the chart
+wrappers) live in `@/components/kit`. Icons are **lucide-react only**. Charts use
+Recharts; tables use TanStack Table. The flagship reference implementation is the
+Partner Recruiting Command Center (`partner-command-center.tsx`) — every other
+partner/university surface copies its structure: `PageHeader → KPI row → primary
+chart/table → secondary panels → activity`, with a right-edge `DetailSheet` for
+detail/edit.
+
+**Brand lockup:** the V mark (`public/brand/logo-dark.png` for light surfaces,
+`logo-light.png` for dark, swapped via `.theme-logo-light/.theme-logo-dark`) +
+hairline divider + "VINUNI CAREER" wordmark. No "Career Platform" tagline.
 
 Sections 2.1–2.5 below describe the pre-v9 colored palettes and are kept for
-brand-color reference only (the official VinUni blue/red still exist as
-accents); `globals.css` is the source of truth for exact hex values. This
-file remains the source of truth for which token plays which *role*,
-component structure, and layout rules.
+brand-color reference only; `globals.css` is the source of truth for exact hex
+values and which token plays which *role*.
 
 ### 1.2 Interaction Semantics And Campaign Realism
 

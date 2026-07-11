@@ -328,7 +328,7 @@ backend/
 │   │   │   ├── interviews/
 │   │   │   ├── scorecards/
 │   │   │   └── offers/
-│   │   ├── talent/                 # Talent pool, passive search, contact requests
+│   │   ├── talent/                 # Talent pool: AI semantic candidate search (pgvector + LLM rerank), external-JD search, contact requests
 │   │   ├── documents/              # CV upload, CV Studio, multi-modal parsing, storage
 │   │   ├── events/                 # Event CRUD, ticket types, seat maps, registration
 │   │   │   ├── api/
@@ -339,7 +339,7 @@ backend/
 │   │   │   │   └── checkin_service.py
 │   │   │   └── domain/
 │   │   │       └── models.py       # Event, TicketType, Seat, Registration, CheckIn
-│   │   ├── advertising/            # Ad campaigns, targeting, approval, performance
+│   │   ├── advertising/            # Ad allocation/distribution engine: campaigns, slot inventory, coarse location + major/career targeting, pacing, approval, performance
 │   │   ├── subscriptions/          # Packages, user subscriptions, payment records
 │   │   ├── reviews/                # Company reviews, sentiment moderation
 │   │   ├── qa_bank/                # Interview Q&A community bank
@@ -487,6 +487,15 @@ Transitions:
 - Rollback phải có reason (min 20 chars)
 - Auto-advance chỉ khi required_action đã hoàn thành
 - Mọi transition ghi audit log
+
+> **De-anon note (owner decision 2026-07-10):** the ADR-0004/0006/0007/0012
+> summaries below still describe an "anonymity invariant" and a
+> `409 reveal_required` precondition on interview scheduling / offer send. Those
+> are **superseded** — applications are always identified, so the reveal gate is
+> retired and interviews/offers schedule/send freely. The RBAC, watermark,
+> optimistic-version, `404` masking, audit, and neutral-notification invariants
+> are unchanged. The ADR files themselves need a follow-up amendment by
+> `system-architect`; this note is authoritative until then.
 
 **Phase 2 stage-engine foundation:** see **ADR-0004** (`docs/adr/ADR-0004-recruitment-pipeline-stage-engine.md`). The pipeline is configurable per org (PRD MODULE 7), but V1 ships the configurable schema (`pipeline_templates` / `pipeline_stages` / `candidate_stages`, migration `0012`) plus a single **seeded system-default 3-stage ladder** (Screening → Interview → Offer, all `required_action=manual`) — the template-builder UI and richer stage-type taxonomy are deferred. `applications.status` stays the **coarse** outcome (`submitted|under_review|rejected|withdrawn`, unchanged from the Phase-1.5 subset); fine position lives in the append-only `candidate_stages` history (one `ACTIVE` row, status `ACTIVE|PASSED|ROLLED_BACK|REJECTED`). The shipped `review`/`reject` decisions are reused, not replaced: `review` becomes the pipeline-entry trigger (materializes stage 1) and `reject` becomes the terminal exit (closes the open stage row); `/advance` + `/rollback` are new service-layer operations that inherit the same optimistic-version, illegal-transition-409, cross-org-404 RBAC, audit, anonymity, and neutral-notification invariants. Scorecards/required-action gating, interview scheduling, offers, the auto-advance worker (on the ADR-0003 scheduler), and bulk actions are explicitly later ADRs.
 
@@ -909,8 +918,10 @@ async def redis_subscriber():
 > notification-bell `unread-count` pattern) — no WS infra in V1. Persist-before-deliver
 > is honored by construction (a REST POST is the persist; a poll reads committed rows).
 > The permission matrix (never student↔student; partner↔student only with a recruitment
-> application, anonymity-masked until the reveal handshake; rate-limited) is enforced at
-> the service layer on thread-create, every send, AND read/subscribe. A new message
+> application; rate-limited) is enforced at the service layer on thread-create, every
+> send, AND read/subscribe. (Owner decision 2026-07-10: the former
+> anonymity-masking-until-reveal in message threads is retired — applicants are
+> identified, so partner↔student threads show the identified student.) A new message
 > notifies through the **shipped notifications feed/outbox** (preference-gated,
 > PII-safe). The `/ws/` + Redis pub/sub fan-out + presence design below is the
 > **deferred follow-up** that attaches to the same tables and service-layer predicates;

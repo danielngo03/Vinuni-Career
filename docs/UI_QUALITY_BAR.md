@@ -59,7 +59,7 @@
 - CV Studio: CV library/template marketplace first; then builder with left
   template/section/elements navigator, center document-like editor, right A4
   preview / AI suggestion / job-fit panel; mobile uses tabs.
-- Job apply: login intent preservation, CV selection modal, anonymous apply consent, screening question review, submit confirmation.
+- Job apply: login intent preservation, CV selection modal, screening question review, submit confirmation. (Applications are always identified — no anonymous-apply consent step, owner decision 2026-07-10.)
 - Partner pipeline: board or dense table with filters, bulk actions, stage transition confirmation, audit trail access.
 - University admin: moderation queues, policy controls, KPI dashboards, export/report flows, clear approval/rejection reasons.
 - AI assistant: streaming message list, tool cards, source citations where applicable, confirmation cards for writes.

@@ -1,5 +1,12 @@
 # ADR-0007: Recruitment Offers — Approval, Send, Accept/Decline & the `hired` Outcome (Phase 2)
 
+> **PARTIALLY SUPERSEDED (owner decision 2026-07-10):** the "accepted reveal
+> handshake is a hard precondition to send an offer" / `409 reveal_required`
+> rule is **retired**. Applications are always identified, so offers send freely.
+> The partner approval-before-send gate, salary encryption, RBAC, and audit
+> invariants stand. This ADR needs a formal amendment; the note here is
+> authoritative until then.
+
 **Status:** Accepted (Proposed for implementation in the next backend slice)
 **Date:** 2026-06-28
 **Owner:** system-architect

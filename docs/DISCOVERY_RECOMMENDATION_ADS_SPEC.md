@@ -169,6 +169,42 @@ Job detail pages should show:
 V1 `sponsored_placements` is useful but not the end-state monetization system.
 The product must evolve toward campaign-grade advertising without losing trust.
 
+### 7.0 Allocation & Distribution Engine (owner decision 2026-07-10)
+
+Advertising is a real **allocation/distribution engine**, not an "upload a
+banner and it shows everywhere" feature. Paid demand is matched to defined
+sponsored slots by an allocation step that runs alongside — never instead of —
+organic ranking:
+
+- **Slot inventory:** each surface declares a fixed number of sponsored slots
+  (e.g. homepage hero, right-rail banner, sponsored job rows, event card). Slots
+  are finite; organic/recommended positions are never converted into paid ones
+  silently.
+- **Eligibility → targeting → allocation:** for each viewer/session, the engine
+  filters active, approved, in-budget campaigns, matches them against the
+  viewer's coarse targeting attributes, then allocates the highest-value eligible
+  campaign to each open slot. Pacing spreads a campaign's budget across its run
+  window instead of front-loading.
+- **Targeting dimensions (coarse only):** partner LOCATION targeting
+  (city/region/campus + work-mode) and student MAJOR / faculty / declared
+  CAREER-interest / role-family targeting, plus year/cohort, coarse tier, and
+  device class. Never exact GPS and never any sensitive category from
+  `docs/SECURITY_PRIVACY.md` "Advertising Compliance".
+- **Separation invariant:** organic, recommended, sponsored, and
+  university-curated inventory are selected by distinct paths and labelled
+  distinctly. A sponsored allocation fills a paid slot; it must not reorder or
+  outrank organic results in organic positions.
+- **Fairness/anti-starvation:** budget pacing, frequency capping per
+  viewer/session, and diversity rules prevent one advertiser from monopolizing a
+  surface. Under-delivering campaigns surface honestly to the partner and
+  university, never by borrowing organic slots.
+- **Fallback:** when no eligible paid campaign matches a slot, fall back to a
+  VinUni-curated asset labelled university-curated, or hide the slot — never show
+  a fake/placeholder ad.
+- **Auditability:** every allocation decision records campaign id, slot, surface,
+  targeting match reason (coarse, non-PII), and pacing state for university
+  oversight and partner reporting.
+
 Placement types:
 
 - Sponsored job row/card.
@@ -195,6 +231,9 @@ Partner campaign workflow:
 
 - Pick target: job, event, company profile, or approved content placement.
 - Pick package/placement, dates, budget/price, creative, and disclosure.
+- Set coarse targeting: location (city/region/campus + work-mode) and student
+  major/faculty/career-interest/role-family, plus optional year/cohort. The
+  builder shows an estimated eligible reach and blocks any forbidden dimension.
 - Preview exactly where the ad appears.
 - Submit for university approval.
 - University approves/rejects, records manual payment, can pause/disable.

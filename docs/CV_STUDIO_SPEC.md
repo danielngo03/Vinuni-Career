@@ -259,7 +259,7 @@ Builder-generated CVs and uploaded CVs share the same student-facing CV list, bu
 - Deleting a CV archives it; existing applications retain the submitted CV snapshot.
 - CV used in an application is immutable for that application; later CV edits do not change submitted applications.
 - Partner download always uses a watermarked rendered PDF.
-- Anonymous applications use redacted preview generated from submitted snapshot, not live current CV.
+- Partner CV views render from the immutable submitted snapshot, not the live current CV.
 - AI CV suggestions consume credits only when generation succeeds.
 - Upload validation failures before AI generation do not consume AI credits.
 - Regeneration overwrites only the pending suggestion, never the accepted CV.
@@ -469,6 +469,6 @@ Required coverage:
 - Export PDF success/failure.
 - Application snapshot remains immutable after CV edits.
 - Partner download is watermarked.
-- Anonymous preview redacts PII.
+- Partner CV access is RBAC-gated and audited.
 - Credit/quota enforcement.
 - Accessibility for section editor, tabs, diff viewer, template chooser.

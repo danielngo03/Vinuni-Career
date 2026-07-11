@@ -575,10 +575,11 @@ summary (ADR-0005 + ADR-0006, current stage): `{ submitted_count, required,
 gate_met, avg_overall, threshold, recommendation_summary }` (`required`
 assignee-derived). The partner-only `interview` block (ADR-0006, current stage —
 `null` when no open interview): `{ id, mode, scheduled_at, status, assignee_count }`
-— **no `meeting_link`** (attendee-only). **Anonymity is non-negotiable:** a stage move never
-reveals the student — the reveal handshake stays the only identity path; the
+— **no `meeting_link`** (attendee-only). **Partner-internal is non-negotiable:** the
 `pipeline` block (including `evaluation`) is partner-internal and **never** appears
 in the student application projection, a student notification, or any email body.
+(Owner decision 2026-07-10: applicants are always identified; there is no
+anonymity/reveal gate on stage moves.)
 New notification types (catalog, vi+en, category `application_status`):
 `recruitment.application_stage_advanced`, `recruitment.application_under_rereview`.
 
@@ -591,7 +592,7 @@ each scored `1..5`, a derived `overall_score` (mean), a required 4-value
 partner-internal `comment`. Scorecards are the same privacy class as
 `rejection_reason`: **partner-internal, never surfaced to the student** (existence,
 scores, recommendation, comment, aggregate). A scorecard carries **no
-student-identity field**; the reveal handshake stays the only identity path.
+student-identity field** and is never surfaced to the student.
 
 | Path | Method | Auth | Notes |
 |---|---|---|---|
@@ -619,10 +620,16 @@ interviewers (PERSON mode, `threshold_pct = 1.0` — **all assigned interviewers
 submit a scorecard**, the upgraded advance gate's `required`). At most ONE OPEN
 (`scheduled`) interview per `(application, stage)`.
 
-**Reveal precondition (NON-NEGOTIABLE):** scheduling an interview on an **anonymous**
-application whose reveal has **not** been accepted → `409 { reason: "reveal_required" }`.
-The reveal handshake stays the only identity path; the student's consent is never
-silently bypassed. Non-anonymous (or anonymous + accepted reveal) schedules freely.
+> **SUPERSEDED (owner decision 2026-07-10):** the "reveal precondition" below is
+> **retired**. Applications are always identified, so there is no anonymous state
+> and no `409 reveal_required` gate — interviews schedule freely. The remaining
+> RBAC, encryption, versioning, and audit invariants are unchanged. The inline
+> `reveal_required` mentions in the interview/offer tables need a
+> `system-architect` cleanup; ignore them.
+
+~~**Reveal precondition (NON-NEGOTIABLE):** scheduling an interview on an
+anonymous application whose reveal has not been accepted →
+`409 { reason: "reveal_required" }`.~~ (retired)
 
 **`meeting_link` is Fernet-encrypted at rest and decrypted ONLY for attendees** (the
 candidate + assigned interviewers). It is **absent** from the board glance and every
@@ -679,9 +686,10 @@ separation-of-duties but records both `created_by` + `approved_by`.
 **Salary (`salary_amount`) is Fernet-encrypted at rest** ("recruiter + student
 only", DATA_MODEL §17): decrypted only for the partner detail view and the **owning
 student's** own offer view — **never** in a notification/email body, the board
-glance, or the `offer.accepted` event payload. **Reveal precondition:** SENDING an
-anonymous application's offer requires an already-accepted reveal (else `409
-reveal_required`) — the handshake stays the only identity path.
+glance, or the `offer.accepted` event payload. (Owner decision 2026-07-10: the
+former `409 reveal_required` precondition on offer send is **retired** —
+applicants are always identified, so offers send freely; the salary-encryption
+and partner-approval-before-send invariants are unchanged.)
 
 | Path | Method | Auth | Notes |
 |---|---|---|---|
@@ -690,7 +698,7 @@ reveal_required`) — the handshake stays the only identity path.
 | `/applications/{id}/offers/{offer_id}` | PATCH | partner member (`recruitment:create_offer`) + `version?` | Edit comp/terms/expiry **only while `draft`** (else `409 { reason:"offer_not_editable" }`). Optimistic `version` (stale → `409`). Audited (`application.offer_updated`). |
 | `/offers/{offer_id}/submit` | POST | partner member (`recruitment:create_offer`) + `version?` | `draft → pending_approval` (freezes content). Audited (`application.offer_submitted`). |
 | `/offers/{offer_id}/approve` | POST | partner member (`recruitment:approve_offer`) + `version?` | Body `{ decision: "approve"｜"reject" }`. `pending_approval → approved` (sets `approved_by`/`approved_at`) or `→ draft` (reject-back). Audited (`application.offer_approved` / `…_rejected_back`). |
-| `/offers/{offer_id}/send` | POST | partner member (`recruitment:send_offer`) + `version?` | `approved → sent` (`sent_at`). **`409 { reason:"offer_not_approved" }`** if not `approved` (the structural approval gate). **`409 reveal_required`** for an anonymous app with no accepted reveal. Audited (`application.offer_sent`). Notifies the candidate (`recruitment.offer_received`, NO salary). |
+| `/offers/{offer_id}/send` | POST | partner member (`recruitment:send_offer`) + `version?` | `approved → sent` (`sent_at`). **`409 { reason:"offer_not_approved" }`** if not `approved` (the structural approval gate). (The former `409 reveal_required` gate is retired — owner 2026-07-10.) Audited (`application.offer_sent`). Notifies the candidate (`recruitment.offer_received`, NO salary). |
 | `/offers/{offer_id}/rescind` | POST | partner member (`recruitment:withdraw_offer`) + `version?` | `{draft,pending_approval,approved,sent} → rescinded`. Notifies the candidate (`recruitment.offer_rescinded`) only if it had been `sent`. Audited (`application.offer_rescinded`). |
 | `/offers` | GET | the applicant (student) | `{ offers:[ <student offer view> ] }` — the student's OWN offers; only `sent`+terminal states are visible (`draft`/`pending_approval`/`approved` are partner-internal). |
 | `/offers/{id}` | GET | the applicant (owner) | The student's OWN offer detail — full comp (decrypted; they are the owner). Non-owner / not student-visible → `404`. |
@@ -773,21 +781,26 @@ Response `data`:
 }
 ```
 
-Each candidate **card** (anonymity-minimal — never CV text, cover letter,
-screening answers, scores, or the internal rejection reason):
+> **SUPERSEDED (owner decision 2026-07-10):** the `is_anonymous` / `anonymous_id`
+> / `reveal_status` / "true only after reveal" fields below are **retired**.
+> Applications are always identified; the card shows the identified applicant to
+> a recruiter with `candidate_access`, and `cv_download_available` reflects the
+> RBAC grant + watermark policy, not a reveal. The card stays PII-minimal (never
+> CV text, cover letter, screening answers, scores, or internal rejection
+> reason). `system-architect` should re-cut the exact shape; ignore the retired
+> fields.
+
+Each candidate **card** (PII-minimal):
 
 ```jsonc
 {
   "application_id": "<uuid>",
-  "is_anonymous": true,
-  "applicant": {                      // pre-reveal: handle only
-    "is_anonymous": true, "revealed": false,
-    "anonymous_id": "UV-AB12CD34", "display_name": "Ứng viên ẩn danh"
-    // post-accept reveal: { revealed:true, user_id, display_name, email }
+  "applicant": {
+    "user_id": "<uuid>", "display_name": "Nguyễn Văn A"
+    // contact fields returned only with the candidate_access grant
   },
   "status": "under_review", "status_label": "Đang xem xét",
-  "reveal_status": "none", "reveal_status_label": null,
-  "cv_download_available": false,     // true only after an anonymous reveal is accepted
+  "cv_download_available": true,      // gated by candidate_access RBAC (watermark on download)
   "stage_id": "<uuid|null>",          // null in the "new" bucket
   "position": 1,                       // current stage sort_order (null in "new")
   "entered_at": "<iso8601|null>",      // when the card entered its current stage
@@ -1961,10 +1974,12 @@ Response can be immediate or queued:
   },
   "cover_letter": "optional text",
   "screening_answers": {},
-  "is_anonymous": false,
   "idempotency_key": "client-generated-key"
 }
 ```
+
+> Owner decision 2026-07-10: the `is_anonymous` request field is **removed** —
+> applications are always identified.
 
 Allowed `cv_selection.type` values:
 
@@ -1998,12 +2013,13 @@ token counts, cost, or latency (`docs/AI_PRODUCT_SPEC.md` §15). Counts come fro
 real `ai_usage_log` rows for the authenticated caller.
 
 - `GET /api/v1/ai/usage/me` — the sidebar meter. Returns
-  `{ day, week, warning, blocked, blocked_scope }` where each window is
-  `{ used, limit, pct }`. `blocked_scope` is `"day" | "week" | null` and the
-  weekly window dominates (an exhausted week blocks even with daily room). This
-  is the same gate the gateway enforces with `409 QUOTA_EXCEEDED`.
+  `{ session, week, warning, blocked, blocked_scope }` where each window is
+  `{ used, limit, pct }`. `session` is a rolling short-session warning window;
+  `week` is the hard-cap window. `blocked_scope` is `"week" | null` for the
+  shipped hard gate: an exhausted week blocks new AI calls with
+  `409 QUOTA_EXCEEDED`.
 - `GET /api/v1/ai/usage/summary` — the billing/usage panel. Extends `/me` with:
-  - `day_reset`, `week_reset` — ISO-8601 UTC instants the windows reset;
+  - `week_reset` — ISO-8601 UTC instant the weekly window resets;
   - `window_days` (default `30`) and `total` — total requests in the window
     (includes system tasks not shown per-feature);
   - `by_feature: [{ feature, count }]` — sorted desc. `feature` is a stable
@@ -2934,42 +2950,34 @@ Response: `{ "data": { "review_id": "uuid", "status": "pending_auto_review", "pu
 
 ---
 
-## Passive Search & Talent Pool
+## Talent Pool — AI Semantic Candidate Search
+
+> **SUPERSEDED by owner decision 2026-07-10.** The `/applications/{id}/reveal`
+> and `/applications/{id}/reveal/respond` endpoints and the "returns anonymized
+> profiles / reveals on accept" behavior are **removed** — applications are
+> always identified and talent-pool candidates are shown identified to authorized
+> recruiters. The passive-search surface becomes **AI semantic search**
+> (pgvector + structured filters + LLM rerank with match reasons + external-JD
+> search). Product/RBAC/AI contract:
+> `docs/PARTNER_RBAC_ANALYTICS_SPEC.md` → "Talent Pool — AI Semantic Candidate
+> Search Contract" and `docs/AI_PRODUCT_SPEC.md` §3.3. The concrete
+> request/response shapes below need a `system-architect` amendment; treat them
+> as retired, not authoritative.
 
 | Path | Method | Actor |
 |---|---|---|
-| `/passive-search/profiles` | GET | Partner (with quota) |
-| `/passive-search/profiles/{id}/contact` | POST | Partner |
+| `/talent-pool/search` | POST | Partner (`talent_pool:search`, quota) — brief / posted job / **external JD (paste/upload)** → ranked identified candidates + match reasons |
+| `/talent-pool/search/{id}/contact` | POST | Partner (quota) |
 | `/talent-pool` | GET | Partner |
 | `/talent-pool` | POST | Partner |
 | `/talent-pool/{entry_id}` | DELETE | Partner |
-| `/applications/{id}/reveal` | POST | Partner (anonymous apply) |
-| `/applications/{id}/reveal/respond` | POST | Student |
 | `/saved-jobs` | GET | Student |
 | `/saved-jobs` | POST | Student |
 | `/saved-jobs/{job_id}` | DELETE | Student |
 
-### Passive Search Query
-
-`GET /api/v1/passive-search/profiles?skills=python,fastapi&graduation_year=2025&page_cursor=xxx`
-
-Returns anonymized profiles. Reveals full profile only when a `contact_reveal_request` is accepted.
-
-### Anonymous Reveal Request
-
-`POST /api/v1/applications/{id}/reveal`
-
-```json
-{ "reason": "Chúng tôi muốn tìm hiểu thêm về kinh nghiệm của bạn (min 20 chars)" }
-```
-
-Student responds via:
-
-`POST /api/v1/applications/{id}/reveal/respond`
-
-```json
-{ "decision": "accepted" }
-```
+CV preview/download from a talent-pool result reuses the `candidate_access`
+RBAC + watermark + audit rules. No provider/model/embedding/similarity internals
+are ever returned to partners; results carry human-readable match reasons only.
 
 ---
 
@@ -3044,21 +3052,23 @@ no delivery path exists before commit; the poll/feed read only committed rows.
 Idempotent on `client_dedupe_key` (same key → the original message, no duplicate /
 re-notify).
 
-### Anonymity + PII rules
+### Identity + PII rules
 
-- Identity is a **projection-time** decision (single source: `thread_view`). A
-  partner viewing the applicant of an anonymous, not-yet-revealed `application`
-  thread sees a stable handle `Ứng viên ẩn danh #<short-app-code>` — never name,
-  email, or CV. On `applications.reveal_approved_at` (the shipped recruitment reveal
-  handshake — the ONLY identity path) the same projection flips to the real name.
+> Owner decision 2026-07-10: applicants are always identified, so the former
+> "anonymous handle until reveal" projection is retired. A partner viewing an
+> application thread sees the identified student directly (subject to
+> `candidate_access` RBAC). The message-body / notification PII-minimization
+> rules below are unchanged.
+
+- A partner viewing the applicant of an `application` thread sees the identified
+  student (name) via the `thread_view` projection — no anonymous handle, no
+  reveal gate. CV access from the thread still uses `candidate_access` RBAC.
 - A student always sees the partner's **org display name** (org identity is not
   protected). University moderators see real identities.
 - The **`message.received` notification** (in-app + email, category `message`,
-  optional/default-on) carries a **masked** sender label + a neutral "Bạn có tin
-  nhắn mới" + the thread deep link — **never the message body**, never the anonymous
-  student's identity. The partner's notification about an anonymous reply stays
-  anonymous; the student's names the org. `message.flagged` notifies university
-  staff on report.
+  optional/default-on) carries a sender label + a neutral "Bạn có tin nhắn mới" +
+  the thread deep link — **never the message body**. `message.flagged` notifies
+  university staff on report.
 - Audit (`messaging.thread.create` / `messaging.message.send` / `.delete` /
   `messaging.report`) snapshots are PII-safe: ids + status only, never body / name /
   email. Reads are not audited.

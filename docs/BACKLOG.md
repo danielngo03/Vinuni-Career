@@ -136,10 +136,10 @@
 | B-083 | Job visibility level 1: Public (guest-accessible) | P0 | 1 |
 | B-084 | Job visibility levels 2–5: Authenticated / Students Only / VinUni Only / Invitation Only | P0 | 2 |
 | B-085 | Invitation-only job: partner sends invite to specific users/emails | P1 | 2 |
-| B-086 | Anonymous apply toggle per job (partner setting) | P0 | 2 |
-| B-087 | Anonymous apply: student chooses at apply time | P0 | 2 |
-| B-088 | University admin: configure which fields hidden in anonymous apply | P0 | 2 |
-| B-089 | Partner: request reveal anonymous applicant (with reason, needs student approval) | P1 | 2 |
+| B-086 | ~~Anonymous apply toggle per job~~ **REMOVED (owner 2026-07-10)** — applications always identified | — | — |
+| B-087 | ~~Anonymous apply: student chooses at apply time~~ **REMOVED (owner 2026-07-10)** | — | — |
+| B-088 | ~~University admin: configure hidden fields in anonymous apply~~ **REMOVED (owner 2026-07-10)** | — | — |
+| B-089 | ~~Partner: request reveal anonymous applicant~~ **REMOVED (owner 2026-07-10)** — no reveal flow; CV access stays RBAC+watermark+audit | — | — |
 | B-090 | Job duplication (clone with new deadline) | P1 | 2 |
 | B-091 | Auto-close job when application quota filled | P1 | 2 |
 | B-092 | Job expire D-3 / D-1 notifications to partner | P1 | 1 |
@@ -201,7 +201,10 @@
 
 ---
 
-## E8 — Talent Pool & Passive Search
+## E8 — Talent Pool: AI Semantic Candidate Search
+
+> Reframed by owner decision 2026-07-10: AI semantic search, not anonymized
+> cards. Contract: `docs/PARTNER_RBAC_ANALYTICS_SPEC.md` + `docs/AI_PRODUCT_SPEC.md` §3.3.
 
 | ID | Story | Priority | Phase |
 |----|-------|----------|-------|
@@ -210,10 +213,13 @@
 | B-152 | Tag candidates in talent pool | P1 | 2 |
 | B-153 | Notes per candidate in pool | P1 | 2 |
 | B-154 | Bulk-add talent pool candidates to job pipeline | P1 | 2 |
-| B-155 | Student: opt-in to passive search visibility | P0 | 2 |
-| B-156 | Passive search: profiles anonymized (name/email hidden) by default | P0 | 2 |
-| B-157 | Partner passive search: filter by skills, tier, GPA range, availability | P0 | 2 |
-| B-158 | Semantic search via pgvector embeddings | P1 | 2 |
+| B-155 | Student: opt-in to passive/talent-pool discoverability (opt-out ⇒ removed from index, not masked) | P0 | 2 |
+| B-156 | ~~Passive search: profiles anonymized by default~~ **REMOVED (owner 2026-07-10)** — candidates shown identified to authorized recruiters; CV access via `candidate_access` RBAC + watermark + audit | — | — |
+| B-157 | Talent-pool structured filters: skills, experience/years, major/faculty, cohort, location/work-mode, availability, tier | P0 | 2 |
+| B-158 | Semantic search: pgvector embeddings over consented candidate CVs | P0 | 2 |
+| B-158b | LLM rerank returning human-readable match reasons + evidence gaps (no raw similarity exposed) | P0 | 2 |
+| B-158c | **External-JD search**: paste/upload a JD not yet posted → ranked candidates; metered + audited | P0 | 2 |
+| B-158d | Deterministic keyword+filter fallback when AI/embeddings unavailable | P0 | 2 |
 | B-159 | Partner sends contact request with message | P0 | 2 |
 | B-160 | Student receives contact request: accept / decline | P0 | 2 |
 | B-161 | Reveal profile info only after student accepts | P0 | 2 |
@@ -718,7 +724,7 @@
 | B-520 | Department-scoped permissions restrict jobs, applications, analytics, pipeline, and exports to the member's assigned scope | P0 | 2 |
 | B-521 | Job analytics projection tracks impressions, detail views, CTA clicks, apply starts, submitted applications, source mix, and conversion | P0 | 3 |
 | B-522 | Partner dashboard V2 shows real todos, job performance, conversion, team activity, package limits, and permission-aware locked states | P0 | 3 |
-| B-523 | Candidate access audit logs application open, CV preview/download, reveal request, and revealed-identity view | P0 | 2 |
+| B-523 | Candidate access audit logs application open, contact view, and CV preview/download (reveal/revealed-identity events removed — owner 2026-07-10) | P0 | 2 |
 | B-524 | Partner activity feed shows who created/submitted jobs, reviewed candidates, viewed CVs, changed roles, and managed billing | P1 | 3 |
 | B-525 | Analytics and exports only include rows/fields the actor has permission to access | P0 | 3 |
 | B-526 | AI recruiting actions respect RBAC and remain advisory or confirmation-required with audit rows | P0 | 3 |
@@ -848,7 +854,7 @@
 | B-600 | CV Studio library right rail (job-fit recommendations + AI-credit/export-quota) and an always-visible AI-credit chip where credits are spent (CV Studio header, AI assistant) | P2 | 3–4 |
 | B-601 | Align alumni persona: `_attach_student_fit` shows fit badges to alumni but `saved_jobs_service._require_student` 403s alumni on save — make save/fit consistent | P3 | 1 |
 | B-602 | Uploaded-CV application snapshot fidelity: the snapshot is a re-rendered structured extraction, not a byte-copy of the original uploaded PDF, so anything the extractor missed is absent from the immutable record — evaluate storing/serving the original document reference in the snapshot | P2 | 1 |
-| B-603 | Strengthen anonymous-apply redaction: `_redact_snapshot` currently only overwrites `title` with `[Ẩn danh]`; extracted sections may still carry identifying content pre-reveal (`apply_service.py:223-227`) | P1 | 1 |
+| B-603 | ~~Strengthen anonymous-apply redaction~~ **REMOVED (owner 2026-07-10)** — anonymous apply removed; instead, delete the `_redact_snapshot`/`is_anonymous` code paths in `apply_service.py` and related presenters (code cleanup, backend-developer) | P1 | 1 |
 
 > **E38 status (implemented + test-verified 08/07/2026):** B-586, B-587, B-588,
 > B-589, B-593, B-594, B-596, B-599, B-603 DONE; B-595 deterministic applier DONE
