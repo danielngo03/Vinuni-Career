@@ -1,9 +1,9 @@
 """Partner pipeline kanban board read model (``GET /jobs/{job_id}/pipeline``).
 
-A read-only, anonymity-safe facade (no writes, no audit) that loads the WHOLE
-kanban board for one of the caller-org's jobs in a small, bounded number of
-queries — never a per-application fetch loop (ADR-0004 kanban data note + the
-``backend.md`` "no heavy live joins / no N+1" rule).
+A read-only facade (no writes, no audit) that loads the WHOLE kanban board for one
+of the caller-org's jobs in a small, bounded number of queries — never a
+per-application fetch loop (ADR-0004 kanban data note + the ``backend.md`` "no
+heavy live joins / no N+1" rule).
 
 Query budget (independent of candidate count):
 
@@ -13,18 +13,16 @@ Query budget (independent of candidate count):
 3. ONE ``applications LEFT JOIN candidate_stages (ACTIVE)`` fetch → every card with
    its current stage position in a single statement (one ACTIVE row per app → no
    row multiplication);
-4. batched reveal-status lookup (one ``IN`` query);
-5. batched user lookup, ONLY for revealed / non-anonymous cards (one ``IN`` query);
-6. batched rollback-count lookup (one grouped query);
-7. authoritative by-stage counts via ``dashboard_read`` (the ``proj_partner_pipeline``
+4. batched applicant identity lookup (contacts + avatars, two ``IN`` queries);
+5. batched rollback-count lookup (one grouped query);
+6. authoritative by-stage counts via ``dashboard_read`` (the ``proj_partner_pipeline``
    live read) so the column COUNTS are exact even when the rendered CARDS are
    capped.
 
-Anonymity is non-negotiable: every card is built through
-``presenters.partner_board_card`` (which reuses the ``_applicant_identity``
-redaction core) so a pre-reveal card carries only the ``UV-xxxx`` handle — never a
-name/email, CV text, cover letter, screening answers, or scores. The reveal
-handshake stays the only identity path; the board never bypasses it.
+Every card carries the applicant's real identity (owner decision 2026-07-10 — the
+anonymous-apply + reveal handshake was removed); a card still never carries CV
+text, the cover letter, screening answers, or scores — a kanban glance is minimal
+by construction.
 """
 
 from __future__ import annotations
@@ -36,16 +34,17 @@ from sqlalchemy import and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.application import job_read_facade
+from app.modules.organization.application import org_reporting_facade
 from app.modules.recruitment.api import presenters
 from app.modules.recruitment.application import _shared, dashboard_read, stage_service
 from app.modules.recruitment.domain import lifecycle, pipeline, scorecard
 from app.modules.recruitment.domain.models import (
     Application,
-    ApplicationRevealRequest,
     CandidateStage,
     PipelineStage,
     Scorecard,
 )
+from app.modules.student_profiles.application import avatar_facade
 from app.modules.users.application import user_read_facade
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import Principal, permission_checker
@@ -82,17 +81,13 @@ async def _load_org_scoped_job(
     job = await job_read_facade.get_job_ref(session, job_id)
     if job is None:
         raise ResourceNotFoundError()
-    if not principal.is_superadmin and (
-        principal.org_id is None or principal.org_id != job.org_id
-    ):
+    if not principal.is_superadmin and (principal.org_id is None or principal.org_id != job.org_id):
         raise ResourceNotFoundError()
     permission_checker.require(principal, _RESOURCE, "read", resource_org_id=job.org_id)
     return job
 
 
-async def _board_stages(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> list[PipelineStage]:
+async def _board_stages(session: AsyncSession, *, org_id: uuid.UUID) -> list[PipelineStage]:
     """The ordered template stages = the kanban columns (lazily seeded if absent)."""
 
     tmpl = await stage_service.ensure_org_default_template(session, org_id=org_id)
@@ -134,31 +129,39 @@ async def _fetch_cards(
     return [(r[0], r[1], r[2]) for r in rows], truncated
 
 
-async def _batch_reveal_status(
-    session: AsyncSession, *, application_ids: list[uuid.UUID], org_id: uuid.UUID
-) -> dict[uuid.UUID, str]:
-    if not application_ids:
-        return {}
-    rows = (
-        await session.execute(
-            select(
-                ApplicationRevealRequest.application_id,
-                ApplicationRevealRequest.status,
-            ).where(
-                ApplicationRevealRequest.application_id.in_(set(application_ids)),
-                ApplicationRevealRequest.requester_org_id == org_id,
-            )
-        )
-    ).all()
-    return {row[0]: row[1] for row in rows}
-
-
 async def _batch_users(
     session: AsyncSession, *, user_ids: list[uuid.UUID]
 ) -> dict[uuid.UUID, user_read_facade.UserContact]:
     if not user_ids:
         return {}
     return await user_read_facade.get_user_contacts(session, user_ids)
+
+
+async def _batch_assignees(
+    session: AsyncSession, *, org_id: uuid.UUID, membership_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, dict]:
+    """Resolve ``{membership_id: assignee_block}`` for the assigned recruiters.
+
+    ONE batched org-facade lookup (membership query + names) for the whole board —
+    independent of candidate count. Reads through ``org_reporting_facade`` so the
+    recruitment module never imports the ``Membership`` ORM directly. The assignee
+    is PARTNER staff (never the candidate) so the name is always shown; the block
+    matches ``presenters.partner_application``'s ``assignee`` shape.
+    """
+
+    if not membership_ids:
+        return {}
+    briefs = await org_reporting_facade.member_briefs(
+        session, org_id=org_id, membership_ids=membership_ids
+    )
+    return {
+        mid: {
+            "membership_id": str(brief.membership_id),
+            "user_id": str(brief.user_id),
+            "display_name": brief.display_name,
+        }
+        for mid, brief in briefs.items()
+    }
 
 
 async def _batch_rollback_counts(
@@ -218,14 +221,10 @@ async def _batch_stage_evaluations(
 
     out: dict[uuid.UUID, dict] = {}
     for app_id, current_stage_id in current_stage_by_app.items():
-        required = scorecard.required_for_action(
-            required_by_stage.get(current_stage_id, "")
-        )
+        required = scorecard.required_for_action(required_by_stage.get(current_stage_id, ""))
         cards = buckets.get(app_id, [])
         submitted_count = len(cards)
-        overalls = [
-            float(o) for _r, o in cards if isinstance(o, (int, float, Decimal))
-        ]
+        overalls = [float(o) for _r, o in cards if isinstance(o, (int, float, Decimal))]
         rec_summary = dict.fromkeys(scorecard.RECOMMENDATION_ORDER, 0)
         for recommendation, _o in cards:
             if recommendation in rec_summary:
@@ -234,9 +233,7 @@ async def _batch_stage_evaluations(
             "submitted_count": submitted_count,
             "required": required,
             "gate_met": scorecard.gate_met(submitted_count, required),
-            "avg_overall": (
-                round(sum(overalls) / len(overalls), 1) if overalls else None
-            ),
+            "avg_overall": (round(sum(overalls) / len(overalls), 1) if overalls else None),
             "recommendation_summary": rec_summary,
         }
     return out
@@ -272,18 +269,23 @@ async def get_job_pipeline_board(
     cards_raw, truncated = await _fetch_cards(session, job_id=job.id)
     app_ids = [app.id for app, _stage_id, _entered in cards_raw]
 
-    reveal_status = await _batch_reveal_status(
-        session, application_ids=app_ids, org_id=job.org_id
-    )
-    # Only revealed / non-anonymous cards need a real user row; anonymous-unrevealed
-    # cards render from the deterministic handle alone (no user fetch, no leak).
-    revealed_user_ids = [
-        app.applicant_id
-        for app, _stage_id, _entered in cards_raw
-        if app.reveal_approved_at is not None or not app.is_anonymous
-    ]
-    users = await _batch_users(session, user_ids=revealed_user_ids)
+    # Every card carries the applicant's real identity (contacts + avatars) — TWO
+    # batched facade lookups for the whole board, independent of candidate count.
+    applicant_ids = [app.applicant_id for app, _stage_id, _entered in cards_raw]
+    users = await _batch_users(session, user_ids=applicant_ids)
+    avatars = await avatar_facade.avatar_urls_for(session, applicant_ids)
     rollback_counts = await _batch_rollback_counts(session, application_ids=app_ids)
+    # Candidate owner (assignee) per card — ONE batched org-facade lookup for the
+    # whole board (empty set → no query, so the board's bounded-query budget holds).
+    assignees = await _batch_assignees(
+        session,
+        org_id=job.org_id,
+        membership_ids=[
+            app.assigned_to_membership_id
+            for app, _stage_id, _entered in cards_raw
+            if app.assigned_to_membership_id is not None
+        ],
+    )
 
     # Partner-only scorecard summary per card (current stage) — ONE batched query.
     required_by_stage = {stage.id: stage.required_action for stage in stages}
@@ -306,15 +308,22 @@ async def get_job_pipeline_board(
     by_stage_cards: dict[uuid.UUID, list[dict]] = {stage.id: [] for stage in stages}
 
     for app, stage_id, entered_at in cards_raw:
-        card = presenters.partner_board_card(
+        applicant = presenters.applicant_block(
             app,
             user=users.get(app.applicant_id),
-            reveal_status=reveal_status.get(app.id),
+            avatar_url=avatars.get(app.applicant_id),
+        )
+        card = presenters.partner_board_card(
+            app,
+            applicant=applicant,
             stage_id=str(stage_id) if stage_id is not None else None,
             position=None,
             entered_at=entered_at if stage_id is not None else None,
             rollback_count=rollback_counts.get(app.id, 0),
             evaluation=evaluations.get(app.id),
+            assignee=assignees.get(app.assigned_to_membership_id)
+            if app.assigned_to_membership_id is not None
+            else None,
             locale=locale,
         )
         if stage_id is not None and stage_id in stage_ids:

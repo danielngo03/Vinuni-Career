@@ -48,21 +48,23 @@ async def save_job(
 
     # Verify the job exists and is publicly visible.
     job = (
-        await session.execute(
-            select(Job).where(Job.id == job_id, Job.deleted_at.is_(None))
-        )
+        await session.execute(select(Job).where(Job.id == job_id, Job.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if job is None:
         raise ResourceNotFoundError()
 
     # Upsert-by-conflict: if the row already exists, do nothing.
     try:
-        stmt = pg_insert(SavedJob).values(
-            id=uuid.uuid4(),
-            user_id=principal.user_id,
-            job_id=job_id,
-            org_id=job.org_id,
-        ).on_conflict_do_nothing(constraint="uq_saved_jobs_user_job")
+        stmt = (
+            pg_insert(SavedJob)
+            .values(
+                id=uuid.uuid4(),
+                user_id=principal.user_id,
+                job_id=job_id,
+                org_id=job.org_id,
+            )
+            .on_conflict_do_nothing(constraint="uq_saved_jobs_user_job")
+        )
         await session.execute(stmt)
         await session.commit()
     except Exception:
@@ -146,10 +148,14 @@ async def get_saved_ids(
     if not principal.is_authenticated:
         return set()
     rows = (
-        await session.execute(
-            select(SavedJob.job_id).where(SavedJob.user_id == principal.user_id)
+        (
+            await session.execute(
+                select(SavedJob.job_id).where(SavedJob.user_id == principal.user_id)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return set(rows)
 
 
@@ -193,9 +199,7 @@ async def list_saved_jobs(
                 (SavedJob.saved_at == anchor_saved) & (SavedJob.id < anchor_id),
             )
         )
-    base = base.order_by(SavedJob.saved_at.desc(), SavedJob.id.desc()).limit(
-        page_limit + 1
-    )
+    base = base.order_by(SavedJob.saved_at.desc(), SavedJob.id.desc()).limit(page_limit + 1)
     saved_rows = list((await session.execute(base)).scalars().all())
 
     page = build_cursor_page(
@@ -214,9 +218,7 @@ async def list_saved_jobs(
 
     jobs_map: dict[uuid.UUID, Job] = {}
     if job_ids:
-        job_rows = (
-            await session.execute(select(Job).where(Job.id.in_(job_ids)))
-        ).scalars().all()
+        job_rows = (await session.execute(select(Job).where(Job.id.in_(job_ids)))).scalars().all()
         jobs_map = {j.id: j for j in job_rows}
 
     org_ids = {j.org_id for j in jobs_map.values()}
@@ -273,10 +275,10 @@ async def get_saved_job_signals(
             employment_types.append(emp_type)
         if title:
             raw_titles.append(title)
-        for sk in (req_skills or []):
+        for sk in req_skills or []:
             if sk not in skills:
                 skills.append(str(sk))
-        for sk in (pref_skills or []):
+        for sk in pref_skills or []:
             if sk not in skills:
                 skills.append(str(sk))
 

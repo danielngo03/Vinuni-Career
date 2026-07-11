@@ -36,10 +36,7 @@ from app.ai.extraction.adapters import (
 from app.ai.extraction.text_extraction import ExtractionError, FileKind, sniff_kind
 
 _SUPPORTED_KINDS = {FileKind.PDF, FileKind.DOCX, FileKind.TXT, FileKind.IMAGE}
-_VI_DIACRITICS = (
-    "ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩị"
-    "óòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ"
-)
+_VI_DIACRITICS = "ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ"
 
 
 @dataclass(slots=True)
@@ -101,9 +98,14 @@ def run_cascade(
     max_bytes: int,
     existing_checksums: tuple[str, ...] | list[str] = (),
     policy: EnginePolicy | None = None,
+    precomputed_checksum: str | None = None,
 ) -> IngestionOutcome:
     policy = policy or resolve_policy()
-    checksum = cv_validation.compute_checksum(data)
+    # ``precomputed_checksum`` lets the caller pin the checksum used for duplicate
+    # detection to the ORIGINAL upload bytes even when ``data`` here is a derived
+    # artifact (e.g. an image CV converted to a served PDF, whose bytes are not
+    # byte-identical across runs). Falls back to hashing ``data`` directly.
+    checksum = precomputed_checksum or cv_validation.compute_checksum(data)
 
     # ---- 1. Security + file gates -------------------------------------------
     if len(data) > max_bytes:
@@ -123,9 +125,7 @@ def run_cascade(
         signals = native.extract(filename, data)
     except ExtractionError as exc:
         code = (
-            exc.code
-            if exc.code in ("PASSWORD_PROTECTED_FILE", "CORRUPT_FILE")
-            else "CORRUPT_FILE"
+            exc.code if exc.code in ("PASSWORD_PROTECTED_FILE", "CORRUPT_FILE") else "CORRUPT_FILE"
         )
         return IngestionOutcome(False, code, checksum=checksum)
 
@@ -160,8 +160,10 @@ def run_cascade(
     cid_corrupted = is_pdf and is_cid_corrupted(text)
     # A PDF needs OCR/vision when image-based (scanned), or when native text is
     # CID-font garbage (visually rich PDF with unreadable encoded glyphs).
-    needs_ocr = is_image or cid_corrupted or (
-        is_pdf and len(text.strip()) < OCR_TRIGGER_THRESHOLD and signals.has_images
+    needs_ocr = (
+        is_image
+        or cid_corrupted
+        or (is_pdf and len(text.strip()) < OCR_TRIGGER_THRESHOLD and signals.has_images)
     )
     # Send to vision every image, and every PDF that actually has content (text or
     # images) — a truly empty PDF skips the paid call and classifies as blank.
@@ -225,9 +227,7 @@ def run_cascade(
         review_fields = vision_structured["review_fields"]
         detected_language = vision_structured.get("detected_language")
         combined_text = " ".join(
-            _section_text(section)
-            for section in extracted.values()
-            if isinstance(section, dict)
+            _section_text(section) for section in extracted.values() if isinstance(section, dict)
         )
         return IngestionOutcome(
             accepted=True,

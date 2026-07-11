@@ -35,9 +35,9 @@ if TYPE_CHECKING:
     pass
 
 # KB scope types
-KB_SCOPE_PLATFORM = "platform"   # visible to all authenticated users
-KB_SCOPE_PARTNER = "partner"     # visible to applicants to that org's jobs
-KB_SCOPE_JOB = "job"             # visible only to applicants to a specific job
+KB_SCOPE_PLATFORM = "platform"  # visible to all authenticated users
+KB_SCOPE_PARTNER = "partner"  # visible to applicants to that org's jobs
+KB_SCOPE_JOB = "job"  # visible only to applicants to a specific job
 
 # Document ingestion status lifecycle
 DOC_STATUS_PENDING = "pending"
@@ -97,9 +97,7 @@ class KnowledgeBaseDocument(Base):
         "KnowledgeBaseChunk", back_populates="document", cascade="all, delete-orphan"
     )
 
-    __table_args__ = (
-        Index("ix_kb_document_kb_status", "kb_id", "status"),
-    )
+    __table_args__ = (Index("ix_kb_document_kb_status", "kb_id", "status"),)
 
 
 class KnowledgeBaseChunk(Base):

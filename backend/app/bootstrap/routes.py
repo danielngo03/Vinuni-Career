@@ -7,6 +7,7 @@ from fastapi import APIRouter, FastAPI
 from app.ai.agents.api import router as ai_workforce_router
 from app.api import health
 from app.modules.account.api import router as account_router
+from app.modules.advertising.api import campaign_router as advertising_campaign_router
 from app.modules.advertising.api import router as advertising_router
 from app.modules.ai_assistant.api.router import router as ai_assistant_router
 from app.modules.ai_assistant.api.router import usage_router as ai_usage_router
@@ -28,6 +29,10 @@ from app.modules.knowledge_base.api.router import router as knowledge_base_route
 from app.modules.locations.api.router import router as locations_router
 from app.modules.marketplace.api import router as marketplace_router
 from app.modules.messaging.api import router as messaging_router
+from app.modules.mock_interview.api import router as mock_interview_router
+from app.modules.mock_interview.api.admin_router import (
+    admin_router as mock_interview_admin_router,
+)
 from app.modules.moderation.api.router import content_reports_router
 from app.modules.moderation.api.router import router as moderation_router
 from app.modules.notifications.api import router as notifications_router
@@ -60,6 +65,7 @@ from app.modules.platform_support.api import router as platform_support_router
 from app.modules.recruitment.api import router as recruitment_router
 from app.modules.reviews.api import router as reviews_router
 from app.modules.student_profiles.api import router as student_profiles_router
+from app.modules.talent_pool.api import router as talent_pool_router
 from app.modules.users.api import router as admin_users_router
 from app.modules.workflow.api import router as workflow_router
 
@@ -92,6 +98,7 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(reviews_router.router)
     api.include_router(reviews_router.admin_router)
     api.include_router(student_profiles_router.router)
+    api.include_router(talent_pool_router.router)
     api.include_router(dashboards_router.router)
     api.include_router(dashboards_admin_router)
     api.include_router(career_outcomes_router.router)
@@ -106,11 +113,15 @@ def register_routes(app: FastAPI) -> None:
     api.include_router(platform_support_router.router)
     api.include_router(advertising_router.router)
     api.include_router(advertising_router.admin_router)
+    api.include_router(advertising_campaign_router.campaign_router)
+    api.include_router(advertising_campaign_router.campaign_admin_router)
     api.include_router(analytics_partner_router)
     api.include_router(billing_router.router)
     api.include_router(billing_router.admin_router)
     api.include_router(ai_assistant_router)
     api.include_router(ai_usage_router)
+    api.include_router(mock_interview_router.router)
+    api.include_router(mock_interview_admin_router)
     api.include_router(ai_workforce_router)
     api.include_router(ai_settings_router.admin_router)
     api.include_router(ai_ops_router.admin_router)

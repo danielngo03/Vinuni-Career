@@ -125,8 +125,10 @@ def _after_items(probe: Probe) -> list[Any]:
 
 def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
     if key == "error_code":
-        return None if probe.raised_code == exp else (
-            f"expected error_code {exp!r}, got {probe.raised_code!r}"
+        return (
+            None
+            if probe.raised_code == exp
+            else (f"expected error_code {exp!r}, got {probe.raised_code!r}")
         )
     if key == "no_stack_trace":
         bad = "traceback" in probe.raised_message.lower()
@@ -136,39 +138,49 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
         return None if exp in flags else f"expected guard flag {exp!r}, got {flags!r}"
     if key == "sanitized_instruction_not_contains":
         sanitized = (probe.data.get("sanitized_instruction") or "").lower()
-        return None if str(exp).lower() not in sanitized else (
-            f"sanitized instruction should not contain {exp!r}"
+        return (
+            None
+            if str(exp).lower() not in sanitized
+            else (f"sanitized instruction should not contain {exp!r}")
         )
     if probe.diff is None:  # any remaining check needs a diff
         return f"no diff produced (task raised {probe.raised_code!r})"
     if key == "applicable":
-        return None if bool(probe.diff.get("applicable")) == bool(exp) else (
-            f"applicable expected {exp}, got {probe.diff.get('applicable')}"
+        return (
+            None
+            if bool(probe.diff.get("applicable")) == bool(exp)
+            else (f"applicable expected {exp}, got {probe.diff.get('applicable')}")
         )
     if key == "requires_fact_confirmation":
         got = bool(probe.diff.get("requires_fact_confirmation"))
-        return None if got == bool(exp) else (
-            f"requires_fact_confirmation expected {exp}, got {got}"
+        return (
+            None if got == bool(exp) else (f"requires_fact_confirmation expected {exp}, got {got}")
         )
     if key in ("after_contains",):
-        return None if str(exp).lower() in (probe.after_blob or "") else (
-            f"after content should contain {exp!r}"
+        return (
+            None
+            if str(exp).lower() in (probe.after_blob or "")
+            else (f"after content should contain {exp!r}")
         )
     if key.startswith("after_not_contains"):
-        return None if str(exp).lower() not in (probe.after_blob or "") else (
-            f"after content should NOT contain {exp!r}"
+        return (
+            None
+            if str(exp).lower() not in (probe.after_blob or "")
+            else (f"after content should NOT contain {exp!r}")
         )
     if key == "after_bullet_count":
         n = len(_after_items(probe))
         return None if n == int(exp) else f"after bullet count expected {exp}, got {n}"
     if key == "unsupported_claims_nonempty":
         got = bool(probe.diff.get("unsupported_claims"))
-        return None if got == bool(exp) else (
-            f"unsupported_claims nonempty expected {exp}, got {got}"
+        return (
+            None if got == bool(exp) else (f"unsupported_claims nonempty expected {exp}, got {got}")
         )
     if key == "summary_not_contains":
-        return None if str(exp).lower() not in (probe.summary or "").lower() else (
-            f"summary should not contain {exp!r}"
+        return (
+            None
+            if str(exp).lower() not in (probe.summary or "").lower()
+            else (f"summary should not contain {exp!r}")
         )
     if key in ("grounded_in_owner_data_only", "no_evidence_from_other_users"):
         return no_forbidden_terms(probe.blob)

@@ -100,14 +100,18 @@ async def _existing_dedupe(
     if action_url is None:
         return None
     return (
-        await session.execute(
-            select(Notification).where(
-                Notification.recipient_id == recipient_id,
-                Notification.notif_type == notif_type,
-                Notification.action_url == action_url,
+        (
+            await session.execute(
+                select(Notification).where(
+                    Notification.recipient_id == recipient_id,
+                    Notification.notif_type == notif_type,
+                    Notification.action_url == action_url,
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
 async def create_in_app(
@@ -127,9 +131,7 @@ async def create_in_app(
     is a fire-and-forget side effect of the product write.
     """
 
-    if not await _in_app_allowed(
-        session, recipient_id=recipient_id, notif_type=notif_type
-    ):
+    if not await _in_app_allowed(session, recipient_id=recipient_id, notif_type=notif_type):
         return None
 
     existing = await _existing_dedupe(
@@ -141,12 +143,8 @@ async def create_in_app(
     if existing is not None:
         return existing
 
-    resolved_locale = await _resolve_locale(
-        session, recipient_id=recipient_id, locale=locale
-    )
-    title, body = message_catalog.render(
-        notif_type, locale=resolved_locale, variables=variables
-    )
+    resolved_locale = await _resolve_locale(session, recipient_id=recipient_id, locale=locale)
+    title, body = message_catalog.render(notif_type, locale=resolved_locale, variables=variables)
     row = Notification(
         recipient_id=recipient_id,
         sender_id=sender_id,
@@ -228,13 +226,12 @@ async def list_feed(
         stmt = stmt.where(
             or_(
                 Notification.created_at < anchor_created,
-                (Notification.created_at == anchor_created)
-                & (Notification.id < anchor_id),
+                (Notification.created_at == anchor_created) & (Notification.id < anchor_id),
             )
         )
-    stmt = stmt.order_by(
-        Notification.created_at.desc(), Notification.id.desc()
-    ).limit(page_limit + 1)
+    stmt = stmt.order_by(Notification.created_at.desc(), Notification.id.desc()).limit(
+        page_limit + 1
+    )
 
     rows = list((await session.execute(stmt)).scalars().all())
     page = build_cursor_page(
@@ -281,9 +278,7 @@ async def mark_read(
     """Idempotently mark one of the caller's notifications read."""
 
     recipient_id = _require_recipient(principal)
-    row = await _load_own(
-        session, recipient_id=recipient_id, notification_id=notification_id
-    )
+    row = await _load_own(session, recipient_id=recipient_id, notification_id=notification_id)
     if not row.is_read:
         row.is_read = True
         row.read_at = _now()
@@ -298,9 +293,7 @@ async def mark_read(
     }
 
 
-async def mark_all_read(
-    session: AsyncSession, *, principal: Principal
-) -> dict:
+async def mark_all_read(session: AsyncSession, *, principal: Principal) -> dict:
     """Mark every unread notification of the caller as read; return the count."""
 
     recipient_id = _require_recipient(principal)

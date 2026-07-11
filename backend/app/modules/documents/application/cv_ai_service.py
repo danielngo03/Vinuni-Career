@@ -100,18 +100,14 @@ async def _gather_context(
     parse_run_id = _shared.to_uuid(source_ids.get("cv_parse_run_id"))
     if parse_run_id is not None:
         run = (
-            await session.execute(
-                select(CvParseRun).where(CvParseRun.id == parse_run_id)
-            )
+            await session.execute(select(CvParseRun).where(CvParseRun.id == parse_run_id))
         ).scalar_one_or_none()
         # Confirm the run belongs to a document owned by the caller.
         if run is not None:
             from app.modules.documents.domain.models import Document
 
             doc = (
-                await session.execute(
-                    select(Document).where(Document.id == run.document_id)
-                )
+                await session.execute(select(Document).where(Document.id == run.document_id))
             ).scalar_one_or_none()
             if doc is not None and doc.user_id == principal.user_id:
                 upload_extracted = run.extracted_data or {}
@@ -119,9 +115,7 @@ async def _gather_context(
     source_cv_sections = None
     source_cv_id = _shared.to_uuid(source_ids.get("source_cv_id"))
     if source_cv_id is not None:
-        src = await _cv_core._load_owned_cv(
-            session, principal=principal, cv_id=source_cv_id
-        )
+        src = await _cv_core._load_owned_cv(session, principal=principal, cv_id=source_cv_id)
         src_sections = await _cv_core._load_sections(session, cv_id=src.id)
         source_cv_sections = [_section_dict(s) for s in src_sections]
 
@@ -353,9 +347,7 @@ async def request_edit_command(
 # --------------------------------------------------------------------------- #
 
 
-async def _apply_after(
-    session: AsyncSession, *, cv: CvProfile, after: dict
-) -> None:
+async def _apply_after(session: AsyncSession, *, cv: CvProfile, after: dict) -> None:
     specs = (after or {}).get("sections") or []
     sections = await _cv_core._load_sections(session, cv_id=cv.id)
     by_id = {str(s.id): s for s in sections}
@@ -402,9 +394,7 @@ async def accept_suggestion(
 ) -> dict:
     permission_checker.require(principal, _RESOURCE, "update")
     assert principal.user_id is not None
-    cv = await _cv_core._load_owned_cv(
-        session, principal=principal, cv_id=cv_id, lock=True
-    )
+    cv = await _cv_core._load_owned_cv(session, principal=principal, cv_id=cv_id, lock=True)
     # Uploaded CVs are read-only: an AI suggestion can never be APPLIED to an
     # uploaded CV (defense in depth — request_suggestion / request_edit_command
     # already refuse to create one for an uploaded CV).

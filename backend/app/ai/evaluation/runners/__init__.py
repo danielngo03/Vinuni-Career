@@ -19,6 +19,7 @@ from app.ai.evaluation.runners import (
     cv_edit_command,
     cv_suggestions,
     fraud_detection,
+    interview_grounding,
     interview_prep,
     interview_sim,
     jd_extraction,
@@ -26,9 +27,12 @@ from app.ai.evaluation.runners import (
     jd_translation,
     knowledge_base,
     market_intelligence,
+    mock_interview_report,
+    mock_interview_turn,
     recommend,
     scorecard_suggest,
     screening_brief,
+    talent_match,
 )
 
 RUN_CASE_BY_FAMILY = {
@@ -51,6 +55,10 @@ RUN_CASE_BY_FAMILY = {
     "content_moderation": content_moderation.run_case,
     "fraud_detection": fraud_detection.run_case,
     "market_intelligence": market_intelligence.run_case,
+    "mock_interview_report": mock_interview_report.run_case,
+    "mock_interview_turn": mock_interview_turn.run_case,
+    "interview_grounding": interview_grounding.run_case,
+    "talent_match": talent_match.run_case,
 }
 
 CHECK_BY_KIND = {
@@ -73,6 +81,10 @@ CHECK_BY_KIND = {
     "content_moderation": content_moderation.check,
     "fraud_detection": fraud_detection.check,
     "market_intelligence": market_intelligence.check,
+    "mock_interview_report": mock_interview_report.check,
+    "mock_interview_turn": mock_interview_turn.check,
+    "interview_grounding": interview_grounding.check,
+    "talent_match": talent_match.check,
 }
 
 __all__ = ["RUN_CASE_BY_FAMILY", "CHECK_BY_KIND"]

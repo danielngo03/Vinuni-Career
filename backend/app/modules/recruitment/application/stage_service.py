@@ -54,6 +54,45 @@ _ADVANCE = "advance"
 _ROLLBACK = "rollback"
 
 
+async def _emit_stage_changed(
+    session: AsyncSession,
+    *,
+    app: Application,
+    from_stage: PipelineStage | None,
+    to_stage: PipelineStage,
+    stage_row_id: uuid.UUID,
+) -> None:
+    """Best-effort ``system.stage_changed`` workflow trigger after a MANUAL advance.
+
+    Fires the workflow engine so partner flows (e.g. "on stage change -> notify")
+    can run. PII-safe payload (ids + stage metadata only). Idempotent per stage row
+    (a re-fired trigger dedupes on the same key). A workflow-engine problem must
+    NEVER fail the stage move, so this is fully guarded. Automation-driven moves
+    pass ``emit_trigger=False`` and never reach here — that is what prevents a
+    ``stage_changed`` -> auto-advance flow from cascading into itself.
+    """
+
+    from app.modules.workflow.application.trigger_service import dispatch_trigger
+
+    try:
+        await dispatch_trigger(
+            session,
+            trigger_type="system.stage_changed",
+            payload={
+                "application_id": str(app.id),
+                "job_id": str(app.job_id),
+                "org_id": str(app.org_id),
+                "from_stage_id": str(from_stage.id) if from_stage is not None else None,
+                "to_stage_id": str(to_stage.id),
+                "to_order": to_stage.sort_order,
+            },
+            idempotency_key=f"stage_changed:{stage_row_id}",
+            scope_org_id=app.org_id,
+        )
+    except Exception:  # noqa: BLE001 — workflow dispatch must never break a stage move
+        pass
+
+
 # --------------------------------------------------------------------------- #
 # Default-template provider (lazy, idempotent)                                 #
 # --------------------------------------------------------------------------- #
@@ -106,9 +145,7 @@ async def ensure_org_default_template(
     return tmpl
 
 
-async def _template_stages(
-    session: AsyncSession, *, template_id: uuid.UUID
-) -> list[PipelineStage]:
+async def _template_stages(session: AsyncSession, *, template_id: uuid.UUID) -> list[PipelineStage]:
     return list(
         (
             await session.execute(
@@ -116,7 +153,9 @@ async def _template_stages(
                 .where(PipelineStage.template_id == template_id)
                 .order_by(PipelineStage.sort_order)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -132,9 +171,7 @@ async def _active_stage(
     return (await session.execute(stmt)).scalars().first()
 
 
-async def _any_stage_exists(
-    session: AsyncSession, *, application_id: uuid.UUID
-) -> bool:
+async def _any_stage_exists(session: AsyncSession, *, application_id: uuid.UUID) -> bool:
     return (
         await session.execute(
             select(CandidateStage.id)
@@ -144,9 +181,7 @@ async def _any_stage_exists(
     ).first() is not None
 
 
-async def _rollback_count(
-    session: AsyncSession, *, application_id: uuid.UUID
-) -> int:
+async def _rollback_count(session: AsyncSession, *, application_id: uuid.UUID) -> int:
     return (
         await session.execute(
             select(func.count())
@@ -159,13 +194,9 @@ async def _rollback_count(
     ).scalar_one()
 
 
-async def _load_stage(
-    session: AsyncSession, *, stage_id: uuid.UUID
-) -> PipelineStage | None:
+async def _load_stage(session: AsyncSession, *, stage_id: uuid.UUID) -> PipelineStage | None:
     return (
-        await session.execute(
-            select(PipelineStage).where(PipelineStage.id == stage_id)
-        )
+        await session.execute(select(PipelineStage).where(PipelineStage.id == stage_id))
     ).scalar_one_or_none()
 
 
@@ -173,13 +204,17 @@ async def _stage_by_idempotency_key(
     session: AsyncSession, *, application_id: uuid.UUID, key: str
 ) -> CandidateStage | None:
     return (
-        await session.execute(
-            select(CandidateStage).where(
-                CandidateStage.application_id == application_id,
-                CandidateStage.idempotency_key == key,
+        (
+            await session.execute(
+                select(CandidateStage).where(
+                    CandidateStage.application_id == application_id,
+                    CandidateStage.idempotency_key == key,
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -218,9 +253,7 @@ async def ensure_pipeline_entry(
     return True
 
 
-async def close_open_stage_on_reject(
-    session: AsyncSession, *, app: Application
-) -> None:
+async def close_open_stage_on_reject(session: AsyncSession, *, app: Application) -> None:
     """Close the open ACTIVE stage row on the terminal reject exit (no new row)."""
 
     active = await _active_stage(session, application_id=app.id, lock=True)
@@ -296,16 +329,12 @@ async def _pipeline_block(session: AsyncSession, *, app: Application) -> dict:
         )
         from app.modules.recruitment.api import presenters
 
-        interview_block = presenters.interview_board_block(
-            open_iv, assignee_count=assignee_count
-        )
+        interview_block = presenters.interview_board_block(open_iv, assignee_count=assignee_count)
     # Partner-only offer glance (ADR-0007 §8): status + deadline at a glance. NO
     # salary on the board — open the offer detail to see comp. None when no offer.
     from app.modules.recruitment.application import offer_service
 
-    offer_block = await offer_service.partner_offer_block(
-        session, application_id=app.id
-    )
+    offer_block = await offer_service.partner_offer_block(session, application_id=app.id)
     return {
         "template_id": str(stage.template_id),
         "current_stage": _stage_summary(stage),
@@ -349,6 +378,7 @@ async def _materialize_first_stage(
     idempotency_key: str | None,
     ctx: RequestContext,
     locale: str,
+    emit_trigger: bool = True,
 ) -> dict:
     """First-advance pipeline ENTRY for an under_review app with no ACTIVE row.
 
@@ -418,6 +448,10 @@ async def _materialize_first_stage(
 
     await session.commit()
     await session.refresh(app)
+    if emit_trigger:
+        await _emit_stage_changed(
+            session, app=app, from_stage=None, to_stage=first_stage, stage_row_id=new_row.id
+        )
     return await _projection(session, app=app, principal=principal, locale=locale)
 
 
@@ -430,6 +464,7 @@ async def advance_application_stage(
     idempotency_key: str | None = None,
     ctx: RequestContext,
     locale: str = "vi",
+    emit_trigger: bool = True,
 ) -> dict:
     """Move the active stage row to the next stage by ``sort_order``.
 
@@ -447,13 +482,9 @@ async def advance_application_stage(
     # Idempotency-Key dedupe (BEFORE the version check): an at-least-once retry of
     # the SAME move returns the already-applied state instead of a 409/double move.
     if idempotency_key:
-        prior = await _stage_by_idempotency_key(
-            session, application_id=app.id, key=idempotency_key
-        )
+        prior = await _stage_by_idempotency_key(session, application_id=app.id, key=idempotency_key)
         if prior is not None:
-            return await _projection(
-                session, app=app, principal=principal, locale=locale
-            )
+            return await _projection(session, app=app, principal=principal, locale=locale)
 
     if version is not None and version != app.version:
         raise ApplicationVersionConflictError()
@@ -478,6 +509,7 @@ async def advance_application_stage(
             idempotency_key=idempotency_key,
             ctx=ctx,
             locale=locale,
+            emit_trigger=emit_trigger,
         )
 
     current = await _load_stage(session, stage_id=active.stage_id)
@@ -506,9 +538,7 @@ async def advance_application_stage(
                 raise ScoreBelowThresholdError(
                     avg_overall=gate.avg_overall, threshold=gate.threshold
                 )
-            raise ScorecardRequiredError(
-                submitted=gate.submitted, required=gate.required
-            )
+            raise ScorecardRequiredError(submitted=gate.submitted, required=gate.required)
     else:
         raise IllegalApplicationTransitionError(event=_ADVANCE)
     if not pipeline.can_advance(current.sort_order, max_order):
@@ -571,6 +601,10 @@ async def advance_application_stage(
 
     await session.commit()
     await session.refresh(app)
+    if emit_trigger:
+        await _emit_stage_changed(
+            session, app=app, from_stage=current, to_stage=next_stage, stage_row_id=new_row.id
+        )
     return await _projection(session, app=app, principal=principal, locale=locale)
 
 
@@ -606,13 +640,9 @@ async def rollback_application_stage(
     )
 
     if idempotency_key:
-        prior = await _stage_by_idempotency_key(
-            session, application_id=app.id, key=idempotency_key
-        )
+        prior = await _stage_by_idempotency_key(session, application_id=app.id, key=idempotency_key)
         if prior is not None:
-            return await _projection(
-                session, app=app, principal=principal, locale=locale
-            )
+            return await _projection(session, app=app, principal=principal, locale=locale)
 
     if version is not None and version != app.version:
         raise ApplicationVersionConflictError()
@@ -637,9 +667,7 @@ async def rollback_application_stage(
         raise IllegalApplicationTransitionError(event=_ROLLBACK)
 
     # Max 3 rollbacks per application; the 4th is blocked (admin-approval deferred).
-    if pipeline.rollback_limit_reached(
-        await _rollback_count(session, application_id=app.id)
-    ):
+    if pipeline.rollback_limit_reached(await _rollback_count(session, application_id=app.id)):
         raise RollbackLimitReachedError()
 
     # One transaction: close current (ROLLED_BACK), append target ACTIVE, bump.

@@ -7,16 +7,20 @@ documents services or ORM internals). At application-submit time it calls
 a builder CV version or an uploaded document. Snapshots are never updated or
 deleted (``docs/CV_STUDIO_SPEC.md`` §5; ``docs/SECURITY_PRIVACY.md``).
 
-Partner access to a snapshot (always watermarked) is granted through an injectable
-authorizer seam (:func:`set_snapshot_access_authorizer`) so the recruitment module
-supplies its own context check (e.g. "this partner owns the job the snapshot was
-submitted to") without the documents module importing recruitment internals.
-Until an authorizer is wired, only the snapshot owner can access it; everyone else
-gets ``404``.
+Partner CV view/download serves the STUDENT'S ORIGINAL file (owner decision
+2026-07-10) via :func:`build_partner_cv_view` / :func:`build_snapshot_original_download`
+— NOT a watermarked derivative. The recruitment service verifies org ownership +
+CV-access RBAC before minting the signed URL, and every byte fetch is audited.
+
+The legacy watermarked authorizer seam (:func:`set_snapshot_access_authorizer` /
+:func:`get_snapshot_download`) is retained for the owner self-download path (and
+backward compatibility); until an authorizer is wired, only the snapshot owner can
+use that path and everyone else gets ``404``.
 """
 
 from __future__ import annotations
 
+import re
 import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -126,9 +130,7 @@ async def create_application_cv_snapshot(
         if not cv_id or not version_id:
             raise ValidationFailedError("Thiếu CV hoặc phiên bản CV để nộp.")
         cv = (
-            await session.execute(
-                select(CvProfile).where(CvProfile.id == cv_id)
-            )
+            await session.execute(select(CvProfile).where(CvProfile.id == cv_id))
         ).scalar_one_or_none()
         if cv is None or cv.user_id != owner_id:
             raise ResourceNotFoundError()
@@ -160,12 +162,16 @@ async def create_application_cv_snapshot(
         if document is None or document.user_id != owner_id:
             raise ResourceNotFoundError()
         run = (
-            await session.execute(
-                select(CvParseRun)
-                .where(CvParseRun.document_id == document.id)
-                .order_by(CvParseRun.created_at.desc())
+            (
+                await session.execute(
+                    select(CvParseRun)
+                    .where(CvParseRun.document_id == document.id)
+                    .order_by(CvParseRun.created_at.desc())
+                )
             )
-        ).scalars().first()
+            .scalars()
+            .first()
+        )
         extracted = (run.extracted_data if run else None) or {}
         snapshot.uploaded_document_id = document.id
         snapshot.snapshot_json = {
@@ -180,7 +186,9 @@ async def create_application_cv_snapshot(
     session.add(snapshot)
     await session.flush()
     await write_audit(
-        session, action="cv.snapshot.created", resource_type="application_cv_snapshot",
+        session,
+        action="cv.snapshot.created",
+        resource_type="application_cv_snapshot",
         resource_id=snapshot.id,
         context=_shared.audit_ctx(Principal(user_id=owner_id), ctx),
         after={
@@ -218,13 +226,142 @@ async def get_snapshot_json_for_application(
     """
 
     snap = (
-        await session.execute(
-            select(ApplicationCvSnapshot)
-            .where(ApplicationCvSnapshot.application_id == application_id)
-            .order_by(ApplicationCvSnapshot.created_at.desc())
+        (
+            await session.execute(
+                select(ApplicationCvSnapshot)
+                .where(ApplicationCvSnapshot.application_id == application_id)
+                .order_by(ApplicationCvSnapshot.created_at.desc())
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     return dict(snap.snapshot_json or {}) if snap is not None else None
+
+
+_YEAR_RE = re.compile(r"\b(?:19|20)\d{2}\b")
+_HEADLINE_HEADING_KEYS = (
+    "heading",
+    "degree",
+    "title",
+    "program",
+    "school",
+    "institution",
+    "organization",
+)
+_HEADLINE_MAJOR_KEYS = (
+    "subheading",
+    "field",
+    "major",
+    "field_of_study",
+    "organization",
+    "institution",
+    "school",
+)
+_HEADLINE_DATE_KEYS = ("timeframe", "period", "dates", "end_date", "graduation", "year")
+
+
+def _first_str(item: dict, keys: tuple[str, ...]) -> str | None:
+    for key in keys:
+        value = item.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
+
+
+def _grad_year_from(text: str | None) -> str | None:
+    """The latest 4-digit year in a timeframe string (the graduation year)."""
+
+    if not text:
+        return None
+    years = _YEAR_RE.findall(text)
+    return years[-1] if years else None
+
+
+def _derive_headline(body: dict) -> str | None:
+    """A short "grad-year · major"-style descriptor from a CV snapshot, or ``None``.
+
+    Prefers the CV's own header ``headline`` (the student's professional tagline);
+    otherwise derives ``"{grad_year} · {major}"`` from the first education entry.
+    Only content a recruiter already sees on the CV is used — never contact PII.
+    """
+
+    sections = body.get("sections")
+    if not isinstance(sections, list):
+        return None
+
+    # 1) The student's own professional headline on the header section.
+    for section in sections:
+        if not isinstance(section, dict):
+            continue
+        stype = str(section.get("section_type") or "").lower()
+        title = str(section.get("title") or "").lower()
+        if stype == "header" or "header" in title or "contact" in title:
+            content = section.get("content_json") or section.get("content") or {}
+            if isinstance(content, dict):
+                headline = content.get("headline")
+                if isinstance(headline, str) and headline.strip():
+                    return headline.strip()[:120]
+
+    # 2) First education entry -> "{grad_year} · {major}" (best available parts).
+    for section in sections:
+        if not isinstance(section, dict):
+            continue
+        stype = str(section.get("section_type") or "").lower()
+        title = str(section.get("title") or "").lower()
+        if stype == "education" or "education" in title or "học vấn" in title:
+            content = section.get("content_json") or section.get("content") or {}
+            entries = []
+            if isinstance(content, dict):
+                raw = content.get("entries") or content.get("items")
+                entries = raw if isinstance(raw, list) else []
+            for entry in entries:
+                if not isinstance(entry, dict):
+                    continue
+                major = _first_str(entry, _HEADLINE_MAJOR_KEYS) or _first_str(
+                    entry, _HEADLINE_HEADING_KEYS
+                )
+                grad_year = _grad_year_from(_first_str(entry, _HEADLINE_DATE_KEYS))
+                if major and grad_year:
+                    return f"{grad_year} · {major}"[:120]
+                if major:
+                    return major[:120]
+                if grad_year:
+                    return grad_year
+    return None
+
+
+async def snapshot_headlines_for(
+    session: AsyncSession, snapshot_ids: list[uuid.UUID]
+) -> dict[uuid.UUID, str]:
+    """Batch ``{snapshot_id: headline}`` short descriptors for a page of snapshots.
+
+    ONE query over the immutable snapshots' structured JSON; each headline is a
+    "grad-year · major"-style line derived from the CV (see :func:`_derive_headline`).
+    Snapshots with no derivable descriptor are simply absent from the map (the caller
+    falls back to the candidate's email). Never exposes contact PII or storage keys.
+    """
+
+    ids = {sid for sid in snapshot_ids if sid is not None}
+    if not ids:
+        return {}
+    rows = (
+        (
+            await session.execute(
+                select(
+                    ApplicationCvSnapshot.id, ApplicationCvSnapshot.snapshot_json
+                ).where(ApplicationCvSnapshot.id.in_(ids))
+            )
+        )
+        .all()
+    )
+    out: dict[uuid.UUID, str] = {}
+    for snap_id, snapshot_json in rows:
+        body = snapshot_json if isinstance(snapshot_json, dict) else {}
+        headline = _derive_headline(body)
+        if headline:
+            out[snap_id] = headline
+    return out
 
 
 async def get_snapshot_download(
@@ -263,6 +400,115 @@ async def get_snapshot_download(
     }
 
 
+_DOC_EXTENSIONS = (".pdf", ".png", ".jpg", ".jpeg", ".webp", ".docx", ".doc")
+
+
+def _snapshot_filename(body: dict) -> str:
+    """Friendly display filename for a snapshot's ORIGINAL file.
+
+    Uploaded-CV snapshots store the real ``document.original_name`` as ``title``
+    (often already carrying an extension); builder-CV snapshots store the CV
+    title (no extension → append ``.pdf`` since a builder CV renders to PDF).
+    """
+
+    raw_title = str(body.get("title") or "cv").strip() or "cv"
+    if raw_title.lower().endswith(_DOC_EXTENSIONS):
+        return raw_title
+    return f"{raw_title}.pdf"
+
+
+def _original_cv_url(snap: ApplicationCvSnapshot, *, actor_id: uuid.UUID | None, disp: str) -> str:
+    """Mint a signed ``/cv-files`` URL that serves the snapshot's ORIGINAL bytes.
+
+    ``disp`` is ``"inline"`` (embeddable view) or ``"attachment"`` (download). The
+    token carries only a resource reference + access metadata (never a storage
+    path) and NO watermark flag — the partner sees the student's real file.
+    """
+
+    token = storage.make_signed_token(
+        {
+            "kind": "snapshot_original",
+            "id": str(snap.id),
+            "uid": str(actor_id) if actor_id else "",
+            "purpose": "application_review" if disp == "inline" else "application_download",
+            "disp": disp,
+        }
+    )
+    base = get_settings().app_url.rstrip("/")
+    return f"{base}/api/v1/cv-files/{token}"
+
+
+async def build_partner_cv_view(
+    session: AsyncSession,
+    *,
+    snapshot_id: uuid.UUID,
+    actor_id: uuid.UUID | None,
+) -> dict | None:
+    """Mint an embeddable inline view + download URL for a snapshot's ORIGINAL file.
+
+    Owner decision 2026-07-10: the partner sees the STUDENT'S ORIGINAL CV — the
+    file the student uploaded, or the template CV's rendered PDF — NOT a
+    watermarked derivative. The recruitment service calls this AFTER it has
+    verified the partner's org ownership + CV-access RBAC for the application, so
+    this trusts the caller (no authorizer seam). Returns ``{snapshot_id,
+    filename, view_url, download_url}``:
+
+    - ``view_url`` serves the original ``inline`` (``Content-Disposition: inline``,
+      no ``X-Frame-Options``) so the frontend can embed it in an ``<iframe>``.
+    - ``download_url`` serves the same original bytes as an ``attachment``.
+
+    Both point at the token-authorized ``/api/v1/cv-files`` endpoint; the token
+    carries only a resource reference (never a storage path) and every byte fetch
+    is audited via ``signed_file_accesses``.
+
+    Returns ``None`` when the snapshot is missing or retention-tombstoned (nothing
+    renderable), so the caller surfaces ``cv: null``.
+    """
+
+    snap = await _load_snapshot(session, snapshot_id=snapshot_id)
+    body = snap.snapshot_json if isinstance(snap.snapshot_json, dict) else {}
+    if not body or body.get(_RETENTION_TOMBSTONE_MARKER):
+        return None
+
+    return {
+        "snapshot_id": str(snap.id),
+        "filename": _snapshot_filename(body),
+        "view_url": _original_cv_url(snap, actor_id=actor_id, disp="inline"),
+        "download_url": _original_cv_url(snap, actor_id=actor_id, disp="attachment"),
+        # ``has_watermark`` describes the INLINE VIEW, which stays the clean
+        # original (owner decision 2026-07-10). The DOWNLOAD served via
+        # ``download_url`` IS watermarked (VinUni logo + "VinUni Career") — the
+        # download service stamps it on the attachment path.
+        "has_watermark": False,
+    }
+
+
+async def build_snapshot_original_download(
+    session: AsyncSession,
+    *,
+    snapshot_id: uuid.UUID,
+    actor_id: uuid.UUID | None,
+) -> dict:
+    """Return a signed download URL for a snapshot's WATERMARKED partner download.
+
+    Used by the recruitment ``/applications/{id}/cv-download`` endpoint for the
+    partner path. The caller MUST have already verified org ownership +
+    ``download_cv`` RBAC. The served attachment is stamped with the VinUni logo +
+    "VinUni Career" at render time by the download service (owner decision
+    2026-07-10; ``docs/SECURITY_PRIVACY.md``: partner CV downloads are
+    watermarked). The inline VIEW (:func:`build_partner_cv_view`) stays the clean
+    original. Shaped like :func:`get_snapshot_download` (``{snapshot_id,
+    has_watermark, download_url}``) so the response contract is unchanged.
+    """
+
+    snap = await _load_snapshot(session, snapshot_id=snapshot_id)
+    return {
+        "snapshot_id": str(snap.id),
+        "has_watermark": True,
+        "download_url": _original_cv_url(snap, actor_id=actor_id, disp="attachment"),
+    }
+
+
 # --------------------------------------------------------------------------- #
 # Retention sweep (compliance module's scheduled job hook, ADR-0014 §35)      #
 # --------------------------------------------------------------------------- #
@@ -285,9 +531,7 @@ async def anonymize_expired_snapshots(session: AsyncSession, *, older_than) -> i
     rows = list(
         (
             await session.execute(
-                select(ApplicationCvSnapshot).where(
-                    ApplicationCvSnapshot.created_at < older_than
-                )
+                select(ApplicationCvSnapshot).where(ApplicationCvSnapshot.created_at < older_than)
             )
         )
         .scalars()

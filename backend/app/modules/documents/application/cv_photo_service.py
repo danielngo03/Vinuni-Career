@@ -139,8 +139,11 @@ async def update_photo(
     await session.flush()
 
     await _cv_core._snapshot_version(
-        session, cv=cv, change_source="manual",
-        change_summary="photo updated", created_by=principal.user_id,
+        session,
+        cv=cv,
+        change_source="manual",
+        change_summary="photo updated",
+        created_by=principal.user_id,
     )
     await write_audit(
         session,
@@ -180,8 +183,11 @@ async def remove_photo(
     await session.flush()
 
     await _cv_core._snapshot_version(
-        session, cv=cv, change_source="manual",
-        change_summary="photo removed", created_by=principal.user_id,
+        session,
+        cv=cv,
+        change_source="manual",
+        change_summary="photo removed",
+        created_by=principal.user_id,
     )
     await write_audit(
         session,

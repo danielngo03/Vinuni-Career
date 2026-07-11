@@ -66,9 +66,7 @@ _SOURCE_COLUMN = {s: f"src_{s}" for s in SOURCE_VALUES}
 # ``year_group`` retired with the identity-only profile cleanup (no more
 # ``graduation_year``). ``major_group`` kept in the vocabulary only for backward
 # compatibility with any historical rows; it is no longer produced.
-DIMENSION_TYPES: frozenset[str] = frozenset(
-    {"device_class", "student_tier", "major_group"}
-)
+DIMENSION_TYPES: frozenset[str] = frozenset({"device_class", "student_tier", "major_group"})
 DEVICE_CLASSES: frozenset[str] = frozenset({"desktop", "mobile", "tablet", "unknown"})
 STUDENT_TIERS: frozenset[str] = frozenset({"student", "alumni", "guest"})
 
@@ -159,9 +157,7 @@ async def _upsert_daily_row(
     stmt = insert(PartnerJobMetricDaily).values(**values)
     tbl = PartnerJobMetricDaily.__table__
     set_ = {col: tbl.c[col] + amount for col, amount in counter_increments.items()}
-    stmt = stmt.on_conflict_do_update(
-        index_elements=["job_id", "metric_date"], set_=set_
-    )
+    stmt = stmt.on_conflict_do_update(index_elements=["job_id", "metric_date"], set_=set_)
     await session.execute(stmt)
 
 
@@ -234,13 +230,20 @@ async def record_job_metric_event(
     try:
         async with session.begin_nested():
             await _upsert_daily_row(
-                session, org_id=org_id, job_id=job_id, metric_date=day,
+                session,
+                org_id=org_id,
+                job_id=job_id,
+                metric_date=day,
                 counter_increments=counter_increments,
             )
             for dim_type, dim_value in dims:
                 await _upsert_dimension_row(
-                    session, org_id=org_id, job_id=job_id, metric_date=day,
-                    dimension_type=dim_type, dimension_value=dim_value,
+                    session,
+                    org_id=org_id,
+                    job_id=job_id,
+                    metric_date=day,
+                    dimension_type=dim_type,
+                    dimension_value=dim_value,
                 )
     except Exception:  # noqa: BLE001 — telemetry is best-effort at these sites
         logger.warning(
@@ -257,9 +260,7 @@ async def record_job_metric_event(
 async def has_any_metrics(session: AsyncSession, *, org_id: uuid.UUID) -> bool:
     row = (
         await session.execute(
-            select(PartnerJobMetricDaily.id)
-            .where(PartnerJobMetricDaily.org_id == org_id)
-            .limit(1)
+            select(PartnerJobMetricDaily.id).where(PartnerJobMetricDaily.org_id == org_id).limit(1)
         )
     ).first()
     return row is not None
@@ -287,7 +288,9 @@ async def job_performance_for_org(
                 func.sum(PartnerJobMetricDaily.detail_views).label("detail_views"),
                 func.sum(PartnerJobMetricDaily.cta_clicks).label("cta_clicks"),
                 func.sum(PartnerJobMetricDaily.apply_starts).label("apply_starts"),
-                func.sum(PartnerJobMetricDaily.applications_submitted).label("applications_submitted"),
+                func.sum(PartnerJobMetricDaily.applications_submitted).label(
+                    "applications_submitted"
+                ),
                 func.sum(PartnerJobMetricDaily.save_clicks).label("save_clicks"),
                 func.sum(PartnerJobMetricDaily.share_clicks).label("share_clicks"),
                 func.sum(PartnerJobMetricDaily.src_organic).label("src_organic"),
@@ -312,25 +315,27 @@ async def job_performance_for_org(
         applications = r.applications_submitted or 0
         views = r.detail_views or 0
         conversion = round((applications / views) * 100, 1) if views else None
-        out.append({
-            "job_id": str(r.job_id),
-            "impressions": r.impressions or 0,
-            "detail_views": views,
-            "cta_clicks": r.cta_clicks or 0,
-            "apply_starts": r.apply_starts or 0,
-            "applications_submitted": applications,
-            "save_clicks": r.save_clicks or 0,
-            "share_clicks": r.share_clicks or 0,
-            "conversion_rate_pct": conversion,
-            "source_mix": {
-                "organic": r.src_organic or 0,
-                "search": r.src_search or 0,
-                "recommendation": r.src_recommendation or 0,
-                "sponsored": r.src_sponsored or 0,
-                "invitation": r.src_invitation or 0,
-                "direct": r.src_direct or 0,
-            },
-        })
+        out.append(
+            {
+                "job_id": str(r.job_id),
+                "impressions": r.impressions or 0,
+                "detail_views": views,
+                "cta_clicks": r.cta_clicks or 0,
+                "apply_starts": r.apply_starts or 0,
+                "applications_submitted": applications,
+                "save_clicks": r.save_clicks or 0,
+                "share_clicks": r.share_clicks or 0,
+                "conversion_rate_pct": conversion,
+                "source_mix": {
+                    "organic": r.src_organic or 0,
+                    "search": r.src_search or 0,
+                    "recommendation": r.src_recommendation or 0,
+                    "sponsored": r.src_sponsored or 0,
+                    "invitation": r.src_invitation or 0,
+                    "direct": r.src_direct or 0,
+                },
+            }
+        )
     return out
 
 

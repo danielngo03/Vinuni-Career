@@ -70,9 +70,7 @@ def test_no_network_no_provider_dependency():
     """This reranker must never import the AI gateway/HTTP stack — pure stdlib only."""
     from app.ai.retrieval import local_reranker
 
-    module_names = {
-        name.split(".")[0] for name in getattr(local_reranker, "__dict__", {})
-    }
+    module_names = {name.split(".")[0] for name in getattr(local_reranker, "__dict__", {})}
     assert "AiTaskRunner" not in module_names
     assert not hasattr(local_reranker, "get_provider")
     assert not hasattr(local_reranker, "get_provider_for_alias")

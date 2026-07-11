@@ -17,10 +17,44 @@ import re
 from app.ai.cv.term_expansion import expand_text, term_matches
 
 _STOPWORDS = {
-    "the", "and", "for", "with", "you", "your", "are", "our", "this", "that",
-    "will", "have", "has", "from", "into", "about", "must", "should", "able",
-    "các", "và", "của", "cho", "với", "trong", "một", "được", "này", "là",
-    "có", "khi", "đến", "theo", "như", "tại", "về", "hoặc", "những",
+    "the",
+    "and",
+    "for",
+    "with",
+    "you",
+    "your",
+    "are",
+    "our",
+    "this",
+    "that",
+    "will",
+    "have",
+    "has",
+    "from",
+    "into",
+    "about",
+    "must",
+    "should",
+    "able",
+    "các",
+    "và",
+    "của",
+    "cho",
+    "với",
+    "trong",
+    "một",
+    "được",
+    "này",
+    "là",
+    "có",
+    "khi",
+    "đến",
+    "theo",
+    "như",
+    "tại",
+    "về",
+    "hoặc",
+    "những",
 }
 
 
@@ -95,9 +129,7 @@ def extracted_to_text(extracted: dict | None) -> str:
         if isinstance(value, dict):
             parts.append(content_to_text(value))
             # contact-style dicts: {name,email,phone}
-            parts.extend(
-                str(v) for v in value.values() if isinstance(v, str) and v.strip()
-            )
+            parts.extend(str(v) for v in value.values() if isinstance(v, str) and v.strip())
     return " ".join(p for p in parts if p)
 
 

@@ -25,7 +25,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
 from app.modules.student_profiles.api import presenters
-from app.modules.student_profiles.application import _shared, visibility
+from app.modules.student_profiles.application import (
+    _shared,
+    visibility,
+)
 from app.modules.student_profiles.application.errors import (
     InvalidProfileFieldError,
     ProfileVersionConflictError,
@@ -45,9 +48,7 @@ _RESOURCE = _shared.RESOURCE
 # --------------------------------------------------------------------------- #
 
 
-async def _owner_response(
-    session: AsyncSession, *, profile: StudentProfile, locale: str
-) -> dict:
+async def _owner_response(session: AsyncSession, *, profile: StudentProfile, locale: str) -> dict:
     user = await user_service.get_by_id(session, profile.user_id)
     return presenters.owner_profile(profile, user=user, locale=locale)
 
@@ -191,9 +192,11 @@ async def get_profile_for_viewer(
     if principal.is_superadmin or principal.persona == "university_staff":
         return await _owner_response(session, profile=profile, locale=locale)
 
-    return await _public_response(
-        session, profile=profile, decision=decision, locale=locale
-    )
+    # A partner/community viewer allowed by the visibility decision sees the
+    # candidate's real identity (the reveal-gated mask was removed 2026-07-10);
+    # contact fields still follow the per-field ``expose_email``/``expose_phone``
+    # gate carried by ``decision``.
+    return await _public_response(session, profile=profile, decision=decision, locale=locale)
 
 
 # --------------------------------------------------------------------------- #
@@ -226,6 +229,4 @@ async def get_profile_for_application_context(
     decision = visibility.application_context_decision(
         viewer_principal, profile, reveal_accepted=reveal_accepted
     )
-    return await _public_response(
-        session, profile=profile, decision=decision, locale=locale
-    )
+    return await _public_response(session, profile=profile, decision=decision, locale=locale)

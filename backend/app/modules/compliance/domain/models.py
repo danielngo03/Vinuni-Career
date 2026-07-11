@@ -81,9 +81,7 @@ class Consent(Base):
 
 class PrivacyRequest(Base):
     __tablename__ = "privacy_requests"
-    __table_args__ = (
-        Index("idx_privacy_requests_status", "status", "created_at"),
-    )
+    __table_args__ = (Index("idx_privacy_requests_status", "status", "created_at"),)
 
     id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
     request_type: Mapped[str] = mapped_column(String(20), nullable=False)

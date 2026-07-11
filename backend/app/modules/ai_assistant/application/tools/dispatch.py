@@ -9,7 +9,20 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.modules.analytics.application import ingestion_service as analytics
 from app.shared.permissions import Principal
 
-from . import companies, cv_ai, events, jobs, kb, partner, student
+from . import (
+    analytics_charts,
+    attachments,
+    companies,
+    cv_ai,
+    events,
+    jd_jobs,
+    jobs,
+    kb,
+    partner,
+    recruiting,
+    student,
+    talent,
+)
 from .specs import TOOL_SPECS
 
 SUPPORTED_TOOL_NAMES = frozenset(
@@ -47,6 +60,16 @@ SUPPORTED_TOOL_NAMES = frozenset(
         "generate_screening_brief",
         "get_upcoming_partner_events",
         "move_candidate_stage",
+        "export_applications",
+        "get_recruitment_analytics_chart",
+        "get_hiring_funnel_diagram",
+        "analyze_attachment",
+        "draft_job_from_attachment",
+        "create_job",
+        "search_candidates",
+        "job_stats",
+        "pipeline_summary",
+        "recruiting_analytics",
     }
 )
 
@@ -168,6 +191,28 @@ async def _execute_tool(
             return await partner.get_upcoming_partner_events(session, principal, args)
         if name == "move_candidate_stage":
             return await partner.move_candidate_stage(session, principal, args)
+        if name == "export_applications":
+            return await partner.export_applications(session, principal, args)
+        if name == "get_recruitment_analytics_chart":
+            return await analytics_charts.get_recruitment_analytics_chart(session, principal, args)
+        if name == "get_hiring_funnel_diagram":
+            return await analytics_charts.get_hiring_funnel_diagram(session, principal, args)
+        if name == "analyze_attachment":
+            return await attachments.analyze_attachment(session, principal, args)
+        if name == "draft_job_from_attachment":
+            return await jd_jobs.draft_job_from_attachment(session, principal, args)
+        if name == "create_job":
+            return await jd_jobs.create_job(session, principal, args)
+
+        # --- Talent-pool AI search + recruiting intelligence tools ---
+        if name == "search_candidates":
+            return await talent.search_candidates(session, principal, args)
+        if name == "job_stats":
+            return await recruiting.job_stats(session, principal, args)
+        if name == "pipeline_summary":
+            return await recruiting.pipeline_summary(session, principal, args)
+        if name == "recruiting_analytics":
+            return await recruiting.recruiting_analytics(session, principal, args)
 
         # --- CV / AI tools ---
         if name == "get_my_cvs":

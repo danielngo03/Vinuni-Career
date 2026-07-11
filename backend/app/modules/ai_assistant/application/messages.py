@@ -85,6 +85,20 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
             "recruitment events, salary, or career direction."
         ),
     },
+    "formatter.greeting_partner": {
+        "vi": (
+            "Xin chào! Mình là trợ lý tuyển dụng cho nhà tuyển dụng đối tác của VinUni. "
+            "Bạn có thể nhờ mình xem tin tuyển dụng, tra cứu ứng viên theo vòng, "
+            "soạn/mô tả công việc, gợi ý phiếu đánh giá, tóm tắt sàng lọc, hay xem sự kiện — "
+            "tất cả trong phạm vi tổ chức và quyền của bạn."
+        ),
+        "en": (
+            "Hi! I'm the recruiting assistant for VinUni partner employers. "
+            "Ask me to review your job postings, look up candidates by pipeline stage, "
+            "draft a job description, suggest a scorecard, summarise screening, or check events — "
+            "all scoped to your organisation and your permissions."
+        ),
+    },
     "formatter.stripped_tool_call_fallback": {
         "vi": "Mình đang tra cứu dữ liệu hệ thống. Vui lòng thử lại với câu hỏi cụ thể hơn.",
         "en": "I'm looking up platform data. Please try again with a more specific question.",
@@ -115,19 +129,12 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
         "en": "You don't have a CV to apply with yet. Create or upload one in **CV Studio** first.",
     },
     "confirm.error.apply_already_applied": {
-        "vi": (
-            "Bạn đã ứng tuyển vị trí này rồi. "
-            "Hãy kiểm tra trạng thái trong **Đơn ứng tuyển**."
-        ),
-        "en": (
-            "You've already applied to this position. "
-            "Check its status in **Applications**."
-        ),
+        "vi": ("Bạn đã ứng tuyển vị trí này rồi. Hãy kiểm tra trạng thái trong **Đơn ứng tuyển**."),
+        "en": ("You've already applied to this position. Check its status in **Applications**."),
     },
     "confirm.error.apply_generic": {
         "vi": (
-            "Mình chưa nộp đơn được lúc này. "
-            "Bạn có thể mở trang việc làm và nhấn **Ứng tuyển**."
+            "Mình chưa nộp đơn được lúc này. Bạn có thể mở trang việc làm và nhấn **Ứng tuyển**."
         ),
         "en": (
             "I couldn't submit the application right now. "
@@ -545,8 +552,7 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
     "fmt.fail.no_specific_job": {
         "vi": "Mình chưa xác định được job cụ thể. Bạn hãy mở/tìm job trước rồi nói “job đó” nhé.",
         "en": (
-            "I couldn't identify a specific job. Please open/find a job first, then say "
-            "“that job”."
+            "I couldn't identify a specific job. Please open/find a job first, then say “that job”."
         ),
     },
     "fmt.fail.recommend_jobs": {
@@ -611,9 +617,7 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
         "en": "- {years} years of experience: {min}–{max} {currency}",
     },
     "fmt.salary.footer": {
-        "vi": (
-            "Đây là khoảng tham khảo; thực tế phụ thuộc công ty, level, kỹ năng và phỏng vấn."
-        ),
+        "vi": ("Đây là khoảng tham khảo; thực tế phụ thuộc công ty, level, kỹ năng và phỏng vấn."),
         "en": (
             "This is a reference range; the actual figure depends on the company, level, "
             "skills, and interview."
@@ -670,8 +674,7 @@ _MESSAGES: Final[dict[str, dict[str, str]]] = {
     },
     "fmt.jobs.footer": {
         "vi": (
-            "Bạn có thể nói “xem chi tiết job thứ 2”, “so CV với job đó”, "
-            "hoặc “apply job thứ 2”."
+            "Bạn có thể nói “xem chi tiết job thứ 2”, “so CV với job đó”, hoặc “apply job thứ 2”."
         ),
         "en": (
             "You can say “show details of the 2nd job”, “compare my CV with that job”, "

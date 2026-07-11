@@ -66,8 +66,13 @@ async def list_events(
 ) -> dict:
     principal = await _principal_or_guest(request, session)
     items, next_cursor, page_limit, total = await event_service.list_public_events(
-        session, principal=principal, cursor=cursor, limit=limit,
-        q=q, event_type=event_type, format=event_format,
+        session,
+        principal=principal,
+        cursor=cursor,
+        limit=limit,
+        q=q,
+        event_type=event_type,
+        format=event_format,
     )
     body = paginated(items, next_cursor=next_cursor, limit=page_limit)
     body["page"]["total"] = total
@@ -83,8 +88,11 @@ async def list_my_events(
     event_status: str | None = Query(default=None, alias="status"),
 ) -> dict:
     items, next_cursor, page_limit = await event_service.list_my_events(
-        session, principal=auth.principal, status=event_status,
-        cursor=cursor, limit=limit,
+        session,
+        principal=auth.principal,
+        status=event_status,
+        cursor=cursor,
+        limit=limit,
     )
     return paginated(items, next_cursor=next_cursor, limit=page_limit)
 
@@ -96,9 +104,7 @@ async def my_registrations(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    items = await registration_service.my_registrations(
-        session, principal=auth.principal
-    )
+    items = await registration_service.my_registrations(session, principal=auth.principal)
     return success(items, meta={"count": len(items)})
 
 
@@ -109,9 +115,7 @@ async def get_event(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     principal = await _principal_or_guest(request, session)
-    data = await event_service.get_event(
-        session, principal=principal, event_id=event_id
-    )
+    data = await event_service.get_event(session, principal=principal, event_id=event_id)
     return success(data)
 
 
@@ -127,7 +131,10 @@ async def create_event(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await event_service.create_event(
-        session, principal=auth.principal, payload=body.model_dump(), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        payload=body.model_dump(),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -140,8 +147,11 @@ async def update_event(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await event_service.update_event(
-        session, principal=auth.principal, event_id=event_id,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        payload=body.model_dump(exclude_unset=True),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -155,7 +165,10 @@ async def submit_event(
 ) -> dict:
     version = body.version if body else None
     data = await event_service.submit_event(
-        session, principal=auth.principal, event_id=event_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        ctx=auth.ctx,
         version=version,
     )
     return success(data)
@@ -170,7 +183,10 @@ async def cancel_event(
 ) -> dict:
     version = body.version if body else None
     data = await event_service.cancel_event(
-        session, principal=auth.principal, event_id=event_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        ctx=auth.ctx,
         version=version,
     )
     return success(data)
@@ -183,7 +199,10 @@ async def delete_event(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     await event_service.delete_event(
-        session, principal=auth.principal, event_id=event_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        ctx=auth.ctx,
     )
     return success({"status": "deleted"})
 
@@ -200,7 +219,10 @@ async def register(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await registration_service.register(
-        session, principal=auth.principal, event_id=event_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -212,7 +234,10 @@ async def cancel_registration(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await registration_service.cancel_registration(
-        session, principal=auth.principal, event_id=event_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -229,7 +254,9 @@ async def list_attendees(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     items = await registration_service.list_attendees(
-        session, principal=auth.principal, event_id=event_id,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
     )
     return success(items, meta={"count": len(items)})
 
@@ -245,8 +272,11 @@ async def check_in(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await registration_service.check_in(
-        session, principal=auth.principal, event_id=event_id,
-        registration_id=registration_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        registration_id=registration_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -264,7 +294,10 @@ async def moderation_queue(
     limit: int | None = Query(default=None),
 ) -> dict:
     items, total = await event_moderation_service.list_moderation_queue(
-        session, principal=auth.principal, status=event_status, limit=limit,
+        session,
+        principal=auth.principal,
+        status=event_status,
+        limit=limit,
     )
     return success(items, meta={"count": total})
 
@@ -279,8 +312,12 @@ async def approve_event(
     version = body.version if body else None
     note = body.note if body else None
     data = await event_moderation_service.approve_event(
-        session, principal=auth.principal, event_id=event_id, version=version,
-        note=note, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        version=version,
+        note=note,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -293,8 +330,12 @@ async def reject_event(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await event_moderation_service.reject_event(
-        session, principal=auth.principal, event_id=event_id,
-        reason=body.reason, reason_code=body.reason_code, version=body.version,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        reason=body.reason,
+        reason_code=body.reason_code,
+        version=body.version,
         ctx=auth.ctx,
     )
     return success(data)
@@ -307,7 +348,10 @@ async def claim_event(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await event_moderation_service.claim_event(
-        session, principal=auth.principal, event_id=event_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -324,8 +368,12 @@ async def escalate_event(
     reason_code = body.reason_code if body else None
     note = body.note if body else None
     data = await event_moderation_service.escalate_event(
-        session, principal=auth.principal, event_id=event_id,
-        reason_code=reason_code, note=note, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_id=event_id,
+        reason_code=reason_code,
+        note=note,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -337,7 +385,10 @@ async def bulk_approve_events(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     results = await event_moderation_service.bulk_approve_events(
-        session, principal=auth.principal, event_ids=body.event_ids, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        event_ids=body.event_ids,
+        ctx=auth.ctx,
     )
     return success(results)
 
@@ -350,6 +401,9 @@ async def bulk_reject_events(
 ) -> dict:
     items = [item.model_dump() for item in body.items]
     results = await event_moderation_service.bulk_reject_events(
-        session, principal=auth.principal, items=items, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        items=items,
+        ctx=auth.ctx,
     )
     return success(results)

@@ -11,6 +11,7 @@ no database are touched. They lock in the four contracts the tier promises:
 3. ASCII/English terms skip the translator entirely (identity, no model call).
 4. Cache reuse: translating the same term twice calls the model once.
 """
+
 from __future__ import annotations
 
 import pytest
@@ -35,9 +36,7 @@ def _reset_lru() -> None:
 @pytest.fixture()
 def _no_db_cache(monkeypatch: pytest.MonkeyPatch) -> None:
     """Stub the persistent DB cache so the unit tests never touch a database."""
-    monkeypatch.setattr(
-        skill_translation, "get_cached_translations", _async_empty
-    )
+    monkeypatch.setattr(skill_translation, "get_cached_translations", _async_empty)
     monkeypatch.setattr(skill_translation, "put_translation", _async_noop)
 
 
@@ -82,6 +81,7 @@ def _disable_ai(monkeypatch: pytest.MonkeyPatch) -> None:
 # Fixtures: a Vietnamese-skill CV and an English JD requiring the same skill.  #
 # --------------------------------------------------------------------------- #
 
+
 def _vn_skill_cv() -> job_fit.CvInput:
     return job_fit.CvInput(
         cv_id="cv-vn",
@@ -113,6 +113,7 @@ def _en_jd() -> dict:
 # --------------------------------------------------------------------------- #
 # 1. Gated on AI — offline augmentation is a no-op / byte-identical.           #
 # --------------------------------------------------------------------------- #
+
 
 async def test_english_augment_offline_is_noop(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None
@@ -151,6 +152,7 @@ async def test_evaluate_offline_byte_identical(
 # 2. AI ON — a VN-only CV matches an English requirement after augmentation.   #
 # --------------------------------------------------------------------------- #
 
+
 async def test_vn_cv_matches_english_jd_after_augment(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None
 ) -> None:
@@ -177,6 +179,7 @@ async def test_vn_cv_matches_english_jd_after_augment(
 # --------------------------------------------------------------------------- #
 # 3. ASCII / English terms skip the translator.                                #
 # --------------------------------------------------------------------------- #
+
 
 async def test_english_terms_skip_translator(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None
@@ -210,6 +213,7 @@ async def test_diacritic_detection() -> None:
 # 4. Cache reuse — the same term is translated once, not twice.                #
 # --------------------------------------------------------------------------- #
 
+
 async def test_lru_cache_reuse_single_model_call(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None
 ) -> None:
@@ -232,9 +236,7 @@ async def test_mixed_batch_translates_only_vietnamese(
     fake = _Counter()
     _enable_ai(monkeypatch, fake)
 
-    result = await skill_translation.normalize_terms_to_en(
-        ["python", "Chăm sóc khách hàng", "sql"]
-    )
+    result = await skill_translation.normalize_terms_to_en(["python", "Chăm sóc khách hàng", "sql"])
     assert result["python"] == "python"
     assert result["sql"] == "sql"
     assert result["Chăm sóc khách hàng"] == "customer service"
@@ -260,6 +262,7 @@ async def test_translation_failure_degrades_to_identity(
 # --------------------------------------------------------------------------- #
 # 5. Degradation signal — `complete` flag drives don't-persist-degraded.       #
 # --------------------------------------------------------------------------- #
+
 
 async def test_augment_complete_true_when_translation_succeeds(
     monkeypatch: pytest.MonkeyPatch, _no_db_cache: None

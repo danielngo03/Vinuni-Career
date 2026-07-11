@@ -342,7 +342,7 @@ DEFAULT_TEMPLATES: list[dict] = [
                 "subject": "Tin tuyển dụng đã được duyệt — VinUni Career",
                 "body": (
                     "Chào {{name}},\n\n"
-                    "Tin tuyển dụng \"{{job_title}}\" của bạn đã được duyệt và hiển thị "
+                    'Tin tuyển dụng "{{job_title}}" của bạn đã được duyệt và hiển thị '
                     "công khai trên VinUni Career. Bạn có thể xem tại:\n\n"
                     "{{action_url}}\n\n"
                     "Trân trọng,\nVinUni Career Center"
@@ -352,7 +352,7 @@ DEFAULT_TEMPLATES: list[dict] = [
                 "subject": "Your job posting is approved — VinUni Career",
                 "body": (
                     "Hi {{name}},\n\n"
-                    "Your job posting \"{{job_title}}\" has been approved and is now "
+                    'Your job posting "{{job_title}}" has been approved and is now '
                     "live publicly on VinUni Career. You can view it here:\n\n"
                     "{{action_url}}\n\n"
                     "Best regards,\nVinUni Career Center"
@@ -372,7 +372,7 @@ DEFAULT_TEMPLATES: list[dict] = [
                 "subject": "Cập nhật về tin tuyển dụng — VinUni Career",
                 "body": (
                     "Chào {{name}},\n\n"
-                    "Rất tiếc, tin tuyển dụng \"{{job_title}}\" của bạn chưa được duyệt "
+                    'Rất tiếc, tin tuyển dụng "{{job_title}}" của bạn chưa được duyệt '
                     "ở thời điểm này.\n\n"
                     "Lý do: {{reason}}\n\n"
                     "Bạn có thể chỉnh sửa và gửi lại tin để được xem xét.\n\n"
@@ -383,7 +383,7 @@ DEFAULT_TEMPLATES: list[dict] = [
                 "subject": "Update on your job posting — VinUni Career",
                 "body": (
                     "Hi {{name}},\n\n"
-                    "Unfortunately, your job posting \"{{job_title}}\" was not approved "
+                    'Unfortunately, your job posting "{{job_title}}" was not approved '
                     "at this time.\n\n"
                     "Reason: {{reason}}\n\n"
                     "You can edit and resubmit the posting for another review.\n\n"
@@ -404,7 +404,7 @@ DEFAULT_TEMPLATES: list[dict] = [
                 "subject": "Tin tuyển dụng đã đóng — VinUni Career",
                 "body": (
                     "Chào {{name}},\n\n"
-                    "Tin tuyển dụng \"{{job_title}}\" của bạn đã tự động đóng do đã "
+                    'Tin tuyển dụng "{{job_title}}" của bạn đã tự động đóng do đã '
                     "qua hạn nộp hồ sơ và không còn hiển thị công khai.\n\n"
                     "Bạn có thể mở lại tin (sau khi cập nhật hạn nộp) trên VinUni "
                     "Career nếu vẫn muốn tuyển.\n\n"
@@ -415,7 +415,7 @@ DEFAULT_TEMPLATES: list[dict] = [
                 "subject": "Your job posting was closed — VinUni Career",
                 "body": (
                     "Hi {{name}},\n\n"
-                    "Your job posting \"{{job_title}}\" was automatically closed "
+                    'Your job posting "{{job_title}}" was automatically closed '
                     "because its application deadline passed and is no longer public.\n\n"
                     "You can reopen it (after updating the deadline) on VinUni Career "
                     "if you are still hiring.\n\n"
@@ -436,7 +436,7 @@ DEFAULT_TEMPLATES: list[dict] = [
                 "subject": "Bạn có ứng viên mới — VinUni Career",
                 "body": (
                     "Chào {{name}},\n\n"
-                    "Tin tuyển dụng \"{{job_title}}\" vừa nhận được hồ sơ ứng tuyển từ "
+                    'Tin tuyển dụng "{{job_title}}" vừa nhận được hồ sơ ứng tuyển từ '
                     "{{applicant_label}}. Đăng nhập VinUni Career để xem chi tiết.\n\n"
                     "Trân trọng,\nVinUni Career Center"
                 ),
@@ -445,7 +445,7 @@ DEFAULT_TEMPLATES: list[dict] = [
                 "subject": "You have a new applicant — VinUni Career",
                 "body": (
                     "Hi {{name}},\n\n"
-                    "Your job posting \"{{job_title}}\" just received an application from "
+                    'Your job posting "{{job_title}}" just received an application from '
                     "{{applicant_label}}. Sign in to VinUni Career to review it.\n\n"
                     "Best regards,\nVinUni Career Center"
                 ),
@@ -571,7 +571,11 @@ DEFAULT_TEMPLATES: list[dict] = [
         "channel": "email",
         "variables_schema": {
             "allowed": [
-                "name", "email", "job_title", "scheduled_at", "mode_label",
+                "name",
+                "email",
+                "job_title",
+                "scheduled_at",
+                "mode_label",
                 "location_or_link",
             ],
             "required": [],
@@ -606,7 +610,11 @@ DEFAULT_TEMPLATES: list[dict] = [
         "channel": "email",
         "variables_schema": {
             "allowed": [
-                "name", "email", "job_title", "scheduled_at", "mode_label",
+                "name",
+                "email",
+                "job_title",
+                "scheduled_at",
+                "mode_label",
                 "location_or_link",
             ],
             "required": [],
@@ -669,7 +677,11 @@ DEFAULT_TEMPLATES: list[dict] = [
         "channel": "email",
         "variables_schema": {
             "allowed": [
-                "name", "email", "job_title", "scheduled_at", "mode_label",
+                "name",
+                "email",
+                "job_title",
+                "scheduled_at",
+                "mode_label",
                 "location_or_link",
             ],
             "required": [],
@@ -737,7 +749,11 @@ DEFAULT_TEMPLATES: list[dict] = [
         # Partner-internal (pipeline owner/reviewer). No student-identity field.
         "variables_schema": {
             "allowed": [
-                "name", "email", "job_title", "stage_name", "level_label",
+                "name",
+                "email",
+                "job_title",
+                "stage_name",
+                "level_label",
                 "deadline_label",
             ],
             "required": [],
@@ -772,7 +788,11 @@ DEFAULT_TEMPLATES: list[dict] = [
         # §17); the candidate opens the platform to view comp.
         "variables_schema": {
             "allowed": [
-                "name", "email", "job_title", "position_title", "company_name",
+                "name",
+                "email",
+                "job_title",
+                "position_title",
+                "company_name",
                 "expiry_date",
             ],
             "required": [],
@@ -808,7 +828,11 @@ DEFAULT_TEMPLATES: list[dict] = [
         "channel": "email",
         "variables_schema": {
             "allowed": [
-                "name", "email", "job_title", "position_title", "company_name",
+                "name",
+                "email",
+                "job_title",
+                "position_title",
+                "company_name",
                 "expiry_date",
             ],
             "required": [],
@@ -841,7 +865,11 @@ DEFAULT_TEMPLATES: list[dict] = [
         "channel": "email",
         "variables_schema": {
             "allowed": [
-                "name", "email", "job_title", "position_title", "company_name",
+                "name",
+                "email",
+                "job_title",
+                "position_title",
+                "company_name",
                 "expiry_date",
             ],
             "required": [],
@@ -872,7 +900,11 @@ DEFAULT_TEMPLATES: list[dict] = [
         "channel": "email",
         "variables_schema": {
             "allowed": [
-                "name", "email", "job_title", "position_title", "company_name",
+                "name",
+                "email",
+                "job_title",
+                "position_title",
+                "company_name",
                 "expiry_date",
             ],
             "required": [],
@@ -899,69 +931,15 @@ DEFAULT_TEMPLATES: list[dict] = [
         },
     },
     {
-        "key": "application.reveal_requested",
-        "channel": "email",
-        "variables_schema": {
-            "allowed": ["name", "email", "company_name"],
-            "required": ["company_name"],
-        },
-        "locales": {
-            "vi": {
-                "subject": "Yêu cầu xem thông tin của bạn — VinUni Career",
-                "body": (
-                    "Chào {{name}},\n\n"
-                    "Công ty {{company_name}} muốn xem thông tin đầy đủ của bạn cho một "
-                    "vị trí bạn đã ứng tuyển ẩn danh. Đăng nhập VinUni Career để xem lý "
-                    "do và chấp nhận hoặc từ chối. Yêu cầu sẽ hết hạn sau 72 giờ.\n\n"
-                    "Trân trọng,\nVinUni Career Center"
-                ),
-            },
-            "en": {
-                "subject": "A company requests your information — VinUni Career",
-                "body": (
-                    "Hi {{name}},\n\n"
-                    "{{company_name}} would like to view your full information for a role "
-                    "you applied to anonymously. Sign in to VinUni Career to see the "
-                    "reason and accept or decline. The request expires in 72 hours.\n\n"
-                    "Best regards,\nVinUni Career Center"
-                ),
-            },
-        },
-    },
-    {
-        "key": "application.reveal_responded",
-        "channel": "email",
-        "variables_schema": {
-            "allowed": ["name", "email", "decision_label"],
-            "required": ["decision_label"],
-        },
-        "locales": {
-            "vi": {
-                "subject": "Phản hồi yêu cầu xem thông tin — VinUni Career",
-                "body": (
-                    "Chào {{name}},\n\n"
-                    "Ứng viên đã phản hồi yêu cầu xem thông tin của bạn: {{decision_label}}. "
-                    "Đăng nhập VinUni Career để xem chi tiết.\n\n"
-                    "Trân trọng,\nVinUni Career Center"
-                ),
-            },
-            "en": {
-                "subject": "Response to your information request — VinUni Career",
-                "body": (
-                    "Hi {{name}},\n\n"
-                    "The candidate responded to your information request: {{decision_label}}. "
-                    "Sign in to VinUni Career to see the details.\n\n"
-                    "Best regards,\nVinUni Career Center"
-                ),
-            },
-        },
-    },
-    {
         "key": "account.password_changed",
         "channel": "email",
         "variables_schema": {
+            # ``name`` is optional: a registered account may not have a display
+            # name yet (register is email/password only), so it must never be a
+            # required render variable. The sender always supplies a non-empty
+            # greeting fallback, but omitting it must not fail dispatch.
             "allowed": ["name", "email"],
-            "required": ["name"],
+            "required": [],
         },
         "locales": {
             "vi": {
@@ -1597,8 +1575,10 @@ DEFAULT_TEMPLATES: list[dict] = [
         "key": "account.student_email_verification",
         "channel": "email",
         "variables_schema": {
+            # ``name`` is optional: student verification can run during onboarding
+            # before any display name / CV exists. Only ``otp_code`` is required.
             "allowed": ["name", "otp_code", "ttl_minutes", "email", "action_url", "token"],
-            "required": ["name", "otp_code"],
+            "required": ["otp_code"],
         },
         "locales": {
             "vi": {

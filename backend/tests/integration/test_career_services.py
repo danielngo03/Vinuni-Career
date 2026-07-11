@@ -487,9 +487,7 @@ async def test_reporting_summary_aggregates_correctly(db_session: AsyncSession) 
         ctx=CTX,
     )
 
-    summary = await reporting_service.get_reporting_summary(
-        db_session, principal=counselor
-    )
+    summary = await reporting_service.get_reporting_summary(db_session, principal=counselor)
     assert summary["active_cohorts"] == 1
     assert summary["open_at_risk_flags"] == 1  # one resolved, one still open
     assert summary["open_cv_reviews"] == 1

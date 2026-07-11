@@ -28,10 +28,24 @@ from tests.documents_utils import make_ready_cv, make_student
 from tests.org_utils import make_org_with_admin
 
 _FORBIDDEN = [
-    "openrouter", "openai", "anthropic", "claude", "gpt-4", "gemini", "deepseek",
-    "chat_cheap", "reasoning_cheap", "model_alias", "prompt_tokens",
-    "completion_tokens", "storage_path", "storage_key", "confidence", "embedding",
-    "rank", "percentile",
+    "openrouter",
+    "openai",
+    "anthropic",
+    "claude",
+    "gpt-4",
+    "gemini",
+    "deepseek",
+    "chat_cheap",
+    "reasoning_cheap",
+    "model_alias",
+    "prompt_tokens",
+    "completion_tokens",
+    "storage_path",
+    "storage_key",
+    "confidence",
+    "embedding",
+    "rank",
+    "percentile",
 ]
 
 
@@ -94,12 +108,12 @@ async def _seed(db, cv_id, section_type, items) -> None:
     # reads the freshly seeded content live instead of the empty finalize-time
     # snapshot (a raw content_json write without the bump is a test-only back door
     # production never takes).
-    cv = (
-        await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))
-    ).scalar_one()
+    cv = (await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))).scalar_one()
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     target = next(s for s in sections if s.section_type == section_type)
     target.content_json = {"items": items}
     cv.version += 1
@@ -108,13 +122,13 @@ async def _seed(db, cv_id, section_type, items) -> None:
 
 async def _age_cv(db, cv_id, *, days: int) -> None:
     old = datetime.now(tz=UTC) - timedelta(days=days)
-    cv = (
-        await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))
-    ).scalar_one()
+    cv = (await db.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))).scalar_one()
     cv.last_edited_at = old
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     for s in sections:
         s.updated_at = old
     await db.commit()
@@ -124,7 +138,9 @@ async def _build_strong_cv(db, student, *, title="Strong CV") -> str:
     cv = await _make_cv(db, student, title=title)
     await _seed(db, cv["id"], "skills", [{"text": "Python, FastAPI, PostgreSQL, SQL"}])
     await _seed(
-        db, cv["id"], "experience",
+        db,
+        cv["id"],
+        "experience",
         [{"text": "Built REST APIs with Python and FastAPI at a startup."}],
     )
     await _seed(db, cv["id"], "summary", [{"text": "Backend engineering intern."}])
@@ -143,7 +159,10 @@ async def test_strong_fit_happy_path(db_session) -> None:
     job_id = await _create_job(db_session)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out["job_id"] == str(job_id)
     assert out["best_cv_id"] == cv_id
@@ -164,7 +183,10 @@ async def test_weak_fit_maps_to_weak_label_and_improvement_actions(db_session) -
     job_id = await _create_job(db_session)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(cv["id"]),
     )
     assert out["fit"]["label"] == "weak_fit"
     assert out["fit"]["improvement_actions"]
@@ -183,7 +205,10 @@ async def test_no_active_cv_state(db_session) -> None:
     job_id = await _create_job(db_session)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out["fit"]["status"] == "no_active_cv"
     assert out["best_cv_id"] is None
@@ -204,7 +229,10 @@ async def test_stale_cv_surfaces_in_fit(db_session) -> None:
     job_id = await _create_job(db_session)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out["fit"]["stale"] is True
 
@@ -221,12 +249,18 @@ async def test_hidden_or_missing_job_returns_404(db_session) -> None:
     draft_id = await _create_job(db_session, publish=False)
     with pytest.raises(ResourceNotFoundError):
         await student_intelligence_service.student_intelligence_for_job(
-            db_session, principal=student, job_id=draft_id, cv_id=None,
+            db_session,
+            principal=student,
+            job_id=draft_id,
+            cv_id=None,
         )
 
     with pytest.raises(ResourceNotFoundError):
         await student_intelligence_service.student_intelligence_for_job(
-            db_session, principal=student, job_id=uuid.uuid4(), cv_id=None,
+            db_session,
+            principal=student,
+            job_id=uuid.uuid4(),
+            cv_id=None,
         )
 
 
@@ -241,7 +275,10 @@ async def test_non_student_persona_is_forbidden(db_session) -> None:
 
     with pytest.raises(PermissionDeniedError):
         await student_intelligence_service.student_intelligence_for_job(
-            db_session, principal=partner, job_id=job_id, cv_id=None,
+            db_session,
+            principal=partner,
+            job_id=job_id,
+            cv_id=None,
         )
 
 
@@ -256,7 +293,10 @@ async def test_low_application_volume_is_low_signal_competition(db_session) -> N
     job_id = await _create_job(db_session)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out["competition"]["signal"] == "low_signal"
     assert out["competition"]["score"] is None
@@ -286,14 +326,15 @@ async def test_already_applied_blocks_apply_readiness(db_session) -> None:
     await db_session.commit()
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out["apply_readiness"]["already_applied"] is True
     assert out["apply_readiness"]["ready"] is False
     assert out["apply_readiness"]["blocked_reason"] == "already_applied"
-    assert any(
-        a["action"] == "apply" and a["ready"] is False for a in out["next_actions"]
-    )
+    assert any(a["action"] == "apply" and a["ready"] is False for a in out["next_actions"])
 
 
 # --------------------------------------------------------------------------- #
@@ -308,7 +349,10 @@ async def test_closing_soon_deadline_bucket(db_session) -> None:
     job_id = await _create_job(db_session, application_deadline=deadline)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out["competition"]["deadline_freshness"] == "closing_soon"
 
@@ -324,7 +368,10 @@ async def test_invalid_cv_id_falls_back_to_best(db_session) -> None:
     job_id = await _create_job(db_session)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.uuid4(),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.uuid4(),
     )
     assert out["selected_cv_id"] is None
     assert out["fit"]["status"] == "scored"

@@ -8,8 +8,7 @@ Covers the board facade layered on the stage engine (ADR-0004 kanban data note):
   moves buckets;
 - terminal outcomes (rejected/withdrawn) drop off the active board;
 - cross-org -> 404 (indistinguishable from missing);
-- anonymity is preserved: pre-reveal a card carries only the ``UV-xxxx`` handle —
-  never a name/email — and the revealed identity appears only after accept;
+- every card carries the applicant's real identity (no masking/reveal);
 - the column COUNTS derive from ``candidate_stages`` ACTIVE rows (the
   proj_partner_pipeline fix), not ``applications.status``;
 - the board loads in a BOUNDED number of queries (no per-application N+1).
@@ -25,9 +24,9 @@ from app.modules.documents.application import snapshot_service
 from app.modules.recruitment.application import (
     access,
     apply_service,
+    assignment_service,
     decision_service,
     pipeline_board,
-    reveal_service,
     stage_service,
 )
 from app.modules.recruitment.domain.models import PipelineStage
@@ -36,7 +35,7 @@ from sqlalchemy import event, select
 
 from tests.auth_utils import CTX
 from tests.documents_utils import make_student
-from tests.org_utils import make_org_with_admin
+from tests.org_utils import add_member, make_org_with_admin
 from tests.recruitment_utils import apply_payload, make_builder_cv, publish_job
 
 
@@ -61,34 +60,37 @@ async def _setup_published(db, *, title="Live Job", **over):
     return partner, uni, job_id
 
 
-async def _apply(db, *, job_id, prefix="student", is_anonymous=False):
+async def _apply(db, *, job_id, prefix="student"):
     su, student = await make_student(db, prefix=prefix)
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
-        db, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
+        db,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     return su, student, uuid.UUID(app["id"])
 
 
 async def _template_stages_for_app(db, app_id) -> list[PipelineStage]:
-    from app.modules.recruitment.domain.models import CandidateStage
     from app.modules.recruitment.domain import pipeline
+    from app.modules.recruitment.domain.models import CandidateStage
 
     active = (
-        await db.execute(
-            select(CandidateStage).where(
-                CandidateStage.application_id == app_id,
-                CandidateStage.status == pipeline.STAGE_ACTIVE,
+        (
+            await db.execute(
+                select(CandidateStage).where(
+                    CandidateStage.application_id == app_id,
+                    CandidateStage.status == pipeline.STAGE_ACTIVE,
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert active is not None
     stage = (
-        await db.execute(
-            select(PipelineStage).where(PipelineStage.id == active.stage_id)
-        )
+        await db.execute(select(PipelineStage).where(PipelineStage.id == active.stage_id))
     ).scalar_one()
     return list(
         (
@@ -97,7 +99,9 @@ async def _template_stages_for_app(db, app_id) -> list[PipelineStage]:
                 .where(PipelineStage.template_id == stage.template_id)
                 .order_by(PipelineStage.sort_order)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -106,15 +110,11 @@ def _column(board: dict, *, key: str) -> dict:
 
 
 def _stage_column(board: dict, *, sort_order: int) -> dict:
-    return next(
-        c for c in board["columns"] if c.get("sort_order") == sort_order and c["stage_id"]
-    )
+    return next(c for c in board["columns"] if c.get("sort_order") == sort_order and c["stage_id"])
 
 
 def _all_card_app_ids(board: dict) -> set[str]:
-    return {
-        card["application_id"] for col in board["columns"] for card in col["candidates"]
-    }
+    return {card["application_id"] for col in board["columns"] for card in col["candidates"]}
 
 
 @contextmanager
@@ -135,9 +135,7 @@ def _count_queries(db):
 
 
 async def _board(db, *, partner, job_id):
-    return await pipeline_board.get_job_pipeline_board(
-        db, principal=partner, job_id=job_id
-    )
+    return await pipeline_board.get_job_pipeline_board(db, principal=partner, job_id=job_id)
 
 
 # --------------------------------------------------------------------------- #
@@ -217,15 +215,16 @@ async def test_advanced_candidate_moves_buckets(db_session) -> None:
 async def test_rejected_and_withdrawn_drop_off_active_board(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     _su1, _s1, rejected_id = await _apply(db_session, job_id=job_id, prefix="rej")
-    _su2, withdrawer, withdrawn_id = await _apply(
-        db_session, job_id=job_id, prefix="wd"
-    )
+    _su2, withdrawer, withdrawn_id = await _apply(db_session, job_id=job_id, prefix="wd")
     await decision_service.review_application(
         db_session, principal=partner, application_id=rejected_id, ctx=CTX
     )
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=rejected_id,
-        reason="not_qualified", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=rejected_id,
+        reason="not_qualified",
+        ctx=CTX,
     )
     await decision_service.review_application(
         db_session, principal=partner, application_id=withdrawn_id, ctx=CTX
@@ -307,14 +306,10 @@ async def test_org_pipeline_counts_rollup(db_session) -> None:
 
 async def test_cross_org_partner_gets_404(db_session) -> None:
     partner_a, _uni, job_id = await _setup_published(db_session, title="A Job")
-    _pb_u, _pb_org, partner_b = await make_org_with_admin(
-        db_session, display_name="Org B"
-    )
+    _pb_u, _pb_org, partner_b = await make_org_with_admin(db_session, display_name="Org B")
     await _apply(db_session, job_id=job_id)
     with pytest.raises(ResourceNotFoundError):
-        await pipeline_board.get_job_pipeline_board(
-            db_session, principal=partner_b, job_id=job_id
-        )
+        await pipeline_board.get_job_pipeline_board(db_session, principal=partner_b, job_id=job_id)
 
 
 async def test_unknown_job_is_404(db_session) -> None:
@@ -330,51 +325,71 @@ async def test_unknown_job_is_404(db_session) -> None:
 # --------------------------------------------------------------------------- #
 
 
-async def test_anonymous_card_redacted_pre_reveal(db_session) -> None:
+async def test_board_card_shows_real_identity(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    su, _student, app_id = await _apply(
-        db_session, job_id=job_id, is_anonymous=True
-    )
+    su, student, app_id = await _apply(db_session, job_id=job_id)
     await decision_service.review_application(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
 
     board = await _board(db_session, partner=partner, job_id=job_id)
     card = _stage_column(board, sort_order=1)["candidates"][0]
-    assert card["is_anonymous"] is True
-    assert card["applicant"]["revealed"] is False
-    # UV-handle present; no PII anywhere on the board.
-    assert card["applicant"]["anonymous_id"].startswith("UV-")
-    assert "email" not in card["applicant"]
-    assert "user_id" not in card["applicant"]
-    assert su.email not in str(board)
-    assert (su.full_name or "ZZZ") not in str(board)
-    assert card["cv_download_available"] is False
+    applicant = card["applicant"]
+    assert applicant["user_id"] == str(student.user_id)
+    assert applicant["full_name"] == su.full_name
+    assert applicant["email"] == su.email
+    # No masking / reveal fields remain on the card.
+    assert "is_anonymous" not in card
+    assert "anonymous_id" not in applicant
+    assert "cv_download_available" not in card
 
 
-async def test_revealed_identity_appears_after_accept(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    su, student, app_id = await _apply(
-        db_session, job_id=job_id, is_anonymous=True
-    )
+# --------------------------------------------------------------------------- #
+# Candidate owner (assignee) on the board card                                 #
+# --------------------------------------------------------------------------- #
+
+
+async def test_board_card_shows_assignee(db_session) -> None:
+    # Own setup (capture the partner org so a recruiter can be added + assigned).
+    _pu, porg, partner = await make_org_with_admin(db_session, display_name="Assignee Co")
+    _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
+    job_id = await publish_job(db_session, partner_principal=partner, uni_principal=uni)
+    _su, _student, app_id = await _apply(db_session, job_id=job_id)
     await decision_service.review_application(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
-    await reveal_service.request_reveal(
-        db_session, principal=partner, application_id=app_id,
-        reason="Chúng tôi muốn xác minh thông tin ứng viên để mời phỏng vấn.",
+    _mu, membership, _mp = await add_member(
+        db_session, org=porg, permissions=[("applications", "read"), ("applications", "update")]
+    )
+    await assignment_service.assign_application(
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        assignee_membership_id=membership.id,
         ctx=CTX,
     )
-    await reveal_service.respond_reveal(
-        db_session, principal=student, application_id=app_id,
-        decision="accepted", ctx=CTX,
+
+    board = await _board(db_session, partner=partner, job_id=job_id)
+    card = _stage_column(board, sort_order=1)["candidates"][0]
+    assert card["application_id"] == str(app_id)
+    # The assignee block matches the partner_application shape (partner STAFF, not
+    # the candidate) — membership id + user id + resolved staff name.
+    assert card["assignee"]["membership_id"] == str(membership.id)
+    assert card["assignee"]["user_id"]
+    assert card["assignee"]["display_name"]
+
+
+async def test_board_card_unassigned_has_null_assignee(db_session) -> None:
+    partner, _uni, job_id = await _setup_published(db_session)
+    _su, _student, app_id = await _apply(db_session, job_id=job_id)
+    await decision_service.review_application(
+        db_session, principal=partner, application_id=app_id, ctx=CTX
     )
 
     board = await _board(db_session, partner=partner, job_id=job_id)
     card = _stage_column(board, sort_order=1)["candidates"][0]
-    assert card["applicant"]["revealed"] is True
-    assert card["applicant"]["email"] == su.email
-    assert card["cv_download_available"] is True
+    assert "assignee" in card
+    assert card["assignee"] is None
 
 
 # --------------------------------------------------------------------------- #
@@ -384,11 +399,9 @@ async def test_revealed_identity_appears_after_accept(db_session) -> None:
 
 async def test_board_query_count_is_bounded(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    # Mix of buckets + a revealed card to exercise every batched lookup.
+    # Mix of buckets to exercise every batched lookup.
     for i in range(6):
-        _su, _student, app_id = await _apply(
-            db_session, job_id=job_id, prefix=f"q{i}"
-        )
+        _su, _student, app_id = await _apply(db_session, job_id=job_id, prefix=f"q{i}")
         if i < 4:
             await decision_service.review_application(
                 db_session, principal=partner, application_id=app_id, ctx=CTX
@@ -405,9 +418,7 @@ async def test_board_query_count_is_bounded(db_session) -> None:
     # Add many more candidates; the query count must NOT grow with N (no per-card
     # fetch loop). A small fixed ceiling proves the board is batched.
     for i in range(20):
-        _su, _student, app_id = await _apply(
-            db_session, job_id=job_id, prefix=f"big{i}"
-        )
+        _su, _student, app_id = await _apply(db_session, job_id=job_id, prefix=f"big{i}")
         await decision_service.review_application(
             db_session, principal=partner, application_id=app_id, ctx=CTX
         )

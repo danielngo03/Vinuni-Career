@@ -104,16 +104,14 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
         return None if got == exp else f"level expected {exp!r}, got {got!r}"
     if key == "ai_explanation_available":
         got = bool(result.get("ai_explanation_available"))
-        return None if got == bool(exp) else (
-            f"ai_explanation_available expected {exp}, got {got}"
-        )
+        return None if got == bool(exp) else (f"ai_explanation_available expected {exp}, got {got}")
     if key == "explanation_is_none":
         got = result.get("explanation") is None
         return None if got == bool(exp) else f"explanation_is_none expected {exp}, got {got}"
     if key == "application_count_is_none":
         got = result.get("application_count") is None
-        return None if got == bool(exp) else (
-            f"application_count_is_none expected {exp}, got {got}"
+        return (
+            None if got == bool(exp) else (f"application_count_is_none expected {exp}, got {got}")
         )
     if key == "application_count_equals":
         got = result.get("application_count")

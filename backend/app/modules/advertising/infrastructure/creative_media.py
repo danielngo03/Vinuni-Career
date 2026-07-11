@@ -67,9 +67,7 @@ class CreativeValidationError(Exception):
 
     def __init__(self, reason: str) -> None:
         self.reason = reason
-        self.message_vi, self.message_en = _REASONS.get(
-            reason, _REASONS["unsupported_image_type"]
-        )
+        self.message_vi, self.message_en = _REASONS.get(reason, _REASONS["unsupported_image_type"])
         super().__init__(reason)
 
 
@@ -85,9 +83,7 @@ def sniff_image(data: bytes) -> CreativeMedia | None:
     return None
 
 
-def validate_creative(
-    data: bytes, content_type: str | None, *, max_bytes: int
-) -> CreativeMedia:
+def validate_creative(data: bytes, content_type: str | None, *, max_bytes: int) -> CreativeMedia:
     """Validate uploaded creative bytes and return the resolved media identity.
 
     Order: empty -> size -> declared content-type allowlist -> magic-byte sniff.
@@ -98,10 +94,7 @@ def validate_creative(
         raise CreativeValidationError("empty_file")
     if len(data) > max_bytes:
         raise CreativeValidationError("file_too_large")
-    if (
-        content_type
-        and content_type.split(";")[0].strip().lower() not in ALLOWED_CONTENT_TYPES
-    ):
+    if content_type and content_type.split(";")[0].strip().lower() not in ALLOWED_CONTENT_TYPES:
         raise CreativeValidationError("unsupported_image_type")
     media = sniff_image(data)
     if media is None:

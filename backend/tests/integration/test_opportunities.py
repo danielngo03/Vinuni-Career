@@ -84,13 +84,9 @@ async def _publish(db, partner_principal, uni_principal, *, title="Live Job", **
 
 async def test_create_requires_jobs_create_permission(db_session) -> None:
     _u, org, _admin = await make_org_with_admin(db_session)
-    _m_u, _m, member = await add_member(
-        db_session, org=org, permissions=[("members", "read")]
-    )
+    _m_u, _m, member = await add_member(db_session, org=org, permissions=[("members", "read")])
     with pytest.raises(PermissionDeniedError):
-        await job_service.create_job(
-            db_session, principal=member, payload=_payload(), ctx=CTX
-        )
+        await job_service.create_job(db_session, principal=member, payload=_payload(), ctx=CTX)
 
 
 async def test_member_with_jobs_create_can_create(db_session) -> None:
@@ -98,9 +94,7 @@ async def test_member_with_jobs_create_can_create(db_session) -> None:
     _m_u, _m, member = await add_member(
         db_session, org=org, permissions=[("jobs", "create"), ("jobs", "read")]
     )
-    job = await job_service.create_job(
-        db_session, principal=member, payload=_payload(), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=member, payload=_payload(), ctx=CTX)
     assert job["status"] == "draft"
     assert job["moderation_status"] == "pending"
     assert job["status_label"]  # localized, never raw-only
@@ -213,9 +207,7 @@ async def test_guest_sees_only_published_jobs(db_session) -> None:
     live_id = await _publish(db_session, admin, uni, title="Published Job")
 
     # Guest list shows only the published job; count reflects visible-only.
-    items, _next, _limit, total = await job_service.list_public_jobs(
-        db_session, principal=GUEST
-    )
+    items, _next, _limit, total = await job_service.list_public_jobs(db_session, principal=GUEST)
     assert total == 1
     assert [i["id"] for i in items] == [str(live_id)]
 
@@ -236,9 +228,7 @@ async def test_guest_sees_only_published_jobs(db_session) -> None:
 
 async def test_submit_transition_and_illegal_resubmit(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
     submitted = await job_service.submit_job(
         db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
     )
@@ -253,9 +243,7 @@ async def test_submit_transition_and_illegal_resubmit(db_session) -> None:
 
 async def test_close_draft_is_illegal(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
     with pytest.raises(IllegalJobTransitionError):
         await job_service.close_job(
             db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
@@ -267,17 +255,13 @@ async def test_close_and_reopen_active_job(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     job_id = await _publish(db_session, admin, uni)
 
-    closed = await job_service.close_job(
-        db_session, principal=admin, job_id=job_id, ctx=CTX
-    )
+    closed = await job_service.close_job(db_session, principal=admin, job_id=job_id, ctx=CTX)
     assert closed["status"] == "closed"
     # Closed jobs are not publicly visible.
     with pytest.raises(ResourceNotFoundError):
         await job_service.get_job(db_session, principal=GUEST, job_id=job_id)
 
-    reopened = await job_service.reopen_job(
-        db_session, principal=admin, job_id=job_id, ctx=CTX
-    )
+    reopened = await job_service.reopen_job(db_session, principal=admin, job_id=job_id, ctx=CTX)
     assert reopened["status"] == "active"
     detail = await job_service.get_job(db_session, principal=GUEST, job_id=job_id)
     assert detail["id"] == str(job_id)
@@ -290,12 +274,8 @@ async def test_close_and_reopen_active_job(db_session) -> None:
 
 async def test_partner_admin_cannot_moderate(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)  # partner *:*
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
-    await job_service.submit_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
+    await job_service.submit_job(db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX)
     # Partner admin holds *:* but org_type != university -> 403.
     with pytest.raises(PermissionDeniedError):
         await moderation_service.approve_job(
@@ -308,15 +288,9 @@ async def test_partner_admin_cannot_moderate(db_session) -> None:
 async def test_university_moderation_queue_and_approve(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
-    await job_service.submit_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
-    )
-    queue, total = await moderation_service.list_moderation_queue(
-        db_session, principal=uni
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
+    await job_service.submit_job(db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX)
+    queue, total = await moderation_service.list_moderation_queue(db_session, principal=uni)
     assert total == 1 and queue[0]["id"] == job["id"]
 
     approved = await moderation_service.approve_job(
@@ -326,43 +300,49 @@ async def test_university_moderation_queue_and_approve(db_session) -> None:
 
     # Outbox notification queued to the posting partner.
     outbox = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.template_key == "job.approved"
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(NotificationOutbox.template_key == "job.approved")
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(outbox) == 1
 
 
 async def test_reject_notifies_and_sets_rejected(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
-    await job_service.submit_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
+    await job_service.submit_job(db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX)
     rejected = await moderation_service.reject_job(
-        db_session, principal=uni, job_id=uuid.UUID(job["id"]),
-        reason="Mô tả công việc chưa rõ ràng.", ctx=CTX,
+        db_session,
+        principal=uni,
+        job_id=uuid.UUID(job["id"]),
+        reason="Mô tả công việc chưa rõ ràng.",
+        ctx=CTX,
     )
     assert rejected["status"] == "rejected"
 
     outbox = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.template_key == "job.rejected"
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(NotificationOutbox.template_key == "job.rejected")
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(outbox) == 1
 
     # A rejected job is editable again, then resubmittable.
     edited = await job_service.update_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]),
-        payload={"title": "Backend Intern (revised)"}, ctx=CTX,
+        db_session,
+        principal=admin,
+        job_id=uuid.UUID(job["id"]),
+        payload={"title": "Backend Intern (revised)"},
+        ctx=CTX,
     )
     assert edited["title"] == "Backend Intern (revised)"
     resubmitted = await job_service.submit_job(
@@ -384,8 +364,11 @@ async def test_closed_job_is_edit_locked(db_session) -> None:
     await job_service.close_job(db_session, principal=admin, job_id=job_id, ctx=CTX)
     with pytest.raises(JobNotEditableError):
         await job_service.update_job(
-            db_session, principal=admin, job_id=job_id,
-            payload={"title": "New title"}, ctx=CTX,
+            db_session,
+            principal=admin,
+            job_id=job_id,
+            payload={"title": "New title"},
+            ctx=CTX,
         )
 
 
@@ -401,7 +384,9 @@ async def test_free_amend_field_stays_active_and_public(db_session) -> None:
     job_id = await _publish(db_session, admin, uni)
 
     edited = await job_service.update_job(
-        db_session, principal=admin, job_id=job_id,
+        db_session,
+        principal=admin,
+        job_id=job_id,
         payload={"headcount": 5, "benefits": "Free lunch, health insurance."},
         ctx=CTX,
     )
@@ -421,8 +406,11 @@ async def test_content_amend_on_active_job_requires_remoderation(db_session) -> 
     job_id = await _publish(db_session, admin, uni)
 
     edited = await job_service.update_job(
-        db_session, principal=admin, job_id=job_id,
-        payload={"title": "Backend Intern (Revised)"}, ctx=CTX,
+        db_session,
+        principal=admin,
+        job_id=job_id,
+        payload={"title": "Backend Intern (Revised)"},
+        ctx=CTX,
     )
     assert edited["status"] == "pending_review"
     assert edited["moderation_status"] == "pending"
@@ -447,19 +435,26 @@ async def test_amendment_audit_records_before_after_diff(db_session) -> None:
 
     before_count = await _audit_count(db_session, "job.updated")
     await job_service.update_job(
-        db_session, principal=admin, job_id=job_id,
-        payload={"headcount": 9}, ctx=CTX,
+        db_session,
+        principal=admin,
+        job_id=job_id,
+        payload={"headcount": 9},
+        ctx=CTX,
     )
     after_count = await _audit_count(db_session, "job.updated")
     assert after_count == before_count + 1
 
     row = (
-        await db_session.execute(
-            select(AuditLog)
-            .where(AuditLog.action == "job.updated", AuditLog.resource_id == job_id)
-            .order_by(AuditLog.occurred_at.desc())
+        (
+            await db_session.execute(
+                select(AuditLog)
+                .where(AuditLog.action == "job.updated", AuditLog.resource_id == job_id)
+                .order_by(AuditLog.occurred_at.desc())
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert row is not None
     assert row.after_snapshot["diff"]["before"]["headcount"] == 1
     assert row.after_snapshot["diff"]["after"]["headcount"] == 9
@@ -467,13 +462,14 @@ async def test_amendment_audit_records_before_after_diff(db_session) -> None:
 
 async def test_optimistic_version_conflict(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
     with pytest.raises(JobVersionConflictError):
         await job_service.update_job(
-            db_session, principal=admin, job_id=uuid.UUID(job["id"]),
-            payload={"title": "Race", "version": 999}, ctx=CTX,
+            db_session,
+            principal=admin,
+            job_id=uuid.UUID(job["id"]),
+            payload={"title": "Race", "version": 999},
+            ctx=CTX,
         )
 
 
@@ -485,21 +481,15 @@ async def test_optimistic_version_conflict(db_session) -> None:
 async def test_audit_written_on_every_transition(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
     assert await _audit_count(db_session, "job.created") == 1
-    await job_service.submit_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
-    )
+    await job_service.submit_job(db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX)
     assert await _audit_count(db_session, "job.submit") == 1
     await moderation_service.approve_job(
         db_session, principal=uni, job_id=uuid.UUID(job["id"]), ctx=CTX
     )
     assert await _audit_count(db_session, "job.approved") == 1
-    await job_service.close_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
-    )
+    await job_service.close_job(db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX)
     assert await _audit_count(db_session, "job.close") == 1
 
 
@@ -511,28 +501,18 @@ async def test_audit_written_on_every_transition(db_session) -> None:
 async def test_university_moderator_can_view_pending_job_detail(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
-    await job_service.submit_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
+    await job_service.submit_job(db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX)
     # University moderator sees the FULL detail (incl. moderation fields) while
     # the job is pending_review.
-    detail = await job_service.get_job(
-        db_session, principal=uni, job_id=uuid.UUID(job["id"])
-    )
+    detail = await job_service.get_job(db_session, principal=uni, job_id=uuid.UUID(job["id"]))
     assert detail["status"] == "pending_review"
     assert "moderation_status" in detail
 
     # A different (non-university) partner still gets 404 (tenant/enumeration).
-    _ob_u, _ob, other_partner = await make_org_with_admin(
-        db_session, display_name="Other Co"
-    )
+    _ob_u, _ob, other_partner = await make_org_with_admin(db_session, display_name="Other Co")
     with pytest.raises(ResourceNotFoundError):
-        await job_service.get_job(
-            db_session, principal=other_partner, job_id=uuid.UUID(job["id"])
-        )
+        await job_service.get_job(db_session, principal=other_partner, job_id=uuid.UUID(job["id"]))
 
 
 def test_approve_request_accepts_empty_body() -> None:
@@ -606,9 +586,7 @@ async def test_duplicate_job_creates_draft_copy(db_session) -> None:
 async def test_duplicate_job_cross_org_raises_404(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     _u2, _org2, other = await make_org_with_admin(db_session, display_name="Other")
-    source = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
+    source = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
     with pytest.raises(ResourceNotFoundError):
         await job_service.duplicate_job(
             db_session, principal=other, job_id=uuid.UUID(source["id"]), ctx=CTX
@@ -639,9 +617,7 @@ async def test_duplicate_from_live_published_job_starts_clean_draft(db_session) 
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     live_id = await _publish(db_session, admin, uni, title="Top Performing Role")
 
-    copy = await job_service.duplicate_job(
-        db_session, principal=admin, job_id=live_id, ctx=CTX
-    )
+    copy = await job_service.duplicate_job(db_session, principal=admin, job_id=live_id, ctx=CTX)
     assert copy["status"] == "draft"
     assert copy["moderation_status"] == "pending"
     assert copy["published_at"] is None
@@ -650,13 +626,17 @@ async def test_duplicate_from_live_published_job_starts_clean_draft(db_session) 
 
     # Audited with a pointer back to the source job.
     row = (
-        await db_session.execute(
-            select(AuditLog).where(
-                AuditLog.action == "job.duplicated",
-                AuditLog.resource_id == uuid.UUID(copy["id"]),
+        (
+            await db_session.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "job.duplicated",
+                    AuditLog.resource_id == uuid.UUID(copy["id"]),
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert row is not None
     assert row.after_snapshot["source_job_id"] == str(live_id)
 
@@ -670,7 +650,8 @@ async def test_duplicate_from_live_published_job_starts_clean_draft(db_session) 
 async def test_submit_blocked_by_thin_placeholder_description(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     job = await job_service.create_job(
-        db_session, principal=admin,
+        db_session,
+        principal=admin,
         payload=_payload("Backend Intern", description="test"),
         ctx=CTX,
     )
@@ -679,9 +660,7 @@ async def test_submit_blocked_by_thin_placeholder_description(db_session) -> Non
             db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
         )
     issues = exc_info.value.details["issues"]
-    assert any(
-        i["field"] == "description" and i["severity"] == "blocking" for i in issues
-    )
+    assert any(i["field"] == "description" and i["severity"] == "blocking" for i in issues)
     # Never resolved to a raw enum-only response — every issue carries a message.
     assert all(i["message"] for i in issues)
 
@@ -690,7 +669,8 @@ async def test_submit_blocked_by_thin_placeholder_description(db_session) -> Non
 async def test_submit_blocked_by_disclosed_salary_without_values(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     job = await job_service.create_job(
-        db_session, principal=admin,
+        db_session,
+        principal=admin,
         payload=_payload("Backend Intern", salary_is_disclosed=True),
         ctx=CTX,
     )
@@ -707,9 +687,7 @@ async def test_submit_allows_advisory_only_warnings(db_session) -> None:
     """A thin-but-real JD (no requirements, salary undisclosed, no experience
     bound) surfaces advisory warnings but is NOT blocked."""
     _u, _org, admin = await make_org_with_admin(db_session)
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
     result = await job_service.submit_job(
         db_session, principal=admin, job_id=uuid.UUID(job["id"]), ctx=CTX
     )
@@ -722,7 +700,8 @@ async def test_submit_allows_advisory_only_warnings(db_session) -> None:
 async def test_quality_check_preview_matches_submit_gate(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     job = await job_service.create_job(
-        db_session, principal=admin,
+        db_session,
+        principal=admin,
         payload=_payload("Backend Intern", description="test"),
         ctx=CTX,
     )
@@ -745,7 +724,10 @@ async def test_preview_as_guest_shows_public_projection_before_publish(db_sessio
         db_session, principal=admin, payload=_payload("Draft Preview Job"), ctx=CTX
     )
     out = await job_service.preview_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), as_persona="guest",
+        db_session,
+        principal=admin,
+        job_id=uuid.UUID(job["id"]),
+        as_persona="guest",
     )
     assert out["as"] == "guest"
     assert out["would_be_visible"] is True
@@ -760,18 +742,25 @@ async def test_preview_as_guest_shows_public_projection_before_publish(db_sessio
 async def test_preview_hides_students_only_job_from_guest(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     job = await job_service.create_job(
-        db_session, principal=admin,
+        db_session,
+        principal=admin,
         payload=_payload("Students Only Job", visibility="students_only"),
         ctx=CTX,
     )
     guest_view = await job_service.preview_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), as_persona="guest",
+        db_session,
+        principal=admin,
+        job_id=uuid.UUID(job["id"]),
+        as_persona="guest",
     )
     assert guest_view["would_be_visible"] is False
     assert guest_view["hidden_reason"] == "visibility_tier"
 
     student_view = await job_service.preview_job(
-        db_session, principal=admin, job_id=uuid.UUID(job["id"]), as_persona="student",
+        db_session,
+        principal=admin,
+        job_id=uuid.UUID(job["id"]),
+        as_persona="student",
     )
     assert student_view["would_be_visible"] is True
 
@@ -779,16 +768,16 @@ async def test_preview_hides_students_only_job_from_guest(db_session) -> None:
 @pytest.mark.asyncio
 async def test_preview_requires_jobs_read_permission(db_session) -> None:
     _u, org, admin = await make_org_with_admin(db_session)
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
     # A member who can create/submit but was never granted jobs:read.
     _m_u, _m, member_no_read = await add_member(
         db_session, org=org, permissions=[("jobs", "create"), ("jobs", "submit")]
     )
     with pytest.raises(PermissionDeniedError):
         await job_service.preview_job(
-            db_session, principal=member_no_read, job_id=uuid.UUID(job["id"]),
+            db_session,
+            principal=member_no_read,
+            job_id=uuid.UUID(job["id"]),
             as_persona="guest",
         )
 
@@ -797,12 +786,13 @@ async def test_preview_requires_jobs_read_permission(db_session) -> None:
 async def test_preview_cross_org_raises_404(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
     _u2, _org2, other = await make_org_with_admin(db_session, display_name="Other")
-    job = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
+    job = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
     with pytest.raises(ResourceNotFoundError):
         await job_service.preview_job(
-            db_session, principal=other, job_id=uuid.UUID(job["id"]), as_persona="guest",
+            db_session,
+            principal=other,
+            job_id=uuid.UUID(job["id"]),
+            as_persona="guest",
         )
 
 
@@ -838,12 +828,16 @@ async def test_weekly_digest_enqueues_for_students(db_session) -> None:
     assert result["digests_enqueued"] >= 2
 
     rows = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.template_key == "student.weekly_job_digest"
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.template_key == "student.weekly_job_digest"
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     recipient_ids = {r.recipient_id for r in rows}
     assert student1.id in recipient_ids
     assert student2.id in recipient_ids

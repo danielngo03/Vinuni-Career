@@ -67,7 +67,7 @@ _BASE_INSTRUCTION = (
     '"text": <string>} — append a new bullet/item (only what the user stated and '
     "the CONTEXT supports; never invent facts).\n"
     '- {"op": "reorder_sections", "order": [<section types, new top-to-bottom '
-    'order>]} — reorder existing sections.\n\n'
+    "order>]} — reorder existing sections.\n\n"
     "Respond with ONLY this JSON object (no markdown fences, no extra keys):\n"
     '{"operations": [ ... ], "explanation": "<one short user-facing sentence '
     'describing what would change, or why nothing was changed>"}\n'

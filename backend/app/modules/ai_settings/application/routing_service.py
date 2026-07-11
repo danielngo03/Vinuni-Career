@@ -42,22 +42,29 @@ async def create_draft_graph(
     graph: dict,
     ctx: RequestContext,
 ) -> AiRoutingGraph:
-    await settings_service._require_ai_settings_admin(session, principal, "manage")
+    settings_service.require_platform_superadmin(principal)
 
     errors = validate_routing_graph(graph)
     if errors:
         raise InvalidRoutingGraphError(errors)
 
     row = AiRoutingGraph(
-        task_family=task_family, graph=graph, status="DRAFT", version=1,
-        created_by=principal.user_id, created_at=datetime.now(tz=UTC),
+        task_family=task_family,
+        graph=graph,
+        status="DRAFT",
+        version=1,
+        created_by=principal.user_id,
+        created_at=datetime.now(tz=UTC),
     )
     session.add(row)
     await session.flush()
 
     await write_audit(
-        session, action="ai_settings.routing_graph_created", resource_type="ai_routing_graph",
-        resource_id=row.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="ai_settings.routing_graph_created",
+        resource_type="ai_routing_graph",
+        resource_id=row.id,
+        context=_audit_ctx(principal, ctx),
         after={"task_family": task_family, "status": "DRAFT"},
     )
     await session.commit()
@@ -72,7 +79,7 @@ async def update_draft_graph(
     graph: dict,
     ctx: RequestContext,
 ) -> AiRoutingGraph:
-    await settings_service._require_ai_settings_admin(session, principal, "manage")
+    settings_service.require_platform_superadmin(principal)
     row = await get_graph(session, principal=principal, graph_id=graph_id)
 
     if row.status != "DRAFT":
@@ -101,7 +108,7 @@ async def update_draft_graph(
 async def get_graph(
     session: AsyncSession, *, principal: Principal, graph_id: uuid.UUID
 ) -> AiRoutingGraph:
-    await settings_service._require_ai_settings_admin(session, principal, "read")
+    settings_service.require_platform_superadmin(principal)
     row = await session.get(AiRoutingGraph, graph_id)
     if row is None:
         raise ResourceNotFoundError()
@@ -111,7 +118,7 @@ async def get_graph(
 async def list_graphs(
     session: AsyncSession, *, principal: Principal, task_family: str | None = None
 ) -> list[AiRoutingGraph]:
-    await settings_service._require_ai_settings_admin(session, principal, "read")
+    settings_service.require_platform_superadmin(principal)
     stmt = select(AiRoutingGraph).order_by(AiRoutingGraph.created_at.desc())
     if task_family is not None:
         stmt = stmt.where(AiRoutingGraph.task_family == task_family)

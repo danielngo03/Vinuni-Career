@@ -64,9 +64,7 @@ async def get_or_create_onboarding_state(
     session: AsyncSession, *, user_id: uuid.UUID
 ) -> OnboardingState:
     state = (
-        await session.execute(
-            select(OnboardingState).where(OnboardingState.user_id == user_id)
-        )
+        await session.execute(select(OnboardingState).where(OnboardingState.user_id == user_id))
     ).scalar_one_or_none()
     if state is None:
         state = OnboardingState(user_id=user_id, current_step="role_select")
@@ -75,9 +73,7 @@ async def get_or_create_onboarding_state(
     return state
 
 
-async def get_status(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> dict:
+async def get_status(session: AsyncSession, *, user_id: uuid.UUID) -> dict:
     """Return current onboarding state for redirect guard / frontend wizard."""
     user = await user_service.get_by_id(session, user_id)
     if user is None:
@@ -401,9 +397,8 @@ async def submit_employer_docs(
     tax_id: str | None,
     ctx: RequestContext,
 ) -> dict:
-    """Record uploaded business document path, enqueue AI verification task."""
-    from app.modules.onboarding.application import doc_verification  # local import
-
+    """Record uploaded business document path; the router enqueues AI verification
+    AFTER commit (see the note at the return)."""
     req = await partner_registration_facade.get_by_user(session, user_id)
     if req is None:
         raise ValidationFailedError("employer_info_not_submitted")
@@ -429,15 +424,16 @@ async def submit_employer_docs(
     )
     await session.flush()
 
-    # Enqueue async AI verification (non-blocking)
-    await doc_verification.enqueue_verification(session, request_id=req.id)
+    # AI verification is enqueued by the ROUTER *after commit* (as a FastAPI
+    # background task), never here: the verification task opens its OWN session
+    # and can only see the document once this transaction has committed. Enqueuing
+    # inline pre-commit with the dev queue self-deadlocked (the task's separate
+    # session blocked on the row this transaction had locked). ``request_id`` is
+    # returned so the router can enqueue it and is stripped before the API response.
+    return {"status": "submitted", "ai_doc_status": "pending", "request_id": str(req.id)}
 
-    return {"status": "submitted", "ai_doc_status": "pending"}
 
-
-async def get_employer_doc_status(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> dict:
+async def get_employer_doc_status(session: AsyncSession, *, user_id: uuid.UUID) -> dict:
     req = await partner_registration_facade.get_by_user(session, user_id)
     if req is None:
         raise NotFoundError("employer_request_not_found")

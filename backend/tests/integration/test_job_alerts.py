@@ -106,6 +106,7 @@ async def test_quota_exceeded_at_10(db_session) -> None:
 async def test_delete_removes_from_list(db_session) -> None:
     _, student = await make_student(db_session)
     import uuid as _uuid
+
     alert = await _make_alert(db_session, student, name="To Delete")
     alert_id = _uuid.UUID(alert["id"])
     await job_alert_service.delete_alert(db_session, principal=student, alert_id=alert_id)
@@ -117,25 +118,23 @@ async def test_delete_nonexistent_raises_not_found(db_session) -> None:
     import uuid as _uuid
 
     from app.shared.exceptions import ResourceNotFoundError
+
     _, student = await make_student(db_session)
     with pytest.raises(ResourceNotFoundError):
-        await job_alert_service.delete_alert(
-            db_session, principal=student, alert_id=_uuid.uuid4()
-        )
+        await job_alert_service.delete_alert(db_session, principal=student, alert_id=_uuid.uuid4())
 
 
 async def test_delete_owned_by_other_raises_not_found(db_session) -> None:
     import uuid as _uuid
 
     from app.shared.exceptions import ResourceNotFoundError
+
     _, student1 = await make_student(db_session)
     _, student2 = await make_student(db_session)
     alert = await _make_alert(db_session, student1, name="Student1 Alert")
     alert_id = _uuid.UUID(alert["id"])
     with pytest.raises(ResourceNotFoundError):
-        await job_alert_service.delete_alert(
-            db_session, principal=student2, alert_id=alert_id
-        )
+        await job_alert_service.delete_alert(db_session, principal=student2, alert_id=alert_id)
 
 
 # ---------------------------------------------------------------------------
@@ -172,13 +171,17 @@ async def test_create_and_delete_alert_write_audit_rows(db_session) -> None:
     alert_id = uuid.UUID(alert["id"])
 
     created_rows = (
-        await db_session.execute(
-            select(AuditLog).where(
-                AuditLog.action == "job_alert.created",
-                AuditLog.resource_id == alert_id,
+        (
+            await db_session.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "job_alert.created",
+                    AuditLog.resource_id == alert_id,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(created_rows) == 1
     created = created_rows[0]
     assert created.resource_type == "job_alert"
@@ -187,17 +190,19 @@ async def test_create_and_delete_alert_write_audit_rows(db_session) -> None:
     assert created.after_snapshot is not None
     assert created.after_snapshot.get("name") == "Audited Alert"
 
-    await job_alert_service.delete_alert(
-        db_session, principal=student, alert_id=alert_id
-    )
+    await job_alert_service.delete_alert(db_session, principal=student, alert_id=alert_id)
 
     deleted_rows = (
-        await db_session.execute(
-            select(AuditLog).where(
-                AuditLog.action == "job_alert.deleted",
-                AuditLog.resource_id == alert_id,
+        (
+            await db_session.execute(
+                select(AuditLog).where(
+                    AuditLog.action == "job_alert.deleted",
+                    AuditLog.resource_id == alert_id,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(deleted_rows) == 1
     assert deleted_rows[0].after_snapshot == {"is_active": False}

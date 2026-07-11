@@ -3,6 +3,21 @@ from __future__ import annotations
 from app.shared.exceptions import ConflictError, ValidationFailedError
 
 
+class NodeExecutionFailed(Exception):
+    """Raised by a node handler for a recoverable failure during execution.
+
+    ``user_safe_error`` is stored on the node log and the created follow-up task;
+    it must never include stack traces, provider/internal details, or raw PII.
+    Lives here (not in ``execution_service``) so both the engine and the
+    cross-module node handlers (``recruiting_nodes``) can import it without a
+    circular import.
+    """
+
+    def __init__(self, user_safe_error: str) -> None:
+        self.user_safe_error = user_safe_error
+        super().__init__(user_safe_error)
+
+
 class InvalidGraphError(ValidationFailedError):
     message = "Sơ đồ quy trình không hợp lệ."
 
@@ -21,9 +36,7 @@ class FlowNotActivatableError(ConflictError):
     message = "Chỉ có thể kích hoạt quy trình ở trạng thái nháp hoặc tạm dừng."
 
     def __init__(self, *, from_status: str) -> None:
-        super().__init__(
-            self.message, details={"reason": "not_activatable", "status": from_status}
-        )
+        super().__init__(self.message, details={"reason": "not_activatable", "status": from_status})
 
 
 class MissingActivationCapabilitiesError(ValidationFailedError):

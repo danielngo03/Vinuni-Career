@@ -84,9 +84,7 @@ async def _seed_user_with_identity(
 @pytest.mark.asyncio
 async def test_me_normal_user_permissions_empty_list(db_session: AsyncSession) -> None:
     """A user with no grants gets an empty sorted permissions list."""
-    user, identity = await _seed_user_with_identity(
-        db_session, email="me_no_grants@example.com"
-    )
+    user, identity = await _seed_user_with_identity(db_session, email="me_no_grants@example.com")
     await db_session.commit()
 
     principal = Principal(
@@ -113,9 +111,7 @@ async def test_me_normal_user_permissions_empty_list(db_session: AsyncSession) -
 @pytest.mark.asyncio
 async def test_me_normal_user_permissions_sorted(db_session: AsyncSession) -> None:
     """A user with grants gets their permissions as a sorted list."""
-    user, identity = await _seed_user_with_identity(
-        db_session, email="me_with_grants@example.com"
-    )
+    user, identity = await _seed_user_with_identity(db_session, email="me_with_grants@example.com")
     await db_session.commit()
 
     principal = Principal(
@@ -175,9 +171,7 @@ async def test_me_permissions_additive_existing_fields_unchanged(
     db_session: AsyncSession,
 ) -> None:
     """Adding ``permissions`` must not remove or alter existing /auth/me fields."""
-    user, identity = await _seed_user_with_identity(
-        db_session, email="me_additive@example.com"
-    )
+    user, identity = await _seed_user_with_identity(db_session, email="me_additive@example.com")
     await db_session.commit()
 
     principal = Principal(

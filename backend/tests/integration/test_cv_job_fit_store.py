@@ -28,11 +28,7 @@ from tests.integration.test_cv_job_fit import _build_strong_cv, _create_job
 
 async def _fit_rows(db, *, user_id: uuid.UUID) -> list[CvJobFitScore]:
     return list(
-        (
-            await db.execute(
-                select(CvJobFitScore).where(CvJobFitScore.user_id == user_id)
-            )
-        )
+        (await db.execute(select(CvJobFitScore).where(CvJobFitScore.user_id == user_id)))
         .scalars()
         .all()
     )
@@ -72,9 +68,7 @@ def _enable_ai(monkeypatch, fake: _FakeSemantic) -> None:
     class _Cfg:
         job_fit_ai_explanation_enabled = True
 
-    monkeypatch.setattr(
-        job_fit_service.runtime_config, "current", lambda: _Cfg()
-    )
+    monkeypatch.setattr(job_fit_service.runtime_config, "current", lambda: _Cfg())
     monkeypatch.setattr(semantic_scorer, "analyze", fake.analyze)
     # These tests exercise the store / explanation cache, not cross-lingual
     # translation-normalization; keep that tier off so scores stay lexical-only
@@ -94,9 +88,7 @@ async def test_deterministic_score_identical_and_row_persisted(db_session) -> No
     cv_id = await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
 
-    first = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    first = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     # Row written after the first call.
     rows = await _fit_rows(db_session, user_id=user.id)
     assert len(rows) == 1
@@ -106,12 +98,8 @@ async def test_deterministic_score_identical_and_row_persisted(db_session) -> No
     assert stored.scorer_version == job_fit.SCORER_VERSION
     assert stored.score == first["results"][0]["score"]
 
-    second = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
-    assert [r["score"] for r in first["results"]] == [
-        r["score"] for r in second["results"]
-    ]
+    second = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
+    assert [r["score"] for r in first["results"]] == [r["score"] for r in second["results"]]
     assert first["results"][0]["bands"] == second["results"][0]["bands"]
     assert first["recommended_cv_id"] == second["recommended_cv_id"]
     # Still exactly one row per (cv, job) — the second call updated, not inserted.
@@ -123,9 +111,7 @@ async def test_deterministic_score_identical_and_row_persisted(db_session) -> No
 # --------------------------------------------------------------------------- #
 
 
-async def test_explanation_reused_when_versions_unchanged(
-    db_session, monkeypatch
-) -> None:
+async def test_explanation_reused_when_versions_unchanged(db_session, monkeypatch) -> None:
     user, student = await make_student(db_session)
     cv_id = await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
@@ -146,9 +132,7 @@ async def test_explanation_reused_when_versions_unchanged(
         db_session, principal=student, job_id=job_id, with_explanation=True
     )
     assert second["ai_explanation_available"] is True
-    rec2 = next(
-        r for r in second["results"] if r["cv_id"] == second["recommended_cv_id"]
-    )
+    rec2 = next(r for r in second["results"] if r["cv_id"] == second["recommended_cv_id"])
     assert rec2["explanation"] == "This CV is a strong match for the role."
     assert fake.calls == 1  # NOT re-invoked
 
@@ -164,9 +148,7 @@ async def test_explanation_reused_when_versions_unchanged(
 # --------------------------------------------------------------------------- #
 
 
-async def test_job_version_bump_regenerates_explanation(
-    db_session, monkeypatch
-) -> None:
+async def test_job_version_bump_regenerates_explanation(db_session, monkeypatch) -> None:
     _user, student = await make_student(db_session)
     await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
@@ -180,9 +162,7 @@ async def test_job_version_bump_regenerates_explanation(
     assert fake.calls == 1
 
     # Employer edits the JD -> job.version bumps -> the stored row is stale.
-    job = (
-        await db_session.execute(select(Job).where(Job.id == job_id))
-    ).scalar_one()
+    job = (await db_session.execute(select(Job).where(Job.id == job_id))).scalar_one()
     job.version = job.version + 1
     await db_session.commit()
 
@@ -198,9 +178,7 @@ async def test_job_version_bump_regenerates_explanation(
 # --------------------------------------------------------------------------- #
 
 
-async def test_cv_version_bump_regenerates_explanation(
-    db_session, monkeypatch
-) -> None:
+async def test_cv_version_bump_regenerates_explanation(db_session, monkeypatch) -> None:
     _user, student = await make_student(db_session)
     cv_id = await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
@@ -219,13 +197,9 @@ async def test_cv_version_bump_regenerates_explanation(
     # -> the explanation regenerates.
     from tests.integration.test_cv_job_fit import _seed
 
-    await _seed(
-        db_session, cv_id, "skills", [{"text": "Java, Spring Boot, Kotlin"}]
-    )
+    await _seed(db_session, cv_id, "skills", [{"text": "Java, Spring Boot, Kotlin"}])
     cv = (
-        await db_session.execute(
-            select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id))
-        )
+        await db_session.execute(select(CvProfile).where(CvProfile.id == uuid.UUID(cv_id)))
     ).scalar_one()
     cv.version = cv.version + 1
     await db_session.commit()
@@ -291,9 +265,7 @@ async def test_offline_provider_null_explanation_score_present(db_session) -> No
     await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert out["ai_explanation_available"] is False
     assert all(r["explanation"] is None for r in out["results"])
     assert out["results"][0]["score"] > 0
@@ -330,7 +302,5 @@ async def test_scorer_version_bump_recomputes(db_session, monkeypatch) -> None:
     # not tied to SCORER_VERSION (the number, not the "why", moved).
     assert fake.calls == 1
     assert second["ai_explanation_available"] is True
-    rec = next(
-        r for r in second["results"] if r["cv_id"] == second["recommended_cv_id"]
-    )
+    rec = next(r for r in second["results"] if r["cv_id"] == second["recommended_cv_id"])
     assert rec["explanation"] == first["results"][0]["explanation"]

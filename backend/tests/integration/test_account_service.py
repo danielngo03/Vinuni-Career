@@ -25,15 +25,11 @@ def _email() -> str:
 
 
 def _principal(user_id: uuid.UUID, persona: str = "student") -> Principal:
-    return Principal(
-        user_id=user_id, persona=persona, permissions=permissions_for(persona)
-    )
+    return Principal(user_id=user_id, persona=persona, permissions=permissions_for(persona))
 
 
 async def _login(db_session, email: str):
-    return await auth_service.login(
-        db_session, email=email, password="Sup3rSecret!", ctx=CTX
-    )
+    return await auth_service.login(db_session, email=email, password="Sup3rSecret!", ctx=CTX)
 
 
 async def test_preferences_returns_locked_mandatory_categories(db_session) -> None:
@@ -103,9 +99,7 @@ async def test_remote_revoke_session(db_session) -> None:
         db_session, principal=principal, session_id=claims.session_id, ctx=CTX
     )
     sess = (
-        await db_session.execute(
-            select(Session).where(Session.id == claims.session_id)
-        )
+        await db_session.execute(select(Session).where(Session.id == claims.session_id))
     ).scalar_one()
     assert sess.revoked_at is not None
     assert sess.revoked_reason == "remote_logout"
@@ -145,14 +139,10 @@ async def test_password_change_reauth_and_revokes_other_sessions(db_session) -> 
 
     # Current session stays; the other session is revoked.
     current = (
-        await db_session.execute(
-            select(Session).where(Session.id == first_claims.session_id)
-        )
+        await db_session.execute(select(Session).where(Session.id == first_claims.session_id))
     ).scalar_one()
     other = (
-        await db_session.execute(
-            select(Session).where(Session.id == second_claims.session_id)
-        )
+        await db_session.execute(select(Session).where(Session.id == second_claims.session_id))
     ).scalar_one()
     assert current.revoked_at is None
     assert other.revoked_at is not None

@@ -47,26 +47,18 @@ from tests.org_utils import add_member, make_org_with_admin
 async def _university_with_support(db, *, action: str = "act"):
     """A university-org member granted `support:{action}` (not superadmin)."""
 
-    _admin_user, org, _admin_principal = await make_org_with_admin(
-        db, org_type="university"
-    )
+    _admin_user, org, _admin_principal = await make_org_with_admin(db, org_type="university")
     perms = {("support", action), ("support", "read")}
-    _user, _membership, principal = await add_member(
-        db, org=org, permissions=list(perms)
-    )
+    _user, _membership, principal = await add_member(db, org=org, permissions=list(perms))
     return org, principal
 
 
 async def _partner_with_support(db, *, action: str = "act"):
     """A PARTNER-org member granted `support:{action}` (must still be denied)."""
 
-    _admin_user, org, _admin_principal = await make_org_with_admin(
-        db, org_type="partner"
-    )
+    _admin_user, org, _admin_principal = await make_org_with_admin(db, org_type="partner")
     perms = {("support", action), ("support", "read")}
-    _user, _membership, principal = await add_member(
-        db, org=org, permissions=list(perms)
-    )
+    _user, _membership, principal = await add_member(db, org=org, permissions=list(perms))
     return org, principal
 
 
@@ -81,9 +73,7 @@ async def test_support_case_list_requires_auth(db_session) -> None:
 
 
 async def test_support_case_list_denied_without_permission(db_session) -> None:
-    _admin_user, _org, principal = await make_org_with_admin(
-        db_session, org_type="university"
-    )
+    _admin_user, _org, principal = await make_org_with_admin(db_session, org_type="university")
     # `_admin_user` here holds `*:*` from make_org_with_admin's first-admin
     # convenience — use a plain member with NO grants instead.
     _u, _org2, uni = await make_org_with_admin(db_session, org_type="university")
@@ -193,13 +183,17 @@ async def test_duplicate_report_is_idempotent(db_session) -> None:
     assert second["status"] == "already_reported"
 
     count = (
-        await db_session.execute(
-            select(ContentReport).where(
-                ContentReport.reporter_id == reporter.id,
-                ContentReport.entity_id == entity_id,
+        (
+            await db_session.execute(
+                select(ContentReport).where(
+                    ContentReport.reporter_id == reporter.id,
+                    ContentReport.entity_id == entity_id,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(count) == 1
 
 
@@ -226,17 +220,32 @@ async def test_report_rate_limit_enforced(db_session, monkeypatch) -> None:
     principal = Principal(user_id=reporter.id, persona="student")
 
     await report_service.submit(
-        db_session, principal=principal, entity_type="job", entity_id=uuid.uuid4(),
-        reason_code="spam", note=None, ctx=CTX,
+        db_session,
+        principal=principal,
+        entity_type="job",
+        entity_id=uuid.uuid4(),
+        reason_code="spam",
+        note=None,
+        ctx=CTX,
     )
     await report_service.submit(
-        db_session, principal=principal, entity_type="job", entity_id=uuid.uuid4(),
-        reason_code="spam", note=None, ctx=CTX,
+        db_session,
+        principal=principal,
+        entity_type="job",
+        entity_id=uuid.uuid4(),
+        reason_code="spam",
+        note=None,
+        ctx=CTX,
     )
     with pytest.raises(RateLimitedError):
         await report_service.submit(
-            db_session, principal=principal, entity_type="job", entity_id=uuid.uuid4(),
-            reason_code="spam", note=None, ctx=CTX,
+            db_session,
+            principal=principal,
+            entity_type="job",
+            entity_id=uuid.uuid4(),
+            reason_code="spam",
+            note=None,
+            ctx=CTX,
         )
 
 
@@ -255,8 +264,13 @@ async def test_escalate_report_creates_review_item_with_low_severity(db_session)
     reporter_principal = Principal(user_id=reporter.id, persona="student")
     entity_id = uuid.uuid4()
     submitted = await report_service.submit(
-        db_session, principal=reporter_principal, entity_type="company",
-        entity_id=entity_id, reason_code="fraud", note="looks fake", ctx=CTX,
+        db_session,
+        principal=reporter_principal,
+        entity_type="company",
+        entity_id=entity_id,
+        reason_code="fraud",
+        note="looks fake",
+        ctx=CTX,
     )
     report_id = uuid.UUID(submitted["report"]["id"])
 
@@ -285,8 +299,12 @@ async def test_escalate_report_creates_review_item_with_low_severity(db_session)
 async def test_requeue_rejects_non_dead_row(db_session) -> None:
     _org, principal = await _university_with_support(db_session, action="act")
     row = NotificationOutbox(
-        recipient_id=None, template_key="x", channel="email", locale="vi",
-        variables={}, status="pending",
+        recipient_id=None,
+        template_key="x",
+        channel="email",
+        locale="vi",
+        variables={},
+        status="pending",
     )
     db_session.add(row)
     await db_session.commit()
@@ -301,8 +319,13 @@ async def test_requeue_rejects_non_dead_row(db_session) -> None:
 async def test_requeue_succeeds_on_dead_row_and_audits(db_session) -> None:
     _org, principal = await _university_with_support(db_session, action="act")
     row = NotificationOutbox(
-        recipient_id=None, template_key="x", channel="email", locale="vi",
-        variables={}, status="dead", attempts=5,
+        recipient_id=None,
+        template_key="x",
+        channel="email",
+        locale="vi",
+        variables={},
+        status="dead",
+        attempts=5,
     )
     db_session.add(row)
     await db_session.commit()
@@ -317,10 +340,14 @@ async def test_requeue_succeeds_on_dead_row_and_audits(db_session) -> None:
     assert row.attempts == 0
 
     audit = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "support.outbox_requeued")
+        (
+            await db_session.execute(
+                select(AuditLog).where(AuditLog.action == "support.outbox_requeued")
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert audit is not None
     assert audit.after_snapshot["outbox_id"] == str(row.id)
 
@@ -329,8 +356,12 @@ async def test_outbox_health_counts(db_session) -> None:
     _org, principal = await _university_with_support(db_session, action="read")
     db_session.add(
         NotificationOutbox(
-            recipient_id=None, template_key="x", channel="email", locale="vi",
-            variables={}, status="dead",
+            recipient_id=None,
+            template_key="x",
+            channel="email",
+            locale="vi",
+            variables={},
+            status="dead",
         )
     )
     await db_session.commit()
@@ -359,10 +390,14 @@ async def test_reveal_never_logs_value_in_audit(db_session) -> None:
     assert result["email"] == target.email
 
     audit = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "support.pii_revealed")
+        (
+            await db_session.execute(
+                select(AuditLog).where(AuditLog.action == "support.pii_revealed")
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert audit is not None
     dumped = str(audit.after_snapshot)
     assert target.email not in dumped
@@ -384,24 +419,35 @@ async def test_override_reverses_user_suspension_with_before_after(db_session) -
     await db_session.commit()
 
     item = HumanReviewItem(
-        source="user_report", resource_type="user", resource_id=suspended_user.id,
-        severity="high", status="RESOLVED", findings_json={},
+        source="user_report",
+        resource_type="user",
+        resource_id=suspended_user.id,
+        severity="high",
+        status="RESOLVED",
+        findings_json={},
     )
     db_session.add(item)
     await db_session.commit()
     await db_session.refresh(item)
 
     result = await triage_service.override_action(
-        db_session, principal=override_principal, review_item_id=item.id,
-        note="Appeal upheld — reinstating account", ctx=CTX,
+        db_session,
+        principal=override_principal,
+        review_item_id=item.id,
+        note="Appeal upheld — reinstating account",
+        ctx=CTX,
     )
     assert result["id"] == str(item.id)
 
     audit = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "abuse.action_overridden")
+        (
+            await db_session.execute(
+                select(AuditLog).where(AuditLog.action == "abuse.action_overridden")
+            )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert audit is not None
     assert audit.before_snapshot == {"is_active": False}
     assert audit.after_snapshot == {"is_active": True}
@@ -452,8 +498,11 @@ async def test_consent_grant_revoke_roundtrip(db_session) -> None:
     assert initial[CONSENT_INTERVIEW_RECORDING]["granted"] is False
 
     granted = await consent_service.set_mine(
-        db_session, principal=principal, consent_type=CONSENT_INTERVIEW_RECORDING,
-        granted=True, ctx=CTX,
+        db_session,
+        principal=principal,
+        consent_type=CONSENT_INTERVIEW_RECORDING,
+        granted=True,
+        ctx=CTX,
     )
     assert granted["granted"] is True
 
@@ -473,12 +522,20 @@ async def test_privacy_request_duplicate_open_is_idempotent(db_session) -> None:
     principal = Principal(user_id=user.id, persona="student")
 
     first = await privacy_request_service.submit(
-        db_session, principal=principal, request_type="export", note=None, ctx=CTX,
+        db_session,
+        principal=principal,
+        request_type="export",
+        note=None,
+        ctx=CTX,
     )
     assert first["status"] == "submitted"
 
     second = await privacy_request_service.submit(
-        db_session, principal=principal, request_type="export", note=None, ctx=CTX,
+        db_session,
+        principal=principal,
+        request_type="export",
+        note=None,
+        ctx=CTX,
     )
     assert second["status"] == "request_already_pending"
 
@@ -487,7 +544,11 @@ async def test_privacy_request_fulfill_writes_audit(db_session) -> None:
     user = await register_verified(db_session, email="privacy_user2@vinuni.edu.vn")
     principal = Principal(user_id=user.id, persona="student")
     submitted = await privacy_request_service.submit(
-        db_session, principal=principal, request_type="deletion", note=None, ctx=CTX,
+        db_session,
+        principal=principal,
+        request_type="deletion",
+        note=None,
+        ctx=CTX,
     )
     request_id = uuid.UUID(submitted["request"]["id"])
 
@@ -497,18 +558,24 @@ async def test_privacy_request_fulfill_writes_audit(db_session) -> None:
     )
 
     fulfilled = await privacy_request_service.fulfill(
-        db_session, principal=staff_principal, request_id=request_id,
-        status="fulfilled", note="Done manually", ctx=CTX,
+        db_session,
+        principal=staff_principal,
+        request_id=request_id,
+        status="fulfilled",
+        note="Done manually",
+        ctx=CTX,
     )
     assert fulfilled["status"] == "fulfilled"
 
     audit = (
-        await db_session.execute(
-            select(AuditLog).where(
-                AuditLog.action == "compliance.privacy_request_fulfilled"
+        (
+            await db_session.execute(
+                select(AuditLog).where(AuditLog.action == "compliance.privacy_request_fulfilled")
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert audit is not None
     assert audit.before_snapshot == {"status": "pending"}
     assert audit.after_snapshot == {"status": "fulfilled"}

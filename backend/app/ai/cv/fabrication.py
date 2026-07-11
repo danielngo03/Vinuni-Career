@@ -18,11 +18,31 @@ from app.ai.cv.grounding import normalize
 # High-risk fabrication-target keywords (en + vi). Presence in ``after`` but not
 # in evidence => unsupported claim.
 _RISK_KEYWORDS = [
-    "gpa", "award", "awards", "prize", "scholarship", "certified", "certificate",
-    "certification", "toeic", "toefl", "ielts", "first place", "gold medal",
-    "patent", "published", "honors", "dean's list",
-    "giải nhất", "giải nhì", "huy chương", "học bổng", "chứng chỉ", "bằng khen",
-    "thủ khoa", "xuất sắc nhất",
+    "gpa",
+    "award",
+    "awards",
+    "prize",
+    "scholarship",
+    "certified",
+    "certificate",
+    "certification",
+    "toeic",
+    "toefl",
+    "ielts",
+    "first place",
+    "gold medal",
+    "patent",
+    "published",
+    "honors",
+    "dean's list",
+    "giải nhất",
+    "giải nhì",
+    "huy chương",
+    "học bổng",
+    "chứng chỉ",
+    "bằng khen",
+    "thủ khoa",
+    "xuất sắc nhất",
 ]
 
 # A number, optional decimal, optional percent (e.g. "4.0", "30%", "1000").

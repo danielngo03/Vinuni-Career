@@ -41,28 +41,28 @@ ADMIN_ONLY = "admin_only"
 # ---------------------------------------------------------------------------
 
 INTENT_BENIGN = "benign"
-INTENT_OFF_TOPIC = "off_topic"           # clearly outside VinUni career domain
-INTENT_BOUNDARY_PROBE = "boundary_probe" # testing limits / jailbreak attempt
-INTENT_HARMFUL = "harmful"               # explicit harmful content request
+INTENT_OFF_TOPIC = "off_topic"  # clearly outside VinUni career domain
+INTENT_BOUNDARY_PROBE = "boundary_probe"  # testing limits / jailbreak attempt
+INTENT_HARMFUL = "harmful"  # explicit harmful content request
 INTENT_EXTERNAL_SOURCE = "external_source"  # asking the assistant to use non-platform sources
-INTENT_PERSONAL_DATA = "personal_data"   # PII was present (already redacted by input_guard)
+INTENT_PERSONAL_DATA = "personal_data"  # PII was present (already redacted by input_guard)
 
 # Policy actions
 ACTION_ALLOW = "allow"
 ACTION_ALLOW_WITH_NOTE = "allow_with_note"  # proceed but add a system note to logs
-ACTION_REWRITE = "rewrite"                   # sanitised text replaces original
-ACTION_REFUSE = "refuse"                     # do not call LLM; return safe refusal
+ACTION_REWRITE = "rewrite"  # sanitised text replaces original
+ACTION_REFUSE = "refuse"  # do not call LLM; return safe refusal
 
 
 @dataclass
 class PolicyDecision:
     """Result of the policy orchestrator for a single user message."""
 
-    action: str                             # one of the ACTION_* constants
-    clean_text: str | None                  # sanitised text to pass to LLM (None if refuse)
-    intent: str = INTENT_BENIGN             # detected intent category
+    action: str  # one of the ACTION_* constants
+    clean_text: str | None  # sanitised text to pass to LLM (None if refuse)
+    intent: str = INTENT_BENIGN  # detected intent category
     flags: list[str] = field(default_factory=list)
-    refusal_message: str | None = None      # user-safe refusal (if action == refuse)
+    refusal_message: str | None = None  # user-safe refusal (if action == refuse)
 
 
 # ---------------------------------------------------------------------------

@@ -108,13 +108,17 @@ async def list_access_events(
     """
 
     rows = (
-        await session.execute(
-            select(PartnerCandidateAccessEvent)
-            .where(PartnerCandidateAccessEvent.org_id == org_id)
-            .order_by(PartnerCandidateAccessEvent.occurred_at.desc())
-            .limit(max(limit, 1))
+        (
+            await session.execute(
+                select(PartnerCandidateAccessEvent)
+                .where(PartnerCandidateAccessEvent.org_id == org_id)
+                .order_by(PartnerCandidateAccessEvent.occurred_at.desc())
+                .limit(max(limit, 1))
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     if not rows:
         return []
 
@@ -177,21 +181,25 @@ async def detect_access_alerts(
     for actor_id, count in by_actor_download.items():
         if count >= _CV_DOWNLOAD_ALERT_THRESHOLD:
             user = await user_service.get_by_id(session, actor_id)
-            alerts.append({
-                "code": "cv_download_spike",
-                "label": labels["cv_download_spike"],
-                "actor_name": user.full_name if user else None,
-                "count": count,
-                "window_hours": 24,
-            })
+            alerts.append(
+                {
+                    "code": "cv_download_spike",
+                    "label": labels["cv_download_spike"],
+                    "actor_name": user.full_name if user else None,
+                    "count": count,
+                    "window_hours": 24,
+                }
+            )
     for actor_id, count in by_actor_reveal.items():
         if count >= _REVEAL_ALERT_THRESHOLD:
             user = await user_service.get_by_id(session, actor_id)
-            alerts.append({
-                "code": "reveal_spike",
-                "label": labels["reveal_spike"],
-                "actor_name": user.full_name if user else None,
-                "count": count,
-                "window_hours": 24,
-            })
+            alerts.append(
+                {
+                    "code": "reveal_spike",
+                    "label": labels["reveal_spike"],
+                    "actor_name": user.full_name if user else None,
+                    "count": count,
+                    "window_hours": 24,
+                }
+            )
     return alerts

@@ -71,10 +71,7 @@ class RollbackLimitReachedError(ConflictError):
     deferred to a later slice.
     """
 
-    message = (
-        "Hồ sơ đã đạt số lần chuyển về tối đa. Cần phê duyệt của quản trị viên "
-        "để tiếp tục."
-    )
+    message = "Hồ sơ đã đạt số lần chuyển về tối đa. Cần phê duyệt của quản trị viên để tiếp tục."
 
     def __init__(self) -> None:
         super().__init__(
@@ -128,25 +125,6 @@ class ScoreBelowThresholdError(ConflictError):
         )
 
 
-class RevealRequiredError(ConflictError):
-    """Scheduling an interview on an anonymous app needs an accepted reveal first.
-
-    ADR-0006 §3: the reveal handshake is the ONLY identity path and is never
-    silently bypassed. Scheduling an interview on an anonymous application whose
-    reveal has not been accepted (``reveal_approved_at is None``) is blocked with
-    this distinct ``409`` so the board renders "request and obtain the candidate's
-    consent before scheduling" and deep-links the reveal flow. Partner-internal.
-    """
-
-    message = (
-        "Cần yêu cầu và được ứng viên đồng ý tiết lộ danh tính trước khi đặt lịch "
-        "phỏng vấn."
-    )
-
-    def __init__(self) -> None:
-        super().__init__(self.message, details={"reason": "reveal_required"})
-
-
 class InterviewExistsError(ConflictError):
     """An OPEN (scheduled) interview already exists for this (application, stage).
 
@@ -166,15 +144,6 @@ class InterviewNotActionableError(ConflictError):
     message = "Không thể thực hiện thao tác này với buổi phỏng vấn ở trạng thái hiện tại."
 
     def __init__(self, *, reason: str = "interview_not_actionable") -> None:
-        super().__init__(self.message, details={"reason": reason})
-
-
-class RevealNotAvailableError(ConflictError):
-    """A reveal request cannot be created/answered in the current state."""
-
-    message = "Không thể thực hiện yêu cầu xem thông tin ở trạng thái hiện tại."
-
-    def __init__(self, *, reason: str = "reveal_unavailable") -> None:
         super().__init__(self.message, details={"reason": reason})
 
 

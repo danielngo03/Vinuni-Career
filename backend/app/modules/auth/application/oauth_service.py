@@ -32,6 +32,7 @@ from app.modules.auth.application.auth_service import (
     LoginResult,
     _audit_ctx,
     _finalize_login,
+    _greeting_name,
 )
 from app.modules.auth.application.context import RequestContext
 from app.modules.auth.domain.models import OidcAccount
@@ -106,16 +107,14 @@ async def _find_link(
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
-async def _notify_oauth_linked(
-    session: AsyncSession, *, user, provider: str
-) -> None:
+async def _notify_oauth_linked(session: AsyncSession, *, user, provider: str) -> None:
     await enqueue_notification(
         session,
         recipient_id=user.id,
         template_key="account.oauth_linked",
         channel="email",
         locale=user.preferred_language,
-        variables={"email": user.email, "name": user.full_name or "", "provider": provider},
+        variables={"email": user.email, "name": _greeting_name(user), "provider": provider},
         dedupe_key=f"oauth_linked:{user.id}:{provider}",
     )
 
@@ -130,9 +129,7 @@ async def handle_callback(
 ) -> OAuthCallbackResult:
     ensure_provider_configured(provider)
     prov = get_oauth_provider(provider)
-    user_info: OAuthUserInfo = await prov.exchange_code(
-        code=code, redirect_uri=redirect_uri
-    )
+    user_info: OAuthUserInfo = await prov.exchange_code(code=code, redirect_uri=redirect_uri)
 
     existing_link = await _find_link(
         session, provider=provider, provider_user_id=user_info.provider_user_id
@@ -224,7 +221,7 @@ async def handle_callback(
         template_key="account.oauth_conflict",
         channel="email",
         locale=user.preferred_language,
-        variables={"email": user.email, "name": user.full_name or "", "provider": provider},
+        variables={"email": user.email, "name": _greeting_name(user), "provider": provider},
         dedupe_key=f"oauth_conflict:{user.id}:{provider}:{now.isoformat()}",
     )
     await session.commit()

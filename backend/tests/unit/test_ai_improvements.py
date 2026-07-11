@@ -40,6 +40,7 @@ def test_output_guard_still_scrubs_model_paths():
 # Gateway: real streaming via base fallback
 # ---------------------------------------------------------------------------
 
+
 class TestStreamingBase:
     @pytest.mark.asyncio
     async def test_offline_provider_stream_yields_words(self):
@@ -75,10 +76,12 @@ class TestStreamingBase:
 # Circuit breaker
 # ---------------------------------------------------------------------------
 
+
 class TestCircuitBreaker:
     def setup_method(self):
         # Reset circuit states between tests
         from app.ai.gateway import factory
+
         factory._circuit_states.clear()
 
     def test_circuit_open_after_threshold(self):
@@ -121,25 +124,30 @@ class TestCircuitBreaker:
 # Embedding LRU cache
 # ---------------------------------------------------------------------------
 
+
 class TestEmbedCache:
     def setup_method(self):
         from app.ai.retrieval.embeddings import clear_embed_cache
+
         clear_embed_cache()
 
     def test_cache_key_deterministic(self):
         from app.ai.retrieval.embeddings import _cache_key
+
         k1 = _cache_key("hello world", "embedding_cheap")
         k2 = _cache_key("hello world", "embedding_cheap")
         assert k1 == k2
 
     def test_cache_key_differs_by_alias(self):
         from app.ai.retrieval.embeddings import _cache_key
+
         k1 = _cache_key("hello", "embedding_cheap")
         k2 = _cache_key("hello", "embedding_fast")
         assert k1 != k2
 
     def test_cache_put_get(self):
         from app.ai.retrieval.embeddings import _cache_get, _cache_put
+
         key = "abc123"
         vector = [0.1, 0.2, 0.3]
         assert _cache_get(key) is None
@@ -152,6 +160,7 @@ class TestEmbedCache:
             _cache_get,
             _cache_put,
         )
+
         # Fill the cache past its limit
         for i in range(_CACHE_MAX + 5):
             _cache_put(f"key_{i}", [float(i)])
@@ -180,6 +189,7 @@ class TestEmbedCache:
 # ---------------------------------------------------------------------------
 # Chunking pipeline
 # ---------------------------------------------------------------------------
+
 
 class TestChunkingPipeline:
     @pytest.mark.asyncio
@@ -248,12 +258,14 @@ class TestChunkingPipeline:
 # Conversation memory compression trigger
 # ---------------------------------------------------------------------------
 
+
 class TestMemoryCompression:
     def test_compress_threshold_constant(self):
         from app.modules.ai_assistant.application.session_history import (
             _COMPRESS_THRESHOLD,
             _SUMMARY_KEEP_RECENT,
         )
+
         assert _COMPRESS_THRESHOLD > 0
         assert _SUMMARY_KEEP_RECENT > 0
         assert _COMPRESS_THRESHOLD > _SUMMARY_KEEP_RECENT
@@ -281,6 +293,7 @@ class TestMemoryCompression:
     @pytest.mark.asyncio
     async def test_summarize_empty_returns_empty(self):
         from app.modules.ai_assistant.application.session_history import _summarize_history
+
         result = await _summarize_history([])
         assert result == ""
 
@@ -289,9 +302,11 @@ class TestMemoryCompression:
 # Provider routing fix
 # ---------------------------------------------------------------------------
 
+
 class TestProviderRouting:
     def test_real_provider_active_returns_bool(self):
         from app.ai.gateway.factory import real_provider_active
+
         result = real_provider_active()
         assert isinstance(result, bool)
 
@@ -325,6 +340,7 @@ class TestProviderRouting:
 # ---------------------------------------------------------------------------
 # Retrieval reranking
 # ---------------------------------------------------------------------------
+
 
 class TestRerank:
     def test_parse_rank_array_accepts_fenced_json(self):

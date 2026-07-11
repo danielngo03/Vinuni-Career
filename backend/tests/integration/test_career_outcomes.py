@@ -59,8 +59,12 @@ async def _accept_offer(db_session) -> tuple[uuid.UUID, uuid.UUID]:
     sent = await _to_sent(db_session, partner=partner, app_id=app_id)
     oid = uuid.UUID(sent["id"])
     out = await offer_service.respond_offer(
-        db_session, principal=student, offer_id=oid, decision="accepted",
-        idempotency_key="co-accept", ctx=CTX,
+        db_session,
+        principal=student,
+        offer_id=oid,
+        decision="accepted",
+        idempotency_key="co-accept",
+        ctx=CTX,
     )
     assert out["status"] == offer_domain.STATUS_ACCEPTED
     return app_id, oid
@@ -82,9 +86,7 @@ async def test_accept_materializes_one_outcome_trust_level_4(db_session) -> None
     assert res.get("deduped", 0) == 0
 
     async with get_sessionmaker()() as fresh:
-        rows = (
-            await fresh.execute(select(CareerOutcomeRecord))
-        ).scalars().all()
+        rows = (await fresh.execute(select(CareerOutcomeRecord))).scalars().all()
         assert len(rows) == 1
         rec = rows[0]
 
@@ -99,9 +101,7 @@ async def test_accept_materializes_one_outcome_trust_level_4(db_session) -> None
         assert rec.position_title == "Backend Engineer"
         assert rec.recorded_at is not None
 
-        offer = (
-            await fresh.execute(select(Offer).where(Offer.id == oid))
-        ).scalar_one()
+        offer = (await fresh.execute(select(Offer).where(Offer.id == oid))).scalar_one()
         app_row = (
             await fresh.execute(select(Application).where(Application.id == app_id))
         ).scalar_one()
@@ -180,9 +180,7 @@ async def test_non_offer_accepted_event_is_ignored(db_session) -> None:
         # The non-target event was left untouched (not marked processed).
         ev = (
             await fresh.execute(
-                select(OutboxEvent).where(
-                    OutboxEvent.event_type == "application.reviewed"
-                )
+                select(OutboxEvent).where(OutboxEvent.event_type == "application.reviewed")
             )
         ).scalar_one()
         assert ev.published_at is None

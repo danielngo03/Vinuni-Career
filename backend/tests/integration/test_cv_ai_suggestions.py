@@ -32,9 +32,20 @@ from tests.documents_utils import make_student, new_key
 
 # Terms that must never appear anywhere in an AI response (provider/model/token).
 _FORBIDDEN = [
-    "openrouter", "openai", "anthropic", "claude", "gpt-4", "gemini", "deepseek",
-    "chat_cheap", "reasoning_cheap", "model_alias", "prompt_tokens",
-    "completion_tokens", "storage_path", "storage_key",
+    "openrouter",
+    "openai",
+    "anthropic",
+    "claude",
+    "gpt-4",
+    "gemini",
+    "deepseek",
+    "chat_cheap",
+    "reasoning_cheap",
+    "model_alias",
+    "prompt_tokens",
+    "completion_tokens",
+    "storage_path",
+    "storage_key",
 ]
 
 
@@ -54,7 +65,9 @@ async def _audit_count(db, action: str) -> int:
 
 async def _make_cv(db, student, *, title="My CV") -> dict:
     return await cv_service.create_cv(
-        db, principal=student, payload={"title": title, "creation_mode": "blank_template"},
+        db,
+        principal=student,
+        payload={"title": title, "creation_mode": "blank_template"},
         ctx=CTX,
     )
 
@@ -63,8 +76,10 @@ async def _seed_section_content(db, cv_id, section_type, items) -> uuid.UUID:
     """Put content into an existing section and return its id."""
 
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     target = next(s for s in sections if s.section_type == section_type)
     target.content_json = {"items": items}
     await db.commit()
@@ -82,13 +97,13 @@ async def test_rewrite_section_produces_diff_without_mutating_cv(db_session) -> 
     section_id = await _seed_section_content(
         db_session, cv["id"], "summary", [{"text": "built rest apis with fastapi"}]
     )
-    seeded = await cv_service.get_cv(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"])
-    )
+    seeded = await cv_service.get_cv(db_session, principal=student, cv_id=uuid.UUID(cv["id"]))
     version_before = seeded["version"]
 
     res = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "task_type": "rewrite_cv_section",
             "target_section_id": str(section_id),
@@ -124,12 +139,18 @@ async def test_deterministic_same_input_same_diff(db_session) -> None:
         "target_section_id": str(section_id),
     }
     r1 = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={**payload, "idempotency_key": new_key()}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={**payload, "idempotency_key": new_key()},
+        ctx=CTX,
     )
     r2 = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={**payload, "idempotency_key": new_key()}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={**payload, "idempotency_key": new_key()},
+        ctx=CTX,
     )
     assert r1["diff"]["after"] == r2["diff"]["after"]
 
@@ -143,7 +164,9 @@ async def test_fabrication_check_produces_leak_safe_diff(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     res = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={"task_type": "cv_fabrication_check", "idempotency_key": new_key()},
         ctx=CTX,
     )
@@ -158,7 +181,9 @@ async def test_removed_profile_task_is_rejected(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidTaskTypeError):
         await cv_ai_service.request_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
             payload={"task_type": "draft_cv_from_profile", "idempotency_key": new_key()},
             ctx=CTX,
         )
@@ -169,7 +194,9 @@ async def test_bullets_from_notes(db_session) -> None:
     cv = await _make_cv(db_session, student)
     section_id = await _seed_section_content(db_session, cv["id"], "experience", [])
     res = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "task_type": "generate_cv_bullets",
             "target_section_id": str(section_id),
@@ -189,10 +216,15 @@ async def test_optimize_and_ats_keywords(db_session) -> None:
     await _seed_section_content(db_session, cv["id"], "skills", [{"text": "python"}])
     job_id = str(uuid.uuid4())
     res = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "ats_keyword_suggestions", "job_id": job_id,
-                 "raw_notes": "python kubernetes terraform",
-                 "idempotency_key": new_key()},
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "ats_keyword_suggestions",
+            "job_id": job_id,
+            "raw_notes": "python kubernetes terraform",
+            "idempotency_key": new_key(),
+        },
         ctx=CTX,
     )
     assert "kubernetes" in res["diff"]["keywords"]
@@ -209,8 +241,11 @@ async def test_invalid_task_type_rejected(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(InvalidTaskTypeError):
         await cv_ai_service.request_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"task_type": "make_me_rich"}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"task_type": "make_me_rich"},
+            ctx=CTX,
         )
 
 
@@ -219,8 +254,11 @@ async def test_section_targeted_requires_section(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(AiSourceRequiredError):
         await cv_ai_service.request_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"task_type": "rewrite_cv_section"}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"task_type": "rewrite_cv_section"},
+            ctx=CTX,
         )
 
 
@@ -229,8 +267,11 @@ async def test_job_targeted_requires_job(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(AiSourceRequiredError):
         await cv_ai_service.request_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"task_type": "optimize_cv_for_job"}, ctx=CTX,
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={"task_type": "optimize_cv_for_job"},
+            ctx=CTX,
         )
 
 
@@ -244,15 +285,23 @@ async def test_accept_requires_fact_confirmation_when_flagged(db_session) -> Non
     cv = await _make_cv(db_session, student)
     section_id = await _seed_section_content(db_session, cv["id"], "experience", [])
     sug = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "generate_cv_bullets", "target_section_id": str(section_id),
-                 "raw_notes": "shipped a feature", "idempotency_key": new_key()},
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "generate_cv_bullets",
+            "target_section_id": str(section_id),
+            "raw_notes": "shipped a feature",
+            "idempotency_key": new_key(),
+        },
         ctx=CTX,
     )
     assert sug["diff"]["requires_fact_confirmation"] is True
     with pytest.raises(FactConfirmationRequiredError):
         await cv_ai_service.accept_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
             suggestion_id=uuid.UUID(sug["suggestion_id"]),
             payload={"fact_confirmation": False, "idempotency_key": new_key()},
             ctx=CTX,
@@ -269,13 +318,20 @@ async def test_accept_with_confirmation_creates_version_and_audit(db_session) ->
     versions_before = len(before["versions"])
 
     sug = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "rewrite_cv_section", "target_section_id": str(section_id),
-                 "idempotency_key": new_key()},
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "rewrite_cv_section",
+            "target_section_id": str(section_id),
+            "idempotency_key": new_key(),
+        },
         ctx=CTX,
     )
     accepted = await cv_ai_service.accept_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         suggestion_id=uuid.UUID(sug["suggestion_id"]),
         payload={"fact_confirmation": True, "idempotency_key": new_key()},
         ctx=CTX,
@@ -290,25 +346,34 @@ async def test_accept_with_confirmation_creates_version_and_audit(db_session) ->
 async def test_accept_is_idempotent(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
-    section_id = await _seed_section_content(
-        db_session, cv["id"], "summary", [{"text": "hello"}]
-    )
+    section_id = await _seed_section_content(db_session, cv["id"], "summary", [{"text": "hello"}])
     sug = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "rewrite_cv_section", "target_section_id": str(section_id),
-                 "idempotency_key": new_key()},
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "rewrite_cv_section",
+            "target_section_id": str(section_id),
+            "idempotency_key": new_key(),
+        },
         ctx=CTX,
     )
     key = new_key()
     a1 = await cv_ai_service.accept_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         suggestion_id=uuid.UUID(sug["suggestion_id"]),
-        payload={"fact_confirmation": True, "idempotency_key": key}, ctx=CTX,
+        payload={"fact_confirmation": True, "idempotency_key": key},
+        ctx=CTX,
     )
     a2 = await cv_ai_service.accept_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         suggestion_id=uuid.UUID(sug["suggestion_id"]),
-        payload={"fact_confirmation": True, "idempotency_key": key}, ctx=CTX,
+        payload={"fact_confirmation": True, "idempotency_key": key},
+        ctx=CTX,
     )
     assert a1["version"] == a2["version"]  # second accept is a no-op replay
 
@@ -316,25 +381,34 @@ async def test_accept_is_idempotent(db_session) -> None:
 async def test_double_accept_without_key_conflicts(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
-    section_id = await _seed_section_content(
-        db_session, cv["id"], "summary", [{"text": "hello"}]
-    )
+    section_id = await _seed_section_content(db_session, cv["id"], "summary", [{"text": "hello"}])
     sug = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "rewrite_cv_section", "target_section_id": str(section_id),
-                 "idempotency_key": new_key()},
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "rewrite_cv_section",
+            "target_section_id": str(section_id),
+            "idempotency_key": new_key(),
+        },
         ctx=CTX,
     )
     await cv_ai_service.accept_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         suggestion_id=uuid.UUID(sug["suggestion_id"]),
-        payload={"fact_confirmation": True}, ctx=CTX,
+        payload={"fact_confirmation": True},
+        ctx=CTX,
     )
     with pytest.raises(SuggestionNotPendingError):
         await cv_ai_service.accept_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
             suggestion_id=uuid.UUID(sug["suggestion_id"]),
-            payload={"fact_confirmation": True}, ctx=CTX,
+            payload={"fact_confirmation": True},
+            ctx=CTX,
         )
 
 
@@ -342,16 +416,25 @@ async def test_advisory_suggestion_cannot_be_accepted(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     sug = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "ats_keyword_suggestions", "job_id": str(uuid.uuid4()),
-                 "raw_notes": "python docker", "idempotency_key": new_key()},
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "ats_keyword_suggestions",
+            "job_id": str(uuid.uuid4()),
+            "raw_notes": "python docker",
+            "idempotency_key": new_key(),
+        },
         ctx=CTX,
     )
     with pytest.raises(SuggestionNotApplicableError):
         await cv_ai_service.accept_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
             suggestion_id=uuid.UUID(sug["suggestion_id"]),
-            payload={"fact_confirmation": True}, ctx=CTX,
+            payload={"fact_confirmation": True},
+            ctx=CTX,
         )
 
 
@@ -363,19 +446,29 @@ async def test_advisory_suggestion_cannot_be_accepted(db_session) -> None:
 async def test_suggest_is_idempotent(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
-    section_id = await _seed_section_content(
-        db_session, cv["id"], "summary", [{"text": "hello"}]
-    )
+    section_id = await _seed_section_content(db_session, cv["id"], "summary", [{"text": "hello"}])
     key = new_key()
     r1 = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "rewrite_cv_section", "target_section_id": str(section_id),
-                 "idempotency_key": key}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "rewrite_cv_section",
+            "target_section_id": str(section_id),
+            "idempotency_key": key,
+        },
+        ctx=CTX,
     )
     r2 = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "rewrite_cv_section", "target_section_id": str(section_id),
-                 "idempotency_key": key}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "rewrite_cv_section",
+            "target_section_id": str(section_id),
+            "idempotency_key": key,
+        },
+        ctx=CTX,
     )
     assert r1["suggestion_id"] == r2["suggestion_id"]
 
@@ -392,7 +485,9 @@ async def test_prompt_injection_does_not_leak_or_fabricate(db_session) -> None:
         db_session, cv["id"], "education", [{"text": "BSc Computer Science"}]
     )
     res = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={
             "task_type": "rewrite_cv_section",
             "target_section_id": str(section_id),
@@ -423,9 +518,7 @@ async def test_prompt_injection_does_not_leak_or_fabricate(db_session) -> None:
 async def test_provider_unavailable_returns_ai_unavailable(db_session, monkeypatch) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
-    section_id = await _seed_section_content(
-        db_session, cv["id"], "summary", [{"text": "hello"}]
-    )
+    section_id = await _seed_section_content(db_session, cv["id"], "summary", [{"text": "hello"}])
 
     class _BrokenProvider:
         async def complete(self, *a, **k):
@@ -435,10 +528,14 @@ async def test_provider_unavailable_returns_ai_unavailable(db_session, monkeypat
 
     with pytest.raises(AIUnavailableError):
         await cv_ai_service.request_suggestion(
-            db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-            payload={"task_type": "rewrite_cv_section",
-                     "target_section_id": str(section_id),
-                     "idempotency_key": new_key()},
+            db_session,
+            principal=student,
+            cv_id=uuid.UUID(cv["id"]),
+            payload={
+                "task_type": "rewrite_cv_section",
+                "target_section_id": str(section_id),
+                "idempotency_key": new_key(),
+            },
             ctx=CTX,
         )
 
@@ -454,7 +551,9 @@ async def test_cross_owner_suggest_404(db_session) -> None:
     cv = await _make_cv(db_session, student)
     with pytest.raises(ResourceNotFoundError):
         await cv_ai_service.request_suggestion(
-            db_session, principal=other, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=other,
+            cv_id=uuid.UUID(cv["id"]),
             payload={"task_type": "cv_fabrication_check", "idempotency_key": new_key()},
             ctx=CTX,
         )
@@ -464,19 +563,26 @@ async def test_cross_owner_accept_404(db_session) -> None:
     _u, student = await make_student(db_session)
     _u2, other = await make_student(db_session, prefix="other")
     cv = await _make_cv(db_session, student)
-    section_id = await _seed_section_content(
-        db_session, cv["id"], "summary", [{"text": "hello"}]
-    )
+    section_id = await _seed_section_content(db_session, cv["id"], "summary", [{"text": "hello"}])
     sug = await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
-        payload={"task_type": "rewrite_cv_section", "target_section_id": str(section_id),
-                 "idempotency_key": new_key()}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
+        payload={
+            "task_type": "rewrite_cv_section",
+            "target_section_id": str(section_id),
+            "idempotency_key": new_key(),
+        },
+        ctx=CTX,
     )
     with pytest.raises(ResourceNotFoundError):
         await cv_ai_service.accept_suggestion(
-            db_session, principal=other, cv_id=uuid.UUID(cv["id"]),
+            db_session,
+            principal=other,
+            cv_id=uuid.UUID(cv["id"]),
             suggestion_id=uuid.UUID(sug["suggestion_id"]),
-            payload={"fact_confirmation": True}, ctx=CTX,
+            payload={"fact_confirmation": True},
+            ctx=CTX,
         )
 
 
@@ -489,7 +595,9 @@ async def test_suggest_writes_audit(db_session) -> None:
     _u, student = await make_student(db_session)
     cv = await _make_cv(db_session, student)
     await cv_ai_service.request_suggestion(
-        db_session, principal=student, cv_id=uuid.UUID(cv["id"]),
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(cv["id"]),
         payload={"task_type": "cv_fabrication_check", "idempotency_key": new_key()},
         ctx=CTX,
     )

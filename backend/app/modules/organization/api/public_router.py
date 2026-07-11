@@ -27,7 +27,11 @@ async def list_companies(
     limit: int | None = Query(default=None),
 ) -> dict:
     items, next_cursor, page_limit, total = await company_directory_service.list_companies(
-        session, q=q, industry=industry, cursor=cursor, limit=limit,
+        session,
+        q=q,
+        industry=industry,
+        cursor=cursor,
+        limit=limit,
     )
     return {
         "data": items,

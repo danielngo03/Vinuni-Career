@@ -157,8 +157,7 @@ _PHONE_RE = re.compile(
 )
 
 _VI_DIACRITICS_RE = re.compile(
-    "[ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩị"
-    "óòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]"
+    "[ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]"
 )
 
 # CV-title words that appear as the very first line on many templates instead of
@@ -182,26 +181,37 @@ _CV_TITLE_WORDS: frozenset[str] = frozenset(
 # diacritics so "kinh nghiệm" → "kinh nghiêm" / "kinh nghiem", etc.  These are
 # NOT added to _HEADER_MAP (which drives actual parsing) — only used to disqualify
 # lines from being accepted as a person's name.
-_OCR_SECTION_KEYWORDS: frozenset[str] = frozenset({
-    "kinh nghiem", "kinh nghiêm",           # work experience
-    "thong tin", "thong tin lien he",        # contact
-    "hoc van", "hoc vân",                    # education
-    "ky nang", "kỹ nang", "ky nang chuyen mon",  # skills
-    "muc tieu", "muc tieu nghe nghiep",     # objective
-    "hoat dong", "hoat dong ngoai khoa",    # activities
-    "chung chi", "chung nhan",              # certifications
-    "giai thuong", "thanh tich",            # awards
-    "ngoai ngu", "ngon ngu",               # languages
-    "so thich",                             # interests
-    "tham chieu", "nguoi tham chieu",       # references
-})
+_OCR_SECTION_KEYWORDS: frozenset[str] = frozenset(
+    {
+        "kinh nghiem",
+        "kinh nghiêm",  # work experience
+        "thong tin",
+        "thong tin lien he",  # contact
+        "hoc van",
+        "hoc vân",  # education
+        "ky nang",
+        "kỹ nang",
+        "ky nang chuyen mon",  # skills
+        "muc tieu",
+        "muc tieu nghe nghiep",  # objective
+        "hoat dong",
+        "hoat dong ngoai khoa",  # activities
+        "chung chi",
+        "chung nhan",  # certifications
+        "giai thuong",
+        "thanh tich",  # awards
+        "ngoai ngu",
+        "ngon ngu",  # languages
+        "so thich",  # interests
+        "tham chieu",
+        "nguoi tham chieu",  # references
+    }
+)
 
 # Sentinel: a line that starts with one of these substrings is a section header
 # even when _header_type() returns None (e.g. partial two-column merge like
 # "Uông Kinh nghiệm làm việc"). Used to disqualify a line from being the name.
-_SECTION_KEYWORDS: tuple[str, ...] = tuple(
-    set(_HEADER_MAP.keys()) | _OCR_SECTION_KEYWORDS
-)
+_SECTION_KEYWORDS: tuple[str, ...] = tuple(set(_HEADER_MAP.keys()) | _OCR_SECTION_KEYWORDS)
 
 # Garbage patterns that disqualify a line from being a name candidate.
 _CID_RE = re.compile(r"\(cid:")  # PDF font-substitution artifacts
@@ -340,9 +350,7 @@ def _is_name_candidate(line: str) -> bool:
     # Heuristic: all words are uppercase ASCII-only (no diacritics) AND there are
     # multiple words (a single-word surname like "TA" or "LINH" is still valid).
     words = stripped.split()
-    all_ascii_upper = all(
-        w.isupper() and w.isascii() for w in words if w.isalpha()
-    )
+    all_ascii_upper = all(w.isupper() and w.isascii() for w in words if w.isalpha())
     has_vi_diacritics = bool(_VI_DIACRITICS_RE.search(stripped))
     if (
         all_ascii_upper
@@ -352,12 +360,34 @@ def _is_name_candidate(line: str) -> bool:
         # by checking whether the phrase appears verbatim in a job-title word list.
         # Simpler heuristic: if any word is a common English noun/verb, it's a title.
         and any(
-            w.lower() in {
-                "service", "services", "engineer", "manager", "director",
-                "officer", "specialist", "analyst", "developer", "designer",
-                "consultant", "coordinator", "executive", "intern", "assistant",
-                "account", "sales", "marketing", "operations", "business",
-                "customer", "support", "product", "senior", "junior", "lead",
+            w.lower()
+            in {
+                "service",
+                "services",
+                "engineer",
+                "manager",
+                "director",
+                "officer",
+                "specialist",
+                "analyst",
+                "developer",
+                "designer",
+                "consultant",
+                "coordinator",
+                "executive",
+                "intern",
+                "assistant",
+                "account",
+                "sales",
+                "marketing",
+                "operations",
+                "business",
+                "customer",
+                "support",
+                "product",
+                "senior",
+                "junior",
+                "lead",
             }
             for w in words
         )
@@ -427,9 +457,11 @@ def review_fields_for_extracted(extracted: dict) -> list[dict]:
 
 
 _LEADING_ARTIFACT_RE = re.compile(r"^[^\wÀ-ɏḀ-ỿ]+")
-_CAPITAL_TOKEN_RE = re.compile(r"^[A-ZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸ"
-                                r"ĂĐÊÔƠƯẮẶẲẴẤẦẨẪẬẾỀỂỄỆỐỒỔỖỘỚỜỞỠỢỨỪỬỮỰ"
-                                r"ÀÁẢÃẠĂẮẶẲẴẤẦẨẪẬÂÊẾỀỆỂỄÔỐỒỘỔỖƠỚỜỞỠỢƯỨỪỬỮỰĐÝ]")
+_CAPITAL_TOKEN_RE = re.compile(
+    r"^[A-ZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸ"
+    r"ĂĐÊÔƠƯẮẶẲẴẤẦẨẪẬẾỀỂỄỆỐỒỔỖỘỚỜỞỠỢỨỪỬỮỰ"
+    r"ÀÁẢÃẠĂẮẶẲẴẤẦẨẪẬÂÊẾỀỆỂỄÔỐỒỘỔỖƠỚỜỞỠỢƯỨỪỬỮỰĐÝ]"
+)
 
 
 def _rescue_name_from_body(text: str) -> str:
@@ -608,7 +640,7 @@ def _extract_timeframe(text: str) -> tuple[str, str]:
     if not m:
         return "", text
     timeframe = re.sub(r"\s+", " ", m.group(0)).strip()
-    rest = text[: m.start()] + " " + text[m.end():]
+    rest = text[: m.start()] + " " + text[m.end() :]
     rest = re.sub(r"[(\[]\s*[)\]]", " ", rest)  # drop now-empty () the date left behind
     rest = re.sub(r"\s+", " ", rest).strip(_FIELD_STRIP)
     return timeframe, rest

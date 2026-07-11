@@ -54,9 +54,7 @@ def _as_utc(value: datetime | None) -> datetime | None:
     return value if value.tzinfo is not None else value.replace(tzinfo=UTC)
 
 
-async def _load_active_cvs(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> list[CvProfile]:
+async def _load_active_cvs(session: AsyncSession, *, user_id: uuid.UUID) -> list[CvProfile]:
     """The caller's matchable CV library: committed (``ready``), not soft-deleted.
 
     Only CVs the student has committed to their library (status ``ready`` —
@@ -169,10 +167,7 @@ async def _maybe_semantic_analyze(
     Returns ``None`` on gate-off or any provider failure so the caller always
     has a complete deterministic result to fall back to.
     """
-    if (
-        not real_provider_active()
-        or not runtime_config.current().job_fit_ai_explanation_enabled
-    ):
+    if not real_provider_active() or not runtime_config.current().job_fit_ai_explanation_enabled:
         return None
     try:
         cv_text = _cv_sections_to_text(best_cv_input.sections)
@@ -217,9 +212,7 @@ def _fit_to_result_payload(fit: job_fit.CvFit, *, signal: str) -> dict:
     }
 
 
-def _present_from_row(
-    row: CvJobFitScore, *, title: str, explanation: str | None
-) -> dict:
+def _present_from_row(row: CvJobFitScore, *, title: str, explanation: str | None) -> dict:
     """Build the user-facing per-CV result from a stored fit row."""
     return {
         "cv_id": str(row.cv_id),
@@ -266,17 +259,12 @@ async def _resolve_explanation_for_row(
     matched_skills = list(recommended_row.matched_skills or [])
     gaps = list(recommended_row.gaps or [])
 
-    if fit_store.has_fresh_explanation(
-        recommended_row, prompt_version=prompt_version, lang=lang
-    ):
+    if fit_store.has_fresh_explanation(recommended_row, prompt_version=prompt_version, lang=lang):
         # Fresh cached explanation for THIS (cv, job) content version on the
         # row itself — REUSE, no LLM.
         return recommended_row.explanation, True
 
-    if not (
-        real_provider_active()
-        and runtime_config.current().job_fit_ai_explanation_enabled
-    ):
+    if not (real_provider_active() and runtime_config.current().job_fit_ai_explanation_enabled):
         # AI gate off -> deterministic-only, no explanation. Never raise.
         return None, False
 
@@ -369,9 +357,7 @@ async def _score_active_cvs(
     permission_checker.require(principal, _RESOURCE, "read")
     assert principal.user_id is not None
 
-    job = await job_fit_read.load_job_for_fit(
-        session, job_id=job_id, persona=principal.persona
-    )
+    job = await job_fit_read.load_job_for_fit(session, job_id=job_id, persona=principal.persona)
     if job is None:
         # Hidden / closed / unpublished / missing -> non-enumerable 404.
         raise ResourceNotFoundError()
@@ -431,9 +417,7 @@ async def _score_active_cvs(
         aug_job, aug_cv_inputs, aug_complete = await skill_translation.english_augment(
             job, cv_inputs
         )
-        outcome = job_fit.evaluate(
-            aug_job, aug_cv_inputs, stale_days=_stale_days()
-        )
+        outcome = job_fit.evaluate(aug_job, aug_cv_inputs, stale_days=_stale_days())
         signal = outcome.signal
         rows = {}
         for fit in outcome.results:
@@ -537,11 +521,7 @@ async def job_fit_for_job(
     # endpoint fills it in separately.
     explanation: str | None = None
     ai_available = False
-    if (
-        with_explanation
-        and recommended_row is not None
-        and recommended_cv_id is not None
-    ):
+    if with_explanation and recommended_row is not None and recommended_cv_id is not None:
         explanation, ai_available = await _resolve_explanation_for_row(
             session,
             job=core["job"],

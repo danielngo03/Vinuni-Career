@@ -66,6 +66,27 @@ _BUILTIN_MODEL_MAP: dict[str, str] = {
 _ALIAS_MODEL_MAP = _BUILTIN_MODEL_MAP
 
 
+def _serialize_message(m: AIMessage) -> dict:
+    """Serialize an ``AIMessage`` to the OpenAI-compatible wire format.
+
+    Plain ``system``/``user``/``assistant`` messages produce ``{role, content}``
+    exactly as before (no behavioural change for non-tool callers). Native
+    function-calling adds two shapes: an ``assistant`` turn that requested tools
+    carries ``tool_calls``; a ``tool`` result message carries ``tool_call_id``.
+    """
+    if m.role == "tool":
+        out: dict = {"role": "tool", "content": m.content}
+        if m.tool_call_id:
+            out["tool_call_id"] = m.tool_call_id
+        if m.name:
+            out["name"] = m.name
+        return out
+    if m.role == "assistant" and m.tool_calls:
+        # content may be empty when the model only emitted tool_calls.
+        return {"role": "assistant", "content": m.content or "", "tool_calls": m.tool_calls}
+    return {"role": m.role, "content": m.content}
+
+
 def resolve_model(alias: str) -> str:
     """Resolve an alias to a concrete model id (internal use only).
 
@@ -88,6 +109,7 @@ def known_aliases() -> frozenset[str]:
     # Include aliases from the published runtime snapshot (DB-backed custom aliases)
     try:
         from app.ai.gateway import runtime_config
+
         route_aliases = frozenset(runtime_config.current().provider_routes.keys())
     except Exception:
         route_aliases = frozenset()
@@ -124,18 +146,23 @@ class OpenAICompatibleProvider(AIProvider):
         alias: str,
         temperature: float = 0.2,
         max_tokens: int = 1024,
+        tools: list[dict] | None = None,
+        tool_choice: str | None = None,
     ) -> AICompletion:
         settings = get_settings()
         if not settings.ai_real_calls_enabled:
             raise AIUnavailableError()
 
         model = self._model_override or resolve_model(alias)
-        payload = {
+        payload: dict = {
             "model": model,
-            "messages": [{"role": m.role, "content": m.content} for m in messages],
+            "messages": [_serialize_message(m) for m in messages],
             "temperature": temperature,
             "max_tokens": max_tokens,
         }
+        if tools:
+            payload["tools"] = tools
+            payload["tool_choice"] = tool_choice or "auto"
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "HTTP-Referer": "https://career.vinuni.edu.vn",
@@ -155,7 +182,10 @@ class OpenAICompatibleProvider(AIProvider):
             raise AIUnavailableError() from exc
 
         choice = (data.get("choices") or [{}])[0]
-        text = (choice.get("message") or {}).get("content", "")
+        message = choice.get("message") or {}
+        text = message.get("content") or ""
+        raw_tool_calls = message.get("tool_calls") or []
+        tool_calls = [tc for tc in raw_tool_calls if isinstance(tc, dict)]
         usage = data.get("usage", {})
         return AICompletion(
             text=text,
@@ -165,6 +195,7 @@ class OpenAICompatibleProvider(AIProvider):
                 "completion_tokens": int(usage.get("completion_tokens", 0)),
             },
             finish_reason=choice.get("finish_reason", "stop"),
+            tool_calls=tool_calls,
         )
 
     async def stream(
@@ -257,9 +288,7 @@ class OpenAICompatibleProvider(AIProvider):
         except (httpx.HTTPError, ValueError) as exc:
             raise AIUnavailableError() from exc
 
-        raw_data: list[dict] = sorted(
-            data.get("data", []), key=lambda d: d.get("index", 0)
-        )
+        raw_data: list[dict] = sorted(data.get("data", []), key=lambda d: d.get("index", 0))
         usage = data.get("usage", {})
         return [
             AIEmbedding(

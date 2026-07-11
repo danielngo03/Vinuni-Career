@@ -3,10 +3,9 @@
 Covers: apply happy path (creates the immutable CV snapshot + links snapshot_id),
 apply to non-visible/closed job rejected, duplicate active apply rejected, submit
 idempotency replay, withdraw idempotency, student sees only own applications,
-partner sees only own-org job applications (cross-org 404), anonymous applicant
-redacted in the partner view until reveal accepted, partner watermarked CV
-download + non-partner 404 + anonymous-unrevealed download blocked, and audit on
-writes.
+partner sees only own-org job applications (cross-org 404), the partner view always
+carries the applicant's real identity, partner watermarked CV download +
+non-partner 404, and audit on writes.
 """
 
 from __future__ import annotations
@@ -19,13 +18,14 @@ from app.modules.documents.domain.models import ApplicationCvSnapshot
 from app.modules.notifications.domain.models import NotificationOutbox
 from app.modules.opportunities.application import job_service
 from app.modules.opportunities.domain.models import Job
-from app.modules.recruitment.application import access, apply_service, export_service, reveal_service
-from app.modules.recruitment.application.errors import (
-    DuplicateApplicationError,
-    RevealNotAvailableError,
+from app.modules.recruitment.application import (
+    access,
+    apply_service,
+    export_service,
 )
+from app.modules.recruitment.application.errors import DuplicateApplicationError
 from app.modules.recruitment.domain.models import Application
-from app.shared.exceptions import ResourceNotFoundError, ValidationFailedError
+from app.shared.exceptions import ResourceNotFoundError
 from app.shared.models import AuditLog
 from sqlalchemy import func, select
 
@@ -75,8 +75,10 @@ async def test_apply_creates_immutable_snapshot_and_links(db_session) -> None:
     sel = await make_builder_cv(db_session, student=student)
 
     out = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     assert out["status"] == "submitted"
     assert out["status_label"]  # localized, never raw-only
@@ -97,12 +99,16 @@ async def test_apply_creates_immutable_snapshot_and_links(db_session) -> None:
     assert await _audit_count(db_session, "cv.snapshot.created") == 1
 
     outbox = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.template_key == "application.received"
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.template_key == "application.received"
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(outbox) == 1
 
 
@@ -120,7 +126,8 @@ async def test_apply_to_draft_job_rejected(db_session) -> None:
     sel = await make_builder_cv(db_session, student=student)
     with pytest.raises(ResourceNotFoundError):
         await apply_service.apply_to_job(
-            db_session, principal=student,
+            db_session,
+            principal=student,
             payload=apply_payload(job_id=uuid.UUID(draft["id"]), cv_selection=sel),
             ctx=CTX,
         )
@@ -133,8 +140,10 @@ async def test_apply_to_closed_job_rejected(db_session) -> None:
     sel = await make_builder_cv(db_session, student=student)
     with pytest.raises(ResourceNotFoundError):
         await apply_service.apply_to_job(
-            db_session, principal=student,
-            payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+            db_session,
+            principal=student,
+            payload=apply_payload(job_id=job_id, cv_selection=sel),
+            ctx=CTX,
         )
 
 
@@ -148,14 +157,18 @@ async def test_duplicate_active_apply_rejected(db_session) -> None:
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     # A second apply with a DIFFERENT idempotency key is a genuine duplicate.
     with pytest.raises(DuplicateApplicationError):
         await apply_service.apply_to_job(
-            db_session, principal=student,
-            payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+            db_session,
+            principal=student,
+            payload=apply_payload(job_id=job_id, cv_selection=sel),
+            ctx=CTX,
         )
 
 
@@ -171,9 +184,7 @@ async def test_apply_idempotency_replay_returns_same(db_session) -> None:
         db_session, principal=student, payload=dict(payload), ctx=CTX
     )
     assert a1["id"] == a2["id"]
-    count = (
-        await db_session.execute(select(func.count()).select_from(Application))
-    ).scalar_one()
+    count = (await db_session.execute(select(func.count()).select_from(Application))).scalar_one()
     assert count == 1
 
 
@@ -187,8 +198,10 @@ async def test_withdraw_is_idempotent(db_session) -> None:
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
     w1 = await apply_service.withdraw_application(
@@ -202,9 +215,7 @@ async def test_withdraw_is_idempotent(db_session) -> None:
 
 
 async def _job_application_count(db, job_id: uuid.UUID) -> int:
-    return (
-        await db.execute(select(Job.application_count).where(Job.id == job_id))
-    ).scalar_one()
+    return (await db.execute(select(Job.application_count).where(Job.id == job_id))).scalar_one()
 
 
 async def test_apply_increments_then_withdraw_decrements_count(db_session) -> None:
@@ -213,8 +224,10 @@ async def test_apply_increments_then_withdraw_decrements_count(db_session) -> No
     sel = await make_builder_cv(db_session, student=student)
 
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     assert await _job_application_count(db_session, job_id) == 1
 
@@ -230,8 +243,10 @@ async def test_re_withdraw_does_not_double_decrement_count(db_session) -> None:
     sel = await make_builder_cv(db_session, student=student)
 
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
     await apply_service.withdraw_application(
@@ -253,12 +268,16 @@ async def test_two_applies_then_one_withdraw_leaves_count_one(db_session) -> Non
     sel_b = await make_builder_cv(db_session, student=student_b)
 
     app_a = await apply_service.apply_to_job(
-        db_session, principal=student_a,
-        payload=apply_payload(job_id=job_id, cv_selection=sel_a), ctx=CTX,
+        db_session,
+        principal=student_a,
+        payload=apply_payload(job_id=job_id, cv_selection=sel_a),
+        ctx=CTX,
     )
     await apply_service.apply_to_job(
-        db_session, principal=student_b,
-        payload=apply_payload(job_id=job_id, cv_selection=sel_b), ctx=CTX,
+        db_session,
+        principal=student_b,
+        payload=apply_payload(job_id=job_id, cv_selection=sel_b),
+        ctx=CTX,
     )
     assert await _job_application_count(db_session, job_id) == 2
 
@@ -280,16 +299,18 @@ async def test_student_sees_only_own_applications(db_session) -> None:
     sel_a = await make_builder_cv(db_session, student=student_a)
     sel_b = await make_builder_cv(db_session, student=student_b)
     app_a = await apply_service.apply_to_job(
-        db_session, principal=student_a,
-        payload=apply_payload(job_id=job_id, cv_selection=sel_a), ctx=CTX,
+        db_session,
+        principal=student_a,
+        payload=apply_payload(job_id=job_id, cv_selection=sel_a),
+        ctx=CTX,
     )
     await apply_service.apply_to_job(
-        db_session, principal=student_b,
-        payload=apply_payload(job_id=job_id, cv_selection=sel_b), ctx=CTX,
+        db_session,
+        principal=student_b,
+        payload=apply_payload(job_id=job_id, cv_selection=sel_b),
+        ctx=CTX,
     )
-    items_a, _c, _l = await apply_service.list_my_applications(
-        db_session, principal=student_a
-    )
+    items_a, _c, _l = await apply_service.list_my_applications(db_session, principal=student_a)
     assert [i["id"] for i in items_a] == [app_a["id"]]
 
     # Student B cannot read student A's application detail -> 404.
@@ -305,8 +326,10 @@ async def test_partner_sees_only_own_org_job_applications(db_session) -> None:
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
 
     items, _c, _l = await apply_service.list_job_applications(
@@ -316,101 +339,79 @@ async def test_partner_sees_only_own_org_job_applications(db_session) -> None:
 
     # Cross-org partner cannot list another org's job applications -> 404.
     with pytest.raises(ResourceNotFoundError):
-        await apply_service.list_job_applications(
-            db_session, principal=partner_b, job_id=job_id
-        )
+        await apply_service.list_job_applications(db_session, principal=partner_b, job_id=job_id)
 
 
 # --------------------------------------------------------------------------- #
-# Anonymous redaction + reveal                                                #
+# Partner always sees the applicant's real identity + detail cv/fit            #
 # --------------------------------------------------------------------------- #
 
 
-async def test_anonymous_applicant_redacted_until_reveal(db_session) -> None:
+async def test_partner_view_always_identified_with_cv_and_fit(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
 
+    # LIST: real identity, no masking/reveal fields, cv/fit are detail-only.
     items, _c, _l = await apply_service.list_job_applications(
         db_session, principal=partner, job_id=job_id
     )
     applicant = items[0]["applicant"]
-    assert applicant["is_anonymous"] is True and applicant["revealed"] is False
-    assert applicant["anonymous_id"].startswith("UV-")
-    assert "email" not in applicant
-    assert items[0]["cover_letter"] is None
-    assert items[0]["cv_download_available"] is False
+    assert applicant["user_id"] == str(student.user_id)
+    assert applicant["email"] == su.email
+    assert "is_anonymous" not in applicant and "anonymous_id" not in applicant
+    assert items[0]["cover_letter"] is not None
+    # CV embed stays DETAIL-only (None on the list); the match-ring ``fit`` is now
+    # ALSO on the list ({score, band} minimum) so the FE renders a ring per row.
+    assert "cv" in items[0] and items[0]["cv"] is None
+    assert "reveal_status" not in items[0] and "cv_download_available" not in items[0]
+    assert "fit" in items[0]
+    if items[0]["fit"] is not None:
+        assert 0 <= items[0]["fit"]["score"] <= 100
+        assert items[0]["fit"]["band"]
+        # List fit is the lean ring only — no reasons/internals.
+        assert set(items[0]["fit"].keys()) == {"score", "band"}
 
-    # Partner requests reveal (reason >= 20 chars), student accepts.
-    await reveal_service.request_reveal(
-        db_session, principal=partner, application_id=app_id,
-        reason="We would like to learn more about your internship experience.", ctx=CTX,
+    # DETAIL: identity + the ORIGINAL (un-watermarked) cv block (admin holds the
+    # wildcard) + a fit block (None or a user-safe {score, band, reasons}).
+    detail = await apply_service.get_application(
+        db_session, principal=partner, application_id=app_id
     )
-    await reveal_service.respond_reveal(
-        db_session, principal=student, application_id=app_id, decision="accepted", ctx=CTX,
-    )
-
-    items2, _c2, _l2 = await apply_service.list_job_applications(
-        db_session, principal=partner, job_id=job_id
-    )
-    applicant2 = items2[0]["applicant"]
-    assert applicant2["revealed"] is True
-    assert applicant2["email"] == su.email
-    assert items2[0]["cv_download_available"] is True
-    assert await _audit_count(db_session, "application.reveal_requested") == 1
-    assert await _audit_count(db_session, "application.reveal_responded") == 1
-
-
-async def test_reveal_reason_too_short_rejected(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
-        ctx=CTX,
-    )
-    with pytest.raises(ValidationFailedError):
-        await reveal_service.request_reveal(
-            db_session, principal=partner, application_id=uuid.UUID(app["id"]),
-            reason="too short", ctx=CTX,
-        )
-
-
-async def test_reveal_on_non_anonymous_rejected(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=False),
-        ctx=CTX,
-    )
-    with pytest.raises(RevealNotAvailableError):
-        await reveal_service.request_reveal(
-            db_session, principal=partner, application_id=uuid.UUID(app["id"]),
-            reason="We would like to learn more about your experience here.", ctx=CTX,
-        )
+    assert detail["applicant"]["user_id"] == str(student.user_id)
+    assert detail["cv"] is not None
+    assert detail["cv"]["view_url"] and detail["cv"]["download_url"]
+    # Owner decision 2026-07-10: partner sees the student's ORIGINAL file, never a
+    # watermarked derivative.
+    assert detail["cv"]["has_watermark"] is False
+    assert "fit" in detail
+    if detail["fit"] is not None:
+        assert 0 <= detail["fit"]["score"] <= 100
+        assert detail["fit"]["band"]
+        # Never leaks provider/model/token/confidence internals.
+        assert set(detail["fit"].keys()) == {"score", "band", "reasons"}
 
 
 # --------------------------------------------------------------------------- #
-# Partner watermarked CV download                                            #
+# Partner CV download = the student's ORIGINAL file (no watermark) + 404 guard  #
 # --------------------------------------------------------------------------- #
 
 
-async def test_partner_cv_download_watermarked_and_non_partner_404(db_session) -> None:
+async def test_partner_cv_download_original_and_non_partner_404(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
 
@@ -420,33 +421,20 @@ async def test_partner_cv_download_watermarked_and_non_partner_404(db_session) -
     )
     assert own["has_watermark"] is False
 
-    # Authorized partner download IS watermarked.
+    # Authorized partner download serves the student's ORIGINAL file WATERMARKED
+    # with the VinUni logo + "VinUni Career" (owner decision 2026-07-10; the inline
+    # view stays clean, only the download is stamped). The download URL is present.
     partner_dl = await apply_service.get_application_cv_download(
         db_session, principal=partner, application_id=app_id
     )
     assert partner_dl["has_watermark"] is True
+    assert partner_dl["download_url"]
 
     # A non-partner third party cannot download -> 404.
     _ou, outsider = await make_student(db_session, prefix="outsider")
     with pytest.raises(ResourceNotFoundError):
         await apply_service.get_application_cv_download(
             db_session, principal=outsider, application_id=app_id
-        )
-
-
-async def test_anonymous_unrevealed_partner_download_blocked(db_session) -> None:
-    partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session)
-    sel = await make_builder_cv(db_session, student=student)
-    app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
-        ctx=CTX,
-    )
-    # PDF download blocked until reveal accepted.
-    with pytest.raises(ResourceNotFoundError):
-        await apply_service.get_application_cv_download(
-            db_session, principal=partner, application_id=uuid.UUID(app["id"])
         )
 
 
@@ -461,18 +449,20 @@ async def test_export_csv_returns_rows_for_partner(db_session) -> None:
     _su, student = await make_student(db_session, prefix="exp1")
     sel = await make_builder_cv(db_session, student=student)
     await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
 
     csv_text = await export_service.export_applications_csv(
         db_session, principal=partner, job_id=job_id
     )
 
-    lines = [l for l in csv_text.splitlines() if l.strip()]
+    lines = [line for line in csv_text.splitlines() if line.strip()]
     assert lines[0].startswith("application_id"), "first line must be CSV header"
     assert len(lines) >= 2, "expected at least one data row"
-    assert "is_anonymous" in lines[0]
+    assert "is_anonymous" not in lines[0]
 
 
 @pytest.mark.asyncio
@@ -481,36 +471,33 @@ async def test_export_csv_cross_org_raises_not_found(db_session) -> None:
     _ou, _oorg, outsider = await make_org_with_admin(db_session, display_name="Other Co")
 
     from app.shared.exceptions import ResourceNotFoundError as RNFE
+
     with pytest.raises(RNFE):
-        await export_service.export_applications_csv(
-            db_session, principal=outsider, job_id=job_id
-        )
+        await export_service.export_applications_csv(db_session, principal=outsider, job_id=job_id)
 
 
 @pytest.mark.asyncio
-async def test_export_csv_anonymous_unrevealed_redacted(db_session) -> None:
+async def test_export_csv_shows_real_identity(db_session) -> None:
     partner, _uni, job_id = await _setup_published(db_session)
-    _su, student = await make_student(db_session, prefix="anon_exp")
+    su, student = await make_student(db_session, prefix="ident_exp")
     sel = await make_builder_cv(db_session, student=student)
     await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=True),
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
 
     csv_text = await export_service.export_applications_csv(
         db_session, principal=partner, job_id=job_id
     )
-    lines = [l for l in csv_text.splitlines() if l.strip()]
-    # Data row(s) for the anonymous applicant must not contain any email
-    data_rows = lines[1:]
-    assert any("UV-" in row for row in data_rows), "anonymous label must use UV- prefix"
-    # The email column (3rd column, index 2) must be empty for unrevealed anon
-    import csv as _csv, io as _io
+    import csv as _csv
+    import io as _io
+
     reader = list(_csv.reader(_io.StringIO(csv_text)))
     email_col_idx = reader[0].index("email")
-    anon_rows = [r for r in reader[1:] if r[email_col_idx] == ""]
-    assert len(anon_rows) >= 1, "unrevealed anonymous applicant must have blank email"
+    # The applicant's real email is present (never masked).
+    assert any(r[email_col_idx] == su.email for r in reader[1:])
 
 
 # --------------------------------------------------------------------------- #
@@ -523,21 +510,24 @@ async def test_withdraw_with_reason_recorded_in_audit_and_timeline(db_session) -
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
 
     out = await apply_service.withdraw_application(
-        db_session, principal=student, application_id=app_id,
-        reason="Accepted another offer.", ctx=CTX,
+        db_session,
+        principal=student,
+        application_id=app_id,
+        reason="Accepted another offer.",
+        ctx=CTX,
     )
     assert out["status"] == "withdrawn"
 
     row = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "application.withdrawn")
-        )
+        await db_session.execute(select(AuditLog).where(AuditLog.action == "application.withdrawn"))
     ).scalar_one()
     assert row.after_snapshot["reason"] == "Accepted another offer."
 
@@ -559,20 +549,28 @@ async def test_withdraw_version_conflict_is_409(db_session) -> None:
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
 
     with pytest.raises(ApplicationVersionConflictError):
         await apply_service.withdraw_application(
-            db_session, principal=student, application_id=app_id,
-            version=999, ctx=CTX,
+            db_session,
+            principal=student,
+            application_id=app_id,
+            version=999,
+            ctx=CTX,
         )
     # Correct version still withdraws.
     out = await apply_service.withdraw_application(
-        db_session, principal=student, application_id=app_id,
-        version=app["version"], ctx=CTX,
+        db_session,
+        principal=student,
+        application_id=app_id,
+        version=app["version"],
+        ctx=CTX,
     )
     assert out["status"] == "withdrawn"
 
@@ -584,13 +582,17 @@ async def test_duplicate_apply_409_includes_existing_application_id_and_status(
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     first = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     with pytest.raises(DuplicateApplicationError) as exc:
         await apply_service.apply_to_job(
-            db_session, principal=student,
-            payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+            db_session,
+            principal=student,
+            payload=apply_payload(job_id=job_id, cv_selection=sel),
+            ctx=CTX,
         )
     assert exc.value.details == {
         "reason": "duplicate_application",
@@ -616,8 +618,10 @@ async def test_application_timeline_records_submit_review_reject_sequence(
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
 
@@ -625,13 +629,15 @@ async def test_application_timeline_records_submit_review_reject_sequence(
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="not_qualified", note="Internal-only note.", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="not_qualified",
+        note="Internal-only note.",
+        ctx=CTX,
     )
 
-    out = await apply_service.get_application(
-        db_session, principal=student, application_id=app_id
-    )
+    out = await apply_service.get_application(db_session, principal=student, application_id=app_id)
     assert [e["event_type"] for e in out["timeline"]] == [
         "submitted",
         "under_review",
@@ -653,8 +659,10 @@ async def test_student_timeline_never_exposes_partner_rejection_note_or_stage_me
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     app = await apply_service.apply_to_job(
-        db_session, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+        db_session,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
+        ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
     await decision_service.review_application(
@@ -666,13 +674,15 @@ async def test_student_timeline_never_exposes_partner_rejection_note_or_stage_me
         db_session, principal=partner, application_id=app_id, ctx=CTX
     )
     await decision_service.reject_application(
-        db_session, principal=partner, application_id=app_id,
-        reason="experience_mismatch", note="Do not tell the candidate this.", ctx=CTX,
+        db_session,
+        principal=partner,
+        application_id=app_id,
+        reason="experience_mismatch",
+        note="Do not tell the candidate this.",
+        ctx=CTX,
     )
 
-    out = await apply_service.get_application(
-        db_session, principal=student, application_id=app_id
-    )
+    out = await apply_service.get_application(db_session, principal=student, application_id=app_id)
     for event in out["timeline"]:
         assert set(event.keys()) == {"event_type", "label", "occurred_at"}
         assert "metadata" not in event
@@ -694,6 +704,8 @@ async def test_apply_with_non_owned_cv_selection_is_404(db_session) -> None:
 
     with pytest.raises(ResourceNotFoundError):
         await apply_service.apply_to_job(
-            db_session, principal=other,
-            payload=apply_payload(job_id=job_id, cv_selection=sel), ctx=CTX,
+            db_session,
+            principal=other,
+            payload=apply_payload(job_id=job_id, cv_selection=sel),
+            ctx=CTX,
         )

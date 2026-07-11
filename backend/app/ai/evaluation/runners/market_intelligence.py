@@ -65,18 +65,14 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:
         return None if got == bool(exp) else f"low_signal expected {exp}, got {got}"
     if key == "ai_narrative_available":
         got = bool(d.get("ai_narrative_available"))
-        return None if got == bool(exp) else (
-            f"ai_narrative_available expected {exp}, got {got}"
-        )
+        return None if got == bool(exp) else (f"ai_narrative_available expected {exp}, got {got}")
     if key == "top_skill":
         skills = [s.get("skill") for s in d.get("top_skills") or []]
         first = skills[0] if skills else None
         return None if first == exp else f"top_skill expected {exp!r}, got {first!r}"
     if key == "employment_type_count":
         n = len(d.get("employment_types") or [])
-        return None if n == int(exp) else (
-            f"employment_type_count expected {exp}, got {n}"
-        )
+        return None if n == int(exp) else (f"employment_type_count expected {exp}, got {n}")
     if key == "no_crash":
         return None
     return None  # unknown / informational key

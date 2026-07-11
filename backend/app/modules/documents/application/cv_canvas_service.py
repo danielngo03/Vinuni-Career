@@ -301,9 +301,7 @@ async def update_canvas(
     if "blocks" in payload and payload["blocks"] is not None:
         sections = await _cv_core._load_sections(session, cv_id=cv.id)
         valid_section_ids = {str(s.id) for s in sections}
-        canvas["blocks"] = _validate_blocks(
-            payload["blocks"], valid_section_ids=valid_section_ids
-        )
+        canvas["blocks"] = _validate_blocks(payload["blocks"], valid_section_ids=valid_section_ids)
 
     if "page" in payload and payload["page"] is not None:
         if not isinstance(payload["page"], dict):

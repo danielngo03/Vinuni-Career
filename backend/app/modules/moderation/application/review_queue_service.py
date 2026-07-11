@@ -183,18 +183,12 @@ async def list_items(
     limit: int = 50,
 ) -> list[HumanReviewItem]:
     await _require_university(session, principal)
-    return await list_items_unchecked(
-        session, status=status, source=source, limit=limit
-    )
+    return await list_items_unchecked(session, status=status, source=source, limit=limit)
 
 
-async def _load_pending(
-    session: AsyncSession, item_id: uuid.UUID
-) -> HumanReviewItem:
+async def _load_pending(session: AsyncSession, item_id: uuid.UUID) -> HumanReviewItem:
     item = (
-        await session.execute(
-            select(HumanReviewItem).where(HumanReviewItem.id == item_id)
-        )
+        await session.execute(select(HumanReviewItem).where(HumanReviewItem.id == item_id))
     ).scalar_one_or_none()
     if item is None:
         raise ResourceNotFoundError()
@@ -246,9 +240,7 @@ async def get_source(session: AsyncSession, item_id: uuid.UUID) -> str | None:
     """
 
     item = (
-        await session.execute(
-            select(HumanReviewItem.source).where(HumanReviewItem.id == item_id)
-        )
+        await session.execute(select(HumanReviewItem.source).where(HumanReviewItem.id == item_id))
     ).scalar_one_or_none()
     return item
 

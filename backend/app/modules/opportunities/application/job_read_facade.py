@@ -56,9 +56,7 @@ def to_ref(job: Job) -> JobRef:
 async def get_job_title(session: AsyncSession, job_id: uuid.UUID | None) -> str | None:
     if job_id is None:
         return None
-    return (
-        await session.execute(select(Job.title).where(Job.id == job_id))
-    ).scalar_one_or_none()
+    return (await session.execute(select(Job.title).where(Job.id == job_id))).scalar_one_or_none()
 
 
 async def get_job_titles(
@@ -67,9 +65,7 @@ async def get_job_titles(
     ids = {i for i in job_ids if i is not None}
     if not ids:
         return {}
-    rows = (
-        await session.execute(select(Job.id, Job.title).where(Job.id.in_(ids)))
-    ).all()
+    rows = (await session.execute(select(Job.id, Job.title).where(Job.id.in_(ids)))).all()
     return {row.id: row.title for row in rows}
 
 
@@ -90,23 +86,19 @@ async def get_org_scoped_job_ref(
 
     from app.modules.opportunities.domain import lifecycle as job_lifecycle
 
-    stmt = select(Job).where(
-        Job.id == job_id, Job.org_id == org_id, Job.deleted_at.is_(None)
-    )
+    stmt = select(Job).where(Job.id == job_id, Job.org_id == org_id, Job.deleted_at.is_(None))
     if active_only:
         stmt = stmt.where(Job.status == job_lifecycle.ACTIVE)
     job = (await session.execute(stmt)).scalar_one_or_none()
     return to_ref(job) if job is not None else None
 
 
-async def list_org_job_refs(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> list[JobRef]:
+async def list_org_job_refs(session: AsyncSession, *, org_id: uuid.UUID) -> list[JobRef]:
     rows = (
-        await session.execute(
-            select(Job).where(Job.org_id == org_id, Job.deleted_at.is_(None))
-        )
-    ).scalars().all()
+        (await session.execute(select(Job).where(Job.org_id == org_id, Job.deleted_at.is_(None))))
+        .scalars()
+        .all()
+    )
     return [to_ref(j) for j in rows]
 
 
@@ -128,13 +120,47 @@ async def increment_application_count(session: AsyncSession, job_id: uuid.UUID) 
     """Increment the denormalized ``jobs.application_count`` by one (no-op if missing)."""
 
     job = (
-        await session.execute(
-            select(Job).where(Job.id == job_id, Job.deleted_at.is_(None))
-        )
+        await session.execute(select(Job).where(Job.id == job_id, Job.deleted_at.is_(None)))
     ).scalar_one_or_none()
     if job is None:
         return
     job.application_count += 1
+
+
+async def screening_questions_for_job(
+    session: AsyncSession, job_id: uuid.UUID, *, locale: str = "vi"
+) -> dict[str, str]:
+    """Return ``{question_id: prompt}`` for a job's screening questions.
+
+    Screening questions live on the job's ``settings["screening_questions"]`` JSON
+    (a list of ``{"id", "prompt"|"question"|"label", "prompt_en"|"label_en"?}``) so
+    the DETAIL partner view can label each stored ``applications.screening_answers``
+    key with its human question text instead of an opaque id. Returns ``{}`` when the
+    job defines none (the common case today). Only the localized prompt string is
+    exposed — never any other owner-only job internal.
+    """
+
+    settings = (
+        await session.execute(select(Job.settings).where(Job.id == job_id))
+    ).scalar_one_or_none()
+    raw = (settings or {}).get("screening_questions") if isinstance(settings, dict) else None
+    if not isinstance(raw, list):
+        return {}
+    want_en = str(locale or "vi").lower().startswith("en")
+    out: dict[str, str] = {}
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        qid = item.get("id")
+        if qid is None:
+            continue
+        prompt = None
+        if want_en:
+            prompt = item.get("prompt_en") or item.get("label_en")
+        prompt = prompt or item.get("prompt") or item.get("question") or item.get("label")
+        if isinstance(prompt, str) and prompt.strip():
+            out[str(qid)] = prompt.strip()[:500]
+    return out
 
 
 async def get_job_title_and_skills(
@@ -143,9 +169,7 @@ async def get_job_title_and_skills(
     """``(title, required_skills)`` for a job, or ``(None, [])`` if missing."""
 
     row = (
-        await session.execute(
-            select(Job.title, Job.required_skills).where(Job.id == job_id)
-        )
+        await session.execute(select(Job.title, Job.required_skills).where(Job.id == job_id))
     ).first()
     if row is None:
         return None, []
@@ -158,9 +182,7 @@ async def count_all_jobs(session: AsyncSession) -> int:
     from sqlalchemy import func
 
     return (
-        await session.execute(
-            select(func.count()).select_from(Job).where(Job.deleted_at.is_(None))
-        )
+        await session.execute(select(func.count()).select_from(Job).where(Job.deleted_at.is_(None)))
     ).scalar_one()
 
 
@@ -171,16 +193,14 @@ async def count_published_events(session: AsyncSession) -> int:
 
     return (
         await session.execute(
-            select(func.count()).select_from(Event).where(
-                Event.status == "published", Event.deleted_at.is_(None)
-            )
+            select(func.count())
+            .select_from(Event)
+            .where(Event.status == "published", Event.deleted_at.is_(None))
         )
     ).scalar_one()
 
 
-async def fraud_scan_snapshot(
-    session: AsyncSession, job_id: uuid.UUID
-) -> dict | None:
+async def fraud_scan_snapshot(session: AsyncSession, job_id: uuid.UUID) -> dict | None:
     """Projected job shape for the moderation fraud scanner, or ``None``.
 
     Returns only what the scanner needs: identity, owning org, the combined
@@ -192,9 +212,7 @@ async def fraud_scan_snapshot(
 
     from sqlalchemy import func
 
-    job = (
-        await session.execute(select(Job).where(Job.id == job_id))
-    ).scalar_one_or_none()
+    job = (await session.execute(select(Job).where(Job.id == job_id))).scalar_one_or_none()
     if job is None:
         return None
 
@@ -207,9 +225,7 @@ async def fraud_scan_snapshot(
         )
     ).scalar_one()
 
-    text = " ".join(
-        part for part in (job.title, job.description, job.requirements) if part
-    )
+    text = " ".join(part for part in (job.title, job.description, job.requirements) if part)
     return {
         "id": job.id,
         "org_id": job.org_id,
@@ -239,9 +255,7 @@ async def market_aggregates(session: AsyncSession) -> dict:
 
     active_jobs = (
         await session.execute(
-            select(func.count())
-            .select_from(Job)
-            .where(Job.status == job_lifecycle.ACTIVE)
+            select(func.count()).select_from(Job).where(Job.status == job_lifecycle.ACTIVE)
         )
     ).scalar_one()
 
@@ -347,9 +361,7 @@ async def list_upcoming_registered_events(
                 "ends_at": event.ends_at.isoformat() if event.ends_at else None,
                 "venue_name": event.venue_name,
                 "registration_status": reg.status,
-                "registration_status_label": registration_state_label(
-                    reg.status, locale=locale
-                ),
+                "registration_status_label": registration_state_label(reg.status, locale=locale),
             }
         )
     return out

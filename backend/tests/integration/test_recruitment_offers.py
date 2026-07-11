@@ -5,8 +5,7 @@ of the ADR-0004 stage engine, ADR-0005 scorecards, and ADR-0006 interviews:
 
 - create draft -> submit -> approve -> send happy path; send-before-approve -> 409
   ``offer_not_approved``; second LIVE offer -> 409 ``offer_exists``; edit-after-draft
-  -> 409 ``offer_not_editable``; send anonymous w/o accepted reveal -> 409
-  ``reveal_required``.
+  -> 409 ``offer_not_editable``.
 - student accept -> offer ``accepted`` + ``applications.status='hired'`` + Offer-stage
   ``candidate_stages`` row closed PASSED/``exit_kind='hired'`` + ``offer.accepted``
   outbox event (career seam, NO salary) + ``application.hired`` audit; student decline
@@ -34,7 +33,6 @@ from app.modules.recruitment.application import (
     apply_service,
     decision_service,
     offer_service,
-    reveal_service,
 )
 from app.modules.recruitment.application.errors import (
     ApplicationVersionConflictError,
@@ -42,7 +40,6 @@ from app.modules.recruitment.application.errors import (
     OfferNotActionableError,
     OfferNotApprovedError,
     OfferNotEditableError,
-    RevealRequiredError,
 )
 from app.modules.recruitment.domain import lifecycle, pipeline
 from app.modules.recruitment.domain import offer as offer_domain
@@ -77,7 +74,7 @@ _SALARY = 25_000_000
 # --------------------------------------------------------------------------- #
 
 
-async def _setup_reviewed(db, *, is_anonymous=False):
+async def _setup_reviewed(db):
     """Published job + applied + reviewed (candidate ACTIVE at stage 1)."""
 
     _pu, _porg, partner = await make_org_with_admin(db, display_name="Partner Co")
@@ -87,14 +84,13 @@ async def _setup_reviewed(db, *, is_anonymous=False):
     su, student = await make_student(db, prefix="student")
     sel = await make_builder_cv(db, student=student)
     app = await apply_service.apply_to_job(
-        db, principal=student,
-        payload=apply_payload(job_id=job_id, cv_selection=sel, is_anonymous=is_anonymous),
+        db,
+        principal=student,
+        payload=apply_payload(job_id=job_id, cv_selection=sel),
         ctx=CTX,
     )
     app_id = uuid.UUID(app["id"])
-    await decision_service.review_application(
-        db, principal=partner, application_id=app_id, ctx=CTX
-    )
+    await decision_service.review_application(db, principal=partner, application_id=app_id, ctx=CTX)
     return partner, su, student, job_id, app_id
 
 
@@ -140,18 +136,6 @@ async def _audit_count(db, action: str) -> int:
     ).scalar_one()
 
 
-async def _accept_reveal(db, *, partner, student, app_id) -> None:
-    await reveal_service.request_reveal(
-        db, principal=partner, application_id=app_id,
-        reason="We would like to extend an offer and confirm your details.",
-        ctx=CTX,
-    )
-    await reveal_service.respond_reveal(
-        db, principal=student, application_id=app_id,
-        decision=lifecycle.REVEAL_ACCEPTED, ctx=CTX,
-    )
-
-
 # --------------------------------------------------------------------------- #
 # Happy path + approval gate                                                  #
 # --------------------------------------------------------------------------- #
@@ -176,9 +160,7 @@ async def test_create_submit_approve_send_happy_path(db_session) -> None:
     assert approved["approved_by"] == str(partner.user_id)
     assert approved["approved_at"] is not None
 
-    sent = await offer_service.send_offer(
-        db_session, principal=partner, offer_id=oid, ctx=CTX
-    )
+    sent = await offer_service.send_offer(db_session, principal=partner, offer_id=oid, ctx=CTX)
     assert sent["status"] == offer_domain.STATUS_SENT
     assert sent["sent_at"] is not None
     for action in ("offer_submitted", "offer_approved", "offer_sent"):
@@ -191,17 +173,13 @@ async def test_send_before_approve_is_409_offer_not_approved(db_session) -> None
     oid = uuid.UUID(out["id"])
     # Still a draft (never submitted/approved) -> send is blocked by the gate.
     with pytest.raises(OfferNotApprovedError) as exc:
-        await offer_service.send_offer(
-            db_session, principal=partner, offer_id=oid, ctx=CTX
-        )
+        await offer_service.send_offer(db_session, principal=partner, offer_id=oid, ctx=CTX)
     assert exc.value.details == {"reason": "offer_not_approved"}
 
     # Submitted but not yet approved -> still blocked.
     await offer_service.submit_offer(db_session, principal=partner, offer_id=oid, ctx=CTX)
     with pytest.raises(OfferNotApprovedError):
-        await offer_service.send_offer(
-            db_session, principal=partner, offer_id=oid, ctx=CTX
-        )
+        await offer_service.send_offer(db_session, principal=partner, offer_id=oid, ctx=CTX)
 
 
 async def test_approve_reject_bounces_back_to_draft(db_session) -> None:
@@ -240,7 +218,10 @@ async def test_edit_after_submit_is_409_offer_not_editable(db_session) -> None:
     await offer_service.submit_offer(db_session, principal=partner, offer_id=oid, ctx=CTX)
     with pytest.raises(OfferNotEditableError) as exc:
         await offer_service.update_draft(
-            db_session, principal=partner, offer_id=oid, salary_amount=99_000_000,
+            db_session,
+            principal=partner,
+            offer_id=oid,
+            salary_amount=99_000_000,
             ctx=CTX,
         )
     assert exc.value.details == {"reason": "offer_not_editable"}
@@ -252,12 +233,20 @@ async def test_update_draft_version_conflict_is_409(db_session) -> None:
     oid = uuid.UUID(out["id"])
     with pytest.raises(ApplicationVersionConflictError):
         await offer_service.update_draft(
-            db_session, principal=partner, offer_id=oid, salary_amount=1, version=999,
+            db_session,
+            principal=partner,
+            offer_id=oid,
+            salary_amount=1,
+            version=999,
             ctx=CTX,
         )
     ok = await offer_service.update_draft(
-        db_session, principal=partner, offer_id=oid, salary_amount=1,
-        version=out["version"], ctx=CTX,
+        db_session,
+        principal=partner,
+        offer_id=oid,
+        salary_amount=1,
+        version=out["version"],
+        ctx=CTX,
     )
     assert ok["version"] == out["version"] + 1
 
@@ -265,27 +254,6 @@ async def test_update_draft_version_conflict_is_409(db_session) -> None:
 # --------------------------------------------------------------------------- #
 # Reveal precondition on SEND                                                 #
 # --------------------------------------------------------------------------- #
-
-
-async def test_send_anonymous_without_reveal_is_409_reveal_required(db_session) -> None:
-    partner, _su, _student, _job, app_id = await _setup_reviewed(
-        db_session, is_anonymous=True
-    )
-    appr = await _to_approved(db_session, partner=partner, app_id=app_id)
-    with pytest.raises(RevealRequiredError) as exc:
-        await offer_service.send_offer(
-            db_session, principal=partner, offer_id=uuid.UUID(appr["id"]), ctx=CTX
-        )
-    assert exc.value.details == {"reason": "reveal_required"}
-
-
-async def test_send_anonymous_after_accepted_reveal_ok(db_session) -> None:
-    partner, _su, student, _job, app_id = await _setup_reviewed(
-        db_session, is_anonymous=True
-    )
-    await _accept_reveal(db_session, partner=partner, student=student, app_id=app_id)
-    sent = await _to_sent(db_session, partner=partner, app_id=app_id)
-    assert sent["status"] == offer_domain.STATUS_SENT
 
 
 # --------------------------------------------------------------------------- #
@@ -299,37 +267,46 @@ async def test_student_accept_marks_hired_closes_stage_emits_event(db_session) -
     oid = uuid.UUID(sent["id"])
 
     out = await offer_service.respond_offer(
-        db_session, principal=student, offer_id=oid, decision="accepted",
-        idempotency_key="resp-1", ctx=CTX,
+        db_session,
+        principal=student,
+        offer_id=oid,
+        decision="accepted",
+        idempotency_key="resp-1",
+        ctx=CTX,
     )
     assert out["status"] == offer_domain.STATUS_ACCEPTED
 
     # applications.status -> hired (terminal positive; not active/withdrawable).
     app_row = (
-        await db_session.execute(
-            select(Application).where(Application.id == app_id)
-        )
+        await db_session.execute(select(Application).where(Application.id == app_id))
     ).scalar_one()
     assert app_row.status == lifecycle.HIRED
     assert lifecycle.HIRED not in lifecycle.ACTIVE_STATUSES
 
     # The open Offer-stage candidate_stages row is closed PASSED / exit_kind='hired'.
     closed = (
-        await db_session.execute(
-            select(CandidateStage).where(CandidateStage.application_id == app_id)
+        (
+            await db_session.execute(
+                select(CandidateStage).where(CandidateStage.application_id == app_id)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert any(
-        c.status == pipeline.STAGE_PASSED and c.exit_kind == pipeline.EXIT_HIRED
-        for c in closed
+        c.status == pipeline.STAGE_PASSED and c.exit_kind == pipeline.EXIT_HIRED for c in closed
     )
 
     # The non-blocking career-outcome seam event was emitted (NO salary in payload).
     events = (
-        await db_session.execute(
-            select(OutboxEvent).where(OutboxEvent.event_type == "offer.accepted")
+        (
+            await db_session.execute(
+                select(OutboxEvent).where(OutboxEvent.event_type == "offer.accepted")
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(events) == 1
     payload = events[0].payload
     assert payload["application_id"] == str(app_id)
@@ -346,15 +323,18 @@ async def test_student_decline_keeps_application_under_review(db_session) -> Non
     oid = uuid.UUID(sent["id"])
 
     out = await offer_service.respond_offer(
-        db_session, principal=student, offer_id=oid, decision="declined",
-        notes="Accepted another role", idempotency_key="resp-d", ctx=CTX,
+        db_session,
+        principal=student,
+        offer_id=oid,
+        decision="declined",
+        notes="Accepted another role",
+        idempotency_key="resp-d",
+        ctx=CTX,
     )
     assert out["status"] == offer_domain.STATUS_DECLINED
     # The application is NOT auto-rejected — it stays under_review.
     app_row = (
-        await db_session.execute(
-            select(Application).where(Application.id == app_id)
-        )
+        await db_session.execute(select(Application).where(Application.id == app_id))
     ).scalar_one()
     assert app_row.status == lifecycle.UNDER_REVIEW
     # decline_reason is partner-internal — never on the student projection.
@@ -367,19 +347,28 @@ async def test_respond_replay_is_idempotent(db_session) -> None:
     sent = await _to_sent(db_session, partner=partner, app_id=app_id)
     oid = uuid.UUID(sent["id"])
     await offer_service.respond_offer(
-        db_session, principal=student, offer_id=oid, decision="accepted",
-        idempotency_key="r1", ctx=CTX,
+        db_session,
+        principal=student,
+        offer_id=oid,
+        decision="accepted",
+        idempotency_key="r1",
+        ctx=CTX,
     )
     # Replay the SAME accept -> no-op (no duplicate hired/event/audit).
     again = await offer_service.respond_offer(
-        db_session, principal=student, offer_id=oid, decision="accepted",
-        idempotency_key="r1", ctx=CTX,
+        db_session,
+        principal=student,
+        offer_id=oid,
+        decision="accepted",
+        idempotency_key="r1",
+        ctx=CTX,
     )
     assert again["status"] == offer_domain.STATUS_ACCEPTED
     assert await _audit_count(db_session, "application.hired") == 1
     events = (
         await db_session.execute(
-            select(func.count()).select_from(OutboxEvent)
+            select(func.count())
+            .select_from(OutboxEvent)
             .where(OutboxEvent.event_type == "offer.accepted")
         )
     ).scalar_one()
@@ -397,8 +386,12 @@ async def test_respond_to_expired_is_409_offer_not_actionable(db_session) -> Non
 
     with pytest.raises(OfferNotActionableError) as exc:
         await offer_service.respond_offer(
-            db_session, principal=student, offer_id=oid, decision="accepted",
-            idempotency_key="r-exp", ctx=CTX,
+            db_session,
+            principal=student,
+            offer_id=oid,
+            decision="accepted",
+            idempotency_key="r-exp",
+            ctx=CTX,
         )
     assert exc.value.details == {"reason": "offer_not_actionable"}
     # Lazy-expire flipped it.
@@ -413,8 +406,12 @@ async def test_respond_by_non_owner_is_404(db_session) -> None:
     _ou, other = await make_student(db_session, prefix="intruder")
     with pytest.raises(ResourceNotFoundError):
         await offer_service.respond_offer(
-            db_session, principal=other, offer_id=oid, decision="accepted",
-            idempotency_key="r-x", ctx=CTX,
+            db_session,
+            principal=other,
+            offer_id=oid,
+            decision="accepted",
+            idempotency_key="r-x",
+            ctx=CTX,
         )
 
 
@@ -430,13 +427,14 @@ async def test_cross_org_offer_actions_are_404(db_session) -> None:
     _bu, _borg, partner_b = await make_org_with_admin(db_session, display_name="Org B")
     with pytest.raises(ResourceNotFoundError):
         await offer_service.create_offer(
-            db_session, principal=partner_b, application_id=app_id, ctx=CTX,
+            db_session,
+            principal=partner_b,
+            application_id=app_id,
+            ctx=CTX,
             **_create_kwargs(),
         )
     with pytest.raises(ResourceNotFoundError):
-        await offer_service.submit_offer(
-            db_session, principal=partner_b, offer_id=oid, ctx=CTX
-        )
+        await offer_service.submit_offer(db_session, principal=partner_b, offer_id=oid, ctx=CTX)
     with pytest.raises(ResourceNotFoundError):
         await offer_service.list_offers_partner(
             db_session, principal=partner_b, application_id=app_id
@@ -467,21 +465,23 @@ async def test_salary_absent_from_notification_body_and_board_glance(db_session)
 
     # No queued candidate notification carries the salary figure.
     rows = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.dedupe_key.like("recruitment.offer_received:%")
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.dedupe_key.like("recruitment.offer_received:%")
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert rows
     for r in rows:
         assert str(_SALARY) not in str(r.variables)
         assert "salary" not in str(r.variables).lower()
 
     # The partner board glance carries NO salary (open the detail to see comp).
-    view = await apply_service.get_application(
-        db_session, principal=partner, application_id=app_id
-    )
+    view = await apply_service.get_application(db_session, principal=partner, application_id=app_id)
     offer_block = view["pipeline"]["offer"]
     assert offer_block is not None
     assert offer_block["status"] == offer_domain.STATUS_SENT
@@ -493,9 +493,7 @@ async def test_salary_absent_from_notification_body_and_board_glance(db_session)
 async def test_student_projection_has_no_partner_internals(db_session) -> None:
     partner, _su, student, _job, app_id = await _setup_reviewed(db_session)
     await _to_sent(db_session, partner=partner, app_id=app_id)
-    view = await apply_service.get_application(
-        db_session, principal=student, application_id=app_id
-    )
+    view = await apply_service.get_application(db_session, principal=student, application_id=app_id)
     card = view["offer"]
     assert card is not None
     assert card["position_title"] == "Backend Engineer"
@@ -510,9 +508,7 @@ async def test_draft_offer_not_visible_to_student(db_session) -> None:
     partner, _su, student, _job, app_id = await _setup_reviewed(db_session)
     await _create_offer(db_session, partner=partner, app_id=app_id)
     # A draft offer is partner-internal: not on the student detail, not listed.
-    view = await apply_service.get_application(
-        db_session, principal=student, application_id=app_id
-    )
+    view = await apply_service.get_application(db_session, principal=student, application_id=app_id)
     assert view["offer"] is None
     listed = await offer_service.list_offers_student(db_session, principal=student)
     assert listed == []
@@ -526,7 +522,8 @@ async def test_draft_offer_not_visible_to_student(db_session) -> None:
 async def _expired_outbox_count(db_session, oid) -> int:
     return (
         await db_session.execute(
-            select(func.count()).select_from(NotificationOutbox)
+            select(func.count())
+            .select_from(NotificationOutbox)
             .where(NotificationOutbox.dedupe_key.like(f"recruitment.offer_expired:{oid}:%"))
         )
     ).scalar_one()
@@ -557,9 +554,7 @@ async def test_expire_sweep_flips_sent_to_expired_idempotent(db_session) -> None
     # scheduler tick) — a long-lived test session can serve a stale page cache for
     # an updated row across SQLite connections.
     async with get_sessionmaker()() as fresh:
-        offer = (
-            await fresh.execute(select(Offer).where(Offer.id == oid))
-        ).scalar_one()
+        offer = (await fresh.execute(select(Offer).where(Offer.id == oid))).scalar_one()
         assert offer.status == offer_domain.STATUS_EXPIRED
         # Exactly one expired notice to the candidate (deduped).
         assert await _expired_outbox_count(fresh, oid) == 1
@@ -576,15 +571,11 @@ async def test_offer_expire_sweep_emits_timeline_event(db_session) -> None:
     await db_session.commit()
 
     await db_session.rollback()
-    res = await runner.tick(
-        _now(), session_factory=get_sessionmaker(), only=["offer.expire_sweep"]
-    )
+    res = await runner.tick(_now(), session_factory=get_sessionmaker(), only=["offer.expire_sweep"])
     assert res["offer.expire_sweep"]["expired"] == 1
 
     async with get_sessionmaker()() as fresh:
-        view = await apply_service.get_application(
-            fresh, principal=student, application_id=app_id
-        )
+        view = await apply_service.get_application(fresh, principal=student, application_id=app_id)
         types = [e["event_type"] for e in view["timeline"]]
         assert types.count("offer_sent") == 1
         assert types.count("offer_expired") == 1
@@ -615,7 +606,8 @@ async def test_expiring_reminder_enqueued_once(db_session) -> None:
     await db_session.rollback()
     count = (
         await db_session.execute(
-            select(func.count()).select_from(NotificationOutbox)
+            select(func.count())
+            .select_from(NotificationOutbox)
             .where(NotificationOutbox.dedupe_key == f"recruitment.offer_expiring:{oid}:expiring")
         )
     ).scalar_one()

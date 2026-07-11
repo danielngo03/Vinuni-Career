@@ -46,11 +46,7 @@ async def get_mine(session: AsyncSession, *, principal: Principal) -> dict:
     if not principal.is_authenticated or principal.user_id is None:
         raise AuthRequiredError()
     rows = list(
-        (
-            await session.execute(
-                select(Consent).where(Consent.user_id == principal.user_id)
-            )
-        )
+        (await session.execute(select(Consent).where(Consent.user_id == principal.user_id)))
         .scalars()
         .all()
     )

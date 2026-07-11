@@ -126,13 +126,17 @@ async def test_register_pending_unverified_email_resumes(client, db_session) -> 
     from sqlalchemy import select
 
     rows = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.recipient_id == user.id,
-                NotificationOutbox.template_key == "account.email_verification",
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.recipient_id == user.id,
+                    NotificationOutbox.template_key == "account.email_verification",
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     tokens = {str(row.variables["token"]) for row in rows}
     assert len(tokens) == 2
     second_token = next(iter(tokens - {first_token}))
@@ -148,9 +152,7 @@ async def test_register_pending_unverified_email_resumes(client, db_session) -> 
     )
     assert login_new.status_code == 200
 
-    login_old = await client.post(
-        "/auth/login", json={"email": email, "password": "Sup3rSecret!"}
-    )
+    login_old = await client.post("/auth/login", json={"email": email, "password": "Sup3rSecret!"})
     assert login_old.status_code == 401
 
 
@@ -196,17 +198,13 @@ async def test_forgot_reset_login_flow_over_http(client, db_session) -> None:
 
     # Log in once so there is an active session to revoke on reset. Capture the
     # refresh token from the httpOnly cookie (no longer present in the body).
-    login = await client.post(
-        "/auth/login", json={"email": email, "password": "Sup3rSecret!"}
-    )
+    login = await client.post("/auth/login", json={"email": email, "password": "Sup3rSecret!"})
     old_refresh = login.cookies.get("vinuni_refresh")
     assert old_refresh
 
     # Anti-enumeration: same generic response for known + unknown email.
     known = await client.post("/auth/forgot-password", json={"email": email})
-    unknown = await client.post(
-        "/auth/forgot-password", json={"email": _email()}
-    )
+    unknown = await client.post("/auth/forgot-password", json={"email": _email()})
     assert known.status_code == unknown.status_code == 200
     assert known.json()["data"] == {**known.json()["data"]}
     assert known.json()["data"]["status"] == unknown.json()["data"]["status"] == "reset_email_sent"
@@ -229,18 +227,14 @@ async def test_forgot_reset_login_flow_over_http(client, db_session) -> None:
     assert reset.json()["data"]["status"] == "password_reset"
 
     # New password logs in.
-    relog = await client.post(
-        "/auth/login", json={"email": email, "password": "FreshPass2026!"}
-    )
+    relog = await client.post("/auth/login", json={"email": email, "password": "FreshPass2026!"})
     assert relog.status_code == 200
 
     # Old refresh token rejected after reset revoked all sessions. Clear the
     # client cookie (now holding the fresh post-relogin token) and present the
     # stale token via the non-browser body fallback to prove it is rejected.
     client.cookies.clear()
-    bad = await client.post(
-        "/auth/refresh", json={"refresh_token": old_refresh}
-    )
+    bad = await client.post("/auth/refresh", json={"refresh_token": old_refresh})
     assert bad.status_code == 401
 
     # Reusing the reset token is rejected with a friendly validation error.
@@ -269,15 +263,19 @@ async def test_forgot_reset_with_otp_over_http(client, db_session) -> None:
 
     await client.post("/auth/forgot-password", json={"email": email})
     reset_row = (
-        await db_session.execute(
-            select(NotificationOutbox)
-            .where(
-                NotificationOutbox.recipient_id == user.id,
-                NotificationOutbox.template_key == "account.password_reset",
+        (
+            await db_session.execute(
+                select(NotificationOutbox)
+                .where(
+                    NotificationOutbox.recipient_id == user.id,
+                    NotificationOutbox.template_key == "account.password_reset",
+                )
+                .order_by(NotificationOutbox.created_at.desc())
             )
-            .order_by(NotificationOutbox.created_at.desc())
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     assert reset_row is not None
     otp = str(reset_row.variables["otp_code"])
 
@@ -288,15 +286,11 @@ async def test_forgot_reset_with_otp_over_http(client, db_session) -> None:
     assert reset.status_code == 200
     assert reset.json()["data"]["status"] == "password_reset"
 
-    relog = await client.post(
-        "/auth/login", json={"email": email, "password": "FreshOtp2026!"}
-    )
+    relog = await client.post("/auth/login", json={"email": email, "password": "FreshOtp2026!"})
     assert relog.status_code == 200
 
 
 async def test_protected_route_rejects_garbage_token(client) -> None:
-    resp = await client.get(
-        "/auth/me", headers={"Authorization": "Bearer not.a.jwt"}
-    )
+    resp = await client.get("/auth/me", headers={"Authorization": "Bearer not.a.jwt"})
     assert resp.status_code == 401
     assert resp.json()["error"]["code"] == "AUTH_REQUIRED"

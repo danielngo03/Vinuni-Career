@@ -40,19 +40,25 @@ async def recompute(session: AsyncSession, org_id: uuid.UUID) -> dict:
     # aggregate. Flagging moves a review from published→flagged for moderator
     # attention but does NOT remove it from the public rating (ADR-0013).
     rows = (
-        await session.execute(
-            select(ReviewRating)
-            .join(CompanyReview, CompanyReview.id == ReviewRating.review_id)
-            .where(
-                CompanyReview.org_id == org_id,
-                CompanyReview.status.in_((
-                    entities.STATUS_PUBLISHED,
-                    entities.STATUS_FLAGGED,
-                )),
-                CompanyReview.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(ReviewRating)
+                .join(CompanyReview, CompanyReview.id == ReviewRating.review_id)
+                .where(
+                    CompanyReview.org_id == org_id,
+                    CompanyReview.status.in_(
+                        (
+                            entities.STATUS_PUBLISHED,
+                            entities.STATUS_FLAGGED,
+                        )
+                    ),
+                    CompanyReview.deleted_at.is_(None),
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
     overalls = [r.overall for r in rows]
     payload = {
@@ -64,9 +70,7 @@ async def recompute(session: AsyncSession, org_id: uuid.UUID) -> dict:
         "culture_values_avg": _avg_col([r.culture_values for r in rows]),
         "compensation_avg": _avg_col([r.compensation for r in rows]),
         "career_growth_avg": _avg_col([r.career_growth for r in rows]),
-        "interview_experience_avg": _avg_col(
-            [r.interview_experience for r in rows]
-        ),
+        "interview_experience_avg": _avg_col([r.interview_experience for r in rows]),
         "distribution": entities.distribution(overalls),
     }
 
@@ -74,9 +78,7 @@ async def recompute(session: AsyncSession, org_id: uuid.UUID) -> dict:
     insert = pg_insert if dialect == "postgresql" else sqlite_insert
     stmt = insert(ProjCompanyRating).values(**payload)
     update_cols = {k: stmt.excluded[k] for k in payload if k != "org_id"}
-    stmt = stmt.on_conflict_do_update(
-        index_elements=[ProjCompanyRating.org_id], set_=update_cols
-    )
+    stmt = stmt.on_conflict_do_update(index_elements=[ProjCompanyRating.org_id], set_=update_cols)
     await session.execute(stmt)
     await session.flush()
     return payload

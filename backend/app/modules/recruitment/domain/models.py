@@ -1,10 +1,17 @@
 """Recruitment ORM models (``docs/DATA_MODEL.md`` §9).
 
-Phase 1e owns ``applications`` and ``application_reveal_requests``. Types use the
-shared cross-database variants (``JsonType``) so the same models run on
-PostgreSQL (runtime) and SQLite (unit tests). Postgres-only constructs (partial /
-unique-active indexes, ``set_updated_at`` trigger, the deferred
-``application_cv_snapshots`` FK + NOT NULL) live in migration ``0006`` only.
+Phase 1e owns ``applications``. Types use the shared cross-database variants
+(``JsonType``) so the same models run on PostgreSQL (runtime) and SQLite (unit
+tests). Postgres-only constructs (partial / unique-active indexes,
+``set_updated_at`` trigger, the deferred ``application_cv_snapshots`` FK + NOT
+NULL) live in migration ``0006`` only.
+
+Identity model (owner decision 2026-07-10): an application ALWAYS carries and
+exposes the applicant's real identity to any partner member who passes the CV /
+candidate RBAC gate. The former anonymous-apply + identity-reveal handshake was
+removed entirely; CV-access RBAC, the watermark on CV downloads, and audit
+logging of sensitive candidate access are retained (they gate WHO may see the CV,
+not WHETHER identity is masked).
 
 Documented deviations from the canonical ``docs/DATA_MODEL.md`` §9 columns
 (necessary because the ``student_profiles`` module is not yet built):
@@ -20,9 +27,6 @@ Documented deviations from the canonical ``docs/DATA_MODEL.md`` §9 columns
   side here to avoid an ORM metadata create cycle; the migration adds it on
   Postgres.
 - ``applications.idempotency_key`` — submit idempotency (``docs/API_CONTRACTS.md``).
-- ``application_reveal_requests`` is the apply-flow reveal table (the broader
-  ``contact_reveal_requests`` of the data model also serves passive search, a
-  later phase); shape is identical for the apply use case.
 """
 
 from __future__ import annotations
@@ -69,18 +73,20 @@ class Application(Base):
     status: Mapped[str] = mapped_column(String(30), nullable=False, default="submitted")
     cover_letter: Mapped[str | None] = mapped_column(Text, nullable=True)
     screening_answers: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
-    is_anonymous: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     snapshot_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("application_cv_snapshots.id", ondelete="SET NULL"), nullable=True
     )
-    reveal_approved_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id", ondelete="SET NULL"), nullable=True
-    )
-    reveal_approved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
     rejection_reason: Mapped[str | None] = mapped_column(String(50), nullable=True)
     rejection_note: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Candidate ownership for multi-person recruiting teams: the org membership
+    # this candidate is assigned to (the recruiter accountable for driving it).
+    # ``SET NULL`` on member removal so a departed recruiter's candidates surface
+    # as unassigned rather than dangling. Distinct from ``candidate_stages.entered_by``
+    # (who moved the card) — this is the durable owner (PARTNER_RBAC_ANALYTICS_SPEC).
+    assigned_to_membership_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("memberships.id", ondelete="SET NULL"), nullable=True, index=True
+    )
+    assigned_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(200), nullable=True)
     applied_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
@@ -92,12 +98,12 @@ class Application(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
 
 
@@ -159,20 +165,14 @@ class PipelineStage(Base):
     name: Mapped[str] = mapped_column(String(150), nullable=False)
     stage_type: Mapped[str] = mapped_column(String(30), nullable=False)
     sort_order: Mapped[int] = mapped_column(SmallInteger, nullable=False)
-    required_action: Mapped[str] = mapped_column(
-        String(30), nullable=False, default="manual"
-    )
+    required_action: Mapped[str] = mapped_column(String(30), nullable=False, default="manual")
     sla_hours: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # ADR-0006: average-score gate for ``required_action='score_threshold'``;
     # nullable (meaningful only for that action). NUMERIC(2,1) matches overall_score.
     score_threshold: Mapped[Decimal | None] = mapped_column(Numeric(2, 1), nullable=True)
     is_terminal: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    candidate_visible: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=True
-    )
-    automation_rules: Mapped[dict] = mapped_column(
-        JsonType, nullable=False, default=dict
-    )
+    candidate_visible: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    automation_rules: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
 
 
 class CandidateStage(Base):
@@ -200,9 +200,7 @@ class CandidateStage(Base):
     entered_by: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
-    exited_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    exited_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     exit_kind: Mapped[str | None] = mapped_column(String(20), nullable=True)
     reason: Mapped[str | None] = mapped_column(Text, nullable=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(200), nullable=True)
@@ -236,9 +234,8 @@ class CandidateStage(Base):
 # upsert guard).
 #
 # A scorecard carries NO student-identity field — it references ``application_id``
-# (already redacted on every partner projection); the reveal handshake stays the
-# only identity path. ``interview_id`` (DATA_MODEL §9) is added nullable by
-# ADR-0006; V1 binds to ``application_id`` + ``stage_id`` directly.
+# only. ``interview_id`` (DATA_MODEL §9) is added nullable by ADR-0006; V1 binds to
+# ``application_id`` + ``stage_id`` directly.
 
 
 class Scorecard(Base):
@@ -266,13 +263,9 @@ class Scorecard(Base):
         ForeignKey("interviews.id", ondelete="SET NULL"), nullable=True, index=True
     )
     recommendation: Mapped[str] = mapped_column(String(20), nullable=False)
-    overall_score: Mapped[Decimal | None] = mapped_column(
-        Numeric(2, 1), nullable=True
-    )
+    overall_score: Mapped[Decimal | None] = mapped_column(Numeric(2, 1), nullable=True)
     comment: Mapped[str | None] = mapped_column(Text, nullable=True)
-    status: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="submitted"
-    )
+    status: Mapped[str] = mapped_column(String(20), nullable=False, default="submitted")
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     submitted_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
@@ -281,7 +274,9 @@ class Scorecard(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -325,9 +320,8 @@ class ScorecardScore(Base):
 # "At most one OPEN (scheduled) interview per (application, stage)" is enforced by a
 # Postgres PARTIAL unique index ``uq_interview_open_per_stage ... WHERE
 # status='scheduled'`` (migration ``0014``, dialect-guarded); SQLite unit tests rely
-# on the service-layer guard. An interview carries NO student-identity field — the
-# reveal handshake stays the only identity path (scheduling an anonymous interview
-# REQUIRES an already-accepted reveal, enforced in the service).
+# on the service-layer guard. An interview carries NO student-identity field — it
+# references ``application_id`` only.
 
 
 class Interview(Base):
@@ -347,18 +341,12 @@ class Interview(Base):
     )
     title: Mapped[str | None] = mapped_column(String(150), nullable=True)
     mode: Mapped[str] = mapped_column(String(20), nullable=False)
-    scheduled_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
-    duration_minutes: Mapped[int] = mapped_column(
-        SmallInteger, nullable=False, default=60
-    )
+    scheduled_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    duration_minutes: Mapped[int] = mapped_column(SmallInteger, nullable=False, default=60)
     location: Mapped[str | None] = mapped_column(String(500), nullable=True)
     # Fernet ciphertext (urlsafe base64) — never stored as plaintext at rest.
     meeting_link: Mapped[str | None] = mapped_column(String(1000), nullable=True)
-    status: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="scheduled"
-    )
+    status: Mapped[str] = mapped_column(String(20), nullable=False, default="scheduled")
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_by: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
@@ -368,7 +356,9 @@ class Interview(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -382,9 +372,7 @@ class InterviewAssignee(Base):
     """
 
     __tablename__ = "interview_assignees"
-    __table_args__ = (
-        UniqueConstraint("interview_id", "user_id", name="uq_interview_assignee"),
-    )
+    __table_args__ = (UniqueConstraint("interview_id", "user_id", name="uq_interview_assignee"),)
 
     id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
     interview_id: Mapped[uuid.UUID] = mapped_column(
@@ -418,8 +406,7 @@ class InterviewAssignee(Base):
 # sent) is enforced by a Postgres PARTIAL unique index
 # ``uq_offer_live_per_application ... WHERE status IN (...)`` (migration ``0015``,
 # dialect-guarded); SQLite unit tests rely on the service-layer guard. An offer
-# carries NO student-identity field — the reveal handshake stays the only identity
-# path (SENDING an anonymous offer REQUIRES an already-accepted reveal, §5).
+# carries NO student-identity field — it references ``application_id`` only.
 
 
 class Offer(Base):
@@ -442,17 +429,11 @@ class Offer(Base):
     start_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     # Fernet ciphertext (urlsafe base64) — never stored in plaintext at rest.
     salary_amount: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    salary_currency: Mapped[str] = mapped_column(
-        String(5), nullable=False, default="VND"
-    )
-    salary_period: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="monthly"
-    )
+    salary_currency: Mapped[str] = mapped_column(String(5), nullable=False, default="VND")
+    salary_period: Mapped[str] = mapped_column(String(20), nullable=False, default="monthly")
     benefits_summary: Mapped[str | None] = mapped_column(Text, nullable=True)
     terms_notes: Mapped[str | None] = mapped_column(Text, nullable=True)
-    expiry_date: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
+    expiry_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="draft")
     created_by: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
@@ -460,12 +441,8 @@ class Offer(Base):
     approved_by: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
-    approved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    sent_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    approved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     student_response_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
@@ -475,7 +452,9 @@ class Offer(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -506,45 +485,8 @@ class ApplicationTimelineEvent(Base):
     actor_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
-    event_metadata: Mapped[dict] = mapped_column(
-        "metadata", JsonType, nullable=False, default=dict
-    )
+    event_metadata: Mapped[dict] = mapped_column("metadata", JsonType, nullable=False, default=dict)
     occurred_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now()
-    )
-
-
-class ApplicationRevealRequest(Base):
-    """A partner's request to reveal an anonymous applicant's identity.
-
-    One request per (application, requester_org); 72h expiry. The student
-    accepts/declines; on accept the partner may see identity + download the CV.
-    """
-
-    __tablename__ = "application_reveal_requests"
-    __table_args__ = (
-        UniqueConstraint("application_id", "requester_org_id", name="uq_reveal_app_org"),
-    )
-
-    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
-    application_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("applications.id", ondelete="CASCADE"), nullable=False, index=True
-    )
-    requester_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
-    )
-    requester_org_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("organizations.id", ondelete="RESTRICT"), nullable=False
-    )
-    reason: Mapped[str] = mapped_column(Text, nullable=False)
-    status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
-    expires_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
-    responded_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
 
@@ -580,19 +522,81 @@ class JobApplicationInvitation(Base):
     )
     message: Mapped[str | None] = mapped_column(Text, nullable=True)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
-    expires_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    responded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
     )
-    responded_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+# --------------------------------------------------------------------------- #
+# On-demand HR CV↔JD evaluation cache (partner AI screen — "evaluate this CV")  #
+# --------------------------------------------------------------------------- #
+
+
+class CvEvaluation(Base):
+    """A persisted, version-stamped AI verdict of one application's CV vs its JD.
+
+    The partner "AI evaluate this candidate" action screens the application's
+    IMMUTABLE CV snapshot against the job it was submitted to and stores the
+    user-safe verdict here so re-opening the modal returns instantly with no
+    token re-spend. ``?refresh=true`` recomputes and re-meters (updates the row).
+
+    Freshness stamps: ``snapshot_id`` IS the CV-content version (immutable), so a
+    row is invalidated (recomputed in place) only when the JD changes
+    (``job_version`` != the live ``jobs.version``). ``cv_version`` is a stable
+    stamp reserved for a future re-snapshot scheme (always ``1`` today) and is
+    part of the natural key so the cache is keyed by
+    ``(snapshot_id, job_id, cv_version)``.
+
+    ``result_json`` holds ONLY the user-safe verdict (recommendation / summary /
+    strengths / gaps / criteria) — never provider/model/token/latency/prompt
+    internals. ``snapshot_id`` is a bare UUID (no FK) because the immutable
+    snapshot is owned by the ``documents`` module.
+    """
+
+    __tablename__ = "cv_evaluations"
+    __table_args__ = (
+        UniqueConstraint(
+            "snapshot_id", "job_id", "cv_version", name="uq_cv_evaluations_snapshot_job"
+        ),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
+    application_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("applications.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    # Bare UUID — the immutable snapshot is owned by the documents module.
+    snapshot_id: Mapped[uuid.UUID] = mapped_column(nullable=False, index=True)
+    job_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("jobs.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    org_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    cv_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    job_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    recommendation: Mapped[str] = mapped_column(String(20), nullable=False)
+    overall_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    deterministic_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    result_json: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
+    is_fallback: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    created_by: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
-    )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
     )

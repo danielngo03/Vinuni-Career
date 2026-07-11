@@ -76,25 +76,21 @@ class CvTemplate(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     # Governance: draft | published | archived. Only published + active templates
     # are offered to students (``GET /cv-templates``).
-    status: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="published"
-    )
+    status: Mapped[str] = mapped_column(String(20), nullable=False, default="published")
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     # NULL = built-in/global template; set = university-owned.
     owner_org_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("organizations.id", ondelete="SET NULL"), nullable=True
     )
-    published_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    archived_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -109,9 +105,7 @@ class CvTemplateVersion(Base):
 
     __tablename__ = "cv_template_versions"
     __table_args__ = (
-        UniqueConstraint(
-            "template_id", "version_number", name="uq_cv_template_versions_num"
-        ),
+        UniqueConstraint("template_id", "version_number", name="uq_cv_template_versions_num"),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
@@ -148,23 +142,19 @@ class Document(Base):
     mime_type: Mapped[str] = mapped_column(String(100), nullable=False)
     file_size_bytes: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     checksum_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
-    virus_scan_status: Mapped[str] = mapped_column(
-        String(20), nullable=False, default="pending"
-    )
-    virus_scan_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    virus_scan_status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
+    virus_scan_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(200), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class CvParseRun(Base):
@@ -190,12 +180,8 @@ class CvParseRun(Base):
     review_fields: Mapped[list | None] = mapped_column(JsonType, nullable=True)
     confidence: Mapped[float | None] = mapped_column(Numeric(4, 3), nullable=True)
     error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
-    started_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    completed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -243,17 +229,15 @@ class CvIngestion(Base):
         ForeignKey("cv_profiles.id", ondelete="SET NULL"), nullable=True
     )
     idempotency_key: Mapped[str | None] = mapped_column(String(200), nullable=True)
-    started_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    completed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -286,9 +270,7 @@ class CvProfile(Base):
     # it is still an unlimited, non-matchable draft. The two-tier library lifecycle
     # (design spec 2026-07-05): only ``ready`` CVs count to the 5-cap and are usable
     # for apply / job-fit.
-    finalized_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    finalized_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(200), nullable=True)
     last_edited_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
@@ -297,12 +279,12 @@ class CvProfile(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     # Canvas/block-level layout metadata for the visual document editor
     # (``docs/CV_STUDIO_SPEC.md`` "Visual Canvas Editor Contract"): per-block
@@ -343,7 +325,9 @@ class CvSection(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -412,9 +396,7 @@ class CvAiSuggestion(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
-    resolved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class CvExport(Base):
@@ -443,9 +425,7 @@ class CvExport(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
-    completed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class SignedFileAccess(Base):
@@ -555,9 +535,7 @@ class CvJobFitScore(Base):
     # Optional AI explanation for the recommended CV (regenerated only when the
     # content version or prompt version/language changes).
     explanation: Mapped[str | None] = mapped_column(Text, nullable=True)
-    explanation_prompt_version: Mapped[int | None] = mapped_column(
-        Integer, nullable=True
-    )
+    explanation_prompt_version: Mapped[int | None] = mapped_column(Integer, nullable=True)
     explanation_lang: Mapped[str | None] = mapped_column(String(5), nullable=True)
     explanation_generated_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
@@ -570,7 +548,9 @@ class CvJobFitScore(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -605,7 +585,9 @@ class CvFitExplanationCache(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 

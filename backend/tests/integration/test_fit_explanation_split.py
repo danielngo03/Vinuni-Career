@@ -80,9 +80,7 @@ async def client():
 # --------------------------------------------------------------------------- #
 
 
-async def test_student_intelligence_is_fast_and_never_calls_llm(
-    db_session, monkeypatch
-) -> None:
+async def test_student_intelligence_is_fast_and_never_calls_llm(db_session, monkeypatch) -> None:
     _u, student = await make_student(db_session)
     await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
@@ -93,7 +91,10 @@ async def test_student_intelligence_is_fast_and_never_calls_llm(
     _enable_ai(monkeypatch, fake)
 
     out = await student_intelligence_service.student_intelligence_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
 
     assert out["fit"]["status"] == "scored"
@@ -114,9 +115,7 @@ async def test_job_fit_default_skips_explanation(db_session, monkeypatch) -> Non
     fake = _CountingSemantic()
     _enable_ai(monkeypatch, fake)
 
-    out = await job_fit_service.job_fit_for_job(
-        db_session, principal=student, job_id=job_id
-    )
+    out = await job_fit_service.job_fit_for_job(db_session, principal=student, job_id=job_id)
     assert out["ai_explanation_available"] is False
     assert all(r["explanation"] is None for r in out["results"])
     assert out["results"][0]["score"] > 0
@@ -128,9 +127,7 @@ async def test_job_fit_default_skips_explanation(db_session, monkeypatch) -> Non
 # --------------------------------------------------------------------------- #
 
 
-async def test_fit_explanation_recommended_cv_with_ai_on(
-    db_session, monkeypatch
-) -> None:
+async def test_fit_explanation_recommended_cv_with_ai_on(db_session, monkeypatch) -> None:
     _u, student = await make_student(db_session)
     cv_id = await _build_strong_cv(db_session, student)
     job_id = await _create_job(db_session)
@@ -139,7 +136,10 @@ async def test_fit_explanation_recommended_cv_with_ai_on(
     _enable_ai(monkeypatch, fake)
 
     out = await job_fit_service.fit_explanation_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out["cv_id"] == cv_id
     assert out["explanation"] is not None
@@ -159,7 +159,10 @@ async def test_fit_explanation_specific_valid_cv(db_session, monkeypatch) -> Non
     _enable_ai(monkeypatch, fake)
 
     out = await job_fit_service.fit_explanation_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.UUID(weak_cv),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.UUID(weak_cv),
     )
     assert out["cv_id"] == weak_cv
     assert out["explanation"] is not None
@@ -178,7 +181,10 @@ async def test_fit_explanation_foreign_cv_falls_back_to_recommended(
 
     # A cv_id the caller does not own -> fall back to the recommended CV (no 404).
     out = await job_fit_service.fit_explanation_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=uuid.uuid4(),
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=uuid.uuid4(),
     )
     assert out["cv_id"] == cv_id
     assert out["explanation"] is not None
@@ -192,7 +198,10 @@ async def test_fit_explanation_ai_off_returns_null_no_crash(db_session) -> None:
 
     # Default offline provider (no gate patching) -> both AI gates closed.
     out = await job_fit_service.fit_explanation_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out["explanation"] is None
     assert out["ai_explanation_available"] is False
@@ -208,7 +217,10 @@ async def test_fit_explanation_no_active_cv_returns_null(db_session, monkeypatch
     _enable_ai(monkeypatch, fake)
 
     out = await job_fit_service.fit_explanation_for_job(
-        db_session, principal=student, job_id=job_id, cv_id=None,
+        db_session,
+        principal=student,
+        job_id=job_id,
+        cv_id=None,
     )
     assert out == {
         "cv_id": None,
@@ -218,9 +230,7 @@ async def test_fit_explanation_no_active_cv_returns_null(db_session, monkeypatch
     assert fake.calls == 0
 
 
-async def test_fit_explanation_reuses_fresh_row_no_second_call(
-    db_session, monkeypatch
-) -> None:
+async def test_fit_explanation_reuses_fresh_row_no_second_call(db_session, monkeypatch) -> None:
     """A second explanation request reuses the stored row -> LLM not re-invoked."""
     _u, student = await make_student(db_session)
     await _build_strong_cv(db_session, student)
@@ -230,13 +240,17 @@ async def test_fit_explanation_reuses_fresh_row_no_second_call(
     _enable_ai(monkeypatch, fake)
 
     first = await job_fit_service.fit_explanation_for_job(
-        db_session, principal=student, job_id=job_id,
+        db_session,
+        principal=student,
+        job_id=job_id,
     )
     assert first["explanation"] is not None
     assert fake.calls == 1
 
     second = await job_fit_service.fit_explanation_for_job(
-        db_session, principal=student, job_id=job_id,
+        db_session,
+        principal=student,
+        job_id=job_id,
     )
     assert second["explanation"] == first["explanation"]
     assert fake.calls == 1  # fresh-row reuse: no second generation

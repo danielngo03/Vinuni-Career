@@ -72,3 +72,16 @@ async def load_application(
 async def org_display_name(session: AsyncSession, org_id: uuid.UUID) -> str:
     name = await org_reporting_facade.display_name_for(session, org_id)
     return name or "VinUni Career"
+
+
+def display_name(contact: object | None) -> str:
+    """A candidate's display name from a users-facade contact (name -> email -> "").
+
+    Applications are always identified (owner 2026-07-10), so a board row shows the
+    real applicant name; when the name is blank we fall back to the email, then the
+    empty string (never a masked handle).
+    """
+
+    if contact is None:
+        return ""
+    return getattr(contact, "full_name", None) or getattr(contact, "email", None) or ""

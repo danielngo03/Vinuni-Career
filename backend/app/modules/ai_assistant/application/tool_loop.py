@@ -261,9 +261,7 @@ def _confirmation_result_text(tool_name: str, locale: str = "vi") -> str:
     return assistant_message("confirm.result.generic", locale)
 
 
-def _confirmation_error_text(
-    tool_name: str, result: dict[str, Any], locale: str = "vi"
-) -> str:
+def _confirmation_error_text(tool_name: str, result: dict[str, Any], locale: str = "vi") -> str:
     error = result.get("error")
     if tool_name == "apply_job":
         if error == "no_cv_found":
@@ -331,9 +329,7 @@ async def llm_complete(
         )
 
     try:
-        completion = await provider.complete(
-            messages, alias=alias, temperature=0.4, max_tokens=800
-        )
+        completion = await provider.complete(messages, alias=alias, temperature=0.4, max_tokens=800)
     except Exception as exc:
         if db is not None:
             await log_ai_usage_async(

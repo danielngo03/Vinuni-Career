@@ -89,9 +89,7 @@ async def record_event(
 
     existing = (
         await session.execute(
-            select(DiscoveryEvent).where(
-                DiscoveryEvent.idempotency_key == idempotency_key
-            )
+            select(DiscoveryEvent).where(DiscoveryEvent.idempotency_key == idempotency_key)
         )
     ).scalar_one_or_none()
     if existing is not None:
@@ -100,8 +98,7 @@ async def record_event(
     # Sponsored placement reference is meaningful ONLY on sponsored inventory.
     effective_placement = (
         placement_id
-        if placement_id is not None
-        and allowlist.is_sponsored_surface(source_surface, target_type)
+        if placement_id is not None and allowlist.is_sponsored_surface(source_surface, target_type)
         else None
     )
     scope, session_id, user_id = _resolve_scope(principal, discovery_session)
@@ -127,9 +124,7 @@ async def record_event(
         # Concurrent insert with the same key — return the winner's row.
         return (
             await session.execute(
-                select(DiscoveryEvent).where(
-                    DiscoveryEvent.idempotency_key == idempotency_key
-                )
+                select(DiscoveryEvent).where(DiscoveryEvent.idempotency_key == idempotency_key)
             )
         ).scalar_one()
 
@@ -171,9 +166,7 @@ async def ingest(
 
     now = now or _now()
     # Validate BEFORE creating a session so a bad event never spawns a row.
-    _validate(
-        payload["event_type"], payload["source_surface"], payload["target_type"]
-    )
+    _validate(payload["event_type"], payload["source_surface"], payload["target_type"])
 
     discovery_session = await session_service.get_or_create(
         session,
@@ -185,9 +178,7 @@ async def ingest(
 
     signal_tags = payload.get("signal_tags")
     if isinstance(signal_tags, dict) and signal_tags:
-        await session_service.record_signal(
-            session, discovery_session, tags=signal_tags
-        )
+        await session_service.record_signal(session, discovery_session, tags=signal_tags)
 
     await record_event(
         session,

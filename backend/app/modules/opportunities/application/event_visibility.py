@@ -33,9 +33,7 @@ def guest_levels() -> frozenset[str]:
     return lifecycle.visible_levels_for("guest", is_authenticated=False)
 
 
-def apply_visible_filter(
-    stmt: Select, *, levels: frozenset[str], now: datetime
-) -> Select:
+def apply_visible_filter(stmt: Select, *, levels: frozenset[str], now: datetime) -> Select:
     """Constrain ``stmt`` (selecting from :class:`Event`) to publicly visible rows."""
 
     return stmt.where(

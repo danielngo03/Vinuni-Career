@@ -25,7 +25,6 @@ _CAPABILITY_ROWS: list[tuple[str, str, str, str]] = [
     ("analytics:export", "analytics", "export", "export_analytics"),
     ("candidate_identity:view_cv", "candidate_identity", "view_cv", "cv_preview"),
     ("candidate_identity:download_cv", "candidate_identity", "download_cv", "cv_download"),
-    ("candidate_identity:request_reveal", "candidate_identity", "request_reveal", "identity_reveal"),
     ("applications:read", "applications", "read", "pipeline_and_candidates"),
     ("pipeline:move_candidate", "pipeline", "move_candidate", "pipeline_actions"),
     ("members:read", "members", "read", "team_activity"),
@@ -37,9 +36,7 @@ def capability_summary(principal: Principal, *, org_id: uuid.UUID | None) -> dic
     grants: dict[str, bool] = {}
     hidden_widgets: list[str] = []
     for key, resource, action, widget in _CAPABILITY_ROWS:
-        granted = permission_checker.can(
-            principal, resource, action, resource_org_id=org_id
-        )
+        granted = permission_checker.can(principal, resource, action, resource_org_id=org_id)
         grants[key] = granted
         if not granted and widget not in hidden_widgets:
             hidden_widgets.append(widget)

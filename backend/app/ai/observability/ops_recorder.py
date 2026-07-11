@@ -73,16 +73,10 @@ async def record_ops_event(
             return
 
         # --- 1. Append the raw per-call event row ---
-        session.add(
-            AiOpsEvent(
-                **{k: getattr(event, k) for k in OpsEventInput.__slots__}
-            )
-        )
+        session.add(AiOpsEvent(**{k: getattr(event, k) for k in OpsEventInput.__slots__}))
 
         # --- 2. Upsert the daily rollup row ---
-        day = datetime.now(UTC).replace(
-            hour=0, minute=0, second=0, microsecond=0
-        )
+        day = datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
         provider_key = event.provider or ""
         model_key = event.model or ""
 

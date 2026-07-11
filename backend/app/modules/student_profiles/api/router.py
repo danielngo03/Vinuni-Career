@@ -123,9 +123,7 @@ async def remove_avatar(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    result = await avatar_service.remove_avatar(
-        session, principal=auth.principal, ctx=auth.ctx
-    )
+    result = await avatar_service.remove_avatar(session, principal=auth.principal, ctx=auth.ctx)
     return success(result)
 
 

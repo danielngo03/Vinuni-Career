@@ -30,11 +30,14 @@ from sqlalchemy import (
     Boolean,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     Numeric,
     SmallInteger,
     String,
     Text,
+    UniqueConstraint,
+    Uuid,
     func,
 )
 from sqlalchemy.orm import Mapped, mapped_column
@@ -70,7 +73,9 @@ class SubscriptionPlan(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
 
@@ -91,9 +96,7 @@ class Subscription(Base):
     principal_type: Mapped[str] = mapped_column(String(10), nullable=False)  # user|org
     principal_id: Mapped[uuid.UUID] = mapped_column(nullable=False)
 
-    plan_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("subscription_plans.id"), nullable=False
-    )
+    plan_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("subscription_plans.id"), nullable=False)
     billing_period: Mapped[str] = mapped_column(String(10), nullable=False)
     # Frozen snapshot of the plan price at request (price freeze).
     price_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
@@ -104,25 +107,15 @@ class Subscription(Base):
     )  # pending|active|expired|cancelled
 
     # The active window; set at mark_paid (end_at = paid_at + plan.duration_days).
-    start_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    end_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    start_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    end_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
-    requested_by: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("users.id"), nullable=False
-    )
+    requested_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), nullable=False)
 
     # Manual/bank-transfer payment record (fields-on-row, ADR-0010 §4).
-    paid_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    paid_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     payment_reference: Mapped[str | None] = mapped_column(String(120), nullable=True)
-    paid_by: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("users.id"), nullable=True
-    )
+    paid_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True)
 
     cancel_reason: Mapped[str | None] = mapped_column(Text, nullable=True)
     # T-7d "expiring soon" notification dedupe stamp.
@@ -130,18 +123,10 @@ class Subscription(Base):
         DateTime(timezone=True), nullable=True
     )
 
-    requested_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    activated_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    expired_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    cancelled_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    requested_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    activated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    expired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    cancelled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     settings: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
 
@@ -149,10 +134,66 @@ class Subscription(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, server_default=func.now(),
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
         onupdate=func.now(),
     )
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+
+
+class AiEnergyAccount(Base):
+    """Masked AI-energy ceiling + persistent top-up wallet per scope (migration 0084).
+
+    One row per ``(scope_type, scope_id)`` where ``scope_type`` is ``user`` (a
+    student's own energy), ``org`` (a partner org / university), or ``department``.
+    The account holds only the CEILING configuration — it never stores consumption:
+
+    - ``weekly_allowance_units`` — an OPTIONAL weekly ceiling override. ``NULL``
+      means "use the tier-resolved default" (see
+      :func:`limit_facade.resolve_user_weekly_energy_units`). It resets every
+      week; consumption for the current week is summed on demand from
+      ``ai_billable_usage.units_charged`` (the durable ledger), never decremented
+      here.
+    - ``wallet_units`` — a NON-resetting purchased top-up balance. Credited by a
+      confirmed ``ai_energy_topups`` purchase and spent (decremented) by
+      :func:`app.modules.billing.application.energy_service.charge` only for the
+      portion of a charge that exceeds the current week's remaining allowance.
+
+    Never exposes provider/model/token/USD internals — units are a masked product
+    currency shown to users only as a percentage by the energy surface.
+    """
+
+    __tablename__ = "ai_energy_accounts"
+    __table_args__ = (
+        UniqueConstraint("scope_type", "scope_id", name="uq_ai_energy_accounts_scope"),
+        Index("ix_ai_energy_accounts_org_id", "org_id"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+        server_default=func.gen_random_uuid(),
+    )
+    # "user" | "org" | "department"
+    scope_type: Mapped[str] = mapped_column(String(16), nullable=False)
+    scope_id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    # Denormalised owning org for org/department scopes (indexed for admin reads).
+    org_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    # NULL == use the tier-resolved default weekly allowance.
+    weekly_allowance_units: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Non-resetting purchased top-up balance (credited by confirmed top-ups).
+    wallet_units: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    updated_by: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+    )

@@ -66,9 +66,7 @@ async def create_cohort(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=org_id)
     if not name or not name.strip():
         raise ValidationFailedError(details={"reason": "name_required"})
 
@@ -111,12 +109,16 @@ async def list_cohorts(
     org_id = require_org(principal)
     permission_checker.require(principal, _RESOURCE, "read", resource_org_id=org_id)
     rows = (
-        await session.execute(
-            select(Cohort)
-            .where(Cohort.org_id == org_id, Cohort.deleted_at.is_(None))
-            .order_by(Cohort.created_at.desc())
+        (
+            await session.execute(
+                select(Cohort)
+                .where(Cohort.org_id == org_id, Cohort.deleted_at.is_(None))
+                .order_by(Cohort.created_at.desc())
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [_presenter(c, locale=locale) for c in rows]
 
 
@@ -132,9 +134,7 @@ async def update_cohort(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=org_id)
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
@@ -170,9 +170,7 @@ async def delete_cohort(
     ctx: RequestContext,
 ) -> None:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "delete", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "delete", resource_org_id=org_id)
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
@@ -200,9 +198,7 @@ async def add_member(
     ctx: RequestContext,
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=org_id)
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
@@ -245,9 +241,7 @@ async def remove_member(
     ctx: RequestContext,
 ) -> None:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=org_id)
     cohort = await _get_cohort(session, org_id=org_id, cohort_id=cohort_id)
     if cohort is None:
         raise ResourceNotFoundError()
@@ -284,10 +278,14 @@ async def list_members(
     if cohort is None:
         raise ResourceNotFoundError()
     rows = (
-        await session.execute(
-            select(CohortMembership)
-            .where(CohortMembership.cohort_id == cohort_id)
-            .order_by(CohortMembership.created_at)
+        (
+            await session.execute(
+                select(CohortMembership)
+                .where(CohortMembership.cohort_id == cohort_id)
+                .order_by(CohortMembership.created_at)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [_membership_presenter(m) for m in rows]

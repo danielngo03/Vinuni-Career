@@ -57,9 +57,7 @@ def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
 
 
 async def _get_org(session: AsyncSession, org_id: uuid.UUID) -> Organization | None:
-    stmt = select(Organization).where(
-        Organization.id == org_id, Organization.deleted_at.is_(None)
-    )
+    stmt = select(Organization).where(Organization.id == org_id, Organization.deleted_at.is_(None))
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
@@ -69,9 +67,7 @@ async def unique_slug(session: AsyncSession, display_name: str) -> str:
     suffix = 1
     while True:
         exists = (
-            await session.execute(
-                select(Organization.id).where(Organization.slug == candidate)
-            )
+            await session.execute(select(Organization.id).where(Organization.slug == candidate))
         ).first()
         if exists is None:
             return candidate
@@ -161,27 +157,40 @@ async def create_org_with_admin(
     org.owner_membership_id = membership.id
     await session.flush()
 
-    audit_ctx = AuditContext(actor_id=actor_id, actor_org_id=org.id,
-                             ip=ctx.ip, user_agent=ctx.user_agent)
-    await write_audit(
-        session, action="organization.created", resource_type="organization",
-        resource_id=org.id, context=audit_ctx,
-        after={"slug": slug, "org_type": org_type, "status": status,
-               "trust_level": trust_level, "subscription_tier": subscription_tier},
+    audit_ctx = AuditContext(
+        actor_id=actor_id, actor_org_id=org.id, ip=ctx.ip, user_agent=ctx.user_agent
     )
     await write_audit(
-        session, action="role.created", resource_type="role",
-        resource_id=admin_role.id, context=audit_ctx,
+        session,
+        action="organization.created",
+        resource_type="organization",
+        resource_id=org.id,
+        context=audit_ctx,
+        after={
+            "slug": slug,
+            "org_type": org_type,
+            "status": status,
+            "trust_level": trust_level,
+            "subscription_tier": subscription_tier,
+        },
+    )
+    await write_audit(
+        session,
+        action="role.created",
+        resource_type="role",
+        resource_id=admin_role.id,
+        context=audit_ctx,
         after={"name": admin_role.name, "is_system": True, "permissions": ["*:*"]},
     )
     await write_audit(
-        session, action="membership.created", resource_type="membership",
-        resource_id=membership.id, context=audit_ctx,
+        session,
+        action="membership.created",
+        resource_type="membership",
+        resource_id=membership.id,
+        context=audit_ctx,
         after={"user_id": str(admin_user_id), "roles": [str(admin_role.id)]},
     )
-    return OrgBootstrapResult(
-        organization=org, admin_role=admin_role, membership=membership
-    )
+    return OrgBootstrapResult(organization=org, admin_role=admin_role, membership=membership)
 
 
 # --------------------------------------------------------------------------- #
@@ -194,9 +203,7 @@ async def get_organization(
 ) -> dict:
     if principal.org_id is None:
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "read", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "read", resource_org_id=principal.org_id)
     org = await _get_org(session, principal.org_id)
     if org is None:
         raise ResourceNotFoundError()
@@ -213,9 +220,7 @@ async def update_organization(
 ) -> dict:
     if principal.org_id is None:
         raise ResourceNotFoundError()
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=principal.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=principal.org_id)
     org = await _get_org(session, principal.org_id)
     if org is None:
         raise ResourceNotFoundError()
@@ -233,8 +238,11 @@ async def update_organization(
         org.version += 1
     await session.flush()
     await write_audit(
-        session, action="organization.updated", resource_type="organization",
-        resource_id=org.id, context=_audit_ctx(principal, ctx),
+        session,
+        action="organization.updated",
+        resource_type="organization",
+        resource_id=org.id,
+        context=_audit_ctx(principal, ctx),
         after={"fields": sorted(changed.keys())},
     )
     await session.commit()

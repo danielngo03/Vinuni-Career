@@ -26,9 +26,7 @@ _STUDENT_BATCH = 500
 _PERSONA = "student"
 
 
-async def sweep_weekly_digest(
-    session: AsyncSession, *, now: datetime
-) -> dict[str, int]:
+async def sweep_weekly_digest(session: AsyncSession, *, now: datetime) -> dict[str, int]:
     """Enqueue a weekly job digest for every active student. Idempotent per ISO week."""
 
     job_rows = (

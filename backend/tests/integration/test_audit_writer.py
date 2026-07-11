@@ -25,9 +25,7 @@ async def test_write_audit_persists_hashed_values(db_session) -> None:
     await db_session.commit()
 
     assert entry is not None
-    row = (
-        await db_session.execute(select(AuditLog).where(AuditLog.id == entry.id))
-    ).scalar_one()
+    row = (await db_session.execute(select(AuditLog).where(AuditLog.id == entry.id))).scalar_one()
     assert row.action == "job.created"
     assert row.actor_id == actor
     # IP/UA stored as hashes, never raw values.
@@ -38,9 +36,7 @@ async def test_write_audit_persists_hashed_values(db_session) -> None:
 
 
 async def test_write_audit_handles_missing_context(db_session) -> None:
-    entry = await write_audit(
-        db_session, action="system.ping", resource_type="system"
-    )
+    entry = await write_audit(db_session, action="system.ping", resource_type="system")
     await db_session.commit()
     assert entry is not None
     assert entry.ip_hash is None

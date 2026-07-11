@@ -404,6 +404,7 @@ async def test_check_async_raises_when_budget_exceeded(db_session):
                 check(estimated_cost_usd=0.2)
     finally:
         from app.modules.ai_settings.application.budget_guard import _NoOpAccumulator
+
         set_accumulator(_NoOpAccumulator())
 
 

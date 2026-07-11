@@ -32,10 +32,10 @@ from app.modules.discovery.application import health_service, ranking_service
 from app.modules.discovery.domain import ranking
 from app.modules.documents.domain.models import CvSection
 from app.modules.marketplace.application import overview_service
-from app.modules.opportunities.application import job_service, moderation_service
+from app.modules.opportunities.application import job_service
 from app.modules.opportunities.domain.models import Job
 from app.shared.exceptions import PermissionDeniedError, ResourceNotFoundError
-from app.shared.permissions import GUEST, Principal
+from app.shared.permissions import GUEST
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import select
 
@@ -45,9 +45,22 @@ from tests.org_utils import make_org_with_admin
 from tests.recruitment_utils import make_builder_cv, publish_job
 
 _FORBIDDEN = [
-    "openrouter", "openai", "anthropic", "claude", "gpt-4", "gemini", "deepseek",
-    "chat_cheap", "reasoning_cheap", "model_alias", "prompt_tokens",
-    "completion_tokens", "storage_path", "storage_key", "confidence", "embedding",
+    "openrouter",
+    "openai",
+    "anthropic",
+    "claude",
+    "gpt-4",
+    "gemini",
+    "deepseek",
+    "chat_cheap",
+    "reasoning_cheap",
+    "model_alias",
+    "prompt_tokens",
+    "completion_tokens",
+    "storage_path",
+    "storage_key",
+    "confidence",
+    "embedding",
 ]
 
 
@@ -95,8 +108,10 @@ async def _set_deadline(db, job_id: uuid.UUID, *, days: int) -> None:
 
 async def _seed_cv_skills(db, cv_id: str, text: str) -> None:
     sections = (
-        await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id)))
-    ).scalars().all()
+        (await db.execute(select(CvSection).where(CvSection.cv_id == uuid.UUID(cv_id))))
+        .scalars()
+        .all()
+    )
     target = next(s for s in sections if s.section_type == "skills")
     target.content_json = {"items": [{"text": text}]}
     await db.commit()
@@ -135,16 +150,17 @@ async def test_authenticated_recommendations_carry_reason_score_source(db_sessio
     partner = await _partner(db_session, "Acme Co")
     uni = await _university(db_session)
     await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Python Backend Intern", required_skills=["python", "fastapi"],
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Python Backend Intern",
+        required_skills=["python", "fastapi"],
     )
     _su, student = await make_student(db_session)
     sel = await make_builder_cv(db_session, student=student)
     await _seed_cv_skills(db_session, sel["cv_profile_id"], "Python, FastAPI, SQL")
 
-    out = await ranking_service.recommend_jobs(
-        db_session, principal=student, q="python", limit=10
-    )
+    out = await ranking_service.recommend_jobs(db_session, principal=student, q="python", limit=10)
     assert out["source"] == ranking.SOURCE_RECOMMENDED
     assert out["personalized"] is True
     assert len(out["items"]) == 1
@@ -229,16 +245,25 @@ async def test_sponsored_target_hidden_is_dropped_no_leak(db_session) -> None:
     pd = await _partner(db_session, "Org D")
     # A placement that is "active" but its target job was never published (draft).
     created = await job_service.create_job(
-        db_session, principal=pd, payload={
-            "title": "Hidden Sponsored", "description": "x", "employment_type": "internship",
-            "location_type": "onsite", "location_city": "Hanoi", "location_country": "Vietnam",
-            "required_skills": [], "preferred_skills": [], "salary_currency": "VND",
-            "salary_is_disclosed": False, "headcount": 1, "visibility": "public",
-        }, ctx=CTX,
+        db_session,
+        principal=pd,
+        payload={
+            "title": "Hidden Sponsored",
+            "description": "x",
+            "employment_type": "internship",
+            "location_type": "onsite",
+            "location_city": "Hanoi",
+            "location_country": "Vietnam",
+            "required_skills": [],
+            "preferred_skills": [],
+            "salary_currency": "VND",
+            "salary_is_disclosed": False,
+            "headcount": 1,
+            "visibility": "public",
+        },
+        ctx=CTX,
     )
-    await _seed_active_sponsored(
-        db_session, partner=pd, target_id=uuid.UUID(created["id"])
-    )
+    await _seed_active_sponsored(db_session, partner=pd, target_id=uuid.UUID(created["id"]))
     # Plus one real organic job so the list is non-empty.
     pa = await _partner(db_session, "Org A")
     await publish_job(db_session, partner_principal=pa, uni_principal=uni, title="Real Job")
@@ -258,8 +283,11 @@ async def test_guest_session_search_term_drives_reason(db_session) -> None:
     partner = await _partner(db_session, "Acme Co")
     uni = await _university(db_session)
     await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Data Analyst Intern", required_skills=["sql", "excel"],
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Data Analyst Intern",
+        required_skills=["sql", "excel"],
     )
     # Guest with a recorded search term (from the discovery_session coarse tags).
     out = await ranking_service.recommend_jobs(
@@ -284,12 +312,23 @@ async def test_eligibility_excludes_hidden_and_expired(db_session) -> None:
     )
     # A draft (never approved) job -> not publicly visible.
     await job_service.create_job(
-        db_session, principal=partner, payload={
-            "title": "Draft", "description": "x", "employment_type": "internship",
-            "location_type": "onsite", "location_city": "Hanoi", "location_country": "Vietnam",
-            "required_skills": [], "preferred_skills": [], "salary_currency": "VND",
-            "salary_is_disclosed": False, "headcount": 1, "visibility": "public",
-        }, ctx=CTX,
+        db_session,
+        principal=partner,
+        payload={
+            "title": "Draft",
+            "description": "x",
+            "employment_type": "internship",
+            "location_type": "onsite",
+            "location_city": "Hanoi",
+            "location_country": "Vietnam",
+            "required_skills": [],
+            "preferred_skills": [],
+            "salary_currency": "VND",
+            "salary_is_disclosed": False,
+            "headcount": 1,
+            "visibility": "public",
+        },
+        ctx=CTX,
     )
     # An expired (past-deadline) published job -> excluded by the predicate.
     expired = await publish_job(
@@ -316,16 +355,25 @@ async def test_diversity_avoids_same_company_back_to_back(db_session) -> None:
     org_a = await _partner(db_session, "Org A")
     org_b = await _partner(db_session, "Org B")
     a1 = await publish_job(
-        db_session, partner_principal=org_a, uni_principal=uni,
-        title="Python One", required_skills=["python"],
+        db_session,
+        partner_principal=org_a,
+        uni_principal=uni,
+        title="Python One",
+        required_skills=["python"],
     )
     a2 = await publish_job(
-        db_session, partner_principal=org_a, uni_principal=uni,
-        title="Python Two", required_skills=["python"],
+        db_session,
+        partner_principal=org_a,
+        uni_principal=uni,
+        title="Python Two",
+        required_skills=["python"],
     )
     b1 = await publish_job(
-        db_session, partner_principal=org_b, uni_principal=uni,
-        title="Python Three", required_skills=["python"],
+        db_session,
+        partner_principal=org_b,
+        uni_principal=uni,
+        title="Python Three",
+        required_skills=["python"],
     )
     await _backdate(db_session, a1, days=0)
     await _backdate(db_session, a2, days=1)
@@ -349,16 +397,25 @@ async def test_similar_jobs_deterministic_and_eligible(db_session) -> None:
     uni = await _university(db_session)
     partner = await _partner(db_session, "Acme Co")
     seed = await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Backend Engineer", required_skills=["python", "fastapi"],
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Backend Engineer",
+        required_skills=["python", "fastapi"],
     )
     similar = await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Backend Developer", required_skills=["python", "django"],
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Backend Developer",
+        required_skills=["python", "django"],
     )
     await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Marketing Intern", required_skills=["seo"],
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Marketing Intern",
+        required_skills=["seo"],
     )
 
     out1 = await ranking_service.similar_jobs(db_session, principal=GUEST, job_id=seed)
@@ -379,12 +436,23 @@ async def test_similar_jobs_deterministic_and_eligible(db_session) -> None:
 async def test_similar_jobs_404_on_hidden_seed(db_session) -> None:
     partner = await _partner(db_session, "Acme Co")
     draft = await job_service.create_job(
-        db_session, principal=partner, payload={
-            "title": "Draft", "description": "x", "employment_type": "internship",
-            "location_type": "onsite", "location_city": "Hanoi", "location_country": "Vietnam",
-            "required_skills": [], "preferred_skills": [], "salary_currency": "VND",
-            "salary_is_disclosed": False, "headcount": 1, "visibility": "public",
-        }, ctx=CTX,
+        db_session,
+        principal=partner,
+        payload={
+            "title": "Draft",
+            "description": "x",
+            "employment_type": "internship",
+            "location_type": "onsite",
+            "location_city": "Hanoi",
+            "location_country": "Vietnam",
+            "required_skills": [],
+            "preferred_skills": [],
+            "salary_currency": "VND",
+            "salary_is_disclosed": False,
+            "headcount": 1,
+            "visibility": "public",
+        },
+        ctx=CTX,
     )
     with pytest.raises(ResourceNotFoundError):
         await ranking_service.similar_jobs(
@@ -401,8 +469,11 @@ async def test_overview_rails_populated_and_hide_if_empty(db_session) -> None:
     uni = await _university(db_session)
     partner = await _partner(db_session, "Acme Co")
     await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Software Engineer", required_skills=["python"],
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Software Engineer",
+        required_skills=["python"],
     )
     sponsored_job = await publish_job(
         db_session, partner_principal=partner, uni_principal=uni, title="Sponsored Eng"
@@ -462,9 +533,7 @@ async def test_admin_health_aggregates_and_privacy(db_session) -> None:
     await _seed_active_sponsored(db_session, partner=partner, target_id=sponsored_job)
 
     data = await health_service.get_discovery_health(db_session, principal=uni)
-    assert set(data.keys()) == {
-        "rails", "empty_rails", "sponsored", "events", "policy_flags"
-    }
+    assert set(data.keys()) == {"rails", "empty_rails", "sponsored", "events", "policy_flags"}
     assert data["sponsored"]["active_count"] >= 1
     assert data["rails"]["recommended_jobs_available"] >= 1
     # Privacy: only aggregate counts — no user id / email / session id anywhere.
@@ -495,8 +564,11 @@ async def test_http_recommendations_and_similar_routes(client, db_session) -> No
     uni = await _university(db_session)
     partner = await _partner(db_session, "Acme Co")
     job_id = await publish_job(
-        db_session, partner_principal=partner, uni_principal=uni,
-        title="Backend Engineer", required_skills=["python", "fastapi"],
+        db_session,
+        partner_principal=partner,
+        uni_principal=uni,
+        title="Backend Engineer",
+        required_skills=["python", "fastapi"],
     )
 
     # /jobs/recommendations is matched as a STATIC path (never captured by

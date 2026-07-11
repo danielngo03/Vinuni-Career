@@ -58,9 +58,7 @@ def build_report(
     else:
         trend = "flat"
 
-    disclosure_rate = (
-        round(100 * disclosed_salary_jobs / active_jobs) if active_jobs else 0
-    )
+    disclosure_rate = round(100 * disclosed_salary_jobs / active_jobs) if active_jobs else 0
     return {
         "active_jobs": active_jobs,
         "jobs_last_30d": jobs_last_30d,
@@ -68,9 +66,7 @@ def build_report(
         "trend": trend,
         "employment_types": [
             {"type": t, "count": c}
-            for t, c in sorted(
-                employment_type_counts.items(), key=lambda kv: -kv[1]
-            )[:5]
+            for t, c in sorted(employment_type_counts.items(), key=lambda kv: -kv[1])[:5]
         ],
         "top_skills": [
             {"skill": s, "count": c}

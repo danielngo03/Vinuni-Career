@@ -47,9 +47,7 @@ class DiscoverySession(Base):
     __tablename__ = "discovery_sessions"
 
     # Random anonymous id — NOT tied to user PII.
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     # Nullable link populated once a session-holder logs in (post-login continuity).
     user_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True
@@ -77,32 +75,22 @@ class DiscoveryEvent(Base):
 
     __tablename__ = "discovery_events"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     event_type: Mapped[str] = mapped_column(
         String(30), nullable=False
     )  # impression|click|view|apply_start|save_intent|event_register_intent
     source_surface: Mapped[str] = mapped_column(String(50), nullable=False)
-    target_type: Mapped[str] = mapped_column(
-        String(20), nullable=False
-    )  # job|event|company|banner
+    target_type: Mapped[str] = mapped_column(String(20), nullable=False)  # job|event|company|banner
     target_id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
     # FK-less reference to sponsored_placements; set ONLY for sponsored surfaces.
-    placement_id: Mapped[uuid.UUID | None] = mapped_column(
-        Uuid(as_uuid=True), nullable=True
-    )
-    scope: Mapped[str] = mapped_column(
-        String(20), nullable=False
-    )  # anonymous|session|user
+    placement_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    scope: Mapped[str] = mapped_column(String(20), nullable=False)  # anonymous|session|user
     session_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("discovery_sessions.id", ondelete="SET NULL"), nullable=True
     )
     # Plain (FK-less) — high-volume append-only ledger, mirrors audit_logs.
     user_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
-    idempotency_key: Mapped[str] = mapped_column(
-        String(120), nullable=False, unique=True
-    )
+    idempotency_key: Mapped[str] = mapped_column(String(120), nullable=False, unique=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

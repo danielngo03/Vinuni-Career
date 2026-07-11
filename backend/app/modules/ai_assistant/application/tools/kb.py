@@ -15,6 +15,7 @@ async def knowledge_base_query(session: AsyncSession, principal: Principal, args
         return {"ok": False, "error": "query_required", "chunks": []}
 
     from app.ai.safety.input_guard import sanitize_instruction
+
     safe_query, blocked = sanitize_instruction(query)
     if blocked or not safe_query:
         return {"ok": False, "error": "query_blocked", "chunks": []}

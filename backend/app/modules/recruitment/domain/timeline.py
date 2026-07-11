@@ -40,8 +40,6 @@ OFFER_ACCEPTED = "offer_accepted"
 OFFER_DECLINED = "offer_declined"
 OFFER_EXPIRED = "offer_expired"
 OFFER_RESCINDED = "offer_rescinded"
-REVEAL_REQUESTED = "reveal_requested"
-REVEAL_APPROVED = "reveal_approved"
 
 EVENT_TYPES: frozenset[str] = frozenset(
     {
@@ -61,8 +59,6 @@ EVENT_TYPES: frozenset[str] = frozenset(
         OFFER_DECLINED,
         OFFER_EXPIRED,
         OFFER_RESCINDED,
-        REVEAL_REQUESTED,
-        REVEAL_APPROVED,
     }
 )
 
@@ -137,14 +133,6 @@ _LABELS: dict[str, dict[str, str]] = {
     OFFER_RESCINDED: {
         "en": "Offer withdrawn by the company",
         "vi": "Công ty đã thu hồi thư mời",
-    },
-    REVEAL_REQUESTED: {
-        "en": "Company requested to view your identity",
-        "vi": "Nhà tuyển dụng yêu cầu xem thông tin của bạn",
-    },
-    REVEAL_APPROVED: {
-        "en": "You approved the identity reveal request",
-        "vi": "Bạn đã đồng ý tiết lộ danh tính",
     },
 }
 

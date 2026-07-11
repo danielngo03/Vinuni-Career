@@ -112,9 +112,7 @@ async def run_job(
             status = "ok"
         except Exception:  # noqa: BLE001 - one job must not crash the scheduler
             await session.rollback()
-            logger.warning(
-                "scheduler.job_failed", extra={"job": job.name}, exc_info=True
-            )
+            logger.warning("scheduler.job_failed", extra={"job": job.name}, exc_info=True)
             result_dict = {"error": 1}
             status = "error"
 

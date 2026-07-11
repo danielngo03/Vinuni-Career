@@ -49,9 +49,7 @@ router = APIRouter(prefix="/career-services", tags=["career-services"])
 # --------------------------------------------------------------------------- #
 
 
-@router.post(
-    "/cohorts", status_code=status.HTTP_201_CREATED, summary="Create a cohort"
-)
+@router.post("/cohorts", status_code=status.HTTP_201_CREATED, summary="Create a cohort")
 async def create_cohort(
     body: CohortCreateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
@@ -75,9 +73,7 @@ async def list_cohorts(
     session: AsyncSession = Depends(get_db_session),
     locale: str = Query(default="vi"),
 ) -> dict:
-    data = await cohort_service.list_cohorts(
-        session, principal=auth.principal, locale=locale
-    )
+    data = await cohort_service.list_cohorts(session, principal=auth.principal, locale=locale)
     return success(data)
 
 
@@ -123,9 +119,7 @@ async def list_members(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await cohort_service.list_members(
-        session, principal=auth.principal, cohort_id=cohort_id
-    )
+    data = await cohort_service.list_members(session, principal=auth.principal, cohort_id=cohort_id)
     return success(data)
 
 
@@ -218,9 +212,7 @@ async def list_at_risk_flags(
     return success(data)
 
 
-@router.patch(
-    "/at-risk-flags/{flag_id}/status", summary="Update an at-risk flag's status"
-)
+@router.patch("/at-risk-flags/{flag_id}/status", summary="Update an at-risk flag's status")
 async def update_at_risk_flag_status(
     flag_id: uuid.UUID,
     body: AtRiskFlagStatusRequest,
@@ -286,9 +278,7 @@ async def list_cv_review_items(
     return success(data)
 
 
-@router.post(
-    "/cv-review-items/{item_id}/assign", summary="Assign a counselor to a CV review"
-)
+@router.post("/cv-review-items/{item_id}/assign", summary="Assign a counselor to a CV review")
 async def assign_cv_review(
     item_id: uuid.UUID,
     body: CvReviewAssignRequest,
@@ -307,9 +297,7 @@ async def assign_cv_review(
     return success(data)
 
 
-@router.patch(
-    "/cv-review-items/{item_id}/status", summary="Update a CV review item's status"
-)
+@router.patch("/cv-review-items/{item_id}/status", summary="Update a CV review item's status")
 async def update_cv_review_status(
     item_id: uuid.UUID,
     body: CvReviewStatusRequest,
@@ -334,9 +322,7 @@ async def update_cv_review_status(
 # --------------------------------------------------------------------------- #
 
 
-@router.post(
-    "/appointments", status_code=status.HTTP_201_CREATED, summary="Book an appointment"
-)
+@router.post("/appointments", status_code=status.HTTP_201_CREATED, summary="Book an appointment")
 async def book_appointment(
     body: AppointmentCreateRequest,
     auth: CurrentAuth = Depends(get_current_auth),
@@ -379,9 +365,7 @@ async def list_appointments(
     return success(data)
 
 
-@router.patch(
-    "/appointments/{appointment_id}/status", summary="Update an appointment's status"
-)
+@router.patch("/appointments/{appointment_id}/status", summary="Update an appointment's status")
 async def update_appointment_status(
     appointment_id: uuid.UUID,
     body: AppointmentStatusRequest,
@@ -510,9 +494,7 @@ async def list_interventions(
     return success(data)
 
 
-@router.patch(
-    "/interventions/{record_id}/outcome", summary="Update an intervention's outcome"
-)
+@router.patch("/interventions/{record_id}/outcome", summary="Update an intervention's outcome")
 async def update_intervention_outcome(
     record_id: uuid.UUID,
     body: InterventionOutcomeRequest,

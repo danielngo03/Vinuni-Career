@@ -21,7 +21,6 @@ from app.shared.permissions import GUEST
 from tests.documents_utils import make_student
 from tests.org_utils import make_org_with_admin
 
-
 # --------------------------------------------------------------------------- #
 # create_kb / list_kbs                                                        #
 # --------------------------------------------------------------------------- #
@@ -44,9 +43,7 @@ async def test_create_platform_kb_visible_to_any_authenticated_user(db_session) 
 
 async def test_guest_cannot_see_any_kb(db_session) -> None:
     _u, _org, uni = await make_org_with_admin(db_session, org_type="university")
-    await kb_service.create_kb(
-        db_session, principal=uni, name="Public KB", scope=KB_SCOPE_PLATFORM
-    )
+    await kb_service.create_kb(db_session, principal=uni, name="Public KB", scope=KB_SCOPE_PLATFORM)
 
     kbs = await kb_service.list_kbs(db_session, principal=GUEST)
     assert kbs == []

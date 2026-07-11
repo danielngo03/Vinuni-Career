@@ -50,24 +50,45 @@ _LABELS: dict[str, dict[str, str]] = {
         "job.created": "Đã tạo tin tuyển dụng",
         "job.updated": "Đã cập nhật tin tuyển dụng",
         "job.submit": "Đã gửi duyệt tin tuyển dụng",
+        "job.approved": "Đã duyệt tin tuyển dụng",
+        "job.rejected": "Đã từ chối tin tuyển dụng",
+        "job.claimed": "Đã nhận xử lý tin tuyển dụng",
+        "job.escalated": "Đã chuyển cấp xử lý tin tuyển dụng",
+        "job.close": "Đã đóng tin tuyển dụng",
+        "job.reopen": "Đã mở lại tin tuyển dụng",
+        "job.auto_closed": "Tin tuyển dụng tự động đóng",
         "job.deleted": "Đã xoá tin tuyển dụng",
         "job.duplicated": "Đã nhân bản tin tuyển dụng",
+        "application.created": "Đã có hồ sơ ứng tuyển mới",
         "application.reviewed": "Đã xem xét hồ sơ ứng tuyển",
         "application.rejected": "Đã từ chối hồ sơ ứng tuyển",
+        "application.assigned": "Đã phân công ứng viên",
+        "application.unassigned": "Đã bỏ phân công ứng viên",
+        "application.cv_evaluated": "Đã đánh giá CV ứng viên",
+        "application.withdrawn": "Ứng viên đã rút hồ sơ",
         "application.stage_advanced": "Đã chuyển giai đoạn ứng viên",
         "application.stage_rolled_back": "Đã lùi giai đoạn ứng viên",
         "application.hired": "Đã tuyển ứng viên",
         "application.reveal_requested": "Đã gửi yêu cầu tiết lộ danh tính",
         "application.reveal_responded": "Ứng viên đã phản hồi yêu cầu tiết lộ",
+        "application.scorecard_submitted": "Đã gửi đánh giá ứng viên",
+        "application.scorecard_updated": "Đã cập nhật đánh giá ứng viên",
+        "application.scorecard_withdrawn": "Đã thu hồi đánh giá ứng viên",
+        "application.interview_assigned": "Đã phân công người phỏng vấn",
+        "application.interview_assignees_changed": "Đã thay đổi người phỏng vấn",
         "application.offer_created": "Đã tạo đề nghị làm việc",
         "application.offer_submitted": "Đã gửi duyệt đề nghị làm việc",
         "application.offer_sent": "Đã gửi đề nghị làm việc cho ứng viên",
+        "application.offer_updated": "Đã cập nhật đề nghị làm việc",
+        "application.offer_declined": "Ứng viên đã từ chối đề nghị làm việc",
         "application.offer_rescinded": "Đã thu hồi đề nghị làm việc",
         "application.interview_scheduled": "Đã lên lịch phỏng vấn",
         "application.interview_rescheduled": "Đã dời lịch phỏng vấn",
         "application.interview_cancelled": "Đã huỷ lịch phỏng vấn",
         "membership.created": "Đã thêm thành viên",
         "membership.updated": "Đã cập nhật thành viên",
+        "membership.deactivated": "Đã tạm ngưng thành viên",
+        "membership.reactivated": "Đã kích hoạt lại thành viên",
         "membership.removed": "Đã xoá thành viên",
         "invitation.created": "Đã mời thành viên mới",
         "invitation.revoked": "Đã thu hồi lời mời",
@@ -85,24 +106,45 @@ _LABELS: dict[str, dict[str, str]] = {
         "job.created": "Job created",
         "job.updated": "Job updated",
         "job.submit": "Job submitted for review",
+        "job.approved": "Job approved",
+        "job.rejected": "Job rejected",
+        "job.claimed": "Job claimed for review",
+        "job.escalated": "Job escalated",
+        "job.close": "Job closed",
+        "job.reopen": "Job reopened",
+        "job.auto_closed": "Job auto-closed",
         "job.deleted": "Job deleted",
         "job.duplicated": "Job duplicated",
+        "application.created": "New application received",
         "application.reviewed": "Application reviewed",
         "application.rejected": "Application rejected",
+        "application.assigned": "Candidate assigned",
+        "application.unassigned": "Candidate unassigned",
+        "application.cv_evaluated": "Evaluated a candidate CV",
+        "application.withdrawn": "Candidate withdrew",
         "application.stage_advanced": "Candidate moved forward",
         "application.stage_rolled_back": "Candidate moved back",
         "application.hired": "Candidate hired",
         "application.reveal_requested": "Identity reveal requested",
         "application.reveal_responded": "Candidate responded to reveal request",
+        "application.scorecard_submitted": "Scorecard submitted",
+        "application.scorecard_updated": "Scorecard updated",
+        "application.scorecard_withdrawn": "Scorecard withdrawn",
+        "application.interview_assigned": "Interviewer assigned",
+        "application.interview_assignees_changed": "Interviewers changed",
         "application.offer_created": "Offer created",
         "application.offer_submitted": "Offer submitted for approval",
         "application.offer_sent": "Offer sent to candidate",
+        "application.offer_updated": "Offer updated",
+        "application.offer_declined": "Offer declined by candidate",
         "application.offer_rescinded": "Offer rescinded",
         "application.interview_scheduled": "Interview scheduled",
         "application.interview_rescheduled": "Interview rescheduled",
         "application.interview_cancelled": "Interview cancelled",
         "membership.created": "Team member added",
         "membership.updated": "Team member updated",
+        "membership.deactivated": "Team member deactivated",
+        "membership.reactivated": "Team member reactivated",
         "membership.removed": "Team member removed",
         "invitation.created": "Invitation sent",
         "invitation.revoked": "Invitation revoked",
@@ -127,7 +169,14 @@ def _capability_for(action: str) -> tuple[str, str] | None:
 
 
 def _label(action: str, *, locale: str) -> str:
-    return _LABELS.get(locale, _LABELS["vi"]).get(action, action)
+    table = _LABELS.get(locale, _LABELS["vi"])
+    if action in table:
+        return table[action]
+    # Safety net: never surface a raw dotted action code (e.g. an action added
+    # later without a bilingual label). Humanize the leaf segment instead:
+    # "application.foo_bar" -> "Foo bar".
+    leaf = action.rsplit(".", 1)[-1].replace("_", " ").strip()
+    return leaf[:1].upper() + leaf[1:] if leaf else action
 
 
 async def _viewer_department_ids(
@@ -155,13 +204,17 @@ async def list_partner_activity_feed(
     approximation, department when the viewer is department-scoped)."""
 
     rows = (
-        await session.execute(
-            select(AuditLog)
-            .where(AuditLog.actor_org_id == org_id)
-            .order_by(AuditLog.occurred_at.desc())
-            .limit(max(limit, 1) * 3)  # over-fetch; some rows get capability-filtered out
+        (
+            await session.execute(
+                select(AuditLog)
+                .where(AuditLog.actor_org_id == org_id)
+                .order_by(AuditLog.occurred_at.desc())
+                .limit(max(limit, 1) * 3)  # over-fetch; some rows get capability-filtered out
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     if not rows:
         return []
 
@@ -192,9 +245,7 @@ async def list_partner_activity_feed(
         if cap is None:
             continue
         resource, action_verb = cap
-        if not permission_checker.can(
-            principal, resource, action_verb, resource_org_id=org_id
-        ):
+        if not permission_checker.can(principal, resource, action_verb, resource_org_id=org_id):
             continue
         if not await _actor_shares_department(row.actor_id):
             continue
@@ -204,14 +255,16 @@ async def list_partner_activity_feed(
             actor = await user_service.get_by_id(session, row.actor_id)
             actor_name = actor.full_name if actor else None
 
-        out.append({
-            "action": row.action,
-            "action_label": _label(row.action, locale=locale),
-            "resource_type": row.resource_type,
-            "resource_id": str(row.resource_id) if row.resource_id else None,
-            "actor_name": actor_name,
-            "occurred_at": row.occurred_at.isoformat(),
-        })
+        out.append(
+            {
+                "action": row.action,
+                "action_label": _label(row.action, locale=locale),
+                "resource_type": row.resource_type,
+                "resource_id": str(row.resource_id) if row.resource_id else None,
+                "actor_name": actor_name,
+                "occurred_at": row.occurred_at.isoformat(),
+            }
+        )
         if len(out) >= limit:
             break
     return out

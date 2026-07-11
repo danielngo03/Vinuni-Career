@@ -46,9 +46,7 @@ class StudentProfile(BaseEntity):
     )
     phone: Mapped[str | None] = mapped_column(String(30), nullable=True)
     location_city: Mapped[str | None] = mapped_column(String(100), nullable=True)
-    location_country: Mapped[str] = mapped_column(
-        String(100), nullable=False, default="Vietnam"
-    )
+    location_country: Mapped[str] = mapped_column(String(100), nullable=False, default="Vietnam")
 
     # Visibility / privacy.
     profile_visibility: Mapped[str] = mapped_column(

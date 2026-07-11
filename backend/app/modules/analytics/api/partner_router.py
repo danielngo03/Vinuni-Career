@@ -103,7 +103,9 @@ def _require_access_log_permission(principal: Principal, *, org_id: uuid.UUID) -
         raise PermissionDeniedError()
     if not (
         principal.is_superadmin
-        or permission_checker.can(principal, "candidate_identity", "download_cv", resource_org_id=org_id)
+        or permission_checker.can(
+            principal, "candidate_identity", "download_cv", resource_org_id=org_id
+        )
         or permission_checker.can(principal, "analytics", "view_clicks", resource_org_id=org_id)
     ):
         raise PermissionDeniedError()

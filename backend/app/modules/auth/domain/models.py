@@ -39,9 +39,7 @@ class Session(Base):
     user_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
     )
-    identity_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("identities.id"), nullable=False
-    )
+    identity_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("identities.id"), nullable=False)
     device_hint: Mapped[str | None] = mapped_column(String(200), nullable=True)
     ip_hash: Mapped[str | None] = mapped_column(String(128), nullable=True)
     city_level_location: Mapped[str | None] = mapped_column(String(200), nullable=True)
@@ -52,9 +50,7 @@ class Session(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
-    revoked_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     revoked_reason: Mapped[str | None] = mapped_column(String(50), nullable=True)
 
     def is_active(self, *, now: datetime) -> bool:
@@ -75,12 +71,8 @@ class RefreshToken(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
-    rotated_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
-    revoked_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    rotated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     replaced_by_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("refresh_tokens.id"), nullable=True
     )
@@ -113,9 +105,7 @@ class EmailVerification(Base):
     token_hash: Mapped[str] = mapped_column(String(128), nullable=False, unique=True)
     purpose: Mapped[str] = mapped_column(String(30), nullable=False)
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    used_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     otp_code_hash: Mapped[str | None] = mapped_column(String(128), nullable=True)
     otp_attempts: Mapped[int] = mapped_column(default=0, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
@@ -133,9 +123,7 @@ class SecurityEvent(Base):
         ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
     )
     event_type: Mapped[str] = mapped_column(String(100), nullable=False)
-    session_id: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("sessions.id"), nullable=True
-    )
+    session_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("sessions.id"), nullable=True)
     device_hint: Mapped[str | None] = mapped_column(String(200), nullable=True)
     ip_hash: Mapped[str | None] = mapped_column(String(128), nullable=True)
     city_level_location: Mapped[str | None] = mapped_column(String(200), nullable=True)
@@ -159,9 +147,7 @@ class UserTotp(Base):
         ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
     )
     secret: Mapped[str] = mapped_column(String(255), nullable=False)
-    confirmed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    confirmed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -183,9 +169,7 @@ class AuthThrottle(Base):
     """
 
     __tablename__ = "auth_throttles"
-    __table_args__ = (
-        UniqueConstraint("scope", "key_hash", name="uq_auth_throttles_scope_key"),
-    )
+    __table_args__ = (UniqueConstraint("scope", "key_hash", name="uq_auth_throttles_scope_key"),)
 
     id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
     scope: Mapped[str] = mapped_column(String(50), nullable=False)

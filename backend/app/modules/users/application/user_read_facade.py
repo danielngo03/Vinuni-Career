@@ -40,14 +40,10 @@ class IdentityRef:
     org_id: uuid.UUID | None
 
 
-async def get_user_contact(
-    session: AsyncSession, user_id: uuid.UUID | None
-) -> UserContact | None:
+async def get_user_contact(session: AsyncSession, user_id: uuid.UUID | None) -> UserContact | None:
     if user_id is None:
         return None
-    user = (
-        await session.execute(select(User).where(User.id == user_id))
-    ).scalar_one_or_none()
+    user = (await session.execute(select(User).where(User.id == user_id))).scalar_one_or_none()
     if user is None:
         return None
     return UserContact(
@@ -61,13 +57,9 @@ async def get_user_contacts(
     ids = {i for i in user_ids if i is not None}
     if not ids:
         return {}
-    rows = (
-        await session.execute(select(User).where(User.id.in_(ids)))
-    ).scalars().all()
+    rows = (await session.execute(select(User).where(User.id.in_(ids)))).scalars().all()
     return {
-        u.id: UserContact(
-            id=u.id, email=u.email, full_name=u.full_name, is_active=u.is_active
-        )
+        u.id: UserContact(id=u.id, email=u.email, full_name=u.full_name, is_active=u.is_active)
         for u in rows
     }
 
@@ -78,17 +70,11 @@ async def get_full_names(
     ids = {i for i in user_ids if i is not None}
     if not ids:
         return {}
-    rows = (
-        await session.execute(
-            select(User.id, User.full_name).where(User.id.in_(ids))
-        )
-    ).all()
+    rows = (await session.execute(select(User.id, User.full_name).where(User.id.in_(ids)))).all()
     return {row.id: row.full_name for row in rows}
 
 
-async def get_full_name(
-    session: AsyncSession, user_id: uuid.UUID | None
-) -> str | None:
+async def get_full_name(session: AsyncSession, user_id: uuid.UUID | None) -> str | None:
     if user_id is None:
         return None
     return (
@@ -104,26 +90,18 @@ async def get_email(session: AsyncSession, user_id: uuid.UUID | None) -> str | N
     ).scalar_one_or_none()
 
 
-async def existing_user_ids(
-    session: AsyncSession, user_ids: Iterable[uuid.UUID]
-) -> set[uuid.UUID]:
+async def existing_user_ids(session: AsyncSession, user_ids: Iterable[uuid.UUID]) -> set[uuid.UUID]:
     """The subset of ``user_ids`` that resolve to a real user row."""
 
     ids = {i for i in user_ids if i is not None}
     if not ids:
         return set()
-    return set(
-        (await session.execute(select(User.id).where(User.id.in_(ids)))).scalars().all()
-    )
+    return set((await session.execute(select(User.id).where(User.id.in_(ids)))).scalars().all())
 
 
-async def get_preferred_language(
-    session: AsyncSession, user_id: uuid.UUID
-) -> str | None:
+async def get_preferred_language(session: AsyncSession, user_id: uuid.UUID) -> str | None:
     return (
-        await session.execute(
-            select(User.preferred_language).where(User.id == user_id)
-        )
+        await session.execute(select(User.preferred_language).where(User.id == user_id))
     ).scalar_one_or_none()
 
 
@@ -143,14 +121,10 @@ async def get_notification_in_app_preference(
     return None if row is None else bool(row.in_app_enabled)
 
 
-async def is_org_member(
-    session: AsyncSession, *, user_id: uuid.UUID, org_id: uuid.UUID
-) -> bool:
+async def is_org_member(session: AsyncSession, *, user_id: uuid.UUID, org_id: uuid.UUID) -> bool:
     found = (
         await session.execute(
-            select(Identity.id).where(
-                Identity.user_id == user_id, Identity.org_id == org_id
-            )
+            select(Identity.id).where(Identity.user_id == user_id, Identity.org_id == org_id)
         )
     ).first()
     return found is not None
@@ -163,9 +137,7 @@ async def get_identity_persona_in_org(
 
     return (
         await session.execute(
-            select(Identity.persona).where(
-                Identity.user_id == user_id, Identity.org_id == org_id
-            )
+            select(Identity.persona).where(Identity.user_id == user_id, Identity.org_id == org_id)
         )
     ).scalar_one_or_none()
 
@@ -262,8 +234,4 @@ async def count_active_identities(session: AsyncSession) -> int:
 
     from sqlalchemy import func
 
-    return (
-        await session.execute(
-            select(func.count()).select_from(Identity)
-        )
-    ).scalar_one()
+    return (await session.execute(select(func.count()).select_from(Identity))).scalar_one()

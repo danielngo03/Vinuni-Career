@@ -14,21 +14,19 @@ from __future__ import annotations
 # Overall profile discoverability / visibility                                #
 # --------------------------------------------------------------------------- #
 
-VISIBILITY_PUBLIC = "public"          # any authenticated user may see the public projection
+VISIBILITY_PUBLIC = "public"  # any authenticated user may see the public projection
 VISIBILITY_VINUNI_ONLY = "vinuni_only"  # only the VinUni community (student/alumni/staff)
-VISIBILITY_PRIVATE = "private"        # owner only (+ staff governance); not discoverable
+VISIBILITY_PRIVATE = "private"  # owner only (+ staff governance); not discoverable
 
-PROFILE_VISIBILITY = frozenset(
-    {VISIBILITY_PUBLIC, VISIBILITY_VINUNI_ONLY, VISIBILITY_PRIVATE}
-)
+PROFILE_VISIBILITY = frozenset({VISIBILITY_PUBLIC, VISIBILITY_VINUNI_ONLY, VISIBILITY_PRIVATE})
 
 # --------------------------------------------------------------------------- #
 # Per-field contact visibility (subset of docs/DATA_MODEL.md privacy_settings) #
 # --------------------------------------------------------------------------- #
 
-CONTACT_PUBLIC = "public"     # visible in any allowed view
-CONTACT_INVITED = "invited"   # visible only in an accepted-reveal / application context
-CONTACT_HIDDEN = "hidden"     # never exposed to anyone but the owner
+CONTACT_PUBLIC = "public"  # visible in any allowed view
+CONTACT_INVITED = "invited"  # visible only in an accepted-reveal / application context
+CONTACT_HIDDEN = "hidden"  # never exposed to anyone but the owner
 
 CONTACT_VISIBILITY = frozenset({CONTACT_PUBLIC, CONTACT_INVITED, CONTACT_HIDDEN})
 

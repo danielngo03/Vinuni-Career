@@ -22,9 +22,7 @@ def get_policy_text(*, locale: str = "vi") -> list[dict[str, object]]:
     return retention.as_dict(locale=locale)
 
 
-async def sweep_retention(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def sweep_retention(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Anonymize application CV snapshots past the retention window.
 
     Idempotent: :func:`snapshot_service.anonymize_expired_snapshots` skips
@@ -34,7 +32,5 @@ async def sweep_retention(
 
     now = now or datetime.now(tz=UTC)
     cutoff = now - timedelta(days=retention.APPLICATION_CV_SNAPSHOT_RETENTION_DAYS)
-    anonymized = await snapshot_service.anonymize_expired_snapshots(
-        session, older_than=cutoff
-    )
+    anonymized = await snapshot_service.anonymize_expired_snapshots(session, older_than=cutoff)
     return {"anonymized": anonymized}

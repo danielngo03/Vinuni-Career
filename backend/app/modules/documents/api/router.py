@@ -85,9 +85,7 @@ async def list_templates_admin(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    items = await template_admin_service.list_templates_admin(
-        session, principal=auth.principal
-    )
+    items = await template_admin_service.list_templates_admin(session, principal=auth.principal)
     return success(items, meta={"count": len(items)})
 
 
@@ -208,8 +206,11 @@ async def ingest_upload(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     result = await ingestion_service.start_ingestion(
-        session, principal=auth.principal, document_id=document_id,
-        idempotency_key=body.idempotency_key, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        document_id=document_id,
+        idempotency_key=body.idempotency_key,
+        ctx=auth.ctx,
     )
     return success(result)
 
@@ -226,9 +227,11 @@ async def get_ingestion(
     return success(result)
 
 
-@ingestions_router.post("/{ingestion_id}/import",
-                        status_code=status.HTTP_201_CREATED,
-                        summary="Import a reviewed ingestion into a new/draft CV")
+@ingestions_router.post(
+    "/{ingestion_id}/import",
+    status_code=status.HTTP_201_CREATED,
+    summary="Import a reviewed ingestion into a new/draft CV",
+)
 async def import_ingestion(
     ingestion_id: uuid.UUID,
     body: ImportIngestionRequest,
@@ -236,8 +239,11 @@ async def import_ingestion(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     result = await ingestion_service.import_ingestion(
-        session, principal=auth.principal, ingestion_id=ingestion_id,
-        payload=body.model_dump(mode="json"), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        ingestion_id=ingestion_id,
+        payload=body.model_dump(mode="json"),
+        ctx=auth.ctx,
     )
     return success(result)
 
@@ -315,22 +321,26 @@ async def update_cv(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_service.update_cv(
-        session, principal=auth.principal, cv_id=cv_id,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        payload=body.model_dump(exclude_unset=True),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.delete("/{cv_id}", status_code=status.HTTP_204_NO_CONTENT,
-                   summary="Delete a CV (owner only, soft-delete)")
+@cvs_router.delete(
+    "/{cv_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    summary="Delete a CV (owner only, soft-delete)",
+)
 async def delete_cv(
     cv_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> None:
-    await cv_service.delete_cv(
-        session, principal=auth.principal, cv_id=cv_id, ctx=auth.ctx
-    )
+    await cv_service.delete_cv(session, principal=auth.principal, cv_id=cv_id, ctx=auth.ctx)
 
 
 @cvs_router.get("/{cv_id}/versions", summary="List a CV's version history (owner only)")
@@ -339,14 +349,15 @@ async def list_cv_versions(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    items = await cv_service.list_versions(
-        session, principal=auth.principal, cv_id=cv_id
-    )
+    items = await cv_service.list_versions(session, principal=auth.principal, cv_id=cv_id)
     return success(items)
 
 
-@cvs_router.post("/{cv_id}/sections", status_code=status.HTTP_201_CREATED,
-                 summary="Add a new CV section (versioned)")
+@cvs_router.post(
+    "/{cv_id}/sections",
+    status_code=status.HTTP_201_CREATED,
+    summary="Add a new CV section (versioned)",
+)
 async def create_section(
     cv_id: uuid.UUID,
     body: CreateSectionRequest,
@@ -354,14 +365,19 @@ async def create_section(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_section_service.create_section(
-        session, principal=auth.principal, cv_id=cv_id,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        payload=body.model_dump(exclude_unset=True),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.post("/{cv_id}/versions/{version_id}/restore",
-                 summary="Restore a prior CV version (creates a new version)")
+@cvs_router.post(
+    "/{cv_id}/versions/{version_id}/restore",
+    summary="Restore a prior CV version (creates a new version)",
+)
 async def restore_cv_version(
     cv_id: uuid.UUID,
     version_id: uuid.UUID,
@@ -370,8 +386,12 @@ async def restore_cv_version(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_section_service.restore_version(
-        session, principal=auth.principal, cv_id=cv_id, version_id=version_id,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        version_id=version_id,
+        payload=body.model_dump(exclude_unset=True),
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -385,14 +405,19 @@ async def upsert_section(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_section_service.upsert_section(
-        session, principal=auth.principal, cv_id=cv_id, section_id=section_id,
-        payload=body.model_dump(exclude_unset=True), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        section_id=section_id,
+        payload=body.model_dump(exclude_unset=True),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.patch("/{cv_id}/canvas",
-                  summary="Update CV canvas layout (blocks/page; versioned, non-destructive)")
+@cvs_router.patch(
+    "/{cv_id}/canvas", summary="Update CV canvas layout (blocks/page; versioned, non-destructive)"
+)
 async def update_cv_canvas(
     cv_id: uuid.UUID,
     body: UpdateCvCanvasRequest,
@@ -400,14 +425,18 @@ async def update_cv_canvas(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_canvas_service.update_canvas(
-        session, principal=auth.principal, cv_id=cv_id,
-        payload=body.model_dump(exclude_unset=True, mode="json"), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        payload=body.model_dump(exclude_unset=True, mode="json"),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.patch("/{cv_id}/photo",
-                  summary="Replace/crop the CV profile photo, or remove it (no file)")
+@cvs_router.patch(
+    "/{cv_id}/photo", summary="Replace/crop the CV profile photo, or remove it (no file)"
+)
 async def update_cv_photo(
     cv_id: uuid.UUID,
     file: UploadFile | None = File(default=None),
@@ -422,8 +451,11 @@ async def update_cv_photo(
 ) -> dict:
     if file is None:
         data = await cv_photo_service.remove_photo(
-            session, principal=auth.principal, cv_id=cv_id,
-            expected_version=expected_version, ctx=auth.ctx,
+            session,
+            principal=auth.principal,
+            cv_id=cv_id,
+            expected_version=expected_version,
+            ctx=auth.ctx,
         )
         return success(data)
 
@@ -443,15 +475,25 @@ async def update_cv_photo(
             "height": crop_height if crop_height is not None else 1,
         }
     data = await cv_photo_service.update_photo(
-        session, principal=auth.principal, cv_id=cv_id, data=raw,
-        content_type=file.content_type, filename=file.filename or "photo",
-        crop=crop, shape=shape, expected_version=expected_version, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        data=raw,
+        content_type=file.content_type,
+        filename=file.filename or "photo",
+        crop=crop,
+        shape=shape,
+        expected_version=expected_version,
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.post("/{cv_id}/duplicate", status_code=status.HTTP_201_CREATED,
-                 summary="Duplicate a CV (never mutates the source)")
+@cvs_router.post(
+    "/{cv_id}/duplicate",
+    status_code=status.HTTP_201_CREATED,
+    summary="Duplicate a CV (never mutates the source)",
+)
 async def duplicate_cv(
     cv_id: uuid.UUID,
     body: DuplicateCvRequest,
@@ -459,21 +501,26 @@ async def duplicate_cv(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_creation_service.duplicate_cv(
-        session, principal=auth.principal, cv_id=cv_id,
-        payload=body.model_dump(), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        payload=body.model_dump(),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.post("/{cv_id}/finalize",
-                 summary="Commit a draft CV into the library (draft -> ready)")
+@cvs_router.post("/{cv_id}/finalize", summary="Commit a draft CV into the library (draft -> ready)")
 async def finalize_cv(
     cv_id: uuid.UUID,
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_lifecycle_service.finalize_cv(
-        session, principal=auth.principal, cv_id=cv_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -483,8 +530,11 @@ async def finalize_cv(
 # --------------------------------------------------------------------------- #
 
 
-@cvs_router.post("/{cv_id}/ai-edit-command", status_code=status.HTTP_201_CREATED,
-                 summary="Natural-language AI CV edit (pending diff; never mutates the CV)")
+@cvs_router.post(
+    "/{cv_id}/ai-edit-command",
+    status_code=status.HTTP_201_CREATED,
+    summary="Natural-language AI CV edit (pending diff; never mutates the CV)",
+)
 async def request_ai_edit_command(
     cv_id: uuid.UUID,
     body: AiEditCommandRequest,
@@ -492,14 +542,20 @@ async def request_ai_edit_command(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_ai_service.request_edit_command(
-        session, principal=auth.principal, cv_id=cv_id,
-        payload=body.model_dump(mode="json"), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        payload=body.model_dump(mode="json"),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.post("/{cv_id}/ai-suggestions", status_code=status.HTTP_201_CREATED,
-                 summary="Request an AI CV suggestion (pending diff, no mutation)")
+@cvs_router.post(
+    "/{cv_id}/ai-suggestions",
+    status_code=status.HTTP_201_CREATED,
+    summary="Request an AI CV suggestion (pending diff, no mutation)",
+)
 async def request_ai_suggestion(
     cv_id: uuid.UUID,
     body: AiSuggestionRequest,
@@ -507,14 +563,19 @@ async def request_ai_suggestion(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_ai_service.request_suggestion(
-        session, principal=auth.principal, cv_id=cv_id,
-        payload=body.model_dump(mode="json"), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        payload=body.model_dump(mode="json"),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.get("/{cv_id}/ai-suggestions/{suggestion_id}",
-                summary="Get the current status and diff of an AI suggestion (owner-only)")
+@cvs_router.get(
+    "/{cv_id}/ai-suggestions/{suggestion_id}",
+    summary="Get the current status and diff of an AI suggestion (owner-only)",
+)
 async def get_ai_suggestion(
     cv_id: uuid.UUID,
     suggestion_id: uuid.UUID,
@@ -522,13 +583,18 @@ async def get_ai_suggestion(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_ai_service.get_suggestion(
-        session, principal=auth.principal, cv_id=cv_id, suggestion_id=suggestion_id,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        suggestion_id=suggestion_id,
     )
     return success(data)
 
 
-@cvs_router.post("/{cv_id}/ai-suggestions/{suggestion_id}/accept",
-                 summary="Accept an AI suggestion (requires confirmation; new version)")
+@cvs_router.post(
+    "/{cv_id}/ai-suggestions/{suggestion_id}/accept",
+    summary="Accept an AI suggestion (requires confirmation; new version)",
+)
 async def accept_ai_suggestion(
     cv_id: uuid.UUID,
     suggestion_id: uuid.UUID,
@@ -537,14 +603,19 @@ async def accept_ai_suggestion(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_ai_service.accept_suggestion(
-        session, principal=auth.principal, cv_id=cv_id, suggestion_id=suggestion_id,
-        payload=body.model_dump(mode="json"), ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        suggestion_id=suggestion_id,
+        payload=body.model_dump(mode="json"),
+        ctx=auth.ctx,
     )
     return success(data)
 
 
-@cvs_router.post("/{cv_id}/ai-suggestions/{suggestion_id}/reject",
-                 summary="Reject a pending AI suggestion")
+@cvs_router.post(
+    "/{cv_id}/ai-suggestions/{suggestion_id}/reject", summary="Reject a pending AI suggestion"
+)
 async def reject_ai_suggestion(
     cv_id: uuid.UUID,
     suggestion_id: uuid.UUID,
@@ -552,7 +623,10 @@ async def reject_ai_suggestion(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await cv_ai_service.reject_suggestion(
-        session, principal=auth.principal, cv_id=cv_id, suggestion_id=suggestion_id,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        suggestion_id=suggestion_id,
         ctx=auth.ctx,
     )
     return success(data)
@@ -571,8 +645,13 @@ async def export_cv(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     data = await export_service.create_export(
-        session, principal=auth.principal, cv_id=cv_id, version_id=body.version_id,
-        export_format=body.format, idempotency_key=body.idempotency_key, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        cv_id=cv_id,
+        version_id=body.version_id,
+        export_format=body.format,
+        idempotency_key=body.idempotency_key,
+        ctx=auth.ctx,
     )
     return success(data)
 
@@ -583,15 +662,62 @@ async def get_export(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await export_service.get_export(
-        session, principal=auth.principal, export_id=export_id
-    )
+    data = await export_service.get_export(session, principal=auth.principal, export_id=export_id)
     return success(data)
 
 
 # --------------------------------------------------------------------------- #
 # Signed file download (token-authorized, no session)                         #
 # --------------------------------------------------------------------------- #
+
+
+def _content_disposition(disposition: str, filename: str) -> str:
+    """Build a header-injection-safe ``Content-Disposition`` value.
+
+    Strips CR/LF/control chars + quotes/backslash from the name (header-injection
+    guard) and adds an RFC 5987 ``filename*`` for non-ASCII names so a Vietnamese
+    CV name survives without breaking the header.
+    """
+
+    from urllib.parse import quote
+
+    safe = "".join(
+        ch for ch in (filename or "") if ord(ch) >= 0x20 and ord(ch) != 0x7F and ch not in '"\\'
+    ).strip()
+    if not safe:
+        safe = "cv"
+    ascii_name = safe.encode("ascii", "ignore").decode("ascii").strip() or "cv"
+    encoded = quote(safe, safe="")
+    return f"{disposition}; filename=\"{ascii_name}\"; filename*=UTF-8''{encoded}"
+
+
+def _cv_file_security_headers(disposition: str, filename: str) -> dict[str, str]:
+    """Stored-XSS-safe response headers for the signed file-serve path.
+
+    - ``X-Content-Type-Options: nosniff`` — the browser must not MIME-sniff a
+      served PDF into HTML.
+    - ``Content-Security-Policy: sandbox …`` — the KEY control: the served
+      document runs in a maximally-restrictive sandbox (no script execution),
+      neutralizing any hostile CV even when embedded in the recruiter's iframe.
+      Works cross-origin (the file is served from the API origin, the FE embeds
+      it from a different origin), so ``frame-ancestors`` (NOT ``X-Frame-Options``,
+      which would block the legitimate cross-origin iframe) restricts WHO may
+      frame it to the app's own FE origins.
+    """
+
+    settings = get_settings()
+    frame_ancestors = ["'self'", settings.frontend_url.rstrip("/")]
+    for origin in settings.cors_origins_list:
+        origin = origin.strip().rstrip("/")
+        if origin and origin != "*" and origin not in frame_ancestors:
+            frame_ancestors.append(origin)
+    csp = "sandbox; frame-ancestors " + " ".join(frame_ancestors)
+    return {
+        "Content-Disposition": _content_disposition(disposition, filename),
+        "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": csp,
+        "Referrer-Policy": "no-referrer",
+    }
 
 
 @files_router.get("/{token}", summary="Download a file via a signed token")
@@ -602,10 +728,13 @@ async def download_file(
     ctx: RequestContext = Depends(get_request_context),
 ) -> Response:
     result = await download_service.resolve_download(session, token=token, ctx=ctx)
+    # ``inline`` lets the FE embed an ALLOWLISTED (PDF/PNG/JPEG/WebP) CV in an
+    # <iframe>/PDF viewer; anything else was force-downgraded to ``attachment`` +
+    # octet-stream by ``resolve_download``. Every response is sandboxed + nosniff.
     return Response(
         content=result.content,
         media_type=result.media_type,
-        headers={"Content-Disposition": f'inline; filename="{result.filename}"'},
+        headers=_cv_file_security_headers(result.disposition, result.filename),
     )
 
 

@@ -97,9 +97,7 @@ async def test_get_seeds_singleton_and_returns_masked_view(db_session) -> None:
     # Exactly one platform row exists after the lazy seed.
     from app.modules.ai_settings.domain.models import AiSettings
 
-    count = (
-        await db_session.execute(select(func.count()).select_from(AiSettings))
-    ).scalar_one()
+    count = (await db_session.execute(select(func.count()).select_from(AiSettings))).scalar_one()
     assert count == 1
 
     # Alias names + flags + budget + DERIVED status are present.
@@ -128,9 +126,7 @@ async def test_get_is_idempotent_singleton(db_session) -> None:
 
     from app.modules.ai_settings.domain.models import AiSettings
 
-    count = (
-        await db_session.execute(select(func.count()).select_from(AiSettings))
-    ).scalar_one()
+    count = (await db_session.execute(select(func.count()).select_from(AiSettings))).scalar_one()
     assert count == 1
 
 
@@ -160,18 +156,16 @@ async def test_patch_updates_flags_budget_and_audits_diff(db_session) -> None:
 
     # An audit row with a before/after diff was written (no secret in the diff).
     audit = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "ai_settings.updated")
-        )
-    ).scalars().all()
+        (await db_session.execute(select(AuditLog).where(AuditLog.action == "ai_settings.updated")))
+        .scalars()
+        .all()
+    )
     assert len(audit) == 1
     entry = audit[0]
     assert entry.after_snapshot["cv_llm_structuring_enabled"] is True
     assert entry.after_snapshot["daily_budget_usd"] == "2.50"
     assert entry.before_snapshot["cv_llm_structuring_enabled"] is False
-    _assert_no_secret_leak(
-        {"before": entry.before_snapshot, "after": entry.after_snapshot}
-    )
+    _assert_no_secret_leak({"before": entry.before_snapshot, "after": entry.after_snapshot})
 
 
 async def test_patch_publishes_snapshot_to_gateway(db_session) -> None:
@@ -273,8 +267,10 @@ async def test_patch_rejects_invalid_rollout_state(db_session) -> None:
     await settings_service.get_effective_settings(db_session, principal=principal)
     with pytest.raises(ValidationFailedError):
         await settings_service.update_settings(
-            db_session, principal=principal,
-            payload={"rollout_state": "yolo"}, ctx=CTX,
+            db_session,
+            principal=principal,
+            payload={"rollout_state": "yolo"},
+            ctx=CTX,
         )
 
 
@@ -289,8 +285,10 @@ async def test_disable_ai_kill_switch(db_session) -> None:
     # switch must still force it back off + rollout offline).
     await settings_service.get_effective_settings(db_session, principal=principal)
     await settings_service.update_settings(
-        db_session, principal=principal,
-        payload={"real_calls_enabled": True}, ctx=CTX,
+        db_session,
+        principal=principal,
+        payload={"real_calls_enabled": True},
+        ctx=CTX,
     )
 
     view = await settings_service.disable_ai(db_session, principal=principal, ctx=CTX)
@@ -300,9 +298,9 @@ async def test_disable_ai_kill_switch(db_session) -> None:
 
     audit = (
         await db_session.execute(
-            select(func.count()).select_from(AuditLog).where(
-                AuditLog.action == "ai_settings.disabled"
-            )
+            select(func.count())
+            .select_from(AuditLog)
+            .where(AuditLog.action == "ai_settings.disabled")
         )
     ).scalar_one()
     assert audit == 1
@@ -318,8 +316,10 @@ async def test_superadmin_can_read_and_update(db_session) -> None:
     view = await settings_service.get_effective_settings(db_session, principal=principal)
     assert view["scope"] == "platform"
     view = await settings_service.update_settings(
-        db_session, principal=principal,
-        payload={"job_fit_ai_explanation_enabled": False}, ctx=CTX,
+        db_session,
+        principal=principal,
+        payload={"job_fit_ai_explanation_enabled": False},
+        ctx=CTX,
     )
     assert view["feature_flags"]["job_fit_ai_explanation_enabled"] is False
 
@@ -330,8 +330,10 @@ async def test_partner_admin_forbidden(db_session) -> None:
         await settings_service.get_effective_settings(db_session, principal=principal)
     with pytest.raises(PermissionDeniedError):
         await settings_service.update_settings(
-            db_session, principal=principal,
-            payload={"cv_llm_structuring_enabled": True}, ctx=CTX,
+            db_session,
+            principal=principal,
+            payload={"cv_llm_structuring_enabled": True},
+            ctx=CTX,
         )
 
 
@@ -378,14 +380,11 @@ async def test_patch_sets_per_org_budget_and_get_returns_it(db_session) -> None:
 
     # An audit row must have been written.
     audit = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "ai_settings.updated")
-        )
-    ).scalars().all()
-    assert any(
-        row.after_snapshot.get("per_org_daily_budget_usd") == "0.75"
-        for row in audit
+        (await db_session.execute(select(AuditLog).where(AuditLog.action == "ai_settings.updated")))
+        .scalars()
+        .all()
     )
+    assert any(row.after_snapshot.get("per_org_daily_budget_usd") == "0.75" for row in audit)
 
 
 async def test_patch_clears_per_org_budget(db_session) -> None:

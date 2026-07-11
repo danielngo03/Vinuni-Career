@@ -95,9 +95,7 @@ async def list_platform_audit(
     stmt = stmt.order_by(AuditLog.id.desc()).limit(page_limit + 1)
 
     rows = list((await session.execute(stmt)).scalars().all())
-    page = build_cursor_page(
-        rows, limit=page_limit, cursor_builder=lambda row: {"id": str(row.id)}
-    )
+    page = build_cursor_page(rows, limit=page_limit, cursor_builder=lambda row: {"id": str(row.id)})
 
     actor_ids = {row.actor_id for row in page.items if row.actor_id is not None}
     contacts = await user_read_facade.get_user_contacts(session, actor_ids)
@@ -107,9 +105,7 @@ async def list_platform_audit(
             "id": row.id,
             "actor_id": str(row.actor_id) if row.actor_id else None,
             "actor_org_id": str(row.actor_org_id) if row.actor_org_id else None,
-            "actor_email": (
-                contacts[row.actor_id].email if row.actor_id in contacts else None
-            ),
+            "actor_email": (contacts[row.actor_id].email if row.actor_id in contacts else None),
             "action": row.action,
             "resource_type": row.resource_type,
             "resource_id": str(row.resource_id) if row.resource_id else None,
@@ -174,14 +170,16 @@ async def export_platform_audit_csv(
         actor_email = (
             contacts[row.actor_id].email if row.actor_id and row.actor_id in contacts else ""
         )
-        writer.writerow([
-            _iso(row.occurred_at),
-            actor_email,
-            str(row.actor_id) if row.actor_id else "",
-            str(row.actor_org_id) if row.actor_org_id else "",
-            row.action,
-            row.resource_type,
-            str(row.resource_id) if row.resource_id else "",
-        ])
+        writer.writerow(
+            [
+                _iso(row.occurred_at),
+                actor_email,
+                str(row.actor_id) if row.actor_id else "",
+                str(row.actor_org_id) if row.actor_org_id else "",
+                row.action,
+                row.resource_type,
+                str(row.resource_id) if row.resource_id else "",
+            ]
+        )
 
     return buf.getvalue()

@@ -27,7 +27,7 @@ from app.core.config import get_settings
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
-_BATCH_SIZE = 512   # max texts per embed call (well below OpenRouter's 2048 limit)
+_BATCH_SIZE = 512  # max texts per embed call (well below OpenRouter's 2048 limit)
 
 # ---------------------------------------------------------------------------
 # In-process LRU embedding cache
@@ -109,9 +109,11 @@ async def embed_texts(
             provider = get_provider_for_alias(resolved_alias)
         except Exception:
             from app.ai.gateway.offline import OfflineProvider
+
             provider = OfflineProvider()
     else:
         from app.ai.gateway.offline import OfflineProvider
+
         provider = OfflineProvider()
 
     results: list[AIEmbedding] = []
@@ -197,9 +199,6 @@ def top_k_by_cosine(
     Returns:
         Sorted list of ``(id, score)`` tuples, highest score first.
     """
-    scored = [
-        (cid, cosine_sim(query_vector, vec))
-        for cid, vec in candidates
-    ]
+    scored = [(cid, cosine_sim(query_vector, vec)) for cid, vec in candidates]
     scored.sort(key=lambda t: -t[1])
     return [(cid, s) for cid, s in scored if s >= min_score][:k]

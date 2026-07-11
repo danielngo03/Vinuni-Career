@@ -4,7 +4,6 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
-
 from app.modules.workflow.application import execution_service
 from app.modules.workflow.domain.models import WorkflowExecution, WorkflowFlow
 
@@ -36,17 +35,26 @@ CONDITION_GRAPH = {
 
 async def _make_flow_and_execution(db_session, *, trigger_event: dict) -> WorkflowExecution:
     flow = WorkflowFlow(
-        id=uuid.uuid4(), name="Partner approval", description=None,
-        trigger_type="system.partner_registered", graph=CONDITION_GRAPH,
-        status="ACTIVE", version=1, created_by=uuid.uuid4(),
+        id=uuid.uuid4(),
+        name="Partner approval",
+        description=None,
+        trigger_type="system.partner_registered",
+        graph=CONDITION_GRAPH,
+        status="ACTIVE",
+        version=1,
+        created_by=uuid.uuid4(),
         created_at=datetime.now(tz=UTC),
     )
     db_session.add(flow)
     await db_session.flush()
     execution = WorkflowExecution(
-        id=uuid.uuid4(), flow_id=flow.id, trigger_event=trigger_event,
-        idempotency_key="evt-1", status="RUNNING",
-        started_at=datetime.now(tz=UTC), node_logs=[],
+        id=uuid.uuid4(),
+        flow_id=flow.id,
+        trigger_event=trigger_event,
+        idempotency_key="evt-1",
+        status="RUNNING",
+        started_at=datetime.now(tz=UTC),
+        node_logs=[],
     )
     db_session.add(execution)
     await db_session.flush()
@@ -77,6 +85,22 @@ async def test_high_fraud_score_routes_to_human_review_and_pauses(db_session) ->
     last_log = refreshed.node_logs[-1]
     assert last_log["node_id"] == "n3"
     assert last_log["decision"] == "awaiting_human_review"
+
+
+@pytest.mark.asyncio
+async def test_condition_rejects_python_payload_without_eval(db_session, tmp_path) -> None:
+    sentinel = tmp_path / "workflow_eval_pwned"
+    payload = f"__import__('pathlib').Path('{sentinel}').touch()"
+    execution = await _make_flow_and_execution(db_session, trigger_event={"fraud_score": payload})
+
+    await execution_service.execute_flow(db_session, execution_id=execution.id)
+
+    refreshed = await db_session.get(WorkflowExecution, execution.id)
+    assert refreshed.status == "FAILED"
+    failed_log = refreshed.node_logs[-1]
+    assert failed_log["node_id"] == "n2"
+    assert failed_log["error"] == "Điều kiện workflow không hợp lệ."
+    assert not sentinel.exists()
 
 
 @pytest.mark.asyncio

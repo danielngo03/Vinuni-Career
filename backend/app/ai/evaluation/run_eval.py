@@ -48,7 +48,7 @@ def main(argv: list[str] | None = None) -> int:
         choices=(*TASK_FAMILIES, "all"),
         default="all",
         help="Which task family to evaluate (default: all). Choices: "
-             + ", ".join((*TASK_FAMILIES, "all")),
+        + ", ".join((*TASK_FAMILIES, "all")),
     )
     args = parser.parse_args(argv)
     text, ok = asyncio.run(run(args.task_family))

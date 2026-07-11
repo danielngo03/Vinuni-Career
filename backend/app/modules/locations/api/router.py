@@ -44,9 +44,7 @@ def _ward_dto(w: Ward) -> dict:
 async def list_provinces(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    rows = (
-        await session.execute(select(Province).order_by(Province.name))
-    ).scalars().all()
+    rows = (await session.execute(select(Province).order_by(Province.name))).scalars().all()
     return {"items": [_province_dto(p) for p in rows]}
 
 
@@ -56,10 +54,8 @@ async def list_province_wards(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     rows = (
-        await session.execute(
-            select(Ward)
-            .where(Ward.province_code == code)
-            .order_by(Ward.name)
-        )
-    ).scalars().all()
+        (await session.execute(select(Ward).where(Ward.province_code == code).order_by(Ward.name)))
+        .scalars()
+        .all()
+    )
     return {"items": [_ward_dto(w) for w in rows]}

@@ -39,9 +39,7 @@ def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
     )
 
 
-async def _require_template_admin(
-    session: AsyncSession, principal: Principal, action: str
-) -> None:
+async def _require_template_admin(session: AsyncSession, principal: Principal, action: str) -> None:
     if principal.is_superadmin:
         return
     permission_checker.require(principal, _RESOURCE, action)
@@ -53,9 +51,7 @@ async def _require_template_admin(
 def _normalize_key(value: str) -> str:
     key = value.strip().lower().replace(" ", "_").replace("-", "_")
     if not key or not all(ch.isalnum() or ch == "_" for ch in key):
-        raise ValidationFailedError(
-            details={"field": "key", "reason": "invalid_template_key"}
-        )
+        raise ValidationFailedError(details={"field": "key", "reason": "invalid_template_key"})
     return key
 
 
@@ -116,15 +112,17 @@ async def list_templates_admin(
 ) -> list[dict]:
     await _require_template_admin(session, principal, "read")
     rows = (
-        await session.execute(
-            select(CvTemplate).order_by(
-                CvTemplate.is_active.desc(), CvTemplate.category, CvTemplate.key
+        (
+            await session.execute(
+                select(CvTemplate).order_by(
+                    CvTemplate.is_active.desc(), CvTemplate.category, CvTemplate.key
+                )
             )
         )
-    ).scalars().all()
-    return [
-        presenters.template(row, locale=locale, include_admin_fields=True) for row in rows
-    ]
+        .scalars()
+        .all()
+    )
+    return [presenters.template(row, locale=locale, include_admin_fields=True) for row in rows]
 
 
 async def create_template(
@@ -137,13 +135,9 @@ async def create_template(
 ) -> dict:
     await _require_template_admin(session, principal, "create")
     key = _normalize_key(payload["key"])
-    clash = (
-        await session.execute(select(CvTemplate.id).where(CvTemplate.key == key))
-    ).first()
+    clash = (await session.execute(select(CvTemplate.id).where(CvTemplate.key == key))).first()
     if clash is not None:
-        raise ValidationFailedError(
-            details={"field": "key", "reason": "duplicate_template_key"}
-        )
+        raise ValidationFailedError(details={"field": "key", "reason": "duplicate_template_key"})
     is_active = bool(payload.get("is_active", True))
     template = CvTemplate(
         key=key,
@@ -216,9 +210,7 @@ async def update_template(
         if key != template.key:
             clash = (
                 await session.execute(
-                    select(CvTemplate.id).where(
-                        CvTemplate.key == key, CvTemplate.id != template.id
-                    )
+                    select(CvTemplate.id).where(CvTemplate.key == key, CvTemplate.id != template.id)
                 )
             ).first()
             if clash is not None:

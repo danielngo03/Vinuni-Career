@@ -33,21 +33,21 @@ from typing import Any
 # List-valued coarse signals: viewed taxonomy + short search terms + viewed ids.
 _LIST_KEYS: frozenset[str] = frozenset(
     {
-        "categories",      # viewed job categories
-        "industries",      # viewed industries
-        "role_families",   # viewed role families
-        "company_ids",     # viewed company ids (opaque uuids)
-        "event_ids",       # viewed event ids (opaque uuids)
-        "search_terms",    # short search-query terms
+        "categories",  # viewed job categories
+        "industries",  # viewed industries
+        "role_families",  # viewed role families
+        "company_ids",  # viewed company ids (opaque uuids)
+        "event_ids",  # viewed event ids (opaque uuids)
+        "search_terms",  # short search-query terms
     }
 )
 
 # Scalar coarse signals: coarse filter selections + layout device class.
 _SCALAR_KEYS: frozenset[str] = frozenset(
     {
-        "work_mode",   # onsite | remote | hybrid  (a FILTER selection)
-        "city",        # a coarse city FILTER selection (NOT GPS / exact location)
-        "device_type", # desktop | mobile | tablet (layout + allowed ad targeting)
+        "work_mode",  # onsite | remote | hybrid  (a FILTER selection)
+        "city",  # a coarse city FILTER selection (NOT GPS / exact location)
+        "device_type",  # desktop | mobile | tablet (layout + allowed ad targeting)
     }
 )
 
@@ -61,21 +61,66 @@ ALLOWED_COARSE_TAG_KEYS: frozenset[str] = _LIST_KEYS | _SCALAR_KEYS
 FORBIDDEN_COARSE_TAG_KEYS: frozenset[str] = frozenset(
     {
         # direct identifiers
-        "name", "full_name", "first_name", "last_name", "email", "phone",
-        "phone_number", "username", "user_id",
+        "name",
+        "full_name",
+        "first_name",
+        "last_name",
+        "email",
+        "phone",
+        "phone_number",
+        "username",
+        "user_id",
         # location / network
-        "ip", "ip_address", "raw_ip", "gps", "geo", "geolocation",
-        "latitude", "longitude", "lat", "lng", "lon", "coordinates",
-        "exact_location", "address", "postal_code", "zip",
+        "ip",
+        "ip_address",
+        "raw_ip",
+        "gps",
+        "geo",
+        "geolocation",
+        "latitude",
+        "longitude",
+        "lat",
+        "lng",
+        "lon",
+        "coordinates",
+        "exact_location",
+        "address",
+        "postal_code",
+        "zip",
         # raw CV / document content
-        "cv", "cv_text", "raw_cv", "resume", "resume_text", "document_text",
+        "cv",
+        "cv_text",
+        "raw_cv",
+        "resume",
+        "resume_text",
+        "document_text",
         # sensitive categories (docs/SECURITY_PRIVACY.md §Advertising Compliance)
-        "health", "ethnicity", "race", "national_origin", "gender", "sex",
-        "sexual_orientation", "religion", "politics", "political", "disability",
-        "pregnancy", "financial_status", "income", "salary",
+        "health",
+        "ethnicity",
+        "race",
+        "national_origin",
+        "gender",
+        "sex",
+        "sexual_orientation",
+        "religion",
+        "politics",
+        "political",
+        "disability",
+        "pregnancy",
+        "financial_status",
+        "income",
+        "salary",
         # cross-site / third-party ad identifiers
-        "gaid", "idfa", "fbclid", "gclid", "ad_id", "advertising_id",
-        "third_party_id", "device_id", "fingerprint", "tracking_id",
+        "gaid",
+        "idfa",
+        "fbclid",
+        "gclid",
+        "ad_id",
+        "advertising_id",
+        "third_party_id",
+        "device_id",
+        "fingerprint",
+        "tracking_id",
     }
 )
 

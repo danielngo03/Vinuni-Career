@@ -167,8 +167,7 @@ async def test_jobs_health_covers_all_registry_jobs(
     returned_names = {j["name"] for j in jobs}
     registry_names = {j.name for j in REGISTRY}
     assert registry_names == returned_names, (
-        f"Missing: {registry_names - returned_names}, "
-        f"Extra: {returned_names - registry_names}"
+        f"Missing: {registry_names - returned_names}, Extra: {returned_names - registry_names}"
     )
 
 
@@ -320,10 +319,14 @@ async def test_run_job_persists_run_row_on_success(db_session: AsyncSession) -> 
     # A run row must have been persisted.
     await db_session.rollback()
     rows = (
-        await db_session.execute(
-            select(SchedulerJobRun).where(SchedulerJobRun.job_name == job_name)
+        (
+            await db_session.execute(
+                select(SchedulerJobRun).where(SchedulerJobRun.job_name == job_name)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1
     run = rows[0]
     assert run.job_name == job_name
@@ -344,6 +347,7 @@ async def test_run_job_persists_run_row_on_job_error(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """A job that raises still gets a SchedulerJobRun row with status='error'."""
+
     # Build a synthetic failing job and temporarily inject it into the registry.
     async def _failing_coro(session, now):  # type: ignore[override]
         raise RuntimeError("job exploded for test")
@@ -376,10 +380,14 @@ async def test_run_job_persists_run_row_on_job_error(
     # A run row with status="error" must have been persisted.
     await db_session.rollback()
     rows = (
-        await db_session.execute(
-            select(SchedulerJobRun).where(SchedulerJobRun.job_name == fake_job.name)
+        (
+            await db_session.execute(
+                select(SchedulerJobRun).where(SchedulerJobRun.job_name == fake_job.name)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(rows) == 1
     assert rows[0].status == "error"
     assert rows[0].result == {"error": 1}

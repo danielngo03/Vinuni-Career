@@ -82,10 +82,7 @@ def test_applicant_quality_bucket_thresholds() -> None:
     assert competition_service._applicant_quality_bucket([90, 90, 90, 90]) == "unknown"
     assert competition_service._applicant_quality_bucket([90, 85, 80, 75, 72]) == "strong"
     assert competition_service._applicant_quality_bucket([60, 55, 52, 58, 50]) == "mixed"
-    assert (
-        competition_service._applicant_quality_bucket([40, 30, 45, 20, 35])
-        == "developing"
-    )
+    assert competition_service._applicant_quality_bucket([40, 30, 45, 20, 35]) == "developing"
 
 
 def test_student_standing_bucket() -> None:
@@ -113,7 +110,10 @@ async def test_strong_pool_and_student_ahead(db_session) -> None:
     await db_session.flush()
 
     out = await competition_service.student_competition_intelligence(
-        db_session, principal=student, job_id=job.id, student_fit_score=95,
+        db_session,
+        principal=student,
+        job_id=job.id,
+        student_fit_score=95,
     )
     assert out["applicant_quality_bucket"] == "strong"
     assert out["student_standing_bucket"] == "ahead_of_most"
@@ -138,7 +138,10 @@ async def test_below_threshold_is_unknown(db_session) -> None:
     await db_session.flush()
 
     out = await competition_service.student_competition_intelligence(
-        db_session, principal=student, job_id=job.id, student_fit_score=90,
+        db_session,
+        principal=student,
+        job_id=job.id,
+        student_fit_score=90,
     )
     assert out["applicant_quality_bucket"] == "unknown"
     assert out["student_standing_bucket"] == "unknown"
@@ -158,7 +161,10 @@ async def test_student_own_scores_excluded_from_pool(db_session) -> None:
     await db_session.flush()
 
     out = await competition_service.student_competition_intelligence(
-        db_session, principal=student, job_id=job.id, student_fit_score=93,
+        db_session,
+        principal=student,
+        job_id=job.id,
+        student_fit_score=93,
     )
     assert out["applicant_quality_bucket"] == "unknown"
     assert out["student_standing_bucket"] == "unknown"
@@ -174,7 +180,10 @@ async def test_developing_pool_and_student_behind(db_session) -> None:
     await db_session.flush()
 
     out = await competition_service.student_competition_intelligence(
-        db_session, principal=student, job_id=job.id, student_fit_score=20,
+        db_session,
+        principal=student,
+        job_id=job.id,
+        student_fit_score=20,
     )
     assert out["applicant_quality_bucket"] == "developing"
     assert out["student_standing_bucket"] == "behind_most"

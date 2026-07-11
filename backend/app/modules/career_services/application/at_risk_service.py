@@ -49,9 +49,7 @@ def _presenter(flag: AtRiskFlag, *, locale: str = "vi") -> dict:
 async def _get_flag(
     session: AsyncSession, *, org_id: uuid.UUID, flag_id: uuid.UUID
 ) -> AtRiskFlag | None:
-    stmt = select(AtRiskFlag).where(
-        AtRiskFlag.id == flag_id, AtRiskFlag.org_id == org_id
-    )
+    stmt = select(AtRiskFlag).where(AtRiskFlag.id == flag_id, AtRiskFlag.org_id == org_id)
     return (await session.execute(stmt)).scalar_one_or_none()
 
 
@@ -68,9 +66,7 @@ async def create_flag(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "create", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "create", resource_org_id=org_id)
     if reason not in catalog.RISK_REASONS:
         raise ValidationFailedError(details={"reason": "invalid_reason"})
     if severity not in catalog.RISK_SEVERITIES:
@@ -133,9 +129,7 @@ async def update_flag_status(
     locale: str = "vi",
 ) -> dict:
     org_id = require_org(principal)
-    permission_checker.require(
-        principal, _RESOURCE, "update", resource_org_id=org_id
-    )
+    permission_checker.require(principal, _RESOURCE, "update", resource_org_id=org_id)
     flag = await _get_flag(session, org_id=org_id, flag_id=flag_id)
     if flag is None:
         raise ResourceNotFoundError()

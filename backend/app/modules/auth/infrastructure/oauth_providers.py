@@ -162,7 +162,5 @@ def is_provider_configured(name: str) -> bool:
     if name == "google":
         return bool(settings.google_oauth_client_id and settings.google_oauth_client_secret)
     if name == "facebook":
-        return bool(
-            settings.facebook_oauth_client_id and settings.facebook_oauth_client_secret
-        )
+        return bool(settings.facebook_oauth_client_id and settings.facebook_oauth_client_secret)
     return False

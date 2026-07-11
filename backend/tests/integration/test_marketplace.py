@@ -34,16 +34,31 @@ async def client():
     async with AsyncClient(transport=transport, base_url="http://test/api/v1") as c:
         yield c
 
+
 # Fields surfaced by directory_summary / company_block (the only allowed leak).
 _DIRECTORY_FIELDS = {
-    "id", "slug", "display_name", "logo_url", "industry", "company_size",
-    "headquarters_city", "is_verified", "trust_level", "active_job_count",
+    "id",
+    "slug",
+    "display_name",
+    "logo_url",
+    "industry",
+    "company_size",
+    "headquarters_city",
+    "is_verified",
+    "trust_level",
+    "active_job_count",
     "rating",
 }
 # Internal org fields that must NEVER appear on a public projection.
 _FORBIDDEN_ORG_FIELDS = {
-    "status", "subscription_tier", "settings", "verified_by", "org_type",
-    "logo_path", "version", "deleted_at",
+    "status",
+    "subscription_tier",
+    "settings",
+    "verified_by",
+    "org_type",
+    "logo_path",
+    "version",
+    "deleted_at",
 }
 
 
@@ -85,9 +100,7 @@ async def _publish(db, partner, uni, *, title="Live Job", **over) -> uuid.UUID:
     created = await job_service.create_job(
         db, principal=partner, payload=_payload(title, **over), ctx=CTX
     )
-    await job_service.submit_job(
-        db, principal=partner, job_id=uuid.UUID(created["id"]), ctx=CTX
-    )
+    await job_service.submit_job(db, principal=partner, job_id=uuid.UUID(created["id"]), ctx=CTX)
     await moderation_service.approve_job(
         db, principal=uni, job_id=uuid.UUID(created["id"]), ctx=CTX
     )
@@ -124,9 +137,7 @@ async def test_directory_lists_only_active_partners(db_session) -> None:
     _pu, pending, _pa = await make_org_with_admin(db_session, display_name="Pending Co")
     await _set_org_fields(db_session, pending, status="pending")
 
-    items, next_cursor, limit, total = await company_directory_service.list_companies(
-        db_session
-    )
+    items, next_cursor, limit, total = await company_directory_service.list_companies(db_session)
     slugs = {c["slug"] for c in items}
     assert partner.slug in slugs
     assert "vinuni" not in slugs and "pending-co" not in slugs
@@ -175,9 +186,7 @@ async def test_directory_active_job_count_is_visible_only(db_session) -> None:
 
 
 async def test_directory_empty_state(db_session) -> None:
-    items, next_cursor, _l, total = await company_directory_service.list_companies(
-        db_session
-    )
+    items, next_cursor, _l, total = await company_directory_service.list_companies(db_session)
     assert items == [] and next_cursor is None and total == 0
 
 
@@ -189,8 +198,12 @@ async def test_directory_empty_state(db_session) -> None:
 async def test_company_detail_includes_active_jobs(db_session) -> None:
     _u, partner, p_admin = await make_org_with_admin(db_session, display_name="Acme Co")
     await _set_org_fields(
-        db_session, partner, industry="technology", website_url="https://acme.test",
-        description="We build robots.", founded_year=2010,
+        db_session,
+        partner,
+        industry="technology",
+        website_url="https://acme.test",
+        description="We build robots.",
+        founded_year=2010,
     )
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     await _publish(db_session, p_admin, uni, title="Visible Role")
@@ -249,20 +262,26 @@ async def test_public_job_search_filters(db_session) -> None:
     _u, _partner, p_admin = await make_org_with_admin(db_session)
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     await _publish(
-        db_session, p_admin, uni, title="Senior Python Engineer",
-        employment_type="full_time", location_type="remote",
+        db_session,
+        p_admin,
+        uni,
+        title="Senior Python Engineer",
+        employment_type="full_time",
+        location_type="remote",
         required_skills=["python", "fastapi"],
     )
     await _publish(
-        db_session, p_admin, uni, title="Marketing Intern",
-        employment_type="internship", location_type="onsite",
+        db_session,
+        p_admin,
+        uni,
+        title="Marketing Intern",
+        employment_type="internship",
+        location_type="onsite",
         required_skills=["seo", "content"],
     )
 
     # q on title.
-    res, _c, _l, total = await job_service.list_public_jobs(
-        db_session, principal=GUEST, q="python"
-    )
+    res, _c, _l, total = await job_service.list_public_jobs(db_session, principal=GUEST, q="python")
     assert total == 1 and res[0]["title"] == "Senior Python Engineer"
 
     # q matches required_skills text only (title has no "seo").
@@ -284,12 +303,8 @@ async def test_public_job_search_filters(db_session) -> None:
 
 async def test_owner_projection_has_no_company_block(db_session) -> None:
     _u, _org, admin = await make_org_with_admin(db_session)
-    created = await job_service.create_job(
-        db_session, principal=admin, payload=_payload(), ctx=CTX
-    )
-    detail = await job_service.get_job(
-        db_session, principal=admin, job_id=uuid.UUID(created["id"])
-    )
+    created = await job_service.create_job(db_session, principal=admin, payload=_payload(), ctx=CTX)
+    detail = await job_service.get_job(db_session, principal=admin, job_id=uuid.UUID(created["id"]))
     # Owner detail is unchanged: no embedded company block.
     assert "company" not in detail
 
@@ -335,9 +350,7 @@ async def test_marketplace_overview_no_fabricated_inventory(db_session) -> None:
     assert data["featured_jobs"] == []
     assert data["recent_jobs"] == []
     assert data["spotlight_companies"] == []
-    assert data["metrics"] == {
-        "active_jobs": 0, "companies": 0, "open_for_applications": 0
-    }
+    assert data["metrics"] == {"active_jobs": 0, "companies": 0, "open_for_applications": 0}
     # Trend is real-but-empty: 30 zero buckets, zero new jobs, and a NULL delta
     # (no prior-period history -> never a fabricated 0% or +100%).
     trend = data["jobs_trend"]
@@ -416,9 +429,7 @@ async def test_marketplace_trend_null_delta_on_insufficient_history(db_session) 
     assert sum(b["count"] for b in trend["series"]) == 2
 
 
-async def test_marketplace_trend_null_on_failure_metrics_survive(
-    db_session, monkeypatch
-) -> None:
+async def test_marketplace_trend_null_on_failure_metrics_survive(db_session, monkeypatch) -> None:
     # If the trend aggregate raises, jobs_trend is None (strip hides the sparkline)
     # but the other three metrics still resolve — no 500, no fabrication.
     async def _boom(*_a, **_k):
@@ -429,9 +440,7 @@ async def test_marketplace_trend_null_on_failure_metrics_survive(
     )
     data = await overview_service.get_overview(db_session)
     assert data["jobs_trend"] is None
-    assert data["metrics"] == {
-        "active_jobs": 0, "companies": 0, "open_for_applications": 0
-    }
+    assert data["metrics"] == {"active_jobs": 0, "companies": 0, "open_for_applications": 0}
 
 
 # --------------------------------------------------------------------------- #
@@ -465,13 +474,24 @@ async def test_http_marketplace_overview_contract(client, db_session) -> None:
     assert resp.status_code == 200
     data = resp.json()["data"]
     assert set(data.keys()) == {
-        "metrics", "jobs_trend", "sponsored_jobs", "featured_jobs", "recent_jobs",
-        "spotlight_companies", "upcoming_events", "sponsored_events",
+        "metrics",
+        "jobs_trend",
+        "sponsored_jobs",
+        "featured_jobs",
+        "recent_jobs",
+        "spotlight_companies",
+        "upcoming_events",
+        "sponsored_events",
         "featured_events",
         # Spec §8 explicit recommendation/sponsored/curated rails.
-        "hero_campaign", "recommended_jobs", "recommended_events",
+        "hero_campaign",
+        "recommended_jobs",
+        "recommended_events",
         "recommended_companies",
-        "sponsored_banner", "employer_spotlight", "popular_roles", "trust_modules",
+        "sponsored_banner",
+        "employer_spotlight",
+        "popular_roles",
+        "trust_modules",
     }
     # Empty marketplace: recommendation rails hide-if-empty, hero/banner null,
     # trust modules are static (no fabricated metrics).

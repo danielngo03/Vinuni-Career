@@ -98,10 +98,14 @@ async def application_messages_pointer(
         return None
     last_read_at = participant_row[0]
 
-    unread_stmt = select(func.count()).select_from(_messages).where(
-        _messages.c.thread_id == thread_id,
-        _messages.c.deleted_at.is_(None),
-        or_(_messages.c.sender_id.is_(None), _messages.c.sender_id != viewer_id),
+    unread_stmt = (
+        select(func.count())
+        .select_from(_messages)
+        .where(
+            _messages.c.thread_id == thread_id,
+            _messages.c.deleted_at.is_(None),
+            or_(_messages.c.sender_id.is_(None), _messages.c.sender_id != viewer_id),
+        )
     )
     if last_read_at is not None:
         unread_stmt = unread_stmt.where(_messages.c.created_at > last_read_at)

@@ -20,6 +20,7 @@ flagged as backlog/follow-up, not silently pretended to be complete.
 
 from __future__ import annotations
 
+import re
 import uuid
 from datetime import UTC, datetime
 
@@ -27,7 +28,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.notifications.application.dispatch_service import enqueue_notification
-from app.modules.workflow.domain.graph import FlowContext, SIDE_EFFECTING_NODE_TYPES
+from app.modules.workflow.application.errors import NodeExecutionFailed
+from app.modules.workflow.domain.graph import FlowContext
 from app.modules.workflow.domain.models import (
     WorkflowExecution,
     WorkflowFailedNodeTask,
@@ -36,21 +38,26 @@ from app.modules.workflow.domain.models import (
 )
 
 _PII_KEYS = {
-    "email", "phone", "phone_number", "full_name", "name", "address",
-    "national_id", "cv_text", "resume_text", "cover_letter", "ssn",
-    "date_of_birth", "identity_number",
+    "email",
+    "phone",
+    "phone_number",
+    "full_name",
+    "name",
+    "address",
+    "national_id",
+    "cv_text",
+    "resume_text",
+    "cover_letter",
+    "ssn",
+    "date_of_birth",
+    "identity_number",
 }
 
+_CONDITION_RE = re.compile(r"^\s*(?P<left>.+?)\s*(?P<op>>=|<=|==|!=|>|<)\s*(?P<right>.+?)\s*$")
 
-class NodeExecutionFailed(Exception):
-    """Raised by a node handler for a recoverable failure. ``user_safe_error``
-    is stored on the node log and the created follow-up task; never include
-    stack traces, provider/internal details, or raw PII in it.
-    """
-
-    def __init__(self, user_safe_error: str) -> None:
-        self.user_safe_error = user_safe_error
-        super().__init__(user_safe_error)
+# ``NodeExecutionFailed`` moved to ``errors`` (so cross-module node handlers can
+# import it without a cycle); re-exported here for backward-compatible imports.
+__all__ = ["NodeExecutionFailed", "dry_run_flow", "execute_flow", "list_flow_executions"]
 
 
 def redact_sample_event(event: dict) -> dict:
@@ -104,7 +111,7 @@ async def execute_flow(
     while current is not None:
         entered_at = datetime.now(tz=UTC)
         try:
-            result = await _execute_node(session, current, context, simulate=simulate)
+            result = await _execute_node(session, current, context, simulate=simulate, flow=flow)
         except NodeExecutionFailed as exc:
             exited_at = datetime.now(tz=UTC)
             logs.append(
@@ -133,7 +140,9 @@ async def execute_flow(
             execution.finished_at = exited_at
             await session.flush()
             if not simulate:
-                await _create_failed_node_task(session, flow=flow, execution=execution, node=current, error=exc.user_safe_error)
+                await _create_failed_node_task(
+                    session, flow=flow, execution=execution, node=current, error=exc.user_safe_error
+                )
             await session.commit()
             return
 
@@ -224,7 +233,7 @@ async def dry_run_flow(
         visited += 1
         entered_at = datetime.now(tz=UTC)
         try:
-            result = await _execute_node(session, current, context, simulate=True)
+            result = await _execute_node(session, current, context, simulate=True, flow=flow)
             status, error, decision = "success", None, result.decision
             output_summary = _summarize(result.output_variables)
         except NodeExecutionFailed as exc:
@@ -351,7 +360,12 @@ def _find_trigger_node(nodes_by_id: dict[str, dict]) -> dict | None:
 
 
 async def _execute_node(
-    session: AsyncSession, node: dict, context: FlowContext, *, simulate: bool
+    session: AsyncSession,
+    node: dict,
+    context: FlowContext,
+    *,
+    simulate: bool,
+    flow: WorkflowFlow | None = None,
 ) -> _NodeResult:
     node_type = node["type"]
     data = node.get("data", {})
@@ -359,17 +373,25 @@ async def _execute_node(
     if node_type == "trigger":
         return _NodeResult(decision="entered")
 
+    if node_type in (
+        "ai_screen_application",
+        "auto_advance_on_gate",
+        "notify",
+        "jd_pdf_to_draft",
+    ):
+        # Recruiting-automation node types (Wave 2B). Delegated to the isolated
+        # cross-module handler; imported lazily to avoid a workflow<->recruitment
+        # import cycle. Each honors ``simulate`` as a no-op internally.
+        from app.modules.workflow.application import recruiting_nodes
+
+        outcome = await recruiting_nodes.execute(
+            session, flow=flow, node=node, context=context, simulate=simulate
+        )
+        return _NodeResult(decision=outcome.decision, output_variables=outcome.output)
+
     if node_type == "condition":
         expression = context.interpolate(data["expression"])
-        # NOTE (deliberate, narrow, flagged for follow-up): this eval() runs
-        # with {"__builtins__": {}} against a string that has already been
-        # through FlowContext.interpolate, so no attacker-controlled Python
-        # syntax reaches it in this plan's two seed templates (Task 9 only
-        # uses "{{fraud_score}} > 0.70"-shaped expressions with numeric
-        # literals). This is a real security-hardening gap flagged for a
-        # follow-up task (a proper restricted expression grammar), not
-        # something to silently ship as final.
-        return _NodeResult(decision=str(eval(expression, {"__builtins__": {}})).lower())  # noqa: S307
+        return _NodeResult(decision=str(_evaluate_condition(expression)).lower())
 
     if node_type in ("human_review", "request_approval"):
         return _NodeResult(decision="awaiting_human_review")
@@ -380,7 +402,10 @@ async def _execute_node(
         # yet, so this always pauses for human confirmation, same as
         # human_review, until an org-level "audited automation policy" model
         # exists to allow an explicit opt-in bypass.
-        return _NodeResult(decision="awaiting_human_review", output_variables={"ai_suggestion": data.get("prompt_key", "advisory")})
+        return _NodeResult(
+            decision="awaiting_human_review",
+            output_variables={"ai_suggestion": data.get("prompt_key", "advisory")},
+        )
 
     if node_type == "delay" or node_type == "wait":
         # No real scheduler/SLA-timer wiring yet — logged as an instant no-op,
@@ -394,7 +419,9 @@ async def _execute_node(
                 output_variables={"simulated_notification_template": data.get("template_key")},
             )
         template_key = data.get("template_key")
-        recipient_id = data.get("recipient_id") or context.variables.get(data.get("recipient_variable", ""))
+        recipient_id = data.get("recipient_id") or context.variables.get(
+            data.get("recipient_variable", "")
+        )
         if not template_key or not recipient_id:
             raise NodeExecutionFailed(
                 "Không thể gửi thông báo: thiếu người nhận hoặc mẫu thông báo."
@@ -424,6 +451,51 @@ async def _execute_node(
     raise ValueError(f"unsupported node type: {node_type}")
 
 
+def _coerce_condition_value(value: str) -> float | bool | str:
+    token = value.strip()
+    if (token.startswith('"') and token.endswith('"')) or (
+        token.startswith("'") and token.endswith("'")
+    ):
+        return token[1:-1]
+    lowered = token.lower()
+    if lowered in {"true", "false"}:
+        return lowered == "true"
+    try:
+        return float(token)
+    except ValueError:
+        if not re.fullmatch(r"[\w .:/@-]{1,200}", token):
+            raise NodeExecutionFailed("Điều kiện workflow không hợp lệ.") from None
+        return token
+
+
+def _evaluate_condition(expression: str) -> bool:
+    match = _CONDITION_RE.match(expression)
+    if match is None:
+        raise NodeExecutionFailed("Điều kiện workflow không hợp lệ.")
+
+    left = _coerce_condition_value(match.group("left"))
+    right = _coerce_condition_value(match.group("right"))
+    op = match.group("op")
+
+    if isinstance(left, float) and isinstance(right, float):
+        if op == ">":
+            return left > right
+        if op == ">=":
+            return left >= right
+        if op == "<":
+            return left < right
+        if op == "<=":
+            return left <= right
+        if op == "==":
+            return left == right
+        if op == "!=":
+            return left != right
+    elif op in {"==", "!="}:
+        return (left == right) if op == "==" else (left != right)
+
+    raise NodeExecutionFailed("Điều kiện workflow không hợp lệ.")
+
+
 def _resolve_next_node(
     nodes_by_id: dict[str, dict], edges: list[dict], current: dict, decision: str
 ) -> dict | None:
@@ -445,28 +517,34 @@ async def list_flow_executions(
     """
 
     executions = (
-        await session.execute(
-            select(WorkflowExecution)
-            .where(
-                WorkflowExecution.flow_id == flow.id,
-                WorkflowExecution.is_simulated.is_(False),
+        (
+            await session.execute(
+                select(WorkflowExecution)
+                .where(
+                    WorkflowExecution.flow_id == flow.id,
+                    WorkflowExecution.is_simulated.is_(False),
+                )
+                .order_by(WorkflowExecution.started_at.desc())
+                .limit(max(limit, 1))
             )
-            .order_by(WorkflowExecution.started_at.desc())
-            .limit(max(limit, 1))
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     if not executions:
         return []
 
     logs = (
-        await session.execute(
-            select(WorkflowNodeExecutionLog)
-            .where(
-                WorkflowNodeExecutionLog.execution_id.in_([e.id for e in executions])
+        (
+            await session.execute(
+                select(WorkflowNodeExecutionLog)
+                .where(WorkflowNodeExecutionLog.execution_id.in_([e.id for e in executions]))
+                .order_by(WorkflowNodeExecutionLog.entered_at.asc())
             )
-            .order_by(WorkflowNodeExecutionLog.entered_at.asc())
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     logs_by_execution: dict[uuid.UUID, list[WorkflowNodeExecutionLog]] = {}
     for log in logs:
         logs_by_execution.setdefault(log.execution_id, []).append(log)

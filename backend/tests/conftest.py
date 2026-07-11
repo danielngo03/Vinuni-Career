@@ -28,7 +28,7 @@ os.environ["AI_EMBEDDING_MODEL_ALIAS"] = "embedding_default"
 os.environ["AI_RERANK_MODEL_ALIAS"] = "rerank_default"
 os.environ["AI_EVAL_MODEL_ALIAS"] = "eval_default"
 os.environ["AI_DAILY_COST_LIMIT_USD"] = "1.00"
-os.environ["OPENROUTER_API_KEY"] = "replace-with-local-key"   # placeholder → key_configured False
+os.environ["OPENROUTER_API_KEY"] = "replace-with-local-key"  # placeholder → key_configured False
 os.environ["CV_LLM_STRUCTURING_ENABLED"] = "false"
 os.environ["AUDIT_LOG_ENABLED"] = "true"
 

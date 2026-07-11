@@ -6,8 +6,9 @@ admins / superadmin only — students and partners get 403.
 
 Provider/alias endpoints (/providers, /model-aliases) extend the admin surface
 with multi-provider configuration. API keys are write-only and encrypted at rest;
-responses expose only ``has_api_key``. Concrete ``model_id`` values are also kept
-off GET responses.
+responses expose only ``has_api_key``. Provider/model registry and routing canvas
+routes are platform-superadmin-only because they expose platform operations
+metadata, not ordinary university governance controls.
 """
 
 from __future__ import annotations
@@ -57,9 +58,7 @@ async def get_ai_settings(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await settings_service.get_effective_settings(
-        session, principal=auth.principal
-    )
+    data = await settings_service.get_effective_settings(session, principal=auth.principal)
     return success(data)
 
 
@@ -95,13 +94,15 @@ async def disable_ai(
 # Multi-provider admin: providers and model aliases (ADR-0011 §6)
 # ---------------------------------------------------------------------------
 
+
 @admin_router.get("/providers", summary="List all AI provider endpoints")
 async def list_providers(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     from app.ai.gateway import provider_registry
-    await settings_service._require_ai_settings_admin(session, auth.principal, "read")
+
+    settings_service.require_platform_superadmin(auth.principal)
     await provider_registry.ensure_defaults(session)
     await session.commit()
     data = await provider_registry.list_providers(session)
@@ -116,7 +117,8 @@ async def create_provider(
 ) -> dict:
     from app.ai.gateway import provider_registry
     from app.shared.audit import AuditContext, write_audit
-    await settings_service._require_ai_settings_admin(session, auth.principal, "manage")
+
+    settings_service.require_platform_superadmin(auth.principal)
     try:
         data = await provider_registry.create_provider(
             session, payload=body.model_dump(), created_by=auth.principal.user_id
@@ -128,8 +130,12 @@ async def create_provider(
         action="ai_provider.created",
         resource_type="ai_provider_config",
         resource_id=uuid.UUID(data["id"]),
-        context=AuditContext(actor_id=auth.principal.user_id, actor_org_id=auth.principal.org_id,
-                             ip=auth.ctx.ip, user_agent=auth.ctx.user_agent),
+        context=AuditContext(
+            actor_id=auth.principal.user_id,
+            actor_org_id=auth.principal.org_id,
+            ip=auth.ctx.ip,
+            user_agent=auth.ctx.user_agent,
+        ),
         after={"name": data["name"], "provider_type": data["provider_type"]},
     )
     await _commit_and_republish(session)
@@ -144,7 +150,8 @@ async def update_provider(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     from app.ai.gateway import provider_registry
-    await settings_service._require_ai_settings_admin(session, auth.principal, "manage")
+
+    settings_service.require_platform_superadmin(auth.principal)
     try:
         data = await provider_registry.update_provider(
             session,
@@ -164,15 +171,18 @@ async def rotate_provider_keys(
 ) -> dict:
     from app.ai.gateway import provider_registry
     from app.shared.audit import AuditContext, write_audit
-    await settings_service._require_ai_settings_admin(session, auth.principal, "manage")
+
+    settings_service.require_platform_superadmin(auth.principal)
     result = await provider_registry.reencrypt_all_provider_keys(session)
     await write_audit(
         session,
         action="ai_provider.keys_rotated",
         resource_type="ai_provider_config",
         context=AuditContext(
-            actor_id=auth.principal.user_id, actor_org_id=auth.principal.org_id,
-            ip=auth.ctx.ip, user_agent=auth.ctx.user_agent,
+            actor_id=auth.principal.user_id,
+            actor_org_id=auth.principal.org_id,
+            ip=auth.ctx.ip,
+            user_agent=auth.ctx.user_agent,
         ),
         after={"rotated": result["rotated"], "skipped": result["skipped"]},
     )
@@ -186,7 +196,8 @@ async def list_model_aliases(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     from app.ai.gateway import provider_registry
-    await settings_service._require_ai_settings_admin(session, auth.principal, "read")
+
+    settings_service.require_platform_superadmin(auth.principal)
     await provider_registry.ensure_defaults(session)
     await session.commit()
     data = await provider_registry.list_aliases(session)
@@ -201,7 +212,8 @@ async def create_model_alias(
 ) -> dict:
     from app.ai.gateway import provider_registry
     from app.shared.audit import AuditContext, write_audit
-    await settings_service._require_ai_settings_admin(session, auth.principal, "manage")
+
+    settings_service.require_platform_superadmin(auth.principal)
     try:
         data = await provider_registry.create_alias(
             session, payload=body.model_dump(), created_by=auth.principal.user_id
@@ -213,8 +225,12 @@ async def create_model_alias(
         action="ai_model_alias.created",
         resource_type="ai_model_alias",
         resource_id=uuid.UUID(data["id"]),
-        context=AuditContext(actor_id=auth.principal.user_id, actor_org_id=auth.principal.org_id,
-                             ip=auth.ctx.ip, user_agent=auth.ctx.user_agent),
+        context=AuditContext(
+            actor_id=auth.principal.user_id,
+            actor_org_id=auth.principal.org_id,
+            ip=auth.ctx.ip,
+            user_agent=auth.ctx.user_agent,
+        ),
         after={"alias_name": data["alias_name"], "provider_name": data["provider_name"]},
     )
     await _commit_and_republish(session)
@@ -229,7 +245,8 @@ async def update_model_alias(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     from app.ai.gateway import provider_registry
-    await settings_service._require_ai_settings_admin(session, auth.principal, "manage")
+
+    settings_service.require_platform_superadmin(auth.principal)
     try:
         data = await provider_registry.update_alias(
             session,
@@ -247,6 +264,7 @@ async def update_model_alias(
 # ---------------------------------------------------------------------------
 # AI Provider/Model Routing Canvas (draft CRUD + activation + live view)
 # ---------------------------------------------------------------------------
+
 
 def _routing_graph_presenter(row) -> dict:
     return {
@@ -282,7 +300,11 @@ async def update_routing_graph(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     row = await routing_service.update_draft_graph(
-        session, principal=auth.principal, graph_id=graph_id, graph=body.graph, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        graph_id=graph_id,
+        graph=body.graph,
+        ctx=auth.ctx,
     )
     return success(_routing_graph_presenter(row))
 
@@ -319,7 +341,10 @@ async def activate_routing_graph(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     row = await routing_activation_service.activate_routing_graph(
-        session, principal=auth.principal, graph_id=graph_id, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        graph_id=graph_id,
+        ctx=auth.ctx,
     )
     return success(_routing_graph_presenter(row))
 
@@ -334,6 +359,9 @@ async def get_routing_canvas(
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
     view = await routing_read_service.get_routing_canvas_view(
-        session, principal=auth.principal, task_family=task_family, ctx=auth.ctx,
+        session,
+        principal=auth.principal,
+        task_family=task_family,
+        ctx=auth.ctx,
     )
     return success(view)

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import pytest
-
 from scripts.seed_workflow_templates import seed_templates
+
 from tests.auth_utils import CTX
 from tests.org_utils import make_org_with_admin
 

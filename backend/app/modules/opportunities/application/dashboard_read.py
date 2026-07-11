@@ -31,9 +31,7 @@ def _iso(value) -> str | None:
 # --------------------------------------------------------------------------- #
 
 
-async def count_org_jobs_by_status(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> dict[str, int]:
+async def count_org_jobs_by_status(session: AsyncSession, *, org_id: uuid.UUID) -> dict[str, int]:
     """Counts of the org's own (non-deleted) jobs grouped by lifecycle status."""
 
     rows = (
@@ -66,17 +64,21 @@ async def list_org_jobs_needing_attention(
 
     attention = (lifecycle.DRAFT, lifecycle.REJECTED, lifecycle.PENDING_REVIEW)
     rows = (
-        await session.execute(
-            select(Job)
-            .where(
-                Job.org_id == org_id,
-                Job.deleted_at.is_(None),
-                Job.status.in_(attention),
+        (
+            await session.execute(
+                select(Job)
+                .where(
+                    Job.org_id == org_id,
+                    Job.deleted_at.is_(None),
+                    Job.status.in_(attention),
+                )
+                .order_by(Job.updated_at.desc(), Job.id.desc())
+                .limit(max(limit, 0))
             )
-            .order_by(Job.updated_at.desc(), Job.id.desc())
-            .limit(max(limit, 0))
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [
         {
             "id": str(job.id),
@@ -112,16 +114,18 @@ async def list_pending_moderation_jobs(
     """Oldest-first pending-review jobs (with employer) for the moderation queue."""
 
     jobs = (
-        await session.execute(
-            select(Job)
-            .where(Job.deleted_at.is_(None), Job.status == lifecycle.PENDING_REVIEW)
-            .order_by(Job.submitted_at.asc().nulls_last(), Job.created_at.asc())
-            .limit(max(limit, 0))
+        (
+            await session.execute(
+                select(Job)
+                .where(Job.deleted_at.is_(None), Job.status == lifecycle.PENDING_REVIEW)
+                .order_by(Job.submitted_at.asc().nulls_last(), Job.created_at.asc())
+                .limit(max(limit, 0))
+            )
         )
-    ).scalars().all()
-    names = await org_reporting_facade.display_names_for(
-        session, (j.org_id for j in jobs)
+        .scalars()
+        .all()
     )
+    names = await org_reporting_facade.display_names_for(session, (j.org_id for j in jobs))
     return [
         {
             "id": str(job.id),

@@ -102,9 +102,7 @@ async def _email_for_user(session: AsyncSession, user_id: Any) -> str | None:
     return await user_read_facade.get_email(session, user_id)
 
 
-async def _student_segment_limits(
-    session: AsyncSession, principal: Principal
-) -> dict[str, Any]:
+async def _student_segment_limits(session: AsyncSession, principal: Principal) -> dict[str, Any]:
     if principal.user_id is None or principal.org_id is not None:
         return {}
     email = await _email_for_user(session, principal.user_id)
@@ -113,18 +111,20 @@ async def _student_segment_limits(
     return dict(_EXTERNAL_STUDENT_LIMITS)
 
 
-async def _default_plan(
-    session: AsyncSession, audience: str
-) -> SubscriptionPlan | None:
+async def _default_plan(session: AsyncSession, audience: str) -> SubscriptionPlan | None:
     return (
-        await session.execute(
-            select(SubscriptionPlan).where(
-                SubscriptionPlan.audience == audience,
-                SubscriptionPlan.is_default.is_(True),
-                SubscriptionPlan.is_visible.is_(True),
+        (
+            await session.execute(
+                select(SubscriptionPlan).where(
+                    SubscriptionPlan.audience == audience,
+                    SubscriptionPlan.is_default.is_(True),
+                    SubscriptionPlan.is_visible.is_(True),
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
 async def _active_plan(
@@ -136,25 +136,27 @@ async def _active_plan(
     principal_type, principal_id = key
     now = now or _now()
     sub = (
-        await session.execute(
-            select(Subscription)
-            .where(
-                Subscription.principal_type == principal_type,
-                Subscription.principal_id == principal_id,
-                Subscription.status == lifecycle.ACTIVE,
-                Subscription.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(Subscription)
+                .where(
+                    Subscription.principal_type == principal_type,
+                    Subscription.principal_id == principal_id,
+                    Subscription.status == lifecycle.ACTIVE,
+                    Subscription.deleted_at.is_(None),
+                )
+                .order_by(Subscription.activated_at.desc().nulls_last())
             )
-            .order_by(Subscription.activated_at.desc().nulls_last())
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     if sub is None:
         return None
     if not lifecycle.is_active_now(sub.status, _as_aware(sub.end_at), now):
         return None
     return (
-        await session.execute(
-            select(SubscriptionPlan).where(SubscriptionPlan.id == sub.plan_id)
-        )
+        await session.execute(select(SubscriptionPlan).where(SubscriptionPlan.id == sub.plan_id))
     ).scalar_one_or_none()
 
 

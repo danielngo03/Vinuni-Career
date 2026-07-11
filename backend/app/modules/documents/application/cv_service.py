@@ -49,15 +49,19 @@ async def list_templates(session: AsyncSession, *, locale: str = "vi") -> list[d
     """
 
     rows = (
-        await session.execute(
-            select(CvTemplate)
-            .where(
-                CvTemplate.is_active.is_(True),
-                CvTemplate.status == "published",
+        (
+            await session.execute(
+                select(CvTemplate)
+                .where(
+                    CvTemplate.is_active.is_(True),
+                    CvTemplate.status == "published",
+                )
+                .order_by(CvTemplate.key)
             )
-            .order_by(CvTemplate.key)
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return [presenters.template(t, locale=locale) for t in rows]
 
 
@@ -88,9 +92,7 @@ async def list_versions(
     versions = await _cv_core._load_versions(session, cv_id=cv.id)
     current_id = str(versions[0].id) if versions else None
     return [
-        presenters.cv_version_summary(
-            v, is_current=(str(v.id) == current_id), locale=locale
-        )
+        presenters.cv_version_summary(v, is_current=(str(v.id) == current_id), locale=locale)
         for v in versions
     ]
 
@@ -159,7 +161,8 @@ async def list_cvs(
     stmt = stmt.order_by(CvProfile.created_at.desc(), CvProfile.id.desc()).limit(page_limit + 1)
     rows = list((await session.execute(stmt)).scalars().all())
     page = build_cursor_page(
-        rows, limit=page_limit,
+        rows,
+        limit=page_limit,
         cursor_builder=lambda p: {"created_at": p.created_at.isoformat(), "id": str(p.id)},
     )
     items = [presenters.cv_summary(p, locale=locale) for p in page.items]
@@ -194,9 +197,7 @@ async def update_cv(
     if payload.get("template_id") is not None:
         payload["template_id"] = _shared.to_uuid(payload["template_id"])
         tpl = (
-            await session.execute(
-                select(CvTemplate).where(CvTemplate.id == payload["template_id"])
-            )
+            await session.execute(select(CvTemplate).where(CvTemplate.id == payload["template_id"]))
         ).scalar_one_or_none()
         if tpl is None or not tpl.is_active:
             raise InvalidCvFieldError(field="template_id")
@@ -213,7 +214,10 @@ async def update_cv(
     await session.flush()
 
     await write_audit(
-        session, action="cv.updated", resource_type="cv", resource_id=cv.id,
+        session,
+        action="cv.updated",
+        resource_type="cv",
+        resource_id=cv.id,
         context=_shared.audit_ctx(principal, ctx),
         after={"fields": sorted(changed.keys())},
     )
@@ -244,7 +248,10 @@ async def delete_cv(
     cv.version += 1
     await session.flush()
     await write_audit(
-        session, action="cv.deleted", resource_type="cv", resource_id=cv.id,
+        session,
+        action="cv.deleted",
+        resource_type="cv",
+        resource_id=cv.id,
         context=_shared.audit_ctx(principal, ctx),
     )
     await session.commit()

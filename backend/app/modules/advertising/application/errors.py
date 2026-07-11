@@ -39,9 +39,7 @@ class PlacementNotEditableError(ConflictError):
 class DisclosureRequiredError(ValidationFailedError):
     """Submit attempted without confirming the non-removable sponsored label."""
 
-    message = (
-        "Bạn cần xác nhận nhãn công khai tài trợ/nổi bật trước khi gửi yêu cầu."
-    )
+    message = "Bạn cần xác nhận nhãn công khai tài trợ/nổi bật trước khi gửi yêu cầu."
 
     def __init__(self) -> None:
         super().__init__(details={"reason": "disclosure_required"})

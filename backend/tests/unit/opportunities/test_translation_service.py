@@ -11,10 +11,9 @@ Uses offline provider (no real AI calls). Covers:
 from __future__ import annotations
 
 import uuid
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-
 
 # ---------------------------------------------------------------------------
 # Helper: build a minimal Job-like object without a real DB
@@ -163,8 +162,13 @@ async def test_cache_hit_does_not_expose_internals() -> None:
 
     # Internal fields must not appear in the public payload
     forbidden_keys = {
-        "translated_by", "model", "provider", "model_alias",
-        "token_count", "tokens", "latency",
+        "translated_by",
+        "model",
+        "provider",
+        "model_alias",
+        "token_count",
+        "tokens",
+        "latency",
     }
     assert not forbidden_keys.intersection(result.keys()), (
         f"Internal keys leaked: {forbidden_keys.intersection(result.keys())}"

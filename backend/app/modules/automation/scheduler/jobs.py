@@ -32,6 +32,9 @@ from app.modules.career_outcomes.application import materializer_service
 from app.modules.compliance.application import retention_service as compliance_retention
 from app.modules.dashboards.application import snapshot_service as mi_snapshot
 from app.modules.discovery.application import cleanup_service as discovery_cleanup
+from app.modules.mock_interview.application import (
+    stale_sweep_service as mock_interview_sweep,
+)
 from app.modules.notifications.application import dispatch_service
 from app.modules.opportunities.application import (
     job_alert_dispatch_service,
@@ -42,7 +45,6 @@ from app.modules.opportunities.application import (
 from app.modules.recruitment.application import (
     interview_service,
     offer_service,
-    reveal_service,
     sla_reminder_service,
 )
 
@@ -60,10 +62,6 @@ async def _drain_outbox(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await dispatch_service.process_outbox(session, limit=50, now=now)
 
 
-async def _expire_reveals(session: AsyncSession, now: datetime) -> dict[str, int]:
-    return await reveal_service.sweep_expired(session, now=now)
-
-
 async def _close_deadlines(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await job_service.sweep_deadline_closures(session, now=now)
 
@@ -76,9 +74,7 @@ async def _offer_expire_sweep(session: AsyncSession, now: datetime) -> dict[str,
     return await offer_service.sweep_offers(session, now=now)
 
 
-async def _pipeline_sla_reminders(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _pipeline_sla_reminders(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await sla_reminder_service.sweep_sla_reminders(session, now=now)
 
 
@@ -90,9 +86,7 @@ async def _event_reminders_soon(session: AsyncSession, now: datetime) -> dict[st
     return await registration_service.sweep_reminders_soon(session, now=now)
 
 
-async def _event_waitlist_backfill(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _event_waitlist_backfill(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await registration_service.sweep_waitlist_backfill(session, now=now)
 
 
@@ -104,45 +98,31 @@ async def _event_no_show(session: AsyncSession, now: datetime) -> dict[str, int]
     return await registration_service.sweep_no_show(session, now=now)
 
 
-async def _advertising_activation(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _advertising_activation(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await ad_activation.activation_sweep(session, now=now)
 
 
-async def _advertising_completion(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _advertising_completion(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await ad_activation.completion_sweep(session, now=now)
 
 
-async def _advertising_flag_reconcile(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _advertising_flag_reconcile(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await ad_activation.flag_reconcile(session, now=now)
 
 
-async def _billing_expiry_sweep(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _billing_expiry_sweep(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await billing_expiry.expiry_sweep(session, now=now)
 
 
-async def _billing_expiring_notice(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _billing_expiring_notice(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await billing_expiry.expiring_notice(session, now=now)
 
 
-async def _career_outcomes_materialize(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _career_outcomes_materialize(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await materializer_service.materialize_career_outcomes(session, now)
 
 
-async def _discovery_session_cleanup(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _discovery_session_cleanup(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await discovery_cleanup.session_cleanup(session, now=now)
 
 
@@ -154,22 +134,20 @@ async def _weekly_job_digest(session: AsyncSession, now: datetime) -> dict[str, 
     return await weekly_digest_service.sweep_weekly_digest(session, now=now)
 
 
-async def _compliance_retention_sweep(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _compliance_retention_sweep(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await compliance_retention.sweep_retention(session, now=now)
 
 
-async def _market_intelligence_refresh(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _market_intelligence_refresh(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await mi_snapshot.refresh(session, now=now)
 
 
-async def _market_intelligence_reconcile(
-    session: AsyncSession, now: datetime
-) -> dict[str, int]:
+async def _market_intelligence_reconcile(session: AsyncSession, now: datetime) -> dict[str, int]:
     return await mi_snapshot.reconcile(session, now=now)
+
+
+async def _mock_interview_stale_sweep(session: AsyncSession, now: datetime) -> dict[str, int]:
+    return await mock_interview_sweep.sweep_stale_active(session, now=now)
 
 
 async def _evaluate_alerts(session: AsyncSession, _now: datetime) -> dict[str, int]:
@@ -190,7 +168,6 @@ async def _evaluate_alerts(session: AsyncSession, _now: datetime) -> dict[str, i
 # within a tick; each job is otherwise independent (its own session + commit).
 REGISTRY: tuple[ScheduledJob, ...] = (
     ScheduledJob("outbox.drain", 15, _drain_outbox),
-    ScheduledJob("reveal.expire_sweep", 300, _expire_reveals),
     ScheduledJob("interview.reminder_sweep", 300, _interview_reminders),
     ScheduledJob("offer.expire_sweep", 300, _offer_expire_sweep),
     # Pipeline SLA reminders: notify the stage's owning reviewer (fallback: the
@@ -236,9 +213,7 @@ REGISTRY: tuple[ScheduledJob, ...] = (
     # snapshot (well inside ``market_intelligence_stale_after_seconds``) + a
     # nightly drift reconciliation check (read-only; logs only, self-heals via
     # the next scheduled refresh).
-    ScheduledJob(
-        "dashboards.market_intelligence_refresh_sweep", 900, _market_intelligence_refresh
-    ),
+    ScheduledJob("dashboards.market_intelligence_refresh_sweep", 900, _market_intelligence_refresh),
     ScheduledJob(
         "dashboards.market_intelligence_reconcile_sweep",
         86400,
@@ -250,6 +225,12 @@ REGISTRY: tuple[ScheduledJob, ...] = (
     # (rollup rows in ai_usage_daily are never pruned). Both are idempotent.
     ScheduledJob("ai_ops.usage_daily_reconcile", 3600, _ai_usage_daily_reconcile),
     ScheduledJob("ai_ops.prune", 86400, _ai_ops_prune),
+    # P0-3: platform-wide expiry of abandoned ``active`` mock-interview sessions
+    # past the hard session cap + grace. Previously only lazily expired per-user
+    # at the next create; an abandoned session for an absent student lingered as
+    # ``active`` forever, inflating governance counts. Idempotent (re-tick finds
+    # only newly-stale rows); never touches a session still within the cap.
+    ScheduledJob("mock_interview.stale_session_sweep", 300, _mock_interview_stale_sweep),
     # P7: Alert rule evaluation — opens/resolves incidents on threshold breaches.
     # Runs every 5 minutes. Never raises (errors logged, never crashes the scheduler).
     ScheduledJob("alerts.evaluate", 300, _evaluate_alerts),

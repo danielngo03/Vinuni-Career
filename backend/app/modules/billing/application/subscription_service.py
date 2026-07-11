@@ -104,34 +104,33 @@ async def list_plans(
             return []
         stmt = stmt.where(SubscriptionPlan.audience == audience)
     stmt = stmt.order_by(
-        SubscriptionPlan.audience.asc(), SubscriptionPlan.sort_order.asc(),
+        SubscriptionPlan.audience.asc(),
+        SubscriptionPlan.sort_order.asc(),
         SubscriptionPlan.price_amount.asc(),
     )
     rows = list((await session.execute(stmt)).scalars().all())
     return [presenters.plan(p, locale=locale) for p in rows]
 
 
-async def _load_plan(
-    session: AsyncSession, plan_id: uuid.UUID
-) -> SubscriptionPlan | None:
+async def _load_plan(session: AsyncSession, plan_id: uuid.UUID) -> SubscriptionPlan | None:
     return (
-        await session.execute(
-            select(SubscriptionPlan).where(SubscriptionPlan.id == plan_id)
-        )
+        await session.execute(select(SubscriptionPlan).where(SubscriptionPlan.id == plan_id))
     ).scalar_one_or_none()
 
 
-async def _default_plan_for(
-    session: AsyncSession, *, audience: str
-) -> SubscriptionPlan | None:
+async def _default_plan_for(session: AsyncSession, *, audience: str) -> SubscriptionPlan | None:
     return (
-        await session.execute(
-            select(SubscriptionPlan).where(
-                SubscriptionPlan.audience == audience,
-                SubscriptionPlan.is_default.is_(True),
+        (
+            await session.execute(
+                select(SubscriptionPlan).where(
+                    SubscriptionPlan.audience == audience,
+                    SubscriptionPlan.is_default.is_(True),
+                )
             )
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -181,9 +180,7 @@ async def _load_owned(
     return sub
 
 
-async def _present(
-    session: AsyncSession, sub: Subscription, *, locale: str
-) -> dict:
+async def _present(session: AsyncSession, sub: Subscription, *, locale: str) -> dict:
     plan_obj = await _load_plan(session, sub.plan_id)
     return presenters.subscription(sub, locale=locale, plan_obj=plan_obj)
 
@@ -193,9 +190,7 @@ async def _present(
 # --------------------------------------------------------------------------- #
 
 
-async def get_mine(
-    session: AsyncSession, *, principal: Principal, locale: str = "vi"
-) -> dict:
+async def get_mine(session: AsyncSession, *, principal: Principal, locale: str = "vi") -> dict:
     """The caller's current subscription (active|pending) + effective limits.
 
     Null-safe: when the caller has no in-flight subscription, ``subscription`` is
@@ -204,8 +199,7 @@ async def get_mine(
 
     permission_checker.require(principal, _RESOURCE, "view")
     audience = (
-        lifecycle.AUDIENCE_PARTNER if principal.org_id is not None
-        else lifecycle.AUDIENCE_STUDENT
+        lifecycle.AUDIENCE_PARTNER if principal.org_id is not None else lifecycle.AUDIENCE_STUDENT
     )
     sub = await _load_current_inflight(session, principal=principal)
     default_plan = await _default_plan_for(session, audience=audience)
@@ -213,14 +207,11 @@ async def get_mine(
     if not effective and default_plan is not None:
         effective = dict(default_plan.limits or {})
     return {
-        "subscription": (
-            await _present(session, sub, locale=locale) if sub is not None else None
-        ),
+        "subscription": (await _present(session, sub, locale=locale) if sub is not None else None),
         "audience": audience,
         "limits": effective,
         "default_plan": (
-            presenters.plan(default_plan, locale=locale)
-            if default_plan is not None else None
+            presenters.plan(default_plan, locale=locale) if default_plan is not None else None
         ),
     }
 
@@ -235,9 +226,7 @@ async def get(
     """Owner-scoped subscription detail (cross-principal -> ``404``)."""
 
     permission_checker.require(principal, _RESOURCE, "view")
-    sub = await _load_owned(
-        session, principal=principal, subscription_id=subscription_id
-    )
+    sub = await _load_owned(session, principal=principal, subscription_id=subscription_id)
     return await _present(session, sub, locale=locale)
 
 
@@ -261,9 +250,7 @@ async def request_subscription(
     plan_obj = await _load_plan(session, plan_id)
     if plan_obj is None or not plan_obj.is_visible:
         raise InvalidPlanError()
-    if not lifecycle.audience_matches_principal(
-        plan_obj.audience, principal_type=principal_type
-    ):
+    if not lifecycle.audience_matches_principal(plan_obj.audience, principal_type=principal_type):
         raise PlanAudienceMismatchError()
 
     # One in-flight subscription per principal (pending|active).
@@ -286,11 +273,17 @@ async def request_subscription(
     await session.flush()
 
     await write_audit(
-        session, action="billing.subscription_requested",
-        resource_type="subscription", resource_id=sub.id,
+        session,
+        action="billing.subscription_requested",
+        resource_type="subscription",
+        resource_id=sub.id,
         context=_audit_ctx(principal, ctx),
-        after={"status": sub.status, "plan": plan_obj.code,
-               "principal_type": principal_type, "price_amount": str(sub.price_amount)},
+        after={
+            "status": sub.status,
+            "plan": plan_obj.code,
+            "principal_type": principal_type,
+            "price_amount": str(sub.price_amount),
+        },
     )
     await session.commit()
     await session.refresh(sub)
@@ -341,15 +334,19 @@ async def cancel(
     sub.version += 1
     await session.flush()
     await write_audit(
-        session, action="billing.subscription_cancelled",
-        resource_type="subscription", resource_id=sub.id,
+        session,
+        action="billing.subscription_cancelled",
+        resource_type="subscription",
+        resource_id=sub.id,
         context=_audit_ctx(principal, ctx),
         after={"status": sub.status, "by": "requester"},
     )
     from app.modules.billing.application import notify
 
     await notify.notify_owner(
-        session, subscription=sub, template_key="billing.cancelled",
+        session,
+        subscription=sub,
+        template_key="billing.cancelled",
     )
     await session.commit()
     await session.refresh(sub)

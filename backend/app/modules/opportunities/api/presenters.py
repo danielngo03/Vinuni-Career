@@ -48,14 +48,16 @@ def _build_locations(job: Job) -> list[dict]:
             }
             for loc in job.locations
         ]
-    return [{
-        "type": job.location_type,
-        "province_code": None,
-        "ward_code": None,
-        "ward_name": None,
-        "city": job.location_city,
-        "country": job.location_country,
-    }]
+    return [
+        {
+            "type": job.location_type,
+            "province_code": None,
+            "ward_code": None,
+            "ward_name": None,
+            "city": job.location_city,
+            "country": job.location_country,
+        }
+    ]
 
 
 def _salary(job: Job, *, is_owner: bool = False) -> dict | None:
@@ -82,7 +84,9 @@ def _salary(job: Job, *, is_owner: bool = False) -> dict | None:
     return None
 
 
-def _format_salary_amount(amount: int, *, currency: str, locale: str) -> str:
+def _format_salary_amount(amount: int | None, *, currency: str, locale: str) -> str:
+    if amount is None:
+        return "Thỏa thuận" if locale == "vi" else "Negotiable"
     if currency.upper() == "VND":
         millions = amount / 1_000_000
         value = f"{millions:.1f}".rstrip("0").rstrip(".")
@@ -118,24 +122,24 @@ def _salary_display(job: Job, *, locale: str) -> dict:
             "period": period,
             "gross_net": gross_net,
         }
-    if mode in ("fixed", "range", "from", "to") and (
-        min_amount is not None or max_amount is not None
-    ):
-        if mode == "fixed":
+    if mode in ("fixed", "range", "from", "to"):
+        if mode == "fixed" and min_amount is not None:
             label = _format_salary_amount(min_amount, currency=currency, locale=locale)
-        elif mode == "range":
+        elif mode == "range" and min_amount is not None and max_amount is not None:
             label = (
                 f"{_format_salary_amount(min_amount, currency=currency, locale=locale)}"
                 f" - {_format_salary_amount(max_amount, currency=currency, locale=locale)}"
             )
             if currency.upper() == "VND":
                 label = label.replace(" triệu - ", " - ").replace(" M VND - ", " - ")
-        elif mode == "from":
+        elif mode == "from" and min_amount is not None:
             amount = _format_salary_amount(min_amount, currency=currency, locale=locale)
             label = f"Từ {amount}" if locale == "vi" else f"From {amount}"
-        else:  # "to"
+        elif mode == "to" and max_amount is not None:
             amount = _format_salary_amount(max_amount, currency=currency, locale=locale)
             label = f"Tới {amount}" if locale == "vi" else f"Up to {amount}"
+        else:
+            label = "Thỏa thuận" if locale == "vi" else "Negotiable"
         return {
             "kind": mode,
             "label": label,
@@ -276,9 +280,7 @@ def _experience_display(job: Job, *, locale: str) -> dict:
             )
             return {"kind": "fixed", "label": label, "min": min_years, "max": max_years}
         label = (
-            f"{min_years}-{max_years} năm"
-            if locale == "vi"
-            else f"{min_years}-{max_years} years"
+            f"{min_years}-{max_years} năm" if locale == "vi" else f"{min_years}-{max_years} years"
         )
         return {"kind": "range", "label": label, "min": min_years, "max": max_years}
     if min_years is not None:
@@ -301,9 +303,7 @@ def _common(job: Job, *, locale: str, is_owner: bool = False) -> dict:
         ),
         "industry_id": str(job.industry_id) if job.industry_id else None,
         "location_type": job.location_type,
-        "location_type_label": lifecycle.location_type_label(
-            job.location_type, locale=locale
-        ),
+        "location_type_label": lifecycle.location_type_label(job.location_type, locale=locale),
         "location_city": job.location_city,
         "location_country": job.location_country,
         # Multi-location: always a list. When empty, synthesize from legacy fields.
@@ -384,14 +384,10 @@ def _owner_fields(job: Job, *, locale: str) -> dict:
         "status": job.status,
         "status_label": lifecycle.status_label(job.status, locale=locale),
         "moderation_status": job.moderation_status,
-        "moderation_status_label": lifecycle.moderation_label(
-            job.moderation_status, locale=locale
-        ),
+        "moderation_status_label": lifecycle.moderation_label(job.moderation_status, locale=locale),
         "moderation_note": job.moderation_note,
         "moderation_reason_code": job.moderation_reason_code,
-        "moderation_reason_label": reason_code_label(
-            job.moderation_reason_code, locale=locale
-        ),
+        "moderation_reason_label": reason_code_label(job.moderation_reason_code, locale=locale),
         "submitted_at": _iso(job.submitted_at),
         "approved_at": _iso(job.approved_at),
         "closed_at": _iso(job.closed_at),
@@ -407,7 +403,24 @@ def _owner_fields(job: Job, *, locale: str) -> dict:
     }
 
 
-def owner_job_summary(job: Job, *, locale: str = "vi") -> dict:
+def owner_job_summary(
+    job: Job,
+    *,
+    locale: str = "vi",
+    unreviewed_count: int | None = None,
+    in_pipeline_count: int | None = None,
+    owner_name: str | None = None,
+) -> dict:
+    """Owner (partner) list row for ``GET /jobs/mine``.
+
+    ``unreviewed_count`` (submitted-but-not-yet-reviewed — the "new to screen"
+    number) and ``in_pipeline_count`` (applications in an ACTIVE pipeline stage)
+    are live recruitment funnel signals batched in by the service; they are ``None``
+    when the caller does not supply them (never fabricated to 0). ``owner_name`` is
+    the safe display name of the job's poster (``posted_by``) — the recruiter
+    accountable for the job — and never leaks their email/PII.
+    """
+
     data = _common(job, locale=locale, is_owner=True)
     data.update(
         {
@@ -418,11 +431,18 @@ def owner_job_summary(job: Job, *, locale: str = "vi") -> dict:
                 job.moderation_status, locale=locale
             ),
             "moderation_reason_code": job.moderation_reason_code,
-            "moderation_reason_label": reason_code_label(
-                job.moderation_reason_code, locale=locale
-            ),
+            "moderation_reason_label": reason_code_label(job.moderation_reason_code, locale=locale),
             "visibility": job.visibility,
             "version": job.version,
+            "view_count": job.view_count,
+            "application_count": job.application_count,
+            # Live recruiting funnel signals (batched read-model; see
+            # recruitment.job_application_stats_facade). ``None`` = not supplied.
+            "unreviewed_count": unreviewed_count,
+            "in_pipeline_count": in_pipeline_count,
+            # The job's poster identity (safe display name only, never email).
+            "posted_by": str(job.posted_by),
+            "owner_name": owner_name,
             "created_at": _iso(job.created_at),
             "claimed_by": str(job.claimed_by) if job.claimed_by else None,
             "claimed_at": _iso(job.claimed_at),

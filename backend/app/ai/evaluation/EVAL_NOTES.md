@@ -119,6 +119,46 @@ adversarial and privacy_boundary cases (previously only had happy_path/
 low_quality/fallback coverage for this specific task_type, even though the
 family-level gate already passed via other task types).
 
+### Addendum — mock-interview brain + grounding (2026-07-10)
+
+Two families close the biggest remaining offline gap: the conversational
+**interviewer brain** (`conversation_service` + `prompts/mock_interview/v1.py`)
+had ZERO offline eval, and its deterministic grounding had none either.
+
+- `mock_interview_turn` — invariants of ONE interviewer utterance, asserted via
+  the PURE `mock_interview.application.turn_guard.assess_turn_offline` (prompt-
+  wording-independent, so it survives a prompt reword). Checks: exactly one
+  question per turn (multi-question dump flagged), grounded in the CV and/or JD,
+  NO protected/personal-characteristic probe, NO numeric score/rating/grade
+  (a candidate's own quantified achievement — "cut latency 40%", "ranked 2nd" —
+  is explicitly allowed), correct `[END]` handling, and the deterministic
+  provider-down fallback turn. The runner scrubs the simulated turn with the same
+  `output_guard.scrub_text` the real `AiTaskRunner` applies to every streamed
+  chunk, so provider/model/key leaks are neutralised exactly as in production.
+  Counts: 15 / 10 / 8 / 6 / 5 (exceeds the §10.1 floor).
+- `interview_grounding` — deterministic, zero-LLM coverage of the pure
+  `grounding_service` helpers (`_infer_focus`, `_infer_difficulty`,
+  `_job_requirements`, the `low_signal` flag, owner-scoped matched-skills/gaps
+  cleaning). Verifies focus/difficulty inference, the near-empty-JD `low_signal`
+  flag, requirement-bullet extraction, and that injection/PII embedded in a JD
+  is stripped by `sanitize_instruction` before it can reach the system prompt.
+  Counts: 12 / 6 / 6 / 6 / 3.
+
+Two opt-in LLM-judge rubrics were added to `judge.RUBRICS`
+(`mock_interview_turn`, `mock_interview_report`) with paired good-vs-hallucinated
+gold sets at `datasets/{family}/judge.jsonl` (~16 each). These are NOT part of
+the offline gate — they run only under `AI_REAL_CALLS_ENABLED=true` with the
+cheap eval alias. A latency benchmark (`scripts/bench_interview_latency.py`,
+opt-in, real-call, capped by `AI_MAX_REAL_CALLS_PER_TEST_RUN`) measures
+time-to-first-question / per-turn p50-p95 / report latency against §10.4
+(first-token p95 ≤ 3s, total ≤ 15s), keyed by internal alias only.
+
+The stale "task is DISABLED" premise in `runners/mock_interview_report.py` was
+reconciled: `report_service.generate_report` ALWAYS attempts the model and
+degrades to the static report on failure — the task is ENABLED, and "rollback"
+means disabling the model path at the gateway (which still leaves the static
+report).
+
 ### Addendum — the 7 families closed after the initial 11 (2026-07-01)
 
 All of the following were, at the time, real AI-backed services with **zero**

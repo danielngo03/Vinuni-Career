@@ -23,13 +23,19 @@ def test_run_uses_injected_adapter_when_enabled():
 
 def test_run_returns_none_when_disabled():
     jdv.set_jd_vision_adapter(_FakeAdapter())
-    assert jdv.run_jd_vision_extraction(
-        b"\xff\xd8\xff", FileKind.IMAGE, enabled=False, max_image_px=2200, max_pages=3
-    ) is None
+    assert (
+        jdv.run_jd_vision_extraction(
+            b"\xff\xd8\xff", FileKind.IMAGE, enabled=False, max_image_px=2200, max_pages=3
+        )
+        is None
+    )
 
 
 def test_disabled_default_adapter_is_unavailable():
     jdv.set_jd_vision_adapter(jdv.DisabledJdVisionAdapter())
-    assert jdv.run_jd_vision_extraction(
-        b"\xff\xd8\xff", FileKind.IMAGE, enabled=True, max_image_px=2200, max_pages=3
-    ) is None
+    assert (
+        jdv.run_jd_vision_extraction(
+            b"\xff\xd8\xff", FileKind.IMAGE, enabled=True, max_image_px=2200, max_pages=3
+        )
+        is None
+    )

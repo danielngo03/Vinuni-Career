@@ -112,9 +112,7 @@ def _incident_to_dict(inc: Incident) -> dict[str, Any]:
     }
 
 
-def _build_incident_message(
-    metric: str, value: float, comparison: str, threshold: float
-) -> str:
+def _build_incident_message(metric: str, value: float, comparison: str, threshold: float) -> str:
     """Build a user-safe incident message without internals."""
     labels: dict[str, str] = {
         "ai_spend_vs_budget_pct": "AI spend vs budget",
@@ -571,9 +569,7 @@ async def evaluate_alerts(session: AsyncSession) -> dict[str, int]:
     evaluated = 0
 
     # Load enabled rules.
-    rules_result = await session.execute(
-        select(AlertRule).where(AlertRule.enabled.is_(True))
-    )
+    rules_result = await session.execute(select(AlertRule).where(AlertRule.enabled.is_(True)))
     rules = list(rules_result.scalars().all())
 
     for rule in rules:
@@ -603,9 +599,7 @@ async def evaluate_alerts(session: AsyncSession) -> dict[str, int]:
 
         if fires and open_incident is None:
             # Open a new incident.
-            msg = _build_incident_message(
-                rule.metric, value, rule.comparison, rule.threshold
-            )
+            msg = _build_incident_message(rule.metric, value, rule.comparison, rule.threshold)
             inc = Incident(
                 rule_id=rule.id,
                 metric=rule.metric,

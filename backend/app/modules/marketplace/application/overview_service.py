@@ -104,16 +104,9 @@ async def _jobs_trend(session: AsyncSession) -> dict | None:
         today = datetime.now(tz=UTC).date()
         window_start = today - timedelta(days=_TREND_DAYS - 1)  # 30 buckets incl. today
         prior_start = window_start - timedelta(days=_TREND_DAYS)
-        fetch_start = datetime(
-            prior_start.year, prior_start.month, prior_start.day, tzinfo=UTC
-        )
-        fetch_end = (
-            datetime(today.year, today.month, today.day, tzinfo=UTC)
-            + timedelta(days=1)
-        )
-        per_day = await public_read.published_per_day(
-            session, start=fetch_start, end=fetch_end
-        )
+        fetch_start = datetime(prior_start.year, prior_start.month, prior_start.day, tzinfo=UTC)
+        fetch_end = datetime(today.year, today.month, today.day, tzinfo=UTC) + timedelta(days=1)
+        per_day = await public_read.published_per_day(session, start=fetch_start, end=fetch_end)
     except Exception:  # noqa: BLE001 — trend hidden on failure; metrics unaffected
         return None
 
@@ -128,9 +121,7 @@ async def _jobs_trend(session: AsyncSession) -> dict | None:
     # Prior equivalent period: the 30 days immediately before the window.
     window_key = window_start.isoformat()
     prior_key = prior_start.isoformat()
-    prior_total = sum(
-        n for day_key, n in per_day.items() if prior_key <= day_key < window_key
-    )
+    prior_total = sum(n for day_key, n in per_day.items() if prior_key <= day_key < window_key)
 
     return {
         "new_jobs_30d": current_total,
@@ -227,9 +218,7 @@ async def _sponsored_banners(
                     }
                 )
             else:
-                banners.append(
-                    inventory_facade.curated_fallback(slot, locale=locale)
-                )
+                banners.append(inventory_facade.curated_fallback(slot, locale=locale))
     except Exception:  # noqa: BLE001 — a sponsored-read failure hides the banner, never 500s
         return None, None
     return banners[0], banners[1]
@@ -261,15 +250,10 @@ async def _recommended_events(
     rows = await event_public_read.list_upcoming_summaries(
         session, limit=_RECOMMENDED_EVENTS_CAP, locale=locale
     )
-    return [
-        {**row, "source": "recent", "reason_codes": [{"code": "recent"}]}
-        for row in rows
-    ]
+    return [{**row, "source": "recent", "reason_codes": [{"code": "recent"}]} for row in rows]
 
 
-async def _recommended_companies(
-    session: AsyncSession, *, session_tags: dict | None
-) -> list[dict]:
+async def _recommended_companies(session: AsyncSession, *, session_tags: dict | None) -> list[dict]:
     """Public companies ranked from company/industry session signals."""
 
     tags = session_tags or {}
@@ -306,9 +290,7 @@ async def get_overview(
     featured = await public_read.list_featured_summaries(
         session, limit=_FEATURED_CAP, locale=locale
     )
-    recent = await public_read.list_recent_summaries(
-        session, limit=_RECENT_CAP, locale=locale
-    )
+    recent = await public_read.list_recent_summaries(session, limit=_RECENT_CAP, locale=locale)
     spotlight = await company_directory_service.list_spotlight_companies(
         session, limit=_SPOTLIGHT_CAP
     )
@@ -345,9 +327,7 @@ async def get_overview(
     recommended_events = await _recommended_events(
         session, session_tags=session_tags, locale=locale
     )
-    recommended_companies = await _recommended_companies(
-        session, session_tags=session_tags
-    )
+    recommended_companies = await _recommended_companies(session, session_tags=session_tags)
     hero_campaign, sponsored_banner = await _sponsored_banners(
         session,
         locale=locale,

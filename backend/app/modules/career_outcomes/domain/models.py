@@ -59,37 +59,25 @@ class CareerOutcomeRecord(Base):
 
     __tablename__ = "career_outcome_records"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     # From the offer.accepted payload (no FK: cross-module, consumed as data).
-    application_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), nullable=False
-    )
+    application_id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
     offer_id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
     org_id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
-    employer_org_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True), nullable=False
-    )
+    employer_org_id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
     position_title: Mapped[str | None] = mapped_column(String(300), nullable=True)
     start_date: Mapped[date | None] = mapped_column(Date, nullable=True)
 
-    outcome_type: Mapped[str] = mapped_column(
-        String(30), nullable=False, default=OUTCOME_HIRED
-    )
+    outcome_type: Mapped[str] = mapped_column(String(30), nullable=False, default=OUTCOME_HIRED)
     trust_level: Mapped[int] = mapped_column(
         SmallInteger, nullable=False, default=TRUST_LEVEL_ESTIMATED
     )
-    source: Mapped[str] = mapped_column(
-        String(30), nullable=False, default=SOURCE_SYSTEM_ESTIMATE
-    )
+    source: Mapped[str] = mapped_column(String(30), nullable=False, default=SOURCE_SYSTEM_ESTIMATE)
     # Originating OutboxEvent.id — UNIQUE for idempotent materialization.
     source_event_id: Mapped[uuid.UUID] = mapped_column(
         Uuid(as_uuid=True), nullable=False, unique=True
     )
-    recorded_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
+    recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

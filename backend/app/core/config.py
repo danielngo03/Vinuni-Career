@@ -97,8 +97,83 @@ class Settings(BaseSettings):
     # policy, V1 flat). Single weekly window, resets at UTC Monday. The daily
     # request-count window was removed (WS-1) — cost-weighted metering is now the
     # masked-energy account; this weekly cap is a coarse safety net for chat.
+    ai_session_request_limit: int = 50
+    ai_session_window_hours: int = 3
     ai_weekly_request_limit: int = 200
     openai_compatible_base_url: str = "https://openrouter.ai/api/v1"
+
+    # --- Mock Interview: conversational "brain" model ---------------------------
+    # The turn-by-turn interviewer engine AND the post-session coaching report run
+    # through the SAME safe text gateway as every other AI task (guard + fallback +
+    # usage log + telemetry + eval sampling). Bound to a leak-safe alias; the
+    # concrete model id is internal. Gemini 2.5 Flash reads/writes Vietnamese well
+    # and is fast + cheap, which matters for a low-latency spoken interview. Any
+    # OpenAI-compatible model works — a superadmin can rebind the alias in the
+    # provider registry without touching code.
+    ai_interview_model: str = "google/gemini-2.5-flash"
+    ai_interview_model_alias: str = "interview_default"
+
+    # --- Mock Interview: realtime speech-to-speech tier (Tier V2) ---------------
+    # TRUE full-duplex voice needs a NATIVE provider socket (Gemini Live via
+    # WebSocket / OpenAI Realtime via WebRTC) and that provider's own key — it
+    # CANNOT be proxied through an OpenAI-compatible TEXT endpoint like OpenRouter.
+    # It is therefore DISABLED by default: the default spoken experience is
+    # browser-native STT/TTS driving the text brain above (Tier V1), which runs on
+    # the existing OpenRouter key at ~zero extra provider cost. A platform
+    # superadmin enables Tier V2 by registering a realtime provider+model+voice
+    # (plus its own key) in the AI registry and flipping ``ai_realtime_enabled``.
+    # All values are leak-safe aliases; no vendor/model string reaches end users.
+    ai_realtime_enabled: bool = False  # OFF until a NATIVE realtime key is present
+    ai_realtime_provider: str = "gemini-live"  # registry alias (superadmin-swappable)
+    # Native speech-to-speech model (Gemini Live). Default = the natural-voice
+    # "Native Audio Dialog"; alternatives your project may expose:
+    # gemini-3-flash-live-preview, gemini-2.5-flash-native-audio-preview-09-2025.
+    ai_realtime_model: str = "gemini-2.5-flash-preview-native-audio-dialog"
+    ai_realtime_voice: str = "Aoede"  # provider voice name (Aoede/Puck/Charon/…)
+    ai_realtime_ttl_seconds: int = 660  # ephemeral-token / session hard-cap ceiling
+    # Native Google GenAI key (AI Studio developer key or Vertex express key)
+    # for the voice tiers (Live realtime, speech STT/TTS). NOT OpenRouter.
+    # Canonical env var: GOOGLE_API_KEY (GEMINI_API_KEY was retired 2026-07-11).
+    google_api_key: str = ""
+
+    # --- Mock Interview: server-mediated Gemini voice tier (STT + TTS) ----------
+    # A turn-based spoken interview that runs on a Google/Vertex GenAI key WITHOUT
+    # the AI-Studio ephemeral-token Live socket: the server transcribes the
+    # student's spoken answer (Gemini audio understanding) and synthesizes the
+    # interviewer's question to natural speech (Gemini TTS), reusing the existing
+    # CV+JD-grounded text turn engine in between. This works on a Vertex *express*
+    # API key (``genai.Client(vertexai=True, api_key=...)``), unlike the native
+    # Live tier which requires an AI-Studio key. Values are leak-safe; no vendor or
+    # model string reaches the student. Disabled by default; enable once a working
+    # Google key + ``AI_REAL_CALLS_ENABLED`` are present.
+    ai_speech_enabled: bool = False
+    ai_speech_use_vertex: bool = True  # express Vertex key path (vertexai=True)
+    ai_speech_tts_model: str = "gemini-2.5-flash-preview-tts"
+    ai_speech_stt_model: str = "gemini-2.5-flash"
+    ai_speech_voice: str = "Aoede"  # Gemini prebuilt voice (Aoede/Puck/Charon/Kore/…)
+    ai_speech_max_tts_chars: int = 1200  # cap synthesized text length per call
+    ai_speech_max_audio_seconds: int = 90  # cap uploaded answer audio length
+    ai_speech_max_audio_bytes: int = 8 * 1024 * 1024  # hard upload ceiling (8 MB)
+
+    # Google Cloud / Vertex AI binding for the speech tier (and any future native
+    # Google model). ``google_application_credentials`` is a FILE PATH to a
+    # service-account JSON key — the file itself lives OUTSIDE the repo and is
+    # never committed; only its path is configured here. When set, the speech
+    # client authenticates via ADC (full quota) instead of an express API key.
+    google_cloud_project: str = ""
+    google_cloud_location: str = "global"
+    google_application_credentials: str = ""
+
+    # --- Mock Interview: TRUE realtime Live relay (server-mediated) --------------
+    # Full-duplex native-audio interview via the Gemini Live model. The browser
+    # cannot hold the Google service-account credential, so the SERVER brokers the
+    # Live socket (ADC), relaying the student's mic audio in and the interviewer's
+    # native-audio out with live transcripts. This is the low-latency "live" tier;
+    # the turn-based STT+TTS tier above is the fallback. Region-pinned because the
+    # Live model is only served from specific Vertex regions (not ``global``).
+    ai_realtime_relay_enabled: bool = False
+    ai_realtime_relay_model: str = "gemini-live-2.5-flash-native-audio"
+    ai_realtime_relay_location: str = "us-central1"
 
     # OCR / extraction (lightweight defaults)
     backend_ai_extras: str = "ai-lite"
@@ -179,14 +254,30 @@ class Settings(BaseSettings):
     # ``submit`` that would exceed this is rejected ``409 active_placement_limit``.
     advertising_max_active_per_org: int = 3
 
+    # Campaign-grade allocation engine (spec §7.0). Max concurrent in-flight
+    # (pending_review | approved | active | paused) CAMPAIGNS per advertiser org.
+    advertising_max_active_campaigns_per_org: int = 5
+    # Default frozen CPM (cost per 1000 impressions, VND) used to derive a
+    # campaign's notional impression goal + per-impression spend for budget pacing.
+    # V1 has no bidding; this is a fixed rate-card value, frozen onto the campaign
+    # at submit. Never surfaced as a "bid" — it is an internal spend/pacing rate.
+    advertising_default_cpm_vnd: str = "50000.00"
+    # TTL (seconds) an allocation-plan row stays "current" before recomputation.
+    advertising_allocation_ttl_seconds: int = 600
+
     # CV-to-job fit: a CV whose latest content update is older than this many days
     # is flagged ``stale: true`` in job-fit results (docs/BUSINESS_LOGIC.md §4B.3B,
     # docs/CV_STUDIO_SPEC.md §recommend). Deterministic; never a model parameter.
     cv_stale_after_days: int = 60
 
     # Storage
+    # "local" (LOCAL_STORAGE_DIR on disk) or "gcs" (Google Cloud Storage bucket).
+    # Cloud Run's filesystem is ephemeral, so production must use "gcs" (or mount
+    # a persistent volume) or uploaded CVs/logos vanish on instance recycle.
     storage_backend: str = "local"
     local_storage_dir: str = ".dev/storage"
+    gcs_bucket_name: str = ""
+    gcs_key_prefix: str = ""  # optional folder prefix inside the bucket
     signed_url_ttl_seconds: int = 900
     max_upload_mb: int = 50
     # Organization logo upload cap (docs/API_CONTRACTS.md "Organization Media And

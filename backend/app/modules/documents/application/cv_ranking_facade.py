@@ -23,9 +23,7 @@ from app.modules.documents.application import _shared, job_fit_service
 from app.shared.permissions import Principal, permission_checker
 
 
-async def build_cv_inputs(
-    session: AsyncSession, *, principal: Principal
-) -> list[job_fit.CvInput]:
+async def build_cv_inputs(session: AsyncSession, *, principal: Principal) -> list[job_fit.CvInput]:
     """The caller's active CVs prepared for deterministic fit scoring.
 
     Owner-only (``cv:read``). Empty list when the student has no active CV — the
@@ -37,6 +35,4 @@ async def build_cv_inputs(
 
     now = datetime.now(tz=UTC)
     cvs = await job_fit_service._load_active_cvs(session, user_id=principal.user_id)
-    return [
-        await job_fit_service._build_cv_input(session, cv=cv, now=now) for cv in cvs
-    ]
+    return [await job_fit_service._build_cv_input(session, cv=cv, now=now) for cv in cvs]

@@ -36,8 +36,13 @@ def _cv() -> dict:
             }
         ],
         "education": [
-            {"degree": "Cử nhân CNTT", "school": "Đại học FPT",
-             "start": "2014", "end": "2018", "gpa": "3,64"}
+            {
+                "degree": "Cử nhân CNTT",
+                "school": "Đại học FPT",
+                "start": "2014",
+                "end": "2018",
+                "gpa": "3,64",
+            }
         ],
         "skills": [
             {"name": "McAfee SIEM", "level": 85},
@@ -106,7 +111,9 @@ def test_normalize_rejects_empty_result() -> None:
 def test_normalize_infers_language_when_missing() -> None:
     parsed = {
         "contact": {"name": "Trần Văn A"},
-        "experience": [{"role": "Kỹ sư", "organization": "Công ty", "highlights": ["Giao tiếp tốt"]}],
+        "experience": [
+            {"role": "Kỹ sư", "organization": "Công ty", "highlights": ["Giao tiếp tốt"]}
+        ],
     }
     result = vision._normalize(parsed)
     assert result is not None

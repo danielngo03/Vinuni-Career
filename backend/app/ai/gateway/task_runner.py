@@ -559,9 +559,8 @@ async def _record_telemetry(
 
     except Exception:  # noqa: BLE001
         import logging
-        logging.getLogger("ai.task_runner").warning(
-            "ai_telemetry_failed", exc_info=True
-        )
+
+        logging.getLogger("ai.task_runner").warning("ai_telemetry_failed", exc_info=True)
 
 
 def _sanitize_messages(
@@ -591,4 +590,5 @@ def _sanitize_messages(
 
 class PolicyRefusalError(ValueError):
     """Raised when policy orchestrator refuses a message."""
+
     pass

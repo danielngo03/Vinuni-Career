@@ -26,10 +26,10 @@ from dataclasses import dataclass
 # --------------------------------------------------------------------------- #
 
 SOURCE_RECOMMENDED = "recommended"  # genuine session/profile/CV/query signal
-SOURCE_RECENT = "recent"            # honest fallback: newest eligible inventory
-SOURCE_POPULAR = "popular"          # honest fallback: most-applied/-viewed
-SOURCE_SPONSORED = "sponsored"      # paid inventory filling a defined slot
-SOURCE_CURATED = "curated"          # university-curated inventory
+SOURCE_RECENT = "recent"  # honest fallback: newest eligible inventory
+SOURCE_POPULAR = "popular"  # honest fallback: most-applied/-viewed
+SOURCE_SPONSORED = "sponsored"  # paid inventory filling a defined slot
+SOURCE_CURATED = "curated"  # university-curated inventory
 
 SOURCES: frozenset[str] = frozenset(
     {
@@ -45,19 +45,19 @@ SOURCES: frozenset[str] = frozenset(
 # Reason codes (user-safe coded reasons; the frontend localizes them)         #
 # --------------------------------------------------------------------------- #
 
-REASON_CV_FIT = "cv_fit"                    # {score, cv_id, cv_title}
-REASON_PREFERRED_JOB_TYPE = "preferred_job_type"   # {value}
-REASON_PREFERRED_LOCATION = "preferred_location"   # {value}
-REASON_PREFERRED_FIELD = "preferred_field"         # {value}
-REASON_MATCHES_SEARCH = "matches_search"    # {term}
-REASON_SIMILAR_ROLE = "similar_role"        # {} viewed similar role family
+REASON_CV_FIT = "cv_fit"  # {score, cv_id, cv_title}
+REASON_PREFERRED_JOB_TYPE = "preferred_job_type"  # {value}
+REASON_PREFERRED_LOCATION = "preferred_location"  # {value}
+REASON_PREFERRED_FIELD = "preferred_field"  # {value}
+REASON_MATCHES_SEARCH = "matches_search"  # {term}
+REASON_SIMILAR_ROLE = "similar_role"  # {} viewed similar role family
 REASON_SIMILAR_INDUSTRY = "similar_industry"  # {value}
-REASON_SKILL_MATCH = "skill_match"          # {skills: [...]}
-REASON_SAVED_AFFINITY = "saved_affinity"    # {} similar to a job you saved
+REASON_SKILL_MATCH = "skill_match"  # {skills: [...]}
+REASON_SAVED_AFFINITY = "saved_affinity"  # {} similar to a job you saved
 REASON_VERIFIED_EMPLOYER = "verified_employer"  # {}
-REASON_DEADLINE_SOON = "deadline_soon"      # {days}
-REASON_POPULAR = "popular"                  # {}
-REASON_RECENT = "recent"                    # {}
+REASON_DEADLINE_SOON = "deadline_soon"  # {days}
+REASON_POPULAR = "popular"  # {}
+REASON_RECENT = "recent"  # {}
 
 REASON_CODES: frozenset[str] = frozenset(
     {
@@ -83,11 +83,11 @@ MAX_REASONS = 3
 # THESE positions only; organic items keep their relative order around them.
 SPONSORED_SLOTS: tuple[int, ...] = (0, 4)
 # Thresholds.
-CV_FIT_REASON_MIN = 55       # only claim cv_fit above this product score
-POPULAR_REASON_MIN = 5       # application_count at/above this earns a popular reason
-DEADLINE_SOON_DAYS = 7       # apply window closing within N days
-RECENCY_WINDOW_DAYS = 30.0   # recency decays to 0 over this many days
-POPULARITY_NORM = 10.0       # application_count that saturates the popularity term
+CV_FIT_REASON_MIN = 55  # only claim cv_fit above this product score
+POPULAR_REASON_MIN = 5  # application_count at/above this earns a popular reason
+DEADLINE_SOON_DAYS = 7  # apply window closing within N days
+RECENCY_WINDOW_DAYS = 30.0  # recency decays to 0 over this many days
+POPULARITY_NORM = 10.0  # application_count that saturates the popularity term
 
 # --------------------------------------------------------------------------- #
 # Component weights (renormalized over the components actually present)        #

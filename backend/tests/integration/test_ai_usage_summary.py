@@ -46,9 +46,7 @@ async def _log_calls(
 
 
 async def _principal(db_session) -> Principal:
-    user = await register_verified(
-        db_session, email=f"usage_{uuid.uuid4().hex[:8]}@vinuni.edu.vn"
-    )
+    user = await register_verified(db_session, email=f"usage_{uuid.uuid4().hex[:8]}@vinuni.edu.vn")
     return Principal(user_id=user.id, persona="partner", permissions=frozenset())
 
 
@@ -59,10 +57,49 @@ async def test_usage_empty_for_new_user(db_session) -> None:
 
     settings = get_settings()
     assert "day" not in data  # daily window removed (WS-1)
-    assert data["week"] == {"used": 0, "limit": settings.ai_weekly_request_limit, "pct": 0}
+    assert data["week"]["used"] == 0
+    assert data["week"]["limit"] == settings.ai_weekly_request_limit
+    assert data["week"]["pct"] == 0
+    # Week is a fixed Monday bucket, so it always advertises a reset instant.
+    assert data["week"]["resets_at"] is not None
+    # Session is a rolling window: with zero usage there is nothing pending to
+    # reset, so no reset instant is advertised.
+    assert data["session"]["resets_at"] is None
     assert data["warning"] is False
     assert data["blocked"] is False
     assert data["blocked_scope"] is None
+
+
+async def test_week_resets_at_is_next_utc_monday(db_session) -> None:
+    principal = await _principal(db_session)
+
+    data = await usage_service.my_usage(db_session, principal=principal)
+
+    reset = datetime.fromisoformat(data["week"]["resets_at"])
+    now = datetime.now(UTC)
+    assert reset > now
+    assert reset <= now + timedelta(days=7)
+    # Fixed bucket boundary: next Monday at 00:00 UTC.
+    assert reset.weekday() == 0
+    assert (reset.hour, reset.minute, reset.second) == (0, 0, 0)
+
+
+async def test_session_resets_at_is_oldest_row_plus_window(db_session) -> None:
+    principal = await _principal(db_session)
+    settings = get_settings()
+    now = datetime.now(UTC)
+    # Oldest counted request sits partway through the rolling session window.
+    oldest = now - timedelta(hours=1)
+    await _log_calls(db_session, principal.user_id, 1, created_at=oldest)
+    await _log_calls(db_session, principal.user_id, 1, created_at=now - timedelta(minutes=10))
+
+    data = await usage_service.my_usage(db_session, principal=principal)
+
+    assert data["session"]["used"] == 2
+    reset = datetime.fromisoformat(data["session"]["resets_at"])
+    expected = oldest + timedelta(hours=settings.ai_session_window_hours)
+    # Reset tracks the OLDEST in-window row ageing out (small clock skew allowed).
+    assert abs((reset - expected).total_seconds()) < 5
 
 
 async def test_usage_counts_per_window_and_only_my_rows(db_session) -> None:

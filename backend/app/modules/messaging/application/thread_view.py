@@ -1,20 +1,15 @@
 """The SINGLE projection source for messaging reads (ADR-0012 §2 / §3).
 
-Every per-viewer identity decision and every unread aggregation flows through here,
-so anonymity masking can never diverge between the inbox list, the thread detail,
-the message echo, and the notification label. Masking is computed at projection
-time from ``thread.is_anonymous`` + the recruitment reveal handshake — identity is
-never copied into the messaging tables.
+Every per-viewer identity decision and every unread aggregation flows through here.
+The anonymous-apply + reveal masking was removed (owner decision 2026-07-10), so a
+partner viewing a bound application thread always sees the applicant's real name.
 
-Masking decision (for a given viewer rendering another participant):
+Identity decision (for a given viewer rendering another participant):
 
 1. A university moderator (or superadmin) sees real identities.
-2. A PARTNER viewing the applicant of an ``application`` thread that is anonymous
-   AND not yet revealed sees a stable anonymous handle (never name/email/CV).
-   After ``reveal_approved_at`` the same projection flips to the real name.
-3. A STUDENT/alumni viewing the org side of an org-bound thread sees the ORG's
+2. A STUDENT/alumni viewing the org side of an org-bound thread sees the ORG's
    public display name (org identity is not protected).
-4. Otherwise: the real display name.
+3. Otherwise: the real display name.
 """
 
 from __future__ import annotations
@@ -42,20 +37,12 @@ _EPOCH = datetime(1970, 1, 1, tzinfo=UTC)
 _NEUTRAL_NAME = {"vi": "Người dùng", "en": "User"}
 
 
-def _short_code(application_id: uuid.UUID | None) -> str:
-    if application_id is None:
-        return "000000"
-    return application_id.hex[:6].upper()
-
-
 async def _real_name(session: AsyncSession, user_id: uuid.UUID, locale: str) -> str:
     name = await user_read_facade.get_full_name(session, user_id)
     return name or _NEUTRAL_NAME.get(labels.normalize_locale(locale), _NEUTRAL_NAME["vi"])
 
 
-async def _is_org_member(
-    session: AsyncSession, *, user_id: uuid.UUID, org_id: uuid.UUID
-) -> bool:
+async def _is_org_member(session: AsyncSession, *, user_id: uuid.UUID, org_id: uuid.UUID) -> bool:
     return await user_read_facade.is_org_member(session, user_id=user_id, org_id=org_id)
 
 
@@ -75,28 +62,12 @@ async def render_participant_label(
     if is_moderator:
         return await _real_name(session, other_user_id, locale)
 
-    viewer_is_partner = (
-        viewer.persona == rules.PARTNER_MEMBER and viewer.org_id == thread.org_id
-    )
-    # 2) Partner viewing the masked applicant.
-    if (
-        viewer_is_partner
-        and thread.context_type == rules.CONTEXT_APPLICATION
-        and relationship is not None
-        and other_user_id == relationship.applicant_id
-    ):
-        if relationship.is_anonymous and not relationship.is_revealed:
-            return labels.anonymous_handle(
-                short_code=_short_code(thread.context_id), locale=locale
-            )
-        return await _real_name(session, other_user_id, locale)
-
-    # 3) Student/alumni viewing the org counterpart -> org name.
+    # 2) Student/alumni viewing the org counterpart -> org name.
     if viewer.persona in (rules.STUDENT, rules.ALUMNI):
         if await _is_org_member(session, user_id=other_user_id, org_id=thread.org_id):
             return await _shared.org_display_name(session, thread.org_id)
 
-    # 4) Default: real name.
+    # 3) Default: real name (a partner always sees the applicant's real identity).
     return await _real_name(session, other_user_id, locale)
 
 
@@ -139,9 +110,7 @@ async def thread_unread(
 ) -> int:
     """Unread = messages newer than my ``last_read_at``, not authored by me, not deleted."""
 
-    participant = await _shared.get_participant(
-        session, thread_id=thread_id, user_id=viewer_id
-    )
+    participant = await _shared.get_participant(session, thread_id=thread_id, user_id=viewer_id)
     if participant is None:
         return 0
     anchor = participant.last_read_at or _EPOCH
@@ -182,7 +151,5 @@ async def unread_count_total(session: AsyncSession, *, principal: Principal) -> 
     )
     total = 0
     for thread_id, _last_read in rows:
-        total += await thread_unread(
-            session, thread_id=thread_id, viewer_id=principal.user_id
-        )
+        total += await thread_unread(session, thread_id=thread_id, viewer_id=principal.user_id)
     return total

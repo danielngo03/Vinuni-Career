@@ -96,16 +96,28 @@ def test_update_entry_field_preserves_other_fields() -> None:
 def test_add_and_remove_highlight() -> None:
     _b, after_add, has_text = _apply_operations(
         _sections(),
-        [{"op": "add_highlight", "section_type": "experience", "entry_index": 1,
-          "text": "Led a data project"}],
+        [
+            {
+                "op": "add_highlight",
+                "section_type": "experience",
+                "entry_index": 1,
+                "text": "Led a data project",
+            }
+        ],
     )
     assert has_text is True
     assert _after_entries(after_add)[1]["highlights"] == ["Did Z", "Led a data project"]
 
     _b2, after_rm, has_text2 = _apply_operations(
         _sections(),
-        [{"op": "remove_highlight", "section_type": "experience", "entry_index": 0,
-          "highlight_index": 0}],
+        [
+            {
+                "op": "remove_highlight",
+                "section_type": "experience",
+                "entry_index": 0,
+                "highlight_index": 0,
+            }
+        ],
     )
     # Structural change (no new prose) -> not flagged for the fabrication check.
     assert has_text2 is False
@@ -127,16 +139,25 @@ def test_malformed_entry_ops_are_dropped() -> None:
         _sections(),
         [
             # entry index out of range
-            {"op": "update_highlight", "section_type": "experience", "entry_index": 9,
-             "highlight_index": 0, "text": "x"},
+            {
+                "op": "update_highlight",
+                "section_type": "experience",
+                "entry_index": 9,
+                "highlight_index": 0,
+                "text": "x",
+            },
             # highlights is not an updatable field
-            {"op": "update_entry_field", "section_type": "experience", "entry_index": 0,
-             "field": "highlights", "text": "x"},
+            {
+                "op": "update_entry_field",
+                "section_type": "experience",
+                "entry_index": 0,
+                "field": "highlights",
+                "text": "x",
+            },
             # duplicate index in reorder
             {"op": "reorder_entries", "section_type": "experience", "order": [0, 0]},
             # empty text
-            {"op": "add_highlight", "section_type": "experience", "entry_index": 0,
-             "text": "   "},
+            {"op": "add_highlight", "section_type": "experience", "entry_index": 0, "text": "   "},
         ],
     )
     assert after["sections"] == []
@@ -147,8 +168,7 @@ def test_malformed_entry_ops_are_dropped() -> None:
 def test_entry_op_on_missing_section_is_dropped() -> None:
     _b, after, has_text = _apply_operations(
         _sections(),
-        [{"op": "add_highlight", "section_type": "projects", "entry_index": 0,
-          "text": "injected"}],
+        [{"op": "add_highlight", "section_type": "projects", "entry_index": 0, "text": "injected"}],
     )
     assert after["sections"] == []
     assert has_text is False

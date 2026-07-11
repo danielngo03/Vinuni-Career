@@ -6,11 +6,10 @@ re-check RBAC — the calling ``dashboards`` application service owns the person
 gate and only ever passes the caller's own scope. This mirrors the RBAC-free
 ``opportunities.public_read`` facade.
 
-Privacy rule for partner-facing rows: a dashboard is a glance surface, so partner
-candidate rows carry **only** the deterministic anonymous handle
-(``presenters.anonymous_handle``) — never the student's name/email — regardless of
-reveal state. Full identity (post-reveal) lives on the application *detail*
-endpoint, not on the org-wide glance.
+Partner-facing rows carry the candidate's real display name (an application always
+exposes the applicant to a partner who holds ``applications:read``); a dashboard
+glance still omits contact PII (email) — the partner opens the application detail
+for the CV + fit + contact.
 
 Job titles / org display names are resolved through the ``opportunities`` /
 ``organization`` internal read facades (no cross-module ORM import) with a
@@ -23,21 +22,21 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime, timedelta
 
-from sqlalchemy import func, select
+from sqlalchemy import and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.opportunities.application import job_read_facade
 from app.modules.organization.application import org_reporting_facade
-from app.modules.recruitment.api import presenters
 from app.modules.recruitment.application import _shared
 from app.modules.recruitment.domain import lifecycle, pipeline
 from app.modules.recruitment.domain.models import (
     Application,
-    ApplicationRevealRequest,
     CandidateStage,
     Interview,
     Offer,
+    PipelineStage,
 )
+from app.modules.users.application import user_read_facade
 
 
 def _iso(value) -> str | None:
@@ -69,8 +68,7 @@ async def count_student_applications(
         by_status[status] = count
     total = sum(by_status.values())
     active = sum(
-        count for status, count in by_status.items()
-        if status in lifecycle.ACTIVE_STATUSES
+        count for status, count in by_status.items() if status in lifecycle.ACTIVE_STATUSES
     )
     return {"total": total, "active": active}
 
@@ -85,20 +83,22 @@ async def list_recent_student_applications(
     """Newest-first compact rows of the student's own applications (with employer)."""
 
     apps = (
-        await session.execute(
-            select(Application)
-            .where(
-                Application.applicant_id == user_id,
-                Application.deleted_at.is_(None),
+        (
+            await session.execute(
+                select(Application)
+                .where(
+                    Application.applicant_id == user_id,
+                    Application.deleted_at.is_(None),
+                )
+                .order_by(Application.applied_at.desc(), Application.id.desc())
+                .limit(max(limit, 0))
             )
-            .order_by(Application.applied_at.desc(), Application.id.desc())
-            .limit(max(limit, 0))
         )
-    ).scalars().all()
-    titles = await job_read_facade.get_job_titles(session, (a.job_id for a in apps))
-    names = await org_reporting_facade.display_names_for(
-        session, (a.org_id for a in apps)
+        .scalars()
+        .all()
     )
+    titles = await job_read_facade.get_job_titles(session, (a.job_id for a in apps))
+    names = await org_reporting_facade.display_names_for(session, (a.org_id for a in apps))
     return [
         {
             "id": str(app.id),
@@ -109,40 +109,6 @@ async def list_recent_student_applications(
             "submitted_at": _iso(app.applied_at),
         }
         for app in apps
-    ]
-
-
-async def _pending_reveals_for_student(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> list[tuple[ApplicationRevealRequest, str | None, str | None]]:
-    """Non-expired ``pending`` reveal requests on the student's applications.
-
-    Expiry is evaluated in Python (``_shared.as_aware``) so the lazily-expired
-    convention used elsewhere (``apply_service._effective_reveal_status``) holds
-    identically across SQLite (tests) and PostgreSQL (runtime).
-    """
-
-    rows = (
-        await session.execute(
-            select(ApplicationRevealRequest, Application.job_id)
-            .join(Application, Application.id == ApplicationRevealRequest.application_id)
-            .where(
-                Application.applicant_id == user_id,
-                Application.deleted_at.is_(None),
-                ApplicationRevealRequest.status == lifecycle.REVEAL_PENDING,
-            )
-            .order_by(ApplicationRevealRequest.created_at.desc())
-        )
-    ).all()
-    titles = await job_read_facade.get_job_titles(session, (job_id for _, job_id in rows))
-    names = await org_reporting_facade.display_names_for(
-        session, (req.requester_org_id for req, _ in rows)
-    )
-    now = _shared.now()
-    return [
-        (req, titles.get(job_id), names.get(req.requester_org_id))
-        for req, job_id in rows
-        if _shared.as_aware(req.expires_at) > now
     ]
 
 
@@ -171,9 +137,7 @@ async def list_upcoming_student_interviews(
         )
     ).all()
     titles = await job_read_facade.get_job_titles(session, (job_id for _, job_id in rows))
-    names = await org_reporting_facade.display_names_for(
-        session, (iv.org_id for iv, _ in rows)
-    )
+    names = await org_reporting_facade.display_names_for(session, (iv.org_id for iv, _ in rows))
     return [
         {
             "id": str(iv.id),
@@ -187,31 +151,6 @@ async def list_upcoming_student_interviews(
             "location": iv.location,
         }
         for iv, job_id in rows
-    ]
-
-
-async def count_pending_reveals_for_student(
-    session: AsyncSession, *, user_id: uuid.UUID
-) -> int:
-    return len(await _pending_reveals_for_student(session, user_id=user_id))
-
-
-async def list_pending_reveals_for_student(
-    session: AsyncSession,
-    *,
-    user_id: uuid.UUID,
-    limit: int,
-    locale: str = "vi",
-) -> list[dict]:
-    pending = await _pending_reveals_for_student(session, user_id=user_id)
-    return [
-        {
-            "application_id": str(req.application_id),
-            "job_title": title,
-            "company_name": company,
-            "requested_at": _iso(req.created_at),
-        }
-        for req, title, company in pending[: max(limit, 0)]
     ]
 
 
@@ -230,16 +169,12 @@ async def count_all_applications(session: AsyncSession) -> int:
 
     return (
         await session.execute(
-            select(func.count())
-            .select_from(Application)
-            .where(Application.deleted_at.is_(None))
+            select(func.count()).select_from(Application).where(Application.deleted_at.is_(None))
         )
     ).scalar_one()
 
 
-async def monthly_application_counts(
-    session: AsyncSession, *, months: int = 6
-) -> list[dict]:
+async def monthly_application_counts(session: AsyncSession, *, months: int = 6) -> list[dict]:
     """Applied-count per calendar month for the last ``months`` months (oldest first)."""
 
     now = datetime.now(tz=UTC)
@@ -274,9 +209,7 @@ async def monthly_application_counts(
     return out
 
 
-async def count_org_applications(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> int:
+async def count_org_applications(session: AsyncSession, *, org_id: uuid.UUID) -> int:
     return (
         await session.execute(
             select(func.count())
@@ -286,22 +219,38 @@ async def count_org_applications(
     ).scalar_one()
 
 
-async def count_org_pending_reveals(
+async def count_org_applications_needing_review(
     session: AsyncSession, *, org_id: uuid.UUID
 ) -> int:
-    """Reveal requests this org initiated that are still awaiting a student
-    response (non-expired ``pending``)."""
+    """New applications awaiting partner triage (``submitted``) for this org."""
 
-    rows = (
+    return (
         await session.execute(
-            select(ApplicationRevealRequest).where(
-                ApplicationRevealRequest.requester_org_id == org_id,
-                ApplicationRevealRequest.status == lifecycle.REVEAL_PENDING,
+            select(func.count())
+            .select_from(Application)
+            .where(
+                Application.org_id == org_id,
+                Application.status == lifecycle.SUBMITTED,
+                Application.deleted_at.is_(None),
             )
         )
-    ).scalars().all()
-    now = _shared.now()
-    return sum(1 for req in rows if _shared.as_aware(req.expires_at) > now)
+    ).scalar_one()
+
+
+async def count_org_offers_by_status(
+    session: AsyncSession, *, org_id: uuid.UUID, statuses: tuple[str, ...]
+) -> int:
+    """Count this org's offers in any of ``statuses`` (e.g. pending_approval / approved)."""
+
+    if not statuses:
+        return 0
+    return (
+        await session.execute(
+            select(func.count())
+            .select_from(Offer)
+            .where(Offer.org_id == org_id, Offer.status.in_(statuses))
+        )
+    ).scalar_one()
 
 
 async def list_recent_org_applications(
@@ -311,28 +260,31 @@ async def list_recent_org_applications(
     limit: int,
     locale: str = "vi",
 ) -> list[dict]:
-    """Newest-first applications to the org's jobs — ANONYMOUS handle only.
+    """Newest-first applications to the org's jobs — candidate display name.
 
-    The dashboard never surfaces applicant PII; the partner opens the application
-    detail (which enforces the reveal handshake) to see identity where allowed.
+    The glance carries the applicant's real display name (never masked) but no
+    contact PII; the partner opens the application detail for the CV + fit + email.
     """
 
     apps = (
-        await session.execute(
-            select(Application)
-            .where(Application.org_id == org_id, Application.deleted_at.is_(None))
-            .order_by(Application.applied_at.desc(), Application.id.desc())
-            .limit(max(limit, 0))
+        (
+            await session.execute(
+                select(Application)
+                .where(Application.org_id == org_id, Application.deleted_at.is_(None))
+                .order_by(Application.applied_at.desc(), Application.id.desc())
+                .limit(max(limit, 0))
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     titles = await job_read_facade.get_job_titles(session, (a.job_id for a in apps))
+    names = await user_read_facade.get_full_names(session, (a.applicant_id for a in apps))
     return [
         {
             "id": str(app.id),
             "job_title": titles.get(app.job_id),
-            "candidate_handle": presenters.anonymous_handle(
-                applicant_id=app.applicant_id, org_id=app.org_id
-            ),
+            "candidate_name": names.get(app.applicant_id) or "",
             "status": app.status,
             "status_label": lifecycle.status_label(app.status, locale=locale),
             "submitted_at": _iso(app.applied_at),
@@ -360,22 +312,16 @@ async def list_recent_org_applications(
 # the pre-pipeline "new" buckets read from ``candidate_stages``.
 
 
-async def _coarse_status_counts(
-    session: AsyncSession, *, where
-) -> dict[str, int]:
+async def _coarse_status_counts(session: AsyncSession, *, where) -> dict[str, int]:
     rows = (
         await session.execute(
-            select(Application.status, func.count())
-            .where(*where)
-            .group_by(Application.status)
+            select(Application.status, func.count()).where(*where).group_by(Application.status)
         )
     ).all()
     return {row[0]: row[1] for row in rows}
 
 
-async def _active_stage_counts(
-    session: AsyncSession, *, where
-) -> dict[uuid.UUID, int]:
+async def _active_stage_counts(session: AsyncSession, *, where) -> dict[uuid.UUID, int]:
     """Count ACTIVE ``candidate_stages`` rows per stage for under_review apps.
 
     Joins ``applications`` so the coarse outcome gates the count: a withdrawn
@@ -445,9 +391,7 @@ def _assemble_pipeline_counts(
     }
 
 
-async def pipeline_counts_for_job(
-    session: AsyncSession, *, job_id: uuid.UUID
-) -> dict:
+async def pipeline_counts_for_job(session: AsyncSession, *, job_id: uuid.UUID) -> dict:
     """``proj_partner_pipeline`` counts for ONE job, derived from candidate_stages.
 
     Returns ``{new, by_stage:{stage_id: count}, active_total, rejected,
@@ -462,14 +406,10 @@ async def pipeline_counts_for_job(
     )
     by_stage = await _active_stage_counts(session, where=job_where)
     new_count = await _new_bucket_count(session, where=job_where)
-    return _assemble_pipeline_counts(
-        coarse=coarse, by_stage=by_stage, new_count=new_count
-    )
+    return _assemble_pipeline_counts(coarse=coarse, by_stage=by_stage, new_count=new_count)
 
 
-async def pipeline_counts_for_org(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> dict:
+async def pipeline_counts_for_org(session: AsyncSession, *, org_id: uuid.UUID) -> dict:
     """``proj_partner_pipeline`` counts rolled up across ALL of an org's jobs.
 
     Same shape as :func:`pipeline_counts_for_job`; powers the partner dashboard
@@ -483,9 +423,7 @@ async def pipeline_counts_for_org(
     )
     by_stage = await _active_stage_counts(session, where=org_where)
     new_count = await _new_bucket_count(session, where=org_where)
-    return _assemble_pipeline_counts(
-        coarse=coarse, by_stage=by_stage, new_count=new_count
-    )
+    return _assemble_pipeline_counts(coarse=coarse, by_stage=by_stage, new_count=new_count)
 
 
 # --------------------------------------------------------------------------- #
@@ -514,12 +452,8 @@ async def pipeline_overview_for_org(
     active_sum = func.sum(
         case((Application.status.in_(list(lifecycle.ACTIVE_STATUSES)), 1), else_=0)
     )
-    rejected_sum = func.sum(
-        case((Application.status == lifecycle.REJECTED, 1), else_=0)
-    )
-    withdrawn_sum = func.sum(
-        case((Application.status == lifecycle.WITHDRAWN, 1), else_=0)
-    )
+    rejected_sum = func.sum(case((Application.status == lifecycle.REJECTED, 1), else_=0))
+    withdrawn_sum = func.sum(case((Application.status == lifecycle.WITHDRAWN, 1), else_=0))
     count_rows = (
         await session.execute(
             select(
@@ -554,9 +488,7 @@ async def pipeline_overview_for_org(
             "job_id": str(ref.id),
             "title": ref.title or "",
             "status": ref.status,
-            "deadline": ref.application_deadline.isoformat()
-            if ref.application_deadline
-            else None,
+            "deadline": ref.application_deadline.isoformat() if ref.application_deadline else None,
             "total": total,
             "active_total": active_total,
             "rejected": rejected,
@@ -572,9 +504,7 @@ async def pipeline_overview_for_org(
 # --------------------------------------------------------------------------- #
 
 
-async def analytics_application_funnel(
-    session: AsyncSession, *, org_id: uuid.UUID
-) -> list[dict]:
+async def analytics_application_funnel(session: AsyncSession, *, org_id: uuid.UUID) -> list[dict]:
     """Application funnel counts grouped by coarse status for an org.
 
     Returns counts for active statuses in pipeline order, then terminal statuses.
@@ -711,3 +641,192 @@ async def hiring_outcomes_for_org(
         "recent_applications": recent_applications,
         "window_months": months,
     }
+
+
+# --------------------------------------------------------------------------- #
+# Recruiting funnel + per-stage conversion + time metrics (org scope, no PII)  #
+# --------------------------------------------------------------------------- #
+#
+# These reads unify the COARSE outcome (``applications.status``) with the FINE
+# pipeline position (``candidate_stages`` joined to ``pipeline_stages.stage_type``)
+# into the classic recruiting funnel applied -> screened -> interview -> offer ->
+# hired. "reached at least stage X" is a distinct-application count, so the funnel
+# is monotonically non-increasing by construction (a candidate at ``interview``
+# also owns the closed ``screening`` row it advanced out of). All queries are
+# grouped aggregates over the recruitment module's own tables (no cross-module
+# join, no PII) — the RBAC gate + presentation live in the analytics service.
+
+
+async def recruiting_funnel_counts(session: AsyncSession, *, org_id: uuid.UUID) -> dict[str, int]:
+    """Distinct-application counts for each recruiting-funnel step.
+
+    ``applied`` counts every non-deleted application; ``screened`` counts those
+    that entered the pipeline (own a ``candidate_stages`` row); ``interview`` /
+    ``offer`` count those that reached a stage of that ``stage_type``; ``hired``
+    counts the terminal positive outcome (``applications.status='hired'``).
+    """
+
+    applied = await count_org_applications(session, org_id=org_id)
+
+    screened = (
+        await session.execute(
+            select(func.count(func.distinct(CandidateStage.application_id)))
+            .select_from(CandidateStage)
+            .join(Application, Application.id == CandidateStage.application_id)
+            .where(Application.org_id == org_id, Application.deleted_at.is_(None))
+        )
+    ).scalar_one()
+
+    reached_rows = (
+        await session.execute(
+            select(
+                PipelineStage.stage_type,
+                func.count(func.distinct(CandidateStage.application_id)),
+            )
+            .select_from(CandidateStage)
+            .join(PipelineStage, PipelineStage.id == CandidateStage.stage_id)
+            .join(Application, Application.id == CandidateStage.application_id)
+            .where(Application.org_id == org_id, Application.deleted_at.is_(None))
+            .group_by(PipelineStage.stage_type)
+        )
+    ).all()
+    reached: dict[str, int] = {stage_type: int(count) for stage_type, count in reached_rows}
+
+    hired = (
+        await session.execute(
+            select(func.count())
+            .select_from(Application)
+            .where(
+                Application.org_id == org_id,
+                Application.status == lifecycle.HIRED,
+                Application.deleted_at.is_(None),
+            )
+        )
+    ).scalar_one()
+
+    return {
+        "applied": int(applied),
+        "screened": int(screened),
+        "interview": int(reached.get("interview", 0)),
+        "offer": int(reached.get("offer", 0)),
+        "hired": int(hired),
+    }
+
+
+async def stage_exit_breakdown(session: AsyncSession, *, org_id: uuid.UUID) -> list[dict]:
+    """Per ``stage_type`` outcome counts derived from ``candidate_stages.exit_kind``.
+
+    Returns one row per stage_type present, each with ``entered`` (all rows),
+    ``advanced`` (advanced/hired exits), ``rejected``, ``rolled_back``, and
+    ``active`` (still-open rows). The caller derives a pass rate from these.
+    """
+
+    rows = (
+        await session.execute(
+            select(
+                PipelineStage.stage_type,
+                CandidateStage.exit_kind,
+                CandidateStage.status,
+                func.count(),
+            )
+            .select_from(CandidateStage)
+            .join(PipelineStage, PipelineStage.id == CandidateStage.stage_id)
+            .join(Application, Application.id == CandidateStage.application_id)
+            .where(Application.org_id == org_id, Application.deleted_at.is_(None))
+            .group_by(PipelineStage.stage_type, CandidateStage.exit_kind, CandidateStage.status)
+        )
+    ).all()
+
+    agg: dict[str, dict[str, int]] = {}
+    for stage_type, exit_kind, status, count in rows:
+        bucket = agg.setdefault(
+            stage_type,
+            {"entered": 0, "advanced": 0, "rejected": 0, "rolled_back": 0, "active": 0},
+        )
+        n = int(count or 0)
+        bucket["entered"] += n
+        if exit_kind in (pipeline.EXIT_ADVANCED, pipeline.EXIT_HIRED):
+            bucket["advanced"] += n
+        elif exit_kind == pipeline.EXIT_REJECTED:
+            bucket["rejected"] += n
+        elif exit_kind == pipeline.EXIT_ROLLED_BACK:
+            bucket["rolled_back"] += n
+        elif status == pipeline.STAGE_ACTIVE:
+            bucket["active"] += n
+    return [{"stage_type": stage_type, **counts} for stage_type, counts in agg.items()]
+
+
+async def time_to_hire_samples(session: AsyncSession, *, org_id: uuid.UUID) -> list[float]:
+    """Days from ``applied_at`` to hire, one sample per hired application.
+
+    Hire time is the ``exit_kind='hired'`` candidate-stage's ``exited_at`` when
+    present, else the application's ``last_status_at`` (legacy/no-stage path).
+    """
+
+    rows = (
+        await session.execute(
+            select(
+                Application.applied_at,
+                Application.last_status_at,
+                CandidateStage.exited_at,
+            )
+            .select_from(Application)
+            .outerjoin(
+                CandidateStage,
+                and_(
+                    CandidateStage.application_id == Application.id,
+                    CandidateStage.exit_kind == pipeline.EXIT_HIRED,
+                ),
+            )
+            .where(
+                Application.org_id == org_id,
+                Application.status == lifecycle.HIRED,
+                Application.deleted_at.is_(None),
+            )
+        )
+    ).all()
+
+    samples: list[float] = []
+    for applied_at, last_status_at, hired_exit_at in rows:
+        end = hired_exit_at or last_status_at
+        if applied_at is None or end is None:
+            continue
+        days = (_shared.as_aware(end) - _shared.as_aware(applied_at)).total_seconds() / 86400.0
+        if days >= 0:
+            samples.append(days)
+    return samples
+
+
+async def time_in_stage_samples(
+    session: AsyncSession, *, org_id: uuid.UUID
+) -> dict[str, list[float]]:
+    """Per ``stage_type`` list of closed-stage durations in days (entered->exited)."""
+
+    rows = (
+        await session.execute(
+            select(
+                PipelineStage.stage_type,
+                CandidateStage.entered_at,
+                CandidateStage.exited_at,
+            )
+            .select_from(CandidateStage)
+            .join(PipelineStage, PipelineStage.id == CandidateStage.stage_id)
+            .join(Application, Application.id == CandidateStage.application_id)
+            .where(
+                Application.org_id == org_id,
+                Application.deleted_at.is_(None),
+                CandidateStage.exited_at.is_not(None),
+            )
+        )
+    ).all()
+
+    out: dict[str, list[float]] = {}
+    for stage_type, entered_at, exited_at in rows:
+        if entered_at is None or exited_at is None:
+            continue
+        days = (
+            _shared.as_aware(exited_at) - _shared.as_aware(entered_at)
+        ).total_seconds() / 86400.0
+        if days >= 0:
+            out.setdefault(stage_type, []).append(days)
+    return out

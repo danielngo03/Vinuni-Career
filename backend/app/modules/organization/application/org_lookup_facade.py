@@ -20,9 +20,7 @@ _PARTNER = "partner"
 _ACTIVE = "active"
 
 
-async def listable_id_for_slug(
-    session: AsyncSession, *, slug: str
-) -> uuid.UUID | None:
+async def listable_id_for_slug(session: AsyncSession, *, slug: str) -> uuid.UUID | None:
     """Org id for a publicly listable partner slug, else ``None``."""
 
     return (

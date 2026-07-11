@@ -75,8 +75,6 @@ def test_no_provider_or_model_leak_in_suggestions() -> None:
     forbidden = ["openrouter", "openai", "anthropic", "claude", "gpt", "gemini"]
     for skill in ["Docker", "SQL", "Python", "AWS", "React", "Git", "Unknown Skill"]:
         for locale in ("vi", "en"):
-            suggestion = learning_resources.resource_for(skill, locale=locale)[
-                "suggestion"
-            ].lower()
+            suggestion = learning_resources.resource_for(skill, locale=locale)["suggestion"].lower()
             for term in forbidden:
                 assert term not in suggestion

@@ -42,9 +42,7 @@ async def get_by_id(
 
     return (
         await session.execute(
-            select(PartnerRegistrationRequest).where(
-                PartnerRegistrationRequest.id == request_id
-            )
+            select(PartnerRegistrationRequest).where(PartnerRegistrationRequest.id == request_id)
         )
     ).scalar_one_or_none()
 

@@ -16,6 +16,7 @@ Covers (``docs/CV_INGESTION_EXTRACTION_SPEC.md`` §8 eval set + minimum acceptan
 
 from __future__ import annotations
 
+import io
 import json
 import uuid
 
@@ -153,14 +154,22 @@ def _disable_async() -> None:
 
 async def _upload(db, student, *, filename, data, content_type="application/pdf"):
     return await ingestion_service.create_upload(
-        db, principal=student, filename=filename, data=data,
-        content_type=content_type, idempotency_key=new_key(), ctx=CTX,
+        db,
+        principal=student,
+        filename=filename,
+        data=data,
+        content_type=content_type,
+        idempotency_key=new_key(),
+        ctx=CTX,
     )
 
 
 async def _ingest(db, student, document_id):
     return await ingestion_service.start_ingestion(
-        db, principal=student, document_id=uuid.UUID(document_id), ctx=CTX,
+        db,
+        principal=student,
+        document_id=uuid.UUID(document_id),
+        ctx=CTX,
     )
 
 
@@ -171,9 +180,7 @@ async def _ingest(db, student, document_id):
 
 async def test_upload_returns_preview_metadata_without_storage_path(db_session) -> None:
     _u, student = await make_student(db_session)
-    result = await _upload(
-        db_session, student, filename="cv.pdf", data=F.text_pdf_en()
-    )
+    result = await _upload(db_session, student, filename="cv.pdf", data=F.text_pdf_en())
     assert result["document_id"]
     assert result["filename"] == "cv.pdf"
     assert result["content_type"] == "application/pdf"
@@ -202,9 +209,107 @@ async def test_upload_rejects_infected_file_without_storing(db_session) -> None:
     infected = cv_validation._EICAR + b" experience education skills"
     with pytest.raises(ValidationFailedError):
         await _upload(
-            db_session, student, filename="virus.txt", data=infected,
+            db_session,
+            student,
+            filename="virus.txt",
+            data=infected,
             content_type="text/plain",
         )
+
+
+# --------------------------------------------------------------------------- #
+# Image CV -> PDF on upload (owner decision 2026-07-10)                         #
+# --------------------------------------------------------------------------- #
+
+
+def _real_png(text: str = "Candidate CV") -> bytes:
+    from PIL import Image, ImageDraw
+
+    img = Image.new("RGB", (480, 640), "white")
+    ImageDraw.Draw(img).text((20, 40), text, fill="black")
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def _real_webp(text: str = "Candidate CV") -> bytes:
+    from PIL import Image, ImageDraw
+
+    img = Image.new("RGB", (480, 640), "white")
+    ImageDraw.Draw(img).text((20, 40), text, fill="black")
+    buf = io.BytesIO()
+    img.save(buf, format="WEBP")
+    return buf.getvalue()
+
+
+@pytest.mark.parametrize(
+    ("filename", "builder", "content_type"),
+    [
+        ("resume.png", _real_png, "image/png"),
+        ("resume.webp", _real_webp, "image/webp"),
+    ],
+)
+async def test_image_cv_is_stored_and_served_as_pdf(
+    db_session, filename, builder, content_type
+) -> None:
+    _u, student = await make_student(db_session)
+    result = await _upload(
+        db_session, student, filename=filename, data=builder(), content_type=content_type
+    )
+    # The upload preview reports a PDF artifact + a ``.pdf`` display name.
+    assert result["content_type"] == "application/pdf"
+    assert result["filename"].endswith(".pdf")
+
+    # The stored document is a real PDF (magic %PDF), and the preview token serves it.
+    doc = (
+        await db_session.execute(
+            select(Document).where(Document.id == uuid.UUID(result["document_id"]))
+        )
+    ).scalar_one()
+    assert doc.mime_type == "application/pdf"
+    assert storage.get_storage().load(doc.storage_path)[:5] == b"%PDF-"
+
+    token = result["preview_url"].rsplit("/", 1)[-1]
+    served = await download_service.resolve_download(db_session, token=token, ctx=CTX)
+    assert served.media_type == "application/pdf"
+    assert served.content[:5] == b"%PDF-"
+
+
+async def test_corrupt_image_upload_stored_then_rejected_by_cascade(db_session) -> None:
+    # A corrupt image cannot be wrapped into a PDF: the upload does NOT crash (the
+    # original bytes are stored) and the ingestion cascade classifies it as a
+    # failed low-quality scan — never fabricated into a CV.
+    _u, student = await make_student(db_session)
+    corrupt = b"\x89PNG\r\n\x1a\n" + b"not-a-decodable-image" * 4
+    result = await _upload(
+        db_session, student, filename="broken.png", data=corrupt, content_type="image/png"
+    )
+    # Unconvertible -> stored as the original image (no crash).
+    assert result["content_type"] == "image/png"
+    doc = (
+        await db_session.execute(
+            select(Document).where(Document.id == uuid.UUID(result["document_id"]))
+        )
+    ).scalar_one()
+    assert storage.get_storage().load(doc.storage_path) == corrupt
+
+    ing = await _ingest(db_session, student, result["document_id"])
+    assert ing["status"] == "failed"
+    assert ing["quality_code"] in ("LOW_QUALITY_SCAN", "CORRUPT_FILE")
+
+
+async def test_duplicate_image_cv_detected_despite_pdf_conversion(db_session) -> None:
+    # Two uploads of the SAME image become two (non-byte-identical) PDFs, but the
+    # checksum is pinned to the ORIGINAL image bytes so the duplicate is still caught
+    # at the cascade's file gate (before any OCR/vision work).
+    _u, student = await make_student(db_session)
+    img = _real_png("Dup CV")
+    up1 = await _upload(db_session, student, filename="a.png", data=img, content_type="image/png")
+    await _ingest(db_session, student, up1["document_id"])
+    up2 = await _upload(db_session, student, filename="b.png", data=img, content_type="image/png")
+    ing2 = await _ingest(db_session, student, up2["document_id"])
+    assert ing2["status"] == "failed"
+    assert ing2["quality_code"] == "DUPLICATE_FILE"
 
 
 # --------------------------------------------------------------------------- #
@@ -258,8 +363,15 @@ async def test_ingestion_response_has_no_engine_or_provider_leak(db_session) -> 
     assert "extracted_data" not in ing
     blob = json.dumps(ing).lower()
     for needle in (
-        "pdfplumber", "pymupdf", "tesseract", "native_pdf", "engine_family",
-        "engine_version", "openrouter", "deepseek", "provider_alias",
+        "pdfplumber",
+        "pymupdf",
+        "tesseract",
+        "native_pdf",
+        "engine_family",
+        "engine_version",
+        "openrouter",
+        "deepseek",
+        "provider_alias",
     ):
         assert needle not in blob, needle
 
@@ -331,7 +443,10 @@ async def test_ocr_fallback_with_mocked_engine(db_session) -> None:
     set_ocr_adapter(fake)
     _enable_ocr_engine()
     up = await _upload(
-        db_session, student, filename="scan.png", data=F.scanned_image_cv(),
+        db_session,
+        student,
+        filename="scan.png",
+        data=F.scanned_image_cv(),
         content_type="image/png",
     )
     ing = await _ingest(db_session, student, up["document_id"])
@@ -347,7 +462,10 @@ async def test_ocr_unavailable_records_low_quality(db_session) -> None:
     # and the user copy never mentions a missing engine.
     _u, student = await make_student(db_session)
     up = await _upload(
-        db_session, student, filename="scan.png", data=F.scanned_image_cv(),
+        db_session,
+        student,
+        filename="scan.png",
+        data=F.scanned_image_cv(),
         content_type="image/png",
     )
     ing = await _ingest(db_session, student, up["document_id"])
@@ -394,9 +512,7 @@ def test_vision_tier_structures_styled_image_cv() -> None:
             "phone": "(024) 6680 5588",
             "location": "Ba Đình, Hà Nội",
         },
-        "experience": {
-            "items": [{"text": "Điều dưỡng nhi khoa - Trung tâm Y tế - 04/2020 - Nay"}]
-        },
+        "experience": {"items": [{"text": "Điều dưỡng nhi khoa - Trung tâm Y tế - 04/2020 - Nay"}]},
         "skills": {"items": [{"text": "Kỹ năng giao tiếp"}]},
     }
     fake = FakeVision(
@@ -409,7 +525,9 @@ def test_vision_tier_structures_styled_image_cv() -> None:
     set_vision_adapter(fake)
     try:
         outcome = cv_ingestion_cascade.run_cascade(
-            "cv.png", F.scanned_image_cv(), max_bytes=50 * 1024 * 1024,
+            "cv.png",
+            F.scanned_image_cv(),
+            max_bytes=50 * 1024 * 1024,
             policy=resolve_policy(),
         )
         assert fake.calls == 1
@@ -437,7 +555,9 @@ def test_vision_returns_nothing_falls_back_to_ocr() -> None:
     _enable_ocr_engine()
     try:
         outcome = cv_ingestion_cascade.run_cascade(
-            "scan.png", F.scanned_image_cv(), max_bytes=50 * 1024 * 1024,
+            "scan.png",
+            F.scanned_image_cv(),
+            max_bytes=50 * 1024 * 1024,
             policy=resolve_policy(),
         )
         assert fake_vision.calls == 1
@@ -468,7 +588,9 @@ def test_llm_structuring_enabled_receives_text_only() -> None:
     _enable_llm()
     try:
         outcome = cv_ingestion_cascade.run_cascade(
-            "cv.pdf", F.text_pdf_en(), max_bytes=50 * 1024 * 1024,
+            "cv.pdf",
+            F.text_pdf_en(),
+            max_bytes=50 * 1024 * 1024,
             policy=resolve_policy(),
         )
         assert outcome.llm_used is True
@@ -508,8 +630,11 @@ async def test_import_creates_versioned_draft(db_session) -> None:
     ing = await _ingest_ready(db_session, student)
 
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={"title": "Imported CV"}, ctx=CTX,
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={"title": "Imported CV"},
+        ctx=CTX,
     )
     # An uploaded CV is already extracted/analyzed -> lands directly in the library
     # (``ready``), not a scratch draft (design spec 2026-07-05).
@@ -535,8 +660,10 @@ def _section_texts(detail: dict, section_type: str) -> list[str]:
     # Item sections carry {text} (free text) or {name} (skills/languages); entry
     # sections (experience/education/projects) carry {heading, ...}. Read whichever
     # this section uses so the helper works across all structured shapes (B-599).
-    out = [it.get("text") if it.get("text") is not None else it.get("name")
-           for it in content.get("items", [])]
+    out = [
+        it.get("text") if it.get("text") is not None else it.get("name")
+        for it in content.get("items", [])
+    ]
     out += [e.get("heading") for e in content.get("entries", [])]
     return out
 
@@ -550,8 +677,11 @@ async def test_import_carries_contact_in_header_section(db_session) -> None:
     ing = await _ingest_ready(db_session, student)
 
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={"title": "Imported CV"}, ctx=CTX,
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={"title": "Imported CV"},
+        ctx=CTX,
     )
     header = next(s for s in detail["sections"] if s["section_type"] == "header")
     content = header["content"]
@@ -574,14 +704,14 @@ async def test_import_applies_review_field_overrides(db_session) -> None:
 
     paths = {f["path"] for f in ing["review_fields"]}
     assert "summary[0].text" in paths
-    original = next(
-        f["value"] for f in ing["review_fields"] if f["path"] == "summary[0].text"
-    )
+    original = next(f["value"] for f in ing["review_fields"] if f["path"] == "summary[0].text")
     edited = "Backend intern specialising in data pipelines and APIs."
     assert edited != original
 
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={
             "title": "Imported CV",
             "overrides": [{"path": "summary[0].text", "value": edited}],
@@ -615,12 +745,12 @@ async def test_import_overrides_reject_unknown_paths(db_session) -> None:
     await db_session.commit()
     _u, student = await make_student(db_session)
     ing = await _ingest_ready(db_session, student)
-    original = next(
-        f["value"] for f in ing["review_fields"] if f["path"] == "summary[0].text"
-    )
+    original = next(f["value"] for f in ing["review_fields"] if f["path"] == "summary[0].text")
 
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={
             "title": "Imported CV",
             "overrides": [
@@ -646,12 +776,13 @@ async def test_import_without_overrides_unchanged(db_session) -> None:
     await db_session.commit()
     _u, student = await make_student(db_session)
     ing = await _ingest_ready(db_session, student)
-    original = next(
-        f["value"] for f in ing["review_fields"] if f["path"] == "summary[0].text"
-    )
+    original = next(f["value"] for f in ing["review_fields"] if f["path"] == "summary[0].text")
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={"title": "Imported CV"}, ctx=CTX,
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={"title": "Imported CV"},
+        ctx=CTX,
     )
     assert detail["status"] == "ready"
     assert len(detail["versions"]) == 1
@@ -663,16 +794,23 @@ async def test_import_with_overrides_never_overwrites_accepted_cv(db_session) ->
     _u, student = await make_student(db_session)
     ing = await _ingest_ready(db_session, student)
     blank = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "Accepted CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "Accepted CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     await cv_service.update_cv(
-        db_session, principal=student, cv_id=uuid.UUID(blank["id"]),
-        payload={"status": "ready"}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(blank["id"]),
+        payload={"status": "ready"},
+        ctx=CTX,
     )
     with pytest.raises(ValidationFailedError):
         await ingestion_service.import_ingestion(
-            db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+            db_session,
+            principal=student,
+            ingestion_id=uuid.UUID(ing["ingestion_id"]),
             payload={
                 "target_cv_id": blank["id"],
                 "overrides": [{"path": "summary[0].text", "value": "edited"}],
@@ -691,7 +829,9 @@ async def test_import_with_overrides_respects_quota(db_session) -> None:
         await make_ready_cv(db_session, student=student, title=f"CV {i}")
     with pytest.raises(CvQuotaReachedError) as exc:
         await ingestion_service.import_ingestion(
-            db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+            db_session,
+            principal=student,
+            ingestion_id=uuid.UUID(ing["ingestion_id"]),
             payload={"overrides": [{"path": "summary[0].text", "value": "edited"}]},
             ctx=CTX,
         )
@@ -702,12 +842,18 @@ async def test_import_is_idempotent(db_session) -> None:
     _u, student = await make_student(db_session)
     ing = await _ingest_ready(db_session, student)
     first = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={}, ctx=CTX,
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={},
+        ctx=CTX,
     )
     second = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={}, ctx=CTX,
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={},
+        ctx=CTX,
     )
     assert first["id"] == second["id"]
 
@@ -721,8 +867,11 @@ async def test_import_respects_active_cv_quota(db_session) -> None:
         await make_ready_cv(db_session, student=student, title=f"CV {i}")
     with pytest.raises(CvQuotaReachedError) as exc:
         await ingestion_service.import_ingestion(
-            db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-            payload={}, ctx=CTX,
+            db_session,
+            principal=student,
+            ingestion_id=uuid.UUID(ing["ingestion_id"]),
+            payload={},
+            ctx=CTX,
         )
     assert exc.value.http_status == 409
 
@@ -732,17 +881,25 @@ async def test_import_into_ready_cv_is_blocked(db_session) -> None:
     ing = await _ingest_ready(db_session, student)
     # Create a CV and mark it ready (accepted) — import must not overwrite it.
     blank = await cv_service.create_cv(
-        db_session, principal=student,
-        payload={"title": "Accepted CV", "creation_mode": "blank_template"}, ctx=CTX,
+        db_session,
+        principal=student,
+        payload={"title": "Accepted CV", "creation_mode": "blank_template"},
+        ctx=CTX,
     )
     await cv_service.update_cv(
-        db_session, principal=student, cv_id=uuid.UUID(blank["id"]),
-        payload={"status": "ready"}, ctx=CTX,
+        db_session,
+        principal=student,
+        cv_id=uuid.UUID(blank["id"]),
+        payload={"status": "ready"},
+        ctx=CTX,
     )
     with pytest.raises(ValidationFailedError):
         await ingestion_service.import_ingestion(
-            db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-            payload={"target_cv_id": blank["id"]}, ctx=CTX,
+            db_session,
+            principal=student,
+            ingestion_id=uuid.UUID(ing["ingestion_id"]),
+            payload={"target_cv_id": blank["id"]},
+            ctx=CTX,
         )
 
 
@@ -753,8 +910,11 @@ async def test_import_requires_ready_ingestion(db_session) -> None:
     assert ing["status"] == "failed"
     with pytest.raises(ValidationFailedError):
         await ingestion_service.import_ingestion(
-            db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-            payload={}, ctx=CTX,
+            db_session,
+            principal=student,
+            ingestion_id=uuid.UUID(ing["ingestion_id"]),
+            payload={},
+            ctx=CTX,
         )
 
 
@@ -780,7 +940,10 @@ async def test_cross_owner_ingest_of_foreign_document_returns_404(db_session) ->
     up = await _upload(db_session, owner, filename="cv.pdf", data=F.text_pdf_en())
     with pytest.raises(ResourceNotFoundError):
         await ingestion_service.start_ingestion(
-            db_session, principal=other, document_id=uuid.UUID(up["document_id"]), ctx=CTX,
+            db_session,
+            principal=other,
+            document_id=uuid.UUID(up["document_id"]),
+            ctx=CTX,
         )
 
 
@@ -825,12 +988,12 @@ async def test_import_override_reject_excludes_item(db_session) -> None:
     await db_session.commit()
     _u, student = await make_student(db_session)
     ing = await _ingest_ready(db_session, student)
-    original = next(
-        f["value"] for f in ing["review_fields"] if f["path"] == "summary[0].text"
-    )
+    original = next(f["value"] for f in ing["review_fields"] if f["path"] == "summary[0].text")
 
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={
             "title": "Imported CV",
             "overrides": [{"path": "summary[0].text", "accepted": False}],
@@ -858,7 +1021,9 @@ async def test_import_override_reject_contact_field(db_session) -> None:
     original_email = ing_row.extracted_data["contact"]["email"]
 
     await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={
             "title": "Imported CV",
             "overrides": [{"path": "contact.email", "accepted": False}],
@@ -885,9 +1050,14 @@ async def _make_needs_review_ingestion(db) -> tuple[object, dict]:
 
     _u, student = await make_student(db)
     document = Document(
-        user_id=student.user_id, doc_type="cv", original_name="cv.pdf",
-        storage_path="cv-uploads/x", mime_type="application/pdf", file_size_bytes=10,
-        checksum_sha256="x" * 64, virus_scan_status="clean",
+        user_id=student.user_id,
+        doc_type="cv",
+        original_name="cv.pdf",
+        storage_path="cv-uploads/x",
+        mime_type="application/pdf",
+        file_size_bytes=10,
+        checksum_sha256="x" * 64,
+        virus_scan_status="clean",
     )
     db.add(document)
     await db.flush()
@@ -918,8 +1088,11 @@ async def test_import_needs_review_requires_per_field_decision(db_session) -> No
     student, ing = await _make_needs_review_ingestion(db_session)
     with pytest.raises(FactConfirmationFieldsRequiredError) as exc:
         await ingestion_service.import_ingestion(
-            db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-            payload={"title": "Imported CV"}, ctx=CTX,
+            db_session,
+            principal=student,
+            ingestion_id=uuid.UUID(ing["ingestion_id"]),
+            payload={"title": "Imported CV"},
+            ctx=CTX,
         )
     assert exc.value.details["fields"] == ["contact.email"]
 
@@ -927,7 +1100,9 @@ async def test_import_needs_review_requires_per_field_decision(db_session) -> No
 async def test_import_needs_review_succeeds_with_per_field_override(db_session) -> None:
     student, ing = await _make_needs_review_ingestion(db_session)
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={
             "title": "Imported CV",
             "overrides": [{"path": "contact.email", "value": "jane@example.com"}],
@@ -940,7 +1115,9 @@ async def test_import_needs_review_succeeds_with_per_field_override(db_session) 
 async def test_import_needs_review_succeeds_with_field_rejected(db_session) -> None:
     student, ing = await _make_needs_review_ingestion(db_session)
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
         payload={
             "title": "Imported CV",
             "overrides": [{"path": "contact.email", "accepted": False}],
@@ -953,7 +1130,10 @@ async def test_import_needs_review_succeeds_with_field_rejected(db_session) -> N
 async def test_import_needs_review_succeeds_with_blanket_fact_confirmation(db_session) -> None:
     student, ing = await _make_needs_review_ingestion(db_session)
     detail = await ingestion_service.import_ingestion(
-        db_session, principal=student, ingestion_id=uuid.UUID(ing["ingestion_id"]),
-        payload={"title": "Imported CV", "fact_confirmation": True}, ctx=CTX,
+        db_session,
+        principal=student,
+        ingestion_id=uuid.UUID(ing["ingestion_id"]),
+        payload={"title": "Imported CV", "fact_confirmation": True},
+        ctx=CTX,
     )
     assert detail["status"] == "ready"

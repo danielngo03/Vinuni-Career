@@ -238,16 +238,20 @@ async def test_funnel_stage_counts_and_conversions(
     for _ in range(2):
         db_session.add(_analytics_event(event_type="application.submitted", actor_id=actor))
     # 1 under_review, 1 interview via status_changed
-    db_session.add(_analytics_event(
-        event_type="application.status_changed",
-        actor_id=actor,
-        properties={"status": "under_review"},
-    ))
-    db_session.add(_analytics_event(
-        event_type="application.status_changed",
-        actor_id=actor,
-        properties={"status": "interview"},
-    ))
+    db_session.add(
+        _analytics_event(
+            event_type="application.status_changed",
+            actor_id=actor,
+            properties={"status": "under_review"},
+        )
+    )
+    db_session.add(
+        _analytics_event(
+            event_type="application.status_changed",
+            actor_id=actor,
+            properties={"status": "interview"},
+        )
+    )
     await db_session.commit()
 
     resp = await superadmin_client.get("/admin/analytics/funnel", params={"range_days": 7})
@@ -312,26 +316,26 @@ async def test_growth_series_gap_filled(
     actor_t = uuid.uuid4()
 
     # 1 application submitted yesterday, 2 today
-    db_session.add(_analytics_event(
-        event_type="application.submitted", actor_id=actor_y, occurred_at=_YESTERDAY
-    ))
-    db_session.add(_analytics_event(
-        event_type="application.submitted", actor_id=actor_t, occurred_at=_NOW
-    ))
-    db_session.add(_analytics_event(
-        event_type="application.submitted", actor_id=actor_t, occurred_at=_NOW
-    ))
+    db_session.add(
+        _analytics_event(
+            event_type="application.submitted", actor_id=actor_y, occurred_at=_YESTERDAY
+        )
+    )
+    db_session.add(
+        _analytics_event(event_type="application.submitted", actor_id=actor_t, occurred_at=_NOW)
+    )
+    db_session.add(
+        _analytics_event(event_type="application.submitted", actor_id=actor_t, occurred_at=_NOW)
+    )
 
     # 2 distinct actors active yesterday, 1 today
-    db_session.add(_analytics_event(
-        event_type="job.viewed", actor_id=actor_y, occurred_at=_YESTERDAY
-    ))
-    db_session.add(_analytics_event(
-        event_type="job.viewed", actor_id=uuid.uuid4(), occurred_at=_YESTERDAY
-    ))
-    db_session.add(_analytics_event(
-        event_type="job.viewed", actor_id=actor_t, occurred_at=_NOW
-    ))
+    db_session.add(
+        _analytics_event(event_type="job.viewed", actor_id=actor_y, occurred_at=_YESTERDAY)
+    )
+    db_session.add(
+        _analytics_event(event_type="job.viewed", actor_id=uuid.uuid4(), occurred_at=_YESTERDAY)
+    )
+    db_session.add(_analytics_event(event_type="job.viewed", actor_id=actor_t, occurred_at=_NOW))
 
     await db_session.commit()
 
@@ -499,11 +503,13 @@ async def test_funnel_response_contains_no_pii(
     """Funnel response must not expose actor_id, email, or raw properties."""
 
     actor = uuid.uuid4()
-    db_session.add(_analytics_event(
-        event_type="job.viewed",
-        actor_id=actor,
-        properties={"status": "published", "source": "search"},
-    ))
+    db_session.add(
+        _analytics_event(
+            event_type="job.viewed",
+            actor_id=actor,
+            properties={"status": "published", "source": "search"},
+        )
+    )
     await db_session.commit()
 
     resp = await superadmin_client.get("/admin/analytics/funnel", params={"range_days": 7})
@@ -573,10 +579,12 @@ async def test_funnel_zero_division_guarded(
     """When a predecessor stage is 0, conversion_from_previous must be 0.0, not crash."""
 
     # Only seed a status_changed/under_review with no job.viewed / job.applied
-    db_session.add(_analytics_event(
-        event_type="application.status_changed",
-        properties={"status": "hired"},
-    ))
+    db_session.add(
+        _analytics_event(
+            event_type="application.status_changed",
+            properties={"status": "hired"},
+        )
+    )
     await db_session.commit()
 
     resp = await superadmin_client.get("/admin/analytics/funnel", params={"range_days": 7})

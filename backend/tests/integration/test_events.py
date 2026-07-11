@@ -29,7 +29,6 @@ from app.modules.opportunities.application.event_errors import (
     IllegalEventTransitionError,
     RegistrationClosedError,
 )
-from app.modules.opportunities.domain import event_lifecycle
 from app.modules.opportunities.domain.event_models import Event, EventRegistration
 from app.shared.exceptions import (
     AuthRequiredError,
@@ -93,12 +92,16 @@ async def test_create_submit_moderate_publish(db_session) -> None:
 
     # Organizer notified (outbox row to the creator).
     outbox = (
-        await db_session.execute(
-            select(NotificationOutbox).where(
-                NotificationOutbox.template_key == "event.approved"
+        (
+            await db_session.execute(
+                select(NotificationOutbox).where(
+                    NotificationOutbox.template_key == "event.approved"
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(outbox) == 1
 
 
@@ -130,8 +133,10 @@ async def test_public_list_only_visible_events(db_session) -> None:
     # A published-but-past event must drop out of discovery.
     past_id = await publish_event(db_session, organizer, uni, title="Past Event")
     await _set_event(
-        db_session, past_id,
-        starts_at=_now() - timedelta(days=2), ends_at=_now() - timedelta(days=1),
+        db_session,
+        past_id,
+        starts_at=_now() - timedelta(days=2),
+        ends_at=_now() - timedelta(days=1),
     )
 
     items, _next, _limit, total = await event_service.list_public_events(
@@ -141,17 +146,13 @@ async def test_public_list_only_visible_events(db_session) -> None:
     assert [i["id"] for i in items] == [str(live_id)]
 
     # Public detail leaks no moderation fields.
-    detail = await event_service.get_event(
-        db_session, principal=GUEST, event_id=live_id
-    )
+    detail = await event_service.get_event(db_session, principal=GUEST, event_id=live_id)
     assert "moderation_note" not in detail
     assert "moderation_status" not in detail
 
     # Draft hidden from guests -> 404 (enumeration hiding).
     with pytest.raises(ResourceNotFoundError):
-        await event_service.get_event(
-            db_session, principal=GUEST, event_id=uuid.UUID(draft["id"])
-        )
+        await event_service.get_event(db_session, principal=GUEST, event_id=uuid.UUID(draft["id"]))
 
 
 async def test_moderation_reject_then_resubmit(db_session) -> None:
@@ -164,14 +165,20 @@ async def test_moderation_reject_then_resubmit(db_session) -> None:
         db_session, principal=organizer, event_id=uuid.UUID(created["id"]), ctx=CTX
     )
     rejected = await event_moderation_service.reject_event(
-        db_session, principal=uni, event_id=uuid.UUID(created["id"]),
-        reason="Mô tả sự kiện chưa rõ ràng.", ctx=CTX,
+        db_session,
+        principal=uni,
+        event_id=uuid.UUID(created["id"]),
+        reason="Mô tả sự kiện chưa rõ ràng.",
+        ctx=CTX,
     )
     assert rejected["status"] == "rejected"
     # Editable again, then resubmittable.
     await event_service.update_event(
-        db_session, principal=organizer, event_id=uuid.UUID(created["id"]),
-        payload={"title": "Career Day 2026 (revised)"}, ctx=CTX,
+        db_session,
+        principal=organizer,
+        event_id=uuid.UUID(created["id"]),
+        payload={"title": "Career Day 2026 (revised)"},
+        ctx=CTX,
     )
     resubmitted = await event_service.submit_event(
         db_session, principal=organizer, event_id=uuid.UUID(created["id"]), ctx=CTX
@@ -200,8 +207,11 @@ async def test_optimistic_version_and_illegal_transition(db_session) -> None:
     )
     with pytest.raises(EventVersionConflictError):
         await event_service.update_event(
-            db_session, principal=organizer, event_id=uuid.UUID(created["id"]),
-            payload={"title": "Race", "version": 999}, ctx=CTX,
+            db_session,
+            principal=organizer,
+            event_id=uuid.UUID(created["id"]),
+            payload={"title": "Race", "version": 999},
+            ctx=CTX,
         )
     # Cancel from draft is illegal.
     with pytest.raises(IllegalEventTransitionError):
@@ -237,9 +247,7 @@ async def test_register_guest_401(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     event_id = await publish_event(db_session, organizer, uni)
     with pytest.raises(AuthRequiredError):
-        await registration_service.register(
-            db_session, principal=GUEST, event_id=event_id, ctx=CTX
-        )
+        await registration_service.register(db_session, principal=GUEST, event_id=event_id, ctx=CTX)
 
 
 async def test_register_past_deadline_409(db_session) -> None:
@@ -247,7 +255,9 @@ async def test_register_past_deadline_409(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     # Registration closed in the past, event still upcoming.
     event_id = await publish_event(
-        db_session, organizer, uni,
+        db_session,
+        organizer,
+        uni,
         starts_at=_now() + timedelta(days=3),
         registration_closes_at=_now() - timedelta(hours=1),
     )
@@ -262,9 +272,7 @@ async def test_register_cancelled_event_409(db_session) -> None:
     _u, _org, organizer = await make_org_with_admin(db_session)
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     event_id = await publish_event(db_session, organizer, uni)
-    await event_service.cancel_event(
-        db_session, principal=organizer, event_id=event_id, ctx=CTX
-    )
+    await event_service.cancel_event(db_session, principal=organizer, event_id=event_id, ctx=CTX)
     _su, student = await make_student(db_session)
     with pytest.raises(EventNotOpenError):
         await registration_service.register(
@@ -288,7 +296,9 @@ async def test_duplicate_active_registration_is_idempotent(db_session) -> None:
     # No duplicate active row created (partial-unique guarantee on PG; service guard here).
     count = (
         await db_session.execute(
-            select(func.count()).select_from(EventRegistration).where(
+            select(func.count())
+            .select_from(EventRegistration)
+            .where(
                 EventRegistration.event_id == event_id,
                 EventRegistration.user_id == student.user_id,
                 EventRegistration.status != "cancelled",
@@ -316,7 +326,9 @@ async def test_capacity_last_seat_one_confirmed_one_waitlisted(db_session) -> No
     # Exactly one confirmed — no overbooking (count + capacity guard).
     confirmed_n = (
         await db_session.execute(
-            select(func.count()).select_from(EventRegistration).where(
+            select(func.count())
+            .select_from(EventRegistration)
+            .where(
                 EventRegistration.event_id == event_id,
                 EventRegistration.status == "confirmed",
             )
@@ -352,10 +364,14 @@ async def test_cancel_confirmed_promotes_waitlist_head_fifo(db_session) -> None:
     )
 
     rows = (
-        await db_session.execute(
-            select(EventRegistration).where(EventRegistration.event_id == event_id)
+        (
+            await db_session.execute(
+                select(EventRegistration).where(EventRegistration.event_id == event_id)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     by_user = {r.user_id: r.status for r in rows}
     assert by_user[student_a.user_id] == "cancelled"
     assert by_user[student_b.user_id] == "confirmed"  # promoted
@@ -371,9 +387,7 @@ async def test_cancelled_then_reregister_allowed(db_session) -> None:
     event_id = await publish_event(db_session, organizer, uni)
     _su, student = await make_student(db_session)
 
-    await registration_service.register(
-        db_session, principal=student, event_id=event_id, ctx=CTX
-    )
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
     await registration_service.cancel_registration(
         db_session, principal=student, event_id=event_id, ctx=CTX
     )
@@ -389,9 +403,7 @@ async def test_my_registrations_lists_active(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     event_id = await publish_event(db_session, organizer, uni)
     _su, student = await make_student(db_session)
-    await registration_service.register(
-        db_session, principal=student, event_id=event_id, ctx=CTX
-    )
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
     mine = await registration_service.my_registrations(db_session, principal=student)
     assert len(mine) == 1
     assert mine[0]["event"]["id"] == str(event_id)
@@ -418,21 +430,30 @@ async def test_check_in_marks_attended_organizer_and_university(db_session) -> N
 
     # Organizer checks one in.
     res = await registration_service.check_in(
-        db_session, principal=organizer, event_id=event_id,
-        registration_id=uuid.UUID(reg_a["registration_id"]), ctx=CTX,
+        db_session,
+        principal=organizer,
+        event_id=event_id,
+        registration_id=uuid.UUID(reg_a["registration_id"]),
+        ctx=CTX,
     )
     assert res["status"] == "attended"
     # Idempotent re-check-in.
     res2 = await registration_service.check_in(
-        db_session, principal=organizer, event_id=event_id,
-        registration_id=uuid.UUID(reg_a["registration_id"]), ctx=CTX,
+        db_session,
+        principal=organizer,
+        event_id=event_id,
+        registration_id=uuid.UUID(reg_a["registration_id"]),
+        ctx=CTX,
     )
     assert res2["status"] == "attended"
 
     # University moderator can also check in.
     res3 = await registration_service.check_in(
-        db_session, principal=uni, event_id=event_id,
-        registration_id=uuid.UUID(reg_b["registration_id"]), ctx=CTX,
+        db_session,
+        principal=uni,
+        event_id=event_id,
+        registration_id=uuid.UUID(reg_b["registration_id"]),
+        ctx=CTX,
     )
     assert res3["status"] == "attended"
 
@@ -449,14 +470,20 @@ async def test_check_in_unauthorized_cross_org_404(db_session) -> None:
     # A different partner org -> 404 (enumeration hiding).
     with pytest.raises(ResourceNotFoundError):
         await registration_service.check_in(
-            db_session, principal=other, event_id=event_id,
-            registration_id=uuid.UUID(reg["registration_id"]), ctx=CTX,
+            db_session,
+            principal=other,
+            event_id=event_id,
+            registration_id=uuid.UUID(reg["registration_id"]),
+            ctx=CTX,
         )
     # A student is not staff -> 404.
     with pytest.raises(ResourceNotFoundError):
         await registration_service.check_in(
-            db_session, principal=student, event_id=event_id,
-            registration_id=uuid.UUID(reg["registration_id"]), ctx=CTX,
+            db_session,
+            principal=student,
+            event_id=event_id,
+            registration_id=uuid.UUID(reg["registration_id"]),
+            ctx=CTX,
         )
 
 
@@ -482,9 +509,7 @@ async def test_attendee_list_pii_email_only_for_organizer(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     event_id = await publish_event(db_session, organizer, uni)
     su, student = await make_student(db_session)
-    await registration_service.register(
-        db_session, principal=student, event_id=event_id, ctx=CTX
-    )
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
 
     # Organizer sees the email.
     org_view = await registration_service.list_attendees(
@@ -502,13 +527,13 @@ async def test_attendee_list_pii_email_only_for_organizer(db_session) -> None:
 
     # No audit/log row for the registration carries an email (PII-safe snapshots).
     rows = (
-        await db_session.execute(
-            select(AuditLog).where(AuditLog.action == "event.registered")
-        )
-    ).scalars().all()
+        (await db_session.execute(select(AuditLog).where(AuditLog.action == "event.registered")))
+        .scalars()
+        .all()
+    )
     assert rows
     for row in rows:
-        snapshot = (row.after_snapshot or {})
+        snapshot = row.after_snapshot or {}
         assert su.email not in str(snapshot)
         assert set(snapshot.keys()) <= {"event_id", "user_id", "status"}
 
@@ -553,18 +578,16 @@ async def test_reminder_sweep_dedupes_no_double_send(db_session) -> None:
         db_session, organizer, uni, starts_at=_now() + timedelta(hours=12)
     )
     _su, student = await make_student(db_session)
-    await registration_service.register(
-        db_session, principal=student, event_id=event_id, ctx=CTX
-    )
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
 
     await runner.tick(only={"events.reminder_sweep"})
     await runner.tick(only={"events.reminder_sweep"})  # second tick must not re-send
 
     sent = (
         await db_session.execute(
-            select(func.count()).select_from(NotificationOutbox).where(
-                NotificationOutbox.template_key == "event.reminder"
-            )
+            select(func.count())
+            .select_from(NotificationOutbox)
+            .where(NotificationOutbox.template_key == "event.reminder")
         )
     ).scalar_one()
     assert sent == 1
@@ -577,18 +600,16 @@ async def test_reminder_sweep_soon_dedupes_no_double_send(db_session) -> None:
         db_session, organizer, uni, starts_at=_now() + timedelta(minutes=30)
     )
     _su, student = await make_student(db_session)
-    await registration_service.register(
-        db_session, principal=student, event_id=event_id, ctx=CTX
-    )
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
 
     await runner.tick(only={"events.reminder_sweep_soon"})
     await runner.tick(only={"events.reminder_sweep_soon"})  # second tick: no re-send
 
     sent = (
         await db_session.execute(
-            select(func.count()).select_from(NotificationOutbox).where(
-                NotificationOutbox.template_key == "event.reminder_soon"
-            )
+            select(func.count())
+            .select_from(NotificationOutbox)
+            .where(NotificationOutbox.template_key == "event.reminder_soon")
         )
     ).scalar_one()
     assert sent == 1
@@ -603,18 +624,16 @@ async def test_reminder_sweep_and_soon_are_independent(db_session) -> None:
         db_session, organizer, uni, starts_at=_now() + timedelta(minutes=30)
     )
     _su, student = await make_student(db_session)
-    await registration_service.register(
-        db_session, principal=student, event_id=event_id, ctx=CTX
-    )
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
 
     await runner.tick(only={"events.reminder_sweep", "events.reminder_sweep_soon"})
 
     counts = {
         key: (
             await db_session.execute(
-                select(func.count()).select_from(NotificationOutbox).where(
-                    NotificationOutbox.template_key == key
-                )
+                select(func.count())
+                .select_from(NotificationOutbox)
+                .where(NotificationOutbox.template_key == key)
             )
         ).scalar_one()
         for key in ("event.reminder", "event.reminder_soon")
@@ -628,9 +647,7 @@ async def test_waitlist_backfill_sweep_promotes(db_session) -> None:
     event_id = await publish_event(db_session, organizer, uni, capacity=1)
     _sa, student_a = await make_student(db_session, prefix="a")
     _sb, student_b = await make_student(db_session, prefix="b")
-    await registration_service.register(
-        db_session, principal=student_a, event_id=event_id, ctx=CTX
-    )
+    await registration_service.register(db_session, principal=student_a, event_id=event_id, ctx=CTX)
     await registration_service.register(
         db_session, principal=student_b, event_id=event_id, ctx=CTX
     )  # waitlisted
@@ -668,13 +685,13 @@ async def test_auto_complete_and_no_show_sweeps(db_session) -> None:
     _uu, _uorg, uni = await make_org_with_admin(db_session, org_type="university")
     event_id = await publish_event(db_session, organizer, uni)
     _su, student = await make_student(db_session)
-    await registration_service.register(
-        db_session, principal=student, event_id=event_id, ctx=CTX
-    )
+    await registration_service.register(db_session, principal=student, event_id=event_id, ctx=CTX)
     # Move the event entirely into the past (beyond the no-show grace window).
     await _set_event(
-        db_session, event_id,
-        starts_at=_now() - timedelta(hours=6), ends_at=_now() - timedelta(hours=5),
+        db_session,
+        event_id,
+        starts_at=_now() - timedelta(hours=6),
+        ends_at=_now() - timedelta(hours=5),
     )
 
     await runner.tick(only={"events.auto_complete"})

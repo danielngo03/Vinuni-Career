@@ -24,7 +24,6 @@ from app.core.config import get_settings
 from app.modules.advertising.application import (
     creative_service,
     moderation_service,
-    placement_service,
 )
 from app.modules.advertising.domain import disclosure as disclosure_vocab
 from app.modules.advertising.domain.models import SponsoredPlacement
@@ -111,12 +110,8 @@ async def _published_job(db, partner, uni, *, title="Live Job") -> uuid.UUID:
     created = await job_service.create_job(
         db, principal=partner, payload=_job_payload(title), ctx=CTX
     )
-    await job_service.submit_job(
-        db, principal=partner, job_id=uuid.UUID(created["id"]), ctx=CTX
-    )
-    await jobs_moderation.approve_job(
-        db, principal=uni, job_id=uuid.UUID(created["id"]), ctx=CTX
-    )
+    await job_service.submit_job(db, principal=partner, job_id=uuid.UUID(created["id"]), ctx=CTX)
+    await jobs_moderation.approve_job(db, principal=uni, job_id=uuid.UUID(created["id"]), ctx=CTX)
     return uuid.UUID(created["id"])
 
 
@@ -157,15 +152,27 @@ async def _seed_placement(
 
 async def _upload(db, principal, placement_id, *, slot="homepage_hero", data=PNG_BYTES):
     return await creative_service.upload_creative(
-        db, principal=principal, placement_id=placement_id, slot=slot,
-        data=data, content_type="image/png", alt_vi="Banner VN", alt_en="Banner EN",
-        focal_x=0.4, focal_y=0.6, click_target="/companies/acme", ctx=CTX,
+        db,
+        principal=principal,
+        placement_id=placement_id,
+        slot=slot,
+        data=data,
+        content_type="image/png",
+        alt_vi="Banner VN",
+        alt_en="Banner EN",
+        focal_x=0.4,
+        focal_y=0.6,
+        click_target="/companies/acme",
+        ctx=CTX,
     )
 
 
 async def _approve_creative(db, uni, creative_id):
     return await moderation_service.review_creative(
-        db, principal=uni, creative_id=uuid.UUID(creative_id), decision="approve",
+        db,
+        principal=uni,
+        creative_id=uuid.UUID(creative_id),
+        decision="approve",
         ctx=CTX,
     )
 
@@ -204,15 +211,11 @@ async def test_upload_sets_asset_and_serve_returns_bytes(db_session, _memory_sto
 
     # Pending creative is NOT publicly servable.
     with pytest.raises(ResourceNotFoundError):
-        await creative_service.serve_creative(
-            db_session, creative_id=uuid.UUID(created["id"])
-        )
+        await creative_service.serve_creative(db_session, creative_id=uuid.UUID(created["id"]))
 
     # Approve -> servable.
     await _approve_creative(db_session, uni, created["id"])
-    served = await creative_service.serve_creative(
-        db_session, creative_id=uuid.UUID(created["id"])
-    )
+    served = await creative_service.serve_creative(db_session, creative_id=uuid.UUID(created["id"]))
     assert served.content == PNG_BYTES
     assert served.media_type == "image/png"
 
@@ -228,9 +231,7 @@ async def test_serve_404_when_placement_not_active(db_session):
     created = await _upload(db_session, partner, placement.id)
     await _approve_creative(db_session, uni, created["id"])
     with pytest.raises(ResourceNotFoundError):
-        await creative_service.serve_creative(
-            db_session, creative_id=uuid.UUID(created["id"])
-        )
+        await creative_service.serve_creative(db_session, creative_id=uuid.UUID(created["id"]))
 
 
 # --------------------------------------------------------------------------- #
@@ -268,9 +269,15 @@ async def test_invalid_slot_and_focal_rejected(db_session):
         await _upload(db_session, partner, placement.id, slot="not_a_slot")
     with pytest.raises(ValidationFailedError):
         await creative_service.upload_creative(
-            db_session, principal=partner, placement_id=placement.id,
-            slot="right_rail", data=PNG_BYTES, content_type="image/png",
-            focal_x=1.5, focal_y=0.5, ctx=CTX,
+            db_session,
+            principal=partner,
+            placement_id=placement.id,
+            slot="right_rail",
+            data=PNG_BYTES,
+            content_type="image/png",
+            focal_x=1.5,
+            focal_y=0.5,
+            ctx=CTX,
         )
 
 
@@ -293,9 +300,7 @@ async def test_cross_org_creative_upload_is_404(db_session):
 async def test_member_without_permission_denied(db_session):
     _u, org, _admin = await make_org_with_admin(db_session)
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
-    _mu, _m, member = await add_member(
-        db_session, org=org, permissions=[("members", "read")]
-    )
+    _mu, _m, member = await add_member(db_session, org=org, permissions=[("members", "read")])
     job_id = await _published_job(db_session, _admin, uni)
     placement = await _seed_placement(db_session, _admin, target_id=job_id)
     with pytest.raises(PermissionDeniedError):
@@ -344,9 +349,7 @@ async def test_marketplace_hero_returns_creative_image(db_session):
     assert hero["source"] == "partner"
     assert hero["placement_id"] == str(placement.id)
     # Approval bumps the creative version, so the cache key is >= the upload's.
-    assert f"/advertising/creatives/{created['id']}/image?v=" in (
-        hero["creative"]["image_url"]
-    )
+    assert f"/advertising/creatives/{created['id']}/image?v=" in (hero["creative"]["image_url"])
     assert hero["creative"]["focal_point"] == {"x": 0.4, "y": 0.6}
     # Paid placement -> non-removable paid disclosure.
     assert hero["disclosure"]["class"] == "paid_sponsored"
@@ -356,16 +359,18 @@ async def test_marketplace_hero_returns_creative_image(db_session):
     assert "image_path" not in str(hero)
 
 
-async def test_marketplace_curated_fallback_when_no_partner_creative(
-    db_session, monkeypatch
-):
+async def test_marketplace_curated_fallback_when_no_partner_creative(db_session, monkeypatch):
     monkeypatch.setattr(
-        get_settings(), "marketplace_hero_fallback_image",
-        "/images/career-day-2026.jpg", raising=False,
+        get_settings(),
+        "marketplace_hero_fallback_image",
+        "/images/career-day-2026.jpg",
+        raising=False,
     )
     monkeypatch.setattr(
-        get_settings(), "marketplace_rail_fallback_image",
-        "/images/vinuni-campus.png", raising=False,
+        get_settings(),
+        "marketplace_rail_fallback_image",
+        "/images/vinuni-campus.png",
+        raising=False,
     )
     # Completely empty marketplace -> curated fallback, NEVER paid.
     data = await overview_service.get_overview(db_session)
@@ -425,18 +430,23 @@ async def test_creative_review_reject_requires_note_and_blocks_serve(db_session)
 
     with pytest.raises(ValidationFailedError):
         await moderation_service.review_creative(
-            db_session, principal=uni, creative_id=uuid.UUID(created["id"]),
-            decision="reject", ctx=CTX,
+            db_session,
+            principal=uni,
+            creative_id=uuid.UUID(created["id"]),
+            decision="reject",
+            ctx=CTX,
         )
     rejected = await moderation_service.review_creative(
-        db_session, principal=uni, creative_id=uuid.UUID(created["id"]),
-        decision="reject", note="Logo safe-area violated", ctx=CTX,
+        db_session,
+        principal=uni,
+        creative_id=uuid.UUID(created["id"]),
+        decision="reject",
+        note="Logo safe-area violated",
+        ctx=CTX,
     )
     assert rejected["moderation_status"] == "rejected"
     with pytest.raises(ResourceNotFoundError):
-        await creative_service.serve_creative(
-            db_session, creative_id=uuid.UUID(created["id"])
-        )
+        await creative_service.serve_creative(db_session, creative_id=uuid.UUID(created["id"]))
 
 
 # --------------------------------------------------------------------------- #
@@ -450,14 +460,15 @@ async def test_paid_disclosure_is_non_removable(db_session):
     _u, _o, partner = await make_org_with_admin(db_session)
     _uu, _uo, uni = await make_org_with_admin(db_session, org_type="university")
     job_id = await _published_job(db_session, partner, uni)
-    placement = await _seed_placement(
-        db_session, partner, target_id=job_id, paid=True
-    )
+    placement = await _seed_placement(db_session, partner, target_id=job_id, paid=True)
     # A PAID placement can never be relabelled to a non-paid editorial class.
     with pytest.raises(PaidDisclosureImmutableError):
         await moderation_service.set_disclosure_class(
-            db_session, principal=uni, placement_id=placement.id,
-            disclosure_class="university_curated", ctx=CTX,
+            db_session,
+            principal=uni,
+            placement_id=placement.id,
+            disclosure_class="university_curated",
+            ctx=CTX,
         )
 
 
@@ -469,8 +480,11 @@ async def test_unpaid_placement_can_be_curated_not_labelled_paid(db_session):
         db_session, partner, target_id=job_id, status="pending_approval", paid=False
     )
     updated = await moderation_service.set_disclosure_class(
-        db_session, principal=uni, placement_id=placement.id,
-        disclosure_class="strategic_partner", ctx=CTX,
+        db_session,
+        principal=uni,
+        placement_id=placement.id,
+        disclosure_class="strategic_partner",
+        ctx=CTX,
     )
     assert updated["disclosure_class"] == "strategic_partner"
     assert updated["disclosure"]["is_paid"] is False
@@ -488,6 +502,9 @@ async def test_partner_admin_cannot_moderate_creative(db_session):
     # A partner admin's *:* cannot self-approve its own creative (university only).
     with pytest.raises(_PD):
         await moderation_service.review_creative(
-            db_session, principal=partner, creative_id=uuid.UUID(created["id"]),
-            decision="approve", ctx=CTX,
+            db_session,
+            principal=partner,
+            creative_id=uuid.UUID(created["id"]),
+            decision="approve",
+            ctx=CTX,
         )

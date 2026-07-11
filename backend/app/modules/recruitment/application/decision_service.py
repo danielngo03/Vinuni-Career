@@ -8,14 +8,11 @@ Two partner-driven decisions on an application:
 
 The full configurable stage engine (``docs/BUSINESS_LOGIC.md`` §3, ``/advance`` /
 ``/rollback``) stays Phase 2. RBAC + tenant isolation are enforced HERE, not in the
-router, using the SAME org-membership gate as ``reveal_service.request_reveal``: a
-cross-org or non-partner caller is indistinguishable from a missing resource
-(``404``, never ``403``), so applications are not enumerable.
+router: a cross-org or non-partner caller is indistinguishable from a missing
+resource (``404``, never ``403``), so applications are not enumerable.
 
 Privacy invariants (``docs/SECURITY_PRIVACY.md`` / ``docs/API_CONTRACTS.md``):
 
-- A status change NEVER exposes the student's identity to the partner and never
-  bypasses the anonymous-reveal handshake.
 - The student notification + the student application projection carry ONLY the
   localized status label — never the coded ``rejection_reason`` or the partner's
   ``rejection_note``. Those stay org-internal (partner/owner projection only).
@@ -23,8 +20,8 @@ Privacy invariants (``docs/SECURITY_PRIVACY.md`` / ``docs/API_CONTRACTS.md``):
 Each transition bumps the optimistic ``version``, writes an audit row (the reason
 code lives in audit metadata, not the user response), and — in the same
 transaction — enqueues the outbox email AND inserts the in-app feed row, mirroring
-``reveal_service`` / ``apply_service``. The idempotent no-op path short-circuits
-BEFORE any notification, so a double-review / double-reject never duplicates.
+``apply_service``. The idempotent no-op path short-circuits BEFORE any
+notification, so a double-review / double-reject never duplicates.
 """
 
 from __future__ import annotations
@@ -58,16 +55,12 @@ async def _load_partner_application(
 ) -> Application:
     """Load an application the caller may act on as a partner of its owning org.
 
-    Mirrors ``reveal_service.request_reveal``: a cross-org or non-partner caller is
-    indistinguishable from missing (``404``). Row is locked for the read-modify-write.
+    A cross-org or non-partner caller is indistinguishable from missing (``404``).
+    Row is locked for the read-modify-write.
     """
 
-    app = await _shared.load_application(
-        session, application_id=application_id, lock=True
-    )
-    if not principal.is_superadmin and (
-        principal.org_id is None or principal.org_id != app.org_id
-    ):
+    app = await _shared.load_application(session, application_id=application_id, lock=True)
+    if not principal.is_superadmin and (principal.org_id is None or principal.org_id != app.org_id):
         raise ResourceNotFoundError()
     permission_checker.require(principal, _RESOURCE, "read", resource_org_id=app.org_id)
     return app
@@ -78,16 +71,13 @@ async def _partner_projection(
 ) -> dict:
     """Build the partner/owner projection (includes reason/note/last_status_at).
 
-    Identity stays redacted until the reveal handshake is accepted — a decision
-    never reveals the student. Reuses the apply_service partner view so the
-    anonymity rules are applied in exactly one place.
+    Reuses the apply_service partner view so the identity + assignee shape is
+    applied in exactly one place.
     """
 
     from app.modules.recruitment.application import apply_service
 
-    return await apply_service._partner_view(
-        session, app=app, principal=principal, locale=locale
-    )
+    return await apply_service._partner_view(session, app=app, principal=principal, locale=locale)
 
 
 async def _resolve_student_locale(
@@ -125,9 +115,7 @@ async def _notify_student(
     student = await user_service.get_by_id(session, app.applicant_id)
     if student is None:
         return
-    locale = await _resolve_student_locale(
-        session, applicant_id=app.applicant_id, student=student
-    )
+    locale = await _resolve_student_locale(session, applicant_id=app.applicant_id, student=student)
     job_title = await _job_title(session, job_id=app.job_id)
     await enqueue_notification(
         session,
@@ -183,9 +171,7 @@ async def review_application(
     # no-op path STILL ensures the stage row exists (covers an application that
     # reached under_review before the stage engine shipped).
     if app.status == lifecycle.UNDER_REVIEW:
-        created = await stage_service.ensure_pipeline_entry(
-            session, app=app, principal=principal
-        )
+        created = await stage_service.ensure_pipeline_entry(session, app=app, principal=principal)
         if created:
             await session.commit()
             await session.refresh(app)
@@ -201,8 +187,11 @@ async def review_application(
     await stage_service.ensure_pipeline_entry(session, app=app, principal=principal)
 
     await write_audit(
-        session, action="application.reviewed", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.reviewed",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"status": app.status},
     )
     await timeline.record_timeline_event(
@@ -281,8 +270,11 @@ async def reject_application(
     await stage_service.close_open_stage_on_reject(session, app=app)
 
     await write_audit(
-        session, action="application.rejected", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.rejected",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         # Reason lives in audit metadata only — NOT in the user-facing response.
         after={"status": app.status, "rejection_reason": reason},
     )
@@ -340,9 +332,7 @@ async def bulk_review_applications(
     errors = 0
     for app_id in application_ids:
         try:
-            await review_application(
-                session, principal=principal, application_id=app_id, ctx=ctx
-            )
+            await review_application(session, principal=principal, application_id=app_id, ctx=ctx)
             reviewed += 1
         except IllegalApplicationTransitionError:
             skipped += 1

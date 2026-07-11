@@ -7,10 +7,7 @@ unknown (short text), and real-world JD patterns.
 
 from __future__ import annotations
 
-import pytest
-
 from app.modules.opportunities.domain.language_detection import detect_language
-
 
 # ---------------------------------------------------------------------------
 # Vietnamese detection

@@ -1,19 +1,22 @@
-"""Per-user AI request quota: the weekly window.
+"""Per-user AI request quota: rolling session + weekly windows.
 
 Counts ``ai_usage_log`` rows for the caller (request counts only — no cost,
 token, latency, or provider data ever leaves the backend, per AI_PRODUCT_SPEC
 leakage rules) against one platform allowance:
 
-- ``AI_WEEKLY_REQUEST_LIMIT`` — resets at UTC Monday 00:00.
+- ``AI_SESSION_REQUEST_LIMIT`` — rolling short-session soft-warning window.
+- ``AI_WEEKLY_REQUEST_LIMIT`` — hard cap, resets at UTC Monday 00:00.
 
 The daily request-count window was removed (WS-1): fine-grained, cost-weighted
-metering is now the masked-energy account (:mod:`app.modules.billing.application.energy_service`);
-this legacy request-count gate keeps only the weekly hard cap as a coarse
-safety net for chat.
+metering is now the masked-energy account
+(:mod:`app.modules.billing.application.energy_service`). This legacy
+request-count surface keeps a rolling session warning and weekly hard cap as a
+coarse safety net for chat.
 
 ``my_usage()`` powers the sidebar meter; ``enforce_quota()`` is the hard gate
 called before running an AI request — when the weekly window is exhausted the
-request is refused with ``409 QUOTA_EXCEEDED``. The UI warns from 80%.
+request is refused with ``409 QUOTA_EXCEEDED``. The UI warns from 80% in either
+window.
 """
 
 from __future__ import annotations
@@ -47,6 +50,9 @@ _FEATURE_BY_TASK: dict[str, str] = {
     "cv_vision_extraction": "cv_import",
     "interview_sim": "interview",
     "answer_feedback": "interview",
+    "mock_interview_turn": "mock_interview",
+    "mock_interview_report": "mock_interview",
+    "mock_interview_realtime": "mock_interview",
     "scorecard_suggest": "scorecard",
     "screening_brief": "screening",
     "bulk_screening_brief": "screening",
@@ -103,28 +109,94 @@ async def _count_since(session: AsyncSession, user_id: Any, since: datetime) -> 
     ).scalar_one()
 
 
-def _window(used: int, limit: int) -> dict:
+async def _count_and_oldest_since(
+    session: AsyncSession, user_id: Any, since: datetime
+) -> tuple[int, datetime | None]:
+    """Row count AND the oldest ``created_at`` within the window (one query).
+
+    The oldest counted row is what powers the rolling-window ``resets_at``: the
+    window slides continuously, so the next moment usage frees up is exactly when
+    that oldest row ages out (``oldest + window``). ``None`` when nothing counts.
+    """
+    row = (
+        await session.execute(
+            select(func.count(), func.min(AiUsageLog.created_at))
+            .select_from(AiUsageLog)
+            .where(AiUsageLog.user_id == user_id, AiUsageLog.created_at >= since)
+        )
+    ).one()
+    oldest = row[1]
+    # SQLite may hand back a naive ISO string for an aggregate over a DateTime
+    # column; normalize so callers always get a datetime (or None).
+    if isinstance(oldest, str):
+        oldest = datetime.fromisoformat(oldest)
+    return int(row[0]), oldest
+
+
+def _window(used: int, limit: int, resets_at: str | None = None) -> dict:
+    """One quota window: raw count, allowance, percent used, and reset instant.
+
+    ``pct`` is the 0-100 percent USED (drives the meter fill + 80% warn / 100%
+    block thresholds). ``resets_at`` is an ISO-8601 UTC instant (or ``None`` when
+    the window is empty and has nothing pending to reset).
+    """
     limit = max(1, limit)
     return {
         "used": int(used),
         "limit": limit,
         "pct": min(100, round(used * 100 / limit)),
+        "resets_at": resets_at,
     }
 
 
+async def _compute_windows(
+    session: AsyncSession, *, principal: Any, now: datetime, settings: Any
+) -> tuple[dict, dict]:
+    """Build the caller's SESSION (rolling) and WEEK (fixed) usage windows.
+
+    SESSION mirrors the enforced short-window gate: a ROLLING window of
+    ``ai_session_window_hours`` (default 3h). ``resets_at`` is the instant the
+    oldest counted request ages out of that rolling window (i.e. when the meter
+    first drops), or ``None`` when the window is empty.
+
+    WEEK mirrors the enforced hard cap: a FIXED bucket that resets at UTC Monday
+    00:00, so ``resets_at`` is always the next Monday regardless of usage.
+    """
+    window_hours = max(1, settings.ai_session_window_hours)
+    session_used, session_oldest = await _count_and_oldest_since(
+        session, principal.user_id, now - timedelta(hours=window_hours)
+    )
+    session_reset = (
+        _iso_utc(session_oldest + timedelta(hours=window_hours))
+        if session_oldest is not None
+        else None
+    )
+    session_window = _window(session_used, settings.ai_session_request_limit, session_reset)
+
+    week_start = _week_start(now)
+    week_used = await _count_since(session, principal.user_id, week_start)
+    week = _window(
+        week_used,
+        settings.ai_weekly_request_limit,
+        _iso_utc(week_start + timedelta(days=7)),
+    )
+    return session_window, week
+
+
 async def my_usage(session: AsyncSession, *, principal: Any) -> dict:
-    """Return this week's AI request usage for the caller."""
+    """Return the caller's rolling session and weekly AI request usage."""
     settings = get_settings()
     now = datetime.now(UTC)
 
-    week_used = await _count_since(session, principal.user_id, _week_start(now))
-    week = _window(week_used, settings.ai_weekly_request_limit)
-
+    session_window, week = await _compute_windows(
+        session, principal=principal, now=now, settings=settings
+    )
     blocked_scope = "week" if week["pct"] >= 100 else None
 
     return {
+        "session": session_window,
         "week": week,
-        "warning": week["pct"] >= WARNING_THRESHOLD_PCT,
+        "warning": max(session_window["pct"], week["pct"]) >= WARNING_THRESHOLD_PCT,
         "blocked": blocked_scope is not None,
         "blocked_scope": blocked_scope,
     }
@@ -148,8 +220,9 @@ async def my_usage_detail(
     settings = get_settings()
     now = datetime.now(UTC)
 
-    week_used = await _count_since(session, principal.user_id, _week_start(now))
-    week = _window(week_used, settings.ai_weekly_request_limit)
+    session_window, week = await _compute_windows(
+        session, principal=principal, now=now, settings=settings
+    )
     blocked_scope = "week" if week["pct"] >= 100 else None
 
     since = now - timedelta(days=max(1, days))
@@ -175,9 +248,7 @@ async def my_usage_detail(
         feature_counts[feature] = feature_counts.get(feature, 0) + int(n)
     by_feature = [
         {"feature": feature, "count": count}
-        for feature, count in sorted(
-            feature_counts.items(), key=lambda kv: (-kv[1], kv[0])
-        )
+        for feature, count in sorted(feature_counts.items(), key=lambda kv: (-kv[1], kv[0]))
     ]
 
     # Recent activity. Over-fetch so excluded system rows don't starve the list.
@@ -198,18 +269,19 @@ async def my_usage_detail(
         feature = _feature_for(task_type)
         if feature is None:
             continue
-        recent.append(
-            {"feature": feature, "ok": bool(success), "at": _iso_utc(created_at)}
-        )
+        recent.append({"feature": feature, "ok": bool(success), "at": _iso_utc(created_at)})
         if len(recent) >= recent_limit:
             break
 
     return {
+        "session": session_window,
         "week": week,
-        "warning": week["pct"] >= WARNING_THRESHOLD_PCT,
+        "warning": max(session_window["pct"], week["pct"]) >= WARNING_THRESHOLD_PCT,
         "blocked": blocked_scope is not None,
         "blocked_scope": blocked_scope,
-        "week_reset": _iso_utc(_week_start(now) + timedelta(days=7)),
+        # Top-level mirror of ``week.resets_at`` kept for the billing panel's
+        # existing ``week_reset`` contract; both are the next UTC-Monday instant.
+        "week_reset": week["resets_at"],
         "window_days": max(1, days),
         "total": total,
         "by_feature": by_feature,

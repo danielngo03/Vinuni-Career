@@ -27,7 +27,6 @@ class ApplyRequest(BaseModel):
     cv_selection: CvSelectionInput
     cover_letter: str | None = Field(default=None, max_length=20000)
     screening_answers: dict = Field(default_factory=dict)
-    is_anonymous: bool = False
     idempotency_key: str = Field(min_length=1, max_length=200)
 
 
@@ -48,6 +47,17 @@ class ReviewRequestBody(BaseModel):
     """``POST /applications/{id}/review`` — optimistic ``version`` only."""
 
     version: int | None = None
+
+
+class AssignApplicationBody(BaseModel):
+    """``POST /applications/{id}/assign``.
+
+    ``assignee_membership_id`` is the org membership that will OWN this candidate;
+    ``null`` unassigns. The membership must be an ACTIVE member of the caller's org
+    (validated in the service — an invalid one is a ``422``, never a tenant leak).
+    """
+
+    assignee_membership_id: uuid.UUID | None = None
 
 
 class RejectRequestBody(BaseModel):
@@ -273,15 +283,6 @@ class OfferRespondBody(BaseModel):
     decision: Literal["accepted", "declined"]
     notes: str | None = Field(default=None, max_length=2000)
     idempotency_key: str = Field(min_length=1, max_length=200)
-
-
-class RevealRequestBody(BaseModel):
-    # Min-length 20 is enforced in the service for a friendly, field-scoped error.
-    reason: str = Field(min_length=1, max_length=2000)
-
-
-class RevealRespondBody(BaseModel):
-    decision: str = Field(max_length=20)  # accepted | declined
 
 
 # --------------------------------------------------------------------------- #

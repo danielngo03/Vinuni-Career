@@ -80,9 +80,7 @@ async def get_current_auth(
     if identity is None:
         raise AuthRequiredError()
 
-    permissions = await grant_resolver.resolve_grants(
-        session, user_id=user.id, identity=identity
-    )
+    permissions = await grant_resolver.resolve_grants(session, user_id=user.id, identity=identity)
     principal = Principal(
         user_id=user.id,
         persona=identity.persona,
@@ -94,6 +92,47 @@ async def get_current_auth(
         principal=principal,
         claims=claims,
         ctx=context_from_request(request),
+    )
+
+
+async def principal_from_access_token(session: AsyncSession, token: str) -> Principal:
+    """Resolve a :class:`Principal` from a raw access token, for transports that
+    cannot send an ``Authorization`` header (WebSockets pass the token as a query
+    param). Mirrors :func:`get_current_auth`'s checks — revocation, session
+    liveness, active user/identity, grants — and raises ``AuthRequiredError`` on
+    any failure. Authorization (owner/RBAC) is still enforced in the service layer.
+    """
+
+    from datetime import UTC, datetime
+
+    try:
+        claims = decode_access_token(token)
+    except InvalidTokenError as exc:
+        raise AuthRequiredError() from exc
+    if await token_revocation.is_revoked(claims.jti):
+        raise AuthRequiredError()
+    sess = (
+        await session.execute(select(Session).where(Session.id == claims.session_id))
+    ).scalar_one_or_none()
+    if sess is None or not sess.is_active(now=datetime.now(tz=UTC)):
+        raise AuthRequiredError()
+    user = await user_service.get_by_id(session, claims.user_id)
+    if user is None or not user.is_active:
+        raise AuthRequiredError()
+    identity = await user_service.get_identity(
+        session, identity_id=claims.identity_id, user_id=user.id
+    )
+    if identity is None:
+        raise AuthRequiredError()
+    permissions = await grant_resolver.resolve_grants(
+        session, user_id=user.id, identity=identity
+    )
+    return Principal(
+        user_id=user.id,
+        persona=identity.persona,
+        org_id=identity.org_id,
+        is_superadmin=user.is_superadmin,
+        permissions=permissions,
     )
 
 

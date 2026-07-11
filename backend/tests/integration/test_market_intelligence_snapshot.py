@@ -9,13 +9,11 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime, timedelta
 
-import pytest
-from sqlalchemy import select
-
 from app.core.config import get_settings
 from app.modules.dashboards.application import snapshot_service
 from app.modules.dashboards.domain.models import MarketIntelligenceSnapshot
 from app.modules.opportunities.domain.models import Job
+from sqlalchemy import select
 
 from tests.org_utils import make_org_with_admin
 

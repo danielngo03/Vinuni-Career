@@ -24,12 +24,16 @@ CTX = RequestContext(ip="203.0.113.9", user_agent="Mozilla/5.0 (Macintosh) Chrom
 
 async def _fetch_student_email_otp(session, user_id) -> str:
     rows = (
-        await session.execute(
-            select(NotificationOutbox)
-            .where(NotificationOutbox.recipient_id == user_id)
-            .order_by(NotificationOutbox.created_at.desc())
+        (
+            await session.execute(
+                select(NotificationOutbox)
+                .where(NotificationOutbox.recipient_id == user_id)
+                .order_by(NotificationOutbox.created_at.desc())
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     for row in rows:
         if row.template_key == "account.student_email_verification":
             return str(row.variables["otp_code"])
@@ -63,9 +67,7 @@ async def test_org_scoped_identity_without_state_does_not_get_stuck(db_session) 
 
 async def test_set_role_job_seeker_advances_to_seeker_type(db_session) -> None:
     user = await register_verified(db_session, email="onb_seeker@vinuni.edu.vn")
-    state = await svc.set_role(
-        db_session, user_id=user.id, role=svc.ROLE_JOB_SEEKER, ctx=CTX
-    )
+    state = await svc.set_role(db_session, user_id=user.id, role=svc.ROLE_JOB_SEEKER, ctx=CTX)
     assert state.role == svc.ROLE_JOB_SEEKER
     assert state.current_step == "seeker_type"
     await db_session.commit()
@@ -73,9 +75,7 @@ async def test_set_role_job_seeker_advances_to_seeker_type(db_session) -> None:
 
 async def test_set_role_employer_advances_to_employer_info(db_session) -> None:
     user = await register_verified(db_session, email="onb_employer@vinuni.edu.vn")
-    state = await svc.set_role(
-        db_session, user_id=user.id, role=svc.ROLE_EMPLOYER, ctx=CTX
-    )
+    state = await svc.set_role(db_session, user_id=user.id, role=svc.ROLE_EMPLOYER, ctx=CTX)
     assert state.role == svc.ROLE_EMPLOYER
     assert state.current_step == "employer_info"
     await db_session.commit()
@@ -107,9 +107,7 @@ async def test_save_seeker_profile_completes_onboarding(db_session) -> None:
     await svc.set_seeker_type(
         db_session, user_id=user.id, seeker_type=svc.SEEKER_PROFESSIONAL, ctx=CTX
     )
-    state = await svc.save_seeker_profile(
-        db_session, user_id=user.id, profile_data={}, ctx=CTX
-    )
+    state = await svc.save_seeker_profile(db_session, user_id=user.id, profile_data={}, ctx=CTX)
     assert state.current_step == "complete"
     assert state.completed_at is not None
     assert state.is_complete
@@ -119,13 +117,9 @@ async def test_save_seeker_profile_completes_onboarding(db_session) -> None:
 async def test_student_can_skip_optional_verification_and_complete(db_session) -> None:
     user = await register_verified(db_session, email="onb_student_skip@vinuni.edu.vn")
     await svc.set_role(db_session, user_id=user.id, role=svc.ROLE_JOB_SEEKER, ctx=CTX)
-    await svc.set_seeker_type(
-        db_session, user_id=user.id, seeker_type=svc.SEEKER_STUDENT, ctx=CTX
-    )
+    await svc.set_seeker_type(db_session, user_id=user.id, seeker_type=svc.SEEKER_STUDENT, ctx=CTX)
 
-    state = await svc.save_seeker_profile(
-        db_session, user_id=user.id, profile_data={}, ctx=CTX
-    )
+    state = await svc.save_seeker_profile(db_session, user_id=user.id, profile_data={}, ctx=CTX)
     assert state.current_step == "complete"
     assert state.is_complete
 
@@ -139,9 +133,7 @@ async def test_student_can_skip_optional_verification_and_complete(db_session) -
 async def test_student_verify_request_and_confirm(db_session) -> None:
     user = await register_verified(db_session, email="onb_student@vinuni.edu.vn")
     await svc.set_role(db_session, user_id=user.id, role=svc.ROLE_JOB_SEEKER, ctx=CTX)
-    await svc.set_seeker_type(
-        db_session, user_id=user.id, seeker_type=svc.SEEKER_STUDENT, ctx=CTX
-    )
+    await svc.set_seeker_type(db_session, user_id=user.id, seeker_type=svc.SEEKER_STUDENT, ctx=CTX)
 
     result = await svc.request_student_verify(
         db_session,
@@ -324,9 +316,7 @@ async def test_get_status_resumes_mid_flow_not_reset(db_session) -> None:
 async def test_completion_preserves_prior_verification_and_audit_rows(db_session) -> None:
     user = await register_verified(db_session, email="onb_preserve@vinuni.edu.vn")
     await svc.set_role(db_session, user_id=user.id, role=svc.ROLE_JOB_SEEKER, ctx=CTX)
-    await svc.set_seeker_type(
-        db_session, user_id=user.id, seeker_type=svc.SEEKER_STUDENT, ctx=CTX
-    )
+    await svc.set_seeker_type(db_session, user_id=user.id, seeker_type=svc.SEEKER_STUDENT, ctx=CTX)
     await svc.request_student_verify(
         db_session,
         user_id=user.id,
@@ -343,19 +333,13 @@ async def test_completion_preserves_prior_verification_and_audit_rows(db_session
     await db_session.commit()
 
     audit_count_before = len(
-        (
-            await db_session.execute(
-                select(AuditLog).where(AuditLog.actor_id == user.id)
-            )
-        )
+        (await db_session.execute(select(AuditLog).where(AuditLog.actor_id == user.id)))
         .scalars()
         .all()
     )
     assert audit_count_before > 0
 
-    state = await svc.save_seeker_profile(
-        db_session, user_id=user.id, profile_data={}, ctx=CTX
-    )
+    state = await svc.save_seeker_profile(db_session, user_id=user.id, profile_data={}, ctx=CTX)
     await db_session.commit()
     assert state.completed_at is not None
 
@@ -368,11 +352,7 @@ async def test_completion_preserves_prior_verification_and_audit_rows(db_session
     assert verif.student_email_verified_at is not None
 
     audit_count_after = len(
-        (
-            await db_session.execute(
-                select(AuditLog).where(AuditLog.actor_id == user.id)
-            )
-        )
+        (await db_session.execute(select(AuditLog).where(AuditLog.actor_id == user.id)))
         .scalars()
         .all()
     )

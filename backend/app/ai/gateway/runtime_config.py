@@ -50,6 +50,14 @@ _BUILTIN_ROUTES: dict[str, tuple[str, str, str]] = {
     "rerank_default": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-v4-flash"),
     "eval_default": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-v4-flash"),
     "vision_default": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-flash"),
+    # Mock Interview conversational brain + coaching report. Fast, Vietnamese-
+    # capable, cheap — bound to ``ai_interview_model`` at bootstrap.
+    "interview_default": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-flash"),
+    # Mock Interview PLANNER — a STRONG model run ONCE per session to build the
+    # frozen competency map + tiered question bank (then reused for free by every
+    # turn/tier/report). Routes to the same interview provider; a superadmin can
+    # rebind this alias to any model. Leak-safe alias (never surfaced to users).
+    "interview_planner": ("openrouter", "https://openrouter.ai/api/v1", "google/gemini-2.5-pro"),
     # Legacy aliases — resolvable synonyms (removed from allowlist/UI).
     "chat_cheap": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
     "chat_free": ("openrouter", "https://openrouter.ai/api/v1", "deepseek/deepseek-chat"),
@@ -104,9 +112,7 @@ class EffectiveAiConfig:
     job_fit_ai_explanation_enabled: bool
     daily_budget_usd: float
     provider_routes: dict[str, tuple[str, str, str]] = field(default_factory=dict)
-    provider_route_chains: dict[str, list[tuple[str, str, str]]] = field(
-        default_factory=dict
-    )
+    provider_route_chains: dict[str, list[tuple[str, str, str]]] = field(default_factory=dict)
     provider_key_ciphertexts: dict[str, str] = field(default_factory=dict)
 
 
@@ -179,15 +185,18 @@ def _bootstrap_from_env() -> EffectiveAiConfig:
     # leak-safe. The default provider serves all slots (one shared key); admins
     # can rebind a slot to another provider from the admin UI (DB routes win).
     _prov = s.ai_default_provider
-    _base = openrouter_url if _prov == "openrouter" else _BUILTIN_ROUTES.get(
-        "chat_cheap", (_prov, "", "")
-    )[1]
+    _base = (
+        openrouter_url
+        if _prov == "openrouter"
+        else _BUILTIN_ROUTES.get("chat_cheap", (_prov, "", ""))[1]
+    )
     routes["chat_default"] = (_prov, _base, s.ai_chat_model)
     routes["reasoning_default"] = (_prov, _base, s.ai_reasoning_model)
     routes["embedding_default"] = (_prov, _base, s.ai_embedding_model)
     routes["rerank_default"] = (_prov, _base, s.ai_rerank_model)
     routes["eval_default"] = (_prov, _base, s.ai_eval_model)
     routes["vision_default"] = (_prov, _base, s.ai_vision_model)
+    routes["interview_default"] = (_prov, _base, s.ai_interview_model)
     selected = (
         s.ai_default_model_alias,
         s.ai_reasoning_model_alias,

@@ -66,31 +66,22 @@ _DEFAULT_LOCALE = "vi"
 # cover the fit/next-action guidance only.
 _STRINGS: dict[str, dict[str, str]] = {
     "vi": {
-        "no_cv": (
-            "Tạo CV đầu tiên của bạn để mở khóa điểm phù hợp cá nhân hóa cho công "
-            "việc này."
-        ),
+        "no_cv": ("Tạo CV đầu tiên của bạn để mở khóa điểm phù hợp cá nhân hóa cho công việc này."),
         "add_evidence": (
-            "Bổ sung bằng chứng cho: {top_gaps} (nếu bạn thực sự có kinh nghiệm với "
-            "chúng)."
+            "Bổ sung bằng chứng cho: {top_gaps} (nếu bạn thực sự có kinh nghiệm với chúng)."
         ),
         "add_experience": (
-            "Thêm phần kinh nghiệm làm việc hoặc dự án thể hiện bằng chứng thực tế "
-            "cho vai trò này."
+            "Thêm phần kinh nghiệm làm việc hoặc dự án thể hiện bằng chứng thực tế cho vai trò này."
         ),
         "domain_mismatch": (
             "Công việc này thuộc lĩnh vực khác với CV của bạn — hãy làm nổi bật kinh "
             "nghiệm hoặc kỹ năng có thể chuyển đổi phù hợp với ngành này."
         ),
-        "update_cv_stale": (
-            "Cập nhật CV của bạn — CV chưa được chỉnh sửa trong hơn hai tháng."
-        ),
+        "update_cv_stale": ("Cập nhật CV của bạn — CV chưa được chỉnh sửa trong hơn hai tháng."),
         "fill_core_sections": (
             "Điền thêm các phần cốt lõi (tóm tắt, học vấn, kỹ năng) để hoàn thiện CV."
         ),
-        "refresh_stale": (
-            "CV này đã cũ — hãy làm mới trước khi ứng tuyển."
-        ),
+        "refresh_stale": ("CV này đã cũ — hãy làm mới trước khi ứng tuyển."),
         "next_create_cv": "Tạo CV để xem mức độ phù hợp của bạn với công việc này",
         "next_select_best_cv": "Dùng CV phù hợp nhất cho công việc này",
         "next_improve_cv": "Cải thiện CV trước khi ứng tuyển",
@@ -99,29 +90,20 @@ _STRINGS: dict[str, dict[str, str]] = {
         "next_compare": "So sánh với các vai trò tương tự",
     },
     "en": {
-        "no_cv": (
-            "Create your first CV to unlock a personalized fit score for this job."
-        ),
-        "add_evidence": (
-            "Add evidence for: {top_gaps} (if you have real experience with them)."
-        ),
+        "no_cv": ("Create your first CV to unlock a personalized fit score for this job."),
+        "add_evidence": ("Add evidence for: {top_gaps} (if you have real experience with them)."),
         "add_experience": (
-            "Add a work experience or project section showing hands-on evidence for "
-            "this role."
+            "Add a work experience or project section showing hands-on evidence for this role."
         ),
         "domain_mismatch": (
             "This role is in a different field from your CV — highlight any "
             "transferable experience or skills relevant to this industry."
         ),
-        "update_cv_stale": (
-            "Update your CV — it hasn't been edited in over two months."
-        ),
+        "update_cv_stale": ("Update your CV — it hasn't been edited in over two months."),
         "fill_core_sections": (
             "Fill in more core sections (summary, education, skills) for completeness."
         ),
-        "refresh_stale": (
-            "This CV is stale — refresh it before applying."
-        ),
+        "refresh_stale": ("This CV is stale — refresh it before applying."),
         "next_create_cv": "Create a CV to see your fit for this job",
         "next_select_best_cv": "Use your best-matching CV for this job",
         "next_improve_cv": "Improve your CV before applying",
@@ -205,11 +187,13 @@ def _learning_gaps(result: dict | None, *, locale: str = _DEFAULT_LOCALE) -> lis
         # localized suggestion); unknown skills fall back to the generic
         # ``practice_project`` resource. Deterministic and provider/model-free.
         resource = learning_resources.resource_for(gap, locale=locale)
-        gaps.append({
-            "skill": gap,
-            "suggestion": resource["suggestion"],
-            "resource_type": resource["resource_type"],
-        })
+        gaps.append(
+            {
+                "skill": gap,
+                "suggestion": resource["suggestion"],
+                "resource_type": resource["resource_type"],
+            }
+        )
     return gaps
 
 
@@ -224,41 +208,49 @@ def _next_actions(
 ) -> list[dict]:
     actions: list[dict] = []
     if not has_active_cv:
-        actions.append({
-            "action": "improve_cv",
-            "label": _t(locale, "next_create_cv"),
-        })
+        actions.append(
+            {
+                "action": "improve_cv",
+                "label": _t(locale, "next_create_cv"),
+            }
+        )
     else:
         if best_cv_id and best_cv_id != selected_cv_id:
-            actions.append({
-                "action": "select_best_cv",
-                "cv_id": best_cv_id,
-                "label": _t(locale, "next_select_best_cv"),
-            })
+            actions.append(
+                {
+                    "action": "select_best_cv",
+                    "cv_id": best_cv_id,
+                    "label": _t(locale, "next_select_best_cv"),
+                }
+            )
         if fit_result and (fit_result["bands"]["skills"] < 70 or fit_result["stale"]):
-            actions.append({
-                "action": "improve_cv",
-                "cv_id": selected_cv_id or best_cv_id,
-                "label": _t(locale, "next_improve_cv"),
-            })
+            actions.append(
+                {
+                    "action": "improve_cv",
+                    "cv_id": selected_cv_id or best_cv_id,
+                    "label": _t(locale, "next_improve_cv"),
+                }
+            )
 
-    actions.append({
-        "action": "apply",
-        "label": _t(locale, "next_apply"),
-        "ready": apply_readiness["ready"],
-        "blocked_reason": apply_readiness["blocked_reason"],
-    })
+    actions.append(
+        {
+            "action": "apply",
+            "label": _t(locale, "next_apply"),
+            "ready": apply_readiness["ready"],
+            "blocked_reason": apply_readiness["blocked_reason"],
+        }
+    )
     actions.append({"action": "save_job", "label": _t(locale, "next_save_job")})
-    actions.append({
-        "action": "compare_adjacent_roles",
-        "label": _t(locale, "next_compare"),
-    })
+    actions.append(
+        {
+            "action": "compare_adjacent_roles",
+            "label": _t(locale, "next_compare"),
+        }
+    )
     return actions
 
 
-def _apply_readiness(
-    *, has_active_cv: bool, already_applied: bool, deadline_passed: bool
-) -> dict:
+def _apply_readiness(*, has_active_cv: bool, already_applied: bool, deadline_passed: bool) -> dict:
     blocked_reason: str | None = None
     if already_applied:
         blocked_reason = "already_applied"

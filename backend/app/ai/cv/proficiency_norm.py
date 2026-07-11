@@ -38,6 +38,7 @@ def cefr_meets(achieved: str, required: str) -> bool:
 # 2. IELTS score → CEFR  (Cambridge assessment framework)
 # ---------------------------------------------------------------------------
 
+
 def _ielts_to_cefr(score: float) -> str:
     if score >= 8.0:
         return "C2"
@@ -56,6 +57,7 @@ def _ielts_to_cefr(score: float) -> str:
 # 3. TOEFL iBT score → CEFR
 # ---------------------------------------------------------------------------
 
+
 def _toefl_to_cefr(score: float) -> str:
     if score >= 95:
         return "C1"
@@ -71,6 +73,7 @@ def _toefl_to_cefr(score: float) -> str:
 # ---------------------------------------------------------------------------
 # 4. TOEIC (Listening+Reading total) → CEFR
 # ---------------------------------------------------------------------------
+
 
 def _toeic_to_cefr(score: float) -> str:
     if score >= 945:
@@ -88,6 +91,7 @@ def _toeic_to_cefr(score: float) -> str:
 # 5. PTE Academic → CEFR
 # ---------------------------------------------------------------------------
 
+
 def _pte_to_cefr(score: float) -> str:
     if score >= 76:
         return "C1"
@@ -104,6 +108,7 @@ def _pte_to_cefr(score: float) -> str:
 # 6. SAT/ACT reading – not used for CEFR; DUOLINGO English Test → CEFR
 # ---------------------------------------------------------------------------
 
+
 def _duolingo_to_cefr(score: float) -> str:
     if score >= 125:
         return "C1"
@@ -119,6 +124,7 @@ def _duolingo_to_cefr(score: float) -> str:
 # ---------------------------------------------------------------------------
 # 7. VSTEP (Vietnam Standardized Test of English Proficiency) → CEFR
 # ---------------------------------------------------------------------------
+
 
 def _vstep_to_cefr(score: float) -> str:
     """VSTEP uses a 10-50 total score mapped directly to CEFR B1-C1."""
@@ -137,43 +143,73 @@ def _vstep_to_cefr(score: float) -> str:
 
 _NAMED_EXAM_CEFR: dict[str, str] = {
     # Cambridge ESOL
-    "cpe": "C2", "c2 proficiency": "C2",
-    "cae": "C1", "c1 advanced": "C1",
-    "fce": "B2", "b2 first": "B2", "cambridge b2": "B2",
-    "pet": "B1", "b1 preliminary": "B1",
-    "ket": "A2", "a2 key": "A2",
+    "cpe": "C2",
+    "c2 proficiency": "C2",
+    "cae": "C1",
+    "c1 advanced": "C1",
+    "fce": "B2",
+    "b2 first": "B2",
+    "cambridge b2": "B2",
+    "pet": "B1",
+    "b1 preliminary": "B1",
+    "ket": "A2",
+    "a2 key": "A2",
     # APTIS (British Council) — APTIS reports A/B/C bands directly as CEFR
-    "aptis c": "C1", "aptis b2": "B2", "aptis b": "B2",
-    "aptis b1": "B1", "aptis a": "A2",
+    "aptis c": "C1",
+    "aptis b2": "B2",
+    "aptis b": "B2",
+    "aptis b1": "B1",
+    "aptis a": "A2",
     # DELF/DALF (French) — not English but shows CEFR awareness
-    "dalf c2": "C2", "dalf c1": "C1",
-    "delf b2": "B2", "delf b1": "B1", "delf a2": "A2", "delf a1": "A1",
+    "dalf c2": "C2",
+    "dalf c1": "C1",
+    "delf b2": "B2",
+    "delf b1": "B1",
+    "delf a2": "A2",
+    "delf a1": "A1",
     # JLPT (Japanese) — approximate CEFR mapping
-    "jlpt n1": "C1", "jlpt n2": "B2", "jlpt n3": "B1",
-    "jlpt n4": "A2", "jlpt n5": "A1",
+    "jlpt n1": "C1",
+    "jlpt n2": "B2",
+    "jlpt n3": "B1",
+    "jlpt n4": "A2",
+    "jlpt n5": "A1",
     # HSK (Chinese)
-    "hsk 6": "C1", "hsk 5": "B2", "hsk 4": "B1",
-    "hsk 3": "A2", "hsk 2": "A1",
+    "hsk 6": "C1",
+    "hsk 5": "B2",
+    "hsk 4": "B1",
+    "hsk 3": "A2",
+    "hsk 2": "A1",
     # VSTEP named bands
-    "vstep c1": "C1", "vstep b2": "B2", "vstep b1": "B1",
+    "vstep c1": "C1",
+    "vstep b2": "B2",
+    "vstep b1": "B1",
     # Verbal descriptors — soft signals (lowest CEFR for that label)
-    "native": "C2", "native speaker": "C2", "bilingual": "C1",
-    "mastery": "C2", "proficiency": "C1",
-    "fluent": "C1", "fluently": "C1", "advanced": "C1",
-    "upper intermediate": "B2", "upper-intermediate": "B2",
+    "native": "C2",
+    "native speaker": "C2",
+    "bilingual": "C1",
+    "mastery": "C2",
+    "proficiency": "C1",
+    "fluent": "C1",
+    "fluently": "C1",
+    "advanced": "C1",
+    "upper intermediate": "B2",
+    "upper-intermediate": "B2",
     "intermediate": "B1",
-    "pre-intermediate": "A2", "pre intermediate": "A2",
-    "elementary": "A2", "basic": "A1", "beginner": "A1",
+    "pre-intermediate": "A2",
+    "pre intermediate": "A2",
+    "elementary": "A2",
+    "basic": "A1",
+    "beginner": "A1",
     # Vietnamese descriptors
-    "thành thạo": "C1", "lưu loát": "C1",
-    "khá": "B1", "trung bình": "B1",
+    "thành thạo": "C1",
+    "lưu loát": "C1",
+    "khá": "B1",
+    "trung bình": "B1",
     "cơ bản": "A2",
 }
 
 # Direct CEFR band references
-_CEFR_DIRECT_RE = re.compile(
-    r"\b(c2|c1|b2|b1|a2|a1)\b", re.IGNORECASE
-)
+_CEFR_DIRECT_RE = re.compile(r"\b(c2|c1|b2|b1|a2|a1)\b", re.IGNORECASE)
 
 
 # ---------------------------------------------------------------------------
@@ -183,11 +219,12 @@ _CEFR_DIRECT_RE = re.compile(
 # Captures: (test_name, score)
 _SCORED_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"ielts\s*(?:[:\-≥≤>=<]+\s*)?(?:từ\s*)?(\d+(?:\.\d+)?)", re.I), "ielts"),
-    (re.compile(r"toefl(?:\s*ibt)?\s*(?:[:\-≥≤>=<]+\s*)?(?:từ\s*)?(\d+(?:\.\d+)?)", re.I),
-     "toefl"),
+    (re.compile(r"toefl(?:\s*ibt)?\s*(?:[:\-≥≤>=<]+\s*)?(?:từ\s*)?(\d+(?:\.\d+)?)", re.I), "toefl"),
     (re.compile(r"toeic\s*(?:[:\-≥≤>=<]+\s*)?(?:từ\s*)?(\d+(?:\.\d+)?)", re.I), "toeic"),
-    (re.compile(r"pte(?:\s*academic)?\s*(?:[:\-≥≤>=<]+\s*)?(?:từ\s*)?(\d+(?:\.\d+)?)", re.I),
-     "pte"),
+    (
+        re.compile(r"pte(?:\s*academic)?\s*(?:[:\-≥≤>=<]+\s*)?(?:từ\s*)?(\d+(?:\.\d+)?)", re.I),
+        "pte",
+    ),
     (re.compile(r"duolingo\s*(?:[:\-≥≤>=<]+\s*)?(?:từ\s*)?(\d+(?:\.\d+)?)", re.I), "duolingo"),
     (re.compile(r"vstep\s*(?:[:\-≥≤>=<]+\s*)?(?:từ\s*)?(\d+(?:\.\d+)?)", re.I), "vstep"),
 ]
@@ -205,6 +242,7 @@ _SCORE_FNS: dict[str, Callable[[float], str]] = {
 # ---------------------------------------------------------------------------
 # 10. Public API
 # ---------------------------------------------------------------------------
+
 
 def normalize_proficiency(text: str) -> str | None:
     """Extract and normalize a language proficiency claim to a CEFR level.
@@ -264,10 +302,18 @@ def cefr_expansion_tokens(level: str) -> list[str]:
 # ---------------------------------------------------------------------------
 
 _GPA_LETTER: dict[str, float] = {
-    "a+": 4.0, "a": 4.0, "a-": 3.7,
-    "b+": 3.3, "b": 3.0, "b-": 2.7,
-    "c+": 2.3, "c": 2.0, "c-": 1.7,
-    "d+": 1.3, "d": 1.0, "f": 0.0,
+    "a+": 4.0,
+    "a": 4.0,
+    "a-": 3.7,
+    "b+": 3.3,
+    "b": 3.0,
+    "b-": 2.7,
+    "c+": 2.3,
+    "c": 2.0,
+    "c-": 1.7,
+    "d+": 1.3,
+    "d": 1.0,
+    "f": 0.0,
 }
 
 _GPA_VI_CLASS: dict[str, tuple[float, float]] = {

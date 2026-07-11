@@ -54,17 +54,13 @@ async def preview_for_member(
 
     membership = (
         await session.execute(
-            select(Membership).where(
-                Membership.id == membership_id, Membership.org_id == org_id
-            )
+            select(Membership).where(Membership.id == membership_id, Membership.org_id == org_id)
         )
     ).scalar_one_or_none()
     if membership is None:
         raise ResourceNotFoundError()
 
-    grants = await grant_resolver.grants_for_membership(
-        session, membership_id=membership.id
-    )
+    grants = await grant_resolver.grants_for_membership(session, membership_id=membership.id)
     result = _grants_summary(grants)
     result["membership_id"] = str(membership.id)
     result["membership_status"] = membership.status
@@ -89,10 +85,16 @@ async def preview_hypothetical(
 
     target_ids = list(dict.fromkeys(role_ids))
     roles = (
-        await session.execute(
-            select(Role.id).where(Role.id.in_(target_ids), Role.org_id == org_id)
+        (
+            await session.execute(
+                select(Role.id).where(Role.id.in_(target_ids), Role.org_id == org_id)
+            )
         )
-    ).scalars().all() if target_ids else []
+        .scalars()
+        .all()
+        if target_ids
+        else []
+    )
     if len(roles) != len(target_ids):
         raise ResourceNotFoundError()
 

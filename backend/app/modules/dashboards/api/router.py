@@ -11,7 +11,11 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_db_session
-from app.modules.analytics.application import partner_ops_dashboard_service
+from app.modules.analytics.application import (
+    advertising_performance_service,
+    partner_ops_dashboard_service,
+    partner_recruiting_funnel_service,
+)
 from app.modules.auth.api.deps import CurrentAuth, get_current_auth
 from app.modules.dashboards.application import (
     market_intelligence_service,
@@ -31,9 +35,7 @@ async def get_student_dashboard(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await student_dashboard.get_student_dashboard(
-        session, principal=auth.principal
-    )
+    data = await student_dashboard.get_student_dashboard(session, principal=auth.principal)
     return success(data)
 
 
@@ -42,9 +44,7 @@ async def get_partner_dashboard(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await partner_dashboard.get_partner_dashboard(
-        session, principal=auth.principal
-    )
+    data = await partner_dashboard.get_partner_dashboard(session, principal=auth.principal)
     return success(data)
 
 
@@ -53,9 +53,7 @@ async def get_university_dashboard(
     auth: CurrentAuth = Depends(get_current_auth),
     session: AsyncSession = Depends(get_db_session),
 ) -> dict:
-    data = await university_dashboard.get_university_dashboard(
-        session, principal=auth.principal
-    )
+    data = await university_dashboard.get_university_dashboard(session, principal=auth.principal)
     return success(data)
 
 
@@ -140,3 +138,31 @@ async def get_partner_analytics(
     top_jobs = await recruitment_read.analytics_top_jobs(session, org_id=p.org_id)
     monthly = await recruitment_read.analytics_monthly_trend(session, org_id=p.org_id)
     return success({"funnel": funnel, "top_jobs": top_jobs, "monthly_trend": monthly})
+
+
+@router.get(
+    "/partner/analytics/recruiting-funnel",
+    summary="Partner recruiting funnel — stage conversion, time-to-hire, time-in-stage",
+)
+async def get_partner_recruiting_funnel(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await partner_recruiting_funnel_service.get_recruiting_funnel(
+        session, principal=auth.principal
+    )
+    return success(data)
+
+
+@router.get(
+    "/partner/analytics/advertising",
+    summary="Partner campaign/advertising performance — impressions, clicks, CTR, spend",
+)
+async def get_partner_advertising_performance(
+    auth: CurrentAuth = Depends(get_current_auth),
+    session: AsyncSession = Depends(get_db_session),
+) -> dict:
+    data = await advertising_performance_service.get_campaign_performance(
+        session, principal=auth.principal
+    )
+    return success(data)

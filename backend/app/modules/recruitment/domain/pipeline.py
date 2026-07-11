@@ -38,9 +38,7 @@ EXIT_HIRED = "hired"
 ACTION_MANUAL = "manual"
 
 # stage_type — coarse DATA_MODEL §9 set; metadata for labeling only.
-STAGE_TYPES: frozenset[str] = frozenset(
-    {"screening", "interview", "assessment", "offer", "custom"}
-)
+STAGE_TYPES: frozenset[str] = frozenset({"screening", "interview", "assessment", "offer", "custom"})
 
 # A rollback reason is partner-internal (audit + partner projection) and must be
 # meaningful (ARCHITECTURE §4.1 / BUSINESS_LOGIC §3.5).

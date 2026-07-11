@@ -57,8 +57,18 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     ],
     "gcp": ["google cloud", "google cloud platform", "gke", "bigquery", "cloud run"],
     "azure": ["microsoft azure", "aks", "azure devops", "azure functions"],
-    "ci/cd": ["cicd", "continuous integration", "continuous delivery", "continuous deployment",
-               "github actions", "gitlab ci", "jenkins", "circle ci", "travis ci", "argocd"],
+    "ci/cd": [
+        "cicd",
+        "continuous integration",
+        "continuous delivery",
+        "continuous deployment",
+        "github actions",
+        "gitlab ci",
+        "jenkins",
+        "circle ci",
+        "travis ci",
+        "argocd",
+    ],
     "devops": ["dev ops", "site reliability", "sre", "platform engineering"],
     "microservices": ["micro-services", "micro services", "service mesh", "soa"],
     "serverless": ["faas", "function as a service", "lambda", "cloud functions"],
@@ -71,7 +81,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "prometheus": ["grafana", "monitoring", "observability", "alerting"],
     "datadog": ["monitoring", "apm", "observability"],
     "istio": ["service mesh", "envoy proxy"],
-
     # ── Programming Languages ───────────────────────────────────────────────
     # ONLY abbreviation/spelling variants here. Framework names are SEPARATE
     # entries (see web frameworks section). This prevents "python" from matching
@@ -95,7 +104,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "matlab": ["simulink"],
     "c++": ["cpp"],
     "c": ["c language", "embedded c", "ansi c"],
-
     # ── Web Frameworks (spelling variants only, no language bridging) ───────
     # NOTE: Language implications go in _CV_IMPLIES_MAP, NOT here.
     "react": ["react.js", "reactjs", "redux"],
@@ -123,7 +131,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "swiftui": [],
     "flutter": [],
     "jetpack compose": [],
-
     # ── Web & Frontend ──────────────────────────────────────────────────────
     "html": ["html5", "hypertext"],
     "css": ["css3", "sass", "scss", "less", "tailwind", "bootstrap"],
@@ -131,7 +138,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "rest": ["restful", "rest api", "http api"],
     "grpc": ["protocol buffers", "protobuf"],
     "websocket": ["ws", "socket.io", "real-time"],
-
     # ── Databases ───────────────────────────────────────────────────────────
     "postgresql": ["postgres", "pg", "psql"],
     "mysql": ["mariadb"],
@@ -146,15 +152,37 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "snowflake": ["data warehouse", "cloud data warehouse"],
     "bigquery": ["bq", "google bigquery"],
     "redshift": ["aws redshift"],
-
     # ── Data / ML / AI ──────────────────────────────────────────────────────
-    "machine learning": ["ml", "supervised learning", "unsupervised learning", "classification",
-                         "regression", "clustering", "random forest", "xgboost", "lightgbm"],
-    "deep learning": ["dl", "neural network", "cnn", "rnn", "lstm", "transformer",
-                      "convolutional", "recurrent"],
+    "machine learning": [
+        "ml",
+        "supervised learning",
+        "unsupervised learning",
+        "classification",
+        "regression",
+        "clustering",
+        "random forest",
+        "xgboost",
+        "lightgbm",
+    ],
+    "deep learning": [
+        "dl",
+        "neural network",
+        "cnn",
+        "rnn",
+        "lstm",
+        "transformer",
+        "convolutional",
+        "recurrent",
+    ],
     "artificial intelligence": ["ai", "intelligent systems"],
-    "natural language processing": ["nlp", "text mining", "sentiment analysis", "named entity",
-                                    "ner", "text classification"],
+    "natural language processing": [
+        "nlp",
+        "text mining",
+        "sentiment analysis",
+        "named entity",
+        "ner",
+        "text classification",
+    ],
     "computer vision": ["image recognition", "object detection", "yolo", "opencv"],
     "reinforcement learning": ["rl", "reward learning"],
     "pytorch": ["torch"],
@@ -174,7 +202,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "dbt": ["data build tool", "data transformation"],
     "tableau": ["data visualization", "bi tool", "dashboard"],
     "power bi": ["powerbi", "microsoft power bi", "bi dashboard"],
-
     # ── DevSecOps / Security ─────────────────────────────────────────────────
     "devsecops": ["dev sec ops", "security engineering", "application security", "appsec"],
     "owasp": ["web application security", "injection", "xss"],
@@ -187,7 +214,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "oauth": ["oauth2", "openid connect", "oidc"],
     "zero trust": ["zero-trust", "zero trust security"],
     "vault": ["hashicorp vault", "secrets management"],
-
     # ── Automotive / Embedded ────────────────────────────────────────────────
     "autosar": ["autosar classic", "autosar adaptive"],
     "can bus": ["can", "can-fd", "automotive bus", "controller area network"],
@@ -200,7 +226,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "bms": ["battery management system", "battery management"],
     "can": ["controller area network", "can bus", "can-fd"],
     "ota": ["over the air update", "firmware update"],
-
     # ── Finance / Banking ─────────────────────────────────────────────────────
     "cfa": ["chartered financial analyst"],
     "cpa": ["certified public accountant"],
@@ -218,7 +243,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "pos": ["point of sale"],
     "payment gateway": ["payment processing", "vnpay", "momo", "zalopay"],
     "trading": ["equity trading", "stock trading", "algorithmic trading", "quant"],
-
     # ── Healthcare / Life Science ─────────────────────────────────────────────
     "hl7": ["hl7 fhir", "healthcare interoperability", "medical data exchange"],
     "fhir": ["fast healthcare interoperability resources"],
@@ -229,7 +253,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "icd": ["icd-10", "icd-11", "diagnosis coding"],
     "hipaa": ["health data privacy", "patient data protection"],
     "clinical trials": ["gcp", "clinical research", "phase 1", "phase 2", "phase 3"],
-
     # ── Aviation / Logistics ─────────────────────────────────────────────────
     "gds": ["global distribution system", "amadeus", "sabre", "galileo", "travelport"],
     "ndc": ["new distribution capability", "iata ndc"],
@@ -238,7 +261,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "wms": ["warehouse management system"],
     "tms": ["transportation management system"],
     "scm": ["supply chain management"],
-
     # ── Agile / Project Management ────────────────────────────────────────────
     "scrum": ["agile scrum", "sprint", "daily standup", "retrospective"],
     "kanban": ["agile kanban", "lean"],
@@ -247,7 +269,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "okr": ["objectives and key results", "goal setting"],
     "product management": ["pm", "product owner", "roadmap", "backlog"],
     "ba": ["business analyst", "business analysis", "requirements analysis"],
-
     # ── Design / UX ──────────────────────────────────────────────────────────
     "figma": ["ui design", "ux design", "prototyping", "wireframing", "design tool"],
     "ux": ["user experience", "usability", "user research", "hci"],
@@ -255,11 +276,17 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "a/b testing": ["ab testing", "experimentation", "conversion optimization"],
     "hig": ["apple human interface guidelines", "ios design guidelines"],
     "material design": ["google material", "material ui", "mui"],
-
     # ── Vietnamese city aliases — bidirectional so both CV and JD variants match
     "ho chi minh city": [
-        "hcmc", "hcm", "saigon", "sài gòn", "sai gon",
-        "tp hcm", "tp.hcm", "tp. hồ chí minh", "thành phố hồ chí minh",
+        "hcmc",
+        "hcm",
+        "saigon",
+        "sài gòn",
+        "sai gon",
+        "tp hcm",
+        "tp.hcm",
+        "tp. hồ chí minh",
+        "thành phố hồ chí minh",
     ],
     "hcmc": ["ho chi minh city", "hcm", "saigon", "sài gòn"],
     "hcm": ["ho chi minh city", "hcmc", "saigon"],
@@ -271,7 +298,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "hn": ["hanoi", "hà nội"],
     "da nang": ["đà nẵng"],
     "đà nẵng": ["da nang"],
-
     # ── Vietnamese-specific ───────────────────────────────────────────────────
     "cntt": ["công nghệ thông tin", "information technology", "it"],
     "ktpm": ["kỹ thuật phần mềm", "software engineering"],
@@ -288,7 +314,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "ktvm": ["kinh tế vĩ mô"],
     "ktvi": ["kinh tế vi mô"],
     "khtn": ["khoa học tự nhiên"],
-
     # ── Role abbreviations (bidirectional) ───────────────────────────────────
     "pm": ["product manager"],
     "po": ["product owner"],
@@ -302,7 +327,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "ds": ["data scientist"],
     "mle": ["machine learning engineer", "ml engineer"],
     "devrel": ["developer relations", "developer advocate"],
-
     # ── Marketing & Digital (VN ↔ EN) ─────────────────────────────────────────
     "digital marketing": ["tiếp thị số", "tiếp thị kỹ thuật số", "marketing số", "digital mkt"],
     "marketing": ["tiếp thị", "mkt"],
@@ -320,7 +344,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "market research": ["nghiên cứu thị trường"],
     "kpi": ["key performance indicator", "chỉ số hiệu suất"],
     "crm": ["customer relationship management", "quản lý quan hệ khách hàng"],
-
     # ── Sales / Business / Customer (VN ↔ EN) ──────────────────────────────────
     "sales": ["bán hàng", "kinh doanh"],
     "b2b": ["business to business"],
@@ -329,19 +352,16 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "telesales": ["bán hàng qua điện thoại", "telemarketing"],
     "account management": ["quản lý khách hàng"],
     "business development": ["phát triển kinh doanh"],
-
     # ── HR / Admin (VN ↔ EN) ───────────────────────────────────────────────────
     "human resources": ["nhân sự", "quản lý nhân sự", "hr", "quản trị nhân sự"],
     "recruitment": ["tuyển dụng", "talent acquisition"],
     "payroll": ["tính lương", "c&b", "compensation and benefits"],
     "training": ["đào tạo", "l&d", "learning and development"],
-
     # ── Office / Productivity ─────────────────────────────────────────────────
     "microsoft office": ["ms office", "tin học văn phòng", "microsoft office suite"],
     "excel": ["microsoft excel", "ms excel", "bảng tính"],
     "powerpoint": ["microsoft powerpoint", "ms powerpoint", "power point"],
     "google workspace": ["google suite", "g suite", "google docs", "google sheets"],
-
     # ── Design / Media tools ──────────────────────────────────────────────────
     "photoshop": ["adobe photoshop"],
     "illustrator": ["adobe illustrator"],
@@ -351,7 +371,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "capcut": ["cap cut"],
     "graphic design": ["thiết kế đồ họa", "thiết kế đồ hoạ"],
     "video editing": ["chỉnh sửa video", "dựng video", "edit video"],
-
     # ── Soft skills (VN ↔ EN) ─────────────────────────────────────────────────
     "teamwork": ["làm việc nhóm", "team work", "làm việc theo nhóm", "phối hợp nhóm"],
     "communication": ["giao tiếp", "kỹ năng giao tiếp"],
@@ -362,7 +381,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "negotiation": ["đàm phán", "thương lượng"],
     "critical thinking": ["tư duy phản biện", "tư duy phê phán"],
     "adaptability": ["khả năng thích nghi", "thích nghi nhanh"],
-
     # ── Manufacturing / QA / Ops (esp. garment/production) ─────────────────────
     "lean manufacturing": ["lean", "sản xuất tinh gọn"],
     "kaizen": ["cải tiến liên tục"],
@@ -372,7 +390,6 @@ _EXPANSION_MAP: dict[str, list[str]] = {
     "garment": ["may mặc", "dệt may", "hàng may mặc"],
     "supply chain": ["chuỗi cung ứng", "scm"],
     "inventory management": ["quản lý kho", "quản lý hàng tồn kho"],
-
     # ── Certifications ────────────────────────────────────────────────────────
     "aws certified": [
         "aws certification",
@@ -549,6 +566,7 @@ def _boundary_match(variant: str, text: str) -> bool:
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
 
 def expand_term(term: str) -> frozenset[str]:
     """Return all known SYNONYM forms of ``term`` (bidirectional, synonym-only).

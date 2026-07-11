@@ -69,9 +69,7 @@ class NotificationOutbox(Base):
     # NULL = eligible for delivery immediately; a future value defers reclaim after
     # a transient send failure (exponential backoff, ADR-0003 §3). The drain claim
     # gate is ``status='pending' AND (next_attempt_at IS NULL OR next_attempt_at<=now)``.
-    next_attempt_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    next_attempt_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -111,9 +109,7 @@ class Notification(Base):
     body: Mapped[str] = mapped_column(Text, nullable=False)
     action_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
     is_read: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    read_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    read_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     channels: Mapped[list] = mapped_column(JsonType, nullable=False, default=list)
     delivered_at: Mapped[dict] = mapped_column(JsonType, nullable=False, default=dict)
     created_at: Mapped[datetime] = mapped_column(

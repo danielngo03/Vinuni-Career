@@ -69,9 +69,7 @@ async def _load_row(
             job_stmt = job_stmt.with_for_update()
         return (await session.execute(job_stmt)).scalar_one_or_none()
     if target_type == _EVENT:
-        event_stmt = select(Event).where(
-            Event.id == target_id, Event.deleted_at.is_(None)
-        )
+        event_stmt = select(Event).where(Event.id == target_id, Event.deleted_at.is_(None))
         if lock and _use_for_update():
             event_stmt = event_stmt.with_for_update()
         return (await session.execute(event_stmt)).scalar_one_or_none()
@@ -92,9 +90,7 @@ async def load_target(
     for a missing or soft-deleted target.
     """
 
-    row = await _load_row(
-        session, target_type=target_type, target_id=target_id, lock=lock
-    )
+    row = await _load_row(session, target_type=target_type, target_id=target_id, lock=lock)
     if row is None:
         return None
     return TargetRef(
@@ -128,9 +124,7 @@ async def set_target_flags(
     commit (so the placement transition and the flag flip commit atomically).
     """
 
-    row = await _load_row(
-        session, target_type=target_type, target_id=target_id, lock=True
-    )
+    row = await _load_row(session, target_type=target_type, target_id=target_id, lock=True)
     if row is None:
         return False
     if row.is_sponsored == is_sponsored and row.is_featured == is_featured:

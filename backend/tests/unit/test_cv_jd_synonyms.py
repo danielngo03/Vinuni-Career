@@ -6,6 +6,7 @@ abbreviation (``k8s``) must satisfy a JD that writes the canonical form
 (``Kubernetes``) — and such a skill must NEVER resurface as a gap /
 "improve this" suggestion. Pure functions, no DB, no LLM — fast and free.
 """
+
 from __future__ import annotations
 
 import pytest
@@ -72,10 +73,10 @@ def test_abbreviation_counts_as_matched_not_gap(jd_term: str, cv_term: str) -> N
 
 # CV tech that IMPLIES a JD requirement (one-way).
 _IMPLIES = [
-    ("Python", "FastAPI"),        # FastAPI implies Python
-    ("JavaScript", "React"),      # React implies JavaScript
-    ("Java", "Spring Boot"),      # Spring Boot implies Java
-    ("Kubernetes", "Helm"),       # Helm implies Kubernetes
+    ("Python", "FastAPI"),  # FastAPI implies Python
+    ("JavaScript", "React"),  # React implies JavaScript
+    ("Java", "Spring Boot"),  # Spring Boot implies Java
+    ("Kubernetes", "Helm"),  # Helm implies Kubernetes
 ]
 
 
@@ -132,9 +133,9 @@ def test_business_tool_implies_discipline(jd_term: str, cv_term: str) -> None:
 
 # Confusable pairs the LEXICAL matcher must NOT collapse (word-boundary precision).
 _CONFUSABLE_NON_MATCH = [
-    ("Java", "experienced javascript developer"),   # java ⊄ javascript
-    ("C", "c++ and c# programming"),                # c ⊄ c++ / c#
-    ("develop", "senior developer"),                # develop ⊄ developer
+    ("Java", "experienced javascript developer"),  # java ⊄ javascript
+    ("C", "c++ and c# programming"),  # c ⊄ c++ / c#
+    ("develop", "senior developer"),  # develop ⊄ developer
 ]
 
 
@@ -147,21 +148,35 @@ def test_confusable_substrings_do_not_falsely_match(jd_term: str, cv_text: str) 
 
 def test_confusable_real_skills_still_match() -> None:
     # The precision fix must not break genuine matches for these tokens.
-    assert "Java" in _match(_job(required=["Java"]), "strong in Java and Spring Boot").matched_skills
+    assert (
+        "Java" in _match(_job(required=["Java"]), "strong in Java and Spring Boot").matched_skills
+    )
     assert "C++" in _match(_job(required=["C++"]), "C++ and CUDA").matched_skills
     assert "C#" in _match(_job(required=["C#"]), "built APIs in C#").matched_skills
 
 
 def _degree_result(cv_education: str, degree_required: str) -> job_fit.CvFit:
     job = {
-        "id": "job", "title": "Role", "description": "", "requirements": "",
-        "experience_mode": "no_requirement", "required_skills": [], "preferred_skills": [],
+        "id": "job",
+        "title": "Role",
+        "description": "",
+        "requirements": "",
+        "experience_mode": "no_requirement",
+        "required_skills": [],
+        "preferred_skills": [],
         "degree_required": degree_required,
     }
     cv = job_fit.CvInput(
-        cv_id="cv", title="CV", language="vi",
-        sections=[{"section_type": "education", "title": "Học vấn",
-                   "content": {"items": [{"text": cv_education}]}}],
+        cv_id="cv",
+        title="CV",
+        language="vi",
+        sections=[
+            {
+                "section_type": "education",
+                "title": "Học vấn",
+                "content": {"items": [{"text": cv_education}]},
+            }
+        ],
         last_updated_days=5,
     )
     return job_fit.evaluate(job, [cv], stale_days=120).results[0]
@@ -227,11 +242,21 @@ def _leveled_cv(cv_id: str, level: int) -> job_fit.CvInput:
         title=cv_id,
         language="en",
         sections=[
-            {"section_type": "skills", "title": "Skills",
-             "content": {"items": [{"name": "Python", "level": level},
-                                    {"name": "Docker", "level": level}]}},
-            {"section_type": "experience", "title": "Experience",
-             "content": {"items": [{"text": "Production Python and Docker work."}]}},
+            {
+                "section_type": "skills",
+                "title": "Skills",
+                "content": {
+                    "items": [
+                        {"name": "Python", "level": level},
+                        {"name": "Docker", "level": level},
+                    ]
+                },
+            },
+            {
+                "section_type": "experience",
+                "title": "Experience",
+                "content": {"items": [{"text": "Production Python and Docker work."}]},
+            },
         ],
         last_updated_days=5,
     )

@@ -12,6 +12,10 @@ _VAR_PATTERN = re.compile(r"\{\{\s*([a-zA-Z0-9_]+)\s*\}\}")
 class TriggerType(StrEnum):
     STUDENT_REGISTERED = "system.student_registered"
     APPLICATION_SUBMITTED = "system.application_submitted"
+    # A candidate's pipeline stage changed by a MANUAL partner action (advance).
+    # Automation-driven stage moves deliberately do NOT re-emit this trigger so a
+    # ``stage_changed`` -> auto-advance flow cannot cascade into itself.
+    STAGE_CHANGED = "system.stage_changed"
     PAYMENT_RECEIVED = "system.payment_received"
     FILE_UPLOADED = "system.file_uploaded"
     PARTNER_REGISTERED = "system.partner_registered"
@@ -44,6 +48,25 @@ class NodeType(StrEnum):
     REQUEST_APPROVAL = "request_approval"
     AI_SUGGESTION = "ai_suggestion"
     WEBHOOK = "webhook"
+    # Recruiting-automation node types (Wave 2B). Each maps to an APPROVED
+    # application-layer seam in recruitment/documents/opportunities/notifications
+    # (never a sibling domain/infrastructure import) and honors simulate=True as a
+    # no-op. See ``recruiting_nodes`` for the executors and
+    # docs/PARTNER_RBAC_ANALYTICS_SPEC.md "Visual Recruiting Workflow Builder".
+    #
+    # ``ai_screen_application``: run the deterministic CV<->JD fit (free) and/or the
+    #   metered on-demand HR evaluation on a triggered application; branch on the
+    #   resulting recommendation (strong|consider|weak).
+    # ``auto_advance_on_gate``: advance a candidate to the next stage ONLY when the
+    #   stage's required-action gate is already met (never bypasses ``gate_met``).
+    # ``notify``: enqueue an in-app/email notification via the outbox to an
+    #   assignee/explicit recipient (no synchronous SMTP).
+    # ``jd_pdf_to_draft``: turn an extracted JD into a job-draft PROPOSAL that
+    #   pauses for human confirm-create (never auto-publishes a job).
+    AI_SCREEN_APPLICATION = "ai_screen_application"
+    AUTO_ADVANCE_ON_GATE = "auto_advance_on_gate"
+    NOTIFY = "notify"
+    JD_PDF_TO_DRAFT = "jd_pdf_to_draft"
 
 
 # Node types whose real (non-simulated) execution performs, or is intended to
@@ -62,6 +85,13 @@ SIDE_EFFECTING_NODE_TYPES = frozenset(
         NodeType.AI_SUGGESTION,
         NodeType.AI_PROCESS,
         NodeType.WEBHOOK,
+        # Recruiting-automation nodes: each performs a real read/meter/write on the
+        # non-simulated path (screen meters+caches, auto-advance moves a candidate,
+        # notify enqueues) and is a no-op under simulate=True.
+        NodeType.AI_SCREEN_APPLICATION,
+        NodeType.AUTO_ADVANCE_ON_GATE,
+        NodeType.NOTIFY,
+        NodeType.JD_PDF_TO_DRAFT,
     }
 )
 
@@ -83,6 +113,14 @@ DEFAULT_NODE_CAPABILITY: dict[NodeType, tuple[str, str]] = {
     NodeType.AI_SUGGESTION: ("ai_assistant", "suggest"),
     NodeType.AI_PROCESS: ("ai_assistant", "suggest"),
     NodeType.WEBHOOK: ("workflow", "webhook"),
+    # Recruiting-automation nodes: activation requires the SAME capability the
+    # equivalent manual action requires, so a flow can never automate an action
+    # its activator could not perform by hand (docs/PARTNER_RBAC_ANALYTICS_SPEC.md
+    # "Activation requires RBAC grants for every action the flow can execute").
+    NodeType.AI_SCREEN_APPLICATION: ("ai_recruiting", "screen_candidate"),
+    NodeType.AUTO_ADVANCE_ON_GATE: ("pipeline", "move_candidate"),
+    NodeType.NOTIFY: ("notifications", "send"),
+    NodeType.JD_PDF_TO_DRAFT: ("jobs", "create"),
 }
 
 
@@ -99,6 +137,8 @@ def required_capability_for_node(node: dict) -> tuple[str, str] | None:
         return resource, action
 
     node_type = node.get("type")
+    if not isinstance(node_type, str):
+        return None
     try:
         return DEFAULT_NODE_CAPABILITY.get(NodeType(node_type))
     except ValueError:

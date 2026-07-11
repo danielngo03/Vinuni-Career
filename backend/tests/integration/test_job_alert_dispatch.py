@@ -318,9 +318,7 @@ async def test_sweep_province_filter_works_on_sqlite(db_session: AsyncSession) -
         locations=[{"type": "onsite", "province_code": "HN", "city": "Hà Nội"}],
         published_minutes_ago=5,
     )
-    _make_alert(
-        db_session, user_id=user_id, keywords="python", province_code="HN"
-    )
+    _make_alert(db_session, user_id=user_id, keywords="python", province_code="HN")
     await db_session.flush()
 
     result = await sweep_job_alerts(db_session, now=_now())
@@ -340,9 +338,7 @@ async def test_sweep_province_filter_excludes_other_province(
         locations=[{"type": "onsite", "province_code": "SG", "city": "TP HCM"}],
         published_minutes_ago=5,
     )
-    _make_alert(
-        db_session, user_id=user_id, keywords="python", province_code="HN"
-    )
+    _make_alert(db_session, user_id=user_id, keywords="python", province_code="HN")
     await db_session.flush()
 
     result = await sweep_job_alerts(db_session, now=_now())

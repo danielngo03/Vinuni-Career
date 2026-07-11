@@ -117,10 +117,7 @@ def _context_block(ctx: CvAiContext) -> str:
     if ctx.raw_notes:
         lines.append(f"- User notes: {ctx.raw_notes[:1500]}")
     if ctx.instruction:
-        lines.append(
-            "USER REQUEST (a directive only, not evidence): "
-            f"{ctx.instruction[:1000]}"
-        )
+        lines.append(f"USER REQUEST (a directive only, not evidence): {ctx.instruction[:1000]}")
     return "\n".join(lines)
 
 
@@ -132,9 +129,7 @@ def _evidence(ctx: CvAiContext) -> str:
 
 
 def _by_type(cv_sections: list[dict]) -> dict[str, dict]:
-    return {
-        str(s.get("section_type")): s for s in cv_sections if s.get("section_type")
-    }
+    return {str(s.get("section_type")): s for s in cv_sections if s.get("section_type")}
 
 
 def _clip(text: str) -> str:
@@ -209,9 +204,7 @@ def _apply_entry_op(op: str, raw_op: dict, entries: list[dict]) -> tuple[bool, b
     return False, False
 
 
-def _apply_operations(
-    cv_sections: list[dict], operations: list[dict]
-) -> tuple[dict, dict, bool]:
+def _apply_operations(cv_sections: list[dict], operations: list[dict]) -> tuple[dict, dict, bool]:
     """Deterministically validate + apply operations.
 
     Returns ``(before, after, has_content_change)``. Any operation naming a
@@ -314,9 +307,7 @@ async def generate_cv_edit_patch(ctx: CvAiContext) -> CvAiResult:
     stores the result as a normal ``cv_ai_suggestions`` row.
     """
 
-    section_types = [
-        str(s.get("section_type")) for s in ctx.cv_sections if s.get("section_type")
-    ]
+    section_types = [str(s.get("section_type")) for s in ctx.cv_sections if s.get("section_type")]
     system_prompt = edit_command_prompt.build_system_prompt(
         ctx.output_language, section_types=section_types
     )

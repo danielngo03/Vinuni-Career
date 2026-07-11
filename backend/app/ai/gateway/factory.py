@@ -28,7 +28,7 @@ from app.shared.exceptions import AIUnavailableError
 # Opens after _CB_THRESHOLD consecutive failures; re-tests after _CB_RECOVERY_SECS.
 # ---------------------------------------------------------------------------
 
-_CB_THRESHOLD = 3       # failures before circuit opens
+_CB_THRESHOLD = 3  # failures before circuit opens
 _CB_RECOVERY_SECS = 60.0  # seconds before HALF_OPEN retry
 
 
@@ -120,6 +120,7 @@ def _get_api_key(provider_name: str) -> str:
 # ---------------------------------------------------------------------------
 # Factory functions
 # ---------------------------------------------------------------------------
+
 
 def real_provider_active() -> bool:
     """True when a real (network) provider is configured and enabled.
@@ -234,11 +235,25 @@ class CircuitAwareProvider(AIProvider):
     def name(self) -> str:  # type: ignore[override]
         return self._inner.name
 
-    async def complete(self, messages, *, alias, temperature=0.2, max_tokens=1024):
+    async def complete(
+        self,
+        messages,
+        *,
+        alias,
+        temperature=0.2,
+        max_tokens=1024,
+        tools=None,
+        tool_choice=None,
+    ):
         circuit = _get_circuit(self._provider_name)
         try:
             result = await self._inner.complete(
-                messages, alias=alias, temperature=temperature, max_tokens=max_tokens
+                messages,
+                alias=alias,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                tools=tools,
+                tool_choice=tool_choice,
             )
             circuit.record_success()
             return result

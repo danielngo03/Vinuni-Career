@@ -23,15 +23,25 @@ async def dispatch_trigger(
     trigger_type: str,
     payload: dict,
     idempotency_key: str,
+    scope_org_id: uuid.UUID | None = None,
 ) -> list[uuid.UUID]:
-    active_flows = (
-        await session.execute(
-            select(WorkflowFlow).where(
-                WorkflowFlow.trigger_type == trigger_type,
-                WorkflowFlow.status == "ACTIVE",
-            )
-        )
-    ).scalars().all()
+    """Fire every ACTIVE flow bound to ``trigger_type``.
+
+    ``scope_org_id`` scopes an ORG-owned business event (e.g. an application in a
+    specific partner org) so ONLY that org's flows run — a partner's "on new
+    application" automation must never fire for another partner's applications.
+    Global/platform triggers (student/partner registration) pass ``None`` and fan
+    out to all matching flows as before. Execution stays idempotent per
+    ``(flow, idempotency_key)``, so a duplicate delivery never double-acts.
+    """
+
+    stmt = select(WorkflowFlow).where(
+        WorkflowFlow.trigger_type == trigger_type,
+        WorkflowFlow.status == "ACTIVE",
+    )
+    if scope_org_id is not None:
+        stmt = stmt.where(WorkflowFlow.owner_org_id == scope_org_id)
+    active_flows = (await session.execute(stmt)).scalars().all()
 
     execution_ids: list[uuid.UUID] = []
     for flow in active_flows:

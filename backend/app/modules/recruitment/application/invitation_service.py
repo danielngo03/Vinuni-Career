@@ -103,9 +103,7 @@ async def send_invite(
 
     # Validate message length.
     if message and len(message.strip()) > _MAX_MESSAGE_LEN:
-        raise ValidationFailedError(
-            details={"message": f"max {_MAX_MESSAGE_LEN} chars"}
-        )
+        raise ValidationFailedError(details={"message": f"max {_MAX_MESSAGE_LEN} chars"})
 
     # Confirm the job is published + owned by this partner.
     job = await _get_job(session, job_id, org_id)
@@ -186,9 +184,7 @@ async def list_student_invitations(
         stmt = stmt.where(JobApplicationInvitation.status == filter_status)
 
     invitations = list((await session.execute(stmt)).scalars().all())
-    titles = await job_read_facade.get_job_titles(
-        session, (inv.job_id for inv in invitations)
-    )
+    titles = await job_read_facade.get_job_titles(session, (inv.job_id for inv in invitations))
     names = await org_reporting_facade.display_names_for(
         session, (inv.inviting_org_id for inv in invitations)
     )

@@ -23,9 +23,6 @@ from app.modules.analytics.domain import (  # noqa: F401
 )
 from app.modules.auth.domain import models as _auth_models  # noqa: F401
 from app.modules.automation.scheduler import models as _scheduler_run_models  # noqa: F401
-from app.modules.billing.domain import (  # noqa: F401
-    energy_models as _billing_energy_models,
-)
 from app.modules.billing.domain import models as _billing_models  # noqa: F401
 from app.modules.career_outcomes.domain import (  # noqa: F401
     models as _career_outcome_models,
@@ -40,6 +37,7 @@ from app.modules.discovery.domain import search_log_model as _search_log_model  
 from app.modules.documents.domain import models as _documents_models  # noqa: F401
 from app.modules.knowledge_base.domain import models as _knowledge_base_models  # noqa: F401
 from app.modules.messaging.domain import models as _messaging_models  # noqa: F401
+from app.modules.mock_interview.domain import models as _mock_interview_models  # noqa: F401
 from app.modules.moderation.domain import models as _moderation_models  # noqa: F401
 from app.modules.notifications.domain import models as _notification_models  # noqa: F401
 from app.modules.onboarding.domain import models as _onboarding_models  # noqa: F401
@@ -58,6 +56,7 @@ from app.modules.reviews.domain import models as _reviews_models  # noqa: F401
 from app.modules.student_profiles.domain import (  # noqa: F401
     models as _student_profile_models,
 )
+from app.modules.talent_pool.domain import models as _talent_pool_models  # noqa: F401
 from app.modules.users.domain import models as _user_models  # noqa: F401
 from app.modules.workflow.domain import models as _workflow_models  # noqa: F401
 
@@ -87,7 +86,6 @@ def import_all_models() -> None:
         _discovery_models,
         _search_log_model,
         _billing_models,
-        _billing_energy_models,
         _notification_models,
         _user_models,
         _auth_models,
@@ -98,8 +96,10 @@ def import_all_models() -> None:
         _documents_models,
         _recruitment_models,
         _messaging_models,
+        _mock_interview_models,
         _moderation_models,
         _student_profile_models,
+        _talent_pool_models,
         _career_outcome_models,
         _career_services_models,
         _compliance_models,

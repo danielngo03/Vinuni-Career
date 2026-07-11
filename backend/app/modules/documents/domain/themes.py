@@ -28,9 +28,7 @@ from copy import deepcopy
 THEME_VERSION = 1
 
 # Allowed vocabulary (kept here so validators and tests share one source).
-LAYOUT_KINDS = frozenset(
-    {"single", "left-sidebar", "right-sidebar", "header-band", "two-column"}
-)
+LAYOUT_KINDS = frozenset({"single", "left-sidebar", "right-sidebar", "header-band", "two-column"})
 FONT_TOKENS = frozenset({"sans", "serif", "mono"})
 PHOTO_SHAPES = frozenset({"circle", "square", "rounded"})
 PHOTO_POSITIONS = frozenset({"sidebar", "header", "top-left"})

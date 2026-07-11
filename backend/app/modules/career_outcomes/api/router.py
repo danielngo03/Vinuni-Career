@@ -25,9 +25,7 @@ async def get_kpi(
     session: AsyncSession = Depends(get_db_session),
     locale: str = Query(default="vi"),
 ) -> dict:
-    data = await read_service.get_kpi(
-        session, principal=auth.principal, locale=locale
-    )
+    data = await read_service.get_kpi(session, principal=auth.principal, locale=locale)
     return success(data)
 
 

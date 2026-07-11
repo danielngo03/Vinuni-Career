@@ -14,9 +14,6 @@ Hard rules enforced HERE (service layer, never the router):
   (``OfferExistsError`` / 409 ``offer_exists``).
 - **Editable only while ``draft`` (§1):** editing after submit raises
   ``OfferNotEditableError`` / 409 ``offer_not_editable``.
-- **Reveal precondition on SEND (§5):** sending an anonymous application's offer
-  without an accepted reveal raises ``RevealRequiredError`` / 409 ``reveal_required``
-  — the handshake stays the ONLY identity path.
 - **Candidate respond (§3):** owner-only, only to a ``sent`` non-expired offer
   (else 409 ``offer_not_actionable``); idempotent; lazy-expire on read. **Accept ->
   ``applications.status='hired'``** + closes the Offer-stage ``candidate_stages`` row
@@ -39,7 +36,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timedelta
 
-from sqlalchemy import select
+from sqlalchemy import case, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.modules.auth.application.context import RequestContext
@@ -60,13 +57,12 @@ from app.modules.recruitment.application.errors import (
     OfferNotActionableError,
     OfferNotApprovedError,
     OfferNotEditableError,
-    RevealRequiredError,
 )
 from app.modules.recruitment.domain import lifecycle, pipeline, timeline
 from app.modules.recruitment.domain import offer as offer_domain
 from app.modules.recruitment.domain.models import Application, Offer
 from app.modules.recruitment.infrastructure.offer_salary_crypto import encrypt_salary
-from app.modules.users.application import user_service
+from app.modules.users.application import user_read_facade, user_service
 from app.shared.audit import write_audit
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.models import OutboxEvent
@@ -120,7 +116,9 @@ async def _offers_for_application(
                 .where(Offer.application_id == application_id)
                 .order_by(Offer.created_at)
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
 
 
@@ -147,9 +145,7 @@ async def _load_partner_offer(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=offer.application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, permission, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, permission, resource_org_id=app.org_id)
     return offer, app
 
 
@@ -193,26 +189,17 @@ async def create_offer(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, _PERM_CREATE, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, _PERM_CREATE, resource_org_id=app.org_id)
 
     # An offer is only meaningful while the application is active in the pipeline.
     if app.status != lifecycle.UNDER_REVIEW:
         raise IllegalApplicationTransitionError(event="create_offer")
-    active = await stage_service._active_stage(
-        session, application_id=app.id, lock=True
-    )
+    active = await stage_service._active_stage(session, application_id=app.id, lock=True)
     if active is None:
         raise IllegalApplicationTransitionError(event="create_offer")
 
     # One LIVE offer per application (service-layer guard; PG partial-unique backstop).
-    if (
-        await _live_offer_for_application(
-            session, application_id=app.id, lock=True
-        )
-        is not None
-    ):
+    if await _live_offer_for_application(session, application_id=app.id, lock=True) is not None:
         raise OfferExistsError()
 
     clean_title = (position_title or "").strip()
@@ -226,9 +213,7 @@ async def create_offer(
         position_title=clean_title,
         department=_clean_text(department),
         start_date=start_date,
-        salary_amount=(
-            encrypt_salary(str(salary_amount)) if salary_amount is not None else None
-        ),
+        salary_amount=(encrypt_salary(str(salary_amount)) if salary_amount is not None else None),
         salary_currency=salary_currency or offer_domain.DEFAULT_CURRENCY,
         salary_period=salary_period or offer_domain.DEFAULT_PERIOD,
         benefits_summary=_clean_text(benefits_summary),
@@ -242,10 +227,12 @@ async def create_offer(
     await session.flush()
 
     await write_audit(
-        session, action="application.offer_created", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
-        after={"offer_id": str(offer.id), "stage_id": str(offer.stage_id),
-               "status": offer.status},
+        session,
+        action="application.offer_created",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
+        after={"offer_id": str(offer.id), "stage_id": str(offer.stage_id), "status": offer.status},
     )
     await session.commit()
     await session.refresh(offer)
@@ -273,8 +260,11 @@ async def update_draft(
     """Edit comp/terms/expiry in place — ONLY while ``draft`` (§1)."""
 
     offer, app = await _load_partner_offer(
-        session, principal=principal, offer_id=offer_id,
-        permission=_PERM_CREATE, lock=True,
+        session,
+        principal=principal,
+        offer_id=offer_id,
+        permission=_PERM_CREATE,
+        lock=True,
     )
     if version is not None and version != offer.version:
         raise ApplicationVersionConflictError()
@@ -306,8 +296,11 @@ async def update_draft(
     await session.flush()
 
     await write_audit(
-        session, action="application.offer_updated", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.offer_updated",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"offer_id": str(offer.id), "version": offer.version},
     )
     await session.commit()
@@ -332,8 +325,11 @@ async def submit_offer(
     """``draft -> pending_approval`` (freezes content for approval)."""
 
     offer, app = await _load_partner_offer(
-        session, principal=principal, offer_id=offer_id,
-        permission=_PERM_CREATE, lock=True,
+        session,
+        principal=principal,
+        offer_id=offer_id,
+        permission=_PERM_CREATE,
+        lock=True,
     )
     if version is not None and version != offer.version:
         raise ApplicationVersionConflictError()
@@ -345,8 +341,11 @@ async def submit_offer(
     await session.flush()
 
     await write_audit(
-        session, action="application.offer_submitted", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.offer_submitted",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"offer_id": str(offer.id), "status": offer.status},
     )
     await session.commit()
@@ -370,8 +369,11 @@ async def approve_offer(
         raise InvalidApplicationFieldError(field="decision")
 
     offer, app = await _load_partner_offer(
-        session, principal=principal, offer_id=offer_id,
-        permission=_PERM_APPROVE, lock=True,
+        session,
+        principal=principal,
+        offer_id=offer_id,
+        permission=_PERM_APPROVE,
+        lock=True,
     )
     if version is not None and version != offer.version:
         raise ApplicationVersionConflictError()
@@ -392,10 +394,12 @@ async def approve_offer(
     await session.flush()
 
     await write_audit(
-        session, action=action, resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
-        after={"offer_id": str(offer.id), "status": offer.status,
-               "decision": decision},
+        session,
+        action=action,
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
+        after={"offer_id": str(offer.id), "status": offer.status, "decision": decision},
     )
     await session.commit()
     await session.refresh(offer)
@@ -403,7 +407,7 @@ async def approve_offer(
 
 
 # --------------------------------------------------------------------------- #
-# Send (reveal precondition) / rescind                                        #
+# Send (approval gate) / rescind                                              #
 # --------------------------------------------------------------------------- #
 
 
@@ -416,11 +420,14 @@ async def send_offer(
     ctx: RequestContext,
     locale: str = "vi",
 ) -> dict:
-    """``approved -> sent`` (the approval gate + reveal precondition; §2/§5)."""
+    """``approved -> sent`` (the approval gate; §2)."""
 
     offer, app = await _load_partner_offer(
-        session, principal=principal, offer_id=offer_id,
-        permission=_PERM_SEND, lock=True,
+        session,
+        principal=principal,
+        offer_id=offer_id,
+        permission=_PERM_SEND,
+        lock=True,
     )
     if version is not None and version != offer.version:
         raise ApplicationVersionConflictError()
@@ -428,10 +435,6 @@ async def send_offer(
     # The structural approval gate: send requires status='approved'.
     if offer.status != offer_domain.STATUS_APPROVED:
         raise OfferNotApprovedError()
-    # Reveal precondition (§5): an anonymous app with no accepted reveal can NOT have
-    # an offer sent — the handshake is the only identity path.
-    if app.is_anonymous and app.reveal_approved_at is None:
-        raise RevealRequiredError()
 
     offer.status = offer_domain.transition_target(offer_domain.EVENT_SEND)
     offer.sent_at = _shared.now()
@@ -439,8 +442,11 @@ async def send_offer(
     await session.flush()
 
     await write_audit(
-        session, action="application.offer_sent", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.offer_sent",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"offer_id": str(offer.id), "status": offer.status},
     )
     await timeline.record_timeline_event(
@@ -451,7 +457,9 @@ async def send_offer(
         metadata={"offer_id": str(offer.id)},
     )
     await _notify_candidate(
-        session, app=app, offer=offer,
+        session,
+        app=app,
+        offer=offer,
         template_key="application.offer_received",
         notif_type="recruitment.offer_received",
         dedupe_suffix="sent",
@@ -473,8 +481,11 @@ async def rescind_offer(
     """``{draft,pending_approval,approved,sent} -> rescinded`` (partner withdraw)."""
 
     offer, app = await _load_partner_offer(
-        session, principal=principal, offer_id=offer_id,
-        permission=_PERM_WITHDRAW, lock=True,
+        session,
+        principal=principal,
+        offer_id=offer_id,
+        permission=_PERM_WITHDRAW,
+        lock=True,
     )
     if version is not None and version != offer.version:
         raise ApplicationVersionConflictError()
@@ -487,10 +498,12 @@ async def rescind_offer(
     await session.flush()
 
     await write_audit(
-        session, action="application.offer_rescinded", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
-        after={"offer_id": str(offer.id), "status": offer.status,
-               "was_sent": was_sent},
+        session,
+        action="application.offer_rescinded",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
+        after={"offer_id": str(offer.id), "status": offer.status, "was_sent": was_sent},
     )
     # Timeline (like the notification) only matters once the offer reached the
     # candidate — a rescinded DRAFT/pending/approved offer was never student-visible.
@@ -505,7 +518,9 @@ async def rescind_offer(
     # Notify the candidate ONLY if the offer had already reached them (was sent).
     if was_sent:
         await _notify_candidate(
-            session, app=app, offer=offer,
+            session,
+            app=app,
+            offer=offer,
             template_key="application.offer_rescinded",
             notif_type="recruitment.offer_rescinded",
             dedupe_suffix="rescinded",
@@ -536,9 +551,7 @@ async def respond_offer(
     offer = await _load_offer(session, offer_id=offer_id, lock=True)
     if offer is None:
         raise ResourceNotFoundError()
-    app = await _shared.load_application(
-        session, application_id=offer.application_id, lock=True
-    )
+    app = await _shared.load_application(session, application_id=offer.application_id, lock=True)
     # Owner-only: a non-owner is indistinguishable from missing (404, never 403).
     if principal.user_id is None or app.applicant_id != principal.user_id:
         raise ResourceNotFoundError()
@@ -551,10 +564,7 @@ async def respond_offer(
 
     # Lazy-expire: a stale sent offer past its deadline is flipped to expired and is
     # never acted on (§3). Re-raise as not-actionable.
-    if (
-        offer.status == offer_domain.STATUS_SENT
-        and _shared.as_aware(offer.expiry_date) <= now
-    ):
+    if offer.status == offer_domain.STATUS_SENT and _shared.as_aware(offer.expiry_date) <= now:
         offer.status = offer_domain.STATUS_EXPIRED
         await session.flush()
         await session.commit()
@@ -563,11 +573,9 @@ async def respond_offer(
     # Idempotent replay: re-responding with the SAME decision on an already-answered
     # offer is a no-op (no duplicate hired / placement / notification).
     if (
-        decision == offer_domain.RESPOND_ACCEPTED
-        and offer.status == offer_domain.STATUS_ACCEPTED
+        decision == offer_domain.RESPOND_ACCEPTED and offer.status == offer_domain.STATUS_ACCEPTED
     ) or (
-        decision == offer_domain.RESPOND_DECLINED
-        and offer.status == offer_domain.STATUS_DECLINED
+        decision == offer_domain.RESPOND_DECLINED and offer.status == offer_domain.STATUS_DECLINED
     ):
         return presenters.student_offer(offer, locale=locale)
 
@@ -575,15 +583,30 @@ async def respond_offer(
         raise OfferNotActionableError(reason="offer_not_actionable")
 
     if decision == offer_domain.RESPOND_ACCEPTED:
-        return await _accept(session, offer=offer, app=app, principal=principal,
-                             now=now, ctx=ctx, locale=locale)
-    return await _decline(session, offer=offer, app=app, principal=principal,
-                         notes=notes, now=now, ctx=ctx, locale=locale)
+        return await _accept(
+            session, offer=offer, app=app, principal=principal, now=now, ctx=ctx, locale=locale
+        )
+    return await _decline(
+        session,
+        offer=offer,
+        app=app,
+        principal=principal,
+        notes=notes,
+        now=now,
+        ctx=ctx,
+        locale=locale,
+    )
 
 
 async def _accept(
-    session: AsyncSession, *, offer: Offer, app, principal: Principal,
-    now: datetime, ctx: RequestContext, locale: str,
+    session: AsyncSession,
+    *,
+    offer: Offer,
+    app,
+    principal: Principal,
+    now: datetime,
+    ctx: RequestContext,
+    locale: str,
 ) -> dict:
     """Accept: offer -> accepted; application -> hired; close stage row; career seam."""
 
@@ -600,9 +623,7 @@ async def _accept(
 
     # Close the open Offer-stage candidate_stages row PASSED with exit_kind='hired'
     # (no new stage row — Offer is the last stage). No-op when no active row exists.
-    active = await stage_service._active_stage(
-        session, application_id=app.id, lock=True
-    )
+    active = await stage_service._active_stage(session, application_id=app.id, lock=True)
     if active is not None:
         active.status = pipeline.STAGE_PASSED
         active.exit_kind = pipeline.EXIT_HIRED
@@ -630,8 +651,11 @@ async def _accept(
     await session.flush()
 
     await write_audit(
-        session, action="application.hired", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.hired",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         after={"offer_id": str(offer.id), "status": app.status},
     )
     await timeline.record_timeline_event(
@@ -650,7 +674,9 @@ async def _accept(
     )
     # Partner-internal feed: candidate hired (position + start date; NO salary).
     await _notify_partner(
-        session, offer=offer, app=app,
+        session,
+        offer=offer,
+        app=app,
         notif_type="recruitment.offer_accepted",
         recipient_id=offer.created_by,
     )
@@ -660,8 +686,15 @@ async def _accept(
 
 
 async def _decline(
-    session: AsyncSession, *, offer: Offer, app, principal: Principal,
-    notes: str | None, now: datetime, ctx: RequestContext, locale: str,
+    session: AsyncSession,
+    *,
+    offer: Offer,
+    app,
+    principal: Principal,
+    notes: str | None,
+    now: datetime,
+    ctx: RequestContext,
+    locale: str,
 ) -> dict:
     """Decline: offer -> declined; the application stays under_review (no cascade)."""
 
@@ -672,8 +705,11 @@ async def _decline(
     await session.flush()
 
     await write_audit(
-        session, action="application.offer_declined", resource_type="application",
-        resource_id=app.id, context=_shared.audit_ctx(principal, ctx),
+        session,
+        action="application.offer_declined",
+        resource_type="application",
+        resource_id=app.id,
+        context=_shared.audit_ctx(principal, ctx),
         # decline_reason is partner-internal — recorded in audit metadata only.
         after={"offer_id": str(offer.id), "status": offer.status},
     )
@@ -685,7 +721,9 @@ async def _decline(
         metadata={"offer_id": str(offer.id)},
     )
     await _notify_partner(
-        session, offer=offer, app=app,
+        session,
+        offer=offer,
+        app=app,
         notif_type="recruitment.offer_declined",
         recipient_id=offer.created_by,
     )
@@ -713,14 +751,115 @@ async def list_offers_partner(
     app = await decision_service._load_partner_application(
         session, principal=principal, application_id=application_id
     )
-    permission_checker.require(
-        principal, _RESOURCE, _PERM_CREATE, resource_org_id=app.org_id
-    )
+    permission_checker.require(principal, _RESOURCE, _PERM_CREATE, resource_org_id=app.org_id)
     rows = await _offers_for_application(session, application_id=app.id)
     return {
         "application_id": str(app.id),
         "offers": [presenters.partner_offer(o, locale=locale) for o in rows],
     }
+
+
+# --------------------------------------------------------------------------- #
+# Org-wide offer board (partner recruiting surface)                           #
+# --------------------------------------------------------------------------- #
+#
+# A cross-job read: ALL offers for the caller org's jobs (not one application).
+# ``offers:create`` at ORG scope (the same capability that governs the per-
+# application partner offer list); tenant isolation via the denormalized
+# ``offers.org_id``. Comp is decrypted on the row (recruiter own-org management
+# surface, DATA_MODEL §17) — never the approver identity or ``decline_reason``.
+
+_NEEDS_ACTION_STATUSES: tuple[str, ...] = (
+    offer_domain.STATUS_PENDING_APPROVAL,
+    offer_domain.STATUS_APPROVED,
+)
+
+
+def _offer_board_conditions(
+    *, scope: str, status: str | None, job_id: uuid.UUID | None
+) -> list:
+    """The WHERE clauses for the offer board (shared by count + page queries)."""
+
+    conditions: list = []
+    if scope == "live":
+        conditions.append(Offer.status.in_(tuple(offer_domain.LIVE_STATUSES)))
+    elif scope == "terminal":
+        conditions.append(Offer.status.in_(tuple(offer_domain.TERMINAL_STATUSES)))
+    elif scope == "needs_action":
+        conditions.append(Offer.status.in_(_NEEDS_ACTION_STATUSES))
+    # scope == "all": no constraint beyond the optional ``status`` filter.
+    if status is not None:
+        conditions.append(Offer.status == status)
+    if job_id is not None:
+        conditions.append(Application.job_id == job_id)
+    return conditions
+
+
+async def list_org_offers(
+    session: AsyncSession,
+    *,
+    principal: Principal,
+    scope: str = "all",
+    status: str | None = None,
+    job_id: uuid.UUID | None = None,
+    limit: int = 50,
+    offset: int = 0,
+    locale: str = "vi",
+) -> dict:
+    """Org-wide offer board: every offer for the caller org's jobs.
+
+    ``offers:create`` at ORG scope (tenant isolation via ``offers.org_id``). Returns
+    ``{offers: [board_row...], total}`` where ``total`` is the full match count BEFORE
+    ``limit``/``offset``. ``all``/``needs_action`` put LIVE offers before TERMINAL
+    ones, then newest first; ``live``/``terminal`` are newest first.
+    """
+
+    org_id = principal.org_id
+    permission_checker.require(principal, _RESOURCE, _PERM_CREATE, resource_org_id=org_id)
+    if org_id is None:
+        # Authenticated but no org context (e.g. a superadmin with no org): no board.
+        return {"offers": [], "total": 0}
+
+    conditions = _offer_board_conditions(scope=scope, status=status, job_id=job_id)
+
+    base = (
+        select(Offer, Application.job_id, Application.applicant_id)
+        .join(Application, Application.id == Offer.application_id)
+        .where(Offer.org_id == org_id, Application.deleted_at.is_(None))
+    )
+    for cond in conditions:
+        base = base.where(cond)
+
+    total = (
+        await session.execute(select(func.count()).select_from(base.subquery()))
+    ).scalar_one()
+
+    if scope in ("all", "needs_action"):
+        live_first = case((Offer.status.in_(tuple(offer_domain.LIVE_STATUSES)), 1), else_=0)
+        page_stmt = base.order_by(
+            live_first.desc(), Offer.created_at.desc(), Offer.id.desc()
+        )
+    else:
+        page_stmt = base.order_by(Offer.created_at.desc(), Offer.id.desc())
+    page_stmt = page_stmt.limit(limit).offset(offset)
+    rows = (await session.execute(page_stmt)).all()
+
+    job_ids = {row[1] for row in rows}
+    applicant_ids = {row[2] for row in rows}
+    job_titles = await job_read_facade.get_job_titles(session, job_ids)
+    contacts = await user_read_facade.get_user_contacts(session, applicant_ids)
+
+    items = [
+        presenters.offer_board_row(
+            offer,
+            job_id=str(job_id_val),
+            job_title=job_titles.get(job_id_val, ""),
+            candidate_handle=_shared.display_name(contacts.get(applicant_id_val)),
+            locale=locale,
+        )
+        for offer, job_id_val, applicant_id_val in rows
+    ]
+    return {"offers": items, "total": int(total)}
 
 
 async def list_offers_student(
@@ -741,7 +880,9 @@ async def list_offers_student(
                 )
                 .order_by(Offer.created_at.desc())
             )
-        ).scalars().all()
+        )
+        .scalars()
+        .all()
     )
     return [presenters.student_offer(o, locale=locale) for o in rows]
 
@@ -777,15 +918,19 @@ async def student_offer_block(
     """
 
     offer = (
-        await session.execute(
-            select(Offer)
-            .where(
-                Offer.application_id == application_id,
-                Offer.status.in_(tuple(offer_domain.STUDENT_VISIBLE_STATUSES)),
+        (
+            await session.execute(
+                select(Offer)
+                .where(
+                    Offer.application_id == application_id,
+                    Offer.status.in_(tuple(offer_domain.STUDENT_VISIBLE_STATUSES)),
+                )
+                .order_by(Offer.created_at.desc())
             )
-            .order_by(Offer.created_at.desc())
         )
-    ).scalars().first()
+        .scalars()
+        .first()
+    )
     if offer is None:
         return None
     return presenters.student_offer_card(offer, locale=locale)
@@ -803,12 +948,16 @@ async def partner_offer_block(
     offer = await _live_offer_for_application(session, application_id=application_id)
     if offer is None:
         offer = (
-            await session.execute(
-                select(Offer)
-                .where(Offer.application_id == application_id)
-                .order_by(Offer.created_at.desc())
+            (
+                await session.execute(
+                    select(Offer)
+                    .where(Offer.application_id == application_id)
+                    .order_by(Offer.created_at.desc())
+                )
             )
-        ).scalars().first()
+            .scalars()
+            .first()
+        )
     if offer is None:
         return None
     return presenters.offer_board_block(offer, locale=locale)
@@ -850,9 +999,7 @@ async def _notify_candidate(
     student = await user_service.get_by_id(session, app.applicant_id)
     if student is None:
         return
-    locale = message_catalog.normalize_locale(
-        getattr(student, "preferred_language", None)
-    )
+    locale = message_catalog.normalize_locale(getattr(student, "preferred_language", None))
     job_title = await _job_title(session, job_id=app.job_id)
     company = await _company_name(session, org_id=app.org_id)
     variables: dict[str, object] = {
@@ -900,9 +1047,7 @@ async def _notify_partner(
     member = await user_service.get_by_id(session, recipient_id)
     if member is None:
         return
-    locale = message_catalog.normalize_locale(
-        getattr(member, "preferred_language", None)
-    )
+    locale = message_catalog.normalize_locale(getattr(member, "preferred_language", None))
     job_title = await _job_title(session, job_id=app.job_id)
     await feed_service.create_in_app(
         session,
@@ -928,9 +1073,7 @@ async def _outbox_dedupe_exists(session: AsyncSession, *, dedupe_key: str) -> bo
     return await dispatch_service.dedupe_exists(session, dedupe_key=dedupe_key)
 
 
-async def sweep_offers(
-    session: AsyncSession, *, now: datetime | None = None
-) -> dict[str, int]:
+async def sweep_offers(session: AsyncSession, *, now: datetime | None = None) -> dict[str, int]:
     """Lazy-expire sweep + the T-24h expiring reminder (ADR-0007 §6).
 
     Finds ``sent`` offers: flips those past ``expiry_date`` to ``expired`` (notifying
@@ -938,17 +1081,15 @@ async def sweep_offers(
     entering the window. IDEMPOTENT — once flipped the row is no longer ``sent`` so a
     re-run finds no work; the expiring reminder is deduped on the per-offer outbox
     ``dedupe_key``. Flush-only — the scheduler owns the commit (mirrors
-    ``interview_service.sweep_due_reminders`` / ``reveal_service.sweep_expired``).
+    ``interview_service.sweep_due_reminders``).
     """
 
     now = _shared.as_aware(now) if now is not None else _shared.now()
     horizon = now + _EXPIRING_WINDOW
     rows = list(
-        (
-            await session.execute(
-                select(Offer).where(Offer.status == offer_domain.STATUS_SENT)
-            )
-        ).scalars().all()
+        (await session.execute(select(Offer).where(Offer.status == offer_domain.STATUS_SENT)))
+        .scalars()
+        .all()
     )
 
     expired = 0
@@ -976,14 +1117,18 @@ async def _enqueue_expired(session: AsyncSession, *, offer: Offer) -> None:
         metadata={"offer_id": str(offer.id)},
     )
     await _notify_candidate(
-        session, app=app, offer=offer,
+        session,
+        app=app,
+        offer=offer,
         template_key="application.offer_expired",
         notif_type="recruitment.offer_expired",
         dedupe_suffix="expired",
     )
     # Partner feed: the offer lapsed without a response.
     await _notify_partner(
-        session, offer=offer, app=app,
+        session,
+        offer=offer,
+        app=app,
         notif_type="recruitment.offer_expired",
         recipient_id=offer.created_by,
     )
@@ -995,7 +1140,9 @@ async def _enqueue_expiring(session: AsyncSession, *, offer: Offer) -> bool:
         return False
     app = await _shared.load_application(session, application_id=offer.application_id)
     await _notify_candidate(
-        session, app=app, offer=offer,
+        session,
+        app=app,
+        offer=offer,
         template_key="application.offer_expiring",
         notif_type="recruitment.offer_expiring",
         dedupe_suffix="expiring",

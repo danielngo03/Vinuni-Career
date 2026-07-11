@@ -37,8 +37,10 @@ from app.shared.permissions import Principal, permission_checker
 
 def _audit_ctx(principal: Principal, ctx: RequestContext) -> AuditContext:
     return AuditContext(
-        actor_id=principal.user_id, actor_org_id=principal.org_id,
-        ip=ctx.ip, user_agent=ctx.user_agent,
+        actor_id=principal.user_id,
+        actor_org_id=principal.org_id,
+        ip=ctx.ip,
+        user_agent=ctx.user_agent,
     )
 
 
@@ -51,9 +53,7 @@ def _require_org(principal: Principal) -> uuid.UUID:
 async def _get_org(session: AsyncSession, org_id: uuid.UUID) -> Organization:
     org = (
         await session.execute(
-            select(Organization).where(
-                Organization.id == org_id, Organization.deleted_at.is_(None)
-            )
+            select(Organization).where(Organization.id == org_id, Organization.deleted_at.is_(None))
         )
     ).scalar_one_or_none()
     if org is None:
@@ -77,20 +77,22 @@ async def current_owner_membership_id(
     if not admin_ids:
         return None
     rows = (
-        await session.execute(
-            select(Membership.id)
-            .where(Membership.id.in_(admin_ids))
-            .order_by(Membership.joined_at.asc(), Membership.id.asc())
+        (
+            await session.execute(
+                select(Membership.id)
+                .where(Membership.id.in_(admin_ids))
+                .order_by(Membership.joined_at.asc(), Membership.id.asc())
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return rows[0] if rows else None
 
 
 async def get_ownership(session: AsyncSession, *, principal: Principal) -> dict:
     org_id = _require_org(principal)
-    permission_checker.require(
-        principal, "organizations", "read", resource_org_id=org_id
-    )
+    permission_checker.require(principal, "organizations", "read", resource_org_id=org_id)
     org = await _get_org(session, org_id)
     owner_id = await current_owner_membership_id(session, org=org)
     return {"owner_membership_id": str(owner_id) if owner_id else None}
@@ -107,9 +109,7 @@ async def transfer_ownership(
     org_id = _require_org(principal)
     # Ownership transfer is the most sensitive org action available; gate it on
     # the full org admin grant (not merely `members:update`).
-    permission_checker.require(
-        principal, "organizations", "update", resource_org_id=org_id
-    )
+    permission_checker.require(principal, "organizations", "update", resource_org_id=org_id)
     if not confirm:
         raise ConfirmationRequiredError()
 
@@ -149,9 +149,7 @@ async def transfer_ownership(
         )
 
     # Ensure the new owner holds the admin wildcard grant.
-    if not await admin_guard.role_grants_admin_for_membership(
-        session, membership_id=target.id
-    ):
+    if not await admin_guard.role_grants_admin_for_membership(session, membership_id=target.id):
         admin_role = (
             await session.execute(
                 select(Role).where(
@@ -163,7 +161,8 @@ async def transfer_ownership(
             raise ResourceNotFoundError()
         session.add(
             MembershipRole(
-                membership_id=target.id, role_id=admin_role.id,
+                membership_id=target.id,
+                role_id=admin_role.id,
                 assigned_by=principal.user_id,
             )
         )
@@ -173,8 +172,10 @@ async def transfer_ownership(
     org.version += 1
     await session.flush()
     await write_audit(
-        session, action="organization.ownership_transferred",
-        resource_type="organization", resource_id=org.id,
+        session,
+        action="organization.ownership_transferred",
+        resource_type="organization",
+        resource_id=org.id,
         context=_audit_ctx(principal, ctx),
         before={"owner_membership_id": before_owner},
         after={"owner_membership_id": str(target.id)},

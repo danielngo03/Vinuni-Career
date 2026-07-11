@@ -15,12 +15,16 @@ CTX = RequestContext(ip="203.0.113.7", user_agent="Mozilla/5.0 (Macintosh) Chrom
 
 async def fetch_verification_token(session: AsyncSession, user_id) -> str:
     rows = (
-        await session.execute(
-            select(NotificationOutbox)
-            .where(NotificationOutbox.recipient_id == user_id)
-            .order_by(NotificationOutbox.created_at.desc())
+        (
+            await session.execute(
+                select(NotificationOutbox)
+                .where(NotificationOutbox.recipient_id == user_id)
+                .order_by(NotificationOutbox.created_at.desc())
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     for row in rows:
         if row.template_key == "account.email_verification":
             return str(row.variables["token"])

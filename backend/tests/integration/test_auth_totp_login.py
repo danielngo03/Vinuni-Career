@@ -40,23 +40,17 @@ def _email() -> str:
 
 
 def _principal(user_id: uuid.UUID) -> Principal:
-    return Principal(
-        user_id=user_id, persona="student", permissions=permissions_for("student")
-    )
+    return Principal(user_id=user_id, persona="student", permissions=permissions_for("student"))
 
 
 async def _enroll_confirmed_totp(db_session, user_id: uuid.UUID) -> str:
     """Enrol + confirm TOTP via the account service. Returns the base32 secret."""
 
     principal = _principal(user_id)
-    setup = await account_service.totp_setup(
-        db_session, principal=principal, ctx=CTX
-    )
+    setup = await account_service.totp_setup(db_session, principal=principal, ctx=CTX)
     secret = setup["secret"]
     code = pyotp.TOTP(secret).now()
-    await account_service.totp_verify(
-        db_session, principal=principal, code=code, ctx=CTX
-    )
+    await account_service.totp_verify(db_session, principal=principal, code=code, ctx=CTX)
     return secret
 
 
@@ -86,9 +80,7 @@ async def test_totp_secret_stored_encrypted(db_session) -> None:
     user = await register_verified(db_session, email=_email())
     secret = await _enroll_confirmed_totp(db_session, user.id)
     row = (
-        await db_session.execute(
-            select(UserTotp).where(UserTotp.user_id == user.id)
-        )
+        await db_session.execute(select(UserTotp).where(UserTotp.user_id == user.id))
     ).scalar_one()
     # Persisted value is ciphertext, not the plaintext base32 secret.
     assert row.secret != secret
@@ -108,9 +100,7 @@ async def test_legacy_plaintext_secret_reencrypted_on_verify(db_session) -> None
     from datetime import UTC, datetime
 
     row = (
-        await db_session.execute(
-            select(UserTotp).where(UserTotp.user_id == user.id)
-        )
+        await db_session.execute(select(UserTotp).where(UserTotp.user_id == user.id))
     ).scalar_one()
     row.confirmed_at = datetime.now(tz=UTC)
     await db_session.commit()
@@ -127,9 +117,7 @@ async def test_legacy_plaintext_secret_reencrypted_on_verify(db_session) -> None
     )
     assert isinstance(result, LoginResult)
     refreshed = (
-        await db_session.execute(
-            select(UserTotp).where(UserTotp.user_id == user.id)
-        )
+        await db_session.execute(select(UserTotp).where(UserTotp.user_id == user.id))
     ).scalar_one()
     assert refreshed.secret != secret  # now ciphertext
     assert decrypt_totp_secret(refreshed.secret) == (secret, False)
@@ -163,13 +151,17 @@ async def test_confirmed_totp_blocks_password_only_login(db_session) -> None:
     assert jwt_infra.decode_totp_challenge_token(result.challenge_token) == user.id
     # A challenge security event was recorded.
     events = (
-        await db_session.execute(
-            select(SecurityEvent).where(
-                SecurityEvent.user_id == user.id,
-                SecurityEvent.event_type == ev.TOTP_CHALLENGE,
+        (
+            await db_session.execute(
+                select(SecurityEvent).where(
+                    SecurityEvent.user_id == user.id,
+                    SecurityEvent.event_type == ev.TOTP_CHALLENGE,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(events) == 1
 
 
@@ -190,13 +182,17 @@ async def test_login_totp_completes_with_correct_code(db_session) -> None:
     assert result.tokens.access_token
     assert result.tokens.refresh_token
     success_events = (
-        await db_session.execute(
-            select(SecurityEvent).where(
-                SecurityEvent.user_id == user.id,
-                SecurityEvent.event_type == ev.LOGIN_SUCCESS,
+        (
+            await db_session.execute(
+                select(SecurityEvent).where(
+                    SecurityEvent.user_id == user.id,
+                    SecurityEvent.event_type == ev.LOGIN_SUCCESS,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(success_events) == 1
 
 
@@ -216,13 +212,17 @@ async def test_login_totp_rejects_wrong_code(db_session) -> None:
         )
     # A failed second-factor attempt accrues a LOGIN_FAILED event (lockout parity).
     failed = (
-        await db_session.execute(
-            select(SecurityEvent).where(
-                SecurityEvent.user_id == user.id,
-                SecurityEvent.event_type == ev.LOGIN_FAILED,
+        (
+            await db_session.execute(
+                select(SecurityEvent).where(
+                    SecurityEvent.user_id == user.id,
+                    SecurityEvent.event_type == ev.LOGIN_FAILED,
+                )
             )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     assert len(failed) == 1
 
 
@@ -275,9 +275,7 @@ async def test_http_totp_login_flow(client, db_session) -> None:
     setup = await client.post("/account/totp/setup", headers=auth_headers)
     secret = setup.json()["data"]["secret"]
     code = pyotp.TOTP(secret).now()
-    verify = await client.post(
-        "/account/totp/verify", json={"code": code}, headers=auth_headers
-    )
+    verify = await client.post("/account/totp/verify", json={"code": code}, headers=auth_headers)
     assert verify.json()["data"]["confirmed"] is True
 
     client.cookies.clear()
@@ -320,9 +318,7 @@ async def test_http_totp_login_flow(client, db_session) -> None:
     assert "httponly" in set_cookie.lower()
 
 
-async def test_http_logout_clears_cookie_and_switch_identity_sets_fresh(
-    client, db_session
-) -> None:
+async def test_http_logout_clears_cookie_and_switch_identity_sets_fresh(client, db_session) -> None:
     headers = {"User-Agent": "Mozilla/5.0 (Macintosh) Chrome/120"}
     user = await register_verified(db_session, email=_email())
     login = await client.post(

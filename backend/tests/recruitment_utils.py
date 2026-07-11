@@ -37,12 +37,8 @@ async def publish_job(
         session, principal=partner_principal, payload=job_payload(title, **over), ctx=CTX
     )
     job_id = uuid.UUID(created["id"])
-    await job_service.submit_job(
-        session, principal=partner_principal, job_id=job_id, ctx=CTX
-    )
-    await moderation_service.approve_job(
-        session, principal=uni_principal, job_id=job_id, ctx=CTX
-    )
+    await job_service.submit_job(session, principal=partner_principal, job_id=job_id, ctx=CTX)
+    await moderation_service.approve_job(session, principal=uni_principal, job_id=job_id, ctx=CTX)
     return job_id
 
 
@@ -70,7 +66,6 @@ def apply_payload(*, job_id: uuid.UUID, cv_selection: dict, **over) -> dict:
         "cv_selection": cv_selection,
         "cover_letter": "I am excited to apply.",
         "screening_answers": {},
-        "is_anonymous": False,
         "idempotency_key": uuid.uuid4().hex,
     }
     base.update(over)

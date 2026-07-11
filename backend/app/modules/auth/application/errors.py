@@ -41,10 +41,7 @@ class EmailAlreadyRegisteredError(AppError):
 class AccountLockedError(AppError):
     code = "RATE_LIMITED"
     http_status = 429
-    message = (
-        "Tài khoản tạm thời bị khóa do đăng nhập sai nhiều lần. "
-        "Vui lòng thử lại sau ít phút."
-    )
+    message = "Tài khoản tạm thời bị khóa do đăng nhập sai nhiều lần. Vui lòng thử lại sau ít phút."
 
     def __init__(self, *, retry_after_minutes: int) -> None:
         super().__init__(
@@ -74,12 +71,15 @@ class SessionExpiredError(AppError):
 
 
 class RateLimitedError(AppError):
-    """Anti-enumeration-safe throttle error for resend-verification,
+    """Anti-enumeration-safe throttle error for register, resend-verification,
     forgot-password, and register-resume.
 
-    Fires identically (same status/shape/timing profile) whether or not the
+    For the enumeration-sensitive flows (resend-verification, forgot-password) it
+    fires identically (same status/shape/timing profile) whether or not the
     presented email maps to a real account, since it is evaluated BEFORE any
-    account lookup — a 429 here is not an enumeration leak.
+    account lookup — a 429 there is not an enumeration leak. On register it caps
+    brand-new account creation for a given email (the endpoint already
+    distinguishes new vs. verified-duplicate by design).
     """
 
     code = "RATE_LIMITED"
@@ -87,6 +87,4 @@ class RateLimitedError(AppError):
     message = "Bạn thao tác quá nhanh. Vui lòng thử lại sau giây lát."
 
     def __init__(self, *, reason: str, retry_after_seconds: int) -> None:
-        super().__init__(
-            details={"reason": reason, "retry_after_seconds": retry_after_seconds}
-        )
+        super().__init__(details={"reason": reason, "retry_after_seconds": retry_after_seconds})

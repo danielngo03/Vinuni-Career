@@ -62,6 +62,7 @@ _EXT_MAP = {
     ".png": FileKind.IMAGE,
     ".jpg": FileKind.IMAGE,
     ".jpeg": FileKind.IMAGE,
+    ".webp": FileKind.IMAGE,
 }
 
 _MAGIC = {
@@ -72,9 +73,18 @@ _MAGIC = {
 }
 
 
+def _is_webp(data: bytes) -> bool:
+    """WebP is a RIFF container: ``RIFF`` at 0 and ``WEBP`` at offset 8."""
+
+    return len(data) >= 12 and data[:4] == b"RIFF" and data[8:12] == b"WEBP"
+
+
 def sniff_kind(filename: str, data: bytes) -> FileKind:
     """Determine file kind via magic bytes first, extension as a hint."""
 
+    # WebP needs an offset-8 check the prefix map cannot express.
+    if _is_webp(data):
+        return FileKind.IMAGE
     for magic, kind in _MAGIC.items():
         if data.startswith(magic):
             return kind
@@ -167,7 +177,5 @@ def extract_text(filename: str, data: bytes) -> ExtractionResult:
             text = _ocr_hook(data, get_settings().tesseract_ocr_langs)
         except Exception:
             text = ""
-        return ExtractionResult(
-            text=text.strip(), page_count=1, engine="tesseract", ocr_used=True
-        )
+        return ExtractionResult(text=text.strip(), page_count=1, engine="tesseract", ocr_used=True)
     raise ExtractionError("UNSUPPORTED_FILE_TYPE")

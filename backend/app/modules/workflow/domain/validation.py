@@ -31,6 +31,10 @@ def validate_graph(graph: dict) -> list[str]:
             errors.extend(_validate_send_notification(node))
         if node_type == NodeType.WEBHOOK.value:
             errors.extend(_validate_webhook(node))
+        if node_type == NodeType.AI_SCREEN_APPLICATION.value:
+            errors.extend(_validate_ai_screen(node))
+        if node_type == NodeType.NOTIFY.value:
+            errors.extend(_validate_notify(node))
 
     for edge in edges:
         if edge.get("source") not in node_ids or edge.get("target") not in node_ids:
@@ -52,16 +56,12 @@ def _validate_human_review(node: dict) -> list[str]:
     data = node.get("data", {})
     mode = data.get("assignee_mode")
     if mode not in _VALID_ASSIGNEE_MODES:
-        errors.append(
-            f"node {node['id']}: assignee_mode must be one of {_VALID_ASSIGNEE_MODES}"
-        )
+        errors.append(f"node {node['id']}: assignee_mode must be one of {_VALID_ASSIGNEE_MODES}")
         return errors
     if mode == "person" and not data.get("assignee_user_id"):
         errors.append(f"node {node['id']}: assignee_mode=person requires assignee_user_id")
     if mode == "queue" and not data.get("assignee_department_id"):
-        errors.append(
-            f"node {node['id']}: assignee_mode=queue requires assignee_department_id"
-        )
+        errors.append(f"node {node['id']}: assignee_mode=queue requires assignee_department_id")
     return errors
 
 
@@ -77,6 +77,63 @@ def _validate_webhook(node: dict) -> list[str]:
     if not data.get("url"):
         return [f"node {node['id']}: webhook requires data.url"]
     return []
+
+
+_VALID_SCREEN_MODES = {"deterministic", "llm"}
+
+
+def _validate_ai_screen(node: dict) -> list[str]:
+    """``ai_screen_application`` config: an optional ``mode`` (deterministic|llm) and
+    optional numeric thresholds. Thresholds must be within 0..100 and ordered
+    (strong >= consider) so a flow author cannot build a nonsensical branch."""
+
+    errors: list[str] = []
+    data = node.get("data", {})
+    mode = data.get("mode", "deterministic")
+    if mode not in _VALID_SCREEN_MODES:
+        errors.append(
+            f"node {node['id']}: ai_screen_application mode must be one of {_VALID_SCREEN_MODES}"
+        )
+    strong = data.get("strong_threshold", 80)
+    consider = data.get("consider_threshold", 50)
+    for label, value in (("strong_threshold", strong), ("consider_threshold", consider)):
+        if not isinstance(value, int | float) or not 0 <= float(value) <= 100:
+            errors.append(f"node {node['id']}: {label} must be a number in 0..100")
+    if (
+        isinstance(strong, int | float)
+        and isinstance(consider, int | float)
+        and float(strong) < float(consider)
+    ):
+        errors.append(f"node {node['id']}: strong_threshold must be >= consider_threshold")
+    return errors
+
+
+_VALID_NOTIFY_RECIPIENT_MODES = {"assignee", "user", "trigger_var"}
+
+
+def _validate_notify(node: dict) -> list[str]:
+    """``notify`` config: a ``template_key`` plus a ``recipient_mode``. Modes
+    ``user``/``trigger_var`` require the referenced key so a flow cannot activate a
+    notify node that can never resolve a recipient."""
+
+    errors: list[str] = []
+    data = node.get("data", {})
+    if not data.get("template_key"):
+        errors.append(f"node {node['id']}: notify requires data.template_key")
+    mode = data.get("recipient_mode", "assignee")
+    if mode not in _VALID_NOTIFY_RECIPIENT_MODES:
+        errors.append(
+            f"node {node['id']}: notify recipient_mode must be one of "
+            f"{_VALID_NOTIFY_RECIPIENT_MODES}"
+        )
+        return errors
+    if mode == "user" and not data.get("recipient_user_id"):
+        errors.append(f"node {node['id']}: notify recipient_mode=user requires recipient_user_id")
+    if mode == "trigger_var" and not data.get("recipient_variable"):
+        errors.append(
+            f"node {node['id']}: notify recipient_mode=trigger_var requires recipient_variable"
+        )
+    return errors
 
 
 def _reachable_from_trigger(nodes: list[dict], edges: list[dict]) -> set[str]:

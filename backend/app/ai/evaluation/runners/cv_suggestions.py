@@ -72,50 +72,64 @@ def _missing_terms(probe: Probe) -> list[str]:
 
 def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
     if key == "error_code":
-        return None if probe.raised_code == exp else (
-            f"expected error_code {exp!r}, got {probe.raised_code!r}"
+        return (
+            None
+            if probe.raised_code == exp
+            else (f"expected error_code {exp!r}, got {probe.raised_code!r}")
         )
     if key == "no_stack_trace":
         bad = "traceback" in probe.raised_message.lower()
         return "stack trace leaked in error message" if bad else None
     if key == "degrades_to_deterministic":
-        return None if probe.raised_code is None and probe.diff is not None else (
-            "expected deterministic success but the task degraded/raised"
+        return (
+            None
+            if probe.raised_code is None and probe.diff is not None
+            else ("expected deterministic success but the task degraded/raised")
         )
     if probe.diff is None:  # any remaining cv check needs a diff
         return f"no diff produced (task raised {probe.raised_code!r})"
     if key == "applicable":
-        return None if bool(probe.diff.get("applicable")) == bool(exp) else (
-            f"applicable expected {exp}, got {probe.diff.get('applicable')}"
+        return (
+            None
+            if bool(probe.diff.get("applicable")) == bool(exp)
+            else (f"applicable expected {exp}, got {probe.diff.get('applicable')}")
         )
     if key == "requires_fact_confirmation":
         got = bool(probe.diff.get("requires_fact_confirmation"))
-        return None if got == bool(exp) else (
-            f"requires_fact_confirmation expected {exp}, got {got}"
+        return (
+            None if got == bool(exp) else (f"requires_fact_confirmation expected {exp}, got {got}")
         )
     if key in ("after_contains",):
-        return None if str(exp).lower() in (probe.after_blob or "") else (
-            f"after content should contain {exp!r}"
+        return (
+            None
+            if str(exp).lower() in (probe.after_blob or "")
+            else (f"after content should contain {exp!r}")
         )
     if key.startswith("after_not_contains"):
-        return None if str(exp).lower() not in (probe.after_blob or "") else (
-            f"after content should NOT contain {exp!r}"
+        return (
+            None
+            if str(exp).lower() not in (probe.after_blob or "")
+            else (f"after content should NOT contain {exp!r}")
         )
     if key == "after_bullet_count":
         n = len(_after_items(probe))
         return None if n == int(exp) else f"after bullet count expected {exp}, got {n}"
     if key == "filled":
         sections = (probe.diff.get("after") or {}).get("sections") or []
-        return None if len(sections) == int(exp) else (
-            f"filled sections expected {exp}, got {len(sections)}"
+        return (
+            None
+            if len(sections) == int(exp)
+            else (f"filled sections expected {exp}, got {len(sections)}")
         )
     if key == "ordering_first":
         sections = (probe.diff.get("after") or {}).get("sections") or []
         first = sections[0].get("section_type") if sections else None
         return None if first == exp else f"first section expected {exp!r}, got {first!r}"
     if key == "missing_contains":
-        return None if str(exp) in _missing_terms(probe) else (
-            f"missing keywords should contain {exp!r} (got {_missing_terms(probe)})"
+        return (
+            None
+            if str(exp) in _missing_terms(probe)
+            else (f"missing keywords should contain {exp!r} (got {_missing_terms(probe)})")
         )
     if key == "missing_count":
         n = len(_missing_terms(probe))
@@ -133,7 +147,9 @@ def check(key: str, exp: Any, probe: Probe) -> str | None:  # noqa: C901
         return no_forbidden_terms(probe.blob)  # structural: owner-scoped + no leak
     if key == "loads_other_user_cv":
         # Expected false: no foreign CV content may appear in the grounded output.
-        return None if "other_user_cv" not in probe.blob else (
-            "foreign (other-user) CV content leaked into the diff"
+        return (
+            None
+            if "other_user_cv" not in probe.blob
+            else ("foreign (other-user) CV content leaked into the diff")
         )
     return None  # unknown / informational key

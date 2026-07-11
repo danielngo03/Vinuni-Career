@@ -2,6 +2,7 @@
 when the caller's content signature matches, so any CV/JD/scorer version change
 is a miss (owner requirement 2026-07-06 — "recompute only when CV/JD changes").
 Uses a tiny in-memory fake Redis; no real Redis needed."""
+
 from __future__ import annotations
 
 import uuid

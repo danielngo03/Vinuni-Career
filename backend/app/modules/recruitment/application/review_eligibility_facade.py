@@ -47,9 +47,7 @@ async def eligibility_for(
     offer_app = next((r.id for r in rows if r.status == lifecycle.HIRED), None)
     if offer_app is not None:
         return ELIG_OFFER, offer_app
-    interview_app = next(
-        (r.id for r in rows if r.status == lifecycle.UNDER_REVIEW), None
-    )
+    interview_app = next((r.id for r in rows if r.status == lifecycle.UNDER_REVIEW), None)
     if interview_app is not None:
         return ELIG_INTERVIEW, interview_app
     return None

@@ -69,8 +69,7 @@ async def test_happy_path_meets_threshold(family: str) -> None:
     assert total > 0, f"{family}: happy_path dataset is empty"
     rate = passed / total
     assert ok and rate >= run_eval.HAPPY_PATH_THRESHOLD, (
-        f"{family} happy_path pass rate {rate:.0%} < "
-        f"{run_eval.HAPPY_PATH_THRESHOLD:.0%}"
+        f"{family} happy_path pass rate {rate:.0%} < {run_eval.HAPPY_PATH_THRESHOLD:.0%}"
     )
 
 
@@ -93,3 +92,58 @@ def test_cli_entrypoint_exits_zero_when_green() -> None:
     lowered = proc.stdout.lower()
     for term in ("openrouter", "openai", "deepseek", "model_alias", "prompt_tokens"):
         assert term not in lowered, f"gate output leaked {term!r}"
+
+
+# --------------------------------------------------------------------------- #
+# Mock-interview eval families (turn brain + grounding) — added coverage.       #
+# These two families closed the biggest offline-eval gap (the conversational    #
+# interviewer had ZERO offline eval). They EXCEED the §10.1 minimum counts and  #
+# each pass the offline gate green on their own; assert both explicitly so a    #
+# regression is caught even while the full-gate test is parametrized broadly.   #
+# --------------------------------------------------------------------------- #
+
+_INTERVIEW_FAMILY_TARGETS = {
+    "mock_interview_turn": {
+        "happy_path": 24,
+        "adversarial": 15,
+        "privacy_boundary": 12,
+        "low_quality_input": 10,
+        "fallback": 8,
+    },
+    "interview_grounding": {
+        "happy_path": 18,
+        "adversarial": 6,
+        "privacy_boundary": 8,
+        "low_quality_input": 6,
+        "fallback": 3,
+    },
+}
+
+
+def test_new_interview_families_are_registered() -> None:
+    """The two new interview eval families are wired into the dispatch tables."""
+
+    for family in _INTERVIEW_FAMILY_TARGETS:
+        assert family in run_eval.TASK_FAMILIES, f"{family} not registered"
+
+
+@pytest.mark.parametrize("family", list(_INTERVIEW_FAMILY_TARGETS))
+def test_new_interview_families_exceed_target_counts(family: str) -> None:
+    """The interview families ship the higher target counts, not just the floor."""
+
+    for category, target in _INTERVIEW_FAMILY_TARGETS[family].items():
+        cases = run_eval._load_cases(family, category)
+        assert len(cases) >= target, (
+            f"{family}/{category}: expected >= {target} cases, got {len(cases)}"
+        )
+
+
+@pytest.mark.parametrize("family", list(_INTERVIEW_FAMILY_TARGETS))
+async def test_new_interview_families_pass_offline_gate(family: str) -> None:
+    """Each interview family is green under the offline provider and leaks nothing."""
+
+    text, ok = await run_eval.run(family)
+    assert ok, f"{family} eval gate FAILED:\n{text}"
+    lowered = text.lower()
+    for term in ("openrouter", "openai", "deepseek", "gpt-4", "model_alias", "prompt_tokens"):
+        assert term not in lowered, f"{family} gate output leaked {term!r}"
