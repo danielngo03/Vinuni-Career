@@ -205,6 +205,8 @@ async def recommend_jobs(session: AsyncSession, principal: Principal, args: dict
         from app.ai.retrieval.hybrid_search import hybrid_job_search
         from app.ai.retrieval.rerank import rerank_jobs
 
+        job_ids = []
+        source = "recent"
         if query_text.strip():
             fused = await hybrid_job_search(session, query=query_text, limit=limit * 3)
             job_docs: dict = {}
@@ -217,8 +219,14 @@ async def recommend_jobs(session: AsyncSession, principal: Principal, args: dict
                     job_docs[jid] = str(jid)
             reranked = await rerank_jobs(query_text, job_docs, top_k=limit, db=session)
             job_ids = [jid for jid, _ in reranked]
-            source = "cv_match_reranked"
-        else:
+            if job_ids:
+                source = "cv_match_reranked"
+
+        # Fall back to recent active jobs when there is no CV to match on, or when
+        # semantic/keyword matching returns nothing (e.g. the dense-vector index is
+        # unavailable in this environment) — never return an empty list while jobs
+        # exist. ``source`` stays truthful so the UI can label the basis.
+        if not job_ids:
             items, _, _, _ = await job_service.list_public_jobs(
                 session, principal=principal, cursor=None, limit=limit
             )

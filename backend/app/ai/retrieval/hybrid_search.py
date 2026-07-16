@@ -13,6 +13,7 @@ When no full-text index exists, only vector scores are used.
 
 from __future__ import annotations
 
+import json
 import uuid
 
 from sqlalchemy import text
@@ -68,8 +69,15 @@ async def bm25_job_search(
 ) -> list[uuid.UUID]:
     """Full-text BM25 search over jobs using Postgres ``tsvector``.
 
-    Uses the ``search_vector`` column on ``jobs`` (created by migration 0010 or
-    similar). Falls back to a ``ILIKE`` scan if the column is unavailable.
+    Uses the ``tsv_search`` generated column on ``jobs`` (created by migration
+    0004). Falls back to a plain ``ILIKE`` title scan if full-text is
+    unavailable. An optional ``province_code`` filter matches the
+    ``locations[].province_code`` JSONB array (jobs has no top-level
+    ``province_code`` column).
+
+    Each query attempt runs inside a SAVEPOINT so a DB-level failure (e.g. a
+    missing column on an older snapshot) rolls back only the savepoint and never
+    poisons the caller's request transaction.
 
     Returns a list of job UUIDs ordered by relevance.
     """
@@ -77,46 +85,74 @@ async def bm25_job_search(
     if not q:
         return []
 
+    # Optional province filter: jobs store locations as a JSONB array of
+    # ``{"province_code": ...}`` objects (see job_alert_dispatch_service), so
+    # containment is the correct predicate — there is no scalar column.
+    province_clause = ""
+    prov_params: dict = {}
+    if province_code:
+        province_clause = "AND locations @> :prov_json ::jsonb"
+        prov_params["prov_json"] = json.dumps([{"province_code": province_code}])
+
     # Build a ts_query from the raw query string (websearch_to_tsquery is lenient)
-    base_query = text("""
+    base_query = text(
+        f"""
         SELECT id
         FROM jobs
         WHERE
             deleted_at IS NULL
             AND status = 'active'
             AND (
-                search_vector @@ websearch_to_tsquery('simple', :q)
+                tsv_search @@ websearch_to_tsquery('simple', :q)
                 OR title ILIKE '%' || :q_raw || '%'
             )
-            AND (:province_code IS NULL OR province_code = :province_code)
-        ORDER BY ts_rank(search_vector, websearch_to_tsquery('simple', :q)) DESC,
+            {province_clause}
+        ORDER BY ts_rank(tsv_search, websearch_to_tsquery('simple', :q)) DESC,
                  created_at DESC
         LIMIT :limit
-    """)
+    """
+    )
 
+    nested = None
     try:
+        nested = await session.begin_nested()
         rows = await session.execute(
             base_query,
-            {"q": q, "q_raw": q, "province_code": province_code, "limit": limit},
+            {"q": q, "q_raw": q, "limit": limit, **prov_params},
         )
-        return [uuid.UUID(str(row.id)) for row in rows]
+        result = [uuid.UUID(str(row.id)) for row in rows]
+        await nested.commit()
+        return result
     except Exception:
-        # search_vector column may not exist in all DB snapshots — degrade gracefully
-        try:
-            rows = await session.execute(
-                text("""
-                    SELECT id FROM jobs
-                    WHERE deleted_at IS NULL AND status = 'active'
-                      AND title ILIKE '%' || :q || '%'
-                      AND (:province_code IS NULL OR province_code = :province_code)
-                    ORDER BY created_at DESC
-                    LIMIT :limit
-                """),
-                {"q": q, "province_code": province_code, "limit": limit},
-            )
-            return [uuid.UUID(str(row.id)) for row in rows]
-        except Exception:
-            return []
+        # Full-text column may be unavailable on some DB snapshots — degrade
+        # gracefully. Roll back the savepoint first so the fallback (and the
+        # caller's transaction) run on a clean connection.
+        if nested is not None and nested.is_active:
+            await nested.rollback()
+
+    fallback_query = text(
+        f"""
+        SELECT id FROM jobs
+        WHERE deleted_at IS NULL AND status = 'active'
+          AND title ILIKE '%' || :q || '%'
+          {province_clause}
+        ORDER BY created_at DESC
+        LIMIT :limit
+    """
+    )
+    nested_fb = None
+    try:
+        nested_fb = await session.begin_nested()
+        rows = await session.execute(
+            fallback_query, {"q": q, "limit": limit, **prov_params}
+        )
+        result = [uuid.UUID(str(row.id)) for row in rows]
+        await nested_fb.commit()
+        return result
+    except Exception:
+        if nested_fb is not None and nested_fb.is_active:
+            await nested_fb.rollback()
+        return []
 
 
 async def hybrid_job_search(
