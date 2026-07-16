@@ -230,6 +230,40 @@ async def test_record_turns_appends_realtime_transcript(db_session) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# realtime tier selection (V2 descriptor absent -> V3 relay, not a downgrade)  #
+# --------------------------------------------------------------------------- #
+async def test_realtime_survives_when_only_relay_available(db_session, monkeypatch) -> None:
+    """A "realtime" request with the V2 descriptor tier OFF but the V3 Live relay
+    ON must STAY realtime (relay path), NOT silently downgrade to turn-based
+    voice. The relay needs no descriptor, so ``realtime`` is None and the client
+    selects the relay from ``modality == "realtime"``. Regression: create_session
+    used to downgrade whenever the (disabled) descriptor could not be minted."""
+
+    from app.ai.gateway.realtime import live_relay
+
+    monkeypatch.setattr(live_relay, "live_relay_enabled", lambda: True)
+    student, job_id = await _seed_student_job(db_session)
+    created = await _create(db_session, student, job_id, modality="realtime")
+
+    assert created["modality"] == "realtime"  # not downgraded
+    assert created["realtime"] is None  # no V2 descriptor -> client uses the relay
+
+
+async def test_realtime_downgrades_when_no_tier_available(db_session, monkeypatch) -> None:
+    """With NEITHER the V2 descriptor nor the V3 relay available, a "realtime"
+    request degrades cleanly to the turn-based voice tier."""
+
+    from app.ai.gateway.realtime import live_relay
+
+    monkeypatch.setattr(live_relay, "live_relay_enabled", lambda: False)
+    student, job_id = await _seed_student_job(db_session)
+    created = await _create(db_session, student, job_id, modality="realtime")
+
+    assert created["modality"] == "voice"
+    assert created["realtime"] is None
+
+
+# --------------------------------------------------------------------------- #
 # abort / delete / share                                                       #
 # --------------------------------------------------------------------------- #
 async def test_abort_session_marks_aborted(db_session) -> None:

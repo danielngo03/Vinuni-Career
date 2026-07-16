@@ -36,6 +36,18 @@ from app.modules.mock_interview.domain.models import (
 _START_HINT = "Let's begin the interview."
 _END_MARK = "[END]"
 
+# The deterministic OfflineProvider (safe fallback when real AI calls are
+# disabled) emits a literal ``"[offline] ..."`` test scaffold that echoes the
+# candidate's own input. That scaffold must NEVER render as an interviewer
+# question — this marker lets us detect and suppress it (see ``stream_interviewer``).
+_OFFLINE_STUB_MARKER = "[offline]"
+
+
+def is_offline_stub(text: str | None) -> bool:
+    """True when ``text`` is (or begins with) the OfflineProvider stub scaffold."""
+
+    return _OFFLINE_STUB_MARKER in (text or "")
+
 
 def _alias() -> str:
     return get_settings().ai_interview_model_alias
@@ -148,7 +160,10 @@ async def generate_opening(
             messages, temperature=0.7, max_tokens=caps.QUESTION_MAX_TOKENS
         )
         text, _ = strip_end_marker(resp.text)
-        return text or prompts.fallback_first_turn(grounding)
+        # Suppress the offline stub scaffold — never return it as the opening.
+        if not text or is_offline_stub(text):
+            return prompts.fallback_first_turn(grounding)
+        return text
     except Exception:  # noqa: BLE001 - any gateway failure degrades to fallback
         return prompts.fallback_first_turn(grounding)
 
@@ -170,7 +185,26 @@ async def stream_interviewer(
     as the final entry (so the model's last message is the candidate's reply).
     ``plan_slice`` steers the question toward the next planned competency.
     On any provider failure a single static fallback chunk is yielded.
+
+    When no real provider is active the AI gateway resolves to the deterministic
+    ``OfflineProvider``, whose ``"[offline] ..."`` stub echoes the candidate's own
+    input. That scaffold must never be shown as an interviewer question, so we
+    skip the gateway entirely and yield the static, human-quality fallback turn.
     """
+
+    # Gate on the FINAL post-precedence decision: when this is False the factory
+    # WILL return ``OfflineProvider`` for any alias, so degrade to the static turn
+    # instead of streaming its test scaffold. Happy path (real provider on) is
+    # unchanged.
+    try:
+        from app.ai.gateway.factory import real_provider_active
+
+        provider_live = real_provider_active()
+    except Exception:  # noqa: BLE001 - treat any resolution failure as "not live"
+        provider_live = False
+    if not provider_live:
+        yield prompts.fallback_next_turn(grounding)
+        return
 
     system = prompts.build_conversation_system_prompt(
         grounding, target_questions=target_questions, plan_slice=plan_slice
@@ -194,9 +228,17 @@ async def stream_interviewer(
         async for chunk in runner.stream(
             messages, temperature=0.7, max_tokens=caps.QUESTION_MAX_TOKENS
         ):
-            if chunk:
-                produced = True
-                yield chunk
+            if not chunk:
+                continue
+            # Defensive: if the offline stub somehow reaches here while a provider
+            # is nominally "live", drop the whole turn and use the static fallback
+            # rather than leaking scaffold text. The marker is always at the very
+            # start of the stub, so only the first chunk needs the check.
+            if not produced and is_offline_stub(chunk):
+                yield prompts.fallback_next_turn(grounding)
+                return
+            produced = True
+            yield chunk
     except Exception:  # noqa: BLE001 - any gateway/policy failure degrades gracefully
         if not produced:
             yield prompts.fallback_next_turn(grounding)

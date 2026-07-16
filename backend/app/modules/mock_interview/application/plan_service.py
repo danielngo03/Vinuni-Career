@@ -22,6 +22,7 @@ data frozen on the session row and reused for free by every later turn/tier/repo
 
 from __future__ import annotations
 
+import asyncio
 import copy
 import json
 import re
@@ -407,11 +408,14 @@ async def build_plan(
     grounding: dict[str, Any],
     user_id: uuid.UUID,
     session_id: uuid.UUID,
+    llm_timeout_s: float = caps.PLAN_LLM_TIMEOUT_SECONDS,
 ) -> dict[str, Any]:
     """Return the frozen interview plan. Never raises — deterministic on failure.
 
-    Runs ONE metered strong-model call; any failure (provider down, invalid JSON,
-    offline provider in tests) degrades to the deterministic plan.
+    Runs ONE metered strong-model call, time-boxed to ``llm_timeout_s``; any
+    failure (provider down, invalid JSON, timeout, offline provider in tests)
+    degrades to the deterministic plan so session create stays responsive. The
+    realtime relay passes a tighter budget (it only needs a coverage hint).
     """
 
     deterministic = _deterministic_plan(grounding)
@@ -441,17 +445,23 @@ async def build_plan(
         usage_context=usage_ctx,
     )
     try:
-        resp = await runner.complete(
-            [
-                AIMessage(role="system", content=system),
-                AIMessage(role="user", content=user),
-            ],
-            temperature=0.4,
-            max_tokens=caps.PLAN_MAX_TOKENS,
+        # Time-box the strong-model call: a hung/slow planner must not stall the
+        # whole session create. On timeout (or any gateway/parse failure) we use
+        # the already-computed deterministic plan, keeping create responsive.
+        resp = await asyncio.wait_for(
+            runner.complete(
+                [
+                    AIMessage(role="system", content=system),
+                    AIMessage(role="user", content=user),
+                ],
+                temperature=0.4,
+                max_tokens=caps.PLAN_MAX_TOKENS,
+            ),
+            timeout=llm_timeout_s,
         )
         validated = _validate_llm_plan(_parse_json(resp.text), grounding)
         return validated or deterministic
-    except Exception:  # noqa: BLE001 - any gateway/parse failure -> deterministic plan
+    except Exception:  # noqa: BLE001 - timeout / gateway / parse failure -> deterministic plan
         return deterministic
 
 

@@ -168,8 +168,9 @@ export function LiveSession({
     !!realtime || (useRelay && mode === "voice"),
   );
   const [realtimeLost, setRealtimeLost] = useState(false);
-  // Relay push-to-talk: true while the student holds/toggles the mic to speak.
-  const [relaySpeaking, setRelaySpeaking] = useState(false);
+  // Relay continuous mic: always-on live conversation; the student may mute
+  // themselves (the model's VAD handles turn-taking — no push-to-talk).
+  const [relayMuted, setRelayMuted] = useState(false);
   // Server voice tier presentation states.
   const [recording, setRecording] = useState(false);
   const [transcribing, setTranscribing] = useState(false);
@@ -536,26 +537,21 @@ export function LiveSession({
       setRelayDisabled(true);
       setRealtimeConnecting(false);
       setRealtimeLost(false);
-      setRelaySpeaking(false);
+      setRelayMuted(false);
       setPhaseNow("interviewer_speaking");
     } else {
       degradeToText();
     }
   }, [serverVoice, degradeToText, setPhaseNow]);
 
-  /* --------------------- relay (V3) push-to-talk toggle ------------------- */
-  const toggleRelaySpeak = useCallback(() => {
+  /* ------------------------ relay (V3) mute toggle ------------------------ */
+  const toggleRelayMute = useCallback(() => {
     const relay = relayRef.current;
     if (!relay) return;
-    if (relaySpeaking) {
-      relay.stopSpeaking();
-      setRelaySpeaking(false);
-    } else {
-      // startSpeaking flushes interviewer playback (barge-in) inside the client.
-      relay.startSpeaking();
-      setRelaySpeaking(true);
-    }
-  }, [relaySpeaking]);
+    const next = !relayMuted;
+    relay.setMuted(next);
+    setRelayMuted(next);
+  }, [relayMuted]);
 
   /* ---------------------------- voice lifecycle --------------------------- */
   useEffect(() => {
@@ -722,12 +718,8 @@ export function LiveSession({
           if (cancelled) return;
           markConnected();
           setRealtimeConnecting(false);
-          // Interviewer took the floor → release the student's push-to-talk so
-          // the mic isn't left streaming behind an idle-looking button.
-          if (state === "speaking") {
-            relayRef.current?.stopSpeaking();
-            setRelaySpeaking(false);
-          }
+          // Mic stays live throughout; the phase is purely presentational (drives
+          // the avatar + captions). Barge-in is handled by the server's VAD.
           setPhaseNow(state === "speaking" ? "interviewer_speaking" : "listening");
         },
         onInputTranscript: (chunk) => {
@@ -1158,11 +1150,13 @@ export function LiveSession({
             }}
           />
         ) : useRelay ? (
-          <RelayAnswerBar
-            speaking={relaySpeaking}
+          <RelayLiveBar
+            muted={relayMuted}
             connecting={realtimeConnecting}
-            disabled={realtimeConnecting || phase === "ending"}
-            onToggleSpeak={toggleRelaySpeak}
+            speaking={phase === "interviewer_speaking"}
+            getMicLevel={() => relayRef.current?.level ?? 0}
+            reduced={reduced}
+            onToggleMute={toggleRelayMute}
             onSwitchToText={degradeToText}
           />
         ) : serverVoiceActive ? (
@@ -1443,70 +1437,122 @@ function ServerVoiceAnswerBar({
 }
 
 /**
- * Relay (Tier V3) push-to-talk control: one prominent mic button the student
- * taps to speak and taps again to finish (`aria-pressed` reflects the state).
- * There is no text answer box in this tier — captions are the a11y floor — but a
- * "type instead" escape hatch always drops to the text tier.
+ * Relay (Tier V3) CONTINUOUS live control. The mic is always on — a real spoken
+ * conversation where the model's VAD handles turn-taking — so there is no
+ * push-to-talk. This bar just reflects the live state (a breathing "listening"
+ * pill with a live mic-level ring), offers a self-mute, and keeps a "type
+ * instead" escape hatch to the text tier. Captions are the a11y floor.
  */
-function RelayAnswerBar({
-  speaking,
+function RelayLiveBar({
+  muted,
   connecting,
-  disabled,
-  onToggleSpeak,
+  speaking,
+  getMicLevel,
+  reduced,
+  onToggleMute,
   onSwitchToText,
 }: {
-  speaking: boolean;
+  muted: boolean;
   connecting: boolean;
-  disabled: boolean;
-  onToggleSpeak: () => void;
+  speaking: boolean;
+  getMicLevel: () => number;
+  reduced: boolean;
+  onToggleMute: () => void;
   onSwitchToText: () => void;
 }) {
   const t = useTranslations("jobs.mockInterview");
+  const ringRef = useRef<HTMLSpanElement>(null);
+  // Drive a live amplitude ring around the "listening" dot from the real mic
+  // level (only while unmuted and it's the student's turn).
+  useEffect(() => {
+    if (reduced) return;
+    let raf = 0;
+    const loop = () => {
+      const level = !muted && !speaking && !connecting ? getMicLevel() : 0;
+      if (ringRef.current) {
+        ringRef.current.style.transform = `scale(${(1 + level * 0.9).toFixed(3)})`;
+        ringRef.current.style.opacity = `${Math.min(0.55, 0.15 + level * 0.6).toFixed(3)}`;
+      }
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, [muted, speaking, connecting, reduced, getMicLevel]);
+
+  const statusText = connecting
+    ? t("realtimeConnectingLabel")
+    : muted
+      ? t("relayMutedHint")
+      : speaking
+        ? t("relayHintInterviewer")
+        : t("relayLiveHint");
+
   return (
-    <div className="mx-auto flex max-w-xl flex-col items-center gap-2.5">
-      <button
-        type="button"
-        onClick={onToggleSpeak}
-        disabled={disabled}
-        aria-pressed={speaking}
-        aria-label={speaking ? t("relaySpeakStop") : t("relaySpeakStart")}
+    <div className="mx-auto flex max-w-xl flex-col items-center gap-3">
+      {/* Live status pill: a breathing dot + a mic-level ring while listening. */}
+      <div
         className={cn(
-          "relative flex size-14 items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-50",
-          speaking
-            ? "bg-[var(--brand-red)] text-white"
-            : "bg-[var(--bg-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-muted)]",
+          "inline-flex items-center gap-2.5 rounded-full border px-4 py-2 transition-colors",
+          muted
+            ? "border-[var(--border-default)] bg-[var(--bg-subtle)]"
+            : "border-[var(--content-success)]/30 bg-[var(--emerald-50)]",
         )}
-      >
-        {speaking && (
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 animate-ping rounded-full bg-[var(--brand-red)]/40"
-          />
-        )}
-        {speaking ? (
-          <Stop aria-hidden weight="fill" className="relative size-6" />
-        ) : (
-          <Microphone aria-hidden weight="fill" className="relative size-6" />
-        )}
-      </button>
-      <p
-        className="text-center text-[11px] leading-relaxed text-[var(--text-muted)]"
         aria-live="polite"
       >
-        {connecting
-          ? t("realtimeConnectingLabel")
-          : speaking
-            ? t("relayHintSpeaking")
-            : t("relayHintIdle")}
-      </p>
-      <button
-        type="button"
-        onClick={onSwitchToText}
-        className="inline-flex items-center gap-1.5 rounded text-[11px] font-semibold text-[var(--text-muted)] outline-none transition-colors hover:text-[var(--text-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
-      >
-        <Keyboard aria-hidden weight="bold" className="size-3.5" />
-        {t("idleSwitchToText")}
-      </button>
+        <span className="relative flex size-3 items-center justify-center">
+          {!muted && !reduced && (
+            <span
+              ref={ringRef}
+              aria-hidden
+              className="absolute inset-0 rounded-full bg-[var(--content-success)]"
+              style={{ transformOrigin: "center", opacity: 0.2 }}
+            />
+          )}
+          <span
+            aria-hidden
+            className={cn(
+              "relative size-2 rounded-full",
+              muted
+                ? "bg-[var(--text-muted)]"
+                : cn("bg-[var(--content-success)]", !reduced && "animate-pulse"),
+            )}
+          />
+        </span>
+        <span className="text-xs font-semibold text-[var(--text-secondary)]">{statusText}</span>
+      </div>
+
+      <div className="flex items-center gap-2">
+        {/* Self-mute toggle — the only mic control in continuous mode. */}
+        <button
+          type="button"
+          onClick={onToggleMute}
+          disabled={connecting}
+          aria-pressed={muted}
+          aria-label={muted ? t("relayUnmute") : t("relayMute")}
+          className={cn(
+            "inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30 disabled:cursor-not-allowed disabled:opacity-50",
+            muted
+              ? "border-[var(--brand-red)]/40 bg-[var(--red-50)] text-[var(--brand-red)]"
+              : "border-[var(--border-strong)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]",
+          )}
+        >
+          {muted ? (
+            <MicrophoneSlash aria-hidden weight="fill" className="size-4" />
+          ) : (
+            <Microphone aria-hidden weight="fill" className="size-4" />
+          )}
+          {muted ? t("relayUnmute") : t("relayMute")}
+        </button>
+
+        <button
+          type="button"
+          onClick={onSwitchToText}
+          className="inline-flex h-10 items-center gap-1.5 rounded-full px-3 text-[11px] font-semibold text-[var(--text-muted)] outline-none transition-colors hover:text-[var(--text-secondary)] focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]/30"
+        >
+          <Keyboard aria-hidden weight="bold" className="size-3.5" />
+          {t("idleSwitchToText")}
+        </button>
+      </div>
     </div>
   );
 }

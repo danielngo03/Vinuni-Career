@@ -163,6 +163,10 @@ class Settings(BaseSettings):
     google_cloud_project: str = ""
     google_cloud_location: str = "global"
     google_application_credentials: str = ""
+    # Quota/billing project for an authorized_user ADC (gcloud application-default
+    # login), which — unlike a service-account key — carries no embedded project.
+    # Falls back to ``google_cloud_project`` when unset.
+    google_cloud_quota_project: str = ""
 
     # --- Mock Interview: TRUE realtime Live relay (server-mediated) --------------
     # Full-duplex native-audio interview via the Gemini Live model. The browser

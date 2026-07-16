@@ -16,6 +16,16 @@ DEFAULT_TARGET_QUESTIONS = 6  # how many questions a normal session aims for
 MAX_QUESTIONS = 12  # interviewer stops after this many questions
 IDLE_TIMEOUT_SECONDS = 45  # auto-end after this much candidate silence
 EPHEMERAL_TOKEN_TTL_SECONDS = 660  # Tier V2 token / socket ceiling (> session cap)
+# Time-box the ONE strong-model planner call at session create. A healthy model
+# answers in a few seconds; if it hangs/stalls we fall back to the deterministic
+# plan so "Bắt đầu phỏng vấn" stays responsive instead of blocking ~20s at the
+# connecting screen (which can trip client/gateway timeouts into a 500).
+PLAN_LLM_TIMEOUT_SECONDS = 8
+# The realtime Live relay lets the model drive the conversation itself and only
+# uses the plan as a soft coverage hint, so it needs a much tighter planner
+# budget — the interviewer should start talking within a couple of seconds, not
+# wait out a slow strong-model plan. Falls back to the deterministic plan.
+PLAN_LLM_TIMEOUT_REALTIME_SECONDS = 3
 
 # --- concurrency & rate ---------------------------------------------------- #
 MAX_CONCURRENT_PER_USER = 1  # one live session at a time

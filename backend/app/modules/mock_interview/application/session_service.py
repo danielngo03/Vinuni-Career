@@ -218,7 +218,17 @@ async def create_session(
     # 6) PLANNER — ONE strong-model call, FROZEN on the row and reused every turn
     # (deterministic fallback inside; never blocks create). No txn/lock held.
     plan = await plan_service.build_plan(
-        session, grounding=grounding, user_id=user_id, session_id=session_row_id
+        session,
+        grounding=grounding,
+        user_id=user_id,
+        session_id=session_row_id,
+        # Realtime starts the spoken interview the moment create returns, so keep
+        # its planner budget tight; the turn-based tiers can afford the fuller one.
+        llm_timeout_s=(
+            caps.PLAN_LLM_TIMEOUT_REALTIME_SECONDS
+            if modality == MODALITY_REALTIME
+            else caps.PLAN_LLM_TIMEOUT_SECONDS
+        ),
     )
     coverage = plan_service.init_coverage(
         plan, difficulty=grounding.get("difficulty")
@@ -245,13 +255,26 @@ async def create_session(
     row.coverage_json = coverage
     row.question_count = 1
 
-    # 8) Optional realtime (Tier V2). Falls back to browser voice on any failure.
+    # 8) Optional realtime. TWO independent tiers can satisfy a "realtime"
+    # request and they are tried in preference order:
+    #   - Tier V2: a browser-direct descriptor (ephemeral token) minted here via
+    #     _try_mint_realtime — only when the descriptor tier is enabled.
+    #   - Tier V3: the server-mediated Live relay over our own WS. It needs NO
+    #     descriptor (the client just opens /sessions/{id}/live), so an absent
+    #     descriptor with modality kept as "realtime" is precisely how the client
+    #     selects the relay (its PREFERRED full-duplex path).
+    # Only downgrade to the turn-based voice tier when NEITHER realtime tier is
+    # available. Previously this downgraded whenever the (often-disabled) V2
+    # descriptor could not be minted, which silently hid the working relay and
+    # dropped every student into the slow turn-based tier.
     realtime: dict[str, Any] | None = None
     if modality == MODALITY_REALTIME:
+        from app.ai.gateway.realtime import live_relay
+
         realtime = await _try_mint_realtime(
             session, row=row, grounding=grounding, plan=plan, coverage=coverage
         )
-        if realtime is None:
+        if realtime is None and not live_relay.live_relay_enabled():
             row.modality = MODALITY_VOICE
             modality = MODALITY_VOICE
 
@@ -516,7 +539,9 @@ async def stream_turn(
         yield {"type": "token", "text": chunk}
 
     clean_text, ended = conversation_service.strip_end_marker("".join(parts))
-    if not clean_text:
+    # Never persist an empty turn — or the deterministic offline stub if it ever
+    # slipped past ``stream_interviewer`` — as the interviewer's line.
+    if not clean_text or conversation_service.is_offline_stub(clean_text):
         clean_text = prompts.fallback_next_turn(grounding)
 
     # M4: the student may have ended the session while the reply was streaming.

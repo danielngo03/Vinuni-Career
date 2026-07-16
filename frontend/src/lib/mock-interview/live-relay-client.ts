@@ -8,16 +8,21 @@
  * only when prep advertises `realtime_relay` and the session is created with
  * `modality: "realtime"`.
  *
+ * The conversation is CONTINUOUS: the mic streams the whole time and the model's
+ * own server-side VAD decides when the student started/stopped — a natural spoken
+ * back-and-forth, NOT push-to-talk. The student can talk over the interviewer
+ * (barge-in); the server detects it and sends `interrupted` to flush playback.
+ *
  * Transport & safety:
  * - Connects to `{wsBase}/mock-interview/sessions/{id}/live?token={access}` where
  *   `wsBase` is {@link env.apiBaseUrl} with `http`→`ws` / `https`→`wss`. The
  *   access token rides as a query param because browsers cannot set a WS
  *   `Authorization` header. No provider/model/prompt identity is ever referenced
  *   — the relay keeps all of that server-side.
- * - Mic → mono PCM16 LE @ 16 kHz sent as raw BINARY frames. Interviewer audio
- *   arrives as raw BINARY PCM16 @ 24 kHz and is played back gaplessly with a
- *   barge-in flush. Everything reuses the shared {@link MicCapture} +
- *   {@link Pcm24Player} machinery.
+ * - Mic → mono PCM16 LE @ 16 kHz sent as raw BINARY frames, streamed continuously
+ *   once `ready`. Interviewer audio arrives as raw BINARY PCM16 @ 24 kHz and is
+ *   played back gaplessly with a barge-in flush. Everything reuses the shared
+ *   {@link MicCapture} + {@link Pcm24Player} machinery.
  * - Transcripts are persisted server-side by the relay, so this client never
  *   records turns — it only renders live captions and drives the presence orb.
  */
@@ -107,8 +112,8 @@ export class LiveRelayClient {
   /* lifecycle */
   private started = false;
   private ended = false;
-  /** True while the student is holding/toggled the push-to-talk mic. */
-  private speaking = false;
+  /** True while the student muted their own mic (stops upstreaming audio). */
+  private muted = false;
 
   /** Current mic amplitude in [0,1] for the presence orb (0 if no analyser). */
   get level(): number {
@@ -120,9 +125,9 @@ export class LiveRelayClient {
     return this.player?.level ?? 0;
   }
 
-  /** True while the student's push-to-talk is engaged. */
-  get isSpeaking(): boolean {
-    return this.speaking;
+  /** True while the student has muted their own mic. */
+  get isMuted(): boolean {
+    return this.muted;
   }
 
   /* -------------------------------- connect ------------------------------- */
@@ -288,26 +293,22 @@ export class LiveRelayClient {
     }
   }
 
-  /* --------------------------- push-to-talk mic --------------------------- */
+  /* ------------------------------ continuous mic -------------------------- */
 
-  /** Student began speaking: flush the interviewer (barge-in), then stream mic. */
-  startSpeaking(): void {
-    if (this.ended || !this.ready || this.speaking) return;
-    this.speaking = true;
-    // Barge-in: cut any interviewer audio the instant the student speaks.
-    this.player?.flush();
-    this.safeSend({ type: "activity_start" });
-  }
-
-  /** Student stopped: signal end-of-turn so the interviewer may answer. */
-  stopSpeaking(): void {
-    if (this.ended || !this.speaking) return;
-    this.speaking = false;
-    this.safeSend({ type: "activity_end" });
+  /**
+   * Mute/unmute the student's own mic. Muting stops upstreaming audio (the model
+   * hears silence) without tearing down the session; unmuting resumes it. The
+   * conversation is otherwise always-on — the model's VAD handles turn-taking.
+   */
+  setMuted(muted: boolean): void {
+    if (this.ended) return;
+    this.muted = muted;
   }
 
   private onFrames(frames: Float32Array): void {
-    if (this.ended || !this.ready || !this.speaking || frames.length === 0) return;
+    // Stream continuously once the session is ready; the model's server-side VAD
+    // decides when the student is talking. Muting is the only local gate.
+    if (this.ended || !this.ready || this.muted || frames.length === 0) return;
     const ws = this.ws;
     if (!ws || ws.readyState !== WebSocket.OPEN) return;
     try {
@@ -330,7 +331,7 @@ export class LiveRelayClient {
     if (this.ended) return;
     this.ended = true;
     this.ready = false;
-    this.speaking = false;
+    this.muted = false;
 
     this.mic?.teardown();
     this.mic = null;

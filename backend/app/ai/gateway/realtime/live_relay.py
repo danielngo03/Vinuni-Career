@@ -10,11 +10,14 @@ done by the caller (the WS route) BEFORE ``run_interview_live`` is invoked; this
 module only bridges an already-authorized socket to the model. Leak-safe: the
 browser sees audio + transcript text only — never a provider/model string.
 
+The conversation is CONTINUOUS: the mic streams the whole time and the model's
+own server-side VAD decides when the student started/stopped talking and when to
+answer — a natural back-and-forth, NOT push-to-talk. The student can also cut in
+while the interviewer is speaking (barge-in) and the model emits ``interrupted``.
+
 Wire protocol (browser <-> server):
   browser -> server:
-    * binary frame  = raw PCM16 mono 16 kHz mic audio
-    * text  {"type":"activity_start"}   - student began speaking (push-to-talk)
-    * text  {"type":"activity_end"}     - student stopped; model may now answer
+    * binary frame  = raw PCM16 mono 16 kHz mic audio (streamed continuously)
     * text  {"type":"bye"}              - end the session
   server -> browser:
     * text  {"type":"ready"}
@@ -74,10 +77,34 @@ def live_relay_enabled() -> bool:
     if not bool(getattr(s, "ai_realtime_relay_enabled", False)):
         return False
     project = getattr(s, "google_cloud_project", "") or os.environ.get("GOOGLE_CLOUD_PROJECT", "")
-    cred = getattr(s, "google_application_credentials", "") or os.environ.get(
-        "GOOGLE_APPLICATION_CREDENTIALS", ""
+    return bool(project and _has_adc_credentials())
+
+
+def _has_adc_credentials() -> bool:
+    """True when a usable Google credential is reachable: an explicit key/ADC file
+    that exists, or the gcloud application-default login at its well-known path."""
+
+    from app.core.config import get_settings
+
+    s = get_settings()
+    cred = (
+        getattr(s, "google_application_credentials", "")
+        or os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
+    ).strip()
+    if cred and os.path.isfile(cred):
+        return True
+    return os.path.isfile(_gcloud_adc_path())
+
+
+def _gcloud_adc_path() -> str:
+    """Well-known path of the gcloud `application-default login` credential."""
+
+    return os.path.join(
+        os.path.expanduser("~"),
+        ".config",
+        "gcloud",
+        "application_default_credentials.json",
     )
-    return bool(project and cred)
 
 
 def _build_client() -> Any:
@@ -90,13 +117,27 @@ def _build_client() -> Any:
         getattr(s, "google_application_credentials", "")
         or os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
     ).strip()
-    if cred and not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
+    # Prefer an explicit key/ADC file when it exists; otherwise fall back to the
+    # gcloud application-default login so a stale/rotated key path can't wedge the
+    # relay. Either way the SDK authenticates through google.auth.default().
+    if cred and os.path.isfile(cred):
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = cred
+    else:
+        os.environ.pop("GOOGLE_APPLICATION_CREDENTIALS", None)
     project = (
         getattr(s, "google_cloud_project", "") or os.environ.get("GOOGLE_CLOUD_PROJECT", "")
     ).strip()
     location = (getattr(s, "ai_realtime_relay_location", "") or "us-central1").strip()
-    if not (project and cred):
+    # An authorized_user ADC has no embedded quota project; set one so Vertex
+    # billing/quota attribution works (harmless for a service-account key).
+    quota = (
+        getattr(s, "google_cloud_quota_project", "")
+        or os.environ.get("GOOGLE_CLOUD_QUOTA_PROJECT", "")
+        or project
+    ).strip()
+    if quota:
+        os.environ.setdefault("GOOGLE_CLOUD_QUOTA_PROJECT", quota)
+    if not (project and _has_adc_credentials()):
         raise LiveRelayUnavailable("no_credentials")
     try:
         from google import genai
@@ -112,10 +153,19 @@ def _live_config(system_instruction: str, voice: str) -> Any:
         response_modalities=["AUDIO"],
         input_audio_transcription=types.AudioTranscriptionConfig(),
         output_audio_transcription=types.AudioTranscriptionConfig(),
-        # Push-to-talk: the client sends explicit activity_start/end, so the model
-        # does not need server-side VAD and won't cut the student off mid-thought.
+        # Continuous natural conversation: the model's own server-side VAD detects
+        # when the student starts/stops speaking from the always-on mic stream, so
+        # there is no push-to-talk. Sensitivity is tuned to hold turns for a beat
+        # of thought (moderate end-of-speech + ~0.7s silence) rather than cutting
+        # the candidate off mid-sentence.
         realtime_input_config=types.RealtimeInputConfig(
-            automatic_activity_detection=types.AutomaticActivityDetection(disabled=True),
+            automatic_activity_detection=types.AutomaticActivityDetection(
+                disabled=False,
+                start_of_speech_sensitivity=types.StartSensitivity.START_SENSITIVITY_HIGH,
+                end_of_speech_sensitivity=types.EndSensitivity.END_SENSITIVITY_LOW,
+                prefix_padding_ms=200,
+                silence_duration_ms=700,
+            ),
         ),
         speech_config=types.SpeechConfig(
             voice_config=types.VoiceConfig(
@@ -208,12 +258,10 @@ async def run_interview_live(
                     payload = json.loads(text)
                 except (ValueError, TypeError):
                     continue
-                kind = payload.get("type")
-                if kind == "activity_start":
-                    await sess.send_realtime_input(activity_start=types.ActivityStart())
-                elif kind == "activity_end":
-                    await sess.send_realtime_input(activity_end=types.ActivityEnd())
-                elif kind == "bye":
+                # Continuous mode: the model's server-side VAD handles turn-taking
+                # from the audio stream, so there are no client activity markers.
+                # `bye` is the only control frame.
+                if payload.get("type") == "bye":
                     return
 
         async def live_to_client() -> None:
