@@ -201,3 +201,39 @@ def test_build_user_message_contains_target_lang() -> None:
     assert "Vietnamese" in msg
     assert "English" in msg
     assert "Backend Engineer" in msg
+
+
+# ---------------------------------------------------------------------------
+# opposite_target_lang — the pre-warm / inline-detail direction resolver
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("source", "expected"),
+    [
+        ("vi", "en"),
+        ("en", "vi"),
+        ("mixed", "vi"),
+        ("unknown", "vi"),
+        ("ja", "vi"),
+        ("ko", "vi"),
+        ("zh", "vi"),
+        (None, "vi"),
+    ],
+)
+def test_opposite_target_lang(source: str | None, expected: str) -> None:
+    from app.modules.opportunities.application.translation_service import (
+        opposite_target_lang,
+    )
+
+    assert opposite_target_lang(source) == expected
+
+
+def test_opposite_target_lang_never_equals_unambiguous_source() -> None:
+    """vi/en sources must map to the OTHER language, never themselves."""
+    from app.modules.opportunities.application.translation_service import (
+        opposite_target_lang,
+    )
+
+    assert opposite_target_lang("vi") != "vi"
+    assert opposite_target_lang("en") != "en"

@@ -78,6 +78,7 @@ export type {
   CompetitionLevel,
   CompetitionSignal,
   JobTranslation,
+  JobInlineTranslation,
   JobsConfig,
   StudentFitLabel,
   StudentFitBands,

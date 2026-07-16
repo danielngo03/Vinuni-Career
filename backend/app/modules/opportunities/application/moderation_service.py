@@ -15,6 +15,7 @@ outbox notification to the posting partner (no synchronous SMTP).
 
 from __future__ import annotations
 
+import logging
 import uuid
 from datetime import UTC, datetime
 
@@ -53,9 +54,40 @@ from app.shared.permissions import Principal, permission_checker
 
 _RESOURCE = "jobs"
 
+logger = logging.getLogger(__name__)
+
 
 def _now() -> datetime:
     return datetime.now(tz=UTC)
+
+
+async def _prewarm_translation(session: AsyncSession, job: Job) -> None:
+    """Best-effort: warm the JD translation cache at publish time.
+
+    Computes the opposite UI language of the JD's detected ``language_code`` and
+    asks the translation service to produce + cache that translation, so the
+    first student to view the published job gets an INSTANT client-side language
+    swap (no processing on click).
+
+    The translation service is a graceful no-op when AI is offline (returns
+    ``None`` and writes nothing), so this only does real work when a real
+    provider is active. The whole call is wrapped so a translation failure can
+    NEVER block or roll back a job approval — the on-demand ``/translate``
+    endpoint remains the fallback. ``translation_service`` is lazy-imported to
+    avoid pulling the AI gateway into this module at load time.
+    """
+
+    try:
+        from app.modules.opportunities.application import translation_service
+
+        target = translation_service.opposite_target_lang(job.language_code)
+        if target is None:
+            return
+        await translation_service.get_or_create_translation(
+            session, job=job, target_lang=target
+        )
+    except Exception as exc:  # noqa: BLE001 — pre-warm must never break approval
+        logger.warning("prewarm translation failed for job_id=%s: %s", job.id, exc)
 
 
 async def _invalidate_job_fit_cache(job_id: uuid.UUID) -> None:
@@ -245,6 +277,10 @@ async def approve_job(
         locale=locale,
         extra={"action_url": _job_url(job, locale=locale)},
     )
+    # Pre-warm the opposite-language translation so the first student to view the
+    # now-published job gets an instant client-side language swap. Best-effort:
+    # a no-op when AI is offline and never blocks/rolls back the approval.
+    await _prewarm_translation(session, job)
     await session.commit()
     # A newly published job may have been scored before it was visible; invalidate
     # any stale cached scores so students get fresh results on next page load.

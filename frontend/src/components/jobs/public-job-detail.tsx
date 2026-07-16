@@ -10,6 +10,7 @@ import {
   Clock,
   Users,
   GraduationCap,
+  Medal,
   SealCheck,
   Star,
   WarningCircle,
@@ -30,8 +31,13 @@ import {
 import { useUiStore } from "@/stores/ui-store";
 import { useAuthStore } from "@/stores/auth-store";
 import { useJobLabels } from "@/lib/jobs/labels";
-import { formatSalary, formatLocation } from "@/lib/jobs/format";
-import { ApiError, jobsApi, type JobTranslation } from "@/lib/api";
+import { formatLocation } from "@/lib/jobs/format";
+import {
+  ApiError,
+  jobsApi,
+  type JobTranslation,
+  type PublicJobDetail as PublicJobDetailDto,
+} from "@/lib/api";
 import { CompanyAvatar } from "@/components/companies/company-avatar";
 import { ApplyModal } from "@/components/applications/apply-modal";
 import { SaveJobButton } from "@/components/jobs/save-job-button";
@@ -45,6 +51,7 @@ import { ReportButton } from "@/components/report/report-button";
 import { recordDiscoveryEvent } from "@/lib/discovery/analytics";
 import { recordJobEngagement } from "@/lib/analytics/job-engagement";
 
+type CandidateRequirements = NonNullable<PublicJobDetailDto["candidate_requirements"]>;
 
 export function PublicJobDetail({ jobId }: { jobId: string }) {
   const t = useTranslations("jobs");
@@ -71,10 +78,17 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
   });
 
   const job = query.data;
-  const salary = job ? formatSalary(job.salary, locale) : null;
   const isHydratingAuth = status === "unknown";
   const isGuest = status === "guest";
   const canApply = isStudent;
+
+  // Applied translation (instant inline swap or on-demand fetch). Falls back to
+  // the original field when no translation is active.
+  const tTitle = translation?.title ?? job?.title ?? "";
+  const tDescription = translation?.description ?? job?.description ?? "";
+  const tRequirements = translation?.requirements ?? job?.requirements ?? null;
+  const tBenefits = translation?.benefits ?? job?.benefits ?? null;
+
   function handleApply() {
     if (isHydratingAuth) return;
     // The apply button is this page's primary CTA — record it against the
@@ -244,7 +258,7 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
               </div>
 
               <h1 className="mt-5 max-w-[900px] text-[2rem] font-extrabold leading-[1.1] tracking-tight text-[var(--text-primary)] sm:text-[2.5rem]">
-                {job.title}
+                {tTitle}
               </h1>
 
               <dl className="mt-6 grid grid-cols-1 overflow-hidden rounded-[16px] border border-[var(--border-default)] sm:grid-cols-2 xl:grid-cols-3">
@@ -257,16 +271,21 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
                   {formatLocation(job.location_city, job.location_country)}
                 </Meta>
                 <Meta icon={CurrencyCircleDollar} label={t("salary")}>
-                  {salary ?? t("salaryUndisclosed")}
-                </Meta>
-                <Meta icon={Users} label={t("headcount")}>
-                  {job.headcount}
+                  <SalaryValue job={job} />
                 </Meta>
                 {job.experience_display && (
                   <Meta icon={Clock} label={t("experience")}>
                     {job.experience_display.label}
                   </Meta>
                 )}
+                {job.seniority_level && job.seniority_level !== "not_required" && (
+                  <Meta icon={Medal} label={t("seniorityLabel")}>
+                    {seniorityLabel(t, job.seniority_level)}
+                  </Meta>
+                )}
+                <Meta icon={Users} label={t("headcount")}>
+                  {job.headcount}
+                </Meta>
                 {job.degree_required && (
                   <Meta icon={GraduationCap} label={t("degree")}>
                     {job.degree_required}
@@ -276,36 +295,55 @@ export function PublicJobDetail({ jobId }: { jobId: string }) {
             </header>
 
             <div className="p-5 sm:p-7">
-              {/* Translation banner — shown when JD language ≠ UI locale */}
+              {/* Language toggle — only when the JD language differs from the UI
+                  locale. Instant when the translation is pre-warmed. */}
               {job.language_code && job.language_code !== "unknown" && (
                 <TranslateJobBanner
                   jobId={job.id}
                   jobLanguageCode={job.language_code}
+                  inline={job.translation}
                   onTranslated={setTranslation}
                   translated={translation !== null}
                   className="mb-6"
                 />
               )}
 
-              <Section title={t("description")}>
-                {translation?.description ?? job.description}
-              </Section>
-              {(translation?.requirements ?? job.requirements) && (
-                <Section title={t("requirements")}>
-                  {translation?.requirements ?? job.requirements}
-                </Section>
-              )}
-              {(translation?.benefits ?? job.benefits) && (
-                <Section title={t("benefits")}>
-                  {translation?.benefits ?? job.benefits}
-                </Section>
+              <Section title={t("description")}>{tDescription}</Section>
+              {tRequirements && (
+                <Section title={t("requirements")}>{tRequirements}</Section>
               )}
 
-              {job.required_skills.length > 0 && (
-                <SkillBlock title={t("requiredSkills")} skills={job.required_skills} />
+              {(job.required_skills.length > 0 || job.preferred_skills.length > 0) && (
+                <div className="mt-7 border-t border-[var(--border-default)]/70 pt-6">
+                  {job.required_skills.length > 0 && (
+                    <SkillBlock title={t("requiredSkills")} skills={job.required_skills} />
+                  )}
+                  {job.preferred_skills.length > 0 && (
+                    <SkillBlock
+                      title={t("preferredSkills")}
+                      skills={job.preferred_skills}
+                      muted
+                    />
+                  )}
+                </div>
               )}
-              {job.preferred_skills.length > 0 && (
-                <SkillBlock title={t("preferredSkills")} skills={job.preferred_skills} />
+
+              {tBenefits && <Section title={t("benefits")}>{tBenefits}</Section>}
+
+              {/* Secondary: candidate eligibility criteria, kept at the bottom. */}
+              {job.candidate_requirements && (
+                <EligibilityBlock cr={job.candidate_requirements} />
+              )}
+
+              {job.published_at && (
+                <p className="mt-8 border-t border-[var(--border-default)]/70 pt-4 text-xs text-[var(--text-muted)]">
+                  {t("moreMeta", {
+                    date: new Date(job.published_at).toLocaleDateString(
+                      locale === "vi" ? "vi-VN" : "en-US",
+                    ),
+                    views: job.view_count,
+                  })}
+                </p>
               )}
             </div>
           </article>
@@ -447,9 +485,36 @@ function Meta({
   );
 }
 
+/** Rich salary label: amount + period + gross/net when disclosed. */
+function SalaryValue({ job }: { job: PublicJobDetailDto }) {
+  const t = useTranslations("jobs");
+  const sd = job.salary_display;
+  const label = sd?.label ?? t("salaryUndisclosed");
+  const disclosed = sd && !["negotiable", "hidden"].includes(sd.kind);
+  const period =
+    disclosed && sd?.period
+      ? sd.period === "yearly"
+        ? t("perYear")
+        : t("perMonth")
+      : null;
+  const grossNet =
+    disclosed && sd?.gross_net && sd.gross_net !== "unspecified"
+      ? t(`form.salaryGrossNetOpts.${sd.gross_net}`)
+      : null;
+  const suffix = [period, grossNet].filter(Boolean).join(" · ");
+  return (
+    <>
+      {label}
+      {suffix && (
+        <span className="ml-1 text-xs font-normal text-[var(--text-muted)]">{suffix}</span>
+      )}
+    </>
+  );
+}
+
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-7 border-t border-[var(--border-default)]/70 pt-6">
+    <section className="mt-7 border-t border-[var(--border-default)]/70 pt-6 first:mt-0 first:border-t-0 first:pt-0">
       <h2 className="mb-3 text-lg font-extrabold tracking-tight text-[var(--text-primary)]">
         {title}
       </h2>
@@ -460,20 +525,169 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function SkillBlock({ title, skills }: { title: string; skills: string[] }) {
+function SkillBlock({
+  title,
+  skills,
+  muted,
+}: {
+  title: string;
+  skills: string[];
+  muted?: boolean;
+}) {
   return (
-    <section className="mt-6">
+    <section className={muted ? "mt-5" : ""}>
       <h2 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">{title}</h2>
       <ul className="flex flex-wrap gap-1.5">
         {skills.map((s) => (
           <li
             key={s}
-            className="rounded-full border border-[var(--border-default)] bg-[var(--surface-secondary)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]"
+            className={
+              muted
+                ? "rounded-full border border-dashed border-[var(--border-default)] px-3 py-1 text-xs font-medium text-[var(--text-muted)]"
+                : "rounded-full border border-[var(--border-default)] bg-[var(--surface-secondary)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]"
+            }
           >
             {s}
           </li>
         ))}
       </ul>
+    </section>
+  );
+}
+
+function seniorityLabel(
+  t: ReturnType<typeof useTranslations>,
+  level: string,
+): string {
+  const known = [
+    "intern",
+    "fresher",
+    "junior",
+    "middle",
+    "senior",
+    "lead",
+    "manager",
+    "director",
+    "executive",
+  ];
+  return known.includes(level) ? t(`form.seniorityOpts.${level}`) : level;
+}
+
+/** Secondary eligibility criteria (education, languages, demographics, …). */
+function EligibilityBlock({ cr }: { cr: CandidateRequirements }) {
+  const t = useTranslations("jobs");
+
+  const modeTag = (mode: string) =>
+    mode === "required" || mode === "preferred" ? (
+      <span className="ml-2 rounded bg-[var(--surface-card)] px-1.5 py-0.5 text-[0.6875rem] font-medium text-[var(--text-muted)] align-middle">
+        {t(`form.eligibility.mode.${mode}`)}
+      </span>
+    ) : null;
+
+  const mapPreset = (group: "gender" | "marital", v: string): string => {
+    const genderKeys = ["male", "female", "other"];
+    const maritalKeys = ["single", "married", "other"];
+    if (group === "gender" && genderKeys.includes(v))
+      return t(`form.eligibility.genderPresets.${v}`);
+    if (group === "marital" && maritalKeys.includes(v))
+      return t(`form.eligibility.maritalPresets.${v}`);
+    return v;
+  };
+
+  const rows: { key: string; label: string; value: React.ReactNode }[] = [];
+
+  const pushGroup = (
+    key: string,
+    labelKey: string,
+    g: { mode?: string; values?: string[] } | undefined,
+    preset?: "gender" | "marital",
+  ) => {
+    if (!g || g.mode === "not_required" || !(g.values && g.values.length)) return;
+    const vals = g.values
+      .map((v) => (preset ? mapPreset(preset, v) : v))
+      .join(", ");
+    rows.push({
+      key,
+      label: t(labelKey),
+      value: (
+        <>
+          {vals}
+          {g.mode && modeTag(g.mode)}
+        </>
+      ),
+    });
+  };
+
+  pushGroup("education", "form.eligibility.education", cr.education);
+  pushGroup("nationality", "form.eligibility.nationality", cr.nationalities);
+  pushGroup("gender", "form.eligibility.gender", cr.gender, "gender");
+  pushGroup("marital", "form.eligibility.marital", cr.marital_status, "marital");
+
+  if (cr.age && cr.age.mode !== "not_required") {
+    let lbl = "";
+    if (cr.age.mode === "at_least" && cr.age.min != null)
+      lbl = t("ageAtLeast", { min: cr.age.min });
+    else if (cr.age.mode === "up_to" && cr.age.max != null)
+      lbl = t("ageUpTo", { max: cr.age.max });
+    else if (cr.age.mode === "range" && cr.age.min != null && cr.age.max != null)
+      lbl = t("ageRange", { min: cr.age.min, max: cr.age.max });
+    if (lbl) rows.push({ key: "age", label: t("form.eligibility.ageLabel"), value: lbl });
+  }
+
+  const langs = (cr.languages ?? []).filter((l) => l.language);
+  if (langs.length) {
+    rows.push({
+      key: "languages",
+      label: t("form.eligibility.languages"),
+      value: (
+        <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
+          {langs.map((l, i) => (
+            <span key={i}>
+              {l.language}
+              {l.proficiency ? ` (${l.proficiency})` : ""}
+              {modeTag(l.required ? "required" : "preferred")}
+            </span>
+          ))}
+        </span>
+      ),
+    });
+  }
+
+  const certs = (cr.certifications ?? []).filter((c) => c.name);
+  if (certs.length) {
+    rows.push({
+      key: "certs",
+      label: t("form.eligibility.certifications"),
+      value: certs.map((c) => c.name).join(", "),
+    });
+  }
+
+  const note = cr.note?.trim();
+  if (rows.length === 0 && !note) return null;
+
+  return (
+    <section className="mt-7 border-t border-[var(--border-default)]/70 pt-6">
+      <h2 className="mb-1 text-lg font-extrabold tracking-tight text-[var(--text-primary)]">
+        {t("eligibilityTitle")}
+      </h2>
+      <p className="mb-4 text-xs text-[var(--text-muted)]">{t("eligibilitySubtitle")}</p>
+      {rows.length > 0 && (
+        <dl className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
+          {rows.map((r) => (
+            <div key={r.key} className="min-w-0">
+              <dt className="text-xs font-medium text-[var(--text-muted)]">{r.label}</dt>
+              <dd className="mt-0.5 text-sm font-medium text-[var(--text-primary)]">
+                {r.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      {note && (
+        <p className="mt-4 whitespace-pre-wrap text-[0.9rem] leading-6 text-[var(--text-secondary)]">
+          {note}
+        </p>
+      )}
     </section>
   );
 }

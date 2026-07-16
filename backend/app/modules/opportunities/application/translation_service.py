@@ -36,6 +36,23 @@ logger = logging.getLogger(__name__)
 _SUPPORTED_TARGET_LANGS: frozenset[str] = frozenset({"vi", "en"})
 
 
+def opposite_target_lang(language_code: str | None) -> str | None:
+    """The "other" UI language to pre-warm / serve for a JD in *language_code*.
+
+    ``vi -> en``, ``en -> vi``. Everything else (``mixed``/``unknown``/``ja``/
+    ``ko``/``zh``/``None``) -> ``vi``: the VN-market default. The frontend maps a
+    non-vi/en source to an ``en`` viewer source, so a pre-warmed ``vi``
+    translation serves the vi-locale reader. Never returns the same language as
+    an unambiguous ``vi``/``en`` source. Always returns a value (the ``| None``
+    return type is kept for callers that may treat "no sensible opposite" as a
+    skip, but no supported input yields ``None``).
+    """
+
+    if language_code == "vi":
+        return "en"
+    return "vi"
+
+
 class _TranslatableJob(Protocol):
     """Structural shape ``_ai_translate``/``_machine_translate_job`` read off a ``Job``.
 

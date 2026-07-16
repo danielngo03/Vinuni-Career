@@ -20,6 +20,7 @@ from app.modules.opportunities.api import presenters
 from app.modules.opportunities.application import (
     job_read_facade,
     saved_jobs_service,
+    translation_service,
 )
 from app.modules.opportunities.application.errors import (
     InvalidJobFieldError,
@@ -32,7 +33,7 @@ from app.modules.opportunities.application.job_common import (
     _now,
 )
 from app.modules.opportunities.domain import lifecycle
-from app.modules.opportunities.domain.models import Job
+from app.modules.opportunities.domain.models import Job, JobTranslation
 from app.modules.organization.application import org_reporting_facade
 from app.shared.exceptions import ResourceNotFoundError
 from app.shared.permissions import Principal, permission_checker
@@ -92,12 +93,47 @@ async def get_job(
     await _record_detail_view_metric(
         session, job=job, principal=principal, user_agent=user_agent, source=source
     )
+    inline_translation = await _cached_translation_inline(session, job=job)
     return presenters.public_job_detail(
         job,
         company=org,
         locale=locale,
         is_saved=job.id in saved_ids,
+        translation=inline_translation,
     )
+
+
+async def _cached_translation_inline(session: AsyncSession, *, job: Job) -> dict | None:
+    """Inline the cached opposite-language translation for the public detail.
+
+    Returns ``{target_lang, title, description, requirements, benefits}`` when a
+    ``JobTranslation`` row exists for ``opposite_target_lang(language_code)`` so
+    the frontend can swap languages client-side with no extra request (the
+    translation is pre-warmed at approve/publish time). Returns ``None`` when no
+    cached translation exists — the on-demand ``POST /jobs/{id}/translate``
+    endpoint remains the fallback. Provider/model internals are never included.
+    """
+
+    target = translation_service.opposite_target_lang(job.language_code)
+    if target is None:
+        return None
+    row = (
+        await session.execute(
+            select(JobTranslation).where(
+                JobTranslation.job_id == job.id,
+                JobTranslation.target_lang == target,
+            )
+        )
+    ).scalar_one_or_none()
+    if row is None:
+        return None
+    return {
+        "target_lang": target,
+        "title": row.title,
+        "description": row.description,
+        "requirements": row.requirements,
+        "benefits": row.benefits,
+    }
 
 
 async def _record_detail_view_metric(

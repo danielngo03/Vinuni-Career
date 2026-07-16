@@ -39,6 +39,7 @@ from app.modules.opportunities.application.job_common import (
     _validate_fields,
 )
 from app.modules.opportunities.domain import jd_quality, lifecycle
+from app.modules.opportunities.domain.language_detection import detect_language
 from app.modules.opportunities.domain.models import Job
 from app.modules.users.application import user_service
 from app.shared.audit import AuditContext, write_audit
@@ -74,6 +75,25 @@ async def _invalidate_job_fit_cache(job_id: uuid.UUID) -> None:
 # --------------------------------------------------------------------------- #
 
 
+def _detect_job_language(
+    title: str,
+    description: str | None,
+    requirements: str | None,
+    benefits: str | None,
+) -> str:
+    """Detect the dominant language of a JD from its content fields.
+
+    Concatenates the non-empty content fields (newline-separated) and defers to
+    the zero-dependency :func:`detect_language` heuristic. ``language_code`` is
+    server-derived — it is never a client-supplied payload/schema field, so
+    there is no collision with ``**payload`` on the ``Job(...)`` constructor.
+    Returns one of ``vi``/``en``/``mixed``/``ja``/``ko``/``zh``/``unknown``.
+    """
+
+    combined = "\n".join(part for part in (title, description, requirements, benefits) if part)
+    return detect_language(combined)
+
+
 async def create_job(
     session: AsyncSession,
     *,
@@ -89,12 +109,19 @@ async def create_job(
     assert principal.user_id is not None
 
     slug = await _unique_slug(session, payload["title"])
+    language_code = _detect_job_language(
+        payload["title"],
+        payload.get("description"),
+        payload.get("requirements"),
+        payload.get("benefits"),
+    )
     job = Job(
         org_id=principal.org_id,
         posted_by=principal.user_id,
         slug=slug,
         status=lifecycle.DRAFT,
         moderation_status=lifecycle.MOD_PENDING,
+        language_code=language_code,
         **payload,
     )
     session.add(job)
@@ -207,6 +234,8 @@ async def duplicate_job(
         slug=slug,
         status=lifecycle.DRAFT,
         moderation_status=lifecycle.MOD_PENDING,
+        # Content is copied verbatim, so the detected language carries over too.
+        language_code=source.language_code,
         **{field: getattr(source, field) for field in _DUPLICATE_COPY},
     )
     session.add(copy)
@@ -284,6 +313,14 @@ async def update_job(
                 requires_remoderation = True
     if changed:
         job.version += 1
+        # Re-detect the JD language from the NEW values whenever any content
+        # field changed (e.g. a partner rewrote the description from vi to en).
+        # Keeps ``language_code`` — and therefore the pre-warmed translation /
+        # student translate CTA — honest after edits.
+        if {"title", "description", "requirements", "benefits"} & changed.keys():
+            job.language_code = _detect_job_language(
+                job.title, job.description, job.requirements, job.benefits
+            )
     await session.flush()
 
     audit_after: dict[str, object] = {"fields": sorted(changed.keys())}

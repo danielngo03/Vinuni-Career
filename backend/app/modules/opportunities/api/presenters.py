@@ -370,10 +370,16 @@ def public_job_detail(
     company: OrgSummary | None = None,
     locale: str = "vi",
     is_saved: bool = False,
+    translation: dict | None = None,
 ) -> dict:
     data = _detail_body(job, locale=locale)
     data["company"] = company_block(company)
     data["is_saved"] = is_saved
+    # Pre-warmed opposite-language translation, inlined so the frontend can swap
+    # languages client-side with no extra request. ``None`` when no cached
+    # translation exists (the on-demand ``/translate`` endpoint is the fallback).
+    # Public detail only — list rows and owner presenters never carry this.
+    data["translation"] = translation
     return data
 
 

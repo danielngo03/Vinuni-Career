@@ -269,6 +269,23 @@ export interface PublicJobDetail extends JobSummary {
    * students can still apply with any CV but see a warning on mismatch.
    */
   cv_language_required?: "any" | "en" | "vi";
+  /**
+   * Pre-warmed JD translation inlined by the backend when a cached translation
+   * exists for the language opposite to `language_code`. Present (non-null) lets
+   * the detail page toggle languages INSTANTLY with no extra network call — the
+   * partner-post/approve flow pre-generates it. Falls back to the on-demand
+   * POST /jobs/{id}/translate endpoint when absent.
+   */
+  translation?: JobInlineTranslation | null;
+}
+
+/** Inline (pre-warmed) JD translation embedded in the public detail payload. */
+export interface JobInlineTranslation {
+  target_lang: string;
+  title: string | null;
+  description: string | null;
+  requirements: string | null;
+  benefits: string | null;
 }
 
 /** Translated JD fields returned by POST /jobs/{id}/translate */
