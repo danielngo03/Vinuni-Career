@@ -12,15 +12,17 @@ substitutions:
   _SCHEDULER_SERVICE: vinuni-career-scheduler
   _MIGRATE_JOB: vinuni-career-migrate
   # Public site origin (custom domain or the web service's run.app URL).
-  _PUBLIC_ORIGIN: https://career.example.com
+  _PUBLIC_ORIGIN: https://vinuni.ter.vn
   # Backend origin the Next.js proxy forwards to (api service's run.app URL).
-  _API_ORIGIN: https://vinuni-career-api-xxxxxxxx.a.run.app
+  _API_ORIGIN: https://vinuni-career-api-w7bbjf645a-as.a.run.app
 
 steps:
   # ---- Backend image -------------------------------------------------------
   - id: build-api
     name: gcr.io/cloud-builders/docker
     dir: backend
+    env:
+      - DOCKER_BUILDKIT=1
     args:
       - build
       - --build-arg=INSTALL_OCR=true
@@ -92,8 +94,9 @@ steps:
       - ${_SCHEDULER_SERVICE}
       - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:$COMMIT_SHA
       - --region=${_REGION}
-      - --command=python
-      - --args=-m,app.worker
+      - --min-instances=1
+      - --max-instances=1
+      - --no-cpu-throttling
     waitFor: [migrate]
 
   - id: deploy-web

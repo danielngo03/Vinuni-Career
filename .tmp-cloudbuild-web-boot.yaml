@@ -1,0 +1,14 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --build-arg=NEXT_PUBLIC_APP_URL=https://vinuni.ter.vn
+      - --build-arg=NEXT_PUBLIC_API_URL=https://vinuni-career-api-w7bbjf645a-as.a.run.app
+      - --build-arg=NEXT_PUBLIC_API_BASE_URL=/api/v1
+      - -t
+      - asia-southeast1-docker.pkg.dev/vinuni-501917/vinuni-career/web:boot
+      - .
+images:
+  - asia-southeast1-docker.pkg.dev/vinuni-501917/vinuni-career/web:boot
+options:
+  logging: CLOUD_LOGGING_ONLY

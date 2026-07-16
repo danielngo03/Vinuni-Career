@@ -2,7 +2,8 @@
 # Skip the auto `pnpm install` that runs before each script — it treats the
 # optional native build scripts below as fatal in this pnpm version.
 verifyDepsBeforeRun: false
-# Optional native build scripts are not needed for local dev/build.
+# Approve optional native build scripts needed by Next/eslint dependencies in
+# clean CI installs; pnpm 11 treats unapproved builds as fatal.
 allowBuilds:
-  sharp: false
-  unrs-resolver: false
+  sharp: true
+  unrs-resolver: true

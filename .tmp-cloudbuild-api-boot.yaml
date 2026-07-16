@@ -1,0 +1,14 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    env:
+      - DOCKER_BUILDKIT=1
+    args:
+      - build
+      - --build-arg=INSTALL_OCR=true
+      - -t
+      - asia-southeast1-docker.pkg.dev/vinuni-501917/vinuni-career/api:boot
+      - .
+images:
+  - asia-southeast1-docker.pkg.dev/vinuni-501917/vinuni-career/api:boot
+options:
+  logging: CLOUD_LOGGING_ONLY
